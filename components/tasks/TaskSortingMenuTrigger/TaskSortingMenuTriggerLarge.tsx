@@ -6,14 +6,24 @@ import {
 } from "./TaskSortingMenuTrigger";
 import { SortingButtonLarge } from "@/components/common/SortingButton";
 
-export function TaskSortingMenuTriggerLarge(
-  props: Omit<TaskSortingMenuTriggerProps, "renderButton">,
-) {
+interface TaskSortingMenuTriggerLargeProps
+  extends Omit<TaskSortingMenuTriggerProps, "renderButton"> {
+  showLabel?: boolean;
+}
+
+export function TaskSortingMenuTriggerLarge({
+  // Extra flag to hide the label on User/Profile Tasks pages
+  showLabel,
+  ...props
+}: TaskSortingMenuTriggerLargeProps) {
   return (
     <TaskSortingMenuTrigger
       {...props}
       renderButton={() => (
-        <SortingButtonLarge data-test="task-sorting-menu-trigger-large" />
+        <SortingButtonLarge
+          showLabel={showLabel}
+          data-test="task-sorting-menu-trigger-large"
+        />
       )}
     />
   );

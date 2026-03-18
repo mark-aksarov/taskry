@@ -4,7 +4,7 @@ interface PageHeadingMobileProps {
 
 export function PageHeadingMobile({ children }: PageHeadingMobileProps) {
   return (
-    <h2 className="text-xl font-extrabold text-black dark:text-white">
+    <h2 className="py-2 text-xl font-extrabold text-black dark:text-white">
       {children}
     </h2>
   );

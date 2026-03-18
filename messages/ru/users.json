@@ -80,7 +80,7 @@
   "TotalUsersCard": {
     "text": "Всего пользователей"
   },
-  "UserToolbarSortingMenuTrigger": {
+  "UserSortingMenuTrigger": {
     "byFullName": "По полному имени",
     "byPosition": "По должности"
   },
@@ -91,7 +91,7 @@
     "delete": "Удалить пользователя",
     "changePasswordSuccessMessage": "Пароль успешно изменен"
   },
-  "ProfileNavigationDesktop": {
+  "ProfileNavigationLarge": {
     "userInformation": "Информация о пользователе",
     "assignedTasks": "Назначенные задачи"
   },
@@ -176,7 +176,7 @@
     "position": "Должность",
     "noPosition": "Нет должности"
   },
-  "UserNavigationDesktop": {
+  "UserNavigationLarge": {
     "userInformation": "Информация о пользователе",
     "assignedTasks": "Назначенные задачи"
   },
@@ -195,14 +195,10 @@
   "UserTasksPageLayout": {
     "title": "Задачи"
   },
-  "UserToolbarFiltersModalTrigger": {
-    "title": "Фильтры пользователя"
+  "UserFiltersModal": {
+    "heading": "Фильтры пользователя"
   },
-  "UserToolbarActionsMenuTrigger": {
-    "dialogHeading": "Действия",
-    "delete": "Удалить"
-  },
-  "UserToolbarCreateNewMenuTrigger": {
+  "CreateUserMenuTrigger": {
     "dialogHeading": "Создать нового",
     "label": "Создать нового",
     "items": {
@@ -210,11 +206,18 @@
       "position": "Должность"
     }
   },
-  "UserToolbarManageMenuTrigger": {
+  "UserManageMenuTrigger": {
     "positions": "Должности"
   },
   "UsersFilteredEmptySection": {
     "heading": "Пользователи не найдены",
     "description": "По выбранным фильтрам пользователи отсутствуют. Попробуйте изменить или сбросить фильтры"
+  },
+  "UserResultsCount": {
+    "usersFound": "{count, plural, one {Найден # пользователь} few {Найдено # пользователя} many {Найдено # пользователей} other {Найдено # пользователей}}"
+  },
+  "UserPositionFiltersModal": {
+    "heading": "Фильтры должностей",
+    "label": "Должность"
   }
 }

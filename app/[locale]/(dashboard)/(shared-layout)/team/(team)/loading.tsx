@@ -1,49 +1,69 @@
 import {
-  ToolbarDesktop,
-  ToolbarMobileTop,
-  ToolbarMobileBottom,
-  PageHeadingMobile,
-  ToolbarDesktopButtonSkeleton,
-  ToolbarMobileTopButtonSkeleton,
-  ToolbarMobileBottomButtonSkeleton,
-} from "@/components/common/ToolbarOld";
+  ToolbarLarge,
+  ToolbarMobile,
+  ToolbarSearchMobile,
+  ToolbarFiltersMobile,
+} from "@/components/common/Toolbar";
 
 import { useTranslations } from "next-intl";
-import { List } from "@/components/common/List";
-import { Repeat } from "@/components/common/Repeat";
 import { PageGrid } from "@/components/common/PageGrid";
+import { UserListSkeleton } from "@/components/users/UserList";
 import { PageContainer } from "@/components/common/PageContainer";
-import { UserListItemSkeleton } from "@/components/users/UserListItem";
+import { ButtonSkeleton, Skeleton } from "@/components/ui/Skeleton";
+import { UserGridMobileSkeleton } from "@/components/users/UserGrid";
+import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
+import { SearchModalTriggerSkeleton } from "@/components/search/SearchModalTrigger";
 
 export default function AppUsersPageLoading() {
-  const t = useTranslations("app.UsersPageLoading");
+  const t = useTranslations("app.UsersPage");
 
   return (
     <PageContainer>
       <PageGrid>
-        <ToolbarDesktop>
-          <ToolbarDesktopButtonSkeleton />
-          <ToolbarDesktopButtonSkeleton />
-          <ToolbarDesktopButtonSkeleton />
-          <ToolbarDesktopButtonSkeleton className="ml-auto" />
-          <ToolbarDesktopButtonSkeleton />
-        </ToolbarDesktop>
+        <ToolbarLarge
+          firstSlot={
+            <>
+              <ButtonSkeleton className="w-[5rem]" />
+              <ButtonSkeleton className="w-[5rem]" />
+              <ButtonSkeleton className="w-[5rem]" />
+              <ButtonSkeleton className="w-[5rem]" />
+            </>
+          }
+          secondSlot={
+            <>
+              <ButtonSkeleton className="w-[5rem]" />
+              <ButtonSkeleton className="w-[5rem]" />
+            </>
+          }
+          twoRowsOnLg
+        />
 
-        <ToolbarMobileTop>
-          <PageHeadingMobile>{t("title")}</PageHeadingMobile>
-          <ToolbarMobileTopButtonSkeleton />
-          <ToolbarMobileTopButtonSkeleton />
-          <ToolbarMobileTopButtonSkeleton />
-        </ToolbarMobileTop>
+        <ToolbarMobile
+          firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
+          secondSlot={
+            <>
+              <ButtonSkeleton className="w-8" />
+              <ButtonSkeleton className="w-8" />
+            </>
+          }
+        />
 
-        <ToolbarMobileBottom>
-          <ToolbarMobileBottomButtonSkeleton />
-          <ToolbarMobileBottomButtonSkeleton className="ml-auto" />
-        </ToolbarMobileBottom>
+        <ToolbarSearchMobile>
+          <SearchModalTriggerSkeleton />
+        </ToolbarSearchMobile>
 
-        <List>
-          <Repeat items={10} renderItem={() => <UserListItemSkeleton />} />
-        </List>
+        <ToolbarFiltersMobile>
+          <ButtonSkeleton className="w-[5rem] rounded-full" />
+          <ButtonSkeleton className="w-[5rem] rounded-full" />
+        </ToolbarFiltersMobile>
+
+        <ToolbarMobile
+          firstSlot={<Skeleton size="xs" className="w-[5rem]" />}
+          secondSlot={<ButtonSkeleton ghost className="w-[7rem]" />}
+        />
+
+        <UserListSkeleton className="max-md:hidden" items={10} />
+        <UserGridMobileSkeleton className="md:hidden" items={10} />
       </PageGrid>
     </PageContainer>
   );

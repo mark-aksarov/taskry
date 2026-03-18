@@ -22,12 +22,6 @@ export const UserTaskListItemSkeleton = () => {
           <ListItemTextSkeleton />
         </>
       }
-      mainMobileSlot={
-        <>
-          <ListItemTitleSkeleton />
-          <ListItemTextSkeleton />
-        </>
-      }
       statusSlot={<ItemBaseBadgeSkeleton />}
       commentsModalTriggerSlot={<ItemBaseButtonSkeleton />}
       menuTriggerSlot={<ItemBaseActionMenuTriggerSkeleton />}

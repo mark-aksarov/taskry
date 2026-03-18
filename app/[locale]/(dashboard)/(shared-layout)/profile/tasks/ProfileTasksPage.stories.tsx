@@ -11,6 +11,7 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { SearchList } from "@/components/search/SearchList";
 import { NewTaskForm } from "@/components/tasks/NewTaskForm";
+import { TaskGridMobile } from "@/components/tasks/TaskGrid";
 import { UserTaskList } from "@/components/users/UserTaskList";
 import { EditUserForm } from "@/components/users/EditUserForm";
 import { ProfileActions } from "@/components/users/ProfileActions";
@@ -19,9 +20,11 @@ import { mockedUserDetail, mockedUserSummaries } from "@/mocks/users";
 import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
+import { TaskGridMobileStory } from "@/components/tasks/TaskGrid/__stories__";
 import { UserTaskListStory } from "@/components/users/UserTaskList/__stories__";
+import { UserTasksPresentation } from "@/components/users/UserTasksPresentation";
+import { ProfileNavigationLarge } from "@/components/users/ProfileNavigationLarge";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
-import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
 import { withDeleteUserProvider } from "@/components/users/DeleteUserContext/__stories__";
 import { withUpdateUserProvider } from "@/components/users/UpdateUserContext/__stories__";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
@@ -68,7 +71,15 @@ export const Default = {
     totalTasksCount: 10,
     selectedSortField: "title",
     searchContainer: <SearchList {...SearchListStory.args} />,
-    userTasksContainer: <UserTaskList {...UserTaskListStory.args} />,
+    userTasksContainer: (
+      <UserTasksPresentation
+        page={1}
+        pageSize={10}
+        totalPages={3}
+        listLarge={<UserTaskList {...UserTaskListStory.args} />}
+        gridMobile={<TaskGridMobile {...TaskGridMobileStory.args} />}
+      />
+    ),
     userDetailHeaderContainer: (
       <UserDetailHeader
         fullName={mockedUserDetail.fullName}
@@ -77,8 +88,8 @@ export const Default = {
         canUpdateImage={true}
       />
     ),
-    navigationDesktop: (
-      <ProfileNavigationDesktop
+    navigationLarge: (
+      <ProfileNavigationLarge
         profileActions={
           <ProfileActions
             userId={mockedUserDetail.id}

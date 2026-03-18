@@ -8,9 +8,8 @@ import { useUpdateProject } from "../UpdateProjectContext";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { BaseDeleteProjectModal } from "../DeleteProjectModal";
-import { useGuestModeModal } from "@/components/common/GuestModeModal";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { NavigationButton } from "@/components/common/NavigationButton";
-import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { DetailActionsCommentsModalTrigger } from "@/components/common/DetailActionsCommentsModalTrigger";
 
 interface ProjectDetailActionsProps {
@@ -30,9 +29,8 @@ export function ProjectDetailActions({
 }: ProjectDetailActionsProps) {
   const t = useTranslations("projects.ProjectDetailActions");
 
-  // If the user is a guest, show the guest mode modal instead of allowing creation
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   // Delete project: action state + form modal state
   const { isPending: isDeletePending, action: deleteAction } =
@@ -46,21 +44,11 @@ export function ProjectDetailActions({
   } = useUpdateProject();
 
   function handleDeletePress() {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-
-    setIsDeleteModalOpen(true);
+    guestGuard(() => setIsDeleteModalOpen(true));
   }
 
   function handleEditPress() {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-
-    onEditModalOpenChange(true);
+    guestGuard(() => onEditModalOpenChange(true));
   }
 
   // Close modal and delete project

@@ -1,18 +1,20 @@
 "use client";
 
-import { List } from "@/components/common/List";
-import { ProjectListSkeleton } from "./ProjectListSkeleton";
-import { useEntityListPending } from "@/lib/hooks/useEntityListPending";
 import { Children } from "react";
+import { List } from "@/components/common/List";
+import { useViewMode } from "@/components/common/ViewMode";
+import { ProjectListSkeleton } from "./ProjectListSkeleton";
+import { usePageTransition } from "@/components/common/PageTransitionContext";
 
 interface ProjectListProps {
   children: React.ReactNode;
 }
 
 export function ProjectList({ children }: ProjectListProps) {
-  const isPending = useEntityListPending();
+  const { isPending: isViewModePending } = useViewMode();
+  const { isPending: isPageTransitionPending } = usePageTransition();
 
-  if (isPending) {
+  if (isViewModePending || isPageTransitionPending) {
     return <ProjectListSkeleton items={Children.count(children)} />;
   }
 

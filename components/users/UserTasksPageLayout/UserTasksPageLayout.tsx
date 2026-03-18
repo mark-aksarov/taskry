@@ -7,23 +7,25 @@ import {
 } from "@/components/common/DetailCard";
 
 import {
-  ToolbarMobileTop,
-  ToolbarMobileBottom,
-  PageHeadingMobile,
-} from "@/components/common/ToolbarOld";
+  CreateTaskModalTriggerLarge,
+  CreateTaskModalTriggerMobile,
+} from "@/components/tasks/CreateTaskModalTrigger";
 
 import { useTranslations } from "next-intl";
 import { TaskSortField } from "@/lib/types";
 import { EditUserModal } from "../EditUserModal";
 import { PageGrid } from "@/components/common/PageGrid";
+import { ToolbarMobile } from "@/components/common/Toolbar";
 import { BackButton } from "@/components/common/BackButton";
 import { ChangePasswordModal } from "../ChangePasswordModal";
 import { NewTaskModal } from "@/components/tasks/NewTaskModal";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { UserTasksPageEmptyLayout } from "./UserTasksPageEmptyLayout";
-import { TaskToolbarSortingMenuTrigger } from "@/components/tasks/TaskSortingMenuTrigger";
-import { TaskToolbarActionsMenuTrigger } from "@/components/tasks/TaskActionsMenuTrigger";
+import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
+import { TaskActionsMenuTrigger } from "@/components/tasks/TaskActionsMenuTrigger";
+import { TaskSortingMenuTriggerLarge } from "@/components/tasks/TaskSortingMenuTrigger";
+import { TaskSortingMenuTriggerMobile } from "@/components/tasks/TaskSortingMenuTrigger";
 
 interface UserTasksPageLayoutProps {
   totalTasksCount: number;
@@ -31,7 +33,7 @@ interface UserTasksPageLayoutProps {
   selectedSortField: TaskSortField;
   backButton?: boolean;
   searchContainer: React.ReactNode;
-  navigationDesktop: React.ReactNode;
+  navigationLarge: React.ReactNode;
   navigationMobile: React.ReactNode;
   userTasksContainer: React.ReactNode;
   editUserFormContainer: React.ReactNode;
@@ -45,7 +47,7 @@ export function UserTasksPageLayout({
   selectedSortField,
   backButton,
   searchContainer,
-  navigationDesktop,
+  navigationLarge,
   navigationMobile,
   userTasksContainer,
   editUserFormContainer,
@@ -59,7 +61,7 @@ export function UserTasksPageLayout({
       <>
         <UserTasksPageEmptyLayout
           userDetailHeaderContainer={userDetailHeaderContainer}
-          navigationDesktop={navigationDesktop}
+          navigationLarge={navigationLarge}
           navigationMobile={navigationMobile}
           backButton={backButton}
         />
@@ -79,10 +81,12 @@ export function UserTasksPageLayout({
             <DetailCardHeader>
               <DetailCardTitle>{t("title")}</DetailCardTitle>
               <div className="flex gap-4">
-                <TaskToolbarSortingMenuTrigger
+                <CreateTaskModalTriggerLarge />
+                <TaskSortingMenuTriggerLarge
+                  showLabel={false}
                   selectedSortField={selectedSortField}
                 />
-                <TaskToolbarActionsMenuTrigger />
+                <TaskActionsMenuTrigger showLabel={false} />
               </div>
             </DetailCardHeader>
             {userTasksContainer}
@@ -90,23 +94,31 @@ export function UserTasksPageLayout({
 
           <DetailCardRight>
             {userDetailHeaderContainer}
-            {navigationDesktop}
+            {navigationLarge}
           </DetailCardRight>
         </DetailCard>
       </PageContainer>
 
       <PageContainer className="md:hidden">
         <PageGrid>
-          <ToolbarMobileTop>
-            {backButton && <BackButton href="/team" />}
-            <PageHeadingMobile>{t("title")}</PageHeadingMobile>
-            <TaskToolbarSortingMenuTrigger
-              selectedSortField={selectedSortField}
-            />
-            <TaskToolbarActionsMenuTrigger />
-          </ToolbarMobileTop>
+          <ToolbarMobile
+            firstSlot={
+              <>
+                {backButton && <BackButton href="/team" />}
+                <PageHeadingMobile>{t("title")}</PageHeadingMobile>
+              </>
+            }
+            secondSlot={<CreateTaskModalTriggerMobile />}
+          />
+          <ToolbarMobile
+            firstSlot={navigationMobile}
+            secondSlot={
+              <TaskSortingMenuTriggerMobile
+                selectedSortField={selectedSortField}
+              />
+            }
+          />
 
-          <ToolbarMobileBottom>{navigationMobile}</ToolbarMobileBottom>
           {userTasksContainer}
         </PageGrid>
       </PageContainer>

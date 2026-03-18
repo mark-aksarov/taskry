@@ -6,8 +6,14 @@ import { useActionsButtonDisabled } from "./useActionsButtonDisabled";
 interface ActionsButtonProps extends ButtonProps {
   "data-test"?: string;
   selectedIds: number[];
+  // Extra flag to hide the label on User/Profile Tasks pages
+  showLabel?: boolean;
 }
-export function ActionsButton({ selectedIds, ...props }: ActionsButtonProps) {
+export function ActionsButton({
+  selectedIds,
+  showLabel = true,
+  ...props
+}: ActionsButtonProps) {
   const t = useTranslations("common.ActionsButton");
 
   const isDisabled = useActionsButtonDisabled(selectedIds);
@@ -15,7 +21,8 @@ export function ActionsButton({ selectedIds, ...props }: ActionsButtonProps) {
   return (
     <Button
       variant="outlined"
-      label={t("label")}
+      label={showLabel ? t("label") : undefined}
+      aria-label={!showLabel ? t("label") : undefined}
       iconLeft={<Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />}
       isDisabled={isDisabled}
       {...props}

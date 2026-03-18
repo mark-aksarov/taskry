@@ -1,9 +1,29 @@
 import {
-  ToolbarDesktop,
-  ToolbarMobileTop,
-  ToolbarMobileBottom,
-  PageHeadingMobile,
-} from "@/components/common/ToolbarOld";
+  ToolbarLarge,
+  ToolbarMobile,
+  ToolbarSearchMobile,
+  ToolbarFiltersMobile,
+} from "@/components/common/Toolbar";
+
+import {
+  UserManageMenuTriggerLarge,
+  UserManageMenuTriggerMobile,
+} from "@/components/users/UserManageMenuTrigger";
+
+import {
+  UserSortingMenuTriggerLarge,
+  UserSortingMenuTriggerMobile,
+} from "@/components/users/UserSortingMenuTrigger";
+
+import {
+  CreateUserMenuTriggerLarge,
+  CreateUserMenuTriggerMobile,
+} from "@/components/users/CreateUserMenuTrigger";
+
+import {
+  UserFiltersModalTriggerLarge,
+  UserFiltersModalTriggerMobile,
+} from "@/components/users/UserFiltersModal";
 
 import { useTranslations } from "next-intl";
 import { UserSortField } from "@/lib/types";
@@ -12,13 +32,13 @@ import { NewUserModal } from "@/components/users/NewUserModal";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { UserSearchModal } from "@/components/users/UserSearchModal";
+import { UserResultsCount } from "@/components/users/UserResultsCount";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { NewPositionModal } from "@/components/position/NewPositionModal";
+import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
+import { SearchModalTrigger } from "@/components/search/SearchModalTrigger";
 import { UsersFilteredEmptySection } from "@/components/users/UsersFilteredEmptySection";
-import { UserToolbarManageMenuTrigger } from "@/components/users/UserToolbarManageMenuTrigger";
-import { UserToolbarSortingMenuTrigger } from "@/components/users/UserToolbarSortingMenuTrigger";
-import { UserToolbarCreateNewMenuTrigger } from "@/components/users/UserToolbarCreateNewMenuTrigger";
-import { UserToolbarFiltersModalTrigger } from "@/components/users/UserToolbarFiltersModalTrigger";
+import { UserPositionFiltersModalTrigger } from "@/components/users/UserPositionFiltersModal";
 
 interface UsersPageProps {
   totalFilteredUsers: number;
@@ -26,6 +46,7 @@ interface UsersPageProps {
   searchContainer: React.ReactNode;
   usersContainer: React.ReactNode;
   filtersFormContainer: React.ReactNode;
+  positionFiltersFormContainer: React.ReactNode;
 }
 
 export function UsersPage({
@@ -34,6 +55,7 @@ export function UsersPage({
   searchContainer,
   usersContainer,
   filtersFormContainer,
+  positionFiltersFormContainer,
 }: UsersPageProps) {
   const t = useTranslations("app.UsersPage");
 
@@ -44,33 +66,59 @@ export function UsersPage({
       <PageContainer fullscreen={isFilteredEmpty} headerOffset>
         <PageGrid className="relative flex-auto">
           <ViewModeProvider>
-            <ToolbarDesktop>
-              <UserToolbarManageMenuTrigger />
-              <UserToolbarSortingMenuTrigger
-                selectedSortField={selectedSortField}
-              />
-              <UserToolbarFiltersModalTrigger
+            <ToolbarLarge
+              firstSlot={
+                <>
+                  <UserManageMenuTriggerLarge />
+                  <UserSortingMenuTriggerLarge
+                    selectedSortField={selectedSortField}
+                  />
+                  <UserFiltersModalTriggerLarge
+                    filtersFormContainer={filtersFormContainer}
+                  />
+                </>
+              }
+              secondSlot={
+                <>
+                  <ViewModeToggleButtonGroup />
+                  <CreateUserMenuTriggerLarge />
+                </>
+              }
+            />
+
+            <ToolbarMobile
+              firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
+              secondSlot={
+                <>
+                  <CreateUserMenuTriggerMobile />
+                  <UserManageMenuTriggerMobile />
+                </>
+              }
+            />
+
+            <ToolbarSearchMobile>
+              <SearchModalTrigger />
+            </ToolbarSearchMobile>
+
+            <ToolbarFiltersMobile>
+              <UserFiltersModalTriggerMobile
                 filtersFormContainer={filtersFormContainer}
               />
-              <ViewModeToggleButtonGroup className="ml-auto" />
-              <UserToolbarCreateNewMenuTrigger />
-            </ToolbarDesktop>
-
-            <ToolbarMobileTop>
-              <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
-              <UserToolbarManageMenuTrigger />
-              <UserToolbarSortingMenuTrigger
-                selectedSortField={selectedSortField}
+              <UserPositionFiltersModalTrigger
+                filtersFormContainer={positionFiltersFormContainer}
               />
-              <UserToolbarFiltersModalTrigger
-                filtersFormContainer={filtersFormContainer}
-              />
-            </ToolbarMobileTop>
+            </ToolbarFiltersMobile>
 
-            <ToolbarMobileBottom>
-              <ViewModeToggleButtonGroup />
-              <UserToolbarCreateNewMenuTrigger />
-            </ToolbarMobileBottom>
+            {!isFilteredEmpty && (
+              <ToolbarMobile
+                firstSlot={<UserResultsCount count={totalFilteredUsers} />}
+                secondSlot={
+                  <UserSortingMenuTriggerMobile
+                    selectedSortField={selectedSortField}
+                  />
+                }
+              />
+            )}
 
             {totalFilteredUsers === 0 ? (
               <UsersFilteredEmptySection />

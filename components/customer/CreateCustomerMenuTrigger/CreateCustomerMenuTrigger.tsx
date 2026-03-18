@@ -6,8 +6,7 @@ import { useTranslations } from "next-intl";
 import { Building2, Contact } from "lucide-react";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { useCreateCustomer } from "../CreateCustomerContext";
-import { useGuestModeModal } from "@/components/common/GuestModeModal";
-import { useCurrentUser } from "@/components/common/CurrentUserContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCreateCompany } from "@/components/company/CreateCompanyContext";
 import { CreateNewMenuTrigger } from "@/components/common/CreateNewMenuTrigger";
 
@@ -20,9 +19,8 @@ export function CreateCustomerMenuTrigger({
 }: CreateCustomerMenuTriggerProps) {
   const t = useTranslations("customers.CreateCustomerMenuTrigger");
 
-  // If the user is a guest, show the guest mode modal instead of allowing creation
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   // Create company form modal state
   const { onModalOpenChange: onCompanyModalOpenChange } = useCreateCompany();
@@ -36,16 +34,13 @@ export function CreateCustomerMenuTrigger({
    * - Otherwise, open create company modal or create customer modal
    */
   function handleAction(key: Key) {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-
-    if (key === "customer") {
-      onCustomerModalOpenChange(true);
-    } else if (key === "company") {
-      onCompanyModalOpenChange(true);
-    }
+    guestGuard(() => {
+      if (key === "customer") {
+        onCustomerModalOpenChange(true);
+      } else if (key === "company") {
+        onCompanyModalOpenChange(true);
+      }
+    });
   }
 
   return (

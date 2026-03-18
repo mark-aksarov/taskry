@@ -1,10 +1,7 @@
-import {
-  EntityPaginationProvider,
-  EntityContainerPagination,
-} from "@/components/common/EntityContainerPagination";
 import { TasksEmptySection } from "../TasksEmptySection";
 import { AssignedTasksSection } from "./AssignedTasksSection";
 import { AssignedTasksSectionHeading } from "./AssignedTasksSectionHeading";
+import { EntityContainerPagination } from "@/components/common/EntityContainerPagination";
 
 interface AssignedTasksPresentationProps {
   totalCount: number;
@@ -35,7 +32,7 @@ export function AssignedTasksPresentation({
   }
 
   return (
-    <EntityPaginationProvider>
+    <>
       <AssignedTasksSection>
         <AssignedTasksSectionHeading />
         <div className="max-md:hidden">{listLarge}</div>
@@ -47,6 +44,6 @@ export function AssignedTasksPresentation({
         totalPages={totalPages}
         pageSize={pageSize}
       />
-    </EntityPaginationProvider>
+    </>
   );
 }

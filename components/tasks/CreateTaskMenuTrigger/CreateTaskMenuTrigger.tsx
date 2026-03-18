@@ -6,10 +6,9 @@ import { useTranslations } from "next-intl";
 import { useCreateTask } from "../CreateTaskContext";
 import { Blocks, CalendarCheck } from "lucide-react";
 import { DialogHeader } from "@/components/ui/Dialog";
-import { useGuestModeModal } from "../../common/GuestModeModal";
-import { useCurrentUser } from "../../common/CurrentUserContext";
-import { useCreateTaskCategory } from "../../taskCategory/CreateTaskCategoryContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { CreateNewMenuTrigger } from "@/components/common/CreateNewMenuTrigger";
+import { useCreateTaskCategory } from "../../taskCategory/CreateTaskCategoryContext";
 
 interface CreateTaskMenuTriggerProps {
   renderButton: () => React.ReactNode;
@@ -20,9 +19,8 @@ export function CreateTaskMenuTrigger({
 }: CreateTaskMenuTriggerProps) {
   const t = useTranslations("tasks.CreateTaskMenuTrigger");
 
-  // If the user is a guest, show the guest mode modal instead of allowing creation
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   // Create task category form modal state
   const { onModalOpenChange: onTaskCategoryModalOpenChange } =
@@ -37,16 +35,13 @@ export function CreateTaskMenuTrigger({
    * - Otherwise, open create task category modal or create task modal
    */
   function handleAction(key: Key) {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-
-    if (key === "task") {
-      onTaskModalOpenChange(true);
-    } else if (key === "category") {
-      onTaskCategoryModalOpenChange(true);
-    }
+    guestGuard(() => {
+      if (key === "task") {
+        onTaskModalOpenChange(true);
+      } else if (key === "category") {
+        onTaskCategoryModalOpenChange(true);
+      }
+    });
   }
 
   return (

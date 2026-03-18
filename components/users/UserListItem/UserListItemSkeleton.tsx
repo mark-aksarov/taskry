@@ -10,15 +10,8 @@ import { ItemBaseActionMenuTriggerSkeleton } from "@/components/common/ItemBase"
 export function UserListItemSkeleton() {
   return (
     <UserListItemLayout
-      imgSlot={<ImageContainerSkeleton className="h-9 w-9 max-md:hidden" />}
-      imgMobileSlot={<ImageContainerSkeleton className="h-9 w-9 md:hidden" />}
+      imgSlot={<ImageContainerSkeleton className="h-9 w-9" />}
       mainSlot={
-        <>
-          <ListItemTitleSkeleton />
-          <ListItemTextSkeleton />
-        </>
-      }
-      mainMobileSlot={
         <>
           <ListItemTitleSkeleton />
           <ListItemTextSkeleton />

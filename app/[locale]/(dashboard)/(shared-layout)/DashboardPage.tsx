@@ -1,12 +1,9 @@
-import {
-  ToolbarMobileTop,
-  PageHeadingMobile,
-} from "@/components/common/ToolbarOld";
-
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
+import { ToolbarMobile } from "@/components/common/Toolbar";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
+import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { DashboardCardsGrid } from "@/components/common/DashboardCardsGrid";
 
 interface DashboardPageProps {
@@ -32,9 +29,9 @@ export function DashboardPage({
     <>
       <PageContainer>
         <PageGrid>
-          <ToolbarMobileTop>
-            <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
-          </ToolbarMobileTop>
+          <ToolbarMobile
+            firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
+          />
           <DashboardCardsGrid>
             {totalProjectsCardContainer}
             {totalTasksCardContainer}

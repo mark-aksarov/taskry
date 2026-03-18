@@ -1,2 +1,2 @@
 export { FilterButtonMobile } from "./FilterButtonMobile";
-export { FilterButtonDesktop } from "./FilterButtonDesktop";
+export { FilterButtonLarge } from "./FilterButtonLarge";

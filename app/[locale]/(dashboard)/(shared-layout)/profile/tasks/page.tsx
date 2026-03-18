@@ -22,7 +22,7 @@ import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
-import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
+import { ProfileNavigationLarge } from "@/components/users/ProfileNavigationLarge";
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext";
 import { UserDetailHeaderAltContainer } from "@/components/users/UserDetailHeaderAltContainer";
 
@@ -74,8 +74,8 @@ export default async function AppProfileTasksPage({
                     totalTasksCount={totalTasksCount}
                     userId={userId}
                     selectedSortField={sort}
-                    navigationDesktop={
-                      <ProfileNavigationDesktop
+                    navigationLarge={
+                      <ProfileNavigationLarge
                         profileActions={
                           <ProfileActions
                             userId={userId}

@@ -1,1 +1,2 @@
-export { Default as UserGridStory } from "./UserGrid.stories";
+export { Default as UserGridLargeStory } from "./UserGridLarge.stories";
+export { Default as UserGridMobileStory } from "./UserGridMobile.stories";

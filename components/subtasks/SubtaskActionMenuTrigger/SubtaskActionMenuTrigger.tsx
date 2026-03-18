@@ -15,9 +15,8 @@ import { EditSubtaskModal } from "../EditSubtaskModal";
 import { DeleteSubtaskModal } from "../DeleteSubtaskModal";
 import { useToggleSubtask } from "../ToggleSubtaskContext";
 import { useUpdateSubtask } from "../UpdateSubtaskContext";
-import { useGuestModeModal } from "../../common/GuestModeModal";
 import { CheckCheck, Loader2, Pencil, Trash } from "lucide-react";
-import { useCurrentUser } from "@/components/common/CurrentUserContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useSubtaskListItemPending } from "../SubtaskListItem/useSubtaskListItemPending";
 
 interface SubtaskActionMenuTriggerProps {
@@ -46,9 +45,8 @@ export function SubtaskActionMenuTrigger({
 }: SubtaskActionMenuTriggerProps) {
   const t = useTranslations("subtasks.SubtaskActionMenuTrigger");
 
-  // Detect if the current user is a guest
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -60,20 +58,17 @@ export function SubtaskActionMenuTrigger({
   const { onModalOpenChange: onEditModalOpenChange } = useUpdateSubtask();
 
   function handleAction(key: Key) {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-
-    if (key === "delete") {
-      setIsDeleteModalOpen(true);
-    } else if (key === "edit") {
-      onEditModalOpenChange(true);
-    } else if (key === "toggle") {
-      startTransition(() =>
-        toggleSubtaskAction({ id: subtaskId, isDone: !isDone }),
-      );
-    }
+    guestGuard(() => {
+      if (key === "delete") {
+        setIsDeleteModalOpen(true);
+      } else if (key === "edit") {
+        onEditModalOpenChange(true);
+      } else if (key === "toggle") {
+        startTransition(() =>
+          toggleSubtaskAction({ id: subtaskId, isDone: !isDone }),
+        );
+      }
+    });
   }
 
   //Pending state while deleting or updating

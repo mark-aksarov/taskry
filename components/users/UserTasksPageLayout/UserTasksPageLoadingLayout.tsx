@@ -8,30 +8,25 @@ import {
   DetailCardHeader,
 } from "@/components/common/DetailCard";
 
-import {
-  ToolbarMobileTop,
-  ToolbarMobileBottom,
-  PageHeadingMobile,
-} from "@/components/common/ToolbarOld";
-
 import { useTranslations } from "next-intl";
-import { Skeleton } from "@/components/ui/Skeleton";
-import { Repeat } from "@/components/common/Repeat";
 import { PageGrid } from "@/components/common/PageGrid";
+import { ButtonSkeleton } from "@/components/ui/Skeleton";
+import { ToolbarMobile } from "@/components/common/Toolbar";
 import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
-import { UserTaskListLayout } from "@/components/users/UserTaskList";
+import { UserTaskListSkeleton } from "@/components/users/UserTaskList";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
-import { UserTaskListItemSkeleton } from "@/components/users/UserTaskListItem";
+import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
+import { TaskGridMobileSkeleton } from "@/components/tasks/TaskGrid";
 
 interface UserTasksPageLoadingLayoutProps {
-  navigationDesktop: React.ReactNode;
+  navigationLarge: React.ReactNode;
   navigationMobile: React.ReactNode;
   backButton?: boolean;
 }
 
 export function UserTasksPageLoadingLayout({
-  navigationDesktop,
+  navigationLarge,
   navigationMobile,
   backButton,
 }: UserTasksPageLoadingLayoutProps) {
@@ -45,42 +40,39 @@ export function UserTasksPageLoadingLayout({
             <DetailCardHeader>
               <DetailCardTitle>{t("title")}</DetailCardTitle>
               <div className="flex gap-4">
-                <Skeleton className="h-8 w-[5.5rem] rounded-lg" />
-                <Skeleton className="h-8 w-[5.5rem] rounded-lg" />
+                <ButtonSkeleton size="small" className="w-[5rem]" />
+                <ButtonSkeleton size="small" className="w-8" />
+                <ButtonSkeleton size="small" className="w-8" />
               </div>
             </DetailCardHeader>
-            <UserTaskListLayout>
-              <Repeat
-                items={10}
-                renderItem={() => <UserTaskListItemSkeleton />}
-              />
-            </UserTaskListLayout>
+
+            <UserTaskListSkeleton items={10} />
           </DetailCardLeft>
 
           <DetailCardRight>
             <DetailHeaderSkeleton />
-            {navigationDesktop}
+            {navigationLarge}
           </DetailCardRight>
         </DetailCard>
       </PageContainer>
 
       <PageContainer className="md:hidden">
         <PageGrid>
-          <ToolbarMobileTop>
-            {backButton && <BackButton href="/team" />}
-            <PageHeadingMobile>{t("title")}</PageHeadingMobile>
-            <Skeleton className="h-8 w-8 rounded-lg" />
-            <Skeleton className="h-8 w-8 rounded-lg" />
-          </ToolbarMobileTop>
+          <ToolbarMobile
+            firstSlot={
+              <>
+                {backButton && <BackButton href="/team" />}
+                <PageHeadingMobile>{t("title")}</PageHeadingMobile>
+              </>
+            }
+            secondSlot={<ButtonSkeleton size="small" className="w-8" />}
+          />
+          <ToolbarMobile
+            firstSlot={navigationMobile}
+            secondSlot={<ButtonSkeleton ghost className="w-[7rem]" />}
+          />
 
-          <ToolbarMobileBottom>{navigationMobile}</ToolbarMobileBottom>
-
-          <UserTaskListLayout>
-            <Repeat
-              items={10}
-              renderItem={() => <UserTaskListItemSkeleton />}
-            />
-          </UserTaskListLayout>
+          <TaskGridMobileSkeleton items={10} />
         </PageGrid>
       </PageContainer>
     </>

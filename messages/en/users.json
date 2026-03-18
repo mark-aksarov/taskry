@@ -80,7 +80,7 @@
   "TotalUsersCard": {
     "text": "Total Users"
   },
-  "UserToolbarSortingMenuTrigger": {
+  "UserSortingMenuTrigger": {
     "byFullName": "By full name",
     "byPosition": "By position"
   },
@@ -91,7 +91,7 @@
     "delete": "Delete user",
     "changePasswordSuccessMessage": "Password changed successfully"
   },
-  "ProfileNavigationDesktop": {
+  "ProfileNavigationLarge": {
     "userInformation": "User Information",
     "assignedTasks": "Assigned Tasks"
   },
@@ -176,7 +176,7 @@
     "position": "Position",
     "noPosition": "No position"
   },
-  "UserNavigationDesktop": {
+  "UserNavigationLarge": {
     "userInformation": "User Information",
     "assignedTasks": "Assigned Tasks"
   },
@@ -195,14 +195,10 @@
   "UserTasksPageLayout": {
     "title": "Tasks"
   },
-  "UserToolbarFiltersModalTrigger": {
-    "title": "User Filters"
+  "UserFiltersModal": {
+    "heading": "User Filters"
   },
-  "UserToolbarActionsMenuTrigger": {
-    "dialogHeading": "Actions",
-    "delete": "Delete"
-  },
-  "UserToolbarCreateNewMenuTrigger": {
+  "CreateUserMenuTrigger": {
     "dialogHeading": "Create New",
     "label": "Create New",
     "items": {
@@ -210,7 +206,7 @@
       "position": "Position"
     }
   },
-  "UserToolbarManageMenuTrigger": {
+  "UserManageMenuTrigger": {
     "positions": "Positions"
   },
   "UsersFilteredEmptySection": {
@@ -219,5 +215,12 @@
   },
   "DeleteUserProvider": {
     "successMessage": "User created successfully"
+  },
+  "UserResultsCount": {
+    "usersFound": "{count, plural, one {# user found} other {# users found}}"
+  },
+  "UserPositionFiltersModal": {
+    "heading": "Position Filters",
+    "label": "Position"
   }
 }

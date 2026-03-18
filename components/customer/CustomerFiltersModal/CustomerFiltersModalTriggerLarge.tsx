@@ -2,7 +2,7 @@
 
 import { DialogTrigger } from "react-aria-components";
 import { CustomerFiltersModal } from "./CustomerFiltersModal";
-import { FilterButtonDesktop } from "@/components/common/FilterButton";
+import { FilterButtonLarge } from "@/components/common/FilterButton";
 
 interface CustomerFiltersModalTriggerLargeProps {
   filtersFormContainer: React.ReactNode;
@@ -13,7 +13,7 @@ export function CustomerFiltersModalTriggerLarge({
 }: CustomerFiltersModalTriggerLargeProps) {
   return (
     <DialogTrigger>
-      <FilterButtonDesktop />
+      <FilterButtonLarge />
       <CustomerFiltersModal filtersFormContainer={filtersFormContainer} />
     </DialogTrigger>
   );

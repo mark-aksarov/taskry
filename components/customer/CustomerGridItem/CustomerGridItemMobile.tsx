@@ -17,7 +17,6 @@ import { Link } from "@/components/ui/Link";
 import { Separator } from "@/components/ui/Separator";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
 import { ItemBaseUserImageContainer } from "@/components/common/ItemBase";
-import { CustomerItemCheckbox } from "../CustomerItem/CustomerItemCheckbox";
 import { BaseCustomerItemProps, CustomerItemProviders } from "../CustomerItem";
 import { CustomerItemActionMenuTrigger } from "../CustomerItem/CustomerItemActionMenuTrigger";
 

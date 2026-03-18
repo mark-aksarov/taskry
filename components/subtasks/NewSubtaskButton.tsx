@@ -5,8 +5,7 @@ import { tv } from "tailwind-variants";
 import { linkStyles } from "../ui/Link";
 import { useTranslations } from "next-intl";
 import { useCreateSubtask } from "./CreateSubtaskContext";
-import { useGuestModeModal } from "../common/GuestModeModal";
-import { useCurrentUser } from "../common/CurrentUserContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { composeRenderProps, ButtonProps, Button } from "react-aria-components";
 
 const styles = tv({
@@ -20,17 +19,13 @@ export function NewSubtasksButton({
 }: ButtonProps & React.RefAttributes<HTMLButtonElement>) {
   const t = useTranslations("subtasks.NewSubtasksButton");
 
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
+
   const { onModalOpenChange } = useCreateSubtask();
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 
   function handlePress() {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-
-    onModalOpenChange(true);
+    guestGuard(() => onModalOpenChange(true));
   }
 
   return (

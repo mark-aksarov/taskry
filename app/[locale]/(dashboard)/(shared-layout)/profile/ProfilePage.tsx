@@ -1,20 +1,16 @@
-import {
-  ToolbarMobileTop,
-  ToolbarMobileBottom,
-  PageHeadingMobile,
-} from "@/components/common/ToolbarOld";
-
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
+import { ToolbarMobile } from "@/components/common/Toolbar";
 import { EditUserModal } from "@/components/users/EditUserModal";
 import { PageContainer } from "@/components/common/PageContainer";
 import { UserDetailCard } from "@/components/users/UserDetailCard";
 import { ProfileActions } from "@/components/users/ProfileActions";
+import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
+import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { ChangePasswordModal } from "@/components/users/ChangePasswordModal";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
-import { ProfileNavigationDesktop } from "@/components/users/ProfileNavigationDesktop";
-import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
+import { ProfileNavigationLarge } from "@/components/users/ProfileNavigationLarge";
 
 interface ProfilePageProps {
   userId: string;
@@ -41,8 +37,8 @@ export function ProfilePage({
         <UserDetailCard
           userDetailContainer={userDetailContainer}
           userDetailHeaderContainer={userDetailHeaderContainer}
-          navigationDesktop={
-            <ProfileNavigationDesktop
+          navigationLarge={
+            <ProfileNavigationLarge
               profileActions={
                 <ProfileActions userId={userId} userFullName={userFullName} />
               }
@@ -51,13 +47,11 @@ export function ProfilePage({
         />
 
         <PageGrid className="md:hidden">
-          <ToolbarMobileTop>
-            <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
-          </ToolbarMobileTop>
+          <ToolbarMobile
+            firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
+          />
 
-          <ToolbarMobileBottom>
-            <ProfileNavigationMobile />
-          </ToolbarMobileBottom>
+          <ToolbarMobile firstSlot={<ProfileNavigationMobile />} />
 
           <div className="flex flex-col">{userDetailHeaderContainer}</div>
           <Card className="flex flex-col p-1.5">

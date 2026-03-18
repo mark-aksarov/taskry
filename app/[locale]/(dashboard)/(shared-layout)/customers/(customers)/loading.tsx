@@ -58,7 +58,7 @@ export default function AppCustomersPageLoading() {
         </ToolbarFiltersMobile>
 
         <ToolbarMobile
-          firstSlot={<Skeleton size="sm" className="w-[5rem]" />}
+          firstSlot={<Skeleton size="xs" className="w-[5rem]" />}
           secondSlot={<ButtonSkeleton ghost className="w-[7rem]" />}
         />
 

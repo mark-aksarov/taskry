@@ -18,6 +18,7 @@ export function CommentTextFieldSendButton({
 }: CommentTextFieldSendButtonProps) {
   const t = useTranslations("comments.CommentTextFieldSendButton");
 
+  // If the user is a guest, show the guest mode modal instead of allowing action
   const { isGuest } = useCurrentUser();
   const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
 

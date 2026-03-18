@@ -1,8 +1,12 @@
+import {
+  UserGridLargeStory,
+  UserGridMobileStory,
+} from "@/components/users/UserGrid/__stories__";
+
 import { UsersPage } from "./UsersPage";
 import UsersPageLoading from "./loading";
 import { fn, mocked } from "storybook/test";
 import { UserList } from "@/components/users/UserList";
-import { UserGrid } from "@/components/users/UserGrid";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { usePathname, useParams } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
@@ -10,17 +14,18 @@ import { mockedPositionSummaries } from "@/mocks/positions";
 import { SearchList } from "@/components/search/SearchList";
 import { UserFiltersForm } from "@/components/users/UserFiltersForm";
 import { UserListStory } from "@/components/users/UserList/__stories__";
-import { UserGridStory } from "@/components/users/UserGrid/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { UserGridLarge, UserGridMobile } from "@/components/users/UserGrid";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { withCreateUserProvider } from "@/components/users/CreateUserContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withUserFiltersProvider } from "@/components/users/UserFiltersContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
-import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentationOLD";
+import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withCreatePositionProvider } from "@/components/position/CreatePositionContext/__stories__";
+import { UserPositionFiltersForm } from "@/components/users/UserPositionFiltersForm";
 
 const meta = {
   title: "pages/UsersPage",
@@ -54,10 +59,16 @@ export const Default = {
     filtersFormContainer: (
       <UserFiltersForm positionCheckboxGroupItems={mockedPositionSummaries} />
     ),
+    positionFiltersFormContainer: (
+      <UserPositionFiltersForm
+        positionCheckboxGroupItems={mockedPositionSummaries}
+      />
+    ),
     usersContainer: (
       <EntityContainerPresentation
-        list={<UserList {...UserListStory.args} />}
-        grid={<UserGrid {...UserGridStory.args} />}
+        listLarge={<UserList {...UserListStory.args} />}
+        gridLarge={<UserGridLarge {...UserGridLargeStory.args} />}
+        gridMobile={<UserGridMobile {...UserGridMobileStory.args} />}
         page={1}
         pageSize={3}
         totalPages={3}

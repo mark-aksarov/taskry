@@ -2,17 +2,19 @@
 
 import { Children } from "react";
 import { List } from "@/components/common/List";
+import { useViewMode } from "@/components/common/ViewMode";
 import { CustomerListSkeleton } from "./CustomerListSkeleton";
-import { useEntityListPending } from "@/lib/hooks/useEntityListPending";
+import { usePageTransition } from "@/components/common/PageTransitionContext";
 
 export type CustomerListProps = {
   children: React.ReactNode;
 };
 
 export function CustomerList({ children }: CustomerListProps) {
-  const isPending = useEntityListPending();
+  const { isPending: isViewModePending } = useViewMode();
+  const { isPending: isPageTransitionPending } = usePageTransition();
 
-  if (isPending) {
+  if (isViewModePending || isPageTransitionPending) {
     return <CustomerListSkeleton items={Children.count(children)} />;
   }
 

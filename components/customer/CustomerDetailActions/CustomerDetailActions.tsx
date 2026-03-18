@@ -7,9 +7,8 @@ import { EditCustomerModal } from "../EditCustomerModal";
 import { useDeleteCustomer } from "../DeleteCustomerContext";
 import { useUpdateCustomer } from "../UpdateCustomerContext";
 import { BaseDeleteCustomerModal } from "../DeleteCustomerModal";
-import { useGuestModeModal } from "@/components/common/GuestModeModal";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { NavigationButton } from "@/components/common/NavigationButton";
-import { useCurrentUser } from "@/components/common/CurrentUserContext";
 
 interface CustomerDetailActionsProps {
   customerId: number;
@@ -24,9 +23,8 @@ export function CustomerDetailActions({
 }: CustomerDetailActionsProps) {
   const t = useTranslations("customers.CustomerDetailActions");
 
-  // If the user is a guest, show the guest mode modal instead of allowing creation
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   // Delete customer: action state + form modal state
   const { isPending: isDeletePending, action: deleteAction } =
@@ -40,21 +38,13 @@ export function CustomerDetailActions({
   } = useUpdateCustomer();
 
   function handleDeletePress() {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-
-    setIsDeleteModalOpen(true);
+    guestGuard(() => setIsDeleteModalOpen(true));
   }
 
   function handleEditPress() {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-
-    onEditModalOpenChange(true);
+    guestGuard(() => {
+      onEditModalOpenChange(true);
+    });
   }
 
   // Close modal and delete customer

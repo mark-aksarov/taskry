@@ -22,9 +22,8 @@ import { DeleteTaskModal } from "../DeleteTaskModal";
 import { useUpdateTask } from "../UpdateTaskContext";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useTaskItemPending } from "./useTaskItemPending";
-import { useCurrentUser } from "../../common/CurrentUserContext";
 import { useUpdateTaskStatus } from "../UpdateTaskStatusContext";
-import { useGuestModeModal } from "@/components/common/GuestModeModal";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
 export type TaskItemActionMenuTriggerProps = {
   taskId: number;
@@ -41,9 +40,8 @@ export function TaskItemActionMenuTrigger({
 }: TaskItemActionMenuTriggerProps) {
   const t = useTranslations("tasks.TaskItemActionMenuTrigger");
 
-  // Detect if the current user is a guest
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -67,29 +65,26 @@ export function TaskItemActionMenuTrigger({
    *    and trigger the updateProjectStatusAction for this task.
    */
   function handleAction(key: Key) {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
+    guestGuard(() => {
+      const action = key.toString();
 
-    const action = key.toString();
+      if (action === "details") {
+        return;
+      }
 
-    if (action === "details") {
-      return;
-    }
-
-    if (action === "edit") {
-      onEditModalOpenChange(true);
-    } else if (action === "delete") {
-      setIsDeleteModalOpen(true);
-    } else {
-      startTransition(() => {
-        updateTaskStatusAction({
-          id: taskId,
-          nextStatus: action as TaskStatus,
+      if (action === "edit") {
+        onEditModalOpenChange(true);
+      } else if (action === "delete") {
+        setIsDeleteModalOpen(true);
+      } else {
+        startTransition(() => {
+          updateTaskStatusAction({
+            id: taskId,
+            nextStatus: action as TaskStatus,
+          });
         });
-      });
-    }
+      }
+    });
   }
 
   // Disable status-related menu items while a task update is in progress,

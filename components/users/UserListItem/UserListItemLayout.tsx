@@ -8,8 +8,6 @@ interface UserListItemLayoutProps {
   publicLinkSlot: React.ReactNode;
   positionSlot: React.ReactNode;
   menuTriggerSlot: React.ReactNode;
-  imgMobileSlot: React.ReactNode;
-  mainMobileSlot: React.ReactNode;
 }
 
 export const UserListItemLayout = ({
@@ -20,8 +18,6 @@ export const UserListItemLayout = ({
   publicLinkSlot,
   positionSlot,
   menuTriggerSlot,
-  imgMobileSlot,
-  mainMobileSlot,
 }: UserListItemLayoutProps) => {
   return (
     <ListItem
@@ -30,11 +26,7 @@ export const UserListItemLayout = ({
       className="flex w-full items-center gap-4"
     >
       {imgSlot}
-      {imgMobileSlot}
-
-      <ListItemInfo className="max-md:hidden">{mainSlot}</ListItemInfo>
-      <ListItemInfo className="md:hidden">{mainMobileSlot}</ListItemInfo>
-
+      <ListItemInfo>{mainSlot}</ListItemInfo>
       <ListItemInfo className="@max-lg:hidden">{phoneNumberSlot}</ListItemInfo>
       <ListItemInfo className="@max-2xl:hidden">{publicLinkSlot}</ListItemInfo>
       <ListItemInfo className="@max-4xl:hidden">{positionSlot}</ListItemInfo>

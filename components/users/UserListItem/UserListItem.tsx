@@ -1,26 +1,46 @@
 "use client";
 
 import {
+  BaseUserItemProps,
+  UserItemProviders,
+  UserItemActionMenuTrigger,
+} from "../UserItem";
+
+import {
   ListItemText,
   ListItemTitle,
   ListItemTextLink,
   ListItemTitleDetailModalTrigger,
 } from "@/components/common/List";
 
+import {
+  ItemBaseDetailModalTrigger,
+  ItemBaseUserImageContainer,
+} from "@/components/common/ItemBase";
+
 import { memo } from "react";
-import Image from "next/image";
-import { Link } from "@/components/ui/Link";
 import { useTranslations } from "next-intl";
 import { UserDetailModal } from "../UserDetailModal";
 import { UserListItemLayout } from "./UserListItemLayout";
-import { UnknownUser } from "@/components/common/UnknownUser";
-import { ImageContainer } from "@/components/common/ImageContainer";
-import { UserItemActionMenuTrigger, UserItemProps } from "../UserItem";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
-import { ItemBaseDetailModalTrigger } from "@/components/common/ItemBase";
 import { ListItemTitleLink } from "@/components/common/List/ListItemTitle";
 
-export const UserListItem = memo(
+interface Props extends BaseUserItemProps {
+  userDetailContainer: React.ReactNode;
+  userDetailHeaderContainer: React.ReactNode;
+}
+
+export function UserListItem({ updateUser, deleteUser, ...props }: Props) {
+  return (
+    <UserItemProviders updateUser={updateUser} deleteUser={deleteUser}>
+      <UserListItemInner {...props} />
+    </UserItemProviders>
+  );
+}
+
+type InnerProps = Omit<Props, "deleteUser" | "updateUser">;
+
+export const UserListItemInner = memo(
   ({
     id,
     fullName,
@@ -32,17 +52,18 @@ export const UserListItem = memo(
     editUserFormContainer,
     userDetailContainer,
     userDetailHeaderContainer,
-  }: Omit<UserItemProps, "deleteUser" | "updateUser">) => {
+  }: InnerProps) => {
     const t = useTranslations("users.UserListItem");
 
     const { isOwner, isGuest } = useCurrentUser();
 
-    const userImg = imageUrl ? (
-      <ImageContainer className="h-9 w-9">
-        <Image src={imageUrl} alt={fullName} width={36} height={36} />
-      </ImageContainer>
-    ) : (
-      <UnknownUser className="h-9 w-9" />
+    const userImg = (
+      <ItemBaseUserImageContainer
+        user={{ fullName, imageUrl }}
+        width={36}
+        height={36}
+        className="h-9 w-9"
+      />
     );
 
     const userDetailModal = (
@@ -62,15 +83,10 @@ export const UserListItem = memo(
         imgSlot={
           <ItemBaseDetailModalTrigger
             modal={userDetailModal}
-            className="h-9 w-9 max-md:hidden"
+            className="h-9 w-9"
           >
             {userImg}
           </ItemBaseDetailModalTrigger>
-        }
-        imgMobileSlot={
-          <Link className="md:hidden" href={`/team/${id}`}>
-            {userImg}
-          </Link>
         }
         mainSlot={
           <>
@@ -81,12 +97,6 @@ export const UserListItem = memo(
             <ListItemTextLink href={`mailto:${email}`}>
               {email}
             </ListItemTextLink>
-          </>
-        }
-        mainMobileSlot={
-          <>
-            <ListItemTitle>{fullName}</ListItemTitle>
-            <ListItemText>{email}</ListItemText>
           </>
         }
         phoneNumberSlot={

@@ -2,17 +2,17 @@
 
 import { Children } from "react";
 import { GridMobile } from "@/components/common/Grid";
-import { useEntityListPending } from "@/lib/hooks/useEntityListPending";
 import { CustomerGridMobileSkeleton } from "./CustomerGridMobileSkeleton";
+import { usePageTransition } from "@/components/common/PageTransitionContext";
 
 export function CustomerGridMobile({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const isPending = useEntityListPending();
+  const { isPending: isPageTransitionPending } = usePageTransition();
 
-  if (isPending) {
+  if (isPageTransitionPending) {
     return <CustomerGridMobileSkeleton items={Children.count(children)} />;
   }
 

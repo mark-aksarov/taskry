@@ -1,14 +1,11 @@
-import {
-  ToolbarMobileTop,
-  PageHeadingMobile,
-} from "@/components/common/ToolbarOld";
-
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { BackButton } from "@/components/common/BackButton";
+import { ToolbarMobile } from "@/components/common/Toolbar";
 import { PageContainer } from "@/components/common/PageContainer";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
+import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { CustomerDetailCard } from "@/components/customer/CustomerDetailCard";
 import { CustomerDetailSkeleton } from "@/components/customer/CustomerDetail";
 import { CustomerDetailActionsSkeleton } from "@/components/customer/CustomerDetailActions";
@@ -25,10 +22,14 @@ export default function AppCustomerDetailLoading() {
       />
 
       <PageGrid className="md:hidden">
-        <ToolbarMobileTop>
-          <BackButton href="/customers" />
-          <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
-        </ToolbarMobileTop>
+        <ToolbarMobile
+          firstSlot={
+            <>
+              <BackButton href="/customers" />
+              <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
+            </>
+          }
+        />
 
         <div className="flex flex-col">
           <DetailHeaderSkeleton />

@@ -41,9 +41,7 @@ export const AppHeader = ({
 
         <div className="flex items-center justify-between md:hidden">
           {profileLinkContainer}
-          <div className="flex items-center gap-3">
-            <AppBottomSheetTrigger appNavigation={<AppNavigation />} />
-          </div>
+          <AppBottomSheetTrigger appNavigation={<AppNavigation />} />
         </div>
       </header>
     </>

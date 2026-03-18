@@ -6,8 +6,7 @@ import { useTranslations } from "next-intl";
 import { Blocks, FolderClosed } from "lucide-react";
 import { DialogHeader } from "@/components/ui/Dialog";
 import { useCreateProject } from "../CreateProjectContext";
-import { useGuestModeModal } from "@/components/common/GuestModeModal";
-import { useCurrentUser } from "@/components/common/CurrentUserContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { CreateNewMenuTrigger } from "@/components/common/CreateNewMenuTrigger";
 import { useCreateProjectCategory } from "@/components/projectCategory/CreateProjectCategoryContext";
 
@@ -20,9 +19,8 @@ export function CreateProjectMenuTrigger({
 }: CreateProjectMenuTriggerProps) {
   const t = useTranslations("projects.CreateProjectMenuTrigger");
 
-  // If the user is a guest, show the guest mode modal instead of allowing creation
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   // Create project category form modal state
   const { onModalOpenChange: onProjectCategoryModalOpenChange } =
@@ -37,16 +35,13 @@ export function CreateProjectMenuTrigger({
    * - Otherwise, open create project category modal or create project modal
    */
   function handleAction(key: Key) {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-
-    if (key === "project") {
-      onProjectModalOpenChange(true);
-    } else if (key === "category") {
-      onProjectCategoryModalOpenChange(true);
-    }
+    guestGuard(() => {
+      if (key === "project") {
+        onProjectModalOpenChange(true);
+      } else if (key === "category") {
+        onProjectCategoryModalOpenChange(true);
+      }
+    });
   }
 
   return (

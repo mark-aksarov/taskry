@@ -69,17 +69,15 @@
     "details": "Открыть детали"
   },
   "CreateTaskMenuTrigger": {
+    "label": "Создать новую",
     "dialogHeading": "Создать новую",
     "items": {
       "task": "Задачу",
       "category": "Категорию"
     }
   },
-  "CreateTaskMenuTriggerMobile": {
-    "buttonAriaLabel": "Создать новую"
-  },
-  "CreateTaskMenuTriggerLarge": {
-    "buttonLabel": "Создать новую"
+  "CreateTaskModalTrigger": {
+    "label": "Создать задачу"
   },
   "DeleteTaskModal": {
     "heading": "Удалить задачу",

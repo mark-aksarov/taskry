@@ -50,7 +50,7 @@
   "SortingButtonLarge": {
     "label": "Сортировка"
   },
-  "FilterButtonDesktop": {
+  "FilterButtonLarge": {
     "label": "Фильтры"
   },
   "FiltersFormSubmitButton": {
@@ -80,12 +80,6 @@
     "previousPage": "Предыдущая страница",
     "nextPage": "Следующая страница",
     "page": "страница {pageNumber}"
-  },
-  "ToolbarManageButtonDesktop": {
-    "label": "Управление"
-  },
-  "ToolbarManageButtonMobile": {
-    "ariaLabel": "Управление"
   },
   "FilterCheckboxGroupExpandButton": {
     "collapse": "Свернуть",

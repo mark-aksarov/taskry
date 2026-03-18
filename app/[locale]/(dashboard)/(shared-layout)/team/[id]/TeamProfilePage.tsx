@@ -1,21 +1,17 @@
-import {
-  ToolbarMobileTop,
-  ToolbarMobileBottom,
-  PageHeadingMobile,
-} from "@/components/common/ToolbarOld";
-
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
+import { ToolbarMobile } from "@/components/common/Toolbar";
 import { BackButton } from "@/components/common/BackButton";
 import { EditUserModal } from "@/components/users/EditUserModal";
 import { PageContainer } from "@/components/common/PageContainer";
 import { UserDetailCard } from "@/components/users/UserDetailCard";
 import { ProfileActions } from "@/components/users/ProfileActions";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
+import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { ChangePasswordModal } from "@/components/users/ChangePasswordModal";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
-import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
+import { UserNavigationLarge } from "@/components/users/UserNavigationLarge";
 
 interface TeamProfilePageProps {
   showUserActions: boolean;
@@ -44,8 +40,8 @@ export function TeamProfilePage({
         <UserDetailCard
           userDetailContainer={userDetailContainer}
           userDetailHeaderContainer={userDetailHeaderContainer}
-          navigationDesktop={
-            <UserNavigationDesktop
+          navigationLarge={
+            <UserNavigationLarge
               userActions={
                 showUserActions ? (
                   <ProfileActions userId={userId} userFullName={userFullName} />
@@ -56,14 +52,16 @@ export function TeamProfilePage({
         />
 
         <PageGrid className="md:hidden">
-          <ToolbarMobileTop>
-            <BackButton href="/team" />
-            <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
-          </ToolbarMobileTop>
+          <ToolbarMobile
+            firstSlot={
+              <>
+                <BackButton href="/team" />
+                <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
+              </>
+            }
+          />
 
-          <ToolbarMobileBottom>
-            <UserNavigationMobile />
-          </ToolbarMobileBottom>
+          <ToolbarMobile firstSlot={<UserNavigationMobile />} />
 
           <div className="flex flex-col">{userDetailHeaderContainer}</div>
           {showUserActions && (

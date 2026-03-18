@@ -1,22 +1,17 @@
-import { useCurrentUser } from "@/components/common/CurrentUserContext";
-import { useGuestModeModal } from "@/components/common/GuestModeModal";
 import { useCreateCompany } from "../CreateCompanyContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
 export function useCreateCompanyTriggerPress() {
-  // If the user is a guest, show the guest mode modal instead of allowing creation
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   // Create company action and modal states
   const { onModalOpenChange: onCompanyModalOpenChange } = useCreateCompany();
 
   const handlePress = () => {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-
-    onCompanyModalOpenChange(true);
+    guestGuard(() => {
+      onCompanyModalOpenChange(true);
+    });
   };
 
   return handlePress;

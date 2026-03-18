@@ -3,9 +3,8 @@
 import { tv } from "tailwind-variants";
 import { CirclePlus } from "lucide-react";
 import { linkStyles } from "@/components/ui/Link";
-import { useGuestModeModal } from "../GuestModeModal";
-import { useCurrentUser } from "../CurrentUserContext";
 import { Button, ButtonProps, PressEvent } from "react-aria-components";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
 interface EmptySectionButtonProps extends ButtonProps {
   children: React.ReactNode;
@@ -22,16 +21,13 @@ export function EmptySectionButton({
   onPress,
   ...props
 }: EmptySectionButtonProps) {
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   function handlePress(e: PressEvent) {
-    if (isGuest) {
-      onOpenChange(true);
-      return;
-    }
-
-    onPress?.(e);
+    guestGuard(() => {
+      onPress?.(e);
+    });
   }
 
   return (

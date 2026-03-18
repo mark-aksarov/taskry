@@ -1,23 +1,15 @@
-import { useCurrentUser } from "@/components/common/CurrentUserContext";
-import { useGuestModeModal } from "@/components/common/GuestModeModal";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCreateProjectCategory } from "../CreateProjectCategoryContext";
 
 export function useCreateProjectCategoryTriggerPress() {
-  // If the user is a guest, show the guest mode modal instead of allowing creation
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
-  // Create project category action and modal states
   const { onModalOpenChange: onProjectCategoryModalOpenChange } =
     useCreateProjectCategory();
 
   const handlePress = () => {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-
-    onProjectCategoryModalOpenChange(true);
+    guestGuard(() => onProjectCategoryModalOpenChange(true));
   };
 
   return handlePress;

@@ -6,9 +6,8 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "../ui/Dialog";
 import { ActionsButton } from "../common/ActionsButton";
-import { useGuestModeModal } from "../common/GuestModeModal";
-import { useCurrentUser } from "../common/CurrentUserContext";
 import { ActionsMenuTrigger } from "../common/ActionsMenuTrigger";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { DeleteProjectCategoriesModal } from "./DeleteProjectCategoriesModal";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
@@ -17,9 +16,8 @@ export const ProjectCategoryActionsMenuTrigger = () => {
     "projectCategories.ProjectCategoryActionsMenuTrigger",
   );
 
-  // Guest mode
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -29,14 +27,11 @@ export const ProjectCategoryActionsMenuTrigger = () => {
 
   // Menu actions: show delete modal
   const handleAction = (key: Key) => {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-
-    if (key === "delete") {
-      setIsDeleteModalOpen(true);
-    }
+    guestGuard(() => {
+      if (key === "delete") {
+        setIsDeleteModalOpen(true);
+      }
+    });
   };
 
   return (

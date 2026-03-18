@@ -7,19 +7,17 @@ import { startTransition, useState } from "react";
 import { ActionsButton } from "../common/ActionsButton";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { DeleteProjectsModal } from "./DeleteProjectsModal";
-import { useGuestModeModal } from "../common/GuestModeModal";
-import { useCurrentUser } from "../common/CurrentUserContext";
 import { useSelectedProjects } from "./SelectedProjectsContext";
 import { ActionsMenuTrigger } from "../common/ActionsMenuTrigger";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { useUpdateProjectStatuses } from "./UpdateProjectStatusesContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
 export const ProjectActionsMenuTrigger = () => {
   const t = useTranslations("projects.ProjectActionsMenuTrigger");
 
-  // Detect if the current user is a guest
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -39,27 +37,24 @@ export const ProjectActionsMenuTrigger = () => {
    * - Otherwise, open delete confirmation modal based on action key or update project statuses
    */
   const handleAction = (key: Key) => {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
+    guestGuard(() => {
+      if (key === "delete") {
+        setIsDeleteModalOpen(true);
+      } else {
+        // I store the current ids separately so that checkbox changes
+        // during the update process don’t affect status tracking.
+        setUpdateProjectStatusesIds(selected.ids);
 
-    if (key === "delete") {
-      setIsDeleteModalOpen(true);
-    } else {
-      // I store the current ids separately so that checkbox changes
-      // during the update process don’t affect status tracking.
-      setUpdateProjectStatusesIds(selected.ids);
+        startTransition(() => {
+          const nextStatus = key as ProjectStatus;
 
-      startTransition(() => {
-        const nextStatus = key as ProjectStatus;
-
-        updateProjectStatusesAction({
-          ids: selected.ids,
-          nextStatus,
+          updateProjectStatusesAction({
+            ids: selected.ids,
+            nextStatus,
+          });
         });
-      });
-    }
+      }
+    });
   };
 
   // disable menu items if selected projects have the same status.

@@ -9,6 +9,7 @@ import {
 } from "react";
 
 interface PageTransitionContextType {
+  isPending: boolean;
   isPaginationPending: boolean;
   isFilteringPending: boolean;
   isSortingPending: boolean;
@@ -29,16 +30,22 @@ export const PageTransitionProvider = ({
   const [isFilteringPending, startFilteringTransition] = useTransition();
   const [isSortingPending, startSortingTransition] = useTransition();
 
+  const isPending =
+    isPaginationPending || isFilteringPending || isSortingPending;
+
   const contextValue = useMemo(
     () => ({
+      isPending,
+
       isPaginationPending,
       isFilteringPending,
       isSortingPending,
+
       startPaginationTransition,
       startFilteringTransition,
       startSortingTransition,
     }),
-    [isPaginationPending, isFilteringPending, isSortingPending],
+    [isPending, isPaginationPending, isFilteringPending, isSortingPending],
   );
 
   return (

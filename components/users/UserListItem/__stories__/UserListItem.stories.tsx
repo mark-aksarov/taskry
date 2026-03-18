@@ -45,6 +45,8 @@ export const Default = {
         canUpdateImage={false}
       />
     ),
+    updateUser: () => ({ status: "success" }),
+    deleteUser: () => ({ status: "success" }),
   },
 } satisfies Story;
 

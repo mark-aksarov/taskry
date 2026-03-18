@@ -2,13 +2,15 @@
 
 import { Children } from "react";
 import { GridLarge } from "@/components/common/Grid";
-import { useEntityListPending } from "@/lib/hooks/useEntityListPending";
+import { useViewMode } from "@/components/common/ViewMode";
 import { CustomerGridLargeSkeleton } from "./CustomerGridLargeSkeleton";
+import { usePageTransition } from "@/components/common/PageTransitionContext";
 
 export function CustomerGridLarge({ children }: { children: React.ReactNode }) {
-  const isPending = useEntityListPending();
+  const { isPending: isViewModePending } = useViewMode();
+  const { isPending: isPageTransitionPending } = usePageTransition();
 
-  if (isPending) {
+  if (isViewModePending || isPageTransitionPending) {
     return <CustomerGridLargeSkeleton items={Children.count(children)} />;
   }
 

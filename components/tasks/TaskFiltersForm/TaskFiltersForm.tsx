@@ -70,9 +70,6 @@ export function TaskFiltersForm({
       </FormBaseBody>
       <FormBaseFooter>
         <FiltersFormSubmitButton />
-        <FiltersFormResetButton
-          onPress={() => dispatch({ type: "resetFilters" })}
-        />
       </FormBaseFooter>
     </FormBase>
   );

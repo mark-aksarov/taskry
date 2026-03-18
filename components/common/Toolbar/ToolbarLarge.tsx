@@ -19,7 +19,14 @@ export function ToolbarLarge({
       )}
     >
       <div className="flex items-center gap-4">{firstSlot}</div>
-      <div className="flex items-center gap-4">{secondSlot}</div>
+      <div
+        className={twMerge(
+          "flex items-center gap-4",
+          twoRowsOnLg && "max-lg:w-full max-lg:justify-between",
+        )}
+      >
+        {secondSlot}
+      </div>
     </div>
   );
 }

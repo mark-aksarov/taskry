@@ -17,7 +17,7 @@ export function CustomerFiltersModal({
   const t = useTranslations("customers.CustomerFiltersModal");
 
   return (
-    <FormBaseModal data-test="project-filters-modal">
+    <FormBaseModal data-test="customer-filters-modal">
       <FilterModalDialog>
         <DialogHeader>{t("heading")}</DialogHeader>
         <FormBaseModalDialogBody>

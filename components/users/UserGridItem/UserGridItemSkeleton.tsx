@@ -7,13 +7,17 @@ import { UserGridItemLayout } from "./UserGridItemLayout";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
 import { ItemBaseActionMenuTriggerSkeleton } from "@/components/common/ItemBase";
 
-export function UserGridItemSkeleton() {
+interface UserGridItemSkeletonProps {
+  imageClassName?: string;
+}
+
+function UserGridItemSkeleton({ imageClassName }: UserGridItemSkeletonProps) {
   return (
     <UserGridItemLayout
       actionMenuSlot={
         <ItemBaseActionMenuTriggerSkeleton className="-mr-2 ml-auto" />
       }
-      imageSlot={<ImageContainerSkeleton className="h-9 w-9" />}
+      imageSlot={<ImageContainerSkeleton className={imageClassName} />}
       titleSlot={<GridItemInfoSkeleton className="flex-auto" />}
       phoneNumberSlot={
         <>
@@ -24,3 +28,11 @@ export function UserGridItemSkeleton() {
     />
   );
 }
+
+export const UserGridItemLargeSkeleton = () => {
+  return <UserGridItemSkeleton imageClassName="h-9 w-9" />;
+};
+
+export const UserGridItemMobileSkeleton = () => {
+  return <UserGridItemSkeleton imageClassName="h-11 w-11" />;
+};

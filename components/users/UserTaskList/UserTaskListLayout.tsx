@@ -1,13 +1,15 @@
 import { twMerge } from "tailwind-merge";
 import { List } from "@/components/common/List";
 
+interface UserTaskListLayoutProps {
+  className?: string;
+  children: React.ReactNode;
+}
+
 export function UserTaskListLayout({
   className,
   children,
-}: {
-  className?: string;
-  children: React.ReactNode;
-}) {
+}: UserTaskListLayoutProps) {
   return (
     <List
       data-test="user-task-list"

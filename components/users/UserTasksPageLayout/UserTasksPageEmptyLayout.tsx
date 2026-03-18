@@ -1,10 +1,4 @@
 import {
-  ToolbarMobileTop,
-  ToolbarMobileBottom,
-  PageHeadingMobile,
-} from "@/components/common/ToolbarOld";
-
-import {
   DetailCard,
   DetailCardLeft,
   DetailCardRight,
@@ -15,20 +9,22 @@ import {
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { BackButton } from "@/components/common/BackButton";
+import { ToolbarMobile } from "@/components/common/Toolbar";
 import { PageContainer } from "@/components/common/PageContainer";
 import { AbsoluteCenter } from "@/components/common/AbsoluteCenter";
 import { TasksEmptySection } from "@/components/tasks/TasksEmptySection";
+import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 
 interface UserTasksPageEmptyLayoutProps {
   userDetailHeaderContainer: React.ReactNode;
-  navigationDesktop: React.ReactNode;
+  navigationLarge: React.ReactNode;
   navigationMobile: React.ReactNode;
   backButton?: boolean;
 }
 
 export function UserTasksPageEmptyLayout({
   userDetailHeaderContainer,
-  navigationDesktop,
+  navigationLarge,
   navigationMobile,
   backButton,
 }: UserTasksPageEmptyLayoutProps) {
@@ -50,19 +46,22 @@ export function UserTasksPageEmptyLayout({
 
           <DetailCardRight>
             {userDetailHeaderContainer}
-            {navigationDesktop}
+            {navigationLarge}
           </DetailCardRight>
         </DetailCard>
       </PageContainer>
 
       <PageContainer fullscreen headerOffset className="md:hidden">
         <PageGrid className="relative flex-auto">
-          <ToolbarMobileTop>
-            {backButton && <BackButton href="/team" />}
-            <PageHeadingMobile>{t("title")}</PageHeadingMobile>
-          </ToolbarMobileTop>
-
-          <ToolbarMobileBottom>{navigationMobile}</ToolbarMobileBottom>
+          <ToolbarMobile
+            firstSlot={
+              <>
+                {backButton && <BackButton href="/team" />}
+                <PageHeadingMobile>{t("title")}</PageHeadingMobile>
+              </>
+            }
+          />
+          <ToolbarMobile firstSlot={navigationMobile} />
 
           <AbsoluteCenter className="w-full">
             <TasksEmptySection />

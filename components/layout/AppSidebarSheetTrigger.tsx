@@ -27,7 +27,7 @@ export function AppSidebarSheetTrigger({
         aria-label={t("triggerAriaLabel")}
         variant="ghost"
         iconLeft={<Menu size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-        className="rounded-full p-3 max-md:hidden xl:hidden"
+        className="-mr-3 rounded-full p-3 max-md:hidden xl:hidden"
         onPress={() => setOpen(true)}
       />
 

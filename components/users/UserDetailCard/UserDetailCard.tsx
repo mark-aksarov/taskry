@@ -10,13 +10,13 @@ import { useTranslations } from "next-intl";
 interface UserDetailCardProps {
   userDetailHeaderContainer: React.ReactNode;
   userDetailContainer: React.ReactNode;
-  navigationDesktop: React.ReactNode;
+  navigationLarge: React.ReactNode;
 }
 
 export function UserDetailCard({
   userDetailHeaderContainer,
   userDetailContainer,
-  navigationDesktop,
+  navigationLarge,
 }: UserDetailCardProps) {
   const t = useTranslations("users.UserDetailCard");
 
@@ -31,7 +31,7 @@ export function UserDetailCard({
 
       <DetailCardRight>
         {userDetailHeaderContainer}
-        {navigationDesktop}
+        {navigationLarge}
       </DetailCardRight>
     </DetailCard>
   );

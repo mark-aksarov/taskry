@@ -8,18 +8,23 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { DeleteTasksModal } from "./DeleteTasksModal";
 import { ActionsButton } from "../common/ActionsButton";
 import { useSelectedTasks } from "./SelectedTasksContext";
-import { useGuestModeModal } from "../common/GuestModeModal";
-import { useCurrentUser } from "../common/CurrentUserContext";
 import { ActionsMenuTrigger } from "../common/ActionsMenuTrigger";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { useUpdateTaskStatuses } from "./UpdateTaskStatusesContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
-export const TaskActionsMenuTrigger = () => {
+interface TaskActionsMenuTriggerProps {
+  // Extra flag to hide the label on User/Profile Tasks pages
+  showLabel?: boolean;
+}
+
+export const TaskActionsMenuTrigger = ({
+  showLabel,
+}: TaskActionsMenuTriggerProps) => {
   const t = useTranslations("tasks.TaskActionsMenuTrigger");
 
-  // Detect if the current user is a guest
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -37,27 +42,24 @@ export const TaskActionsMenuTrigger = () => {
    * - Otherwise, open delete confirmation modal based on action key or update task statuses
    */
   const handleAction = (key: Key) => {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
+    guestGuard(() => {
+      if (key === "delete") {
+        setIsDeleteModalOpen(true);
+      } else {
+        // I store the current ids separately so that checkbox changes
+        // during the update process don’t affect status tracking.
+        setUpdateTaskStatusesIds(selected.ids);
 
-    if (key === "delete") {
-      setIsDeleteModalOpen(true);
-    } else {
-      // I store the current ids separately so that checkbox changes
-      // during the update process don’t affect status tracking.
-      setUpdateTaskStatusesIds(selected.ids);
+        startTransition(() => {
+          const nextStatus = key as TaskStatus;
 
-      startTransition(() => {
-        const nextStatus = key as TaskStatus;
-
-        updateTaskStatusesAction({
-          ids: selected.ids,
-          nextStatus,
+          updateTaskStatusesAction({
+            ids: selected.ids,
+            nextStatus,
+          });
         });
-      });
-    }
+      }
+    });
   };
 
   // disable menu items if selected tasks have the same status.
@@ -75,6 +77,7 @@ export const TaskActionsMenuTrigger = () => {
         )}
         renderButton={() => (
           <ActionsButton
+            showLabel={showLabel}
             data-test="task-actions-menu-trigger"
             selectedIds={selected.ids}
           />

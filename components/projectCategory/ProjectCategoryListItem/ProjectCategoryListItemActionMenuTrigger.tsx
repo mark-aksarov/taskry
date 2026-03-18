@@ -10,9 +10,8 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { useCurrentUser } from "../../common/CurrentUserContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { EditProjectCategoryModal } from "../EditProjectCategoryModal";
-import { useGuestModeModal } from "@/components/common/GuestModeModal";
 import { DeleteProjectCategoryModal } from "../DeleteProjectCategoryModal";
 import { useUpdateProjectCategory } from "../UpdateProjectCategoryContext";
 import { useProjectCategoryListItemPending } from "./useProjectCategoryListItemPending";
@@ -30,9 +29,8 @@ export function ProjectCategoryListItemActionMenuTrigger({
     "projectCategories.ProjectCategoryListItemActionMenuTrigger",
   );
 
-  // Detect if the current user is a guest
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -47,17 +45,14 @@ export function ProjectCategoryListItemActionMenuTrigger({
    * - Otherwise, open edit or delete modal based on action key
    */
   const handleAction = (key: Key) => {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-
-    const action = key.toString();
-    if (action === "edit") {
-      onEditModalOpenChange(true);
-    } else if (action === "delete") {
-      setIsDeleteModalOpen(true);
-    }
+    guestGuard(() => {
+      const action = key.toString();
+      if (action === "edit") {
+        onEditModalOpenChange(true);
+      } else if (action === "delete") {
+        setIsDeleteModalOpen(true);
+      }
+    });
   };
 
   // Determine if any action on this project category item is pending (update or delete)

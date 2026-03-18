@@ -13,9 +13,8 @@ import { Info, Pencil, Trash } from "lucide-react";
 import { EditCustomerModal } from "../EditCustomerModal";
 import { DeleteCustomerModal } from "../DeleteCustomerModal";
 import { useUpdateCustomer } from "../UpdateCustomerContext";
-import { useCurrentUser } from "../../common/CurrentUserContext";
 import { useCustomerItemPending } from "./useCustomerItemPending";
-import { useGuestModeModal } from "@/components/common/GuestModeModal";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
 export type CustomerItemActionMenuTriggerProps = {
   customerId: number;
@@ -32,9 +31,8 @@ export function CustomerItemActionMenuTrigger({
 }: CustomerItemActionMenuTriggerProps) {
   const t = useTranslations("customers.CustomerItemActionMenuTrigger");
 
-  // Detect if the current user is a guest
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -48,20 +46,17 @@ export function CustomerItemActionMenuTrigger({
    * - Otherwise, open edit or delete modal based on action key
    */
   function handleAction(key: Key) {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
+    guestGuard(() => {
+      if (key === "details") {
+        return;
+      }
 
-    if (key === "details") {
-      return;
-    }
-
-    if (key === "edit") {
-      onEditModalOpenChange(true);
-    } else if (key === "delete") {
-      setIsDeleteModalOpen(true);
-    }
+      if (key === "edit") {
+        onEditModalOpenChange(true);
+      } else if (key === "delete") {
+        setIsDeleteModalOpen(true);
+      }
+    });
   }
 
   //Pending state while deleting or updating

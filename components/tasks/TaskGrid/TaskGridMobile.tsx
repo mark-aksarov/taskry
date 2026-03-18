@@ -3,16 +3,16 @@
 import { Children } from "react";
 import { GridMobile } from "@/components/common/Grid";
 import { TaskGridMobileSkeleton } from "./TaskGridMobileSkeleton";
-import { useEntityListPending } from "@/lib/hooks/useEntityListPending";
+import { usePageTransition } from "@/components/common/PageTransitionContext";
 
 interface TaskGridMobileProps {
   children: React.ReactNode;
 }
 
 export function TaskGridMobile({ children }: TaskGridMobileProps) {
-  const isPending = useEntityListPending();
+  const { isPending: isPageTransitionPending } = usePageTransition();
 
-  if (isPending) {
+  if (isPageTransitionPending) {
     return <TaskGridMobileSkeleton items={Children.count(children)} />;
   }
 

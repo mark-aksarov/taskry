@@ -15,8 +15,7 @@ import { useUpdateComment } from "../UpdateCommentContext";
 import { DeleteCommentModal } from "../DeleteCommentModal";
 import { useCommentFormContext } from "../CommentFormContext";
 import { useCommentItemPending } from "./useCommentItemPending";
-import { useGuestModeModal } from "@/components/common/GuestModeModal";
-import { useCurrentUser } from "@/components/common/CurrentUserContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
 export type CommentItemActionMenuTriggerProps = {
   commentId: number;
@@ -33,9 +32,8 @@ export function CommentItemActionMenuTrigger({
 
   const t = useTranslations("comments.CommentItemActionMenuTrigger");
 
-  // Detect if the current user is a guest
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -48,18 +46,15 @@ export function CommentItemActionMenuTrigger({
    * - If "delete" is selected, opens the delete confirmation modal.
    */
   function handleAction(key: Key) {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-
-    const action = key.toString();
-    if (action === "edit") {
-      setEditCommentId(commentId);
-      setCommentContent(commentContent);
-    } else if (action === "delete") {
-      setIsDeleteModalOpen(true);
-    }
+    guestGuard(() => {
+      const action = key.toString();
+      if (action === "edit") {
+        setEditCommentId(commentId);
+        setCommentContent(commentContent);
+      } else if (action === "delete") {
+        setIsDeleteModalOpen(true);
+      }
+    });
   }
 
   // Pending state for this specific comment item (when it’s being deleted or updated)

@@ -13,9 +13,7 @@ export function AppNavigationThemeToggleButton() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      setMounted(true);
-    }, 3000);
+    setMounted(true);
   }, []);
 
   if (!mounted) {

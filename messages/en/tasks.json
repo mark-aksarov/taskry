@@ -69,17 +69,15 @@
     "details": "Open details"
   },
   "CreateTaskMenuTrigger": {
+    "label": "Create new",
     "dialogHeading": "Create New",
     "items": {
       "task": "Task",
       "category": "Category"
     }
   },
-  "CreateTaskMenuTriggerMobile": {
-    "buttonAriaLabel": "Create new"
-  },
-  "CreateTaskMenuTriggerLarge": {
-    "buttonLabel": "Create new"
+  "CreateTaskModalTrigger": {
+    "label": "Create task"
   },
   "DeleteTaskModal": {
     "heading": "Delete Task",

@@ -28,7 +28,7 @@ export function AppBottomSheetTrigger({
         aria-label={t("triggerAriaLabel")}
         variant="ghost"
         iconLeft={<Menu size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-        className="rounded-full p-3"
+        className="-mr-2 rounded-full p-3"
       />
 
       <BottomSheet isDismissable state={state}>

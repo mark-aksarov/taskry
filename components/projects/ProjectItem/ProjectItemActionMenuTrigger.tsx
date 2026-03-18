@@ -21,10 +21,9 @@ import { startTransition, useState } from "react";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { DeleteProjectModal } from "../DeleteProjectModal";
 import { useUpdateProject } from "../UpdateProjectContext";
-import { useGuestModeModal } from "../../common/GuestModeModal";
 import { useProjectItemPending } from "./useProjectItemPending";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateProjectStatus } from "../UpdateProjectStatusContext";
-import { useCurrentUser } from "@/components/common/CurrentUserContext";
 
 export type ProjectItemActionMenuTriggerProps = {
   projectId: number;
@@ -41,9 +40,8 @@ export function ProjectItemActionMenuTrigger({
 }: ProjectItemActionMenuTriggerProps) {
   const t = useTranslations("projects.ProjectItemActionMenuTrigger");
 
-  // Detect if the current user is a guest
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -67,29 +65,26 @@ export function ProjectItemActionMenuTrigger({
    *    and trigger the updateProjectStatusAction for this project.
    */
   const handleAction = (key: Key) => {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
+    guestGuard(() => {
+      const action = key.toString();
 
-    const action = key.toString();
+      if (action === "details") {
+        return;
+      }
 
-    if (action === "details") {
-      return;
-    }
-
-    if (action === "edit") {
-      onEditModalOpenChange(true);
-    } else if (action === "delete") {
-      setIsDeleteModalOpen(true);
-    } else {
-      startTransition(() => {
-        updateProjectStatusAction({
-          id: projectId,
-          nextStatus: action as ProjectStatus,
+      if (action === "edit") {
+        onEditModalOpenChange(true);
+      } else if (action === "delete") {
+        setIsDeleteModalOpen(true);
+      } else {
+        startTransition(() => {
+          updateProjectStatusAction({
+            id: projectId,
+            nextStatus: action as ProjectStatus,
+          });
         });
-      });
-    }
+      }
+    });
   };
 
   // Disable status-related menu items while a project update is in progress,

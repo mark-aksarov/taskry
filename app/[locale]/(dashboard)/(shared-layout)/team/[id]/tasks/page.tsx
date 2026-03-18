@@ -24,7 +24,7 @@ import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
-import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
+import { UserNavigationLarge } from "@/components/users/UserNavigationLarge";
 import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext";
@@ -92,8 +92,8 @@ export default async function AppProfileTasksPage({
                     selectedSortField={sort}
                     backButton
                     searchContainer={<LinkSearchContainer pathname="/tasks" />}
-                    navigationDesktop={
-                      <UserNavigationDesktop
+                    navigationLarge={
+                      <UserNavigationLarge
                         userActions={
                           showUserActions && (
                             <ProfileActions

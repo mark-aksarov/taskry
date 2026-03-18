@@ -3,16 +3,18 @@
 import { Children } from "react";
 import { List } from "@/components/common/List";
 import { TaskListSkeleton } from "./TaskListSkeleton";
-import { useEntityListPending } from "@/lib/hooks/useEntityListPending";
+import { useViewMode } from "@/components/common/ViewMode";
+import { usePageTransition } from "@/components/common/PageTransitionContext";
 
 interface TaskListProps {
   children: React.ReactNode;
 }
 
 export function TaskList({ children }: TaskListProps) {
-  const isPending = useEntityListPending();
+  const { isPending: isViewModePending } = useViewMode();
+  const { isPending: isPageTransitionPending } = usePageTransition();
 
-  if (isPending) {
+  if (isViewModePending || isPageTransitionPending) {
     return (
       <TaskListSkeleton items={Children.count(children)} showCheckbox={true} />
     );

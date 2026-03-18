@@ -2,7 +2,7 @@
 
 import { DialogTrigger } from "react-aria-components";
 import { TaskFiltersModal } from "./TaskFiltersModal";
-import { FilterButtonDesktop } from "@/components/common/FilterButton";
+import { FilterButtonLarge } from "@/components/common/FilterButton";
 
 interface TaskFiltersModalTriggerLargeProps {
   filtersFormContainer: React.ReactNode;
@@ -13,7 +13,7 @@ export function TaskFiltersModalTriggerLarge({
 }: TaskFiltersModalTriggerLargeProps) {
   return (
     <DialogTrigger>
-      <FilterButtonDesktop />
+      <FilterButtonLarge />
       <TaskFiltersModal filtersFormContainer={filtersFormContainer} />
     </DialogTrigger>
   );

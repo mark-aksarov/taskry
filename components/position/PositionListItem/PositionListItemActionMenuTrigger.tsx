@@ -13,8 +13,7 @@ import { Pencil, Trash } from "lucide-react";
 import { EditPositionModal } from "../EditPositionModal";
 import { useUpdatePosition } from "../UpdatePositionContext";
 import { DeletePositionModal } from "../DeletePositionModal";
-import { useCurrentUser } from "../../common/CurrentUserContext";
-import { useGuestModeModal } from "@/components/common/GuestModeModal";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { usePositionListItemPending } from "./usePositionListItemPending";
 
 export type PositionListItemActionMenuTriggerProps = {
@@ -28,9 +27,8 @@ export function PositionListItemActionMenuTrigger({
 }: PositionListItemActionMenuTriggerProps) {
   const t = useTranslations("positions.PositionListItemActionMenuTrigger");
 
-  // Detect if the current user is a guest
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -44,17 +42,14 @@ export function PositionListItemActionMenuTrigger({
    * - Otherwise, open edit or delete modal based on action key
    */
   const handleAction = (key: Key) => {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-
-    const action = key.toString();
-    if (action === "edit") {
-      onEditModalOpenChange(true);
-    } else if (action === "delete") {
-      setIsDeleteModalOpen(true);
-    }
+    guestGuard(() => {
+      const action = key.toString();
+      if (action === "edit") {
+        onEditModalOpenChange(true);
+      } else if (action === "delete") {
+        setIsDeleteModalOpen(true);
+      }
+    });
   };
 
   // Determine if any action on this position item is pending (update or delete)

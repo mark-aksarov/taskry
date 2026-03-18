@@ -19,6 +19,7 @@ import { CreateUserProvider } from "@/components/users/CreateUserContext";
 import { RouterSearchContainer } from "@/components/common/RouterSearchContainer";
 import { CreatePositionProvider } from "@/components/position/CreatePositionContext";
 import { UserFiltersFormContainer } from "@/components/users/UserFiltersFormContainer";
+import { UserPositionFiltersFormContainer } from "@/components/users/UserPositionFiltersFormContainer";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -58,6 +59,7 @@ export default async function AppUsersPage({
           selectedSortField={sort}
           searchContainer={<RouterSearchContainer />}
           filtersFormContainer={<UserFiltersFormContainer filters={filters} />}
+          positionFiltersFormContainer={<UserPositionFiltersFormContainer />}
           usersContainer={
             <UsersContainer
               page={page}

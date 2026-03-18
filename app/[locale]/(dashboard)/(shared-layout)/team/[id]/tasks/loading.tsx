@@ -1,13 +1,14 @@
 import { ProfileActionsSkeleton } from "@/components/users/ProfileActions";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
-import { UserNavigationDesktop } from "@/components/users/UserNavigationDesktop";
+import { UserNavigationLarge } from "@/components/users/UserNavigationLarge";
 import { UserTasksPageLoadingLayout } from "@/components/users/UserTasksPageLayout";
 
 export default function AppProfileTasksPageLoading() {
   return (
     <UserTasksPageLoadingLayout
-      navigationDesktop={
-        <UserNavigationDesktop userActions={<ProfileActionsSkeleton />} />
+      backButton
+      navigationLarge={
+        <UserNavigationLarge userActions={<ProfileActionsSkeleton />} />
       }
       navigationMobile={<UserNavigationMobile />}
     />

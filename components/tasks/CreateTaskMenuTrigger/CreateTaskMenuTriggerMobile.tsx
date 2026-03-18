@@ -3,20 +3,20 @@
 import { useTranslations } from "next-intl";
 import { CreateTaskMenuTrigger } from "./CreateTaskMenuTrigger";
 import { CreateNewButtonMobile } from "@/components/common/CreateNewButton";
-import { useCreateTaskButtonDisabled } from "./useCreateTaskButtonDisabled";
+import { useCreateTaskMenuTriggerDisabled } from "./useCreateTaskMenuTriggerDisabled";
 
 export function CreateTaskMenuTriggerMobile() {
-  const t = useTranslations("tasks.CreateTaskMenuTriggerMobile");
+  const t = useTranslations("tasks.CreateTaskMenuTrigger");
 
-  const isDisabled = useCreateTaskButtonDisabled();
+  const isDisabled = useCreateTaskMenuTriggerDisabled();
 
   return (
     <CreateTaskMenuTrigger
       renderButton={() => (
         <CreateNewButtonMobile
-          data-test="create-task-menu-trigger-mobile"
-          aria-label={t("buttonAriaLabel")}
           isDisabled={isDisabled}
+          aria-label={t("label")}
+          data-test="create-task-menu-trigger-mobile"
         />
       )}
     />

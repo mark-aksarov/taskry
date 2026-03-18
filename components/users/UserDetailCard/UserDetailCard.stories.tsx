@@ -10,7 +10,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { ChangePasswordModal } from "../ChangePasswordModal";
-import { UserNavigationDesktop } from "../UserNavigationDesktop";
+import { UserNavigationLarge } from "../UserNavigationLarge";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteUserProvider } from "../DeleteUserContext/__stories__";
@@ -70,8 +70,8 @@ export const Default = {
         canUpdateImage={true}
       />
     ),
-    navigationDesktop: (
-      <UserNavigationDesktop
+    navigationLarge: (
+      <UserNavigationLarge
         userActions={
           <ProfileActions
             userId={mockedUserDetail.id}
@@ -87,8 +87,8 @@ export const Loading = {
   args: {
     userDetailContainer: <UserDetailSkeleton />,
     userDetailHeaderContainer: <DetailHeaderSkeleton />,
-    navigationDesktop: (
-      <UserNavigationDesktop userActions={<ProfileActionsSkeleton />} />
+    navigationLarge: (
+      <UserNavigationLarge userActions={<ProfileActionsSkeleton />} />
     ),
   },
 } satisfies Story;
@@ -102,8 +102,8 @@ export const WithoutOptionalUserData = {
         fullName={mockedUserDetail.fullName}
       />
     ),
-    navigationDesktop: (
-      <UserNavigationDesktop
+    navigationLarge: (
+      <UserNavigationLarge
         userActions={
           <ProfileActions
             userId={mockedUserDetail.id}

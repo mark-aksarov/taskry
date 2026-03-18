@@ -34,17 +34,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    children: (
-      <>
-        {mockedProjectList.map((project) => (
-          <ProjectGridItemLarge
-            key={project.id}
-            {...ProjectGridItemLargeStory.args}
-            {...project}
-          />
-        ))}
-      </>
-    ),
+    children: mockedProjectList.map((project) => (
+      <ProjectGridItemLarge
+        key={project.id}
+        {...ProjectGridItemLargeStory.args}
+        {...project}
+      />
+    )),
   },
 } satisfies Story;
 

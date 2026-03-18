@@ -6,18 +6,16 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { DialogHeader } from "../ui/Dialog";
 import { ActionsButton } from "../common/ActionsButton";
-import { useGuestModeModal } from "../common/GuestModeModal";
 import { DeleteCustomersModal } from "./DeleteCustomersModal";
-import { useCurrentUser } from "../common/CurrentUserContext";
 import { ActionsMenuTrigger } from "../common/ActionsMenuTrigger";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 export const CustomerActionsMenuTrigger = () => {
   const t = useTranslations("customers.CustomerActionsMenuTrigger");
 
-  // If the user is a guest, show the guest mode modal instead of allowing creation
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -27,14 +25,11 @@ export const CustomerActionsMenuTrigger = () => {
 
   // Menu actions: show delete modal
   const handleAction = (key: Key) => {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-
-    if (key === "delete") {
-      setIsDeleteModalOpen(true);
-    }
+    guestGuard(() => {
+      if (key === "delete") {
+        setIsDeleteModalOpen(true);
+      }
+    });
   };
 
   return (

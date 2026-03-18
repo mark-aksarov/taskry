@@ -12,8 +12,7 @@ import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { EditCompanyModal } from "../EditCompanyModal";
 import { useUpdateCompany } from "../UpdateCompanyContext";
-import { useCurrentUser } from "../../common/CurrentUserContext";
-import { useGuestModeModal } from "@/components/common/GuestModeModal";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCompanyListItemPending } from "./useCompanyListItemPending";
 import { DeleteCompanyModal } from "@/components/company/DeleteCompanyModal";
 
@@ -28,9 +27,8 @@ export function CompanyListItemActionMenuTrigger({
 }: CompanyListItemActionMenuTriggerProps) {
   const t = useTranslations("company.CompanyListItemActionMenuTrigger");
 
-  // Detect if the current user is a guest
-  const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -44,17 +42,14 @@ export function CompanyListItemActionMenuTrigger({
    * - Otherwise, open edit or delete modal based on action key
    */
   const handleAction = (key: Key) => {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-
-    const action = key.toString();
-    if (action === "edit") {
-      onEditModalOpenChange(true);
-    } else if (action === "delete") {
-      setIsDeleteModalOpen(true);
-    }
+    guestGuard(() => {
+      const action = key.toString();
+      if (action === "edit") {
+        onEditModalOpenChange(true);
+      } else if (action === "delete") {
+        setIsDeleteModalOpen(true);
+      }
+    });
   };
 
   // Determine if any action on this company item is pending (update or delete)
