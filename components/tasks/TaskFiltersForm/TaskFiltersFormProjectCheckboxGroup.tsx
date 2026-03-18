@@ -21,11 +21,15 @@ interface Item {
   title: string;
 }
 
+interface Props {
+  items: Item[];
+  disableExpansion?: boolean;
+}
+
 export function TaskFiltersFormProjectCheckboxGroup({
   items,
-}: {
-  items: Item[];
-}) {
+  disableExpansion,
+}: Props) {
   const t = useTranslations("tasks.TaskFiltersFormProjectCheckboxGroup");
   const filters = useTaskFilters();
   const dispatch = useTaskFiltersDispatch();
@@ -36,7 +40,11 @@ export function TaskFiltersFormProjectCheckboxGroup({
     visibleItems,
     hiddenItems,
     hiddenSelectedItems,
-  } = useFilterCheckboxGroupExpansion(items, filters.project);
+  } = useFilterCheckboxGroupExpansion(
+    items,
+    filters.project,
+    disableExpansion ? Number.MAX_VALUE : undefined,
+  );
 
   const renderCheckbox = (item: Item, hidden = false) => (
     <Checkbox

@@ -28,6 +28,7 @@ export function TaskCategoryFiltersForm({
     <FormBase id="task-category-filter-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <TaskFiltersFormCategoryCheckboxGroup
+          disableExpansion
           items={categoryCheckboxGroupItems}
         />
       </FormBaseBody>

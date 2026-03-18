@@ -17,11 +17,15 @@ interface Item {
   name: string;
 }
 
+interface Props {
+  items: Item[];
+  disableExpansion?: boolean;
+}
+
 export function UserFiltersFormPositionCheckboxGroup({
   items,
-}: {
-  items: Item[];
-}) {
+  disableExpansion,
+}: Props) {
   const t = useTranslations("users.UserFiltersFormPositionCheckboxGroup");
   const filters = useUserFilters();
   const dispatch = useUserFiltersDispatch();
@@ -32,7 +36,11 @@ export function UserFiltersFormPositionCheckboxGroup({
     visibleItems,
     hiddenItems,
     hiddenSelectedItems,
-  } = useFilterCheckboxGroupExpansion(items, filters.position);
+  } = useFilterCheckboxGroupExpansion(
+    items,
+    filters.position,
+    disableExpansion ? Number.MAX_VALUE : undefined,
+  );
 
   const renderCheckbox = (item: Item, hidden = false) => (
     <Checkbox

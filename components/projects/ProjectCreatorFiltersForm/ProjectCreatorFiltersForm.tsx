@@ -28,6 +28,7 @@ export function ProjectCreatorFiltersForm({
     <FormBase id="project-creator-filter-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <ProjectFiltersFormUserCheckboxGroup
+          disableExpansion
           items={creatorCheckboxGroupItems}
         />
       </FormBaseBody>

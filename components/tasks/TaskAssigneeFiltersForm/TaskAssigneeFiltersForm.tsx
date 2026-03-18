@@ -28,6 +28,7 @@ export function TaskAssigneeFiltersForm({
     <FormBase id="task-assignee-filter-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <TaskFiltersFormAssigneeCheckboxGroup
+          disableExpansion
           items={assigneeCheckboxGroupItems}
         />
       </FormBaseBody>

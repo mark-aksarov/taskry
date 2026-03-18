@@ -8,7 +8,6 @@ import {
 
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { UserFiltersFormPositionCheckboxGroup } from "../UserFiltersForm";
-import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { useFiltersFormHandleSubmit } from "@/components/common/FiltersForm";
 
 interface UserPositionFiltersFormProps {
@@ -18,17 +17,14 @@ interface UserPositionFiltersFormProps {
 export function UserPositionFiltersForm({
   positionCheckboxGroupItems,
 }: UserPositionFiltersFormProps) {
-  const { clear: clearSelectedItems } = useSelectedItems();
-
-  const handleSubmit = useFiltersFormHandleSubmit({
-    clearSelectedItems,
-  });
+  const handleSubmit = useFiltersFormHandleSubmit({});
 
   return (
     <FormBase id="user-position-filter-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <UserFiltersFormPositionCheckboxGroup
           items={positionCheckboxGroupItems}
+          disableExpansion
         />
       </FormBaseBody>
       <FormBaseFooter>

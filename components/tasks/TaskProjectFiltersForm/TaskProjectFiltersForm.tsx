@@ -28,6 +28,7 @@ export function TaskProjectFiltersForm({
     <FormBase id="task-project-filter-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <TaskFiltersFormProjectCheckboxGroup
+          disableExpansion
           items={projectCheckboxGroupItems}
         />
       </FormBaseBody>

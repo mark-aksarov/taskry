@@ -28,6 +28,7 @@ export function ProjectCustomerFiltersForm({
     <FormBase id="project-customer-filter-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <ProjectFiltersFormCustomerCheckboxGroup
+          disableExpansion
           items={customerCheckboxGroupItems}
         />
       </FormBaseBody>

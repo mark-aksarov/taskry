@@ -21,11 +21,15 @@ interface Item {
   name: string;
 }
 
+interface Props {
+  items: Item[];
+  disableExpansion?: boolean;
+}
+
 export function CustomerFiltersFormCompanyCheckboxGroup({
   items,
-}: {
-  items: Item[];
-}) {
+  disableExpansion,
+}: Props) {
   const t = useTranslations(
     "customers.CustomerFiltersFormCompanyCheckboxGroup",
   );
@@ -38,7 +42,11 @@ export function CustomerFiltersFormCompanyCheckboxGroup({
     visibleItems,
     hiddenItems,
     hiddenSelectedItems,
-  } = useFilterCheckboxGroupExpansion(items, filters.company);
+  } = useFilterCheckboxGroupExpansion(
+    items,
+    filters.company,
+    disableExpansion ? Number.MAX_VALUE : undefined,
+  );
 
   const renderCheckbox = (item: Item, hidden = false) => (
     <Checkbox
