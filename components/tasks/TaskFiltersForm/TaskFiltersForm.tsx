@@ -8,8 +8,6 @@ import {
 
 import { Separator } from "@/components/ui/Separator";
 import { useSelectedTasks } from "../SelectedTasksContext";
-import { useTaskFiltersDispatch } from "../TaskFiltersContext";
-import { FiltersFormResetButton } from "@/components/common/FiltersForm";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { useFiltersFormHandleSubmit } from "@/components/common/FiltersForm";
 import { TaskFiltersFormOnlyMyTaskSwitch } from "./TaskFiltersFormOnlyMyTaskSwitch";
@@ -32,11 +30,11 @@ export function TaskFiltersForm({
   assigneeCheckboxGroupItems,
 }: TaskFiltersFormProps) {
   const { clear: clearSelectedTasks } = useSelectedTasks();
-  const dispatch = useTaskFiltersDispatch();
 
   const handleSubmit = useFiltersFormHandleSubmit({
     booleanFieldNames: ["onlyMyTasks"],
     clearSelectedItems: clearSelectedTasks,
+    preserve: ["sort", "query"],
   });
 
   return (

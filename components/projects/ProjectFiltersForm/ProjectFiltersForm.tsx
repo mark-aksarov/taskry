@@ -8,8 +8,6 @@ import {
 
 import { Separator } from "@/components/ui/Separator";
 import { useSelectedProjects } from "../SelectedProjectsContext";
-import { useProjectFiltersDispatch } from "../ProjectFiltersContext";
-import { FiltersFormResetButton } from "@/components/common/FiltersForm";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { useFiltersFormHandleSubmit } from "@/components/common/FiltersForm";
 import { ProjectFiltersFormUserCheckboxGroup } from "./ProjectFiltersFormUserCheckboxGroup";
@@ -32,7 +30,6 @@ export function ProjectFiltersForm({
   customerCheckboxGroupItems,
 }: ProjectFiltersFormProps) {
   const { clear: clearSelectedProjects } = useSelectedProjects();
-  const dispatch = useProjectFiltersDispatch();
 
   const handleSubmit = useFiltersFormHandleSubmit({
     booleanFieldNames: ["noActiveTasks"],
@@ -67,9 +64,6 @@ export function ProjectFiltersForm({
 
       <FormBaseFooter>
         <FiltersFormSubmitButton />
-        <FiltersFormResetButton
-          onPress={() => dispatch({ type: "resetFilters" })}
-        />
       </FormBaseFooter>
     </FormBase>
   );

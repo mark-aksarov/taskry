@@ -16,6 +16,16 @@ export function TaskStatusFiltersForm() {
 
   const handleSubmit = useFiltersFormHandleSubmit({
     clearSelectedItems: clearSelectedTasks,
+    preserve: [
+      "sort",
+      "query",
+      "category",
+      "project",
+      "assignee",
+      "onlyMyTasks",
+      "deadlineFrom",
+      "deadlineTo",
+    ],
   });
 
   return (

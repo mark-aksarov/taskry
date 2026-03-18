@@ -6,8 +6,9 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
+import { useCustomerFiltersDispatch } from "../CustomerFiltersContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
-import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
+import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
 export function CustomerFiltersModal({
   filtersFormContainer,
@@ -15,11 +16,16 @@ export function CustomerFiltersModal({
   filtersFormContainer: React.ReactNode;
 }) {
   const t = useTranslations("customers.CustomerFiltersModal");
+  const dispatch = useCustomerFiltersDispatch();
 
   return (
     <FormBaseModal data-test="customer-filters-modal">
       <FilterModalDialog>
-        <DialogHeaderWithClose>{t("heading")}</DialogHeaderWithClose>
+        <FilterModalDialogHeader
+          resetFilters={() => dispatch({ type: "resetFilters" })}
+        >
+          {t("heading")}
+        </FilterModalDialogHeader>
         <FormBaseModalDialogBody>
           {filtersFormContainer}
         </FormBaseModalDialogBody>

@@ -4,9 +4,9 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui/Dialog";
+import { useTaskFiltersDispatch } from "../TaskFiltersContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
-import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
+import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
 interface TaskProjectFiltersModalProps {
   filtersFormContainer: React.ReactNode;
@@ -16,11 +16,16 @@ export function TaskProjectFiltersModal({
   filtersFormContainer,
 }: TaskProjectFiltersModalProps) {
   const t = useTranslations("tasks.TaskProjectFiltersModal");
+  const dispatch = useTaskFiltersDispatch();
 
   return (
     <FormBaseModal data-test="task-project-filters-modal">
       <FilterModalDialog>
-        <DialogHeaderWithClose>{t("heading")}</DialogHeaderWithClose>
+        <FilterModalDialogHeader
+          resetFilters={() => dispatch({ type: "setProject", payload: [] })}
+        >
+          {t("heading")}
+        </FilterModalDialogHeader>
         <FormBaseModalDialogBody>
           {filtersFormContainer}
         </FormBaseModalDialogBody>

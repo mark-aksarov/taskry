@@ -4,8 +4,9 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
+import { useCustomerFiltersDispatch } from "../CustomerFiltersContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
-import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
+import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
 interface CustomerCompanyFiltersModalProps {
   filtersFormContainer: React.ReactNode;
@@ -15,11 +16,17 @@ export function CustomerCompanyFiltersModal({
   filtersFormContainer,
 }: CustomerCompanyFiltersModalProps) {
   const t = useTranslations("customers.CustomerCompanyFiltersModal");
+  const dispatch = useCustomerFiltersDispatch();
 
   return (
     <FormBaseModal data-test="customer-company-filters-modal">
       <FilterModalDialog>
-        <DialogHeaderWithClose>{t("heading")}</DialogHeaderWithClose>
+        <FilterModalDialogHeader
+          resetFilters={() => dispatch({ type: "setCompany", payload: [] })}
+        >
+          {t("heading")}
+        </FilterModalDialogHeader>
+
         <FormBaseModalDialogBody>
           {filtersFormContainer}
         </FormBaseModalDialogBody>

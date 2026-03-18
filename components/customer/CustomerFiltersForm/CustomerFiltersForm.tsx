@@ -6,13 +6,8 @@ import {
   FormBaseFooter,
 } from "@/components/common/FormBase";
 
-import {
-  FiltersFormResetButton,
-  FiltersFormSubmitButton,
-} from "@/components/common/FiltersForm";
-
 import { Separator } from "@/components/ui/Separator";
-import { useCustomerFiltersDispatch } from "../CustomerFiltersContext";
+import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { useFiltersFormHandleSubmit } from "@/components/common/FiltersForm";
 import { CustomerFiltersFormActiveProjectsSwitch } from "./CustomerFiltersFormActiveProjectsSwitch";
@@ -28,7 +23,6 @@ export function CustomerFiltersForm({
   companyCheckboxGroupItems,
 }: CustomerFiltersFormProps) {
   const { clear: clearSelectedItems } = useSelectedItems();
-  const dispatch = useCustomerFiltersDispatch();
 
   const handleSubmit = useFiltersFormHandleSubmit({
     booleanFieldNames: [
@@ -57,9 +51,6 @@ export function CustomerFiltersForm({
       </FormBaseBody>
       <FormBaseFooter>
         <FiltersFormSubmitButton />
-        <FiltersFormResetButton
-          onPress={() => dispatch({ type: "resetFilters" })}
-        />
       </FormBaseFooter>
     </FormBase>
   );

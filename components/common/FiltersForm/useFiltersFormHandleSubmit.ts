@@ -14,9 +14,11 @@ import { areSearchParamsEqual } from "@/lib/utils/areSearchParamsEqual";
 export function useFiltersFormHandleSubmit({
   clearSelectedItems,
   booleanFieldNames = [],
+  preserve,
 }: {
   clearSelectedItems?: () => void;
   booleanFieldNames?: string[];
+  preserve?: string[];
 }) {
   const overlayContext = useContext(OverlayTriggerStateContext);
 
@@ -48,13 +50,14 @@ export function useFiltersFormHandleSubmit({
     // convert formData to URLSearchParams and remove empty values
     const newSearchParams = formDataToSearchParams(formData);
 
-    // preserve the "sort" param when resetting filters
-    const sort = searchParams.get("sort");
-    if (sort) newSearchParams.set("sort", sort);
+    // preserve params (can contain arbitrary keys, including multi-value like category)
+    preserve?.forEach((key) => {
+      const values = searchParams.getAll(key);
 
-    // preserve the "query" param when resetting filters
-    const query = searchParams.get("query");
-    if (query) newSearchParams.set("query", query);
+      values.forEach((value) => {
+        newSearchParams.append(key, value);
+      });
+    });
 
     // reset pagination when applying new filters
     newSearchParams.delete("page");

@@ -6,8 +6,9 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
+import { useProjectFiltersDispatch } from "../ProjectFiltersContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
-import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
+import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
 export function ProjectFiltersModal({
   filtersFormContainer,
@@ -15,11 +16,16 @@ export function ProjectFiltersModal({
   filtersFormContainer: React.ReactNode;
 }) {
   const t = useTranslations("projects.ProjectFiltersModal");
+  const dispatch = useProjectFiltersDispatch();
 
   return (
     <FormBaseModal data-test="project-filters-modal">
       <FilterModalDialog>
-        <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
+        <FilterModalDialogHeader
+          resetFilters={() => dispatch({ type: "resetFilters" })}
+        >
+          {t("title")}
+        </FilterModalDialogHeader>
         <FormBaseModalDialogBody>
           {filtersFormContainer}
         </FormBaseModalDialogBody>

@@ -8,7 +8,6 @@ import {
 import { Suspense } from "react";
 import { ProjectFilters } from "@/lib/types";
 import { getUserSummaries } from "@/lib/data/user/user.dal";
-import { ProjectFiltersProvider } from "../ProjectFiltersContext";
 import { getCustomerSummaries } from "@/lib/data/customer/customer.dal";
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
 
@@ -34,12 +33,10 @@ async function ProjectFiltersFormContainerInner({
   const users = await getUserSummaries();
 
   return (
-    <ProjectFiltersProvider initialFilters={filters}>
-      <ProjectFiltersForm
-        userCheckboxGroupItems={users}
-        categoryCheckboxGroupItems={categories}
-        customerCheckboxGroupItems={customers}
-      />
-    </ProjectFiltersProvider>
+    <ProjectFiltersForm
+      userCheckboxGroupItems={users}
+      categoryCheckboxGroupItems={categories}
+      customerCheckboxGroupItems={customers}
+    />
   );
 }

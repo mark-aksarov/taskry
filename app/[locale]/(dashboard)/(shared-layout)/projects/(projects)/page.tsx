@@ -26,6 +26,7 @@ import { ProjectsContainer } from "@/components/projects/ProjectsContainer";
 import { CreateProjectProvider } from "@/components/projects/CreateProjectContext";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
 import { DeleteProjectsProvider } from "@/components/projects/DeleteProjectsContext";
+import { ProjectFiltersProvider } from "@/components/projects/ProjectFiltersContext";
 import { NewProjectFormContainer } from "@/components/projects/NewProjectFormContainer";
 import { SelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext";
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
@@ -99,33 +100,35 @@ export default async function AppProjectsPage({
             createProjectCategory={createProjectCategory}
           >
             <CreateProjectProvider createProject={createProject}>
-              <ProjectsPage
-                totalCount={totalCount}
-                searchContainer={<ProjectRouterSearchContainer />}
-                newProjectFormContainer={<NewProjectFormContainer />}
-                totalFilteredProjects={totalFilteredProjects}
-                selectedSortField={sort}
-                projectsContainer={
-                  <ProjectsContainer
-                    projects={projects}
-                    totalCount={totalFilteredProjects}
-                    page={page}
-                    pageSize={pageSize}
-                  />
-                }
-                projectFiltersFormContainer={
-                  <ProjectFiltersFormContainer filters={filters} />
-                }
-                projectCategoryFiltersFormContainer={
-                  <ProjectCategoryFiltersFormContainer />
-                }
-                creatorFiltersFormContainer={
-                  <ProjectCreatorFiltersFormContainer />
-                }
-                customerFiltersFormContainer={
-                  <ProjectCreatorFiltersFormContainer />
-                }
-              />
+              <ProjectFiltersProvider initialFilters={filters}>
+                <ProjectsPage
+                  totalCount={totalCount}
+                  searchContainer={<ProjectRouterSearchContainer />}
+                  newProjectFormContainer={<NewProjectFormContainer />}
+                  totalFilteredProjects={totalFilteredProjects}
+                  selectedSortField={sort}
+                  projectsContainer={
+                    <ProjectsContainer
+                      projects={projects}
+                      totalCount={totalFilteredProjects}
+                      page={page}
+                      pageSize={pageSize}
+                    />
+                  }
+                  projectFiltersFormContainer={
+                    <ProjectFiltersFormContainer filters={filters} />
+                  }
+                  projectCategoryFiltersFormContainer={
+                    <ProjectCategoryFiltersFormContainer />
+                  }
+                  creatorFiltersFormContainer={
+                    <ProjectCreatorFiltersFormContainer />
+                  }
+                  customerFiltersFormContainer={
+                    <ProjectCreatorFiltersFormContainer />
+                  }
+                />
+              </ProjectFiltersProvider>
             </CreateProjectProvider>
           </CreateProjectCategoryProvider>
         </DeleteProjectsProvider>

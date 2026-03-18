@@ -6,9 +6,9 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { DialogHeader } from "@/components/ui/Dialog";
+import { useUserFiltersDispatch } from "../UserFiltersContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
-import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
+import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
 export function UserFiltersModal({
   filtersFormContainer,
@@ -16,11 +16,16 @@ export function UserFiltersModal({
   filtersFormContainer: React.ReactNode;
 }) {
   const t = useTranslations("users.UserFiltersModal");
+  const dispatch = useUserFiltersDispatch();
 
   return (
     <FormBaseModal data-test="user-filters-modal">
       <FilterModalDialog>
-        <DialogHeaderWithClose>{t("heading")}</DialogHeaderWithClose>
+        <FilterModalDialogHeader
+          resetFilters={() => dispatch({ type: "resetFilters" })}
+        >
+          {t("heading")}
+        </FilterModalDialogHeader>
         <FormBaseModalDialogBody>
           {filtersFormContainer}
         </FormBaseModalDialogBody>

@@ -1,16 +1,24 @@
+import { tv } from "tailwind-variants";
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/Button";
+import { Button } from "react-aria-components";
+import { linkStyles } from "@/components/ui/Link";
+
+const styles = tv({
+  extend: linkStyles,
+  base: "gap-2 text-sm font-semibold",
+});
 
 export function FiltersFormResetButton({ onPress }: { onPress: () => void }) {
   const t = useTranslations("common.FiltersResetButton");
 
   return (
     <Button
-      variant="outlined"
-      label={t("label")}
-      size="medium"
-      className="w-full justify-center px-0"
+      className={(renderProps) =>
+        styles({ ...renderProps, variant: "primary" })
+      }
       onPress={onPress}
-    />
+    >
+      {t("label")}
+    </Button>
   );
 }
