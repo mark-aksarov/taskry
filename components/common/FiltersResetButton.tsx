@@ -42,7 +42,7 @@ export function FiltersResetButton() {
 
     // start the page transition and update the URL with the new searchParams
     startFilteringTransition(() => {
-      router.replace(`${pathname}?${newSearchParams.toString()}`, { locale });
+      router.replace(`${pathname}?${newSearchParams}`, { locale });
     });
   };
 

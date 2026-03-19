@@ -1,17 +1,9 @@
 "use client";
 
 import {
-  ActiveProjectsSwitch,
-  useActiveProjectsSwitch,
-} from "../ActiveProjectsSwitch";
-import {
-  OverdueProjectsSwitch,
-  useOverdueProjectsSwitch,
-} from "../OverdueProjectsSwitch";
-import {
-  NoActiveProjectsSwitch,
-  useNoActiveProjectsSwitch,
-} from "../NoActiveProjectsSwitch";
+  CompanyCheckboxGroup,
+  useCompanyCheckboxGroup,
+} from "../CompanyCheckboxGroup";
 
 import {
   FormBase,
@@ -19,28 +11,22 @@ import {
   FormBaseFooter,
 } from "@/components/common/FormBase";
 
-import {
-  CompanyCheckboxGroup,
-  useCompanyCheckboxGroup,
-} from "@/components/company/CompanyCheckboxGroup";
-
 import { useContext } from "react";
 import { useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { Separator } from "@/components/ui/Separator";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { OverlayTriggerStateContext } from "react-aria-components";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { usePageTransition } from "@/components/common/PageTransitionContext";
 
-interface CustomerFiltersFormProps {
+interface CompanyFiltersFormProps {
   companyCheckboxGroupItems: { id: number; name: string }[];
 }
 
-export function CustomerFiltersForm({
+export function CompanyFiltersForm({
   companyCheckboxGroupItems,
-}: CustomerFiltersFormProps) {
+}: CompanyFiltersFormProps) {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -48,12 +34,9 @@ export function CustomerFiltersForm({
   const { startFilteringTransition } = usePageTransition();
   const { clear: clearSelectedItems } = useSelectedItems();
 
-  // CustomerFiltersForm can only be used inside the CustomerFiltersModal
+  // CompanyFiltersForm can only be used inside the CompanyFiltersModal
   const { close: closeModal } = useContext(OverlayTriggerStateContext)!;
 
-  const { isSelected: hasActiveProjects } = useActiveProjectsSwitch();
-  const { isSelected: hasOverdueProjects } = useOverdueProjectsSwitch();
-  const { isSelected: hasNoActiveProjects } = useNoActiveProjectsSwitch();
   const { value: companyIds } = useCompanyCheckboxGroup();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -65,26 +48,8 @@ export function CustomerFiltersForm({
     // Create new search params based on the current ones
     const newSearchParams = new URLSearchParams(searchParams);
 
-    // Remove old filter values before applying new ones
-    newSearchParams.delete("hasActiveProjects");
-    newSearchParams.delete("hasOverdueProjects");
-    newSearchParams.delete("hasNoActiveProjects");
+    // Replace companyIds: remove old ones and add the new values
     newSearchParams.delete("companyIds");
-
-    // Add boolean filters if they are selected
-    if (hasActiveProjects) {
-      newSearchParams.set("hasActiveProjects", "true");
-    }
-
-    if (hasOverdueProjects) {
-      newSearchParams.set("hasOverdueProjects", "true");
-    }
-
-    if (hasNoActiveProjects) {
-      newSearchParams.set("hasNoActiveProjects", "true");
-    }
-
-    // Add selected company IDs
     companyIds.forEach((id) => newSearchParams.append("companyIds", id));
 
     // Reset pagination
@@ -100,18 +65,12 @@ export function CustomerFiltersForm({
   };
 
   return (
-    <FormBase id="customer-filters-form" onSubmit={handleSubmit}>
+    <FormBase id="company-filter-form" onSubmit={handleSubmit}>
       <FormBaseBody>
-        <NoActiveProjectsSwitch />
-        <Separator />
-
-        <ActiveProjectsSwitch />
-        <Separator />
-
-        <OverdueProjectsSwitch />
-        <Separator />
-
-        <CompanyCheckboxGroup items={companyCheckboxGroupItems} />
+        <CompanyCheckboxGroup
+          disableExpansion
+          items={companyCheckboxGroupItems}
+        />
       </FormBaseBody>
       <FormBaseFooter>
         <FiltersFormSubmitButton />

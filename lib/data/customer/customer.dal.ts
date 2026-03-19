@@ -524,7 +524,9 @@ export function buildCustomerWhereClause(
     ...(filters?.query && {
       fullName: { contains: filters.query, mode: "insensitive" as const },
     }),
-    ...(filters?.company?.length && { companyId: { in: filters.company } }),
+    ...(filters?.companyIds?.length && {
+      companyId: { in: filters.companyIds },
+    }),
     ...(projectFilters.length > 0 && { OR: projectFilters }),
   };
 }

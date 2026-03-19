@@ -1,4 +1,13 @@
 {
+  "CompanyFiltersModal": {
+    "heading": "Company filters"
+  },
+  "CompanyFiltersModalTrigger": {
+    "label": "Company"
+  },
+  "CompanyCheckboxGroup": {
+    "label": "Company"
+  },
   "CompanySelect": {
     "label": "Company",
     "noCompany": "No company"

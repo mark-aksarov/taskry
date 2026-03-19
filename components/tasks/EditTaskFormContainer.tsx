@@ -33,7 +33,6 @@ export function EditTaskFormContainer({ taskId }: EditTaskFormContainerProps) {
     revalidateOnFocus: false,
   });
 
-  // Current task data for editing (loaded each modal open)
   const {
     data: task,
     isValidating: isValidatingTask,

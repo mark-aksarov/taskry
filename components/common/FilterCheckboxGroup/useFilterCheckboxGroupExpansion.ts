@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export function useFilterCheckboxGroupExpansion<
   T extends { id: string | number },
->(items: T[], selectedIds: string[], limit = 3) {
+>(items: T[], value: string[], limit = 3) {
   // Can this filter group be expanded at all
   const canExpand = items.length > limit;
 
@@ -19,7 +19,7 @@ export function useFilterCheckboxGroupExpansion<
 
   // Count of selected items among the hidden ones
   const hiddenSelectedItems = hiddenItems.filter((item) =>
-    selectedIds.includes(item.id.toString()),
+    value.includes(item.id.toString()),
   );
 
   return {

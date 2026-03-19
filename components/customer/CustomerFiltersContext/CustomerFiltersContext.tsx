@@ -1,32 +1,27 @@
 "use client";
 
 import { CustomerFilters } from "@/lib/types";
-import { useReducer, useContext, createContext } from "react";
+import { useContext, createContext } from "react";
 
-const CustomerFiltersContext = createContext<CustomerFiltersState | null>(null);
+/**
+ * Single source of truth for customer filters.
+ * The filters provided here have been validated and normalized from the URL search params.
+ */
 
-const CustomerFiltersDispatchContext =
-  createContext<React.Dispatch<CustomerFiltersAction> | null>(null);
+const CustomerFiltersContext = createContext<CustomerFilters | null>(null);
 
 interface CustomerFiltersProviderProps {
-  initialFilters?: CustomerFilters;
+  filters: CustomerFilters;
   children: React.ReactNode;
 }
 
 export const CustomerFiltersProvider = ({
-  initialFilters,
+  filters,
   children,
 }: CustomerFiltersProviderProps) => {
-  const [filters, dispatch] = useReducer(
-    customerFiltersReducer,
-    createInitialState(initialFilters),
-  );
-
   return (
     <CustomerFiltersContext.Provider value={filters}>
-      <CustomerFiltersDispatchContext.Provider value={dispatch}>
-        {children}
-      </CustomerFiltersDispatchContext.Provider>
+      {children}
     </CustomerFiltersContext.Provider>
   );
 };
@@ -39,66 +34,4 @@ export function useCustomerFilters() {
     );
   }
   return context;
-}
-
-export function useCustomerFiltersDispatch() {
-  const context = useContext(CustomerFiltersDispatchContext);
-  if (context === null) {
-    throw new Error(
-      "useCustomerFiltersDispatch must be used within a CustomerFiltersProvider",
-    );
-  }
-  return context;
-}
-
-// Project filters reducer, action and state
-
-type CustomerFiltersAction =
-  | { type: "changeHasNoActiveProjects"; payload: boolean }
-  | { type: "changeHasActiveProjects"; payload: boolean }
-  | { type: "changeHasOverdueProjects"; payload: boolean }
-  | { type: "setCompany"; payload: string[] }
-  | { type: "resetFilters" };
-
-interface CustomerFiltersState {
-  hasNoActiveProjects: boolean;
-  hasActiveProjects: boolean;
-  hasOverdueProjects: boolean;
-  company: string[];
-}
-
-function createInitialState(
-  initialFilters?: CustomerFilters,
-): CustomerFiltersState {
-  return {
-    hasNoActiveProjects: initialFilters?.hasNoActiveProjects ?? false,
-    hasActiveProjects: initialFilters?.hasActiveProjects ?? false,
-    hasOverdueProjects: initialFilters?.hasOverdueProjects ?? false,
-    company: initialFilters?.company?.map((id) => id.toString()) ?? [],
-  };
-}
-
-function customerFiltersReducer(
-  state: CustomerFiltersState,
-  action: CustomerFiltersAction,
-) {
-  switch (action.type) {
-    case "changeHasNoActiveProjects":
-      return { ...state, hasNoActiveProjects: action.payload };
-    case "changeHasActiveProjects":
-      return { ...state, hasActiveProjects: action.payload };
-    case "changeHasOverdueProjects":
-      return { ...state, hasOverdueProjects: action.payload };
-    case "setCompany":
-      return { ...state, company: action.payload };
-    case "resetFilters":
-      return {
-        hasNoActiveProjects: false,
-        hasActiveProjects: false,
-        hasOverdueProjects: false,
-        company: [],
-      };
-    default:
-      return state;
-  }
 }

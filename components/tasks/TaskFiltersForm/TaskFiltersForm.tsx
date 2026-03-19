@@ -34,7 +34,6 @@ export function TaskFiltersForm({
   const handleSubmit = useFiltersFormHandleSubmit({
     booleanFieldNames: ["onlyMyTasks"],
     clearSelectedItems: clearSelectedTasks,
-    preserve: ["sort", "query"],
   });
 
   return (

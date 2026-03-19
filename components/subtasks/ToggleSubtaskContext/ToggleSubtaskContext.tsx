@@ -9,6 +9,7 @@ import {
 } from "react";
 
 import {
+  ActionContextType,
   ActionFn,
   ActionState,
   ToggleSubtaskPayload,
@@ -22,15 +23,8 @@ export const initialState: ActionState = {
   status: null,
 };
 
-export interface ToggleEntityContextType {
-  state: ActionState;
-  action: (payload: ToggleSubtaskPayload) => void;
-  isPending: boolean;
-}
-
-const ToggleSubtaskContext = createContext<ToggleEntityContextType | null>(
-  null,
-);
+const ToggleSubtaskContext =
+  createContext<ActionContextType<ToggleSubtaskPayload> | null>(null);
 
 interface ToggleSubtaskProviderProps {
   taskId: number;

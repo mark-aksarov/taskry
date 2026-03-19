@@ -1,20 +1,16 @@
 "use client";
 
 import {
-  useCustomerFilters,
-  useCustomerFiltersDispatch,
-} from "../CustomerFiltersContext";
-
-import {
-  FilterCheckboxGroupExpandButton,
   FilterCheckboxGroupWrapper,
   useFilterCheckboxGroupExpansion,
+  FilterCheckboxGroupExpandButton,
 } from "@/components/common/FilterCheckboxGroup";
 
 import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
+import { useCompanyCheckboxGroup } from "./CompanyCheckboxGroupContext";
 
 interface Item {
   id: number;
@@ -26,15 +22,10 @@ interface Props {
   disableExpansion?: boolean;
 }
 
-export function CustomerFiltersFormCompanyCheckboxGroup({
-  items,
-  disableExpansion,
-}: Props) {
-  const t = useTranslations(
-    "customers.CustomerFiltersFormCompanyCheckboxGroup",
-  );
-  const filters = useCustomerFilters();
-  const dispatch = useCustomerFiltersDispatch();
+export function CompanyCheckboxGroup({ items, disableExpansion }: Props) {
+  const t = useTranslations("company.CompanyCheckboxGroup");
+
+  const { value, updateValue } = useCompanyCheckboxGroup();
 
   const {
     isExpanded,
@@ -44,7 +35,7 @@ export function CustomerFiltersFormCompanyCheckboxGroup({
     hiddenSelectedItems,
   } = useFilterCheckboxGroupExpansion(
     items,
-    filters.company,
+    value,
     disableExpansion ? Number.MAX_VALUE : undefined,
   );
 
@@ -62,12 +53,10 @@ export function CustomerFiltersFormCompanyCheckboxGroup({
   return (
     <FilterCheckboxGroupWrapper>
       <CheckboxGroup
-        name="company"
+        name="companyIds"
         label={t("label")}
-        value={filters.company}
-        onChange={(value) =>
-          dispatch({ type: "setCompany", payload: value as any })
-        }
+        value={value}
+        onChange={updateValue}
       >
         {visibleItems.map((item) => renderCheckbox(item))}
         {hiddenItems.map((item) => renderCheckbox(item, true))}

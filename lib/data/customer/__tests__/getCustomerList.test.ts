@@ -323,7 +323,7 @@ describe("getCustomerList", () => {
         page: 1,
         pageSize: 10,
         sort: "fullName",
-        filters: { company: [1] },
+        filters: { companyIds: [1] },
       });
 
       expect(result.items).toHaveLength(1);

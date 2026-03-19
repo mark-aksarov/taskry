@@ -90,23 +90,14 @@
     "dialogHeading": "Customer Details",
     "openInFullPage": "Open in Full Page"
   },
-  "CustomerCompanyFiltersModal": {
-    "heading": "Company filters"
-  },
-  "CustomerCompanyFiltersModalTrigger": {
-    "buttonLabel": "Company"
-  },
-  "CustomerFiltersFormNoActiveProjectsSwitch": {
+  "NoActiveProjectsSwitch": {
     "text": "Has no active projects"
   },
-  "CustomerFiltersFormActiveProjectsSwitch": {
+  "ActiveProjectsSwitch": {
     "text": "Has active projects"
   },
-  "CustomerFiltersFormOverdueProjectsSwitch": {
+  "OverdueProjectsSwitch": {
     "text": "Has overdue projects"
-  },
-  "CustomerFiltersFormCompanyCheckboxGroup": {
-    "label": "Company"
   },
   "CustomerItemActionMenuTrigger": {
     "edit": "Edit",

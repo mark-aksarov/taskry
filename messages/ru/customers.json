@@ -90,23 +90,14 @@
     "dialogHeading": "Детали клиента",
     "openInFullPage": "Открыть в полном окне"
   },
-  "CustomerCompanyFiltersModal": {
-    "heading": "Фильтры компании"
-  },
-  "CustomerCompanyFiltersModalTrigger": {
-    "buttonLabel": "Компания"
-  },
-  "CustomerFiltersFormNoActiveProjectsSwitch": {
+  "NoActiveProjectsSwitch": {
     "text": "Не имеет активных проектов"
   },
-  "CustomerFiltersFormActiveProjectsSwitch": {
+  "ActiveProjectsSwitch": {
     "text": "Имеет активные проекты"
   },
-  "CustomerFiltersFormOverdueProjectsSwitch": {
+  "OverdueProjectsSwitch": {
     "text": "Имеет просроченные проекты"
-  },
-  "CustomerFiltersFormCompanyCheckboxGroup": {
-    "label": "Компания"
   },
   "CustomerItemActionMenuTrigger": {
     "edit": "Редактировать",

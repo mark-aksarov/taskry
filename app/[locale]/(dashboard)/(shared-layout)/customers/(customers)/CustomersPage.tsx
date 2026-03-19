@@ -38,10 +38,10 @@ import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { SearchModalTrigger } from "@/components/search/SearchModalTrigger";
 import { CustomerSearchModal } from "@/components/customer/CustomerSearchModal";
 import { CustomerResultsCount } from "@/components/customer/CustomerResultsCount";
+import { CompanyFiltersModalTrigger } from "@/components/company/CompanyFiltersModal";
 import { CustomerActionsMenuTrigger } from "@/components/customer/CustomerActionsMenuTrigger";
 import { CustomersFilteredEmptySection } from "@/components/customer/CustomersFilteredEmptySection";
 import { CustomersEmptySectionCreateButton } from "@/components/customer/CustomersEmptySectionCreateButton";
-import { CustomerCompanyFiltersModalTrigger } from "@/components/customer/CustomerCompanyFiltersModal";
 
 interface CustomersPageProps {
   totalCount: number;
@@ -115,6 +115,7 @@ export function CustomersPage({
                   <CreateCustomerMenuTriggerLarge />
                 </>
               }
+              twoRowsOnLg
             />
 
             <ToolbarMobile
@@ -135,7 +136,7 @@ export function CustomersPage({
               <CustomerFiltersModalTriggerMobile
                 filtersFormContainer={filtersFormContainer}
               />
-              <CustomerCompanyFiltersModalTrigger
+              <CompanyFiltersModalTrigger
                 filtersFormContainer={companyFiltersFormContainer}
               />
             </ToolbarFiltersMobile>

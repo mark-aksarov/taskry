@@ -3,7 +3,7 @@ import { CustomerFiltersProvider } from "../CustomerFiltersContext";
 
 export const withCustomerFiltersProvider: Decorator = (Story) => {
   return (
-    <CustomerFiltersProvider>
+    <CustomerFiltersProvider filters={{}}>
       <Story />
     </CustomerFiltersProvider>
   );

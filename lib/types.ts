@@ -35,7 +35,7 @@ export interface CustomerFilters {
   hasNoActiveProjects?: boolean;
   hasActiveProjects?: boolean;
   hasOverdueProjects?: boolean;
-  company?: number[];
+  companyIds?: number[];
 }
 
 export const taskSortFields = [

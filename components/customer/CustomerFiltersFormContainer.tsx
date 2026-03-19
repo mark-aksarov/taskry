@@ -6,32 +6,18 @@ import {
 } from "./CustomerFiltersForm";
 
 import { Suspense } from "react";
-import { CustomerFilters } from "@/lib/types";
-import { CustomerFiltersProvider } from "./CustomerFiltersContext";
 import { getCompanySummaries } from "@/lib/data/company/company.dal";
 
-interface CustomerFiltersFormContainerProps {
-  filters?: CustomerFilters;
-}
-
-export function CustomerFiltersFormContainer(
-  props: CustomerFiltersFormContainerProps,
-) {
+export function CustomerFiltersFormContainer() {
   return (
     <Suspense fallback={<CustomerFiltersFormSkeleton />}>
-      <CustomerFiltersFormContainerInner {...props} />
+      <CustomerFiltersFormContainerInner />
     </Suspense>
   );
 }
 
-async function CustomerFiltersFormContainerInner({
-  filters,
-}: CustomerFiltersFormContainerProps) {
+async function CustomerFiltersFormContainerInner() {
   const companies = await getCompanySummaries();
 
-  return (
-    <CustomerFiltersProvider initialFilters={filters}>
-      <CustomerFiltersForm companyCheckboxGroupItems={companies} />
-    </CustomerFiltersProvider>
-  );
+  return <CustomerFiltersForm companyCheckboxGroupItems={companies} />;
 }
