@@ -20,7 +20,7 @@ import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { TaskGridLargeStory } from "@/components/tasks/TaskGrid/__stories__";
 import { TaskGridMobileStory } from "@/components/tasks/TaskGrid/__stories__";
 import { TaskProjectFiltersForm } from "@/components/tasks/TaskProjectFiltersForm";
-import { TaskAssigneeFiltersForm } from "@/components/tasks/TaskAssigneeFiltersForm";
+import { AssigneeFiltersForm } from "@/components/tasks/AssigneeFiltersForm";
 import { TaskCategoryFiltersForm } from "@/components/tasks/TaskCategoryFiltersForm";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
@@ -103,9 +103,7 @@ export const Default = {
       />
     ),
     assigneeFiltersFormContainer: (
-      <TaskAssigneeFiltersForm
-        assigneeCheckboxGroupItems={mockedUserSummaries}
-      />
+      <AssigneeFiltersForm assigneeCheckboxGroupItems={mockedUserSummaries} />
     ),
     newTaskFormContainer: (
       <NewTaskForm

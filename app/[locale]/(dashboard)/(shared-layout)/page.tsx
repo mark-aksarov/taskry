@@ -38,7 +38,7 @@ export default async function AppDashboardPage({
     pageSize,
     sort: "createdAt",
     filters: {
-      assignee: [session.user.id],
+      assigneeIds: [session.user.id],
     },
   });
 

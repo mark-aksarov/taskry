@@ -3,8 +3,13 @@ import {
   FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
+import {
+  useTaskCategoryCheckboxGroup,
+  TaskCategoryCheckboxGroupProvider,
+} from "@/components/taskCategory/TaskCategoryCheckboxGroup";
+
 import { useTranslations } from "next-intl";
-import { useTaskFiltersDispatch } from "../TaskFiltersContext";
+import { useTaskFilters } from "../TaskFiltersContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
@@ -15,21 +20,30 @@ interface TaskCategoryFiltersModalProps {
 export function TaskCategoryFiltersModal({
   filtersFormContainer,
 }: TaskCategoryFiltersModalProps) {
-  const t = useTranslations("tasks.TaskCategoryFiltersModal");
-  const dispatch = useTaskFiltersDispatch();
+  const { categoryIds } = useTaskFilters();
 
   return (
     <FormBaseModal data-test="task-category-filters-modal">
-      <FilterModalDialog>
-        <FilterModalDialogHeader
-          resetFilters={() => dispatch({ type: "setCategory", payload: [] })}
-        >
-          {t("heading")}
-        </FilterModalDialogHeader>
-        <FormBaseModalDialogBody>
-          {filtersFormContainer}
-        </FormBaseModalDialogBody>
-      </FilterModalDialog>
+      <TaskCategoryCheckboxGroupProvider initialCategoryIds={categoryIds}>
+        <FilterModalDialog>
+          <DialogHeader />
+          <FormBaseModalDialogBody>
+            {filtersFormContainer}
+          </FormBaseModalDialogBody>
+        </FilterModalDialog>
+      </TaskCategoryCheckboxGroupProvider>
     </FormBaseModal>
+  );
+}
+
+function DialogHeader() {
+  const t = useTranslations("tasks.TaskCategoryFiltersModal");
+
+  const { updateValue } = useTaskCategoryCheckboxGroup();
+
+  return (
+    <FilterModalDialogHeader resetFilters={() => updateValue([])}>
+      {t("heading")}
+    </FilterModalDialogHeader>
   );
 }

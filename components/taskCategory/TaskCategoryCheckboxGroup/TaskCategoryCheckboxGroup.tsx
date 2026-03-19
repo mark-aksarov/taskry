@@ -1,20 +1,16 @@
 "use client";
 
 import {
-  useTaskFilters,
-  useTaskFiltersDispatch,
-} from "@/components/tasks/TaskFiltersContext";
-
-import {
-  FilterCheckboxGroupExpandButton,
   FilterCheckboxGroupWrapper,
   useFilterCheckboxGroupExpansion,
+  FilterCheckboxGroupExpandButton,
 } from "@/components/common/FilterCheckboxGroup";
 
 import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
+import { useTaskCategoryCheckboxGroup } from "./TaskCategoryCheckboxGroupContext";
 
 interface Item {
   id: number;
@@ -26,13 +22,10 @@ interface Props {
   disableExpansion?: boolean;
 }
 
-export function TaskFiltersFormCategoryCheckboxGroup({
-  items,
-  disableExpansion,
-}: Props) {
-  const t = useTranslations("tasks.TaskFiltersFormCategoryCheckboxGroup");
-  const filters = useTaskFilters();
-  const dispatch = useTaskFiltersDispatch();
+export function TaskCategoryCheckboxGroup({ items, disableExpansion }: Props) {
+  const t = useTranslations("taskCategories.TaskCategoryCheckboxGroup");
+
+  const { value, updateValue } = useTaskCategoryCheckboxGroup();
 
   const {
     isExpanded,
@@ -42,7 +35,7 @@ export function TaskFiltersFormCategoryCheckboxGroup({
     hiddenSelectedItems,
   } = useFilterCheckboxGroupExpansion(
     items,
-    filters.category,
+    value,
     disableExpansion ? Number.MAX_VALUE : undefined,
   );
 
@@ -51,7 +44,8 @@ export function TaskFiltersFormCategoryCheckboxGroup({
       key={item.id}
       value={item.id.toString()}
       className={twMerge("font-normal capitalize", hidden && "hidden")}
-      data-test={`category-${item.id}-checkbox`}
+      data-test="task-category-checkbox"
+      data-id={item.id}
     >
       {item.name}
     </Checkbox>
@@ -61,11 +55,9 @@ export function TaskFiltersFormCategoryCheckboxGroup({
     <FilterCheckboxGroupWrapper>
       <CheckboxGroup
         label={t("label")}
-        name="category"
-        value={filters?.category}
-        onChange={(value) =>
-          dispatch({ type: "setCategory", payload: value as any })
-        }
+        name="categoryIds"
+        value={value}
+        onChange={updateValue}
       >
         {visibleItems.map((item) => renderCheckbox(item))}
         {hiddenItems.map((item) => renderCheckbox(item, true))}

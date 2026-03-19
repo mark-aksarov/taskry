@@ -14,10 +14,10 @@ export interface ProjectFilters {
 export interface TaskFilters {
   query?: string;
   onlyMyTasks?: boolean;
-  status?: TaskStatus[];
-  category?: number[];
-  project?: number[];
-  assignee?: string[];
+  statuses?: TaskStatus[];
+  categoryIds?: number[];
+  projectIds?: number[];
+  assigneeIds?: string[];
   deadlineFrom?: string;
   deadlineTo?: string;
 }

@@ -557,10 +557,16 @@ export function buildTaskWhereClause(
       title: { contains: filters.query, mode: "insensitive" as const },
     }),
     ...(filters.onlyMyTasks && { assigneeId: userId }),
-    ...(filters.status?.length && { status: { in: filters.status } }),
-    ...(filters.category?.length && { categoryId: { in: filters.category } }),
-    ...(filters.project?.length && { projectId: { in: filters.project } }),
-    ...(filters.assignee?.length && { assigneeId: { in: filters.assignee } }),
+    ...(filters.statuses?.length && { status: { in: filters.statuses } }),
+    ...(filters.categoryIds?.length && {
+      categoryId: { in: filters.categoryIds },
+    }),
+    ...(filters.projectIds?.length && {
+      projectId: { in: filters.projectIds },
+    }),
+    ...(filters.assigneeIds?.length && {
+      assigneeId: { in: filters.assigneeIds },
+    }),
     deadline: {
       ...(filters.deadlineFrom && { gte: new Date(filters.deadlineFrom) }),
       ...(filters.deadlineTo && { lte: new Date(filters.deadlineTo) }),

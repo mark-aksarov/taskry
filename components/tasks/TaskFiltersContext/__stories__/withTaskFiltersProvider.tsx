@@ -3,7 +3,7 @@ import { TaskFiltersProvider } from "../TaskFiltersContext";
 
 export const withTaskFiltersProvider: Decorator = (Story) => {
   return (
-    <TaskFiltersProvider>
+    <TaskFiltersProvider filters={{}}>
       <Story />
     </TaskFiltersProvider>
   );

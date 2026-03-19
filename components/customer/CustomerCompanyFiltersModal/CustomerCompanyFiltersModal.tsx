@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FormBaseModal,
   FormBaseModalDialogBody,
@@ -9,6 +11,7 @@ import {
 } from "@/components/company/CompanyCheckboxGroup";
 
 import { useTranslations } from "next-intl";
+import { useCustomerFilters } from "../CustomerFiltersContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
@@ -19,9 +22,13 @@ interface CustomerCompanyFiltersModalProps {
 export function CustomerCompanyFiltersModal({
   filtersFormContainer,
 }: CustomerCompanyFiltersModalProps) {
+  const { companyIds } = useCustomerFilters();
+
   return (
     <FormBaseModal data-test="customer-company-filters-modal">
-      <CompanyCheckboxGroupProvider>
+      <CompanyCheckboxGroupProvider
+        initialValue={companyIds ? companyIds.map((id) => id.toString()) : []}
+      >
         <FilterModalDialog>
           <DialogHeader />
           <FormBaseModalDialogBody>

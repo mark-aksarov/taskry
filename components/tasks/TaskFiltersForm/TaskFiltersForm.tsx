@@ -1,22 +1,51 @@
 "use client";
 
 import {
+  DeadlineToDatePicker,
+  useDeadlineToDatePicker,
+} from "../DeadlineToDatePicker";
+
+import {
+  AssigneeCheckboxGroup,
+  useAssigneeCheckboxGroup,
+} from "../AssigneeCheckboxGroup";
+
+import {
+  DeadlineFromDatePicker,
+  useDeadlineFromDatePicker,
+} from "../DeadlineFromDatePicker";
+
+import {
+  TaskStatusCheckboxGroup,
+  useTaskStatusCheckboxGroup,
+} from "../TaskStatusCheckboxGroup";
+
+import {
   FormBase,
   FormBaseBody,
   FormBaseFooter,
 } from "@/components/common/FormBase";
 
+import {
+  ProjectCheckboxGroup,
+  useProjectCheckboxGroup,
+} from "@/components/projects/ProjectCheckboxGroup";
+
+import {
+  TaskCategoryCheckboxGroup,
+  useTaskCategoryCheckboxGroup,
+} from "@/components/taskCategory/TaskCategoryCheckboxGroup";
+
+import { useContext } from "react";
+import { useLocale } from "next-intl";
+import { useSearchParams } from "next/navigation";
 import { Separator } from "@/components/ui/Separator";
 import { useSelectedTasks } from "../SelectedTasksContext";
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { OverlayTriggerStateContext } from "react-aria-components";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
-import { useFiltersFormHandleSubmit } from "@/components/common/FiltersForm";
-import { TaskFiltersFormOnlyMyTaskSwitch } from "./TaskFiltersFormOnlyMyTaskSwitch";
-import { TaskFiltersFormStatusCheckboxGroup } from "./TaskFiltersFormStatusCheckboxGroup";
-import { TaskFiltersFormDeadlineToDatePicker } from "./TaskFiltersFormDeadlineToDatePicker";
-import { TaskFiltersFormProjectCheckboxGroup } from "./TaskFiltersFormProjectCheckboxGroup";
-import { TaskFiltersFormCategoryCheckboxGroup } from "./TaskFiltersFormCategoryCheckboxGroup";
-import { TaskFiltersFormAssigneeCheckboxGroup } from "./TaskFiltersFormAssigneeCheckboxGroup";
-import { TaskFiltersFormDeadlineFromDatePicker } from "./TaskFiltersFormDeadlineFromDatePicker";
+import { usePageTransition } from "@/components/common/PageTransitionContext";
+import { OnlyMyTasksSwitch, useOnlyMyTasksSwitch } from "../OnlyMyTasksSwitch";
 
 interface TaskFiltersFormProps {
   categoryCheckboxGroupItems: { id: number; name: string }[];
@@ -29,41 +58,92 @@ export function TaskFiltersForm({
   projectCheckboxGroupItems,
   assigneeCheckboxGroupItems,
 }: TaskFiltersFormProps) {
-  const { clear: clearSelectedTasks } = useSelectedTasks();
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const { startFilteringTransition } = usePageTransition();
+  const { clear: clearSelectedItems } = useSelectedTasks();
 
-  const handleSubmit = useFiltersFormHandleSubmit({
-    booleanFieldNames: ["onlyMyTasks"],
-    clearSelectedItems: clearSelectedTasks,
-  });
+  // TaskFiltersForm can only be used inside the TaskFiltersModal
+  const { close: closeModal } = useContext(OverlayTriggerStateContext)!;
+
+  const { isSelected: onlyMyTasks } = useOnlyMyTasksSwitch();
+  const { value: deadlineFrom } = useDeadlineFromDatePicker();
+  const { value: deadlineTo } = useDeadlineToDatePicker();
+  const { value: projectIds } = useProjectCheckboxGroup();
+  const { value: categoryIds } = useTaskCategoryCheckboxGroup();
+  const { value: assigneeIds } = useAssigneeCheckboxGroup();
+  const { value: statuses } = useTaskStatusCheckboxGroup();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // close the form modal immediately
+    closeModal();
+
+    // Create new search params based on the current ones
+    const newSearchParams = new URLSearchParams(searchParams);
+
+    // Remove old filter values before applying new ones
+    newSearchParams.delete("onlyMyTasks");
+    newSearchParams.delete("deadlineFrom");
+    newSearchParams.delete("deadlineTo");
+    newSearchParams.delete("projectIds");
+    newSearchParams.delete("categoryIds");
+    newSearchParams.delete("assigneeIds");
+    newSearchParams.delete("statuses");
+
+    // Add new filter values
+    if (onlyMyTasks) {
+      newSearchParams.set("onlyMyTasks", "true");
+    }
+    if (deadlineFrom) {
+      // toString convert date to ISO 8601, e.g. '2022-02-03'
+      newSearchParams.set("deadlineFrom", deadlineFrom.toString());
+    }
+    if (deadlineTo) {
+      newSearchParams.set("deadlineTo", deadlineTo.toString());
+    }
+    statuses.forEach((status) => newSearchParams.append("statuses", status));
+    projectIds.forEach((id) => newSearchParams.append("projectIds", id));
+    categoryIds.forEach((id) => newSearchParams.append("categoryIds", id));
+    assigneeIds.forEach((id) => newSearchParams.append("assigneeIds", id));
+
+    // Reset pagination
+    newSearchParams.delete("page");
+
+    // Clear the selected items in list / grid
+    clearSelectedItems?.();
+
+    // Start the page transition and update the URL with new search params
+    startFilteringTransition(() => {
+      router.replace(`${pathname}?${newSearchParams}`, { locale });
+    });
+  };
 
   return (
     <FormBase id="task-filter-form" onSubmit={handleSubmit}>
       <FormBaseBody>
-        <TaskFiltersFormOnlyMyTaskSwitch />
+        <OnlyMyTasksSwitch />
 
         <Separator />
 
-        <TaskFiltersFormDeadlineFromDatePicker />
-        <TaskFiltersFormDeadlineToDatePicker />
+        <DeadlineFromDatePicker />
+        <DeadlineToDatePicker />
 
         <Separator />
 
-        <TaskFiltersFormStatusCheckboxGroup />
+        <TaskStatusCheckboxGroup />
         <Separator />
 
-        <TaskFiltersFormCategoryCheckboxGroup
-          items={categoryCheckboxGroupItems}
-        />
+        <TaskCategoryCheckboxGroup items={categoryCheckboxGroupItems} />
         <Separator />
 
-        <TaskFiltersFormProjectCheckboxGroup
-          items={projectCheckboxGroupItems}
-        />
+        <ProjectCheckboxGroup items={projectCheckboxGroupItems} />
         <Separator />
 
-        <TaskFiltersFormAssigneeCheckboxGroup
-          items={assigneeCheckboxGroupItems}
-        />
+        <AssigneeCheckboxGroup items={assigneeCheckboxGroupItems} />
       </FormBaseBody>
       <FormBaseFooter>
         <FiltersFormSubmitButton />

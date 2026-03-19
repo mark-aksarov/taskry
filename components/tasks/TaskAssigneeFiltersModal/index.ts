@@ -1,1 +1,0 @@
-export { TaskAssigneeFiltersModalTrigger } from "./TaskAssigneeFiltersModalTrigger";

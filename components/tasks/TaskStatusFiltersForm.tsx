@@ -1,37 +1,67 @@
 "use client";
 
 import {
+  TaskStatusCheckboxGroup,
+  useTaskStatusCheckboxGroup,
+} from "./TaskStatusCheckboxGroup";
+
+import {
   FormBase,
   FormBaseBody,
   FormBaseFooter,
 } from "@/components/common/FormBase";
 
+import { useContext } from "react";
+import { useLocale } from "next-intl";
+import { useSearchParams } from "next/navigation";
 import { useSelectedTasks } from "./SelectedTasksContext";
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { OverlayTriggerStateContext } from "react-aria-components";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
-import { useFiltersFormHandleSubmit } from "@/components/common/FiltersForm";
-import { TaskFiltersFormStatusCheckboxGroup } from "./TaskFiltersForm";
+import { usePageTransition } from "@/components/common/PageTransitionContext";
 
 export function TaskStatusFiltersForm() {
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const { startFilteringTransition } = usePageTransition();
   const { clear: clearSelectedTasks } = useSelectedTasks();
 
-  const handleSubmit = useFiltersFormHandleSubmit({
-    clearSelectedItems: clearSelectedTasks,
-    /*preserve: [
-      "sort",
-      "query",
-      "category",
-      "project",
-      "assignee",
-      "onlyMyTasks",
-      "deadlineFrom",
-      "deadlineTo",
-    ],*/
-  });
+  // TaskStatusFiltersForm can only be used inside the TaskStatusFiltersModal
+  const { close: closeModal } = useContext(OverlayTriggerStateContext)!;
+
+  const { value: statuses } = useTaskStatusCheckboxGroup();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // close the form modal immediately
+    closeModal();
+
+    // Create new search params based on the current ones
+    const newSearchParams = new URLSearchParams(searchParams);
+
+    // Replace status: remove old ones and add the new values
+    newSearchParams.delete("status");
+    statuses.forEach((status) => newSearchParams.append("status", status));
+
+    // Reset pagination
+    newSearchParams.delete("page");
+
+    // Clear the selected tasks in list / grid
+    clearSelectedTasks?.();
+
+    // Start the page transition and update the URL with new search params
+    startFilteringTransition(() => {
+      router.replace(`${pathname}?${newSearchParams}`, { locale });
+    });
+  };
 
   return (
     <FormBase id="task-status-filter-form" onSubmit={handleSubmit}>
       <FormBaseBody>
-        <TaskFiltersFormStatusCheckboxGroup />
+        <TaskStatusCheckboxGroup />
       </FormBaseBody>
       <FormBaseFooter>
         <FiltersFormSubmitButton />

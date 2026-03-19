@@ -26,6 +26,7 @@ import {
 } from "@/components/company/CompanyCheckboxGroup";
 
 import { useTranslations } from "next-intl";
+import { useCustomerFilters } from "../CustomerFiltersContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
@@ -49,11 +50,22 @@ export function CustomerFiltersModal({
 }
 
 function Providers({ children }: { children: React.ReactNode }) {
+  const {
+    hasNoActiveProjects,
+    hasActiveProjects,
+    hasOverdueProjects,
+    companyIds,
+  } = useCustomerFilters();
+
   return (
-    <ActiveProjectsSwitchProvider>
-      <NoActiveProjectsSwitchProvider>
-        <OverdueProjectsSwitchProvider>
-          <CompanyCheckboxGroupProvider>
+    <ActiveProjectsSwitchProvider initialValue={!!hasActiveProjects}>
+      <NoActiveProjectsSwitchProvider initialValue={!!hasNoActiveProjects}>
+        <OverdueProjectsSwitchProvider initialValue={!!hasOverdueProjects}>
+          <CompanyCheckboxGroupProvider
+            initialValue={
+              companyIds ? companyIds.map((id) => id.toString()) : []
+            }
+          >
             {children}
           </CompanyCheckboxGroupProvider>
         </OverdueProjectsSwitchProvider>

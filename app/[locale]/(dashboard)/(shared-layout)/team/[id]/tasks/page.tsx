@@ -64,7 +64,7 @@ export default async function AppProfileTasksPage({
     pageSize,
     sort,
     filters: {
-      assignee: [userId],
+      assigneeIds: [userId],
     },
   });
 

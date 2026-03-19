@@ -109,25 +109,19 @@
     "dialogHeading": "Детали задачи",
     "openInFullPage": "Открыть на полной странице"
   },
-  "TaskFiltersFormOnlyMyTaskSwitch": {
+  "OnlyMyTasksSwitch": {
     "text": "Только мои задачи"
   },
-  "TaskFiltersFormDeadlineFromDatePicker": {
+  "DeadlineFromDatePicker": {
     "label": "Срок от"
   },
-  "TaskFiltersFormDeadlineToDatePicker": {
+  "DeadlineToDatePicker": {
     "label": "Срок до"
   },
-  "TaskFiltersFormStatusCheckboxGroup": {
+  "TaskStatusCheckboxGroup": {
     "label": "Статус"
   },
-  "TaskFiltersFormCategoryCheckboxGroup": {
-    "label": "Категория"
-  },
-  "TaskFiltersFormProjectCheckboxGroup": {
-    "label": "Проект"
-  },
-  "TaskFiltersFormAssigneeCheckboxGroup": {
+  "AssigneeCheckboxGroup": {
     "label": "Исполнитель"
   },
   "TaskTitleTextField": {
@@ -216,10 +210,10 @@
   "TaskProjectFiltersModal": {
     "heading": "Фильтры проектов"
   },
-  "TaskAssigneeFiltersModal": {
+  "AssigneeFiltersModal": {
     "heading": "Фильтры назначенных"
   },
-  "TaskAssigneeFiltersModalTrigger": {
+  "AssigneeFiltersModalTrigger": {
     "buttonLabel": "Назначенный"
   }
 }

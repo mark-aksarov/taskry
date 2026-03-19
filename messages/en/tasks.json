@@ -109,25 +109,19 @@
     "dialogHeading": "Task Details",
     "openInFullPage": "Open in Full Page"
   },
-  "TaskFiltersFormOnlyMyTaskSwitch": {
+  "OnlyMyTasksSwitch": {
     "text": "Show only my tasks"
   },
-  "TaskFiltersFormDeadlineFromDatePicker": {
+  "DeadlineFromDatePicker": {
     "label": "Deadline from"
   },
-  "TaskFiltersFormDeadlineToDatePicker": {
+  "DeadlineToDatePicker": {
     "label": "Deadline to"
   },
-  "TaskFiltersFormStatusCheckboxGroup": {
+  "TaskStatusCheckboxGroup": {
     "label": "Status"
   },
-  "TaskFiltersFormCategoryCheckboxGroup": {
-    "label": "Category"
-  },
-  "TaskFiltersFormProjectCheckboxGroup": {
-    "label": "Project"
-  },
-  "TaskFiltersFormAssigneeCheckboxGroup": {
+  "AssigneeCheckboxGroup": {
     "label": "Assignee"
   },
   "TaskTitleTextField": {
@@ -216,10 +210,10 @@
   "TaskProjectFiltersModal": {
     "heading": "Project filters"
   },
-  "TaskAssigneeFiltersModal": {
+  "AssigneeFiltersModal": {
     "heading": "Assignee filters"
   },
-  "TaskAssigneeFiltersModalTrigger": {
+  "AssigneeFiltersModalTrigger": {
     "buttonLabel": "Assignee"
   }
 }

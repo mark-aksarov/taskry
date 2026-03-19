@@ -418,7 +418,7 @@ describe("getTaskList", () => {
         pageSize: 10,
         sort: "title",
         filters: {
-          status: [TaskStatus.completed],
+          statuses: [TaskStatus.completed],
         },
       });
 
@@ -520,7 +520,7 @@ describe("getTaskList", () => {
       });
 
       const filters: TaskFilters = {
-        project: [1],
+        projectIds: [1],
       };
 
       const result = await getTaskList({
@@ -561,7 +561,7 @@ describe("getTaskList", () => {
       });
 
       const filters: TaskFilters = {
-        category: [1],
+        categoryIds: [1],
       };
 
       const result = await getTaskList({
@@ -602,7 +602,7 @@ describe("getTaskList", () => {
       });
 
       const filters: TaskFilters = {
-        assignee: ["user-3"],
+        assigneeIds: ["user-3"],
       };
 
       const result = await getTaskList({

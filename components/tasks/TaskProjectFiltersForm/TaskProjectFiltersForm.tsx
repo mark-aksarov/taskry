@@ -6,10 +6,19 @@ import {
   FormBaseFooter,
 } from "@/components/common/FormBase";
 
+import {
+  ProjectCheckboxGroup,
+  useProjectCheckboxGroup,
+} from "@/components/projects/ProjectCheckboxGroup";
+
+import { useContext } from "react";
+import { useLocale } from "next-intl";
+import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { useSelectedTasks } from "../SelectedTasksContext";
+import { OverlayTriggerStateContext } from "react-aria-components";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
-import { TaskFiltersFormProjectCheckboxGroup } from "../TaskFiltersForm";
-import { useFiltersFormHandleSubmit } from "@/components/common/FiltersForm";
+import { usePageTransition } from "@/components/common/PageTransitionContext";
 
 interface TaskProjectFiltersFormProps {
   projectCheckboxGroupItems: { id: number; title: string }[];
@@ -18,16 +27,47 @@ interface TaskProjectFiltersFormProps {
 export function TaskProjectFiltersForm({
   projectCheckboxGroupItems,
 }: TaskProjectFiltersFormProps) {
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const { startFilteringTransition } = usePageTransition();
   const { clear: clearSelectedTasks } = useSelectedTasks();
 
-  const handleSubmit = useFiltersFormHandleSubmit({
-    clearSelectedItems: clearSelectedTasks,
-  });
+  // TaskProjectFiltersForm can only be used inside the TaskProjectFiltersModal
+  const { close: closeModal } = useContext(OverlayTriggerStateContext)!;
+
+  const { value: projectIds } = useProjectCheckboxGroup();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // close the form modal immediately
+    closeModal();
+
+    // Create new search params based on the current ones
+    const newSearchParams = new URLSearchParams(searchParams);
+
+    // Replace projectIds: remove old ones and add the new values
+    newSearchParams.delete("categoryIds");
+    projectIds.forEach((id) => newSearchParams.append("projectIds", id));
+
+    // Reset pagination
+    newSearchParams.delete("page");
+
+    // Clear the selected tasks in list / grid
+    clearSelectedTasks?.();
+
+    // Start the page transition and update the URL with new search params
+    startFilteringTransition(() => {
+      router.replace(`${pathname}?${newSearchParams}`, { locale });
+    });
+  };
 
   return (
     <FormBase id="task-project-filter-form" onSubmit={handleSubmit}>
       <FormBaseBody>
-        <TaskFiltersFormProjectCheckboxGroup
+        <ProjectCheckboxGroup
           disableExpansion
           items={projectCheckboxGroupItems}
         />

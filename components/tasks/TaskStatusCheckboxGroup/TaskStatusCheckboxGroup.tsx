@@ -1,29 +1,22 @@
 "use client";
 
-import {
-  useTaskFilters,
-  useTaskFiltersDispatch,
-} from "@/components/tasks/TaskFiltersContext/TaskFiltersContext";
-
 import { useTranslations } from "next-intl";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
+import { useTaskStatusCheckboxGroup } from "./TaskStatusCheckboxGroupContext";
 
-export function TaskFiltersFormStatusCheckboxGroup() {
+export function TaskStatusCheckboxGroup() {
   const tStatus = useTranslations("tasks.TaskStatus");
-  const t = useTranslations("tasks.TaskFiltersFormStatusCheckboxGroup");
+  const t = useTranslations("tasks.TaskStatusCheckboxGroup");
 
-  const filters = useTaskFilters();
-  const dispatch = useTaskFiltersDispatch();
+  const { value, updateValue } = useTaskStatusCheckboxGroup();
 
   return (
     <CheckboxGroup
-      name="status"
+      name="statuses"
       label={t("label")}
-      value={filters.status}
-      onChange={(value) =>
-        dispatch({ type: "setStatus", payload: value as any })
-      }
+      value={value}
+      onChange={updateValue}
     >
       <Checkbox
         data-test="pending-checkbox"

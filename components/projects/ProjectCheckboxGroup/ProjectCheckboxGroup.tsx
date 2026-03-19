@@ -1,11 +1,6 @@
 "use client";
 
 import {
-  useTaskFilters,
-  useTaskFiltersDispatch,
-} from "@/components/tasks/TaskFiltersContext";
-
-import {
   FilterCheckboxGroupExpandButton,
   FilterCheckboxGroupWrapper,
   useFilterCheckboxGroupExpansion,
@@ -15,6 +10,7 @@ import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
+import { useProjectCheckboxGroup } from "./ProjectCheckboxGroupContext";
 
 interface Item {
   id: number;
@@ -26,13 +22,10 @@ interface Props {
   disableExpansion?: boolean;
 }
 
-export function TaskFiltersFormProjectCheckboxGroup({
-  items,
-  disableExpansion,
-}: Props) {
-  const t = useTranslations("tasks.TaskFiltersFormProjectCheckboxGroup");
-  const filters = useTaskFilters();
-  const dispatch = useTaskFiltersDispatch();
+export function ProjectCheckboxGroup({ items, disableExpansion }: Props) {
+  const t = useTranslations("projects.ProjectCheckboxGroup");
+
+  const { value, updateValue } = useProjectCheckboxGroup();
 
   const {
     isExpanded,
@@ -42,7 +35,7 @@ export function TaskFiltersFormProjectCheckboxGroup({
     hiddenSelectedItems,
   } = useFilterCheckboxGroupExpansion(
     items,
-    filters.project,
+    value,
     disableExpansion ? Number.MAX_VALUE : undefined,
   );
 
@@ -51,7 +44,8 @@ export function TaskFiltersFormProjectCheckboxGroup({
       key={item.id}
       value={item.id.toString()}
       className={twMerge("font-normal capitalize", hidden && "hidden")}
-      data-test={`project-${item.id}-checkbox`}
+      data-test="project-checkbox"
+      data-id={item.id}
     >
       {item.title}
     </Checkbox>
@@ -62,10 +56,8 @@ export function TaskFiltersFormProjectCheckboxGroup({
       <CheckboxGroup
         label={t("label")}
         name="project"
-        value={filters?.project}
-        onChange={(value) =>
-          dispatch({ type: "setProject", payload: value as any })
-        }
+        value={value}
+        onChange={updateValue}
       >
         {visibleItems.map((item) => renderCheckbox(item))}
         {hiddenItems.map((item) => renderCheckbox(item, true))}

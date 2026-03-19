@@ -40,7 +40,7 @@ import { TaskSortingMenuTriggerMobile } from "@/components/tasks/TaskSortingMenu
 import { TasksFilteredEmptySection } from "@/components/tasks/TasksFilteredEmptySection";
 import { TaskStatusFiltersModalTrigger } from "@/components/tasks/TaskStatusFiltersModal";
 import { TaskProjectFiltersModalTrigger } from "@/components/tasks/TaskProjectFiltersModal";
-import { TaskAssigneeFiltersModalTrigger } from "@/components/tasks/TaskAssigneeFiltersModal";
+import { AssigneeFiltersModalTrigger } from "@/components/tasks/AssigneeFiltersModal";
 import { TaskCategoryFiltersModalTrigger } from "@/components/tasks/TaskCategoryFiltersModal";
 
 interface TasksPageProps {
@@ -147,7 +147,7 @@ export function TasksPage({
               <TaskProjectFiltersModalTrigger
                 filtersFormContainer={projectFiltersFormContainer}
               />
-              <TaskAssigneeFiltersModalTrigger
+              <AssigneeFiltersModalTrigger
                 filtersFormContainer={assigneeFiltersFormContainer}
               />
             </ToolbarFiltersMobile>

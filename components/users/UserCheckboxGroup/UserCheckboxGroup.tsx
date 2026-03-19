@@ -1,38 +1,35 @@
 "use client";
 
 import {
-  useTaskFilters,
-  useTaskFiltersDispatch,
-} from "@/components/tasks/TaskFiltersContext";
-
-import {
-  FilterCheckboxGroupExpandButton,
   FilterCheckboxGroupWrapper,
   useFilterCheckboxGroupExpansion,
+  FilterCheckboxGroupExpandButton,
 } from "@/components/common/FilterCheckboxGroup";
 
 import { twMerge } from "tailwind-merge";
-import { useTranslations } from "next-intl";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
+import { useUserCheckboxGroup } from "./UserCheckboxGroupContext";
 
 interface Item {
   id: string;
   fullName: string;
 }
 
-interface Props {
+export interface UserCheckboxGroupProps {
   items: Item[];
+  name: string;
+  label: string;
   disableExpansion?: boolean;
 }
 
-export function TaskFiltersFormAssigneeCheckboxGroup({
+export function UserCheckboxGroup({
   items,
+  name,
+  label,
   disableExpansion,
-}: Props) {
-  const t = useTranslations("tasks.TaskFiltersFormAssigneeCheckboxGroup");
-  const filters = useTaskFilters();
-  const dispatch = useTaskFiltersDispatch();
+}: UserCheckboxGroupProps) {
+  const { value, updateValue } = useUserCheckboxGroup();
 
   const {
     isExpanded,
@@ -42,7 +39,7 @@ export function TaskFiltersFormAssigneeCheckboxGroup({
     hiddenSelectedItems,
   } = useFilterCheckboxGroupExpansion(
     items,
-    filters.assignee,
+    value,
     disableExpansion ? Number.MAX_VALUE : undefined,
   );
 
@@ -51,7 +48,8 @@ export function TaskFiltersFormAssigneeCheckboxGroup({
       key={item.id}
       value={item.id}
       className={twMerge("font-normal capitalize", hidden && "hidden")}
-      data-test={`assignee-${item.id}-checkbox`}
+      data-test="user-checkbox"
+      data-id={item.id}
     >
       {item.fullName}
     </Checkbox>
@@ -60,12 +58,10 @@ export function TaskFiltersFormAssigneeCheckboxGroup({
   return (
     <FilterCheckboxGroupWrapper>
       <CheckboxGroup
-        label={t("label")}
-        name="assignee"
-        value={filters?.assignee}
-        onChange={(value) =>
-          dispatch({ type: "setAssignee", payload: value as any })
-        }
+        value={value}
+        name={name}
+        label={label}
+        onChange={updateValue}
       >
         {visibleItems.map((item) => renderCheckbox(item))}
         {hiddenItems.map((item) => renderCheckbox(item, true))}

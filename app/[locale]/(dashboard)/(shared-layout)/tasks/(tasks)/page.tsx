@@ -32,7 +32,7 @@ import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatuse
 import { CreateTaskCategoryProvider } from "@/components/taskCategory/CreateTaskCategoryContext";
 import { TaskCategoryFiltersFormContainer } from "@/components/tasks/TaskCategoryFiltersFormContainer";
 import { TaskProjectFiltersFormContainer } from "@/components/tasks/TaskProjectFiltersFormContainer";
-import { TaskAssigneeFiltersFormContainer } from "@/components/tasks/TaskAssigneeFiltersFormContainer";
+import { AssigneeFiltersFormContainer } from "@/components/tasks/AssigneeFiltersFormContainer";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -42,19 +42,19 @@ const searchParamsSchema = z.object({
   deadlineTo: dateSearchParam,
   onlyMyTasks: booleanSearchParam,
   sort: z.enum(taskSortFields).catch("createdAt"),
-  status: z.preprocess(
+  statuses: z.preprocess(
     searchParamToArray,
     z.array(taskStatus).optional().catch(undefined),
   ),
-  category: z.preprocess(
+  categoryIds: z.preprocess(
     searchParamToArray,
     z.array(taskCategoryId).optional().catch(undefined),
   ),
-  project: z.preprocess(
+  projectIds: z.preprocess(
     searchParamToArray,
     z.array(projectId).optional().catch(undefined),
   ),
-  assignee: z.preprocess(
+  assigneeIds: z.preprocess(
     searchParamToArray,
     z.array(userId).optional().catch(undefined),
   ),
@@ -91,7 +91,7 @@ export default async function AppTasksPage({
         <DeleteTasksProvider deleteTasks={deleteTasks}>
           <CreateTaskCategoryProvider createTaskCategory={createTaskCategory}>
             <CreateTaskProvider createTask={createTask}>
-              <TaskFiltersProvider initialFilters={filters}>
+              <TaskFiltersProvider filters={filters}>
                 <TasksPage
                   totalCount={totalCount}
                   totalFilteredTasks={totalFilteredTasks}
@@ -105,7 +105,7 @@ export default async function AppTasksPage({
                     <TaskProjectFiltersFormContainer />
                   }
                   assigneeFiltersFormContainer={
-                    <TaskAssigneeFiltersFormContainer />
+                    <AssigneeFiltersFormContainer />
                   }
                   searchContainer={<TaskRouterSearchContainer />}
                   tasksContainer={

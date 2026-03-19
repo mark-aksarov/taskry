@@ -1,4 +1,7 @@
 {
+  "ProjectCheckboxGroup": {
+    "label": "Проект"
+  },
   "ProjectSearchModal": {
     "heading": "Поиск проектов"
   },

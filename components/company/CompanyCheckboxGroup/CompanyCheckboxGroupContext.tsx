@@ -1,7 +1,6 @@
 "use client";
 
 import { useContext, createContext, useState, useMemo } from "react";
-import { useCustomerFilters } from "@/components/customer/CustomerFiltersContext";
 
 interface CompanyCheckboxGroup {
   value: string[];
@@ -13,20 +12,15 @@ const CompanyCheckboxGroupContext = createContext<CompanyCheckboxGroup | null>(
 );
 
 interface CompanyCheckboxGroupProviderProps {
+  initialValue: string[];
   children: React.ReactNode;
 }
 
 export const CompanyCheckboxGroupProvider = ({
+  initialValue,
   children,
 }: CompanyCheckboxGroupProviderProps) => {
-  const { companyIds } = useCustomerFilters();
-
-  const [value, setValue] = useState(() => {
-    if (!companyIds) {
-      return [];
-    }
-    return companyIds?.map((id) => id.toString());
-  });
+  const [value, setValue] = useState(initialValue);
 
   const contextValue = useMemo(
     () => ({

@@ -1,4 +1,7 @@
 {
+  "TaskCategoryCheckboxGroup": {
+    "label": "Category"
+  },
   "TaskCategorySelect": {
     "label": "Category",
     "noTaskCategory": "No task category"

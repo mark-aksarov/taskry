@@ -2,22 +2,22 @@
 
 import { useTranslations } from "next-intl";
 import { DialogTrigger } from "react-aria-components";
-import { TaskAssigneeFiltersModal } from "./TaskAssigneeFiltersModal";
+import { AssigneeFiltersModal } from "./AssigneeFiltersModal";
 import { FilterButtonMobile } from "@/components/common/FilterButton";
 
-export interface TaskAssigneeFiltersModalTriggerProps {
+export interface AssigneeFiltersModalTriggerProps {
   filtersFormContainer: React.ReactNode;
 }
 
-export function TaskAssigneeFiltersModalTrigger({
+export function AssigneeFiltersModalTrigger({
   filtersFormContainer,
-}: TaskAssigneeFiltersModalTriggerProps) {
-  const t = useTranslations("tasks.TaskAssigneeFiltersModalTrigger");
+}: AssigneeFiltersModalTriggerProps) {
+  const t = useTranslations("tasks.AssigneeFiltersModalTrigger");
 
   return (
     <DialogTrigger>
       <FilterButtonMobile mode="single" label={t("buttonLabel")} />
-      <TaskAssigneeFiltersModal filtersFormContainer={filtersFormContainer} />
+      <AssigneeFiltersModal filtersFormContainer={filtersFormContainer} />
     </DialogTrigger>
   );
 }

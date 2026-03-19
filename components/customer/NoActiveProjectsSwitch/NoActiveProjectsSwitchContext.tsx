@@ -1,6 +1,5 @@
 "use client";
 
-import { useCustomerFilters } from "../CustomerFiltersContext";
 import { useContext, createContext, useState, useMemo } from "react";
 
 interface NoActiveProjectsSwitch {
@@ -12,15 +11,15 @@ const NoActiveProjectsSwitchContext =
   createContext<NoActiveProjectsSwitch | null>(null);
 
 interface NoActiveProjectsSwitchProviderProps {
+  initialValue: boolean;
   children: React.ReactNode;
 }
 
 export const NoActiveProjectsSwitchProvider = ({
+  initialValue,
   children,
 }: NoActiveProjectsSwitchProviderProps) => {
-  const { hasNoActiveProjects } = useCustomerFilters();
-
-  const [isSelected, setIsSelected] = useState(!!hasNoActiveProjects);
+  const [isSelected, setIsSelected] = useState(initialValue);
 
   const contextValue = useMemo(
     () => ({
