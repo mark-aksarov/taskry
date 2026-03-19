@@ -3,7 +3,7 @@
 import {
   CompanyCheckboxGroup,
   useCompanyCheckboxGroup,
-} from "../CompanyCheckboxGroup";
+} from "@/components/company/CompanyCheckboxGroup";
 
 import {
   FormBase,
@@ -20,13 +20,13 @@ import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { usePageTransition } from "@/components/common/PageTransitionContext";
 
-interface CompanyFiltersFormProps {
+interface CustomerCompanyFiltersFormProps {
   companyCheckboxGroupItems: { id: number; name: string }[];
 }
 
-export function CompanyFiltersForm({
+export function CustomerCompanyFiltersForm({
   companyCheckboxGroupItems,
-}: CompanyFiltersFormProps) {
+}: CustomerCompanyFiltersFormProps) {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -34,7 +34,7 @@ export function CompanyFiltersForm({
   const { startFilteringTransition } = usePageTransition();
   const { clear: clearSelectedItems } = useSelectedItems();
 
-  // CompanyFiltersForm can only be used inside the CompanyFiltersModal
+  // CustomerCompanyFiltersForm can only be used inside the CustomerCompanyFiltersModal
   const { close: closeModal } = useContext(OverlayTriggerStateContext)!;
 
   const { value: companyIds } = useCompanyCheckboxGroup();

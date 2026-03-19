@@ -1,4 +1,10 @@
 {
+  "CustomerCompanyFiltersModal": {
+    "heading": "Фильтры компании"
+  },
+  "CustomerCompanyFiltersModalTrigger": {
+    "label": "Компания"
+  },
   "CustomerSearchModal": {
     "heading": "Поиск клиентов"
   },

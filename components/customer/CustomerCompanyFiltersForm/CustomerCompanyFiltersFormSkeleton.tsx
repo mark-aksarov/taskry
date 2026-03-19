@@ -2,7 +2,7 @@ import { FieldSkeleton } from "@/components/ui/Skeleton";
 import { ButtonSkeleton, Skeleton } from "@/components/ui/Skeleton";
 import { FormBaseBody, FormBaseFooter } from "@/components/common/FormBase";
 
-export function CompanyFiltersFormSkeleton() {
+export function CustomerCompanyFiltersFormSkeleton() {
   return (
     <div className="flex h-full flex-col gap-4">
       <FormBaseBody>

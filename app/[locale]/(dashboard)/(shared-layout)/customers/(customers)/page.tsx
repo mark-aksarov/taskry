@@ -25,11 +25,11 @@ import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext"
 import { CreateCompanyProvider } from "@/components/company/CreateCompanyContext";
 import { CreateCustomerProvider } from "@/components/customer/CreateCustomerContext";
 import { DeleteCustomersProvider } from "@/components/customer/DeleteCustomersContext";
+import { CustomerFiltersProvider } from "@/components/customer/CustomerFiltersContext";
 import { NewCustomerFormContainer } from "@/components/customer/NewCustomerFormContainer";
-import { CompanyFiltersFormContainer } from "@/components/company/CompanyFiltersFormContainer";
 import { CustomerFiltersFormContainer } from "@/components/customer/CustomerFiltersFormContainer";
 import { CustomerRouterSearchContainer } from "@/components/customer/CustomerRouterSearchContainer";
-import { CustomerFiltersProvider } from "@/components/customer/CustomerFiltersContext";
+import { CustomerCompanyFiltersFormContainer } from "@/components/customer/CustomerCompanyFiltersFormContainer";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -84,7 +84,9 @@ export default async function AppCustomersPage({
                 selectedSortField={sort}
                 searchContainer={<CustomerRouterSearchContainer />}
                 filtersFormContainer={<CustomerFiltersFormContainer />}
-                companyFiltersFormContainer={<CompanyFiltersFormContainer />}
+                customerCompanyFiltersFormContainer={
+                  <CustomerCompanyFiltersFormContainer />
+                }
                 newCustomerFormContainer={<NewCustomerFormContainer />}
                 customersContainer={
                   <CustomersContainer

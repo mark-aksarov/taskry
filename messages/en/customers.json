@@ -1,4 +1,10 @@
 {
+  "CustomerCompanyFiltersModal": {
+    "heading": "Company filters"
+  },
+  "CustomerCompanyFiltersModalTrigger": {
+    "label": "Company"
+  },
   "CustomerSearchModal": {
     "heading": "Search customers"
   },

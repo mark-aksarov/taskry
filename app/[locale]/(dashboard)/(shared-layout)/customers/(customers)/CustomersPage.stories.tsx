@@ -11,7 +11,7 @@ import { CustomerGridLarge } from "@/components/customer/CustomerGrid";
 import { NewCustomerForm } from "@/components/customer/NewCustomerForm";
 import { CustomerGridMobile } from "@/components/customer/CustomerGrid";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { CompanyFiltersForm } from "@/components/company/CompanyFiltersForm";
+import { CompanyFiltersForm } from "@/components/customer/CustomerCompanyFiltersForm";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { CustomerFiltersForm } from "@/components/customer/CustomerFiltersForm";
 import { CustomerListStory } from "@/components/customer/CustomerList/__stories__";

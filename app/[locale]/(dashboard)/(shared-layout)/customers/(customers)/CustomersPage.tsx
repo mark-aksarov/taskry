@@ -38,9 +38,9 @@ import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { SearchModalTrigger } from "@/components/search/SearchModalTrigger";
 import { CustomerSearchModal } from "@/components/customer/CustomerSearchModal";
 import { CustomerResultsCount } from "@/components/customer/CustomerResultsCount";
-import { CompanyFiltersModalTrigger } from "@/components/company/CompanyFiltersModal";
 import { CustomerActionsMenuTrigger } from "@/components/customer/CustomerActionsMenuTrigger";
 import { CustomersFilteredEmptySection } from "@/components/customer/CustomersFilteredEmptySection";
+import { CustomerCompanyFiltersModalTrigger } from "@/components/customer/CustomerCompanyFiltersModal";
 import { CustomersEmptySectionCreateButton } from "@/components/customer/CustomersEmptySectionCreateButton";
 
 interface CustomersPageProps {
@@ -51,7 +51,7 @@ interface CustomersPageProps {
   customersContainer: React.ReactNode;
   newCustomerFormContainer: React.ReactNode;
   filtersFormContainer: React.ReactNode;
-  companyFiltersFormContainer: React.ReactNode;
+  customerCompanyFiltersFormContainer: React.ReactNode;
 }
 
 export function CustomersPage({
@@ -62,7 +62,7 @@ export function CustomersPage({
   customersContainer,
   newCustomerFormContainer,
   filtersFormContainer,
-  companyFiltersFormContainer,
+  customerCompanyFiltersFormContainer,
 }: CustomersPageProps) {
   const t = useTranslations("app.CustomersPage");
 
@@ -136,8 +136,8 @@ export function CustomersPage({
               <CustomerFiltersModalTriggerMobile
                 filtersFormContainer={filtersFormContainer}
               />
-              <CompanyFiltersModalTrigger
-                filtersFormContainer={companyFiltersFormContainer}
+              <CustomerCompanyFiltersModalTrigger
+                filtersFormContainer={customerCompanyFiltersFormContainer}
               />
             </ToolbarFiltersMobile>
 

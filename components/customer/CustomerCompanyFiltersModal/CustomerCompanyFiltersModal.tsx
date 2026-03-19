@@ -3,23 +3,24 @@ import {
   FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
-import { useTranslations } from "next-intl";
 import {
-  CompanyCheckboxGroupProvider,
   useCompanyCheckboxGroup,
-} from "../CompanyCheckboxGroup";
+  CompanyCheckboxGroupProvider,
+} from "@/components/company/CompanyCheckboxGroup";
+
+import { useTranslations } from "next-intl";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
-interface CompanyFiltersModalProps {
+interface CustomerCompanyFiltersModalProps {
   filtersFormContainer: React.ReactNode;
 }
 
-export function CompanyFiltersModal({
+export function CustomerCompanyFiltersModal({
   filtersFormContainer,
-}: CompanyFiltersModalProps) {
+}: CustomerCompanyFiltersModalProps) {
   return (
-    <FormBaseModal data-test="company-filters-modal">
+    <FormBaseModal data-test="customer-company-filters-modal">
       <CompanyCheckboxGroupProvider>
         <FilterModalDialog>
           <DialogHeader />
@@ -33,7 +34,7 @@ export function CompanyFiltersModal({
 }
 
 export function DialogHeader() {
-  const t = useTranslations("company.CompanyFiltersModal");
+  const t = useTranslations("customers.CustomerCompanyFiltersModal");
 
   const { updateValue } = useCompanyCheckboxGroup();
 

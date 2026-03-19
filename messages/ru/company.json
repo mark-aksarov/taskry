@@ -1,10 +1,4 @@
 {
-  "CompanyFiltersModal": {
-    "heading": "Фильтры компании"
-  },
-  "CompanyFiltersModalTrigger": {
-    "label": "Компания"
-  },
   "CompanyCheckboxGroup": {
     "label": "Компания"
   },

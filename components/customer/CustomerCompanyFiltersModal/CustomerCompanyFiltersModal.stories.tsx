@@ -3,15 +3,15 @@ import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/react";
 import { DialogTrigger } from "react-aria-components";
 import { mockedCompanySummaries } from "@/mocks/companies";
-import { CompanyFiltersForm } from "../CompanyFiltersForm";
-import { CompanyFiltersModal } from "./CompanyFiltersModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { CustomerCompanyFiltersForm } from "../CustomerCompanyFiltersForm";
+import { CustomerCompanyFiltersModal } from "./CustomerCompanyFiltersModal";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 
 const meta = {
-  title: "components/companies/CompanyFiltersModal",
-  component: CompanyFiltersModal,
+  title: "components/customers/CustomerCompanyFiltersModal",
+  component: CustomerCompanyFiltersModal,
   decorators: [
     (Story) => {
       const [isOpen, setIsOpen] = useState(true);
@@ -27,7 +27,7 @@ const meta = {
     withPageTransitionProvider,
     withThemedBackground,
   ],
-} satisfies Meta<typeof CompanyFiltersModal>;
+} satisfies Meta<typeof CustomerCompanyFiltersModal>;
 
 export default meta;
 export type Story = StoryObj<typeof meta>;
@@ -35,7 +35,9 @@ export type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     filtersFormContainer: (
-      <CompanyFiltersForm companyCheckboxGroupItems={mockedCompanySummaries} />
+      <CustomerCompanyFiltersForm
+        companyCheckboxGroupItems={mockedCompanySummaries}
+      />
     ),
   },
 } satisfies Story;
