@@ -1,9 +1,9 @@
 "use client";
 
 import {
-  TaskStatusCheckboxGroup,
-  useTaskStatusCheckboxGroup,
-} from "./TaskStatusCheckboxGroup";
+  useTaskFiltersForm,
+  useTaskFiltersFormDispatch,
+} from "./TaskFiltersForm";
 
 import {
   FormBase,
@@ -14,9 +14,11 @@ import {
 import { useContext } from "react";
 import { useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
+import { TaskStatus } from "@/generated/prisma/enums";
 import { useSelectedTasks } from "./SelectedTasksContext";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { OverlayTriggerStateContext } from "react-aria-components";
+import { TaskStatusCheckboxGroup } from "./TaskStatusCheckboxGroup";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { usePageTransition } from "@/components/common/PageTransitionContext";
 
@@ -31,7 +33,8 @@ export function TaskStatusFiltersForm() {
   // TaskStatusFiltersForm can only be used inside the TaskStatusFiltersModal
   const { close: closeModal } = useContext(OverlayTriggerStateContext)!;
 
-  const { value: statuses } = useTaskStatusCheckboxGroup();
+  const { statuses } = useTaskFiltersForm();
+  const dispatch = useTaskFiltersFormDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -61,7 +64,12 @@ export function TaskStatusFiltersForm() {
   return (
     <FormBase id="task-status-filter-form" onSubmit={handleSubmit}>
       <FormBaseBody>
-        <TaskStatusCheckboxGroup />
+        <TaskStatusCheckboxGroup
+          value={statuses}
+          onChange={(value) =>
+            dispatch({ type: "setStatuses", payload: value as TaskStatus[] })
+          }
+        />
       </FormBaseBody>
       <FormBaseFooter>
         <FiltersFormSubmitButton />

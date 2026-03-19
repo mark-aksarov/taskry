@@ -1,12 +1,14 @@
+"use client";
+
+import {
+  TaskFiltersFormProvider,
+  useTaskFiltersFormDispatch,
+} from "../TaskFiltersForm";
+
 import {
   FormBaseModal,
   FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
-
-import {
-  useTaskStatusCheckboxGroup,
-  TaskStatusCheckboxGroupProvider,
-} from "../TaskStatusCheckboxGroup";
 
 import { useTranslations } from "next-intl";
 import { useTaskFilters } from "../TaskFiltersContext";
@@ -15,18 +17,18 @@ import { FilterModalDialog } from "@/components/common/FilterModalDialog";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
 export function TaskStatusFiltersModal() {
-  const { statuses } = useTaskFilters();
+  const initialFilters = useTaskFilters();
 
   return (
     <FormBaseModal data-test="task-status-filters-modal">
-      <TaskStatusCheckboxGroupProvider initialStatuses={statuses}>
+      <TaskFiltersFormProvider initialFilters={initialFilters}>
         <FilterModalDialog>
           <DialogHeader />
           <FormBaseModalDialogBody>
             <TaskStatusFiltersForm />
           </FormBaseModalDialogBody>
         </FilterModalDialog>
-      </TaskStatusCheckboxGroupProvider>
+      </TaskFiltersFormProvider>
     </FormBaseModal>
   );
 }
@@ -34,10 +36,12 @@ export function TaskStatusFiltersModal() {
 function DialogHeader() {
   const t = useTranslations("tasks.TaskStatusFiltersModal");
 
-  const { updateValue } = useTaskStatusCheckboxGroup();
+  const dispatch = useTaskFiltersFormDispatch();
 
   return (
-    <FilterModalDialogHeader resetFilters={() => updateValue([])}>
+    <FilterModalDialogHeader
+      resetFilters={() => dispatch({ type: "setStatuses", payload: [] })}
+    >
       {t("heading")}
     </FilterModalDialogHeader>
   );

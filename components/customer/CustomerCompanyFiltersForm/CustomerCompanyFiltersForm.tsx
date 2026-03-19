@@ -1,15 +1,15 @@
 "use client";
 
 import {
-  CompanyCheckboxGroup,
-  useCompanyCheckboxGroup,
-} from "@/components/company/CompanyCheckboxGroup";
-
-import {
   FormBase,
   FormBaseBody,
   FormBaseFooter,
 } from "@/components/common/FormBase";
+
+import {
+  useCustomerFiltersForm,
+  useCustomerFiltersFormDispatch,
+} from "../CustomerFiltersForm/CustomerFiltersFormContext";
 
 import { useContext } from "react";
 import { useLocale } from "next-intl";
@@ -19,6 +19,7 @@ import { OverlayTriggerStateContext } from "react-aria-components";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { usePageTransition } from "@/components/common/PageTransitionContext";
+import { CompanyCheckboxGroup } from "@/components/company/CompanyCheckboxGroup";
 
 interface CustomerCompanyFiltersFormProps {
   companyCheckboxGroupItems: { id: number; name: string }[];
@@ -37,7 +38,8 @@ export function CustomerCompanyFiltersForm({
   // CustomerCompanyFiltersForm can only be used inside the CustomerCompanyFiltersModal
   const { close: closeModal } = useContext(OverlayTriggerStateContext)!;
 
-  const { value: companyIds } = useCompanyCheckboxGroup();
+  const { companyIds } = useCustomerFiltersForm();
+  const dispatch = useCustomerFiltersFormDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -70,6 +72,10 @@ export function CustomerCompanyFiltersForm({
         <CompanyCheckboxGroup
           disableExpansion
           items={companyCheckboxGroupItems}
+          value={companyIds}
+          onChange={(value) =>
+            dispatch({ type: "setCompanyIds", payload: value })
+          }
         />
       </FormBaseBody>
       <FormBaseFooter>

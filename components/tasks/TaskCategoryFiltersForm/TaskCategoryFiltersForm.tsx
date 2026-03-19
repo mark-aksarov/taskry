@@ -7,9 +7,9 @@ import {
 } from "@/components/common/FormBase";
 
 import {
-  TaskCategoryCheckboxGroup,
-  useTaskCategoryCheckboxGroup,
-} from "@/components/taskCategory/TaskCategoryCheckboxGroup";
+  useTaskFiltersForm,
+  useTaskFiltersFormDispatch,
+} from "../TaskFiltersForm/TaskFiltersFormContext";
 
 import { useContext } from "react";
 import { useLocale } from "next-intl";
@@ -19,6 +19,7 @@ import { useSelectedTasks } from "../SelectedTasksContext";
 import { OverlayTriggerStateContext } from "react-aria-components";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { usePageTransition } from "@/components/common/PageTransitionContext";
+import { TaskCategoryCheckboxGroup } from "@/components/taskCategory/TaskCategoryCheckboxGroup";
 
 interface TaskCategoryFiltersFormProps {
   categoryCheckboxGroupItems: { id: number; name: string }[];
@@ -37,7 +38,8 @@ export function TaskCategoryFiltersForm({
   // TaskCategoryFiltersForm can only be used inside the TaskCategoryFiltersModal
   const { close: closeModal } = useContext(OverlayTriggerStateContext)!;
 
-  const { value: assigneeIds } = useTaskCategoryCheckboxGroup();
+  const { assigneeIds } = useTaskFiltersForm();
+  const dispatch = useTaskFiltersFormDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -70,6 +72,10 @@ export function TaskCategoryFiltersForm({
         <TaskCategoryCheckboxGroup
           disableExpansion
           items={categoryCheckboxGroupItems}
+          value={assigneeIds}
+          onChange={(value) =>
+            dispatch({ type: "setAssigneeIds", payload: value })
+          }
         />
       </FormBaseBody>
       <FormBaseFooter>

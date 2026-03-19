@@ -1,44 +1,14 @@
 "use client";
 
 import {
-  useDeadlineToDatePicker,
-  DeadlineToDatePickerProvider,
-} from "../DeadlineToDatePicker";
-
-import {
-  useOnlyMyTasksSwitch,
-  OnlyMyTasksSwitchProvider,
-} from "../OnlyMyTasksSwitch";
-
-import {
-  useAssigneeCheckboxGroup,
-  AssigneeCheckboxGroupProvider,
-} from "../AssigneeCheckboxGroup";
-
-import {
   FormBaseModal,
   FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import {
-  useProjectCheckboxGroup,
-  ProjectCheckboxGroupProvider,
-} from "@/components/projects/ProjectCheckboxGroup";
-
-import {
-  useTaskCategoryCheckboxGroup,
-  TaskCategoryCheckboxGroupProvider,
-} from "@/components/taskCategory/TaskCategoryCheckboxGroup";
-
-import {
-  useDeadlineFromDatePicker,
-  DeadlineFromDatePickerProvider,
-} from "../DeadlineFromDatePicker";
-
-import {
-  TaskStatusCheckboxGroupProvider,
-  useTaskStatusCheckboxGroup,
-} from "../TaskStatusCheckboxGroup";
+  TaskFiltersFormProvider,
+  useTaskFiltersFormDispatch,
+} from "../TaskFiltersForm/TaskFiltersFormContext";
 
 import { useTranslations } from "next-intl";
 import { useTaskFilters } from "../TaskFiltersContext";
@@ -52,81 +22,35 @@ interface TaskFiltersModalProps {
 export function TaskFiltersModal({
   filtersFormContainer,
 }: TaskFiltersModalProps) {
+  const initialFilters = useTaskFilters();
+
   return (
     <FormBaseModal data-test="task-filters-modal">
-      <Provider>
+      {
+        // TaskFiltersFormProvider re-mount on each render, so it state is re-initialized
+        // using values from TaskFiltersContext (derived from URL/search params)
+      }
+      <TaskFiltersFormProvider initialFilters={initialFilters}>
         <FilterModalDialog>
           <DialogHeader />
           <FormBaseModalDialogBody>
             {filtersFormContainer}
           </FormBaseModalDialogBody>
         </FilterModalDialog>
-      </Provider>
+      </TaskFiltersFormProvider>
     </FormBaseModal>
-  );
-}
-
-// Providers re-mount on each render, so their state is re-initialized
-// using values from TaskFiltersContext (derived from URL/search params)
-function Provider({ children }: { children: React.ReactNode }) {
-  const {
-    onlyMyTasks,
-    assigneeIds,
-    deadlineFrom,
-    deadlineTo,
-    categoryIds,
-    projectIds,
-    statuses,
-  } = useTaskFilters();
-
-  return (
-    <OnlyMyTasksSwitchProvider initialValue={onlyMyTasks}>
-      <DeadlineFromDatePickerProvider initialDate={deadlineFrom}>
-        <DeadlineToDatePickerProvider initialDate={deadlineTo}>
-          <TaskCategoryCheckboxGroupProvider initialCategoryIds={categoryIds}>
-            <ProjectCheckboxGroupProvider initialProjectIds={projectIds}>
-              <AssigneeCheckboxGroupProvider initialAssigneeIds={assigneeIds}>
-                <TaskStatusCheckboxGroupProvider initialStatuses={statuses}>
-                  {children}
-                </TaskStatusCheckboxGroupProvider>
-              </AssigneeCheckboxGroupProvider>
-            </ProjectCheckboxGroupProvider>
-          </TaskCategoryCheckboxGroupProvider>
-        </DeadlineToDatePickerProvider>
-      </DeadlineFromDatePickerProvider>
-    </OnlyMyTasksSwitchProvider>
   );
 }
 
 function DialogHeader() {
   const t = useTranslations("tasks.TaskFiltersModal");
 
-  const { updateValue: updateOnlyMyTasksSwitchValue } = useOnlyMyTasksSwitch();
-  const { updateValue: updateDeadlineFromDatePickerValue } =
-    useDeadlineFromDatePicker();
-  const { updateValue: updateDeadlineToDatePickerValue } =
-    useDeadlineToDatePicker();
-  const { updateValue: updateAssigneeCheckboxGroupValue } =
-    useAssigneeCheckboxGroup();
-  const { updateValue: updateTaskCategoryCheckboxGroupValue } =
-    useTaskCategoryCheckboxGroup();
-  const { updateValue: updateProjectCheckboxGroupValue } =
-    useProjectCheckboxGroup();
-  const { updateValue: updateTaskStatusCheckboxGroupValue } =
-    useTaskStatusCheckboxGroup();
-
-  function resetFilters() {
-    updateOnlyMyTasksSwitchValue(false);
-    updateDeadlineFromDatePickerValue(null);
-    updateDeadlineToDatePickerValue(null);
-    updateAssigneeCheckboxGroupValue([]);
-    updateTaskCategoryCheckboxGroupValue([]);
-    updateProjectCheckboxGroupValue([]);
-    updateTaskStatusCheckboxGroupValue([]);
-  }
+  const dispatch = useTaskFiltersFormDispatch();
 
   return (
-    <FilterModalDialogHeader resetFilters={resetFilters}>
+    <FilterModalDialogHeader
+      resetFilters={() => dispatch({ type: "resetFilters" })}
+    >
       {t("heading")}
     </FilterModalDialogHeader>
   );

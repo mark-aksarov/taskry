@@ -5,7 +5,7 @@ import { linkStyles } from "@/components/ui/Link";
 
 const styles = tv({
   extend: linkStyles,
-  base: "gap-2 text-sm font-semibold",
+  base: "block shrink-1 gap-2 truncate text-sm font-semibold",
 });
 
 export function FiltersFormResetButton({ onPress }: { onPress: () => void }) {

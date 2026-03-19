@@ -545,7 +545,7 @@ describe("getProjectList", () => {
         pageSize: 10,
         sort: "title",
         filters: {
-          status: [ProjectStatus.completed],
+          statuses: [ProjectStatus.completed],
         },
       });
 
@@ -647,7 +647,7 @@ describe("getProjectList", () => {
       });
 
       const filters: ProjectFilters = {
-        customer: [1],
+        customerIds: [1],
       };
 
       const result = await getProjectList({
@@ -688,7 +688,7 @@ describe("getProjectList", () => {
       });
 
       const filters: ProjectFilters = {
-        user: ["user-1"],
+        creatorIds: ["user-1"],
       };
 
       const result = await getProjectList({
@@ -729,7 +729,7 @@ describe("getProjectList", () => {
       });
 
       const filters: ProjectFilters = {
-        category: [1],
+        categoryIds: [1],
       };
 
       const result = await getProjectList({

@@ -1,10 +1,17 @@
+"use client";
+
+import {
+  ProjectFiltersFormProvider,
+  useProjectFiltersFormDispatch,
+} from "../ProjectFiltersForm";
+
 import {
   FormBaseModal,
   FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { useProjectFiltersDispatch } from "../ProjectFiltersContext";
+import { useProjectFilters } from "../ProjectFiltersContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
@@ -15,21 +22,32 @@ interface ProjectCategoryFiltersModalProps {
 export function ProjectCategoryFiltersModal({
   filtersFormContainer,
 }: ProjectCategoryFiltersModalProps) {
-  const t = useTranslations("projects.ProjectCategoryFiltersModal");
-  const dispatch = useProjectFiltersDispatch();
+  const initialFilters = useProjectFilters();
 
   return (
     <FormBaseModal data-test="project-category-filters-modal">
-      <FilterModalDialog>
-        <FilterModalDialogHeader
-          resetFilters={() => dispatch({ type: "setCategory", payload: [] })}
-        >
-          {t("heading")}
-        </FilterModalDialogHeader>
-        <FormBaseModalDialogBody>
-          {filtersFormContainer}
-        </FormBaseModalDialogBody>
-      </FilterModalDialog>
+      <ProjectFiltersFormProvider initialFilters={initialFilters}>
+        <FilterModalDialog>
+          <DialogHeader />
+          <FormBaseModalDialogBody>
+            {filtersFormContainer}
+          </FormBaseModalDialogBody>
+        </FilterModalDialog>
+      </ProjectFiltersFormProvider>
     </FormBaseModal>
+  );
+}
+
+function DialogHeader() {
+  const t = useTranslations("projects.ProjectCategoryFiltersModal");
+
+  const dispatch = useProjectFiltersFormDispatch();
+
+  return (
+    <FilterModalDialogHeader
+      resetFilters={() => dispatch({ type: "setCategoryIds", payload: [] })}
+    >
+      {t("heading")}
+    </FilterModalDialogHeader>
   );
 }

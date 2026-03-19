@@ -1,9 +1,9 @@
 "use client";
 
 import {
-  useAssigneeCheckboxGroup,
-  AssigneeCheckboxGroupProvider,
-} from "../AssigneeCheckboxGroup";
+  TaskFiltersFormProvider,
+  useTaskFiltersFormDispatch,
+} from "../TaskFiltersForm";
 
 import {
   FormBaseModal,
@@ -22,18 +22,18 @@ interface AssigneeFiltersModalProps {
 export function AssigneeFiltersModal({
   filtersFormContainer,
 }: AssigneeFiltersModalProps) {
-  const { assigneeIds } = useTaskFilters();
+  const initialFilters = useTaskFilters();
 
   return (
     <FormBaseModal data-test="assignee-filters-modal">
-      <AssigneeCheckboxGroupProvider initialAssigneeIds={assigneeIds}>
+      <TaskFiltersFormProvider initialFilters={initialFilters}>
         <FilterModalDialog>
           <DialogHeader />
           <FormBaseModalDialogBody>
             {filtersFormContainer}
           </FormBaseModalDialogBody>
         </FilterModalDialog>
-      </AssigneeCheckboxGroupProvider>
+      </TaskFiltersFormProvider>
     </FormBaseModal>
   );
 }
@@ -41,10 +41,12 @@ export function AssigneeFiltersModal({
 function DialogHeader() {
   const t = useTranslations("tasks.AssigneeFiltersModal");
 
-  const { updateValue } = useAssigneeCheckboxGroup();
+  const dispatch = useTaskFiltersFormDispatch();
 
   return (
-    <FilterModalDialogHeader resetFilters={() => updateValue([])}>
+    <FilterModalDialogHeader
+      resetFilters={() => dispatch({ type: "setAssigneeIds", payload: [] })}
+    >
       {t("heading")}
     </FilterModalDialogHeader>
   );

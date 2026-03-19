@@ -45,19 +45,19 @@ const searchParamsSchema = z.object({
   deadlineTo: dateSearchParam,
   noActiveTasks: booleanSearchParam,
   sort: z.enum(projectSortFields).catch("createdAt"),
-  status: z.preprocess(
+  statuses: z.preprocess(
     searchParamToArray,
     z.array(projectStatus).optional().catch(undefined),
   ),
-  category: z.preprocess(
+  categoryIds: z.preprocess(
     searchParamToArray,
     z.array(projectCategoryId).optional().catch(undefined),
   ),
-  customer: z.preprocess(
+  customerIds: z.preprocess(
     searchParamToArray,
     z.array(customerId).optional().catch(undefined),
   ),
-  user: z.preprocess(
+  creatorIds: z.preprocess(
     searchParamToArray,
     z.array(userId).optional().catch(undefined),
   ),
@@ -100,7 +100,7 @@ export default async function AppProjectsPage({
             createProjectCategory={createProjectCategory}
           >
             <CreateProjectProvider createProject={createProject}>
-              <ProjectFiltersProvider initialFilters={filters}>
+              <ProjectFiltersProvider filters={filters}>
                 <ProjectsPage
                   totalCount={totalCount}
                   searchContainer={<ProjectRouterSearchContainer />}

@@ -6,9 +6,9 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import {
-  useCompanyCheckboxGroup,
-  CompanyCheckboxGroupProvider,
-} from "@/components/company/CompanyCheckboxGroup";
+  CustomerFiltersFormProvider,
+  useCustomerFiltersFormDispatch,
+} from "../CustomerFiltersForm/CustomerFiltersFormContext";
 
 import { useTranslations } from "next-intl";
 import { useCustomerFilters } from "../CustomerFiltersContext";
@@ -22,20 +22,18 @@ interface CustomerCompanyFiltersModalProps {
 export function CustomerCompanyFiltersModal({
   filtersFormContainer,
 }: CustomerCompanyFiltersModalProps) {
-  const { companyIds } = useCustomerFilters();
+  const initialFilters = useCustomerFilters();
 
   return (
     <FormBaseModal data-test="customer-company-filters-modal">
-      <CompanyCheckboxGroupProvider
-        initialValue={companyIds ? companyIds.map((id) => id.toString()) : []}
-      >
+      <CustomerFiltersFormProvider initialFilters={initialFilters}>
         <FilterModalDialog>
           <DialogHeader />
           <FormBaseModalDialogBody>
             {filtersFormContainer}
           </FormBaseModalDialogBody>
         </FilterModalDialog>
-      </CompanyCheckboxGroupProvider>
+      </CustomerFiltersFormProvider>
     </FormBaseModal>
   );
 }
@@ -43,10 +41,12 @@ export function CustomerCompanyFiltersModal({
 export function DialogHeader() {
   const t = useTranslations("customers.CustomerCompanyFiltersModal");
 
-  const { updateValue } = useCompanyCheckboxGroup();
+  const dispatch = useCustomerFiltersFormDispatch();
 
   return (
-    <FilterModalDialogHeader resetFilters={() => updateValue([])}>
+    <FilterModalDialogHeader
+      resetFilters={() => dispatch({ type: "setCompanyIds", payload: [] })}
+    >
       {t("heading")}
     </FilterModalDialogHeader>
   );

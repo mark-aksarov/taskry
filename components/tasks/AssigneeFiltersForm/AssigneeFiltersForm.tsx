@@ -1,21 +1,22 @@
 "use client";
 
 import {
-  AssigneeCheckboxGroup,
-  useAssigneeCheckboxGroup,
-} from "../AssigneeCheckboxGroup";
-
-import {
   FormBase,
   FormBaseBody,
   FormBaseFooter,
 } from "@/components/common/FormBase";
+
+import {
+  useTaskFiltersForm,
+  useTaskFiltersFormDispatch,
+} from "../TaskFiltersForm/TaskFiltersFormContext";
 
 import { useContext } from "react";
 import { useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useSelectedTasks } from "../SelectedTasksContext";
+import { AssigneeCheckboxGroup } from "../AssigneeCheckboxGroup";
 import { OverlayTriggerStateContext } from "react-aria-components";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { usePageTransition } from "@/components/common/PageTransitionContext";
@@ -37,7 +38,8 @@ export function AssigneeFiltersForm({
   // AssigneeFiltersForm can only be used inside the AssigneeFiltersModal
   const { close: closeModal } = useContext(OverlayTriggerStateContext)!;
 
-  const { value: assigneeIds } = useAssigneeCheckboxGroup();
+  const { assigneeIds } = useTaskFiltersForm();
+  const dispatch = useTaskFiltersFormDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -70,6 +72,10 @@ export function AssigneeFiltersForm({
         <AssigneeCheckboxGroup
           disableExpansion
           items={assigneeCheckboxGroupItems}
+          value={assigneeIds}
+          onChange={(value) =>
+            dispatch({ type: "setAssigneeIds", payload: value })
+          }
         />
       </FormBaseBody>
       <FormBaseFooter>

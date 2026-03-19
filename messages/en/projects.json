@@ -88,7 +88,7 @@
       "required": "Status is required"
     }
   },
-  "ProjectFiltersFormNoActiveTasksSwitch": {
+  "NoActiveTasksSwitch": {
     "text": "Has not active tasks"
   },
   "ProjectFiltersFormDeadlineFromDatePicker": {
@@ -97,16 +97,10 @@
   "ProjectFiltersFormDeadlineToDatePicker": {
     "label": "Deadline to"
   },
-  "ProjectFiltersFormStatusCheckboxGroup": {
+  "ProjectStatusCheckboxGroup": {
     "label": "Status"
   },
-  "ProjectFiltersFormCategoryCheckboxGroup": {
-    "label": "Category"
-  },
-  "ProjectFiltersFormCustomerCheckboxGroup": {
-    "label": "Customer"
-  },
-  "ProjectFiltersFormUserCheckboxGroup": {
+  "ProjectCreatorCheckboxGroup": {
     "label": "Creator"
   },
   "CreateProjectMenuTrigger": {

@@ -3,10 +3,10 @@ import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 export interface ProjectFilters {
   query?: string;
   noActiveTasks?: boolean;
-  status?: ProjectStatus[];
-  category?: number[];
-  customer?: number[];
-  user?: string[];
+  statuses?: ProjectStatus[];
+  categoryIds?: number[];
+  customerIds?: number[];
+  creatorIds?: string[];
   deadlineFrom?: string;
   deadlineTo?: string;
 }

@@ -51,7 +51,7 @@ export const DialogHeading = ({
     <Heading
       slot="title"
       className={twMerge(
-        "font-bold text-black max-md:text-base md:text-lg dark:text-white",
+        "font-bold text-nowrap text-black max-md:text-base md:text-lg dark:text-white",
         className,
       )}
       {...props}

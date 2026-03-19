@@ -1,24 +1,9 @@
 "use client";
 
 import {
-  DeadlineToDatePicker,
-  useDeadlineToDatePicker,
-} from "../DeadlineToDatePicker";
-
-import {
-  AssigneeCheckboxGroup,
-  useAssigneeCheckboxGroup,
-} from "../AssigneeCheckboxGroup";
-
-import {
-  DeadlineFromDatePicker,
-  useDeadlineFromDatePicker,
-} from "../DeadlineFromDatePicker";
-
-import {
-  TaskStatusCheckboxGroup,
-  useTaskStatusCheckboxGroup,
-} from "../TaskStatusCheckboxGroup";
+  useTaskFiltersForm,
+  useTaskFiltersFormDispatch,
+} from "./TaskFiltersFormContext";
 
 import {
   FormBase,
@@ -26,26 +11,23 @@ import {
   FormBaseFooter,
 } from "@/components/common/FormBase";
 
-import {
-  ProjectCheckboxGroup,
-  useProjectCheckboxGroup,
-} from "@/components/projects/ProjectCheckboxGroup";
-
-import {
-  TaskCategoryCheckboxGroup,
-  useTaskCategoryCheckboxGroup,
-} from "@/components/taskCategory/TaskCategoryCheckboxGroup";
-
 import { useContext } from "react";
 import { useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
+import { TaskStatus } from "@/generated/prisma/enums";
 import { Separator } from "@/components/ui/Separator";
+import { OnlyMyTasksSwitch } from "../OnlyMyTasksSwitch";
 import { useSelectedTasks } from "../SelectedTasksContext";
 import { usePathname, useRouter } from "@/i18n/navigation";
+import { AssigneeCheckboxGroup } from "../AssigneeCheckboxGroup";
 import { OverlayTriggerStateContext } from "react-aria-components";
+import { TaskStatusCheckboxGroup } from "../TaskStatusCheckboxGroup";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { usePageTransition } from "@/components/common/PageTransitionContext";
-import { OnlyMyTasksSwitch, useOnlyMyTasksSwitch } from "../OnlyMyTasksSwitch";
+import { DeadlineToDatePicker } from "@/components/common/DeadlineToDatePicker";
+import { ProjectCheckboxGroup } from "@/components/projects/ProjectCheckboxGroup";
+import { DeadlineFromDatePicker } from "@/components/common/DeadlineFromDatePicker";
+import { TaskCategoryCheckboxGroup } from "@/components/taskCategory/TaskCategoryCheckboxGroup";
 
 interface TaskFiltersFormProps {
   categoryCheckboxGroupItems: { id: number; name: string }[];
@@ -68,13 +50,17 @@ export function TaskFiltersForm({
   // TaskFiltersForm can only be used inside the TaskFiltersModal
   const { close: closeModal } = useContext(OverlayTriggerStateContext)!;
 
-  const { isSelected: onlyMyTasks } = useOnlyMyTasksSwitch();
-  const { value: deadlineFrom } = useDeadlineFromDatePicker();
-  const { value: deadlineTo } = useDeadlineToDatePicker();
-  const { value: projectIds } = useProjectCheckboxGroup();
-  const { value: categoryIds } = useTaskCategoryCheckboxGroup();
-  const { value: assigneeIds } = useAssigneeCheckboxGroup();
-  const { value: statuses } = useTaskStatusCheckboxGroup();
+  const {
+    onlyMyTasks,
+    deadlineFrom,
+    deadlineTo,
+    projectIds,
+    categoryIds,
+    assigneeIds,
+    statuses,
+  } = useTaskFiltersForm();
+
+  const dispatch = useTaskFiltersFormDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -125,25 +111,64 @@ export function TaskFiltersForm({
   return (
     <FormBase id="task-filter-form" onSubmit={handleSubmit}>
       <FormBaseBody>
-        <OnlyMyTasksSwitch />
+        <OnlyMyTasksSwitch
+          isSelected={onlyMyTasks}
+          onChange={(value) =>
+            dispatch({ type: "changeOnlyMyTasks", payload: value })
+          }
+        />
 
         <Separator />
 
-        <DeadlineFromDatePicker />
-        <DeadlineToDatePicker />
+        <DeadlineFromDatePicker
+          value={deadlineFrom}
+          onChange={(value) =>
+            dispatch({ type: "changeDeadlineFrom", payload: value })
+          }
+        />
+        <DeadlineToDatePicker
+          value={deadlineTo}
+          deadlineFromValue={deadlineFrom}
+          onChange={(value) =>
+            dispatch({ type: "changeDeadlineTo", payload: value })
+          }
+        />
 
         <Separator />
 
-        <TaskStatusCheckboxGroup />
+        <TaskStatusCheckboxGroup
+          value={statuses}
+          onChange={(value) =>
+            dispatch({ type: "setStatuses", payload: value as TaskStatus[] })
+          }
+        />
         <Separator />
 
-        <TaskCategoryCheckboxGroup items={categoryCheckboxGroupItems} />
+        <TaskCategoryCheckboxGroup
+          items={categoryCheckboxGroupItems}
+          value={categoryIds}
+          onChange={(value) =>
+            dispatch({ type: "setCategoryIds", payload: value })
+          }
+        />
         <Separator />
 
-        <ProjectCheckboxGroup items={projectCheckboxGroupItems} />
+        <ProjectCheckboxGroup
+          items={projectCheckboxGroupItems}
+          value={projectIds}
+          onChange={(value) =>
+            dispatch({ type: "setProjectIds", payload: value })
+          }
+        />
         <Separator />
 
-        <AssigneeCheckboxGroup items={assigneeCheckboxGroupItems} />
+        <AssigneeCheckboxGroup
+          items={assigneeCheckboxGroupItems}
+          value={assigneeIds}
+          onChange={(value) =>
+            dispatch({ type: "setAssigneeIds", payload: value })
+          }
+        />
       </FormBaseBody>
       <FormBaseFooter>
         <FiltersFormSubmitButton />

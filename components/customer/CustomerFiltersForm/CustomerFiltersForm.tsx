@@ -1,38 +1,29 @@
 "use client";
 
 import {
-  ActiveProjectsSwitch,
-  useActiveProjectsSwitch,
-} from "../ActiveProjectsSwitch";
-import {
-  OverdueProjectsSwitch,
-  useOverdueProjectsSwitch,
-} from "../OverdueProjectsSwitch";
-import {
-  NoActiveProjectsSwitch,
-  useNoActiveProjectsSwitch,
-} from "../NoActiveProjectsSwitch";
-
-import {
   FormBase,
   FormBaseBody,
   FormBaseFooter,
 } from "@/components/common/FormBase";
 
 import {
-  CompanyCheckboxGroup,
-  useCompanyCheckboxGroup,
-} from "@/components/company/CompanyCheckboxGroup";
+  useCustomerFiltersForm,
+  useCustomerFiltersFormDispatch,
+} from "./CustomerFiltersFormContext";
 
 import { useContext } from "react";
 import { useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { Separator } from "@/components/ui/Separator";
 import { usePathname, useRouter } from "@/i18n/navigation";
+import { ActiveProjectsSwitch } from "../ActiveProjectsSwitch";
+import { OverdueProjectsSwitch } from "../OverdueProjectsSwitch";
+import { NoActiveProjectsSwitch } from "../NoActiveProjectsSwitch";
 import { OverlayTriggerStateContext } from "react-aria-components";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { usePageTransition } from "@/components/common/PageTransitionContext";
+import { CompanyCheckboxGroup } from "@/components/company/CompanyCheckboxGroup";
 
 interface CustomerFiltersFormProps {
   companyCheckboxGroupItems: { id: number; name: string }[];
@@ -51,10 +42,13 @@ export function CustomerFiltersForm({
   // CustomerFiltersForm can only be used inside the CustomerFiltersModal
   const { close: closeModal } = useContext(OverlayTriggerStateContext)!;
 
-  const { isSelected: hasActiveProjects } = useActiveProjectsSwitch();
-  const { isSelected: hasOverdueProjects } = useOverdueProjectsSwitch();
-  const { isSelected: hasNoActiveProjects } = useNoActiveProjectsSwitch();
-  const { value: companyIds } = useCompanyCheckboxGroup();
+  const {
+    companyIds,
+    hasActiveProjects,
+    hasOverdueProjects,
+    hasNoActiveProjects,
+  } = useCustomerFiltersForm();
+  const dispatch = useCustomerFiltersFormDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -102,16 +96,35 @@ export function CustomerFiltersForm({
   return (
     <FormBase id="customer-filters-form" onSubmit={handleSubmit}>
       <FormBaseBody>
-        <NoActiveProjectsSwitch />
+        <NoActiveProjectsSwitch
+          isSelected={hasNoActiveProjects}
+          onChange={(value) =>
+            dispatch({ type: "changeHasNoActiveProjects", payload: value })
+          }
+        />
         <Separator />
 
-        <ActiveProjectsSwitch />
+        <ActiveProjectsSwitch
+          isSelected={hasActiveProjects}
+          onChange={(value) =>
+            dispatch({ type: "changeHasActiveProjects", payload: value })
+          }
+        />
         <Separator />
 
-        <OverdueProjectsSwitch />
+        <OverdueProjectsSwitch
+          isSelected={hasOverdueProjects}
+          onChange={(value) =>
+            dispatch({ type: "changeHasOverdueProjects", payload: value })
+          }
+        />
         <Separator />
 
-        <CompanyCheckboxGroup items={companyCheckboxGroupItems} />
+        <CompanyCheckboxGroup
+          items={companyCheckboxGroupItems}
+          value={companyIds}
+          onChange={(ids) => dispatch({ type: "setCompanyIds", payload: ids })}
+        />
       </FormBaseBody>
       <FormBaseFooter>
         <FiltersFormSubmitButton />

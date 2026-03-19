@@ -1,12 +1,14 @@
+"use client";
+
+import {
+  TaskFiltersFormProvider,
+  useTaskFiltersFormDispatch,
+} from "../TaskFiltersForm";
+
 import {
   FormBaseModal,
   FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
-
-import {
-  useProjectCheckboxGroup,
-  ProjectCheckboxGroupProvider,
-} from "@/components/projects/ProjectCheckboxGroup";
 
 import { useTranslations } from "next-intl";
 import { useTaskFilters } from "../TaskFiltersContext";
@@ -20,18 +22,18 @@ interface TaskProjectFiltersModalProps {
 export function TaskProjectFiltersModal({
   filtersFormContainer,
 }: TaskProjectFiltersModalProps) {
-  const { projectIds } = useTaskFilters();
+  const initialFilters = useTaskFilters();
 
   return (
     <FormBaseModal data-test="task-project-filters-modal">
-      <ProjectCheckboxGroupProvider initialProjectIds={projectIds}>
+      <TaskFiltersFormProvider initialFilters={initialFilters}>
         <FilterModalDialog>
           <DialogHeader />
           <FormBaseModalDialogBody>
             {filtersFormContainer}
           </FormBaseModalDialogBody>
         </FilterModalDialog>
-      </ProjectCheckboxGroupProvider>
+      </TaskFiltersFormProvider>
     </FormBaseModal>
   );
 }
@@ -39,10 +41,12 @@ export function TaskProjectFiltersModal({
 function DialogHeader() {
   const t = useTranslations("tasks.TaskProjectFiltersModal");
 
-  const { updateValue } = useProjectCheckboxGroup();
+  const dispatch = useTaskFiltersFormDispatch();
 
   return (
-    <FilterModalDialogHeader resetFilters={() => updateValue([])}>
+    <FilterModalDialogHeader
+      resetFilters={() => dispatch({ type: "setProjectIds", payload: [] })}
+    >
       {t("heading")}
     </FilterModalDialogHeader>
   );

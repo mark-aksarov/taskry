@@ -1,15 +1,15 @@
 "use client";
 
 import {
+  useTaskFiltersForm,
+  useTaskFiltersFormDispatch,
+} from "../TaskFiltersForm";
+
+import {
   FormBase,
   FormBaseBody,
   FormBaseFooter,
 } from "@/components/common/FormBase";
-
-import {
-  ProjectCheckboxGroup,
-  useProjectCheckboxGroup,
-} from "@/components/projects/ProjectCheckboxGroup";
 
 import { useContext } from "react";
 import { useLocale } from "next-intl";
@@ -19,6 +19,7 @@ import { useSelectedTasks } from "../SelectedTasksContext";
 import { OverlayTriggerStateContext } from "react-aria-components";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { usePageTransition } from "@/components/common/PageTransitionContext";
+import { ProjectCheckboxGroup } from "@/components/projects/ProjectCheckboxGroup";
 
 interface TaskProjectFiltersFormProps {
   projectCheckboxGroupItems: { id: number; title: string }[];
@@ -37,7 +38,8 @@ export function TaskProjectFiltersForm({
   // TaskProjectFiltersForm can only be used inside the TaskProjectFiltersModal
   const { close: closeModal } = useContext(OverlayTriggerStateContext)!;
 
-  const { value: projectIds } = useProjectCheckboxGroup();
+  const { projectIds } = useTaskFiltersForm();
+  const dispatch = useTaskFiltersFormDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -70,6 +72,8 @@ export function TaskProjectFiltersForm({
         <ProjectCheckboxGroup
           disableExpansion
           items={projectCheckboxGroupItems}
+          value={projectIds}
+          onChange={(ids) => dispatch({ type: "setProjectIds", payload: ids })}
         />
       </FormBaseBody>
       <FormBaseFooter>

@@ -570,10 +570,16 @@ export function buildProjectWhereClause(
       status: ProjectStatus.active,
       tasks: { none: { status: TaskStatus.active } },
     }),
-    ...(filters.status?.length && { status: { in: filters.status } }),
-    ...(filters.category?.length && { categoryId: { in: filters.category } }),
-    ...(filters.customer?.length && { customerId: { in: filters.customer } }),
-    ...(filters.user?.length && { creatorId: { in: filters.user } }),
+    ...(filters.statuses?.length && { status: { in: filters.statuses } }),
+    ...(filters.categoryIds?.length && {
+      categoryId: { in: filters.categoryIds },
+    }),
+    ...(filters.customerIds?.length && {
+      customerId: { in: filters.customerIds },
+    }),
+    ...(filters.creatorIds?.length && {
+      creatorId: { in: filters.creatorIds },
+    }),
     deadline: {
       ...(filters.deadlineFrom && { gte: new Date(filters.deadlineFrom) }),
       ...(filters.deadlineTo && { lte: new Date(filters.deadlineTo) }),

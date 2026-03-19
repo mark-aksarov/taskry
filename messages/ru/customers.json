@@ -1,4 +1,7 @@
 {
+  "CustomerCheckboxGroup": {
+    "label": "Клиент"
+  },
   "CustomerCompanyFiltersModal": {
     "heading": "Фильтры компании"
   },

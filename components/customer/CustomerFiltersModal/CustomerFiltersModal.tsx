@@ -1,29 +1,14 @@
 "use client";
 
 import {
-  useActiveProjectsSwitch,
-  ActiveProjectsSwitchProvider,
-} from "../ActiveProjectsSwitch";
-
-import {
-  useOverdueProjectsSwitch,
-  OverdueProjectsSwitchProvider,
-} from "../OverdueProjectsSwitch";
-
-import {
-  useNoActiveProjectsSwitch,
-  NoActiveProjectsSwitchProvider,
-} from "../NoActiveProjectsSwitch";
-
-import {
   FormBaseModal,
   FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import {
-  useCompanyCheckboxGroup,
-  CompanyCheckboxGroupProvider,
-} from "@/components/company/CompanyCheckboxGroup";
+  CustomerFiltersFormProvider,
+  useCustomerFiltersFormDispatch,
+} from "../CustomerFiltersForm/CustomerFiltersFormContext";
 
 import { useTranslations } from "next-intl";
 import { useCustomerFilters } from "../CustomerFiltersContext";
@@ -35,66 +20,31 @@ export function CustomerFiltersModal({
 }: {
   filtersFormContainer: React.ReactNode;
 }) {
+  const initialFilters = useCustomerFilters();
+
   return (
     <FormBaseModal data-test="customer-filters-modal">
-      <Providers>
+      <CustomerFiltersFormProvider initialFilters={initialFilters}>
         <FilterModalDialog>
           <DialogHeader />
           <FormBaseModalDialogBody>
             {filtersFormContainer}
           </FormBaseModalDialogBody>
         </FilterModalDialog>
-      </Providers>
+      </CustomerFiltersFormProvider>
     </FormBaseModal>
-  );
-}
-
-function Providers({ children }: { children: React.ReactNode }) {
-  const {
-    hasNoActiveProjects,
-    hasActiveProjects,
-    hasOverdueProjects,
-    companyIds,
-  } = useCustomerFilters();
-
-  return (
-    <ActiveProjectsSwitchProvider initialValue={!!hasActiveProjects}>
-      <NoActiveProjectsSwitchProvider initialValue={!!hasNoActiveProjects}>
-        <OverdueProjectsSwitchProvider initialValue={!!hasOverdueProjects}>
-          <CompanyCheckboxGroupProvider
-            initialValue={
-              companyIds ? companyIds.map((id) => id.toString()) : []
-            }
-          >
-            {children}
-          </CompanyCheckboxGroupProvider>
-        </OverdueProjectsSwitchProvider>
-      </NoActiveProjectsSwitchProvider>
-    </ActiveProjectsSwitchProvider>
   );
 }
 
 function DialogHeader() {
   const t = useTranslations("customers.CustomerFiltersModal");
 
-  const { updateValue: updateCompanyCheckboxGroupValue } =
-    useCompanyCheckboxGroup();
-  const { updateValue: updateOverdueProjectsSwitchValue } =
-    useOverdueProjectsSwitch();
-  const { updateValue: updateActiveProjectsSwitchValue } =
-    useActiveProjectsSwitch();
-  const { updateValue: updateNoActiveProjectsSwitchValue } =
-    useNoActiveProjectsSwitch();
-
-  function resetFilters() {
-    updateCompanyCheckboxGroupValue([]);
-    updateOverdueProjectsSwitchValue(false);
-    updateActiveProjectsSwitchValue(false);
-    updateNoActiveProjectsSwitchValue(false);
-  }
+  const dispatch = useCustomerFiltersFormDispatch();
 
   return (
-    <FilterModalDialogHeader resetFilters={resetFilters}>
+    <FilterModalDialogHeader
+      resetFilters={() => dispatch({ type: "resetFilters" })}
+    >
       {t("heading")}
     </FilterModalDialogHeader>
   );

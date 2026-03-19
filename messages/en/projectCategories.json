@@ -1,4 +1,7 @@
 {
+  "ProjectCategoryCheckboxGroup": {
+    "label": "Category"
+  },
   "ProjectCategorySelect": {
     "label": "Category",
     "noProjectCategory": "No project category"
