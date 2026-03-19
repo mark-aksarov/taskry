@@ -1,22 +1,22 @@
 import { useTranslations } from "next-intl";
 import { Switch } from "@/components/ui/Switch";
 
-interface NoActiveProjectsSwitchProps {
+interface OverdueProjectsSwitchProps {
   isSelected: boolean;
   onChange: (value: boolean) => void;
 }
 
-export function NoActiveProjectsSwitch({
+export function OverdueProjectsSwitch({
   isSelected,
   onChange,
-}: NoActiveProjectsSwitchProps) {
-  const t = useTranslations("customers.NoActiveProjectsSwitch");
+}: OverdueProjectsSwitchProps) {
+  const t = useTranslations("projects.OverdueProjectsSwitch");
 
   return (
     <Switch
-      data-test="has-no-active-projects-switch"
+      data-test="has-overdue-projects-switch"
       className="justify-between"
-      name="hasNoActiveProjects"
+      name="hasOverdueProjects"
       isSelected={isSelected}
       onChange={onChange}
     >

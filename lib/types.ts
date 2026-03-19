@@ -27,7 +27,7 @@ export interface UserFilters {
   hasNoActiveTasks?: boolean;
   hasActiveTasks?: boolean;
   hasOverdueTasks?: boolean;
-  position?: number[];
+  positionIds?: number[];
 }
 
 export interface CustomerFilters {

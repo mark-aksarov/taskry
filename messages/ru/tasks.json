@@ -1,4 +1,13 @@
 {
+  "NoActiveTasksSwitch": {
+    "text": "Нет активных задач"
+  },
+  "ActiveTasksSwitch": {
+    "text": "Есть активные задачи"
+  },
+  "OverdueTasksSwitch": {
+    "text": "Есть просроченные задачи"
+  },
   "TaskSearchModal": {
     "heading": "Поиск задач"
   },

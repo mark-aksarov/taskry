@@ -1,5 +1,1 @@
-export {
-  useUserFilters,
-  UserFiltersProvider,
-  useUserFiltersDispatch,
-} from "./UserFiltersContext";
+export { useUserFilters, UserFiltersProvider } from "./UserFiltersContext";

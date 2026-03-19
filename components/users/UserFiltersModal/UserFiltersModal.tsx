@@ -5,8 +5,13 @@ import {
   FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
+import {
+  UserFiltersFormProvider,
+  useUserFiltersFormDispatch,
+} from "../UserFiltersForm/UserFiltersFormContext";
+
 import { useTranslations } from "next-intl";
-import { useUserFiltersDispatch } from "../UserFiltersContext";
+import { useUserFilters } from "../UserFiltersContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
@@ -15,21 +20,32 @@ export function UserFiltersModal({
 }: {
   filtersFormContainer: React.ReactNode;
 }) {
-  const t = useTranslations("users.UserFiltersModal");
-  const dispatch = useUserFiltersDispatch();
+  const initialFilters = useUserFilters();
 
   return (
     <FormBaseModal data-test="user-filters-modal">
-      <FilterModalDialog>
-        <FilterModalDialogHeader
-          resetFilters={() => dispatch({ type: "resetFilters" })}
-        >
-          {t("heading")}
-        </FilterModalDialogHeader>
-        <FormBaseModalDialogBody>
-          {filtersFormContainer}
-        </FormBaseModalDialogBody>
-      </FilterModalDialog>
+      <UserFiltersFormProvider initialFilters={initialFilters}>
+        <FilterModalDialog>
+          <DialogHeader />
+          <FormBaseModalDialogBody>
+            {filtersFormContainer}
+          </FormBaseModalDialogBody>
+        </FilterModalDialog>
+      </UserFiltersFormProvider>
     </FormBaseModal>
+  );
+}
+
+function DialogHeader() {
+  const t = useTranslations("users.UserFiltersModal");
+
+  const dispatch = useUserFiltersFormDispatch();
+
+  return (
+    <FilterModalDialogHeader
+      resetFilters={() => dispatch({ type: "resetFilters" })}
+    >
+      {t("heading")}
+    </FilterModalDialogHeader>
   );
 }

@@ -10,7 +10,7 @@ export function ActiveProjectsSwitch({
   isSelected,
   onChange,
 }: ActiveProjectsSwitchProps) {
-  const t = useTranslations("customers.ActiveProjectsSwitch");
+  const t = useTranslations("projects.ActiveProjectsSwitch");
 
   return (
     <Switch

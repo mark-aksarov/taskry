@@ -1,24 +1,22 @@
-"use client";
-
 import { useTranslations } from "next-intl";
 import { Switch } from "@/components/ui/Switch";
 
-interface NoActiveTasksSwitchProps {
+interface ActiveTasksSwitchProps {
   isSelected: boolean;
   onChange: (value: boolean) => void;
 }
 
-export function NoActiveTasksSwitch({
+export function OverdueTasksSwitch({
   isSelected,
   onChange,
-}: NoActiveTasksSwitchProps) {
-  const t = useTranslations("projects.NoActiveTasksSwitch");
+}: ActiveTasksSwitchProps) {
+  const t = useTranslations("tasks.OverdueTasksSwitch");
 
   return (
     <Switch
-      data-test="no-active-tasks-switch"
+      data-test="has-overdue-tasks-switch"
       className="justify-between"
-      name="noActiveTasks"
+      name="hasOverdueTasks"
       isSelected={isSelected}
       onChange={onChange}
     >

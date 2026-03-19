@@ -244,7 +244,7 @@ describe("getUserList", () => {
         page: 1,
         pageSize: 10,
         sort: "fullName",
-        filters: { hasActiveTasks: true, position: [] },
+        filters: { hasActiveTasks: true, positionIds: [] },
       });
 
       expect(result.items).toHaveLength(2);
@@ -258,7 +258,7 @@ describe("getUserList", () => {
         page: 1,
         pageSize: 10,
         sort: "fullName",
-        filters: { hasOverdueTasks: true, position: [] },
+        filters: { hasOverdueTasks: true, positionIds: [] },
       });
 
       expect(result.items).toHaveLength(1);
@@ -271,7 +271,7 @@ describe("getUserList", () => {
         page: 1,
         pageSize: 10,
         sort: "fullName",
-        filters: { hasNoActiveTasks: true, position: [] },
+        filters: { hasNoActiveTasks: true, positionIds: [] },
       });
 
       expect(result.items).toHaveLength(1);
@@ -284,7 +284,7 @@ describe("getUserList", () => {
         page: 1,
         pageSize: 10,
         sort: "fullName",
-        filters: { position: [1] },
+        filters: { positionIds: [1] },
       });
 
       expect(result.items).toHaveLength(2);

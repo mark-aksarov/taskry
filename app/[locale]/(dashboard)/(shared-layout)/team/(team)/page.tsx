@@ -16,6 +16,7 @@ import { UsersContainer } from "@/components/users/UsersContainer";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CreateUserProvider } from "@/components/users/CreateUserContext";
+import { UserFiltersProvider } from "@/components/users/UserFiltersContext";
 import { RouterSearchContainer } from "@/components/common/RouterSearchContainer";
 import { CreatePositionProvider } from "@/components/position/CreatePositionContext";
 import { UserFiltersFormContainer } from "@/components/users/UserFiltersFormContainer";
@@ -29,7 +30,7 @@ const searchParamsSchema = z.object({
   hasActiveTasks: booleanSearchParam,
   hasOverdueTasks: booleanSearchParam,
   sort: z.enum(userSortFields).catch("fullName"),
-  position: z.preprocess(
+  positionIds: z.preprocess(
     searchParamToArray,
     z.array(positionId).optional().catch(undefined),
   ),
@@ -54,21 +55,23 @@ export default async function AppUsersPage({
   return (
     <CreateUserProvider createUser={createUser}>
       <CreatePositionProvider createPosition={createPosition}>
-        <UsersPage
-          totalFilteredUsers={totalFilteredUsers}
-          selectedSortField={sort}
-          searchContainer={<RouterSearchContainer />}
-          filtersFormContainer={<UserFiltersFormContainer filters={filters} />}
-          positionFiltersFormContainer={<UserPositionFiltersFormContainer />}
-          usersContainer={
-            <UsersContainer
-              page={page}
-              pageSize={pageSize}
-              sort={sort}
-              filters={filters}
-            />
-          }
-        />
+        <UserFiltersProvider filters={filters}>
+          <UsersPage
+            totalFilteredUsers={totalFilteredUsers}
+            selectedSortField={sort}
+            searchContainer={<RouterSearchContainer />}
+            filtersFormContainer={<UserFiltersFormContainer />}
+            positionFiltersFormContainer={<UserPositionFiltersFormContainer />}
+            usersContainer={
+              <UsersContainer
+                page={page}
+                pageSize={pageSize}
+                sort={sort}
+                filters={filters}
+              />
+            }
+          />
+        </UserFiltersProvider>
       </CreatePositionProvider>
     </CreateUserProvider>
   );

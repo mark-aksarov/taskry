@@ -1,4 +1,13 @@
 {
+  "NoActiveTasksSwitch": {
+    "text": "Has no active tasks"
+  },
+  "ActiveTasksSwitch": {
+    "text": "Has active tasks"
+  },
+  "OverdueTasksSwitch": {
+    "text": "Has overdue tasks"
+  },
   "TaskSearchModal": {
     "heading": "Search tasks"
   },

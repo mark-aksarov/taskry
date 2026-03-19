@@ -1,16 +1,15 @@
 "use client";
 
 import {
-  FilterCheckboxGroupExpandButton,
   FilterCheckboxGroupWrapper,
   useFilterCheckboxGroupExpansion,
+  FilterCheckboxGroupExpandButton,
 } from "@/components/common/FilterCheckboxGroup";
 
 import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
-import { useUserFilters, useUserFiltersDispatch } from "../UserFiltersContext";
 
 interface Item {
   id: number;
@@ -20,15 +19,17 @@ interface Item {
 interface Props {
   items: Item[];
   disableExpansion?: boolean;
+  value: string[];
+  onChange: (value: string[]) => void;
 }
 
-export function UserFiltersFormPositionCheckboxGroup({
+export function PositionCheckboxGroup({
   items,
   disableExpansion,
+  value,
+  onChange,
 }: Props) {
-  const t = useTranslations("users.UserFiltersFormPositionCheckboxGroup");
-  const filters = useUserFilters();
-  const dispatch = useUserFiltersDispatch();
+  const t = useTranslations("users.PositionCheckboxGroup");
 
   const {
     isExpanded,
@@ -38,7 +39,7 @@ export function UserFiltersFormPositionCheckboxGroup({
     hiddenSelectedItems,
   } = useFilterCheckboxGroupExpansion(
     items,
-    filters.position,
+    value,
     disableExpansion ? Number.MAX_VALUE : undefined,
   );
 
@@ -58,10 +59,8 @@ export function UserFiltersFormPositionCheckboxGroup({
       <CheckboxGroup
         name="position"
         label={t("label")}
-        value={filters.position}
-        onChange={(value) =>
-          dispatch({ type: "setPosition", payload: value as any })
-        }
+        value={value}
+        onChange={onChange}
       >
         {visibleItems.map((item) => renderCheckbox(item))}
         {hiddenItems.map((item) => renderCheckbox(item, true))}

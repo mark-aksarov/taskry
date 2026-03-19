@@ -115,9 +115,7 @@ export default async function AppProjectsPage({
                       pageSize={pageSize}
                     />
                   }
-                  projectFiltersFormContainer={
-                    <ProjectFiltersFormContainer filters={filters} />
-                  }
+                  projectFiltersFormContainer={<ProjectFiltersFormContainer />}
                   projectCategoryFiltersFormContainer={
                     <ProjectCategoryFiltersFormContainer />
                   }

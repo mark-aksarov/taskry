@@ -1,4 +1,13 @@
 {
+  "NoActiveProjectsSwitch": {
+    "text": "Не имеет активных проектов"
+  },
+  "ActiveProjectsSwitch": {
+    "text": "Имеет активные проекты"
+  },
+  "OverdueProjectsSwitch": {
+    "text": "Имеет просроченные проекты"
+  },
   "ProjectCheckboxGroup": {
     "label": "Проект"
   },
@@ -87,9 +96,6 @@
     "validation": {
       "required": "Требуется статус"
     }
-  },
-  "NoActiveTasksSwitch": {
-    "text": "Не имеет активных задач"
   },
   "ProjectFiltersFormDeadlineFromDatePicker": {
     "label": "Срок от"

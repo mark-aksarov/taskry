@@ -99,15 +99,6 @@
     "dialogHeading": "Детали клиента",
     "openInFullPage": "Открыть в полном окне"
   },
-  "NoActiveProjectsSwitch": {
-    "text": "Не имеет активных проектов"
-  },
-  "ActiveProjectsSwitch": {
-    "text": "Имеет активные проекты"
-  },
-  "OverdueProjectsSwitch": {
-    "text": "Имеет просроченные проекты"
-  },
   "CustomerItemActionMenuTrigger": {
     "edit": "Редактировать",
     "delete": "Удалить",

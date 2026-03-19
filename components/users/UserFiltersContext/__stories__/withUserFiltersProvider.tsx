@@ -3,7 +3,7 @@ import { UserFiltersProvider } from "../UserFiltersContext";
 
 export const withUserFiltersProvider: Decorator = (Story) => {
   return (
-    <UserFiltersProvider>
+    <UserFiltersProvider filters={{}}>
       <Story />
     </UserFiltersProvider>
   );

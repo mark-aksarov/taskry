@@ -1,4 +1,13 @@
 {
+  "NoActiveProjectsSwitch": {
+    "text": "Has no active projects"
+  },
+  "ActiveProjectsSwitch": {
+    "text": "Has active projects"
+  },
+  "OverdueProjectsSwitch": {
+    "text": "Has overdue projects"
+  },
   "ProjectCheckboxGroup": {
     "label": "Project"
   },
@@ -87,9 +96,6 @@
     "validation": {
       "required": "Status is required"
     }
-  },
-  "NoActiveTasksSwitch": {
-    "text": "Has not active tasks"
   },
   "ProjectFiltersFormDeadlineFromDatePicker": {
     "label": "Deadline from"

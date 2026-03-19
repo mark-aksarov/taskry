@@ -127,15 +127,6 @@
     "dialogHeading": "User Details",
     "openInFullPage": "Open in Full Page"
   },
-  "UserFiltersFormNoActiveTasksSwitch": {
-    "text": "Has no active tasks"
-  },
-  "UserFiltersFormActiveTasksSwitch": {
-    "text": "Has active tasks"
-  },
-  "UserFiltersFormOverdueTasksSwitch": {
-    "text": "Has overdue tasks"
-  },
   "UserFiltersFormRoleCheckboxGroup": {
     "label": "Role",
     "items": {
@@ -144,7 +135,7 @@
       "user": "User"
     }
   },
-  "UserFiltersFormPositionCheckboxGroup": {
+  "PositionCheckboxGroup": {
     "label": "Position"
   },
   "UserItemActionMenuTrigger": {

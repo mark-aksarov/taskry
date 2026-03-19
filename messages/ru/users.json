@@ -127,15 +127,6 @@
     "dialogHeading": "Детали пользователя",
     "openInFullPage": "Открыть в полном окне"
   },
-  "UserFiltersFormNoActiveTasksSwitch": {
-    "text": "Нет активных задач"
-  },
-  "UserFiltersFormActiveTasksSwitch": {
-    "text": "Есть активные задачи"
-  },
-  "UserFiltersFormOverdueTasksSwitch": {
-    "text": "Есть просроченные задачи"
-  },
   "UserFiltersFormRoleCheckboxGroup": {
     "label": "Роль",
     "items": {
@@ -144,7 +135,7 @@
       "user": "Пользователь"
     }
   },
-  "UserFiltersFormPositionCheckboxGroup": {
+  "PositionCheckboxGroup": {
     "label": "Должность"
   },
   "UserItemActionMenuTrigger": {

@@ -99,15 +99,6 @@
     "dialogHeading": "Customer Details",
     "openInFullPage": "Open in Full Page"
   },
-  "NoActiveProjectsSwitch": {
-    "text": "Has no active projects"
-  },
-  "ActiveProjectsSwitch": {
-    "text": "Has active projects"
-  },
-  "OverdueProjectsSwitch": {
-    "text": "Has overdue projects"
-  },
   "CustomerItemActionMenuTrigger": {
     "edit": "Edit",
     "delete": "Delete",

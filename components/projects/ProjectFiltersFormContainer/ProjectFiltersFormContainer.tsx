@@ -6,28 +6,19 @@ import {
 } from "../ProjectFiltersForm";
 
 import { Suspense } from "react";
-import { ProjectFilters } from "@/lib/types";
 import { getUserSummaries } from "@/lib/data/user/user.dal";
 import { getCustomerSummaries } from "@/lib/data/customer/customer.dal";
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
 
-interface ProjectFiltersFormContainerProps {
-  filters?: ProjectFilters;
-}
-
-export function ProjectFiltersFormContainer(
-  props: ProjectFiltersFormContainerProps,
-) {
+export function ProjectFiltersFormContainer() {
   return (
     <Suspense fallback={<ProjectFiltersFormSkeleton />}>
-      <ProjectFiltersFormContainerInner {...props} />
+      <ProjectFiltersFormContainerInner />
     </Suspense>
   );
 }
 
-async function ProjectFiltersFormContainerInner({
-  filters,
-}: ProjectFiltersFormContainerProps) {
+async function ProjectFiltersFormContainerInner() {
   const categories = await getProjectCategorySummaries();
   const customers = await getCustomerSummaries();
   const users = await getUserSummaries();

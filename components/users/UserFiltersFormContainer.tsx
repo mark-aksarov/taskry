@@ -1,31 +1,19 @@
 import "server-only";
 
 import { Suspense } from "react";
-import { UserFilters } from "@/lib/types";
-import { UserFiltersProvider } from "./UserFiltersContext";
 import { getPositionSummaries } from "@/lib/data/position/position.dal";
 import { UserFiltersForm, UserFiltersFormSkeleton } from "./UserFiltersForm";
 
-interface UserFiltersFormContainerProps {
-  filters?: UserFilters;
-}
-
-export function UserFiltersFormContainer(props: UserFiltersFormContainerProps) {
+export function UserFiltersFormContainer() {
   return (
     <Suspense fallback={<UserFiltersFormSkeleton />}>
-      <UserFiltersFormContainerInner {...props} />
+      <UserFiltersFormContainerInner />
     </Suspense>
   );
 }
 
-async function UserFiltersFormContainerInner({
-  filters,
-}: UserFiltersFormContainerProps) {
+async function UserFiltersFormContainerInner() {
   const positions = await getPositionSummaries();
 
-  return (
-    <UserFiltersProvider initialFilters={filters}>
-      <UserFiltersForm positionCheckboxGroupItems={positions} />
-    </UserFiltersProvider>
-  );
+  return <UserFiltersForm positionCheckboxGroupItems={positions} />;
 }

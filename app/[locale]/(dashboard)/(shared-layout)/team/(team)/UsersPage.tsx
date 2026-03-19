@@ -84,6 +84,7 @@ export function UsersPage({
                   <CreateUserMenuTriggerLarge />
                 </>
               }
+              twoRowsOnLg
             />
 
             <ToolbarMobile

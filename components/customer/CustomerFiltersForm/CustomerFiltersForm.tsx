@@ -16,14 +16,14 @@ import { useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { Separator } from "@/components/ui/Separator";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { ActiveProjectsSwitch } from "../ActiveProjectsSwitch";
-import { OverdueProjectsSwitch } from "../OverdueProjectsSwitch";
-import { NoActiveProjectsSwitch } from "../NoActiveProjectsSwitch";
 import { OverlayTriggerStateContext } from "react-aria-components";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { usePageTransition } from "@/components/common/PageTransitionContext";
 import { CompanyCheckboxGroup } from "@/components/company/CompanyCheckboxGroup";
+import { ActiveProjectsSwitch } from "@/components/projects/ActiveProjectsSwitch";
+import { OverdueProjectsSwitch } from "@/components/projects/OverdueProjectsSwitch";
+import { NoActiveProjectsSwitch } from "@/components/projects/NoActiveProjectsSwitch";
 
 interface CustomerFiltersFormProps {
   companyCheckboxGroupItems: { id: number; name: string }[];
