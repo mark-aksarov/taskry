@@ -69,10 +69,10 @@ export function ProjectFiltersForm({
     newSearchParams.delete("noActiveTasks");
     newSearchParams.delete("deadlineFrom");
     newSearchParams.delete("deadlineTo");
-    newSearchParams.delete("projectIds");
-    newSearchParams.delete("categoryIds");
-    newSearchParams.delete("assigneeIds");
     newSearchParams.delete("statuses");
+    newSearchParams.delete("customerIds");
+    newSearchParams.delete("categoryIds");
+    newSearchParams.delete("creatorIds");
 
     // Add new filter values
     if (noActiveTasks) {

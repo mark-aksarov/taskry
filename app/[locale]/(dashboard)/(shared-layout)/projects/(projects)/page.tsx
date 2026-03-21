@@ -36,6 +36,7 @@ import { UpdateProjectStatusesProvider } from "@/components/projects/UpdateProje
 import { CreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryContext";
 import { ProjectCategoryFiltersFormContainer } from "@/components/projects/ProjectCategoryFiltersFormContainer";
 import { ProjectCreatorFiltersFormContainer } from "@/components/projects/ProjectCreatorFiltersFormContainer";
+import { ProjectCustomerFiltersFormContainer } from "@/components/projects/ProjectCustomerFiltersFormContainer";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -123,7 +124,7 @@ export default async function AppProjectsPage({
                     <ProjectCreatorFiltersFormContainer />
                   }
                   customerFiltersFormContainer={
-                    <ProjectCreatorFiltersFormContainer />
+                    <ProjectCustomerFiltersFormContainer />
                   }
                 />
               </ProjectFiltersProvider>
