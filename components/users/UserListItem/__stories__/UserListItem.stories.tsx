@@ -7,7 +7,6 @@ import { UserDetailHeader } from "../../UserDetailHeader";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { withUserItemProviders } from "../../UserItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateUserImageProvider } from "../../UpdateUserImageContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
@@ -15,7 +14,6 @@ const meta = {
   title: "components/users/UserListItem",
   component: UserListItem,
   decorators: [
-    withUpdateUserImageProvider,
     withUserItemProviders,
     withGuestModeModalProvider,
     withCurrentUserProvider,
@@ -39,6 +37,7 @@ export const Default = {
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
       <UserDetailHeader
+        userId={mockedUserDetail.id}
         fullName={mockedUserDetail.fullName}
         positionName={mockedUserDetail.position.name}
         imageUrl={mockedUserDetail.imageUrl}

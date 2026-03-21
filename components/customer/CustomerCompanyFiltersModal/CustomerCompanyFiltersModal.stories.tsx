@@ -6,6 +6,7 @@ import { mockedCompanySummaries } from "@/mocks/companies";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerCompanyFiltersForm } from "../CustomerCompanyFiltersForm";
 import { CustomerCompanyFiltersModal } from "./CustomerCompanyFiltersModal";
+import { withCustomerFiltersProvider } from "../CustomerFiltersContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 
@@ -23,6 +24,7 @@ const meta = {
         </DialogTrigger>
       );
     },
+    withCustomerFiltersProvider,
     withSelectedItemsProvider,
     withPageTransitionProvider,
     withThemedBackground,

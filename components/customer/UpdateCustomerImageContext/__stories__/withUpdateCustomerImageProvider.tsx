@@ -1,7 +1,6 @@
+import { useState } from "react";
 import { type Decorator } from "@storybook/react";
 import { UpdateCustomerImageContext } from "../UpdateCustomerImageContext";
-import { useState } from "react";
-import { CustomerImageModal } from "../../CustomerImageModal";
 
 export const withUpdateCustomerImageProvider: Decorator = (Story) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,7 +19,6 @@ export const withUpdateCustomerImageProvider: Decorator = (Story) => {
       }}
     >
       <Story />
-      <CustomerImageModal customerId={1} />
     </UpdateCustomerImageContext.Provider>
   );
 };

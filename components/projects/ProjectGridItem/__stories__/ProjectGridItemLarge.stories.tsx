@@ -17,13 +17,11 @@ import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__st
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusesContext/__stories__";
-import { withUpdateUserImageProvider } from "@/components/users/UpdateUserImageContext/__stories__";
 
 const meta = {
   title: "components/projects/ProjectGridItemLarge",
   component: ProjectGridItemLarge,
   decorators: [
-    withUpdateUserImageProvider,
     withDeleteProjectsProvider,
     withUpdateProjectStatusesProvider,
     withGuestModeModalProvider,
@@ -54,6 +52,7 @@ export const Default = {
     userDetailContainer: <UserDetail {...mockedUser} />,
     userDetailHeaderContainer: (
       <UserDetailHeader
+        userId={mockedUser.id}
         fullName={mockedUser.fullName}
         positionName={mockedUser.position.name}
         imageUrl={mockedUser.imageUrl}

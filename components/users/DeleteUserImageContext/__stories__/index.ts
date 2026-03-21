@@ -1,0 +1,1 @@
+export { withDeleteUserImageProvider } from "./withDeleteUserImageProvider";

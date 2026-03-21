@@ -1,0 +1,1 @@
+export { withDeleteCustomerImageProvider } from "./withDeleteCustomerImageProvider";

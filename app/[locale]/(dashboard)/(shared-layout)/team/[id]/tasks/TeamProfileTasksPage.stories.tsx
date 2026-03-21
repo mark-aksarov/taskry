@@ -36,6 +36,7 @@ import { withChangePasswordProvider } from "@/components/users/ChangePasswordCon
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withUpdateUserImageProvider } from "@/components/users/UpdateUserImageContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
+import { withDeleteUserImageProvider } from "@/components/users/DeleteUserImageContext/__stories__";
 
 const meta = {
   title: "pages/TeamProfileTasksPage",
@@ -43,6 +44,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     withUpdateUserImageProvider,
+    withDeleteUserImageProvider,
     withCreateTaskProvider,
     withUpdateUserProvider,
     withChangePasswordProvider,
@@ -83,6 +85,7 @@ export const Default = {
     ),
     userDetailHeaderContainer: (
       <UserDetailHeader
+        userId={mockedUserDetail.id}
         fullName={mockedUserDetail.fullName}
         positionName={mockedUserDetail.position.name}
         imageUrl={mockedUserDetail.imageUrl}

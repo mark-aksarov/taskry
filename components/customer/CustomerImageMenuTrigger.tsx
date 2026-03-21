@@ -1,20 +1,29 @@
 "use client";
 
-import { PersonImageMenuTrigger } from "../common/PersonImageMenuTrigger";
+import { useDeleteCustomerImage } from "./DeleteCustomerImageContext";
 import { useUpdateCustomerImage } from "./UpdateCustomerImageContext";
+import { PersonImageMenuTrigger } from "../common/PersonImageMenuTrigger";
 
 export function CustomerImageMenuTrigger({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { isPending, onModalOpenChange } = useUpdateCustomerImage();
+  const {
+    isPending: isUpdatePending,
+    onModalOpenChange: onUpdateModalOpenChange,
+  } = useUpdateCustomerImage();
+
+  const {
+    isPending: isDeletePending,
+    onModalOpenChange: onDeleteModalOpenChange,
+  } = useDeleteCustomerImage();
 
   return (
     <PersonImageMenuTrigger
-      onDelete={() => {}}
-      onUpdate={() => onModalOpenChange(true)}
-      isDisabled={isPending}
+      onDelete={() => onDeleteModalOpenChange(true)}
+      onUpdate={() => onUpdateModalOpenChange(true)}
+      isDisabled={isUpdatePending || isDeletePending}
     >
       {children}
     </PersonImageMenuTrigger>

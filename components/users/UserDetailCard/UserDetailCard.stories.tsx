@@ -17,6 +17,7 @@ import { withDeleteUserProvider } from "../DeleteUserContext/__stories__";
 import { withUpdateUserProvider } from "../UpdateUserContext/__stories__";
 import { ProfileActions, ProfileActionsSkeleton } from "../ProfileActions";
 import { withChangePasswordProvider } from "../ChangePasswordContext/__stories__";
+import { withDeleteUserImageProvider } from "../DeleteUserImageContext/__stories__";
 import { withUpdateUserImageProvider } from "../UpdateUserImageContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
@@ -47,6 +48,7 @@ const meta = {
       </>
     ),
     withUpdateUserImageProvider,
+    withDeleteUserImageProvider,
     withUpdateUserProvider,
     withChangePasswordProvider,
     withDeleteUserProvider,
@@ -64,6 +66,7 @@ export const Default = {
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
       <UserDetailHeader
+        userId={mockedUserDetail.id}
         fullName={mockedUserDetail.fullName}
         positionName={mockedUserDetail.position.name}
         imageUrl={mockedUserDetail.imageUrl}
@@ -99,6 +102,7 @@ export const WithoutOptionalUserData = {
     userDetailHeaderContainer: (
       <UserDetailHeader
         canUpdateImage={true}
+        userId={mockedUserDetail.id}
         fullName={mockedUserDetail.fullName}
       />
     ),

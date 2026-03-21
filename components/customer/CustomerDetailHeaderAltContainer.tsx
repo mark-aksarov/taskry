@@ -2,12 +2,12 @@ import "server-only";
 
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { CustomerImageModal } from "./CustomerImageModal";
 import { CustomerDetailHeader } from "./CustomerDetailHeader";
 import { getCustomerDetail } from "@/lib/data/customer/customer.dal";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { createPresignedUrl } from "@/lib/actions/s3/createPresignedUrl";
 import { UpdateCustomerImageProvider } from "./UpdateCustomerImageContext";
+import { DeleteCustomerImageProvider } from "./DeleteCustomerImageContext";
 import { updateCustomerImageUrl } from "@/lib/actions/customer/updateCustomerImageUrl";
 
 interface CustomerDetailHeaderAltContainerProps {
@@ -38,14 +38,17 @@ async function CustomerDetailHeaderAltContainerInner({
       createPresignedUrl={createPresignedUrl}
       updateCustomerImageUrl={updateCustomerImageUrl}
     >
-      <CustomerDetailHeader
-        canUpdateImage
-        fullName={customer.fullName}
-        imageUrl={customer.imageUrl}
-        companyName={customer.company?.name}
-      />
-
-      <CustomerImageModal customerId={customerId} />
+      <DeleteCustomerImageProvider
+        updateCustomerImageUrl={updateCustomerImageUrl}
+      >
+        <CustomerDetailHeader
+          canUpdateImage
+          customerId={customer.id}
+          fullName={customer.fullName}
+          imageUrl={customer.imageUrl}
+          companyName={customer.company?.name}
+        />
+      </DeleteCustomerImageProvider>
     </UpdateCustomerImageProvider>
   );
 }

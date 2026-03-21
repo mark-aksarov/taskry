@@ -150,6 +150,13 @@
     "cancelButton": "Отменить",
     "successMessage": "Пользователь успешно удален"
   },
+  "DeleteUserImageModal": {
+    "heading": "Удалить изображение",
+    "text": "Вы уверены, что хотите удалить изображение пользователя <strong>«{name}»</strong>?",
+    "deleteButton": "Удалить",
+    "cancelButton": "Отменить",
+    "successMessage": "Изображение успешно удалено"
+  },
   "UserGridItem": {
     "noPosition": "Нет должности",
     "noPhoneNumber": "Номер телефона не указан",

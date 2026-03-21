@@ -111,6 +111,13 @@
     "cancelButton": "Cancel",
     "successMessage": "Customer deleted successfully"
   },
+  "DeleteCustomerImageModal": {
+    "heading": "Delete image",
+    "text": "Are you sure you want to delete image of customer <strong>«{name}»</strong>?",
+    "deleteButton": "Delete",
+    "cancelButton": "Cancel",
+    "successMessage": "Image deleted successfully"
+  },
   "DeleteCustomersModal": {
     "heading": "Delete customers",
     "text": "Are you sure you want to delete <strong>{count} customers</strong>? All contents will be permanently removed.",

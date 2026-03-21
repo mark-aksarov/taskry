@@ -10,7 +10,7 @@ import { updateUserImageUrl as updateUserImageUrlQuery } from "@/lib/data/user/u
 
 const schema = z.object({
   id: userId,
-  imageUrl: userImageUrl,
+  imageUrl: userImageUrl.nullable(),
 });
 
 export async function updateUserImageUrl(

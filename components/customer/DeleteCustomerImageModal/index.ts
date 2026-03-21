@@ -1,0 +1,1 @@
+export { DeleteCustomerImageModal } from "./DeleteCustomerImageModal";

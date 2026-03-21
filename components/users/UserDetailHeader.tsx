@@ -1,10 +1,13 @@
 import React from "react";
 import { useTranslations } from "next-intl";
+import { UserImageModal } from "./UserImageModal";
+import { DeleteUserImageModal } from "./DeleteUserImageModal";
 import { UserImageMenuTrigger } from "./UserImageMenuTrigger";
 import { DetailHeader } from "@/components/common/DetailHeader";
 import { PersonDetailHeaderImage } from "../common/PersonDetailHeaderImage";
 
 interface UserDetailHeaderProps {
+  userId: string;
   fullName: string;
   imageUrl?: string;
   positionName?: string;
@@ -12,6 +15,7 @@ interface UserDetailHeaderProps {
 }
 
 export function UserDetailHeader({
+  userId,
   fullName,
   imageUrl,
   canUpdateImage,
@@ -28,6 +32,10 @@ export function UserDetailHeader({
             <UserImageMenuTrigger>
               <PersonDetailHeaderImage alt={fullName} imageUrl={imageUrl} />
             </UserImageMenuTrigger>
+
+            <UserImageModal userId={userId} />
+
+            <DeleteUserImageModal userId={userId} userFullName={fullName} />
           </>
         ) : (
           <PersonDetailHeaderImage alt={fullName} imageUrl={imageUrl} />

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { type Decorator } from "@storybook/react";
-import { UserImageModal } from "../../UserImageModal";
 import { UpdateUserImageContext } from "../UpdateUserImageContext";
 
 export const withUpdateUserImageProvider: Decorator = (Story) => {
@@ -20,7 +19,6 @@ export const withUpdateUserImageProvider: Decorator = (Story) => {
       }}
     >
       <Story />
-      <UserImageModal userId="user-1" />
     </UpdateUserImageContext.Provider>
   );
 };

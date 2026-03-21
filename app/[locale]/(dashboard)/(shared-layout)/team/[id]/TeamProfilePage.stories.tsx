@@ -18,6 +18,7 @@ import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/_
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withChangePasswordProvider } from "@/components/users/ChangePasswordContext/__stories__";
 import { withUpdateUserImageProvider } from "@/components/users/UpdateUserImageContext/__stories__";
+import { withDeleteUserImageProvider } from "@/components/users/DeleteUserImageContext/__stories__";
 
 const meta = {
   title: "pages/TeamProfilePage",
@@ -25,6 +26,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     withUpdateUserImageProvider,
+    withDeleteUserImageProvider,
     withUpdateUserProvider,
     withChangePasswordProvider,
     withDeleteUserProvider,
@@ -60,6 +62,7 @@ export const Default = {
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
       <UserDetailHeader
+        userId={mockedUserDetail.id}
         fullName={mockedUserDetail.fullName}
         positionName={mockedUserDetail.position.name}
         imageUrl={mockedUserDetail.imageUrl}
@@ -83,6 +86,7 @@ export const WithoutSomeData = {
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
       <UserDetailHeader
+        userId={mockedUserDetail.id}
         fullName={mockedUserDetail.fullName}
         canUpdateImage={true}
       />

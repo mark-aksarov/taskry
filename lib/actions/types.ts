@@ -51,12 +51,12 @@ export type DeleteUserPayload = {
 
 export type UpdateUserImageUrlPayload = {
   id: string;
-  imageUrl: string;
+  imageUrl: string | null;
 };
 
 export type UpdateCustomerImageUrlPayload = {
   id: number;
-  imageUrl: string;
+  imageUrl: string | null;
 };
 
 export interface UpdateProjectStatusPayload {

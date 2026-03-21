@@ -5,7 +5,6 @@ import { UserGridItemMobile } from "../UserGridItemMobile";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { withUserItemProviders } from "../../UserItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateUserImageProvider } from "../../UpdateUserImageContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 
@@ -13,7 +12,6 @@ const meta = {
   title: "components/users/UserGridItemMobile",
   component: UserGridItemMobile,
   decorators: [
-    withUpdateUserImageProvider,
     withUserItemProviders,
     withGuestModeModalProvider,
     withCurrentUserProvider,

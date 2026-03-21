@@ -22,6 +22,7 @@ import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/
 import { withDeleteCustomerProvider } from "@/components/customer/DeleteCustomerContext/__stories__";
 import { withUpdateCustomerProvider } from "@/components/customer/UpdateCustomerContext/__stories__";
 import { withUpdateCustomerImageProvider } from "@/components/customer/UpdateCustomerImageContext/__stories__";
+import { withDeleteCustomerImageProvider } from "@/components/customer/DeleteCustomerImageContext/__stories__";
 
 const meta = {
   title: "pages/CustomerDetailPage",
@@ -29,6 +30,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     withUpdateCustomerImageProvider,
+    withDeleteCustomerImageProvider,
     withUpdateCustomerProvider,
     withDeleteCustomerProvider,
     withGuestModeModalProvider,
@@ -54,6 +56,7 @@ export const Default = {
     customerDetailHeaderContainer: (
       <CustomerDetailHeader
         canUpdateImage={true}
+        customerId={mockedCustomerDetail.id}
         fullName={mockedCustomerDetail.fullName}
         imageUrl={mockedCustomerDetail.imageUrl}
         companyName={mockedCustomerDetail.company.name}
@@ -91,6 +94,7 @@ export const WithoutSomeData = {
     customerDetailHeaderContainer: (
       <CustomerDetailHeader
         canUpdateImage={true}
+        customerId={mockedCustomerDetail.id}
         fullName={mockedCustomerDetail.fullName}
       />
     ),

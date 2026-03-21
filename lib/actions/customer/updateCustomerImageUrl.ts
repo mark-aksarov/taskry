@@ -10,7 +10,7 @@ import { updateCustomerImageUrl as updateCustomerImageUrlQuery } from "@/lib/dat
 
 const schema = z.object({
   id: customerId,
-  imageUrl: customerImageUrl,
+  imageUrl: customerImageUrl.nullable(),
 });
 
 export async function updateCustomerImageUrl(

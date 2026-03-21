@@ -18,12 +18,14 @@ import { withUpdateCustomerProvider } from "../UpdateCustomerContext/__stories__
 import { withUpdateCustomerImageProvider } from "../UpdateCustomerImageContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withDeleteCustomerImageProvider } from "../DeleteCustomerImageContext/__stories__";
 
 const meta = {
   title: "components/customers/CustomerDetailCard",
   component: CustomerDetailCard,
   decorators: [
     withUpdateCustomerImageProvider,
+    withDeleteCustomerImageProvider,
     withUpdateCustomerProvider,
     withDeleteCustomerProvider,
     withGuestModeModalProvider,
@@ -41,6 +43,7 @@ export const Default = {
     customerDetailHeaderContainer: (
       <CustomerDetailHeader
         canUpdateImage={true}
+        customerId={mockedCustomerDetail.id}
         fullName={mockedCustomerDetail.fullName}
         imageUrl={mockedCustomerDetail.imageUrl}
         companyName={mockedCustomerDetail.company.name}
@@ -82,6 +85,7 @@ export const WithoutSomeData = {
     ),
     customerDetailHeaderContainer: (
       <CustomerDetailHeader
+        customerId={mockedCustomerDetail.id}
         fullName={mockedCustomerDetail.fullName}
         canUpdateImage={true}
       />

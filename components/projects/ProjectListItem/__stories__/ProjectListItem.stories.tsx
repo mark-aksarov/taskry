@@ -52,6 +52,7 @@ export const Default = {
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
       <UserDetailHeader
+        userId={mockedUserDetail.id}
         fullName={mockedUserDetail.fullName}
         positionName={mockedUserDetail.position.name}
         imageUrl={mockedUserDetail.imageUrl}
@@ -62,6 +63,7 @@ export const Default = {
     customerDetailHeaderContainer: (
       <CustomerDetailHeader
         canUpdateImage={false}
+        customerId={mockedCustomerDetail.id}
         companyName={mockedCustomerDetail.company.name}
         fullName={mockedCustomerDetail.fullName}
         imageUrl={mockedCustomerDetail.imageUrl}
