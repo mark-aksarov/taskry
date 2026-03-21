@@ -9,12 +9,12 @@
       "common": {
         "heading": "Category error",
         "description": "An error occurred while handling project category data. Please try again.",
-        "buttonLabel": "Refresh page"
+        "buttonLabel": "Try again"
       },
       "notFound": {
         "heading": "Category not found",
         "description": "The project category does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Refresh page"
+        "buttonLabel": "Try again"
       }
     }
   },
@@ -24,12 +24,12 @@
   "ErrorPage": {
     "heading": "Something went wrong",
     "description": "We encountered an unexpected error. Please try refreshing the page or contact support if the issue persists.",
-    "buttonLabel": "Refresh page"
+    "buttonLabel": "Try again"
   },
   "NotFoundPage": {
     "heading": "Page not found",
     "description": "The page you are looking for doesn’t exist or has been moved. Please check the URL or return to the homepage.",
-    "toHome": "Refresh page"
+    "toHome": "Try again"
   },
   "CheckEmailPage": {
     "heading": "Check your email",
@@ -75,12 +75,12 @@
       "common": {
         "heading": "Project error",
         "description": "An error occurred while handling project data. Please try again.",
-        "buttonLabel": "Refresh page"
+        "buttonLabel": "Try again"
       },
       "notFound": {
         "heading": "Project not found",
         "description": "The project does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Refresh page"
+        "buttonLabel": "Try again"
       }
     }
   },
@@ -94,12 +94,12 @@
       "common": {
         "heading": "Task error",
         "description": "An error occurred while handling task data. Please try again.",
-        "buttonLabel": "Refresh page"
+        "buttonLabel": "Try again"
       },
       "notFound": {
         "heading": "Task not found",
         "description": "The task does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Refresh page"
+        "buttonLabel": "Try again"
       }
     }
   },
@@ -113,12 +113,12 @@
       "common": {
         "heading": "Customer error",
         "description": "An error occurred while handling customer data. Please try again.",
-        "buttonLabel": "Refresh page"
+        "buttonLabel": "Try again"
       },
       "notFound": {
         "heading": "Customer not found",
         "description": "The customer does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Refresh page"
+        "buttonLabel": "Try again"
       }
     }
   },
@@ -154,12 +154,12 @@
       "common": {
         "heading": "User error",
         "description": "An error occurred while handling user data. Please try again.",
-        "buttonLabel": "Refresh page"
+        "buttonLabel": "Try again"
       },
       "notFound": {
         "heading": "User not found",
         "description": "The user does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Refresh page"
+        "buttonLabel": "Try again"
       }
     }
   },
@@ -168,7 +168,7 @@
     "notFound": {
       "heading": "User not found",
       "description": "The user does not exist or was deleted by another user.",
-      "buttonLabel": "Refresh page"
+      "buttonLabel": "Try again"
     }
   },
   "TaskCategoriesPage": {
@@ -181,12 +181,12 @@
       "common": {
         "heading": "Category error",
         "description": "An error occurred while handling task category data. Please try again.",
-        "buttonLabel": "Refresh page"
+        "buttonLabel": "Try again"
       },
       "notFound": {
         "heading": "Category not found",
         "description": "The task category does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Refresh page"
+        "buttonLabel": "Try again"
       }
     }
   },
@@ -200,12 +200,12 @@
       "common": {
         "heading": "Companies error",
         "description": "An error occurred while handling companies data. Please try again.",
-        "buttonLabel": "Refresh page"
+        "buttonLabel": "Try again"
       },
       "notFound": {
         "heading": "Company not found",
         "description": "This company does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Refresh page"
+        "buttonLabel": "Try again"
       }
     }
   },
@@ -225,12 +225,12 @@
       "common": {
         "heading": "Positions error",
         "description": "An error occurred while handling positions data. Please try again.",
-        "buttonLabel": "Refresh page"
+        "buttonLabel": "Try again"
       },
       "notFound": {
         "heading": "Position not found",
         "description": "This position does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Refresh page"
+        "buttonLabel": "Try again"
       }
     }
   }
