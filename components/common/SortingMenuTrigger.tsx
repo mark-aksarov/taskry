@@ -8,7 +8,6 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import { usePageTransition } from "./PageTransitionContext";
 import { ResponsiveMenuTrigger } from "./ResponsiveMenuTrigger";
 import { DialogHeaderWithClose } from "./DialogHeaderWithClose";
-import { areSearchParamsEqual } from "@/lib/utils/areSearchParamsEqual";
 
 interface SortingMenuTriggerProps<T extends object = any>
   extends MenuTriggerProps<T> {
@@ -27,20 +26,16 @@ export function SortingMenuTrigger<T extends object = any>({
   const { startSortingTransition } = usePageTransition();
 
   const handleAction = (key: Key) => {
+    const newSort = key as string;
+
     const newSearchParams = new URLSearchParams(searchParams.toString());
-    newSearchParams.set("sort", key as string);
+    newSearchParams.set("sort", newSort);
     newSearchParams.delete("page");
 
-    // if the new searchParams are the same as the current searchParams, do nothing
-    if (
-      areSearchParamsEqual({
-        a: searchParams,
-        b: newSearchParams,
-        includeKeys: ["sort"],
-      })
-    ) {
-      return;
-    }
+    // if the new old sort param is the same as the current sort param, do nothing
+    const currentSort = searchParams.get("sort");
+    if (currentSort === newSort) return;
+
     clearSelectedItems?.();
 
     startSortingTransition(() => {
