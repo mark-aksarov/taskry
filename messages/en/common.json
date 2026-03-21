@@ -57,6 +57,9 @@
     "label": "Apply Filters"
   },
   "FiltersResetButton": {
+    "label": "Reset filters"
+  },
+  "FiltersFormResetButton": {
     "label": "Reset"
   },
   "ActionsButton": {

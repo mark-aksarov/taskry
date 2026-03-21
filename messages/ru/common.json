@@ -57,6 +57,9 @@
     "label": "Применить фильтры"
   },
   "FiltersResetButton": {
+    "label": "Сбросить фильтры"
+  },
+  "FiltersFormResetButton": {
     "label": "Сбросить"
   },
   "ActionsButton": {

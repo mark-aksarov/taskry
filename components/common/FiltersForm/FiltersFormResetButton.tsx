@@ -9,7 +9,7 @@ const styles = tv({
 });
 
 export function FiltersFormResetButton({ onPress }: { onPress: () => void }) {
-  const t = useTranslations("common.FiltersResetButton");
+  const t = useTranslations("common.FiltersFormResetButton");
 
   return (
     <Button
