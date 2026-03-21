@@ -1,19 +1,10 @@
 "use client";
 
 import {
-  Info,
-  Trash,
-  Check,
-  Clock,
-  Pencil,
-  CircleEllipsis,
-} from "lucide-react";
-
-import {
   ItemBaseActionMenuButton,
   ItemBaseActionMenuTrigger,
   ItemBaseActionMenuDialogHeader,
-} from "../../common/ItemBase";
+} from "@/components/common/ItemBase";
 
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
@@ -24,6 +15,7 @@ import { useUpdateProject } from "../UpdateProjectContext";
 import { useProjectItemPending } from "./useProjectItemPending";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateProjectStatus } from "../UpdateProjectStatusContext";
+import { Trash, Check, Clock, Pencil, CircleEllipsis } from "lucide-react";
 
 export type ProjectItemActionMenuTriggerProps = {
   projectId: number;
@@ -57,20 +49,15 @@ export function ProjectItemActionMenuTrigger({
 
   /**
    * Handles menu actions for a project item:
-   * 1. If the user is a guest, show the guest mode modal.
-   * 2. If action is "details", do nothing.
-   * 3. If action is "edit", open the edit modal.
-   * 4. If action is "delete", open the delete confirmation modal.
-   * 5. Otherwise, treat the action as a project status update
+   * If the user is a guest, show the guest mode modal.
+   * If action is "edit", open the edit modal.
+   * If action is "delete", open the delete confirmation modal.
+   * Otherwise, treat the action as a project status update
    *    and trigger the updateProjectStatusAction for this project.
    */
   const handleAction = (key: Key) => {
     guestGuard(() => {
       const action = key.toString();
-
-      if (action === "details") {
-        return;
-      }
 
       if (action === "edit") {
         onEditModalOpenChange(true);
@@ -111,13 +98,6 @@ export function ProjectItemActionMenuTrigger({
           />
         )}
       >
-        <Item
-          href={`/projects/${projectId}`}
-          textValue={t("details")}
-          key="details"
-        >
-          <Info size={16} /> {t("details")}
-        </Item>
         <Item textValue={t("edit")} key="edit">
           <Pencil size={16} /> {t("edit")}
         </Item>

@@ -9,12 +9,12 @@ import {
 import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
+import { Pencil, Trash } from "lucide-react";
 import { EditUserModal } from "../EditUserModal";
-import { Info, Pencil, Trash } from "lucide-react";
 import { DeleteUserModal } from "../DeleteUserModal";
 import { useUpdateUser } from "../UpdateUserContext";
 import { useUserItemPending } from "./useUserItemPending";
-import { useGuestModeModal } from "@/components/common/GuestModeModal";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 
 interface UserItemActionMenuTriggerProps {
@@ -33,8 +33,10 @@ export function UserItemActionMenuTrigger({
   const t = useTranslations("users.UserItemActionMenuTrigger");
 
   // Detect if the current user is a guest
-  const { isGuest, userId: currentUserId } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  const { userId: currentUserId } = useCurrentUser();
+
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -48,20 +50,13 @@ export function UserItemActionMenuTrigger({
    * - Otherwise, open edit or delete modal based on action key
    */
   function handleAction(key: Key) {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-
-    if (key === "details") {
-      return;
-    }
-
-    if (key === "edit") {
-      onEditModalOpenChange(true);
-    } else if (key === "delete") {
-      setIsDeleteModalOpen(true);
-    }
+    guestGuard(() => {
+      if (key === "edit") {
+        onEditModalOpenChange(true);
+      } else if (key === "delete") {
+        setIsDeleteModalOpen(true);
+      }
+    });
   }
 
   // The user can't delete themselves, so we need to make sure the user sees the "Delete" menu item.
@@ -84,9 +79,6 @@ export function UserItemActionMenuTrigger({
           />
         )}
       >
-        <Item href={`/team/${userId}`} textValue={t("details")} key="details">
-          <Info size={16} /> {t("details")}
-        </Item>
         <Item textValue={t("edit")} key="edit">
           <Pencil size={16} /> {t("edit")}
         </Item>

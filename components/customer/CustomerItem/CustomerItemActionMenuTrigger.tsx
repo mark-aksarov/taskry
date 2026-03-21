@@ -4,12 +4,12 @@ import {
   ItemBaseActionMenuButton,
   ItemBaseActionMenuTrigger,
   ItemBaseActionMenuDialogHeader,
-} from "../../common/ItemBase";
+} from "@/components/common/ItemBase";
 
 import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
-import { Info, Pencil, Trash } from "lucide-react";
+import { Pencil, Trash } from "lucide-react";
 import { EditCustomerModal } from "../EditCustomerModal";
 import { DeleteCustomerModal } from "../DeleteCustomerModal";
 import { useUpdateCustomer } from "../UpdateCustomerContext";
@@ -47,10 +47,6 @@ export function CustomerItemActionMenuTrigger({
    */
   function handleAction(key: Key) {
     guestGuard(() => {
-      if (key === "details") {
-        return;
-      }
-
       if (key === "edit") {
         onEditModalOpenChange(true);
       } else if (key === "delete") {
@@ -76,13 +72,6 @@ export function CustomerItemActionMenuTrigger({
           />
         )}
       >
-        <Item
-          href={`/customers/${customerId}`}
-          textValue={t("details")}
-          key="details"
-        >
-          <Info size={16} /> {t("details")}
-        </Item>
         <Item textValue={t("edit")} key="edit">
           <Pencil size={16} /> {t("edit")}
         </Item>

@@ -1,15 +1,6 @@
 "use client";
 
 import {
-  Info,
-  Check,
-  Clock,
-  Trash,
-  Pencil,
-  CircleEllipsis,
-} from "lucide-react";
-
-import {
   ItemBaseActionMenuButton,
   ItemBaseActionMenuTrigger,
   ItemBaseActionMenuDialogHeader,
@@ -24,6 +15,7 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { useTaskItemPending } from "./useTaskItemPending";
 import { useUpdateTaskStatus } from "../UpdateTaskStatusContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
+import { Check, Clock, Trash, Pencil, CircleEllipsis } from "lucide-react";
 
 export type TaskItemActionMenuTriggerProps = {
   taskId: number;
@@ -57,20 +49,15 @@ export function TaskItemActionMenuTrigger({
 
   /**
    * Handles menu actions for a task item:
-   * 1. If the user is a guest, show the guest mode modal.
-   * 2. If action is "details", do nothing.
-   * 3. If action is "edit", open the edit modal.
-   * 4. If action is "delete", open the delete confirmation modal.
-   * 5. Otherwise, treat the action as a task status update
+   *  If the user is a guest, show the guest mode modal.
+   *  If action is "edit", open the edit modal.
+   *  If action is "delete", open the delete confirmation modal.
+   *  Otherwise, treat the action as a task status update
    *    and trigger the updateProjectStatusAction for this task.
    */
   function handleAction(key: Key) {
     guestGuard(() => {
       const action = key.toString();
-
-      if (action === "details") {
-        return;
-      }
 
       if (action === "edit") {
         onEditModalOpenChange(true);
@@ -111,9 +98,6 @@ export function TaskItemActionMenuTrigger({
           />
         )}
       >
-        <Item href={`/tasks/${taskId}`} textValue={t("details")} key="details">
-          <Info size={16} /> {t("details")}
-        </Item>
         <Item textValue={t("edit")} key="edit">
           <Pencil size={16} /> {t("edit")}
         </Item>
