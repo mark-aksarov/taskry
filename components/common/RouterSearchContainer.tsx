@@ -1,9 +1,10 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useSearchBar } from "../search/SearchBar";
 import { useSearchModal } from "../search/SearchModal";
 import { SearchListItem } from "../search/SearchListItem";
-import { useApplySearchQuery } from "../search/useApplySearchQuery";
+import { useApplyFilterURL } from "@/lib/hooks/useApplyFilterURL";
 import { SearchList, SearchListSkeleton } from "../search/SearchList";
 import { useFetchSearchKeywords } from "@/lib/swr/hooks/useFetchSearchKeywords";
 
@@ -12,6 +13,8 @@ export function RouterSearchContainer({
 }: {
   clearSelectedItems?: () => void;
 }) {
+  const searchParams = useSearchParams();
+
   // whenever the search bar value changes, refetch the search keywords
   const { value: searchBarValue, updateValue: updateSearchBarValue } =
     useSearchBar();
@@ -21,16 +24,23 @@ export function RouterSearchContainer({
   // close the search modal when applying a new search query
   const { onOpenChange } = useSearchModal();
 
-  // apply the search query when a search keyword is selected
-  const applySearchQuery = useApplySearchQuery();
+  // apply the filters when a search keyword is selected
+  const applyFilterURL = useApplyFilterURL();
 
   if (!data) return <SearchListSkeleton />;
 
-  function handlePress(value: string) {
+  function handlePress(newQuery: string) {
     clearSelectedItems?.();
-    updateSearchBarValue(value);
+    updateSearchBarValue(newQuery);
     onOpenChange(false);
-    applySearchQuery(value);
+
+    // Create new search params based on the current ones
+    const newSearchParams = new URLSearchParams(searchParams);
+
+    // set the search query
+    newSearchParams.set("query", newQuery);
+
+    applyFilterURL(newSearchParams);
   }
 
   return (

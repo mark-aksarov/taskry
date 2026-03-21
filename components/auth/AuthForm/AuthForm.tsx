@@ -2,7 +2,6 @@
 
 import { startTransition } from "react";
 import { Form } from "react-aria-components";
-import { normalizeBooleanFields } from "@/lib/utils/formDataUtils";
 
 interface AuthFormProps {
   action: (payload: FormData) => void;
@@ -14,7 +13,12 @@ export function AuthForm({ action, children }: AuthFormProps) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
-    normalizeBooleanFields(formData, ["rememberMe"]);
+    // Normalize "rememberMe" to either "true" or remove it
+    if (formData.get("rememberMe") === "on") {
+      formData.set("rememberMe", "true");
+    } else {
+      formData.delete("rememberMe");
+    }
 
     startTransition(() => {
       action(formData);
