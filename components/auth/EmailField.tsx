@@ -3,29 +3,29 @@
 import { useTranslations } from "next-intl";
 import { TextField } from "@/components/ui/TextField";
 
-export function SignUpFormPasswordField() {
-  const t = useTranslations("auth.SignUpFormPasswordField");
+export function EmailField() {
+  const t = useTranslations("auth.EmailField");
 
   return (
     <TextField
       label={t("label")}
-      type="password"
-      name="password"
+      type="email"
+      name="email"
+      data-testid="email-field"
       placeholder={t("placeholder")}
       isRequired
-      minLength={8}
-      maxLength={128}
+      maxLength={254}
       errorMessage={(validation) => {
         const details = validation.validationDetails;
 
         if (details.valueMissing) {
           return t("validation.required");
         }
-        if (details.tooShort) {
-          return t("validation.tooShort", { minLength: 8 });
-        }
         if (details.tooLong) {
-          return t("validation.tooLong", { minLength: 128 });
+          return t("validation.tooLong", { minLength: 254 });
+        }
+        if (details.typeMismatch) {
+          return t("validation.format");
         }
 
         return "";

@@ -33,7 +33,7 @@
   },
   "CheckEmailPage": {
     "heading": "Check your email",
-    "subtitle": "We have sent a password reset link to your email. If this email exists in our system, check your email for the reset link",
+    "subtitle": "We have sent a password reset link to your email.",
     "backButtonLabel": "Back to reset password"
   },
   "ForgetPasswordPage": {
@@ -60,7 +60,7 @@
   },
   "VerifyEmailPage": {
     "heading": "Verify Email",
-    "subtitle": "We've sent a verification email to {email}. Click the link in the email to activate your account and continue using the service. If you don’t see the message, check your spam folder or resend it."
+    "subtitle": "We've sent a verification email to {email}. Click the link in the email to activate your account."
   },
   "DashboardPage": {
     "heading": "Dashboard"

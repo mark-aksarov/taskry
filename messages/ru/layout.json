@@ -14,13 +14,6 @@
     "taskCategories": "Категории задач",
     "companies": "Компании"
   },
-  "AppHeaderLangMenuTrigger": {
-    "label": "Английский",
-    "items": {
-      "english": "Английский",
-      "russian": "Русский"
-    }
-  },
   "AppHeaderThemeToggleButton": {
     "darkLabel": "Темная тема",
     "lightLabel": "Светлая тема"

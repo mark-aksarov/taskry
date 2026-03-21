@@ -14,13 +14,6 @@
     "taskCategories": "Task categories",
     "companies": "Companies"
   },
-  "AppHeaderLangMenuTrigger": {
-    "label": "English",
-    "items": {
-      "english": "English",
-      "russian": "Russian"
-    }
-  },
   "AppHeaderThemeToggleButton": {
     "darkLabel": "Dark mode",
     "lightLabel": "Light mode"

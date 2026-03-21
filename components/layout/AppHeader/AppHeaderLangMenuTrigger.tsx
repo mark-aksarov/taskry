@@ -1,29 +1,15 @@
 "use client";
 
-import Image from "next/image";
-import { Item, Key } from "react-stately";
 import { Languages } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
-import { MenuTrigger } from "@/components/ui/Menu";
-import { useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { LangMenuTrigger } from "@/components/common/LangMenuTrigger";
 
 export const AppHeaderLangMenuTrigger = () => {
-  const t = useTranslations("layout.AppHeaderLangMenuTrigger");
-  const router = useRouter();
-  const pathname = usePathname();
-  const locale = useLocale();
-
-  function toggleLang(key: Key) {
-    const locale = key as "en" | "ru";
-    router.push(pathname, { locale });
-  }
+  const t = useTranslations("common.LangMenuTrigger");
 
   return (
-    <MenuTrigger
-      selectionMode="single"
-      selectedKeys={[locale]}
-      onAction={toggleLang}
+    <LangMenuTrigger
       renderButton={() => (
         <Button
           aria-label={t("label")}
@@ -34,26 +20,6 @@ export const AppHeaderLangMenuTrigger = () => {
           className="rounded-full p-3"
         />
       )}
-      placement="bottom right"
-    >
-      <Item textValue={t("items.english")} key="en">
-        <Image
-          src={`https://flagcdn.com/gb.svg`}
-          alt={t("items.english")}
-          width={32}
-          height={22}
-        />
-        {t("items.english")}
-      </Item>
-      <Item textValue={t("items.russian")} key="ru">
-        <Image
-          src={`https://flagcdn.com/ru.svg`}
-          alt={t("items.russian")}
-          width={32}
-          height={22}
-        />
-        {t("items.russian")}
-      </Item>
-    </MenuTrigger>
+    />
   );
 };

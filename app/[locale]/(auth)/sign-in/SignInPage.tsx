@@ -2,15 +2,14 @@ import {
   AuthCard,
   AuthCardBody,
   AuthCardHeader,
-  AuthCardFooter,
   AuthCardHeading,
   AuthCardSubtitle,
 } from "@/components/auth/AuthCard";
 import { useTranslations } from "next-intl";
 import { SignInForm } from "@/components/auth/SignInForm";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { AuthCardFooterSignUpItem } from "@/components/auth/AuthCardFooterSignUpItem";
-import { AuthCardFooterForgotPasswordItem } from "@/components/auth/AuthCardFooterForgotPasswordItem";
+import { AuthLangMenuTrigger } from "@/components/auth/AuthLangMenuTrigger";
+import { AuthCardSignUpFooter } from "@/components/auth/AuthCardSignUpFooter";
 
 interface SignInPageProps {
   resetPasswordSuccess?: boolean;
@@ -22,6 +21,7 @@ export function SignInPage({ resetPasswordSuccess, signIn }: SignInPageProps) {
 
   return (
     <AuthCard>
+      <AuthLangMenuTrigger />
       <AuthCardHeader>
         <AuthCardHeading>{t("heading")}</AuthCardHeading>
         <AuthCardSubtitle>
@@ -31,10 +31,7 @@ export function SignInPage({ resetPasswordSuccess, signIn }: SignInPageProps) {
       <AuthCardBody>
         <SignInForm signIn={signIn} />
       </AuthCardBody>
-      <AuthCardFooter>
-        <AuthCardFooterSignUpItem />
-        <AuthCardFooterForgotPasswordItem />
-      </AuthCardFooter>
+      <AuthCardSignUpFooter />
     </AuthCard>
   );
 }

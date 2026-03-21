@@ -1,7 +1,15 @@
-export function AuthCardFooter({ children }: { children: React.ReactNode }) {
+interface AuthCardFooterProps {
+  text: string;
+  link: React.ReactNode;
+}
+
+export function AuthCardFooter({ text, link }: AuthCardFooterProps) {
   return (
-    <div className="flex justify-between gap-4 max-md:flex-col md:items-center">
-      {children}
+    <div className="mt-8 flex items-center justify-center gap-1.5">
+      <div className="text-sm font-normal text-black dark:text-white">
+        {text}
+      </div>
+      {link}
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import { Checkbox } from "@/components/ui/Checkbox";
 import { useTranslations } from "next-intl";
 
-export function SignUpFormRememberMeCheckbox() {
-  const t = useTranslations("auth.SignUpFormRememberMeCheckbox");
+export function RememberMeCheckbox() {
+  const t = useTranslations("auth.RememberMeCheckbox");
 
   return (
     <Checkbox className="font-normal" name="rememberMe">

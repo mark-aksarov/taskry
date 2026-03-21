@@ -4,6 +4,3 @@ export { AuthCardHeader } from "./AuthCardHeader";
 export { AuthCardFooter } from "./AuthCardFooter";
 export { AuthCardHeading } from "./AuthCardHeading";
 export { AuthCardSubtitle } from "./AuthCardSubtitle";
-export { AuthCardFooterLink } from "./AuthCardFooterLink";
-export { AuthCardFooterItem } from "./AuthCardFooterItem";
-export { AuthCardFooterText } from "./AuthCardFooterText";

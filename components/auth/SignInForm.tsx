@@ -1,13 +1,14 @@
 "use client";
 
 import { useActionState } from "react";
+import { EmailField } from "./EmailField";
 import { useTranslations } from "next-intl";
+import { PasswordField } from "./PasswordField";
+import { AuthForgotPassword } from "./AuthForgotPassword";
+import { RememberMeCheckbox } from "./RememberMeCheckbox";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { AuthForm, AuthFormSubmitButton } from "../AuthForm";
-import { SignInFormEmailField } from "./SignInFormEmailField";
-import { SignInFormPasswordField } from "./SignInFormPasswordField";
+import { AuthForm, AuthFormSubmitButton } from "./AuthForm";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
-import { SignInFormRememberMeCheckbox } from "./SignInFormRememberMeCheckbox";
 
 const initialState: ActionState = {
   status: null,
@@ -24,9 +25,13 @@ export function SignInForm({ signIn }: SignInFormProps) {
 
   return (
     <AuthForm action={formAction}>
-      <SignInFormEmailField />
-      <SignInFormPasswordField />
-      <SignInFormRememberMeCheckbox />
+      <EmailField />
+      <PasswordField />
+
+      <div className="flex items-center justify-between">
+        <RememberMeCheckbox />
+        <AuthForgotPassword />
+      </div>
 
       <FormErrorBanner status={state.status} isPending={isPending}>
         {state.message}

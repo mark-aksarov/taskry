@@ -1,4 +1,12 @@
 {
+  "LangMenuTrigger": {
+    "dialogHeading": "Язык",
+    "label": "Русский",
+    "items": {
+      "english": "Английский",
+      "russian": "Русский"
+    }
+  },
   "GridItemPhoneNumber": {
     "noPhoneNumber": "Нет номера телефона"
   },

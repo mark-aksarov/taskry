@@ -2,19 +2,20 @@ import {
   AuthCard,
   AuthCardBody,
   AuthCardHeader,
-  AuthCardFooter,
   AuthCardHeading,
   AuthCardSubtitle,
 } from "@/components/auth/AuthCard";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
-import { AuthCardFooterSignInItem } from "@/components/auth/AuthCardFooterSignInItem";
+import { AuthLangMenuTrigger } from "@/components/auth/AuthLangMenuTrigger";
+import { AuthCardSignInFooter } from "@/components/auth/AuthCardSignInFooter";
 
 export function CheckEmailPage() {
   const t = useTranslations("app.CheckEmailPage");
 
   return (
     <AuthCard>
+      <AuthLangMenuTrigger />
       <AuthCardHeader>
         <AuthCardHeading>{t("heading")}</AuthCardHeading>
         <AuthCardSubtitle>{t("subtitle")}</AuthCardSubtitle>
@@ -29,9 +30,7 @@ export function CheckEmailPage() {
           size="medium"
         />
       </AuthCardBody>
-      <AuthCardFooter>
-        <AuthCardFooterSignInItem />
-      </AuthCardFooter>
+      <AuthCardSignInFooter />
     </AuthCard>
   );
 }

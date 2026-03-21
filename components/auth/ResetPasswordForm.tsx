@@ -2,10 +2,10 @@
 
 import { useActionState } from "react";
 import { useTranslations } from "next-intl";
+import { PasswordField } from "./PasswordField";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { AuthForm, AuthFormSubmitButton } from "../AuthForm";
+import { AuthForm, AuthFormSubmitButton } from "./AuthForm";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
-import { ResetPasswordFormPasswordField } from "./ResetPasswordFormPasswordField";
 
 const initialState: ActionState = {
   status: null,
@@ -25,7 +25,7 @@ export function ResetPasswordForm({ resetPassword }: ResetPasswordFormProps) {
 
   return (
     <AuthForm action={formAction}>
-      <ResetPasswordFormPasswordField />
+      <PasswordField minLength={8} maxLength={128} />
 
       <FormErrorBanner status={state.status} isPending={isPending}>
         {state.message}

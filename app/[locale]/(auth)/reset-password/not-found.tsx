@@ -3,21 +3,24 @@ import {
   AuthCardBody,
   AuthCardHeader,
   AuthCardHeading,
+  AuthCardSubtitle,
 } from "@/components/auth/AuthCard";
 import { LogIn } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
+import { AuthLangMenuTrigger } from "@/components/auth/AuthLangMenuTrigger";
 
 export default function ResetPasswordNotFound() {
   const t = useTranslations("app.ResetPasswordNotFound");
 
   return (
     <AuthCard>
+      <AuthLangMenuTrigger />
       <AuthCardHeader>
         <AuthCardHeading>{t("heading")}</AuthCardHeading>
+        <AuthCardSubtitle>{t("body")}</AuthCardSubtitle>
       </AuthCardHeader>
       <AuthCardBody>
-        <p className="text-sm text-black dark:text-white">{t("body")}</p>
         <Button
           as="a"
           href="/signIn"

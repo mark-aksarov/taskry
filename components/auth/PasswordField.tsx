@@ -1,18 +1,23 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { TextField } from "@/components/ui/TextField";
+import { TextField, TextFieldProps } from "@/components/ui/TextField";
 
-export function SignInFormPasswordField() {
-  const t = useTranslations("auth.SignInFormPasswordField");
+export function PasswordField({
+  minLength,
+  maxLength,
+}: Pick<TextFieldProps, "minLength" | "maxLength">) {
+  const t = useTranslations("auth.PasswordField");
 
   return (
     <TextField
       label={t("label")}
       type="password"
-      placeholder={t("placeholder")}
       name="password"
+      placeholder={t("placeholder")}
       isRequired
+      minLength={minLength}
+      maxLength={maxLength}
       errorMessage={(validation) => {
         const details = validation.validationDetails;
 
@@ -23,7 +28,7 @@ export function SignInFormPasswordField() {
           return t("validation.tooShort", { minLength: 8 });
         }
         if (details.tooLong) {
-          return t("validation.tooLong", { maxLength: 128 });
+          return t("validation.tooLong", { minLength: 128 });
         }
 
         return "";

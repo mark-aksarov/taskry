@@ -2,15 +2,14 @@ import {
   AuthCard,
   AuthCardBody,
   AuthCardHeader,
-  AuthCardFooter,
   AuthCardHeading,
   AuthCardSubtitle,
 } from "@/components/auth/AuthCard";
 import { useTranslations } from "next-intl";
 import { SignUpForm } from "@/components/auth/SignUpForm";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { AuthCardFooterSignInItem } from "@/components/auth/AuthCardFooterSignInItem";
-import { AuthCardFooterForgotPasswordItem } from "@/components/auth/AuthCardFooterForgotPasswordItem";
+import { AuthLangMenuTrigger } from "@/components/auth/AuthLangMenuTrigger";
+import { AuthCardSignInFooter } from "@/components/auth/AuthCardSignInFooter";
 
 export function SignUpPage({
   action,
@@ -21,6 +20,7 @@ export function SignUpPage({
 
   return (
     <AuthCard>
+      <AuthLangMenuTrigger />
       <AuthCardHeader>
         <AuthCardHeading>{t("heading")}</AuthCardHeading>
         <AuthCardSubtitle>{t("subtitle")}</AuthCardSubtitle>
@@ -28,10 +28,7 @@ export function SignUpPage({
       <AuthCardBody>
         <SignUpForm action={action} />
       </AuthCardBody>
-      <AuthCardFooter>
-        <AuthCardFooterSignInItem />
-        <AuthCardFooterForgotPasswordItem />
-      </AuthCardFooter>
+      <AuthCardSignInFooter />
     </AuthCard>
   );
 }

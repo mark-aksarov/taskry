@@ -1,11 +1,11 @@
 "use client";
 
 import { useActionState } from "react";
+import { EmailField } from "./EmailField";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { AuthForm, AuthFormSubmitButton } from "../AuthForm";
+import { AuthForm, AuthFormSubmitButton } from "./AuthForm";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
-import { ForgetPasswordFormEmailField } from "./ForgetPasswordFormEmailField";
 
 const initialState: ActionState = {
   status: null,
@@ -22,7 +22,7 @@ export function ForgetPasswordForm({ action }: ForgetPasswordFormProps) {
 
   return (
     <AuthForm action={formAction}>
-      <ForgetPasswordFormEmailField />
+      <EmailField />
 
       <FormErrorBanner status={state.status} isPending={isPending}>
         {state.message}
