@@ -77,10 +77,6 @@
     "list": "List",
     "cards": "Cards"
   },
-  "AttachmentsField": {
-    "label": "Attachments",
-    "maxSize": "Max size: 10 MB"
-  },
   "ItemBaseActionMenuTrigger": {
     "ariaLabel": "Actions"
   },

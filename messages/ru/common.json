@@ -77,10 +77,6 @@
     "list": "Список",
     "cards": "Карточки"
   },
-  "AttachmentsField": {
-    "label": "Вложения",
-    "maxSize": "Максимальный размер: 10 МБ"
-  },
   "ItemBaseActionMenuTrigger": {
     "ariaLabel": "Действия"
   },

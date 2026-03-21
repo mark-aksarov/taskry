@@ -20,9 +20,6 @@
   "CommentTextField": {
     "placeholder": "Type a comment..."
   },
-  "CommentTextFieldFileTrigger": {
-    "ariaLabel": "Add attachments"
-  },
   "CommentTextFieldSendButton": {
     "ariaLabel": "Send Message"
   },

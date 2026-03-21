@@ -20,9 +20,6 @@
   "CommentTextField": {
     "placeholder": "Напишите комментарий..."
   },
-  "CommentTextFieldFileTrigger": {
-    "ariaLabel": "Добавить вложения"
-  },
   "CommentTextFieldSendButton": {
     "ariaLabel": "Отправить сообщение"
   },
