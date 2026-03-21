@@ -14,7 +14,7 @@
     "taskCategories": "Категории задач",
     "companies": "Компании"
   },
-  "AppHeaderThemeToggleButton": {
+  "ThemeToggleButton": {
     "darkLabel": "Темная тема",
     "lightLabel": "Светлая тема"
   },
@@ -26,20 +26,8 @@
     "customers": "Клиенты",
     "profile": "Профиль"
   },
-  "AppNavigationLangMenuTrigger": {
-    "dialogHeading": "Язык",
-    "label": "Русский",
-    "items": {
-      "english": "Английский",
-      "russian": "Русский"
-    }
-  },
   "AppNavigationLogoutButton": {
     "logout": "Выйти"
-  },
-  "AppNavigationThemeToggleButton": {
-    "darkLabel": "Темная тема",
-    "lightLabel": "Светлая тема"
   },
   "AppBottomSheetTrigger": {
     "triggerAriaLabel": "язык",

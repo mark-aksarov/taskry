@@ -8,7 +8,7 @@ import { ButtonSkeleton } from "@/components/ui/Skeleton";
 import { NavigationButton } from "@/components/common/NavigationButton";
 
 export function AppNavigationThemeToggleButton() {
-  const t = useTranslations("layout.AppNavigationThemeToggleButton");
+  const t = useTranslations("layout.ThemeToggleButton");
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 

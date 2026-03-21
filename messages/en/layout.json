@@ -14,7 +14,7 @@
     "taskCategories": "Task categories",
     "companies": "Companies"
   },
-  "AppHeaderThemeToggleButton": {
+  "ThemeToggleButton": {
     "darkLabel": "Dark mode",
     "lightLabel": "Light mode"
   },
@@ -26,20 +26,8 @@
     "customers": "Customers",
     "profile": "Profile"
   },
-  "AppNavigationLangMenuTrigger": {
-    "dialogHeading": "Language",
-    "label": "English",
-    "items": {
-      "english": "English",
-      "russian": "Russian"
-    }
-  },
   "AppNavigationLogoutButton": {
     "logout": "Logout"
-  },
-  "AppNavigationThemeToggleButton": {
-    "darkLabel": "Dark mode",
-    "lightLabel": "Light mode"
   },
   "AppBottomSheetTrigger": {
     "triggerAriaLabel": "language",

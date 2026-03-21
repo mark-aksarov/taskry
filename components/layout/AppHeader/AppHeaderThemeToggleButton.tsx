@@ -14,7 +14,7 @@ export interface AppHeaderThemeToggleButtonProps {
 export function AppHeaderThemeToggleButton({
   className,
 }: AppHeaderThemeToggleButtonProps) {
-  const t = useTranslations("layout.AppHeaderThemeToggleButton");
+  const t = useTranslations("layout.ThemeToggleButton");
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 

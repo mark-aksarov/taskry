@@ -1,12 +1,13 @@
 "use client";
 
-import Image from "next/image";
 import { Item, Key } from "react-stately";
 import { Placement } from "../ui/Popover";
+import { RussiaFlag } from "../icons/RussiaFlag";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { ResponsiveMenuTrigger } from "./ResponsiveMenuTrigger";
 import { DialogHeaderWithClose } from "./DialogHeaderWithClose";
+import { UnitedKingdomFlag } from "../icons/UnitedKingdomFlag";
 
 interface LangMenuTriggerProps {
   renderButton: () => React.ReactNode;
@@ -39,21 +40,11 @@ export const LangMenuTrigger = ({
       placement={placement}
     >
       <Item textValue={t("items.english")} key="en">
-        <Image
-          src={`https://flagcdn.com/gb.svg`}
-          alt={t("items.english")}
-          width={32}
-          height={22}
-        />
+        <UnitedKingdomFlag width={32} height={22} />
         {t("items.english")}
       </Item>
       <Item textValue={t("items.russian")} key="ru">
-        <Image
-          src={`https://flagcdn.com/ru.svg`}
-          alt={t("items.russian")}
-          width={32}
-          height={22}
-        />
+        <RussiaFlag width={32} height={22} />
         {t("items.russian")}
       </Item>
     </ResponsiveMenuTrigger>
