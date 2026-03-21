@@ -11,22 +11,19 @@ import {
   FormBaseFooter,
 } from "@/components/common/FormBase";
 
-import { useContext } from "react";
-import { useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { Separator } from "@/components/ui/Separator";
 import { OnlyMyTasksSwitch } from "../OnlyMyTasksSwitch";
 import { useSelectedTasks } from "../SelectedTasksContext";
-import { usePathname, useRouter } from "@/i18n/navigation";
 import { AssigneeCheckboxGroup } from "../AssigneeCheckboxGroup";
-import { OverlayTriggerStateContext } from "react-aria-components";
+import { useApplyFilterURL } from "@/lib/hooks/useApplyFilterURL";
 import { TaskStatusCheckboxGroup } from "../TaskStatusCheckboxGroup";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
-import { usePageTransition } from "@/components/common/PageTransitionContext";
 import { DeadlineToDatePicker } from "@/components/common/DeadlineToDatePicker";
 import { ProjectCheckboxGroup } from "@/components/projects/ProjectCheckboxGroup";
 import { DeadlineFromDatePicker } from "@/components/common/DeadlineFromDatePicker";
+import { useFilterSubmitSideEffects } from "@/lib/hooks/useFilterSubmitSideEffects";
 import { TaskCategoryCheckboxGroup } from "@/components/taskCategory/TaskCategoryCheckboxGroup";
 
 interface TaskFiltersFormProps {
@@ -40,15 +37,12 @@ export function TaskFiltersForm({
   projectCheckboxGroupItems,
   assigneeCheckboxGroupItems,
 }: TaskFiltersFormProps) {
-  const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { startFilteringTransition } = usePageTransition();
+  const applyFilterURL = useApplyFilterURL();
   const { clear: clearSelectedItems } = useSelectedTasks();
-
-  // TaskFiltersForm can only be used inside the TaskFiltersModal
-  const { close: closeModal } = useContext(OverlayTriggerStateContext)!;
+  const runSubmitSideEffects = useFilterSubmitSideEffects({
+    clearSelectedItems,
+  });
 
   const {
     onlyMyTasks,
@@ -65,8 +59,8 @@ export function TaskFiltersForm({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // close the form modal immediately
-    closeModal();
+    // Run submit UI side effects
+    runSubmitSideEffects();
 
     // Create new search params based on the current ones
     const newSearchParams = new URLSearchParams(searchParams);
@@ -96,16 +90,7 @@ export function TaskFiltersForm({
     categoryIds.forEach((id) => newSearchParams.append("categoryIds", id));
     assigneeIds.forEach((id) => newSearchParams.append("assigneeIds", id));
 
-    // Reset pagination
-    newSearchParams.delete("page");
-
-    // Clear the selected items in list / grid
-    clearSelectedItems?.();
-
-    // Start the page transition and update the URL with new search params
-    startFilteringTransition(() => {
-      router.replace(`${pathname}?${newSearchParams}`, { locale });
-    });
+    applyFilterURL(newSearchParams);
   };
 
   return (

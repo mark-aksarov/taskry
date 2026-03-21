@@ -11,22 +11,19 @@ import {
   useProjectFiltersFormDispatch,
 } from "./ProjectFiltersFormContext";
 
-import { useContext } from "react";
-import { useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { Separator } from "@/components/ui/Separator";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { usePathname, useRouter } from "@/i18n/navigation";
 import { useSelectedProjects } from "../SelectedProjectsContext";
-import { OverlayTriggerStateContext } from "react-aria-components";
+import { useApplyFilterURL } from "@/lib/hooks/useApplyFilterURL";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { ProjectStatusCheckboxGroup } from "../ProjectStatusCheckboxGroup";
 import { ProjectCreatorCheckboxGroup } from "../ProjectCreatorCheckboxGroup";
 import { NoActiveTasksSwitch } from "@/components/tasks/NoActiveTasksSwitch";
-import { usePageTransition } from "@/components/common/PageTransitionContext";
 import { DeadlineToDatePicker } from "@/components/common/DeadlineToDatePicker";
 import { CustomerCheckboxGroup } from "@/components/customer/CustomerCheckboxGroup";
 import { DeadlineFromDatePicker } from "@/components/common/DeadlineFromDatePicker";
+import { useFilterSubmitSideEffects } from "@/lib/hooks/useFilterSubmitSideEffects";
 import { ProjectCategoryCheckboxGroup } from "@/components/projectCategory/ProjectCategoryCheckboxGroup";
 
 interface ProjectFiltersFormProps {
@@ -40,15 +37,12 @@ export function ProjectFiltersForm({
   userCheckboxGroupItems,
   customerCheckboxGroupItems,
 }: ProjectFiltersFormProps) {
-  const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { startFilteringTransition } = usePageTransition();
+  const applyFilterURL = useApplyFilterURL();
   const { clear: clearSelectedItems } = useSelectedProjects();
-
-  // TaskFiltersForm can only be used inside the TaskFiltersModal
-  const { close: closeModal } = useContext(OverlayTriggerStateContext)!;
+  const runSubmitSideEffects = useFilterSubmitSideEffects({
+    clearSelectedItems,
+  });
 
   const {
     noActiveTasks,
@@ -65,8 +59,8 @@ export function ProjectFiltersForm({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // close the form modal immediately
-    closeModal();
+    // Run submit UI side effects
+    runSubmitSideEffects();
 
     // Create new search params based on the current ones
     const newSearchParams = new URLSearchParams(searchParams);
@@ -96,16 +90,7 @@ export function ProjectFiltersForm({
     categoryIds.forEach((id) => newSearchParams.append("categoryIds", id));
     creatorIds.forEach((id) => newSearchParams.append("creatorIds", id));
 
-    // Reset pagination
-    newSearchParams.delete("page");
-
-    // Clear the selected items in list / grid
-    clearSelectedItems?.();
-
-    // Start the page transition and update the URL with new search params
-    startFilteringTransition(() => {
-      router.replace(`${pathname}?${newSearchParams}`, { locale });
-    });
+    applyFilterURL(newSearchParams);
   };
 
   return (

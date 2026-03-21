@@ -11,18 +11,15 @@ import {
   useCustomerFiltersFormDispatch,
 } from "./CustomerFiltersFormContext";
 
-import { useContext } from "react";
-import { useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { Separator } from "@/components/ui/Separator";
-import { usePathname, useRouter } from "@/i18n/navigation";
-import { OverlayTriggerStateContext } from "react-aria-components";
+import { useApplyFilterURL } from "@/lib/hooks/useApplyFilterURL";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { usePageTransition } from "@/components/common/PageTransitionContext";
 import { CompanyCheckboxGroup } from "@/components/company/CompanyCheckboxGroup";
 import { ActiveProjectsSwitch } from "@/components/projects/ActiveProjectsSwitch";
 import { OverdueProjectsSwitch } from "@/components/projects/OverdueProjectsSwitch";
+import { useFilterSubmitSideEffects } from "@/lib/hooks/useFilterSubmitSideEffects";
 import { NoActiveProjectsSwitch } from "@/components/projects/NoActiveProjectsSwitch";
 
 interface CustomerFiltersFormProps {
@@ -32,15 +29,12 @@ interface CustomerFiltersFormProps {
 export function CustomerFiltersForm({
   companyCheckboxGroupItems,
 }: CustomerFiltersFormProps) {
-  const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { startFilteringTransition } = usePageTransition();
+  const applyFilterURL = useApplyFilterURL();
   const { clear: clearSelectedItems } = useSelectedItems();
-
-  // CustomerFiltersForm can only be used inside the CustomerFiltersModal
-  const { close: closeModal } = useContext(OverlayTriggerStateContext)!;
+  const runSubmitSideEffects = useFilterSubmitSideEffects({
+    clearSelectedItems,
+  });
 
   const {
     companyIds,
@@ -53,8 +47,8 @@ export function CustomerFiltersForm({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // close the form modal immediately
-    closeModal();
+    // Run submit UI side effects
+    runSubmitSideEffects();
 
     // Create new search params based on the current ones
     const newSearchParams = new URLSearchParams(searchParams);
@@ -81,16 +75,7 @@ export function CustomerFiltersForm({
     // Add selected company IDs
     companyIds.forEach((id) => newSearchParams.append("companyIds", id));
 
-    // Reset pagination
-    newSearchParams.delete("page");
-
-    // Clear the selected items in list / grid
-    clearSelectedItems?.();
-
-    // Start the page transition and update the URL with new search params
-    startFilteringTransition(() => {
-      router.replace(`${pathname}?${newSearchParams}`, { locale });
-    });
+    applyFilterURL(newSearchParams);
   };
 
   return (

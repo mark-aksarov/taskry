@@ -11,27 +11,21 @@ import {
   FormBaseFooter,
 } from "@/components/common/FormBase";
 
-import { useContext } from "react";
-import { useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useSelectedTasks } from "./SelectedTasksContext";
-import { usePathname, useRouter } from "@/i18n/navigation";
-import { OverlayTriggerStateContext } from "react-aria-components";
+import { useApplyFilterURL } from "@/lib/hooks/useApplyFilterURL";
 import { TaskStatusCheckboxGroup } from "./TaskStatusCheckboxGroup";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
-import { usePageTransition } from "@/components/common/PageTransitionContext";
+import { useFilterSubmitSideEffects } from "@/lib/hooks/useFilterSubmitSideEffects";
 
 export function TaskStatusFiltersForm() {
-  const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { startFilteringTransition } = usePageTransition();
-  const { clear: clearSelectedTasks } = useSelectedTasks();
-
-  // TaskStatusFiltersForm can only be used inside the TaskStatusFiltersModal
-  const { close: closeModal } = useContext(OverlayTriggerStateContext)!;
+  const applyFilterURL = useApplyFilterURL();
+  const { clear: clearSelectedItems } = useSelectedTasks();
+  const runSubmitSideEffects = useFilterSubmitSideEffects({
+    clearSelectedItems,
+  });
 
   const { statuses } = useTaskFiltersForm();
   const dispatch = useTaskFiltersFormDispatch();
@@ -39,8 +33,8 @@ export function TaskStatusFiltersForm() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // close the form modal immediately
-    closeModal();
+    // Run submit UI side effects
+    runSubmitSideEffects();
 
     // Create new search params based on the current ones
     const newSearchParams = new URLSearchParams(searchParams);
@@ -49,16 +43,7 @@ export function TaskStatusFiltersForm() {
     newSearchParams.delete("status");
     statuses.forEach((status) => newSearchParams.append("status", status));
 
-    // Reset pagination
-    newSearchParams.delete("page");
-
-    // Clear the selected tasks in list / grid
-    clearSelectedTasks?.();
-
-    // Start the page transition and update the URL with new search params
-    startFilteringTransition(() => {
-      router.replace(`${pathname}?${newSearchParams}`, { locale });
-    });
+    applyFilterURL(newSearchParams);
   };
 
   return (

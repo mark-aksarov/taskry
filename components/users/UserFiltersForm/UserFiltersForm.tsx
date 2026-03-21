@@ -11,32 +11,24 @@ import {
   useUserFiltersFormDispatch,
 } from "./UserFiltersFormContext";
 
-import { useContext } from "react";
-import { useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { Separator } from "@/components/ui/Separator";
-import { usePathname, useRouter } from "@/i18n/navigation";
 import { PositionCheckboxGroup } from "../PositionCheckboxGroup";
-import { OverlayTriggerStateContext } from "react-aria-components";
+import { useApplyFilterURL } from "@/lib/hooks/useApplyFilterURL";
 import { ActiveTasksSwitch } from "@/components/tasks/ActiveTasksSwitch";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { OverdueTasksSwitch } from "@/components/tasks/OverdueTasksSwitch";
 import { NoActiveTasksSwitch } from "@/components/tasks/NoActiveTasksSwitch";
-import { usePageTransition } from "@/components/common/PageTransitionContext";
+import { useFilterSubmitSideEffects } from "@/lib/hooks/useFilterSubmitSideEffects";
 
 interface Props {
   positionCheckboxGroupItems: { id: number; name: string }[];
 }
 
 export function UserFiltersForm({ positionCheckboxGroupItems }: Props) {
-  const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { startFilteringTransition } = usePageTransition();
-
-  // UserFiltersForm can only be used inside the UserFiltersModal
-  const { close: closeModal } = useContext(OverlayTriggerStateContext)!;
+  const applyFilterURL = useApplyFilterURL();
+  const runSubmitSideEffects = useFilterSubmitSideEffects();
 
   const { hasActiveTasks, hasNoActiveTasks, hasOverdueTasks, positionIds } =
     useUserFiltersForm();
@@ -46,8 +38,8 @@ export function UserFiltersForm({ positionCheckboxGroupItems }: Props) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // close the form modal immediately
-    closeModal();
+    // Run submit UI side effects
+    runSubmitSideEffects();
 
     // Create new search params based on the current ones
     const newSearchParams = new URLSearchParams(searchParams);
@@ -73,13 +65,7 @@ export function UserFiltersForm({ positionCheckboxGroupItems }: Props) {
 
     positionIds.forEach((id) => newSearchParams.append("positionIds", id));
 
-    // Reset pagination
-    newSearchParams.delete("page");
-
-    // Start the page transition and update the URL with new search params
-    startFilteringTransition(() => {
-      router.replace(`${pathname}?${newSearchParams}`, { locale });
-    });
+    applyFilterURL(newSearchParams);
   };
 
   return (

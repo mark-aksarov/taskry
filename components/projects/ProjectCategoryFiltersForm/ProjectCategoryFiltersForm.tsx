@@ -11,14 +11,11 @@ import {
   FormBaseFooter,
 } from "@/components/common/FormBase";
 
-import { useContext } from "react";
-import { useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { usePathname, useRouter } from "@/i18n/navigation";
 import { useSelectedProjects } from "../SelectedProjectsContext";
-import { OverlayTriggerStateContext } from "react-aria-components";
+import { useApplyFilterURL } from "@/lib/hooks/useApplyFilterURL";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
-import { usePageTransition } from "@/components/common/PageTransitionContext";
+import { useFilterSubmitSideEffects } from "@/lib/hooks/useFilterSubmitSideEffects";
 import { ProjectCategoryCheckboxGroup } from "@/components/projectCategory/ProjectCategoryCheckboxGroup";
 
 interface ProjectCategoryFiltersFormProps {
@@ -28,15 +25,12 @@ interface ProjectCategoryFiltersFormProps {
 export function ProjectCategoryFiltersForm({
   categoryCheckboxGroupItems,
 }: ProjectCategoryFiltersFormProps) {
-  const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { startFilteringTransition } = usePageTransition();
+  const applyFilterURL = useApplyFilterURL();
   const { clear: clearSelectedItems } = useSelectedProjects();
-
-  // ProjectCategoryFiltersForm can only be used inside the ProjectCategoryFiltersModal
-  const { close: closeModal } = useContext(OverlayTriggerStateContext)!;
+  const runSubmitSideEffects = useFilterSubmitSideEffects({
+    clearSelectedItems,
+  });
 
   const { categoryIds } = useProjectFiltersForm();
   const dispatch = useProjectFiltersFormDispatch();
@@ -44,8 +38,8 @@ export function ProjectCategoryFiltersForm({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // close the form modal immediately
-    closeModal();
+    // Run submit UI side effects
+    runSubmitSideEffects();
 
     // Create new search params based on the current ones
     const newSearchParams = new URLSearchParams(searchParams);
@@ -54,16 +48,7 @@ export function ProjectCategoryFiltersForm({
     newSearchParams.delete("categoryIds");
     categoryIds.forEach((id) => newSearchParams.append("categoryIds", id));
 
-    // Reset pagination
-    newSearchParams.delete("page");
-
-    // Clear the selected items in list / grid
-    clearSelectedItems?.();
-
-    // Start the page transition and update the URL with new search params
-    startFilteringTransition(() => {
-      router.replace(`${pathname}?${newSearchParams}`, { locale });
-    });
+    applyFilterURL(newSearchParams);
   };
 
   return (

@@ -11,14 +11,11 @@ import {
   useUserFiltersFormDispatch,
 } from "../UserFiltersForm/UserFiltersFormContext";
 
-import { useContext } from "react";
-import { useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { usePathname, useRouter } from "@/i18n/navigation";
 import { PositionCheckboxGroup } from "../PositionCheckboxGroup";
-import { OverlayTriggerStateContext } from "react-aria-components";
+import { useApplyFilterURL } from "@/lib/hooks/useApplyFilterURL";
 import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
-import { usePageTransition } from "@/components/common/PageTransitionContext";
+import { useFilterSubmitSideEffects } from "@/lib/hooks/useFilterSubmitSideEffects";
 
 interface UserPositionFiltersFormProps {
   positionCheckboxGroupItems: { id: number; name: string }[];
@@ -27,14 +24,9 @@ interface UserPositionFiltersFormProps {
 export function UserPositionFiltersForm({
   positionCheckboxGroupItems,
 }: UserPositionFiltersFormProps) {
-  const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { startFilteringTransition } = usePageTransition();
-
-  // CustomerCompanyFiltersForm can only be used inside the CustomerCompanyFiltersModal
-  const { close: closeModal } = useContext(OverlayTriggerStateContext)!;
+  const applyFilterURL = useApplyFilterURL();
+  const runSubmitSideEffects = useFilterSubmitSideEffects();
 
   const { positionIds } = useUserFiltersForm();
   const dispatch = useUserFiltersFormDispatch();
@@ -42,8 +34,8 @@ export function UserPositionFiltersForm({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // close the form modal immediately
-    closeModal();
+    // Run submit UI side effects
+    runSubmitSideEffects();
 
     // Create new search params based on the current ones
     const newSearchParams = new URLSearchParams(searchParams);
@@ -52,13 +44,7 @@ export function UserPositionFiltersForm({
     newSearchParams.delete("positionIds");
     positionIds.forEach((id) => newSearchParams.append("positionIds", id));
 
-    // Reset pagination
-    newSearchParams.delete("page");
-
-    // Start the page transition and update the URL with new search params
-    startFilteringTransition(() => {
-      router.replace(`${pathname}?${newSearchParams}`, { locale });
-    });
+    applyFilterURL(newSearchParams);
   };
 
   return (
