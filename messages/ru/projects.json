@@ -98,10 +98,10 @@
     }
   },
   "ProjectFiltersFormDeadlineFromDatePicker": {
-    "label": "Срок от"
+    "label": "Дедлайн с"
   },
   "ProjectFiltersFormDeadlineToDatePicker": {
-    "label": "Срок до"
+    "label": "Дедлайн по"
   },
   "ProjectStatusCheckboxGroup": {
     "label": "Статус"

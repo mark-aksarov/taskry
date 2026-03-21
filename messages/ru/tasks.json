@@ -122,10 +122,10 @@
     "text": "Только мои задачи"
   },
   "DeadlineFromDatePicker": {
-    "label": "Срок от"
+    "label": "Дедлайн с"
   },
   "DeadlineToDatePicker": {
-    "label": "Срок до"
+    "label": "Дедлайн по"
   },
   "TaskStatusCheckboxGroup": {
     "label": "Статус"
