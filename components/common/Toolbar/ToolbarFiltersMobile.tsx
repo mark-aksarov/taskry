@@ -3,9 +3,12 @@ interface ToolbarFiltersMobileProps {
 }
 
 export function ToolbarFiltersMobile({ children }: ToolbarFiltersMobileProps) {
+  // FIXME: Temporary hardcoded header height (73px (mobile), measured in browser).
   return (
-    <div className="no-scrollbar flex w-full shrink-0 items-center gap-2 overflow-x-auto md:hidden">
-      {children}
+    <div className="sticky top-[73px] z-2 -m-4 bg-gray-100 py-4 md:hidden dark:bg-gray-900">
+      <div className="no-scrollbar flex w-full items-center gap-2 overflow-x-auto px-4">
+        {children}
+      </div>
     </div>
   );
 }

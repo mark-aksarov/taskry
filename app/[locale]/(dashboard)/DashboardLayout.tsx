@@ -29,7 +29,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           </AppSidebarBody>
         </AppSidebar>
 
-        {/* flex items have min-width:auto in row; min-w-0 prevents filters overflow */}
+        {/* flex items have min-width:auto in row; min-w-0 prevents filters overflow when empty filtering results */}
         <div className="flex min-w-0 flex-auto flex-col">{children}</div>
       </div>
       <GuestModeModal />
