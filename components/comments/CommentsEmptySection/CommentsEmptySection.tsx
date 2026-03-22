@@ -1,3 +1,4 @@
+import { AbsoluteCenter } from "@/components/common/AbsoluteCenter";
 import {
   EmptySection,
   EmptySectionHeading,
@@ -9,16 +10,13 @@ export function CommentsEmptySection() {
   const t = useTranslations("comments.CommentsEmptySection");
 
   return (
-    <div className="flex min-h-[400px] flex-auto items-center justify-center">
-      <EmptySection
-        data-test="comments-empty-section"
-        className="max-w-[375px]"
-      >
+    <AbsoluteCenter className="w-full p-5">
+      <EmptySection data-test="comments-empty-section">
         <EmptySectionHeading tag="h3" className="text-3xl!">
           {t("heading")}
         </EmptySectionHeading>
         <EmptySectionDescription>{t("description")}</EmptySectionDescription>
       </EmptySection>
-    </div>
+    </AbsoluteCenter>
   );
 }

@@ -5,5 +5,7 @@ export function CommentsModalDialogBody({
 }: {
   children: React.ReactNode;
 }) {
-  return <DialogBody className="flex">{children}</DialogBody>;
+  return (
+    <DialogBody className="relative flex flex-col gap-4">{children}</DialogBody>
+  );
 }
