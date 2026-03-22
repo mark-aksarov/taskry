@@ -77,7 +77,7 @@ export const CommentTextField = ({
       </TextField>
 
       <CommentTextFieldSendButton
-        buttonClasses="absolute top-[1.75rem] -translate-y-1/2"
+        buttonClasses="absolute bottom-[1.75rem] translate-y-1/2"
         isDisabled={!commentContent || isPending}
       />
     </div>
