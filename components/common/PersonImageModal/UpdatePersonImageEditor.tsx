@@ -1,3 +1,4 @@
+import { useTheme } from "next-themes";
 import AvatarEditor from "react-avatar-editor";
 
 interface UpdatePersonImageDialogProps {
@@ -9,6 +10,8 @@ export function UpdatePersonImageEditor({
   ref,
   imageFile,
 }: UpdatePersonImageDialogProps) {
+  const { theme } = useTheme();
+
   return (
     <AvatarEditor
       ref={ref}
@@ -17,7 +20,7 @@ export function UpdatePersonImageEditor({
       height={300}
       border={50}
       borderRadius={150}
-      color={[255, 255, 255, 0.6]}
+      color={theme === "dark" ? [30, 41, 57, 0.6] : [255, 255, 255, 0.6]}
       scale={1.2}
       rotate={0}
     />
