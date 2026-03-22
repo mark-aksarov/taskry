@@ -9,7 +9,7 @@ import { ActionFn, ActionState } from "@/lib/actions/types";
 import { createContext, useContext, useEffect } from "react";
 import { useRefreshTaskDetail } from "@/lib/swr/hooks/useRefreshTaskDetail";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
-import { useShowToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useShowToastOnActionErrorWhenModalClosed";
+import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 
 const UpdateSubtaskContext = createContext<UpdateEntityContextType | null>(
   null,
@@ -31,13 +31,12 @@ export function UpdateSubtaskProvider({
   const contextValue = useUpdateEntityContextValue(updateSubtask);
   const { state, isModalOpen, onModalOpenChange } = contextValue;
 
-  useCloseModalOnActionSuccess(state, onModalOpenChange);
-
   useEffect(() => {
     refreshTaskDetail();
   }, [state, refreshTaskDetail]);
 
-  useShowToastOnActionErrorWhenModalClosed(state, isModalOpen);
+  useCloseModalOnActionSuccess(state, onModalOpenChange);
+  useShowToastWhenModalClosedOnActionError(state, isModalOpen);
 
   return (
     <UpdateSubtaskContext.Provider value={contextValue}>

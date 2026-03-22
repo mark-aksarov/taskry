@@ -7,9 +7,9 @@ import {
 
 import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
-import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
-import { useShowToastOnActionErrorWhenModalClosed } from "@/lib/hooks/useShowToastOnActionErrorWhenModalClosed";
+import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
+import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
+import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
 
 const UpdateTaskCategoryContext = createContext<UpdateEntityContextType | null>(
   null,
@@ -34,9 +34,13 @@ export function UpdateTaskCategoryProvider({
     throw new Error(state.message, { cause: "taskCategoryNotFound" });
   }
 
-  useShowToastOnActionSuccess(state);
-  useCloseModalOnActionSuccess(state, onModalOpenChange);
-  useShowToastOnActionErrorWhenModalClosed(state, isModalOpen);
+  useCloseModalThenShowToastOnActionSuccess(
+    state,
+    isModalOpen,
+    onModalOpenChange,
+  );
+  useShowToastWhenModalClosedOnActionSuccess(state, isModalOpen);
+  useShowToastWhenModalClosedOnActionError(state, isModalOpen);
 
   return (
     <UpdateTaskCategoryContext.Provider value={contextValue}>

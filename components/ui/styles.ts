@@ -1,5 +1,7 @@
 import { tv } from "tailwind-variants";
 
+export const overlayTransitionDuration = 150;
+
 export const focusRing = tv({
   base: "outline outline-offset-2 outline-blue-600 dark:outline-blue-700",
   variants: {

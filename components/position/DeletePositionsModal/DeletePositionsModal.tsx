@@ -12,6 +12,7 @@ import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { useDeletePositions } from "../DeletePositionsContext";
+import { overlayTransitionDuration } from "@/components/ui/styles";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 interface DeletePositionsModalProps {
@@ -36,11 +37,11 @@ export function DeletePositionsModal({
     // Note: selectedIds may change if the user updates selection.
     setDeletePositionIds(selectedIds);
 
-    // Clear selected items after the modal close animation (150ms).
+    // Clear selected items after the modal close animation.
     // This prevents the modal text from jumping due to deleted items.
     setTimeout(() => {
       clearSelectedItems();
-    }, 150);
+    }, overlayTransitionDuration);
 
     // Trigger the deletion
     startTransition(() => {

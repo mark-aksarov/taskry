@@ -3,6 +3,7 @@
 import { Modal } from "@/components/ui/Modal";
 import { useMediaQuery } from "react-responsive";
 import { UploadPersonImageDialog } from "./UploadPersonImageDialog";
+import { overlayTransitionDuration } from "@/components/ui/styles";
 
 interface PersonImageModalProps {
   imageFile: File | null;
@@ -25,7 +26,7 @@ export function PersonImageModal({
     if (!isOpen) {
       setTimeout(() => {
         onImageFileChange(null);
-      }, 150);
+      }, overlayTransitionDuration);
     }
 
     onOpenChange(isOpen);
