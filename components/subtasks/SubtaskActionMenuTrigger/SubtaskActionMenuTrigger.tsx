@@ -94,7 +94,7 @@ export function SubtaskActionMenuTrigger({
                 size={16}
                 strokeWidth={1.5}
                 absoluteStrokeWidth
-                className="animate-spin"
+                className="mt-0.75 shrink-0 animate-spin self-start"
               />
             )}
           </Button>
