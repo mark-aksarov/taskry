@@ -40,11 +40,11 @@ export const LangMenuTrigger = ({
       placement={placement}
     >
       <Item textValue={t("items.english")} key="en">
-        <UnitedKingdomFlag width={32} height={22} />
+        <UnitedKingdomFlag />
         {t("items.english")}
       </Item>
       <Item textValue={t("items.russian")} key="ru">
-        <RussiaFlag width={32} height={22} />
+        <RussiaFlag />
         {t("items.russian")}
       </Item>
     </ResponsiveMenuTrigger>

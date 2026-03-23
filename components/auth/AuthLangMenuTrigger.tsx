@@ -10,7 +10,7 @@ import { LangMenuTrigger } from "@/components/common/LangMenuTrigger";
 
 const styles = tv({
   extend: focusRing,
-  base: "mx-auto mb-10 flex cursor-pointer items-center gap-2 self-start text-sm font-bold text-black dark:text-white",
+  base: "mx-auto mb-10 flex cursor-pointer items-center gap-4 self-start text-sm font-bold text-black dark:text-white",
 });
 
 export const AuthLangMenuTrigger = () => {
