@@ -10,22 +10,20 @@ import { mockedCustomerDetail } from "@/mocks/customers";
 import { CustomerDetailCard } from "./CustomerDetailCard";
 import { CustomerDetailSkeleton } from "../CustomerDetail";
 import { mockedCompanySummaries } from "@/mocks/companies";
-import { CustomerDetailHeader } from "../CustomerDetailHeader";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { CustomerDetailHeaderInteractive } from "../CustomerDetailHeader";
 import { withDeleteCustomerProvider } from "../DeleteCustomerContext/__stories__";
 import { withUpdateCustomerProvider } from "../UpdateCustomerContext/__stories__";
-import { withUpdateCustomerImageProvider } from "../UpdateCustomerImageContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
-import { withDeleteCustomerImageProvider } from "../DeleteCustomerImageContext/__stories__";
+import { MockedUpdateCustomerImageProvider } from "../UpdateCustomerImageContext/__stories__";
+import { MockedClearCustomerImageUrlProvider } from "../ClearCustomerImageUrlContext/__stories__";
 
 const meta = {
   title: "components/customers/CustomerDetailCard",
   component: CustomerDetailCard,
   decorators: [
-    withUpdateCustomerImageProvider,
-    withDeleteCustomerImageProvider,
     withUpdateCustomerProvider,
     withDeleteCustomerProvider,
     withGuestModeModalProvider,
@@ -41,13 +39,16 @@ export const Default = {
   args: {
     customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
     customerDetailHeaderContainer: (
-      <CustomerDetailHeader
-        canUpdateImage={true}
-        customerId={mockedCustomerDetail.id}
-        fullName={mockedCustomerDetail.fullName}
-        imageUrl={mockedCustomerDetail.imageUrl}
-        companyName={mockedCustomerDetail.company.name}
-      />
+      <MockedClearCustomerImageUrlProvider>
+        <MockedUpdateCustomerImageProvider>
+          <CustomerDetailHeaderInteractive
+            customerId={mockedCustomerDetail.id}
+            fullName={mockedCustomerDetail.fullName}
+            imageUrl={mockedCustomerDetail.imageUrl}
+            companyName={mockedCustomerDetail.company.name}
+          />
+        </MockedUpdateCustomerImageProvider>
+      </MockedClearCustomerImageUrlProvider>
     ),
     customerDetailActions: (
       <CustomerDetailActions
@@ -84,11 +85,14 @@ export const WithoutSomeData = {
       />
     ),
     customerDetailHeaderContainer: (
-      <CustomerDetailHeader
-        customerId={mockedCustomerDetail.id}
-        fullName={mockedCustomerDetail.fullName}
-        canUpdateImage={true}
-      />
+      <MockedClearCustomerImageUrlProvider>
+        <MockedUpdateCustomerImageProvider>
+          <CustomerDetailHeaderInteractive
+            customerId={mockedCustomerDetail.id}
+            fullName={mockedCustomerDetail.fullName}
+          />
+        </MockedUpdateCustomerImageProvider>
+      </MockedClearCustomerImageUrlProvider>
     ),
   },
 } satisfies Story;

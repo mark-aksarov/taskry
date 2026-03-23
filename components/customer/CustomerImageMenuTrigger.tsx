@@ -1,8 +1,9 @@
 "use client";
 
-import { useDeleteCustomerImage } from "./DeleteCustomerImageContext";
 import { useUpdateCustomerImage } from "./UpdateCustomerImageContext";
 import { PersonImageMenuTrigger } from "../common/PersonImageMenuTrigger";
+import { useClearCustomerImageUrl } from "./ClearCustomerImageUrlContext";
+import { useDeleteCustomerImageModal } from "./DeleteCustomerImageModal/DeleteCustomerImageModalContext";
 
 export function CustomerImageMenuTrigger({
   children,
@@ -14,10 +15,9 @@ export function CustomerImageMenuTrigger({
     onModalOpenChange: onUpdateModalOpenChange,
   } = useUpdateCustomerImage();
 
-  const {
-    isPending: isDeletePending,
-    onModalOpenChange: onDeleteModalOpenChange,
-  } = useDeleteCustomerImage();
+  const { isPending: isDeletePending } = useClearCustomerImageUrl();
+  const { onOpenChange: onDeleteModalOpenChange } =
+    useDeleteCustomerImageModal();
 
   return (
     <PersonImageMenuTrigger

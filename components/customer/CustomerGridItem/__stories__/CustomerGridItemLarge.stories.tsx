@@ -1,8 +1,8 @@
 import { CustomerDetail } from "../../CustomerDetail";
-import { CustomerGridItemLarge } from "../CustomerGridItemLarge";
 import type { Meta, StoryObj } from "@storybook/react";
 import { EditCustomerForm } from "../../EditCustomerForm";
 import { mockedCompanySummaries } from "@/mocks/companies";
+import { CustomerGridItemLarge } from "../CustomerGridItemLarge";
 import { CustomerDetailHeader } from "../../CustomerDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedCustomerDetail as mockedCustomer } from "@/mocks/customers";
@@ -32,8 +32,6 @@ export const Default = {
     customerDetailContainer: <CustomerDetail {...mockedCustomer} />,
     customerDetailHeaderContainer: (
       <CustomerDetailHeader
-        canUpdateImage={false}
-        customerId={mockedCustomer.id}
         fullName={mockedCustomer.fullName}
         imageUrl={mockedCustomer.imageUrl}
         companyName={mockedCustomer.company.name}

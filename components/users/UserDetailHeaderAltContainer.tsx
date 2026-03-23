@@ -1,18 +1,20 @@
 import "server-only";
 
+import {
+  UserDetailHeader,
+  UserDetailHeaderInteractive,
+} from "./UserDetailHeader";
+
 import { Suspense } from "react";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
-import { UserDetailHeader } from "./UserDetailHeader";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { getUserDetail } from "@/lib/data/user/user.dal";
-import { UpdateUserImageProvider } from "./UpdateUserImageContext";
+import { UpdateUserImageProvider } from "./UpdateUserImageProvider";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
-import { createPresignedUrl } from "@/lib/actions/s3/createPresignedUrl";
-import { updateUserImageUrl } from "@/lib/actions/user/updateUserImageUrl";
-import { DeleteUserImageProvider } from "./DeleteUserImageContext/DeleteUserImageContext";
+import { ClearUserImageUrlProvider } from "./ClearUserImageUrlProvider";
 
 interface UserDetailHeaderAltContainerProps {
   userId: string;
@@ -51,20 +53,26 @@ async function UserDetailHeaderAltContainerInner({
 
   const canUpdateImage = isOwner || isGuest || userId === currentUserId;
 
+  if (!canUpdateImage) {
+    return (
+      <UserDetailHeader
+        fullName={user.fullName}
+        imageUrl={user.imageUrl}
+        positionName={user.position?.name}
+      />
+    );
+  }
+
   return (
-    <UpdateUserImageProvider
-      createPresignedUrl={createPresignedUrl}
-      updateUserImageUrl={updateUserImageUrl}
-    >
-      <DeleteUserImageProvider updateUserImageUrl={updateUserImageUrl}>
-        <UserDetailHeader
+    <UpdateUserImageProvider>
+      <ClearUserImageUrlProvider>
+        <UserDetailHeaderInteractive
           userId={user.id}
           fullName={user.fullName}
           imageUrl={user.imageUrl}
-          canUpdateImage={canUpdateImage}
           positionName={user.position?.name}
         />
-      </DeleteUserImageProvider>
+      </ClearUserImageUrlProvider>
     </UpdateUserImageProvider>
   );
 }

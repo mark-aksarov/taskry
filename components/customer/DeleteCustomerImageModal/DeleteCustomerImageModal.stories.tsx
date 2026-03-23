@@ -1,26 +1,26 @@
+import {
+  DeleteCustomerImageModal,
+  useDeleteCustomerImageModal,
+} from "../DeleteCustomerImageModal";
+
 import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/react";
-import { useDeleteCustomerImage } from "../DeleteCustomerImageContext";
-import { DeleteCustomerImageModal } from "../DeleteCustomerImageModal";
+import { withDeleteCustomerImageModalProvider } from "./__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteCustomerImageProvider } from "../DeleteCustomerImageContext/__stories__";
 
 const meta = {
   title: "components/customers/DeleteCustomerImageModal",
   component: DeleteCustomerImageModal,
-  decorators: [withDeleteCustomerImageProvider, withThemedBackground],
+  decorators: [withDeleteCustomerImageModalProvider, withThemedBackground],
   render: (args) => {
-    const { onModalOpenChange } = useDeleteCustomerImage();
+    const { onOpenChange } = useDeleteCustomerImageModal();
 
-    useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
+    useEffect(() => onOpenChange(true), [onOpenChange]);
 
     return (
       <>
-        <Button
-          label="Delete customer image"
-          onClick={() => onModalOpenChange(true)}
-        />
+        <Button label="Open modal" onClick={() => onOpenChange(true)} />
         <DeleteCustomerImageModal {...args} />
       </>
     );

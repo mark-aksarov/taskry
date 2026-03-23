@@ -34,8 +34,6 @@ export function CustomerDetailHeaderContainer({
 
   return (
     <CustomerDetailHeader
-      canUpdateImage={false}
-      customerId={customerId}
       fullName={customer.fullName}
       imageUrl={customer.imageUrl}
       companyName={customer.company?.name}

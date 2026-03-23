@@ -17,14 +17,14 @@ import { EditUserForm } from "@/components/users/EditUserForm";
 import { ProfileActions } from "@/components/users/ProfileActions";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { mockedUserDetail, mockedUserSummaries } from "@/mocks/users";
-import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { UserNavigationLarge } from "@/components/users/UserNavigationLarge";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { TaskGridMobileStory } from "@/components/tasks/TaskGrid/__stories__";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { UserTaskListStory } from "@/components/users/UserTaskList/__stories__";
 import { UserTasksPresentation } from "@/components/users/UserTasksPresentation";
-import { UserNavigationLarge } from "@/components/users/UserNavigationLarge";
+import { UserDetailHeaderInteractive } from "@/components/users/UserDetailHeader";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
 import { withUpdateUserProvider } from "@/components/users/UpdateUserContext/__stories__";
 import { withDeleteUserProvider } from "@/components/users/DeleteUserContext/__stories__";
@@ -34,17 +34,17 @@ import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withChangePasswordProvider } from "@/components/users/ChangePasswordContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
-import { withUpdateUserImageProvider } from "@/components/users/UpdateUserImageContext/__stories__";
+import { MockedUpdateUserImageProvider } from "@/components/users/UpdateUserImageContext/__stories__";
+import { withDeleteUserImageModalProvider } from "@/components/users/DeleteUserImageModal/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
-import { withDeleteUserImageProvider } from "@/components/users/DeleteUserImageContext/__stories__";
+import { MockedClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlContext/__stories__";
 
 const meta = {
   title: "pages/TeamProfileTasksPage",
   component: UserTasksPageLayout,
   parameters: { layout: "fullscreen" },
   decorators: [
-    withUpdateUserImageProvider,
-    withDeleteUserImageProvider,
+    withDeleteUserImageModalProvider,
     withCreateTaskProvider,
     withUpdateUserProvider,
     withChangePasswordProvider,
@@ -84,13 +84,16 @@ export const Default = {
       />
     ),
     userDetailHeaderContainer: (
-      <UserDetailHeader
-        userId={mockedUserDetail.id}
-        fullName={mockedUserDetail.fullName}
-        positionName={mockedUserDetail.position.name}
-        imageUrl={mockedUserDetail.imageUrl}
-        canUpdateImage={true}
-      />
+      <MockedClearUserImageUrlProvider>
+        <MockedUpdateUserImageProvider>
+          <UserDetailHeaderInteractive
+            userId={mockedUserDetail.id}
+            fullName={mockedUserDetail.fullName}
+            positionName={mockedUserDetail.position.name}
+            imageUrl={mockedUserDetail.imageUrl}
+          />
+        </MockedUpdateUserImageProvider>
+      </MockedClearUserImageUrlProvider>
     ),
     navigationLarge: (
       <UserNavigationLarge

@@ -40,8 +40,6 @@ export const Default = {
     userId: "user-1",
     userDetailHeaderContainer: (
       <UserDetailHeader
-        canUpdateImage={false}
-        userId={mockedUserDetail.id}
         fullName={mockedUserDetail.fullName}
         imageUrl={mockedUserDetail.imageUrl}
         positionName={mockedUserDetail.position.name}

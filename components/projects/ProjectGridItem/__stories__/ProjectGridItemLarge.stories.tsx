@@ -52,11 +52,9 @@ export const Default = {
     userDetailContainer: <UserDetail {...mockedUser} />,
     userDetailHeaderContainer: (
       <UserDetailHeader
-        userId={mockedUser.id}
         fullName={mockedUser.fullName}
         positionName={mockedUser.position.name}
         imageUrl={mockedUser.imageUrl}
-        canUpdateImage={false}
       />
     ),
     sendComment: () => ({ status: "success" }),

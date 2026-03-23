@@ -15,22 +15,20 @@ import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { EditCustomerForm } from "@/components/customer/EditCustomerForm";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
-import { CustomerDetailHeader } from "@/components/customer/CustomerDetailHeader";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { CustomerDetailHeaderInteractive } from "@/components/customer/CustomerDetailHeader";
 import { withDeleteCustomerProvider } from "@/components/customer/DeleteCustomerContext/__stories__";
 import { withUpdateCustomerProvider } from "@/components/customer/UpdateCustomerContext/__stories__";
-import { withUpdateCustomerImageProvider } from "@/components/customer/UpdateCustomerImageContext/__stories__";
-import { withDeleteCustomerImageProvider } from "@/components/customer/DeleteCustomerImageContext/__stories__";
+import { MockedUpdateCustomerImageProvider } from "@/components/customer/UpdateCustomerImageContext/__stories__";
+import { MockedClearCustomerImageUrlProvider } from "@/components/customer/ClearCustomerImageUrlContext/__stories__";
 
 const meta = {
   title: "pages/CustomerDetailPage",
   component: CustomerDetailPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    withUpdateCustomerImageProvider,
-    withDeleteCustomerImageProvider,
     withUpdateCustomerProvider,
     withDeleteCustomerProvider,
     withGuestModeModalProvider,
@@ -54,13 +52,16 @@ export const Default = {
     searchContainer: <SearchList {...SearchListStory.args} />,
     customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
     customerDetailHeaderContainer: (
-      <CustomerDetailHeader
-        canUpdateImage={true}
-        customerId={mockedCustomerDetail.id}
-        fullName={mockedCustomerDetail.fullName}
-        imageUrl={mockedCustomerDetail.imageUrl}
-        companyName={mockedCustomerDetail.company.name}
-      />
+      <MockedClearCustomerImageUrlProvider>
+        <MockedUpdateCustomerImageProvider>
+          <CustomerDetailHeaderInteractive
+            customerId={mockedCustomerDetail.id}
+            fullName={mockedCustomerDetail.fullName}
+            imageUrl={mockedCustomerDetail.imageUrl}
+            companyName={mockedCustomerDetail.company.name}
+          />
+        </MockedUpdateCustomerImageProvider>
+      </MockedClearCustomerImageUrlProvider>
     ),
     customerDetailActions: (
       <CustomerDetailActions
@@ -92,11 +93,14 @@ export const WithoutSomeData = {
     searchContainer: <SearchList {...SearchListStory.args} />,
     customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
     customerDetailHeaderContainer: (
-      <CustomerDetailHeader
-        canUpdateImage={true}
-        customerId={mockedCustomerDetail.id}
-        fullName={mockedCustomerDetail.fullName}
-      />
+      <MockedClearCustomerImageUrlProvider>
+        <MockedUpdateCustomerImageProvider>
+          <CustomerDetailHeaderInteractive
+            customerId={mockedCustomerDetail.id}
+            fullName={mockedCustomerDetail.fullName}
+          />
+        </MockedUpdateCustomerImageProvider>
+      </MockedClearCustomerImageUrlProvider>
     ),
     customerDetailActions: Default.args.customerDetailActions,
   },

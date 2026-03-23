@@ -31,10 +31,8 @@ export function UserDetailHeaderContainer({
 
   return (
     <UserDetailHeader
-      userId={user.id}
       fullName={user.fullName}
       imageUrl={user.imageUrl}
-      canUpdateImage={false}
       positionName={user.position?.name}
     />
   );

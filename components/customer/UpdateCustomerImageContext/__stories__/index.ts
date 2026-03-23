@@ -1,1 +1,1 @@
-export { withUpdateCustomerImageProvider } from "./withUpdateCustomerImageProvider";
+export { MockedUpdateCustomerImageProvider } from "./MockedUpdateCustomerImageProvider";

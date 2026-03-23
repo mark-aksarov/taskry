@@ -56,11 +56,9 @@ export const Default = {
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
       <UserDetailHeader
-        userId={mockedUserDetail.id}
         fullName={mockedUserDetail.fullName}
         imageUrl={mockedUserDetail.imageUrl}
         positionName={mockedUserDetail.position.name}
-        canUpdateImage={false}
       />
     ),
     projectDetailContainer: <ProjectDetail {...mockedProjectDetail} />,

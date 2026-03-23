@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { type Decorator } from "@storybook/react";
 import { UpdateCustomerImageContext } from "../UpdateCustomerImageContext";
 
-export const withUpdateCustomerImageProvider: Decorator = (Story) => {
+export function MockedUpdateCustomerImageProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imageFile, setImageFile] = useState<File | null>(null);
 
@@ -18,7 +21,7 @@ export const withUpdateCustomerImageProvider: Decorator = (Story) => {
         onImageFileChange: setImageFile,
       }}
     >
-      <Story />
+      {children}
     </UpdateCustomerImageContext.Provider>
   );
-};
+}

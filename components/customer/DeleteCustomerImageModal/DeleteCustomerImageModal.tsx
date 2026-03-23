@@ -11,7 +11,8 @@ import {
 import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
-import { useDeleteCustomerImage } from "../DeleteCustomerImageContext";
+import { useClearCustomerImageUrl } from "../ClearCustomerImageUrlContext";
+import { useDeleteCustomerImageModal } from "./DeleteCustomerImageModalContext";
 
 interface DeleteCustomerImageModalProps {
   customerId: number;
@@ -22,11 +23,12 @@ export function DeleteCustomerImageModal({
   customerId,
   customerFullName,
 }: DeleteCustomerImageModalProps) {
-  const { action, isModalOpen, onModalOpenChange } = useDeleteCustomerImage();
+  const { action } = useClearCustomerImageUrl();
+  const { isOpen, onOpenChange } = useDeleteCustomerImageModal();
 
   function handleDelete() {
     //close modal before deleting
-    onModalOpenChange(false);
+    onOpenChange(false);
 
     startTransition(() => action(customerId));
   }
@@ -36,8 +38,8 @@ export function DeleteCustomerImageModal({
   return (
     <ConfirmModal
       data-test="delete-customer-image-modal"
-      isOpen={isModalOpen}
-      onOpenChange={onModalOpenChange}
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
     >
       <DialogHeading>{t("heading")}</DialogHeading>
       <ConfirmModalText>

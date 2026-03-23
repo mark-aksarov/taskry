@@ -1,0 +1,1 @@
+export { withDeleteCustomerImageModalProvider } from "./withDeleteCustomerImageModalProvider";

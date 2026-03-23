@@ -7,7 +7,10 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { SearchList } from "@/components/search/SearchList";
 import { EditUserForm } from "@/components/users/EditUserForm";
-import { UserDetailHeader } from "@/components/users/UserDetailHeader";
+import {
+  UserDetailHeader,
+  UserDetailHeaderInteractive,
+} from "@/components/users/UserDetailHeader";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
@@ -17,16 +20,14 @@ import { withUpdateUserProvider } from "@/components/users/UpdateUserContext/__s
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withChangePasswordProvider } from "@/components/users/ChangePasswordContext/__stories__";
-import { withUpdateUserImageProvider } from "@/components/users/UpdateUserImageContext/__stories__";
-import { withDeleteUserImageProvider } from "@/components/users/DeleteUserImageContext/__stories__";
+import { withDeleteUserImageModalProvider } from "@/components/users/DeleteUserImageModal/__stories__";
 
 const meta = {
   title: "pages/ProfilePage",
   component: ProfilePage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    withUpdateUserImageProvider,
-    withDeleteUserImageProvider,
+    withDeleteUserImageModalProvider,
     withUpdateUserProvider,
     withChangePasswordProvider,
     withDeleteUserProvider,
@@ -57,12 +58,11 @@ export const Default = {
     searchContainer: <SearchList {...SearchListStory.args} />,
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
-      <UserDetailHeader
+      <UserDetailHeaderInteractive
         userId={mockedUserDetail.id}
         fullName={mockedUserDetail.fullName}
         positionName={mockedUserDetail.position.name}
         imageUrl={mockedUserDetail.imageUrl}
-        canUpdateImage={true}
       />
     ),
   },
@@ -87,10 +87,9 @@ export const WithoutOptionalUserData = {
       />
     ),
     userDetailHeaderContainer: (
-      <UserDetailHeader
+      <UserDetailHeaderInteractive
         userId={mockedUserDetail.id}
         fullName={mockedUserDetail.fullName}
-        canUpdateImage={true}
       />
     ),
   },

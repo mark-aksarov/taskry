@@ -5,22 +5,23 @@ import { EditUserModal } from "../EditUserModal";
 import { mockedUserDetail } from "@/mocks/users";
 import { UserDetailCard } from "./UserDetailCard";
 import { UserDetailSkeleton } from "../UserDetail";
-import { UserDetailHeader } from "../UserDetailHeader";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { ChangePasswordModal } from "../ChangePasswordModal";
 import { UserNavigationLarge } from "../UserNavigationLarge";
+import { UserDetailHeaderInteractive } from "../UserDetailHeader";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteUserProvider } from "../DeleteUserContext/__stories__";
 import { withUpdateUserProvider } from "../UpdateUserContext/__stories__";
 import { ProfileActions, ProfileActionsSkeleton } from "../ProfileActions";
 import { withChangePasswordProvider } from "../ChangePasswordContext/__stories__";
-import { withDeleteUserImageProvider } from "../DeleteUserImageContext/__stories__";
-import { withUpdateUserImageProvider } from "../UpdateUserImageContext/__stories__";
-import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { MockedUpdateUserImageProvider } from "../UpdateUserImageContext/__stories__";
+import { MockedClearUserImageUrlProvider } from "../ClearUserImageUrlContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withDeleteUserImageModalProvider } from "@/components/users/DeleteUserImageModal/__stories__";
 
 const meta = {
   title: "components/users/UserDetailCard",
@@ -47,8 +48,7 @@ const meta = {
         />
       </>
     ),
-    withUpdateUserImageProvider,
-    withDeleteUserImageProvider,
+    withDeleteUserImageModalProvider,
     withUpdateUserProvider,
     withChangePasswordProvider,
     withDeleteUserProvider,
@@ -65,13 +65,16 @@ export const Default = {
   args: {
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
-      <UserDetailHeader
-        userId={mockedUserDetail.id}
-        fullName={mockedUserDetail.fullName}
-        positionName={mockedUserDetail.position.name}
-        imageUrl={mockedUserDetail.imageUrl}
-        canUpdateImage={true}
-      />
+      <MockedClearUserImageUrlProvider>
+        <MockedUpdateUserImageProvider>
+          <UserDetailHeaderInteractive
+            userId={mockedUserDetail.id}
+            fullName={mockedUserDetail.fullName}
+            positionName={mockedUserDetail.position.name}
+            imageUrl={mockedUserDetail.imageUrl}
+          />
+        </MockedUpdateUserImageProvider>
+      </MockedClearUserImageUrlProvider>
     ),
     navigationLarge: (
       <UserNavigationLarge
@@ -100,11 +103,14 @@ export const WithoutOptionalUserData = {
   args: {
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
-      <UserDetailHeader
-        canUpdateImage={true}
-        userId={mockedUserDetail.id}
-        fullName={mockedUserDetail.fullName}
-      />
+      <MockedClearUserImageUrlProvider>
+        <MockedUpdateUserImageProvider>
+          <UserDetailHeaderInteractive
+            userId={mockedUserDetail.id}
+            fullName={mockedUserDetail.fullName}
+          />
+        </MockedUpdateUserImageProvider>
+      </MockedClearUserImageUrlProvider>
     ),
     navigationLarge: (
       <UserNavigationLarge
