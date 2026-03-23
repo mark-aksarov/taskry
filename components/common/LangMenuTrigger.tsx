@@ -3,6 +3,7 @@
 import { Item, Key } from "react-stately";
 import { Placement } from "../ui/Popover";
 import { RussiaFlag } from "../icons/RussiaFlag";
+import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { ResponsiveMenuTrigger } from "./ResponsiveMenuTrigger";
@@ -22,10 +23,14 @@ export const LangMenuTrigger = ({
   const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale();
+  const searchParams = useSearchParams();
 
   function toggleLang(key: Key) {
-    const locale = key as "en" | "ru";
-    router.push(pathname, { locale });
+    const nextLocale = key as "en" | "ru";
+
+    router.push(`${pathname}?${searchParams.toString()}`, {
+      locale: nextLocale,
+    });
   }
 
   return (
