@@ -10,7 +10,7 @@ export function useClearUserImageUrl() {
   const context = useContext(ClearUserImageUrlContext);
   if (!context)
     throw new Error(
-      "useClearImageUrl must be used within ClearImageUrlProvider",
+      "useClearImageUrl must be used within ClearUserImageUrlContext.Provider",
     );
   return context;
 }

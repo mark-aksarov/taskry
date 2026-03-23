@@ -35,7 +35,6 @@ import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksConte
 import { withChangePasswordProvider } from "@/components/users/ChangePasswordContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { MockedUpdateUserImageProvider } from "@/components/users/UpdateUserImageContext/__stories__";
-import { withDeleteUserImageModalProvider } from "@/components/users/DeleteUserImageModal/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
 import { MockedClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlContext/__stories__";
 
@@ -44,7 +43,6 @@ const meta = {
   component: UserTasksPageLayout,
   parameters: { layout: "fullscreen" },
   decorators: [
-    withDeleteUserImageModalProvider,
     withCreateTaskProvider,
     withUpdateUserProvider,
     withChangePasswordProvider,

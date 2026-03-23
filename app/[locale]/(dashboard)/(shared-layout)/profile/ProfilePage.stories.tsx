@@ -7,27 +7,24 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { SearchList } from "@/components/search/SearchList";
 import { EditUserForm } from "@/components/users/EditUserForm";
-import {
-  UserDetailHeader,
-  UserDetailHeaderInteractive,
-} from "@/components/users/UserDetailHeader";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
+import { UserDetailHeaderInteractive } from "@/components/users/UserDetailHeader";
 import { withDeleteUserProvider } from "@/components/users/DeleteUserContext/__stories__";
 import { withUpdateUserProvider } from "@/components/users/UpdateUserContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withChangePasswordProvider } from "@/components/users/ChangePasswordContext/__stories__";
-import { withDeleteUserImageModalProvider } from "@/components/users/DeleteUserImageModal/__stories__";
+import { MockedClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlContext/__stories__";
+import { MockedUpdateUserImageProvider } from "@/components/users/UpdateUserImageContext/__stories__";
 
 const meta = {
   title: "pages/ProfilePage",
   component: ProfilePage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    withDeleteUserImageModalProvider,
     withUpdateUserProvider,
     withChangePasswordProvider,
     withDeleteUserProvider,
@@ -58,12 +55,16 @@ export const Default = {
     searchContainer: <SearchList {...SearchListStory.args} />,
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
-      <UserDetailHeaderInteractive
-        userId={mockedUserDetail.id}
-        fullName={mockedUserDetail.fullName}
-        positionName={mockedUserDetail.position.name}
-        imageUrl={mockedUserDetail.imageUrl}
-      />
+      <MockedClearUserImageUrlProvider>
+        <MockedUpdateUserImageProvider>
+          <UserDetailHeaderInteractive
+            userId={mockedUserDetail.id}
+            fullName={mockedUserDetail.fullName}
+            positionName={mockedUserDetail.position.name}
+            imageUrl={mockedUserDetail.imageUrl}
+          />
+        </MockedUpdateUserImageProvider>
+      </MockedClearUserImageUrlProvider>
     ),
   },
 } satisfies Story;
@@ -87,10 +88,14 @@ export const WithoutOptionalUserData = {
       />
     ),
     userDetailHeaderContainer: (
-      <UserDetailHeaderInteractive
-        userId={mockedUserDetail.id}
-        fullName={mockedUserDetail.fullName}
-      />
+      <MockedClearUserImageUrlProvider>
+        <MockedUpdateUserImageProvider>
+          <UserDetailHeaderInteractive
+            userId={mockedUserDetail.id}
+            fullName={mockedUserDetail.fullName}
+          />
+        </MockedUpdateUserImageProvider>
+      </MockedClearUserImageUrlProvider>
     ),
   },
 } satisfies Story;

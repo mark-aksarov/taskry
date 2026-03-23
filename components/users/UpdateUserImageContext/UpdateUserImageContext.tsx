@@ -10,7 +10,7 @@ export function useUpdateUserImage() {
   const context = useContext(UpdateUserImageContext);
   if (!context) {
     throw new Error(
-      "useUpdateUserImage must be used within a UpdateUserImageProvider",
+      "useUpdateUserImage must be used within a UpdateUserImageContext.Provider",
     );
   }
   return context;

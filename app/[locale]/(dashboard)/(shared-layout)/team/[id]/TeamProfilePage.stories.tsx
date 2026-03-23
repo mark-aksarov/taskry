@@ -18,7 +18,6 @@ import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/_
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withChangePasswordProvider } from "@/components/users/ChangePasswordContext/__stories__";
 import { MockedUpdateUserImageProvider } from "@/components/users/UpdateUserImageContext/__stories__";
-import { withDeleteUserImageModalProvider } from "@/components/users/DeleteUserImageModal/__stories__";
 import { MockedClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlContext/__stories__";
 
 const meta = {
@@ -26,7 +25,6 @@ const meta = {
   component: TeamProfilePage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    withDeleteUserImageModalProvider,
     withUpdateUserProvider,
     withChangePasswordProvider,
     withDeleteUserProvider,
