@@ -1,16 +1,8 @@
 "use client";
 
-import {
-  useMemo,
-  useEffect,
-  useContext,
-  createContext,
-  useActionState,
-} from "react";
-
-import { useRouter } from "@/i18n/navigation";
 import { useCommentFormContext } from "../CommentFormContext";
 import { useRefreshComments } from "@/lib/swr/hooks/useRefreshComments";
+import { useMemo, useContext, createContext, useActionState } from "react";
 import { ActionContextType, ActionFn, ActionState } from "@/lib/actions/types";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 
@@ -29,15 +21,19 @@ export function UpdateCommentProvider({
   updateComment,
   children,
 }: UpdateCommentProviderProps) {
-  const router = useRouter();
+  const refreshComments = useRefreshComments();
+  const { setCommentContent, setEditCommentId } = useCommentFormContext();
 
   const [state, action, isPending] = useActionState(
     async (state: ActionState, payload: FormData) => {
       const newState = await updateComment(state, payload);
 
       if (newState.status === "success") {
-        // router.refresh is wrapped in startTransition internally
-        router.refresh();
+        // The following lines aren't marked as transitions
+        // they help keep the UI in sync when refreshing comments.
+        await refreshComments();
+        setCommentContent("");
+        setEditCommentId(undefined);
       }
 
       return newState;
@@ -45,19 +41,7 @@ export function UpdateCommentProvider({
     initialState,
   );
 
-  const refreshComments = useRefreshComments();
-  const { setCommentContent, setEditCommentId } = useCommentFormContext();
-
-  useEffect(() => {
-    refreshComments();
-  }, [state, refreshComments]);
-
-  // Reset comment form
-  useEffect(() => {
-    setCommentContent("");
-    setEditCommentId(undefined);
-  }, [state, setCommentContent, setEditCommentId]);
-
+  // wait for transition to finish
   useShowToastOnActionError(state);
 
   const contextValue = useMemo(

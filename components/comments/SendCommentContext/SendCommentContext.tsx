@@ -1,16 +1,9 @@
 "use client";
 
-import {
-  useMemo,
-  useEffect,
-  useContext,
-  createContext,
-  useActionState,
-} from "react";
-
 import { useRouter } from "@/i18n/navigation";
 import { useCommentFormContext } from "../CommentFormContext";
 import { useRefreshComments } from "@/lib/swr/hooks/useRefreshComments";
+import { useMemo, useContext, createContext, useActionState } from "react";
 import { ActionContextType, ActionFn, ActionState } from "@/lib/actions/types";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 
@@ -39,7 +32,13 @@ export function SendCommentProvider({
       const newState = await sendComment(state, payload);
 
       if (newState.status === "success") {
+        // The following lines aren't marked as transitions
+        // they help keep the UI in sync when refreshing comments.
+        await refreshComments();
+        setCommentContent("");
+
         // router.refresh is wrapped in startTransition internally
+        // router.refresh only updates the CommentButton label (comment count) after refresh
         router.refresh();
       }
 
@@ -48,14 +47,7 @@ export function SendCommentProvider({
     initialState,
   );
 
-  useEffect(() => {
-    refreshComments();
-  }, [state, refreshComments]);
-
-  useEffect(() => {
-    setCommentContent("");
-  }, [state, setCommentContent]);
-
+  // wait for transition to finish
   useShowToastOnActionError(state);
 
   const contextValue = useMemo(

@@ -44,7 +44,7 @@ export function ProjectCommentsContainer({
     throw new Error();
   }
 
-  // Show skeleton while loading or revalidating
+  // Show skeleton while loading
   if (!comments) {
     return (
       <CommentList>

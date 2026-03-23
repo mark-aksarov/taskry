@@ -58,6 +58,7 @@ export const CommentTextField = ({
         {...props}
         id="content"
         name="content"
+        aria-label={t("ariaLabel")}
         value={commentContent}
         onChange={setCommentContent}
         className={fieldStyles}

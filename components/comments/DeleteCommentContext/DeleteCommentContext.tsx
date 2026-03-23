@@ -1,17 +1,18 @@
 "use client";
 
-import {
-  DeleteEntityContextType,
-  useDeleteEntityContextValue,
-} from "@/lib/hooks/useDeleteEntityContextValue";
-
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useContext, createContext, useEffect } from "react";
+import { useRouter } from "@/i18n/navigation";
 import { useRefreshComments } from "@/lib/swr/hooks/useRefreshComments";
+import { useContext, createContext, useMemo, useActionState } from "react";
+import { ActionContextType, ActionFn, ActionState } from "@/lib/actions/types";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 
-const DeleteCommentContext =
-  createContext<DeleteEntityContextType<number> | null>(null);
+export const initialState: ActionState = {
+  status: null,
+};
+
+const DeleteCommentContext = createContext<ActionContextType<number> | null>(
+  null,
+);
 
 interface DeleteCommentProviderProps {
   deleteComment: ActionFn<ActionState, number>;
@@ -22,17 +23,34 @@ export function DeleteCommentProvider({
   deleteComment,
   children,
 }: DeleteCommentProviderProps) {
+  const router = useRouter();
   const refreshComments = useRefreshComments();
 
-  const contextValue = useDeleteEntityContextValue(deleteComment);
+  const [state, action, isPending] = useActionState(
+    async (state: ActionState, payload: number) => {
+      const newState = await deleteComment(state, payload);
 
-  const { state } = contextValue;
+      if (newState.status === "success") {
+        // The following line isn't marked as transitions
+        await refreshComments();
 
-  useEffect(() => {
-    refreshComments();
-  }, [state, refreshComments]);
+        // router.refresh is wrapped in startTransition internally
+        // router.refresh only updates the CommentButton label (comment count) after refresh
+        router.refresh();
+      }
 
+      return newState;
+    },
+    initialState,
+  );
+
+  // wait for transition to finish
   useShowToastOnActionError(state);
+
+  const contextValue = useMemo(
+    () => ({ state, action, isPending }),
+    [state, action, isPending],
+  );
 
   return (
     <DeleteCommentContext.Provider value={contextValue}>
