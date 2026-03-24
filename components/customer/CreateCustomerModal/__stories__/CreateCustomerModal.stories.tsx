@@ -8,7 +8,7 @@ import { CustomerFormSkeleton } from "../../CustomerFormSkeleton";
 import { useCreateCustomerModal } from "../CreateCustomerModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCreateCustomerModalProvider } from "./withCreateCustomerModalProvider";
-import { withCreateCustomerProvider } from "../../CreateCustomerContext/__stories__";
+import { withCreateCustomerProvider } from "../../CreateCustomerProvider/__stories__";
 
 const meta = {
   title: "components/customers/CreateCustomerModal",

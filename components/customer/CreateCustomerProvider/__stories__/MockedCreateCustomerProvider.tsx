@@ -1,4 +1,4 @@
-import { CreateCustomerContext } from "../CreateCustomerContext";
+import { CreateCustomerContext } from "../../CreateCustomerContext";
 
 export const MockedCreateCustomerProvider = ({
   children,

@@ -3,8 +3,8 @@
 import { useRouter } from "@/i18n/navigation";
 import { useActionState, useMemo } from "react";
 import { ActionState } from "@/lib/actions/types";
-import { useCreateCustomerModal } from "./CreateCustomerModal";
-import { CreateCustomerContext } from "./CreateCustomerContext";
+import { useCreateCustomerModal } from "../CreateCustomerModal";
+import { CreateCustomerContext } from "../CreateCustomerContext";
 import { createCustomer } from "@/lib/actions/customer/createCustomer";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
