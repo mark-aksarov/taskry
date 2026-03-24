@@ -12,7 +12,7 @@
   "NewCompanyForm": {
     "submitButtonLabel": "Создать компанию"
   },
-  "NewCompanyModal": {
+  "CreateCompanyModal": {
     "title": "Новая компания"
   },
   "CompanyNameTextField": {

@@ -1,4 +1,4 @@
-import { useCreateCompany } from "../CreateCompanyContext";
+import { useCreateCompanyModal } from "../CreateCompanyModal";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
 export function useCreateCompanyTriggerPress() {
@@ -6,11 +6,11 @@ export function useCreateCompanyTriggerPress() {
   const guestGuard = useGuestModalGuard();
 
   // Create company action and modal states
-  const { onModalOpenChange: onCompanyModalOpenChange } = useCreateCompany();
+  const { onOpenChange: onModalOpenChange } = useCreateCompanyModal();
 
   const handlePress = () => {
     guestGuard(() => {
-      onCompanyModalOpenChange(true);
+      onModalOpenChange(true);
     });
   };
 

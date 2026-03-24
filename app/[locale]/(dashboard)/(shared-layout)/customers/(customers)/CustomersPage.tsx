@@ -30,7 +30,7 @@ import { CustomerSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { NewCompanyModal } from "@/components/company/NewCompanyModal";
+import { CreateCompanyModal } from "@/components/company/CreateCompanyModal";
 import { PageEmptySection } from "@/components/common/PageEmptySection";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { NewCustomerModal } from "@/components/customer/NewCustomerModal";
@@ -165,7 +165,7 @@ export function CustomersPage({
 
       <CustomerSearchModal searchContainer={searchContainer} />
       <NewCustomerModal newCustomerFormContainer={newCustomerFormContainer} />
-      <NewCompanyModal />
+      <CreateCompanyModal />
     </>
   );
 }

@@ -1,18 +1,12 @@
 import { type Decorator } from "@storybook/react";
-import { CurrentUserProvider } from "../../CurrentUserContext";
+import { MockedCurrentUserProvider } from "./MockedCurrentUserProvider";
 
 export const withCurrentUserProvider: Decorator = (Story, context) => {
   const isGuest = context.parameters.isGuest || false;
 
   return (
-    <CurrentUserProvider
-      value={{
-        userId: "user-1",
-        isGuest,
-        isOwner: true,
-      }}
-    >
+    <MockedCurrentUserProvider isGuest={isGuest}>
       <Story />
-    </CurrentUserProvider>
+    </MockedCurrentUserProvider>
   );
 };

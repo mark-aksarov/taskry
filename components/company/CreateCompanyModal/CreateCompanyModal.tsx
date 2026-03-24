@@ -8,19 +8,19 @@ import {
 
 import { useTranslations } from "next-intl";
 import { NewCompanyForm } from "../NewCompanyForm";
-import { useCreateCompany } from "../CreateCompanyContext";
+import { useCreateCompanyModal } from "./CreateCompanyModalContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
-export function NewCompanyModal() {
-  const t = useTranslations("company.NewCompanyModal");
+export function CreateCompanyModal() {
+  const t = useTranslations("company.CreateCompanyModal");
 
-  const { isModalOpen, onModalOpenChange } = useCreateCompany();
+  const { isOpen, onOpenChange } = useCreateCompanyModal();
 
   return (
     <FormBaseModal
       className="md:w-[350px]"
-      isOpen={isModalOpen}
-      onOpenChange={onModalOpenChange}
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>

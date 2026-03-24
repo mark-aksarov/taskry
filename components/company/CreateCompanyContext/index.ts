@@ -1,2 +1,2 @@
-export { CreateCompanyProvider } from "./CreateCompanyContext";
+export { CreateCompanyContext } from "./CreateCompanyContext";
 export { useCreateCompany } from "./CreateCompanyContext";

@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { Building2, Contact } from "lucide-react";
 import { useCreateCustomer } from "../CreateCustomerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { useCreateCompany } from "@/components/company/CreateCompanyContext";
+import { useCreateCompanyModal } from "@/components/company/CreateCompanyModal";
 import { CreateNewMenuTrigger } from "@/components/common/CreateNewMenuTrigger";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
@@ -23,7 +23,8 @@ export function CreateCustomerMenuTrigger({
   const guestGuard = useGuestModalGuard();
 
   // Create company form modal state
-  const { onModalOpenChange: onCompanyModalOpenChange } = useCreateCompany();
+  const { onOpenChange: onCreateCompanyModalOpenChange } =
+    useCreateCompanyModal();
 
   // Create customer form modal state
   const { onModalOpenChange: onCustomerModalOpenChange } = useCreateCustomer();
@@ -38,7 +39,7 @@ export function CreateCustomerMenuTrigger({
       if (key === "customer") {
         onCustomerModalOpenChange(true);
       } else if (key === "company") {
-        onCompanyModalOpenChange(true);
+        onCreateCompanyModalOpenChange(true);
       }
     });
   }

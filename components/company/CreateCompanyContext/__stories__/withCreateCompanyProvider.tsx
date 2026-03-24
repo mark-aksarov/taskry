@@ -1,10 +1,10 @@
 import { type Decorator } from "@storybook/react";
-import { CreateCompanyProvider } from "../../CreateCompanyContext";
+import { MockedCreateCompanyProvider } from "./MockedCreateCompanyProvider";
 
 export const withCreateCompanyProvider: Decorator = (Story) => {
   return (
-    <CreateCompanyProvider createCompany={() => ({ status: "success" })}>
+    <MockedCreateCompanyProvider>
       <Story />
-    </CreateCompanyProvider>
+    </MockedCreateCompanyProvider>
   );
 };

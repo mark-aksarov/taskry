@@ -9,25 +9,22 @@ import { CompanyList } from "@/components/company/CompanyList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { CompanyListStory } from "@/components/company/CompanyList/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
-import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withCreateCompanyProvider } from "@/components/company/CreateCompanyContext/__stories__";
-import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withDeleteCompaniesProvider } from "@/components/company/DeleteCompaniesContext/__stories__";
+import { withCreateCompanyModalProvider } from "@/components/company/CreateCompanyModal/__stories__";
 
 const meta = {
   title: "pages/CompaniesPage",
   component: CompaniesPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    // preserve provider order as in page.tsx file
     withCreateCompanyProvider,
+    withCreateCompanyModalProvider,
     withDeleteCompaniesProvider,
-    withGuestModeModalProvider,
-    withCurrentUserProvider,
     withSelectedItemsProvider,
-    withPageTransitionProvider,
-    PageDecorator,
+    PageDecorator, // most providers and layout are defined in PageDecorator
     withThemedBackground,
   ],
   beforeEach: () => {

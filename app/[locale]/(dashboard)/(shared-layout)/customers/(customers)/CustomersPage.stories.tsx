@@ -16,13 +16,11 @@ import { CustomerFiltersForm } from "@/components/customer/CustomerFiltersForm";
 import { CustomerListStory } from "@/components/customer/CustomerList/__stories__";
 import { CustomerGridLargeStory } from "@/components/customer/CustomerGrid/__stories__";
 import { CustomerGridMobileStory } from "@/components/customer/CustomerGrid/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
-import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { CustomerCompanyFiltersForm } from "@/components/customer/CustomerCompanyFiltersForm";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withCreateCompanyProvider } from "@/components/company/CreateCompanyContext/__stories__";
-import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
+import { withCreateCompanyModalProvider } from "@/components/company/CreateCompanyModal/__stories__";
 import { withCreateCustomerProvider } from "@/components/customer/CreateCustomerContext/__stories__";
 import { withDeleteCustomersProvider } from "@/components/customer/DeleteCustomersContext/__stories__";
 import { withCustomerFiltersProvider } from "@/components/customer/CustomerFiltersContext/__stories__";
@@ -32,15 +30,14 @@ const meta = {
   component: CustomersPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    // preserve provider order as in page.tsx file
     withCustomerFiltersProvider,
-    withCreateCompanyProvider,
     withCreateCustomerProvider,
+    withCreateCompanyProvider,
+    withCreateCompanyModalProvider,
     withDeleteCustomersProvider,
-    withGuestModeModalProvider,
-    withCurrentUserProvider,
     withSelectedItemsProvider,
-    withPageTransitionProvider,
-    PageDecorator,
+    PageDecorator, // most providers and layout are defined in PageDecorator
     withThemedBackground,
   ],
   beforeEach: () => {

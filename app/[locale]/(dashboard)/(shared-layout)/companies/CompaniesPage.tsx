@@ -9,7 +9,7 @@ import { BackButton } from "@/components/common/BackButton";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
-import { NewCompanyModal } from "@/components/company/NewCompanyModal";
+import { CreateCompanyModal } from "@/components/company/CreateCompanyModal";
 import { PageEmptySection } from "@/components/common/PageEmptySection";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { ToolbarLarge, ToolbarMobile } from "@/components/common/Toolbar";
@@ -51,7 +51,7 @@ export function CompaniesPage({
           </PageGrid>
         </PageContainer>
 
-        <NewCompanyModal />
+        <CreateCompanyModal />
       </>
     );
   }
@@ -81,7 +81,7 @@ export function CompaniesPage({
       </PageContainer>
 
       <TaskSearchModal searchContainer={searchContainer} />
-      <NewCompanyModal />
+      <CreateCompanyModal />
     </>
   );
 }

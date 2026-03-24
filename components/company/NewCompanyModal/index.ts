@@ -1,1 +1,0 @@
-export { NewCompanyModal } from "./NewCompanyModal";

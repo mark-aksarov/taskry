@@ -22,7 +22,7 @@ import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
 import { CustomersContainer } from "@/components/customer/CustomersContainer";
 import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
-import { CreateCompanyProvider } from "@/components/company/CreateCompanyContext";
+import { CreateCompanyProvider } from "@/components/company/CreateCompanyProvider";
 import { CreateCustomerProvider } from "@/components/customer/CreateCustomerContext";
 import { DeleteCustomersProvider } from "@/components/customer/DeleteCustomersContext";
 import { CustomerFiltersProvider } from "@/components/customer/CustomerFiltersContext";
@@ -30,6 +30,7 @@ import { NewCustomerFormContainer } from "@/components/customer/NewCustomerFormC
 import { CustomerFiltersFormContainer } from "@/components/customer/CustomerFiltersFormContainer";
 import { CustomerRouterSearchContainer } from "@/components/customer/CustomerRouterSearchContainer";
 import { CustomerCompanyFiltersFormContainer } from "@/components/customer/CustomerCompanyFiltersFormContainer";
+import { CreateCompanyModalProvider } from "@/components/company/CreateCompanyModal";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -75,31 +76,33 @@ export default async function AppCustomersPage({
   return (
     <SelectedItemsProvider pageItems={customers.map((c) => ({ id: c.id }))}>
       <DeleteCustomersProvider deleteCustomers={deleteCustomers}>
-        <CreateCompanyProvider createCompany={createCompany}>
-          <CreateCustomerProvider createCustomer={createCustomer}>
-            <CustomerFiltersProvider filters={filters}>
-              <CustomersPage
-                totalCount={totalCount}
-                totalFilteredCustomers={totalFilteredCustomers}
-                selectedSortField={sort}
-                searchContainer={<CustomerRouterSearchContainer />}
-                filtersFormContainer={<CustomerFiltersFormContainer />}
-                customerCompanyFiltersFormContainer={
-                  <CustomerCompanyFiltersFormContainer />
-                }
-                newCustomerFormContainer={<NewCustomerFormContainer />}
-                customersContainer={
-                  <CustomersContainer
-                    customers={customers}
-                    totalCount={totalCount}
-                    page={page}
-                    pageSize={pageSize}
-                  />
-                }
-              />
-            </CustomerFiltersProvider>
-          </CreateCustomerProvider>
-        </CreateCompanyProvider>
+        <CreateCompanyModalProvider>
+          <CreateCompanyProvider>
+            <CreateCustomerProvider createCustomer={createCustomer}>
+              <CustomerFiltersProvider filters={filters}>
+                <CustomersPage
+                  totalCount={totalCount}
+                  totalFilteredCustomers={totalFilteredCustomers}
+                  selectedSortField={sort}
+                  searchContainer={<CustomerRouterSearchContainer />}
+                  filtersFormContainer={<CustomerFiltersFormContainer />}
+                  customerCompanyFiltersFormContainer={
+                    <CustomerCompanyFiltersFormContainer />
+                  }
+                  newCustomerFormContainer={<NewCustomerFormContainer />}
+                  customersContainer={
+                    <CustomersContainer
+                      customers={customers}
+                      totalCount={totalCount}
+                      page={page}
+                      pageSize={pageSize}
+                    />
+                  }
+                />
+              </CustomerFiltersProvider>
+            </CreateCustomerProvider>
+          </CreateCompanyProvider>
+        </CreateCompanyModalProvider>
       </DeleteCustomersProvider>
     </SelectedItemsProvider>
   );

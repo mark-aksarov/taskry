@@ -1,13 +1,13 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useCreateCompany } from "./CreateCompanyContext";
+import { useCreateCompanyModal } from "./CreateCompanyModal";
 import { EmptySectionButton } from "@/components/common/EmptySection";
 
 export function CompaniesEmptySectionCreateButton() {
   const t = useTranslations("company.CompaniesEmptySectionCreateButton");
 
-  const { onModalOpenChange } = useCreateCompany();
+  const { onOpenChange: onModalOpenChange } = useCreateCompanyModal();
 
   return (
     <EmptySectionButton onPress={() => onModalOpenChange(true)}>
