@@ -1,4 +1,4 @@
-import { DeleteCompanyContext } from "../DeleteCompanyContext";
+import { DeleteCompanyContext } from "../../DeleteCompanyContext";
 
 export const MockedDeleteCompanyProvider = ({
   children,

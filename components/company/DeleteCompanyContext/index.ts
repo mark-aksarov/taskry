@@ -1,2 +1,1 @@
-export { DeleteCompanyContext } from "./DeleteCompanyContext";
-export { useDeleteCompany } from "./DeleteCompanyContext";
+export { DeleteCompanyProvider } from "./DeleteCompanyProvider";

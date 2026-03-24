@@ -1,7 +1,7 @@
 import { CompanyList } from "./CompanyList";
 import { CompanyListItem } from "./CompanyListItem";
 import { UpdateCompanyProvider } from "./UpdateCompanyProvider";
-import { DeleteCompanyProvider } from "./DeleteCompanyProvider";
+import { DeleteCompanyProvider } from "./DeleteCompanyContext/DeleteCompanyProvider";
 import { UpdateCompanyModalProvider } from "./UpdateCompanyModal";
 import { getCompanySummaries } from "@/lib/data/company/company.dal";
 
