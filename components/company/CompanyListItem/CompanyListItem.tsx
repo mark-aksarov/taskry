@@ -9,9 +9,6 @@ import {
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { DeleteCompanyProvider } from "../DeleteCompanyContext";
-import { UpdateCompanyProvider } from "../UpdateCompanyContext";
 import { CompanyListItemCheckbox } from "./CompanyListItemCheckbox";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
@@ -21,50 +18,35 @@ import { CompanyListItemActionMenuTrigger } from "./CompanyListItemActionMenuTri
 interface CompanyListItemProps {
   id: number;
   name: string;
-  updateCompany: ActionFn<ActionState, FormData>;
-  deleteCompany: ActionFn<ActionState, number>;
 }
 
-export function CompanyListItem({
-  updateCompany,
-  deleteCompany,
-  ...props
-}: CompanyListItemProps) {
+export function CompanyListItem(props: CompanyListItemProps) {
   const selected = useSelectedItems();
 
   return (
-    <UpdateCompanyProvider updateCompany={updateCompany}>
-      <DeleteCompanyProvider deleteCompany={deleteCompany}>
-        <CompanyListItemPendingOverlay companyId={props.id}>
-          <SelectableItem {...selected} item={{ id: props.id }}>
-            <CompanyListItemInner {...props} />
-          </SelectableItem>
-        </CompanyListItemPendingOverlay>
-      </DeleteCompanyProvider>
-    </UpdateCompanyProvider>
+    <CompanyListItemPendingOverlay companyId={props.id}>
+      <SelectableItem {...selected} item={{ id: props.id }}>
+        <CompanyListItemInner {...props} />
+      </SelectableItem>
+    </CompanyListItemPendingOverlay>
   );
 }
 
-const CompanyListItemInner = memo(
-  ({
-    id,
-    name,
-  }: Omit<CompanyListItemProps, "updateCompany" | "deleteCompany">) => {
-    const t = useTranslations("company.CompanyListItem");
+const CompanyListItemInner = memo(({ id, name }: CompanyListItemProps) => {
+  const t = useTranslations("company.CompanyListItem");
 
-    return (
-      <ListItem
-        data-test="company-list-item "
-        className="flex w-full items-center gap-4"
-      >
-        <CompanyListItemCheckbox id={id} />
-        <ListItemInfo>
-          <ListItemTitle>{name}</ListItemTitle>
-          <ListItemText>{t("name")}</ListItemText>
-        </ListItemInfo>
+  return (
+    <ListItem
+      data-test="company-list-item "
+      className="flex w-full items-center gap-4"
+    >
+      <CompanyListItemCheckbox id={id} />
+      <ListItemInfo>
+        <ListItemTitle>{name}</ListItemTitle>
+        <ListItemText>{t("name")}</ListItemText>
+      </ListItemInfo>
 
-        <CompanyListItemActionMenuTrigger companyId={id} companyName={name} />
-      </ListItem>
-    );
-  },
-);
+      <CompanyListItemActionMenuTrigger companyId={id} companyName={name} />
+    </ListItem>
+  );
+});

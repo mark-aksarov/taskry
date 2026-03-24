@@ -1,6 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { CompanyListItem } from "../CompanyListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDeleteCompanyProvider } from "../../DeleteCompanyContext/__stories__";
+import { withUpdateCompanyProvider } from "../../UpdateCompanyContext/__stories__";
 import { withDeleteCompaniesProvider } from "../../DeleteCompaniesContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
@@ -10,10 +12,14 @@ const meta = {
   title: "components/companies/CompanyListItem",
   component: CompanyListItem,
   decorators: [
+    // mocking providers
+    withDeleteCompanyProvider,
+    withUpdateCompanyProvider,
     withDeleteCompaniesProvider,
     withSelectedItemsProvider,
     withGuestModeModalProvider,
     withCurrentUserProvider,
+
     withThemedBackground,
   ],
 } satisfies Meta<typeof CompanyListItem>;
@@ -25,8 +31,6 @@ export const Default = {
   args: {
     id: 1,
     name: "Company 1",
-    updateCompany: () => ({ status: "success" }),
-    deleteCompany: () => ({ status: "success" }),
   },
 } satisfies Story;
 

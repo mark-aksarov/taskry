@@ -11,9 +11,8 @@ import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseM
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
 
-const UpdateCompanyContext = createContext<UpdateEntityContextType | null>(
-  null,
-);
+export const UpdateCompanyContext =
+  createContext<UpdateEntityContextType | null>(null);
 
 interface UpdateCompanyProviderProps {
   updateCompany: ActionFn<ActionState, FormData>;
