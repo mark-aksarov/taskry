@@ -1,0 +1,1 @@
+export { DeleteCompaniesProvider } from "./DeleteCompaniesProvider";

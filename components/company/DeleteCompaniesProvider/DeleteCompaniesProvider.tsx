@@ -3,7 +3,7 @@
 import { useRouter } from "@/i18n/navigation";
 import { ActionState } from "@/lib/actions/types";
 import { useMemo, useState, useActionState } from "react";
-import { DeleteCompaniesContext } from "./DeleteCompaniesContext";
+import { DeleteCompaniesContext } from "../DeleteCompaniesContext";
 import { deleteCompanies } from "@/lib/actions/company/deleteCompanies";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 

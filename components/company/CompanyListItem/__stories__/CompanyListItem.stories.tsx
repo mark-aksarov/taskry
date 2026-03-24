@@ -4,7 +4,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteCompanyProvider } from "../../DeleteCompanyContext/__stories__";
 import { withUpdateCompanyProvider } from "../../UpdateCompanyContext/__stories__";
 import { withUpdateCompanyModalProvider } from "../../UpdateCompanyModal/__stories__";
-import { withDeleteCompaniesProvider } from "../../DeleteCompaniesContext/__stories__";
+import { withDeleteCompaniesProvider } from "../../DeleteCompaniesProvider/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
