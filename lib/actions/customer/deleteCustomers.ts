@@ -9,10 +9,7 @@ import { deleteCustomers as deleteCustomersQuery } from "@/lib/data/customer/cus
 
 const customerIds = z.array(customerId).min(1);
 
-export async function deleteCustomers(
-  _prevState: ActionState,
-  ids: number[],
-): Promise<ActionState> {
+export async function deleteCustomers(ids: number[]): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

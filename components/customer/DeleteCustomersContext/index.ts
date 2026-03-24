@@ -1,2 +1,1 @@
-export { DeleteCustomersProvider } from "./DeleteCustomersContext";
-export { useDeleteCustomers } from "./DeleteCustomersContext";
+export { DeleteCustomersProvider } from "./DeleteCustomersProvider";

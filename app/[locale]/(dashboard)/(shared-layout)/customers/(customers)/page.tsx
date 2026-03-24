@@ -17,7 +17,6 @@ import { CustomersPage } from "./CustomersPage";
 import { customerSortFields } from "@/lib/types";
 import { companyId } from "@/lib/schemas/company";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
 import { CustomersContainer } from "@/components/customer/CustomersContainer";
 import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
 import { CreateCompanyProvider } from "@/components/company/CreateCompanyProvider";
@@ -74,7 +73,7 @@ export default async function AppCustomersPage({
 
   return (
     <SelectedItemsProvider pageItems={customers.map((c) => ({ id: c.id }))}>
-      <DeleteCustomersProvider deleteCustomers={deleteCustomers}>
+      <DeleteCustomersProvider>
         <CreateCompanyModalProvider>
           <CreateCompanyProvider>
             <CreateCustomerModalProvider>
