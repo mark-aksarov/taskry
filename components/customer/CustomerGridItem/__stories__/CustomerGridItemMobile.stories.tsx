@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { EditCustomerForm } from "../../EditCustomerForm";
+import { UpdateCustomerForm } from "../../UpdateCustomerForm";
 import { mockedCompanySummaries } from "@/mocks/companies";
 import { CustomerGridItemMobile } from "../CustomerGridItemMobile";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -32,8 +32,8 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     ...mockedCustomer,
-    editCustomerFormContainer: (
-      <EditCustomerForm
+    updateCustomerFormContainer: (
+      <UpdateCustomerForm
         {...mockedCustomer}
         customerId={mockedCustomer.id}
         companySelectItems={mockedCompanySummaries}
@@ -59,7 +59,7 @@ export const WithoutImagePhoneAndLink = {
     id: mockedCustomer.id,
     fullName: mockedCustomer.fullName,
     email: mockedCustomer.email,
-    editCustomerFormContainer: Default.args.editCustomerFormContainer,
+    updateCustomerFormContainer: Default.args.updateCustomerFormContainer,
   },
 } satisfies Story;
 

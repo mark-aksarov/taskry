@@ -21,7 +21,7 @@
   "CustomerContainer": {
     "notFound": "Сustomer not found. It may have been deleted by another user."
   },
-  "EditCustomerForm": {
+  "UpdateCustomerForm": {
     "submitButtonLabel": "Update Customer",
     "successMessage": "Customer updated successfully"
   },
@@ -59,7 +59,7 @@
   "CreateCustomerModal": {
     "title": "New Customer"
   },
-  "EditCustomerModal": {
+  "UpdateCustomerModal": {
     "title": "Edit Customer"
   },
   "CustomerDetailCard": {

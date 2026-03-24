@@ -55,7 +55,7 @@ export const CustomerListItemInner = memo(
     company,
     customerDetailContainer,
     customerDetailHeaderContainer,
-    editCustomerFormContainer,
+    updateCustomerFormContainer,
   }: Props) => {
     const t = useTranslations("customers.CustomerListItem");
 
@@ -137,7 +137,7 @@ export const CustomerListItemInner = memo(
           <CustomerItemActionMenuTrigger
             customerId={id}
             customerFullName={fullName}
-            editCustomerFormContainer={editCustomerFormContainer}
+            updateCustomerFormContainer={updateCustomerFormContainer}
           />
         }
       />

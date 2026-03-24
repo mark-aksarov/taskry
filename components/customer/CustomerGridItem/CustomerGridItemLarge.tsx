@@ -59,7 +59,7 @@ export const CustomerGridItemLargeInner = memo(
     company,
     customerDetailContainer,
     customerDetailHeaderContainer,
-    editCustomerFormContainer,
+    updateCustomerFormContainer,
   }: Props) => {
     const t = useTranslations("customers.CustomerGridItem");
 
@@ -88,7 +88,7 @@ export const CustomerGridItemLargeInner = memo(
             <CustomerItemActionMenuTrigger
               customerId={id}
               customerFullName={fullName}
-              editCustomerFormContainer={editCustomerFormContainer}
+              updateCustomerFormContainer={updateCustomerFormContainer}
               className="-mr-2"
             />
           </GridItemRow>

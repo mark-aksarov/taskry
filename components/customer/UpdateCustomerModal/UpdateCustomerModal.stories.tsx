@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
-import { EditCustomerForm } from "../EditCustomerForm";
-import { EditCustomerModal } from "./EditCustomerModal";
+import { UpdateCustomerForm } from "../UpdateCustomerForm";
+import { UpdateCustomerModal } from "./UpdateCustomerModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedCustomerDetail } from "@/mocks/customers";
 import { mockedCompanySummaries } from "@/mocks/companies";
@@ -11,8 +11,8 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateCustomerProvider } from "../UpdateCustomerContext/__stories__";
 
 const meta = {
-  title: "components/customers/EditCustomerModal",
-  component: EditCustomerModal,
+  title: "components/customers/UpdateCustomerModal",
+  component: UpdateCustomerModal,
   decorators: [
     (Story) => {
       const { onModalOpenChange } = useUpdateCustomer();
@@ -32,15 +32,15 @@ const meta = {
     withUpdateCustomerProvider,
     withThemedBackground,
   ],
-} satisfies Meta<typeof EditCustomerModal>;
+} satisfies Meta<typeof UpdateCustomerModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    editCustomerFormContainer: (
-      <EditCustomerForm
+    updateCustomerFormContainer: (
+      <UpdateCustomerForm
         {...mockedCustomerDetail}
         customerId={mockedCustomerDetail.id}
         companySelectItems={mockedCompanySummaries}
@@ -51,6 +51,6 @@ export const Default = {
 
 export const Skeleton = {
   args: {
-    editCustomerFormContainer: <CustomerFormSkeleton />,
+    updateCustomerFormContainer: <CustomerFormSkeleton />,
   },
 } satisfies Story;

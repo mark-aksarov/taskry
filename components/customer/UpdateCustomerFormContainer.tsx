@@ -2,19 +2,19 @@
 
 import useSWR from "swr";
 import { usePathname } from "@/i18n/navigation";
-import { EditCustomerForm } from "./EditCustomerForm";
+import { UpdateCustomerForm } from "./UpdateCustomerForm";
 import { notFound, useParams } from "next/navigation";
 import { CustomerFormSkeleton } from "./CustomerFormSkeleton";
 import { CompanySummaryDTO } from "@/lib/data/company/company.dto";
 import { CustomerFormDataDTO } from "@/lib/data/customer/customer.dto";
 
-interface EditCustomerFormContainerProps {
+interface UpdateCustomerFormContainerProps {
   customerId: number;
 }
 
-export function EditCustomerFormContainer({
+export function UpdateCustomerFormContainer({
   customerId,
-}: EditCustomerFormContainerProps) {
+}: UpdateCustomerFormContainerProps) {
   const pathname = usePathname();
   const params = useParams();
 
@@ -50,7 +50,7 @@ export function EditCustomerFormContainer({
   }
 
   return (
-    <EditCustomerForm
+    <UpdateCustomerForm
       customerId={customerId}
       fullName={customer.fullName}
       bio={customer.bio}

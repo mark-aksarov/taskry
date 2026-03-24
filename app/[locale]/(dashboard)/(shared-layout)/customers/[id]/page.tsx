@@ -8,7 +8,7 @@ import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
 import { UpdateCustomerProvider } from "@/components/customer/UpdateCustomerProvider";
 import { DeleteCustomerProvider } from "@/components/customer/DeleteCustomerProvider";
-import { EditCustomerFormContainer } from "@/components/customer/EditCustomerFormContainer";
+import { UpdateCustomerFormContainer } from "@/components/customer/UpdateCustomerFormContainer";
 import { CustomerDetailAltContainer } from "@/components/customer/CustomerDetailAltContainer";
 import { CustomerDetailHeaderAltContainer } from "@/components/customer/CustomerDetailHeaderAltContainer";
 
@@ -48,8 +48,8 @@ export default async function AppCustomerDetailPage({
             <CustomerDetailActions
               customerId={id}
               customerFullName={customerSummary.fullName}
-              editCustomerFormContainer={
-                <EditCustomerFormContainer customerId={id} />
+              updateCustomerFormContainer={
+                <UpdateCustomerFormContainer customerId={id} />
               }
             />
           </DeleteCustomerProvider>

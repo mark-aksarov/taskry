@@ -4,7 +4,7 @@ import {
 } from "../CustomerDetailActions";
 
 import { CustomerDetail } from "../CustomerDetail";
-import { EditCustomerForm } from "../EditCustomerForm";
+import { UpdateCustomerForm } from "../UpdateCustomerForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedCustomerDetail } from "@/mocks/customers";
 import { CustomerDetailCard } from "./CustomerDetailCard";
@@ -51,8 +51,8 @@ export const Default = {
       <CustomerDetailActions
         customerId={mockedCustomerDetail.id}
         customerFullName={mockedCustomerDetail.fullName}
-        editCustomerFormContainer={
-          <EditCustomerForm
+        updateCustomerFormContainer={
+          <UpdateCustomerForm
             {...mockedCustomerDetail}
             customerId={mockedCustomerDetail.id}
             companySelectItems={mockedCompanySummaries}

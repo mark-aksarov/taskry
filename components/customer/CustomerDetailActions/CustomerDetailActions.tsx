@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { startTransition, useState } from "react";
-import { EditCustomerModal } from "../EditCustomerModal";
+import { UpdateCustomerModal } from "../UpdateCustomerModal";
 import { useDeleteCustomer } from "../DeleteCustomerContext";
 import { useUpdateCustomer } from "../UpdateCustomerContext";
 import { BaseDeleteCustomerModal } from "../DeleteCustomerModal";
@@ -13,13 +13,13 @@ import { NavigationButton } from "@/components/common/NavigationButton";
 interface CustomerDetailActionsProps {
   customerId: number;
   customerFullName: string;
-  editCustomerFormContainer: React.ReactNode;
+  updateCustomerFormContainer: React.ReactNode;
 }
 
 export function CustomerDetailActions({
   customerId,
   customerFullName,
-  editCustomerFormContainer,
+  updateCustomerFormContainer,
 }: CustomerDetailActionsProps) {
   const t = useTranslations("customers.CustomerDetailActions");
 
@@ -81,8 +81,8 @@ export function CustomerDetailActions({
       </div>
 
       {/* Modal for editing customer details */}
-      <EditCustomerModal
-        editCustomerFormContainer={editCustomerFormContainer}
+      <UpdateCustomerModal
+        updateCustomerFormContainer={updateCustomerFormContainer}
       />
 
       {/* Modal for confirming customer deletion */}

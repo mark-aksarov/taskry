@@ -10,7 +10,7 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { EditCustomerModal } from "../EditCustomerModal";
+import { UpdateCustomerModal } from "../UpdateCustomerModal";
 import { DeleteCustomerModal } from "../DeleteCustomerModal";
 import { useUpdateCustomer } from "../UpdateCustomerContext";
 import { useCustomerItemPending } from "./useCustomerItemPending";
@@ -20,14 +20,14 @@ export type CustomerItemActionMenuTriggerProps = {
   customerId: number;
   customerFullName: string;
   className?: string;
-  editCustomerFormContainer: React.ReactNode;
+  updateCustomerFormContainer: React.ReactNode;
 };
 
 export function CustomerItemActionMenuTrigger({
   customerId,
   customerFullName,
   className,
-  editCustomerFormContainer,
+  updateCustomerFormContainer,
 }: CustomerItemActionMenuTriggerProps) {
   const t = useTranslations("customers.CustomerItemActionMenuTrigger");
 
@@ -80,8 +80,8 @@ export function CustomerItemActionMenuTrigger({
         </Item>
       </ItemBaseActionMenuTrigger>
 
-      <EditCustomerModal
-        editCustomerFormContainer={editCustomerFormContainer}
+      <UpdateCustomerModal
+        updateCustomerFormContainer={updateCustomerFormContainer}
       />
 
       <DeleteCustomerModal

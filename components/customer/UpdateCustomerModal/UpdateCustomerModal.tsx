@@ -10,14 +10,14 @@ import { useTranslations } from "next-intl";
 import { useUpdateCustomer } from "../UpdateCustomerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
-interface EditCustomerModalProps {
-  editCustomerFormContainer: React.ReactNode;
+interface UpdateCustomerModalProps {
+  updateCustomerFormContainer: React.ReactNode;
 }
 
-export function EditCustomerModal({
-  editCustomerFormContainer,
-}: EditCustomerModalProps) {
-  const t = useTranslations("customers.EditCustomerModal");
+export function UpdateCustomerModal({
+  updateCustomerFormContainer,
+}: UpdateCustomerModalProps) {
+  const t = useTranslations("customers.UpdateCustomerModal");
 
   const { isModalOpen, onModalOpenChange } = useUpdateCustomer();
 
@@ -30,7 +30,7 @@ export function EditCustomerModal({
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
-          {editCustomerFormContainer}
+          {updateCustomerFormContainer}
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

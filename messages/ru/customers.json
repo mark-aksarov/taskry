@@ -21,7 +21,7 @@
   "CustomerContainer": {
     "notFound": "Клиент не найден. Возможно, он был удален другим пользователем."
   },
-  "EditCustomerForm": {
+  "UpdateCustomerForm": {
     "submitButtonLabel": "Обновить клиента",
     "successMessage": "Клиент успешно обновлен"
   },
@@ -59,7 +59,7 @@
   "CreateCustomerModal": {
     "title": "Новый клиент"
   },
-  "EditCustomerModal": {
+  "UpdateCustomerModal": {
     "title": "Изменить клиента"
   },
   "CustomerDetailCard": {

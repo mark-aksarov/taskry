@@ -14,7 +14,7 @@ import { CustomerItemProviders } from "./CustomerItemProviders";
 import { CustomerDetailContainer } from "./CustomerDetailContainer";
 import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
 import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
-import { EditCustomerFormContainer } from "./EditCustomerFormContainer";
+import { UpdateCustomerFormContainer } from "./UpdateCustomerFormContainer";
 import { CustomerDetailHeaderContainer } from "./CustomerDetailHeaderContainer";
 import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
 
@@ -41,8 +41,8 @@ export async function CustomersContainer({
     phoneNumber: customer.phoneNumber,
     publicLink: customer.publicLink,
     company: customer.company,
-    editCustomerFormContainer: (
-      <EditCustomerFormContainer customerId={customer.id} />
+    updateCustomerFormContainer: (
+      <UpdateCustomerFormContainer customerId={customer.id} />
     ),
   });
 

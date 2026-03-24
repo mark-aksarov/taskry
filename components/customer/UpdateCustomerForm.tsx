@@ -18,7 +18,7 @@ import { CustomerFullNameTextField } from "./CustomerFullNameTextField";
 import { CustomerPublicLinkTextField } from "./CustomerPublicLinkTextField";
 import { CustomerPhoneNumberTextField } from "./CustomerPhoneNumberTextField";
 
-interface EditCustomerFormProps {
+interface UpdateCustomerFormProps {
   customerId: number;
   fullName: string;
   bio?: string;
@@ -29,7 +29,7 @@ interface EditCustomerFormProps {
   companySelectItems: { id: number; name: string }[];
 }
 
-export function EditCustomerForm({
+export function UpdateCustomerForm({
   customerId,
   fullName,
   bio,
@@ -38,8 +38,8 @@ export function EditCustomerForm({
   publicLink,
   companyId,
   companySelectItems,
-}: EditCustomerFormProps) {
-  const t = useTranslations("customers.EditCustomerForm");
+}: UpdateCustomerFormProps) {
+  const t = useTranslations("customers.UpdateCustomerForm");
 
   const { state, isPending, action } = useUpdateCustomer();
 

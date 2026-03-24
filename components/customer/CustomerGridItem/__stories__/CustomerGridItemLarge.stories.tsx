@@ -1,6 +1,6 @@
 import { CustomerDetail } from "../../CustomerDetail";
 import type { Meta, StoryObj } from "@storybook/react";
-import { EditCustomerForm } from "../../EditCustomerForm";
+import { UpdateCustomerForm } from "../../UpdateCustomerForm";
 import { mockedCompanySummaries } from "@/mocks/companies";
 import { CustomerGridItemLarge } from "../CustomerGridItemLarge";
 import { CustomerDetailHeader } from "../../CustomerDetailHeader";
@@ -39,8 +39,8 @@ export const Default = {
         companyName={mockedCustomer.company.name}
       />
     ),
-    editCustomerFormContainer: (
-      <EditCustomerForm
+    updateCustomerFormContainer: (
+      <UpdateCustomerForm
         {...mockedCustomer}
         customerId={mockedCustomer.id}
         companySelectItems={mockedCompanySummaries}
@@ -68,7 +68,7 @@ export const WithoutImagePhoneAndLink = {
     email: mockedCustomer.email,
     customerDetailContainer: Default.args.customerDetailContainer,
     customerDetailHeaderContainer: Default.args.customerDetailHeaderContainer,
-    editCustomerFormContainer: Default.args.editCustomerFormContainer,
+    updateCustomerFormContainer: Default.args.updateCustomerFormContainer,
   },
 } satisfies Story;
 

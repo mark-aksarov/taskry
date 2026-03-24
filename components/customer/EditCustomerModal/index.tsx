@@ -1,1 +1,0 @@
-export { EditCustomerModal } from "./EditCustomerModal";

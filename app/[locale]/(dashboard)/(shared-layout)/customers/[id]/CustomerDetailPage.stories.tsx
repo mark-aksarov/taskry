@@ -13,7 +13,7 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { SearchList } from "@/components/search/SearchList";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { EditCustomerForm } from "@/components/customer/EditCustomerForm";
+import { UpdateCustomerForm } from "@/components/customer/UpdateCustomerForm";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
@@ -64,8 +64,8 @@ export const Default = {
       <CustomerDetailActions
         customerId={mockedCustomerDetail.id}
         customerFullName={mockedCustomerDetail.fullName}
-        editCustomerFormContainer={
-          <EditCustomerForm
+        updateCustomerFormContainer={
+          <UpdateCustomerForm
             {...mockedCustomerDetail}
             customerId={mockedCustomerDetail.id}
             companySelectItems={mockedCompanySummaries}
