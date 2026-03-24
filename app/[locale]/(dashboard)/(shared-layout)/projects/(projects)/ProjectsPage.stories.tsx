@@ -8,12 +8,12 @@ import {
   ProjectGridMobileStory,
 } from "@/components/projects/ProjectGrid/__stories__";
 
-import { fn, mocked } from "storybook/test";
+import { mocked } from "storybook/test";
 import ProjectsPageLoading from "./loading";
 import { ProjectsPage } from "./ProjectsPage";
+import { usePathname } from "next/navigation";
 import { mockedUserSummaries } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedCustomerSummaries } from "@/mocks/customers";
 import { SearchList } from "@/components/search/SearchList";
@@ -57,7 +57,6 @@ const meta = {
   ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/projects");
-    mocked(useParams).mockReturnValue({ push: fn() } as any);
   },
 } satisfies Meta<typeof ProjectsPage>;
 

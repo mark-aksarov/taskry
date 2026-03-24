@@ -1,9 +1,13 @@
 "use client";
 
+import {
+  UpdateCustomerModal,
+  useUpdateCustomerModal,
+} from "../UpdateCustomerModal";
+
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { startTransition, useState } from "react";
-import { UpdateCustomerModal } from "../UpdateCustomerModal";
 import { useDeleteCustomer } from "../DeleteCustomerContext";
 import { useUpdateCustomer } from "../UpdateCustomerContext";
 import { BaseDeleteCustomerModal } from "../DeleteCustomerModal";
@@ -31,11 +35,9 @@ export function CustomerDetailActions({
     useDeleteCustomer();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // Edit customer: action state + form modal state from context
-  const {
-    isPending: isUpdatePending,
-    onModalOpenChange: onEditModalOpenChange,
-  } = useUpdateCustomer();
+  // Update customer: action state + form modal state from context
+  const { isPending: isUpdatePending } = useUpdateCustomer();
+  const { onOpenChange: onUpdateModalOpenChange } = useUpdateCustomerModal();
 
   function handleDeletePress() {
     guestGuard(() => setIsDeleteModalOpen(true));
@@ -43,7 +45,7 @@ export function CustomerDetailActions({
 
   function handleEditPress() {
     guestGuard(() => {
-      onEditModalOpenChange(true);
+      onUpdateModalOpenChange(true);
     });
   }
 

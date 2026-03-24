@@ -7,8 +7,8 @@ import { mocked } from "storybook/internal/test";
 import { NextIntlClientProvider } from "next-intl";
 import type { Preview } from "@storybook/nextjs-vite";
 import { MINIMAL_VIEWPORTS } from "storybook/viewport";
-import { useRouter, useSearchParams } from "next/navigation";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 export const globalTypes = {
   locale: {
@@ -92,6 +92,8 @@ const preview: Preview = {
       refresh: () => {},
       replace: () => {},
     } as any);
+
+    mocked(useParams).mockReturnValue({} as any);
   },
 };
 

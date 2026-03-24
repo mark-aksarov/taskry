@@ -2,14 +2,12 @@ import { notFound } from "next/navigation";
 import { customerId } from "@/lib/schemas/customer";
 import { CustomerDetailPage } from "./CustomerDetailPage";
 import { getCustomerSummary } from "@/lib/data/customer/customer.dal";
-import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { CustomerProviders } from "@/components/customer/CustomerProviders";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
-import { UpdateCustomerProvider } from "@/components/customer/UpdateCustomerProvider";
-import { DeleteCustomerProvider } from "@/components/customer/DeleteCustomerProvider";
-import { UpdateCustomerFormContainer } from "@/components/customer/UpdateCustomerFormContainer";
 import { CustomerDetailAltContainer } from "@/components/customer/CustomerDetailAltContainer";
+import { UpdateCustomerFormContainer } from "@/components/customer/UpdateCustomerFormContainer";
 import { CustomerDetailHeaderAltContainer } from "@/components/customer/CustomerDetailHeaderAltContainer";
 
 export default async function AppCustomerDetailPage({
@@ -43,17 +41,15 @@ export default async function AppCustomerDetailPage({
         <CustomerDetailHeaderAltContainer customerId={id} />
       }
       customerDetailActions={
-        <UpdateCustomerProvider updateCustomer={updateCustomer}>
-          <DeleteCustomerProvider>
-            <CustomerDetailActions
-              customerId={id}
-              customerFullName={customerSummary.fullName}
-              updateCustomerFormContainer={
-                <UpdateCustomerFormContainer customerId={id} />
-              }
-            />
-          </DeleteCustomerProvider>
-        </UpdateCustomerProvider>
+        <CustomerProviders>
+          <CustomerDetailActions
+            customerId={id}
+            customerFullName={customerSummary.fullName}
+            updateCustomerFormContainer={
+              <UpdateCustomerFormContainer customerId={id} />
+            }
+          />
+        </CustomerProviders>
       }
     />
   );

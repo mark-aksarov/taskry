@@ -4,11 +4,11 @@ import {
 } from "@/components/users/UserGrid/__stories__";
 
 import { UsersPage } from "./UsersPage";
+import { mocked } from "storybook/test";
 import UsersPageLoading from "./loading";
-import { fn, mocked } from "storybook/test";
+import { usePathname } from "next/navigation";
 import { UserList } from "@/components/users/UserList";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { usePathname, useParams } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { SearchList } from "@/components/search/SearchList";
@@ -44,7 +44,6 @@ const meta = {
   ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/team");
-    mocked(useParams).mockReturnValue({ push: fn() } as any);
   },
 } satisfies Meta<typeof UsersPage>;
 

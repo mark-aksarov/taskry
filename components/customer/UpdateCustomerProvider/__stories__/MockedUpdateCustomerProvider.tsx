@@ -1,4 +1,4 @@
-import { UpdateCustomerContext } from "../UpdateCustomerContext";
+import { UpdateCustomerContext } from "../../UpdateCustomerContext";
 
 export const MockedUpdateCustomerProvider = ({
   children,
@@ -11,8 +11,6 @@ export const MockedUpdateCustomerProvider = ({
         state: { status: "success" },
         action: () => ({ status: "success" }),
         isPending: false,
-        isModalOpen: false,
-        onModalOpenChange: () => {},
       }}
     >
       {children}

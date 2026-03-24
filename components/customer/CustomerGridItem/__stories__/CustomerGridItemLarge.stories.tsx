@@ -5,7 +5,7 @@ import { mockedCompanySummaries } from "@/mocks/companies";
 import { CustomerGridItemLarge } from "../CustomerGridItemLarge";
 import { CustomerDetailHeader } from "../../CustomerDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCustomerItemProviders } from "../../CustomerItemProviders/__stories__";
+import { withCustomerProviders } from "../../CustomerProviders/__stories__";
 import { mockedCustomerDetail as mockedCustomer } from "@/mocks/customers";
 import { withDeleteCustomersProvider } from "../../DeleteCustomersProvider/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
@@ -16,7 +16,7 @@ const meta = {
   title: "components/customers/CustomerGridItemLarge",
   component: CustomerGridItemLarge,
   decorators: [
-    withCustomerItemProviders,
+    withCustomerProviders,
     withDeleteCustomersProvider,
     withSelectedItemsProvider,
     withGuestModeModalProvider,

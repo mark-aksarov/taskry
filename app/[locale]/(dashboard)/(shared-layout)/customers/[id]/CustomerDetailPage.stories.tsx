@@ -16,25 +16,15 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UpdateCustomerForm } from "@/components/customer/UpdateCustomerForm";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
-import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { CustomerDetailHeaderInteractive } from "@/components/customer/CustomerDetailHeader";
-import { withDeleteCustomerProvider } from "@/components/customer/DeleteCustomerProvider/__stories__";
-import { withUpdateCustomerProvider } from "@/components/customer/UpdateCustomerContext/__stories__";
+import { MockedCustomerProviders } from "@/components/customer/CustomerProviders/__stories__";
 import { MockedCustomerDetailHeaderProviders } from "@/components/customer/CustomerDetailHeader/__stories__";
 
 const meta = {
   title: "pages/CustomerDetailPage",
   component: CustomerDetailPage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    withUpdateCustomerProvider,
-    withDeleteCustomerProvider,
-    withGuestModeModalProvider,
-    withCurrentUserProvider,
-    PageDecorator,
-    withThemedBackground,
-  ],
+  decorators: [PageDecorator, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/customers/1");
     mocked(useParams).mockReturnValue({
@@ -61,17 +51,19 @@ export const Default = {
       </MockedCustomerDetailHeaderProviders>
     ),
     customerDetailActions: (
-      <CustomerDetailActions
-        customerId={mockedCustomerDetail.id}
-        customerFullName={mockedCustomerDetail.fullName}
-        updateCustomerFormContainer={
-          <UpdateCustomerForm
-            {...mockedCustomerDetail}
-            customerId={mockedCustomerDetail.id}
-            companySelectItems={mockedCompanySummaries}
-          />
-        }
-      />
+      <MockedCustomerProviders>
+        <CustomerDetailActions
+          customerId={mockedCustomerDetail.id}
+          customerFullName={mockedCustomerDetail.fullName}
+          updateCustomerFormContainer={
+            <UpdateCustomerForm
+              {...mockedCustomerDetail}
+              customerId={mockedCustomerDetail.id}
+              companySelectItems={mockedCompanySummaries}
+            />
+          }
+        />
+      </MockedCustomerProviders>
     ),
   },
 } satisfies Story;

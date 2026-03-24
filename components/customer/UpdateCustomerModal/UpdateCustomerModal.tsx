@@ -7,8 +7,8 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { useUpdateCustomer } from "../UpdateCustomerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
+import { useUpdateCustomerModal } from "./UpdateCustomerModalContext";
 
 interface UpdateCustomerModalProps {
   updateCustomerFormContainer: React.ReactNode;
@@ -19,13 +19,13 @@ export function UpdateCustomerModal({
 }: UpdateCustomerModalProps) {
   const t = useTranslations("customers.UpdateCustomerModal");
 
-  const { isModalOpen, onModalOpenChange } = useUpdateCustomer();
+  const { isOpen, onOpenChange } = useUpdateCustomerModal();
 
   return (
     <FormBaseModal
-      data-test="edit-customer-modal"
-      isOpen={isModalOpen}
-      onOpenChange={onModalOpenChange}
+      data-test="update-customer-modal"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>

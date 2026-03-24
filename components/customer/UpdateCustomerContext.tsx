@@ -1,10 +1,11 @@
 "use client";
 
 import { useContext, createContext } from "react";
-import { UpdateEntityContextType } from "@/lib/hooks/useUpdateEntityContextValue";
+import { ActionContextType } from "@/lib/actions/types";
 
-export const UpdateCustomerContext =
-  createContext<UpdateEntityContextType | null>(null);
+export const UpdateCustomerContext = createContext<ActionContextType | null>(
+  null,
+);
 
 export function useUpdateCustomer() {
   const context = useContext(UpdateCustomerContext);

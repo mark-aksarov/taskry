@@ -1,6 +1,11 @@
 "use client";
 
 import {
+  UpdateCustomerModal,
+  useUpdateCustomerModal,
+} from "../UpdateCustomerModal";
+
+import {
   ItemBaseActionMenuButton,
   ItemBaseActionMenuTrigger,
   ItemBaseActionMenuDialogHeader,
@@ -10,9 +15,7 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { UpdateCustomerModal } from "../UpdateCustomerModal";
 import { DeleteCustomerModal } from "../DeleteCustomerModal";
-import { useUpdateCustomer } from "../UpdateCustomerContext";
 import { useCustomerItemPending } from "./useCustomerItemPending";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
@@ -37,8 +40,8 @@ export function CustomerItemActionMenuTrigger({
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // State for edit modal from context
-  const { onModalOpenChange: onEditModalOpenChange } = useUpdateCustomer();
+  // State for update modal from context
+  const { onOpenChange: onUpdateModalOpenChange } = useUpdateCustomerModal();
 
   /**
    * Handles menu actions for a customer item
@@ -48,7 +51,7 @@ export function CustomerItemActionMenuTrigger({
   function handleAction(key: Key) {
     guestGuard(() => {
       if (key === "edit") {
-        onEditModalOpenChange(true);
+        onUpdateModalOpenChange(true);
       } else if (key === "delete") {
         setIsDeleteModalOpen(true);
       }

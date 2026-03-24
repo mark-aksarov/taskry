@@ -14,7 +14,7 @@ import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailHeaderInteractive } from "../CustomerDetailHeader";
 import { withDeleteCustomerProvider } from "../DeleteCustomerProvider/__stories__";
-import { withUpdateCustomerProvider } from "../UpdateCustomerContext/__stories__";
+import { withUpdateCustomerProvider } from "../UpdateCustomerProvider/__stories__";
 import { MockedCustomerDetailHeaderProviders } from "../CustomerDetailHeader/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";

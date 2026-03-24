@@ -1,30 +1,27 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
-import { UpdateCustomerForm } from "../UpdateCustomerForm";
-import { UpdateCustomerModal } from "./UpdateCustomerModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedCustomerDetail } from "@/mocks/customers";
 import { mockedCompanySummaries } from "@/mocks/companies";
-import { useUpdateCustomer } from "../UpdateCustomerContext";
+import { UpdateCustomerForm } from "../UpdateCustomerForm";
+import { UpdateCustomerModal } from "./UpdateCustomerModal";
 import { CustomerFormSkeleton } from "../CustomerFormSkeleton";
+import { useUpdateCustomerModal } from "./UpdateCustomerModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateCustomerProvider } from "../UpdateCustomerContext/__stories__";
+import { withUpdateCustomerProvider } from "../UpdateCustomerProvider/__stories__";
 
 const meta = {
   title: "components/customers/UpdateCustomerModal",
   component: UpdateCustomerModal,
   decorators: [
     (Story) => {
-      const { onModalOpenChange } = useUpdateCustomer();
+      const { onOpenChange } = useUpdateCustomerModal();
 
-      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
+      useEffect(() => onOpenChange(true), [onOpenChange]);
 
       return (
         <>
-          <Button
-            label="Edit customer"
-            onClick={() => onModalOpenChange(true)}
-          />
+          <Button label="Update customer" onClick={() => onOpenChange(true)} />
           <Story />
         </>
       );

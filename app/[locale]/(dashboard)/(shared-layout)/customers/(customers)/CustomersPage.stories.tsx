@@ -1,8 +1,8 @@
-import { fn, mocked } from "storybook/test";
+import { mocked } from "storybook/test";
 import CustomersPageLoading from "./loading";
+import { usePathname } from "next/navigation";
 import { CustomersPage } from "./CustomersPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { useParams, usePathname } from "next/navigation";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedCompanySummaries } from "@/mocks/companies";
 import { SearchList } from "@/components/search/SearchList";
@@ -39,12 +39,12 @@ const meta = {
     withCreateCompanyModalProvider,
     withDeleteCustomersProvider,
     withSelectedItemsProvider,
+
     PageDecorator, // most providers and layout are defined in PageDecorator
     withThemedBackground,
   ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/customers");
-    mocked(useParams).mockReturnValue({ push: fn() } as any);
   },
 } satisfies Meta<typeof CustomersPage>;
 

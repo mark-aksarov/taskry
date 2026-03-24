@@ -6,7 +6,7 @@ import { mockedCompanySummaries } from "@/mocks/companies";
 import { CustomerDetailHeader } from "../../CustomerDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedCustomerDetail as mockedCustomer } from "@/mocks/customers";
-import { withCustomerItemProviders } from "../../CustomerItemProviders/__stories__";
+import { withCustomerProviders } from "../../CustomerProviders/__stories__";
 import { withDeleteCustomersProvider } from "../../DeleteCustomersProvider/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
@@ -16,7 +16,7 @@ const meta = {
   title: "components/customers/CustomerListItem",
   component: CustomerListItem,
   decorators: [
-    withCustomerItemProviders,
+    withCustomerProviders,
     withDeleteCustomersProvider,
     withSelectedItemsProvider,
     withGuestModeModalProvider,

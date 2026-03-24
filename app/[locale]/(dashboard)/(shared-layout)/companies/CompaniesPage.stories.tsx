@@ -24,6 +24,7 @@ const meta = {
     withCreateCompanyModalProvider,
     withDeleteCompaniesProvider,
     withSelectedItemsProvider,
+
     PageDecorator, // most providers and layout are defined in PageDecorator
     withThemedBackground,
   ],
