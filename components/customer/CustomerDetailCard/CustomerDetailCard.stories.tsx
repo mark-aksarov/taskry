@@ -13,14 +13,11 @@ import { mockedCompanySummaries } from "@/mocks/companies";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailHeaderInteractive } from "../CustomerDetailHeader";
-import { UpdateCustomerImageModalProvider } from "../UpdateCustomerImageModal";
 import { withDeleteCustomerProvider } from "../DeleteCustomerContext/__stories__";
 import { withUpdateCustomerProvider } from "../UpdateCustomerContext/__stories__";
-import { UpdateCustomerImageFileProvider } from "../UpdateCustomerImageFileContext";
+import { MockedCustomerDetailHeaderProviders } from "../CustomerDetailHeader/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
-import { MockedUpdateCustomerImageProvider } from "../UpdateCustomerImageContext/__stories__";
-import { MockedClearCustomerImageUrlProvider } from "../ClearCustomerImageUrlContext/__stories__";
 
 const meta = {
   title: "components/customers/CustomerDetailCard",
@@ -36,24 +33,6 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
-
-function MockedCustomerDetailHeaderProviders({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <UpdateCustomerImageModalProvider>
-      <UpdateCustomerImageFileProvider>
-        <MockedClearCustomerImageUrlProvider>
-          <MockedUpdateCustomerImageProvider>
-            {children}
-          </MockedUpdateCustomerImageProvider>
-        </MockedClearCustomerImageUrlProvider>
-      </UpdateCustomerImageFileProvider>
-    </UpdateCustomerImageModalProvider>
-  );
-}
 
 export const Default = {
   args: {

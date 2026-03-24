@@ -17,8 +17,7 @@ import { withDeleteUserProvider } from "../DeleteUserContext/__stories__";
 import { withUpdateUserProvider } from "../UpdateUserContext/__stories__";
 import { ProfileActions, ProfileActionsSkeleton } from "../ProfileActions";
 import { withChangePasswordProvider } from "../ChangePasswordContext/__stories__";
-import { MockedUpdateUserImageProvider } from "../UpdateUserImageContext/__stories__";
-import { MockedClearUserImageUrlProvider } from "../ClearUserImageUrlContext/__stories__";
+import { MockedUserDetailHeaderProviders } from "../UserDetailHeader/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withDeleteUserImageModalProvider } from "@/components/users/DeleteUserImageModal/__stories__";
@@ -65,16 +64,14 @@ export const Default = {
   args: {
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
-      <MockedClearUserImageUrlProvider>
-        <MockedUpdateUserImageProvider>
-          <UserDetailHeaderInteractive
-            userId={mockedUserDetail.id}
-            fullName={mockedUserDetail.fullName}
-            positionName={mockedUserDetail.position.name}
-            imageUrl={mockedUserDetail.imageUrl}
-          />
-        </MockedUpdateUserImageProvider>
-      </MockedClearUserImageUrlProvider>
+      <MockedUserDetailHeaderProviders>
+        <UserDetailHeaderInteractive
+          userId={mockedUserDetail.id}
+          fullName={mockedUserDetail.fullName}
+          positionName={mockedUserDetail.position.name}
+          imageUrl={mockedUserDetail.imageUrl}
+        />
+      </MockedUserDetailHeaderProviders>
     ),
     navigationLarge: (
       <UserNavigationLarge
@@ -103,14 +100,12 @@ export const WithoutOptionalUserData = {
   args: {
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
-      <MockedClearUserImageUrlProvider>
-        <MockedUpdateUserImageProvider>
-          <UserDetailHeaderInteractive
-            userId={mockedUserDetail.id}
-            fullName={mockedUserDetail.fullName}
-          />
-        </MockedUpdateUserImageProvider>
-      </MockedClearUserImageUrlProvider>
+      <MockedUserDetailHeaderProviders>
+        <UserDetailHeaderInteractive
+          userId={mockedUserDetail.id}
+          fullName={mockedUserDetail.fullName}
+        />
+      </MockedUserDetailHeaderProviders>
     ),
     navigationLarge: (
       <UserNavigationLarge

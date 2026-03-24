@@ -17,8 +17,7 @@ import { withDeleteUserProvider } from "@/components/users/DeleteUserContext/__s
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withChangePasswordProvider } from "@/components/users/ChangePasswordContext/__stories__";
-import { MockedUpdateUserImageProvider } from "@/components/users/UpdateUserImageContext/__stories__";
-import { MockedClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlContext/__stories__";
+import { MockedUserDetailHeaderProviders } from "@/components/users/UserDetailHeader/__stories__";
 
 const meta = {
   title: "pages/TeamProfilePage",
@@ -59,16 +58,14 @@ export const Default = {
     ),
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
-      <MockedClearUserImageUrlProvider>
-        <MockedUpdateUserImageProvider>
-          <UserDetailHeaderInteractive
-            userId={mockedUserDetail.id}
-            fullName={mockedUserDetail.fullName}
-            positionName={mockedUserDetail.position.name}
-            imageUrl={mockedUserDetail.imageUrl}
-          />
-        </MockedUpdateUserImageProvider>
-      </MockedClearUserImageUrlProvider>
+      <MockedUserDetailHeaderProviders>
+        <UserDetailHeaderInteractive
+          userId={mockedUserDetail.id}
+          fullName={mockedUserDetail.fullName}
+          positionName={mockedUserDetail.position.name}
+          imageUrl={mockedUserDetail.imageUrl}
+        />
+      </MockedUserDetailHeaderProviders>
     ),
   },
 } satisfies Story;
@@ -86,14 +83,12 @@ export const WithoutSomeData = {
     ...Default.args,
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
-      <MockedClearUserImageUrlProvider>
-        <MockedUpdateUserImageProvider>
-          <UserDetailHeaderInteractive
-            userId={mockedUserDetail.id}
-            fullName={mockedUserDetail.fullName}
-          />
-        </MockedUpdateUserImageProvider>
-      </MockedClearUserImageUrlProvider>
+      <MockedUserDetailHeaderProviders>
+        <UserDetailHeaderInteractive
+          userId={mockedUserDetail.id}
+          fullName={mockedUserDetail.fullName}
+        />
+      </MockedUserDetailHeaderProviders>
     ),
   },
 } satisfies Story;

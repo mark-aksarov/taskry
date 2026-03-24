@@ -16,9 +16,10 @@ import { withDeleteUserProvider } from "@/components/users/DeleteUserContext/__s
 import { withUpdateUserProvider } from "@/components/users/UpdateUserContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { MockedUserDetailHeaderProviders } from "@/components/users/UserDetailHeader/__stories__";
 import { withChangePasswordProvider } from "@/components/users/ChangePasswordContext/__stories__";
-import { MockedClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlContext/__stories__";
 import { MockedUpdateUserImageProvider } from "@/components/users/UpdateUserImageContext/__stories__";
+import { MockedClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlContext/__stories__";
 
 const meta = {
   title: "pages/ProfilePage",
@@ -55,16 +56,14 @@ export const Default = {
     searchContainer: <SearchList {...SearchListStory.args} />,
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
-      <MockedClearUserImageUrlProvider>
-        <MockedUpdateUserImageProvider>
-          <UserDetailHeaderInteractive
-            userId={mockedUserDetail.id}
-            fullName={mockedUserDetail.fullName}
-            positionName={mockedUserDetail.position.name}
-            imageUrl={mockedUserDetail.imageUrl}
-          />
-        </MockedUpdateUserImageProvider>
-      </MockedClearUserImageUrlProvider>
+      <MockedUserDetailHeaderProviders>
+        <UserDetailHeaderInteractive
+          userId={mockedUserDetail.id}
+          fullName={mockedUserDetail.fullName}
+          positionName={mockedUserDetail.position.name}
+          imageUrl={mockedUserDetail.imageUrl}
+        />
+      </MockedUserDetailHeaderProviders>
     ),
   },
 } satisfies Story;

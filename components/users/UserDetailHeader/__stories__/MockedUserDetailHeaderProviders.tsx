@@ -1,0 +1,22 @@
+import { UpdateUserImageModalProvider } from "../../UpdateUserImageModal";
+import { UpdateUserImageFileProvider } from "../../UpdateUserImageFileContext";
+import { MockedUpdateUserImageProvider } from "../../UpdateUserImageContext/__stories__";
+import { MockedClearUserImageUrlProvider } from "../../ClearUserImageUrlContext/__stories__";
+
+export function MockedUserDetailHeaderProviders({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <UpdateUserImageModalProvider>
+      <UpdateUserImageFileProvider>
+        <MockedClearUserImageUrlProvider>
+          <MockedUpdateUserImageProvider>
+            {children}
+          </MockedUpdateUserImageProvider>
+        </MockedClearUserImageUrlProvider>
+      </UpdateUserImageFileProvider>
+    </UpdateUserImageModalProvider>
+  );
+}

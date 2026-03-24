@@ -15,6 +15,8 @@ import { getUserDetail } from "@/lib/data/user/user.dal";
 import { UpdateUserImageProvider } from "./UpdateUserImageProvider";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { ClearUserImageUrlProvider } from "./ClearUserImageUrlProvider";
+import { UpdateCustomerImageModalProvider } from "../customer/UpdateCustomerImageModal";
+import { UpdateCustomerImageFileProvider } from "../customer/UpdateCustomerImageFileContext";
 
 interface UserDetailHeaderAltContainerProps {
   userId: string;
@@ -64,15 +66,19 @@ async function UserDetailHeaderAltContainerInner({
   }
 
   return (
-    <UpdateUserImageProvider>
-      <ClearUserImageUrlProvider>
-        <UserDetailHeaderInteractive
-          userId={user.id}
-          fullName={user.fullName}
-          imageUrl={user.imageUrl}
-          positionName={user.position?.name}
-        />
-      </ClearUserImageUrlProvider>
-    </UpdateUserImageProvider>
+    <UpdateCustomerImageModalProvider>
+      <UpdateCustomerImageFileProvider>
+        <UpdateUserImageProvider>
+          <ClearUserImageUrlProvider>
+            <UserDetailHeaderInteractive
+              userId={user.id}
+              fullName={user.fullName}
+              imageUrl={user.imageUrl}
+              positionName={user.position?.name}
+            />
+          </ClearUserImageUrlProvider>
+        </UpdateUserImageProvider>
+      </UpdateCustomerImageFileProvider>
+    </UpdateCustomerImageModalProvider>
   );
 }

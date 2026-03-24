@@ -10,7 +10,7 @@ import {
   DeleteUserImageModalProvider,
 } from "../DeleteUserImageModal";
 
-import { UserImageModal } from "../UserImageModal";
+import { UpdateUserImageModal } from "../UpdateUserImageModal";
 import { UserImageMenuTrigger } from "../UserImageMenuTrigger";
 import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 
@@ -40,7 +40,7 @@ export function UserDetailHeaderInteractive({
         positionName={positionName}
       />
 
-      <UserImageModal userId={userId} />
+      <UpdateUserImageModal userId={userId} />
       <DeleteUserImageModal userId={userId} userFullName={fullName} />
     </DeleteUserImageModalProvider>
   );

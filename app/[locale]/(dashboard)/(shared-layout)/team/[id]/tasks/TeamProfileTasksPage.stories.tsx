@@ -32,11 +32,10 @@ import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/_
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
+import { MockedUserDetailHeaderProviders } from "@/components/users/UserDetailHeader/__stories__";
 import { withChangePasswordProvider } from "@/components/users/ChangePasswordContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
-import { MockedUpdateUserImageProvider } from "@/components/users/UpdateUserImageContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
-import { MockedClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlContext/__stories__";
 
 const meta = {
   title: "pages/TeamProfileTasksPage",
@@ -82,16 +81,14 @@ export const Default = {
       />
     ),
     userDetailHeaderContainer: (
-      <MockedClearUserImageUrlProvider>
-        <MockedUpdateUserImageProvider>
-          <UserDetailHeaderInteractive
-            userId={mockedUserDetail.id}
-            fullName={mockedUserDetail.fullName}
-            positionName={mockedUserDetail.position.name}
-            imageUrl={mockedUserDetail.imageUrl}
-          />
-        </MockedUpdateUserImageProvider>
-      </MockedClearUserImageUrlProvider>
+      <MockedUserDetailHeaderProviders>
+        <UserDetailHeaderInteractive
+          userId={mockedUserDetail.id}
+          fullName={mockedUserDetail.fullName}
+          positionName={mockedUserDetail.position.name}
+          imageUrl={mockedUserDetail.imageUrl}
+        />
+      </MockedUserDetailHeaderProviders>
     ),
     navigationLarge: (
       <UserNavigationLarge
