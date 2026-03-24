@@ -1,6 +1,6 @@
 import { UpdateCustomerImageModalProvider } from "../../UpdateCustomerImageModal";
 import { UpdateCustomerImageFileProvider } from "../../UpdateCustomerImageFileContext";
-import { MockedUpdateCustomerImageProvider } from "../../UpdateCustomerImageContext/__stories__";
+import { MockedUpdateCustomerImageProvider } from "../../UpdateCustomerImageProvider/__stories__";
 import { MockedClearCustomerImageUrlProvider } from "../../ClearCustomerImageUrlProvider/__stories__";
 
 export function MockedCustomerDetailHeaderProviders({

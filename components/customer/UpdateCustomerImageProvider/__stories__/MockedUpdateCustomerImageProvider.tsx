@@ -1,4 +1,4 @@
-import { UpdateCustomerImageContext } from "../UpdateCustomerImageContext";
+import { UpdateCustomerImageContext } from "../../UpdateCustomerImageContext";
 
 export function MockedUpdateCustomerImageProvider({
   children,

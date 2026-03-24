@@ -3,14 +3,14 @@
 import {
   UpdateCustomerImageContext,
   UpdateCustomerImageActionPayloadType,
-} from "./UpdateCustomerImageContext";
+} from "../UpdateCustomerImageContext";
 
 import { notFound } from "next/navigation";
 import { useRouter } from "@/i18n/navigation";
 import { useActionState, useMemo } from "react";
 import { ActionState } from "@/lib/actions/types";
 import { uploadImageToS3 } from "@/lib/utils/uploadImageToS3";
-import { useUpdateCustomerImageModal } from "./UpdateCustomerImageModal";
+import { useUpdateCustomerImageModal } from "../UpdateCustomerImageModal";
 import { updateCustomerImageUrl } from "@/lib/actions/customer/updateCustomerImageUrl";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
