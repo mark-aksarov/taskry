@@ -1,4 +1,4 @@
-import { MockedDeleteCustomerProvider } from "../../DeleteCustomerContext/__stories__";
+import { MockedDeleteCustomerProvider } from "../../DeleteCustomerProvider/__stories__";
 import { MockedUpdateCustomerProvider } from "../../UpdateCustomerContext/__stories__";
 
 export function MockedCustomerItemProviders({

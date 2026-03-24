@@ -19,7 +19,7 @@ import { CustomerDetailActions } from "@/components/customer/CustomerDetailActio
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { CustomerDetailHeaderInteractive } from "@/components/customer/CustomerDetailHeader";
-import { withDeleteCustomerProvider } from "@/components/customer/DeleteCustomerContext/__stories__";
+import { withDeleteCustomerProvider } from "@/components/customer/DeleteCustomerProvider/__stories__";
 import { withUpdateCustomerProvider } from "@/components/customer/UpdateCustomerContext/__stories__";
 import { MockedCustomerDetailHeaderProviders } from "@/components/customer/CustomerDetailHeader/__stories__";
 

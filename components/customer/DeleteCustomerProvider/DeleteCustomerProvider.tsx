@@ -2,7 +2,7 @@
 
 import { useRouter } from "@/i18n/navigation";
 import { useActionState, useMemo } from "react";
-import { DeleteCustomerContext } from "./DeleteCustomerContext";
+import { DeleteCustomerContext } from "../DeleteCustomerContext";
 import { deleteCustomer } from "@/lib/actions/customer/deleteCustomer";
 import { ActionState, DeleteCustomerPayload } from "@/lib/actions/types";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";

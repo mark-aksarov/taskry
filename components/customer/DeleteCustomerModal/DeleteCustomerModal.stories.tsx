@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DeleteCustomerModal } from "../DeleteCustomerModal";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteCustomerProvider } from "../DeleteCustomerContext/__stories__";
+import { withDeleteCustomerProvider } from "../DeleteCustomerProvider/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {

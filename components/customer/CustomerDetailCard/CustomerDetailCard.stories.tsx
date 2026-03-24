@@ -13,7 +13,7 @@ import { mockedCompanySummaries } from "@/mocks/companies";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailHeaderInteractive } from "../CustomerDetailHeader";
-import { withDeleteCustomerProvider } from "../DeleteCustomerContext/__stories__";
+import { withDeleteCustomerProvider } from "../DeleteCustomerProvider/__stories__";
 import { withUpdateCustomerProvider } from "../UpdateCustomerContext/__stories__";
 import { MockedCustomerDetailHeaderProviders } from "../CustomerDetailHeader/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
