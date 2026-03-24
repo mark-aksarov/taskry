@@ -22,7 +22,7 @@ import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext"
 import { CreateCompanyProvider } from "@/components/company/CreateCompanyProvider";
 import { CreateCompanyModalProvider } from "@/components/company/CreateCompanyModal";
 import { CreateCustomerProvider } from "@/components/customer/CreateCustomerProvider";
-import { DeleteCustomersProvider } from "@/components/customer/DeleteCustomersContext";
+import { DeleteCustomersProvider } from "@/components/customer/DeleteCustomersProvider";
 import { CustomerFiltersProvider } from "@/components/customer/CustomerFiltersContext";
 import { CreateCustomerModalProvider } from "@/components/customer/CreateCustomerModal";
 import { CreateCustomerFormContainer } from "@/components/customer/CreateCustomerFormContainer";

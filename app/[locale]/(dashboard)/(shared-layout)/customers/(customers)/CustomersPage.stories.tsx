@@ -22,7 +22,7 @@ import { withSelectedItemsProvider } from "@/components/common/SelectedItemsCont
 import { withCreateCompanyProvider } from "@/components/company/CreateCompanyProvider/__stories__";
 import { withCreateCompanyModalProvider } from "@/components/company/CreateCompanyModal/__stories__";
 import { withCreateCustomerProvider } from "@/components/customer/CreateCustomerProvider/__stories__";
-import { withDeleteCustomersProvider } from "@/components/customer/DeleteCustomersContext/__stories__";
+import { withDeleteCustomersProvider } from "@/components/customer/DeleteCustomersProvider/__stories__";
 import { withCustomerFiltersProvider } from "@/components/customer/CustomerFiltersContext/__stories__";
 import { withCreateCustomerModalProvider } from "@/components/customer/CreateCustomerModal/__stories__";
 
