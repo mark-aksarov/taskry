@@ -1,6 +1,6 @@
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { UpdateCustomerProvider } from "./UpdateCustomerProvider";
-import { DeleteCustomerProvider } from "./DeleteCustomerProvider";
+import { UpdateCustomerProvider } from "../UpdateCustomerProvider";
+import { DeleteCustomerProvider } from "../DeleteCustomerProvider";
 
 interface CustomerItemProvidersProps {
   updateCustomer: ActionFn<ActionState, FormData>;

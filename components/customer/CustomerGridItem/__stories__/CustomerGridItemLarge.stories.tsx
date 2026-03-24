@@ -5,7 +5,7 @@ import { mockedCompanySummaries } from "@/mocks/companies";
 import { CustomerGridItemLarge } from "../CustomerGridItemLarge";
 import { CustomerDetailHeader } from "../../CustomerDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCustomerItemProviders } from "../../CustomerItem/__stories__";
+import { withCustomerItemProviders } from "../../CustomerItemProviders/__stories__";
 import { mockedCustomerDetail as mockedCustomer } from "@/mocks/customers";
 import { withDeleteCustomersProvider } from "../../DeleteCustomersContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";

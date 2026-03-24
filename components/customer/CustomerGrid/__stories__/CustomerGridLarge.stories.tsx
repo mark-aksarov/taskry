@@ -3,7 +3,7 @@ import { mockedCustomerList } from "@/mocks/customers";
 import { CustomerGridLarge } from "../CustomerGridLarge";
 import { CustomerGridItemLarge } from "../../CustomerGridItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { MockedCustomerItemProviders } from "../../CustomerItem/__stories__";
+import { MockedCustomerItemProviders } from "../../CustomerItemProviders/__stories__";
 import { CustomerGridItemLargeStory } from "../../CustomerGridItem/__stories__";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withDeleteCustomersProvider } from "../../DeleteCustomersContext/__stories__";

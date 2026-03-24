@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { CustomerListItem } from "../../CustomerListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerListItemStory } from "../../CustomerListItem/__stories__";
-import { MockedCustomerItemProviders } from "../../CustomerItem/__stories__";
+import { MockedCustomerItemProviders } from "../../CustomerItemProviders/__stories__";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withDeleteCustomersProvider } from "../../DeleteCustomersContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
