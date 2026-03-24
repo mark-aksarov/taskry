@@ -1,10 +1,17 @@
 "use client";
 
 import { useContext, createContext } from "react";
-import { UpdatePersonImageContextType } from "@/lib/hooks/useUpdatePersonImageContextValue";
+import { ActionContextType } from "@/lib/actions/types";
+
+export type UpdateCustomerImageActionPayloadType = {
+  id: number;
+  blob: Blob;
+};
 
 export const UpdateCustomerImageContext =
-  createContext<UpdatePersonImageContextType<number> | null>(null);
+  createContext<ActionContextType<UpdateCustomerImageActionPayloadType> | null>(
+    null,
+  );
 
 export function useUpdateCustomerImage() {
   const context = useContext(UpdateCustomerImageContext);

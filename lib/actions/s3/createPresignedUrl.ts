@@ -1,14 +1,12 @@
 "use server";
 
 import { S3Client } from "@aws-sdk/client-s3";
-import { CreatePresignedUrlState } from "../types";
 import { getTranslations } from "next-intl/server";
+import { CreatePresignedUrlState } from "../types";
 import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
-export async function createPresignedUrl(
-  _prevState: CreatePresignedUrlState,
-): Promise<CreatePresignedUrlState> {
+export async function createPresignedUrl(): Promise<CreatePresignedUrlState> {
   // Authorization
   await requireSessionOrRedirect();
 

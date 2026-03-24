@@ -14,7 +14,6 @@ const schema = z.object({
 });
 
 export async function updateCustomerImageUrl(
-  _prevState: ActionState,
   payload: UpdateCustomerImageUrlPayload,
 ): Promise<ActionState> {
   // Authorization

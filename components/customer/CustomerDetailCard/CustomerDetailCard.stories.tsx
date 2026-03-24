@@ -13,8 +13,10 @@ import { mockedCompanySummaries } from "@/mocks/companies";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailHeaderInteractive } from "../CustomerDetailHeader";
+import { UpdateCustomerImageModalProvider } from "../UpdateCustomerImageModal";
 import { withDeleteCustomerProvider } from "../DeleteCustomerContext/__stories__";
 import { withUpdateCustomerProvider } from "../UpdateCustomerContext/__stories__";
+import { UpdateCustomerImageFileProvider } from "../UpdateCustomerImageFileContext";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { MockedUpdateCustomerImageProvider } from "../UpdateCustomerImageContext/__stories__";
@@ -35,20 +37,36 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+function MockedCustomerDetailHeaderProviders({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <UpdateCustomerImageModalProvider>
+      <UpdateCustomerImageFileProvider>
+        <MockedClearCustomerImageUrlProvider>
+          <MockedUpdateCustomerImageProvider>
+            {children}
+          </MockedUpdateCustomerImageProvider>
+        </MockedClearCustomerImageUrlProvider>
+      </UpdateCustomerImageFileProvider>
+    </UpdateCustomerImageModalProvider>
+  );
+}
+
 export const Default = {
   args: {
     customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
     customerDetailHeaderContainer: (
-      <MockedClearCustomerImageUrlProvider>
-        <MockedUpdateCustomerImageProvider>
-          <CustomerDetailHeaderInteractive
-            customerId={mockedCustomerDetail.id}
-            fullName={mockedCustomerDetail.fullName}
-            imageUrl={mockedCustomerDetail.imageUrl}
-            companyName={mockedCustomerDetail.company.name}
-          />
-        </MockedUpdateCustomerImageProvider>
-      </MockedClearCustomerImageUrlProvider>
+      <MockedCustomerDetailHeaderProviders>
+        <CustomerDetailHeaderInteractive
+          customerId={mockedCustomerDetail.id}
+          fullName={mockedCustomerDetail.fullName}
+          imageUrl={mockedCustomerDetail.imageUrl}
+          companyName={mockedCustomerDetail.company.name}
+        />
+      </MockedCustomerDetailHeaderProviders>
     ),
     customerDetailActions: (
       <CustomerDetailActions
@@ -85,14 +103,12 @@ export const WithoutSomeData = {
       />
     ),
     customerDetailHeaderContainer: (
-      <MockedClearCustomerImageUrlProvider>
-        <MockedUpdateCustomerImageProvider>
-          <CustomerDetailHeaderInteractive
-            customerId={mockedCustomerDetail.id}
-            fullName={mockedCustomerDetail.fullName}
-          />
-        </MockedUpdateCustomerImageProvider>
-      </MockedClearCustomerImageUrlProvider>
+      <MockedCustomerDetailHeaderProviders>
+        <CustomerDetailHeaderInteractive
+          customerId={mockedCustomerDetail.id}
+          fullName={mockedCustomerDetail.fullName}
+        />
+      </MockedCustomerDetailHeaderProviders>
     ),
   },
 } satisfies Story;

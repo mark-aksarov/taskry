@@ -22,9 +22,9 @@ export function ClearUserImageUrlProvider({
   const router = useRouter();
 
   const [state, action, isPending] = useActionState(
-    async (state: ActionState, userId: string) => {
+    async (_prevState: ActionState, userId: string) => {
       // to clear imageUrl, we use updateUserImageUrl server action, which sets it to null
-      const newState = await updateUserImageUrl(state, {
+      const newState = await updateUserImageUrl(_prevState, {
         id: userId,
         imageUrl: null,
       });

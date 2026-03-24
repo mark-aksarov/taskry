@@ -10,7 +10,7 @@ import {
   DeleteCustomerImageModalProvider,
 } from "../DeleteCustomerImageModal";
 
-import { CustomerImageModal } from "../CustomerImageModal";
+import { UpdateCustomerImageModal } from "../UpdateCustomerImageModal";
 import { CustomerImageMenuTrigger } from "../CustomerImageMenuTrigger";
 import { PersonDetailHeaderImage } from "@/components/common/PersonDetailHeaderImage";
 
@@ -40,7 +40,7 @@ export function CustomerDetailHeaderInteractive({
         companyName={companyName}
       />
 
-      <CustomerImageModal customerId={customerId} />
+      <UpdateCustomerImageModal customerId={customerId} />
 
       <DeleteCustomerImageModal
         customerId={customerId}

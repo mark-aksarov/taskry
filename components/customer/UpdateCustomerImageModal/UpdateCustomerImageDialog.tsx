@@ -6,12 +6,13 @@ import {
   UpdatePersonImageErrorBanner,
   UpdatePersonImageDialogHeader,
   UpdatePersonImageActionButton,
-} from "../../common/PersonImageModal";
+} from "@/components/common/PersonImageModal";
 
 import { useRef } from "react";
 import AvatarEditor from "react-avatar-editor";
 import { Dialog, DialogFooter } from "@/components/ui/Dialog";
 import { useUpdateCustomerImage } from "../UpdateCustomerImageContext";
+import { useUpdateCustomerImageFile } from "../UpdateCustomerImageFileContext";
 
 export function UpdateCustomerImageDialog({
   customerId,
@@ -20,9 +21,10 @@ export function UpdateCustomerImageDialog({
 }) {
   const editorRef = useRef<AvatarEditor>(null);
 
-  // UpdateCustomerImageDialog is rendered only when imageFile is not null
-  const { imageFile, onImageFileChange, state, action, isPending } =
-    useUpdateCustomerImage();
+  const { state, action, isPending } = useUpdateCustomerImage();
+
+  // UpdateCustomerImageDialog is rendered only when imageFile is not null, so we use imageFile!
+  const { imageFile, onImageFileChange } = useUpdateCustomerImageFile();
 
   return (
     <Dialog>

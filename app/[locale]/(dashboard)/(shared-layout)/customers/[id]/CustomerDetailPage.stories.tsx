@@ -19,8 +19,10 @@ import { CustomerDetailActions } from "@/components/customer/CustomerDetailActio
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { CustomerDetailHeaderInteractive } from "@/components/customer/CustomerDetailHeader";
+import { UpdateCustomerImageModalProvider } from "@/components/customer/UpdateCustomerImageModal";
 import { withDeleteCustomerProvider } from "@/components/customer/DeleteCustomerContext/__stories__";
 import { withUpdateCustomerProvider } from "@/components/customer/UpdateCustomerContext/__stories__";
+import { UpdateCustomerImageFileProvider } from "@/components/customer/UpdateCustomerImageFileContext";
 import { MockedUpdateCustomerImageProvider } from "@/components/customer/UpdateCustomerImageContext/__stories__";
 import { MockedClearCustomerImageUrlProvider } from "@/components/customer/ClearCustomerImageUrlContext/__stories__";
 
@@ -47,21 +49,37 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+function MockedCustomerDetailHeaderProviders({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <UpdateCustomerImageModalProvider>
+      <UpdateCustomerImageFileProvider>
+        <MockedClearCustomerImageUrlProvider>
+          <MockedUpdateCustomerImageProvider>
+            {children}
+          </MockedUpdateCustomerImageProvider>
+        </MockedClearCustomerImageUrlProvider>
+      </UpdateCustomerImageFileProvider>
+    </UpdateCustomerImageModalProvider>
+  );
+}
+
 export const Default = {
   args: {
     searchContainer: <SearchList {...SearchListStory.args} />,
     customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
     customerDetailHeaderContainer: (
-      <MockedClearCustomerImageUrlProvider>
-        <MockedUpdateCustomerImageProvider>
-          <CustomerDetailHeaderInteractive
-            customerId={mockedCustomerDetail.id}
-            fullName={mockedCustomerDetail.fullName}
-            imageUrl={mockedCustomerDetail.imageUrl}
-            companyName={mockedCustomerDetail.company.name}
-          />
-        </MockedUpdateCustomerImageProvider>
-      </MockedClearCustomerImageUrlProvider>
+      <MockedCustomerDetailHeaderProviders>
+        <CustomerDetailHeaderInteractive
+          customerId={mockedCustomerDetail.id}
+          fullName={mockedCustomerDetail.fullName}
+          imageUrl={mockedCustomerDetail.imageUrl}
+          companyName={mockedCustomerDetail.company.name}
+        />
+      </MockedCustomerDetailHeaderProviders>
     ),
     customerDetailActions: (
       <CustomerDetailActions
@@ -93,14 +111,12 @@ export const WithoutSomeData = {
     searchContainer: <SearchList {...SearchListStory.args} />,
     customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
     customerDetailHeaderContainer: (
-      <MockedClearCustomerImageUrlProvider>
-        <MockedUpdateCustomerImageProvider>
-          <CustomerDetailHeaderInteractive
-            customerId={mockedCustomerDetail.id}
-            fullName={mockedCustomerDetail.fullName}
-          />
-        </MockedUpdateCustomerImageProvider>
-      </MockedClearCustomerImageUrlProvider>
+      <MockedCustomerDetailHeaderProviders>
+        <CustomerDetailHeaderInteractive
+          customerId={mockedCustomerDetail.id}
+          fullName={mockedCustomerDetail.fullName}
+        />
+      </MockedCustomerDetailHeaderProviders>
     ),
     customerDetailActions: Default.args.customerDetailActions,
   },
