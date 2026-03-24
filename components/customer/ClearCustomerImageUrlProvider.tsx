@@ -1,11 +1,16 @@
 "use client";
 
-import { useMemo } from "react";
 import { notFound } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
+import { useActionState, useMemo } from "react";
+import { ActionState } from "@/lib/actions/types";
 import { ClearCustomerImageUrlContext } from "./ClearCustomerImageUrlContext";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
-import { useClearImageUrlActionState } from "@/lib/hooks/useClearImageUrlActionState";
 import { updateCustomerImageUrl } from "@/lib/actions/customer/updateCustomerImageUrl";
+
+export const initialState: ActionState = {
+  status: null,
+};
 
 interface ClearCustomerImageUrlProviderProps {
   children: React.ReactNode;
@@ -14,8 +19,25 @@ interface ClearCustomerImageUrlProviderProps {
 export function ClearCustomerImageUrlProvider({
   children,
 }: ClearCustomerImageUrlProviderProps) {
-  const [state, action, isPending] = useClearImageUrlActionState(
-    updateCustomerImageUrl,
+  const router = useRouter();
+
+  const [state, action, isPending] = useActionState(
+    async (state: ActionState, customerId: number) => {
+      // to clear imageUrl, we use updateCustomerImageUrl server action, which sets it to null
+      const newState = await updateCustomerImageUrl(state, {
+        id: customerId,
+        imageUrl: null,
+      });
+
+      if (newState.status === "success") {
+        // router.refresh is wrapped in startTransition internally
+        // we need refresh profile page to show new image
+        router.refresh();
+      }
+
+      return newState;
+    },
+    initialState,
   );
 
   // wait for the transition (reducerAction returning new state) to finish

@@ -1,11 +1,16 @@
 "use client";
 
-import { useMemo } from "react";
 import { notFound } from "next/navigation";
-import { ClearUserImageUrlContext } from "./ClearUserImageUrlContext/ClearUserImageUrlContext";
+import { useRouter } from "@/i18n/navigation";
+import { useActionState, useMemo } from "react";
+import { ActionState } from "@/lib/actions/types";
+import { ClearUserImageUrlContext } from "./ClearUserImageUrlContext";
 import { updateUserImageUrl } from "@/lib/actions/user/updateUserImageUrl";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
-import { useClearImageUrlActionState } from "@/lib/hooks/useClearImageUrlActionState";
+
+export const initialState: ActionState = {
+  status: null,
+};
 
 interface ClearUserImageUrlProviderProps {
   children: React.ReactNode;
@@ -14,8 +19,26 @@ interface ClearUserImageUrlProviderProps {
 export function ClearUserImageUrlProvider({
   children,
 }: ClearUserImageUrlProviderProps) {
-  const [state, action, isPending] =
-    useClearImageUrlActionState(updateUserImageUrl);
+  const router = useRouter();
+
+  const [state, action, isPending] = useActionState(
+    async (state: ActionState, userId: string) => {
+      // to clear imageUrl, we use updateUserImageUrl server action, which sets it to null
+      const newState = await updateUserImageUrl(state, {
+        id: userId,
+        imageUrl: null,
+      });
+
+      if (newState.status === "success") {
+        // router.refresh is wrapped in startTransition internally
+        // we need refresh profile page to show new image
+        router.refresh();
+      }
+
+      return newState;
+    },
+    initialState,
+  );
 
   // wait for the transition (reducerAction returning new state) to finish
 
