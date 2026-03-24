@@ -4,6 +4,7 @@ import { mockedCompanySummaries } from "@/mocks/companies";
 import { CustomerGridItemMobile } from "../CustomerGridItemMobile";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedCustomerDetail as mockedCustomer } from "@/mocks/customers";
+import { withCustomerItemProviders } from "../../CustomerItem/__stories__";
 import { withDeleteCustomersProvider } from "../../DeleteCustomersContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
@@ -13,6 +14,7 @@ const meta = {
   title: "components/customers/CustomerGridItemMobile",
   component: CustomerGridItemMobile,
   decorators: [
+    withCustomerItemProviders,
     withDeleteCustomersProvider,
     withSelectedItemsProvider,
     withGuestModeModalProvider,
@@ -37,8 +39,6 @@ export const Default = {
         companySelectItems={mockedCompanySummaries}
       />
     ),
-    deleteCustomer: () => ({ status: "success" }),
-    updateCustomer: () => ({ status: "success" }),
   },
 } satisfies Story;
 
@@ -60,8 +60,6 @@ export const WithoutImagePhoneAndLink = {
     fullName: mockedCustomer.fullName,
     email: mockedCustomer.email,
     editCustomerFormContainer: Default.args.editCustomerFormContainer,
-    deleteCustomer: () => ({ status: "success" }),
-    updateCustomer: () => ({ status: "success" }),
   },
 } satisfies Story;
 

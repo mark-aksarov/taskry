@@ -1,6 +1,11 @@
 "use client";
 
 import {
+  BaseCustomerItemProps,
+  CustomerItemPendingOverlay,
+} from "../CustomerItem";
+
+import {
   GridItemRow,
   GridItemInfo,
   GridItemText,
@@ -20,39 +25,28 @@ import { memo } from "react";
 import { useTranslations } from "next-intl";
 import { Separator } from "@/components/ui/Separator";
 import { CustomerDetailModal } from "../CustomerDetailModal";
+import { CustomerItemActionMenuTrigger } from "../CustomerItem";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { CustomerItemCheckbox } from "../CustomerItem/CustomerItemCheckbox";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { BaseCustomerItemProps, CustomerItemProviders } from "../CustomerItem";
-import { CustomerItemActionMenuTrigger } from "../CustomerItem/CustomerItemActionMenuTrigger";
 
 interface Props extends BaseCustomerItemProps {
   customerDetailContainer: React.ReactNode;
   customerDetailHeaderContainer: React.ReactNode;
 }
 
-export function CustomerGridItemLarge({
-  deleteCustomer,
-  updateCustomer,
-  ...props
-}: Props) {
+export function CustomerGridItemLarge(props: Props) {
   const selected = useSelectedItems();
 
   return (
-    <CustomerItemProviders
-      customerId={props.id}
-      deleteCustomer={deleteCustomer}
-      updateCustomer={updateCustomer}
-    >
+    <CustomerItemPendingOverlay customerId={props.id}>
       <SelectableItem {...selected} item={{ id: props.id }}>
         <CustomerGridItemLargeInner {...props} />
       </SelectableItem>
-    </CustomerItemProviders>
+    </CustomerItemPendingOverlay>
   );
 }
-
-type InnerProps = Omit<Props, "deleteCustomer" | "updateCustomer">;
 
 export const CustomerGridItemLargeInner = memo(
   ({
@@ -66,7 +60,7 @@ export const CustomerGridItemLargeInner = memo(
     customerDetailContainer,
     customerDetailHeaderContainer,
     editCustomerFormContainer,
-  }: InnerProps) => {
+  }: Props) => {
     const t = useTranslations("customers.CustomerGridItem");
 
     const customerImg = (

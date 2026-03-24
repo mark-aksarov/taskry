@@ -6,6 +6,7 @@ import { mockedCompanySummaries } from "@/mocks/companies";
 import { CustomerDetailHeader } from "../../CustomerDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedCustomerDetail as mockedCustomer } from "@/mocks/customers";
+import { withCustomerItemProviders } from "../../CustomerItem/__stories__";
 import { withDeleteCustomersProvider } from "../../DeleteCustomersContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
@@ -15,6 +16,7 @@ const meta = {
   title: "components/customers/CustomerListItem",
   component: CustomerListItem,
   decorators: [
+    withCustomerItemProviders,
     withDeleteCustomersProvider,
     withSelectedItemsProvider,
     withGuestModeModalProvider,
@@ -44,8 +46,6 @@ export const Default = {
         companySelectItems={mockedCompanySummaries}
       />
     ),
-    deleteCustomer: () => ({ status: "success" }),
-    updateCustomer: () => ({ status: "success" }),
   },
 } satisfies Story;
 
@@ -69,8 +69,6 @@ export const WithoutImagePhoneAndLink = {
     customerDetailContainer: Default.args.customerDetailContainer,
     customerDetailHeaderContainer: Default.args.customerDetailHeaderContainer,
     editCustomerFormContainer: Default.args.editCustomerFormContainer,
-    deleteCustomer: () => ({ status: "success" }),
-    updateCustomer: () => ({ status: "success" }),
   },
 } satisfies Story;
 

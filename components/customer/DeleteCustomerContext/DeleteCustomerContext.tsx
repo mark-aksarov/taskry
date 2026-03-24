@@ -1,50 +1,16 @@
 "use client";
 
-import {
-  ActionFn,
-  ActionState,
-  DeleteCustomerPayload,
-} from "@/lib/actions/types";
-
-import {
-  DeleteEntityContextType,
-  useDeleteEntityContextValue,
-} from "@/lib/hooks/useDeleteEntityContextValue";
-
 import { useContext, createContext } from "react";
-import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
+import { ActionContextType, DeleteCustomerPayload } from "@/lib/actions/types";
 
-const DeleteCustomerContext =
-  createContext<DeleteEntityContextType<DeleteCustomerPayload> | null>(null);
-
-interface DeleteCustomerProviderProps {
-  deleteCustomer: ActionFn<ActionState, DeleteCustomerPayload>;
-  children: React.ReactNode;
-}
-
-export function DeleteCustomerProvider({
-  deleteCustomer,
-  children,
-}: DeleteCustomerProviderProps) {
-  const contextValue = useDeleteEntityContextValue(deleteCustomer);
-
-  const { state } = contextValue;
-
-  // wait for transition to finish
-  useShowToastOnActionError(state);
-
-  return (
-    <DeleteCustomerContext.Provider value={contextValue}>
-      {children}
-    </DeleteCustomerContext.Provider>
-  );
-}
+export const DeleteCustomerContext =
+  createContext<ActionContextType<DeleteCustomerPayload> | null>(null);
 
 export function useDeleteCustomer() {
   const context = useContext(DeleteCustomerContext);
   if (!context)
     throw new Error(
-      "useDeleteCustomer must be used within DeleteCustomerProvider",
+      "useDeleteCustomer must be used within DeleteCustomerContext.Provider",
     );
   return context;
 }

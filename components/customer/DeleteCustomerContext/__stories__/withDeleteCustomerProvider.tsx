@@ -1,10 +1,10 @@
 import { type Decorator } from "@storybook/react";
-import { DeleteCustomerProvider } from "../DeleteCustomerContext";
+import { MockedDeleteCustomerProvider } from "./MockedDeleteCustomerProvider";
 
 export const withDeleteCustomerProvider: Decorator = (Story) => {
   return (
-    <DeleteCustomerProvider deleteCustomer={() => ({ status: "success" })}>
+    <MockedDeleteCustomerProvider>
       <Story />
-    </DeleteCustomerProvider>
+    </MockedDeleteCustomerProvider>
   );
 };

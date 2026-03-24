@@ -2,13 +2,12 @@ import { notFound } from "next/navigation";
 import { customerId } from "@/lib/schemas/customer";
 import { CustomerDetailPage } from "./CustomerDetailPage";
 import { getCustomerSummary } from "@/lib/data/customer/customer.dal";
-import { deleteCustomer } from "@/lib/actions/customer/deleteCustomer";
 import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
-import { UpdateCustomerProvider } from "@/components/customer/UpdateCustomerContext";
-import { DeleteCustomerProvider } from "@/components/customer/DeleteCustomerContext";
+import { UpdateCustomerProvider } from "@/components/customer/UpdateCustomerProvider";
+import { DeleteCustomerProvider } from "@/components/customer/DeleteCustomerProvider";
 import { EditCustomerFormContainer } from "@/components/customer/EditCustomerFormContainer";
 import { CustomerDetailAltContainer } from "@/components/customer/CustomerDetailAltContainer";
 import { CustomerDetailHeaderAltContainer } from "@/components/customer/CustomerDetailHeaderAltContainer";
@@ -45,7 +44,7 @@ export default async function AppCustomerDetailPage({
       }
       customerDetailActions={
         <UpdateCustomerProvider updateCustomer={updateCustomer}>
-          <DeleteCustomerProvider deleteCustomer={deleteCustomer}>
+          <DeleteCustomerProvider>
             <CustomerDetailActions
               customerId={id}
               customerFullName={customerSummary.fullName}

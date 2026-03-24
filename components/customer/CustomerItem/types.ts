@@ -1,9 +1,3 @@
-import {
-  ActionFn,
-  ActionState,
-  DeleteCustomerPayload,
-} from "@/lib/actions/types";
-
 export interface BaseCustomerItemProps {
   id: number;
   fullName: string;
@@ -16,6 +10,4 @@ export interface BaseCustomerItemProps {
     name: string;
   };
   editCustomerFormContainer: React.ReactNode;
-  updateCustomer: ActionFn<ActionState, FormData>;
-  deleteCustomer: ActionFn<ActionState, DeleteCustomerPayload>;
 }

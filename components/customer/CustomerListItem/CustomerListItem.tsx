@@ -1,6 +1,11 @@
 "use client";
 
 import {
+  BaseCustomerItemProps,
+  CustomerItemPendingOverlay,
+} from "../CustomerItem";
+
+import {
   ListItemText,
   ListItemTextLink,
   ListItemTitle,
@@ -14,41 +19,30 @@ import {
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
+import { CustomerItemCheckbox } from "../CustomerItem";
 import { CustomerDetailModal } from "../CustomerDetailModal";
+import { CustomerItemActionMenuTrigger } from "../CustomerItem";
 import { CustomerListItemLayout } from "./CustomerListItemLayout";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { ListItemTitleLink } from "@/components/common/List/ListItemTitle";
-import { CustomerItemCheckbox } from "../CustomerItem/CustomerItemCheckbox";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { BaseCustomerItemProps, CustomerItemProviders } from "../CustomerItem";
-import { CustomerItemActionMenuTrigger } from "../CustomerItem/CustomerItemActionMenuTrigger";
 
 interface Props extends BaseCustomerItemProps {
   customerDetailContainer: React.ReactNode;
   customerDetailHeaderContainer: React.ReactNode;
 }
 
-export function CustomerListItem({
-  deleteCustomer,
-  updateCustomer,
-  ...props
-}: Props) {
+export function CustomerListItem(props: Props) {
   const selected = useSelectedItems();
 
   return (
-    <CustomerItemProviders
-      customerId={props.id}
-      deleteCustomer={deleteCustomer}
-      updateCustomer={updateCustomer}
-    >
+    <CustomerItemPendingOverlay customerId={props.id}>
       <SelectableItem {...selected} item={{ id: props.id }}>
         <CustomerListItemInner {...props} />
       </SelectableItem>
-    </CustomerItemProviders>
+    </CustomerItemPendingOverlay>
   );
 }
-
-type InnerProps = Omit<Props, "deleteCustomer" | "updateCustomer">;
 
 export const CustomerListItemInner = memo(
   ({
@@ -62,7 +56,7 @@ export const CustomerListItemInner = memo(
     customerDetailContainer,
     customerDetailHeaderContainer,
     editCustomerFormContainer,
-  }: InnerProps) => {
+  }: Props) => {
     const t = useTranslations("customers.CustomerListItem");
 
     const customerImg = (

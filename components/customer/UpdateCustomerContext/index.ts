@@ -1,2 +1,2 @@
-export { UpdateCustomerProvider } from "./UpdateCustomerContext";
+export { UpdateCustomerContext } from "./UpdateCustomerContext";
 export { useUpdateCustomer } from "./UpdateCustomerContext";

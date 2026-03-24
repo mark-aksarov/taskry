@@ -4,14 +4,14 @@ import {
   CustomerGridItemLarge,
   CustomerGridItemMobile,
 } from "./CustomerGridItem";
-import { BaseCustomerItemProps } from "./CustomerItem";
 
 import { CustomerList } from "./CustomerList";
 import { CustomerGridLarge } from "./CustomerGrid";
 import { CustomerGridMobile } from "./CustomerGrid";
 import { CustomerListItem } from "./CustomerListItem";
+import { BaseCustomerItemProps } from "./CustomerItem";
+import { CustomerItemProviders } from "./CustomerItemProviders";
 import { CustomerDetailContainer } from "./CustomerDetailContainer";
-import { deleteCustomer } from "@/lib/actions/customer/deleteCustomer";
 import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
 import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
 import { EditCustomerFormContainer } from "./EditCustomerFormContainer";
@@ -41,8 +41,6 @@ export async function CustomersContainer({
     phoneNumber: customer.phoneNumber,
     publicLink: customer.publicLink,
     company: customer.company,
-    updateCustomer: updateCustomer,
-    deleteCustomer: deleteCustomer,
     editCustomerFormContainer: (
       <EditCustomerFormContainer customerId={customer.id} />
     ),
@@ -64,32 +62,42 @@ export async function CustomersContainer({
       listLarge={
         <CustomerList>
           {customers.map((customer) => (
-            <CustomerListItem
+            <CustomerItemProviders
               key={customer.id}
-              {...getCommonProps(customer)}
-              {...getContainerProps(customer)}
-            />
+              updateCustomer={updateCustomer}
+            >
+              <CustomerListItem
+                {...getCommonProps(customer)}
+                {...getContainerProps(customer)}
+              />
+            </CustomerItemProviders>
           ))}
         </CustomerList>
       }
       gridLarge={
         <CustomerGridLarge>
           {customers.map((customer) => (
-            <CustomerGridItemLarge
+            <CustomerItemProviders
               key={customer.id}
-              {...getCommonProps(customer)}
-              {...getContainerProps(customer)}
-            />
+              updateCustomer={updateCustomer}
+            >
+              <CustomerGridItemLarge
+                {...getCommonProps(customer)}
+                {...getContainerProps(customer)}
+              />
+            </CustomerItemProviders>
           ))}
         </CustomerGridLarge>
       }
       gridMobile={
         <CustomerGridMobile>
           {customers.map((customer) => (
-            <CustomerGridItemMobile
+            <CustomerItemProviders
               key={customer.id}
-              {...getCommonProps(customer)}
-            />
+              updateCustomer={updateCustomer}
+            >
+              <CustomerGridItemMobile {...getCommonProps(customer)} />
+            </CustomerItemProviders>
           ))}
         </CustomerGridMobile>
       }

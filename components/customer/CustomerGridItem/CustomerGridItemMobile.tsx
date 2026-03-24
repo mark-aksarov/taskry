@@ -1,6 +1,11 @@
 "use client";
 
 import {
+  BaseCustomerItemProps,
+  CustomerItemPendingOverlay,
+} from "../CustomerItem";
+
+import {
   GridItemRow,
   GridItemInfo,
   GridItemText,
@@ -15,22 +20,13 @@ import { memo } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/components/ui/Link";
 import { Separator } from "@/components/ui/Separator";
+import { CustomerItemActionMenuTrigger } from "../CustomerItem";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
 import { ItemBaseUserImageContainer } from "@/components/common/ItemBase";
-import { BaseCustomerItemProps, CustomerItemProviders } from "../CustomerItem";
-import { CustomerItemActionMenuTrigger } from "../CustomerItem/CustomerItemActionMenuTrigger";
 
-export function CustomerGridItemMobile({
-  deleteCustomer,
-  updateCustomer,
-  ...props
-}: BaseCustomerItemProps) {
+export function CustomerGridItemMobile(props: BaseCustomerItemProps) {
   return (
-    <CustomerItemProviders
-      customerId={props.id}
-      deleteCustomer={deleteCustomer}
-      updateCustomer={updateCustomer}
-    >
+    <CustomerItemPendingOverlay customerId={props.id}>
       <div className="relative block">
         <Link
           href={`/customers/${props.id}`}
@@ -38,14 +34,9 @@ export function CustomerGridItemMobile({
         />
         <CustomerGridItemMobileInner {...props} />
       </div>
-    </CustomerItemProviders>
+    </CustomerItemPendingOverlay>
   );
 }
-
-type InnerProps = Omit<
-  BaseCustomerItemProps,
-  "deleteCustomer" | "updateCustomer"
->;
 
 export const CustomerGridItemMobileInner = memo(
   ({
@@ -57,7 +48,7 @@ export const CustomerGridItemMobileInner = memo(
     imageUrl,
     company,
     editCustomerFormContainer,
-  }: InnerProps) => {
+  }: BaseCustomerItemProps) => {
     const t = useTranslations("customers.CustomerGridItem");
 
     const customerImg = (

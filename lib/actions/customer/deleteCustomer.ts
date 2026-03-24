@@ -8,7 +8,6 @@ import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedir
 import { deleteCustomers as deleteCustomersQuery } from "@/lib/data/customer/customer.dal";
 
 export async function deleteCustomer(
-  _prevState: ActionState,
   payload: DeleteCustomerPayload,
 ): Promise<ActionState> {
   // Authorization
