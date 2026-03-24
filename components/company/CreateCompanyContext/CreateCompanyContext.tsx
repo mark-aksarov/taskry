@@ -11,7 +11,7 @@ export function useCreateCompany() {
   const context = useContext(CreateCompanyContext);
   if (!context)
     throw new Error(
-      "useCreateCompany must be used within CreateCompanyProvider",
+      "useCreateCompany must be used within CreateCompanyContext.Provider",
     );
   return context;
 }
