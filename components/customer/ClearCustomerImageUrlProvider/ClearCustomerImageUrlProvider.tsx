@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { useRouter } from "@/i18n/navigation";
 import { useActionState, useMemo } from "react";
 import { ActionState } from "@/lib/actions/types";
-import { ClearCustomerImageUrlContext } from "./ClearCustomerImageUrlContext";
+import { ClearCustomerImageUrlContext } from "../ClearCustomerImageUrlContext";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 import { updateCustomerImageUrl } from "@/lib/actions/customer/updateCustomerImageUrl";
 
