@@ -10,7 +10,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { CompanyListStory } from "@/components/company/CompanyList/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
-import { withCreateCompanyProvider } from "@/components/company/CreateCompanyContext/__stories__";
+import { withCreateCompanyProvider } from "@/components/company/CreateCompanyProvider/__stories__";
 import { withDeleteCompaniesProvider } from "@/components/company/DeleteCompaniesContext/__stories__";
 import { withCreateCompanyModalProvider } from "@/components/company/CreateCompanyModal/__stories__";
 

@@ -1,4 +1,4 @@
-import { CreateCompanyContext } from "..";
+import { CreateCompanyContext } from "../../CreateCompanyContext";
 
 export const MockedCreateCompanyProvider = ({
   children,

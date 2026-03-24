@@ -19,7 +19,7 @@ import { CustomerGridMobileStory } from "@/components/customer/CustomerGrid/__st
 import { CustomerCompanyFiltersForm } from "@/components/customer/CustomerCompanyFiltersForm";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
-import { withCreateCompanyProvider } from "@/components/company/CreateCompanyContext/__stories__";
+import { withCreateCompanyProvider } from "@/components/company/CreateCompanyProvider/__stories__";
 import { withCreateCompanyModalProvider } from "@/components/company/CreateCompanyModal/__stories__";
 import { withCreateCustomerProvider } from "@/components/customer/CreateCustomerContext/__stories__";
 import { withDeleteCustomersProvider } from "@/components/customer/DeleteCustomersContext/__stories__";
