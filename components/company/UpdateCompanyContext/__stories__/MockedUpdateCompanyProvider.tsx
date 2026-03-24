@@ -11,8 +11,6 @@ export const MockedUpdateCompanyProvider = ({
         state: { status: "success" },
         action: () => ({ status: "success" }),
         isPending: false,
-        isModalOpen: false,
-        onModalOpenChange: () => {},
       }}
     >
       {children}

@@ -2,6 +2,7 @@ import { CompanyList } from "../CompanyList";
 import { Meta, StoryObj } from "@storybook/react";
 import { CompanyListItem } from "../../CompanyListItem";
 import { mockedCompanySummaries } from "@/mocks/companies";
+import { UpdateCompanyModalProvider } from "../../UpdateCompanyModal";
 import { CompanyListItemStory } from "../../CompanyListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { MockedDeleteCompanyProvider } from "../../DeleteCompanyContext/__stories__";
@@ -31,15 +32,17 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedCompanySummaries.map((company) => (
-      <MockedUpdateCompanyProvider key={company.id}>
-        <MockedDeleteCompanyProvider>
-          <CompanyListItem
-            key={company.id}
-            {...CompanyListItemStory.args}
-            {...company}
-          />
-        </MockedDeleteCompanyProvider>
-      </MockedUpdateCompanyProvider>
+      <UpdateCompanyModalProvider>
+        <MockedUpdateCompanyProvider key={company.id}>
+          <MockedDeleteCompanyProvider>
+            <CompanyListItem
+              key={company.id}
+              {...CompanyListItemStory.args}
+              {...company}
+            />
+          </MockedDeleteCompanyProvider>
+        </MockedUpdateCompanyProvider>
+      </UpdateCompanyModalProvider>
     )),
   },
 } satisfies Story;

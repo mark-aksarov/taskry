@@ -5,8 +5,8 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { EditCompanyForm } from "../EditCompanyForm";
-import { useUpdateCompany } from "../UpdateCompanyContext";
+import { UpdateCompanyForm } from "../UpdateCompanyForm";
+import { useUpdateCompanyModal } from "./UpdateCompanyModalContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface EditCompanyModalProps {
@@ -14,24 +14,24 @@ interface EditCompanyModalProps {
   companyName: string;
 }
 
-export function EditCompanyModal({
+export function UpdateCompanyModal({
   companyId,
   companyName,
 }: EditCompanyModalProps) {
-  const t = useTranslations("company.EditCompanyModal");
+  const t = useTranslations("company.UpdateCompanyModal");
 
-  const { isModalOpen, onModalOpenChange } = useUpdateCompany();
+  const { isOpen, onOpenChange } = useUpdateCompanyModal();
 
   return (
     <FormBaseModal
       className="md:w-[350px]"
-      isOpen={isModalOpen}
-      onOpenChange={onModalOpenChange}
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
-          <EditCompanyForm
+          <UpdateCompanyForm
             companyId={companyId}
             nameDefaultValue={companyName}
           />

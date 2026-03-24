@@ -1,0 +1,1 @@
+export { withUpdateCompanyModalProvider } from "./withUpdateCompanyModalProvider";

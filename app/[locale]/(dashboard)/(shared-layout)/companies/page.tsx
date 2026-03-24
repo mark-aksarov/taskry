@@ -1,6 +1,5 @@
 import { CompaniesPage } from "./CompaniesPage";
 import { getCompanySummaries } from "@/lib/data/company/company.dal";
-import { deleteCompanies } from "@/lib/actions/company/deleteCompanies";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CompaniesContainer } from "@/components/company/CompaniesContainer";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";

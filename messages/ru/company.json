@@ -36,11 +36,11 @@
     "edit": "Редактировать",
     "delete": "Удалить"
   },
-  "EditCompanyForm": {
+  "UpdateCompanyForm": {
     "submitButtonLabel": "Обновить компанию",
     "successMessage": "Компания успешно обновлена"
   },
-  "EditCompanyModal": {
+  "UpdateCompanyModal": {
     "title": "Изменить компанию"
   },
   "DeleteCompaniesModal": {

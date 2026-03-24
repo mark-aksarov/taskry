@@ -10,8 +10,8 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { EditCompanyModal } from "../EditCompanyModal";
-import { useUpdateCompany } from "../UpdateCompanyContext";
+import { UpdateCompanyModal } from "../UpdateCompanyModal";
+import { useUpdateCompanyModal } from "../UpdateCompanyModal";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCompanyListItemPending } from "./useCompanyListItemPending";
 import { DeleteCompanyModal } from "@/components/company/DeleteCompanyModal";
@@ -34,7 +34,7 @@ export function CompanyListItemActionMenuTrigger({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // State for edit modal from context
-  const { onModalOpenChange: onEditModalOpenChange } = useUpdateCompany();
+  const { onOpenChange: onEditModalOpenChange } = useUpdateCompanyModal();
 
   /**
    * Handles menu actions for a company item
@@ -77,7 +77,7 @@ export function CompanyListItemActionMenuTrigger({
       </ItemBaseActionMenuTrigger>
 
       {/* Modals for editing, deleting, and guest mode */}
-      <EditCompanyModal companyId={companyId} companyName={companyName} />
+      <UpdateCompanyModal companyId={companyId} companyName={companyName} />
 
       <DeleteCompanyModal
         companyId={companyId}

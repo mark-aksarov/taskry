@@ -18,11 +18,11 @@ interface EditCompanyFormProps {
   nameDefaultValue: string;
 }
 
-export function EditCompanyForm({
+export function UpdateCompanyForm({
   companyId,
   nameDefaultValue,
 }: EditCompanyFormProps) {
-  const t = useTranslations("company.EditCompanyForm");
+  const t = useTranslations("company.UpdateCompanyForm");
 
   const { state, isPending, action } = useUpdateCompany();
 

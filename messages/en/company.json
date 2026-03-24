@@ -36,11 +36,11 @@
     "edit": "Edit",
     "delete": "Delete"
   },
-  "EditCompanyForm": {
+  "UpdateCompanyForm": {
     "submitButtonLabel": "Update company",
     "successMessage": "Company updated successfully"
   },
-  "EditCompanyModal": {
+  "UpdateCompanyModal": {
     "title": "Edit company"
   },
   "DeleteCompaniesModal": {

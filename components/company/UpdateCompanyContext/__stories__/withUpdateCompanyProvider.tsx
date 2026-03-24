@@ -1,10 +1,10 @@
 import { type Decorator } from "@storybook/react";
-import { UpdateCompanyProvider } from "../UpdateCompanyContext";
+import { MockedUpdateCompanyProvider } from "./MockedUpdateCompanyProvider";
 
 export const withUpdateCompanyProvider: Decorator = (Story) => {
   return (
-    <UpdateCompanyProvider updateCompany={() => ({ status: "success" })}>
+    <MockedUpdateCompanyProvider>
       <Story />
-    </UpdateCompanyProvider>
+    </MockedUpdateCompanyProvider>
   );
 };

@@ -1,4 +1,4 @@
-import { fn, mocked } from "storybook/test";
+import { mocked } from "storybook/test";
 import CompaniesPageLoading from "./loading";
 import { usePathname } from "next/navigation";
 import { CompaniesPage } from "./CompaniesPage";
