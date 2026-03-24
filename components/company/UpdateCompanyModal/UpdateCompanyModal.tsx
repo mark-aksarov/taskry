@@ -9,7 +9,7 @@ import { UpdateCompanyForm } from "../UpdateCompanyForm";
 import { useUpdateCompanyModal } from "./UpdateCompanyModalContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
-interface EditCompanyModalProps {
+interface UpdateCompanyModalProps {
   companyId: number;
   companyName: string;
 }
@@ -17,7 +17,7 @@ interface EditCompanyModalProps {
 export function UpdateCompanyModal({
   companyId,
   companyName,
-}: EditCompanyModalProps) {
+}: UpdateCompanyModalProps) {
   const t = useTranslations("company.UpdateCompanyModal");
 
   const { isOpen, onOpenChange } = useUpdateCompanyModal();

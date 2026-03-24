@@ -30,12 +30,12 @@ import { CustomerSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { CreateCompanyModal } from "@/components/company/CreateCompanyModal";
 import { PageEmptySection } from "@/components/common/PageEmptySection";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
-import { NewCustomerModal } from "@/components/customer/NewCustomerModal";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { SearchModalTrigger } from "@/components/search/SearchModalTrigger";
+import { CreateCompanyModal } from "@/components/company/CreateCompanyModal";
+import { CreateCustomerModal } from "@/components/customer/CreateCustomerModal";
 import { CustomerSearchModal } from "@/components/customer/CustomerSearchModal";
 import { CustomerResultsCount } from "@/components/customer/CustomerResultsCount";
 import { CustomerActionsMenuTrigger } from "@/components/customer/CustomerActionsMenuTrigger";
@@ -49,7 +49,7 @@ interface CustomersPageProps {
   selectedSortField: CustomerSortField;
   searchContainer: React.ReactNode;
   customersContainer: React.ReactNode;
-  newCustomerFormContainer: React.ReactNode;
+  createCustomerFormContainer: React.ReactNode;
   filtersFormContainer: React.ReactNode;
   customerCompanyFiltersFormContainer: React.ReactNode;
 }
@@ -60,7 +60,7 @@ export function CustomersPage({
   selectedSortField,
   searchContainer,
   customersContainer,
-  newCustomerFormContainer,
+  createCustomerFormContainer,
   filtersFormContainer,
   customerCompanyFiltersFormContainer,
 }: CustomersPageProps) {
@@ -84,7 +84,9 @@ export function CustomersPage({
           </PageGrid>
         </PageContainer>
 
-        <NewCustomerModal newCustomerFormContainer={newCustomerFormContainer} />
+        <CreateCustomerModal
+          createCustomerFormContainer={createCustomerFormContainer}
+        />
       </>
     );
   }
@@ -164,7 +166,9 @@ export function CustomersPage({
       </PageContainer>
 
       <CustomerSearchModal searchContainer={searchContainer} />
-      <NewCustomerModal newCustomerFormContainer={newCustomerFormContainer} />
+      <CreateCustomerModal
+        createCustomerFormContainer={createCustomerFormContainer}
+      />
       <CreateCompanyModal />
     </>
   );

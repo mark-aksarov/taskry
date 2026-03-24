@@ -13,7 +13,7 @@ import { useUpdateCompany } from "./UpdateCompanyContext";
 import { CompanyNameTextField } from "./CompanyNameTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 
-interface EditCompanyFormProps {
+interface UpdateCompanyFormProps {
   companyId: number;
   nameDefaultValue: string;
 }
@@ -21,7 +21,7 @@ interface EditCompanyFormProps {
 export function UpdateCompanyForm({
   companyId,
   nameDefaultValue,
-}: EditCompanyFormProps) {
+}: UpdateCompanyFormProps) {
   const t = useTranslations("company.UpdateCompanyForm");
 
   const { state, isPending, action } = useUpdateCompany();

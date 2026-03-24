@@ -90,6 +90,7 @@ const preview: Preview = {
     mocked(useRouter).mockReturnValue({
       push: () => {},
       refresh: () => {},
+      replace: () => {},
     } as any);
   },
 };

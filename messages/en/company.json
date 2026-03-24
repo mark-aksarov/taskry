@@ -9,7 +9,7 @@
   "CompaniesEmptySectionCreateButton": {
     "label": "New company"
   },
-  "NewCompanyForm": {
+  "CreateCompanyForm": {
     "submitButtonLabel": "Create company"
   },
   "CreateCompanyModal": {

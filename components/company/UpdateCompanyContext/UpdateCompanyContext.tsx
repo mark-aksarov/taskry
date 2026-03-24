@@ -11,7 +11,7 @@ export function useUpdateCompany() {
   const context = useContext(UpdateCompanyContext);
   if (!context) {
     throw new Error(
-      "useUpdateCompany must be used within a UpdateCompanyProvider",
+      "useUpdateCompany must be used within a UpdateCompanyContext.Provider",
     );
   }
   return context;

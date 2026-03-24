@@ -25,7 +25,7 @@
     "submitButtonLabel": "Update Customer",
     "successMessage": "Customer updated successfully"
   },
-  "NewCustomerForm": {
+  "CreateCustomerForm": {
     "submitButtonLabel": "Create Customer",
     "successMessage": "Customer created successfully"
   },
@@ -56,7 +56,7 @@
     "noPublicLink": "No public link",
     "noCompany": "Company not specified"
   },
-  "NewCustomerModal": {
+  "CreateCustomerModal": {
     "title": "New Customer"
   },
   "EditCustomerModal": {

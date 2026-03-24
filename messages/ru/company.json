@@ -9,7 +9,7 @@
   "CompaniesEmptySectionCreateButton": {
     "label": "Новая компания"
   },
-  "NewCompanyForm": {
+  "CreateCompanyForm": {
     "submitButtonLabel": "Создать компанию"
   },
   "CreateCompanyModal": {

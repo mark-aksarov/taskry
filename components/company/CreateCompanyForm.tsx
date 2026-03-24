@@ -13,8 +13,8 @@ import { useCreateCompany } from "./CreateCompanyContext";
 import { CompanyNameTextField } from "./CompanyNameTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 
-export function NewCompanyForm() {
-  const t = useTranslations("company.NewCompanyForm");
+export function CreateCompanyForm() {
+  const t = useTranslations("company.CreateCompanyForm");
 
   const { state, action, isPending } = useCreateCompany();
 

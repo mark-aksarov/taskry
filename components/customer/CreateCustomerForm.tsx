@@ -9,21 +9,23 @@ import {
 
 import { startTransition } from "react";
 import { useTranslations } from "next-intl";
+import { CompanySelect } from "../company/CompanySelect";
 import { useCreateCustomer } from "./CreateCustomerContext";
 import { CustomerBioTextField } from "./CustomerBioTextField";
-import { CompanySelect } from "../company/CompanySelect";
 import { CustomerEmailTextField } from "./CustomerEmailTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { CustomerFullNameTextField } from "./CustomerFullNameTextField";
 import { CustomerPublicLinkTextField } from "./CustomerPublicLinkTextField";
 import { CustomerPhoneNumberTextField } from "./CustomerPhoneNumberTextField";
 
-interface NewCustomerFormProps {
+interface CreateCustomerFormProps {
   companySelectItems: { id: number; name: string }[];
 }
 
-export function NewCustomerForm({ companySelectItems }: NewCustomerFormProps) {
-  const t = useTranslations("customers.NewCustomerForm");
+export function CreateCustomerForm({
+  companySelectItems,
+}: CreateCustomerFormProps) {
+  const t = useTranslations("customers.CreateCustomerForm");
 
   const { state, action, isPending } = useCreateCustomer();
 
@@ -37,7 +39,7 @@ export function NewCustomerForm({ companySelectItems }: NewCustomerFormProps) {
   }
 
   return (
-    <FormBase id="new-customer-form" onSubmit={handleSubmit}>
+    <FormBase id="create-customer-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <CustomerFullNameTextField />
         <CustomerBioTextField />

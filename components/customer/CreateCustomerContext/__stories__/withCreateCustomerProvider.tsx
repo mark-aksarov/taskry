@@ -1,10 +1,10 @@
 import { type Decorator } from "@storybook/react";
-import { CreateCustomerProvider } from "../CreateCustomerContext";
+import { MockedCreateCustomerProvider } from "./MockedCreateCustomerProvider";
 
 export const withCreateCustomerProvider: Decorator = (Story) => {
   return (
-    <CreateCustomerProvider createCustomer={() => ({ status: "success" })}>
+    <MockedCreateCustomerProvider>
       <Story />
-    </CreateCustomerProvider>
+    </MockedCreateCustomerProvider>
   );
 };

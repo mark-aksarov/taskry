@@ -5,6 +5,7 @@ import { CreateCompanyModal } from "./CreateCompanyModal";
 import { withCreateCompanyModalProvider } from "./__stories__";
 import { useCreateCompanyModal } from "./CreateCompanyModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withCreateCompanyProvider } from "../CreateCompanyContext/__stories__";
 
 const meta = {
   title: "components/companies/CreateCompanyModal",
@@ -22,6 +23,7 @@ const meta = {
         </>
       );
     },
+    withCreateCompanyProvider,
     withCreateCompanyModalProvider,
     withThemedBackground,
   ],

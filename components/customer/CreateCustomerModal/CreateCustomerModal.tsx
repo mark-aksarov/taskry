@@ -7,30 +7,30 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { useCreateCustomer } from "../CreateCustomerContext";
+import { useCreateCustomerModal } from "./CreateCustomerModalContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface NewCustomerModalProps {
-  newCustomerFormContainer: React.ReactNode;
+  createCustomerFormContainer: React.ReactNode;
 }
 
-export function NewCustomerModal({
-  newCustomerFormContainer,
+export function CreateCustomerModal({
+  createCustomerFormContainer,
 }: NewCustomerModalProps) {
-  const t = useTranslations("customers.NewCustomerModal");
+  const t = useTranslations("customers.CreateCustomerModal");
 
-  const { isModalOpen, onModalOpenChange } = useCreateCustomer();
+  const { isOpen, onOpenChange } = useCreateCustomerModal();
 
   return (
     <FormBaseModal
       data-test="new-customer-modal"
-      isOpen={isModalOpen}
-      onOpenChange={onModalOpenChange}
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
-          {newCustomerFormContainer}
+          {createCustomerFormContainer}
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

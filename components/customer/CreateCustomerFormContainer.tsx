@@ -1,20 +1,20 @@
 import "server-only";
 
 import { Suspense } from "react";
-import { NewCustomerForm } from "./NewCustomerForm";
+import { CreateCustomerForm } from "./CreateCustomerForm";
 import { CustomerFormSkeleton } from "./CustomerFormSkeleton";
 import { getCompanySummaries } from "@/lib/data/company/company.dal";
 
-export function NewCustomerFormContainer() {
+export function CreateCustomerFormContainer() {
   return (
     <Suspense fallback={<CustomerFormSkeleton />}>
-      <NewCustomerFormContainerInner />
+      <CreateCustomerFormContainerInner />
     </Suspense>
   );
 }
 
-async function NewCustomerFormContainerInner() {
+async function CreateCustomerFormContainerInner() {
   const companies = await getCompanySummaries();
 
-  return <NewCustomerForm companySelectItems={companies} />;
+  return <CreateCustomerForm companySelectItems={companies} />;
 }

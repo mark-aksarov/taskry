@@ -8,10 +8,10 @@ import { mockedCompanySummaries } from "@/mocks/companies";
 import { SearchList } from "@/components/search/SearchList";
 import { CustomerList } from "@/components/customer/CustomerList";
 import { CustomerGridLarge } from "@/components/customer/CustomerGrid";
-import { NewCustomerForm } from "@/components/customer/NewCustomerForm";
 import { CustomerGridMobile } from "@/components/customer/CustomerGrid";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
+import { CreateCustomerForm } from "@/components/customer/CreateCustomerForm";
 import { CustomerFiltersForm } from "@/components/customer/CustomerFiltersForm";
 import { CustomerListStory } from "@/components/customer/CustomerList/__stories__";
 import { CustomerGridLargeStory } from "@/components/customer/CustomerGrid/__stories__";
@@ -24,6 +24,7 @@ import { withCreateCompanyModalProvider } from "@/components/company/CreateCompa
 import { withCreateCustomerProvider } from "@/components/customer/CreateCustomerContext/__stories__";
 import { withDeleteCustomersProvider } from "@/components/customer/DeleteCustomersContext/__stories__";
 import { withCustomerFiltersProvider } from "@/components/customer/CustomerFiltersContext/__stories__";
+import { withCreateCustomerModalProvider } from "@/components/customer/CreateCustomerModal/__stories__";
 
 const meta = {
   title: "pages/CustomersPage",
@@ -33,6 +34,7 @@ const meta = {
     // preserve provider order as in page.tsx file
     withCustomerFiltersProvider,
     withCreateCustomerProvider,
+    withCreateCustomerModalProvider,
     withCreateCompanyProvider,
     withCreateCompanyModalProvider,
     withDeleteCustomersProvider,
@@ -55,8 +57,8 @@ export const Default = {
     totalFilteredCustomers: 10,
     selectedSortField: "fullName",
     searchContainer: <SearchList {...SearchListStory.args} />,
-    newCustomerFormContainer: (
-      <NewCustomerForm companySelectItems={mockedCompanySummaries} />
+    createCustomerFormContainer: (
+      <CreateCustomerForm companySelectItems={mockedCompanySummaries} />
     ),
     filtersFormContainer: (
       <CustomerFiltersForm companyCheckboxGroupItems={mockedCompanySummaries} />

@@ -4,11 +4,11 @@ import { Key } from "react-aria";
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Building2, Contact } from "lucide-react";
-import { useCreateCustomer } from "../CreateCustomerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCreateCompanyModal } from "@/components/company/CreateCompanyModal";
 import { CreateNewMenuTrigger } from "@/components/common/CreateNewMenuTrigger";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
+import { useCreateCustomerModal } from "../CreateCustomerModal/CreateCustomerModalContext";
 
 interface CreateCustomerMenuTriggerProps {
   renderButton: () => React.ReactNode;
@@ -22,12 +22,13 @@ export function CreateCustomerMenuTrigger({
   // Show guest modal for guests
   const guestGuard = useGuestModalGuard();
 
-  // Create company form modal state
+  // Create company modal state
   const { onOpenChange: onCreateCompanyModalOpenChange } =
     useCreateCompanyModal();
 
-  // Create customer form modal state
-  const { onModalOpenChange: onCustomerModalOpenChange } = useCreateCustomer();
+  // Create customer modal state
+  const { onOpenChange: onCreateCustomerModalOpenChange } =
+    useCreateCustomerModal();
 
   /**
    * Handles menu actions for creating a customer or company
@@ -37,7 +38,7 @@ export function CreateCustomerMenuTrigger({
   function handleAction(key: Key) {
     guestGuard(() => {
       if (key === "customer") {
-        onCustomerModalOpenChange(true);
+        onCreateCustomerModalOpenChange(true);
       } else if (key === "company") {
         onCreateCompanyModalOpenChange(true);
       }

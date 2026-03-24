@@ -7,7 +7,7 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { NewCompanyForm } from "../NewCompanyForm";
+import { CreateCompanyForm } from "../CreateCompanyForm";
 import { useCreateCompanyModal } from "./CreateCompanyModalContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
@@ -25,7 +25,7 @@ export function CreateCompanyModal() {
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
-          <NewCompanyForm />
+          <CreateCompanyForm />
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

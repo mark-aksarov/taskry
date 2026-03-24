@@ -1,2 +1,2 @@
-export { CreateCustomerProvider } from "./CreateCustomerContext";
+export { CreateCustomerContext } from "./CreateCustomerContext";
 export { useCreateCustomer } from "./CreateCustomerContext";
