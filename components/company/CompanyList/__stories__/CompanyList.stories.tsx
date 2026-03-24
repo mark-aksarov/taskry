@@ -6,7 +6,7 @@ import { UpdateCompanyModalProvider } from "../../UpdateCompanyModal";
 import { CompanyListItemStory } from "../../CompanyListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { MockedDeleteCompanyProvider } from "../../DeleteCompanyProvider/__stories__";
-import { MockedUpdateCompanyProvider } from "../../UpdateCompanyContext/__stories__";
+import { MockedUpdateCompanyProvider } from "../../UpdateCompanyProvider/__stories__";
 import { withDeleteCompaniesProvider } from "../../DeleteCompaniesProvider/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";

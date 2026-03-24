@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { CompanyListItem } from "../CompanyListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteCompanyProvider } from "../../DeleteCompanyProvider/__stories__";
-import { withUpdateCompanyProvider } from "../../UpdateCompanyContext/__stories__";
+import { withUpdateCompanyProvider } from "../../UpdateCompanyProvider/__stories__";
 import { withUpdateCompanyModalProvider } from "../../UpdateCompanyModal/__stories__";
 import { withDeleteCompaniesProvider } from "../../DeleteCompaniesProvider/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";

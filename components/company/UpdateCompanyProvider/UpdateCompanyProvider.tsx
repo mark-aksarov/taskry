@@ -3,8 +3,8 @@
 import { useRouter } from "@/i18n/navigation";
 import { useActionState, useMemo } from "react";
 import { ActionState } from "@/lib/actions/types";
-import { useUpdateCompanyModal } from "./UpdateCompanyModal";
-import { UpdateCompanyContext } from "./UpdateCompanyContext";
+import { useUpdateCompanyModal } from "../UpdateCompanyModal";
+import { UpdateCompanyContext } from "../UpdateCompanyContext";
 import { updateCompany } from "@/lib/actions/company/updateCompany";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";

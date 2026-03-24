@@ -1,4 +1,4 @@
-import { UpdateCompanyContext } from "../UpdateCompanyContext";
+import { UpdateCompanyContext } from "../../UpdateCompanyContext";
 
 export const MockedUpdateCompanyProvider = ({
   children,
