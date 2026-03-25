@@ -6,7 +6,7 @@ import { TaskList } from "@/components/tasks/TaskList";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { mockedProjectSummaries } from "@/mocks/projects";
-import { PageDecorator } from "@/.storybook/PageDecorator";
+import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { TaskGridLarge } from "@/components/tasks/TaskGrid";
 import { SearchList } from "@/components/search/SearchList";
 import { CreateTaskForm } from "@/components/tasks/CreateTaskForm";
@@ -55,7 +55,7 @@ const meta = {
     withCurrentUserProvider,
     withPageTransitionProvider,
     withSelectedTasksProvider,
-    PageDecorator,
+    SharedPageDecorator,
     withThemedBackground,
   ],
   beforeEach: () => {

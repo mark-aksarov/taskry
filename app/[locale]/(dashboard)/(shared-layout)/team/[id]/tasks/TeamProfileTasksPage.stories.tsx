@@ -7,7 +7,7 @@ import { mocked } from "storybook/test";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { mockedProjectSummaries } from "@/mocks/projects";
-import { PageDecorator } from "@/.storybook/PageDecorator";
+import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { SearchList } from "@/components/search/SearchList";
 import { TaskGridMobile } from "@/components/tasks/TaskGrid";
@@ -52,7 +52,7 @@ const meta = {
     withCurrentUserProvider,
     withPageTransitionProvider,
     withSelectedTasksProvider,
-    PageDecorator,
+    SharedPageDecorator,
     withThemedBackground,
   ],
   beforeEach: () => {

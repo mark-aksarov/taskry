@@ -15,7 +15,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailHeaderInteractive } from "../CustomerDetailHeader";
 import { withDeleteCustomerProvider } from "../DeleteCustomerProvider/__stories__";
 import { withUpdateCustomerProvider } from "../UpdateCustomerProvider/__stories__";
-import { MockedCustomerDetailHeaderProviders } from "../CustomerDetailHeader/__stories__";
+import { MockedCustomerDetailHeaderInteractiveProviders } from "../CustomerDetailHeader/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
@@ -38,14 +38,14 @@ export const Default = {
   args: {
     customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
     customerDetailHeaderContainer: (
-      <MockedCustomerDetailHeaderProviders>
+      <MockedCustomerDetailHeaderInteractiveProviders>
         <CustomerDetailHeaderInteractive
           customerId={mockedCustomerDetail.id}
           fullName={mockedCustomerDetail.fullName}
           imageUrl={mockedCustomerDetail.imageUrl}
           companyName={mockedCustomerDetail.company.name}
         />
-      </MockedCustomerDetailHeaderProviders>
+      </MockedCustomerDetailHeaderInteractiveProviders>
     ),
     customerDetailActions: (
       <CustomerDetailActions
@@ -82,12 +82,12 @@ export const WithoutSomeData = {
       />
     ),
     customerDetailHeaderContainer: (
-      <MockedCustomerDetailHeaderProviders>
+      <MockedCustomerDetailHeaderInteractiveProviders>
         <CustomerDetailHeaderInteractive
           customerId={mockedCustomerDetail.id}
           fullName={mockedCustomerDetail.fullName}
         />
-      </MockedCustomerDetailHeaderProviders>
+      </MockedCustomerDetailHeaderInteractiveProviders>
     ),
   },
 } satisfies Story;

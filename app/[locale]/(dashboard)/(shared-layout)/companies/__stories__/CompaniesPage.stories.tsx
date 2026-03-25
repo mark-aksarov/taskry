@@ -1,31 +1,23 @@
 import { mocked } from "storybook/test";
-import CompaniesPageLoading from "./loading";
+import CompaniesPageLoading from "../loading";
 import { usePathname } from "next/navigation";
-import { CompaniesPage } from "./CompaniesPage";
+import { CompaniesPage } from "../CompaniesPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { PageDecorator } from "@/.storybook/PageDecorator";
 import { SearchList } from "@/components/search/SearchList";
 import { CompanyList } from "@/components/company/CompanyList";
+import { CompaniesPageDecorator } from "./CompaniesPageDecorator";
+import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { CompanyListStory } from "@/components/company/CompanyList/__stories__";
-import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
-import { withCreateCompanyProvider } from "@/components/company/CreateCompanyProvider/__stories__";
-import { withDeleteCompaniesProvider } from "@/components/company/DeleteCompaniesProvider/__stories__";
-import { withCreateCompanyModalProvider } from "@/components/company/CreateCompanyModal/__stories__";
 
 const meta = {
   title: "pages/CompaniesPage",
   component: CompaniesPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    // preserve provider order as in page.tsx file
-    withCreateCompanyProvider,
-    withCreateCompanyModalProvider,
-    withDeleteCompaniesProvider,
-    withSelectedItemsProvider,
-
-    PageDecorator, // most providers and layout are defined in PageDecorator
+    CompaniesPageDecorator,
+    SharedPageDecorator,
     withThemedBackground,
   ],
   beforeEach: () => {

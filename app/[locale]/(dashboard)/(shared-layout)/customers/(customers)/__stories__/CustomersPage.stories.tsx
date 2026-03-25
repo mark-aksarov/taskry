@@ -1,13 +1,14 @@
 import { mocked } from "storybook/test";
-import CustomersPageLoading from "./loading";
+import CustomersPageLoading from "../loading";
 import { usePathname } from "next/navigation";
-import { CustomersPage } from "./CustomersPage";
+import { CustomersPage } from "../CustomersPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedCompanySummaries } from "@/mocks/companies";
 import { SearchList } from "@/components/search/SearchList";
 import { CustomerList } from "@/components/customer/CustomerList";
+import { CustomersPageDecorator } from "./CustomersPageDecorator";
 import { CustomerGridLarge } from "@/components/customer/CustomerGrid";
+import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { CustomerGridMobile } from "@/components/customer/CustomerGrid";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
@@ -18,29 +19,14 @@ import { CustomerGridLargeStory } from "@/components/customer/CustomerGrid/__sto
 import { CustomerGridMobileStory } from "@/components/customer/CustomerGrid/__stories__";
 import { CustomerCompanyFiltersForm } from "@/components/customer/CustomerCompanyFiltersForm";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
-import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
-import { withCreateCompanyProvider } from "@/components/company/CreateCompanyProvider/__stories__";
-import { withCreateCompanyModalProvider } from "@/components/company/CreateCompanyModal/__stories__";
-import { withCreateCustomerProvider } from "@/components/customer/CreateCustomerProvider/__stories__";
-import { withDeleteCustomersProvider } from "@/components/customer/DeleteCustomersProvider/__stories__";
-import { withCustomerFiltersProvider } from "@/components/customer/CustomerFiltersContext/__stories__";
-import { withCreateCustomerModalProvider } from "@/components/customer/CreateCustomerModal/__stories__";
 
 const meta = {
   title: "pages/CustomersPage",
   component: CustomersPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    // preserve provider order as in page.tsx file
-    withCustomerFiltersProvider,
-    withCreateCustomerProvider,
-    withCreateCustomerModalProvider,
-    withCreateCompanyProvider,
-    withCreateCompanyModalProvider,
-    withDeleteCustomersProvider,
-    withSelectedItemsProvider,
-
-    PageDecorator, // most providers and layout are defined in PageDecorator
+    CustomersPageDecorator,
+    SharedPageDecorator,
     withThemedBackground,
   ],
   beforeEach: () => {

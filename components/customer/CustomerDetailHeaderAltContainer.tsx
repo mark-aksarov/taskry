@@ -1,14 +1,14 @@
 import "server-only";
 
+import {
+  CustomerDetailHeaderInteractive,
+  CustomerDetailHeaderInteractiveProviders,
+} from "./CustomerDetailHeader";
+
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getCustomerDetail } from "@/lib/data/customer/customer.dal";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
-import { CustomerDetailHeaderInteractive } from "./CustomerDetailHeader";
-import { UpdateCustomerImageProvider } from "./UpdateCustomerImageProvider";
-import { UpdateCustomerImageModalProvider } from "./UpdateCustomerImageModal";
-import { ClearCustomerImageUrlProvider } from "./ClearCustomerImageUrlProvider";
-import { UpdateCustomerImageFileProvider } from "./UpdateCustomerImageFileContext";
 
 interface CustomerDetailHeaderAltContainerProps {
   customerId: number;
@@ -34,19 +34,13 @@ async function CustomerDetailHeaderAltContainerInner({
   }
 
   return (
-    <UpdateCustomerImageModalProvider>
-      <UpdateCustomerImageFileProvider>
-        <UpdateCustomerImageProvider>
-          <ClearCustomerImageUrlProvider>
-            <CustomerDetailHeaderInteractive
-              customerId={customer.id}
-              fullName={customer.fullName}
-              imageUrl={customer.imageUrl}
-              companyName={customer.company?.name}
-            />
-          </ClearCustomerImageUrlProvider>
-        </UpdateCustomerImageProvider>
-      </UpdateCustomerImageFileProvider>
-    </UpdateCustomerImageModalProvider>
+    <CustomerDetailHeaderInteractiveProviders>
+      <CustomerDetailHeaderInteractive
+        customerId={customer.id}
+        fullName={customer.fullName}
+        imageUrl={customer.imageUrl}
+        companyName={customer.company?.name}
+      />
+    </CustomerDetailHeaderInteractiveProviders>
   );
 }

@@ -8,7 +8,7 @@ import { mockedProjectDetail } from "@/mocks/projects";
 import { ProjectDetailPage } from "./ProjectDetailPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
-import { PageDecorator } from "@/.storybook/PageDecorator";
+import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { mockedCustomerSummaries } from "@/mocks/customers";
 import { SearchList } from "@/components/search/SearchList";
 import { CommentList } from "@/components/comments/CommentList";
@@ -33,7 +33,7 @@ const meta = {
     withDeleteProjectProvider,
     withGuestModeModalProvider,
     withCurrentUserProvider,
-    PageDecorator,
+    SharedPageDecorator,
     withThemedBackground,
   ],
   beforeEach: () => {

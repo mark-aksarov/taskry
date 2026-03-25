@@ -2,7 +2,7 @@ import { mocked } from "storybook/test";
 import ProjectsPageLoading from "./loading";
 import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { PageDecorator } from "@/.storybook/PageDecorator";
+import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { SearchList } from "@/components/search/SearchList";
 import { ProjectCategoriesPage } from "./ProjectCategoriesPage";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -27,7 +27,7 @@ const meta = {
     withCurrentUserProvider,
     withPageTransitionProvider,
     withSelectedItemsProvider,
-    PageDecorator,
+    SharedPageDecorator,
     withThemedBackground,
   ],
   beforeEach: () => {

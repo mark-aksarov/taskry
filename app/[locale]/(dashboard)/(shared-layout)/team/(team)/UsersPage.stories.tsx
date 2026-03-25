@@ -9,7 +9,7 @@ import UsersPageLoading from "./loading";
 import { usePathname } from "next/navigation";
 import { UserList } from "@/components/users/UserList";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { PageDecorator } from "@/.storybook/PageDecorator";
+import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { SearchList } from "@/components/search/SearchList";
 import { UserFiltersForm } from "@/components/users/UserFiltersForm";
@@ -37,7 +37,7 @@ const meta = {
     withCreateUserProvider,
     withSelectedTasksProvider,
 
-    PageDecorator, // most providers and layout are defined in PageDecorator
+    SharedPageDecorator, // most providers and layout are defined in SharedPageDecorator
     withThemedBackground,
   ],
   beforeEach: () => {

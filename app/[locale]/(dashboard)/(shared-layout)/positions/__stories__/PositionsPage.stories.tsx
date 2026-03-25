@@ -1,31 +1,23 @@
 import { mocked } from "storybook/test";
-import PositionsPageLoading from "./loading";
+import PositionsPageLoading from "../loading";
 import { usePathname } from "next/navigation";
-import { PositionsPage } from "./PositionsPage";
+import { PositionsPage } from "../PositionsPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { PageDecorator } from "@/.storybook/PageDecorator";
 import { SearchList } from "@/components/search/SearchList";
 import { PositionList } from "@/components/position/PositionList";
+import { PositionsPageDecorator } from "./PositionsPageDecorator";
+import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { PositionListStory } from "@/components/position/PositionList/__stories__";
-import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
-import { withCreatePositionProvider } from "@/components/position/CreatePositionProvider/__stories__";
-import { withDeletePositionsProvider } from "@/components/position/DeletePositionsProvider/__stories__";
-import { withCreatePositionModalProvider } from "@/components/position/CreatePositionModal/__stories__";
 
 const meta = {
   title: "pages/PositionsPage",
   component: PositionsPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    // preserve provider order as in page.tsx file
-    withCreatePositionProvider,
-    withCreatePositionModalProvider,
-    withDeletePositionsProvider,
-    withSelectedItemsProvider,
-
-    PageDecorator, // most providers and layout are defined in PageDecorator
+    PositionsPageDecorator,
+    SharedPageDecorator,
     withThemedBackground,
   ],
   beforeEach: () => {

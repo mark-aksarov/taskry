@@ -3,7 +3,7 @@ import { UpdateCustomerImageFileProvider } from "../../UpdateCustomerImageFileCo
 import { MockedUpdateCustomerImageProvider } from "../../UpdateCustomerImageProvider/__stories__";
 import { MockedClearCustomerImageUrlProvider } from "../../ClearCustomerImageUrlProvider/__stories__";
 
-export function MockedCustomerDetailHeaderProviders({
+export function MockedCustomerDetailHeaderInteractiveProviders({
   children,
 }: {
   children: React.ReactNode;

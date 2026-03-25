@@ -14,7 +14,7 @@ import { ProjectsPage } from "./ProjectsPage";
 import { usePathname } from "next/navigation";
 import { mockedUserSummaries } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { PageDecorator } from "@/.storybook/PageDecorator";
+import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { mockedCustomerSummaries } from "@/mocks/customers";
 import { SearchList } from "@/components/search/SearchList";
 import { ProjectList } from "@/components/projects/ProjectList";
@@ -50,7 +50,7 @@ const meta = {
     withUpdateProjectStatusesProvider,
     withSelectedProjectsProvider,
 
-    PageDecorator, // most providers and layout are defined in PageDecorator
+    SharedPageDecorator, // most providers and layout are defined in SharedPageDecorator
     withThemedBackground,
   ],
   beforeEach: () => {

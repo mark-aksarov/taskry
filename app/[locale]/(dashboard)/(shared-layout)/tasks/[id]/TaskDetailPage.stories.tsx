@@ -10,7 +10,7 @@ import { mockedUserSummaries } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { mockedProjectSummaries } from "@/mocks/projects";
-import { PageDecorator } from "@/.storybook/PageDecorator";
+import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { SearchList } from "@/components/search/SearchList";
 import { UpdateTaskForm } from "@/components/tasks/UpdateTaskForm";
 import { CommentList } from "@/components/comments/CommentList";
@@ -45,7 +45,7 @@ const meta = {
     withCreateSubtaskProvider,
     withGuestModeModalProvider,
     withCurrentUserProvider,
-    PageDecorator,
+    SharedPageDecorator,
     withThemedBackground,
   ],
   beforeEach: () => {

@@ -9,7 +9,7 @@ import { useParams, usePathname } from "next/navigation";
 import { mockedCustomerDetail } from "@/mocks/customers";
 import { CustomerDetailPage } from "./CustomerDetailPage";
 import { mockedCompanySummaries } from "@/mocks/companies";
-import { PageDecorator } from "@/.storybook/PageDecorator";
+import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { SearchList } from "@/components/search/SearchList";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -18,13 +18,13 @@ import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
 import { CustomerDetailHeaderInteractive } from "@/components/customer/CustomerDetailHeader";
 import { MockedCustomerProviders } from "@/components/customer/CustomerProviders/__stories__";
-import { MockedCustomerDetailHeaderProviders } from "@/components/customer/CustomerDetailHeader/__stories__";
+import { MockedCustomerDetailHeaderInteractiveProviders } from "@/components/customer/CustomerDetailHeader/__stories__";
 
 const meta = {
   title: "pages/CustomerDetailPage",
   component: CustomerDetailPage,
   parameters: { layout: "fullscreen" },
-  decorators: [PageDecorator, withThemedBackground],
+  decorators: [SharedPageDecorator, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/customers/1");
     mocked(useParams).mockReturnValue({
@@ -41,14 +41,14 @@ export const Default = {
     searchContainer: <SearchList {...SearchListStory.args} />,
     customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
     customerDetailHeaderContainer: (
-      <MockedCustomerDetailHeaderProviders>
+      <MockedCustomerDetailHeaderInteractiveProviders>
         <CustomerDetailHeaderInteractive
           customerId={mockedCustomerDetail.id}
           fullName={mockedCustomerDetail.fullName}
           imageUrl={mockedCustomerDetail.imageUrl}
           companyName={mockedCustomerDetail.company.name}
         />
-      </MockedCustomerDetailHeaderProviders>
+      </MockedCustomerDetailHeaderInteractiveProviders>
     ),
     customerDetailActions: (
       <MockedCustomerProviders>
@@ -82,12 +82,12 @@ export const WithoutSomeData = {
     searchContainer: <SearchList {...SearchListStory.args} />,
     customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
     customerDetailHeaderContainer: (
-      <MockedCustomerDetailHeaderProviders>
+      <MockedCustomerDetailHeaderInteractiveProviders>
         <CustomerDetailHeaderInteractive
           customerId={mockedCustomerDetail.id}
           fullName={mockedCustomerDetail.fullName}
         />
-      </MockedCustomerDetailHeaderProviders>
+      </MockedCustomerDetailHeaderInteractiveProviders>
     ),
     customerDetailActions: Default.args.customerDetailActions,
   },

@@ -1,1 +1,1 @@
-export { MockedCustomerDetailHeaderProviders } from "./MockedCustomerDetailHeaderProviders";
+export { MockedCustomerDetailHeaderInteractiveProviders } from "./MockedCustomerDetailHeaderInteractiveProviders";

@@ -3,7 +3,7 @@ import { ProfilePage } from "./ProfilePage";
 import { usePathname } from "next/navigation";
 import { mockedUserDetail } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { PageDecorator } from "@/.storybook/PageDecorator";
+import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { SearchList } from "@/components/search/SearchList";
 import { EditUserForm } from "@/components/users/EditUserForm";
@@ -31,7 +31,7 @@ const meta = {
     withDeleteUserProvider,
     withGuestModeModalProvider,
     withCurrentUserProvider,
-    PageDecorator,
+    SharedPageDecorator,
     withThemedBackground,
   ],
   beforeEach: () => {

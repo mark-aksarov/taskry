@@ -8,7 +8,7 @@ import { MockedCurrentUserProvider } from "@/components/common/CurrentUserContex
  * The page decorator is used to wrap the story in the page layout
  * Preserves the provider and layout structure
  */
-export const PageDecorator: Decorator = (Story, context) => {
+export const SharedPageDecorator: Decorator = (Story, context) => {
   const isGuest = context.parameters.isGuest || false;
 
   return (

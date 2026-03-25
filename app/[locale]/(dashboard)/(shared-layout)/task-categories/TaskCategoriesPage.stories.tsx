@@ -3,7 +3,7 @@ import TasksPageLoading from "./loading";
 import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskCategoriesPage } from "./TaskCategoriesPage";
-import { PageDecorator } from "@/.storybook/PageDecorator";
+import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { SearchList } from "@/components/search/SearchList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
@@ -27,7 +27,7 @@ const meta = {
     withCurrentUserProvider,
     withPageTransitionProvider,
     withSelectedItemsProvider,
-    PageDecorator,
+    SharedPageDecorator,
     withThemedBackground,
   ],
   beforeEach: () => {
