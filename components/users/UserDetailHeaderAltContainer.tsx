@@ -13,10 +13,10 @@ import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { getUserDetail } from "@/lib/data/user/user.dal";
 import { UpdateUserImageProvider } from "./UpdateUserImageProvider";
+import { UpdateUserImageModalProvider } from "./UpdateUserImageModal";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { ClearUserImageUrlProvider } from "./ClearUserImageUrlProvider";
-import { UpdateCustomerImageModalProvider } from "../customer/UpdateCustomerImageModal";
-import { UpdateCustomerImageFileProvider } from "../customer/UpdateCustomerImageFileContext";
+import { UpdateUserImageFileProvider } from "./UpdateUserImageFileContext";
 
 interface UserDetailHeaderAltContainerProps {
   userId: string;
@@ -66,8 +66,8 @@ async function UserDetailHeaderAltContainerInner({
   }
 
   return (
-    <UpdateCustomerImageModalProvider>
-      <UpdateCustomerImageFileProvider>
+    <UpdateUserImageModalProvider>
+      <UpdateUserImageFileProvider>
         <UpdateUserImageProvider>
           <ClearUserImageUrlProvider>
             <UserDetailHeaderInteractive
@@ -78,7 +78,7 @@ async function UserDetailHeaderAltContainerInner({
             />
           </ClearUserImageUrlProvider>
         </UpdateUserImageProvider>
-      </UpdateCustomerImageFileProvider>
-    </UpdateCustomerImageModalProvider>
+      </UpdateUserImageFileProvider>
+    </UpdateUserImageModalProvider>
   );
 }
