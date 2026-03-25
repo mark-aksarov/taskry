@@ -1,4 +1,4 @@
-import { DeletePositionContext } from "../DeletePositionContext";
+import { DeletePositionContext } from "../../DeletePositionContext";
 
 export const MockedDeletePositionProvider = ({
   children,

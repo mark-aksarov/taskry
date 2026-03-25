@@ -3,30 +3,30 @@
 import { useRouter } from "@/i18n/navigation";
 import { useActionState, useMemo } from "react";
 import { ActionState } from "@/lib/actions/types";
-import { deleteCompany } from "@/lib/actions/company/deleteCompany";
-import { DeleteCompanyContext } from "../DeleteCompanyContext";
+import { DeletePositionContext } from "../DeletePositionContext";
+import { deletePosition } from "@/lib/actions/position/deletePosition";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 
 export const initialState: ActionState = {
   status: null,
 };
 
-interface DeleteCompanyProviderProps {
+interface DeletePositionProviderProps {
   children: React.ReactNode;
 }
 
-export function DeleteCompanyProvider({
+export function DeletePositionProvider({
   children,
-}: DeleteCompanyProviderProps) {
+}: DeletePositionProviderProps) {
   const router = useRouter();
 
   const [state, action, isPending] = useActionState(
-    async (_prevState: ActionState, companyId: number) => {
-      const newState = await deleteCompany(companyId);
+    async (_prevState: ActionState, positionId: number) => {
+      const newState = await deletePosition(positionId);
 
       if (newState.status === "success") {
         // router.refresh is wrapped in startTransition internally
-        // when success we need to refresh page to update company list
+        // when success we need to refresh page to update position list
         router.refresh();
       }
 
@@ -48,8 +48,8 @@ export function DeleteCompanyProvider({
   );
 
   return (
-    <DeleteCompanyContext.Provider value={contextValue}>
+    <DeletePositionContext.Provider value={contextValue}>
       {children}
-    </DeleteCompanyContext.Provider>
+    </DeletePositionContext.Provider>
   );
 }

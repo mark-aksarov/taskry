@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { PositionListItem } from "../PositionListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeletePositionProvider } from "../../DeletePositionContext/__stories__";
+import { withDeletePositionProvider } from "../../DeletePositionProvider/__stories__";
 import { withUpdatePositionProvider } from "../../UpdatePositionProvider/__stories__";
 import { withDeletePositionsProvider } from "../../DeletePositionsContext/__stories__";
 import { withUpdatePositionModalProvider } from "../../UpdatePositionModal/__stories__";

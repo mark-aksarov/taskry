@@ -6,7 +6,7 @@ import { UpdatePositionModalProvider } from "../../UpdatePositionModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { PositionListItemStory } from "../../PositionListItem/__stories__";
 import { withDeletePositionsProvider } from "../../DeletePositionsContext/__stories__";
-import { MockedDeletePositionProvider } from "../../DeletePositionContext/__stories__";
+import { MockedDeletePositionProvider } from "../../DeletePositionProvider/__stories__";
 import { MockedUpdatePositionProvider } from "../../UpdatePositionProvider/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";

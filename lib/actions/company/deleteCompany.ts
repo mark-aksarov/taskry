@@ -6,10 +6,7 @@ import { getTranslations } from "next-intl/server";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { deleteCompanies as deleteCompaniesQuery } from "@/lib/data/company/company.dal";
 
-export async function deleteCompany(
-  _prevState: ActionState,
-  id: number,
-): Promise<ActionState> {
+export async function deleteCompany(id: number): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

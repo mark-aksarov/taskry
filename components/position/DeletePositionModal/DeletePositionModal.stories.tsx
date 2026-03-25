@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { DeletePositionModal } from "./DeletePositionModal";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeletePositionProvider } from "../DeletePositionContext/__stories__";
+import { withDeletePositionProvider } from "../DeletePositionProvider/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {

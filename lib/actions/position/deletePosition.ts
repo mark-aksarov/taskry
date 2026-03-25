@@ -6,10 +6,7 @@ import { positionId } from "@/lib/schemas/position";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { deletePositions as deletePositionsQuery } from "@/lib/data/position/position.dal";
 
-export async function deletePosition(
-  _prevState: ActionState,
-  id: number,
-): Promise<ActionState> {
+export async function deletePosition(id: number): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 
