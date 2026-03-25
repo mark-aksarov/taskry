@@ -1,13 +1,13 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useCreatePosition } from "./CreatePositionContext";
+import { useCreatePositionModal } from "./CreatePositionModal";
 import { EmptySectionButton } from "@/components/common/EmptySection";
 
 export function PositionsEmptySectionCreateButton() {
   const t = useTranslations("positions.PositionsEmptySectionCreateButton");
 
-  const { onModalOpenChange } = useCreatePosition();
+  const { onOpenChange: onModalOpenChange } = useCreatePositionModal();
 
   return (
     <EmptySectionButton onPress={() => onModalOpenChange(true)}>

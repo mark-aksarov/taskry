@@ -7,9 +7,9 @@ import { useCreateUser } from "../CreateUserContext";
 import { BriefcaseBusiness, Users } from "lucide-react";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
-import { useCreatePosition } from "@/components/position/CreatePositionContext";
 import { CreateNewMenuTrigger } from "@/components/common/CreateNewMenuTrigger";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
+import { useCreatePositionModal } from "@/components/position/CreatePositionModal";
 
 interface CreateUserMenuTriggerProps {
   renderButton: () => React.ReactNode;
@@ -26,7 +26,8 @@ export function CreateUserMenuTrigger({
   const guestGuard = useGuestModalGuard();
 
   // Create position form modal state
-  const { onModalOpenChange: onPositionModalOpenChange } = useCreatePosition();
+  const { onOpenChange: onCreatePositionModalOpenChange } =
+    useCreatePositionModal();
 
   // Create user form modal state
   const { onModalOpenChange: onUserModalOpenChange } = useCreateUser();
@@ -41,7 +42,7 @@ export function CreateUserMenuTrigger({
       if (key === "user") {
         onUserModalOpenChange(true);
       } else if (key === "position") {
-        onPositionModalOpenChange(true);
+        onCreatePositionModalOpenChange(true);
       }
     });
   }

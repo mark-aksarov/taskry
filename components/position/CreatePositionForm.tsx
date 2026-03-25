@@ -13,8 +13,8 @@ import { useCreatePosition } from "./CreatePositionContext";
 import { PositionNameTextField } from "./PositionNameTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 
-export function NewPositionForm() {
-  const t = useTranslations("positions.NewPositionForm");
+export function CreatePositionForm() {
+  const t = useTranslations("positions.CreatePositionForm");
 
   const { state, action, isPending } = useCreatePosition();
 

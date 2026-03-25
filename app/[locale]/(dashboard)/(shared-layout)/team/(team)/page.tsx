@@ -13,13 +13,13 @@ import { positionId } from "@/lib/schemas/position";
 import { getUserCount } from "@/lib/data/user/user.dal";
 import { createUser } from "@/lib/actions/user/createUser";
 import { UsersContainer } from "@/components/users/UsersContainer";
-import { createPosition } from "@/lib/actions/position/createPosition";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CreateUserProvider } from "@/components/users/CreateUserContext";
 import { UserFiltersProvider } from "@/components/users/UserFiltersContext";
 import { RouterSearchContainer } from "@/components/common/RouterSearchContainer";
-import { CreatePositionProvider } from "@/components/position/CreatePositionContext";
+import { CreatePositionProvider } from "@/components/position/CreatePositionProvider";
 import { UserFiltersFormContainer } from "@/components/users/UserFiltersFormContainer";
+import { CreatePositionModalProvider } from "@/components/position/CreatePositionModal";
 import { UserPositionFiltersFormContainer } from "@/components/users/UserPositionFiltersFormContainer";
 
 const searchParamsSchema = z.object({
@@ -54,25 +54,29 @@ export default async function AppUsersPage({
 
   return (
     <CreateUserProvider createUser={createUser}>
-      <CreatePositionProvider createPosition={createPosition}>
-        <UserFiltersProvider filters={filters}>
-          <UsersPage
-            totalFilteredUsers={totalFilteredUsers}
-            selectedSortField={sort}
-            searchContainer={<RouterSearchContainer />}
-            filtersFormContainer={<UserFiltersFormContainer />}
-            positionFiltersFormContainer={<UserPositionFiltersFormContainer />}
-            usersContainer={
-              <UsersContainer
-                page={page}
-                pageSize={pageSize}
-                sort={sort}
-                filters={filters}
-              />
-            }
-          />
-        </UserFiltersProvider>
-      </CreatePositionProvider>
+      <CreatePositionModalProvider>
+        <CreatePositionProvider>
+          <UserFiltersProvider filters={filters}>
+            <UsersPage
+              totalFilteredUsers={totalFilteredUsers}
+              selectedSortField={sort}
+              searchContainer={<RouterSearchContainer />}
+              filtersFormContainer={<UserFiltersFormContainer />}
+              positionFiltersFormContainer={
+                <UserPositionFiltersFormContainer />
+              }
+              usersContainer={
+                <UsersContainer
+                  page={page}
+                  pageSize={pageSize}
+                  sort={sort}
+                  filters={filters}
+                />
+              }
+            />
+          </UserFiltersProvider>
+        </CreatePositionProvider>
+      </CreatePositionModalProvider>
     </CreateUserProvider>
   );
 }

@@ -6,11 +6,11 @@
   "PositionsEmptySectionCreateButton": {
     "label": "Новая должность"
   },
-  "NewPositionForm": {
+  "CreatePositionForm": {
     "submitButtonLabel": "Создать должность",
     "successMessage": "Должность успешно создана"
   },
-  "NewPositionModal": {
+  "CreatePositionModal": {
     "title": "Новая должность"
   },
   "PositionNameTextField": {

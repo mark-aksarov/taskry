@@ -6,11 +6,11 @@
   "PositionsEmptySectionCreateButton": {
     "label": "New position"
   },
-  "NewPositionForm": {
+  "CreatePositionForm": {
     "submitButtonLabel": "Create Position",
     "successMessage": "Position created successfully"
   },
-  "NewPositionModal": {
+  "CreatePositionModal": {
     "title": "New Position"
   },
   "PositionNameTextField": {

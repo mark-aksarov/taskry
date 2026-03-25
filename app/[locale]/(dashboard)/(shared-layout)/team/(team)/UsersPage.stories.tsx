@@ -17,29 +17,27 @@ import { UserListStory } from "@/components/users/UserList/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserGridLarge, UserGridMobile } from "@/components/users/UserGrid";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
+import { UserPositionFiltersForm } from "@/components/users/UserPositionFiltersForm";
 import { withCreateUserProvider } from "@/components/users/CreateUserContext/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withUserFiltersProvider } from "@/components/users/UserFiltersContext/__stories__";
-import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
-import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
-import { withCreatePositionProvider } from "@/components/position/CreatePositionContext/__stories__";
-import { UserPositionFiltersForm } from "@/components/users/UserPositionFiltersForm";
+import { withCreatePositionProvider } from "@/components/position/CreatePositionProvider/__stories__";
+import { withCreatePositionModalProvider } from "@/components/position/CreatePositionModal/__stories__";
 
 const meta = {
   title: "pages/UsersPage",
   component: UsersPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    // preserve provider order as in page.tsx file
     withUserFiltersProvider,
-    withCreateUserProvider,
     withCreatePositionProvider,
-    withGuestModeModalProvider,
-    withCurrentUserProvider,
-    withPageTransitionProvider,
+    withCreatePositionModalProvider,
+    withCreateUserProvider,
     withSelectedTasksProvider,
-    PageDecorator,
+
+    PageDecorator, // most providers and layout are defined in PageDecorator
     withThemedBackground,
   ],
   beforeEach: () => {

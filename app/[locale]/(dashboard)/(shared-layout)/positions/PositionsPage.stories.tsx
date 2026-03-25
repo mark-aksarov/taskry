@@ -9,25 +9,23 @@ import { PositionList } from "@/components/position/PositionList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { PositionListStory } from "@/components/position/PositionList/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
-import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
-import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
-import { withCreatePositionProvider } from "@/components/position/CreatePositionContext/__stories__";
+import { withCreatePositionProvider } from "@/components/position/CreatePositionProvider/__stories__";
 import { withDeletePositionsProvider } from "@/components/position/DeletePositionsContext/__stories__";
+import { withCreatePositionModalProvider } from "@/components/position/CreatePositionModal/__stories__";
 
 const meta = {
   title: "pages/PositionsPage",
   component: PositionsPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    // preserve provider order as in page.tsx file
     withCreatePositionProvider,
+    withCreatePositionModalProvider,
     withDeletePositionsProvider,
-    withGuestModeModalProvider,
-    withCurrentUserProvider,
-    withPageTransitionProvider,
     withSelectedItemsProvider,
-    PageDecorator,
+
+    PageDecorator, // most providers and layout are defined in PageDecorator
     withThemedBackground,
   ],
   beforeEach: () => {

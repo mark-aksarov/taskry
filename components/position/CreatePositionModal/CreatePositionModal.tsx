@@ -7,25 +7,25 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { NewPositionForm } from "../NewPositionForm";
-import { useCreatePosition } from "../CreatePositionContext";
+import { CreatePositionForm } from "../CreatePositionForm";
+import { useCreatePositionModal } from "./CreatePositionModalContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
-export function NewPositionModal() {
-  const t = useTranslations("positions.NewPositionModal");
+export function CreatePositionModal() {
+  const t = useTranslations("positions.CreatePositionModal");
 
-  const { isModalOpen, onModalOpenChange } = useCreatePosition();
+  const { isOpen, onOpenChange } = useCreatePositionModal();
 
   return (
     <FormBaseModal
       className="md:w-[350px]"
-      isOpen={isModalOpen}
-      onOpenChange={onModalOpenChange}
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
-          <NewPositionForm />
+          <CreatePositionForm />
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

@@ -11,7 +11,7 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { PageEmptySection } from "@/components/common/PageEmptySection";
 import { ToolbarLarge, ToolbarMobile } from "@/components/common/Toolbar";
-import { NewPositionModal } from "@/components/position/NewPositionModal";
+import { CreatePositionModal } from "@/components/position/CreatePositionModal";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { PositionActionsMenuTrigger } from "@/components/position/PositionActionsMenuTrigger";
 import { PositionsEmptySectionCreateButton } from "@/components/position/PositionsEmptySectionCreateButton";
@@ -51,7 +51,7 @@ export function PositionsPage({
           </PageGrid>
         </PageContainer>
 
-        <NewPositionModal />
+        <CreatePositionModal />
       </>
     );
   }
@@ -82,7 +82,7 @@ export function PositionsPage({
       </PageContainer>
 
       <TaskSearchModal searchContainer={searchContainer} />
-      <NewPositionModal />
+      <CreatePositionModal />
     </>
   );
 }

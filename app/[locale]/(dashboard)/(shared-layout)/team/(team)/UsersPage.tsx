@@ -34,7 +34,7 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { UserSearchModal } from "@/components/users/UserSearchModal";
 import { UserResultsCount } from "@/components/users/UserResultsCount";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
-import { NewPositionModal } from "@/components/position/NewPositionModal";
+import { CreatePositionModal } from "@/components/position/CreatePositionModal";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { SearchModalTrigger } from "@/components/search/SearchModalTrigger";
 import { UsersFilteredEmptySection } from "@/components/users/UsersFilteredEmptySection";
@@ -128,7 +128,7 @@ export function UsersPage({
 
       <UserSearchModal searchContainer={searchContainer} />
       <NewUserModal />
-      <NewPositionModal />
+      <CreatePositionModal />
     </>
   );
 }
