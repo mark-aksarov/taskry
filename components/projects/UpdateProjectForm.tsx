@@ -20,7 +20,7 @@ import { ProjectDeadlineDatePicker } from "./ProjectDeadlineDatePicker";
 import { ProjectDescriptionTextField } from "./ProjectDescriptionTextField";
 import { ProjectCategorySelect } from "../projectCategory/ProjectCategorySelect";
 
-interface EditProjectFormProps {
+interface UpdateProjectFormProps {
   projectId: number;
   title: string;
   description?: string;
@@ -32,7 +32,7 @@ interface EditProjectFormProps {
   customerSelectItems: { id: number; fullName: string }[];
 }
 
-export function EditProjectForm({
+export function UpdateProjectForm({
   projectId,
   title,
   description,
@@ -42,8 +42,8 @@ export function EditProjectForm({
   customerId,
   projectCategorySelectItems,
   customerSelectItems,
-}: EditProjectFormProps) {
-  const t = useTranslations("projects.EditProjectForm");
+}: UpdateProjectFormProps) {
+  const t = useTranslations("projects.UpdateProjectForm");
 
   const { state, isPending, action } = useUpdateProject();
 

@@ -28,7 +28,7 @@
     "heading": "Проекты не найдены",
     "description": "По выбранным фильтрам проекты отсутствуют. Попробуйте изменить или сбросить фильтры"
   },
-  "EditProjectForm": {
+  "UpdateProjectForm": {
     "submitButtonLabel": "Обновить проект",
     "successMessage": "Проект успешно обновлен"
   },
@@ -57,7 +57,7 @@
   "CreateProjectModal": {
     "title": "Новый проект"
   },
-  "EditProjectModal": {
+  "UpdateProjectModal": {
     "title": "Изменить проект"
   },
   "ProjectFiltersModal": {

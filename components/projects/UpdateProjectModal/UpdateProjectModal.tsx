@@ -10,14 +10,14 @@ import { useTranslations } from "next-intl";
 import { useUpdateProject } from "../UpdateProjectContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
-interface EditProjectModalProps {
+interface UpdateProjectModalProps {
   editProjectFormContainer: React.ReactNode;
 }
 
-export function EditProjectModal({
+export function UpdateProjectModal({
   editProjectFormContainer,
-}: EditProjectModalProps) {
-  const t = useTranslations("projects.EditProjectModal");
+}: UpdateProjectModalProps) {
+  const t = useTranslations("projects.UpdateProjectModal");
 
   const { isModalOpen, onModalOpenChange } = useUpdateProject();
 

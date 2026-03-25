@@ -13,16 +13,16 @@ import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { useUpdateProjectCategory } from "./UpdateProjectCategoryContext";
 import { ProjectCategoryNameTextField } from "./ProjectCategoryNameTextField";
 
-interface EditProjectCategoryFormProps {
+interface UpdateProjectCategoryFormProps {
   projectCategoryId: number;
   nameDefaultValue: string;
 }
 
-export function EditProjectCategoryForm({
+export function UpdateProjectCategoryForm({
   projectCategoryId,
   nameDefaultValue,
-}: EditProjectCategoryFormProps) {
-  const t = useTranslations("projectCategories.EditProjectCategoryForm");
+}: UpdateProjectCategoryFormProps) {
+  const t = useTranslations("projectCategories.UpdateProjectCategoryForm");
 
   const { state, isPending, action } = useUpdateProjectCategory();
 

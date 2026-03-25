@@ -1,6 +1,6 @@
 import { mockedProjectList } from "@/mocks/projects";
 import type { Meta, StoryObj } from "@storybook/react";
-import { EditProjectForm } from "../../EditProjectForm";
+import { UpdateProjectForm } from "../../UpdateProjectForm";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { mockedCustomerSummaries } from "@/mocks/customers";
 import { ProjectGridItemMobile } from "../ProjectGridItemMobile";
@@ -40,7 +40,7 @@ export const Default = {
     ...mockedProject,
     projectCommentsContainer: <CommentList {...CommentListStory.args} />,
     editProjectFormContainer: (
-      <EditProjectForm
+      <UpdateProjectForm
         {...mockedProject}
         projectId={mockedProject.id}
         projectCategorySelectItems={mockedProjectCategorySummaries}

@@ -12,7 +12,7 @@ import { updateComment } from "@/lib/actions/comment/updateComment";
 import { ProjectListItemDTO } from "@/lib/data/project/project.dto";
 import { updateProject } from "@/lib/actions/project/updateProject";
 import { deleteProject } from "@/lib/actions/project/deleteProject";
-import { EditProjectFormContainer } from "./EditProjectFormContainer";
+import { UpdateProjectFormContainer } from "./UpdateProjectFormContainer";
 import { ProjectCommentsContainer } from "./ProjectCommentsContainer";
 import { CustomerDetailContainer } from "../customer/CustomerDetailContainer";
 import { UserDetailHeaderContainer } from "../users/UserDetailHeaderContainer";
@@ -45,7 +45,7 @@ export async function ProjectsContainer({
     commentsCount: project.commentsCount,
 
     editProjectFormContainer: (
-      <EditProjectFormContainer projectId={project.id} />
+      <UpdateProjectFormContainer projectId={project.id} />
     ),
     projectCommentsContainer: (
       <ProjectCommentsContainer projectId={project.id} />

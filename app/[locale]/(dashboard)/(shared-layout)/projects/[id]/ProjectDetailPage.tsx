@@ -6,7 +6,7 @@ import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ToolbarMobile } from "@/components/common/Toolbar";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
-import { EditProjectModal } from "@/components/projects/EditProjectModal";
+import { UpdateProjectModal } from "@/components/projects/UpdateProjectModal";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { ProjectDetailCard } from "@/components/projects/ProjectDetailCard";
 import { ProjectDetailActions } from "@/components/projects/ProjectDetailActions";
@@ -72,7 +72,7 @@ export function ProjectDetailPage({
       </PageContainer>
 
       <TaskSearchModal searchContainer={searchContainer} />
-      <EditProjectModal editProjectFormContainer={editProjectFormContainer} />
+      <UpdateProjectModal editProjectFormContainer={editProjectFormContainer} />
     </>
   );
 }

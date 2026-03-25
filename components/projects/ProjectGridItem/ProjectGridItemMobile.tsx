@@ -20,7 +20,7 @@ import {
 
 import { memo } from "react";
 import { Link } from "@/components/ui/Link";
-import { EditProjectModal } from "../EditProjectModal";
+import { UpdateProjectModal } from "../UpdateProjectModal";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
@@ -138,7 +138,9 @@ export const ProjectGridItemMobileInner = memo(
         />
 
         {/* Modal for editing project details */}
-        <EditProjectModal editProjectFormContainer={editProjectFormContainer} />
+        <UpdateProjectModal
+          editProjectFormContainer={editProjectFormContainer}
+        />
       </>
     );
   },

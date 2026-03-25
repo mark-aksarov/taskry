@@ -8,8 +8,8 @@ import {
   ProjectDetailActionsSkeleton,
 } from "../ProjectDetailActions";
 
-import { EditProjectForm } from "../EditProjectForm";
-import { EditProjectModal } from "../EditProjectModal";
+import { UpdateProjectForm } from "../UpdateProjectForm";
+import { UpdateProjectModal } from "../UpdateProjectModal";
 import { mockedProjectDetail } from "@/mocks/projects";
 import { ProjectDetailCard } from "./ProjectDetailCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
@@ -33,9 +33,9 @@ const meta = {
       <>
         <Story />
 
-        <EditProjectModal
+        <UpdateProjectModal
           editProjectFormContainer={
-            <EditProjectForm
+            <UpdateProjectForm
               {...mockedProjectDetail}
               projectId={mockedProjectDetail.id}
               projectCategorySelectItems={mockedProjectCategorySummaries}

@@ -20,7 +20,7 @@ import {
 } from "../ProjectItem";
 
 import { memo } from "react";
-import { EditProjectModal } from "../EditProjectModal";
+import { UpdateProjectModal } from "../UpdateProjectModal";
 import { ProjectDetailModal } from "../ProjectDetailModal";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
@@ -173,7 +173,9 @@ export const ProjectGridItemLargeInner = memo(
         />
 
         {/* Modal for editing project details */}
-        <EditProjectModal editProjectFormContainer={editProjectFormContainer} />
+        <UpdateProjectModal
+          editProjectFormContainer={editProjectFormContainer}
+        />
       </>
     );
   },

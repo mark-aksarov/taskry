@@ -12,7 +12,7 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedCustomerSummaries } from "@/mocks/customers";
 import { SearchList } from "@/components/search/SearchList";
 import { CommentList } from "@/components/comments/CommentList";
-import { EditProjectForm } from "@/components/projects/EditProjectForm";
+import { UpdateProjectForm } from "@/components/projects/UpdateProjectForm";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
@@ -63,7 +63,7 @@ export const Default = {
       />
     ),
     editProjectFormContainer: (
-      <EditProjectForm
+      <UpdateProjectForm
         {...mockedProjectDetail}
         projectId={mockedProjectDetail.id}
         projectCategorySelectItems={mockedProjectCategorySummaries}

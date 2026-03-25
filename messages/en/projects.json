@@ -28,7 +28,7 @@
     "heading": "No projects found",
     "description": "No projects match the selected filters. Try changing or resetting the filters."
   },
-  "EditProjectForm": {
+  "UpdateProjectForm": {
     "submitButtonLabel": "Update Project",
     "successMessage": "Project updated successfully."
   },
@@ -57,7 +57,7 @@
   "CreateProjectModal": {
     "title": "New Project"
   },
-  "EditProjectModal": {
+  "UpdateProjectModal": {
     "title": "Edit Project"
   },
   "ProjectFiltersModal": {

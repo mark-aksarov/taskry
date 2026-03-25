@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { EditProjectCategoryModal } from "./EditProjectCategoryModal";
+import { UpdateProjectCategoryModal } from "./UpdateProjectCategoryModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { useUpdateProjectCategory } from "../UpdateProjectCategoryContext";
 import { withUpdateProjectCategoryProvider } from "../UpdateProjectCategoryContext/__stories__";
 
 const meta = {
-  title: "components/project-categories/EditProjectCategoryModal",
-  component: EditProjectCategoryModal,
+  title: "components/project-categories/UpdateProjectCategoryModal",
+  component: UpdateProjectCategoryModal,
   decorators: [
     (Story) => {
       const { onModalOpenChange } = useUpdateProjectCategory();
@@ -28,7 +28,7 @@ const meta = {
     withUpdateProjectCategoryProvider,
     withThemedBackground,
   ],
-} satisfies Meta<typeof EditProjectCategoryModal>;
+} satisfies Meta<typeof UpdateProjectCategoryModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

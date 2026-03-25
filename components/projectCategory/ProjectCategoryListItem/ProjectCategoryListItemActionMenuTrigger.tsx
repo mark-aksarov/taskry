@@ -11,7 +11,7 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { EditProjectCategoryModal } from "../EditProjectCategoryModal";
+import { UpdateProjectCategoryModal } from "../UpdateProjectCategoryModal";
 import { DeleteProjectCategoryModal } from "../DeleteProjectCategoryModal";
 import { useUpdateProjectCategory } from "../UpdateProjectCategoryContext";
 import { useProjectCategoryListItemPending } from "./useProjectCategoryListItemPending";
@@ -80,7 +80,7 @@ export function ProjectCategoryListItemActionMenuTrigger({
       </ItemBaseActionMenuTrigger>
 
       {/* Modals for editing, deleting, and guest mode */}
-      <EditProjectCategoryModal
+      <UpdateProjectCategoryModal
         projectCategoryId={projectCategoryId}
         projectCategoryName={projectCategoryName}
       />

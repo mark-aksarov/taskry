@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
-import { EditProjectForm } from "../EditProjectForm";
-import { EditProjectModal } from "./EditProjectModal";
+import { UpdateProjectForm } from "../UpdateProjectForm";
+import { UpdateProjectModal } from "./UpdateProjectModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useUpdateProject } from "../UpdateProjectContext";
 import { mockedCustomerSummaries } from "@/mocks/customers";
@@ -12,8 +12,8 @@ import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
 import { withUpdateProjectProvider } from "../UpdateProjectContext/__stories__";
 
 const meta = {
-  title: "components/projects/EditProjectModal",
-  component: EditProjectModal,
+  title: "components/projects/UpdateProjectModal",
+  component: UpdateProjectModal,
   decorators: [
     (Story) => {
       const { onModalOpenChange } = useUpdateProject();
@@ -33,7 +33,7 @@ const meta = {
     withUpdateProjectProvider,
     withThemedBackground,
   ],
-} satisfies Meta<typeof EditProjectModal>;
+} satisfies Meta<typeof UpdateProjectModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -41,7 +41,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     editProjectFormContainer: (
-      <EditProjectForm
+      <UpdateProjectForm
         {...mockedProject}
         projectId={mockedProject.id}
         projectCategorySelectItems={mockedProjectCategorySummaries}

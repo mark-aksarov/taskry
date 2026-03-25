@@ -37,11 +37,11 @@
     "dialogHeading": "Действия",
     "delete": "Удалить"
   },
-  "EditProjectCategoryForm": {
+  "UpdateProjectCategoryForm": {
     "submitButtonLabel": "Обновить категорию проекта",
     "successMessage": "Категория проекта успешно обновлена"
   },
-  "EditProjectCategoryModal": {
+  "UpdateProjectCategoryModal": {
     "title": "Изменить категорию проекта"
   },
   "DeleteProjectCategoryModal": {

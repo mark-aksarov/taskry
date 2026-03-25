@@ -5,20 +5,20 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { EditProjectCategoryForm } from "../EditProjectCategoryForm";
+import { UpdateProjectCategoryForm } from "../UpdateProjectCategoryForm";
 import { useUpdateProjectCategory } from "../UpdateProjectCategoryContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
-interface EditProjectCategoryModalProps {
+interface UpdateProjectCategoryModalProps {
   projectCategoryId: number;
   projectCategoryName: string;
 }
 
-export function EditProjectCategoryModal({
+export function UpdateProjectCategoryModal({
   projectCategoryId,
   projectCategoryName,
-}: EditProjectCategoryModalProps) {
-  const t = useTranslations("projectCategories.EditProjectCategoryModal");
+}: UpdateProjectCategoryModalProps) {
+  const t = useTranslations("projectCategories.UpdateProjectCategoryModal");
 
   const { isModalOpen, onModalOpenChange } = useUpdateProjectCategory();
 
@@ -31,7 +31,7 @@ export function EditProjectCategoryModal({
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
-          <EditProjectCategoryForm
+          <UpdateProjectCategoryForm
             projectCategoryId={projectCategoryId}
             nameDefaultValue={projectCategoryName}
           />

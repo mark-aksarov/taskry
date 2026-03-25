@@ -2,20 +2,20 @@
 
 import useSWR from "swr";
 import { usePathname } from "@/i18n/navigation";
-import { EditProjectForm } from "./EditProjectForm";
+import { UpdateProjectForm } from "./UpdateProjectForm";
 import { notFound, useParams } from "next/navigation";
 import { ProjectFormSkeleton } from "./ProjectFormSkeleton";
 import { ProjectFormDataDTO } from "@/lib/data/project/project.dto";
 import { CustomerSummaryDTO } from "@/lib/data/customer/customer.dto";
 import { ProjectCategorySummaryDTO } from "@/lib/data/projectCategory/projectCategory.dto";
 
-interface EditProjectFormContainerProps {
+interface UpdateProjectFormContainerProps {
   projectId: number;
 }
 
-export function EditProjectFormContainer({
+export function UpdateProjectFormContainer({
   projectId,
-}: EditProjectFormContainerProps) {
+}: UpdateProjectFormContainerProps) {
   const pathname = usePathname();
   const params = useParams();
 
@@ -59,7 +59,7 @@ export function EditProjectFormContainer({
   }
 
   return (
-    <EditProjectForm
+    <UpdateProjectForm
       projectId={projectId}
       title={project.title}
       description={project.description}

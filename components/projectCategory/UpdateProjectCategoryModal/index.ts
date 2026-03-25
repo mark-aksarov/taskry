@@ -1,0 +1,1 @@
+export { UpdateProjectCategoryModal } from "./UpdateProjectCategoryModal";

@@ -10,7 +10,7 @@ import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { DeleteProjectProvider } from "@/components/projects/DeleteProjectContext";
 import { UpdateProjectProvider } from "@/components/projects/UpdateProjectContext";
-import { EditProjectFormContainer } from "@/components/projects/EditProjectFormContainer";
+import { UpdateProjectFormContainer } from "@/components/projects/UpdateProjectFormContainer";
 import { ProjectCommentsContainer } from "@/components/projects/ProjectCommentsContainer";
 import { ProjectDetailAltContainer } from "@/components/projects/ProjectDetailAltContainer";
 import { ProjectDetailHeaderContainer } from "@/components/projects/ProjectDetailHeaderContainer";
@@ -52,7 +52,9 @@ export default async function AppProjectDetailPage({
             <ProjectDetailHeaderContainer projectId={id} />
           }
           projectCommentsContainer={<ProjectCommentsContainer projectId={id} />}
-          editProjectFormContainer={<EditProjectFormContainer projectId={id} />}
+          editProjectFormContainer={
+            <UpdateProjectFormContainer projectId={id} />
+          }
         />
       </DeleteProjectProvider>
     </UpdateProjectProvider>
