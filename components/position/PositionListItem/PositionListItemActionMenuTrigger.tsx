@@ -10,9 +10,9 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { EditPositionModal } from "../EditPositionModal";
-import { useUpdatePosition } from "../UpdatePositionContext";
+import { UpdatePositionModal } from "../UpdatePositionModal";
 import { DeletePositionModal } from "../DeletePositionModal";
+import { useUpdatePositionModal } from "../UpdatePositionModal";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { usePositionListItemPending } from "./usePositionListItemPending";
 
@@ -33,8 +33,9 @@ export function PositionListItemActionMenuTrigger({
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // State for edit modal from context
-  const { onModalOpenChange: onEditModalOpenChange } = useUpdatePosition();
+  // State for update modal from context
+  const { onOpenChange: onUpdatePositionModalOpenChange } =
+    useUpdatePositionModal();
 
   /**
    * Handles menu actions for a position item
@@ -45,7 +46,7 @@ export function PositionListItemActionMenuTrigger({
     guestGuard(() => {
       const action = key.toString();
       if (action === "edit") {
-        onEditModalOpenChange(true);
+        onUpdatePositionModalOpenChange(true);
       } else if (action === "delete") {
         setIsDeleteModalOpen(true);
       }
@@ -77,7 +78,10 @@ export function PositionListItemActionMenuTrigger({
       </ItemBaseActionMenuTrigger>
 
       {/* Modals for editing, deleting, and guest mode */}
-      <EditPositionModal positionId={positionId} positionName={positionName} />
+      <UpdatePositionModal
+        positionId={positionId}
+        positionName={positionName}
+      />
 
       <DeletePositionModal
         isOpen={isDeleteModalOpen}

@@ -9,7 +9,7 @@ import { useContext, createContext } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 
-const DeletePositionContext =
+export const DeletePositionContext =
   createContext<DeleteEntityContextType<number> | null>(null);
 
 interface DeletePositionProviderProps {

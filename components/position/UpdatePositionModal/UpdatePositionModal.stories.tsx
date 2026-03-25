@@ -1,26 +1,23 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { EditPositionModal } from "./EditPositionModal";
-import { useUpdatePosition } from "../UpdatePositionContext";
+import { UpdatePositionModal } from "./UpdatePositionModal";
+import { useUpdatePositionModal } from "./UpdatePositionModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdatePositionProvider } from "../UpdatePositionContext/__stories__";
+import { withUpdatePositionProvider } from "../UpdatePositionProvider/__stories__";
 
 const meta = {
-  title: "components/positions/EditPositionModal",
-  component: EditPositionModal,
+  title: "components/positions/UpdatePositionModal",
+  component: UpdatePositionModal,
   decorators: [
     (Story) => {
-      const { onModalOpenChange } = useUpdatePosition();
+      const { onOpenChange } = useUpdatePositionModal();
 
-      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
+      useEffect(() => onOpenChange(true), [onOpenChange]);
 
       return (
         <>
-          <Button
-            label="Edit position"
-            onClick={() => onModalOpenChange(true)}
-          />
+          <Button label="Open modal" onClick={() => onOpenChange(true)} />
           <Story />
         </>
       );
@@ -28,7 +25,7 @@ const meta = {
     withUpdatePositionProvider,
     withThemedBackground,
   ],
-} satisfies Meta<typeof EditPositionModal>;
+} satisfies Meta<typeof UpdatePositionModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

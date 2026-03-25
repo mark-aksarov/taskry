@@ -34,11 +34,11 @@
     "edit": "Edit",
     "delete": "Delete"
   },
-  "EditPositionForm": {
+  "UpdatePositionForm": {
     "submitButtonLabel": "Update position",
     "successMessage": "Position updated successfully"
   },
-  "EditPositionModal": {
+  "UpdatePositionModal": {
     "title": "Edit position"
   },
   "DeletePositionsModal": {

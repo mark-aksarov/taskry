@@ -5,33 +5,33 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { EditPositionForm } from "../EditPositionForm";
-import { useUpdatePosition } from "../UpdatePositionContext";
+import { UpdatePositionForm } from "../UpdatePositionForm";
+import { useUpdatePositionModal } from "./UpdatePositionModalContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
-interface EditPositionModalProps {
+interface UpdatePositionModalProps {
   positionId: number;
   positionName: string;
 }
 
-export function EditPositionModal({
+export function UpdatePositionModal({
   positionId,
   positionName,
-}: EditPositionModalProps) {
-  const t = useTranslations("positions.EditPositionModal");
+}: UpdatePositionModalProps) {
+  const t = useTranslations("positions.UpdatePositionModal");
 
-  const { isModalOpen, onModalOpenChange } = useUpdatePosition();
+  const { isOpen, onOpenChange } = useUpdatePositionModal();
 
   return (
     <FormBaseModal
       className="md:w-[350px]"
-      isOpen={isModalOpen}
-      onOpenChange={onModalOpenChange}
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
-          <EditPositionForm
+          <UpdatePositionForm
             positionId={positionId}
             nameDefaultValue={positionName}
           />

@@ -13,16 +13,16 @@ import { useUpdatePosition } from "./UpdatePositionContext";
 import { PositionNameTextField } from "./PositionNameTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 
-interface EditPositionFormProps {
+interface UpdatePositionFormProps {
   positionId: number;
   nameDefaultValue: string;
 }
 
-export function EditPositionForm({
+export function UpdatePositionForm({
   positionId,
   nameDefaultValue,
-}: EditPositionFormProps) {
-  const t = useTranslations("positions.EditPositionForm");
+}: UpdatePositionFormProps) {
+  const t = useTranslations("positions.UpdatePositionForm");
 
   const { state, isPending, action } = useUpdatePosition();
 

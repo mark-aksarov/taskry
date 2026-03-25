@@ -34,11 +34,11 @@
     "edit": "Редактировать",
     "delete": "Удалить"
   },
-  "EditPositionForm": {
+  "UpdatePositionForm": {
     "submitButtonLabel": "Обновить должность",
     "successMessage": "Должность успешно обновлена"
   },
-  "EditPositionModal": {
+  "UpdatePositionModal": {
     "title": "Изменить должность"
   },
   "DeletePositionsModal": {

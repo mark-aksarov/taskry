@@ -9,10 +9,7 @@ import {
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { PositionItemCheckbox } from "../PositionItemCheckbox";
-import { DeletePositionProvider } from "../DeletePositionContext";
-import { UpdatePositionProvider } from "../UpdatePositionContext";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { PositionListItemPendingOverlay } from "./PositionListItemPendingOverlay";
@@ -21,35 +18,22 @@ import { PositionListItemActionMenuTrigger } from "./PositionListItemActionMenuT
 interface PositionListItemProps {
   id: number;
   name: string;
-  updatePosition: ActionFn<ActionState, FormData>;
-  deletePosition: ActionFn<ActionState, number>;
 }
 
-export function PositionListItem({
-  updatePosition,
-  deletePosition,
-  ...props
-}: PositionListItemProps) {
+export function PositionListItem(props: PositionListItemProps) {
   const selected = useSelectedItems();
 
   return (
-    <UpdatePositionProvider updatePosition={updatePosition}>
-      <DeletePositionProvider deletePosition={deletePosition}>
-        <PositionListItemPendingOverlay positionId={props.id}>
-          <SelectableItem {...selected} item={{ id: props.id }}>
-            <PositionListItemInner {...props} />
-          </SelectableItem>
-        </PositionListItemPendingOverlay>
-      </DeletePositionProvider>
-    </UpdatePositionProvider>
+    <PositionListItemPendingOverlay positionId={props.id}>
+      <SelectableItem {...selected} item={{ id: props.id }}>
+        <PositionListItemInner {...props} />
+      </SelectableItem>
+    </PositionListItemPendingOverlay>
   );
 }
 
 const PositionListItemInner = memo(
-  ({
-    id,
-    name,
-  }: Omit<PositionListItemProps, "updatePosition" | "deletePosition">) => {
+  ({ id, name }: Omit<PositionListItemProps, "deletePosition">) => {
     const t = useTranslations("positions.PositionListItem");
 
     return (
