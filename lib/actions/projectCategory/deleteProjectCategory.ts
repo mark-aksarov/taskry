@@ -6,10 +6,7 @@ import { projectCategoryId } from "@/lib/schemas/projectCategory";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { deleteProjectCategories as deleteProjectCategoriesQuery } from "@/lib/data/projectCategory/projectCategory.dal";
 
-export async function deleteProjectCategory(
-  _prevState: ActionState,
-  id: number,
-): Promise<ActionState> {
+export async function deleteProjectCategory(id: number): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

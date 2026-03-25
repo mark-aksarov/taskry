@@ -2,8 +2,8 @@ import "server-only";
 
 import { ProjectCategoryList } from "./ProjectCategoryList";
 import { ProjectCategoryListItem } from "./ProjectCategoryListItem";
+import { ProjectCategoryProviders } from "./ProjectCategoryProviders";
 import { updateProjectCategory } from "@/lib/actions/projectCategory/updateProjectCategory";
-import { deleteProjectCategory } from "@/lib/actions/projectCategory/deleteProjectCategory";
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
 
 export async function ProjectCategoriesContainer() {
@@ -12,13 +12,14 @@ export async function ProjectCategoriesContainer() {
   return (
     <ProjectCategoryList>
       {projectCategories.map((projectCategory) => (
-        <ProjectCategoryListItem
-          key={projectCategory.id}
-          id={projectCategory.id}
-          name={projectCategory.name}
-          updateProjectCategory={updateProjectCategory}
-          deleteProjectCategory={deleteProjectCategory}
-        />
+        <ProjectCategoryProviders>
+          <ProjectCategoryListItem
+            key={projectCategory.id}
+            id={projectCategory.id}
+            name={projectCategory.name}
+            updateProjectCategory={updateProjectCategory}
+          />
+        </ProjectCategoryProviders>
       ))}
     </ProjectCategoryList>
   );

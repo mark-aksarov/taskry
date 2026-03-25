@@ -1,25 +1,25 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { UpdateProjectCategoryModal } from "./UpdateProjectCategoryModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { useUpdateProjectCategory } from "../UpdateProjectCategoryContext";
-import { withUpdateProjectCategoryProvider } from "../UpdateProjectCategoryContext/__stories__";
+import { UpdateProjectCategoryModal } from "./UpdateProjectCategoryModal";
+import { useUpdateProjectCategoryModal } from "./UpdateProjectCategoryModalContext";
+import { withUpdateProjectCategoryProvider } from "../UpdateProjectCategoryProvider/__stories__";
 
 const meta = {
   title: "components/project-categories/UpdateProjectCategoryModal",
   component: UpdateProjectCategoryModal,
   decorators: [
     (Story) => {
-      const { onModalOpenChange } = useUpdateProjectCategory();
+      const { onOpenChange } = useUpdateProjectCategoryModal();
 
-      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
+      useEffect(() => onOpenChange(true), [onOpenChange]);
 
       return (
         <>
           <Button
             label="Edit project category"
-            onClick={() => onModalOpenChange(true)}
+            onClick={() => onOpenChange(true)}
           />
           <Story />
         </>

@@ -6,8 +6,8 @@ import {
 
 import { useTranslations } from "next-intl";
 import { UpdateProjectCategoryForm } from "../UpdateProjectCategoryForm";
-import { useUpdateProjectCategory } from "../UpdateProjectCategoryContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
+import { useUpdateProjectCategoryModal } from "./UpdateProjectCategoryModalContext";
 
 interface UpdateProjectCategoryModalProps {
   projectCategoryId: number;
@@ -20,13 +20,13 @@ export function UpdateProjectCategoryModal({
 }: UpdateProjectCategoryModalProps) {
   const t = useTranslations("projectCategories.UpdateProjectCategoryModal");
 
-  const { isModalOpen, onModalOpenChange } = useUpdateProjectCategory();
+  const { isOpen, onOpenChange } = useUpdateProjectCategoryModal();
 
   return (
     <FormBaseModal
       className="md:w-[350px]"
-      isOpen={isModalOpen}
-      onOpenChange={onModalOpenChange}
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>

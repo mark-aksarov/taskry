@@ -1,0 +1,1 @@
+export { withUpdateProjectCategoryModalProvider } from "./withUpdateProjectCategoryModalProvider";

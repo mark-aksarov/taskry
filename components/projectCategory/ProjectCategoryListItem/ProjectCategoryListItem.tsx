@@ -12,8 +12,6 @@ import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { DeleteProjectCategoryProvider } from "../DeleteProjectCategoryContext";
-import { UpdateProjectCategoryProvider } from "../UpdateProjectCategoryContext";
 import { ProjectCategoryListItemCheckbox } from "./ProjectCategoryListItemCheckbox";
 import { ProjectCategoryListItemPendingOverlay } from "./ProjectCategoryListItemPendingOverlay";
 import { ProjectCategoryListItemActionMenuTrigger } from "./ProjectCategoryListItemActionMenuTrigger";
@@ -22,30 +20,20 @@ interface ProjectCategoryListItemProps {
   id: number;
   name: string;
   updateProjectCategory: ActionFn<ActionState, FormData>;
-  deleteProjectCategory: ActionFn<ActionState, number>;
 }
 
 export function ProjectCategoryListItem({
   updateProjectCategory,
-  deleteProjectCategory,
   ...props
 }: ProjectCategoryListItemProps) {
   const selected = useSelectedItems();
 
   return (
-    <UpdateProjectCategoryProvider
-      updateProjectCategory={updateProjectCategory}
-    >
-      <DeleteProjectCategoryProvider
-        deleteProjectCategory={deleteProjectCategory}
-      >
-        <ProjectCategoryListItemPendingOverlay projectCategoryId={props.id}>
-          <SelectableItem {...selected} item={{ id: props.id }}>
-            <ProjectCategoryListItemInner {...props} />
-          </SelectableItem>
-        </ProjectCategoryListItemPendingOverlay>
-      </DeleteProjectCategoryProvider>
-    </UpdateProjectCategoryProvider>
+    <ProjectCategoryListItemPendingOverlay projectCategoryId={props.id}>
+      <SelectableItem {...selected} item={{ id: props.id }}>
+        <ProjectCategoryListItemInner {...props} />
+      </SelectableItem>
+    </ProjectCategoryListItemPendingOverlay>
   );
 }
 

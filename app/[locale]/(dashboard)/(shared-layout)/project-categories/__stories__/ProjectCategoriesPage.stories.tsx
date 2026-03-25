@@ -1,34 +1,22 @@
 import { mocked } from "storybook/test";
-import ProjectsPageLoading from "./loading";
+import ProjectsPageLoading from "../loading";
 import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SearchList } from "@/components/search/SearchList";
-import { ProjectCategoriesPage } from "./ProjectCategoriesPage";
+import { ProjectCategoriesPage } from "../ProjectCategoriesPage";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
+import { ProjectCategoriesPageDecorator } from "./ProjectCategoriesPageDecorator";
 import { ProjectCategoryList } from "@/components/projectCategory/ProjectCategoryList";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
-import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
-import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
-import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { ProjectCategoryListStory } from "@/components/projectCategory/ProjectCategoryList/__stories__";
-import { withCreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryProvider/__stories__";
-import { withDeleteProjectCategoriesProvider } from "@/components/projectCategory/DeleteProjectCategoriesProvider/__stories__";
-import { withCreateProjectCategoryModalProvider } from "@/components/projectCategory/CreateProjectCategoryModal/__stories__";
 
 const meta = {
   title: "pages/ProjectCategoriesPage",
   component: ProjectCategoriesPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    withCreateProjectCategoryProvider,
-    withCreateProjectCategoryModalProvider,
-    withDeleteProjectCategoriesProvider,
-    withGuestModeModalProvider,
-    withCurrentUserProvider,
-    withPageTransitionProvider,
-    withSelectedItemsProvider,
+    ProjectCategoriesPageDecorator,
     SharedPageDecorator,
     withThemedBackground,
   ],

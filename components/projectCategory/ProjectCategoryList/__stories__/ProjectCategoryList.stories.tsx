@@ -8,6 +8,7 @@ import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/_
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withDeleteProjectCategoriesProvider } from "../../DeleteProjectCategoriesProvider/__stories__";
+import { MockedProjectCategoryProviders } from "../../ProjectCategoryProviders/__stories__";
 
 const meta = {
   title: "components/project-categories/ProjectCategoryList",
@@ -27,11 +28,12 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedProjectCategorySummaries.map((projectCategory) => (
-      <ProjectCategoryListItem
-        key={projectCategory.id}
-        {...ProjectCategoryListItemStory.args}
-        {...projectCategory}
-      />
+      <MockedProjectCategoryProviders key={projectCategory.id}>
+        <ProjectCategoryListItem
+          {...ProjectCategoryListItemStory.args}
+          {...projectCategory}
+        />
+      </MockedProjectCategoryProviders>
     )),
   },
 } satisfies Story;

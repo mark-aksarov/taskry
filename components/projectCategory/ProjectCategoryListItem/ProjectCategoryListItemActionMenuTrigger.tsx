@@ -6,14 +6,17 @@ import {
   ItemBaseActionMenuDialogHeader,
 } from "@/components/common/ItemBase";
 
+import {
+  UpdateProjectCategoryModal,
+  useUpdateProjectCategoryModal,
+} from "../UpdateProjectCategoryModal";
+
 import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { UpdateProjectCategoryModal } from "../UpdateProjectCategoryModal";
 import { DeleteProjectCategoryModal } from "../DeleteProjectCategoryModal";
-import { useUpdateProjectCategory } from "../UpdateProjectCategoryContext";
 import { useProjectCategoryListItemPending } from "./useProjectCategoryListItemPending";
 
 export type ProjectCategoryListItemActionMenuTriggerProps = {
@@ -35,9 +38,9 @@ export function ProjectCategoryListItemActionMenuTrigger({
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // State for edit modal from context
-  const { onModalOpenChange: onEditModalOpenChange } =
-    useUpdateProjectCategory();
+  // State for update project category modal from context
+  const { onOpenChange: onUpdateModalOpenChange } =
+    useUpdateProjectCategoryModal();
 
   /**
    * Handles menu actions for a project category item
@@ -48,7 +51,7 @@ export function ProjectCategoryListItemActionMenuTrigger({
     guestGuard(() => {
       const action = key.toString();
       if (action === "edit") {
-        onEditModalOpenChange(true);
+        onUpdateModalOpenChange(true);
       } else if (action === "delete") {
         setIsDeleteModalOpen(true);
       }

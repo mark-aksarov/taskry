@@ -1,1 +1,0 @@
-export { withUpdateProjectCategoryProvider } from "./withUpdateProjectCategoryProvider";
