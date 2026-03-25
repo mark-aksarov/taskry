@@ -14,7 +14,7 @@ import { withSelectedItemsProvider } from "@/components/common/SelectedItemsCont
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { ProjectCategoryListStory } from "@/components/projectCategory/ProjectCategoryList/__stories__";
 import { withCreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryProvider/__stories__";
-import { withDeleteProjectCategoriesProvider } from "@/components/projectCategory/DeleteProjectCategoriesContext/__stories__";
+import { withDeleteProjectCategoriesProvider } from "@/components/projectCategory/DeleteProjectCategoriesProvider/__stories__";
 import { withCreateProjectCategoryModalProvider } from "@/components/projectCategory/CreateProjectCategoryModal/__stories__";
 
 const meta = {

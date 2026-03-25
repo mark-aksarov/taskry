@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { DeleteProjectCategoriesModal } from "./DeleteProjectCategoriesModal";
-import { withDeleteProjectCategoriesProvider } from "../DeleteProjectCategoriesContext/__stories__";
+import { withDeleteProjectCategoriesProvider } from "../DeleteProjectCategoriesProvider/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {

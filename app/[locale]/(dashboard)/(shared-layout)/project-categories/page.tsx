@@ -5,7 +5,7 @@ import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext"
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
 import { ProjectCategoriesContainer } from "@/components/projectCategory/ProjectCategoriesContainer";
 import { CreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryProvider";
-import { DeleteProjectCategoriesProvider } from "@/components/projectCategory/DeleteProjectCategoriesContext";
+import { DeleteProjectCategoriesProvider } from "@/components/projectCategory/DeleteProjectCategoriesProvider";
 import { CreateProjectCategoryModalProvider } from "@/components/projectCategory/CreateProjectCategoryModal";
 
 export default async function AppProjectCategoriesPage() {
