@@ -15,7 +15,7 @@ import {
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
-import { EditTaskModal } from "../EditTaskModal";
+import { UpdateTaskModal } from "../UpdateTaskModal";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskItemBaseBadge } from "../TaskItemBaseBadge";
@@ -86,7 +86,7 @@ export const TaskListItemInner = memo(
     status,
     showCheckbox,
     taskCommentsContainer,
-    editTaskFormContainer,
+    updateTaskFormContainer,
     taskDetailContainer,
     userDetailContainer,
     userDetailHeaderContainer,
@@ -231,7 +231,7 @@ export const TaskListItemInner = memo(
         />
 
         {/* Modal for editing task details */}
-        <EditTaskModal editTaskFormContainer={editTaskFormContainer} />
+        <UpdateTaskModal updateTaskFormContainer={updateTaskFormContainer} />
       </>
     );
   },

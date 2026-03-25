@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { EditTaskCategoryModal } from "./EditTaskCategoryModal";
+import { UpdateTaskCategoryModal } from "./UpdateTaskCategoryModal";
 import { useUpdateTaskCategory } from "../UpdateTaskCategoryContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateTaskCategoryProvider } from "../UpdateTaskCategoryContext/__stories__";
 
 const meta = {
-  title: "components/task-categories/EditTaskCategoryModal",
-  component: EditTaskCategoryModal,
+  title: "components/task-categories/UpdateTaskCategoryModal",
+  component: UpdateTaskCategoryModal,
   decorators: [
     (Story) => {
       const { onModalOpenChange } = useUpdateTaskCategory();
@@ -28,7 +28,7 @@ const meta = {
     withUpdateTaskCategoryProvider,
     withThemedBackground,
   ],
-} satisfies Meta<typeof EditTaskCategoryModal>;
+} satisfies Meta<typeof UpdateTaskCategoryModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

@@ -12,7 +12,7 @@ import { useParams, usePathname } from "next/navigation";
 import { mockedProjectSummaries } from "@/mocks/projects";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { SearchList } from "@/components/search/SearchList";
-import { EditTaskForm } from "@/components/tasks/EditTaskForm";
+import { UpdateTaskForm } from "@/components/tasks/UpdateTaskForm";
 import { CommentList } from "@/components/comments/CommentList";
 import { SubtaskList } from "@/components/subtasks/SubtaskList";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
@@ -79,8 +79,8 @@ export const Default = {
         categoryName={mockedTaskDetail.category?.name}
       />
     ),
-    editTaskFormContainer: (
-      <EditTaskForm
+    updateTaskFormContainer: (
+      <UpdateTaskForm
         {...mockedTaskDetail}
         taskId={mockedTaskDetail.id}
         taskCategorySelectItems={mockedTaskCategorySummaries}

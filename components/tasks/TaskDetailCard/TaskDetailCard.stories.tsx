@@ -3,8 +3,8 @@ import {
   TaskDetailActionsSkeleton,
 } from "../TaskDetailActions";
 
-import { EditTaskForm } from "../EditTaskForm";
-import { EditTaskModal } from "../EditTaskModal";
+import { UpdateTaskForm } from "../UpdateTaskForm";
+import { UpdateTaskModal } from "../UpdateTaskModal";
 import { mockedTaskDetail } from "@/mocks/tasks";
 import { TaskDetailCard } from "./TaskDetailCard";
 import { mockedUserSummaries } from "@/mocks/users";
@@ -33,9 +33,9 @@ const meta = {
     (Story) => (
       <>
         <Story />
-        <EditTaskModal
-          editTaskFormContainer={
-            <EditTaskForm
+        <UpdateTaskModal
+          updateTaskFormContainer={
+            <UpdateTaskForm
               {...mockedTaskDetail}
               taskId={mockedTaskDetail.id}
               taskCategorySelectItems={mockedTaskCategorySummaries}

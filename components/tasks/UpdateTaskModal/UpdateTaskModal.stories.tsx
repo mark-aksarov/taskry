@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { EditTaskForm } from "../EditTaskForm";
-import { EditTaskModal } from "./EditTaskModal";
+import { UpdateTaskForm } from "../UpdateTaskForm";
+import { UpdateTaskModal } from "./UpdateTaskModal";
 import { Button } from "@/components/ui/Button";
 import { mockedUserSummaries } from "@/mocks/users";
 import { useUpdateTask } from "../UpdateTaskContext";
@@ -13,8 +13,8 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateTaskProvider } from "../UpdateTaskContext/__stories__";
 
 const meta = {
-  title: "components/tasks/EditTaskModal",
-  component: EditTaskModal,
+  title: "components/tasks/UpdateTaskModal",
+  component: UpdateTaskModal,
   decorators: [
     (Story) => {
       const { onModalOpenChange } = useUpdateTask();
@@ -31,15 +31,15 @@ const meta = {
     withUpdateTaskProvider,
     withThemedBackground,
   ],
-} satisfies Meta<typeof EditTaskModal>;
+} satisfies Meta<typeof UpdateTaskModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    editTaskFormContainer: (
-      <EditTaskForm
+    updateTaskFormContainer: (
+      <UpdateTaskForm
         {...mockedTask}
         taskId={mockedTask.id}
         taskCategorySelectItems={mockedTaskCategorySummaries}
@@ -52,6 +52,6 @@ export const Default = {
 
 export const WithSkeleton = {
   args: {
-    editTaskFormContainer: <TaskFormSkeleton />,
+    updateTaskFormContainer: <TaskFormSkeleton />,
   },
 } satisfies Story;

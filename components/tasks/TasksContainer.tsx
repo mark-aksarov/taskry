@@ -9,7 +9,7 @@ import { TaskGridLarge, TaskGridMobile } from "./TaskGrid";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
 import { TaskDetailContainer } from "./TaskDetailContainer";
 import { sendComment } from "@/lib/actions/comment/sendComment";
-import { EditTaskFormContainer } from "./EditTaskFormContainer";
+import { UpdateTaskFormContainer } from "./UpdateTaskFormContainer";
 import { TaskCommentsContainer } from "./TaskCommentsContainer";
 import { updateComment } from "@/lib/actions/comment/updateComment";
 import { updateTaskStatus } from "@/lib/actions/task/updateTaskStatus";
@@ -41,7 +41,7 @@ export async function TasksContainer({
     commentsCount: task.commentsCount,
 
     taskCommentsContainer: <TaskCommentsContainer taskId={task.id} />,
-    editTaskFormContainer: <EditTaskFormContainer taskId={task.id} />,
+    updateTaskFormContainer: <UpdateTaskFormContainer taskId={task.id} />,
 
     sendComment,
     updateComment,

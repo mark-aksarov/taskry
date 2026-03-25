@@ -14,7 +14,7 @@ import {
 
 import { memo } from "react";
 import { Link } from "@/components/ui/Link";
-import { EditTaskModal } from "../EditTaskModal";
+import { UpdateTaskModal } from "../UpdateTaskModal";
 import { TaskItemActionMenuTrigger } from "../TaskItem";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { TaskItemBaseBadge } from "../TaskItemBaseBadge";
@@ -61,7 +61,7 @@ export const TaskGridItemMobileInner = memo(
     subtasksTotal,
     subtasksDone,
     taskCommentsContainer,
-    editTaskFormContainer,
+    updateTaskFormContainer,
     sendComment,
     updateComment,
   }: InnerProps) => {
@@ -131,7 +131,7 @@ export const TaskGridItemMobileInner = memo(
         />
 
         {/* Modal for editing task details */}
-        <EditTaskModal editTaskFormContainer={editTaskFormContainer} />
+        <UpdateTaskModal updateTaskFormContainer={updateTaskFormContainer} />
       </>
     );
   },

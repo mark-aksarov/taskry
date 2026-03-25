@@ -37,11 +37,11 @@
     "edit": "Edit",
     "delete": "Delete"
   },
-  "EditTaskCategoryForm": {
+  "UpdateTaskCategoryForm": {
     "submitButtonLabel": "Update task category",
     "successMessage": "Task category updated successfully"
   },
-  "EditTaskCategoryModal": {
+  "UpdateTaskCategoryModal": {
     "title": "Edit task category"
   },
   "DeleteTaskCategoriesModal": {

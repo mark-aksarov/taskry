@@ -23,7 +23,7 @@ import { TaskDetailContainer } from "../TaskDetailContainer";
 import { CreateTaskFormContainer } from "../CreateTaskFormContainer";
 import { AssignedTaskListItem } from "../AssignedTaskListItem";
 import { sendComment } from "@/lib/actions/comment/sendComment";
-import { EditTaskFormContainer } from "../EditTaskFormContainer";
+import { UpdateTaskFormContainer } from "../UpdateTaskFormContainer";
 import { TaskCommentsContainer } from "../TaskCommentsContainer";
 import { updateComment } from "@/lib/actions/comment/updateComment";
 import { updateTaskStatus } from "@/lib/actions/task/updateTaskStatus";
@@ -83,7 +83,7 @@ async function AssignedTasksContainerInner({
     userDetailHeaderContainer: task.assignee && (
       <UserDetailHeaderContainer userId={task.assignee.id} />
     ),
-    editTaskFormContainer: <EditTaskFormContainer taskId={task.id} />,
+    updateTaskFormContainer: <UpdateTaskFormContainer taskId={task.id} />,
   });
 
   return (

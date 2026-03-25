@@ -16,7 +16,7 @@ import {
 } from "@/components/common/ItemBase";
 
 import { memo } from "react";
-import { EditTaskModal } from "@/components/tasks/EditTaskModal";
+import { UpdateTaskModal } from "@/components/tasks/UpdateTaskModal";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { TaskDetailModal } from "@/components/tasks/TaskDetailModal";
@@ -66,7 +66,7 @@ export const UserTaskListItemInner = memo(
     commentsCount,
     taskDetailContainer,
     taskCommentsContainer,
-    editTaskFormContainer,
+    updateTaskFormContainer,
     sendComment,
     updateComment,
   }: InnerProps) => {
@@ -121,7 +121,7 @@ export const UserTaskListItemInner = memo(
         />
 
         {/* Modal for editing task details */}
-        <EditTaskModal editTaskFormContainer={editTaskFormContainer} />
+        <UpdateTaskModal updateTaskFormContainer={updateTaskFormContainer} />
       </>
     );
   },

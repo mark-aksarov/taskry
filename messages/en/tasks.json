@@ -14,7 +14,7 @@
   "TaskContainer": {
     "notFound": "Task not found. It may have been deleted by another user."
   },
-  "EditTaskForm": {
+  "UpdateTaskForm": {
     "submitButtonLabel": "Update Task",
     "successMessage": "Task updated successfully."
   },
@@ -105,7 +105,7 @@
   "CreateTaskModal": {
     "title": "New Task"
   },
-  "EditTaskModal": {
+  "UpdateTaskModal": {
     "title": "Edit Task"
   },
   "TaskCommentsModal": {

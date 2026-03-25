@@ -1,6 +1,6 @@
 import { TaskDetail } from "../../TaskDetail";
 import { TaskListItem } from "../TaskListItem";
-import { EditTaskForm } from "../../EditTaskForm";
+import { UpdateTaskForm } from "../../UpdateTaskForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserDetail } from "@/components/users/UserDetail";
 import { SubtaskList } from "@/components/subtasks/SubtaskList";
@@ -44,8 +44,8 @@ export const Default = {
   args: {
     ...task,
     taskCommentsContainer: <CommentList {...CommentListStory.args} />,
-    editTaskFormContainer: (
-      <EditTaskForm
+    updateTaskFormContainer: (
+      <UpdateTaskForm
         {...mockedTaskDetail}
         taskId={mockedTaskDetail.id}
         taskCategorySelectItems={mockedTaskCategorySummaries}

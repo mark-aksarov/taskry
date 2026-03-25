@@ -14,7 +14,7 @@ import { updateComment } from "@/lib/actions/comment/updateComment";
 import { updateTaskStatus } from "@/lib/actions/task/updateTaskStatus";
 import { TaskDetailContainer } from "@/components/tasks/TaskDetailContainer";
 import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
-import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
+import { UpdateTaskFormContainer } from "@/components/tasks/UpdateTaskFormContainer";
 
 interface UserTasksContainerProps {
   tasks: TaskListItemDTO[];
@@ -38,7 +38,7 @@ export async function UserTasksContainer({
     commentsCount: task.commentsCount,
 
     taskCommentsContainer: <TaskCommentsContainer taskId={task.id} />,
-    editTaskFormContainer: <EditTaskFormContainer taskId={task.id} />,
+    updateTaskFormContainer: <UpdateTaskFormContainer taskId={task.id} />,
 
     sendComment,
     updateComment,

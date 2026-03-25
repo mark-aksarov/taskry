@@ -10,7 +10,7 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { EditTaskCategoryModal } from "../EditTaskCategoryModal";
+import { UpdateTaskCategoryModal } from "../UpdateTaskCategoryModal";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { DeleteTaskCategoryModal } from "../DeleteTaskCategoryModal";
 import { useUpdateTaskCategory } from "../UpdateTaskCategoryContext";
@@ -79,7 +79,7 @@ export function TaskCategoryListItemActionMenuTrigger({
       </ItemBaseActionMenuTrigger>
 
       {/* Modals for editing, deleting, and guest mode */}
-      <EditTaskCategoryModal
+      <UpdateTaskCategoryModal
         taskCategoryId={taskCategoryId}
         taskCategoryName={taskCategoryName}
       />

@@ -3,7 +3,7 @@ import { UserTaskListItem } from "../UserTaskListItem";
 import type { Meta, StoryObj } from "@storybook/react";
 import { mockedProjectSummaries } from "@/mocks/projects";
 import { TaskDetail } from "@/components/tasks/TaskDetail";
-import { EditTaskForm } from "@/components/tasks/EditTaskForm";
+import { UpdateTaskForm } from "@/components/tasks/UpdateTaskForm";
 import { CommentList } from "@/components/comments/CommentList";
 import { SubtaskList } from "@/components/subtasks/SubtaskList";
 import { mockedTaskDetail, mockedTaskList } from "@/mocks/tasks";
@@ -50,8 +50,8 @@ export const Default = {
       />
     ),
     taskCommentsContainer: <CommentList {...CommentListStory.args} />,
-    editTaskFormContainer: (
-      <EditTaskForm
+    updateTaskFormContainer: (
+      <UpdateTaskForm
         {...mockedTaskDetail}
         taskId={mockedTaskDetail.id}
         taskCategorySelectItems={mockedTaskCategorySummaries}

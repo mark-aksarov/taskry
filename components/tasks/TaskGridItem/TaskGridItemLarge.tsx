@@ -13,7 +13,7 @@ import {
 } from "@/components/common/ItemBase";
 
 import { memo } from "react";
-import { EditTaskModal } from "../EditTaskModal";
+import { UpdateTaskModal } from "../UpdateTaskModal";
 import { TaskDetailModal } from "../TaskDetailModal";
 import { TaskItemActionMenuTrigger } from "../TaskItem";
 import { TaskCommentsModal } from "../TaskCommentsModal";
@@ -73,7 +73,7 @@ export const TaskGridItemLargeInner = memo(
     subtasksTotal,
     subtasksDone,
     taskCommentsContainer,
-    editTaskFormContainer,
+    updateTaskFormContainer,
     taskDetailContainer,
     userDetailContainer,
     userDetailHeaderContainer,
@@ -168,7 +168,7 @@ export const TaskGridItemLargeInner = memo(
         />
 
         {/* Modal for editing task details */}
-        <EditTaskModal editTaskFormContainer={editTaskFormContainer} />
+        <UpdateTaskModal updateTaskFormContainer={updateTaskFormContainer} />
       </>
     );
   },

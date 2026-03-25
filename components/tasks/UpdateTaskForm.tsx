@@ -21,7 +21,7 @@ import { TaskDeadlineDatePicker } from "./TaskDeadlineDatePicker";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { TaskDescriptionTextField } from "./TaskDescriptionTextField";
 
-interface EditTaskFormProps {
+interface UpdateTaskFormProps {
   taskId: number;
   title: string;
   description?: string;
@@ -35,7 +35,7 @@ interface EditTaskFormProps {
   assigneeSelectItems: { id: string; fullName: string }[];
 }
 
-export function EditTaskForm({
+export function UpdateTaskForm({
   taskId,
   title,
   description,
@@ -47,8 +47,8 @@ export function EditTaskForm({
   taskCategorySelectItems,
   projectSelectItems,
   assigneeSelectItems,
-}: EditTaskFormProps) {
-  const t = useTranslations("tasks.EditTaskForm");
+}: UpdateTaskFormProps) {
+  const t = useTranslations("tasks.UpdateTaskForm");
 
   const { state, isPending, action } = useUpdateTask();
 

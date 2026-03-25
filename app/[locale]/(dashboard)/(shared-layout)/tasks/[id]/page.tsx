@@ -11,7 +11,7 @@ import { UpdateTaskProvider } from "@/components/tasks/UpdateTaskContext";
 import { DeleteTaskProvider } from "@/components/tasks/DeleteTaskContext";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { TaskCommentsContainer } from "@/components/tasks/TaskCommentsContainer";
-import { EditTaskFormContainer } from "@/components/tasks/EditTaskFormContainer";
+import { UpdateTaskFormContainer } from "@/components/tasks/UpdateTaskFormContainer";
 import { TaskDetailAltContainer } from "@/components/tasks/TaskDetailAltContainer";
 import { TaskDetailHeaderContainer } from "@/components/tasks/TaskDetailHeaderContainer";
 
@@ -49,7 +49,7 @@ export default async function AppTaskDetailPage({
           searchContainer={<LinkSearchContainer pathname="/tasks" />}
           taskDetailContainer={<TaskDetailAltContainer taskId={id} />}
           taskHeaderContainer={<TaskDetailHeaderContainer taskId={id} />}
-          editTaskFormContainer={<EditTaskFormContainer taskId={id} />}
+          updateTaskFormContainer={<UpdateTaskFormContainer taskId={id} />}
           taskCommentsContainer={<TaskCommentsContainer taskId={id} />}
         />
       </DeleteTaskProvider>

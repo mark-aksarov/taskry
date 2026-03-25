@@ -4,7 +4,7 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { ToolbarMobile } from "@/components/common/Toolbar";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { BackButton } from "@/components/common/BackButton";
-import { EditTaskModal } from "@/components/tasks/EditTaskModal";
+import { UpdateTaskModal } from "@/components/tasks/UpdateTaskModal";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskDetailCard } from "@/components/tasks/TaskDetailCard";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
@@ -17,7 +17,7 @@ interface TaskDetailPageProps {
   searchContainer: React.ReactNode;
   taskDetailContainer: React.ReactNode;
   taskHeaderContainer: React.ReactNode;
-  editTaskFormContainer: React.ReactNode;
+  updateTaskFormContainer: React.ReactNode;
   taskCommentsContainer: React.ReactNode;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
@@ -29,7 +29,7 @@ export function TaskDetailPage({
   searchContainer,
   taskDetailContainer,
   taskHeaderContainer,
-  editTaskFormContainer,
+  updateTaskFormContainer,
   taskCommentsContainer,
   sendComment,
   updateComment,
@@ -72,7 +72,7 @@ export function TaskDetailPage({
       </PageContainer>
 
       <TaskSearchModal searchContainer={searchContainer} />
-      <EditTaskModal editTaskFormContainer={editTaskFormContainer} />
+      <UpdateTaskModal updateTaskFormContainer={updateTaskFormContainer} />
     </>
   );
 }

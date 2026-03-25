@@ -18,7 +18,7 @@ export interface BaseTaskItemProps {
   commentsCount: number;
   status: TaskStatus;
   taskCommentsContainer: React.ReactNode;
-  editTaskFormContainer: React.ReactNode;
+  updateTaskFormContainer: React.ReactNode;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
   updateTask: ActionFn<ActionState, FormData>;

@@ -14,7 +14,7 @@
   "TaskContainer": {
     "notFound": "Задача не найдена. Возможно, она была удалена другим пользователем."
   },
-  "EditTaskForm": {
+  "UpdateTaskForm": {
     "submitButtonLabel": "Обновить задачу",
     "successMessage": "Задача успешно обновлена"
   },
@@ -105,7 +105,7 @@
   "CreateTaskModal": {
     "title": "Новая задача"
   },
-  "EditTaskModal": {
+  "UpdateTaskModal": {
     "title": "Редактировать задачу"
   },
   "TaskCommentsModal": {

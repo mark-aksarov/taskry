@@ -13,16 +13,16 @@ import { useUpdateTaskCategory } from "./UpdateTaskCategoryContext";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { TaskCategoryNameTextField } from "./TaskCategoryNameTextField";
 
-interface EditTaskCategoryFormProps {
+interface UpdateTaskCategoryFormProps {
   taskCategoryId: number;
   nameDefaultValue: string;
 }
 
-export function EditTaskCategoryForm({
+export function UpdateTaskCategoryForm({
   taskCategoryId,
   nameDefaultValue,
-}: EditTaskCategoryFormProps) {
-  const t = useTranslations("taskCategories.EditTaskCategoryForm");
+}: UpdateTaskCategoryFormProps) {
+  const t = useTranslations("taskCategories.UpdateTaskCategoryForm");
 
   const { state, isPending, action } = useUpdateTaskCategory();
 

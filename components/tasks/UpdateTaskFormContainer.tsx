@@ -1,7 +1,7 @@
 "use client";
 
 import useSWR from "swr";
-import { EditTaskForm } from "./EditTaskForm";
+import { UpdateTaskForm } from "./UpdateTaskForm";
 import { usePathname } from "@/i18n/navigation";
 import { TaskFormSkeleton } from "./TaskFormSkeleton";
 import { notFound, useParams } from "next/navigation";
@@ -10,11 +10,13 @@ import { TaskFormDataDTO } from "@/lib/data/task/task.dto";
 import { ProjectSummaryDTO } from "@/lib/data/project/project.dto";
 import { TaskCategorySummaryDTO } from "@/lib/data/taskCategory/taskCategory.dto";
 
-interface EditTaskFormContainerProps {
+interface UpdateTaskFormContainerProps {
   taskId: number;
 }
 
-export function EditTaskFormContainer({ taskId }: EditTaskFormContainerProps) {
+export function UpdateTaskFormContainer({
+  taskId,
+}: UpdateTaskFormContainerProps) {
   const pathname = usePathname();
   const params = useParams();
 
@@ -62,7 +64,7 @@ export function EditTaskFormContainer({ taskId }: EditTaskFormContainerProps) {
   }
 
   return (
-    <EditTaskForm
+    <UpdateTaskForm
       taskId={taskId}
       title={task.title}
       description={task.description}

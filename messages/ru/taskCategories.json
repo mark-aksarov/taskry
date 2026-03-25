@@ -37,11 +37,11 @@
     "edit": "Редактировать",
     "delete": "Удалить"
   },
-  "EditTaskCategoryForm": {
+  "UpdateTaskCategoryForm": {
     "submitButtonLabel": "Обновить категорию задачи",
     "successMessage": "Категория задач успешно обновлена"
   },
-  "EditTaskCategoryModal": {
+  "UpdateTaskCategoryModal": {
     "title": "Изменить категорию задачи"
   },
   "DeleteTaskCategoriesModal": {

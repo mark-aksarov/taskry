@@ -5,20 +5,20 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { EditTaskCategoryForm } from "../EditTaskCategoryForm";
+import { UpdateTaskCategoryForm } from "../UpdateTaskCategoryForm";
 import { useUpdateTaskCategory } from "../UpdateTaskCategoryContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
-interface EditTaskCategoryModalProps {
+interface UpdateTaskCategoryModalProps {
   taskCategoryId: number;
   taskCategoryName: string;
 }
 
-export function EditTaskCategoryModal({
+export function UpdateTaskCategoryModal({
   taskCategoryId,
   taskCategoryName,
-}: EditTaskCategoryModalProps) {
-  const t = useTranslations("taskCategories.EditTaskCategoryModal");
+}: UpdateTaskCategoryModalProps) {
+  const t = useTranslations("taskCategories.UpdateTaskCategoryModal");
 
   const { isModalOpen, onModalOpenChange } = useUpdateTaskCategory();
 
@@ -31,7 +31,7 @@ export function EditTaskCategoryModal({
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
-          <EditTaskCategoryForm
+          <UpdateTaskCategoryForm
             taskCategoryId={taskCategoryId}
             nameDefaultValue={taskCategoryName}
           />

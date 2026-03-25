@@ -1,6 +1,6 @@
 import { mockedTaskList } from "@/mocks/tasks";
 import { mockedTaskDetail } from "@/mocks/tasks";
-import { EditTaskForm } from "../../EditTaskForm";
+import { UpdateTaskForm } from "../../UpdateTaskForm";
 import { mockedUserSummaries } from "@/mocks/users";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
@@ -45,8 +45,8 @@ export const Default = {
     subtasksTotal: mockedTask.subtasks.total,
     subtasksDone: mockedTask.subtasks.done,
     taskCommentsContainer: <CommentList {...CommentListStory.args} />,
-    editTaskFormContainer: (
-      <EditTaskForm
+    updateTaskFormContainer: (
+      <UpdateTaskForm
         {...mockedTaskDetail}
         taskId={mockedTaskDetail.id}
         taskCategorySelectItems={mockedTaskCategorySummaries}
