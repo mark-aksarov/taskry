@@ -1,8 +1,6 @@
 import { CompanyList } from "./CompanyList";
 import { CompanyListItem } from "./CompanyListItem";
-import { UpdateCompanyProvider } from "./UpdateCompanyProvider";
-import { DeleteCompanyProvider } from "./DeleteCompanyProvider";
-import { UpdateCompanyModalProvider } from "./UpdateCompanyModal";
+import { CompanyProviders } from "./CompanyProviders";
 import { getCompanySummaries } from "@/lib/data/company/company.dal";
 
 export async function CompaniesContainer() {
@@ -11,13 +9,9 @@ export async function CompaniesContainer() {
   return (
     <CompanyList>
       {companies.map((company) => (
-        <UpdateCompanyModalProvider key={company.id}>
-          <UpdateCompanyProvider>
-            <DeleteCompanyProvider>
-              <CompanyListItem id={company.id} name={company.name} />
-            </DeleteCompanyProvider>
-          </UpdateCompanyProvider>
-        </UpdateCompanyModalProvider>
+        <CompanyProviders key={company.id}>
+          <CompanyListItem id={company.id} name={company.name} />
+        </CompanyProviders>
       ))}
     </CompanyList>
   );

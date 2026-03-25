@@ -2,11 +2,9 @@ import { CompanyList } from "../CompanyList";
 import { Meta, StoryObj } from "@storybook/react";
 import { CompanyListItem } from "../../CompanyListItem";
 import { mockedCompanySummaries } from "@/mocks/companies";
-import { UpdateCompanyModalProvider } from "../../UpdateCompanyModal";
 import { CompanyListItemStory } from "../../CompanyListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { MockedDeleteCompanyProvider } from "../../DeleteCompanyProvider/__stories__";
-import { MockedUpdateCompanyProvider } from "../../UpdateCompanyProvider/__stories__";
+import { MockedCompanyProviders } from "../../CompanyProviders/__stories__";
 import { withDeleteCompaniesProvider } from "../../DeleteCompaniesProvider/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
@@ -32,17 +30,13 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedCompanySummaries.map((company) => (
-      <UpdateCompanyModalProvider>
-        <MockedUpdateCompanyProvider key={company.id}>
-          <MockedDeleteCompanyProvider>
-            <CompanyListItem
-              key={company.id}
-              {...CompanyListItemStory.args}
-              {...company}
-            />
-          </MockedDeleteCompanyProvider>
-        </MockedUpdateCompanyProvider>
-      </UpdateCompanyModalProvider>
+      <MockedCompanyProviders key={company.id}>
+        <CompanyListItem
+          key={company.id}
+          {...CompanyListItemStory.args}
+          {...company}
+        />
+      </MockedCompanyProviders>
     )),
   },
 } satisfies Story;
