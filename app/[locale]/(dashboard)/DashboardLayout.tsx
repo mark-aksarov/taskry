@@ -20,7 +20,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <GuestModeModalProvider>
       <div className="flex">
-        <AppSidebar className="sticky top-0 z-3 h-dvh flex-none shadow-lg max-xl:hidden">
+        <AppSidebar className="sticky top-0 z-3 h-dvh flex-none shadow-sm max-xl:hidden">
           <AppSidebarHeader>
             <AppSidebarHeading />
           </AppSidebarHeader>
