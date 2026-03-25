@@ -12,7 +12,7 @@ import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { PageEmptySection } from "@/components/common/PageEmptySection";
 import { ToolbarLarge, ToolbarMobile } from "@/components/common/Toolbar";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { NewProjectCategoryModal } from "@/components/projectCategory/NewProjectCategoryModal";
+import { CreateProjectCategoryModal } from "@/components/projectCategory/CreateProjectCategoryModal";
 import { ProjectCategoryActionsMenuTrigger } from "@/components/projectCategory/ProjectCategoryActionsMenuTrigger";
 import { ProjectCategoriesEmptySectionCreateButton } from "@/components/projectCategory/ProjectCategoriesEmptySectionCreateButton";
 
@@ -51,7 +51,7 @@ export function ProjectCategoriesPage({
           </PageGrid>
         </PageContainer>
 
-        <NewProjectCategoryModal />
+        <CreateProjectCategoryModal />
       </>
     );
   }
@@ -82,7 +82,7 @@ export function ProjectCategoriesPage({
       </PageContainer>
 
       <TaskSearchModal searchContainer={searchContainer} />
-      <NewProjectCategoryModal />
+      <CreateProjectCategoryModal />
     </>
   );
 }

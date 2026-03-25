@@ -9,11 +9,11 @@
   "ProjectCategoriesEmptySectionCreateButton": {
     "label": "Новая категория проекта"
   },
-  "NewProjectCategoryForm": {
+  "CreateProjectCategoryForm": {
     "submitButtonLabel": "Создать категорию",
     "successMessage": "Категория проекта успешно создана"
   },
-  "NewProjectCategoryModal": {
+  "CreateProjectCategoryModal": {
     "title": "Новая категория проекта"
   },
   "ProjectCategoryNameTextField": {

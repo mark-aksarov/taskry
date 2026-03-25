@@ -18,7 +18,7 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedCustomerSummaries } from "@/mocks/customers";
 import { SearchList } from "@/components/search/SearchList";
 import { ProjectList } from "@/components/projects/ProjectList";
-import { NewProjectForm } from "@/components/projects/NewProjectForm";
+import { CreateProjectForm } from "@/components/projects/CreateProjectForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
@@ -70,8 +70,8 @@ export const Default = {
     selectedSortField: "createdAt",
 
     searchContainer: <SearchList {...SearchListStory.args} />,
-    newProjectFormContainer: (
-      <NewProjectForm
+    createProjectFormContainer: (
+      <CreateProjectForm
         projectCategorySelectItems={mockedProjectCategorySummaries}
         customerSelectItems={mockedCustomerSummaries}
       />

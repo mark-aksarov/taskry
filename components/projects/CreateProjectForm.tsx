@@ -18,16 +18,16 @@ import { ProjectDeadlineDatePicker } from "./ProjectDeadlineDatePicker";
 import { ProjectDescriptionTextField } from "./ProjectDescriptionTextField";
 import { ProjectCategorySelect } from "../projectCategory/ProjectCategorySelect";
 
-interface NewProjectFormProps {
+interface CreateProjectFormProps {
   projectCategorySelectItems: { id: number; name: string }[];
   customerSelectItems: { id: number; fullName: string }[];
 }
 
-export function NewProjectForm({
+export function CreateProjectForm({
   projectCategorySelectItems,
   customerSelectItems,
-}: NewProjectFormProps) {
-  const t = useTranslations("projects.NewProjectForm");
+}: CreateProjectFormProps) {
+  const t = useTranslations("projects.CreateProjectForm");
 
   const { state, action, isPending } = useCreateProject();
 

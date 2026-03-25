@@ -13,8 +13,8 @@ import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { useCreateProjectCategory } from "./CreateProjectCategoryContext";
 import { ProjectCategoryNameTextField } from "./ProjectCategoryNameTextField";
 
-export function NewProjectCategoryForm() {
-  const t = useTranslations("projectCategories.NewProjectCategoryForm");
+export function CreateProjectCategoryForm() {
+  const t = useTranslations("projectCategories.CreateProjectCategoryForm");
 
   const { state, action, isPending } = useCreateProjectCategory();
 

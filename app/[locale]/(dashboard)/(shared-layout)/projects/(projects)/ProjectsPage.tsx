@@ -31,14 +31,14 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { PageEmptySection } from "@/components/common/PageEmptySection";
-import { NewProjectModal } from "@/components/projects/NewProjectModal";
+import { CreateProjectModal } from "@/components/projects/CreateProjectModal";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { SearchModalTrigger } from "@/components/search/SearchModalTrigger";
 import { ProjectSearchModal } from "@/components/projects/ProjectSearchModal";
 import { ProjectResultsCount } from "@/components/projects/ProjectResultsCount";
 import { ProjectActionsMenuTrigger } from "@/components/projects/ProjectActionsMenuTrigger";
-import { NewProjectCategoryModal } from "@/components/projectCategory/NewProjectCategoryModal";
+import { CreateProjectCategoryModal } from "@/components/projectCategory/CreateProjectCategoryModal";
 import { ProjectsFilteredEmptySection } from "@/components/projects/ProjectsFilteredEmptySection";
 import { ProjectStatusFiltersModalTrigger } from "@/components/projects/ProjectStatusFiltersModal";
 import { ProjectCreatorFiltersModalTrigger } from "@/components/projects/ProjectCreatorFiltersModal";
@@ -52,7 +52,7 @@ interface ProjectsPageProps {
   selectedSortField: ProjectSortField;
   searchContainer: React.ReactNode;
   projectsContainer: React.ReactNode;
-  newProjectFormContainer: React.ReactNode;
+  createProjectFormContainer: React.ReactNode;
   projectFiltersFormContainer: React.ReactNode;
   projectCategoryFiltersFormContainer: React.ReactNode;
   creatorFiltersFormContainer: React.ReactNode;
@@ -65,7 +65,7 @@ export function ProjectsPage({
   selectedSortField,
   searchContainer,
   projectsContainer,
-  newProjectFormContainer,
+  createProjectFormContainer,
   projectFiltersFormContainer,
   projectCategoryFiltersFormContainer,
   creatorFiltersFormContainer,
@@ -93,7 +93,9 @@ export function ProjectsPage({
           </PageGrid>
         </PageContainer>
 
-        <NewProjectModal newProjectFormContainer={newProjectFormContainer} />
+        <CreateProjectModal
+          createProjectFormContainer={createProjectFormContainer}
+        />
       </>
     );
   }
@@ -180,8 +182,10 @@ export function ProjectsPage({
       </PageContainer>
 
       <ProjectSearchModal searchContainer={searchContainer} />
-      <NewProjectModal newProjectFormContainer={newProjectFormContainer} />
-      <NewProjectCategoryModal />
+      <CreateProjectModal
+        createProjectFormContainer={createProjectFormContainer}
+      />
+      <CreateProjectCategoryModal />
     </>
   );
 }

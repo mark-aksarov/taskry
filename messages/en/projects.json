@@ -32,7 +32,7 @@
     "submitButtonLabel": "Update Project",
     "successMessage": "Project updated successfully."
   },
-  "NewProjectForm": {
+  "CreateProjectForm": {
     "submitButtonLabel": "Create Project",
     "successMessage": "Project created successfully."
   },
@@ -54,7 +54,7 @@
     "byCategory": "By Category",
     "byCreatedAt": "By creation date"
   },
-  "NewProjectModal": {
+  "CreateProjectModal": {
     "title": "New Project"
   },
   "EditProjectModal": {

@@ -27,7 +27,7 @@ import { CreateProjectProvider } from "@/components/projects/CreateProjectContex
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
 import { DeleteProjectsProvider } from "@/components/projects/DeleteProjectsContext";
 import { ProjectFiltersProvider } from "@/components/projects/ProjectFiltersContext";
-import { NewProjectFormContainer } from "@/components/projects/NewProjectFormContainer";
+import { CreateProjectFormContainer } from "@/components/projects/CreateProjectFormContainer";
 import { SelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext";
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
 import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersFormContainer";
@@ -105,7 +105,7 @@ export default async function AppProjectsPage({
                 <ProjectsPage
                   totalCount={totalCount}
                   searchContainer={<ProjectRouterSearchContainer />}
-                  newProjectFormContainer={<NewProjectFormContainer />}
+                  createProjectFormContainer={<CreateProjectFormContainer />}
                   totalFilteredProjects={totalFilteredProjects}
                   selectedSortField={sort}
                   projectsContainer={

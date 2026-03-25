@@ -7,25 +7,30 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { NewProjectCategoryForm } from "../NewProjectCategoryForm";
-import { useCreateProjectCategory } from "../CreateProjectCategoryContext";
+import { useCreateProject } from "../CreateProjectContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
-export function NewProjectCategoryModal() {
-  const t = useTranslations("projectCategories.NewProjectCategoryModal");
+interface CreateProjectModalProps {
+  createProjectFormContainer: React.ReactNode;
+}
 
-  const { isModalOpen, onModalOpenChange } = useCreateProjectCategory();
+export function CreateProjectModal({
+  createProjectFormContainer,
+}: CreateProjectModalProps) {
+  const t = useTranslations("projects.CreateProjectModal");
+
+  const { isModalOpen, onModalOpenChange } = useCreateProject();
 
   return (
     <FormBaseModal
-      className="md:w-[350px]"
+      data-test="new-project-modal"
       isOpen={isModalOpen}
       onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
-          <NewProjectCategoryForm />
+          {createProjectFormContainer}
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

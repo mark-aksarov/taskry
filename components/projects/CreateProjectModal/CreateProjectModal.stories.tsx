@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
-import { NewProjectForm } from "../NewProjectForm";
-import { NewProjectModal } from "./NewProjectModal";
+import { CreateProjectForm } from "../CreateProjectForm";
+import { CreateProjectModal } from "./CreateProjectModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useCreateProject } from "../CreateProjectContext";
 import { mockedCustomerSummaries } from "@/mocks/customers";
@@ -11,8 +11,8 @@ import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
 import { withCreateProjectProvider } from "../CreateProjectContext/__stories__";
 
 const meta = {
-  title: "components/projects/NewProjectModal",
-  component: NewProjectModal,
+  title: "components/projects/CreateProjectModal",
+  component: CreateProjectModal,
   decorators: [
     (Story) => {
       const { onModalOpenChange } = useCreateProject();
@@ -29,15 +29,15 @@ const meta = {
     withCreateProjectProvider,
     withThemedBackground,
   ],
-} satisfies Meta<typeof NewProjectModal>;
+} satisfies Meta<typeof CreateProjectModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    newProjectFormContainer: (
-      <NewProjectForm
+    createProjectFormContainer: (
+      <CreateProjectForm
         projectCategorySelectItems={mockedProjectCategorySummaries}
         customerSelectItems={mockedCustomerSummaries}
       />
@@ -47,6 +47,6 @@ export const Default = {
 
 export const Skeleton = {
   args: {
-    newProjectFormContainer: <ProjectFormSkeleton />,
+    createProjectFormContainer: <ProjectFormSkeleton />,
   },
 } satisfies Story;
