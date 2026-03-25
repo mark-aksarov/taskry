@@ -1,31 +1,33 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { CreateProjectCategoryModal } from "./CreateProjectCategoryModal";
+import { withCreateProjectCategoryModalProvider } from "./__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { useCreateProjectCategory } from "../CreateProjectCategoryContext";
-import { withCreateProjectCategoryProvider } from "../CreateProjectCategoryContext/__stories__";
+import { CreateProjectCategoryModal } from "./CreateProjectCategoryModal";
+import { useCreateProjectCategoryModal } from "./CreateProjectCategoryModalContext";
+import { withCreateProjectCategoryProvider } from "../CreateProjectCategoryProvider/__stories__";
 
 const meta = {
   title: "components/project-categories/CreateProjectCategoryModal",
   component: CreateProjectCategoryModal,
   decorators: [
     (Story) => {
-      const { onModalOpenChange } = useCreateProjectCategory();
+      const { onOpenChange } = useCreateProjectCategoryModal();
 
-      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
+      useEffect(() => onOpenChange(true), [onOpenChange]);
 
       return (
         <>
           <Button
             label="New project category"
-            onClick={() => onModalOpenChange(true)}
+            onClick={() => onOpenChange(true)}
           />
           <Story />
         </>
       );
     },
     withCreateProjectCategoryProvider,
+    withCreateProjectCategoryModalProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof CreateProjectCategoryModal>;

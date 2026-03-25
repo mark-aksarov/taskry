@@ -8,7 +8,7 @@ import { useCreateProjectModal } from "../CreateProjectModal";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { CreateNewMenuTrigger } from "@/components/common/CreateNewMenuTrigger";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
-import { useCreateProjectCategory } from "@/components/projectCategory/CreateProjectCategoryContext";
+import { useCreateProjectCategoryModal } from "@/components/projectCategory/CreateProjectCategoryModal";
 
 interface CreateProjectMenuTriggerProps {
   renderButton: () => React.ReactNode;
@@ -23,8 +23,8 @@ export function CreateProjectMenuTrigger({
   const guestGuard = useGuestModalGuard();
 
   // Create project category form modal state
-  const { onModalOpenChange: onCreateProjectCategoryModalOpenChange } =
-    useCreateProjectCategory();
+  const { onOpenChange: onCreateProjectCategoryModalOpenChange } =
+    useCreateProjectCategoryModal();
 
   // Create project form modal state
   const { onOpenChange: onCreateProjectModalOpenChange } =

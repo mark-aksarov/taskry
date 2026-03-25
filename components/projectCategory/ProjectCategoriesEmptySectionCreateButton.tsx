@@ -2,14 +2,14 @@
 
 import { useTranslations } from "next-intl";
 import { EmptySectionButton } from "@/components/common/EmptySection";
-import { useCreateProjectCategory } from "./CreateProjectCategoryContext";
+import { useCreateProjectCategoryModal } from "./CreateProjectCategoryModal";
 
 export function ProjectCategoriesEmptySectionCreateButton() {
   const t = useTranslations(
     "projectCategories.ProjectCategoriesEmptySectionCreateButton",
   );
 
-  const { onModalOpenChange } = useCreateProjectCategory();
+  const { onOpenChange: onModalOpenChange } = useCreateProjectCategoryModal();
 
   return (
     <EmptySectionButton onPress={() => onModalOpenChange(true)}>

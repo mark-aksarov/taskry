@@ -2,9 +2,9 @@ import { mocked } from "storybook/test";
 import ProjectsPageLoading from "./loading";
 import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { SearchList } from "@/components/search/SearchList";
 import { ProjectCategoriesPage } from "./ProjectCategoriesPage";
+import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { ProjectCategoryList } from "@/components/projectCategory/ProjectCategoryList";
@@ -13,8 +13,9 @@ import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { ProjectCategoryListStory } from "@/components/projectCategory/ProjectCategoryList/__stories__";
-import { withCreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryContext/__stories__";
+import { withCreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryProvider/__stories__";
 import { withDeleteProjectCategoriesProvider } from "@/components/projectCategory/DeleteProjectCategoriesContext/__stories__";
+import { withCreateProjectCategoryModalProvider } from "@/components/projectCategory/CreateProjectCategoryModal/__stories__";
 
 const meta = {
   title: "pages/ProjectCategoriesPage",
@@ -22,6 +23,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     withCreateProjectCategoryProvider,
+    withCreateProjectCategoryModalProvider,
     withDeleteProjectCategoriesProvider,
     withGuestModeModalProvider,
     withCurrentUserProvider,

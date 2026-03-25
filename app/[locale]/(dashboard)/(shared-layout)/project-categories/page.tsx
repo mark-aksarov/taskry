@@ -2,12 +2,12 @@ import { ProjectCategoriesPage } from "./ProjectCategoriesPage";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
-import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
 import { deleteProjectCategories } from "@/lib/actions/projectCategory/deleteProjectCategories";
 import { ProjectCategoriesContainer } from "@/components/projectCategory/ProjectCategoriesContainer";
-import { CreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryContext";
+import { CreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryProvider";
 import { DeleteProjectCategoriesProvider } from "@/components/projectCategory/DeleteProjectCategoriesContext";
+import { CreateProjectCategoryModalProvider } from "@/components/projectCategory/CreateProjectCategoryModal";
 
 export default async function AppProjectCategoriesPage() {
   // Authorization
@@ -22,15 +22,15 @@ export default async function AppProjectCategoriesPage() {
       <DeleteProjectCategoriesProvider
         deleteProjectCategories={deleteProjectCategories}
       >
-        <CreateProjectCategoryProvider
-          createProjectCategory={createProjectCategory}
-        >
-          <ProjectCategoriesPage
-            totalCount={projectCategories.length}
-            searchContainer={<LinkSearchContainer pathname="/tasks" />}
-            projectCategoriesContainer={<ProjectCategoriesContainer />}
-          />
-        </CreateProjectCategoryProvider>
+        <CreateProjectCategoryModalProvider>
+          <CreateProjectCategoryProvider>
+            <ProjectCategoriesPage
+              totalCount={projectCategories.length}
+              searchContainer={<LinkSearchContainer pathname="/tasks" />}
+              projectCategoriesContainer={<ProjectCategoriesContainer />}
+            />
+          </CreateProjectCategoryProvider>
+        </CreateProjectCategoryModalProvider>
       </DeleteProjectCategoriesProvider>
     </SelectedItemsProvider>
   );

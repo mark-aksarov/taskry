@@ -34,7 +34,8 @@ import { withDeleteProjectsProvider } from "@/components/projects/DeleteProjects
 import { withCreateProjectModalProvider } from "@/components/projects/CreateProjectModal/__stories__";
 import { withSelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext/__stories__";
 import { withUpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusesProvider/__stories__";
-import { withCreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryContext/__stories__";
+import { withCreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryProvider/__stories__";
+import { withCreateProjectCategoryModalProvider } from "@/components/projectCategory/CreateProjectCategoryModal/__stories__";
 
 const meta = {
   title: "pages/ProjectsPage",
@@ -44,6 +45,7 @@ const meta = {
     // preserve provider order as in page.tsx file
     withProjectFiltersProvider,
     withCreateProjectCategoryProvider,
+    withCreateProjectCategoryModalProvider,
     withCreateProjectProvider,
     withCreateProjectModalProvider,
     withDeleteProjectsProvider,
