@@ -11,7 +11,7 @@ import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { PositionListStory } from "@/components/position/PositionList/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withCreatePositionProvider } from "@/components/position/CreatePositionProvider/__stories__";
-import { withDeletePositionsProvider } from "@/components/position/DeletePositionsContext/__stories__";
+import { withDeletePositionsProvider } from "@/components/position/DeletePositionsProvider/__stories__";
 import { withCreatePositionModalProvider } from "@/components/position/CreatePositionModal/__stories__";
 
 const meta = {

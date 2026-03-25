@@ -1,13 +1,12 @@
 import { PositionsPage } from "./PositionsPage";
 import { getPositionSummaries } from "@/lib/data/position/position.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { deletePositions } from "@/lib/actions/position/deletePositions";
 import { PositionsContainer } from "@/components/position/PositionsContainer";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
-import { DeletePositionsProvider } from "@/components/position/DeletePositionsContext";
 import { CreatePositionProvider } from "@/components/position/CreatePositionProvider";
 import { CreatePositionModalProvider } from "@/components/position/CreatePositionModal";
+import { DeletePositionsProvider } from "@/components/position/DeletePositionsProvider";
 
 export default async function AppPositionsPage() {
   // Authorization
@@ -17,7 +16,7 @@ export default async function AppPositionsPage() {
 
   return (
     <SelectedItemsProvider pageItems={positions.map((p) => ({ id: p.id }))}>
-      <DeletePositionsProvider deletePositions={deletePositions}>
+      <DeletePositionsProvider>
         <CreatePositionModalProvider>
           <CreatePositionProvider>
             <PositionsPage

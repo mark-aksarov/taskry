@@ -3,7 +3,7 @@ import { PositionListItem } from "../PositionListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeletePositionProvider } from "../../DeletePositionProvider/__stories__";
 import { withUpdatePositionProvider } from "../../UpdatePositionProvider/__stories__";
-import { withDeletePositionsProvider } from "../../DeletePositionsContext/__stories__";
+import { withDeletePositionsProvider } from "../../DeletePositionsProvider/__stories__";
 import { withUpdatePositionModalProvider } from "../../UpdatePositionModal/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
