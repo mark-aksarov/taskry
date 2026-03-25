@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { NewTaskForm } from "../NewTaskForm";
-import { NewTaskModal } from "./NewTaskModal";
+import { CreateTaskForm } from "../CreateTaskForm";
+import { CreateTaskModal } from "./CreateTaskModal";
 import { Button } from "@/components/ui/Button";
 import { mockedUserSummaries } from "@/mocks/users";
 import { useCreateTask } from "../CreateTaskContext";
@@ -12,8 +12,8 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCreateTaskProvider } from "../CreateTaskContext/__stories__";
 
 const meta = {
-  title: "components/tasks/NewTaskModal",
-  component: NewTaskModal,
+  title: "components/tasks/CreateTaskModal",
+  component: CreateTaskModal,
   decorators: [
     (Story) => {
       const { onModalOpenChange } = useCreateTask();
@@ -30,15 +30,15 @@ const meta = {
     withCreateTaskProvider,
     withThemedBackground,
   ],
-} satisfies Meta<typeof NewTaskModal>;
+} satisfies Meta<typeof CreateTaskModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    newTaskFormContainer: (
-      <NewTaskForm
+    createTaskFormContainer: (
+      <CreateTaskForm
         categorySelectItems={mockedTaskCategorySummaries}
         projectSelectItems={mockedProjectSummaries}
         assigneeSelectItems={mockedUserSummaries}
@@ -49,6 +49,6 @@ export const Default = {
 
 export const Skeleton = {
   args: {
-    newTaskFormContainer: <TaskFormSkeleton />,
+    createTaskFormContainer: <TaskFormSkeleton />,
   },
 } satisfies Story;

@@ -19,20 +19,20 @@ import { TaskDeadlineDatePicker } from "./TaskDeadlineDatePicker";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { TaskDescriptionTextField } from "./TaskDescriptionTextField";
 
-interface NewTaskFormProps {
+interface CreateTaskFormProps {
   forcedAssigneeId?: string;
   categorySelectItems: { id: number; name: string }[];
   projectSelectItems: { id: number; title: string }[];
   assigneeSelectItems: { id: string; fullName: string }[];
 }
 
-export function NewTaskForm({
+export function CreateTaskForm({
   forcedAssigneeId,
   categorySelectItems,
   projectSelectItems,
   assigneeSelectItems,
-}: NewTaskFormProps) {
-  const t = useTranslations("tasks.NewTaskForm");
+}: CreateTaskFormProps) {
+  const t = useTranslations("tasks.CreateTaskForm");
 
   const { state, action, isPending } = useCreateTask();
 

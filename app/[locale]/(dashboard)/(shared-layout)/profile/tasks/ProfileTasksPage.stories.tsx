@@ -10,7 +10,7 @@ import { mockedProjectSummaries } from "@/mocks/projects";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { SearchList } from "@/components/search/SearchList";
-import { NewTaskForm } from "@/components/tasks/NewTaskForm";
+import { CreateTaskForm } from "@/components/tasks/CreateTaskForm";
 import { TaskGridMobile } from "@/components/tasks/TaskGrid";
 import { UserTaskList } from "@/components/users/UserTaskList";
 import { EditUserForm } from "@/components/users/EditUserForm";
@@ -107,8 +107,8 @@ export const Default = {
         positionSelectItems={mockedPositionSummaries}
       />
     ),
-    newTaskFormContainer: (
-      <NewTaskForm
+    createTaskFormContainer: (
+      <CreateTaskForm
         categorySelectItems={mockedTaskCategorySummaries}
         projectSelectItems={mockedProjectSummaries}
         assigneeSelectItems={mockedUserSummaries}

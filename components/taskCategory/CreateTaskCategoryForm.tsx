@@ -13,8 +13,8 @@ import { useCreateTaskCategory } from "./CreateTaskCategoryContext";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { TaskCategoryNameTextField } from "./TaskCategoryNameTextField";
 
-export function NewTaskCategoryForm() {
-  const t = useTranslations("taskCategories.NewTaskCategoryForm");
+export function CreateTaskCategoryForm() {
+  const t = useTranslations("taskCategories.CreateTaskCategoryForm");
 
   const { state, action, isPending } = useCreateTaskCategory();
 

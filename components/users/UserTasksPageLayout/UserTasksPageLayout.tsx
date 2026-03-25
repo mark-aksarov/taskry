@@ -18,7 +18,7 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { ToolbarMobile } from "@/components/common/Toolbar";
 import { BackButton } from "@/components/common/BackButton";
 import { ChangePasswordModal } from "../ChangePasswordModal";
-import { NewTaskModal } from "@/components/tasks/NewTaskModal";
+import { CreateTaskModal } from "@/components/tasks/CreateTaskModal";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { UserTasksPageEmptyLayout } from "./UserTasksPageEmptyLayout";
@@ -37,7 +37,7 @@ interface UserTasksPageLayoutProps {
   navigationMobile: React.ReactNode;
   userTasksContainer: React.ReactNode;
   editUserFormContainer: React.ReactNode;
-  newTaskFormContainer: React.ReactNode;
+  createTaskFormContainer: React.ReactNode;
   userDetailHeaderContainer: React.ReactNode;
 }
 
@@ -51,7 +51,7 @@ export function UserTasksPageLayout({
   navigationMobile,
   userTasksContainer,
   editUserFormContainer,
-  newTaskFormContainer,
+  createTaskFormContainer,
   userDetailHeaderContainer,
 }: UserTasksPageLayoutProps) {
   const t = useTranslations("users.UserTasksPageLayout");
@@ -67,7 +67,7 @@ export function UserTasksPageLayout({
         />
 
         <ChangePasswordModal userId={userId} />
-        <NewTaskModal newTaskFormContainer={newTaskFormContainer} />
+        <CreateTaskModal createTaskFormContainer={createTaskFormContainer} />
         <EditUserModal editUserFormContainer={editUserFormContainer} />
       </>
     );
@@ -125,7 +125,7 @@ export function UserTasksPageLayout({
 
       <TaskSearchModal searchContainer={searchContainer} />
       <ChangePasswordModal userId={userId} />
-      <NewTaskModal newTaskFormContainer={newTaskFormContainer} />
+      <CreateTaskModal createTaskFormContainer={createTaskFormContainer} />
       <EditUserModal editUserFormContainer={editUserFormContainer} />
     </>
   );

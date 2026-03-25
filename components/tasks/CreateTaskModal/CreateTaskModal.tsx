@@ -10,12 +10,14 @@ import { useTranslations } from "next-intl";
 import { useCreateTask } from "../CreateTaskContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
-interface NewTaskModalProps {
-  newTaskFormContainer: React.ReactNode;
+interface CreateTaskModalProps {
+  createTaskFormContainer: React.ReactNode;
 }
 
-export function NewTaskModal({ newTaskFormContainer }: NewTaskModalProps) {
-  const t = useTranslations("tasks.NewTaskModal");
+export function CreateTaskModal({
+  createTaskFormContainer,
+}: CreateTaskModalProps) {
+  const t = useTranslations("tasks.CreateTaskModal");
 
   const { isModalOpen, onModalOpenChange } = useCreateTask();
 
@@ -28,7 +30,7 @@ export function NewTaskModal({ newTaskFormContainer }: NewTaskModalProps) {
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
-          {newTaskFormContainer}
+          {createTaskFormContainer}
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

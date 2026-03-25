@@ -21,7 +21,7 @@ import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksContext";
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
-import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
+import { CreateTaskFormContainer } from "@/components/tasks/CreateTaskFormContainer";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { UserNavigationLarge } from "@/components/users/UserNavigationLarge";
@@ -119,8 +119,8 @@ export default async function AppProfileTasksPage({
                     userDetailHeaderContainer={
                       <UserDetailHeaderAltContainer userId={userId} />
                     }
-                    newTaskFormContainer={
-                      <NewTaskFormContainer forcedAssigneeId={userId} />
+                    createTaskFormContainer={
+                      <CreateTaskFormContainer forcedAssigneeId={userId} />
                     }
                   />
                 </CreateTaskProvider>

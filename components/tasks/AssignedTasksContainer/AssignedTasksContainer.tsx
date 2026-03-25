@@ -11,7 +11,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { TaskGridMobile } from "../TaskGrid";
 import { TaskListSkeleton } from "../TaskList";
-import { NewTaskModal } from "../NewTaskModal";
+import { CreateTaskModal } from "../CreateTaskModal";
 import { TaskGridItemMobile } from "../TaskGridItem";
 import { AssignedTaskList } from "../AssignedTaskList";
 import { CreateTaskProvider } from "../CreateTaskContext";
@@ -20,7 +20,7 @@ import { updateTask } from "@/lib/actions/task/updateTask";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
 import { deleteTask } from "@/lib/actions/task/deleteTask";
 import { TaskDetailContainer } from "../TaskDetailContainer";
-import { NewTaskFormContainer } from "../NewTaskFormContainer";
+import { CreateTaskFormContainer } from "../CreateTaskFormContainer";
 import { AssignedTaskListItem } from "../AssignedTaskListItem";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { EditTaskFormContainer } from "../EditTaskFormContainer";
@@ -124,9 +124,9 @@ async function AssignedTasksContainerInner({
         }
       />
 
-      <NewTaskModal
-        newTaskFormContainer={
-          <NewTaskFormContainer forcedAssigneeId={session!.user.id} />
+      <CreateTaskModal
+        createTaskFormContainer={
+          <CreateTaskFormContainer forcedAssigneeId={session!.user.id} />
         }
       />
     </CreateTaskProvider>

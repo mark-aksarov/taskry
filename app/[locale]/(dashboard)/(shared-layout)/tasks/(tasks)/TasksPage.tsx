@@ -23,7 +23,7 @@ import {
 import { useTranslations } from "next-intl";
 import { TaskSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
-import { NewTaskModal } from "@/components/tasks/NewTaskModal";
+import { CreateTaskModal } from "@/components/tasks/CreateTaskModal";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { AbsoluteCenter } from "@/components/common/AbsoluteCenter";
@@ -34,7 +34,7 @@ import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { SearchModalTrigger } from "@/components/search/SearchModalTrigger";
 import { TaskActionsMenuTrigger } from "@/components/tasks/TaskActionsMenuTrigger";
-import { NewTaskCategoryModal } from "@/components/taskCategory/NewTaskCategoryModal";
+import { CreateTaskCategoryModal } from "@/components/taskCategory/CreateTaskCategoryModal";
 import { TaskSortingMenuTriggerLarge } from "@/components/tasks/TaskSortingMenuTrigger";
 import { TaskSortingMenuTriggerMobile } from "@/components/tasks/TaskSortingMenuTrigger";
 import { TasksFilteredEmptySection } from "@/components/tasks/TasksFilteredEmptySection";
@@ -53,7 +53,7 @@ interface TasksPageProps {
   taskCategoryFiltersFormContainer: React.ReactNode;
   projectFiltersFormContainer: React.ReactNode;
   assigneeFiltersFormContainer: React.ReactNode;
-  newTaskFormContainer: React.ReactNode;
+  createTaskFormContainer: React.ReactNode;
 }
 
 export function TasksPage({
@@ -66,7 +66,7 @@ export function TasksPage({
   taskCategoryFiltersFormContainer,
   projectFiltersFormContainer,
   assigneeFiltersFormContainer,
-  newTaskFormContainer,
+  createTaskFormContainer,
 }: TasksPageProps) {
   const t = useTranslations("app.TasksPage");
 
@@ -88,7 +88,7 @@ export function TasksPage({
           </PageGrid>
         </PageContainer>
 
-        <NewTaskModal newTaskFormContainer={newTaskFormContainer} />
+        <CreateTaskModal createTaskFormContainer={createTaskFormContainer} />
       </>
     );
   }
@@ -169,8 +169,8 @@ export function TasksPage({
       </PageContainer>
 
       <TaskSearchModal searchContainer={searchContainer} />
-      <NewTaskModal newTaskFormContainer={newTaskFormContainer} />
-      <NewTaskCategoryModal />
+      <CreateTaskModal createTaskFormContainer={createTaskFormContainer} />
+      <CreateTaskCategoryModal />
     </>
   );
 }

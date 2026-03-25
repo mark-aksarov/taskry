@@ -1,5 +1,5 @@
-import { NewTaskForm } from "../NewTaskForm";
-import { NewTaskModal } from "../NewTaskModal";
+import { CreateTaskForm } from "../CreateTaskForm";
+import { CreateTaskModal } from "../CreateTaskModal";
 import { mockedUserSummaries } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TasksEmptySection } from "./TasksEmptySection";
@@ -17,9 +17,9 @@ const meta = {
     (Story) => (
       <>
         <Story />
-        <NewTaskModal
-          newTaskFormContainer={
-            <NewTaskForm
+        <CreateTaskModal
+          createTaskFormContainer={
+            <CreateTaskForm
               forcedAssigneeId="user-3"
               categorySelectItems={mockedTaskCategorySummaries}
               projectSelectItems={mockedProjectSummaries}

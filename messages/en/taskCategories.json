@@ -9,11 +9,11 @@
   "TaskCategoriesEmptySectionCreateButton": {
     "label": "New task category"
   },
-  "NewTaskCategoryForm": {
+  "CreateTaskCategoryForm": {
     "submitButtonLabel": "Create category",
     "successMessage": "Task category created successfully."
   },
-  "NewTaskCategoryModal": {
+  "CreateTaskCategoryModal": {
     "title": "New task category"
   },
   "TaskCategoryNameTextField": {

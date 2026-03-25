@@ -2,18 +2,18 @@
 
 import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { NewTaskModal } from "./NewTaskModal";
+import { CreateTaskModal } from "./CreateTaskModal";
 import { Button } from "@/components/ui/Button";
 import { DialogTrigger } from "react-aria-components";
 
-interface NewTaskModalTriggerProps {
-  newTaskFormContainer: React.ReactNode;
+interface CreateTaskModalTriggerProps {
+  createTaskFormContainer: React.ReactNode;
 }
 
-export function NewTaskModalTrigger({
-  newTaskFormContainer,
-}: NewTaskModalTriggerProps) {
-  const t = useTranslations("tasks.NewTaskModalTrigger");
+export function CreateTaskModalTrigger({
+  createTaskFormContainer,
+}: CreateTaskModalTriggerProps) {
+  const t = useTranslations("tasks.CreateTaskModalTrigger");
 
   return (
     <DialogTrigger>
@@ -21,7 +21,7 @@ export function NewTaskModalTrigger({
         label={t("label")}
         iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
       />
-      <NewTaskModal newTaskFormContainer={newTaskFormContainer} />
+      <CreateTaskModal createTaskFormContainer={createTaskFormContainer} />
     </DialogTrigger>
   );
 }

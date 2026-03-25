@@ -23,7 +23,7 @@ import { CreateTaskProvider } from "@/components/tasks/CreateTaskContext";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksContext";
 import { TaskFiltersProvider } from "@/components/tasks/TaskFiltersContext";
-import { NewTaskFormContainer } from "@/components/tasks/NewTaskFormContainer";
+import { CreateTaskFormContainer } from "@/components/tasks/CreateTaskFormContainer";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
 import { TaskFiltersFormContainer } from "@/components/tasks/TaskFiltersFormContainer";
@@ -96,7 +96,7 @@ export default async function AppTasksPage({
                   totalCount={totalCount}
                   totalFilteredTasks={totalFilteredTasks}
                   selectedSortField={sort}
-                  newTaskFormContainer={<NewTaskFormContainer />}
+                  createTaskFormContainer={<CreateTaskFormContainer />}
                   filtersFormContainer={<TaskFiltersFormContainer />}
                   taskCategoryFiltersFormContainer={
                     <TaskCategoryFiltersFormContainer />

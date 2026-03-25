@@ -18,7 +18,7 @@
     "submitButtonLabel": "Обновить задачу",
     "successMessage": "Задача успешно обновлена"
   },
-  "NewTaskForm": {
+  "CreateTaskForm": {
     "submitButtonLabel": "Создать задачу",
     "successMessage": "Задача успешно создана"
   },
@@ -102,7 +102,7 @@
     "cancelButton": "Отмена",
     "successMessage": "Задачи успешно удалены"
   },
-  "NewTaskModal": {
+  "CreateTaskModal": {
     "title": "Новая задача"
   },
   "EditTaskModal": {
@@ -111,7 +111,7 @@
   "TaskCommentsModal": {
     "title": "Комментарии к задаче"
   },
-  "NewTaskModalTrigger": {
+  "CreateTaskModalTrigger": {
     "label": "Новая задача"
   },
   "TaskDetailModal": {

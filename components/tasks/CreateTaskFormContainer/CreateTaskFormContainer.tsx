@@ -1,33 +1,33 @@
 import "server-only";
 
 import { Suspense } from "react";
-import { NewTaskForm } from "../NewTaskForm";
+import { CreateTaskForm } from "../CreateTaskForm";
 import { TaskFormSkeleton } from "../TaskFormSkeleton";
 import { getUserSummaries } from "@/lib/data/user/user.dal";
 import { getProjectSummaries } from "@/lib/data/project/project.dal";
 import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
 
-interface NewTaskFormContainerProps {
+interface CreateTaskFormContainerProps {
   forcedAssigneeId?: string;
 }
 
-export function NewTaskFormContainer(props: NewTaskFormContainerProps) {
+export function CreateTaskFormContainer(props: CreateTaskFormContainerProps) {
   return (
     <Suspense fallback={<TaskFormSkeleton />}>
-      <NewTaskFormContainerInner {...props} />
+      <CreateTaskFormContainerInner {...props} />
     </Suspense>
   );
 }
 
-async function NewTaskFormContainerInner({
+async function CreateTaskFormContainerInner({
   forcedAssigneeId,
-}: NewTaskFormContainerProps) {
+}: CreateTaskFormContainerProps) {
   const categories = await getTaskCategorySummaries();
   const projects = await getProjectSummaries();
   const users = await getUserSummaries();
 
   return (
-    <NewTaskForm
+    <CreateTaskForm
       forcedAssigneeId={forcedAssigneeId}
       categorySelectItems={categories}
       projectSelectItems={projects}

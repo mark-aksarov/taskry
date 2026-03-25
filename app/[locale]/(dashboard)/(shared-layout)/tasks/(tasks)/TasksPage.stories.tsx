@@ -9,7 +9,7 @@ import { mockedProjectSummaries } from "@/mocks/projects";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { TaskGridLarge } from "@/components/tasks/TaskGrid";
 import { SearchList } from "@/components/search/SearchList";
-import { NewTaskForm } from "@/components/tasks/NewTaskForm";
+import { CreateTaskForm } from "@/components/tasks/CreateTaskForm";
 import { TaskGridMobile } from "@/components/tasks/TaskGrid";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
@@ -105,8 +105,8 @@ export const Default = {
     assigneeFiltersFormContainer: (
       <AssigneeFiltersForm assigneeCheckboxGroupItems={mockedUserSummaries} />
     ),
-    newTaskFormContainer: (
-      <NewTaskForm
+    createTaskFormContainer: (
+      <CreateTaskForm
         categorySelectItems={mockedTaskCategorySummaries}
         projectSelectItems={mockedProjectSummaries}
         assigneeSelectItems={mockedUserSummaries}

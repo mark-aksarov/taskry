@@ -34,8 +34,8 @@ import { mockedProjectSummaries } from "@/mocks/projects";
 import { PageDecorator } from "@/.storybook/PageDecorator";
 import { SearchList } from "@/components/search/SearchList";
 import { TaskGridMobile } from "@/components/tasks/TaskGrid";
-import { NewTaskForm } from "@/components/tasks/NewTaskForm";
-import { NewTaskModal } from "@/components/tasks/NewTaskModal";
+import { CreateTaskForm } from "@/components/tasks/CreateTaskForm";
+import { CreateTaskModal } from "@/components/tasks/CreateTaskModal";
 import { TaskListSkeleton } from "@/components/tasks/TaskList";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { AssignedTaskList } from "@/components/tasks/AssignedTaskList";
@@ -140,9 +140,9 @@ export const WithNoTasks = {
     (Story) => (
       <>
         <Story />
-        <NewTaskModal
-          newTaskFormContainer={
-            <NewTaskForm
+        <CreateTaskModal
+          createTaskFormContainer={
+            <CreateTaskForm
               forcedAssigneeId={mockedUserSummaries[0].id}
               categorySelectItems={mockedTaskCategorySummaries}
               projectSelectItems={mockedProjectSummaries}
