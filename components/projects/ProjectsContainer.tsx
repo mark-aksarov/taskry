@@ -44,7 +44,7 @@ export async function ProjectsContainer({
     status: project.status,
     commentsCount: project.commentsCount,
 
-    editProjectFormContainer: (
+    updateProjectFormContainer: (
       <UpdateProjectFormContainer projectId={project.id} />
     ),
     projectCommentsContainer: (

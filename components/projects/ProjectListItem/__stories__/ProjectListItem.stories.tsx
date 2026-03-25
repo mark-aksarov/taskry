@@ -41,7 +41,7 @@ export const Default = {
   args: {
     ...mockedProject,
     projectCommentsContainer: <CommentList {...CommentListStory.args} />,
-    editProjectFormContainer: (
+    updateProjectFormContainer: (
       <EditUserForm
         {...mockedUserDetail}
         userId={mockedUserDetail.id}

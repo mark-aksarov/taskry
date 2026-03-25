@@ -34,7 +34,7 @@ const meta = {
         <Story />
 
         <UpdateProjectModal
-          editProjectFormContainer={
+          updateProjectFormContainer={
             <UpdateProjectForm
               {...mockedProjectDetail}
               projectId={mockedProjectDetail.id}

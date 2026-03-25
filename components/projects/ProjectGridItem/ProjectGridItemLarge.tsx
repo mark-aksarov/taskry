@@ -80,7 +80,7 @@ export const ProjectGridItemLargeInner = memo(
     tasksTotal,
     tasksCompleted,
     projectCommentsContainer,
-    editProjectFormContainer,
+    updateProjectFormContainer,
     projectDetailContainer,
     userDetailContainer,
     userDetailHeaderContainer,
@@ -174,7 +174,7 @@ export const ProjectGridItemLargeInner = memo(
 
         {/* Modal for editing project details */}
         <UpdateProjectModal
-          editProjectFormContainer={editProjectFormContainer}
+          updateProjectFormContainer={updateProjectFormContainer}
         />
       </>
     );

@@ -62,7 +62,7 @@ export const Default = {
         categoryName={mockedProjectDetail.category.name}
       />
     ),
-    editProjectFormContainer: (
+    updateProjectFormContainer: (
       <UpdateProjectForm
         {...mockedProjectDetail}
         projectId={mockedProjectDetail.id}

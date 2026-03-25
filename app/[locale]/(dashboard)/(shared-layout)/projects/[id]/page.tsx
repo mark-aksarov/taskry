@@ -52,7 +52,7 @@ export default async function AppProjectDetailPage({
             <ProjectDetailHeaderContainer projectId={id} />
           }
           projectCommentsContainer={<ProjectCommentsContainer projectId={id} />}
-          editProjectFormContainer={
+          updateProjectFormContainer={
             <UpdateProjectFormContainer projectId={id} />
           }
         />

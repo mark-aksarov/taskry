@@ -11,11 +11,11 @@ import { useUpdateProject } from "../UpdateProjectContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UpdateProjectModalProps {
-  editProjectFormContainer: React.ReactNode;
+  updateProjectFormContainer: React.ReactNode;
 }
 
 export function UpdateProjectModal({
-  editProjectFormContainer,
+  updateProjectFormContainer,
 }: UpdateProjectModalProps) {
   const t = useTranslations("projects.UpdateProjectModal");
 
@@ -30,7 +30,7 @@ export function UpdateProjectModal({
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
-          {editProjectFormContainer}
+          {updateProjectFormContainer}
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

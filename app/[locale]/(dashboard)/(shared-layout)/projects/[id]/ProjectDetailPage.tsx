@@ -18,7 +18,7 @@ interface ProjectPageProps {
   projectDetailContainer: React.ReactNode;
   projectHeaderContainer: React.ReactNode;
   projectCommentsContainer: React.ReactNode;
-  editProjectFormContainer: React.ReactNode;
+  updateProjectFormContainer: React.ReactNode;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
 }
@@ -30,7 +30,7 @@ export function ProjectDetailPage({
   projectDetailContainer,
   projectHeaderContainer,
   projectCommentsContainer,
-  editProjectFormContainer,
+  updateProjectFormContainer,
   sendComment,
   updateComment,
 }: ProjectPageProps) {
@@ -72,7 +72,9 @@ export function ProjectDetailPage({
       </PageContainer>
 
       <TaskSearchModal searchContainer={searchContainer} />
-      <UpdateProjectModal editProjectFormContainer={editProjectFormContainer} />
+      <UpdateProjectModal
+        updateProjectFormContainer={updateProjectFormContainer}
+      />
     </>
   );
 }

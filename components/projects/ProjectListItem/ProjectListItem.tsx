@@ -95,7 +95,7 @@ export const ProjectListItemInner = memo(
     commentsCount,
     status,
     creator,
-    editProjectFormContainer,
+    updateProjectFormContainer,
     projectDetailContainer,
     userDetailContainer,
     userDetailHeaderContainer,
@@ -262,7 +262,7 @@ export const ProjectListItemInner = memo(
 
         {/* Modal for editing project details */}
         <UpdateProjectModal
-          editProjectFormContainer={editProjectFormContainer}
+          updateProjectFormContainer={updateProjectFormContainer}
         />
       </>
     );

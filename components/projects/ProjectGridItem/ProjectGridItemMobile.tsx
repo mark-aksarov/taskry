@@ -68,7 +68,7 @@ export const ProjectGridItemMobileInner = memo(
     tasksTotal,
     tasksCompleted,
     projectCommentsContainer,
-    editProjectFormContainer,
+    updateProjectFormContainer,
     sendComment,
     updateComment,
   }: InnerProps) => {
@@ -139,7 +139,7 @@ export const ProjectGridItemMobileInner = memo(
 
         {/* Modal for editing project details */}
         <UpdateProjectModal
-          editProjectFormContainer={editProjectFormContainer}
+          updateProjectFormContainer={updateProjectFormContainer}
         />
       </>
     );

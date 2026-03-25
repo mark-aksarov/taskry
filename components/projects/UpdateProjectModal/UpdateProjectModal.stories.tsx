@@ -40,7 +40,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    editProjectFormContainer: (
+    updateProjectFormContainer: (
       <UpdateProjectForm
         {...mockedProject}
         projectId={mockedProject.id}
@@ -54,6 +54,6 @@ export const Default = {
 export const Skeleton = {
   args: {
     ...Default.args,
-    editProjectFormContainer: <ProjectFormSkeleton />,
+    updateProjectFormContainer: <ProjectFormSkeleton />,
   },
 } satisfies Story;

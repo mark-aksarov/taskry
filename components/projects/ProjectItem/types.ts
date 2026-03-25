@@ -17,7 +17,7 @@ export interface BaseProjectItemProps {
   };
   commentsCount: number;
   status: ProjectStatus;
-  editProjectFormContainer: React.ReactNode;
+  updateProjectFormContainer: React.ReactNode;
   projectCommentsContainer: React.ReactNode;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
