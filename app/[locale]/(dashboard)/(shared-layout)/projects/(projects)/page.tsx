@@ -31,7 +31,7 @@ import { createProjectCategory } from "@/lib/actions/projectCategory/createProje
 import { CreateProjectFormContainer } from "@/components/projects/CreateProjectFormContainer";
 import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersFormContainer";
 import { ProjectRouterSearchContainer } from "@/components/projects/ProjectRouterSearchContainer";
-import { UpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusesContext";
+import { UpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusesProvider";
 import { CreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryContext";
 import { ProjectCreatorFiltersFormContainer } from "@/components/projects/ProjectCreatorFiltersFormContainer";
 import { ProjectCategoryFiltersFormContainer } from "@/components/projects/ProjectCategoryFiltersFormContainer";
@@ -92,9 +92,7 @@ export default async function AppProjectsPage({
     <SelectedProjectsProvider
       pageItems={projects.map((p) => ({ id: p.id, status: p.status }))}
     >
-      <UpdateProjectStatusesProvider
-        updateProjectStatuses={updateProjectStatuses}
-      >
+      <UpdateProjectStatusesProvider>
         <DeleteProjectsProvider>
           <CreateProjectModalProvider>
             <CreateProjectProvider>

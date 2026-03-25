@@ -4,7 +4,7 @@ import { useContext, createContext } from "react";
 import { DeleteEntitiesContextType } from "@/lib/types";
 
 export const DeleteProjectsContext =
-  createContext<DeleteEntitiesContextType<number> | null>(null);
+  createContext<DeleteEntitiesContextType | null>(null);
 
 export function useDeleteProjects() {
   const context = useContext(DeleteProjectsContext);

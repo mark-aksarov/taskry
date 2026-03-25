@@ -13,7 +13,6 @@ const schema = z.object({
 });
 
 export async function updateProjectStatuses(
-  _prevState: ActionState,
   payload: UpdateProjectStatusesPayload,
 ): Promise<ActionState> {
   // Authorization

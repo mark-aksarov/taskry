@@ -17,7 +17,7 @@ import { withDeleteProjectsProvider } from "../../DeleteProjectsProvider/__stori
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
-import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusesContext/__stories__";
+import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusesProvider/__stories__";
 
 const meta = {
   title: "components/projects/ProjectGridItemLarge",

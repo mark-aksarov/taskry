@@ -33,7 +33,7 @@ import { withProjectFiltersProvider } from "@/components/projects/ProjectFilters
 import { withDeleteProjectsProvider } from "@/components/projects/DeleteProjectsProvider/__stories__";
 import { withCreateProjectModalProvider } from "@/components/projects/CreateProjectModal/__stories__";
 import { withSelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext/__stories__";
-import { withUpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusesContext/__stories__";
+import { withUpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusesProvider/__stories__";
 import { withCreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryContext/__stories__";
 
 const meta = {

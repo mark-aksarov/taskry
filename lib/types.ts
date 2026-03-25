@@ -1,5 +1,10 @@
+import {
+  ActionContextType,
+  UpdateTaskStatusesPayload,
+  UpdateProjectStatusesPayload,
+} from "./actions/types";
+
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
-import { ActionContextType, ActionState } from "./actions/types";
 
 export interface ProjectFilters {
   query?: string;
@@ -67,8 +72,19 @@ export const userSortFields = ["fullName", "position"] as const;
 
 export type UserSortField = (typeof userSortFields)[number];
 
-export interface DeleteEntitiesContextType<TId extends number | string>
-  extends ActionContextType<TId[]> {
-  ids: TId[];
-  setIds: (ids: TId[]) => void;
+export interface DeleteEntitiesContextType extends ActionContextType<number[]> {
+  ids: number[];
+  setIds: (ids: number[]) => void;
+}
+
+export interface UpdateProjectStatusesContextType
+  extends ActionContextType<UpdateProjectStatusesPayload> {
+  ids: number[];
+  setIds: (ids: number[]) => void;
+}
+
+export interface UpdateTaskStatusesContextType
+  extends ActionContextType<UpdateTaskStatusesPayload> {
+  ids: number[];
+  setIds: (ids: number[]) => void;
 }
