@@ -18,23 +18,16 @@ import { ProjectsPage } from "./ProjectsPage";
 import { projectSortFields } from "@/lib/types";
 import { customerId } from "@/lib/schemas/customer";
 import { projectStatus } from "@/lib/schemas/project";
+import { ProjectsPageProviders } from "./ProjectsPageProviders";
 import { projectCategoryId } from "@/lib/schemas/projectCategory";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ProjectsContainer } from "@/components/projects/ProjectsContainer";
-import { CreateProjectProvider } from "@/components/projects/CreateProjectProvider";
-import { ProjectFiltersProvider } from "@/components/projects/ProjectFiltersContext";
-import { DeleteProjectsProvider } from "@/components/projects/DeleteProjectsProvider";
-import { CreateProjectModalProvider } from "@/components/projects/CreateProjectModal";
-import { SelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext";
 import { CreateProjectFormContainer } from "@/components/projects/CreateProjectFormContainer";
 import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersFormContainer";
 import { ProjectRouterSearchContainer } from "@/components/projects/ProjectRouterSearchContainer";
-import { UpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusesProvider";
-import { CreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryProvider";
 import { ProjectCreatorFiltersFormContainer } from "@/components/projects/ProjectCreatorFiltersFormContainer";
 import { ProjectCategoryFiltersFormContainer } from "@/components/projects/ProjectCategoryFiltersFormContainer";
 import { ProjectCustomerFiltersFormContainer } from "@/components/projects/ProjectCustomerFiltersFormContainer";
-import { CreateProjectCategoryModalProvider } from "@/components/projectCategory/CreateProjectCategoryModal";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -88,52 +81,28 @@ export default async function AppProjectsPage({
     });
 
   return (
-    <SelectedProjectsProvider
-      pageItems={projects.map((p) => ({ id: p.id, status: p.status }))}
-    >
-      <UpdateProjectStatusesProvider>
-        <DeleteProjectsProvider>
-          <CreateProjectModalProvider>
-            <CreateProjectProvider>
-              <CreateProjectCategoryModalProvider>
-                <CreateProjectCategoryProvider>
-                  <ProjectFiltersProvider filters={filters}>
-                    <ProjectsPage
-                      totalCount={totalCount}
-                      searchContainer={<ProjectRouterSearchContainer />}
-                      createProjectFormContainer={
-                        <CreateProjectFormContainer />
-                      }
-                      totalFilteredProjects={totalFilteredProjects}
-                      selectedSortField={sort}
-                      projectsContainer={
-                        <ProjectsContainer
-                          projects={projects}
-                          totalCount={totalFilteredProjects}
-                          page={page}
-                          pageSize={pageSize}
-                        />
-                      }
-                      projectFiltersFormContainer={
-                        <ProjectFiltersFormContainer />
-                      }
-                      projectCategoryFiltersFormContainer={
-                        <ProjectCategoryFiltersFormContainer />
-                      }
-                      creatorFiltersFormContainer={
-                        <ProjectCreatorFiltersFormContainer />
-                      }
-                      customerFiltersFormContainer={
-                        <ProjectCustomerFiltersFormContainer />
-                      }
-                    />
-                  </ProjectFiltersProvider>
-                </CreateProjectCategoryProvider>
-              </CreateProjectCategoryModalProvider>
-            </CreateProjectProvider>
-          </CreateProjectModalProvider>
-        </DeleteProjectsProvider>
-      </UpdateProjectStatusesProvider>
-    </SelectedProjectsProvider>
+    <ProjectsPageProviders pageItems={projects} filters={filters}>
+      <ProjectsPage
+        totalCount={totalCount}
+        searchContainer={<ProjectRouterSearchContainer />}
+        createProjectFormContainer={<CreateProjectFormContainer />}
+        totalFilteredProjects={totalFilteredProjects}
+        selectedSortField={sort}
+        projectsContainer={
+          <ProjectsContainer
+            projects={projects}
+            totalCount={totalFilteredProjects}
+            page={page}
+            pageSize={pageSize}
+          />
+        }
+        projectFiltersFormContainer={<ProjectFiltersFormContainer />}
+        projectCategoryFiltersFormContainer={
+          <ProjectCategoryFiltersFormContainer />
+        }
+        creatorFiltersFormContainer={<ProjectCreatorFiltersFormContainer />}
+        customerFiltersFormContainer={<ProjectCustomerFiltersFormContainer />}
+      />
+    </ProjectsPageProviders>
   );
 }

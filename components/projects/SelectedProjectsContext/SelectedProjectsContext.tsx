@@ -4,7 +4,7 @@ import { createContext, useContext } from "react";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useSelectedItemsState } from "@/lib/hooks/useSelectedItemsState";
 
-interface SelectedProject {
+export interface SelectedProject {
   id: number;
   status: ProjectStatus;
 }
