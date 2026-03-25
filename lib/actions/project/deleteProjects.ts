@@ -9,10 +9,7 @@ import { deleteProjects as deleteProjectQuery } from "@/lib/data/project/project
 
 const projectIds = z.array(projectId).min(1);
 
-export async function deleteProjects(
-  _prevState: ActionState,
-  ids: number[],
-): Promise<ActionState> {
+export async function deleteProjects(ids: number[]): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

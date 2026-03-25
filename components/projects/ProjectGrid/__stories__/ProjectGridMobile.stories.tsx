@@ -6,7 +6,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { MockedProjectProviders } from "../../ProjectProviders/__stories__";
 import { ProjectGridItemMobileStory } from "../../ProjectGridItem/__stories__";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
-import { withDeleteProjectsProvider } from "../../DeleteProjectsContext/__stories__";
+import { withDeleteProjectsProvider } from "../../DeleteProjectsProvider/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";

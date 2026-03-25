@@ -30,7 +30,7 @@ import { EntityContainerPresentation } from "@/components/common/EntityContainer
 import { ProjectCategoryFiltersForm } from "@/components/projects/ProjectCategoryFiltersForm";
 import { withCreateProjectProvider } from "@/components/projects/CreateProjectProvider/__stories__";
 import { withProjectFiltersProvider } from "@/components/projects/ProjectFiltersContext/__stories__";
-import { withDeleteProjectsProvider } from "@/components/projects/DeleteProjectsContext/__stories__";
+import { withDeleteProjectsProvider } from "@/components/projects/DeleteProjectsProvider/__stories__";
 import { withCreateProjectModalProvider } from "@/components/projects/CreateProjectModal/__stories__";
 import { withSelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext/__stories__";
 import { withUpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusesContext/__stories__";

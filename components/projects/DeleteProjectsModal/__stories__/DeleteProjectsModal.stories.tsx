@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { DeleteProjectsModal } from "../DeleteProjectsModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
-import { withDeleteProjectsProvider } from "../../DeleteProjectsContext/__stories__";
+import { withDeleteProjectsProvider } from "../../DeleteProjectsProvider/__stories__";
 
 const meta = {
   title: "components/projects/DeleteProjectsModal",

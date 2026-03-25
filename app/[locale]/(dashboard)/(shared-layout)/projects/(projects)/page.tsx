@@ -19,25 +19,23 @@ import { projectSortFields } from "@/lib/types";
 import { customerId } from "@/lib/schemas/customer";
 import { projectStatus } from "@/lib/schemas/project";
 import { projectCategoryId } from "@/lib/schemas/projectCategory";
-import { createProject } from "@/lib/actions/project/createProject";
-import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ProjectsContainer } from "@/components/projects/ProjectsContainer";
 import { CreateProjectProvider } from "@/components/projects/CreateProjectProvider";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
-import { DeleteProjectsProvider } from "@/components/projects/DeleteProjectsContext";
 import { ProjectFiltersProvider } from "@/components/projects/ProjectFiltersContext";
-import { CreateProjectFormContainer } from "@/components/projects/CreateProjectFormContainer";
+import { DeleteProjectsProvider } from "@/components/projects/DeleteProjectsProvider";
+import { CreateProjectModalProvider } from "@/components/projects/CreateProjectModal";
 import { SelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext";
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
+import { CreateProjectFormContainer } from "@/components/projects/CreateProjectFormContainer";
 import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersFormContainer";
 import { ProjectRouterSearchContainer } from "@/components/projects/ProjectRouterSearchContainer";
 import { UpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusesContext";
 import { CreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryContext";
-import { ProjectCategoryFiltersFormContainer } from "@/components/projects/ProjectCategoryFiltersFormContainer";
 import { ProjectCreatorFiltersFormContainer } from "@/components/projects/ProjectCreatorFiltersFormContainer";
+import { ProjectCategoryFiltersFormContainer } from "@/components/projects/ProjectCategoryFiltersFormContainer";
 import { ProjectCustomerFiltersFormContainer } from "@/components/projects/ProjectCustomerFiltersFormContainer";
-import { CreateProjectModalProvider } from "@/components/projects/CreateProjectModal";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -97,7 +95,7 @@ export default async function AppProjectsPage({
       <UpdateProjectStatusesProvider
         updateProjectStatuses={updateProjectStatuses}
       >
-        <DeleteProjectsProvider deleteProjects={deleteProjects}>
+        <DeleteProjectsProvider>
           <CreateProjectModalProvider>
             <CreateProjectProvider>
               <CreateProjectCategoryProvider
