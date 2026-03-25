@@ -8,34 +8,24 @@ import { mockedProjectDetail } from "@/mocks/projects";
 import { ProjectDetailPage } from "./ProjectDetailPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
-import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { mockedCustomerSummaries } from "@/mocks/customers";
 import { SearchList } from "@/components/search/SearchList";
 import { CommentList } from "@/components/comments/CommentList";
-import { UpdateProjectForm } from "@/components/projects/UpdateProjectForm";
+import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
+import { UpdateProjectForm } from "@/components/projects/UpdateProjectForm";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { ProjectDetailHeader } from "@/components/projects/ProjectDetailHeader";
 import { CommentListStory } from "@/components/comments/CommentList/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
-import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
-import { withDeleteProjectProvider } from "@/components/projects/DeleteProjectContext/__stories__";
-import { withUpdateProjectProvider } from "@/components/projects/UpdateProjectContext/__stories__";
+import { withProjectProviders } from "@/components/projects/ProjectProviders/__stories__";
 
 const meta = {
   title: "pages/ProjectDetailPage",
   component: ProjectDetailPage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    withUpdateProjectProvider,
-    withDeleteProjectProvider,
-    withGuestModeModalProvider,
-    withCurrentUserProvider,
-    SharedPageDecorator,
-    withThemedBackground,
-  ],
+  decorators: [withProjectProviders, SharedPageDecorator, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/projects/1");
     mocked(useParams).mockReturnValue({

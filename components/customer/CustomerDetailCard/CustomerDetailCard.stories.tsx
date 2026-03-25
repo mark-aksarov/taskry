@@ -15,9 +15,9 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailHeaderInteractive } from "../CustomerDetailHeader";
 import { withDeleteCustomerProvider } from "../DeleteCustomerProvider/__stories__";
 import { withUpdateCustomerProvider } from "../UpdateCustomerProvider/__stories__";
-import { MockedCustomerDetailHeaderInteractiveProviders } from "../CustomerDetailHeader/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { MockedCustomerDetailHeaderInteractiveProviders } from "../CustomerDetailHeaderInteractiveProviders/__stories__";
 
 const meta = {
   title: "components/customers/CustomerDetailCard",

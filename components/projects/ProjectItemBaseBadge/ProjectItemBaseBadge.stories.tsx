@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { ProjectItemBaseBadge } from "./ProjectItemBaseBadge";
 import { withSelectedProjectsProvider } from "../SelectedProjectsContext/__stories__";
-import { withUpdateProjectStatusProvider } from "../UpdateProjectStatusContext/__stories__";
+import { withUpdateProjectStatusProvider } from "../UpdateProjectStatusProvider/__stories__";
 import { withUpdateProjectStatusesProvider } from "../UpdateProjectStatusesContext/__stories__";
 
 const meta: Meta<typeof ProjectItemBaseBadge> = {

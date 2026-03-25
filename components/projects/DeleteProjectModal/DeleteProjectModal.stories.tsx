@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/react";
 import { DeleteProjectModal } from "../DeleteProjectModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteProjectProvider } from "../DeleteProjectContext/__stories__";
+import { withDeleteProjectProvider } from "../DeleteProjectProvider/__stories__";
 import { withSelectedProjectsProvider } from "../SelectedProjectsContext/__stories__";
 
 const meta = {

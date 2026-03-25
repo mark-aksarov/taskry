@@ -11,11 +11,11 @@ import { useTranslations } from "next-intl";
 import { startTransition, useState } from "react";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { DeleteProjectModal } from "../DeleteProjectModal";
-import { useUpdateProject } from "../UpdateProjectContext";
 import { useProjectItemPending } from "./useProjectItemPending";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateProjectStatus } from "../UpdateProjectStatusContext";
 import { Trash, Check, Clock, Pencil, CircleEllipsis } from "lucide-react";
+import { useUpdateProjectModal } from "../UpdateProjectModal";
 
 export type ProjectItemActionMenuTriggerProps = {
   projectId: number;
@@ -39,7 +39,8 @@ export function ProjectItemActionMenuTrigger({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // State for edit modal from context
-  const { onModalOpenChange: onEditModalOpenChange } = useUpdateProject();
+  const { onOpenChange: onUpdateProjectModalOpenChange } =
+    useUpdateProjectModal();
 
   // State for update project status from context
   const {
@@ -60,7 +61,7 @@ export function ProjectItemActionMenuTrigger({
       const action = key.toString();
 
       if (action === "edit") {
-        onEditModalOpenChange(true);
+        onUpdateProjectModalOpenChange(true);
       } else if (action === "delete") {
         setIsDeleteModalOpen(true);
       } else {

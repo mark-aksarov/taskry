@@ -5,18 +5,16 @@ import { ProjectGridMobile } from "./ProjectGrid";
 import { TaskGridLarge } from "../tasks/TaskGrid";
 import { ProjectListItem } from "./ProjectListItem";
 import { BaseProjectItemProps } from "./ProjectItem";
+import { ProjectProviders } from "./ProjectProviders";
 import { sendComment } from "@/lib/actions/comment/sendComment";
 import { ProjectDetailContainer } from "./ProjectDetailContainer";
 import { UserDetailContainer } from "../users/UserDetailContainer";
 import { updateComment } from "@/lib/actions/comment/updateComment";
 import { ProjectListItemDTO } from "@/lib/data/project/project.dto";
-import { updateProject } from "@/lib/actions/project/updateProject";
-import { deleteProject } from "@/lib/actions/project/deleteProject";
-import { UpdateProjectFormContainer } from "./UpdateProjectFormContainer";
 import { ProjectCommentsContainer } from "./ProjectCommentsContainer";
+import { UpdateProjectFormContainer } from "./UpdateProjectFormContainer";
 import { CustomerDetailContainer } from "../customer/CustomerDetailContainer";
 import { UserDetailHeaderContainer } from "../users/UserDetailHeaderContainer";
-import { updateProjectStatus } from "@/lib/actions/project/updateProjectStatus";
 import { ProjectGridItemLarge, ProjectGridItemMobile } from "./ProjectGridItem";
 import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
 import { CustomerDetailHeaderContainer } from "../customer/CustomerDetailHeaderContainer";
@@ -53,9 +51,6 @@ export async function ProjectsContainer({
 
     sendComment,
     updateComment,
-    updateProject,
-    deleteProject,
-    updateProjectStatus,
   });
 
   const getCommonContainerProps = (project: ProjectListItemDTO) => ({
@@ -82,26 +77,29 @@ export async function ProjectsContainer({
             const details = getCommonContainerProps(project);
 
             return (
-              <ProjectListItem
-                key={project.id}
-                {...common}
-                {...details}
-                customer={project.customer}
-                company={project.customer?.company}
-                category={project.category}
-                customerDetailContainer={
-                  project.customer ? (
-                    <CustomerDetailContainer customerId={project.customer.id} />
-                  ) : undefined
-                }
-                customerDetailHeaderContainer={
-                  project.customer ? (
-                    <CustomerDetailHeaderContainer
-                      customerId={project.customer.id}
-                    />
-                  ) : undefined
-                }
-              />
+              <ProjectProviders key={project.id}>
+                <ProjectListItem
+                  {...common}
+                  {...details}
+                  customer={project.customer}
+                  company={project.customer?.company}
+                  category={project.category}
+                  customerDetailContainer={
+                    project.customer ? (
+                      <CustomerDetailContainer
+                        customerId={project.customer.id}
+                      />
+                    ) : undefined
+                  }
+                  customerDetailHeaderContainer={
+                    project.customer ? (
+                      <CustomerDetailHeaderContainer
+                        customerId={project.customer.id}
+                      />
+                    ) : undefined
+                  }
+                />
+              </ProjectProviders>
             );
           })}
         </ProjectList>
@@ -113,13 +111,14 @@ export async function ProjectsContainer({
             const details = getCommonContainerProps(project);
 
             return (
-              <ProjectGridItemLarge
-                key={project.id}
-                {...common}
-                {...details}
-                tasksTotal={project.tasks.total}
-                tasksCompleted={project.tasks.completed}
-              />
+              <ProjectProviders key={project.id}>
+                <ProjectGridItemLarge
+                  {...common}
+                  {...details}
+                  tasksTotal={project.tasks.total}
+                  tasksCompleted={project.tasks.completed}
+                />
+              </ProjectProviders>
             );
           })}
         </TaskGridLarge>
@@ -130,12 +129,13 @@ export async function ProjectsContainer({
             const common = getCommonProps(project);
 
             return (
-              <ProjectGridItemMobile
-                key={project.id}
-                {...common}
-                tasksTotal={project.tasks.total}
-                tasksCompleted={project.tasks.completed}
-              />
+              <ProjectProviders key={project.id}>
+                <ProjectGridItemMobile
+                  {...common}
+                  tasksTotal={project.tasks.total}
+                  tasksCompleted={project.tasks.completed}
+                />
+              </ProjectProviders>
             );
           })}
         </ProjectGridMobile>

@@ -1,14 +1,11 @@
 import "server-only";
 
-import {
-  CustomerDetailHeaderInteractive,
-  CustomerDetailHeaderInteractiveProviders,
-} from "./CustomerDetailHeader";
-
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getCustomerDetail } from "@/lib/data/customer/customer.dal";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
+import { CustomerDetailHeaderInteractive } from "./CustomerDetailHeader";
+import { CustomerDetailHeaderInteractiveProviders } from "./CustomerDetailHeaderInteractiveProviders";
 
 interface CustomerDetailHeaderAltContainerProps {
   customerId: number;

@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ProjectListItem } from "../../ProjectListItem";
 import { ProjectListItemStory } from "../../ProjectListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { MockedProjectProviders } from "../../ProjectProviders/__stories__";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withDeleteProjectsProvider } from "../../DeleteProjectsContext/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
@@ -33,11 +34,13 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedProjectList.map((project) => (
-      <ProjectListItem
-        key={project.id}
-        {...ProjectListItemStory.args}
-        {...project}
-      />
+      <MockedProjectProviders>
+        <ProjectListItem
+          key={project.id}
+          {...ProjectListItemStory.args}
+          {...project}
+        />
+      </MockedProjectProviders>
     )),
   },
 } satisfies Story;

@@ -1,11 +1,12 @@
 import { mockedProjectList } from "@/mocks/projects";
 import type { Meta, StoryObj } from "@storybook/react";
-import { UpdateProjectForm } from "../../UpdateProjectForm";
 import { ProjectStatus } from "@/generated/prisma/enums";
+import { UpdateProjectForm } from "../../UpdateProjectForm";
 import { mockedCustomerSummaries } from "@/mocks/customers";
 import { ProjectGridItemMobile } from "../ProjectGridItemMobile";
 import { CommentList } from "@/components/comments/CommentList";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withProjectProviders } from "../../ProjectProviders/__stories__";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
 import { CommentListStory } from "@/components/comments/CommentList/__stories__";
 import { withDeleteProjectsProvider } from "../../DeleteProjectsContext/__stories__";
@@ -18,6 +19,7 @@ const meta = {
   title: "components/projects/ProjectGridItemMobile",
   component: ProjectGridItemMobile,
   decorators: [
+    withProjectProviders,
     withDeleteProjectsProvider,
     withUpdateProjectStatusesProvider,
     withGuestModeModalProvider,
@@ -49,9 +51,6 @@ export const Default = {
     ),
     sendComment: () => ({ status: "success" }),
     updateComment: () => ({ status: "success" }),
-    updateProject: () => ({ status: "success" }),
-    deleteProject: () => ({ status: "success" }),
-    updateProjectStatus: () => ({ status: "success" }),
   },
 } satisfies Story;
 

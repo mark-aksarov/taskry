@@ -1,16 +1,21 @@
+import {
+  mockedCustomerDetail,
+  mockedCustomerSummaries,
+} from "@/mocks/customers";
+
 import { mockedUserDetail } from "@/mocks/users";
 import { ProjectDetail } from "../../ProjectDetail";
 import { ProjectListItem } from "../ProjectListItem";
 import { mockedProjectList } from "@/mocks/projects";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { mockedCustomerDetail } from "@/mocks/customers";
 import { UserDetail } from "@/components/users/UserDetail";
-import { mockedPositionSummaries } from "@/mocks/positions";
-import { EditUserForm } from "@/components/users/EditUserForm";
+import { UpdateProjectForm } from "../../UpdateProjectForm";
 import { CommentList } from "@/components/comments/CommentList";
 import { CustomerDetail } from "@/components/customer/CustomerDetail";
 import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withProjectProviders } from "../../ProjectProviders/__stories__";
+import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
 import { CommentListStory } from "@/components/comments/CommentList/__stories__";
 import { CustomerDetailHeader } from "@/components/customer/CustomerDetailHeader";
 import { withDeleteProjectsProvider } from "../../DeleteProjectsContext/__stories__";
@@ -23,6 +28,7 @@ const meta = {
   title: "components/projects/ProjectListItem",
   component: ProjectListItem,
   decorators: [
+    withProjectProviders,
     withDeleteProjectsProvider,
     withUpdateProjectStatusesProvider,
     withGuestModeModalProvider,
@@ -42,10 +48,11 @@ export const Default = {
     ...mockedProject,
     projectCommentsContainer: <CommentList {...CommentListStory.args} />,
     updateProjectFormContainer: (
-      <EditUserForm
-        {...mockedUserDetail}
-        userId={mockedUserDetail.id}
-        positionSelectItems={mockedPositionSummaries}
+      <UpdateProjectForm
+        {...mockedProject}
+        projectId={mockedProject.id}
+        projectCategorySelectItems={mockedProjectCategorySummaries}
+        customerSelectItems={mockedCustomerSummaries}
       />
     ),
     projectDetailContainer: <ProjectDetail {...mockedProject} />,
@@ -67,9 +74,6 @@ export const Default = {
     ),
     sendComment: () => ({ status: "success" }),
     updateComment: () => ({ status: "success" }),
-    updateProject: () => ({ status: "success" }),
-    deleteProject: () => ({ status: "success" }),
-    updateProjectStatus: () => ({ status: "success" }),
   },
 } satisfies Story;
 
@@ -94,36 +98,5 @@ export const WithOverflowContent = {
       ...Default.args.company,
       name: "This is a company name with a very long text for layout testing",
     },
-  },
-} satisfies Story;
-
-export const WithoutSomeData = {
-  args: {
-    ...Default.args,
-    creator: undefined,
-    customer: undefined,
-    category: undefined,
-    company: undefined,
-  },
-} satisfies Story;
-
-export const WithActiveStatus = {
-  args: {
-    ...Default.args,
-    status: "active",
-  },
-} satisfies Story;
-
-export const WithCompletedStatus = {
-  args: {
-    ...Default.args,
-    status: "completed",
-  },
-} satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
   },
 } satisfies Story;

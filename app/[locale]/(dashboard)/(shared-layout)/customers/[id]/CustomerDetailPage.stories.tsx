@@ -9,8 +9,8 @@ import { useParams, usePathname } from "next/navigation";
 import { mockedCustomerDetail } from "@/mocks/customers";
 import { CustomerDetailPage } from "./CustomerDetailPage";
 import { mockedCompanySummaries } from "@/mocks/companies";
-import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { SearchList } from "@/components/search/SearchList";
+import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UpdateCustomerForm } from "@/components/customer/UpdateCustomerForm";
@@ -18,7 +18,7 @@ import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
 import { CustomerDetailHeaderInteractive } from "@/components/customer/CustomerDetailHeader";
 import { MockedCustomerProviders } from "@/components/customer/CustomerProviders/__stories__";
-import { MockedCustomerDetailHeaderInteractiveProviders } from "@/components/customer/CustomerDetailHeader/__stories__";
+import { MockedCustomerDetailHeaderInteractiveProviders } from "@/components/customer/CustomerDetailHeaderInteractiveProviders/__stories__";
 
 const meta = {
   title: "pages/CustomerDetailPage",

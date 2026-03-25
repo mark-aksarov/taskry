@@ -1,9 +1,4 @@
-import {
-  ActionFn,
-  ActionState,
-  DeleteProjectPayload,
-  UpdateProjectStatusPayload,
-} from "@/lib/actions/types";
+import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ProjectStatus } from "@/generated/prisma/enums";
 
 export interface BaseProjectItemProps {
@@ -21,7 +16,4 @@ export interface BaseProjectItemProps {
   projectCommentsContainer: React.ReactNode;
   sendComment: ActionFn<ActionState, FormData>;
   updateComment: ActionFn<ActionState, FormData>;
-  updateProject: ActionFn<ActionState, FormData>;
-  deleteProject: ActionFn<ActionState, DeleteProjectPayload>;
-  updateProjectStatus: ActionFn<ActionState, UpdateProjectStatusPayload>;
 }

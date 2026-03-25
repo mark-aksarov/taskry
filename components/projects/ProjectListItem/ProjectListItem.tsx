@@ -2,8 +2,8 @@
 
 import {
   BaseProjectItemProps,
-  ProjectItemProviders,
   ProjectItemActionMenuTrigger,
+  ProjectItemPendingOverlay,
 } from "../ProjectItem";
 
 import {
@@ -54,35 +54,20 @@ export interface Props extends BaseProjectItemProps {
   showCheckbox?: boolean;
 }
 
-export function ProjectListItem({
-  updateProject,
-  deleteProject,
-  updateProjectStatus,
-  ...props
-}: Props) {
+export function ProjectListItem(props: Props) {
   const selected = useSelectedProjects();
 
   return (
-    <ProjectItemProviders
-      projectId={props.id}
-      deleteProject={deleteProject}
-      updateProject={updateProject}
-      updateProjectStatus={updateProjectStatus}
-    >
+    <ProjectItemPendingOverlay projectId={props.id}>
       <SelectableItem
         {...selected}
         item={{ id: props.id, status: props.status }}
       >
         <ProjectListItemInner {...props} />
       </SelectableItem>
-    </ProjectItemProviders>
+    </ProjectItemPendingOverlay>
   );
 }
-
-export type InnerProps = Omit<
-  Props,
-  "updateProject" | "deleteProject" | "updateProjectStatus"
->;
 
 export const ProjectListItemInner = memo(
   ({
@@ -104,7 +89,7 @@ export const ProjectListItemInner = memo(
     projectCommentsContainer,
     sendComment,
     updateComment,
-  }: InnerProps) => {
+  }: Props) => {
     const t = useTranslations("projects.ProjectListItem");
 
     const creatorImg = (

@@ -3,6 +3,7 @@ import { mockedProjectList } from "@/mocks/projects";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectGridItemLarge } from "../../ProjectGridItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { MockedProjectProviders } from "../../ProjectProviders/__stories__";
 import { ProjectGridItemLargeStory } from "../../ProjectGridItem/__stories__";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withDeleteProjectsProvider } from "../../DeleteProjectsContext/__stories__";
@@ -33,11 +34,13 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedProjectList.map((project) => (
-      <ProjectGridItemLarge
-        key={project.id}
-        {...ProjectGridItemLargeStory.args}
-        {...project}
-      />
+      <MockedProjectProviders>
+        <ProjectGridItemLarge
+          key={project.id}
+          {...ProjectGridItemLargeStory.args}
+          {...project}
+        />
+      </MockedProjectProviders>
     )),
   },
 } satisfies Story;

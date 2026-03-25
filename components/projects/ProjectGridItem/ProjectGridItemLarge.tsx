@@ -7,15 +7,15 @@ import {
 } from "@/components/common/Grid";
 
 import {
-  ItemBaseDetailModalTrigger,
-  ItemBaseCommentsModalTrigger,
-  ItemBaseUserImageContainer,
   ItemBaseDeadline,
+  ItemBaseDetailModalTrigger,
+  ItemBaseUserImageContainer,
+  ItemBaseCommentsModalTrigger,
 } from "@/components/common/ItemBase";
 
 import {
   BaseProjectItemProps,
-  ProjectItemProviders,
+  ProjectItemPendingOverlay,
   ProjectItemActionMenuTrigger,
 } from "../ProjectItem";
 
@@ -39,35 +39,20 @@ interface Props extends BaseProjectItemProps {
   userDetailHeaderContainer: React.ReactNode;
 }
 
-export function ProjectGridItemLarge({
-  deleteProject,
-  updateProject,
-  updateProjectStatus,
-  ...props
-}: Props) {
+export function ProjectGridItemLarge(props: Props) {
   const selected = useSelectedProjects();
 
   return (
-    <ProjectItemProviders
-      projectId={props.id}
-      deleteProject={deleteProject}
-      updateProject={updateProject}
-      updateProjectStatus={updateProjectStatus}
-    >
+    <ProjectItemPendingOverlay projectId={props.id}>
       <SelectableItem
         {...selected}
         item={{ id: props.id, status: props.status }}
       >
         <ProjectGridItemLargeInner {...props} />
       </SelectableItem>
-    </ProjectItemProviders>
+    </ProjectItemPendingOverlay>
   );
 }
-
-type InnerProps = Omit<
-  Props,
-  "updateProject" | "deleteProject" | "updateProjectStatus"
->;
 
 export const ProjectGridItemLargeInner = memo(
   ({
@@ -86,7 +71,7 @@ export const ProjectGridItemLargeInner = memo(
     userDetailHeaderContainer,
     sendComment,
     updateComment,
-  }: InnerProps) => {
+  }: Props) => {
     const creatorImg = (
       <ItemBaseUserImageContainer
         user={creator}

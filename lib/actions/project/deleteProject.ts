@@ -8,7 +8,6 @@ import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedir
 import { deleteProjects as deleteProjectQuery } from "@/lib/data/project/project.dal";
 
 export async function deleteProject(
-  _prevState: ActionState,
   payload: DeleteProjectPayload,
 ): Promise<ActionState> {
   // Authorization

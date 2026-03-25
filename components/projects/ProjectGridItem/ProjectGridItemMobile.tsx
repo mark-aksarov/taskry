@@ -14,7 +14,7 @@ import {
 
 import {
   BaseProjectItemProps,
-  ProjectItemProviders,
+  ProjectItemPendingOverlay,
   ProjectItemActionMenuTrigger,
 } from "../ProjectItem";
 
@@ -31,31 +31,16 @@ interface Props extends BaseProjectItemProps {
   tasksCompleted: number;
 }
 
-export function ProjectGridItemMobile({
-  deleteProject,
-  updateProject,
-  updateProjectStatus,
-  ...props
-}: Props) {
+export function ProjectGridItemMobile(props: Props) {
   return (
-    <ProjectItemProviders
-      projectId={props.id}
-      deleteProject={deleteProject}
-      updateProject={updateProject}
-      updateProjectStatus={updateProjectStatus}
-    >
+    <ProjectItemPendingOverlay projectId={props.id}>
       <div className="relative block">
         <Link href={`/projects/${props.id}`} className="absolute inset-0 z-0" />
         <ProjectGridItemMobileInner {...props} />
       </div>
-    </ProjectItemProviders>
+    </ProjectItemPendingOverlay>
   );
 }
-
-type InnerProps = Omit<
-  Props,
-  "updateProject" | "deleteProject" | "updateProjectStatus"
->;
 
 export const ProjectGridItemMobileInner = memo(
   ({
@@ -71,7 +56,7 @@ export const ProjectGridItemMobileInner = memo(
     updateProjectFormContainer,
     sendComment,
     updateComment,
-  }: InnerProps) => {
+  }: Props) => {
     const creatorImg = (
       <ItemBaseUserImageContainer
         user={creator}
