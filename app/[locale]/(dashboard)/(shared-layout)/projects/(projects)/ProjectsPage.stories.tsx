@@ -18,22 +18,20 @@ import { PageDecorator } from "@/.storybook/PageDecorator";
 import { mockedCustomerSummaries } from "@/mocks/customers";
 import { SearchList } from "@/components/search/SearchList";
 import { ProjectList } from "@/components/projects/ProjectList";
-import { CreateProjectForm } from "@/components/projects/CreateProjectForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
+import { CreateProjectForm } from "@/components/projects/CreateProjectForm";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
 import { ProjectListStory } from "@/components/projects/ProjectList/__stories__";
 import { ProjectCreatorFiltersForm } from "@/components/projects/ProjectCreatorFiltersForm";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
-import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { ProjectCustomerFiltersForm } from "@/components/projects/ProjectCustomerFiltersForm";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { ProjectCategoryFiltersForm } from "@/components/projects/ProjectCategoryFiltersForm";
-import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
-import { withCreateProjectProvider } from "@/components/projects/CreateProjectContext/__stories__";
+import { withCreateProjectProvider } from "@/components/projects/CreateProjectProvider/__stories__";
 import { withProjectFiltersProvider } from "@/components/projects/ProjectFiltersContext/__stories__";
 import { withDeleteProjectsProvider } from "@/components/projects/DeleteProjectsContext/__stories__";
+import { withCreateProjectModalProvider } from "@/components/projects/CreateProjectModal/__stories__";
 import { withSelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext/__stories__";
 import { withUpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusesContext/__stories__";
 import { withCreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryContext/__stories__";
@@ -43,16 +41,16 @@ const meta = {
   component: ProjectsPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    // preserve provider order as in page.tsx file
+    withProjectFiltersProvider,
     withCreateProjectCategoryProvider,
     withCreateProjectProvider,
+    withCreateProjectModalProvider,
     withDeleteProjectsProvider,
     withUpdateProjectStatusesProvider,
-    withProjectFiltersProvider,
-    withGuestModeModalProvider,
-    withCurrentUserProvider,
-    withPageTransitionProvider,
     withSelectedProjectsProvider,
-    PageDecorator,
+
+    PageDecorator, // most providers and layout are defined in PageDecorator
     withThemedBackground,
   ],
   beforeEach: () => {

@@ -7,7 +7,7 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { useCreateProject } from "../CreateProjectContext";
+import { useCreateProjectModal } from "./CreateProjectModalContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface CreateProjectModalProps {
@@ -19,13 +19,13 @@ export function CreateProjectModal({
 }: CreateProjectModalProps) {
   const t = useTranslations("projects.CreateProjectModal");
 
-  const { isModalOpen, onModalOpenChange } = useCreateProject();
+  const { isOpen, onOpenChange } = useCreateProjectModal();
 
   return (
     <FormBaseModal
-      data-test="new-project-modal"
-      isOpen={isModalOpen}
-      onOpenChange={onModalOpenChange}
+      data-test="create-project-modal"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>

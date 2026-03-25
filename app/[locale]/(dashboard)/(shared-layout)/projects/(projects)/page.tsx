@@ -23,7 +23,7 @@ import { createProject } from "@/lib/actions/project/createProject";
 import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ProjectsContainer } from "@/components/projects/ProjectsContainer";
-import { CreateProjectProvider } from "@/components/projects/CreateProjectContext";
+import { CreateProjectProvider } from "@/components/projects/CreateProjectProvider";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
 import { DeleteProjectsProvider } from "@/components/projects/DeleteProjectsContext";
 import { ProjectFiltersProvider } from "@/components/projects/ProjectFiltersContext";
@@ -37,6 +37,7 @@ import { CreateProjectCategoryProvider } from "@/components/projectCategory/Crea
 import { ProjectCategoryFiltersFormContainer } from "@/components/projects/ProjectCategoryFiltersFormContainer";
 import { ProjectCreatorFiltersFormContainer } from "@/components/projects/ProjectCreatorFiltersFormContainer";
 import { ProjectCustomerFiltersFormContainer } from "@/components/projects/ProjectCustomerFiltersFormContainer";
+import { CreateProjectModalProvider } from "@/components/projects/CreateProjectModal";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -90,48 +91,52 @@ export default async function AppProjectsPage({
     });
 
   return (
-    <UpdateProjectStatusesProvider
-      updateProjectStatuses={updateProjectStatuses}
+    <SelectedProjectsProvider
+      pageItems={projects.map((p) => ({ id: p.id, status: p.status }))}
     >
-      <SelectedProjectsProvider
-        pageItems={projects.map((p) => ({ id: p.id, status: p.status }))}
+      <UpdateProjectStatusesProvider
+        updateProjectStatuses={updateProjectStatuses}
       >
         <DeleteProjectsProvider deleteProjects={deleteProjects}>
-          <CreateProjectCategoryProvider
-            createProjectCategory={createProjectCategory}
-          >
-            <CreateProjectProvider createProject={createProject}>
-              <ProjectFiltersProvider filters={filters}>
-                <ProjectsPage
-                  totalCount={totalCount}
-                  searchContainer={<ProjectRouterSearchContainer />}
-                  createProjectFormContainer={<CreateProjectFormContainer />}
-                  totalFilteredProjects={totalFilteredProjects}
-                  selectedSortField={sort}
-                  projectsContainer={
-                    <ProjectsContainer
-                      projects={projects}
-                      totalCount={totalFilteredProjects}
-                      page={page}
-                      pageSize={pageSize}
-                    />
-                  }
-                  projectFiltersFormContainer={<ProjectFiltersFormContainer />}
-                  projectCategoryFiltersFormContainer={
-                    <ProjectCategoryFiltersFormContainer />
-                  }
-                  creatorFiltersFormContainer={
-                    <ProjectCreatorFiltersFormContainer />
-                  }
-                  customerFiltersFormContainer={
-                    <ProjectCustomerFiltersFormContainer />
-                  }
-                />
-              </ProjectFiltersProvider>
+          <CreateProjectModalProvider>
+            <CreateProjectProvider>
+              <CreateProjectCategoryProvider
+                createProjectCategory={createProjectCategory}
+              >
+                <ProjectFiltersProvider filters={filters}>
+                  <ProjectsPage
+                    totalCount={totalCount}
+                    searchContainer={<ProjectRouterSearchContainer />}
+                    createProjectFormContainer={<CreateProjectFormContainer />}
+                    totalFilteredProjects={totalFilteredProjects}
+                    selectedSortField={sort}
+                    projectsContainer={
+                      <ProjectsContainer
+                        projects={projects}
+                        totalCount={totalFilteredProjects}
+                        page={page}
+                        pageSize={pageSize}
+                      />
+                    }
+                    projectFiltersFormContainer={
+                      <ProjectFiltersFormContainer />
+                    }
+                    projectCategoryFiltersFormContainer={
+                      <ProjectCategoryFiltersFormContainer />
+                    }
+                    creatorFiltersFormContainer={
+                      <ProjectCreatorFiltersFormContainer />
+                    }
+                    customerFiltersFormContainer={
+                      <ProjectCustomerFiltersFormContainer />
+                    }
+                  />
+                </ProjectFiltersProvider>
+              </CreateProjectCategoryProvider>
             </CreateProjectProvider>
-          </CreateProjectCategoryProvider>
+          </CreateProjectModalProvider>
         </DeleteProjectsProvider>
-      </SelectedProjectsProvider>
-    </UpdateProjectStatusesProvider>
+      </UpdateProjectStatusesProvider>
+    </SelectedProjectsProvider>
   );
 }

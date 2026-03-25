@@ -1,16 +1,17 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useCreateProject } from "./CreateProjectContext";
+import { useCreateProjectModal } from "./CreateProjectModal";
 import { EmptySectionButton } from "@/components/common/EmptySection";
 
 export function ProjectsEmptySectionCreateButton() {
   const t = useTranslations("projects.ProjectsEmptySectionCreateButton");
 
-  const { onModalOpenChange } = useCreateProject();
+  const { onOpenChange: onCreateProjectModalOpenChange } =
+    useCreateProjectModal();
 
   return (
-    <EmptySectionButton onPress={() => onModalOpenChange(true)}>
+    <EmptySectionButton onPress={() => onCreateProjectModalOpenChange(true)}>
       {t("label")}
     </EmptySectionButton>
   );

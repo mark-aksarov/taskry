@@ -32,10 +32,7 @@ const schema = z.object({
   customerId: z.preprocess(emptyStringToUndefined, customerId.optional()),
 });
 
-export async function createProject(
-  _prevState: ActionState,
-  formData: FormData,
-): Promise<ActionState> {
+export async function createProject(formData: FormData): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 
