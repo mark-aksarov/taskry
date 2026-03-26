@@ -20,13 +20,15 @@ interface CustomersDynamicProps {
   customers: CustomerListItemDTO[];
 }
 
+interface CustomerItemWrapperProps {
+  customer: CustomerListItemDTO;
+  renderItem: (props: BaseCustomerItemProps) => React.ReactNode;
+}
+
 function CustomerItemWrapper({
   customer,
-  ItemComponent,
-}: {
-  customer: CustomerListItemDTO;
-  ItemComponent: React.ComponentType<BaseCustomerItemProps & any>;
-}) {
+  renderItem,
+}: CustomerItemWrapperProps) {
   const commonProps: BaseCustomerItemProps = {
     id: customer.id,
     fullName: customer.fullName,
@@ -39,7 +41,7 @@ function CustomerItemWrapper({
 
   return (
     <CustomerItemProviders>
-      <ItemComponent {...commonProps} />
+      {renderItem(commonProps)}
       <CustomerItemModals customer={customer} />
     </CustomerItemProviders>
   );
@@ -57,7 +59,7 @@ export function CustomersDynamic({
         <CustomerItemWrapper
           key={customer.id}
           customer={customer}
-          ItemComponent={CustomerListItem}
+          renderItem={(props) => <CustomerListItem {...props} />}
         />
       ))}
     </CustomerList>
@@ -69,7 +71,7 @@ export function CustomersDynamic({
         <CustomerItemWrapper
           key={customer.id}
           customer={customer}
-          ItemComponent={CustomerGridItemLarge}
+          renderItem={(props) => <CustomerGridItemLarge {...props} />}
         />
       ))}
     </CustomerGridLarge>
@@ -81,7 +83,7 @@ export function CustomersDynamic({
         <CustomerItemWrapper
           key={customer.id}
           customer={customer}
-          ItemComponent={CustomerGridItemMobile}
+          renderItem={(props) => <CustomerGridItemMobile {...props} />}
         />
       ))}
     </CustomerGridMobile>
