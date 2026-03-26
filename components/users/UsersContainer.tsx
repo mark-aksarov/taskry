@@ -1,91 +1,41 @@
-import "server-only";
+"use client";
 
-import { UserList } from "./UserList";
-import { UserListItem } from "./UserListItem";
-import { BaseUserItemProps } from "./UserItem";
-import { getUserList } from "@/lib/data/user/user.dal";
-import { UserFilters, UserSortField } from "@/lib/types";
+import dynamic from "next/dynamic";
+import { UserListSkeleton } from "./UserList";
+import { UserGridMobileSkeleton } from "./UserGrid";
 import { UserListItemDTO } from "@/lib/data/user/user.dto";
-import { deleteUser } from "@/lib/actions/user/deleteUser";
-import { updateUser } from "@/lib/actions/user/updateUser";
-import { UserGridLarge, UserGridMobile } from "./UserGrid";
-import { UserDetailContainer } from "./UserDetailContainer";
-import { EditUserFormContainer } from "./EditUserFormContainer";
-import { UserGridItemLarge, UserGridItemMobile } from "./UserGridItem";
-import { UserDetailHeaderContainer } from "./UserDetailHeaderContainer";
-import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
 
-interface UsersContainerProps {
+const UsersDynamic = dynamic(
+  () => import("./UsersDynamic").then((mod) => mod.UsersDynamic),
+  {
+    ssr: false,
+    loading: () => (
+      <>
+        <UserListSkeleton className="max-md:hidden" items={10} />
+        <UserGridMobileSkeleton className="md:hidden" items={10} />
+      </>
+    ),
+  },
+);
+
+export interface UsersContainerProps {
+  users: UserListItemDTO[];
+  totalCount: number;
   page: number;
   pageSize: number;
-  sort: UserSortField;
-  filters?: UserFilters;
 }
 
-export async function UsersContainer({
+export function UsersContainer({
+  users,
+  totalCount,
   page,
   pageSize,
-  sort,
-  filters,
 }: UsersContainerProps) {
-  const { items: users, totalCount } = await getUserList({
-    page,
-    pageSize,
-    sort,
-    filters,
-  });
-
-  const getCommonProps = (user: UserListItemDTO): BaseUserItemProps => ({
-    id: user.id,
-    fullName: user.fullName,
-    imageUrl: user.imageUrl,
-    email: user.email,
-    phoneNumber: user.phoneNumber,
-    publicLink: user.publicLink,
-    position: user.position,
-    updateUser: updateUser,
-    deleteUser: deleteUser,
-    editUserFormContainer: <EditUserFormContainer userId={user.id} />,
-  });
-
-  const getContainerProps = (user: UserListItemDTO) => ({
-    userDetailContainer: <UserDetailContainer userId={user.id} />,
-    userDetailHeaderContainer: <UserDetailHeaderContainer userId={user.id} />,
-  });
-
   return (
-    <EntityContainerPresentation
+    <UsersDynamic
       page={page}
       pageSize={pageSize}
-      listLarge={
-        <UserList>
-          {users.map((user) => (
-            <UserListItem
-              key={user.id}
-              {...getCommonProps(user)}
-              {...getContainerProps(user)}
-            />
-          ))}
-        </UserList>
-      }
-      gridLarge={
-        <UserGridLarge>
-          {users.map((user) => (
-            <UserGridItemLarge
-              key={user.id}
-              {...getCommonProps(user)}
-              {...getContainerProps(user)}
-            />
-          ))}
-        </UserGridLarge>
-      }
-      gridMobile={
-        <UserGridMobile>
-          {users.map((user) => (
-            <UserGridItemMobile key={user.id} {...getCommonProps(user)} />
-          ))}
-        </UserGridMobile>
-      }
+      users={users}
       totalPages={Math.ceil(totalCount / pageSize)}
     />
   );

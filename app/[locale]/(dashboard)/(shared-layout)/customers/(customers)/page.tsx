@@ -83,7 +83,7 @@ export default async function AppCustomersPage({
         customersContainer={
           <CustomersContainer
             customers={customers}
-            totalCount={totalCount}
+            totalCount={totalFilteredCustomers}
             page={page}
             pageSize={pageSize}
           />

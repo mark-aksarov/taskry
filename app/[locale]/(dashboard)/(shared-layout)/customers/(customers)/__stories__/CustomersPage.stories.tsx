@@ -58,9 +58,11 @@ export const Default = {
       <EntityContainerPresentation
         page={1}
         pageSize={3}
-        listLarge={<CustomerList {...CustomerListStory.args} />}
-        gridLarge={<CustomerGridLarge {...CustomerGridLargeStory.args} />}
-        gridMobile={<CustomerGridMobile {...CustomerGridMobileStory.args} />}
+        listLarge={() => <CustomerList {...CustomerListStory.args} />}
+        gridLarge={() => <CustomerGridLarge {...CustomerGridLargeStory.args} />}
+        gridMobile={() => (
+          <CustomerGridMobile {...CustomerGridMobileStory.args} />
+        )}
         totalPages={3}
       />
     ),

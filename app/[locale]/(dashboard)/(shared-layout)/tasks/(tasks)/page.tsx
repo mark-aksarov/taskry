@@ -23,15 +23,16 @@ import { CreateTaskProvider } from "@/components/tasks/CreateTaskContext";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksContext";
 import { TaskFiltersProvider } from "@/components/tasks/TaskFiltersContext";
-import { CreateTaskFormContainer } from "@/components/tasks/CreateTaskFormContainer";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
+import { CreateTaskFormContainer } from "@/components/tasks/CreateTaskFormContainer";
 import { TaskFiltersFormContainer } from "@/components/tasks/TaskFiltersFormContainer";
 import { TaskRouterSearchContainer } from "@/components/tasks/TaskRouterSearchContainer";
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext";
-import { CreateTaskCategoryProvider } from "@/components/taskCategory/CreateTaskCategoryProvider";
-import { TaskCategoryFiltersFormContainer } from "@/components/tasks/TaskCategoryFiltersFormContainer";
-import { TaskProjectFiltersFormContainer } from "@/components/tasks/TaskProjectFiltersFormContainer";
 import { AssigneeFiltersFormContainer } from "@/components/tasks/AssigneeFiltersFormContainer";
+import { CreateTaskCategoryProvider } from "@/components/taskCategory/CreateTaskCategoryProvider";
+import { TaskProjectFiltersFormContainer } from "@/components/tasks/TaskProjectFiltersFormContainer";
+import { TaskCategoryFiltersFormContainer } from "@/components/tasks/TaskCategoryFiltersFormContainer";
+import { CreateTaskCategoryModalProvider } from "@/components/taskCategory/CreateTaskCategoryModal";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -88,37 +89,39 @@ export default async function AppTasksPage({
         pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
       >
         <DeleteTasksProvider deleteTasks={deleteTasks}>
-          <CreateTaskCategoryProvider>
-            <CreateTaskProvider createTask={createTask}>
-              <TaskFiltersProvider filters={filters}>
-                <TasksPage
-                  totalCount={totalCount}
-                  totalFilteredTasks={totalFilteredTasks}
-                  selectedSortField={sort}
-                  createTaskFormContainer={<CreateTaskFormContainer />}
-                  filtersFormContainer={<TaskFiltersFormContainer />}
-                  taskCategoryFiltersFormContainer={
-                    <TaskCategoryFiltersFormContainer />
-                  }
-                  projectFiltersFormContainer={
-                    <TaskProjectFiltersFormContainer />
-                  }
-                  assigneeFiltersFormContainer={
-                    <AssigneeFiltersFormContainer />
-                  }
-                  searchContainer={<TaskRouterSearchContainer />}
-                  tasksContainer={
-                    <TasksContainer
-                      tasks={tasks}
-                      totalCount={totalFilteredTasks}
-                      page={page}
-                      pageSize={pageSize}
-                    />
-                  }
-                />
-              </TaskFiltersProvider>
-            </CreateTaskProvider>
-          </CreateTaskCategoryProvider>
+          <CreateTaskCategoryModalProvider>
+            <CreateTaskCategoryProvider>
+              <CreateTaskProvider createTask={createTask}>
+                <TaskFiltersProvider filters={filters}>
+                  <TasksPage
+                    totalCount={totalCount}
+                    totalFilteredTasks={totalFilteredTasks}
+                    selectedSortField={sort}
+                    createTaskFormContainer={<CreateTaskFormContainer />}
+                    filtersFormContainer={<TaskFiltersFormContainer />}
+                    taskCategoryFiltersFormContainer={
+                      <TaskCategoryFiltersFormContainer />
+                    }
+                    projectFiltersFormContainer={
+                      <TaskProjectFiltersFormContainer />
+                    }
+                    assigneeFiltersFormContainer={
+                      <AssigneeFiltersFormContainer />
+                    }
+                    searchContainer={<TaskRouterSearchContainer />}
+                    tasksContainer={
+                      <TasksContainer
+                        tasks={tasks}
+                        totalCount={totalFilteredTasks}
+                        page={page}
+                        pageSize={pageSize}
+                      />
+                    }
+                  />
+                </TaskFiltersProvider>
+              </CreateTaskProvider>
+            </CreateTaskCategoryProvider>
+          </CreateTaskCategoryModalProvider>
         </DeleteTasksProvider>
       </SelectedTasksProvider>
     </UpdateTaskStatusesProvider>

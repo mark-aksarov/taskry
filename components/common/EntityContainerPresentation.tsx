@@ -1,15 +1,16 @@
 "use client";
 
+import { useMediaQuery } from "react-responsive";
 import { useViewMode } from "@/components/common/ViewMode";
 import { EntityContainerPagination } from "./EntityContainerPagination";
 
-interface EntityContainerPresentationProps {
+export interface EntityContainerPresentationProps {
   page: number;
   pageSize: number;
-  listLarge: React.ReactNode;
-  gridLarge: React.ReactNode;
-  gridMobile: React.ReactNode;
   totalPages: number;
+  listLarge: () => React.ReactNode;
+  gridLarge: () => React.ReactNode;
+  gridMobile: () => React.ReactNode;
 }
 
 export function EntityContainerPresentation({
@@ -21,14 +22,21 @@ export function EntityContainerPresentation({
   totalPages,
 }: EntityContainerPresentationProps) {
   const { viewMode } = useViewMode();
+  const isMd = useMediaQuery({ query: "(max-width: 47.999rem)" });
+
+  let content;
+
+  if (isMd) {
+    content = gridMobile();
+  } else if (viewMode === "list") {
+    content = listLarge();
+  } else {
+    content = gridLarge();
+  }
 
   return (
     <>
-      <div className="max-md:hidden">
-        {viewMode === "list" ? listLarge : gridLarge}
-      </div>
-
-      <div className="md:hidden">{gridMobile}</div>
+      {content}
 
       <EntityContainerPagination
         page={page}

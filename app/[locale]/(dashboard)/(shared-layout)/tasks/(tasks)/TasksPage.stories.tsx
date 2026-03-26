@@ -19,7 +19,6 @@ import { AssigneeFiltersForm } from "@/components/tasks/AssigneeFiltersForm";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { TaskGridLargeStory } from "@/components/tasks/TaskGrid/__stories__";
 import { TaskGridMobileStory } from "@/components/tasks/TaskGrid/__stories__";
-import { CreateSubtaskModal } from "@/components/subtasks/CreateSubtaskModal";
 import { TaskProjectFiltersForm } from "@/components/tasks/TaskProjectFiltersForm";
 import { TaskCategoryFiltersForm } from "@/components/tasks/TaskCategoryFiltersForm";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
@@ -76,9 +75,9 @@ export const Default = {
       <EntityContainerPresentation
         page={1}
         pageSize={3}
-        listLarge={<TaskList {...TaskListStory.args} />}
-        gridLarge={<TaskGridLarge {...TaskGridLargeStory.args} />}
-        gridMobile={<TaskGridMobile {...TaskGridMobileStory.args} />}
+        listLarge={() => <TaskList {...TaskListStory.args} />}
+        gridLarge={() => <TaskGridLarge {...TaskGridLargeStory.args} />}
+        gridMobile={() => <TaskGridMobile {...TaskGridMobileStory.args} />}
         totalPages={3}
       />
     ),

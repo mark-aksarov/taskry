@@ -9,10 +9,10 @@ import UsersPageLoading from "./loading";
 import { usePathname } from "next/navigation";
 import { UserList } from "@/components/users/UserList";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { SearchList } from "@/components/search/SearchList";
 import { UserFiltersForm } from "@/components/users/UserFiltersForm";
+import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { UserListStory } from "@/components/users/UserList/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserGridLarge, UserGridMobile } from "@/components/users/UserGrid";
@@ -63,9 +63,9 @@ export const Default = {
     ),
     usersContainer: (
       <EntityContainerPresentation
-        listLarge={<UserList {...UserListStory.args} />}
-        gridLarge={<UserGridLarge {...UserGridLargeStory.args} />}
-        gridMobile={<UserGridMobile {...UserGridMobileStory.args} />}
+        listLarge={() => <UserList {...UserListStory.args} />}
+        gridLarge={() => <UserGridLarge {...UserGridLargeStory.args} />}
+        gridMobile={() => <UserGridMobile {...UserGridMobileStory.args} />}
         page={1}
         pageSize={3}
         totalPages={3}

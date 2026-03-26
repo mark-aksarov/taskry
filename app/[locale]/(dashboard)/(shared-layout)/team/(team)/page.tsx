@@ -10,7 +10,7 @@ import { z } from "zod";
 import { UsersPage } from "./UsersPage";
 import { userSortFields } from "@/lib/types";
 import { positionId } from "@/lib/schemas/position";
-import { getUserCount } from "@/lib/data/user/user.dal";
+import { getUserList } from "@/lib/data/user/user.dal";
 import { createUser } from "@/lib/actions/user/createUser";
 import { UsersContainer } from "@/components/users/UsersContainer";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
@@ -49,8 +49,13 @@ export default async function AppUsersPage({
   const { page, pageSize, sort, ...filters } =
     searchParamsSchema.parse(rawParams);
 
-  // Get total count of users based on filters and sorting
-  const totalFilteredUsers = await getUserCount(filters);
+  // Get users for the current page based on filters and sorting
+  const { items: users, totalCount: totalFilteredUsers } = await getUserList({
+    page,
+    pageSize,
+    sort,
+    filters,
+  });
 
   return (
     <CreateUserProvider createUser={createUser}>
@@ -67,10 +72,10 @@ export default async function AppUsersPage({
               }
               usersContainer={
                 <UsersContainer
+                  users={users}
+                  totalCount={totalFilteredUsers}
                   page={page}
                   pageSize={pageSize}
-                  sort={sort}
-                  filters={filters}
                 />
               }
             />
