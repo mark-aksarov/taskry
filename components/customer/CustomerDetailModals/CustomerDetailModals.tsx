@@ -2,14 +2,14 @@ import { UpdateCustomerModal } from "../UpdateCustomerModal";
 import { DeleteCustomerModal } from "../DeleteCustomerModal";
 import { UpdateCustomerFormContainer } from "../UpdateCustomerFormContainer";
 
-interface CustomerItemModalsProps {
+interface CustomerDetailModalsProps {
   customer: {
     id: number;
     fullName: string;
   };
 }
 
-export function CustomerItemModals({ customer }: CustomerItemModalsProps) {
+export function CustomerDetailModals({ customer }: CustomerDetailModalsProps) {
   return (
     <>
       <UpdateCustomerModal

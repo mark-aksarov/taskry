@@ -2,9 +2,9 @@ import { notFound } from "next/navigation";
 import { customerId } from "@/lib/schemas/customer";
 import { CustomerDetailPage } from "./CustomerDetailPage";
 import { getCustomerSummary } from "@/lib/data/customer/customer.dal";
-import { CustomerItemModals } from "@/components/customer/CustomerItem";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
+import { CustomerDetailModals } from "@/components/customer/CustomerDetailModals";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
 import { CustomerDetailProviders } from "@/components/customer/CustomerDetailProviders";
 import { CustomerDetailAltContainer } from "@/components/customer/CustomerDetailAltContainer";
@@ -43,7 +43,7 @@ export default async function AppCustomerDetailPage({
       customerDetailActions={
         <CustomerDetailProviders>
           <CustomerDetailActions />
-          <CustomerItemModals customer={customerSummary} />
+          <CustomerDetailModals customer={customerSummary} />
         </CustomerDetailProviders>
       }
     />
