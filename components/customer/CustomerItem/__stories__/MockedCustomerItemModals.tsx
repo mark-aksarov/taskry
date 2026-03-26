@@ -1,4 +1,5 @@
 import { CustomerDetail } from "../../CustomerDetail";
+import { mockedCustomerDetail } from "@/mocks/customers";
 import { mockedCompanySummaries } from "@/mocks/companies";
 import { UpdateCustomerForm } from "../../UpdateCustomerForm";
 import { CustomerDetailModal } from "../../CustomerDetailModal";
@@ -6,36 +7,17 @@ import { UpdateCustomerModal } from "../../UpdateCustomerModal";
 import { DeleteCustomerModal } from "../../DeleteCustomerModal";
 import { CustomerDetailHeader } from "../../CustomerDetailHeader";
 
-interface MockedCustomerItemModalsProps {
-  customer: {
-    id: number;
-    fullName: string;
-    email: string;
-    bio?: string;
-    phoneNumber?: string;
-    address?: string;
-    publicLink?: string;
-    imageUrl?: string;
-    company?: {
-      id: number;
-      name: string;
-    };
-  };
-}
-
-export function MockedCustomerItemModals({
-  customer,
-}: MockedCustomerItemModalsProps) {
+export function MockedCustomerItemModals() {
   return (
     <>
       <CustomerDetailModal
         customerId={1}
-        customerDetailContainer={<CustomerDetail {...customer} />}
+        customerDetailContainer={<CustomerDetail {...mockedCustomerDetail} />}
         customerDetailHeaderContainer={
           <CustomerDetailHeader
-            fullName={customer.fullName}
-            imageUrl={customer.imageUrl}
-            companyName={customer.company?.name}
+            fullName={mockedCustomerDetail.fullName}
+            imageUrl={mockedCustomerDetail.imageUrl}
+            companyName={mockedCustomerDetail.company?.name}
           />
         }
       />
@@ -43,16 +25,16 @@ export function MockedCustomerItemModals({
       <UpdateCustomerModal
         updateCustomerFormContainer={
           <UpdateCustomerForm
-            {...customer}
-            customerId={customer.id}
+            {...mockedCustomerDetail}
+            customerId={mockedCustomerDetail.id}
             companySelectItems={mockedCompanySummaries}
           />
         }
       />
 
       <DeleteCustomerModal
-        customerId={customer.id}
-        customerFullName={customer.fullName}
+        customerId={mockedCustomerDetail.id}
+        customerFullName={mockedCustomerDetail.fullName}
       />
     </>
   );

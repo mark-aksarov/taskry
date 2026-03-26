@@ -16,27 +16,27 @@ export const mockedTaskSearchList = [
 
 export const mockedTaskDetail = {
   id: 1,
-  title: "Task 1",
+  title: "Fake task",
   description: "Task description. General information goes here.",
   assignee: {
     id: "user-1",
-    fullName: "User 1",
+    fullName: "Fake user",
     imageUrl: "/man.jpg",
   },
   deadline: "2027-01-01",
   status: TaskStatus.active,
   creator: {
     id: "2",
-    fullName: "User 2",
+    fullName: "Fake user",
     imageUrl: "/man.jpg",
   },
   project: {
     id: 1,
-    title: "Project 1",
+    title: "Fake project",
   },
   category: {
     id: 1,
-    name: "Category 1",
+    name: "Fake category",
   },
 };
 

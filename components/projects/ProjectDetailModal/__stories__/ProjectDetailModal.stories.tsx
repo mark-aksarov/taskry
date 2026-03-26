@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
-import { DialogTrigger } from "react-aria-components";
 import { mockedProjectDetail } from "@/mocks/projects";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectDetailModal } from "../ProjectDetailModal";
+import { withProjectDetailModal } from "./withProjectDetailModal";
+import { useProjectDetailModal } from "../ProjectDetailModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectDetail, ProjectDetailSkeleton } from "../../ProjectDetail";
 
@@ -12,15 +13,18 @@ const meta = {
   component: ProjectDetailModal,
   decorators: [
     (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
+      const { onOpenChange } = useProjectDetailModal();
+
+      useEffect(() => onOpenChange(true), [onOpenChange]);
 
       return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Project detail" />
+        <>
+          <Button label="Open modal" onClick={() => onOpenChange(true)} />
           <Story />
-        </DialogTrigger>
+        </>
       );
     },
+    withProjectDetailModal,
     withThemedBackground,
   ],
 } satisfies Meta<typeof ProjectDetailModal>;

@@ -16,11 +16,14 @@ import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose
 interface EntityCommentsModalProps {
   title: string;
   commentsContainer: React.ReactNode;
+  isOpen?: boolean;
+  onOpenChange?: (isOpen: boolean) => void;
 }
 
 export function EntityCommentsModal({
   title,
   commentsContainer,
+  ...props
 }: EntityCommentsModalProps) {
   const { editCommentId } = useCommentFormContext();
 
@@ -30,7 +33,7 @@ export function EntityCommentsModal({
     useUpdateComment();
 
   return (
-    <CommentsModal>
+    <CommentsModal {...props}>
       <CommentsModalDialog>
         <DialogHeaderWithClose>{title}</DialogHeaderWithClose>
         <CommentsModalDialogBody>{commentsContainer}</CommentsModalDialogBody>

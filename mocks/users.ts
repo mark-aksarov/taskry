@@ -136,16 +136,16 @@ export const mockedUserList = [
 
 export const mockedUserDetail = {
   id: "user1",
-  fullName: "User 1",
-  email: "user1@example.com",
+  fullName: "Fake user",
+  email: "fake-user@example.com",
   phoneNumber: "+10000000001",
-  publicLink: "https://example.com/user1",
+  publicLink: "https://example.com/fake-user",
   position: {
     id: 1,
-    name: "Position 1",
+    name: "Fake position",
   },
   imageUrl: "/man.jpg",
   bio: "Sample bio text. Placeholder content only. No specific details provided.",
   birthdate: "1990-01-01",
-  address: "Address line 1",
+  address: "Fake address line",
 };

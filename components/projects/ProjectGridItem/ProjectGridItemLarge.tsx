@@ -3,14 +3,14 @@
 import {
   GridItemText,
   GridItemInfo,
-  GridItemTitleDetailModalTrigger,
+  GridItemTitleButton,
 } from "@/components/common/Grid";
 
 import {
   ItemBaseDeadline,
-  ItemBaseDetailModalTrigger,
+  ItemBaseDetailButton,
+  ItemBaseCommentsButton,
   ItemBaseUserImageContainer,
-  ItemBaseCommentsModalTrigger,
 } from "@/components/common/ItemBase";
 
 import {
@@ -20,23 +20,19 @@ import {
 } from "../ProjectItem";
 
 import { memo } from "react";
-import { UpdateProjectModal } from "../UpdateProjectModal";
-import { ProjectDetailModal } from "../ProjectDetailModal";
-import { ProjectCommentsModal } from "../ProjectCommentsModal";
+import { useProjectDetailModal } from "../ProjectDetailModal";
 import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { useSelectedProjects } from "../SelectedProjectsContext";
+import { useProjectCommentsModal } from "../ProjectCommentsModal";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { ProjectGridItemProgress } from "./ProjectGridItemProgress";
-import { UserDetailModal } from "@/components/users/UserDetailModal";
+import { useUserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectItemCheckbox } from "../ProjectItem/ProjectItemCheckbox";
 
 interface Props extends BaseProjectItemProps {
   tasksTotal: number;
   tasksCompleted: number;
-  projectDetailContainer: React.ReactNode;
-  userDetailContainer: React.ReactNode;
-  userDetailHeaderContainer: React.ReactNode;
 }
 
 export function ProjectGridItemLarge(props: Props) {
@@ -64,14 +60,13 @@ export const ProjectGridItemLargeInner = memo(
     status,
     tasksTotal,
     tasksCompleted,
-    projectCommentsContainer,
-    updateProjectFormContainer,
-    projectDetailContainer,
-    userDetailContainer,
-    userDetailHeaderContainer,
-    sendComment,
-    updateComment,
   }: Props) => {
+    const { onOpenChange: onProjectDetailModalOpenChange } =
+      useProjectDetailModal();
+    const { onOpenChange: onUserDetailModalOpenChange } = useUserDetailModal();
+    const { onOpenChange: onProjectCommentsModalOpenChange } =
+      useProjectCommentsModal();
+
     const creatorImg = (
       <ItemBaseUserImageContainer
         user={creator}
@@ -82,86 +77,59 @@ export const ProjectGridItemLargeInner = memo(
     );
 
     return (
-      <>
-        <ProjectGridItemLayout
-          checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
-          menuTriggerSlot={
-            <ProjectItemActionMenuTrigger
-              projectId={id}
-              projectTitle={title}
-              projectStatus={status}
-              className="-mr-2"
-            />
-          }
-          mainSlot={
-            <GridItemInfo className="flex-auto">
-              <GridItemTitleDetailModalTrigger
-                modal={
-                  <ProjectDetailModal
-                    projectId={id}
-                    projectDetailContainer={projectDetailContainer}
-                  />
-                }
-              >
-                {title}
-              </GridItemTitleDetailModalTrigger>
+      <ProjectGridItemLayout
+        checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
+        menuTriggerSlot={
+          <ProjectItemActionMenuTrigger
+            projectId={id}
+            projectStatus={status}
+            className="-mr-2"
+          />
+        }
+        mainSlot={
+          <GridItemInfo className="flex-auto">
+            <GridItemTitleButton
+              onPress={() => onProjectDetailModalOpenChange(true)}
+            >
+              {title}
+            </GridItemTitleButton>
 
-              <GridItemText>
-                <ItemBaseDeadline deadline={deadline} />
-              </GridItemText>
-            </GridItemInfo>
-          }
-          creatorImageSlot={
-            creator ? (
-              <ItemBaseDetailModalTrigger
-                modal={
-                  <UserDetailModal
-                    userId={creator.id}
-                    userDetailContainer={userDetailContainer}
-                    userDetailHeaderContainer={userDetailHeaderContainer}
-                  />
-                }
-              >
-                {creatorImg}
-              </ItemBaseDetailModalTrigger>
-            ) : (
-              creatorImg
-            )
-          }
-          commentsSlot={
-            <ItemBaseCommentsModalTrigger
-              data-test={`project-${id}-comments-modal-trigger`}
-              commentsCount={commentsCount}
-              modal={
-                <ProjectCommentsModal
-                  projectId={id}
-                  projectCommentsContainer={projectCommentsContainer}
-                  sendComment={sendComment}
-                  updateComment={updateComment}
-                />
-              }
-            />
-          }
-          statusSlot={
-            <ProjectItemBaseBadge
-              projectId={id}
-              deadline={deadline}
-              status={status}
-            />
-          }
-          progressSlot={
-            <ProjectGridItemProgress
-              tasksTotal={tasksTotal}
-              tasksCompleted={tasksCompleted}
-            />
-          }
-        />
-
-        {/* Modal for editing project details */}
-        <UpdateProjectModal
-          updateProjectFormContainer={updateProjectFormContainer}
-        />
-      </>
+            <GridItemText>
+              <ItemBaseDeadline deadline={deadline} />
+            </GridItemText>
+          </GridItemInfo>
+        }
+        creatorImageSlot={
+          creator ? (
+            <ItemBaseDetailButton
+              onPress={() => onUserDetailModalOpenChange(true)}
+            >
+              {creatorImg}
+            </ItemBaseDetailButton>
+          ) : (
+            creatorImg
+          )
+        }
+        commentsSlot={
+          <ItemBaseCommentsButton
+            commentsCount={commentsCount}
+            onPress={() => onProjectCommentsModalOpenChange(true)}
+          />
+        }
+        statusSlot={
+          <ProjectItemBaseBadge
+            projectId={id}
+            deadline={deadline}
+            status={status}
+          />
+        }
+        progressSlot={
+          <ProjectGridItemProgress
+            tasksTotal={tasksTotal}
+            tasksCompleted={tasksCompleted}
+          />
+        }
+      />
     );
   },
 );

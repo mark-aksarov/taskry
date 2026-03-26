@@ -23,22 +23,22 @@ export const mockedProjectSearchList = [
 
 export const mockedProjectDetail = {
   id: 1,
-  title: "Project 1",
+  title: "Fake project",
   creator: {
     id: "1",
-    fullName: "User 1",
+    fullName: "Fake user",
     imageUrl: "/man.jpg",
   },
   deadline: "2027-01-01",
   description: "Project description. General information goes here.",
   customer: {
     id: 2,
-    fullName: "Customer 2",
+    fullName: "Fake customer",
     imageUrl: "/woman.jpg",
   },
   category: {
     id: 1,
-    name: "Category 1",
+    name: "Fake category",
   },
   status: ProjectStatus.pending,
 };

@@ -6,6 +6,7 @@ export { ItemBaseDetailButton } from "./ItemBaseDetailButton";
 export { ItemBaseBadgeSkeleton } from "./ItemBaseBadgeSkeleton";
 export { ItemBasePendingOverlay } from "./ItemBasePendingOverlay";
 export { ItemBaseButtonSkeleton } from "./ItemBaseButtonSkeleton";
+export { ItemBaseCommentsButton } from "./ItemBaseCommentsButton";
 export { ItemBaseActionMenuButton } from "./ItemBaseActionMenuButton";
 export { type ItemBaseDetailButtonProps } from "./ItemBaseDetailButton";
 export { ItemBaseActionMenuTrigger } from "./ItemBaseActionMenuTrigger";

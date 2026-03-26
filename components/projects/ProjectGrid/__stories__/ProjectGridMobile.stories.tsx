@@ -3,9 +3,10 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectGridMobile } from "../ProjectGridMobile";
 import { ProjectGridItemMobile } from "../../ProjectGridItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { MockedProjectProviders } from "../../ProjectProviders/__stories__";
+import { MockedProjectItemModals } from "../../ProjectItemModals/__stories__";
 import { ProjectGridItemMobileStory } from "../../ProjectGridItem/__stories__";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
+import { MockedProjectItemProviders } from "../../ProjectItemProviders/__stories__";
 import { withDeleteProjectsProvider } from "../../DeleteProjectsProvider/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
@@ -37,13 +38,14 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedProjectList.map((project) => (
-      <MockedProjectProviders>
+      <MockedProjectItemProviders>
         <ProjectGridItemMobile
           key={project.id}
           {...ProjectGridItemMobileStory.args}
           {...project}
         />
-      </MockedProjectProviders>
+        <MockedProjectItemModals />
+      </MockedProjectItemProviders>
     )),
   },
 } satisfies Story;

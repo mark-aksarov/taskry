@@ -1,4 +1,3 @@
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ProjectStatus } from "@/generated/prisma/enums";
 
 export interface BaseProjectItemProps {
@@ -12,8 +11,4 @@ export interface BaseProjectItemProps {
   };
   commentsCount: number;
   status: ProjectStatus;
-  updateProjectFormContainer: React.ReactNode;
-  projectCommentsContainer: React.ReactNode;
-  sendComment: ActionFn<ActionState, FormData>;
-  updateComment: ActionFn<ActionState, FormData>;
 }

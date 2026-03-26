@@ -71,15 +71,15 @@ export const mockedCustomerList = [
 
 export const mockedCustomerDetail = {
   id: 1,
-  fullName: "Customer 1",
+  fullName: "Fake customer",
   bio: "Sample bio text. Placeholder content only. No specific details provided.",
-  email: "customer1@example.com",
+  email: "fake-customer@example.com",
   phoneNumber: "+10000000001",
-  address: "Address line 1",
+  address: "Fake address line",
   imageUrl: "/man.jpg",
-  publicLink: "https://example.com/customer1",
+  publicLink: "https://example.com/fake-customer",
   company: {
     id: 1,
-    name: "Company 1",
+    name: "Fake company",
   },
 };

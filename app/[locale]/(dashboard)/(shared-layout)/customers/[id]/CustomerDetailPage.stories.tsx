@@ -52,7 +52,7 @@ export const Default = {
     customerDetailActions: (
       <MockedCustomerDetailProviders>
         <CustomerDetailActions />
-        <MockedCustomerDetailModals customer={mockedCustomerDetail} />
+        <MockedCustomerDetailModals />
       </MockedCustomerDetailProviders>
     ),
   },

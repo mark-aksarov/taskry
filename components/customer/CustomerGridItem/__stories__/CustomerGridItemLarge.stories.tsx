@@ -16,7 +16,7 @@ const meta = {
     (Story) => (
       <>
         <Story />
-        <MockedCustomerItemModals customer={mockedCustomerDetail} />
+        <MockedCustomerItemModals />
       </>
     ),
 

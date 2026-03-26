@@ -20,33 +20,6 @@ interface CustomersDynamicProps {
   customers: CustomerListItemDTO[];
 }
 
-interface CustomerItemWrapperProps {
-  customer: CustomerListItemDTO;
-  renderItem: (props: BaseCustomerItemProps) => React.ReactNode;
-}
-
-function CustomerItemWrapper({
-  customer,
-  renderItem,
-}: CustomerItemWrapperProps) {
-  const commonProps: BaseCustomerItemProps = {
-    id: customer.id,
-    fullName: customer.fullName,
-    imageUrl: customer.imageUrl,
-    email: customer.email,
-    phoneNumber: customer.phoneNumber,
-    publicLink: customer.publicLink,
-    company: customer.company,
-  };
-
-  return (
-    <CustomerItemProviders>
-      {renderItem(commonProps)}
-      <CustomerItemModals customer={customer} />
-    </CustomerItemProviders>
-  );
-}
-
 export function CustomersDynamic({
   page,
   pageSize,
@@ -98,5 +71,32 @@ export function CustomersDynamic({
       gridLarge={renderGridLarge}
       gridMobile={renderGridMobile}
     />
+  );
+}
+
+interface CustomerItemWrapperProps {
+  customer: CustomerListItemDTO;
+  renderItem: (props: BaseCustomerItemProps) => React.ReactNode;
+}
+
+function CustomerItemWrapper({
+  customer,
+  renderItem,
+}: CustomerItemWrapperProps) {
+  const commonProps: BaseCustomerItemProps = {
+    id: customer.id,
+    fullName: customer.fullName,
+    imageUrl: customer.imageUrl,
+    email: customer.email,
+    phoneNumber: customer.phoneNumber,
+    publicLink: customer.publicLink,
+    company: customer.company,
+  };
+
+  return (
+    <CustomerItemProviders>
+      {renderItem(commonProps)}
+      <CustomerItemModals customer={customer} />
+    </CustomerItemProviders>
   );
 }

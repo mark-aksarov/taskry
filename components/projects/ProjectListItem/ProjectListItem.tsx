@@ -9,28 +9,27 @@ import {
 import {
   ListItemText,
   ListItemTitle,
-  ListItemTitleDetailModalTrigger,
+  ListItemTitleButton,
 } from "@/components/common/List";
 
 import {
   ItemBaseDeadline,
   ItemBaseUserImageContainer,
-  ItemBaseDetailModalTrigger,
-  ItemBaseCommentsModalTrigger,
+  ItemBaseDetailButton,
+  ItemBaseCommentsButton,
 } from "@/components/common/ItemBase";
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
-import { UpdateProjectModal } from "../UpdateProjectModal";
-import { ProjectDetailModal } from "../ProjectDetailModal";
-import { ProjectCommentsModal } from "../ProjectCommentsModal";
+import { useProjectDetailModal } from "../ProjectDetailModal";
 import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { useSelectedProjects } from "../SelectedProjectsContext";
+import { useProjectCommentsModal } from "../ProjectCommentsModal";
 import { SelectableItem } from "@/components/common/SelectableItem";
-import { UserDetailModal } from "@/components/users/UserDetailModal";
+import { useUserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectItemCheckbox } from "../ProjectItem/ProjectItemCheckbox";
-import { CustomerDetailModal } from "@/components/customer/CustomerDetailModal";
+import { useCustomerDetailModal } from "@/components/customer/CustomerDetailModal";
 
 export interface Props extends BaseProjectItemProps {
   category?: {
@@ -46,11 +45,6 @@ export interface Props extends BaseProjectItemProps {
     id: number;
     name: string;
   };
-  projectDetailContainer: React.ReactNode;
-  userDetailContainer: React.ReactNode;
-  userDetailHeaderContainer: React.ReactNode;
-  customerDetailContainer: React.ReactNode;
-  customerDetailHeaderContainer: React.ReactNode;
   showCheckbox?: boolean;
 }
 
@@ -80,17 +74,16 @@ export const ProjectListItemInner = memo(
     commentsCount,
     status,
     creator,
-    updateProjectFormContainer,
-    projectDetailContainer,
-    userDetailContainer,
-    userDetailHeaderContainer,
-    customerDetailContainer,
-    customerDetailHeaderContainer,
-    projectCommentsContainer,
-    sendComment,
-    updateComment,
   }: Props) => {
     const t = useTranslations("projects.ProjectListItem");
+
+    const { onOpenChange: onProjectDetailModalOpenChange } =
+      useProjectDetailModal();
+    const { onOpenChange: onUserDetailModalOpenChange } = useUserDetailModal();
+    const { onOpenChange: onCustomerDetailModalOpenChange } =
+      useCustomerDetailModal();
+    const { onOpenChange: onProjectCommentsModalOpenChange } =
+      useProjectCommentsModal();
 
     const creatorImg = (
       <ItemBaseUserImageContainer
@@ -110,22 +103,6 @@ export const ProjectListItemInner = memo(
       />
     );
 
-    const userDetailModal = creator ? (
-      <UserDetailModal
-        userId={creator.id}
-        userDetailContainer={userDetailContainer}
-        userDetailHeaderContainer={userDetailHeaderContainer}
-      />
-    ) : undefined;
-
-    const customerDetailModal = customer ? (
-      <CustomerDetailModal
-        customerId={customer.id}
-        customerDetailContainer={customerDetailContainer}
-        customerDetailHeaderContainer={customerDetailHeaderContainer}
-      />
-    ) : undefined;
-
     return (
       <>
         <ProjectListItemLayout
@@ -133,17 +110,11 @@ export const ProjectListItemInner = memo(
           checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
           mainSlot={
             <>
-              <ListItemTitleDetailModalTrigger
-                data-test="project-list-item-title-trigger"
-                modal={
-                  <ProjectDetailModal
-                    projectId={id}
-                    projectDetailContainer={projectDetailContainer}
-                  />
-                }
+              <ListItemTitleButton
+                onPress={() => onProjectDetailModalOpenChange(true)}
               >
                 {title}
-              </ListItemTitleDetailModalTrigger>
+              </ListItemTitleButton>
               <ListItemText>
                 <ItemBaseDeadline deadline={deadline} />
               </ListItemText>
@@ -152,9 +123,11 @@ export const ProjectListItemInner = memo(
           creatorImgSlot={
             <>
               {creator ? (
-                <ItemBaseDetailModalTrigger modal={userDetailModal}>
+                <ItemBaseDetailButton
+                  onPress={() => onUserDetailModalOpenChange(true)}
+                >
                   {creatorImg}
-                </ItemBaseDetailModalTrigger>
+                </ItemBaseDetailButton>
               ) : (
                 creatorImg
               )}
@@ -163,9 +136,11 @@ export const ProjectListItemInner = memo(
           creatorSlot={
             <>
               {creator ? (
-                <ListItemTitleDetailModalTrigger modal={userDetailModal}>
+                <ListItemTitleButton
+                  onPress={() => onUserDetailModalOpenChange(true)}
+                >
                   {creator.fullName}
-                </ListItemTitleDetailModalTrigger>
+                </ListItemTitleButton>
               ) : (
                 <ListItemTitle>{t("noCreator")}</ListItemTitle>
               )}
@@ -176,9 +151,11 @@ export const ProjectListItemInner = memo(
           customerImgSlot={
             <>
               {customer ? (
-                <ItemBaseDetailModalTrigger modal={customerDetailModal}>
+                <ItemBaseDetailButton
+                  onPress={() => onCustomerDetailModalOpenChange(true)}
+                >
                   {customerImg}
-                </ItemBaseDetailModalTrigger>
+                </ItemBaseDetailButton>
               ) : (
                 customerImg
               )}
@@ -187,9 +164,11 @@ export const ProjectListItemInner = memo(
           customerSlot={
             <>
               {customer ? (
-                <ListItemTitleDetailModalTrigger modal={customerDetailModal}>
+                <ListItemTitleButton
+                  onPress={() => onCustomerDetailModalOpenChange(true)}
+                >
                   {customer.fullName}
-                </ListItemTitleDetailModalTrigger>
+                </ListItemTitleButton>
               ) : (
                 <ListItemTitle>{t("noCustomer")} </ListItemTitle>
               )}
@@ -223,31 +202,17 @@ export const ProjectListItemInner = memo(
             />
           }
           commentsModalTriggerSlot={
-            <ItemBaseCommentsModalTrigger
-              data-test={`project-${id}-comments-modal-trigger`}
+            <ItemBaseCommentsButton
               commentsCount={commentsCount}
-              modal={
-                <ProjectCommentsModal
-                  projectId={id}
-                  projectCommentsContainer={projectCommentsContainer}
-                  sendComment={sendComment}
-                  updateComment={updateComment}
-                />
-              }
+              onPress={() => onProjectCommentsModalOpenChange(true)}
             />
           }
           menuTriggerSlot={
             <ProjectItemActionMenuTrigger
               projectId={id}
-              projectTitle={title}
               projectStatus={status}
             />
           }
-        />
-
-        {/* Modal for editing project details */}
-        <UpdateProjectModal
-          updateProjectFormContainer={updateProjectFormContainer}
         />
       </>
     );

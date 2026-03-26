@@ -6,6 +6,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
+import { useProjectDetailModal } from "./ProjectDetailModalContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface ProjectDetailModalProps {
@@ -19,8 +20,14 @@ export function ProjectDetailModal({
 }: ProjectDetailModalProps) {
   const t = useTranslations("projects.ProjectDetailModal");
 
+  const { isOpen, onOpenChange } = useProjectDetailModal();
+
   return (
-    <DetailModal data-test="project-detail-modal">
+    <DetailModal
+      data-test="project-detail-modal"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+    >
       <DetailModalDialog>
         <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
         <DialogBody>{projectDetailContainer}</DialogBody>

@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
-import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedCustomerDetail } from "@/mocks/customers";
 import { CustomerDetailModal } from "../CustomerDetailModal";
 import { CustomerDetailHeader } from "../../CustomerDetailHeader";
+import { withCustomerDetailModal } from "./withCustomerDetailModal";
 import { CustomerDetail } from "../../CustomerDetail/CustomerDetail";
+import { useCustomerDetailModal } from "../CustomerDetailModalContext";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailSkeleton } from "../../CustomerDetail/CustomerDetailSkeleton";
@@ -15,15 +16,18 @@ const meta = {
   component: CustomerDetailModal,
   decorators: [
     (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
+      const { onOpenChange } = useCustomerDetailModal();
+
+      useEffect(() => onOpenChange(true), [onOpenChange]);
 
       return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Customer detail" />
+        <>
+          <Button label="Open modal" onClick={() => onOpenChange(true)} />
           <Story />
-        </DialogTrigger>
+        </>
       );
     },
+    withCustomerDetailModal,
     withThemedBackground,
   ],
   args: {

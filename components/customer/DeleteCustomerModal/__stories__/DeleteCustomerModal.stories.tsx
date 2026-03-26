@@ -1,15 +1,15 @@
 import {
   DeleteCustomerModal,
   useDeleteCustomerModal,
-} from "../DeleteCustomerModal";
+} from "../../DeleteCustomerModal";
 
 import React, { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withToastRegion } from "@/.storybook/withToastRegion";
-import { withDeleteCustomerModalProvider } from "./__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteCustomerProvider } from "../DeleteCustomerProvider/__stories__";
+import { withDeleteCustomerModalProvider } from "./withDeleteCustomerModalProvider";
+import { withDeleteCustomerProvider } from "../../DeleteCustomerProvider/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {

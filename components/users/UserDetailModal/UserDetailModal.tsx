@@ -5,6 +5,7 @@ import {
 } from "@/components/common/DetailModal";
 
 import { useTranslations } from "next-intl";
+import { useUserDetailModal } from "./UserDetailModalContext";
 import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
@@ -21,8 +22,10 @@ export function UserDetailModal({
 }: UserDetailModalProps) {
   const t = useTranslations("users.UserDetailModal");
 
+  const { isOpen, onOpenChange } = useUserDetailModal();
+
   return (
-    <DetailModal>
+    <DetailModal isOpen={isOpen} onOpenChange={onOpenChange}>
       <DetailModalDialog>
         <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
         <DialogBody className="flex flex-col gap-6">

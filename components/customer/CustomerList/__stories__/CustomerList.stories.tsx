@@ -40,7 +40,7 @@ export const Default = {
           {...CustomerListItemStory.args}
           {...customer}
         />
-        <MockedCustomerItemModals customer={customer} />
+        <MockedCustomerItemModals />
       </MockedCustomerItemProviders>
     )),
   },
