@@ -1,7 +1,12 @@
+import {
+  ItemBaseDetailButton,
+  ItemBaseDetailButtonProps,
+  ItemBaseDetailModalTrigger,
+} from "../ItemBase";
+
 import { twMerge } from "tailwind-merge";
 import { Link } from "@/components/ui/Link";
 import { Skeleton } from "@/components/ui/Skeleton";
-import { ItemBaseDetailModalTrigger } from "../ItemBase";
 import { ItemBaseDetailModalTriggerProps } from "../ItemBase";
 
 // Truncate (overflow-hidden + text-overflow) works only on block elements.
@@ -36,6 +41,22 @@ export function ListItemTitleLink({
     <Link className={twMerge(titleStyles, "block", className)} href={href}>
       {children}
     </Link>
+  );
+}
+
+// Detail button
+export function ListItemTitleButton({
+  className,
+  children,
+  ...props
+}: ItemBaseDetailButtonProps & ListItemTitleProps) {
+  return (
+    <ItemBaseDetailButton
+      className={twMerge(titleStyles, className)}
+      {...props}
+    >
+      {children}
+    </ItemBaseDetailButton>
   );
 }
 

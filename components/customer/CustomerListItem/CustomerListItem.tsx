@@ -9,30 +9,28 @@ import {
   ListItemText,
   ListItemTextLink,
   ListItemTitle,
-  ListItemTitleDetailModalTrigger,
 } from "@/components/common/List";
 
 import {
-  ItemBaseDetailModalTrigger,
+  ItemBaseDetailButton,
   ItemBaseUserImageContainer,
 } from "@/components/common/ItemBase";
+
+import {
+  ListItemTitleLink,
+  ListItemTitleButton,
+} from "@/components/common/List/ListItemTitle";
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
 import { CustomerItemCheckbox } from "../CustomerItem";
-import { CustomerDetailModal } from "../CustomerDetailModal";
+import { useCustomerDetailModal } from "../CustomerDetailModal";
 import { CustomerItemActionMenuTrigger } from "../CustomerItem";
 import { CustomerListItemLayout } from "./CustomerListItemLayout";
 import { SelectableItem } from "@/components/common/SelectableItem";
-import { ListItemTitleLink } from "@/components/common/List/ListItemTitle";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
-interface Props extends BaseCustomerItemProps {
-  customerDetailContainer: React.ReactNode;
-  customerDetailHeaderContainer: React.ReactNode;
-}
-
-export function CustomerListItem(props: Props) {
+export function CustomerListItem(props: BaseCustomerItemProps) {
   const selected = useSelectedItems();
 
   return (
@@ -53,11 +51,11 @@ export const CustomerListItemInner = memo(
     publicLink,
     imageUrl,
     company,
-    customerDetailContainer,
-    customerDetailHeaderContainer,
-    updateCustomerFormContainer,
-  }: Props) => {
+  }: BaseCustomerItemProps) => {
     const t = useTranslations("customers.CustomerListItem");
+
+    const { onOpenChange: onCustomerDetailModalOpenChange } =
+      useCustomerDetailModal();
 
     const customerImg = (
       <ItemBaseUserImageContainer
@@ -68,31 +66,25 @@ export const CustomerListItemInner = memo(
       />
     );
 
-    const customerDetailModal = (
-      <CustomerDetailModal
-        customerId={id}
-        customerDetailContainer={customerDetailContainer}
-        customerDetailHeaderContainer={customerDetailHeaderContainer}
-      />
-    );
-
     return (
       <CustomerListItemLayout
         id={id}
         checkboxSlot={<CustomerItemCheckbox id={id} />}
         imgSlot={
-          <ItemBaseDetailModalTrigger
-            modal={customerDetailModal}
+          <ItemBaseDetailButton
+            onPress={() => onCustomerDetailModalOpenChange(true)}
             className="h-9 w-9"
           >
             {customerImg}
-          </ItemBaseDetailModalTrigger>
+          </ItemBaseDetailButton>
         }
         mainSlot={
           <>
-            <ListItemTitleDetailModalTrigger modal={customerDetailModal}>
+            <ListItemTitleButton
+              onPress={() => onCustomerDetailModalOpenChange(true)}
+            >
               {fullName}
-            </ListItemTitleDetailModalTrigger>
+            </ListItemTitleButton>
 
             <ListItemTextLink href={`mailto:${email}`}>
               {email}
@@ -133,13 +125,7 @@ export const CustomerListItemInner = memo(
             <ListItemText>{t("company")}</ListItemText>
           </>
         }
-        menuTriggerSlot={
-          <CustomerItemActionMenuTrigger
-            customerId={id}
-            customerFullName={fullName}
-            updateCustomerFormContainer={updateCustomerFormContainer}
-          />
-        }
+        menuTriggerSlot={<CustomerItemActionMenuTrigger customerId={id} />}
       />
     );
   },

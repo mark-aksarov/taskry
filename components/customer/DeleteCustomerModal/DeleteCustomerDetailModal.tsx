@@ -3,7 +3,6 @@
 import { startTransition } from "react";
 import { useDeleteCustomer } from "../DeleteCustomerContext";
 import { BaseDeleteCustomerModal } from "./BaseDeleteCustomerModal";
-import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { useDeleteCustomerModal } from "./DeleteCustomerModalContext";
 
 interface DeleteCustomerModalProps {
@@ -11,27 +10,18 @@ interface DeleteCustomerModalProps {
   customerFullName: string;
 }
 
-export function DeleteCustomerModal({
+export function DeleteCustomerDetailModal({
   customerId,
   customerFullName,
 }: DeleteCustomerModalProps) {
   const { action } = useDeleteCustomer();
   const { isOpen, onOpenChange } = useDeleteCustomerModal();
-  const { remove: removeSelected } = useSelectedItems();
 
+  // Close modal and delete customer
+  // We should redirect to the customer list page after deletion
   function handleDelete() {
-    const payload = {
-      id: customerId,
-      shouldRedirect: false,
-    };
-
-    //Remove the entity from the selection to prevent access to it
-    removeSelected(customerId);
-
-    //close modal before deleting
     onOpenChange(false);
-
-    startTransition(() => action(payload));
+    startTransition(() => action({ id: customerId, shouldRedirect: true }));
   }
 
   return (

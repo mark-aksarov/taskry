@@ -1,12 +1,9 @@
-import { CustomerDetail } from "../../CustomerDetail";
 import type { Meta, StoryObj } from "@storybook/react";
-import { UpdateCustomerForm } from "../../UpdateCustomerForm";
-import { mockedCompanySummaries } from "@/mocks/companies";
+import { mockedCustomerDetail } from "@/mocks/customers";
 import { CustomerGridItemLarge } from "../CustomerGridItemLarge";
-import { CustomerDetailHeader } from "../../CustomerDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCustomerProviders } from "../../CustomerProviders/__stories__";
-import { mockedCustomerDetail as mockedCustomer } from "@/mocks/customers";
+import { MockedCustomerItemModals } from "../../CustomerItem/__stories__";
+import { withCustomerItemProviders } from "../../CustomerItemProviders/__stories__";
 import { withDeleteCustomersProvider } from "../../DeleteCustomersProvider/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
@@ -16,7 +13,15 @@ const meta = {
   title: "components/customers/CustomerGridItemLarge",
   component: CustomerGridItemLarge,
   decorators: [
-    withCustomerProviders,
+    (Story) => (
+      <>
+        <Story />
+        <MockedCustomerItemModals customer={mockedCustomerDetail} />
+      </>
+    ),
+
+    withCustomerItemProviders,
+    withCustomerItemProviders,
     withDeleteCustomersProvider,
     withSelectedItemsProvider,
     withGuestModeModalProvider,
@@ -30,22 +35,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    ...mockedCustomer,
-    customerDetailContainer: <CustomerDetail {...mockedCustomer} />,
-    customerDetailHeaderContainer: (
-      <CustomerDetailHeader
-        fullName={mockedCustomer.fullName}
-        imageUrl={mockedCustomer.imageUrl}
-        companyName={mockedCustomer.company.name}
-      />
-    ),
-    updateCustomerFormContainer: (
-      <UpdateCustomerForm
-        {...mockedCustomer}
-        customerId={mockedCustomer.id}
-        companySelectItems={mockedCompanySummaries}
-      />
-    ),
+    ...mockedCustomerDetail,
   },
 } satisfies Story;
 
@@ -63,12 +53,9 @@ export const WithOverflowContent = {
 
 export const WithoutImagePhoneAndLink = {
   args: {
-    id: mockedCustomer.id,
-    fullName: mockedCustomer.fullName,
-    email: mockedCustomer.email,
-    customerDetailContainer: Default.args.customerDetailContainer,
-    customerDetailHeaderContainer: Default.args.customerDetailHeaderContainer,
-    updateCustomerFormContainer: Default.args.updateCustomerFormContainer,
+    id: mockedCustomerDetail.id,
+    fullName: mockedCustomerDetail.fullName,
+    email: mockedCustomerDetail.email,
   },
 } satisfies Story;
 

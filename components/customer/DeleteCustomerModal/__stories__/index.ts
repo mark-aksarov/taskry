@@ -1,0 +1,1 @@
+export { withDeleteCustomerModalProvider } from "./withDeleteCustomerModalProvider";

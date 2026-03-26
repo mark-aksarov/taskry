@@ -4,17 +4,17 @@ import {
 } from "../CustomerDetailActions";
 
 import { CustomerDetail } from "../CustomerDetail";
-import { UpdateCustomerForm } from "../UpdateCustomerForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedCustomerDetail } from "@/mocks/customers";
 import { CustomerDetailCard } from "./CustomerDetailCard";
 import { CustomerDetailSkeleton } from "../CustomerDetail";
-import { mockedCompanySummaries } from "@/mocks/companies";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailHeaderInteractive } from "../CustomerDetailHeader";
+import { MockedCustomerDetailModals } from "../CustomerDetailModals/__stories__";
 import { withDeleteCustomerProvider } from "../DeleteCustomerProvider/__stories__";
 import { withUpdateCustomerProvider } from "../UpdateCustomerProvider/__stories__";
+import { MockedCustomerDetailProviders } from "../CustomerDetailProviders/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { MockedCustomerDetailHeaderInteractiveProviders } from "../CustomerDetailHeaderInteractiveProviders/__stories__";
@@ -48,17 +48,10 @@ export const Default = {
       </MockedCustomerDetailHeaderInteractiveProviders>
     ),
     customerDetailActions: (
-      <CustomerDetailActions
-        customerId={mockedCustomerDetail.id}
-        customerFullName={mockedCustomerDetail.fullName}
-        updateCustomerFormContainer={
-          <UpdateCustomerForm
-            {...mockedCustomerDetail}
-            customerId={mockedCustomerDetail.id}
-            companySelectItems={mockedCompanySummaries}
-          />
-        }
-      />
+      <MockedCustomerDetailProviders>
+        <CustomerDetailActions />
+        <MockedCustomerDetailModals customer={mockedCustomerDetail} />
+      </MockedCustomerDetailProviders>
     ),
   },
 } satisfies Story;

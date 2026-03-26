@@ -10,6 +10,7 @@ export { GridItemText } from "./GridItemText";
 export { GridItemTitle } from "./GridItemTitle";
 export { GridItemEmail } from "./GridItemEmail";
 export { GridItemContact } from "./GridItemContact";
+export { GridItemTitleButton } from "./GridItemTitle";
 export { GridItemContactLink } from "./GridItemContact";
 export { GridItemPublicLink } from "./GridItemPublicLink";
 export { GridItemContactText } from "./GridItemContactText";

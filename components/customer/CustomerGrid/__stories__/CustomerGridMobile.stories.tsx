@@ -3,9 +3,10 @@ import { mockedCustomerList } from "@/mocks/customers";
 import { CustomerGridMobile } from "../CustomerGridMobile";
 import { CustomerGridItemMobile } from "../../CustomerGridItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { MockedCustomerProviders } from "../../CustomerProviders/__stories__";
-import { CustomerGridItemMobileStory } from "../../CustomerGridItem/__stories__";
+import { MockedCustomerItemModals } from "../../CustomerItem/__stories__";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
+import { CustomerGridItemMobileStory } from "../../CustomerGridItem/__stories__";
+import { MockedCustomerItemProviders } from "../../CustomerItemProviders/__stories__";
 import { withDeleteCustomersProvider } from "../../DeleteCustomersProvider/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
@@ -35,13 +36,15 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedCustomerList.map((customer) => (
-      <MockedCustomerProviders key={customer.id}>
+      <MockedCustomerItemProviders key={customer.id}>
         <CustomerGridItemMobile
           key={customer.id}
           {...CustomerGridItemMobileStory.args}
           {...customer}
         />
-      </MockedCustomerProviders>
+
+        <MockedCustomerItemModals customer={customer} />
+      </MockedCustomerItemProviders>
     )),
   },
 } satisfies Story;

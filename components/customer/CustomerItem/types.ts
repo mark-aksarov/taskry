@@ -9,5 +9,4 @@ export interface BaseCustomerItemProps {
     id: number;
     name: string;
   };
-  updateCustomerFormContainer: React.ReactNode;
 }

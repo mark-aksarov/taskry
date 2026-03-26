@@ -47,7 +47,6 @@ export const CustomerGridItemMobileInner = memo(
     publicLink,
     imageUrl,
     company,
-    updateCustomerFormContainer,
   }: BaseCustomerItemProps) => {
     const t = useTranslations("customers.CustomerGridItem");
 
@@ -66,8 +65,6 @@ export const CustomerGridItemMobileInner = memo(
           <GridItemRow>
             <CustomerItemActionMenuTrigger
               customerId={id}
-              customerFullName={fullName}
-              updateCustomerFormContainer={updateCustomerFormContainer}
               className="relative z-1 -mr-2 ml-auto"
             />
           </GridItemRow>

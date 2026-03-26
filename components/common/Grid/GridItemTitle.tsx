@@ -1,5 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import {
+  ItemBaseDetailButton,
+  ItemBaseDetailButtonProps,
   ItemBaseDetailModalTrigger,
   ItemBaseDetailModalTriggerProps,
 } from "../ItemBase";
@@ -15,6 +17,22 @@ interface GridItemTitleProps {
 
 export function GridItemTitle({ className, children }: GridItemTitleProps) {
   return <div className={twMerge(titleStyles, className)}>{children}</div>;
+}
+
+// Detail button
+export function GridItemTitleButton({
+  className,
+  children,
+  ...props
+}: ItemBaseDetailButtonProps & GridItemTitleProps) {
+  return (
+    <ItemBaseDetailButton
+      className={twMerge(titleStyles, className)}
+      {...props}
+    >
+      {children}
+    </ItemBaseDetailButton>
+  );
 }
 
 // Detail modal title

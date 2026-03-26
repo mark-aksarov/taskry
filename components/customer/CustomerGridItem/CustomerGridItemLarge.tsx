@@ -1,11 +1,6 @@
 "use client";
 
 import {
-  BaseCustomerItemProps,
-  CustomerItemPendingOverlay,
-} from "../CustomerItem";
-
-import {
   GridItemRow,
   GridItemInfo,
   GridItemText,
@@ -13,30 +8,30 @@ import {
   GridItemPublicLink,
   GridItemPhoneNumber,
   GridItemContactList,
-  GridItemTitleDetailModalTrigger,
+  GridItemTitleButton,
 } from "@/components/common/Grid";
 
 import {
-  ItemBaseDetailModalTrigger,
+  BaseCustomerItemProps,
+  CustomerItemPendingOverlay,
+} from "../CustomerItem";
+
+import {
+  ItemBaseDetailButton,
   ItemBaseUserImageContainer,
 } from "@/components/common/ItemBase";
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
 import { Separator } from "@/components/ui/Separator";
-import { CustomerDetailModal } from "../CustomerDetailModal";
+import { useCustomerDetailModal } from "../CustomerDetailModal";
 import { CustomerItemActionMenuTrigger } from "../CustomerItem";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { CustomerItemCheckbox } from "../CustomerItem/CustomerItemCheckbox";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
-interface Props extends BaseCustomerItemProps {
-  customerDetailContainer: React.ReactNode;
-  customerDetailHeaderContainer: React.ReactNode;
-}
-
-export function CustomerGridItemLarge(props: Props) {
+export function CustomerGridItemLarge(props: BaseCustomerItemProps) {
   const selected = useSelectedItems();
 
   return (
@@ -57,11 +52,11 @@ export const CustomerGridItemLargeInner = memo(
     publicLink,
     imageUrl,
     company,
-    customerDetailContainer,
-    customerDetailHeaderContainer,
-    updateCustomerFormContainer,
-  }: Props) => {
+  }: BaseCustomerItemProps) => {
     const t = useTranslations("customers.CustomerGridItem");
+
+    const { onOpenChange: onCustomerDetailModalOpenChange } =
+      useCustomerDetailModal();
 
     const customerImg = (
       <ItemBaseUserImageContainer
@@ -72,37 +67,28 @@ export const CustomerGridItemLargeInner = memo(
       />
     );
 
-    const customerDetailModal = (
-      <CustomerDetailModal
-        customerId={id}
-        customerDetailContainer={customerDetailContainer}
-        customerDetailHeaderContainer={customerDetailHeaderContainer}
-      />
-    );
-
     return (
       <CustomerGridItemLayout
         topRowSlot={
           <GridItemRow>
             <CustomerItemCheckbox id={id} />
-            <CustomerItemActionMenuTrigger
-              customerId={id}
-              customerFullName={fullName}
-              updateCustomerFormContainer={updateCustomerFormContainer}
-              className="-mr-2"
-            />
+            <CustomerItemActionMenuTrigger customerId={id} className="-mr-2" />
           </GridItemRow>
         }
         imageSlot={
-          <ItemBaseDetailModalTrigger modal={customerDetailModal}>
+          <ItemBaseDetailButton
+            onPress={() => onCustomerDetailModalOpenChange(true)}
+          >
             {customerImg}
-          </ItemBaseDetailModalTrigger>
+          </ItemBaseDetailButton>
         }
         titleSlot={
           <GridItemInfo className="flex-auto">
-            <GridItemTitleDetailModalTrigger modal={customerDetailModal}>
+            <GridItemTitleButton
+              onPress={() => onCustomerDetailModalOpenChange(true)}
+            >
               {fullName}
-            </GridItemTitleDetailModalTrigger>
+            </GridItemTitleButton>
 
             <GridItemText>
               {company ? company.name : t("noCompany")}

@@ -8,16 +8,15 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { mockedCustomerDetail } from "@/mocks/customers";
 import { CustomerDetailPage } from "./CustomerDetailPage";
-import { mockedCompanySummaries } from "@/mocks/companies";
 import { SearchList } from "@/components/search/SearchList";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { UpdateCustomerForm } from "@/components/customer/UpdateCustomerForm";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
 import { CustomerDetailHeaderInteractive } from "@/components/customer/CustomerDetailHeader";
-import { MockedCustomerProviders } from "@/components/customer/CustomerProviders/__stories__";
+import { MockedCustomerDetailModals } from "@/components/customer/CustomerDetailModals/__stories__";
+import { MockedCustomerDetailProviders } from "@/components/customer/CustomerDetailProviders/__stories__";
 import { MockedCustomerDetailHeaderInteractiveProviders } from "@/components/customer/CustomerDetailHeaderInteractiveProviders/__stories__";
 
 const meta = {
@@ -51,19 +50,10 @@ export const Default = {
       </MockedCustomerDetailHeaderInteractiveProviders>
     ),
     customerDetailActions: (
-      <MockedCustomerProviders>
-        <CustomerDetailActions
-          customerId={mockedCustomerDetail.id}
-          customerFullName={mockedCustomerDetail.fullName}
-          updateCustomerFormContainer={
-            <UpdateCustomerForm
-              {...mockedCustomerDetail}
-              customerId={mockedCustomerDetail.id}
-              companySelectItems={mockedCompanySummaries}
-            />
-          }
-        />
-      </MockedCustomerProviders>
+      <MockedCustomerDetailProviders>
+        <CustomerDetailActions />
+        <MockedCustomerDetailModals customer={mockedCustomerDetail} />
+      </MockedCustomerDetailProviders>
     ),
   },
 } satisfies Story;

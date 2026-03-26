@@ -1,0 +1,1 @@
+export { CustomerDetailProviders } from "./CustomerDetailProviders";

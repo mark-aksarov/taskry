@@ -7,13 +7,10 @@ import {
 
 import { CustomerList } from "./CustomerList";
 import { CustomerListItem } from "./CustomerListItem";
-import { BaseCustomerItemProps } from "./CustomerItem";
-import { CustomerProviders } from "./CustomerProviders";
-import { CustomerDetailContainer } from "./CustomerDetailContainer";
+import { CustomerItemProviders } from "./CustomerItemProviders";
 import { CustomerGridLarge, CustomerGridMobile } from "./CustomerGrid";
 import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
-import { UpdateCustomerFormContainer } from "./UpdateCustomerFormContainer";
-import { CustomerDetailHeaderContainer } from "./CustomerDetailHeaderContainer";
+import { BaseCustomerItemProps, CustomerItemModals } from "./CustomerItem";
 import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
 
 interface CustomersDynamicProps {
@@ -23,15 +20,14 @@ interface CustomersDynamicProps {
   customers: CustomerListItemDTO[];
 }
 
-export function CustomersDynamic({
-  page,
-  pageSize,
-  customers,
-  totalPages,
-}: CustomersDynamicProps) {
-  const getCommonProps = (
-    customer: CustomerListItemDTO,
-  ): BaseCustomerItemProps => ({
+function CustomerItemWrapper({
+  customer,
+  ItemComponent,
+}: {
+  customer: CustomerListItemDTO;
+  ItemComponent: React.ComponentType<BaseCustomerItemProps & any>;
+}) {
+  const commonProps: BaseCustomerItemProps = {
     id: customer.id,
     fullName: customer.fullName,
     imageUrl: customer.imageUrl,
@@ -39,61 +35,57 @@ export function CustomersDynamic({
     phoneNumber: customer.phoneNumber,
     publicLink: customer.publicLink,
     company: customer.company,
-    updateCustomerFormContainer: (
-      <UpdateCustomerFormContainer customerId={customer.id} />
-    ),
-  });
-
-  const getContainerProps = (customer: CustomerListItemDTO) => ({
-    customerDetailContainer: (
-      <CustomerDetailContainer customerId={customer.id} />
-    ),
-    customerDetailHeaderContainer: (
-      <CustomerDetailHeaderContainer customerId={customer.id} />
-    ),
-  });
-
-  const renderListLarge = () => {
-    return (
-      <CustomerList>
-        {customers.map((customer) => (
-          <CustomerProviders key={customer.id}>
-            <CustomerListItem
-              {...getCommonProps(customer)}
-              {...getContainerProps(customer)}
-            />
-          </CustomerProviders>
-        ))}
-      </CustomerList>
-    );
   };
 
-  const renderGridLarge = () => {
-    return (
-      <CustomerGridLarge>
-        {customers.map((customer) => (
-          <CustomerProviders key={customer.id}>
-            <CustomerGridItemLarge
-              {...getCommonProps(customer)}
-              {...getContainerProps(customer)}
-            />
-          </CustomerProviders>
-        ))}
-      </CustomerGridLarge>
-    );
-  };
+  return (
+    <CustomerItemProviders>
+      <ItemComponent {...commonProps} />
+      <CustomerItemModals customer={customer} />
+    </CustomerItemProviders>
+  );
+}
 
-  const renderGridMobile = () => {
-    return (
-      <CustomerGridMobile>
-        {customers.map((customer) => (
-          <CustomerProviders key={customer.id}>
-            <CustomerGridItemMobile {...getCommonProps(customer)} />
-          </CustomerProviders>
-        ))}
-      </CustomerGridMobile>
-    );
-  };
+export function CustomersDynamic({
+  page,
+  pageSize,
+  customers,
+  totalPages,
+}: CustomersDynamicProps) {
+  const renderListLarge = () => (
+    <CustomerList>
+      {customers.map((customer) => (
+        <CustomerItemWrapper
+          key={customer.id}
+          customer={customer}
+          ItemComponent={CustomerListItem}
+        />
+      ))}
+    </CustomerList>
+  );
+
+  const renderGridLarge = () => (
+    <CustomerGridLarge>
+      {customers.map((customer) => (
+        <CustomerItemWrapper
+          key={customer.id}
+          customer={customer}
+          ItemComponent={CustomerGridItemLarge}
+        />
+      ))}
+    </CustomerGridLarge>
+  );
+
+  const renderGridMobile = () => (
+    <CustomerGridMobile>
+      {customers.map((customer) => (
+        <CustomerItemWrapper
+          key={customer.id}
+          customer={customer}
+          ItemComponent={CustomerGridItemMobile}
+        />
+      ))}
+    </CustomerGridMobile>
+  );
 
   return (
     <EntityContainerPresentation
