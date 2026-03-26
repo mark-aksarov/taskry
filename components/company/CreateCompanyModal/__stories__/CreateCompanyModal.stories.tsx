@@ -1,18 +1,18 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { CreatePositionModal } from "./CreatePositionModal";
-import { withCreatePositionModalProvider } from "./__stories__";
-import { useCreatePositionModal } from "./CreatePositionModalContext";
+import { CreateCompanyModal } from "../CreateCompanyModal";
+import { useCreateCompanyModal } from "../CreateCompanyModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCreatePositionProvider } from "../CreatePositionProvider/__stories__";
+import { withCreateCompanyModalProvider } from "./withCreateCompanyModalProvider";
+import { withCreateCompanyProvider } from "../../CreateCompanyProvider/__stories__";
 
 const meta = {
-  title: "components/positions/CreatePositionModal",
-  component: CreatePositionModal,
+  title: "components/companies/CreateCompanyModal",
+  component: CreateCompanyModal,
   decorators: [
     (Story) => {
-      const { onOpenChange } = useCreatePositionModal();
+      const { onOpenChange } = useCreateCompanyModal();
 
       useEffect(() => onOpenChange(true), [onOpenChange]);
 
@@ -23,17 +23,15 @@ const meta = {
         </>
       );
     },
-    withCreatePositionProvider,
-    withCreatePositionModalProvider,
+    withCreateCompanyProvider,
+    withCreateCompanyModalProvider,
     withThemedBackground,
   ],
-} satisfies Meta<typeof CreatePositionModal>;
+} satisfies Meta<typeof CreateCompanyModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
-  args: {
-    createPosition: () => ({ status: "success" }),
-  },
+  args: {},
 } satisfies Story;

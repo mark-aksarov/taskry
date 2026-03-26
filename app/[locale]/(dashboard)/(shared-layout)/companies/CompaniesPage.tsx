@@ -9,10 +9,10 @@ import { BackButton } from "@/components/common/BackButton";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
-import { CreateCompanyModal } from "@/components/company/CreateCompanyModal";
 import { PageEmptySection } from "@/components/common/PageEmptySection";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { ToolbarLarge, ToolbarMobile } from "@/components/common/Toolbar";
+import { CreateCompanyModal } from "@/components/company/CreateCompanyModal";
 import { CompanyActionsMenuTrigger } from "@/components/company/CompanyActionsMenuTrigger";
 import { CompaniesEmptySectionCreateButton } from "@/components/company/CompaniesEmptySectionCreateButton";
 

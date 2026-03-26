@@ -1,17 +1,18 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { UpdatePositionModal } from "./UpdatePositionModal";
-import { useUpdatePositionModal } from "./UpdatePositionModalContext";
+import { CreatePositionModal } from "../CreatePositionModal";
+import { useCreatePositionModal } from "../CreatePositionModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdatePositionProvider } from "../UpdatePositionProvider/__stories__";
+import { withCreatePositionModalProvider } from "./withCreatePositionModalProvider";
+import { withCreatePositionProvider } from "../../CreatePositionProvider/__stories__";
 
 const meta = {
-  title: "components/positions/UpdatePositionModal",
-  component: UpdatePositionModal,
+  title: "components/positions/CreatePositionModal",
+  component: CreatePositionModal,
   decorators: [
     (Story) => {
-      const { onOpenChange } = useUpdatePositionModal();
+      const { onOpenChange } = useCreatePositionModal();
 
       useEffect(() => onOpenChange(true), [onOpenChange]);
 
@@ -22,17 +23,17 @@ const meta = {
         </>
       );
     },
-    withUpdatePositionProvider,
+    withCreatePositionProvider,
+    withCreatePositionModalProvider,
     withThemedBackground,
   ],
-} satisfies Meta<typeof UpdatePositionModal>;
+} satisfies Meta<typeof CreatePositionModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    positionId: 1,
-    positionName: "Position 1",
+    createPosition: () => ({ status: "success" }),
   },
 } satisfies Story;

@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { UpdateProjectCategoryModal } from "./UpdateProjectCategoryModal";
-import { useUpdateProjectCategoryModal } from "./UpdateProjectCategoryModalContext";
-import { withUpdateProjectCategoryProvider } from "../UpdateProjectCategoryProvider/__stories__";
+import { UpdateProjectCategoryModal } from "../UpdateProjectCategoryModal";
+import { useUpdateProjectCategoryModal } from "../UpdateProjectCategoryModalContext";
+import { withUpdateProjectCategoryProvider } from "../../UpdateProjectCategoryProvider/__stories__";
 
 const meta = {
   title: "components/project-categories/UpdateProjectCategoryModal",
@@ -17,10 +17,7 @@ const meta = {
 
       return (
         <>
-          <Button
-            label="Edit project category"
-            onClick={() => onOpenChange(true)}
-          />
+          <Button label="Open modal" onClick={() => onOpenChange(true)} />
           <Story />
         </>
       );

@@ -1,18 +1,17 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { CreateCompanyModal } from "./CreateCompanyModal";
-import { withCreateCompanyModalProvider } from "./__stories__";
-import { useCreateCompanyModal } from "./CreateCompanyModalContext";
+import { UpdateCompanyModal } from "../UpdateCompanyModal";
+import { useUpdateCompanyModal } from "../UpdateCompanyModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCreateCompanyProvider } from "../CreateCompanyProvider/__stories__";
+import { withUpdateCompanyModalProvider } from "./withUpdateCompanyModalProvider";
 
 const meta = {
-  title: "components/companies/CreateCompanyModal",
-  component: CreateCompanyModal,
+  title: "components/companies/UpdateCompanyModal",
+  component: UpdateCompanyModal,
   decorators: [
     (Story) => {
-      const { onOpenChange } = useCreateCompanyModal();
+      const { onOpenChange } = useUpdateCompanyModal();
 
       useEffect(() => onOpenChange(true), [onOpenChange]);
 
@@ -23,15 +22,17 @@ const meta = {
         </>
       );
     },
-    withCreateCompanyProvider,
-    withCreateCompanyModalProvider,
+    withUpdateCompanyModalProvider,
     withThemedBackground,
   ],
-} satisfies Meta<typeof CreateCompanyModal>;
+} satisfies Meta<typeof UpdateCompanyModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
-  args: {},
+  args: {
+    companyId: 1,
+    companyName: "Company 1",
+  },
 } satisfies Story;
