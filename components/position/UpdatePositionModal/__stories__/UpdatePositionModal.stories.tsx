@@ -5,6 +5,7 @@ import { UpdatePositionModal } from "../UpdatePositionModal";
 import { useUpdatePositionModal } from "../UpdatePositionModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdatePositionProvider } from "../../UpdatePositionProvider/__stories__";
+import { withUpdatePositionModalProvider } from "./withUpdatePositionModalProvider";
 
 const meta = {
   title: "components/positions/UpdatePositionModal",
@@ -23,6 +24,7 @@ const meta = {
       );
     },
     withUpdatePositionProvider,
+    withUpdatePositionModalProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof UpdatePositionModal>;

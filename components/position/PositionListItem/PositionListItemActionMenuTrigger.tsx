@@ -6,15 +6,14 @@ import {
   ItemBaseActionMenuDialogHeader,
 } from "@/components/common/ItemBase";
 
-import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { UpdatePositionModal } from "../UpdatePositionModal";
-import { DeletePositionModal } from "../DeletePositionModal";
 import { useUpdatePositionModal } from "../UpdatePositionModal";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { usePositionListItemPending } from "./usePositionListItemPending";
+import { useDeletePositionModal } from "../DeletePositionModal/DeletePositionModalContext";
 
 export type PositionListItemActionMenuTriggerProps = {
   positionId: number;
@@ -31,11 +30,10 @@ export function PositionListItemActionMenuTrigger({
   const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const { onOpenChange: onDeleteModalOpenChange } = useDeletePositionModal();
 
   // State for update modal from context
-  const { onOpenChange: onUpdatePositionModalOpenChange } =
-    useUpdatePositionModal();
+  const { onOpenChange: onUpdateModalOpenChange } = useUpdatePositionModal();
 
   /**
    * Handles menu actions for a position item
@@ -46,9 +44,9 @@ export function PositionListItemActionMenuTrigger({
     guestGuard(() => {
       const action = key.toString();
       if (action === "edit") {
-        onUpdatePositionModalOpenChange(true);
+        onUpdateModalOpenChange(true);
       } else if (action === "delete") {
-        setIsDeleteModalOpen(true);
+        onDeleteModalOpenChange(true);
       }
     });
   };
@@ -57,38 +55,23 @@ export function PositionListItemActionMenuTrigger({
   const isPending = usePositionListItemPending(positionId);
 
   return (
-    <>
-      <ItemBaseActionMenuTrigger
-        onAction={handleAction}
-        renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
-        renderButton={() => (
-          <ItemBaseActionMenuButton
-            isPending={isPending}
-            data-test="position-item-action-menu-trigger"
-            data-id={positionId}
-          />
-        )}
-      >
-        <Item textValue={t("edit")} key="edit">
-          <Pencil size={16} /> {t("edit")}
-        </Item>
-        <Item textValue={t("delete")} key="delete">
-          <Trash size={16} /> {t("delete")}
-        </Item>
-      </ItemBaseActionMenuTrigger>
-
-      {/* Modals for editing, deleting, and guest mode */}
-      <UpdatePositionModal
-        positionId={positionId}
-        positionName={positionName}
-      />
-
-      <DeletePositionModal
-        isOpen={isDeleteModalOpen}
-        onOpenChange={setIsDeleteModalOpen}
-        positionId={positionId}
-        positionName={positionName}
-      />
-    </>
+    <ItemBaseActionMenuTrigger
+      onAction={handleAction}
+      renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
+      renderButton={() => (
+        <ItemBaseActionMenuButton
+          isPending={isPending}
+          data-test="position-item-action-menu-trigger"
+          data-id={positionId}
+        />
+      )}
+    >
+      <Item textValue={t("edit")} key="edit">
+        <Pencil size={16} /> {t("edit")}
+      </Item>
+      <Item textValue={t("delete")} key="delete">
+        <Trash size={16} /> {t("delete")}
+      </Item>
+    </ItemBaseActionMenuTrigger>
   );
 }

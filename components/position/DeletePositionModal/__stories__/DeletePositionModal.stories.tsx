@@ -1,19 +1,19 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { DeleteCompanyModal } from "../DeleteCompanyModal";
-import { useDeleteCompanyModal } from "../DeleteCompanyModalContext";
+import { DeletePositionModal } from "../DeletePositionModal";
+import { useDeletePositionModal } from "../DeletePositionModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteCompanyModalProvider } from "./withDeleteCompanyModalProvider";
-import { withDeleteCompanyProvider } from "../../DeleteCompanyProvider/__stories__";
+import { withDeletePositionModalProvider } from "./withDeletePositionModalProvider";
+import { withDeletePositionProvider } from "../../DeletePositionProvider/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {
-  title: "components/companies/DeleteCompanyModal",
-  component: DeleteCompanyModal,
+  title: "components/positions/DeletePositionModal",
+  component: DeletePositionModal,
   decorators: [
     (Story) => {
-      const { onOpenChange } = useDeleteCompanyModal();
+      const { onOpenChange } = useDeletePositionModal();
 
       useEffect(() => onOpenChange(true), [onOpenChange]);
 
@@ -24,19 +24,19 @@ const meta = {
         </>
       );
     },
-    withDeleteCompanyProvider,
-    withDeleteCompanyModalProvider,
+    withDeletePositionProvider,
+    withDeletePositionModalProvider,
     withSelectedItemsProvider,
     withThemedBackground,
   ],
-} satisfies Meta<typeof DeleteCompanyModal>;
+} satisfies Meta<typeof DeletePositionModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    companyId: 1,
-    companyName: "Company 1",
+    positionId: 1,
+    positionName: "Position 1",
   },
 } satisfies Story;

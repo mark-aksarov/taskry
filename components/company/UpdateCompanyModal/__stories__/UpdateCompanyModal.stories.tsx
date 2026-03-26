@@ -5,6 +5,7 @@ import { UpdateCompanyModal } from "../UpdateCompanyModal";
 import { useUpdateCompanyModal } from "../UpdateCompanyModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateCompanyModalProvider } from "./withUpdateCompanyModalProvider";
+import { withUpdateCompanyProvider } from "../../UpdateCompanyProvider/__stories__";
 
 const meta = {
   title: "components/companies/UpdateCompanyModal",
@@ -22,6 +23,7 @@ const meta = {
         </>
       );
     },
+    withUpdateCompanyProvider,
     withUpdateCompanyModalProvider,
     withThemedBackground,
   ],
