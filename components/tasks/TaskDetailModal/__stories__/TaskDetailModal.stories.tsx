@@ -6,12 +6,13 @@ import { DialogTrigger } from "react-aria-components";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SubtaskList } from "@/components/subtasks/SubtaskList";
 import { TaskDetail, TaskDetailSkeleton } from "../../TaskDetail";
-import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { CreateSubtaskModal } from "@/components/subtasks/CreateSubtaskModal";
 import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
-import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
+import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
+import { withCreateSubtaskModalProvider } from "@/components/subtasks/CreateSubtaskModal/__stories__";
 
 const meta = {
   title: "components/tasks/TaskDetailModal",
@@ -22,14 +23,15 @@ const meta = {
 
       return (
         <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Task detail" />
+          <Button label="Open modal" />
           <Story />
 
-          <NewSubtaskModal taskId={1} />
+          <CreateSubtaskModal taskId={1} />
         </DialogTrigger>
       );
     },
     withCreateSubtaskProvider,
+    withCreateSubtaskModalProvider,
     withGuestModeModalProvider,
     withCurrentUserProvider,
     withThemedBackground,

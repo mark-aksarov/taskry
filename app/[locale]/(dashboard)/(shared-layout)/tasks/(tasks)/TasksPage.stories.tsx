@@ -13,7 +13,7 @@ import { CreateTaskForm } from "@/components/tasks/CreateTaskForm";
 import { TaskGridMobile } from "@/components/tasks/TaskGrid";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
-import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
+import { CreateSubtaskModal } from "@/components/subtasks/CreateSubtaskModal";
 import { TaskListStory } from "@/components/tasks/TaskList/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
@@ -30,7 +30,7 @@ import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
-import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
+import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
 import { withCreateTaskCategoryProvider } from "@/components/taskCategory/CreateTaskCategoryContext/__stories__";
 
@@ -42,7 +42,7 @@ const meta = {
     (Story) => (
       <>
         <Story />
-        <NewSubtaskModal taskId={1} />
+        <CreateSubtaskModal taskId={1} />
       </>
     ),
     withCreateSubtaskProvider,

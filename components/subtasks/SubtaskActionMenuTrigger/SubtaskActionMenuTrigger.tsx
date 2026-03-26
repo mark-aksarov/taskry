@@ -11,7 +11,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "react-aria-components";
 import { startTransition, useState } from "react";
 import { focusRing } from "@/components/ui/styles";
-import { EditSubtaskModal } from "../EditSubtaskModal";
+import { UpdateSubtaskModal } from "../UpdateSubtaskModal";
 import { DeleteSubtaskModal } from "../DeleteSubtaskModal";
 import { useToggleSubtask } from "../ToggleSubtaskContext";
 import { useUpdateSubtask } from "../UpdateSubtaskContext";
@@ -111,7 +111,7 @@ export function SubtaskActionMenuTrigger({
         </Item>
       </ItemBaseActionMenuTrigger>
 
-      <EditSubtaskModal
+      <UpdateSubtaskModal
         taskId={taskId}
         subtaskId={subtaskId}
         subtaskText={subtaskText}

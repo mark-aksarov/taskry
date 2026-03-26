@@ -18,7 +18,7 @@ import { SubtaskList } from "@/components/subtasks/SubtaskList";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { TaskDetailHeader } from "@/components/tasks/TaskDetailHeader";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
-import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
+import { CreateSubtaskModal } from "@/components/subtasks/CreateSubtaskModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
@@ -27,7 +27,7 @@ import { withDeleteTaskProvider } from "@/components/tasks/DeleteTaskContext/__s
 import { withUpdateTaskProvider } from "@/components/tasks/UpdateTaskContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
-import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
+import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
 
 const meta = {
   title: "pages/TaskDetailPage",
@@ -37,7 +37,7 @@ const meta = {
     (Story) => (
       <>
         <Story />
-        <NewSubtaskModal taskId={1} />
+        <CreateSubtaskModal taskId={1} />
       </>
     ),
     withUpdateTaskProvider,

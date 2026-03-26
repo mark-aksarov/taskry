@@ -9,24 +9,18 @@ import {
 
 import { startTransition } from "react";
 import { useTranslations } from "next-intl";
-import { SubtaskTextField } from "./SubtaskTextField";
-import { useUpdateSubtask } from "./UpdateSubtaskContext";
+import { SubtaskTextField } from "../SubtaskTextField";
+import { useCreateSubtask } from "../CreateSubtaskContext";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 
-interface EditSubtaskFormProps {
-  subtaskId: number;
+interface CreateSubtaskFormProps {
   taskId: number;
-  textDefaultValue?: string;
 }
 
-export function EditSubtaskForm({
-  subtaskId,
-  taskId,
-  textDefaultValue,
-}: EditSubtaskFormProps) {
-  const t = useTranslations("subtasks.EditSubtaskForm");
+export function CreateSubtaskForm({ taskId }: CreateSubtaskFormProps) {
+  const t = useTranslations("subtasks.CreateSubtaskForm");
 
-  const { state, isPending, action } = useUpdateSubtask();
+  const { state, action, isPending } = useCreateSubtask();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -38,11 +32,10 @@ export function EditSubtaskForm({
   }
 
   return (
-    <FormBase id="edit-subtask-form" onSubmit={handleSubmit}>
+    <FormBase id="new-subtask-form" onSubmit={handleSubmit}>
       <FormBaseBody>
-        <input type="hidden" name="id" value={subtaskId} />
         <input type="hidden" name="taskId" value={taskId} />
-        <SubtaskTextField defaultValue={textDefaultValue} />
+        <SubtaskTextField />
         <FormErrorBanner status={state.status} isPending={isPending}>
           {state.message}
         </FormErrorBanner>

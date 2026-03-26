@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
-import { EditSubtaskModal } from "./EditSubtaskModal";
+import { UpdateSubtaskModal } from "./UpdateSubtaskModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useUpdateSubtask } from "../UpdateSubtaskContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateSubtaskProvider } from "../UpdateSubtaskContext/__stories__";
 
 const meta = {
-  title: "components/subtasks/EditSubtaskModal",
-  component: EditSubtaskModal,
+  title: "components/subtasks/UpdateSubtaskModal",
+  component: UpdateSubtaskModal,
   decorators: [
     (Story) => {
       const { onModalOpenChange } = useUpdateSubtask();
@@ -28,7 +28,7 @@ const meta = {
     withUpdateSubtaskProvider,
     withThemedBackground,
   ],
-} satisfies Meta<typeof EditSubtaskModal>;
+} satisfies Meta<typeof UpdateSubtaskModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

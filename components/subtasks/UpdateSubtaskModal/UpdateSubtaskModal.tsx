@@ -5,22 +5,22 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { EditSubtaskForm } from "../EditSubtaskForm";
+import { UpdateSubtaskForm } from "../UpdateSubtaskForm";
 import { useUpdateSubtask } from "../UpdateSubtaskContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
-interface EditSubtaskModalProps {
+interface UpdateSubtaskModalProps {
   subtaskId: number;
   taskId: number;
   subtaskText?: string;
 }
 
-export function EditSubtaskModal({
+export function UpdateSubtaskModal({
   subtaskId,
   taskId,
   subtaskText,
-}: EditSubtaskModalProps) {
-  const t = useTranslations("subtasks.EditSubtaskModal");
+}: UpdateSubtaskModalProps) {
+  const t = useTranslations("subtasks.UpdateSubtaskModal");
 
   const { isModalOpen, onModalOpenChange } = useUpdateSubtask();
 
@@ -34,7 +34,7 @@ export function EditSubtaskModal({
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("heading")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
-          <EditSubtaskForm
+          <UpdateSubtaskForm
             taskId={taskId}
             subtaskId={subtaskId}
             textDefaultValue={subtaskText}

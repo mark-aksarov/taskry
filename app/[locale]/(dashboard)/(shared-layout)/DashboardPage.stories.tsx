@@ -39,7 +39,7 @@ import { CreateTaskModal } from "@/components/tasks/CreateTaskModal";
 import { TaskListSkeleton } from "@/components/tasks/TaskList";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { AssignedTaskList } from "@/components/tasks/AssignedTaskList";
-import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
+import { CreateSubtaskModal } from "@/components/subtasks/CreateSubtaskModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { TaskGridMobileStory } from "@/components/tasks/TaskGrid/__stories__";
@@ -51,7 +51,7 @@ import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksContext/_
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
-import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
+import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
 
 const meta = {
@@ -62,7 +62,7 @@ const meta = {
     (Story) => (
       <>
         <Story />
-        <NewSubtaskModal taskId={1} />
+        <CreateSubtaskModal taskId={1} />
       </>
     ),
     withCreateSubtaskProvider,

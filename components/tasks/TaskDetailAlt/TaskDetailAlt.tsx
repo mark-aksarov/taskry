@@ -8,7 +8,7 @@ import {
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { TaskDetailAltLayout } from "./TaskDetailAltLayout";
-import { NewSubtasksButton } from "@/components/subtasks/NewSubtaskButton";
+import { CreateSubtasksButton } from "@/components/subtasks/CreateSubtaskButton";
 
 interface TaskDetailAltProps {
   id: number;
@@ -126,7 +126,7 @@ export function TaskDetailAlt({
         <DetailInfo className="border-none pb-0">
           <DetailTitle>{t("subtasks")}</DetailTitle>
           {subtasksList}
-          <NewSubtasksButton />
+          <CreateSubtasksButton />
         </DetailInfo>
       }
     />

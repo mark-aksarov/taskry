@@ -13,10 +13,7 @@ const schema = z.object({
   taskId: taskId,
 });
 
-export async function createSubtask(
-  _prevState: ActionState,
-  formData: FormData,
-): Promise<ActionState> {
+export async function createSubtask(formData: FormData): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

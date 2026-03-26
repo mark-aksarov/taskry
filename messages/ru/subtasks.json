@@ -1,9 +1,9 @@
 {
-  "EditSubtaskForm": {
+  "UpdateSubtaskForm": {
     "submitButtonLabel": "Обновить подзадачу",
     "successMessage": "Подзадача успешно обновлена"
   },
-  "NewSubtaskForm": {
+  "CreateSubtaskForm": {
     "submitButtonLabel": "Добавить подзадачу",
     "successMessage": "Подзадача успешно добавлена"
   },
@@ -35,16 +35,16 @@
   "SubtaskFormDialogHeader": {
     "heading": "Новая подзадача"
   },
-  "NewSubtaskModal": {
+  "CreateSubtaskModal": {
     "heading": "Новая подзадача"
   },
-  "EditSubtaskModal": {
+  "UpdateSubtaskModal": {
     "heading": "Редактировать подзадачу"
   },
-  "NewSubtaskDialogAddButton": {
+  "CreateSubtaskDialogAddButton": {
     "label": "Добавить подзадачу"
   },
-  "NewSubtasksButton": {
+  "CreateSubtasksButton": {
     "label": "Новая подзадача"
   }
 }

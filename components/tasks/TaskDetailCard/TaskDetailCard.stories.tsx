@@ -14,7 +14,7 @@ import { mockedProjectSummaries } from "@/mocks/projects";
 import { CommentList } from "@/components/comments/CommentList";
 import { SubtaskList } from "@/components/subtasks/SubtaskList";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
-import { NewSubtaskModal } from "@/components/subtasks/NewSubtaskModal";
+import { CreateSubtaskModal } from "@/components/subtasks/CreateSubtaskModal";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { TaskDetailAlt, TaskDetailAltSkeleton } from "../TaskDetailAlt";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -24,7 +24,8 @@ import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__"
 import { CommentListStory } from "@/components/comments/CommentList/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
-import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
+import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
+import { withCreateSubtaskModalProvider } from "@/components/subtasks/CreateSubtaskModal/__stories__";
 
 const meta = {
   title: "components/tasks/TaskDetailCard",
@@ -44,12 +45,13 @@ const meta = {
             />
           }
         />
-        <NewSubtaskModal taskId={mockedTaskDetail.id} />
+        <CreateSubtaskModal taskId={mockedTaskDetail.id} />
       </>
     ),
     withUpdateTaskProvider,
     withDeleteTaskProvider,
     withCreateSubtaskProvider,
+    withCreateSubtaskModalProvider,
     withGuestModeModalProvider,
     withCurrentUserProvider,
     withThemedBackground,

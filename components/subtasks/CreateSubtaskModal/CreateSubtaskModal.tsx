@@ -4,33 +4,33 @@ import {
   FormBaseModal,
   FormBaseModalDialog,
   FormBaseModalDialogBody,
-} from "../common/FormBaseModal";
+} from "../../common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { NewSubtaskForm } from "./NewSubtaskForm";
-import { useCreateSubtask } from "./CreateSubtaskContext";
+import { CreateSubtaskForm } from "../CreateSubtaskForm";
+import { useCreateSubtaskModal } from "./CreateSubtaskModalContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
-interface EditSubtaskModalProps {
+interface UpdateSubtaskModalProps {
   taskId: number;
 }
 
-export function NewSubtaskModal({ taskId }: EditSubtaskModalProps) {
-  const t = useTranslations("subtasks.NewSubtaskModal");
+export function CreateSubtaskModal({ taskId }: UpdateSubtaskModalProps) {
+  const t = useTranslations("subtasks.CreateSubtaskModal");
 
-  const { isModalOpen, onModalOpenChange } = useCreateSubtask();
+  const { isOpen, onOpenChange } = useCreateSubtaskModal();
 
   return (
     <FormBaseModal
       data-test="new-subtask-modal"
       className="md:w-[350px]"
-      isOpen={isModalOpen}
-      onOpenChange={onModalOpenChange}
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("heading")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
-          <NewSubtaskForm taskId={taskId} />
+          <CreateSubtaskForm taskId={taskId} />
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

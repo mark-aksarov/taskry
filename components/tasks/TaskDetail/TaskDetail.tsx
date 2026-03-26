@@ -13,7 +13,7 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
-import { NewSubtasksButton } from "@/components/subtasks/NewSubtaskButton";
+import { CreateSubtasksButton } from "@/components/subtasks/CreateSubtaskButton";
 
 interface TaskDetailProps {
   id: number;
@@ -162,7 +162,7 @@ export function TaskDetail({
         <DetailInfo className="border-none pb-0">
           <DetailTitle>{t("subtasks")}</DetailTitle>
           {subtasksList}
-          <NewSubtasksButton />
+          <CreateSubtasksButton />
         </DetailInfo>
       }
     />

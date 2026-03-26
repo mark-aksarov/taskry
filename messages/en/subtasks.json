@@ -1,9 +1,9 @@
 {
-  "EditSubtaskForm": {
+  "UpdateSubtaskForm": {
     "submitButtonLabel": "Edit Subtask",
     "successMessage": "Subtask updated successfully"
   },
-  "NewSubtaskForm": {
+  "CreateSubtaskForm": {
     "submitButtonLabel": "Add Subtask",
     "successMessage": "Subtask created successfully"
   },
@@ -35,16 +35,16 @@
   "SubtaskFormDialogHeader": {
     "heading": "New Subtask"
   },
-  "NewSubtaskModal": {
+  "CreateSubtaskModal": {
     "heading": "New Subtask"
   },
-  "EditSubtaskModal": {
+  "UpdateSubtaskModal": {
     "heading": "Edit Subtask"
   },
-  "NewSubtaskDialogAddButton": {
+  "CreateSubtaskDialogAddButton": {
     "label": "Add Subtask"
   },
-  "NewSubtasksButton": {
+  "CreateSubtasksButton": {
     "label": "New Subtask"
   }
 }

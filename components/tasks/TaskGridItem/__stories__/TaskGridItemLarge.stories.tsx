@@ -20,7 +20,7 @@ import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories_
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusesContext/__stories__";
-import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskContext/__stories__";
+import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
 
 const meta = {
   title: "components/tasks/TaskGridItemLarge",
