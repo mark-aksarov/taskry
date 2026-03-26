@@ -12,24 +12,22 @@ import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { useDeleteCompany } from "../DeleteCompanyContext";
+import { useDeleteCompanyModal } from "./DeleteCompanyModalContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 interface DeleteCompanyModalProps {
   companyId: number;
   companyName: string;
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
 }
 
 export function DeleteCompanyModal({
   companyId,
   companyName,
-  isOpen,
-  onOpenChange,
 }: DeleteCompanyModalProps) {
   const t = useTranslations("company.DeleteCompanyModal");
 
   const { action } = useDeleteCompany();
+  const { isOpen, onOpenChange } = useDeleteCompanyModal();
 
   const { remove: removeSelected } = useSelectedItems();
 

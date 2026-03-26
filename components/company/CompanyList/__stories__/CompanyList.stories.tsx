@@ -2,6 +2,8 @@ import { CompanyList } from "../CompanyList";
 import { Meta, StoryObj } from "@storybook/react";
 import { CompanyListItem } from "../../CompanyListItem";
 import { mockedCompanySummaries } from "@/mocks/companies";
+import { DeleteCompanyModal } from "../../DeleteCompanyModal";
+import { UpdateCompanyModal } from "../../UpdateCompanyModal";
 import { CompanyListItemStory } from "../../CompanyListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { MockedCompanyProviders } from "../../CompanyProviders/__stories__";
@@ -36,6 +38,9 @@ export const Default = {
           {...CompanyListItemStory.args}
           {...company}
         />
+
+        <DeleteCompanyModal companyId={company.id} companyName={company.name} />
+        <UpdateCompanyModal companyId={company.id} companyName={company.name} />
       </MockedCompanyProviders>
     )),
   },

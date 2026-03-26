@@ -1,6 +1,7 @@
 import { UpdateCompanyModalProvider } from "../../UpdateCompanyModal";
 import { MockedUpdateCompanyProvider } from "../../UpdateCompanyProvider/__stories__";
 import { MockedDeleteCompanyProvider } from "../../DeleteCompanyProvider/__stories__";
+import { DeleteCompanyModalProvider } from "../../DeleteCompanyModal";
 
 export function MockedCompanyProviders({
   children,
@@ -10,7 +11,9 @@ export function MockedCompanyProviders({
   return (
     <UpdateCompanyModalProvider>
       <MockedUpdateCompanyProvider>
-        <MockedDeleteCompanyProvider>{children}</MockedDeleteCompanyProvider>
+        <DeleteCompanyModalProvider>
+          <MockedDeleteCompanyProvider>{children}</MockedDeleteCompanyProvider>
+        </DeleteCompanyModalProvider>
       </MockedUpdateCompanyProvider>
     </UpdateCompanyModalProvider>
   );

@@ -46,7 +46,7 @@ const CompanyListItemInner = memo(({ id, name }: CompanyListItemProps) => {
         <ListItemText>{t("name")}</ListItemText>
       </ListItemInfo>
 
-      <CompanyListItemActionMenuTrigger companyId={id} companyName={name} />
+      <CompanyListItemActionMenuTrigger companyId={id} />
     </ListItem>
   );
 });

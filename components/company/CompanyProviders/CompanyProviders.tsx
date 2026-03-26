@@ -1,3 +1,4 @@
+import { DeleteCompanyModalProvider } from "../DeleteCompanyModal";
 import { DeleteCompanyProvider } from "../DeleteCompanyProvider";
 import { UpdateCompanyModalProvider } from "../UpdateCompanyModal";
 import { UpdateCompanyProvider } from "../UpdateCompanyProvider";
@@ -10,7 +11,9 @@ export function CompanyProviders({ children }: ProjectItemProvidersProps) {
   return (
     <UpdateCompanyModalProvider>
       <UpdateCompanyProvider>
-        <DeleteCompanyProvider>{children}</DeleteCompanyProvider>
+        <DeleteCompanyModalProvider>
+          <DeleteCompanyProvider>{children}</DeleteCompanyProvider>
+        </DeleteCompanyModalProvider>
       </UpdateCompanyProvider>
     </UpdateCompanyModalProvider>
   );
