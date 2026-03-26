@@ -1,20 +1,14 @@
 "use client";
 
-import {
-  CreateSubtaskModal,
-  CreateSubtaskModalProvider,
-} from "../subtasks/CreateSubtaskModal";
-
 import useSWR from "swr";
 import { TaskDetailSkeleton } from "./TaskDetail";
 import { TaskDetail } from "./TaskDetail/TaskDetail";
 import { SubtaskList } from "../subtasks/SubtaskList";
 import { TaskDetailDTO } from "@/lib/data/task/task.dto";
+import { TaskDetailProviders } from "./TaskDetailProviders";
 import { SubtaskListItem } from "../subtasks/SubtaskListItem";
-import { deleteSubtask } from "@/lib/actions/subtask/deleteSubtask";
-import { updateSubtask } from "@/lib/actions/subtask/updateSubtask";
-import { toggleSubtask } from "@/lib/actions/subtask/toggleSubtask";
-import { CreateSubtaskProvider } from "../subtasks/CreateSubtaskProvider";
+import { SubtaskProviders } from "../subtasks/SubtaskProviders";
+import { CreateSubtaskModal } from "../subtasks/CreateSubtaskModal";
 
 interface TaskDetailContainerProps {
   taskId: number;
@@ -39,40 +33,36 @@ export function TaskDetailContainer({ taskId }: TaskDetailContainerProps) {
   }
 
   return (
-    <CreateSubtaskModalProvider>
-      <CreateSubtaskProvider taskId={task.id}>
-        <TaskDetail
-          id={task.id}
-          title={task.title}
-          creator={task.creator}
-          assignee={task.assignee}
-          deadline={task.deadline}
-          description={task.description}
-          category={task.category}
-          status={task.status}
-          project={task.project}
-          subtasksList={
-            task.subtasks.length ? (
-              <SubtaskList>
-                {task.subtasks.map((subtask) => (
+    <TaskDetailProviders taskId={task.id}>
+      <TaskDetail
+        id={task.id}
+        title={task.title}
+        creator={task.creator}
+        assignee={task.assignee}
+        deadline={task.deadline}
+        description={task.description}
+        category={task.category}
+        status={task.status}
+        project={task.project}
+        subtasksList={
+          task.subtasks.length ? (
+            <SubtaskList>
+              {task.subtasks.map((subtask) => (
+                <SubtaskProviders key={subtask.id} taskId={task.id}>
                   <SubtaskListItem
-                    key={subtask.id}
                     id={subtask.id}
                     text={subtask.text}
                     isDone={subtask.isDone}
                     taskId={task.id}
-                    toggleSubtask={toggleSubtask}
-                    updateSubtask={updateSubtask}
-                    deleteSubtask={deleteSubtask}
                   />
-                ))}
-              </SubtaskList>
-            ) : undefined
-          }
-        />
+                </SubtaskProviders>
+              ))}
+            </SubtaskList>
+          ) : undefined
+        }
+      />
 
-        <CreateSubtaskModal taskId={task.id} />
-      </CreateSubtaskProvider>
-    </CreateSubtaskModalProvider>
+      <CreateSubtaskModal taskId={task.id} />
+    </TaskDetailProviders>
   );
 }

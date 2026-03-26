@@ -6,10 +6,7 @@ import { getTranslations } from "next-intl/server";
 import { deleteSubtask as deleteSubtaskQuery } from "@/lib/data/subtask/subtask.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
-export async function deleteSubtask(
-  _prevState: ActionState,
-  id: number,
-): Promise<ActionState> {
+export async function deleteSubtask(id: number): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

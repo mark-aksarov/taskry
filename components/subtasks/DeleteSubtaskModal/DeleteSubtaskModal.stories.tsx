@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { DeleteSubtaskModal } from "../DeleteSubtaskModal";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteSubtaskProvider } from "../DeleteSubtaskContext/__stories__";
+import { withDeleteSubtaskProvider } from "../DeleteSubtaskProvider/__stories__";
 
 const meta = {
   title: "components/subtasks/DeleteSubtaskModal",
@@ -19,7 +19,7 @@ const meta = {
 
     return (
       <>
-        <Button label="Delete subtask" onClick={() => setOpen(true)} />
+        <Button label="Open modal" onClick={() => setOpen(true)} />
         <DeleteSubtaskModal {...args} isOpen={open} onOpenChange={setOpen} />
       </>
     );

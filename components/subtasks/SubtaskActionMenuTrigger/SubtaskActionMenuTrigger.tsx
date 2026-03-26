@@ -11,7 +11,10 @@ import { useTranslations } from "next-intl";
 import { Button } from "react-aria-components";
 import { startTransition, useState } from "react";
 import { focusRing } from "@/components/ui/styles";
-import { UpdateSubtaskModal } from "../UpdateSubtaskModal";
+import {
+  UpdateSubtaskModal,
+  useUpdateSubtaskModal,
+} from "../UpdateSubtaskModal";
 import { DeleteSubtaskModal } from "../DeleteSubtaskModal";
 import { useToggleSubtask } from "../ToggleSubtaskContext";
 import { useUpdateSubtask } from "../UpdateSubtaskContext";
@@ -54,15 +57,15 @@ export function SubtaskActionMenuTrigger({
   // States for toggling subtask from context
   const { action: toggleSubtaskAction } = useToggleSubtask();
 
-  // State for edit modal from context
-  const { onModalOpenChange: onEditModalOpenChange } = useUpdateSubtask();
+  // State for update modal from context
+  const { onOpenChange: onUpdateModalOpenChange } = useUpdateSubtaskModal();
 
   function handleAction(key: Key) {
     guestGuard(() => {
       if (key === "delete") {
         setIsDeleteModalOpen(true);
       } else if (key === "edit") {
-        onEditModalOpenChange(true);
+        onUpdateModalOpenChange(true);
       } else if (key === "toggle") {
         startTransition(() =>
           toggleSubtaskAction({ id: subtaskId, isDone: !isDone }),

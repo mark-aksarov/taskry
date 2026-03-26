@@ -1,6 +1,7 @@
 import { SubtaskListItem } from "../SubtaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withSubtaskProviders } from "../../SubtaskProviders/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 
@@ -8,6 +9,7 @@ const meta = {
   title: "components/subtasks/SubtaskListItem",
   component: SubtaskListItem,
   decorators: [
+    withSubtaskProviders,
     withGuestModeModalProvider,
     withCurrentUserProvider,
     withThemedBackground,
@@ -26,9 +28,6 @@ export const Default = {
     id: 1,
     text: "Subtask 1",
     taskId: 1,
-    toggleSubtask: () => ({ status: "success" }),
-    updateSubtask: () => ({ status: "success" }),
-    deleteSubtask: () => ({ status: "success" }),
   },
 } satisfies Story;
 

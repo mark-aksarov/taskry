@@ -16,17 +16,17 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteTasksProvider } from "../../DeleteTasksContext/__stories__";
 import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
 import { CommentListStory } from "@/components/comments/CommentList/__stories__";
+import { MockedTaskDetailProviders } from "../../TaskDetailProviders/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusesContext/__stories__";
-import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
+import { CreateSubtaskModal } from "@/components/subtasks/CreateSubtaskModal";
 
 const meta = {
   title: "components/tasks/TaskGridItemLarge",
   component: TaskGridItemLarge,
   decorators: [
-    withCreateSubtaskProvider,
     withDeleteTasksProvider,
     withUpdateTaskStatusesProvider,
     withGuestModeModalProvider,
@@ -57,10 +57,14 @@ export const Default = {
       />
     ),
     taskDetailContainer: (
-      <TaskDetail
-        {...mockedTaskDetail}
-        subtasksList={<SubtaskList {...SubtaskListStory.args} />}
-      />
+      <MockedTaskDetailProviders>
+        <TaskDetail
+          {...mockedTaskDetail}
+          subtasksList={<SubtaskList {...SubtaskListStory.args} />}
+        />
+
+        <CreateSubtaskModal taskId={mockedTaskDetail.id} />
+      </MockedTaskDetailProviders>
     ),
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (

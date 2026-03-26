@@ -33,6 +33,7 @@ import { withPageTransitionProvider } from "@/components/common/PageTransitionCo
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
 import { withCreateTaskCategoryProvider } from "@/components/taskCategory/CreateTaskCategoryContext/__stories__";
+import { withCreateSubtaskModalProvider } from "@/components/subtasks/CreateSubtaskModal/__stories__";
 
 const meta = {
   title: "pages/TasksPage",
@@ -46,6 +47,7 @@ const meta = {
       </>
     ),
     withCreateSubtaskProvider,
+    withCreateSubtaskModalProvider,
     withCreateTaskCategoryProvider,
     withCreateTaskProvider,
     withDeleteTasksProvider,

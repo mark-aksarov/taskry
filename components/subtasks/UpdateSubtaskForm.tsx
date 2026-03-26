@@ -38,7 +38,7 @@ export function UpdateSubtaskForm({
   }
 
   return (
-    <FormBase id="edit-subtask-form" onSubmit={handleSubmit}>
+    <FormBase id="update-subtask-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <input type="hidden" name="id" value={subtaskId} />
         <input type="hidden" name="taskId" value={taskId} />

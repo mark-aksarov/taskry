@@ -1,17 +1,8 @@
 "use client";
 
-import {
-  ActionFn,
-  ActionState,
-  ToggleSubtaskPayload,
-} from "@/lib/actions/types";
-
 import { memo } from "react";
 import { Check } from "lucide-react";
 import { twMerge } from "tailwind-merge";
-import { DeleteSubtaskProvider } from "../DeleteSubtaskContext";
-import { UpdateSubtaskProvider } from "../UpdateSubtaskContext";
-import { ToggleSubtaskProvider } from "../ToggleSubtaskContext";
 import { SubtaskActionMenuTrigger } from "../SubtaskActionMenuTrigger";
 import { SubtaskListItemPendingOverlay } from "./SubtaskListItemPendingOverlay";
 
@@ -20,33 +11,13 @@ interface SubtaskListItemProps {
   text: string;
   isDone: boolean;
   taskId: number;
-  toggleSubtask: ActionFn<ActionState, ToggleSubtaskPayload>;
-  updateSubtask: ActionFn<ActionState, FormData>;
-  deleteSubtask: ActionFn<ActionState, number>;
 }
 
-export function SubtaskListItem({
-  toggleSubtask,
-  updateSubtask,
-  deleteSubtask,
-  ...props
-}: SubtaskListItemProps) {
+export function SubtaskListItem(props: SubtaskListItemProps) {
   return (
-    <DeleteSubtaskProvider taskId={props.taskId} deleteSubtask={deleteSubtask}>
-      <UpdateSubtaskProvider
-        taskId={props.taskId}
-        updateSubtask={updateSubtask}
-      >
-        <ToggleSubtaskProvider
-          taskId={props.taskId}
-          toggleSubtask={toggleSubtask}
-        >
-          <SubtaskListItemPendingOverlay>
-            <SubtaskListItemInner {...props} />
-          </SubtaskListItemPendingOverlay>
-        </ToggleSubtaskProvider>
-      </UpdateSubtaskProvider>
-    </DeleteSubtaskProvider>
+    <SubtaskListItemPendingOverlay>
+      <SubtaskListItemInner {...props} />
+    </SubtaskListItemPendingOverlay>
   );
 }
 

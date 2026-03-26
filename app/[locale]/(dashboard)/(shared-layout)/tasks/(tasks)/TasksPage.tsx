@@ -23,10 +23,10 @@ import {
 import { useTranslations } from "next-intl";
 import { TaskSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
-import { CreateTaskModal } from "@/components/tasks/CreateTaskModal";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { AbsoluteCenter } from "@/components/common/AbsoluteCenter";
+import { CreateTaskModal } from "@/components/tasks/CreateTaskModal";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { TaskResultsCount } from "@/components/tasks/TaskResultsCount";
 import { TasksEmptySection } from "@/components/tasks/TasksEmptySection";
@@ -34,13 +34,13 @@ import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { SearchModalTrigger } from "@/components/search/SearchModalTrigger";
 import { TaskActionsMenuTrigger } from "@/components/tasks/TaskActionsMenuTrigger";
-import { CreateTaskCategoryModal } from "@/components/taskCategory/CreateTaskCategoryModal";
+import { AssigneeFiltersModalTrigger } from "@/components/tasks/AssigneeFiltersModal";
 import { TaskSortingMenuTriggerLarge } from "@/components/tasks/TaskSortingMenuTrigger";
 import { TaskSortingMenuTriggerMobile } from "@/components/tasks/TaskSortingMenuTrigger";
 import { TasksFilteredEmptySection } from "@/components/tasks/TasksFilteredEmptySection";
 import { TaskStatusFiltersModalTrigger } from "@/components/tasks/TaskStatusFiltersModal";
+import { CreateTaskCategoryModal } from "@/components/taskCategory/CreateTaskCategoryModal";
 import { TaskProjectFiltersModalTrigger } from "@/components/tasks/TaskProjectFiltersModal";
-import { AssigneeFiltersModalTrigger } from "@/components/tasks/AssigneeFiltersModal";
 import { TaskCategoryFiltersModalTrigger } from "@/components/tasks/TaskCategoryFiltersModal";
 
 interface TasksPageProps {

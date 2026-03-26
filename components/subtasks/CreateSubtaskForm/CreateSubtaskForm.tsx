@@ -32,7 +32,7 @@ export function CreateSubtaskForm({ taskId }: CreateSubtaskFormProps) {
   }
 
   return (
-    <FormBase id="new-subtask-form" onSubmit={handleSubmit}>
+    <FormBase id="create-subtask-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <input type="hidden" name="taskId" value={taskId} />
         <SubtaskTextField />

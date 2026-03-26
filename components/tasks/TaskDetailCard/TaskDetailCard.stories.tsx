@@ -3,29 +3,28 @@ import {
   TaskDetailActionsSkeleton,
 } from "../TaskDetailActions";
 
-import { UpdateTaskForm } from "../UpdateTaskForm";
-import { UpdateTaskModal } from "../UpdateTaskModal";
 import { mockedTaskDetail } from "@/mocks/tasks";
 import { TaskDetailCard } from "./TaskDetailCard";
+import { UpdateTaskForm } from "../UpdateTaskForm";
 import { mockedUserSummaries } from "@/mocks/users";
+import { UpdateTaskModal } from "../UpdateTaskModal";
 import { TaskDetailHeader } from "../TaskDetailHeader";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedProjectSummaries } from "@/mocks/projects";
 import { CommentList } from "@/components/comments/CommentList";
 import { SubtaskList } from "@/components/subtasks/SubtaskList";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
-import { CreateSubtaskModal } from "@/components/subtasks/CreateSubtaskModal";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { TaskDetailAlt, TaskDetailAltSkeleton } from "../TaskDetailAlt";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteTaskProvider } from "../DeleteTaskContext/__stories__";
 import { withUpdateTaskProvider } from "../UpdateTaskContext/__stories__";
+import { CreateSubtaskModal } from "@/components/subtasks/CreateSubtaskModal";
+import { MockedTaskDetailProviders } from "../TaskDetailProviders/__stories__";
 import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
 import { CommentListStory } from "@/components/comments/CommentList/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
-import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
-import { withCreateSubtaskModalProvider } from "@/components/subtasks/CreateSubtaskModal/__stories__";
 
 const meta = {
   title: "components/tasks/TaskDetailCard",
@@ -45,13 +44,10 @@ const meta = {
             />
           }
         />
-        <CreateSubtaskModal taskId={mockedTaskDetail.id} />
       </>
     ),
     withUpdateTaskProvider,
     withDeleteTaskProvider,
-    withCreateSubtaskProvider,
-    withCreateSubtaskModalProvider,
     withGuestModeModalProvider,
     withCurrentUserProvider,
     withThemedBackground,
@@ -64,10 +60,14 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     taskDetailContainer: (
-      <TaskDetailAlt
-        {...mockedTaskDetail}
-        subtasksList={<SubtaskList {...SubtaskListStory.args} />}
-      />
+      <MockedTaskDetailProviders>
+        <TaskDetailAlt
+          {...mockedTaskDetail}
+          subtasksList={<SubtaskList {...SubtaskListStory.args} />}
+        />
+
+        <CreateSubtaskModal taskId={mockedTaskDetail.id} />
+      </MockedTaskDetailProviders>
     ),
     taskDetailHeaderContainer: (
       <TaskDetailHeader

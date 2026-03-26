@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
-import { UpdateSubtaskModal } from "./UpdateSubtaskModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { useUpdateSubtask } from "../UpdateSubtaskContext";
+import { UpdateSubtaskModal } from "./UpdateSubtaskModal";
+import { useUpdateSubtaskModal } from "./UpdateSubtaskModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateSubtaskProvider } from "../UpdateSubtaskContext/__stories__";
+import { withUpdateSubtaskProvider } from "../UpdateSubtaskProvider/__stories__";
 
 const meta = {
   title: "components/subtasks/UpdateSubtaskModal",
   component: UpdateSubtaskModal,
   decorators: [
     (Story) => {
-      const { onModalOpenChange } = useUpdateSubtask();
+      const { onOpenChange: onModalOpenChange } = useUpdateSubtaskModal();
 
       useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
 

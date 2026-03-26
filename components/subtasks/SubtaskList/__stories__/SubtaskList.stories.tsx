@@ -5,6 +5,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SubtaskListItemStory } from "../../SubtaskListItem/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { MockedSubtaskProviders } from "../../SubtaskProviders/__stories__";
 
 const mockedSubtasks = [
   { id: 1, subtaskText: "Subtask 1 text", isDone: false },
@@ -33,11 +34,9 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedSubtasks.map((subtask) => (
-      <SubtaskListItem
-        key={subtask.id}
-        {...SubtaskListItemStory.args}
-        {...subtask}
-      />
+      <MockedSubtaskProviders key={subtask.id}>
+        <SubtaskListItem {...SubtaskListItemStory.args} {...subtask} />
+      </MockedSubtaskProviders>
     )),
   },
 } satisfies Story;

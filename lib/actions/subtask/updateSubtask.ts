@@ -13,10 +13,7 @@ const schema = z.object({
   text: subtaskText,
 });
 
-export async function updateSubtask(
-  _prevState: ActionState,
-  formData: FormData,
-): Promise<ActionState> {
+export async function updateSubtask(formData: FormData): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

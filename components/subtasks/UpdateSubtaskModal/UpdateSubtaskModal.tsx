@@ -6,7 +6,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { UpdateSubtaskForm } from "../UpdateSubtaskForm";
-import { useUpdateSubtask } from "../UpdateSubtaskContext";
+import { useUpdateSubtaskModal } from "./UpdateSubtaskModalContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UpdateSubtaskModalProps {
@@ -22,7 +22,8 @@ export function UpdateSubtaskModal({
 }: UpdateSubtaskModalProps) {
   const t = useTranslations("subtasks.UpdateSubtaskModal");
 
-  const { isModalOpen, onModalOpenChange } = useUpdateSubtask();
+  const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } =
+    useUpdateSubtaskModal();
 
   return (
     <FormBaseModal

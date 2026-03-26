@@ -15,17 +15,17 @@ import { withDeleteTasksProvider } from "../../DeleteTasksContext/__stories__";
 import { mockedProjectDetail, mockedProjectSummaries } from "@/mocks/projects";
 import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
 import { CommentListStory } from "@/components/comments/CommentList/__stories__";
+import { MockedTaskDetailProviders } from "../../TaskDetailProviders/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusesContext/__stories__";
-import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
+import { CreateSubtaskModal } from "@/components/subtasks/CreateSubtaskModal";
 
 const meta = {
   title: "components/tasks/TaskListItem",
   component: TaskListItem,
   decorators: [
-    withCreateSubtaskProvider,
     withDeleteTasksProvider,
     withUpdateTaskStatusesProvider,
     withGuestModeModalProvider,
@@ -63,10 +63,14 @@ export const Default = {
     ),
     projectDetailContainer: <ProjectDetail {...mockedProjectDetail} />,
     taskDetailContainer: (
-      <TaskDetail
-        {...mockedTaskDetail}
-        subtasksList={<SubtaskList {...SubtaskListStory.args} />}
-      />
+      <MockedTaskDetailProviders>
+        <TaskDetail
+          {...mockedTaskDetail}
+          subtasksList={<SubtaskList {...SubtaskListStory.args} />}
+        />
+
+        <CreateSubtaskModal taskId={mockedTaskDetail.id} />
+      </MockedTaskDetailProviders>
     ),
     sendComment: () => ({ status: "success" }),
     updateComment: () => ({ status: "success" }),
