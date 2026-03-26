@@ -1,0 +1,1 @@
+export { withUpdateTaskCategoryModalProvider } from "./withUpdateTaskCategoryModalProvider";

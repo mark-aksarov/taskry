@@ -10,7 +10,6 @@ import { deleteProjectCategories as deleteProjectCategoriesQuery } from "@/lib/d
 const projectCategoryIds = z.array(projectCategoryId).min(1);
 
 export async function deleteProjectCategories(
-  _prevState: ActionState,
   ids: number[],
 ): Promise<ActionState> {
   // Authorization

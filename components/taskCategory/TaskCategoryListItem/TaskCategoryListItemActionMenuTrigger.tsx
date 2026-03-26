@@ -6,14 +6,17 @@ import {
   ItemBaseActionMenuDialogHeader,
 } from "@/components/common/ItemBase";
 
+import {
+  UpdateTaskCategoryModal,
+  useUpdateTaskCategoryModal,
+} from "../UpdateTaskCategoryModal";
+
 import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { UpdateTaskCategoryModal } from "../UpdateTaskCategoryModal";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { DeleteTaskCategoryModal } from "../DeleteTaskCategoryModal";
-import { useUpdateTaskCategory } from "../UpdateTaskCategoryContext";
 import { useTaskCategoryListItemPending } from "./useTaskCategoryListItemPending";
 
 export type TaskCategoryListItemActionMenuTriggerProps = {
@@ -35,8 +38,9 @@ export function TaskCategoryListItemActionMenuTrigger({
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // State for edit modal from context
-  const { onModalOpenChange: onEditModalOpenChange } = useUpdateTaskCategory();
+  // State for update modal from context
+  const { onOpenChange: onUpdateModalOpenChange } =
+    useUpdateTaskCategoryModal();
 
   /**
    * Handles menu actions for a task category item
@@ -47,7 +51,7 @@ export function TaskCategoryListItemActionMenuTrigger({
     guestGuard(() => {
       const action = key.toString();
       if (action === "edit") {
-        onEditModalOpenChange(true);
+        onUpdateModalOpenChange(true);
       } else if (action === "delete") {
         setIsDeleteModalOpen(true);
       }

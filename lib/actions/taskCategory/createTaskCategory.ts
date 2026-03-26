@@ -10,7 +10,6 @@ import { createTaskCategory as createTaskCategoryQuery } from "@/lib/data/taskCa
 const schema = z.object({ name: taskCategoryName });
 
 export async function createTaskCategory(
-  _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
   // Authorization

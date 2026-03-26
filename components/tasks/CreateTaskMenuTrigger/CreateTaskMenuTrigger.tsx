@@ -7,8 +7,8 @@ import { useCreateTask } from "../CreateTaskContext";
 import { Blocks, CalendarCheck } from "lucide-react";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { CreateNewMenuTrigger } from "@/components/common/CreateNewMenuTrigger";
-import { useCreateTaskCategory } from "../../taskCategory/CreateTaskCategoryContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
+import { useCreateTaskCategoryModal } from "@/components/taskCategory/CreateTaskCategoryModal";
 
 interface CreateTaskMenuTriggerProps {
   renderButton: () => React.ReactNode;
@@ -22,9 +22,9 @@ export function CreateTaskMenuTrigger({
   // Show guest modal for guests
   const guestGuard = useGuestModalGuard();
 
-  // Create task category form modal state
-  const { onModalOpenChange: onTaskCategoryModalOpenChange } =
-    useCreateTaskCategory();
+  // Create create task category form modal state
+  const { onOpenChange: onCreateModalOpenChange } =
+    useCreateTaskCategoryModal();
 
   // Create task form modal state
   const { onModalOpenChange: onTaskModalOpenChange } = useCreateTask();
@@ -39,7 +39,7 @@ export function CreateTaskMenuTrigger({
       if (key === "task") {
         onTaskModalOpenChange(true);
       } else if (key === "category") {
-        onTaskCategoryModalOpenChange(true);
+        onCreateModalOpenChange(true);
       }
     });
   }

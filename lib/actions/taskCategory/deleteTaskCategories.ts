@@ -10,7 +10,6 @@ import { deleteTaskCategories as deleteTaskCategoriesQuery } from "@/lib/data/ta
 const taskCategoryIds = z.array(taskCategoryId).min(1);
 
 export async function deleteTaskCategories(
-  _prevState: ActionState,
   ids: number[],
 ): Promise<ActionState> {
   // Authorization

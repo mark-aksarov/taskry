@@ -8,13 +8,14 @@ import {
 
 import { useTranslations } from "next-intl";
 import { CreateTaskCategoryForm } from "../CreateTaskCategoryForm";
-import { useCreateTaskCategory } from "../CreateTaskCategoryContext";
+import { useCreateTaskCategoryModal } from "./CreateTaskCategoryModalContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 export function CreateTaskCategoryModal() {
   const t = useTranslations("taskCategories.CreateTaskCategoryModal");
 
-  const { isModalOpen, onModalOpenChange } = useCreateTaskCategory();
+  const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } =
+    useCreateTaskCategoryModal();
 
   return (
     <FormBaseModal

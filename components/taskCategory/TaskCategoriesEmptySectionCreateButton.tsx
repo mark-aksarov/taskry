@@ -2,14 +2,14 @@
 
 import { useTranslations } from "next-intl";
 import { EmptySectionButton } from "@/components/common/EmptySection";
-import { useCreateTaskCategory } from "./CreateTaskCategoryContext";
+import { useCreateTaskCategoryModal } from "./CreateTaskCategoryModal";
 
 export function TaskCategoriesEmptySectionCreateButton() {
   const t = useTranslations(
     "taskCategories.TaskCategoriesEmptySectionCreateButton",
   );
 
-  const { onModalOpenChange } = useCreateTaskCategory();
+  const { onOpenChange: onModalOpenChange } = useCreateTaskCategoryModal();
 
   return (
     <EmptySectionButton onPress={() => onModalOpenChange(true)}>

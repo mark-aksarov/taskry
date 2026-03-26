@@ -25,11 +25,10 @@ import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksContext";
 import { TaskFiltersProvider } from "@/components/tasks/TaskFiltersContext";
 import { CreateTaskFormContainer } from "@/components/tasks/CreateTaskFormContainer";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
-import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
 import { TaskFiltersFormContainer } from "@/components/tasks/TaskFiltersFormContainer";
 import { TaskRouterSearchContainer } from "@/components/tasks/TaskRouterSearchContainer";
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext";
-import { CreateTaskCategoryProvider } from "@/components/taskCategory/CreateTaskCategoryContext";
+import { CreateTaskCategoryProvider } from "@/components/taskCategory/CreateTaskCategoryProvider";
 import { TaskCategoryFiltersFormContainer } from "@/components/tasks/TaskCategoryFiltersFormContainer";
 import { TaskProjectFiltersFormContainer } from "@/components/tasks/TaskProjectFiltersFormContainer";
 import { AssigneeFiltersFormContainer } from "@/components/tasks/AssigneeFiltersFormContainer";
@@ -89,7 +88,7 @@ export default async function AppTasksPage({
         pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
       >
         <DeleteTasksProvider deleteTasks={deleteTasks}>
-          <CreateTaskCategoryProvider createTaskCategory={createTaskCategory}>
+          <CreateTaskCategoryProvider>
             <CreateTaskProvider createTask={createTask}>
               <TaskFiltersProvider filters={filters}>
                 <TasksPage

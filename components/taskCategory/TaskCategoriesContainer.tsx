@@ -1,7 +1,6 @@
 import { TaskCategoryList } from "./TaskCategoryList";
 import { TaskCategoryListItem } from "./TaskCategoryListItem";
-import { updateTaskCategory } from "@/lib/actions/taskCategory/updateTaskCategory";
-import { deleteTaskCategory } from "@/lib/actions/taskCategory/deleteTaskCategory";
+import { TaskCategoryProviders } from "./TaskCategoryProviders";
 import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
 
 export async function TaskCategoriesContainer() {
@@ -10,13 +9,9 @@ export async function TaskCategoriesContainer() {
   return (
     <TaskCategoryList>
       {taskCategories.map((taskCategory) => (
-        <TaskCategoryListItem
-          key={taskCategory.id}
-          id={taskCategory.id}
-          name={taskCategory.name}
-          updateTaskCategory={updateTaskCategory}
-          deleteTaskCategory={deleteTaskCategory}
-        />
+        <TaskCategoryProviders key={taskCategory.id}>
+          <TaskCategoryListItem id={taskCategory.id} name={taskCategory.name} />
+        </TaskCategoryProviders>
       ))}
     </TaskCategoryList>
   );

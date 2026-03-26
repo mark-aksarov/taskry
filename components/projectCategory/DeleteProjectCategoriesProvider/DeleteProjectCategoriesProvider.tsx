@@ -24,8 +24,8 @@ export function DeleteProjectCategoriesProvider({
   const [ids, setIds] = useState<number[]>([]);
 
   const [state, action, isPending] = useActionState(
-    async (state: ActionState, ids: number[]) => {
-      const newState = await deleteProjectCategories(state, ids);
+    async (_prevState: ActionState, ids: number[]) => {
+      const newState = await deleteProjectCategories(ids);
 
       if (newState.status === "success") {
         // router.refresh is wrapped in startTransition internally

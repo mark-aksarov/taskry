@@ -1,1 +1,0 @@
-export { withDeleteTaskCategoriesProvider } from "./withDeleteTaskCategoriesProvider";

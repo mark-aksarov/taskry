@@ -6,10 +6,7 @@ import { taskCategoryId } from "@/lib/schemas/taskCategory";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { deleteTaskCategories as deleteTaskCategoriesQuery } from "@/lib/data/taskCategory/taskCategory.dal";
 
-export async function deleteTaskCategory(
-  _prevState: ActionState,
-  id: number,
-): Promise<ActionState> {
+export async function deleteTaskCategory(id: number): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

@@ -6,21 +6,21 @@ import { TaskList } from "@/components/tasks/TaskList";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { mockedProjectSummaries } from "@/mocks/projects";
-import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { TaskGridLarge } from "@/components/tasks/TaskGrid";
 import { SearchList } from "@/components/search/SearchList";
-import { CreateTaskForm } from "@/components/tasks/CreateTaskForm";
 import { TaskGridMobile } from "@/components/tasks/TaskGrid";
+import { CreateTaskForm } from "@/components/tasks/CreateTaskForm";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { TaskFiltersForm } from "@/components/tasks/TaskFiltersForm";
-import { CreateSubtaskModal } from "@/components/subtasks/CreateSubtaskModal";
+import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { TaskListStory } from "@/components/tasks/TaskList/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { AssigneeFiltersForm } from "@/components/tasks/AssigneeFiltersForm";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { TaskGridLargeStory } from "@/components/tasks/TaskGrid/__stories__";
 import { TaskGridMobileStory } from "@/components/tasks/TaskGrid/__stories__";
+import { CreateSubtaskModal } from "@/components/subtasks/CreateSubtaskModal";
 import { TaskProjectFiltersForm } from "@/components/tasks/TaskProjectFiltersForm";
-import { AssigneeFiltersForm } from "@/components/tasks/AssigneeFiltersForm";
 import { TaskCategoryFiltersForm } from "@/components/tasks/TaskCategoryFiltersForm";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
@@ -31,24 +31,20 @@ import { EntityContainerPresentation } from "@/components/common/EntityContainer
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
-import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
-import { withCreateTaskCategoryProvider } from "@/components/taskCategory/CreateTaskCategoryContext/__stories__";
 import { withCreateSubtaskModalProvider } from "@/components/subtasks/CreateSubtaskModal/__stories__";
+import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
+import { withCreateTaskCategoryProvider } from "@/components/taskCategory/CreateTaskCategoryProvider/__stories__";
+import { withCreateTaskCategoryModalProvider } from "@/components/taskCategory/CreateTaskCategoryModal/__stories__";
 
 const meta = {
   title: "pages/TasksPage",
   component: TasksPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    (Story) => (
-      <>
-        <Story />
-        <CreateSubtaskModal taskId={1} />
-      </>
-    ),
     withCreateSubtaskProvider,
     withCreateSubtaskModalProvider,
     withCreateTaskCategoryProvider,
+    withCreateTaskCategoryModalProvider,
     withCreateTaskProvider,
     withDeleteTasksProvider,
     withUpdateTaskStatusesProvider,
