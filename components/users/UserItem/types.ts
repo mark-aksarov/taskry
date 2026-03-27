@@ -1,5 +1,3 @@
-import { ActionFn, ActionState, DeleteUserPayload } from "@/lib/actions/types";
-
 export interface BaseUserItemProps {
   id: string;
   fullName: string;
@@ -11,5 +9,4 @@ export interface BaseUserItemProps {
     name: string;
   };
   updateUserFormContainer: React.ReactNode;
-  deleteUser: ActionFn<ActionState, DeleteUserPayload>;
 }

@@ -27,7 +27,7 @@ import { UserTasksPresentation } from "@/components/users/UserTasksPresentation"
 import { UserDetailHeaderInteractive } from "@/components/users/UserDetailHeader";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
 import { withUpdateUserProvider } from "@/components/users/UpdateUserProvider/__stories__";
-import { withDeleteUserProvider } from "@/components/users/DeleteUserContext/__stories__";
+import { withDeleteUserProvider } from "@/components/users/DeleteUserProvider/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";

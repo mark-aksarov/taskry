@@ -35,7 +35,6 @@ export const Default = {
         positionSelectItems={mockedPositionSummaries}
       />
     ),
-    deleteUser: () => ({ status: "success" }),
   },
 } satisfies Story;
 

@@ -10,7 +10,6 @@ import { deleteUser as deleteUserService } from "@/lib/data/user/user.service";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
 export async function deleteUser(
-  _prevState: ActionState,
   payload: DeleteUserPayload,
 ): Promise<ActionState> {
   // Authorization

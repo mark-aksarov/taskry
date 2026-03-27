@@ -9,7 +9,7 @@ import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CreateTaskProvider } from "@/components/tasks/CreateTaskContext";
 import { UpdateUserProvider } from "@/components/users/UpdateUserProvider";
-import { DeleteUserProvider } from "@/components/users/DeleteUserContext";
+import { DeleteUserProvider } from "@/components/users/DeleteUserProvider";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { UserTasksContainer } from "@/components/users/UserTasksContainer";
@@ -67,7 +67,7 @@ export default async function AppProfileTasksPage({
         <DeleteTasksProvider deleteTasks={deleteTasks}>
           <UpdateUserProvider>
             <ChangePasswordProvider changePassword={changePassword}>
-              <DeleteUserProvider deleteUser={deleteUser}>
+              <DeleteUserProvider>
                 <CreateTaskProvider createTask={createTask}>
                   <UserTasksPageLayout
                     totalTasksCount={totalTasksCount}

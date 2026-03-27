@@ -14,7 +14,7 @@ import { getUserList } from "@/lib/data/user/user.dal";
 import { createUser } from "@/lib/actions/user/createUser";
 import { UsersContainer } from "@/components/users/UsersContainer";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { CreateUserProvider } from "@/components/users/CreateUserContext";
+import { CreateUserProvider } from "@/components/users/CreateUserProvider";
 import { UserFiltersProvider } from "@/components/users/UserFiltersContext";
 import { RouterSearchContainer } from "@/components/common/RouterSearchContainer";
 import { CreatePositionProvider } from "@/components/position/CreatePositionProvider";
@@ -58,7 +58,7 @@ export default async function AppUsersPage({
   });
 
   return (
-    <CreateUserProvider createUser={createUser}>
+    <CreateUserProvider>
       <CreatePositionModalProvider>
         <CreatePositionProvider>
           <UserFiltersProvider filters={filters}>

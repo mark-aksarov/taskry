@@ -34,7 +34,6 @@ export function UsersDynamic({
     phoneNumber: user.phoneNumber,
     publicLink: user.publicLink,
     position: user.position,
-    deleteUser: deleteUser,
     updateUserFormContainer: <UpdateUserFormContainer userId={user.id} />,
   });
 

@@ -30,15 +30,13 @@ interface Props extends BaseUserItemProps {
   userDetailHeaderContainer: React.ReactNode;
 }
 
-export function UserListItem({ deleteUser, ...props }: Props) {
+export function UserListItem(props: Props) {
   return (
-    <UserItemProviders deleteUser={deleteUser}>
+    <UserItemProviders>
       <UserListItemInner {...props} />
     </UserItemProviders>
   );
 }
-
-type InnerProps = Omit<Props, "deleteUser" | "updateUser">;
 
 export const UserListItemInner = memo(
   ({
@@ -52,7 +50,7 @@ export const UserListItemInner = memo(
     updateUserFormContainer,
     userDetailContainer,
     userDetailHeaderContainer,
-  }: InnerProps) => {
+  }: Props) => {
     const t = useTranslations("users.UserListItem");
 
     const { isOwner, isGuest } = useCurrentUser();

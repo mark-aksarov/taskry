@@ -2,13 +2,13 @@ import { ProfilePage } from "./ProfilePage";
 import { deleteUser } from "@/lib/actions/user/deleteUser";
 import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { DeleteUserProvider } from "@/components/users/DeleteUserContext";
+import { DeleteUserProvider } from "@/components/users/DeleteUserProvider";
 import { UpdateUserProvider } from "@/components/users/UpdateUserProvider";
-import { UpdateUserFormContainer } from "@/components/users/UpdateUserFormContainer";
+import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
 import { UserDetailAltContainer } from "@/components/users/UserDetailAltContainer";
+import { UpdateUserFormContainer } from "@/components/users/UpdateUserFormContainer";
 import { UserDetailHeaderAltContainer } from "@/components/users/UserDetailHeaderAltContainer";
-import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 
 export default async function AppProfilePage() {
   const session = await requireProtectedPage();
@@ -19,7 +19,7 @@ export default async function AppProfilePage() {
   return (
     <UpdateUserProvider>
       <ChangePasswordProvider changePassword={changePassword}>
-        <DeleteUserProvider deleteUser={deleteUser}>
+        <DeleteUserProvider>
           <ProfilePage
             userId={userId}
             userFullName={userFullName}

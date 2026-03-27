@@ -42,7 +42,6 @@ export const Default = {
         imageUrl={mockedUserDetail.imageUrl}
       />
     ),
-    deleteUser: () => ({ status: "success" }),
   },
 } satisfies Story;
 

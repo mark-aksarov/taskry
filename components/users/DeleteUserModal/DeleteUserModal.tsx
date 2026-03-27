@@ -3,21 +3,19 @@
 import { startTransition } from "react";
 import { useDeleteUser } from "../DeleteUserContext";
 import { BaseDeleteUserModal } from "./BaseDeleteUserModal";
+import { useDeleteUserModal } from "./DeleteUserModalContext";
 
 interface DeleteUserModalProps {
   userId: string;
   userFullName: string;
-  isOpen: boolean;
-  onOpenChange: (isOpen: boolean) => void;
 }
 
 export function DeleteUserModal({
   userId,
   userFullName,
-  isOpen,
-  onOpenChange,
 }: DeleteUserModalProps) {
   const { action } = useDeleteUser();
+  const { isOpen, onOpenChange } = useDeleteUserModal();
 
   function handleDelete() {
     const payload = {

@@ -24,12 +24,9 @@ import { UserGridItemLayout } from "./UserGridItemLayout";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { ItemBaseUserImageContainer } from "@/components/common/ItemBase";
 
-export function UserGridItemMobile({
-  deleteUser,
-  ...props
-}: BaseUserItemProps) {
+export function UserGridItemMobile(props: BaseUserItemProps) {
   return (
-    <UserItemProviders deleteUser={deleteUser}>
+    <UserItemProviders>
       <div className="relative block">
         <Link href={`/team/${props.id}`} className="absolute inset-0 z-0" />
         <UserGridItemMobileInner {...props} />
@@ -37,8 +34,6 @@ export function UserGridItemMobile({
     </UserItemProviders>
   );
 }
-
-type InnerProps = Omit<BaseUserItemProps, "deleteUser" | "updateUser">;
 
 export const UserGridItemMobileInner = memo(
   ({
@@ -50,7 +45,7 @@ export const UserGridItemMobileInner = memo(
     publicLink,
     email,
     updateUserFormContainer,
-  }: InnerProps) => {
+  }: BaseUserItemProps) => {
     const t = useTranslations("users.UserGridItem");
 
     const { isOwner, isGuest } = useCurrentUser();

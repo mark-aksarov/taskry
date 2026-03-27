@@ -89,13 +89,7 @@ export function UserItemActionMenuTrigger({
       </ItemBaseActionMenuTrigger>
 
       <UpdateUserModal updateUserFormContainer={updateUserFormContainer} />
-
-      <DeleteUserModal
-        userId={userId}
-        userFullName={userFullName}
-        isOpen={isDeleteModalOpen}
-        onOpenChange={setIsDeleteModalOpen}
-      />
+      <DeleteUserModal userId={userId} userFullName={userFullName} />
     </>
   );
 }

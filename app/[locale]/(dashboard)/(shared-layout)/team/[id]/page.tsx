@@ -7,7 +7,7 @@ import { deleteUser } from "@/lib/actions/user/deleteUser";
 import { userId as userIdSchema } from "@/lib/schemas/user";
 import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { DeleteUserProvider } from "@/components/users/DeleteUserContext";
+import { DeleteUserProvider } from "@/components/users/DeleteUserProvider";
 import { UpdateUserProvider } from "@/components/users/UpdateUserProvider";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { UpdateUserFormContainer } from "@/components/users/UpdateUserFormContainer";
@@ -46,7 +46,7 @@ export default async function AppProfilePage({
   return (
     <UpdateUserProvider>
       <ChangePasswordProvider changePassword={changePassword}>
-        <DeleteUserProvider deleteUser={deleteUser}>
+        <DeleteUserProvider>
           <TeamProfilePage
             showUserActions={showUserActions}
             userId={userId}

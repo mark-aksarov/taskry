@@ -3,7 +3,7 @@ import { UserItemProviders } from "../UserItemProviders";
 
 export const withUserItemProviders: Decorator = (Story) => {
   return (
-    <UserItemProviders deleteUser={() => ({ status: "success" })}>
+    <UserItemProviders>
       <Story />
     </UserItemProviders>
   );
