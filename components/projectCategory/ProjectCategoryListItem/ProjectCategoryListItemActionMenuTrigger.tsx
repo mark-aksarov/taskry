@@ -6,27 +6,20 @@ import {
   ItemBaseActionMenuDialogHeader,
 } from "@/components/common/ItemBase";
 
-import {
-  UpdateProjectCategoryModal,
-  useUpdateProjectCategoryModal,
-} from "../UpdateProjectCategoryModal";
-
-import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { DeleteProjectCategoryModal } from "../DeleteProjectCategoryModal";
+import { useUpdateProjectCategoryModal } from "../UpdateProjectCategoryModal";
 import { useProjectCategoryListItemPending } from "./useProjectCategoryListItemPending";
+import { useDeleteProjectCategoryModal } from "../DeleteProjectCategoryModal/DeleteProjectCategoryModalContext";
 
 export type ProjectCategoryListItemActionMenuTriggerProps = {
   projectCategoryId: number;
-  projectCategoryName: string;
 };
 
 export function ProjectCategoryListItemActionMenuTrigger({
   projectCategoryId,
-  projectCategoryName,
 }: ProjectCategoryListItemActionMenuTriggerProps) {
   const t = useTranslations(
     "projectCategories.ProjectCategoryListItemActionMenuTrigger",
@@ -36,7 +29,8 @@ export function ProjectCategoryListItemActionMenuTrigger({
   const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const { onOpenChange: onDeleteModalOpenChange } =
+    useDeleteProjectCategoryModal();
 
   // State for update project category modal from context
   const { onOpenChange: onUpdateModalOpenChange } =
@@ -53,7 +47,7 @@ export function ProjectCategoryListItemActionMenuTrigger({
       if (action === "edit") {
         onUpdateModalOpenChange(true);
       } else if (action === "delete") {
-        setIsDeleteModalOpen(true);
+        onDeleteModalOpenChange(true);
       }
     });
   };
@@ -62,38 +56,23 @@ export function ProjectCategoryListItemActionMenuTrigger({
   const isPending = useProjectCategoryListItemPending(projectCategoryId);
 
   return (
-    <>
-      <ItemBaseActionMenuTrigger
-        onAction={handleAction}
-        renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
-        renderButton={() => (
-          <ItemBaseActionMenuButton
-            isPending={isPending}
-            data-test="project-category-item-action-menu-trigger"
-            data-id={projectCategoryId}
-          />
-        )}
-      >
-        <Item textValue={t("edit")} key="edit">
-          <Pencil size={16} /> {t("edit")}
-        </Item>
-        <Item textValue={t("delete")} key="delete">
-          <Trash size={16} /> {t("delete")}
-        </Item>
-      </ItemBaseActionMenuTrigger>
-
-      {/* Modals for editing, deleting, and guest mode */}
-      <UpdateProjectCategoryModal
-        projectCategoryId={projectCategoryId}
-        projectCategoryName={projectCategoryName}
-      />
-
-      <DeleteProjectCategoryModal
-        isOpen={isDeleteModalOpen}
-        onOpenChange={setIsDeleteModalOpen}
-        projectCategoryId={projectCategoryId}
-        projectCategoryName={projectCategoryName}
-      />
-    </>
+    <ItemBaseActionMenuTrigger
+      onAction={handleAction}
+      renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
+      renderButton={() => (
+        <ItemBaseActionMenuButton
+          isPending={isPending}
+          data-test="project-category-item-action-menu-trigger"
+          data-id={projectCategoryId}
+        />
+      )}
+    >
+      <Item textValue={t("edit")} key="edit">
+        <Pencil size={16} /> {t("edit")}
+      </Item>
+      <Item textValue={t("delete")} key="delete">
+        <Trash size={16} /> {t("delete")}
+      </Item>
+    </ItemBaseActionMenuTrigger>
   );
 }

@@ -1,3 +1,4 @@
+import { DeleteProjectCategoryModalProvider } from "../DeleteProjectCategoryModal/DeleteProjectCategoryModalContext";
 import { DeleteProjectCategoryProvider } from "../DeleteProjectCategoryProvider";
 import { UpdateProjectCategoryModalProvider } from "../UpdateProjectCategoryModal";
 import { UpdateProjectCategoryProvider } from "../UpdateProjectCategoryProvider";
@@ -12,9 +13,11 @@ export function ProjectCategoryProviders({
   return (
     <UpdateProjectCategoryModalProvider>
       <UpdateProjectCategoryProvider>
-        <DeleteProjectCategoryProvider>
-          {children}
-        </DeleteProjectCategoryProvider>
+        <DeleteProjectCategoryModalProvider>
+          <DeleteProjectCategoryProvider>
+            {children}
+          </DeleteProjectCategoryProvider>
+        </DeleteProjectCategoryModalProvider>
       </UpdateProjectCategoryProvider>
     </UpdateProjectCategoryModalProvider>
   );

@@ -1,6 +1,7 @@
 import { UpdateProjectCategoryModalProvider } from "../../UpdateProjectCategoryModal";
 import { MockedUpdateProjectCategoryProvider } from "../../UpdateProjectCategoryProvider/__stories__";
 import { MockedDeleteProjectCategoryProvider } from "../../DeleteProjectCategoryProvider/__stories__";
+import { DeleteProjectCategoryModalProvider } from "../../DeleteProjectCategoryModal/DeleteProjectCategoryModalContext";
 
 export function MockedProjectCategoryProviders({
   children,
@@ -10,9 +11,11 @@ export function MockedProjectCategoryProviders({
   return (
     <UpdateProjectCategoryModalProvider>
       <MockedUpdateProjectCategoryProvider>
-        <MockedDeleteProjectCategoryProvider>
-          {children}
-        </MockedDeleteProjectCategoryProvider>
+        <DeleteProjectCategoryModalProvider>
+          <MockedDeleteProjectCategoryProvider>
+            {children}
+          </MockedDeleteProjectCategoryProvider>
+        </DeleteProjectCategoryModalProvider>
       </MockedUpdateProjectCategoryProvider>
     </UpdateProjectCategoryModalProvider>
   );

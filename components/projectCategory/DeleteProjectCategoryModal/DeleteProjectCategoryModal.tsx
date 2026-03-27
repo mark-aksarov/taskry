@@ -13,23 +13,21 @@ import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { useDeleteProjectCategory } from "../DeleteProjectCategoryContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { useDeleteProjectCategoryModal } from "./DeleteProjectCategoryModalContext";
 
 interface DeleteProjectCategoryModalProps {
   projectCategoryId: number;
   projectCategoryName: string;
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
 }
 
 export function DeleteProjectCategoryModal({
   projectCategoryId,
   projectCategoryName,
-  isOpen,
-  onOpenChange,
 }: DeleteProjectCategoryModalProps) {
   const t = useTranslations("projectCategories.DeleteProjectCategoryModal");
 
   const { action } = useDeleteProjectCategory();
+  const { isOpen, onOpenChange } = useDeleteProjectCategoryModal();
 
   const { remove: removeSelected } = useSelectedItems();
 

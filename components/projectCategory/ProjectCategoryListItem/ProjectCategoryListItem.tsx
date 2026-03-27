@@ -9,7 +9,6 @@ import {
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { ProjectCategoryListItemCheckbox } from "./ProjectCategoryListItemCheckbox";
@@ -19,13 +18,9 @@ import { ProjectCategoryListItemActionMenuTrigger } from "./ProjectCategoryListI
 interface ProjectCategoryListItemProps {
   id: number;
   name: string;
-  updateProjectCategory: ActionFn<ActionState, FormData>;
 }
 
-export function ProjectCategoryListItem({
-  updateProjectCategory,
-  ...props
-}: ProjectCategoryListItemProps) {
+export function ProjectCategoryListItem(props: ProjectCategoryListItemProps) {
   const selected = useSelectedItems();
 
   return (
@@ -38,13 +33,7 @@ export function ProjectCategoryListItem({
 }
 
 const ProjectCategoryListItemInner = memo(
-  ({
-    id,
-    name,
-  }: Omit<
-    ProjectCategoryListItemProps,
-    "updateProjectCategory" | "deleteProjectCategory"
-  >) => {
+  ({ id, name }: ProjectCategoryListItemProps) => {
     const t = useTranslations("projectCategories.ProjectCategoryListItem");
 
     return (
@@ -58,10 +47,7 @@ const ProjectCategoryListItemInner = memo(
           <ListItemText>{t("name")}</ListItemText>
         </ListItemInfo>
 
-        <ProjectCategoryListItemActionMenuTrigger
-          projectCategoryId={id}
-          projectCategoryName={name}
-        />
+        <ProjectCategoryListItemActionMenuTrigger projectCategoryId={id} />
       </ListItem>
     );
   },
