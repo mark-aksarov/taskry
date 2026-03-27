@@ -31,14 +31,11 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { PageEmptySection } from "@/components/common/PageEmptySection";
-import { CreateProjectModal } from "@/components/projects/CreateProjectModal";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { SearchModalTrigger } from "@/components/search/SearchModalTrigger";
-import { ProjectSearchModal } from "@/components/projects/ProjectSearchModal";
 import { ProjectResultsCount } from "@/components/projects/ProjectResultsCount";
 import { ProjectActionsMenuTrigger } from "@/components/projects/ProjectActionsMenuTrigger";
-import { CreateProjectCategoryModal } from "@/components/projectCategory/CreateProjectCategoryModal";
 import { ProjectsFilteredEmptySection } from "@/components/projects/ProjectsFilteredEmptySection";
 import { ProjectStatusFiltersModalTrigger } from "@/components/projects/ProjectStatusFiltersModal";
 import { ProjectCreatorFiltersModalTrigger } from "@/components/projects/ProjectCreatorFiltersModal";
@@ -50,142 +47,104 @@ interface ProjectsPageProps {
   totalCount: number;
   totalFilteredProjects: number;
   selectedSortField: ProjectSortField;
-  searchContainer: React.ReactNode;
   projectsContainer: React.ReactNode;
-  createProjectFormContainer: React.ReactNode;
-  projectFiltersFormContainer: React.ReactNode;
-  projectCategoryFiltersFormContainer: React.ReactNode;
-  creatorFiltersFormContainer: React.ReactNode;
-  customerFiltersFormContainer: React.ReactNode;
 }
 
 export function ProjectsPage({
   totalCount,
   totalFilteredProjects,
   selectedSortField,
-  searchContainer,
   projectsContainer,
-  createProjectFormContainer,
-  projectFiltersFormContainer,
-  projectCategoryFiltersFormContainer,
-  creatorFiltersFormContainer,
-  customerFiltersFormContainer,
 }: ProjectsPageProps) {
   const t = useTranslations("app.ProjectsPage");
 
   if (totalCount === 0) {
     return (
-      <>
-        <PageContainer fullscreen headerOffset>
-          <PageGrid className="relative flex-auto">
-            <ToolbarLarge firstSlot={<ProjectManageMenuTriggerLarge />} />
+      <PageContainer fullscreen headerOffset>
+        <PageGrid className="relative flex-auto">
+          <ToolbarLarge firstSlot={<ProjectManageMenuTriggerLarge />} />
 
-            <ToolbarMobile
-              firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
-              secondSlot={<ProjectManageMenuTriggerMobile />}
-            />
+          <ToolbarMobile
+            firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
+            secondSlot={<ProjectManageMenuTriggerMobile />}
+          />
 
-            <PageEmptySection
-              heading={t("emptySection.heading")}
-              description={t("emptySection.description")}
-              createButton={<ProjectsEmptySectionCreateButton />}
-            />
-          </PageGrid>
-        </PageContainer>
-
-        <CreateProjectModal
-          createProjectFormContainer={createProjectFormContainer}
-        />
-      </>
+          <PageEmptySection
+            heading={t("emptySection.heading")}
+            description={t("emptySection.description")}
+            createButton={<ProjectsEmptySectionCreateButton />}
+          />
+        </PageGrid>
+      </PageContainer>
     );
   }
 
   const isFilteredEmpty = totalFilteredProjects === 0;
 
   return (
-    <>
-      <PageContainer fullscreen={isFilteredEmpty} headerOffset>
-        <PageGrid className="relative flex-auto">
-          <ViewModeProvider>
-            <ToolbarLarge
-              firstSlot={
-                <>
-                  <ProjectManageMenuTriggerLarge />
-                  <ProjectSortingMenuTriggerLarge
-                    selectedSortField={selectedSortField}
-                  />
-                  <ProjectFiltersModalTriggerLarge
-                    filtersFormContainer={projectFiltersFormContainer}
-                  />
-                  <ProjectActionsMenuTrigger />
-                </>
-              }
-              secondSlot={
-                <>
-                  <ViewModeToggleButtonGroup />
-                  <CreateProjectMenuTriggerLarge />
-                </>
-              }
-              twoRowsOnLg
-            />
+    <PageContainer fullscreen={isFilteredEmpty} headerOffset>
+      <PageGrid className="relative flex-auto">
+        <ViewModeProvider>
+          <ToolbarLarge
+            firstSlot={
+              <>
+                <ProjectManageMenuTriggerLarge />
+                <ProjectSortingMenuTriggerLarge
+                  selectedSortField={selectedSortField}
+                />
+                <ProjectFiltersModalTriggerLarge />
+                <ProjectActionsMenuTrigger />
+              </>
+            }
+            secondSlot={
+              <>
+                <ViewModeToggleButtonGroup />
+                <CreateProjectMenuTriggerLarge />
+              </>
+            }
+            twoRowsOnLg
+          />
 
+          <ToolbarMobile
+            firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
+            secondSlot={
+              <>
+                <CreateProjectMenuTriggerMobile />
+                <ProjectManageMenuTriggerMobile />
+              </>
+            }
+          />
+
+          <ToolbarSearchMobile>
+            <SearchModalTrigger />
+          </ToolbarSearchMobile>
+
+          <ToolbarFiltersMobile>
+            <ProjectFiltersModalTriggerMobile />
+            <ProjectStatusFiltersModalTrigger />
+            <ProjectCategoryFiltersModalTrigger />
+            <ProjectCreatorFiltersModalTrigger />
+            <ProjectCustomerFiltersModalTrigger />
+          </ToolbarFiltersMobile>
+
+          {!isFilteredEmpty && (
             <ToolbarMobile
-              firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
+              firstSlot={<ProjectResultsCount count={totalFilteredProjects} />}
               secondSlot={
-                <>
-                  <CreateProjectMenuTriggerMobile />
-                  <ProjectManageMenuTriggerMobile />
-                </>
+                <ProjectSortingMenuTriggerMobile
+                  selectedSortField={selectedSortField}
+                />
               }
             />
+          )}
 
-            <ToolbarSearchMobile>
-              <SearchModalTrigger />
-            </ToolbarSearchMobile>
-
-            <ToolbarFiltersMobile>
-              <ProjectFiltersModalTriggerMobile
-                filtersFormContainer={projectFiltersFormContainer}
-              />
-              <ProjectStatusFiltersModalTrigger />
-              <ProjectCategoryFiltersModalTrigger
-                filtersFormContainer={projectCategoryFiltersFormContainer}
-              />
-              <ProjectCreatorFiltersModalTrigger
-                filtersFormContainer={creatorFiltersFormContainer}
-              />
-              <ProjectCustomerFiltersModalTrigger
-                filtersFormContainer={customerFiltersFormContainer}
-              />
-            </ToolbarFiltersMobile>
-
-            {!isFilteredEmpty && (
-              <ToolbarMobile
-                firstSlot={
-                  <ProjectResultsCount count={totalFilteredProjects} />
-                }
-                secondSlot={
-                  <ProjectSortingMenuTriggerMobile
-                    selectedSortField={selectedSortField}
-                  />
-                }
-              />
-            )}
-
-            {isFilteredEmpty ? (
-              <ProjectsFilteredEmptySection />
-            ) : (
-              projectsContainer
-            )}
-          </ViewModeProvider>
-        </PageGrid>
-      </PageContainer>
-
-      <ProjectSearchModal searchContainer={searchContainer} />
-      <CreateProjectModal
-        createProjectFormContainer={createProjectFormContainer}
-      />
-      <CreateProjectCategoryModal />
-    </>
+          {isFilteredEmpty ? (
+            <ProjectsFilteredEmptySection />
+          ) : (
+            projectsContainer
+          )}
+        </ViewModeProvider>
+      </PageGrid>
+    </PageContainer>
   );
 }

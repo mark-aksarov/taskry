@@ -8,9 +8,13 @@ import { CreateProjectProvider } from "@/components/projects/CreateProjectProvid
 import { ProjectFiltersProvider } from "@/components/projects/ProjectFiltersContext";
 import { DeleteProjectsProvider } from "@/components/projects/DeleteProjectsProvider";
 import { CreateProjectModalProvider } from "@/components/projects/CreateProjectModal";
+import { ProjectFiltersModalProvider } from "@/components/projects/ProjectFiltersModal";
 import { UpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusesProvider";
+import { ProjectCustomerFiltersModalProvider } from "@/components/projects/ProjectCustomerFiltersModal";
 import { CreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryProvider";
 import { CreateProjectCategoryModalProvider } from "@/components/projectCategory/CreateProjectCategoryModal";
+import { ProjectCategoryFiltersModalProvider } from "@/components/projects/ProjectCategoryFiltersModal/ProjectCategoryFiltersModalContext";
+import { ProjectCreatorFiltersModalProvider } from "@/components/projects/ProjectCreatorFiltersModal/ProjectCreatorFiltersModalContext";
 
 interface ProjectsPageProvidersProps {
   pageItems: SelectedProject[];
@@ -32,7 +36,15 @@ export function ProjectsPageProviders({
               <CreateProjectCategoryModalProvider>
                 <CreateProjectCategoryProvider>
                   <ProjectFiltersProvider filters={filters}>
-                    {children}
+                    <ProjectFiltersModalProvider>
+                      <ProjectCustomerFiltersModalProvider>
+                        <ProjectCategoryFiltersModalProvider>
+                          <ProjectCreatorFiltersModalProvider>
+                            {children}
+                          </ProjectCreatorFiltersModalProvider>
+                        </ProjectCategoryFiltersModalProvider>
+                      </ProjectCustomerFiltersModalProvider>
+                    </ProjectFiltersModalProvider>
                   </ProjectFiltersProvider>
                 </CreateProjectCategoryProvider>
               </CreateProjectCategoryModalProvider>

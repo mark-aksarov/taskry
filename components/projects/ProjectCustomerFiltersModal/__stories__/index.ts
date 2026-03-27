@@ -1,0 +1,1 @@
+export { withProjectCustomerFiltersModalProvider } from "./withProjectCustomerFiltersModalProvider";

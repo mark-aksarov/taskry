@@ -1,25 +1,18 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { DialogTrigger } from "react-aria-components";
-import { ProjectCategoryFiltersModal } from "./ProjectCategoryFiltersModal";
 import { FilterButtonMobile } from "@/components/common/FilterButton";
+import { useProjectCategoryFiltersModal } from "./ProjectCategoryFiltersModalContext";
 
-export interface ProjectCategoryFiltersModalTriggerProps {
-  filtersFormContainer: React.ReactNode;
-}
-
-export function ProjectCategoryFiltersModalTrigger({
-  filtersFormContainer,
-}: ProjectCategoryFiltersModalTriggerProps) {
+export function ProjectCategoryFiltersModalTrigger() {
   const t = useTranslations("projects.ProjectCategoryFiltersModalTrigger");
+  const { onOpenChange } = useProjectCategoryFiltersModal();
 
   return (
-    <DialogTrigger>
-      <FilterButtonMobile mode="single" label={t("buttonLabel")} />
-      <ProjectCategoryFiltersModal
-        filtersFormContainer={filtersFormContainer}
-      />
-    </DialogTrigger>
+    <FilterButtonMobile
+      mode="single"
+      label={t("buttonLabel")}
+      onPress={() => onOpenChange(true)}
+    />
   );
 }

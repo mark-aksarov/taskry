@@ -12,30 +12,22 @@ import { mocked } from "storybook/test";
 import ProjectsPageLoading from "../loading";
 import { ProjectsPage } from "../ProjectsPage";
 import { usePathname } from "next/navigation";
-import { mockedUserSummaries } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { mockedCustomerSummaries } from "@/mocks/customers";
-import { SearchList } from "@/components/search/SearchList";
-import { ProjectsPageDecorator } from "./ProjectsPageDecorator";
 import { ProjectList } from "@/components/projects/ProjectList";
+import { withProjectsPageModals } from "./withProjectsPageModals";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
+import { withProjectsPageProviders } from "./withProjectsPageProviders";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
-import { CreateProjectForm } from "@/components/projects/CreateProjectForm";
-import { SearchListStory } from "@/components/search/SearchList/__stories__";
-import { ProjectFiltersForm } from "@/components/projects/ProjectFiltersForm";
 import { ProjectListStory } from "@/components/projects/ProjectList/__stories__";
-import { ProjectCreatorFiltersForm } from "@/components/projects/ProjectCreatorFiltersForm";
-import { ProjectCustomerFiltersForm } from "@/components/projects/ProjectCustomerFiltersForm";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
-import { ProjectCategoryFiltersForm } from "@/components/projects/ProjectCategoryFiltersForm";
 
 const meta = {
   title: "pages/ProjectsPage",
   component: ProjectsPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    ProjectsPageDecorator,
+    withProjectsPageModals,
+    withProjectsPageProviders,
     SharedPageDecorator,
     withThemedBackground,
   ],
@@ -52,36 +44,6 @@ export const Default = {
     totalCount: 10,
     totalFilteredProjects: 10,
     selectedSortField: "createdAt",
-
-    searchContainer: <SearchList {...SearchListStory.args} />,
-    createProjectFormContainer: (
-      <CreateProjectForm
-        projectCategorySelectItems={mockedProjectCategorySummaries}
-        customerSelectItems={mockedCustomerSummaries}
-      />
-    ),
-    projectFiltersFormContainer: (
-      <ProjectFiltersForm
-        categoryCheckboxGroupItems={mockedProjectCategorySummaries}
-        userCheckboxGroupItems={mockedUserSummaries}
-        customerCheckboxGroupItems={mockedCustomerSummaries}
-      />
-    ),
-    projectCategoryFiltersFormContainer: (
-      <ProjectCategoryFiltersForm
-        categoryCheckboxGroupItems={mockedProjectCategorySummaries}
-      />
-    ),
-    creatorFiltersFormContainer: (
-      <ProjectCreatorFiltersForm
-        creatorCheckboxGroupItems={mockedUserSummaries}
-      />
-    ),
-    customerFiltersFormContainer: (
-      <ProjectCustomerFiltersForm
-        customerCheckboxGroupItems={mockedCustomerSummaries}
-      />
-    ),
     projectsContainer: (
       <EntityContainerPresentation
         page={1}

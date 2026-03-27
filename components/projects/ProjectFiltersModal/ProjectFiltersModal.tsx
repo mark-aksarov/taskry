@@ -12,6 +12,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { useProjectFilters } from "../ProjectFiltersContext";
+import { useProjectFiltersModal } from "./ProjectFiltersModalContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
@@ -21,9 +22,14 @@ export function ProjectFiltersModal({
   filtersFormContainer: React.ReactNode;
 }) {
   const initialFilters = useProjectFilters();
+  const { isOpen, onOpenChange } = useProjectFiltersModal();
 
   return (
-    <FormBaseModal data-test="project-filters-modal">
+    <FormBaseModal
+      data-test="project-filters-modal"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+    >
       {
         // Providers re-mount on each render, so their state is re-initialized
         // using values from ProjectFiltersContext (derived from URL/search params)

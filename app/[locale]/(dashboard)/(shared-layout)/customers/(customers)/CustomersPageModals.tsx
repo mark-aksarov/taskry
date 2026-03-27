@@ -8,7 +8,7 @@ import { CustomerFiltersFormContainer } from "@/components/customer/CustomerFilt
 import { CustomerRouterSearchContainer } from "@/components/customer/CustomerRouterSearchContainer";
 import { CustomerCompanyFiltersFormContainer } from "@/components/customer/CustomerCompanyFiltersFormContainer";
 
-export function CustomerPageModals() {
+export function CustomersPageModals() {
   return (
     <>
       <CustomerSearchModal

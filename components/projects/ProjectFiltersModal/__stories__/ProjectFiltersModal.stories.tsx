@@ -1,15 +1,20 @@
-import { useState } from "react";
+import {
+  ProjectFiltersForm,
+  ProjectFiltersFormSkeleton,
+} from "../../ProjectFiltersForm";
+
+import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
-import { Meta, StoryObj } from "@storybook/react";
 import { mockedUserSummaries } from "@/mocks/users";
-import { DialogTrigger } from "react-aria-components";
-import { ProjectFiltersForm } from "../ProjectFiltersForm";
-import { ProjectFiltersModal } from "./ProjectFiltersModal";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedCustomerSummaries } from "@/mocks/customers";
+import { ProjectFiltersModal } from "../ProjectFiltersModal";
+import { useProjectFiltersModal } from "../ProjectFiltersModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
-import { withProjectFiltersProvider } from "../ProjectFiltersContext/__stories__";
-import { withSelectedProjectsProvider } from "../SelectedProjectsContext/__stories__";
+import { withProjectFiltersModalProvider } from "./withProjectFiltersModalProvider";
+import { withProjectFiltersProvider } from "../../ProjectFiltersContext/__stories__";
+import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 
 const meta = {
@@ -17,15 +22,18 @@ const meta = {
   component: ProjectFiltersModal,
   decorators: [
     (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
+      const { onOpenChange } = useProjectFiltersModal();
+
+      useEffect(() => onOpenChange(true), [onOpenChange]);
 
       return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Open modal" />
+        <>
+          <Button label="Open modal" onClick={() => onOpenChange(true)} />
           <Story />
-        </DialogTrigger>
+        </>
       );
     },
+    withProjectFiltersModalProvider,
     withProjectFiltersProvider,
     withSelectedProjectsProvider,
     withPageTransitionProvider,
@@ -34,7 +42,7 @@ const meta = {
 } satisfies Meta<typeof ProjectFiltersModal>;
 
 export default meta;
-export type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
@@ -45,5 +53,11 @@ export const Default = {
         customerCheckboxGroupItems={mockedCustomerSummaries}
       />
     ),
+  },
+} satisfies Story;
+
+export const Skeleton = {
+  args: {
+    filtersFormContainer: <ProjectFiltersFormSkeleton />,
   },
 } satisfies Story;

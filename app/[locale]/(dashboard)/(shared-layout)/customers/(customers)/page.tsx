@@ -16,7 +16,7 @@ import { z } from "zod";
 import { CustomersPage } from "./CustomersPage";
 import { customerSortFields } from "@/lib/types";
 import { companyId } from "@/lib/schemas/company";
-import { CustomerPageModals } from "./CustomerPageModals";
+import { CustomersPageModals } from "./CustomersPageModals";
 import { CustomersPageProviders } from "./CustomersPageProviders";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CustomersContainer } from "@/components/customer/CustomersContainer";
@@ -81,7 +81,7 @@ export default async function AppCustomersPage({
         }
       />
 
-      <CustomerPageModals />
+      <CustomersPageModals />
     </CustomersPageProviders>
   );
 }

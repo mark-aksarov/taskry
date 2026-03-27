@@ -22,12 +22,10 @@ import { ProjectsPageProviders } from "./ProjectsPageProviders";
 import { projectCategoryId } from "@/lib/schemas/projectCategory";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ProjectsContainer } from "@/components/projects/ProjectsContainer";
-import { CreateProjectFormContainer } from "@/components/projects/CreateProjectFormContainer";
-import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersFormContainer";
-import { ProjectRouterSearchContainer } from "@/components/projects/ProjectRouterSearchContainer";
 import { ProjectCreatorFiltersFormContainer } from "@/components/projects/ProjectCreatorFiltersFormContainer";
 import { ProjectCategoryFiltersFormContainer } from "@/components/projects/ProjectCategoryFiltersFormContainer";
 import { ProjectCustomerFiltersFormContainer } from "@/components/projects/ProjectCustomerFiltersFormContainer";
+import { ProjectsPageModals } from "./ProjectsPageModals";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -84,8 +82,6 @@ export default async function AppProjectsPage({
     <ProjectsPageProviders pageItems={projects} filters={filters}>
       <ProjectsPage
         totalCount={totalCount}
-        searchContainer={<ProjectRouterSearchContainer />}
-        createProjectFormContainer={<CreateProjectFormContainer />}
         totalFilteredProjects={totalFilteredProjects}
         selectedSortField={sort}
         projectsContainer={
@@ -96,13 +92,9 @@ export default async function AppProjectsPage({
             pageSize={pageSize}
           />
         }
-        projectFiltersFormContainer={<ProjectFiltersFormContainer />}
-        projectCategoryFiltersFormContainer={
-          <ProjectCategoryFiltersFormContainer />
-        }
-        creatorFiltersFormContainer={<ProjectCreatorFiltersFormContainer />}
-        customerFiltersFormContainer={<ProjectCustomerFiltersFormContainer />}
       />
+
+      <ProjectsPageModals />
     </ProjectsPageProviders>
   );
 }
