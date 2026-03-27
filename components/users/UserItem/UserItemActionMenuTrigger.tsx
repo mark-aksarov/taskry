@@ -10,25 +10,24 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { UpdateUserModal } from "../UpdateUserModal";
 import { DeleteUserModal } from "../DeleteUserModal";
-import { useUpdateUser } from "../UpdateUserContext";
 import { useUserItemPending } from "./useUserItemPending";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
+import { UpdateUserModal, useUpdateUserModal } from "../UpdateUserModal";
 
 interface UserItemActionMenuTriggerProps {
   userId: string;
   userFullName: string;
   className?: string;
-  editUserFormContainer: React.ReactNode;
+  updateUserFormContainer: React.ReactNode;
 }
 
 export function UserItemActionMenuTrigger({
   userId,
   userFullName,
   className,
-  editUserFormContainer,
+  updateUserFormContainer,
 }: UserItemActionMenuTriggerProps) {
   const t = useTranslations("users.UserItemActionMenuTrigger");
 
@@ -41,8 +40,8 @@ export function UserItemActionMenuTrigger({
   // Delete confirmation modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // State for edit modal from context
-  const { onModalOpenChange: onEditModalOpenChange } = useUpdateUser();
+  // State for update modal from context
+  const { onOpenChange: onUpdateModalOpenChange } = useUpdateUserModal();
 
   /**
    * Handles menu actions for a user item
@@ -52,7 +51,7 @@ export function UserItemActionMenuTrigger({
   function handleAction(key: Key) {
     guestGuard(() => {
       if (key === "edit") {
-        onEditModalOpenChange(true);
+        onUpdateModalOpenChange(true);
       } else if (key === "delete") {
         setIsDeleteModalOpen(true);
       }
@@ -89,7 +88,7 @@ export function UserItemActionMenuTrigger({
         ) : null}
       </ItemBaseActionMenuTrigger>
 
-      <UpdateUserModal editUserFormContainer={editUserFormContainer} />
+      <UpdateUserModal updateUserFormContainer={updateUserFormContainer} />
 
       <DeleteUserModal
         userId={userId}

@@ -26,7 +26,7 @@ import { UserDetailHeaderInteractive } from "@/components/users/UserDetailHeader
 import { ProfileNavigationLarge } from "@/components/users/ProfileNavigationLarge";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { withDeleteUserProvider } from "@/components/users/DeleteUserContext/__stories__";
-import { withUpdateUserProvider } from "@/components/users/UpdateUserContext/__stories__";
+import { withUpdateUserProvider } from "@/components/users/UpdateUserProvider/__stories__";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
@@ -100,7 +100,7 @@ export const Default = {
       />
     ),
     navigationMobile: <ProfileNavigationMobile />,
-    editUserFormContainer: (
+    updateUserFormContainer: (
       <UpdateUserForm
         {...mockedUserDetail}
         userId={mockedUserDetail.id}

@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     ...mockedUserDetail,
-    editUserFormContainer: (
+    updateUserFormContainer: (
       <UpdateUserForm
         {...mockedUserDetail}
         userId={mockedUserDetail.id}
@@ -42,7 +42,6 @@ export const Default = {
         imageUrl={mockedUserDetail.imageUrl}
       />
     ),
-    updateUser: () => ({ status: "success" }),
     deleteUser: () => ({ status: "success" }),
   },
 } satisfies Story;

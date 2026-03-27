@@ -6,6 +6,7 @@ import { mockedCompanySummaries } from "@/mocks/companies";
 import { UpdateCustomerForm } from "../UpdateCustomerForm";
 import { UpdateCustomerModal } from "./UpdateCustomerModal";
 import { CustomerFormSkeleton } from "../CustomerFormSkeleton";
+import { withUpdateCustomerModalProvider } from "./__stories__";
 import { useUpdateCustomerModal } from "./UpdateCustomerModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateCustomerProvider } from "../UpdateCustomerProvider/__stories__";
@@ -27,6 +28,7 @@ const meta = {
       );
     },
     withUpdateCustomerProvider,
+    withUpdateCustomerModalProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof UpdateCustomerModal>;

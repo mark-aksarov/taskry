@@ -7,30 +7,30 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { useUpdateUser } from "../UpdateUserContext";
+import { useUpdateUserModal } from "./UpdateUserModalContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UpdateUserModalProps {
-  editUserFormContainer: React.ReactNode;
+  updateUserFormContainer: React.ReactNode;
 }
 
 export function UpdateUserModal({
-  editUserFormContainer,
+  updateUserFormContainer,
 }: UpdateUserModalProps) {
   const t = useTranslations("users.UpdateUserModal");
 
-  const { isModalOpen, onModalOpenChange } = useUpdateUser();
+  const { isOpen, onOpenChange } = useUpdateUserModal();
 
   return (
     <FormBaseModal
       data-test="update-user-modal"
-      isOpen={isModalOpen}
-      onOpenChange={onModalOpenChange}
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
-          {editUserFormContainer}
+          {updateUserFormContainer}
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

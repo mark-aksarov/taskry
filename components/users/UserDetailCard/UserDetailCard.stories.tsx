@@ -14,7 +14,7 @@ import { UserDetailHeaderInteractive } from "../UserDetailHeader";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteUserProvider } from "../DeleteUserContext/__stories__";
-import { withUpdateUserProvider } from "../UpdateUserContext/__stories__";
+import { withUpdateUserProvider } from "../UpdateUserProvider/__stories__";
 import { ProfileActions, ProfileActionsSkeleton } from "../ProfileActions";
 import { withChangePasswordProvider } from "../ChangePasswordContext/__stories__";
 import { MockedUserDetailHeaderProviders } from "../UserDetailHeader/__stories__";
@@ -37,7 +37,7 @@ const meta = {
         <Story />
         <ChangePasswordModal userId={mockedUserDetail.id} />
         <UpdateUserModal
-          editUserFormContainer={
+          updateUserFormContainer={
             <UpdateUserForm
               {...mockedUserDetail}
               userId={mockedUserDetail.id}

@@ -3,10 +3,7 @@ import { UserItemProviders } from "../UserItemProviders";
 
 export const withUserItemProviders: Decorator = (Story) => {
   return (
-    <UserItemProviders
-      updateUser={() => ({ status: "success" })}
-      deleteUser={() => ({ status: "success" })}
-    >
+    <UserItemProviders deleteUser={() => ({ status: "success" })}>
       <Story />
     </UserItemProviders>
   );

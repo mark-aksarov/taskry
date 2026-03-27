@@ -33,15 +33,15 @@ interface Props extends BaseUserItemProps {
   userDetailHeaderContainer: React.ReactNode;
 }
 
-export function UserGridItemLarge({ deleteUser, updateUser, ...props }: Props) {
+export function UserGridItemLarge({ deleteUser, ...props }: Props) {
   return (
-    <UserItemProviders updateUser={updateUser} deleteUser={deleteUser}>
+    <UserItemProviders deleteUser={deleteUser}>
       <UserGridItemLargeInner {...props} />
     </UserItemProviders>
   );
 }
 
-type InnerProps = Omit<Props, "deleteUser" | "updateUser">;
+type InnerProps = Omit<Props, "deleteUser">;
 
 const UserGridItemLargeInner = memo(
   ({
@@ -52,7 +52,7 @@ const UserGridItemLargeInner = memo(
     phoneNumber,
     publicLink,
     email,
-    editUserFormContainer,
+    updateUserFormContainer,
     userDetailContainer,
     userDetailHeaderContainer,
   }: InnerProps) => {
@@ -85,7 +85,7 @@ const UserGridItemLargeInner = memo(
         actionMenuSlot={
           showActionMenuTrigger ? (
             <UserItemActionMenuTrigger
-              editUserFormContainer={editUserFormContainer}
+              updateUserFormContainer={updateUserFormContainer}
               userId={id}
               userFullName={fullName}
               className="-mr-2"

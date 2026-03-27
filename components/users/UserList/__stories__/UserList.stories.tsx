@@ -28,10 +28,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedUserList.map((user) => (
-      <UserItemProviders
-        updateUser={() => ({ status: "success" })}
-        deleteUser={() => ({ status: "success" })}
-      >
+      <UserItemProviders deleteUser={() => ({ status: "success" })}>
         <UserListItem key={user.id} {...UserListItemStory.args} {...user} />
       </UserItemProviders>
     )),

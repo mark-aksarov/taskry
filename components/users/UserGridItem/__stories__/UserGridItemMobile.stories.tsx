@@ -28,7 +28,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     ...mockedUserDetail,
-    editUserFormContainer: (
+    updateUserFormContainer: (
       <UpdateUserForm
         {...mockedUserDetail}
         userId={mockedUserDetail.id}
@@ -36,7 +36,6 @@ export const Default = {
       />
     ),
     deleteUser: () => ({ status: "success" }),
-    updateUser: () => ({ status: "success" }),
   },
 } satisfies Story;
 

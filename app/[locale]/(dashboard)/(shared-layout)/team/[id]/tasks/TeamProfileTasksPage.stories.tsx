@@ -26,7 +26,7 @@ import { UserTaskListStory } from "@/components/users/UserTaskList/__stories__";
 import { UserTasksPresentation } from "@/components/users/UserTasksPresentation";
 import { UserDetailHeaderInteractive } from "@/components/users/UserDetailHeader";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
-import { withUpdateUserProvider } from "@/components/users/UpdateUserContext/__stories__";
+import { withUpdateUserProvider } from "@/components/users/UpdateUserProvider/__stories__";
 import { withDeleteUserProvider } from "@/components/users/DeleteUserContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksContext/__stories__";
@@ -100,7 +100,7 @@ export const Default = {
         }
       />
     ),
-    editUserFormContainer: (
+    updateUserFormContainer: (
       <UpdateUserForm
         {...mockedUserDetail}
         userId={mockedUserDetail.id}

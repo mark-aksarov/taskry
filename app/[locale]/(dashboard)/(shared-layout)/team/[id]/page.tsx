@@ -4,12 +4,11 @@ import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { getUserSummary } from "@/lib/data/user/user.dal";
 import { deleteUser } from "@/lib/actions/user/deleteUser";
-import { updateUser } from "@/lib/actions/user/updateUser";
 import { userId as userIdSchema } from "@/lib/schemas/user";
 import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { DeleteUserProvider } from "@/components/users/DeleteUserContext";
-import { UpdateUserProvider } from "@/components/users/UpdateUserContext";
+import { UpdateUserProvider } from "@/components/users/UpdateUserProvider";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { UpdateUserFormContainer } from "@/components/users/UpdateUserFormContainer";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
@@ -45,7 +44,7 @@ export default async function AppProfilePage({
   const showUserActions = isOwner || isGuest || session.user.id === userId;
 
   return (
-    <UpdateUserProvider updateUser={updateUser}>
+    <UpdateUserProvider>
       <ChangePasswordProvider changePassword={changePassword}>
         <DeleteUserProvider deleteUser={deleteUser}>
           <TeamProfilePage
@@ -57,7 +56,9 @@ export default async function AppProfilePage({
             userDetailHeaderContainer={
               <UserDetailHeaderAltContainer userId={userId} />
             }
-            editUserFormContainer={<UpdateUserFormContainer userId={userId} />}
+            updateUserFormContainer={
+              <UpdateUserFormContainer userId={userId} />
+            }
           />
         </DeleteUserProvider>
       </ChangePasswordProvider>

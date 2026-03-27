@@ -30,9 +30,9 @@ interface Props extends BaseUserItemProps {
   userDetailHeaderContainer: React.ReactNode;
 }
 
-export function UserListItem({ updateUser, deleteUser, ...props }: Props) {
+export function UserListItem({ deleteUser, ...props }: Props) {
   return (
-    <UserItemProviders updateUser={updateUser} deleteUser={deleteUser}>
+    <UserItemProviders deleteUser={deleteUser}>
       <UserListItemInner {...props} />
     </UserItemProviders>
   );
@@ -49,7 +49,7 @@ export const UserListItemInner = memo(
     phoneNumber,
     publicLink,
     position,
-    editUserFormContainer,
+    updateUserFormContainer,
     userDetailContainer,
     userDetailHeaderContainer,
   }: InnerProps) => {
@@ -137,7 +137,7 @@ export const UserListItemInner = memo(
         menuTriggerSlot={
           showActionMenuTrigger ? (
             <UserItemActionMenuTrigger
-              editUserFormContainer={editUserFormContainer}
+              updateUserFormContainer={updateUserFormContainer}
               userId={id}
               userFullName={fullName}
             />

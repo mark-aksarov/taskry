@@ -1,32 +1,34 @@
 import { useEffect } from "react";
-import { UpdateUserForm } from "../UpdateUserForm";
-import { UpdateUserModal } from "./UpdateUserModal";
 import { Button } from "@/components/ui/Button";
 import { mockedUserDetail } from "@/mocks/users";
-import { useUpdateUser } from "../UpdateUserContext";
-import { UpdateUserFormSkeleton } from "../UpdateUserForm";
+import { UpdateUserForm } from "../UpdateUserForm";
+import { UpdateUserModal } from "./UpdateUserModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { UpdateUserFormSkeleton } from "../UpdateUserForm";
 import { mockedPositionSummaries } from "@/mocks/positions";
+import { withUpdateUserModalProvider } from "./__stories__";
+import { useUpdateUserModal } from "./UpdateUserModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateUserProvider } from "../UpdateUserContext/__stories__";
+import { withUpdateUserProvider } from "../UpdateUserProvider/__stories__";
 
 const meta = {
   title: "components/users/UpdateUserModal",
   component: UpdateUserModal,
   decorators: [
     (Story) => {
-      const { onModalOpenChange } = useUpdateUser();
+      const { onOpenChange } = useUpdateUserModal();
 
-      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
+      useEffect(() => onOpenChange(true), [onOpenChange]);
 
       return (
         <>
-          <Button label="Edit user" onClick={() => onModalOpenChange(true)} />
+          <Button label="Open modal" onClick={() => onOpenChange(true)} />
           <Story />
         </>
       );
     },
     withUpdateUserProvider,
+    withUpdateUserModalProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof UpdateUserModal>;
@@ -36,7 +38,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    editUserFormContainer: (
+    updateUserFormContainer: (
       <UpdateUserForm
         {...mockedUserDetail}
         userId={mockedUserDetail.id}
@@ -49,6 +51,6 @@ export const Default = {
 export const Skeleton = {
   args: {
     ...Default.args,
-    editUserFormContainer: <UpdateUserFormSkeleton />,
+    updateUserFormContainer: <UpdateUserFormSkeleton />,
   },
 } satisfies Story;

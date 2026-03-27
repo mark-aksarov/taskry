@@ -18,7 +18,7 @@ interface ProfilePageProps {
   searchContainer: React.ReactNode;
   userDetailContainer: React.ReactNode;
   userDetailHeaderContainer: React.ReactNode;
-  editUserFormContainer: React.ReactNode;
+  updateUserFormContainer: React.ReactNode;
 }
 
 export function ProfilePage({
@@ -27,7 +27,7 @@ export function ProfilePage({
   searchContainer,
   userDetailContainer,
   userDetailHeaderContainer,
-  editUserFormContainer,
+  updateUserFormContainer,
 }: ProfilePageProps) {
   const t = useTranslations("app.ProfilePage");
 
@@ -63,7 +63,7 @@ export function ProfilePage({
 
       <TaskSearchModal searchContainer={searchContainer} />
       <ChangePasswordModal userId={userId} />
-      <UpdateUserModal editUserFormContainer={editUserFormContainer} />
+      <UpdateUserModal updateUserFormContainer={updateUserFormContainer} />
     </>
   );
 }

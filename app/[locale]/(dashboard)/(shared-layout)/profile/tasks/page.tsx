@@ -2,14 +2,13 @@ import { z } from "zod";
 import { taskSortFields } from "@/lib/types";
 import { getTaskList } from "@/lib/data/task/task.dal";
 import { createTask } from "@/lib/actions/task/createTask";
-import { updateUser } from "@/lib/actions/user/updateUser";
 import { deleteUser } from "@/lib/actions/user/deleteUser";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { ProfileActions } from "@/components/users/ProfileActions";
 import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CreateTaskProvider } from "@/components/tasks/CreateTaskContext";
-import { UpdateUserProvider } from "@/components/users/UpdateUserContext";
+import { UpdateUserProvider } from "@/components/users/UpdateUserProvider";
 import { DeleteUserProvider } from "@/components/users/DeleteUserContext";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
@@ -66,7 +65,7 @@ export default async function AppProfileTasksPage({
         }))}
       >
         <DeleteTasksProvider deleteTasks={deleteTasks}>
-          <UpdateUserProvider updateUser={updateUser}>
+          <UpdateUserProvider>
             <ChangePasswordProvider changePassword={changePassword}>
               <DeleteUserProvider deleteUser={deleteUser}>
                 <CreateTaskProvider createTask={createTask}>
@@ -86,7 +85,7 @@ export default async function AppProfileTasksPage({
                     }
                     searchContainer={<LinkSearchContainer pathname="/tasks" />}
                     navigationMobile={<ProfileNavigationMobile />}
-                    editUserFormContainer={
+                    updateUserFormContainer={
                       <UpdateUserFormContainer userId={userId} />
                     }
                     userTasksContainer={

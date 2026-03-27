@@ -34,9 +34,8 @@ export function UsersDynamic({
     phoneNumber: user.phoneNumber,
     publicLink: user.publicLink,
     position: user.position,
-    updateUser: updateUser,
     deleteUser: deleteUser,
-    editUserFormContainer: <UpdateUserFormContainer userId={user.id} />,
+    updateUserFormContainer: <UpdateUserFormContainer userId={user.id} />,
   });
 
   const getContainerProps = (user: UserListItemDTO) => ({

@@ -36,7 +36,7 @@ interface UserTasksPageLayoutProps {
   navigationLarge: React.ReactNode;
   navigationMobile: React.ReactNode;
   userTasksContainer: React.ReactNode;
-  editUserFormContainer: React.ReactNode;
+  updateUserFormContainer: React.ReactNode;
   createTaskFormContainer: React.ReactNode;
   userDetailHeaderContainer: React.ReactNode;
 }
@@ -50,7 +50,7 @@ export function UserTasksPageLayout({
   navigationLarge,
   navigationMobile,
   userTasksContainer,
-  editUserFormContainer,
+  updateUserFormContainer,
   createTaskFormContainer,
   userDetailHeaderContainer,
 }: UserTasksPageLayoutProps) {
@@ -68,7 +68,7 @@ export function UserTasksPageLayout({
 
         <ChangePasswordModal userId={userId} />
         <CreateTaskModal createTaskFormContainer={createTaskFormContainer} />
-        <UpdateUserModal editUserFormContainer={editUserFormContainer} />
+        <UpdateUserModal updateUserFormContainer={updateUserFormContainer} />
       </>
     );
   }
@@ -126,7 +126,7 @@ export function UserTasksPageLayout({
       <TaskSearchModal searchContainer={searchContainer} />
       <ChangePasswordModal userId={userId} />
       <CreateTaskModal createTaskFormContainer={createTaskFormContainer} />
-      <UpdateUserModal editUserFormContainer={editUserFormContainer} />
+      <UpdateUserModal updateUserFormContainer={updateUserFormContainer} />
     </>
   );
 }

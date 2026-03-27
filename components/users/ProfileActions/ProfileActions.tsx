@@ -5,6 +5,7 @@ import { startTransition, useState } from "react";
 import { useUpdateUser } from "../UpdateUserContext";
 import { useDeleteUser } from "../DeleteUserContext";
 import { KeyRound, Pencil, Trash } from "lucide-react";
+import { useUpdateUserModal } from "../UpdateUserModal";
 import { BaseDeleteUserModal } from "../DeleteUserModal";
 import { useChangePassword } from "../ChangePasswordContext";
 import { useGuestModeModal } from "@/components/common/GuestModeModal";
@@ -33,11 +34,9 @@ export function ProfileActions({ userId, userFullName }: ProfileActionsProps) {
   const { onModalOpenChange: onChangePasswordModalOpenChange } =
     useChangePassword();
 
-  // Edit user modal state
-  const {
-    isPending: isUpdateUserPending,
-    onModalOpenChange: onEditModalOpenChange,
-  } = useUpdateUser();
+  // Update user modal state
+  const { isPending: isUpdateUserPending } = useUpdateUser();
+  const { onOpenChange: onUpdateModalOpenChange } = useUpdateUserModal();
 
   function handlePasswordChangePress() {
     if (isGuest) {
@@ -47,12 +46,12 @@ export function ProfileActions({ userId, userFullName }: ProfileActionsProps) {
     onChangePasswordModalOpenChange(true);
   }
 
-  function handleEditPress() {
+  function handleUpdatePress() {
     if (isGuest) {
       onGuestModeModalOpenChange(true);
       return;
     }
-    onEditModalOpenChange(true);
+    onUpdateModalOpenChange(true);
   }
 
   function handleDeletePress() {
@@ -99,7 +98,7 @@ export function ProfileActions({ userId, userFullName }: ProfileActionsProps) {
         />
         <NavigationButton
           data-test="edit-user-button"
-          onPress={handleEditPress}
+          onPress={handleUpdatePress}
           variant="secondary"
           isPending={isUpdateUserPending}
           iconLeft={<Pencil size={18} strokeWidth={1.5} absoluteStrokeWidth />}

@@ -6,7 +6,6 @@ import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { getUserSummary } from "@/lib/data/user/user.dal";
 import { deleteUser } from "@/lib/actions/user/deleteUser";
-import { updateUser } from "@/lib/actions/user/updateUser";
 import { createTask } from "@/lib/actions/task/createTask";
 import { deleteTasks } from "@/lib/actions/task/deleteTasks";
 import { ProfileActions } from "@/components/users/ProfileActions";
@@ -14,19 +13,19 @@ import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { CreateTaskProvider } from "@/components/tasks/CreateTaskContext";
-import { UpdateUserProvider } from "@/components/users/UpdateUserContext";
+import { UpdateUserProvider } from "@/components/users/UpdateUserProvider";
 import { DeleteUserProvider } from "@/components/users/DeleteUserContext";
 import { UserTasksContainer } from "@/components/users/UserTasksContainer";
 import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksContext";
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
+import { UserNavigationLarge } from "@/components/users/UserNavigationLarge";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
-import { CreateTaskFormContainer } from "@/components/tasks/CreateTaskFormContainer";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
-import { UserNavigationLarge } from "@/components/users/UserNavigationLarge";
-import { UpdateUserFormContainer } from "@/components/users/UpdateUserFormContainer";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
+import { CreateTaskFormContainer } from "@/components/tasks/CreateTaskFormContainer";
+import { UpdateUserFormContainer } from "@/components/users/UpdateUserFormContainer";
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext";
 import { UserDetailHeaderAltContainer } from "@/components/users/UserDetailHeaderAltContainer";
 
@@ -82,7 +81,7 @@ export default async function AppProfileTasksPage({
         }))}
       >
         <DeleteTasksProvider deleteTasks={deleteTasks}>
-          <UpdateUserProvider updateUser={updateUser}>
+          <UpdateUserProvider>
             <ChangePasswordProvider changePassword={changePassword}>
               <DeleteUserProvider deleteUser={deleteUser}>
                 <CreateTaskProvider createTask={createTask}>
@@ -113,7 +112,7 @@ export default async function AppProfileTasksPage({
                         pageSize={pageSize}
                       />
                     }
-                    editUserFormContainer={
+                    updateUserFormContainer={
                       <UpdateUserFormContainer userId={userId} />
                     }
                     userDetailHeaderContainer={

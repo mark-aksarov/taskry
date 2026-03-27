@@ -31,10 +31,7 @@ const schema = z.object({
   positionId: z.preprocess(emptyStringToNull, positionId.nullable()),
 });
 
-export async function updateUser(
-  _prevState: ActionState,
-  formData: FormData,
-): Promise<ActionState> {
+export async function updateUser(formData: FormData): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

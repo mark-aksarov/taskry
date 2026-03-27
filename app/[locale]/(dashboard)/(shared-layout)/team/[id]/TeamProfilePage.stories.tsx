@@ -12,7 +12,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
 import { UserDetailHeaderInteractive } from "@/components/users/UserDetailHeader";
-import { withUpdateUserProvider } from "@/components/users/UpdateUserContext/__stories__";
+import { withUpdateUserProvider } from "@/components/users/UpdateUserProvider/__stories__";
 import { withDeleteUserProvider } from "@/components/users/DeleteUserContext/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
@@ -49,7 +49,7 @@ export const Default = {
     userFullName: mockedUserDetail.fullName,
     showUserActions: true,
     searchContainer: <SearchList {...SearchListStory.args} />,
-    editUserFormContainer: (
+    updateUserFormContainer: (
       <UpdateUserForm
         {...mockedUserDetail}
         userId={mockedUserDetail.id}

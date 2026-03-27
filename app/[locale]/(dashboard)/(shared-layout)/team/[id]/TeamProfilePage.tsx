@@ -20,7 +20,7 @@ interface TeamProfilePageProps {
   searchContainer: React.ReactNode;
   userDetailContainer: React.ReactNode;
   userDetailHeaderContainer: React.ReactNode;
-  editUserFormContainer: React.ReactNode;
+  updateUserFormContainer: React.ReactNode;
 }
 
 export function TeamProfilePage({
@@ -30,7 +30,7 @@ export function TeamProfilePage({
   searchContainer,
   userDetailContainer,
   userDetailHeaderContainer,
-  editUserFormContainer,
+  updateUserFormContainer,
 }: TeamProfilePageProps) {
   const t = useTranslations("app.TeamProfilePage");
 
@@ -75,7 +75,7 @@ export function TeamProfilePage({
 
       <TaskSearchModal searchContainer={searchContainer} />
       <ChangePasswordModal userId={userId} />
-      <UpdateUserModal editUserFormContainer={editUserFormContainer} />
+      <UpdateUserModal updateUserFormContainer={updateUserFormContainer} />
     </>
   );
 }

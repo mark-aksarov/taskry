@@ -10,7 +10,6 @@ export interface BaseUserItemProps {
   position?: {
     name: string;
   };
-  editUserFormContainer: React.ReactNode;
-  updateUser: ActionFn<ActionState, FormData>;
+  updateUserFormContainer: React.ReactNode;
   deleteUser: ActionFn<ActionState, DeleteUserPayload>;
 }
