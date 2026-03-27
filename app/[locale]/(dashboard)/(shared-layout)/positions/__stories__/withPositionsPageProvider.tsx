@@ -4,7 +4,7 @@ import { MockedSelectedItemsProvider } from "@/components/common/SelectedItemsCo
 import { MockedCreatePositionProvider } from "@/components/position/CreatePositionProvider/__stories__";
 import { MockedDeletePositionsProvider } from "@/components/position/DeletePositionsProvider/__stories__";
 
-export const PositionsPageDecorator: Decorator = (Story) => {
+export const withPositionsPageProvider: Decorator = (Story) => {
   return (
     <MockedSelectedItemsProvider>
       <MockedDeletePositionsProvider>

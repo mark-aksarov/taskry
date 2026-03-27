@@ -3,12 +3,11 @@ import PositionsPageLoading from "../loading";
 import { usePathname } from "next/navigation";
 import { PositionsPage } from "../PositionsPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { SearchList } from "@/components/search/SearchList";
 import { PositionList } from "@/components/position/PositionList";
-import { PositionsPageDecorator } from "./PositionsPageDecorator";
+import { withPositionsPageModals } from "./withPositionsPageModals";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
+import { withPositionsPageProvider } from "./withPositionsPageProvider";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { PositionListStory } from "@/components/position/PositionList/__stories__";
 
 const meta = {
@@ -16,7 +15,8 @@ const meta = {
   component: PositionsPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    PositionsPageDecorator,
+    withPositionsPageModals,
+    withPositionsPageProvider,
     SharedPageDecorator,
     withThemedBackground,
   ],
@@ -31,7 +31,6 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     totalCount: 10,
-    searchContainer: <SearchList {...SearchListStory.args} />,
     positionsContainer: <PositionList {...PositionListStory.args} />,
   },
 } satisfies Story;

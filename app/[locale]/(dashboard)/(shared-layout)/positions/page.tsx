@@ -3,7 +3,6 @@ import { PositionsPageProviders } from "./PositionsPageProviders";
 import { getPositionSummaries } from "@/lib/data/position/position.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { PositionsContainer } from "@/components/position/PositionsContainer";
-import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 
 export default async function AppPositionsPage() {
   // Authorization
@@ -15,7 +14,6 @@ export default async function AppPositionsPage() {
     <PositionsPageProviders pageItems={positions.map((p) => ({ id: p.id }))}>
       <PositionsPage
         totalCount={positions.length}
-        searchContainer={<LinkSearchContainer pathname="/tasks" />}
         positionsContainer={<PositionsContainer />}
       />
     </PositionsPageProviders>
