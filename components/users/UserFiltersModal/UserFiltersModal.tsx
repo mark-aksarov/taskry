@@ -12,6 +12,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { useUserFilters } from "../UserFiltersContext";
+import { useUserFiltersModal } from "./UserFiltersModalContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
@@ -21,9 +22,14 @@ export function UserFiltersModal({
   filtersFormContainer: React.ReactNode;
 }) {
   const initialFilters = useUserFilters();
+  const { isOpen, onOpenChange } = useUserFiltersModal();
 
   return (
-    <FormBaseModal data-test="user-filters-modal">
+    <FormBaseModal
+      data-test="user-filters-modal"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+    >
       <UserFiltersFormProvider initialFilters={initialFilters}>
         <FilterModalDialog>
           <DialogHeader />

@@ -1,20 +1,10 @@
 "use client";
 
-import { DialogTrigger } from "react-aria-components";
-import { UserFiltersModal } from "./UserFiltersModal";
 import { FilterButtonLarge } from "@/components/common/FilterButton";
+import { useUserFiltersModal } from "./UserFiltersModalContext";
 
-interface UserFiltersModalTriggerLargeProps {
-  filtersFormContainer: React.ReactNode;
-}
+export function UserFiltersModalTriggerLarge() {
+  const { onOpenChange } = useUserFiltersModal();
 
-export function UserFiltersModalTriggerLarge({
-  filtersFormContainer,
-}: UserFiltersModalTriggerLargeProps) {
-  return (
-    <DialogTrigger>
-      <FilterButtonLarge />
-      <UserFiltersModal filtersFormContainer={filtersFormContainer} />
-    </DialogTrigger>
-  );
+  return <FilterButtonLarge onClick={() => onOpenChange(true)} />;
 }

@@ -1,16 +1,10 @@
 import { type Decorator } from "@storybook/react";
-import { CreateUserContext } from "../../CreateUserContext";
+import { MockedCreateUserProvider } from "./MockedCreateUserProvider";
 
 export const withCreateUserProvider: Decorator = (Story) => {
   return (
-    <CreateUserContext.Provider
-      value={{
-        state: { status: "success" },
-        action: () => ({ status: "success" }),
-        isPending: false,
-      }}
-    >
+    <MockedCreateUserProvider>
       <Story />
-    </CreateUserContext.Provider>
+    </MockedCreateUserProvider>
   );
 };

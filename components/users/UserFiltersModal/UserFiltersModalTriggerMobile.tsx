@@ -1,20 +1,12 @@
 "use client";
 
-import { DialogTrigger } from "react-aria-components";
-import { UserFiltersModal } from "./UserFiltersModal";
+import { useUserFiltersModal } from "./UserFiltersModalContext";
 import { FilterButtonMobile } from "@/components/common/FilterButton";
 
-interface UserFiltersModalTriggerMobileProps {
-  filtersFormContainer: React.ReactNode;
-}
+export function UserFiltersModalTriggerMobile() {
+  const { onOpenChange } = useUserFiltersModal();
 
-export function UserFiltersModalTriggerMobile({
-  filtersFormContainer,
-}: UserFiltersModalTriggerMobileProps) {
   return (
-    <DialogTrigger>
-      <FilterButtonMobile mode="multiple" />
-      <UserFiltersModal filtersFormContainer={filtersFormContainer} />
-    </DialogTrigger>
+    <FilterButtonMobile mode="multiple" onPress={() => onOpenChange(true)} />
   );
 }

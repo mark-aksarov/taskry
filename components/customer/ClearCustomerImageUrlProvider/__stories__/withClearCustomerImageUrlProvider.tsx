@@ -1,16 +1,10 @@
 import { type Decorator } from "@storybook/react";
-import { ClearCustomerImageUrlContext } from "../../ClearCustomerImageUrlContext";
+import { MockedClearCustomerImageUrlProvider } from "./MockedClearCustomerImageUrlProvider";
 
 export const withClearCustomerImageUrlProvider: Decorator = (Story) => {
   return (
-    <ClearCustomerImageUrlContext.Provider
-      value={{
-        state: { status: "success" },
-        action: () => ({ status: "success" }),
-        isPending: false,
-      }}
-    >
+    <MockedClearCustomerImageUrlProvider>
       <Story />
-    </ClearCustomerImageUrlContext.Provider>
+    </MockedClearCustomerImageUrlProvider>
   );
 };
