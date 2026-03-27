@@ -1,3 +1,4 @@
+import { DeleteTaskCategoryModalProvider } from "../DeleteTaskCategoryModal";
 import { DeleteTaskCategoryProvider } from "../DeleteTaskCategoryProvider";
 import { UpdateTaskCategoryModalProvider } from "../UpdateTaskCategoryModal";
 import { UpdateTaskCategoryProvider } from "../UpdateTaskCategoryProvider";
@@ -10,7 +11,9 @@ export function TaskCategoryProviders({ children }: TaskItemProvidersProps) {
   return (
     <UpdateTaskCategoryModalProvider>
       <UpdateTaskCategoryProvider>
-        <DeleteTaskCategoryProvider>{children}</DeleteTaskCategoryProvider>
+        <DeleteTaskCategoryModalProvider>
+          <DeleteTaskCategoryProvider>{children}</DeleteTaskCategoryProvider>
+        </DeleteTaskCategoryModalProvider>
       </UpdateTaskCategoryProvider>
     </UpdateTaskCategoryModalProvider>
   );

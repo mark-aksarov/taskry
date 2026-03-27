@@ -9,6 +9,7 @@ import { useCreateProjectModal } from "../CreateProjectModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
 import { withCreateProjectProvider } from "../../CreateProjectProvider/__stories__";
+import { withCreateProjectModalProvider } from "./withCreateProjectModalProvider";
 
 const meta = {
   title: "components/projects/CreateProjectModal",
@@ -27,6 +28,7 @@ const meta = {
       );
     },
     withCreateProjectProvider,
+    withCreateProjectModalProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof CreateProjectModal>;

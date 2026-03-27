@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { UpdateSubtaskModal } from "./UpdateSubtaskModal";
-import { useUpdateSubtaskModal } from "./UpdateSubtaskModalContext";
+import { UpdateSubtaskModal } from "../UpdateSubtaskModal";
+import { useUpdateSubtaskModal } from "../UpdateSubtaskModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateSubtaskProvider } from "../UpdateSubtaskProvider/__stories__";
+import { withUpdateSubtaskProvider } from "../../UpdateSubtaskProvider/__stories__";
+import { withUpdateSubtaskModalProvider } from "./withUpdateSubtaskModalProvider";
 
 const meta = {
   title: "components/subtasks/UpdateSubtaskModal",
@@ -26,6 +27,7 @@ const meta = {
       );
     },
     withUpdateSubtaskProvider,
+    withUpdateSubtaskModalProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof UpdateSubtaskModal>;

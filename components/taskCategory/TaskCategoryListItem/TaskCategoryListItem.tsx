@@ -47,10 +47,7 @@ const TaskCategoryListItemInner = memo(
           <ListItemText>{t("name")}</ListItemText>
         </ListItemInfo>
 
-        <TaskCategoryListItemActionMenuTrigger
-          taskCategoryId={id}
-          taskCategoryName={name}
-        />
+        <TaskCategoryListItemActionMenuTrigger taskCategoryId={id} />
       </ListItem>
     );
   },

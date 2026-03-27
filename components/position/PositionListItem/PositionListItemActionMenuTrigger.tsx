@@ -9,7 +9,6 @@ import {
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { UpdatePositionModal } from "../UpdatePositionModal";
 import { useUpdatePositionModal } from "../UpdatePositionModal";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { usePositionListItemPending } from "./usePositionListItemPending";
@@ -17,12 +16,10 @@ import { useDeletePositionModal } from "../DeletePositionModal/DeletePositionMod
 
 export type PositionListItemActionMenuTriggerProps = {
   positionId: number;
-  positionName: string;
 };
 
 export function PositionListItemActionMenuTrigger({
   positionId,
-  positionName,
 }: PositionListItemActionMenuTriggerProps) {
   const t = useTranslations("positions.PositionListItemActionMenuTrigger");
 

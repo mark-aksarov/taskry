@@ -8,7 +8,7 @@ import { withCreateTaskCategoryModalProvider } from "./withCreateTaskCategoryMod
 import { withCreateTaskCategoryProvider } from "../../CreateTaskCategoryProvider/__stories__";
 
 const meta = {
-  title: "components/companies/CreateTaskCategoryModal",
+  title: "components/task-categories/CreateTaskCategoryModal",
   component: CreateTaskCategoryModal,
   decorators: [
     (Story) => {

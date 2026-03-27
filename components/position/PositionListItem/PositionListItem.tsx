@@ -47,10 +47,7 @@ const PositionListItemInner = memo(
           <ListItemText>{t("name")}</ListItemText>
         </ListItemInfo>
 
-        <PositionListItemActionMenuTrigger
-          positionId={id}
-          positionName={name}
-        />
+        <PositionListItemActionMenuTrigger positionId={id} />
       </ListItem>
     );
   },

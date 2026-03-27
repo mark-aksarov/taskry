@@ -13,23 +13,21 @@ import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { useDeleteTaskCategory } from "../DeleteTaskCategoryContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { useDeleteTaskCategoryModal } from "./DeleteTaskCategoryModalContext";
 
 interface DeleteTaskCategoryModalProps {
   taskCategoryId: number;
   taskCategoryName: string;
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
 }
 
 export function DeleteTaskCategoryModal({
   taskCategoryId,
   taskCategoryName,
-  isOpen,
-  onOpenChange,
 }: DeleteTaskCategoryModalProps) {
   const t = useTranslations("taskCategories.DeleteTaskCategoryModal");
 
   const { action } = useDeleteTaskCategory();
+  const { isOpen, onOpenChange } = useDeleteTaskCategoryModal();
 
   const { remove: removeSelected } = useSelectedItems();
 

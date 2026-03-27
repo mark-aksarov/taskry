@@ -5,6 +5,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UpdateProjectCategoryModal } from "../UpdateProjectCategoryModal";
 import { useUpdateProjectCategoryModal } from "../UpdateProjectCategoryModalContext";
 import { withUpdateProjectCategoryProvider } from "../../UpdateProjectCategoryProvider/__stories__";
+import { withUpdateProjectCategoryModalProvider } from "./withUpdateProjectCategoryModalProvider";
 
 const meta = {
   title: "components/project-categories/UpdateProjectCategoryModal",
@@ -23,6 +24,7 @@ const meta = {
       );
     },
     withUpdateProjectCategoryProvider,
+    withUpdateProjectCategoryModalProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof UpdateProjectCategoryModal>;

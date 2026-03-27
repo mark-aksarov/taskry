@@ -2,18 +2,18 @@ import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { DeleteProjectCategoryModal } from "../DeleteProjectCategoryModal";
-import { useDeleteProjectCategoryModal } from "../DeleteProjectCategoryModalContext";
+import { DeleteTaskCategoryModal } from "../DeleteTaskCategoryModal";
+import { useDeleteTaskCategoryModal } from "../DeleteTaskCategoryModalContext";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
-import { withDeleteProjectCategoryModalProvider } from "./withDeleteProjectCategoryModalProvider";
-import { withDeleteProjectCategoryProvider } from "../../DeleteProjectCategoryProvider/__stories__";
+import { withDeleteTaskCategoryModalProvider } from "./withDeleteTaskCategoryModalProvider";
+import { withDeleteTaskCategoryProvider } from "../../DeleteTaskCategoryProvider/__stories__";
 
 const meta = {
-  title: "components/project-categories/DeleteProjectCategoryModal",
-  component: DeleteProjectCategoryModal,
+  title: "components/task-categories/DeleteTaskCategoryModal",
+  component: DeleteTaskCategoryModal,
   decorators: [
     (Story) => {
-      const { onOpenChange } = useDeleteProjectCategoryModal();
+      const { onOpenChange } = useDeleteTaskCategoryModal();
 
       useEffect(() => onOpenChange(true), [onOpenChange]);
 
@@ -24,19 +24,19 @@ const meta = {
         </>
       );
     },
-    withDeleteProjectCategoryProvider,
-    withDeleteProjectCategoryModalProvider,
+    withDeleteTaskCategoryProvider,
+    withDeleteTaskCategoryModalProvider,
     withSelectedItemsProvider,
     withThemedBackground,
   ],
-} satisfies Meta<typeof DeleteProjectCategoryModal>;
+} satisfies Meta<typeof DeleteTaskCategoryModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    projectCategoryId: 1,
-    projectCategoryName: "Fake project category",
+    taskCategoryId: 1,
+    taskCategoryName: "Fake task category",
   },
 } satisfies Story;

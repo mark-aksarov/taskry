@@ -7,7 +7,7 @@ import { useDeleteProjectModal } from "../DeleteProjectModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteProjectModalProvider } from "./withDeleteProjectModalProvider";
 import { withDeleteProjectProvider } from "../../DeleteProjectProvider/__stories__";
-import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
+import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 
 const meta = {
   title: "components/projects/DeleteProjectModal",
@@ -16,7 +16,7 @@ const meta = {
     withDeleteProjectModalProvider,
     withToastRegion,
     withDeleteProjectProvider,
-    withSelectedItemsProvider,
+    withSelectedProjectsProvider,
     withThemedBackground,
   ],
   render: (args) => {
