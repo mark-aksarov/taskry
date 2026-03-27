@@ -12,7 +12,7 @@ import { notFound } from "next/navigation";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { getUserDetail } from "@/lib/data/user/user.dal";
-import { UpdateUserImageProvider } from "./UpdateUserImageProvider";
+import { UpdateUserImageProvider } from "./UpdateUserImageProvider/UpdateUserImageProvider";
 import { UpdateUserImageModalProvider } from "./UpdateUserImageModal";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { ClearUserImageUrlProvider } from "./ClearUserImageUrlProvider";

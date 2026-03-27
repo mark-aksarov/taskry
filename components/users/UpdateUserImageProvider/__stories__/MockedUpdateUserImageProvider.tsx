@@ -1,4 +1,4 @@
-import { UpdateUserImageContext } from "../UpdateUserImageContext";
+import { UpdateUserImageContext } from "../../UpdateUserImageContext";
 
 export function MockedUpdateUserImageProvider({
   children,
