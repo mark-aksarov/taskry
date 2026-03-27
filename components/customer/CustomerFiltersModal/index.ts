@@ -1,2 +1,3 @@
-export { CustomerFiltersModalTriggerMobile } from "./CustomerFiltersModalTriggerMobile";
-export { CustomerFiltersModalTriggerLarge } from "./CustomerFiltersModalTriggerLarge";
+export { CustomerFiltersModal } from "./CustomerFiltersModal";
+export { CustomerFiltersModalProvider } from "./CustomerFiltersModalContext";
+export { useCustomerFiltersModal } from "./CustomerFiltersModalContext";

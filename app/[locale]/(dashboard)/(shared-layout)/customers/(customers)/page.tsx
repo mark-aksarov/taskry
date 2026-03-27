@@ -16,13 +16,10 @@ import { z } from "zod";
 import { CustomersPage } from "./CustomersPage";
 import { customerSortFields } from "@/lib/types";
 import { companyId } from "@/lib/schemas/company";
+import { CustomerPageModals } from "./CustomerPageModals";
 import { CustomersPageProviders } from "./CustomersPageProviders";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CustomersContainer } from "@/components/customer/CustomersContainer";
-import { CreateCustomerFormContainer } from "@/components/customer/CreateCustomerFormContainer";
-import { CustomerFiltersFormContainer } from "@/components/customer/CustomerFiltersFormContainer";
-import { CustomerRouterSearchContainer } from "@/components/customer/CustomerRouterSearchContainer";
-import { CustomerCompanyFiltersFormContainer } from "@/components/customer/CustomerCompanyFiltersFormContainer";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -74,12 +71,6 @@ export default async function AppCustomersPage({
         totalCount={totalCount}
         totalFilteredCustomers={totalFilteredCustomers}
         selectedSortField={sort}
-        searchContainer={<CustomerRouterSearchContainer />}
-        filtersFormContainer={<CustomerFiltersFormContainer />}
-        customerCompanyFiltersFormContainer={
-          <CustomerCompanyFiltersFormContainer />
-        }
-        createCustomerFormContainer={<CreateCustomerFormContainer />}
         customersContainer={
           <CustomersContainer
             customers={customers}
@@ -89,6 +80,8 @@ export default async function AppCustomersPage({
           />
         }
       />
+
+      <CustomerPageModals />
     </CustomersPageProviders>
   );
 }

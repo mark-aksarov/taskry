@@ -14,6 +14,7 @@ import { useTranslations } from "next-intl";
 import { useCustomerFilters } from "../CustomerFiltersContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
+import { useCustomerCompanyFiltersModal } from "./CustomerCompanyFiltersModalContext";
 
 interface CustomerCompanyFiltersModalProps {
   filtersFormContainer: React.ReactNode;
@@ -23,9 +24,14 @@ export function CustomerCompanyFiltersModal({
   filtersFormContainer,
 }: CustomerCompanyFiltersModalProps) {
   const initialFilters = useCustomerFilters();
+  const { isOpen, onOpenChange } = useCustomerCompanyFiltersModal();
 
   return (
-    <FormBaseModal data-test="customer-company-filters-modal">
+    <FormBaseModal
+      data-test="customer-company-filters-modal"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+    >
       <CustomerFiltersFormProvider initialFilters={initialFilters}>
         <FilterModalDialog>
           <DialogHeader />

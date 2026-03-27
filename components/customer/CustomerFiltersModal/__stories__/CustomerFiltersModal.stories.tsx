@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/react";
-import { DialogTrigger } from "react-aria-components";
 import { mockedCompanySummaries } from "@/mocks/companies";
-import { CustomerFiltersForm } from "../CustomerFiltersForm";
-import { CustomerFiltersModal } from "./CustomerFiltersModal";
+import { CustomerFiltersForm } from "../../CustomerFiltersForm";
+import { CustomerFiltersModal } from "../CustomerFiltersModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCustomerFiltersProvider } from "../CustomerFiltersContext/__stories__";
+import { useCustomerFiltersModal } from "../CustomerFiltersModalContext";
+import { withCustomerFiltersModalProvider } from "./withCustomerFiltersModalProvider";
+import { withCustomerFiltersProvider } from "../../CustomerFiltersContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 
@@ -15,15 +16,18 @@ const meta = {
   component: CustomerFiltersModal,
   decorators: [
     (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
+      const { onOpenChange } = useCustomerFiltersModal();
+
+      useEffect(() => onOpenChange(true), [onOpenChange]);
 
       return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Open modal" />
+        <>
           <Story />
-        </DialogTrigger>
+          <Button label="Open modal" onClick={() => onOpenChange(true)} />
+        </>
       );
     },
+    withCustomerFiltersModalProvider,
     withCustomerFiltersProvider,
     withSelectedItemsProvider,
     withPageTransitionProvider,

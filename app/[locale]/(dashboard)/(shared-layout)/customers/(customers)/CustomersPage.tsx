@@ -8,7 +8,7 @@ import {
 import {
   CustomerFiltersModalTriggerLarge,
   CustomerFiltersModalTriggerMobile,
-} from "@/components/customer/CustomerFiltersModal";
+} from "@/components/customer/CustomerFiltersModalTrigger";
 
 import {
   CustomerManageMenuTriggerLarge,
@@ -34,35 +34,24 @@ import { PageEmptySection } from "@/components/common/PageEmptySection";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { SearchModalTrigger } from "@/components/search/SearchModalTrigger";
-import { CreateCompanyModal } from "@/components/company/CreateCompanyModal";
-import { CreateCustomerModal } from "@/components/customer/CreateCustomerModal";
-import { CustomerSearchModal } from "@/components/customer/CustomerSearchModal";
 import { CustomerResultsCount } from "@/components/customer/CustomerResultsCount";
 import { CustomerActionsMenuTrigger } from "@/components/customer/CustomerActionsMenuTrigger";
 import { CustomersFilteredEmptySection } from "@/components/customer/CustomersFilteredEmptySection";
-import { CustomerCompanyFiltersModalTrigger } from "@/components/customer/CustomerCompanyFiltersModal";
 import { CustomersEmptySectionCreateButton } from "@/components/customer/CustomersEmptySectionCreateButton";
+import { CustomerCompanyFiltersModalTrigger } from "@/components/customer/CustomerCompanyFiltersModalTrigger";
 
 interface CustomersPageProps {
   totalCount: number;
   totalFilteredCustomers: number;
   selectedSortField: CustomerSortField;
-  searchContainer: React.ReactNode;
   customersContainer: React.ReactNode;
-  createCustomerFormContainer: React.ReactNode;
-  filtersFormContainer: React.ReactNode;
-  customerCompanyFiltersFormContainer: React.ReactNode;
 }
 
 export function CustomersPage({
   totalCount,
   totalFilteredCustomers,
   selectedSortField,
-  searchContainer,
   customersContainer,
-  createCustomerFormContainer,
-  filtersFormContainer,
-  customerCompanyFiltersFormContainer,
 }: CustomersPageProps) {
   const t = useTranslations("app.CustomersPage");
 
@@ -83,10 +72,6 @@ export function CustomersPage({
             />
           </PageGrid>
         </PageContainer>
-
-        <CreateCustomerModal
-          createCustomerFormContainer={createCustomerFormContainer}
-        />
       </>
     );
   }
@@ -105,9 +90,7 @@ export function CustomersPage({
                   <CustomerSortingMenuTriggerLarge
                     selectedSortField={selectedSortField}
                   />
-                  <CustomerFiltersModalTriggerLarge
-                    filtersFormContainer={filtersFormContainer}
-                  />
+                  <CustomerFiltersModalTriggerLarge />
                   <CustomerActionsMenuTrigger />
                 </>
               }
@@ -135,12 +118,8 @@ export function CustomersPage({
             </ToolbarSearchMobile>
 
             <ToolbarFiltersMobile>
-              <CustomerFiltersModalTriggerMobile
-                filtersFormContainer={filtersFormContainer}
-              />
-              <CustomerCompanyFiltersModalTrigger
-                filtersFormContainer={customerCompanyFiltersFormContainer}
-              />
+              <CustomerFiltersModalTriggerMobile />
+              <CustomerCompanyFiltersModalTrigger />
             </ToolbarFiltersMobile>
 
             {!isFilteredEmpty && (
@@ -164,12 +143,6 @@ export function CustomersPage({
           </ViewModeProvider>
         </PageGrid>
       </PageContainer>
-
-      <CustomerSearchModal searchContainer={searchContainer} />
-      <CreateCustomerModal
-        createCustomerFormContainer={createCustomerFormContainer}
-      />
-      <CreateCompanyModal />
     </>
   );
 }

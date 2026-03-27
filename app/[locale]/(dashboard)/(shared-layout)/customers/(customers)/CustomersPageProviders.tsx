@@ -7,6 +7,8 @@ import { CreateCustomerProvider } from "@/components/customer/CreateCustomerProv
 import { DeleteCustomersProvider } from "@/components/customer/DeleteCustomersProvider";
 import { CustomerFiltersProvider } from "@/components/customer/CustomerFiltersContext";
 import { CreateCustomerModalProvider } from "@/components/customer/CreateCustomerModal";
+import { CustomerFiltersModalProvider } from "@/components/customer/CustomerFiltersModal";
+import { CustomerCompanyFiltersModalProvider } from "@/components/customer/CustomerCompanyFiltersModal";
 
 interface CustomersPageProvidersProps {
   pageItems: SelectedItem[];
@@ -26,9 +28,13 @@ export function CustomersPageProviders({
           <CreateCompanyProvider>
             <CreateCustomerModalProvider>
               <CreateCustomerProvider>
-                <CustomerFiltersProvider filters={filters}>
-                  {children}
-                </CustomerFiltersProvider>
+                <CustomerFiltersModalProvider>
+                  <CustomerCompanyFiltersModalProvider>
+                    <CustomerFiltersProvider filters={filters}>
+                      {children}
+                    </CustomerFiltersProvider>
+                  </CustomerCompanyFiltersModalProvider>
+                </CustomerFiltersModalProvider>
               </CreateCustomerProvider>
             </CreateCustomerModalProvider>
           </CreateCompanyProvider>

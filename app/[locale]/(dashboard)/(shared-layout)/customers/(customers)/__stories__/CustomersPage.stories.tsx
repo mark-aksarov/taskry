@@ -3,21 +3,16 @@ import CustomersPageLoading from "../loading";
 import { usePathname } from "next/navigation";
 import { CustomersPage } from "../CustomersPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { mockedCompanySummaries } from "@/mocks/companies";
-import { SearchList } from "@/components/search/SearchList";
 import { CustomerList } from "@/components/customer/CustomerList";
-import { CustomersPageDecorator } from "./CustomersPageDecorator";
+import { withCustomersPageModals } from "./withCustomersPageModals";
 import { CustomerGridLarge } from "@/components/customer/CustomerGrid";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { CustomerGridMobile } from "@/components/customer/CustomerGrid";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { SearchListStory } from "@/components/search/SearchList/__stories__";
-import { CreateCustomerForm } from "@/components/customer/CreateCustomerForm";
-import { CustomerFiltersForm } from "@/components/customer/CustomerFiltersForm";
+import { withCustomersPageProviders } from "./withCustomersPageProviders";
 import { CustomerListStory } from "@/components/customer/CustomerList/__stories__";
 import { CustomerGridLargeStory } from "@/components/customer/CustomerGrid/__stories__";
 import { CustomerGridMobileStory } from "@/components/customer/CustomerGrid/__stories__";
-import { CustomerCompanyFiltersForm } from "@/components/customer/CustomerCompanyFiltersForm";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 
 const meta = {
@@ -25,7 +20,8 @@ const meta = {
   component: CustomersPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    CustomersPageDecorator,
+    withCustomersPageModals,
+    withCustomersPageProviders,
     SharedPageDecorator,
     withThemedBackground,
   ],
@@ -42,18 +38,6 @@ export const Default = {
     totalCount: 10,
     totalFilteredCustomers: 10,
     selectedSortField: "fullName",
-    searchContainer: <SearchList {...SearchListStory.args} />,
-    createCustomerFormContainer: (
-      <CreateCustomerForm companySelectItems={mockedCompanySummaries} />
-    ),
-    filtersFormContainer: (
-      <CustomerFiltersForm companyCheckboxGroupItems={mockedCompanySummaries} />
-    ),
-    customerCompanyFiltersFormContainer: (
-      <CustomerCompanyFiltersForm
-        companyCheckboxGroupItems={mockedCompanySummaries}
-      />
-    ),
     customersContainer: (
       <EntityContainerPresentation
         page={1}
