@@ -17,7 +17,7 @@ import { withUpdateUserProvider } from "@/components/users/UpdateUserProvider/__
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { MockedUserDetailHeaderProviders } from "@/components/users/UserDetailHeader/__stories__";
-import { withChangePasswordProvider } from "@/components/users/ChangePasswordContext/__stories__";
+import { withChangePasswordProvider } from "@/components/users/ChangePasswordProvider/__stories__";
 import { MockedUpdateUserImageProvider } from "@/components/users/UpdateUserImageProvider/__stories__";
 import { MockedClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlProvider/__stories__";
 

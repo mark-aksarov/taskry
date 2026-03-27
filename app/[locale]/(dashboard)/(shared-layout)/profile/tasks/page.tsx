@@ -16,12 +16,12 @@ import { UserTasksContainer } from "@/components/users/UserTasksContainer";
 import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksContext";
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
-import { CreateTaskFormContainer } from "@/components/tasks/CreateTaskFormContainer";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
-import { UpdateUserFormContainer } from "@/components/users/UpdateUserFormContainer";
-import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
-import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
+import { ChangePasswordProvider } from "@/components/users/ChangePasswordProvider";
 import { ProfileNavigationLarge } from "@/components/users/ProfileNavigationLarge";
+import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
+import { CreateTaskFormContainer } from "@/components/tasks/CreateTaskFormContainer";
+import { UpdateUserFormContainer } from "@/components/users/UpdateUserFormContainer";
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext";
 import { UserDetailHeaderAltContainer } from "@/components/users/UserDetailHeaderAltContainer";
 
@@ -66,7 +66,7 @@ export default async function AppProfileTasksPage({
       >
         <DeleteTasksProvider deleteTasks={deleteTasks}>
           <UpdateUserProvider>
-            <ChangePasswordProvider changePassword={changePassword}>
+            <ChangePasswordProvider>
               <DeleteUserProvider>
                 <CreateTaskProvider createTask={createTask}>
                   <UserTasksPageLayout

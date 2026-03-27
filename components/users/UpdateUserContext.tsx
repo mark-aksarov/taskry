@@ -8,7 +8,9 @@ export const UpdateUserContext = createContext<ActionContextType | null>(null);
 export function useUpdateUser() {
   const context = useContext(UpdateUserContext);
   if (!context) {
-    throw new Error("useUpdateUser must be used within a UpdateUserProvider");
+    throw new Error(
+      "useUpdateUser must be used within a UpdateUserContext.Provider",
+    );
   }
   return context;
 }

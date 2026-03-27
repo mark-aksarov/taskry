@@ -9,6 +9,8 @@ export const DeleteUserContext =
 export function useDeleteUser() {
   const context = useContext(DeleteUserContext);
   if (!context)
-    throw new Error("useDeleteUser must be used within DeleteUserProvider");
+    throw new Error(
+      "useDeleteUser must be used within DeleteUserContext.Provider",
+    );
   return context;
 }

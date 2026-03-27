@@ -16,7 +16,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteUserProvider } from "../DeleteUserProvider/__stories__";
 import { withUpdateUserProvider } from "../UpdateUserProvider/__stories__";
 import { ProfileActions, ProfileActionsSkeleton } from "../ProfileActions";
-import { withChangePasswordProvider } from "../ChangePasswordContext/__stories__";
+import { withChangePasswordProvider } from "../ChangePasswordProvider/__stories__";
 import { MockedUserDetailHeaderProviders } from "../UserDetailHeader/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";

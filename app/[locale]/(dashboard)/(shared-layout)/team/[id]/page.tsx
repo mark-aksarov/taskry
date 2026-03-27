@@ -3,16 +3,14 @@ import { TeamProfilePage } from "./TeamProfilePage";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { getUserSummary } from "@/lib/data/user/user.dal";
-import { deleteUser } from "@/lib/actions/user/deleteUser";
 import { userId as userIdSchema } from "@/lib/schemas/user";
-import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { DeleteUserProvider } from "@/components/users/DeleteUserProvider";
 import { UpdateUserProvider } from "@/components/users/UpdateUserProvider";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
-import { UpdateUserFormContainer } from "@/components/users/UpdateUserFormContainer";
-import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
+import { ChangePasswordProvider } from "@/components/users/ChangePasswordProvider";
 import { UserDetailAltContainer } from "@/components/users/UserDetailAltContainer";
+import { UpdateUserFormContainer } from "@/components/users/UpdateUserFormContainer";
 import { UserDetailHeaderAltContainer } from "@/components/users/UserDetailHeaderAltContainer";
 
 export default async function AppProfilePage({
@@ -45,7 +43,7 @@ export default async function AppProfilePage({
 
   return (
     <UpdateUserProvider>
-      <ChangePasswordProvider changePassword={changePassword}>
+      <ChangePasswordProvider>
         <DeleteUserProvider>
           <TeamProfilePage
             showUserActions={showUserActions}

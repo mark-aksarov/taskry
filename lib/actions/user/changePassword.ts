@@ -19,10 +19,7 @@ const schema = z
     newPassword: o.password,
   }));
 
-export async function changePassword(
-  _prevState: ActionState,
-  formData: FormData,
-): Promise<ActionState> {
+export async function changePassword(formData: FormData): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

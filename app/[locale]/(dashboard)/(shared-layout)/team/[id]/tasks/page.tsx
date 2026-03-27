@@ -23,7 +23,7 @@ import { UserNavigationLarge } from "@/components/users/UserNavigationLarge";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
-import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
+import { ChangePasswordProvider } from "@/components/users/ChangePasswordProvider";
 import { CreateTaskFormContainer } from "@/components/tasks/CreateTaskFormContainer";
 import { UpdateUserFormContainer } from "@/components/users/UpdateUserFormContainer";
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext";
@@ -82,7 +82,7 @@ export default async function AppProfileTasksPage({
       >
         <DeleteTasksProvider deleteTasks={deleteTasks}>
           <UpdateUserProvider>
-            <ChangePasswordProvider changePassword={changePassword}>
+            <ChangePasswordProvider>
               <DeleteUserProvider>
                 <CreateTaskProvider createTask={createTask}>
                   <UserTasksPageLayout

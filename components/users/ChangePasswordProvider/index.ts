@@ -1,0 +1,1 @@
+export { ChangePasswordProvider } from "./ChangePasswordProvider";

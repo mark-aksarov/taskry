@@ -1,0 +1,1 @@
+export { withChangePasswordModalProvider } from "./withChangePasswordModalProvider";

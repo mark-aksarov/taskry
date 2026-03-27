@@ -8,6 +8,8 @@ export const CreateUserContext = createContext<ActionContextType | null>(null);
 export function useCreateUser() {
   const context = useContext(CreateUserContext);
   if (!context)
-    throw new Error("useCreateUser must be used within CreateUserProvider");
+    throw new Error(
+      "useCreateUser must be used within CreateUserContext.Provider",
+    );
   return context;
 }

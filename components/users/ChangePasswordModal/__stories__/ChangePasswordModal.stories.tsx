@@ -1,31 +1,30 @@
+import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ChangePasswordModal } from "./ChangePasswordModal";
-import { useChangePassword } from "../ChangePasswordContext";
+import { ChangePasswordModal } from "../ChangePasswordModal";
+import { useChangePasswordModal } from "../ChangePasswordModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withChangePasswordProvider } from "../ChangePasswordContext/__stories__";
-import { useEffect } from "react";
+import { withChangePasswordModalProvider } from "./withChangePasswordModalProvider";
+import { withChangePasswordProvider } from "../../ChangePasswordProvider/__stories__";
 
 const meta = {
   title: "components/users/ChangePasswordModal",
   component: ChangePasswordModal,
   decorators: [
     (Story) => {
-      const { onModalOpenChange } = useChangePassword();
+      const { onOpenChange } = useChangePasswordModal();
 
-      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
+      useEffect(() => onOpenChange(true), [onOpenChange]);
 
       return (
         <>
-          <Button
-            label="Change password"
-            onClick={() => onModalOpenChange(true)}
-          />
+          <Button label="Open modal" onClick={() => onOpenChange(true)} />
           <Story />
         </>
       );
     },
     withChangePasswordProvider,
+    withChangePasswordModalProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof ChangePasswordModal>;

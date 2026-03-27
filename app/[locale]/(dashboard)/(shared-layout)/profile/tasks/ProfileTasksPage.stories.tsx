@@ -32,7 +32,7 @@ import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksContext/_
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
-import { withChangePasswordProvider } from "@/components/users/ChangePasswordContext/__stories__";
+import { withChangePasswordProvider } from "@/components/users/ChangePasswordProvider/__stories__";
 import { MockedUserDetailHeaderProviders } from "@/components/users/UserDetailHeader/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
