@@ -1,6 +1,6 @@
 import { UserDetail } from "../../UserDetail";
 import { mockedUserDetail } from "@/mocks/users";
-import { EditUserForm } from "../../EditUserForm";
+import { UpdateUserForm } from "../../UpdateUserForm";
 import type { Meta, StoryObj } from "@storybook/react";
 import { UserDetailHeader } from "../../UserDetailHeader";
 import { UserGridItemLarge } from "../UserGridItemLarge";
@@ -28,7 +28,7 @@ export const Default = {
   args: {
     ...mockedUserDetail,
     editUserFormContainer: (
-      <EditUserForm
+      <UpdateUserForm
         {...mockedUserDetail}
         userId={mockedUserDetail.id}
         positionSelectItems={mockedPositionSummaries}

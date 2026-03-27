@@ -6,7 +6,7 @@ import {
 
 import { FormBaseBody, FormBaseFooter } from "@/components/common/FormBase";
 
-export function EditUserFormSkeleton() {
+export function UpdateUserFormSkeleton() {
   return (
     <div className="flex h-full flex-col gap-4">
       <FormBaseBody>

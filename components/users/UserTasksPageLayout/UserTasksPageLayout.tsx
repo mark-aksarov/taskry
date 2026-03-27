@@ -13,7 +13,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { TaskSortField } from "@/lib/types";
-import { EditUserModal } from "../EditUserModal";
+import { UpdateUserModal } from "../UpdateUserModal";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ToolbarMobile } from "@/components/common/Toolbar";
 import { BackButton } from "@/components/common/BackButton";
@@ -68,7 +68,7 @@ export function UserTasksPageLayout({
 
         <ChangePasswordModal userId={userId} />
         <CreateTaskModal createTaskFormContainer={createTaskFormContainer} />
-        <EditUserModal editUserFormContainer={editUserFormContainer} />
+        <UpdateUserModal editUserFormContainer={editUserFormContainer} />
       </>
     );
   }
@@ -126,7 +126,7 @@ export function UserTasksPageLayout({
       <TaskSearchModal searchContainer={searchContainer} />
       <ChangePasswordModal userId={userId} />
       <CreateTaskModal createTaskFormContainer={createTaskFormContainer} />
-      <EditUserModal editUserFormContainer={editUserFormContainer} />
+      <UpdateUserModal editUserFormContainer={editUserFormContainer} />
     </>
   );
 }

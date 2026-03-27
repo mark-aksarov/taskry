@@ -5,7 +5,7 @@ import { changePassword } from "@/lib/actions/user/changePassword";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { DeleteUserProvider } from "@/components/users/DeleteUserContext";
 import { UpdateUserProvider } from "@/components/users/UpdateUserContext";
-import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
+import { UpdateUserFormContainer } from "@/components/users/UpdateUserFormContainer";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
 import { UserDetailAltContainer } from "@/components/users/UserDetailAltContainer";
 import { UserDetailHeaderAltContainer } from "@/components/users/UserDetailHeaderAltContainer";
@@ -25,7 +25,7 @@ export default async function AppProfilePage() {
             userId={userId}
             userFullName={userFullName}
             searchContainer={<LinkSearchContainer pathname="/tasks" />}
-            editUserFormContainer={<EditUserFormContainer userId={userId} />}
+            editUserFormContainer={<UpdateUserFormContainer userId={userId} />}
             userDetailContainer={<UserDetailAltContainer userId={userId} />}
             userDetailHeaderContainer={
               <UserDetailHeaderAltContainer userId={userId} />

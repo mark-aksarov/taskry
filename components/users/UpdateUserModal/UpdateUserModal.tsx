@@ -10,12 +10,14 @@ import { useTranslations } from "next-intl";
 import { useUpdateUser } from "../UpdateUserContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
-interface EditUserModalProps {
+interface UpdateUserModalProps {
   editUserFormContainer: React.ReactNode;
 }
 
-export function EditUserModal({ editUserFormContainer }: EditUserModalProps) {
-  const t = useTranslations("users.EditUserModal");
+export function UpdateUserModal({
+  editUserFormContainer,
+}: UpdateUserModalProps) {
+  const t = useTranslations("users.UpdateUserModal");
 
   const { isModalOpen, onModalOpenChange } = useUpdateUser();
 

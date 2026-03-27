@@ -3,7 +3,7 @@ import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ToolbarMobile } from "@/components/common/Toolbar";
 import { BackButton } from "@/components/common/BackButton";
-import { EditUserModal } from "@/components/users/EditUserModal";
+import { UpdateUserModal } from "@/components/users/UpdateUserModal";
 import { PageContainer } from "@/components/common/PageContainer";
 import { UserDetailCard } from "@/components/users/UserDetailCard";
 import { ProfileActions } from "@/components/users/ProfileActions";
@@ -75,7 +75,7 @@ export function TeamProfilePage({
 
       <TaskSearchModal searchContainer={searchContainer} />
       <ChangePasswordModal userId={userId} />
-      <EditUserModal editUserFormContainer={editUserFormContainer} />
+      <UpdateUserModal editUserFormContainer={editUserFormContainer} />
     </>
   );
 }

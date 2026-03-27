@@ -1,7 +1,7 @@
 import { mocked } from "storybook/test";
 import { UserDetail } from "../UserDetail";
-import { EditUserForm } from "../EditUserForm";
-import { EditUserModal } from "../EditUserModal";
+import { UpdateUserForm } from "../UpdateUserForm";
+import { UpdateUserModal } from "../UpdateUserModal";
 import { mockedUserDetail } from "@/mocks/users";
 import { UserDetailCard } from "./UserDetailCard";
 import { UserDetailSkeleton } from "../UserDetail";
@@ -36,9 +36,9 @@ const meta = {
       <>
         <Story />
         <ChangePasswordModal userId={mockedUserDetail.id} />
-        <EditUserModal
+        <UpdateUserModal
           editUserFormContainer={
-            <EditUserForm
+            <UpdateUserForm
               {...mockedUserDetail}
               userId={mockedUserDetail.id}
               positionSelectItems={mockedPositionSummaries}

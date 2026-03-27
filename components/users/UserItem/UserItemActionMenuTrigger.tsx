@@ -10,7 +10,7 @@ import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { EditUserModal } from "../EditUserModal";
+import { UpdateUserModal } from "../UpdateUserModal";
 import { DeleteUserModal } from "../DeleteUserModal";
 import { useUpdateUser } from "../UpdateUserContext";
 import { useUserItemPending } from "./useUserItemPending";
@@ -89,7 +89,7 @@ export function UserItemActionMenuTrigger({
         ) : null}
       </ItemBaseActionMenuTrigger>
 
-      <EditUserModal editUserFormContainer={editUserFormContainer} />
+      <UpdateUserModal editUserFormContainer={editUserFormContainer} />
 
       <DeleteUserModal
         userId={userId}

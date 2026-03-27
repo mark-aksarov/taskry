@@ -11,7 +11,7 @@ import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { DeleteUserProvider } from "@/components/users/DeleteUserContext";
 import { UpdateUserProvider } from "@/components/users/UpdateUserContext";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
-import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
+import { UpdateUserFormContainer } from "@/components/users/UpdateUserFormContainer";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
 import { UserDetailAltContainer } from "@/components/users/UserDetailAltContainer";
 import { UserDetailHeaderAltContainer } from "@/components/users/UserDetailHeaderAltContainer";
@@ -57,7 +57,7 @@ export default async function AppProfilePage({
             userDetailHeaderContainer={
               <UserDetailHeaderAltContainer userId={userId} />
             }
-            editUserFormContainer={<EditUserFormContainer userId={userId} />}
+            editUserFormContainer={<UpdateUserFormContainer userId={userId} />}
           />
         </DeleteUserProvider>
       </ChangePasswordProvider>

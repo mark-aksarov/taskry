@@ -23,7 +23,7 @@ declare namespace Cypress {
       password?: string;
     }): Chainable<JQuery<HTMLElement>>;
 
-    fillEditUserForm(data: {
+    fillUpdateUserForm(data: {
       fullName?: string;
       bio?: string;
       birthdate?: { month: string; day: string; year: string };

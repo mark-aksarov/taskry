@@ -6,7 +6,7 @@ import { useParams, usePathname } from "next/navigation";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { SearchList } from "@/components/search/SearchList";
-import { EditUserForm } from "@/components/users/EditUserForm";
+import { UpdateUserForm } from "@/components/users/UpdateUserForm";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
@@ -50,7 +50,7 @@ export const Default = {
     showUserActions: true,
     searchContainer: <SearchList {...SearchListStory.args} />,
     editUserFormContainer: (
-      <EditUserForm
+      <UpdateUserForm
         {...mockedUserDetail}
         userId={mockedUserDetail.id}
         positionSelectItems={mockedPositionSummaries}

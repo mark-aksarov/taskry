@@ -19,7 +19,7 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add(
-  "fillEditUserForm",
+  "fillUpdateUserForm",
   (data: {
     fullName?: string;
     bio?: string;

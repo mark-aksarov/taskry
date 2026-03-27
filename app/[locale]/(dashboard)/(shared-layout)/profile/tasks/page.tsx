@@ -19,7 +19,7 @@ import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { CreateTaskFormContainer } from "@/components/tasks/CreateTaskFormContainer";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
-import { EditUserFormContainer } from "@/components/users/EditUserFormContainer";
+import { UpdateUserFormContainer } from "@/components/users/UpdateUserFormContainer";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordContext";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationLarge } from "@/components/users/ProfileNavigationLarge";
@@ -87,7 +87,7 @@ export default async function AppProfileTasksPage({
                     searchContainer={<LinkSearchContainer pathname="/tasks" />}
                     navigationMobile={<ProfileNavigationMobile />}
                     editUserFormContainer={
-                      <EditUserFormContainer userId={userId} />
+                      <UpdateUserFormContainer userId={userId} />
                     }
                     userTasksContainer={
                       <UserTasksContainer

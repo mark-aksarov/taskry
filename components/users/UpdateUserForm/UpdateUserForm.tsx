@@ -20,7 +20,7 @@ import { UserPublicLinkTextField } from "../UserPublicLinkTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { UserPhoneNumberTextField } from "../UserPhoneNumberTextField";
 
-export interface EditUserFormProps {
+export interface UpdateUserFormProps {
   userId: string;
   fullName?: string;
   bio?: string;
@@ -32,7 +32,7 @@ export interface EditUserFormProps {
   positionSelectItems: { id: number; name: string }[];
 }
 
-export function EditUserForm({
+export function UpdateUserForm({
   userId,
   fullName,
   bio,
@@ -42,8 +42,8 @@ export function EditUserForm({
   address,
   positionId,
   positionSelectItems,
-}: EditUserFormProps) {
-  const t = useTranslations("users.EditUserForm");
+}: UpdateUserFormProps) {
+  const t = useTranslations("users.UpdateUserForm");
 
   const { state, action, isPending } = useUpdateUser();
 

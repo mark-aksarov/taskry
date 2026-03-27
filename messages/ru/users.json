@@ -16,7 +16,7 @@
     "submitButtonLabel": "Изменить пароль",
     "successMessage": "Пароль успешно изменен"
   },
-  "EditUserForm": {
+  "UpdateUserForm": {
     "submitButtonLabel": "Обновить пользователя",
     "successMessage": "Пользователь успешно обновлен"
   },
@@ -27,7 +27,7 @@
   "NewUserModal": {
     "title": "Новый пользователь"
   },
-  "EditUserModal": {
+  "UpdateUserModal": {
     "title": "Изменить пользователя"
   },
   "UserFullNameTextField": {

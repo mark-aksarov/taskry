@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { Card } from "@/components/common/Card";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ToolbarMobile } from "@/components/common/Toolbar";
-import { EditUserModal } from "@/components/users/EditUserModal";
+import { UpdateUserModal } from "@/components/users/UpdateUserModal";
 import { PageContainer } from "@/components/common/PageContainer";
 import { UserDetailCard } from "@/components/users/UserDetailCard";
 import { ProfileActions } from "@/components/users/ProfileActions";
@@ -63,7 +63,7 @@ export function ProfilePage({
 
       <TaskSearchModal searchContainer={searchContainer} />
       <ChangePasswordModal userId={userId} />
-      <EditUserModal editUserFormContainer={editUserFormContainer} />
+      <UpdateUserModal editUserFormContainer={editUserFormContainer} />
     </>
   );
 }

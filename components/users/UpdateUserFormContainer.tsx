@@ -4,14 +4,16 @@ import useSWR from "swr";
 import { usePathname } from "@/i18n/navigation";
 import { notFound, useParams } from "next/navigation";
 import { UserFormDataDTO } from "@/lib/data/user/user.dto";
-import { EditUserForm, EditUserFormSkeleton } from "./EditUserForm";
+import { UpdateUserForm, UpdateUserFormSkeleton } from "./UpdateUserForm";
 import { PositionSummaryDTO } from "@/lib/data/position/position.dto";
 
-interface EditUserFormContainerProps {
+interface UpdateUserFormContainerProps {
   userId: string;
 }
 
-export function EditUserFormContainer({ userId }: EditUserFormContainerProps) {
+export function UpdateUserFormContainer({
+  userId,
+}: UpdateUserFormContainerProps) {
   const pathname = usePathname();
   const params = useParams();
 
@@ -48,11 +50,11 @@ export function EditUserFormContainer({ userId }: EditUserFormContainerProps) {
   const showSkeleton = !positions || !user || isValidatingUser;
 
   if (showSkeleton) {
-    return <EditUserFormSkeleton />;
+    return <UpdateUserFormSkeleton />;
   }
 
   return (
-    <EditUserForm
+    <UpdateUserForm
       userId={userId}
       fullName={user.fullName}
       bio={user.bio}

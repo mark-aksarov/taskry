@@ -8,7 +8,7 @@ import { deleteUser } from "@/lib/actions/user/deleteUser";
 import { updateUser } from "@/lib/actions/user/updateUser";
 import { UserGridLarge, UserGridMobile } from "./UserGrid";
 import { UserDetailContainer } from "./UserDetailContainer";
-import { EditUserFormContainer } from "./EditUserFormContainer";
+import { UpdateUserFormContainer } from "./UpdateUserFormContainer";
 import { UserGridItemLarge, UserGridItemMobile } from "./UserGridItem";
 import { UserDetailHeaderContainer } from "./UserDetailHeaderContainer";
 import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
@@ -36,7 +36,7 @@ export function UsersDynamic({
     position: user.position,
     updateUser: updateUser,
     deleteUser: deleteUser,
-    editUserFormContainer: <EditUserFormContainer userId={user.id} />,
+    editUserFormContainer: <UpdateUserFormContainer userId={user.id} />,
   });
 
   const getContainerProps = (user: UserListItemDTO) => ({

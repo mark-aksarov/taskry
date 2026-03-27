@@ -13,7 +13,7 @@ import { SearchList } from "@/components/search/SearchList";
 import { CreateTaskForm } from "@/components/tasks/CreateTaskForm";
 import { TaskGridMobile } from "@/components/tasks/TaskGrid";
 import { UserTaskList } from "@/components/users/UserTaskList";
-import { EditUserForm } from "@/components/users/EditUserForm";
+import { UpdateUserForm } from "@/components/users/UpdateUserForm";
 import { ProfileActions } from "@/components/users/ProfileActions";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { mockedUserDetail, mockedUserSummaries } from "@/mocks/users";
@@ -101,7 +101,7 @@ export const Default = {
     ),
     navigationMobile: <ProfileNavigationMobile />,
     editUserFormContainer: (
-      <EditUserForm
+      <UpdateUserForm
         {...mockedUserDetail}
         userId={mockedUserDetail.id}
         positionSelectItems={mockedPositionSummaries}

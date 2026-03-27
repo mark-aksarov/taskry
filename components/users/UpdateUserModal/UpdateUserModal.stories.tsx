@@ -1,18 +1,18 @@
 import { useEffect } from "react";
-import { EditUserForm } from "../EditUserForm";
-import { EditUserModal } from "./EditUserModal";
+import { UpdateUserForm } from "../UpdateUserForm";
+import { UpdateUserModal } from "./UpdateUserModal";
 import { Button } from "@/components/ui/Button";
 import { mockedUserDetail } from "@/mocks/users";
 import { useUpdateUser } from "../UpdateUserContext";
-import { EditUserFormSkeleton } from "../EditUserForm";
+import { UpdateUserFormSkeleton } from "../UpdateUserForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateUserProvider } from "../UpdateUserContext/__stories__";
 
 const meta = {
-  title: "components/users/EditUserModal",
-  component: EditUserModal,
+  title: "components/users/UpdateUserModal",
+  component: UpdateUserModal,
   decorators: [
     (Story) => {
       const { onModalOpenChange } = useUpdateUser();
@@ -29,7 +29,7 @@ const meta = {
     withUpdateUserProvider,
     withThemedBackground,
   ],
-} satisfies Meta<typeof EditUserModal>;
+} satisfies Meta<typeof UpdateUserModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -37,7 +37,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     editUserFormContainer: (
-      <EditUserForm
+      <UpdateUserForm
         {...mockedUserDetail}
         userId={mockedUserDetail.id}
         positionSelectItems={mockedPositionSummaries}
@@ -49,6 +49,6 @@ export const Default = {
 export const Skeleton = {
   args: {
     ...Default.args,
-    editUserFormContainer: <EditUserFormSkeleton />,
+    editUserFormContainer: <UpdateUserFormSkeleton />,
   },
 } satisfies Story;
