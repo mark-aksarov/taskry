@@ -14,10 +14,7 @@ const schema = z.object({
   fullName: userFullName,
 });
 
-export async function createUser(
-  _prevState: ActionState,
-  formData: FormData,
-): Promise<ActionState> {
+export async function createUser(formData: FormData): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

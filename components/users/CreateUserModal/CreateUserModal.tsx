@@ -8,19 +8,19 @@ import {
 
 import { useTranslations } from "next-intl";
 import { CreateUserForm } from "../CreateUserForm";
-import { useCreateUser } from "../CreateUserContext";
+import { useCreateUserModal } from "./CreateUserModalContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 export function CreateUserModal() {
   const t = useTranslations("users.CreateUserModal");
 
-  const { isModalOpen, onModalOpenChange } = useCreateUser();
+  const { isOpen, onOpenChange } = useCreateUserModal();
 
   return (
     <FormBaseModal
       data-test="create-user-modal"
-      isOpen={isModalOpen}
-      onOpenChange={onModalOpenChange}
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>

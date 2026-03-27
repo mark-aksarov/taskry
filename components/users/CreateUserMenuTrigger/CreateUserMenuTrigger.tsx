@@ -3,7 +3,7 @@
 import { Key } from "react-aria";
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
-import { useCreateUser } from "../CreateUserContext";
+import { useCreateUserModal } from "../CreateUserModal";
 import { BriefcaseBusiness, Users } from "lucide-react";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
@@ -30,7 +30,7 @@ export function CreateUserMenuTrigger({
     useCreatePositionModal();
 
   // Create user form modal state
-  const { onModalOpenChange: onUserModalOpenChange } = useCreateUser();
+  const { onOpenChange: onCreateUserModalOpenChange } = useCreateUserModal();
 
   /**
    * Handles menu actions for creating a user or position
@@ -40,7 +40,7 @@ export function CreateUserMenuTrigger({
   function handleAction(key: Key) {
     guestGuard(() => {
       if (key === "user") {
-        onUserModalOpenChange(true);
+        onCreateUserModalOpenChange(true);
       } else if (key === "position") {
         onCreatePositionModalOpenChange(true);
       }

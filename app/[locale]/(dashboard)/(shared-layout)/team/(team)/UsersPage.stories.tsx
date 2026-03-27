@@ -18,7 +18,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserGridLarge, UserGridMobile } from "@/components/users/UserGrid";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { UserPositionFiltersForm } from "@/components/users/UserPositionFiltersForm";
-import { withCreateUserProvider } from "@/components/users/CreateUserContext/__stories__";
+import { withCreateUserProvider } from "@/components/users/CreateUserProvider/__stories__";
 import { withUserFiltersProvider } from "@/components/users/UserFiltersContext/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";

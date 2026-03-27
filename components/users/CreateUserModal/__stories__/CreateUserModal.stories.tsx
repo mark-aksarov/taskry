@@ -1,28 +1,30 @@
 import { useEffect } from "react";
-import { CreateUserModal } from "./CreateUserModal";
 import { Button } from "@/components/ui/Button";
-import { useCreateUser } from "../CreateUserContext";
+import { CreateUserModal } from "../CreateUserModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { useCreateUserModal } from "../CreateUserModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCreateUserProvider } from "../CreateUserContext/__stories__";
+import { withCreateUserModalProvider } from "./withCreateUserModalProvider";
+import { withCreateUserProvider } from "../../CreateUserProvider/__stories__";
 
 const meta = {
   title: "components/users/CreateUserModal",
   component: CreateUserModal,
   decorators: [
     (Story) => {
-      const { onModalOpenChange } = useCreateUser();
+      const { onOpenChange } = useCreateUserModal();
 
-      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
+      useEffect(() => onOpenChange(true), [onOpenChange]);
 
       return (
         <>
-          <Button label="New user" onClick={() => onModalOpenChange(true)} />
+          <Button label="Open modal" onClick={() => onOpenChange(true)} />
           <Story />
         </>
       );
     },
     withCreateUserProvider,
+    withCreateUserModalProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof CreateUserModal>;
