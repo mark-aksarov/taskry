@@ -2,8 +2,10 @@ import { mockedUserList } from "@/mocks/users";
 import { UserGridMobile } from "../UserGridMobile";
 import { UserGridItemMobile } from "../../UserGridItem";
 import type { Meta, StoryObj } from "@storybook/react";
+import { MockedUserItemModals } from "../../UserItemModals/__stories__";
 import { UserGridItemMobileStory } from "../../UserGridItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { MockedUserItemProviders } from "../../UserItemProviders/__stories__";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
@@ -30,11 +32,10 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedUserList.map((user) => (
-      <UserGridItemMobile
-        key={user.id}
-        {...UserGridItemMobileStory.args}
-        {...user}
-      />
+      <MockedUserItemProviders key={user.id}>
+        <UserGridItemMobile {...UserGridItemMobileStory.args} {...user} />
+        <MockedUserItemModals />
+      </MockedUserItemProviders>
     )),
   },
 } satisfies Story;

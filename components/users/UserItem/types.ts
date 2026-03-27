@@ -8,5 +8,4 @@ export interface BaseUserItemProps {
   position?: {
     name: string;
   };
-  updateUserFormContainer: React.ReactNode;
 }

@@ -21,6 +21,7 @@ import { CreatePositionProvider } from "@/components/position/CreatePositionProv
 import { UserFiltersFormContainer } from "@/components/users/UserFiltersFormContainer";
 import { CreatePositionModalProvider } from "@/components/position/CreatePositionModal";
 import { UserPositionFiltersFormContainer } from "@/components/users/UserPositionFiltersFormContainer";
+import { CreateUserModalProvider } from "@/components/users/CreateUserModal";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -58,30 +59,32 @@ export default async function AppUsersPage({
   });
 
   return (
-    <CreateUserProvider>
-      <CreatePositionModalProvider>
-        <CreatePositionProvider>
-          <UserFiltersProvider filters={filters}>
-            <UsersPage
-              totalFilteredUsers={totalFilteredUsers}
-              selectedSortField={sort}
-              searchContainer={<RouterSearchContainer />}
-              filtersFormContainer={<UserFiltersFormContainer />}
-              positionFiltersFormContainer={
-                <UserPositionFiltersFormContainer />
-              }
-              usersContainer={
-                <UsersContainer
-                  users={users}
-                  totalCount={totalFilteredUsers}
-                  page={page}
-                  pageSize={pageSize}
-                />
-              }
-            />
-          </UserFiltersProvider>
-        </CreatePositionProvider>
-      </CreatePositionModalProvider>
-    </CreateUserProvider>
+    <CreateUserModalProvider>
+      <CreateUserProvider>
+        <CreatePositionModalProvider>
+          <CreatePositionProvider>
+            <UserFiltersProvider filters={filters}>
+              <UsersPage
+                totalFilteredUsers={totalFilteredUsers}
+                selectedSortField={sort}
+                searchContainer={<RouterSearchContainer />}
+                filtersFormContainer={<UserFiltersFormContainer />}
+                positionFiltersFormContainer={
+                  <UserPositionFiltersFormContainer />
+                }
+                usersContainer={
+                  <UsersContainer
+                    users={users}
+                    totalCount={totalFilteredUsers}
+                    page={page}
+                    pageSize={pageSize}
+                  />
+                }
+              />
+            </UserFiltersProvider>
+          </CreatePositionProvider>
+        </CreatePositionModalProvider>
+      </CreateUserProvider>
+    </CreateUserModalProvider>
   );
 }

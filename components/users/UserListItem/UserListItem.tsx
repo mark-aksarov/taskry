@@ -2,7 +2,7 @@
 
 import {
   BaseUserItemProps,
-  UserItemProviders,
+  UserItemPendingOverlay,
   UserItemActionMenuTrigger,
 } from "../UserItem";
 
@@ -10,31 +10,29 @@ import {
   ListItemText,
   ListItemTitle,
   ListItemTextLink,
-  ListItemTitleDetailModalTrigger,
 } from "@/components/common/List";
 
 import {
-  ItemBaseDetailModalTrigger,
+  ItemBaseDetailButton,
   ItemBaseUserImageContainer,
 } from "@/components/common/ItemBase";
 
+import {
+  ListItemTitleLink,
+  ListItemTitleButton,
+} from "@/components/common/List/ListItemTitle";
+
 import { memo } from "react";
 import { useTranslations } from "next-intl";
-import { UserDetailModal } from "../UserDetailModal";
+import { useUserDetailModal } from "../UserDetailModal";
 import { UserListItemLayout } from "./UserListItemLayout";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
-import { ListItemTitleLink } from "@/components/common/List/ListItemTitle";
 
-interface Props extends BaseUserItemProps {
-  userDetailContainer: React.ReactNode;
-  userDetailHeaderContainer: React.ReactNode;
-}
-
-export function UserListItem(props: Props) {
+export function UserListItem(props: BaseUserItemProps) {
   return (
-    <UserItemProviders>
+    <UserItemPendingOverlay>
       <UserListItemInner {...props} />
-    </UserItemProviders>
+    </UserItemPendingOverlay>
   );
 }
 
@@ -47,13 +45,10 @@ export const UserListItemInner = memo(
     phoneNumber,
     publicLink,
     position,
-    updateUserFormContainer,
-    userDetailContainer,
-    userDetailHeaderContainer,
-  }: Props) => {
+  }: BaseUserItemProps) => {
     const t = useTranslations("users.UserListItem");
-
     const { isOwner, isGuest } = useCurrentUser();
+    const { onOpenChange: onUserDetailModalOpenChange } = useUserDetailModal();
 
     const userImg = (
       <ItemBaseUserImageContainer
@@ -64,14 +59,6 @@ export const UserListItemInner = memo(
       />
     );
 
-    const userDetailModal = (
-      <UserDetailModal
-        userId={id}
-        userDetailContainer={userDetailContainer}
-        userDetailHeaderContainer={userDetailHeaderContainer}
-      />
-    );
-
     // We show the action menu only for owners and guests
     const showActionMenuTrigger = isOwner || isGuest;
 
@@ -79,19 +66,20 @@ export const UserListItemInner = memo(
       <UserListItemLayout
         id={id}
         imgSlot={
-          <ItemBaseDetailModalTrigger
-            modal={userDetailModal}
+          <ItemBaseDetailButton
             className="h-9 w-9"
+            onPress={() => onUserDetailModalOpenChange(true)}
           >
             {userImg}
-          </ItemBaseDetailModalTrigger>
+          </ItemBaseDetailButton>
         }
         mainSlot={
           <>
-            <ListItemTitleDetailModalTrigger modal={userDetailModal}>
+            <ListItemTitleButton
+              onPress={() => onUserDetailModalOpenChange(true)}
+            >
               {fullName}
-            </ListItemTitleDetailModalTrigger>
-
+            </ListItemTitleButton>
             <ListItemTextLink href={`mailto:${email}`}>
               {email}
             </ListItemTextLink>
@@ -134,11 +122,7 @@ export const UserListItemInner = memo(
         }
         menuTriggerSlot={
           showActionMenuTrigger ? (
-            <UserItemActionMenuTrigger
-              updateUserFormContainer={updateUserFormContainer}
-              userId={id}
-              userFullName={fullName}
-            />
+            <UserItemActionMenuTrigger userId={id} />
           ) : undefined
         }
       />

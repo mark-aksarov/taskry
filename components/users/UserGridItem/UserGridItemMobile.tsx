@@ -2,7 +2,7 @@
 
 import {
   BaseUserItemProps,
-  UserItemProviders,
+  UserItemPendingOverlay,
   UserItemActionMenuTrigger,
 } from "../UserItem";
 
@@ -26,12 +26,12 @@ import { ItemBaseUserImageContainer } from "@/components/common/ItemBase";
 
 export function UserGridItemMobile(props: BaseUserItemProps) {
   return (
-    <UserItemProviders>
+    <UserItemPendingOverlay>
       <div className="relative block">
         <Link href={`/team/${props.id}`} className="absolute inset-0 z-0" />
         <UserGridItemMobileInner {...props} />
       </div>
-    </UserItemProviders>
+    </UserItemPendingOverlay>
   );
 }
 
@@ -44,7 +44,6 @@ export const UserGridItemMobileInner = memo(
     phoneNumber,
     publicLink,
     email,
-    updateUserFormContainer,
   }: BaseUserItemProps) => {
     const t = useTranslations("users.UserGridItem");
 
@@ -67,9 +66,7 @@ export const UserGridItemMobileInner = memo(
         actionMenuSlot={
           showActionMenuTrigger ? (
             <UserItemActionMenuTrigger
-              updateUserFormContainer={updateUserFormContainer}
               userId={id}
-              userFullName={fullName}
               className="relative z-1 -mr-2"
             />
           ) : undefined

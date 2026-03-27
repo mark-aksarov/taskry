@@ -1,12 +1,9 @@
 import { UserListItem } from "../UserListItem";
-import { UserDetail } from "../../UserDetail";
 import { mockedUserDetail } from "@/mocks/users";
-import { UpdateUserForm } from "../../UpdateUserForm";
 import type { Meta, StoryObj } from "@storybook/react";
-import { UserDetailHeader } from "../../UserDetailHeader";
-import { mockedPositionSummaries } from "@/mocks/positions";
-import { withUserItemProviders } from "../../UserItem/__stories__";
+import { MockedUserItemModals } from "../../UserItemModals/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withUserItemProviders } from "../../UserItemProviders/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
@@ -14,6 +11,13 @@ const meta = {
   title: "components/users/UserListItem",
   component: UserListItem,
   decorators: [
+    (Story) => (
+      <>
+        <Story />
+        <MockedUserItemModals />
+      </>
+    ),
+
     withUserItemProviders,
     withGuestModeModalProvider,
     withCurrentUserProvider,
@@ -27,21 +31,6 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     ...mockedUserDetail,
-    updateUserFormContainer: (
-      <UpdateUserForm
-        {...mockedUserDetail}
-        userId={mockedUserDetail.id}
-        positionSelectItems={mockedPositionSummaries}
-      />
-    ),
-    userDetailContainer: <UserDetail {...mockedUserDetail} />,
-    userDetailHeaderContainer: (
-      <UserDetailHeader
-        fullName={mockedUserDetail.fullName}
-        positionName={mockedUserDetail.position.name}
-        imageUrl={mockedUserDetail.imageUrl}
-      />
-    ),
   },
 } satisfies Story;
 

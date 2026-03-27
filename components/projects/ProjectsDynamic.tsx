@@ -5,11 +5,8 @@ import { ProjectListItem } from "./ProjectListItem";
 import { BaseProjectItemProps } from "./ProjectItem";
 import { ProjectItemModals } from "./ProjectItemModals";
 import { ProjectItemProviders } from "./ProjectItemProviders";
-import { ProjectDetailContainer } from "./ProjectDetailContainer";
-import { UserDetailContainer } from "../users/UserDetailContainer";
 import { ProjectGridLarge, ProjectGridMobile } from "./ProjectGrid";
 import { ProjectListItemDTO } from "@/lib/data/project/project.dto";
-import { UserDetailHeaderContainer } from "../users/UserDetailHeaderContainer";
 import { ProjectGridItemLarge, ProjectGridItemMobile } from "./ProjectGridItem";
 import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
 
@@ -26,18 +23,6 @@ export function ProjectsDynamic({
   projects,
   totalPages,
 }: ProjectsDynamicProps) {
-  const getCommonContainerProps = (project: ProjectListItemDTO) => ({
-    userDetailContainer: project.creator ? (
-      <UserDetailContainer userId={project.creator.id} />
-    ) : undefined,
-
-    userDetailHeaderContainer: project.creator ? (
-      <UserDetailHeaderContainer userId={project.creator.id} />
-    ) : undefined,
-
-    projectDetailContainer: <ProjectDetailContainer projectId={project.id} />,
-  });
-
   const renderListLarge = () => {
     return (
       <ProjectList>

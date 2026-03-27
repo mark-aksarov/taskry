@@ -1,10 +1,10 @@
 import { type Decorator } from "@storybook/react";
-import { UserItemProviders } from "../UserItemProviders";
+import { MockedUserItemProviders } from "./MockedUserItemProviders";
 
 export const withUserItemProviders: Decorator = (Story) => {
   return (
-    <UserItemProviders>
+    <MockedUserItemProviders>
       <Story />
-    </UserItemProviders>
+    </MockedUserItemProviders>
   );
 };

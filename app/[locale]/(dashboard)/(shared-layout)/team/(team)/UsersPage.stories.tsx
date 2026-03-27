@@ -20,6 +20,7 @@ import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { UserPositionFiltersForm } from "@/components/users/UserPositionFiltersForm";
 import { withCreateUserProvider } from "@/components/users/CreateUserProvider/__stories__";
 import { withUserFiltersProvider } from "@/components/users/UserFiltersContext/__stories__";
+import { withCreateUserModalProvider } from "@/components/users/CreateUserModal/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withCreatePositionProvider } from "@/components/position/CreatePositionProvider/__stories__";
@@ -35,6 +36,7 @@ const meta = {
     withCreatePositionProvider,
     withCreatePositionModalProvider,
     withCreateUserProvider,
+    withCreateUserModalProvider,
     withSelectedTasksProvider,
 
     SharedPageDecorator, // most providers and layout are defined in SharedPageDecorator

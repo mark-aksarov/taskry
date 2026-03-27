@@ -1,19 +1,23 @@
-import { UserDetail } from "../../UserDetail";
 import { mockedUserDetail } from "@/mocks/users";
-import { UpdateUserForm } from "../../UpdateUserForm";
 import type { Meta, StoryObj } from "@storybook/react";
-import { UserDetailHeader } from "../../UserDetailHeader";
 import { UserGridItemLarge } from "../UserGridItemLarge";
-import { mockedPositionSummaries } from "@/mocks/positions";
-import { withUserItemProviders } from "../../UserItem/__stories__";
+import { MockedUserItemModals } from "../../UserItemModals/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withUserItemProviders } from "../../UserItemProviders/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "components/users/UserGridItemLarge",
   component: UserGridItemLarge,
   decorators: [
+    (Story) => (
+      <>
+        <Story />
+        <MockedUserItemModals />
+      </>
+    ),
+
     withUserItemProviders,
     withGuestModeModalProvider,
     withCurrentUserProvider,
@@ -27,21 +31,6 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     ...mockedUserDetail,
-    updateUserFormContainer: (
-      <UpdateUserForm
-        {...mockedUserDetail}
-        userId={mockedUserDetail.id}
-        positionSelectItems={mockedPositionSummaries}
-      />
-    ),
-    userDetailContainer: <UserDetail {...mockedUserDetail} />,
-    userDetailHeaderContainer: (
-      <UserDetailHeader
-        fullName={mockedUserDetail.fullName}
-        positionName={mockedUserDetail.position.name}
-        imageUrl={mockedUserDetail.imageUrl}
-      />
-    ),
   },
 } satisfies Story;
 

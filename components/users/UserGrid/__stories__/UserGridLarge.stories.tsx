@@ -3,7 +3,9 @@ import { UserGridLarge } from "../UserGridLarge";
 import { UserGridItemLarge } from "../../UserGridItem";
 import type { Meta, StoryObj } from "@storybook/react";
 import { UserGridItemLargeStory } from "../../UserGridItem/__stories__";
+import { MockedUserItemModals } from "../../UserItemModals/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { MockedUserItemProviders } from "../../UserItemProviders/__stories__";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
@@ -27,11 +29,10 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedUserList.map((user) => (
-      <UserGridItemLarge
-        key={user.id}
-        {...UserGridItemLargeStory.args}
-        {...user}
-      />
+      <MockedUserItemProviders key={user.id}>
+        <UserGridItemLarge {...UserGridItemLargeStory.args} {...user} />
+        <MockedUserItemModals />
+      </MockedUserItemProviders>
     )),
   },
 } satisfies Story;

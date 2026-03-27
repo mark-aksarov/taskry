@@ -1,16 +1,10 @@
 import { type Decorator } from "@storybook/react";
-import { DeleteUserContext } from "../../DeleteUserContext";
+import { MockedDeleteUserProvider } from "./MockedDeleteUserProvider";
 
 export const withDeleteUserProvider: Decorator = (Story) => {
   return (
-    <DeleteUserContext.Provider
-      value={{
-        state: { status: "success" },
-        action: () => ({ status: "success" }),
-        isPending: false,
-      }}
-    >
+    <MockedDeleteUserProvider>
       <Story />
-    </DeleteUserContext.Provider>
+    </MockedDeleteUserProvider>
   );
 };

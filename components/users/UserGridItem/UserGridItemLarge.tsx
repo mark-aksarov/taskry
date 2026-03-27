@@ -2,7 +2,7 @@
 
 import {
   BaseUserItemProps,
-  UserItemProviders,
+  UserItemPendingOverlay,
   UserItemActionMenuTrigger,
 } from "../UserItem";
 
@@ -13,31 +13,26 @@ import {
   GridItemPublicLink,
   GridItemContactList,
   GridItemPhoneNumber,
-  GridItemTitleDetailModalTrigger,
+  GridItemTitleButton,
 } from "@/components/common/Grid";
 
 import {
-  ItemBaseDetailModalTrigger,
+  ItemBaseDetailButton,
   ItemBaseUserImageContainer,
 } from "@/components/common/ItemBase";
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
-import { UserDetailModal } from "../UserDetailModal";
 import { Separator } from "@/components/ui/Separator";
+import { useUserDetailModal } from "../UserDetailModal";
 import { UserGridItemLayout } from "./UserGridItemLayout";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 
-interface Props extends BaseUserItemProps {
-  userDetailContainer: React.ReactNode;
-  userDetailHeaderContainer: React.ReactNode;
-}
-
-export function UserGridItemLarge(props: Props) {
+export function UserGridItemLarge(props: BaseUserItemProps) {
   return (
-    <UserItemProviders>
+    <UserItemPendingOverlay>
       <UserGridItemLargeInner {...props} />
-    </UserItemProviders>
+    </UserItemPendingOverlay>
   );
 }
 
@@ -50,13 +45,10 @@ const UserGridItemLargeInner = memo(
     phoneNumber,
     publicLink,
     email,
-    updateUserFormContainer,
-    userDetailContainer,
-    userDetailHeaderContainer,
-  }: Props) => {
+  }: BaseUserItemProps) => {
     const t = useTranslations("users.UserGridItem");
-
     const { isOwner, isGuest } = useCurrentUser();
+    const { onOpenChange: onUserDetailModalOpenChange } = useUserDetailModal();
 
     const userImg = (
       <ItemBaseUserImageContainer
@@ -67,14 +59,6 @@ const UserGridItemLargeInner = memo(
       />
     );
 
-    const userDetailModal = (
-      <UserDetailModal
-        userId={id}
-        userDetailContainer={userDetailContainer}
-        userDetailHeaderContainer={userDetailHeaderContainer}
-      />
-    );
-
     // We show the action menu only for owners and guests
     const showActionMenuTrigger = isOwner || isGuest;
 
@@ -82,24 +66,23 @@ const UserGridItemLargeInner = memo(
       <UserGridItemLayout
         actionMenuSlot={
           showActionMenuTrigger ? (
-            <UserItemActionMenuTrigger
-              updateUserFormContainer={updateUserFormContainer}
-              userId={id}
-              userFullName={fullName}
-              className="-mr-2"
-            />
+            <UserItemActionMenuTrigger userId={id} className="-mr-2" />
           ) : undefined
         }
         imageSlot={
-          <ItemBaseDetailModalTrigger modal={userDetailModal}>
+          <ItemBaseDetailButton
+            onPress={() => onUserDetailModalOpenChange(true)}
+          >
             {userImg}
-          </ItemBaseDetailModalTrigger>
+          </ItemBaseDetailButton>
         }
         titleSlot={
           <GridItemInfo className="flex-auto">
-            <GridItemTitleDetailModalTrigger modal={userDetailModal}>
+            <GridItemTitleButton
+              onPress={() => onUserDetailModalOpenChange(true)}
+            >
               {fullName}
-            </GridItemTitleDetailModalTrigger>
+            </GridItemTitleButton>
 
             <GridItemText>
               {position ? position.name : t("noPosition")}
