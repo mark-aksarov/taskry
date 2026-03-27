@@ -48,7 +48,7 @@ export function CreateUserMenuTrigger({
   }
 
   // We show the user menu item only for owners and guests
-  const showCreateNewUserMenuItem = isOwner || isGuest;
+  const showCreateCreateUserMenuItem = isOwner || isGuest;
 
   return (
     <>
@@ -59,7 +59,7 @@ export function CreateUserMenuTrigger({
         )}
         renderButton={renderButton}
       >
-        {showCreateNewUserMenuItem ? (
+        {showCreateCreateUserMenuItem ? (
           <Item textValue={t("items.user")} key="user">
             <Users size={16} strokeWidth={1.5} absoluteStrokeWidth />
             {t("items.user")}

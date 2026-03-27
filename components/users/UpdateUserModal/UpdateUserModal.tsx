@@ -23,7 +23,7 @@ export function UpdateUserModal({
 
   return (
     <FormBaseModal
-      data-test="edit-user-modal"
+      data-test="update-user-modal"
       isOpen={isModalOpen}
       onOpenChange={onModalOpenChange}
     >

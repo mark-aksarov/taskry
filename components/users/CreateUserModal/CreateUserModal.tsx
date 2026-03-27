@@ -7,25 +7,25 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { NewUserForm } from "../NewUserForm";
+import { CreateUserForm } from "../CreateUserForm";
 import { useCreateUser } from "../CreateUserContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
-export function NewUserModal() {
-  const t = useTranslations("users.NewUserModal");
+export function CreateUserModal() {
+  const t = useTranslations("users.CreateUserModal");
 
   const { isModalOpen, onModalOpenChange } = useCreateUser();
 
   return (
     <FormBaseModal
-      data-test="new-user-modal"
+      data-test="create-user-modal"
       isOpen={isModalOpen}
       onOpenChange={onModalOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
-          <NewUserForm />
+          <CreateUserForm />
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

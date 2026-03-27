@@ -27,7 +27,7 @@ describe("creates a new project", () => {
     cy.getMenuItem("user").click();
 
     // fill form
-    cy.fillNewUserForm({
+    cy.fillCreateUserForm({
       fullName: "Created User Name",
       email: "created-user@test.com",
       password: "12345abc",
@@ -76,7 +76,7 @@ describe("creates a new project", () => {
     cy.getMenuItem("user").click();
 
     // fill form
-    cy.fillNewUserForm({
+    cy.fillCreateUserForm({
       fullName: "Created User Name",
       email: "user-1@test.com",
       password: "12345abc",

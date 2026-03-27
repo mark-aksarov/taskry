@@ -28,7 +28,7 @@ import {
 import { useTranslations } from "next-intl";
 import { UserSortField } from "@/lib/types";
 import { PageGrid } from "@/components/common/PageGrid";
-import { NewUserModal } from "@/components/users/NewUserModal";
+import { CreateUserModal } from "@/components/users/CreateUserModal";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { UserSearchModal } from "@/components/users/UserSearchModal";
@@ -127,7 +127,7 @@ export function UsersPage({
       </PageContainer>
 
       <UserSearchModal searchContainer={searchContainer} />
-      <NewUserModal />
+      <CreateUserModal />
       <CreatePositionModal />
     </>
   );

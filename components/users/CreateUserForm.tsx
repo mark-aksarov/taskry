@@ -15,8 +15,8 @@ import { UserFullNameTextField } from "./UserFullNameTextField";
 import { UserPasswordTextField } from "./UserPasswordTextField";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 
-export function NewUserForm() {
-  const t = useTranslations("users.NewUserForm");
+export function CreateUserForm() {
+  const t = useTranslations("users.CreateUserForm");
 
   const { state, action, isPending } = useCreateUser();
 
@@ -30,7 +30,7 @@ export function NewUserForm() {
   }
 
   return (
-    <FormBase id="new-user-form" onSubmit={handleSubmit} autoComplete="off">
+    <FormBase id="create-user-form" onSubmit={handleSubmit} autoComplete="off">
       <FormBaseBody>
         <UserFullNameTextField />
         <UserEmailTextField />

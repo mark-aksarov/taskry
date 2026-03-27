@@ -67,7 +67,7 @@ export function UpdateUserForm({
   }
 
   return (
-    <FormBase id="edit-user-form" onSubmit={handleSubmit}>
+    <FormBase id="update-user-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         {userId && <input type="hidden" name="id" value={userId} />}
         <UserFullNameTextField defaultValue={fullName} />

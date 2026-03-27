@@ -20,11 +20,11 @@
     "submitButtonLabel": "Обновить пользователя",
     "successMessage": "Пользователь успешно обновлен"
   },
-  "NewUserForm": {
+  "CreateUserForm": {
     "submitButtonLabel": "Создать пользователя",
     "successMessage": "Пользователь успешно создан"
   },
-  "NewUserModal": {
+  "CreateUserModal": {
     "title": "Новый пользователь"
   },
   "UpdateUserModal": {

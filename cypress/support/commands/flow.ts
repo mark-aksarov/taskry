@@ -1,5 +1,5 @@
 Cypress.Commands.add(
-  "fillNewUserForm",
+  "fillCreateUserForm",
   (data: { fullName?: string; email?: string; password?: string }) => {
     // Text fields (field name : value)
     const fields = {
