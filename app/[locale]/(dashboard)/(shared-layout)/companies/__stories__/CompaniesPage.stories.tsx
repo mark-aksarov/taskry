@@ -3,12 +3,11 @@ import CompaniesPageLoading from "../loading";
 import { usePathname } from "next/navigation";
 import { CompaniesPage } from "../CompaniesPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { SearchList } from "@/components/search/SearchList";
 import { CompanyList } from "@/components/company/CompanyList";
-import { CompaniesPageDecorator } from "./CompaniesPageDecorator";
+import { withCompaniesPageModals } from "./withCompaniesPageModals";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
+import { withCompaniesPageProvider } from "./withCompaniesPageProvider";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { CompanyListStory } from "@/components/company/CompanyList/__stories__";
 
 const meta = {
@@ -16,7 +15,8 @@ const meta = {
   component: CompaniesPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    CompaniesPageDecorator,
+    withCompaniesPageModals,
+    withCompaniesPageProvider,
     SharedPageDecorator,
     withThemedBackground,
   ],
@@ -31,7 +31,6 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     totalCount: 10,
-    searchContainer: <SearchList {...SearchListStory.args} />,
     companiesContainer: <CompanyList {...CompanyListStory.args} />,
   },
 } satisfies Story;

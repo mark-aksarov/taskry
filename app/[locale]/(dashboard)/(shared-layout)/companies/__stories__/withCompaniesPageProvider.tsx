@@ -4,7 +4,7 @@ import { MockedSelectedItemsProvider } from "@/components/common/SelectedItemsCo
 import { MockedCreateCompanyProvider } from "@/components/company/CreateCompanyProvider/__stories__";
 import { MockedDeleteCompaniesProvider } from "@/components/company/DeleteCompaniesProvider/__stories__";
 
-export const CompaniesPageDecorator: Decorator = (Story) => {
+export const withCompaniesPageProvider: Decorator = (Story) => {
   return (
     <MockedSelectedItemsProvider>
       <MockedDeleteCompaniesProvider>
