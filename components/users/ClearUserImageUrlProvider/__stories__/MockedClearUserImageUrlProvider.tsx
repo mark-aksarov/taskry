@@ -1,4 +1,4 @@
-import { ClearUserImageUrlContext } from "../ClearUserImageUrlContext";
+import { ClearUserImageUrlContext } from "../../ClearUserImageUrlContext";
 
 export function MockedClearUserImageUrlProvider({
   children,

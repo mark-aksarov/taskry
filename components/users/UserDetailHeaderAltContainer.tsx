@@ -15,7 +15,7 @@ import { getUserDetail } from "@/lib/data/user/user.dal";
 import { UpdateUserImageProvider } from "./UpdateUserImageProvider/UpdateUserImageProvider";
 import { UpdateUserImageModalProvider } from "./UpdateUserImageModal";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
-import { ClearUserImageUrlProvider } from "./ClearUserImageUrlProvider";
+import { ClearUserImageUrlProvider } from "./ClearUserImageUrlProvider/ClearUserImageUrlProvider";
 import { UpdateUserImageFileProvider } from "./UpdateUserImageFileContext";
 
 interface UserDetailHeaderAltContainerProps {

@@ -1,7 +1,7 @@
 import { UpdateUserImageModalProvider } from "../../UpdateUserImageModal";
 import { UpdateUserImageFileProvider } from "../../UpdateUserImageFileContext";
 import { MockedUpdateUserImageProvider } from "../../UpdateUserImageProvider/__stories__";
-import { MockedClearUserImageUrlProvider } from "../../ClearUserImageUrlContext/__stories__";
+import { MockedClearUserImageUrlProvider } from "../../ClearUserImageUrlProvider/__stories__";
 
 export function MockedUserDetailHeaderProviders({
   children,
