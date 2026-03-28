@@ -5,6 +5,7 @@ import { DeleteCompanyModal } from "./DeleteCompanyModal";
 import { UpdateCompanyProvider } from "./UpdateCompanyProvider";
 import { DeleteCompanyProvider } from "./DeleteCompanyProvider";
 import { getCompanySummaries } from "@/lib/data/company/company.dal";
+import { ModalManagerProvider } from "../common/ModalManagerContext";
 
 export async function CompaniesContainer() {
   const companies = await getCompanySummaries();
@@ -12,21 +13,23 @@ export async function CompaniesContainer() {
   return (
     <CompanyList>
       {companies.map((company) => (
-        <UpdateCompanyProvider key={company.id} companyId={company.id}>
-          <DeleteCompanyProvider>
-            <CompanyListItem id={company.id} name={company.name} />
+        <ModalManagerProvider key={company.id}>
+          <UpdateCompanyProvider companyId={company.id}>
+            <DeleteCompanyProvider>
+              <CompanyListItem id={company.id} name={company.name} />
 
-            <UpdateCompanyModal
-              companyId={company.id}
-              companyName={company.name}
-            />
+              <UpdateCompanyModal
+                companyId={company.id}
+                companyName={company.name}
+              />
 
-            <DeleteCompanyModal
-              companyId={company.id}
-              companyName={company.name}
-            />
-          </DeleteCompanyProvider>
-        </UpdateCompanyProvider>
+              <DeleteCompanyModal
+                companyId={company.id}
+                companyName={company.name}
+              />
+            </DeleteCompanyProvider>
+          </UpdateCompanyProvider>
+        </ModalManagerProvider>
       ))}
     </CompanyList>
   );
