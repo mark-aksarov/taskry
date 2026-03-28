@@ -2,9 +2,10 @@ import "server-only";
 
 import { ProjectCategoryList } from "./ProjectCategoryList";
 import { ProjectCategoryListItem } from "./ProjectCategoryListItem";
-import { ProjectCategoryProviders } from "./ProjectCategoryProviders";
 import { UpdateProjectCategoryModal } from "./UpdateProjectCategoryModal";
 import { DeleteProjectCategoryModal } from "./DeleteProjectCategoryModal";
+import { UpdateProjectCategoryProvider } from "./UpdateProjectCategoryProvider";
+import { DeleteProjectCategoryProvider } from "./DeleteProjectCategoryProvider";
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
 
 export async function ProjectCategoriesContainer() {
@@ -13,22 +14,27 @@ export async function ProjectCategoriesContainer() {
   return (
     <ProjectCategoryList>
       {projectCategories.map((projectCategory) => (
-        <ProjectCategoryProviders key={projectCategory.id}>
-          <ProjectCategoryListItem
-            id={projectCategory.id}
-            name={projectCategory.name}
-          />
+        <UpdateProjectCategoryProvider
+          key={projectCategory.id}
+          projectCategoryId={projectCategory.id}
+        >
+          <DeleteProjectCategoryProvider>
+            <ProjectCategoryListItem
+              id={projectCategory.id}
+              name={projectCategory.name}
+            />
 
-          <UpdateProjectCategoryModal
-            projectCategoryId={projectCategory.id}
-            projectCategoryName={projectCategory.name}
-          />
+            <UpdateProjectCategoryModal
+              projectCategoryId={projectCategory.id}
+              projectCategoryName={projectCategory.name}
+            />
 
-          <DeleteProjectCategoryModal
-            projectCategoryId={projectCategory.id}
-            projectCategoryName={projectCategory.name}
-          />
-        </ProjectCategoryProviders>
+            <DeleteProjectCategoryModal
+              projectCategoryId={projectCategory.id}
+              projectCategoryName={projectCategory.name}
+            />
+          </DeleteProjectCategoryProvider>
+        </UpdateProjectCategoryProvider>
       ))}
     </ProjectCategoryList>
   );

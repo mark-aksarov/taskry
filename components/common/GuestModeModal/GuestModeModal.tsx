@@ -9,12 +9,12 @@ import {
 
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "../../ui/Dialog";
-import { useGuestModeModal } from "./GuestModeModalContext";
+import { useModal } from "../ModalManagerContext";
 
 export function GuestModeModal() {
   const t = useTranslations("common.GuestModeModal");
 
-  const { isOpen, onOpenChange } = useGuestModeModal();
+  const { isOpen, onOpenChange } = useModal("guestMode");
 
   return (
     <ConfirmModal

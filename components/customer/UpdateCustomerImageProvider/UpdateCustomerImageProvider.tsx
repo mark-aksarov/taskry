@@ -10,7 +10,7 @@ import { useRouter } from "@/i18n/navigation";
 import { useActionState, useMemo } from "react";
 import { ActionState } from "@/lib/actions/types";
 import { uploadImageToS3 } from "@/lib/utils/uploadImageToS3";
-import { useUpdateCustomerImageModal } from "../UpdateCustomerImageModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { updateCustomerImageUrl } from "@/lib/actions/customer/updateCustomerImageUrl";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
@@ -69,8 +69,9 @@ export function UpdateCustomerImageProvider({
   }
 
   // we need to track UpdateCustomerImageModal open state to show toast
-  const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } =
-    useUpdateCustomerImageModal();
+  const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } = useModal(
+    "updateCustomerImage",
+  );
 
   // hooks below wait for the transition to complete (reducerAction returns the new state)
   useCloseModalThenShowToastOnActionSuccess(

@@ -1,30 +1,23 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { ProjectCategoryListItem } from "../ProjectCategoryListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withProjectCategoryProviders } from "../../ProjectCategoryProviders/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
-import { withDeleteProjectCategoryModal } from "../../DeleteProjectCategoryModal/__stories__";
-import { withUpdateProjectCategoryModal } from "../../UpdateProjectCategoryModal/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
+import { withUpdateProjectCategoryProvider } from "../../UpdateProjectCategoryProvider/__stories__";
+import { withDeleteProjectCategoryProvider } from "../../DeleteProjectCategoryProvider/__stories__";
 import { withDeleteProjectCategoriesProvider } from "../../DeleteProjectCategoriesProvider/__stories__";
 
 const meta = {
   title: "components/project-categories/ProjectCategoryListItem",
   component: ProjectCategoryListItem,
   decorators: [
-    // we open DeleteProjectCategoryModal and UpdateProjectCategoryModal from ProjectCategoryListItemActionMenuTrigger
-    withDeleteProjectCategoryModal,
-    withUpdateProjectCategoryModal,
-
-    // mocking company item providers
-    withProjectCategoryProviders,
-
-    // mocking another providers
+    withUpdateProjectCategoryProvider,
+    withDeleteProjectCategoryProvider,
     withDeleteProjectCategoriesProvider,
-    withGuestModeModalProvider,
     withCurrentUserProvider,
     withSelectedItemsProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof ProjectCategoryListItem>;
@@ -36,12 +29,5 @@ export const Default = {
   args: {
     id: 1,
     name: "Project Category 1",
-  },
-} satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
   },
 } satisfies Story;

@@ -25,7 +25,6 @@ import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__"
 import { CommentListStory } from "@/components/comments/CommentList/__stories__";
 import { withDeleteTaskProvider } from "@/components/tasks/DeleteTaskContext/__stories__";
 import { withUpdateTaskProvider } from "@/components/tasks/UpdateTaskContext/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
 
@@ -43,7 +42,6 @@ const meta = {
     withUpdateTaskProvider,
     withDeleteTaskProvider,
     withCreateSubtaskProvider,
-    withGuestModeModalProvider,
     withCurrentUserProvider,
     SharedPageDecorator,
     withThemedBackground,
@@ -113,12 +111,5 @@ export const WithoutOptionalTaskData = {
     taskHeaderContainer: (
       <TaskDetailHeader taskTitle={mockedTaskDetail.title} />
     ),
-  },
-} satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
   },
 } satisfies Story;

@@ -7,10 +7,9 @@ import {
 
 import { CustomerList } from "./CustomerList";
 import { CustomerListItem } from "./CustomerListItem";
-import { CustomerItemProviders } from "./CustomerItemProviders";
+import { CustomerItemWrapper } from "./CustomerItemWrapper";
 import { CustomerGridLarge, CustomerGridMobile } from "./CustomerGrid";
 import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
-import { BaseCustomerItemProps, CustomerItemModals } from "./CustomerItem";
 import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
 
 interface CustomersDynamicProps {
@@ -31,9 +30,11 @@ export function CustomersDynamic({
       {customers.map((customer) => (
         <CustomerItemWrapper
           key={customer.id}
-          customer={customer}
-          renderItem={(props) => <CustomerListItem {...props} />}
-        />
+          customerId={customer.id}
+          customerFullName={customer.fullName}
+        >
+          <CustomerListItem {...customer} />
+        </CustomerItemWrapper>
       ))}
     </CustomerList>
   );
@@ -43,9 +44,11 @@ export function CustomersDynamic({
       {customers.map((customer) => (
         <CustomerItemWrapper
           key={customer.id}
-          customer={customer}
-          renderItem={(props) => <CustomerGridItemLarge {...props} />}
-        />
+          customerId={customer.id}
+          customerFullName={customer.fullName}
+        >
+          <CustomerGridItemLarge {...customer} />
+        </CustomerItemWrapper>
       ))}
     </CustomerGridLarge>
   );
@@ -55,9 +58,11 @@ export function CustomersDynamic({
       {customers.map((customer) => (
         <CustomerItemWrapper
           key={customer.id}
-          customer={customer}
-          renderItem={(props) => <CustomerGridItemMobile {...props} />}
-        />
+          customerId={customer.id}
+          customerFullName={customer.fullName}
+        >
+          <CustomerGridItemMobile {...customer} />
+        </CustomerItemWrapper>
       ))}
     </CustomerGridMobile>
   );
@@ -71,32 +76,5 @@ export function CustomersDynamic({
       gridLarge={renderGridLarge}
       gridMobile={renderGridMobile}
     />
-  );
-}
-
-interface CustomerItemWrapperProps {
-  customer: CustomerListItemDTO;
-  renderItem: (props: BaseCustomerItemProps) => React.ReactNode;
-}
-
-function CustomerItemWrapper({
-  customer,
-  renderItem,
-}: CustomerItemWrapperProps) {
-  const commonProps: BaseCustomerItemProps = {
-    id: customer.id,
-    fullName: customer.fullName,
-    imageUrl: customer.imageUrl,
-    email: customer.email,
-    phoneNumber: customer.phoneNumber,
-    publicLink: customer.publicLink,
-    company: customer.company,
-  };
-
-  return (
-    <CustomerItemProviders>
-      {renderItem(commonProps)}
-      <CustomerItemModals customer={customer} />
-    </CustomerItemProviders>
   );
 }

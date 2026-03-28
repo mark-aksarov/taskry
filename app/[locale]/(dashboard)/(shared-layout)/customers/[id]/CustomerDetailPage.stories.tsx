@@ -15,15 +15,25 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
 import { CustomerDetailHeaderInteractive } from "@/components/customer/CustomerDetailHeader";
-import { MockedCustomerDetailModals } from "@/components/customer/CustomerDetailModals/__stories__";
-import { MockedCustomerDetailProviders } from "@/components/customer/CustomerDetailProviders/__stories__";
-import { MockedCustomerDetailHeaderInteractiveProviders } from "@/components/customer/CustomerDetailHeaderInteractiveProviders/__stories__";
+import { withUpdateCustomerProvider } from "@/components/customer/UpdateCustomerProvider/__stories__";
+import { withDeleteCustomerProvider } from "@/components/customer/DeleteCustomerProvider/__stories__";
+import { withUpdateCustomerImageProvider } from "@/components/customer/UpdateCustomerImageProvider/__stories__";
+import { withClearCustomerImageUrlProvider } from "@/components/customer/ClearCustomerImageUrlProvider/__stories__";
+import { withUpdateCustomerImageFileProvider } from "@/components/customer/UpdateCustomerImageFileContext/__stories__";
 
 const meta = {
   title: "pages/CustomerDetailPage",
   component: CustomerDetailPage,
   parameters: { layout: "fullscreen" },
-  decorators: [SharedPageDecorator, withThemedBackground],
+  decorators: [
+    withUpdateCustomerProvider,
+    withDeleteCustomerProvider,
+    withUpdateCustomerImageProvider,
+    withClearCustomerImageUrlProvider,
+    withUpdateCustomerImageFileProvider,
+    SharedPageDecorator,
+    withThemedBackground,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/customers/1");
     mocked(useParams).mockReturnValue({
@@ -37,55 +47,34 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    searchContainer: <SearchList {...SearchListStory.args} />,
     customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
     customerDetailHeaderContainer: (
-      <MockedCustomerDetailHeaderInteractiveProviders>
-        <CustomerDetailHeaderInteractive
-          customerId={mockedCustomerDetail.id}
-          fullName={mockedCustomerDetail.fullName}
-          imageUrl={mockedCustomerDetail.imageUrl}
-          companyName={mockedCustomerDetail.company.name}
-        />
-      </MockedCustomerDetailHeaderInteractiveProviders>
+      <CustomerDetailHeaderInteractive
+        fullName={mockedCustomerDetail.fullName}
+        imageUrl={mockedCustomerDetail.imageUrl}
+        companyName={mockedCustomerDetail.company.name}
+      />
     ),
-    customerDetailActions: (
-      <MockedCustomerDetailProviders>
-        <CustomerDetailActions />
-        <MockedCustomerDetailModals />
-      </MockedCustomerDetailProviders>
-    ),
+    customerDetailActions: <CustomerDetailActions />,
   },
 } satisfies Story;
 
 export const Loading = {
   args: {
-    searchContainer: <SearchList {...SearchListStory.args} />,
     customerDetailContainer: <CustomerDetailSkeleton />,
     customerDetailHeaderContainer: <DetailHeaderSkeleton />,
-    customerDetailActions: Default.args.customerDetailActions,
+    customerDetailActions: <CustomerDetailActions />,
   },
 } satisfies Story;
 
 export const WithoutSomeData = {
   args: {
-    searchContainer: <SearchList {...SearchListStory.args} />,
     customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
     customerDetailHeaderContainer: (
-      <MockedCustomerDetailHeaderInteractiveProviders>
-        <CustomerDetailHeaderInteractive
-          customerId={mockedCustomerDetail.id}
-          fullName={mockedCustomerDetail.fullName}
-        />
-      </MockedCustomerDetailHeaderInteractiveProviders>
+      <CustomerDetailHeaderInteractive
+        fullName={mockedCustomerDetail.fullName}
+      />
     ),
-    customerDetailActions: Default.args.customerDetailActions,
-  },
-} satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
+    customerDetailActions: <CustomerDetailActions />,
   },
 } satisfies Story;

@@ -4,13 +4,12 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ProjectListItem } from "../../ProjectListItem";
 import { ProjectListItemStory } from "../../ProjectListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { MockedProjectItemModals } from "../../ProjectItemModals/__stories__";
+import { MockedProjectItemWrapper } from "../../ProjectItemWrapper/__stories__";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
-import { MockedProjectItemProviders } from "../../ProjectItemProviders/__stories__";
 import { withDeleteProjectsProvider } from "../../DeleteProjectsProvider/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusesProvider/__stories__";
 
@@ -21,10 +20,10 @@ const meta = {
     withDeleteProjectsProvider,
     withUpdateProjectStatusesProvider,
     withViewModeProvider,
-    withGuestModeModalProvider,
     withCurrentUserProvider,
     withPageTransitionProvider,
     withSelectedProjectsProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof ProjectList>;
@@ -35,21 +34,13 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedProjectList.map((project) => (
-      <MockedProjectItemProviders>
+      <MockedProjectItemWrapper>
         <ProjectListItem
           key={project.id}
           {...ProjectListItemStory.args}
           {...project}
         />
-        <MockedProjectItemModals />
-      </MockedProjectItemProviders>
+      </MockedProjectItemWrapper>
     )),
-  },
-} satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
   },
 } satisfies Story;

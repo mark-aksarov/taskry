@@ -13,19 +13,12 @@ import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { useDeleteCompanies } from "../DeleteCompaniesContext";
 import { overlayTransitionDuration } from "@/components/ui/styles";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
-interface DeleteCompaniesModalProps {
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
-}
-
-export function DeleteCompaniesModal({
-  isOpen,
-  onOpenChange,
-}: DeleteCompaniesModalProps) {
+export function DeleteCompaniesModal() {
   const t = useTranslations("company.DeleteCompaniesModal");
-
+  const { isOpen, onOpenChange } = useModal("deleteCompanies");
   const { ids: selectedIds, clear: clearSelectedItems } = useSelectedItems();
   const { action, setIds: setDeleteCompanyIds } = useDeleteCompanies();
 

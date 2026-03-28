@@ -7,7 +7,7 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { useCreateCustomerModal } from "./CreateCustomerModalContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface NewCustomerModalProps {
@@ -19,11 +19,11 @@ export function CreateCustomerModal({
 }: NewCustomerModalProps) {
   const t = useTranslations("customers.CreateCustomerModal");
 
-  const { isOpen, onOpenChange } = useCreateCustomerModal();
+  const { isOpen, onOpenChange } = useModal("createCustomer");
 
   return (
     <FormBaseModal
-      data-test="new-customer-modal"
+      data-test="create-customer-modal"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
     >

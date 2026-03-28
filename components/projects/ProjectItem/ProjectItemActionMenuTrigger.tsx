@@ -10,9 +10,8 @@ import { startTransition } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { useDeleteProjectModal } from "../DeleteProjectModal";
-import { useUpdateProjectModal } from "../UpdateProjectModal";
 import { useProjectItemPending } from "./useProjectItemPending";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateProjectStatus } from "../UpdateProjectStatusContext";
 import { Trash, Check, Clock, Pencil, CircleEllipsis } from "lucide-react";
@@ -34,10 +33,10 @@ export function ProjectItemActionMenuTrigger({
   const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
-  const { onOpenChange: onDeleteModalOpenChange } = useDeleteProjectModal();
+  const { onOpenChange: onDeleteModalOpenChange } = useModal("deleteProject");
 
   // State for edit modal from context
-  const { onOpenChange: onUpdateModalOpenChange } = useUpdateProjectModal();
+  const { onOpenChange: onUpdateModalOpenChange } = useModal("updateProject");
 
   // State for update project status from context
   const {

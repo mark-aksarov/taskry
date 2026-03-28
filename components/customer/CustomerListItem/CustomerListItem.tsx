@@ -24,11 +24,11 @@ import {
 import { memo } from "react";
 import { useTranslations } from "next-intl";
 import { CustomerItemCheckbox } from "../CustomerItem";
-import { useCustomerDetailModal } from "../CustomerDetailModal";
 import { CustomerItemActionMenuTrigger } from "../CustomerItem";
 import { CustomerListItemLayout } from "./CustomerListItemLayout";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 
 export function CustomerListItem(props: BaseCustomerItemProps) {
   const selected = useSelectedItems();
@@ -55,7 +55,7 @@ export const CustomerListItemInner = memo(
     const t = useTranslations("customers.CustomerListItem");
 
     const { onOpenChange: onCustomerDetailModalOpenChange } =
-      useCustomerDetailModal();
+      useModal("customerDetail");
 
     const customerImg = (
       <ItemBaseUserImageContainer

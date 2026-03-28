@@ -9,10 +9,9 @@ import {
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { useUpdatePositionModal } from "../UpdatePositionModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { usePositionListItemPending } from "./usePositionListItemPending";
-import { useDeletePositionModal } from "../DeletePositionModal/DeletePositionModalContext";
 
 export type PositionListItemActionMenuTriggerProps = {
   positionId: number;
@@ -27,10 +26,10 @@ export function PositionListItemActionMenuTrigger({
   const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
-  const { onOpenChange: onDeleteModalOpenChange } = useDeletePositionModal();
+  const { onOpenChange: onDeleteModalOpenChange } = useModal("deletePosition");
 
   // State for update modal from context
-  const { onOpenChange: onUpdateModalOpenChange } = useUpdatePositionModal();
+  const { onOpenChange: onUpdateModalOpenChange } = useModal("updatePosition");
 
   /**
    * Handles menu actions for a position item

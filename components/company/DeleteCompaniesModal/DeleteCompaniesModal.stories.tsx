@@ -6,25 +6,25 @@ import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteCompaniesProvider } from "../DeleteCompaniesProvider/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
+import {
+  withModalManagerProvider,
+  withOpenModal,
+} from "@/components/common/ModalManagerContext/__stories__";
 
 const meta = {
   title: "components/companies/DeleteCompaniesModal",
   component: DeleteCompaniesModal,
   decorators: [
+    withOpenModal,
     withToastRegion,
     withSelectedItemsProvider,
     withDeleteCompaniesProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
-  render: (args) => {
-    const [open, setOpen] = React.useState(true);
 
-    return (
-      <>
-        <Button label="Delete companies" onClick={() => setOpen(true)} />
-        <DeleteCompaniesModal {...args} isOpen={open} onOpenChange={setOpen} />
-      </>
-    );
+  parameters: {
+    modalId: "deleteCompanies",
   },
 } satisfies Meta<typeof DeleteCompaniesModal>;
 

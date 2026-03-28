@@ -11,8 +11,8 @@ import {
 import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useClearCustomerImageUrl } from "../ClearCustomerImageUrlContext";
-import { useDeleteCustomerImageModal } from "./DeleteCustomerImageModalContext";
 
 interface DeleteCustomerImageModalProps {
   customerId: number;
@@ -24,7 +24,7 @@ export function DeleteCustomerImageModal({
   customerFullName,
 }: DeleteCustomerImageModalProps) {
   const { action } = useClearCustomerImageUrl();
-  const { isOpen, onOpenChange } = useDeleteCustomerImageModal();
+  const { isOpen, onOpenChange } = useModal("deleteCustomerImage");
 
   function handleDelete() {
     //close modal before deleting

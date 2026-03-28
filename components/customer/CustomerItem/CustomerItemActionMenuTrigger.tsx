@@ -9,10 +9,9 @@ import {
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { useDeleteCustomerModal } from "../DeleteCustomerModal";
-import { useUpdateCustomerModal } from "../UpdateCustomerModal";
 import { useCustomerItemPending } from "./useCustomerItemPending";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
+import { useModal } from "@/components/common/ModalManagerContext";
 
 export type CustomerItemActionMenuTriggerProps = {
   customerId: number;
@@ -29,10 +28,10 @@ export function CustomerItemActionMenuTrigger({
   const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
-  const { onOpenChange: onDeleteModalOpenChange } = useDeleteCustomerModal();
+  const { onOpenChange: onDeleteModalOpenChange } = useModal("deleteCustomer");
 
   // State for update modal from context
-  const { onOpenChange: onUpdateModalOpenChange } = useUpdateCustomerModal();
+  const { onOpenChange: onUpdateModalOpenChange } = useModal("updateCustomer");
 
   /**
    * Handles menu actions for a customer item

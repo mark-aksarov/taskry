@@ -7,8 +7,8 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
-import { useUpdateCustomerModal } from "./UpdateCustomerModalContext";
 
 interface UpdateCustomerModalProps {
   updateCustomerFormContainer: React.ReactNode;
@@ -19,7 +19,7 @@ export function UpdateCustomerModal({
 }: UpdateCustomerModalProps) {
   const t = useTranslations("customers.UpdateCustomerModal");
 
-  const { isOpen, onOpenChange } = useUpdateCustomerModal();
+  const { isOpen, onOpenChange } = useModal("updateCustomer");
 
   return (
     <FormBaseModal

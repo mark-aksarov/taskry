@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
 import { SendHorizonal } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { useGuestModeModal } from "@/components/common/GuestModeModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 
 interface CommentTextFieldSendButtonProps {
@@ -20,7 +20,7 @@ export function CommentTextFieldSendButton({
 
   // If the user is a guest, show the guest mode modal instead of allowing action
   const { isGuest } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  const { onOpenChange: onGuestModeModalOpenChange } = useModal("guestMode");
 
   function handlePress() {
     if (isGuest) {

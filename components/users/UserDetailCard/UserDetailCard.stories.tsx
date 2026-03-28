@@ -18,7 +18,6 @@ import { withUpdateUserProvider } from "../UpdateUserProvider/__stories__";
 import { ProfileActions, ProfileActionsSkeleton } from "../ProfileActions";
 import { withChangePasswordProvider } from "../ChangePasswordProvider/__stories__";
 import { MockedUserDetailHeaderProviders } from "../UserDetailHeader/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withDeleteUserImageModalProvider } from "@/components/users/DeleteUserImageModal/__stories__";
 
@@ -51,7 +50,6 @@ const meta = {
     withUpdateUserProvider,
     withChangePasswordProvider,
     withDeleteUserProvider,
-    withGuestModeModalProvider,
     withCurrentUserProvider,
     withThemedBackground,
   ],
@@ -117,12 +115,5 @@ export const WithoutOptionalUserData = {
         }
       />
     ),
-  },
-} satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
   },
 } satisfies Story;

@@ -2,12 +2,11 @@ import { ProjectListItem } from "../ProjectListItem";
 import { mockedProjectList } from "@/mocks/projects";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { MockedProjectItemModals } from "../../ProjectItemModals/__stories__";
-import { withProjectItemProviders } from "../../ProjectItemProviders/__stories__";
+import { withMockedProjectItemWrapper } from "../../ProjectItemWrapper/__stories__";
 import { withDeleteProjectsProvider } from "../../DeleteProjectsProvider/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusesProvider/__stories__";
 
 const mockedProject = mockedProjectList[0];
@@ -16,19 +15,12 @@ const meta = {
   title: "components/projects/ProjectListItem",
   component: ProjectListItem,
   decorators: [
-    (Story) => (
-      <>
-        <Story />
-        <MockedProjectItemModals />
-      </>
-    ),
-
-    withProjectItemProviders,
+    withMockedProjectItemWrapper,
     withDeleteProjectsProvider,
     withUpdateProjectStatusesProvider,
-    withGuestModeModalProvider,
     withCurrentUserProvider,
     withSelectedProjectsProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof ProjectListItem>;

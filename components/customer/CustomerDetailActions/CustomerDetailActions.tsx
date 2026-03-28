@@ -4,8 +4,7 @@ import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { useDeleteCustomer } from "../DeleteCustomerContext";
 import { useUpdateCustomer } from "../UpdateCustomerContext";
-import { useUpdateCustomerModal } from "../UpdateCustomerModal";
-import { useDeleteCustomerModal } from "../DeleteCustomerModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { NavigationButton } from "@/components/common/NavigationButton";
 
@@ -17,11 +16,11 @@ export function CustomerDetailActions() {
 
   // Delete customer: action state + form modal state from context
   const { isPending: isDeletePending } = useDeleteCustomer();
-  const { onOpenChange: onDeleteModalOpenChange } = useDeleteCustomerModal();
+  const { onOpenChange: onDeleteModalOpenChange } = useModal("deleteCustomer");
 
   // Update customer: action state + form modal state from context
   const { isPending: isUpdatePending } = useUpdateCustomer();
-  const { onOpenChange: onUpdateModalOpenChange } = useUpdateCustomerModal();
+  const { onOpenChange: onUpdateModalOpenChange } = useModal("updateCustomer");
 
   function handleDeletePress() {
     guestGuard(() => onDeleteModalOpenChange(true));

@@ -3,8 +3,8 @@
 import { useRouter } from "@/i18n/navigation";
 import { useActionState, useMemo } from "react";
 import { ActionState } from "@/lib/actions/types";
-import { useCreateCompanyModal } from "../CreateCompanyModal";
 import { CreateCompanyContext } from "../CreateCompanyContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { createCompany } from "@/lib/actions/company/createCompany";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
@@ -40,7 +40,7 @@ export function CreateCompanyProvider({
 
   // we need to track CreateCompanyModal open state to show toast
   const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } =
-    useCreateCompanyModal();
+    useModal("createCompany");
 
   // hooks below wait for the transition to complete (reducerAction returns the new state)
   useCloseModalThenShowToastOnActionSuccess(

@@ -1,1 +1,0 @@
-export { MockedCustomerDetailModals } from "./MockedCustomerDetailModals";

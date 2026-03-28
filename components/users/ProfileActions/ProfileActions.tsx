@@ -7,11 +7,11 @@ import { useDeleteUser } from "../DeleteUserContext";
 import { KeyRound, Pencil, Trash } from "lucide-react";
 import { useUpdateUserModal } from "../UpdateUserModal";
 import { BaseDeleteUserModal } from "../DeleteUserModal";
+import { useChangePassword } from "../ChangePasswordContext";
 import { useChangePasswordModal } from "../ChangePasswordModal";
-import { useGuestModeModal } from "@/components/common/GuestModeModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { NavigationButton } from "@/components/common/NavigationButton";
-import { useChangePassword } from "../ChangePasswordContext";
 
 interface ProfileActionsProps {
   userId: string;
@@ -28,7 +28,7 @@ export function ProfileActions({ userId, userFullName }: ProfileActionsProps) {
 
   // Guest mode
   const { isGuest, isOwner, userId: currentUserId } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useGuestModeModal();
+  const { onOpenChange: onGuestModeModalOpenChange } = useModal("guestMode");
 
   // Change password action and modal states
   const { isPending: isChangePasswordPending } = useChangePassword();

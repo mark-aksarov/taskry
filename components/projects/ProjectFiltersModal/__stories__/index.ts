@@ -1,1 +1,0 @@
-export { withProjectFiltersModalProvider } from "./withProjectFiltersModalProvider";

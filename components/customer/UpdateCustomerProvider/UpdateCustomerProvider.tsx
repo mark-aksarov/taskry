@@ -4,8 +4,8 @@ import { notFound } from "next/navigation";
 import { useActionState, useMemo } from "react";
 import { ActionState } from "@/lib/actions/types";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { useUpdateCustomerModal } from "../UpdateCustomerModal";
 import { UpdateCustomerContext } from "../UpdateCustomerContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
@@ -16,10 +16,12 @@ const initialState: ActionState = {
 };
 
 interface UpdateCustomerProviderProps {
+  customerId: number;
   children: React.ReactNode;
 }
 
 export function UpdateCustomerProvider({
+  customerId,
   children,
 }: UpdateCustomerProviderProps) {
   const pathname = usePathname();
@@ -50,7 +52,7 @@ export function UpdateCustomerProvider({
 
   // we need to track UpdateCustomerModal open state to show toast
   const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } =
-    useUpdateCustomerModal();
+    useModal("updateCustomer");
 
   // hooks below wait for the transition to complete (reducerAction returns the new state)
   useCloseModalThenShowToastOnActionSuccess(

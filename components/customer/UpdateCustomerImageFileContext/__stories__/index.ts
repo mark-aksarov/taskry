@@ -1,0 +1,1 @@
+export { withUpdateCustomerImageFileProvider } from "./withUpdateCustomerImageFileProvider";

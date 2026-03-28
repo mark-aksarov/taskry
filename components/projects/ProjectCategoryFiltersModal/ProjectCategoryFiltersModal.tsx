@@ -12,9 +12,9 @@ import {
 
 import { useTranslations } from "next-intl";
 import { useProjectFilters } from "../ProjectFiltersContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
-import { useProjectCategoryFiltersModal } from "./ProjectCategoryFiltersModalContext";
 
 interface ProjectCategoryFiltersModalProps {
   filtersFormContainer: React.ReactNode;
@@ -24,7 +24,7 @@ export function ProjectCategoryFiltersModal({
   filtersFormContainer,
 }: ProjectCategoryFiltersModalProps) {
   const initialFilters = useProjectFilters();
-  const { isOpen, onOpenChange } = useProjectCategoryFiltersModal();
+  const { isOpen, onOpenChange } = useModal("projectCategoryFilters");
 
   return (
     <FormBaseModal

@@ -4,7 +4,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { UserTaskListItem } from "../../UserTaskListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserTaskListItemStory } from "../../UserTaskListItem/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
@@ -19,7 +18,6 @@ const meta = {
     withCreateSubtaskProvider,
     withUpdateTaskStatusesProvider,
     withDeleteTasksProvider,
-    withGuestModeModalProvider,
     withCurrentUserProvider,
     withSelectedTasksProvider,
     withPageTransitionProvider,
@@ -43,12 +41,5 @@ export const Default = {
         updateTask={() => ({ status: "success" })}
       />
     )),
-  },
-} satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
   },
 } satisfies Story;

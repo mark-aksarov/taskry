@@ -21,15 +21,12 @@ import {
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
-import { useProjectDetailModal } from "../ProjectDetailModal";
 import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { useSelectedProjects } from "../SelectedProjectsContext";
-import { useProjectCommentsModal } from "../ProjectCommentsModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { SelectableItem } from "@/components/common/SelectableItem";
-import { useUserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectItemCheckbox } from "../ProjectItem/ProjectItemCheckbox";
-import { useCustomerDetailModal } from "@/components/customer/CustomerDetailModal";
 
 export interface Props extends BaseProjectItemProps {
   category?: {
@@ -78,12 +75,13 @@ export const ProjectListItemInner = memo(
     const t = useTranslations("projects.ProjectListItem");
 
     const { onOpenChange: onProjectDetailModalOpenChange } =
-      useProjectDetailModal();
-    const { onOpenChange: onUserDetailModalOpenChange } = useUserDetailModal();
+      useModal("projectDetail");
+    const { onOpenChange: onUserDetailModalOpenChange } =
+      useModal("userDetail");
     const { onOpenChange: onCustomerDetailModalOpenChange } =
-      useCustomerDetailModal();
+      useModal("customerDetail");
     const { onOpenChange: onProjectCommentsModalOpenChange } =
-      useProjectCommentsModal();
+      useModal("projectComments");
 
     const creatorImg = (
       <ItemBaseUserImageContainer

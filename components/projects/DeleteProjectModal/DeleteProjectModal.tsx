@@ -3,8 +3,8 @@
 import { startTransition } from "react";
 import { useDeleteProject } from "../DeleteProjectContext";
 import { useSelectedProjects } from "../SelectedProjectsContext";
-import { BaseDeleteProjectModal } from "./BaseDeleteProjectModal";
-import { useDeleteProjectModal } from "./DeleteProjectModalContext";
+import { BaseDeleteProjectModal } from "../BaseDeleteProjectModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 
 interface DeleteProjectModalProps {
   projectId: number;
@@ -16,8 +16,7 @@ export function DeleteProjectModal({
   projectTitle,
 }: DeleteProjectModalProps) {
   const { action } = useDeleteProject();
-  const { isOpen, onOpenChange } = useDeleteProjectModal();
-
+  const { isOpen, onOpenChange } = useModal("deleteProject");
   const { remove: removeSelected } = useSelectedProjects();
 
   function handleDelete() {

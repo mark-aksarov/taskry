@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchModal } from "./SearchModalContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { ResponsiveModal } from "@/components/common/ResponsiveModal";
 
 interface SearchModalProps {
@@ -12,7 +12,7 @@ export function SearchModal({
   children,
   "data-test": dataTest,
 }: SearchModalProps) {
-  const { isOpen, onOpenChange } = useSearchModal();
+  const { isOpen, onOpenChange } = useModal("search");
 
   return (
     <ResponsiveModal

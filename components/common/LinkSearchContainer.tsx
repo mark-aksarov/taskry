@@ -1,7 +1,7 @@
 "use client";
 
+import { useModal } from "./ModalManagerContext";
 import { useSearchBar } from "../search/SearchBar";
-import { useSearchModal } from "../search/SearchModal";
 import { SearchListItemLink } from "../search/SearchListItem";
 import { SearchList, SearchListSkeleton } from "../search/SearchList";
 import { useFetchSearchKeywords } from "@/lib/swr/hooks/useFetchSearchKeywords";
@@ -14,7 +14,7 @@ export function LinkSearchContainer({ pathname }: { pathname: string }) {
   const { data } = useFetchSearchKeywords(searchBarValue);
 
   // close the search modal when applying a new search query
-  const { onOpenChange } = useSearchModal();
+  const { onOpenChange } = useModal("search");
 
   if (!data) return <SearchListSkeleton />;
 

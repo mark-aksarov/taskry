@@ -46,10 +46,3 @@ export const Loading = {
 export const WithNoTaskCategories = {
   args: { ...Default.args, totalCount: 0 },
 } satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
-  },
-} satisfies Story;

@@ -1,16 +1,16 @@
 "use client";
 
 import { PersonImageModal } from "../../common/PersonImageModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { UpdateCustomerImageDialog } from "./UpdateCustomerImageDialog";
 import { useUpdateCustomerImageFile } from "../UpdateCustomerImageFileContext";
-import { useUpdateCustomerImageModal } from "./UpdateCustomerImageModalContext";
 
 export function UpdateCustomerImageModal({
   customerId,
 }: {
   customerId: number;
 }) {
-  const { isOpen, onOpenChange } = useUpdateCustomerImageModal();
+  const { isOpen, onOpenChange } = useModal("updateCustomerImage");
   const { imageFile, onImageFileChange } = useUpdateCustomerImageFile();
 
   return (

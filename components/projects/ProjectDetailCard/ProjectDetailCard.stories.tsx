@@ -14,19 +14,19 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectDetailHeader } from "../ProjectDetailHeader";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withProjectDetailModals } from "../ProjectDetailModals/__stories__";
-import { withProjectDetailProviders } from "../ProjectDetailProviders/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
+import { withDeleteProjectProvider } from "../DeleteProjectProvider/__stories__";
+import { withUpdateProjectProvider } from "../UpdateProjectProvider/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 
 const meta = {
   title: "components/projects/ProjectDetailCard",
   component: ProjectDetailCard,
   decorators: [
-    withProjectDetailModals,
-    withProjectDetailProviders,
-    withGuestModeModalProvider,
+    withUpdateProjectProvider,
+    withDeleteProjectProvider,
     withCurrentUserProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof ProjectDetailCard>;
@@ -69,12 +69,5 @@ export const WithoutOptionalProjectData = {
       <ProjectDetailHeader projectTitle={mockedProjectDetail.title} />
     ),
     projectDetailActions: Default.args.projectDetailActions,
-  },
-} satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
   },
 } satisfies Story;

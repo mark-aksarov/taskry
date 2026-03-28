@@ -14,7 +14,7 @@ import { useTranslations } from "next-intl";
 import { useProjectFilters } from "../ProjectFiltersContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
-import { useProjectCreatorFiltersModal } from "./ProjectCreatorFiltersModalContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 
 interface ProjectCreatorFiltersModalProps {
   filtersFormContainer: React.ReactNode;
@@ -24,7 +24,7 @@ export function ProjectCreatorFiltersModal({
   filtersFormContainer,
 }: ProjectCreatorFiltersModalProps) {
   const initialFilters = useProjectFilters();
-  const { isOpen, onOpenChange } = useProjectCreatorFiltersModal();
+  const { isOpen, onOpenChange } = useModal("projectCreatorFilters");
 
   return (
     <FormBaseModal

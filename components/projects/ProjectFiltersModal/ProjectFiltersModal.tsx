@@ -12,7 +12,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { useProjectFilters } from "../ProjectFiltersContext";
-import { useProjectFiltersModal } from "./ProjectFiltersModalContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
@@ -22,7 +22,7 @@ export function ProjectFiltersModal({
   filtersFormContainer: React.ReactNode;
 }) {
   const initialFilters = useProjectFilters();
-  const { isOpen, onOpenChange } = useProjectFiltersModal();
+  const { isOpen, onOpenChange } = useModal("projectFilters");
 
   return (
     <FormBaseModal

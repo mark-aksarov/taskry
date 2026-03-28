@@ -7,14 +7,14 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { CreateProjectCategoryForm } from "../CreateProjectCategoryForm";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
-import { useCreateProjectCategoryModal } from "./CreateProjectCategoryModalContext";
 
 export function CreateProjectCategoryModal() {
   const t = useTranslations("projectCategories.CreateProjectCategoryModal");
 
-  const { isOpen, onOpenChange } = useCreateProjectCategoryModal();
+  const { isOpen, onOpenChange } = useModal("createProjectCategory");
 
   return (
     <FormBaseModal

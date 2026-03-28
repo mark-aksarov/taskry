@@ -11,9 +11,9 @@ import {
 import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useDeleteProjectCategory } from "../DeleteProjectCategoryContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { useDeleteProjectCategoryModal } from "./DeleteProjectCategoryModalContext";
 
 interface DeleteProjectCategoryModalProps {
   projectCategoryId: number;
@@ -27,7 +27,7 @@ export function DeleteProjectCategoryModal({
   const t = useTranslations("projectCategories.DeleteProjectCategoryModal");
 
   const { action } = useDeleteProjectCategory();
-  const { isOpen, onOpenChange } = useDeleteProjectCategoryModal();
+  const { isOpen, onOpenChange } = useModal("deleteProjectCategory");
 
   const { remove: removeSelected } = useSelectedItems();
 

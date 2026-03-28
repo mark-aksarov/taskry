@@ -28,7 +28,6 @@ import { UserDetailHeaderInteractive } from "@/components/users/UserDetailHeader
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
 import { withUpdateUserProvider } from "@/components/users/UpdateUserProvider/__stories__";
 import { withDeleteUserProvider } from "@/components/users/DeleteUserProvider/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
@@ -48,7 +47,6 @@ const meta = {
     withDeleteUserProvider,
     withDeleteTasksProvider,
     withUpdateTaskStatusesProvider,
-    withGuestModeModalProvider,
     withCurrentUserProvider,
     withPageTransitionProvider,
     withSelectedTasksProvider,
@@ -125,11 +123,4 @@ export const Loading = {
 export const WithNoTasks = {
   ...Default,
   args: { ...Default.args, totalTasksCount: 0 },
-} satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
-  },
 } satisfies Story;

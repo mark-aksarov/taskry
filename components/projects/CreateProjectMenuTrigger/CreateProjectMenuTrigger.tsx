@@ -4,11 +4,10 @@ import { Key } from "react-aria";
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Blocks, FolderClosed } from "lucide-react";
-import { useCreateProjectModal } from "../CreateProjectModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { CreateNewMenuTrigger } from "@/components/common/CreateNewMenuTrigger";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
-import { useCreateProjectCategoryModal } from "@/components/projectCategory/CreateProjectCategoryModal";
 
 interface CreateProjectMenuTriggerProps {
   renderButton: () => React.ReactNode;
@@ -23,12 +22,13 @@ export function CreateProjectMenuTrigger({
   const guestGuard = useGuestModalGuard();
 
   // Create project category form modal state
-  const { onOpenChange: onCreateProjectCategoryModalOpenChange } =
-    useCreateProjectCategoryModal();
+  const { onOpenChange: onCreateProjectCategoryModalOpenChange } = useModal(
+    `createProjectCategory`,
+  );
 
   // Create project form modal state
   const { onOpenChange: onCreateProjectModalOpenChange } =
-    useCreateProjectModal();
+    useModal("createProject");
 
   /**
    * Handles menu actions for creating a project or project category

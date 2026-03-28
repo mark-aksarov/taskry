@@ -4,7 +4,6 @@ import { UserFiltersProvider } from "@/components/users/UserFiltersContext";
 import { CreateUserModalProvider } from "@/components/users/CreateUserModal";
 import { UserFiltersModalProvider } from "@/components/users/UserFiltersModal";
 import { CreatePositionProvider } from "@/components/position/CreatePositionProvider";
-import { CreatePositionModalProvider } from "@/components/position/CreatePositionModal";
 import { UserPositionFiltersModalProvider } from "@/components/users/UserPositionFiltersModal";
 
 interface UsersPageProvidersProps {
@@ -19,17 +18,15 @@ export function UsersPageProviders({
   return (
     <CreateUserModalProvider>
       <CreateUserProvider>
-        <CreatePositionModalProvider>
-          <CreatePositionProvider>
-            <UserFiltersProvider filters={filters}>
-              <UserFiltersModalProvider>
-                <UserPositionFiltersModalProvider>
-                  {children}
-                </UserPositionFiltersModalProvider>
-              </UserFiltersModalProvider>
-            </UserFiltersProvider>
-          </CreatePositionProvider>
-        </CreatePositionModalProvider>
+        <CreatePositionProvider>
+          <UserFiltersProvider filters={filters}>
+            <UserFiltersModalProvider>
+              <UserPositionFiltersModalProvider>
+                {children}
+              </UserPositionFiltersModalProvider>
+            </UserFiltersModalProvider>
+          </UserFiltersProvider>
+        </CreatePositionProvider>
       </CreateUserProvider>
     </CreateUserModalProvider>
   );

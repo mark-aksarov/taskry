@@ -1,1 +1,0 @@
-export { ProjectDetailProviders } from "./ProjectDetailProviders";

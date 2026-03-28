@@ -14,18 +14,11 @@ import { DialogHeading } from "@/components/ui/Dialog";
 import { useDeleteProjects } from "../DeleteProjectsContext";
 import { useSelectedProjects } from "../SelectedProjectsContext";
 import { overlayTransitionDuration } from "@/components/ui/styles";
+import { useModal } from "@/components/common/ModalManagerContext";
 
-interface DeleteProjectsModalProps {
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
-}
-
-export function DeleteProjectsModal({
-  isOpen,
-  onOpenChange,
-}: DeleteProjectsModalProps) {
+export function DeleteProjectsModal() {
   const t = useTranslations("projects.DeleteProjectsModal");
-
+  const { isOpen, onOpenChange } = useModal("deleteProjects");
   const { ids: selectedIds, clear: clearSelectedItems } = useSelectedProjects();
   const { action, setIds: setDeleteCustomerIds } = useDeleteProjects();
 

@@ -3,8 +3,8 @@
 import { useRouter } from "@/i18n/navigation";
 import { useActionState, useMemo } from "react";
 import { ActionState } from "@/lib/actions/types";
-import { useCreateProjectModal } from "../CreateProjectModal";
 import { CreateProjectContext } from "../CreateProjectContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { createProject } from "@/lib/actions/project/createProject";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
@@ -40,7 +40,7 @@ export function CreateProjectProvider({
 
   // we need to track CreateProjectModal open state to show toast
   const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } =
-    useCreateProjectModal();
+    useModal("createProject");
 
   // hooks below wait for the transition to complete (reducerAction returns the new state)
   useCloseModalThenShowToastOnActionSuccess(

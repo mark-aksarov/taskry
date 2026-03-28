@@ -60,10 +60,3 @@ export const Loading = {
 export const WithEmptyFilterResult = {
   args: { ...Default.args, totalFilteredUsers: 0 },
 } satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
-  },
-} satisfies Story;

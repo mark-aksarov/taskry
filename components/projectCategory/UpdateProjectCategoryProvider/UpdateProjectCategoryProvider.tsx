@@ -3,7 +3,7 @@
 import { useRouter } from "@/i18n/navigation";
 import { ActionState } from "@/lib/actions/types";
 import { useContext, useActionState, useMemo } from "react";
-import { useUpdateProjectCategoryModal } from "../UpdateProjectCategoryModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { UpdateProjectCategoryContext } from "../UpdateProjectCategoryContext";
 import { updateProjectCategory } from "@/lib/actions/projectCategory/updateProjectCategory";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
@@ -15,10 +15,12 @@ const initialState: ActionState = {
 };
 
 interface UpdateProjectCategoryProviderProps {
+  projectCategoryId: number;
   children: React.ReactNode;
 }
 
 export function UpdateProjectCategoryProvider({
+  projectCategoryId,
   children,
 }: UpdateProjectCategoryProviderProps) {
   const router = useRouter();
@@ -42,8 +44,9 @@ export function UpdateProjectCategoryProvider({
   }
 
   // we need to track UpdateProjectCategoryModal open state to show toast
-  const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } =
-    useUpdateProjectCategoryModal();
+  const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } = useModal(
+    "updateProjectCategory",
+  );
 
   // hooks below wait for the transition to complete (reducerAction returns the new state)
   useCloseModalThenShowToastOnActionSuccess(

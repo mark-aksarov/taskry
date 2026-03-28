@@ -4,7 +4,6 @@ import { UserGridItemMobile } from "../UserGridItemMobile";
 import { MockedUserItemModals } from "../../UserItemModals/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUserItemProviders } from "../../UserItemProviders/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
 const meta = {
@@ -19,7 +18,6 @@ const meta = {
     ),
 
     withUserItemProviders,
-    withGuestModeModalProvider,
     withCurrentUserProvider,
     withThemedBackground,
   ],
@@ -55,12 +53,5 @@ export const WithoutImagePositionPhoneAndLink = {
     position: undefined,
     phoneNumber: undefined,
     publicLink: undefined,
-  },
-} satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
   },
 } satisfies Story;

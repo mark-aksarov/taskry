@@ -1,1 +1,0 @@
-export { MockedCustomerDetailHeaderInteractiveProviders } from "./MockedCustomerDetailHeaderInteractiveProviders";

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FormBaseModal,
   FormBaseModalDialog,
@@ -6,8 +8,8 @@ import {
 
 import { useTranslations } from "next-intl";
 import { UpdateCompanyForm } from "../UpdateCompanyForm";
-import { useUpdateCompanyModal } from "./UpdateCompanyModalContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
+import { useModal } from "@/components/common/ModalManagerContext";
 
 interface UpdateCompanyModalProps {
   companyId: number;
@@ -20,7 +22,7 @@ export function UpdateCompanyModal({
 }: UpdateCompanyModalProps) {
   const t = useTranslations("company.UpdateCompanyModal");
 
-  const { isOpen, onOpenChange } = useUpdateCompanyModal();
+  const { isOpen, onOpenChange } = useModal("updateCompany");
 
   return (
     <FormBaseModal

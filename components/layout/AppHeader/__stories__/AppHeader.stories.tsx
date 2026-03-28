@@ -5,16 +5,18 @@ import { ProfileLink } from "../../ProfileLink";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withSearchBarProvider } from "@/components/search/SearchBar/__stories__";
+import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
-import { withSearchModalProvider } from "@/components/search/SearchModal/__stories__";
 
 const meta = {
   title: "components/layout/AppHeader",
   component: AppHeader,
   decorators: [
+    withTaskSearchModal,
     withSearchBarProvider,
     withPageTransitionProvider,
-    withSearchModalProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
   beforeEach: () => {

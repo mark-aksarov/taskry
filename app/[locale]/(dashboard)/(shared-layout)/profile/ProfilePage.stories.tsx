@@ -3,10 +3,10 @@ import { ProfilePage } from "./ProfilePage";
 import { usePathname } from "next/navigation";
 import { mockedUserDetail } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { SearchList } from "@/components/search/SearchList";
 import { UpdateUserForm } from "@/components/users/UpdateUserForm";
+import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
@@ -14,7 +14,6 @@ import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
 import { UserDetailHeaderInteractive } from "@/components/users/UserDetailHeader";
 import { withDeleteUserProvider } from "@/components/users/DeleteUserProvider/__stories__";
 import { withUpdateUserProvider } from "@/components/users/UpdateUserProvider/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { MockedUserDetailHeaderProviders } from "@/components/users/UserDetailHeader/__stories__";
 import { withChangePasswordProvider } from "@/components/users/ChangePasswordProvider/__stories__";
@@ -29,7 +28,6 @@ const meta = {
     withUpdateUserProvider,
     withChangePasswordProvider,
     withDeleteUserProvider,
-    withGuestModeModalProvider,
     withCurrentUserProvider,
     SharedPageDecorator,
     withThemedBackground,
@@ -96,12 +94,5 @@ export const WithoutOptionalUserData = {
         </MockedUpdateUserImageProvider>
       </MockedClearUserImageUrlProvider>
     ),
-  },
-} satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
   },
 } satisfies Story;

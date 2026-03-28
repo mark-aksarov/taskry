@@ -14,18 +14,11 @@ import { DialogHeading } from "@/components/ui/Dialog";
 import { useDeleteCustomers } from "../DeleteCustomersContext";
 import { overlayTransitionDuration } from "@/components/ui/styles";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 
-interface DeleteCustomersModalProps {
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
-}
-
-export function DeleteCustomersModal({
-  isOpen,
-  onOpenChange,
-}: DeleteCustomersModalProps) {
+export function DeleteCustomersModal() {
   const t = useTranslations("customers.DeleteCustomersModal");
-
+  const { isOpen, onOpenChange } = useModal("deleteCustomers");
   const { ids: selectedIds, clear: clearSelectedItems } = useSelectedItems();
   const { action, setIds: setDeleteCustomerIds } = useDeleteCustomers();
 

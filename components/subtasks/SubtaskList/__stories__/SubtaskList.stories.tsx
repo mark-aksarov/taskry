@@ -3,9 +3,8 @@ import { SubtaskListItem } from "../../SubtaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SubtaskListItemStory } from "../../SubtaskListItem/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
-import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { MockedSubtaskProviders } from "../../SubtaskProviders/__stories__";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
 const mockedSubtasks = [
   { id: 1, subtaskText: "Subtask 1 text", isDone: false },
@@ -18,11 +17,7 @@ const mockedSubtasks = [
 const meta = {
   title: "components/subtasks/SubtaskList",
   component: SubtaskList,
-  decorators: [
-    withGuestModeModalProvider,
-    withCurrentUserProvider,
-    withThemedBackground,
-  ],
+  decorators: [withCurrentUserProvider, withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },
@@ -38,12 +33,5 @@ export const Default = {
         <SubtaskListItem {...SubtaskListItemStory.args} {...subtask} />
       </MockedSubtaskProviders>
     )),
-  },
-} satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
   },
 } satisfies Story;

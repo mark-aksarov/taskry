@@ -22,8 +22,8 @@ import { memo } from "react";
 import { Link } from "@/components/ui/Link";
 import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
-import { useProjectCommentsModal } from "../ProjectCommentsModal";
 import { ProjectGridItemProgress } from "./ProjectGridItemProgress";
+import { useModal } from "@/components/common/ModalManagerContext";
 
 interface Props extends BaseProjectItemProps {
   tasksTotal: number;
@@ -53,7 +53,7 @@ export const ProjectGridItemMobileInner = memo(
     tasksCompleted,
   }: Props) => {
     const { onOpenChange: onProjectCommentsModalOpenChange } =
-      useProjectCommentsModal();
+      useModal("projectComments");
 
     const creatorImg = (
       <ItemBaseUserImageContainer

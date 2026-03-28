@@ -1,1 +1,0 @@
-export { withUpdateProjectModalProvider } from "./withUpdateProjectModalProvider";

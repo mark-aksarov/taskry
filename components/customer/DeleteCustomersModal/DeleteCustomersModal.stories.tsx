@@ -1,5 +1,8 @@
-import React from "react";
-import { Button } from "@/components/ui/Button";
+import {
+  withOpenModal,
+  withModalManagerProvider,
+} from "@/components/common/ModalManagerContext/__stories__";
+
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DeleteCustomersModal } from "./DeleteCustomersModal";
 import { withToastRegion } from "@/.storybook/withToastRegion";
@@ -11,20 +14,16 @@ const meta = {
   title: "components/customers/DeleteCustomersModal",
   component: DeleteCustomersModal,
   decorators: [
+    withOpenModal,
     withToastRegion,
     withDeleteCustomersProvider,
     withSelectedItemsProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
-  render: (args) => {
-    const [open, setOpen] = React.useState(true);
 
-    return (
-      <>
-        <Button label="Delete customer" onClick={() => setOpen(true)} />
-        <DeleteCustomersModal {...args} isOpen={open} onOpenChange={setOpen} />
-      </>
-    );
+  parameters: {
+    modalId: "deleteCustomers",
   },
 } satisfies Meta<typeof DeleteCustomersModal>;
 

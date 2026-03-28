@@ -7,7 +7,7 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { useUpdateProjectModal } from "./UpdateProjectModalContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UpdateProjectModalProps {
@@ -19,14 +19,13 @@ export function UpdateProjectModal({
 }: UpdateProjectModalProps) {
   const t = useTranslations("projects.UpdateProjectModal");
 
-  const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } =
-    useUpdateProjectModal();
+  const { isOpen, onOpenChange } = useModal("updateProject");
 
   return (
     <FormBaseModal
-      data-test="edit-project-modal"
-      isOpen={isModalOpen}
-      onOpenChange={onModalOpenChange}
+      data-test="update-project-modal"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>

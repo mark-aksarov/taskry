@@ -1,11 +1,11 @@
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { useCreatePositionModal } from "../CreatePositionModal/CreatePositionModalContext";
 
 export function useCreatePositionTriggerPress() {
   // Show guest modal for guests
   const guestGuard = useGuestModalGuard();
   const { onOpenChange: onCreatePositionModalOpenChange } =
-    useCreatePositionModal();
+    useModal("createPosition");
 
   const handlePress = () => {
     guestGuard(() => onCreatePositionModalOpenChange(true));

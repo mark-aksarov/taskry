@@ -1,15 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import { Trash } from "lucide-react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ActionsButton } from "../common/ActionsButton";
-import { DeleteCustomersModal } from "./DeleteCustomersModal";
+import { useModal } from "../common/ModalManagerContext";
 import { ActionsMenuTrigger } from "../common/ActionsMenuTrigger";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { DialogHeaderWithClose } from "../common/DialogHeaderWithClose";
+import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 export const CustomerActionsMenuTrigger = () => {
   const t = useTranslations("customers.CustomerActionsMenuTrigger");
@@ -18,7 +17,7 @@ export const CustomerActionsMenuTrigger = () => {
   const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const { onOpenChange: setIsDeleteModalOpen } = useModal("deleteCustomers");
 
   // Selected with checkbox customers
   const selected = useSelectedItems();
@@ -51,12 +50,6 @@ export const CustomerActionsMenuTrigger = () => {
           {t("delete")}
         </Item>
       </ActionsMenuTrigger>
-
-      {/* Modal for confirming customer deletion */}
-      <DeleteCustomersModal
-        isOpen={isDeleteModalOpen}
-        onOpenChange={setIsDeleteModalOpen}
-      />
     </>
   );
 };

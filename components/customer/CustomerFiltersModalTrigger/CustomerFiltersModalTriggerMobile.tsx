@@ -1,10 +1,10 @@
 "use client";
 
-import { useCustomerFiltersModal } from "../CustomerFiltersModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { FilterButtonMobile } from "@/components/common/FilterButton";
 
 export function CustomerFiltersModalTriggerMobile() {
-  const { onOpenChange } = useCustomerFiltersModal();
+  const { onOpenChange } = useModal("customerFilters");
 
   return (
     <FilterButtonMobile mode="multiple" onPress={() => onOpenChange(true)} />

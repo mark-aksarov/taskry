@@ -12,7 +12,7 @@ import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { useDeletePosition } from "../DeletePositionContext";
-import { useDeletePositionModal } from "./DeletePositionModalContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
 interface DeletePositionModalProps {
@@ -26,7 +26,7 @@ export function DeletePositionModal({
 }: DeletePositionModalProps) {
   const t = useTranslations("positions.DeletePositionModal");
   const { action } = useDeletePosition();
-  const { isOpen, onOpenChange } = useDeletePositionModal();
+  const { isOpen, onOpenChange } = useModal("deletePosition");
 
   const { remove: removeSelected } = useSelectedItems();
 

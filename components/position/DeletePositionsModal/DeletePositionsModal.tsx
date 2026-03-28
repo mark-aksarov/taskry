@@ -13,19 +13,12 @@ import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { useDeletePositions } from "../DeletePositionsContext";
 import { overlayTransitionDuration } from "@/components/ui/styles";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
-interface DeletePositionsModalProps {
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
-}
-
-export function DeletePositionsModal({
-  isOpen,
-  onOpenChange,
-}: DeletePositionsModalProps) {
+export function DeletePositionsModal() {
   const t = useTranslations("positions.DeletePositionsModal");
-
+  const { isOpen, onOpenChange } = useModal("deletePositions");
   const { ids: selectedIds, clear: clearSelectedItems } = useSelectedItems();
   const { action, setIds: setDeletePositionIds } = useDeletePositions();
 

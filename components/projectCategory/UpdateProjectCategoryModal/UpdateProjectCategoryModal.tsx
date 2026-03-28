@@ -7,9 +7,9 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { UpdateProjectCategoryForm } from "../UpdateProjectCategoryForm";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
-import { useUpdateProjectCategoryModal } from "./UpdateProjectCategoryModalContext";
 
 interface UpdateProjectCategoryModalProps {
   projectCategoryId: number;
@@ -22,7 +22,7 @@ export function UpdateProjectCategoryModal({
 }: UpdateProjectCategoryModalProps) {
   const t = useTranslations("projectCategories.UpdateProjectCategoryModal");
 
-  const { isOpen, onOpenChange } = useUpdateProjectCategoryModal();
+  const { isOpen, onOpenChange } = useModal("updateProjectCategory");
 
   return (
     <FormBaseModal

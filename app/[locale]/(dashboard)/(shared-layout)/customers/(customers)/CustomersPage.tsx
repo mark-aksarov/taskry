@@ -57,92 +57,88 @@ export function CustomersPage({
 
   if (totalCount === 0) {
     return (
-      <>
-        <PageContainer fullscreen headerOffset>
-          <PageGrid className="relative flex-auto">
-            <ToolbarMobile
-              firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
-              secondSlot={<CustomerManageMenuTriggerMobile />}
-            />
+      <PageContainer fullscreen headerOffset>
+        <PageGrid className="relative flex-auto">
+          <ToolbarMobile
+            firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
+            secondSlot={<CustomerManageMenuTriggerMobile />}
+          />
 
-            <PageEmptySection
-              heading={t("emptySection.heading")}
-              description={t("emptySection.description")}
-              createButton={<CustomersEmptySectionCreateButton />}
-            />
-          </PageGrid>
-        </PageContainer>
-      </>
+          <PageEmptySection
+            heading={t("emptySection.heading")}
+            description={t("emptySection.description")}
+            createButton={<CustomersEmptySectionCreateButton />}
+          />
+        </PageGrid>
+      </PageContainer>
     );
   }
 
   const isFilteredEmpty = totalFilteredCustomers === 0;
 
   return (
-    <>
-      <PageContainer fullscreen={isFilteredEmpty} headerOffset>
-        <PageGrid className="relative flex-auto">
-          <ViewModeProvider>
-            <ToolbarLarge
-              firstSlot={
-                <>
-                  <CustomerManageMenuTriggerLarge />
-                  <CustomerSortingMenuTriggerLarge
-                    selectedSortField={selectedSortField}
-                  />
-                  <CustomerFiltersModalTriggerLarge />
-                  <CustomerActionsMenuTrigger />
-                </>
-              }
-              secondSlot={
-                <>
-                  <ViewModeToggleButtonGroup />
-                  <CreateCustomerMenuTriggerLarge />
-                </>
-              }
-              twoRowsOnLg
-            />
+    <PageContainer fullscreen={isFilteredEmpty} headerOffset>
+      <PageGrid className="relative flex-auto">
+        <ViewModeProvider>
+          <ToolbarLarge
+            firstSlot={
+              <>
+                <CustomerManageMenuTriggerLarge />
+                <CustomerSortingMenuTriggerLarge
+                  selectedSortField={selectedSortField}
+                />
+                <CustomerFiltersModalTriggerLarge />
+                <CustomerActionsMenuTrigger />
+              </>
+            }
+            secondSlot={
+              <>
+                <ViewModeToggleButtonGroup />
+                <CreateCustomerMenuTriggerLarge />
+              </>
+            }
+            twoRowsOnLg
+          />
 
+          <ToolbarMobile
+            firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
+            secondSlot={
+              <>
+                <CreateCustomerMenuTriggerMobile />
+                <CustomerManageMenuTriggerMobile />
+              </>
+            }
+          />
+
+          <ToolbarSearchMobile>
+            <SearchModalTrigger />
+          </ToolbarSearchMobile>
+
+          <ToolbarFiltersMobile>
+            <CustomerFiltersModalTriggerMobile />
+            <CustomerCompanyFiltersModalTrigger />
+          </ToolbarFiltersMobile>
+
+          {!isFilteredEmpty && (
             <ToolbarMobile
-              firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
+              firstSlot={
+                <CustomerResultsCount count={totalFilteredCustomers} />
+              }
               secondSlot={
-                <>
-                  <CreateCustomerMenuTriggerMobile />
-                  <CustomerManageMenuTriggerMobile />
-                </>
+                <CustomerSortingMenuTriggerMobile
+                  selectedSortField={selectedSortField}
+                />
               }
             />
+          )}
 
-            <ToolbarSearchMobile>
-              <SearchModalTrigger />
-            </ToolbarSearchMobile>
-
-            <ToolbarFiltersMobile>
-              <CustomerFiltersModalTriggerMobile />
-              <CustomerCompanyFiltersModalTrigger />
-            </ToolbarFiltersMobile>
-
-            {!isFilteredEmpty && (
-              <ToolbarMobile
-                firstSlot={
-                  <CustomerResultsCount count={totalFilteredCustomers} />
-                }
-                secondSlot={
-                  <CustomerSortingMenuTriggerMobile
-                    selectedSortField={selectedSortField}
-                  />
-                }
-              />
-            )}
-
-            {isFilteredEmpty ? (
-              <CustomersFilteredEmptySection />
-            ) : (
-              customersContainer
-            )}
-          </ViewModeProvider>
-        </PageGrid>
-      </PageContainer>
-    </>
+          {isFilteredEmpty ? (
+            <CustomersFilteredEmptySection />
+          ) : (
+            customersContainer
+          )}
+        </ViewModeProvider>
+      </PageGrid>
+    </PageContainer>
   );
 }

@@ -6,7 +6,7 @@ import {
 import { useTranslations } from "next-intl";
 import { DetailModalLink } from "@/components/common/DetailModal";
 import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
-import { useCustomerDetailModal } from "./CustomerDetailModalContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface CustomerDetailModalProps {
@@ -22,7 +22,7 @@ export function CustomerDetailModal({
 }: CustomerDetailModalProps) {
   const t = useTranslations("customers.CustomerDetailModal");
 
-  const { isOpen, onOpenChange } = useCustomerDetailModal();
+  const { isOpen, onOpenChange } = useModal("customerDetail");
 
   return (
     <DetailModal isOpen={isOpen} onOpenChange={onOpenChange}>

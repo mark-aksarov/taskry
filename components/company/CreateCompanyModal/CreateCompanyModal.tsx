@@ -8,13 +8,13 @@ import {
 
 import { useTranslations } from "next-intl";
 import { CreateCompanyForm } from "../CreateCompanyForm";
-import { useCreateCompanyModal } from "./CreateCompanyModalContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 export function CreateCompanyModal() {
   const t = useTranslations("company.CreateCompanyModal");
 
-  const { isOpen, onOpenChange } = useCreateCompanyModal();
+  const { isOpen, onOpenChange } = useModal("createCompany");
 
   return (
     <FormBaseModal

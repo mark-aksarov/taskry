@@ -1,37 +1,29 @@
-import React from "react";
-import { Button } from "@/components/ui/Button";
+import {
+  withOpenModal,
+  withModalManagerProvider,
+} from "@/components/common/ModalManagerContext/__stories__";
+
 import { Meta, StoryObj } from "@storybook/react";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { DeleteProjectCategoriesModal } from "./DeleteProjectCategoriesModal";
-import { withDeleteProjectCategoriesProvider } from "../DeleteProjectCategoriesProvider/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
+import { withDeleteProjectCategoriesProvider } from "../DeleteProjectCategoriesProvider/__stories__";
 
 const meta = {
   title: "components/project-categories/DeleteProjectCategoriesModal",
   component: DeleteProjectCategoriesModal,
   decorators: [
+    withOpenModal,
     withDeleteProjectCategoriesProvider,
     withSelectedItemsProvider,
     withToastRegion,
+    withModalManagerProvider,
     withThemedBackground,
   ],
-  render: (args) => {
-    const [open, setOpen] = React.useState(true);
 
-    return (
-      <>
-        <Button
-          label="Delete project categories"
-          onClick={() => setOpen(true)}
-        />
-        <DeleteProjectCategoriesModal
-          {...args}
-          isOpen={open}
-          onOpenChange={setOpen}
-        />
-      </>
-    );
+  parameters: {
+    modalId: "deleteProjectCategories",
   },
 } satisfies Meta<typeof DeleteProjectCategoriesModal>;
 

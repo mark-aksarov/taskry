@@ -3,8 +3,8 @@
 import { useRouter } from "@/i18n/navigation";
 import { useActionState, useMemo } from "react";
 import { ActionState } from "@/lib/actions/types";
-import { useUpdatePositionModal } from "../UpdatePositionModal";
 import { UpdatePositionContext } from "../UpdatePositionContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { updatePosition } from "@/lib/actions/position/updatePosition";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
@@ -15,10 +15,12 @@ const initialState: ActionState = {
 };
 
 interface UpdatePositionProviderProps {
+  positionId: number;
   children: React.ReactNode;
 }
 
 export function UpdatePositionProvider({
+  positionId,
   children,
 }: UpdatePositionProviderProps) {
   const router = useRouter();
@@ -44,7 +46,7 @@ export function UpdatePositionProvider({
 
   // we need to track UpdatePositionModal open state to show toast
   const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } =
-    useUpdatePositionModal();
+    useModal("updatePosition");
 
   // hooks below wait for the transition to complete (reducerAction returns the new state)
   useCloseModalThenShowToastOnActionSuccess(

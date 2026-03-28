@@ -1,1 +1,0 @@
-export { withUpdateCustomerModalProvider } from "./withUpdateCustomerModalProvider";

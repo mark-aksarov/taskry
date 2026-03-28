@@ -1,1 +1,0 @@
-export { withDeleteProjectModalProvider } from "./withDeleteProjectModalProvider";

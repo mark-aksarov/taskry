@@ -1,12 +1,13 @@
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { useCreateProjectCategoryModal } from "../CreateProjectCategoryModal";
 
 export function useCreateProjectCategoryTriggerPress() {
   // Show guest modal for guests
   const guestGuard = useGuestModalGuard();
 
-  const { onOpenChange: onProjectCategoryModalOpenChange } =
-    useCreateProjectCategoryModal();
+  const { onOpenChange: onProjectCategoryModalOpenChange } = useModal(
+    "createProjectCategory",
+  );
 
   const handlePress = () => {
     guestGuard(() => onProjectCategoryModalOpenChange(true));

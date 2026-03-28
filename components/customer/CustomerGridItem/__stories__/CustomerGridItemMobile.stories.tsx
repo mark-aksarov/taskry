@@ -2,10 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { mockedCustomerDetail } from "@/mocks/customers";
 import { CustomerGridItemMobile } from "../CustomerGridItemMobile";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { MockedCustomerItemModals } from "../../CustomerItem/__stories__";
-import { withCustomerItemProviders } from "../../CustomerItemProviders/__stories__";
+import { withMockedCustomerItemWrapper } from "../../CustomerItemWrapper/__stories__";
 import { withDeleteCustomersProvider } from "../../DeleteCustomersProvider/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
@@ -13,17 +11,9 @@ const meta = {
   title: "components/customers/CustomerGridItemMobile",
   component: CustomerGridItemMobile,
   decorators: [
-    (Story) => (
-      <>
-        <Story />
-        <MockedCustomerItemModals />
-      </>
-    ),
-
-    withCustomerItemProviders,
+    withMockedCustomerItemWrapper,
     withDeleteCustomersProvider,
     withSelectedItemsProvider,
-    withGuestModeModalProvider,
     withCurrentUserProvider,
     withThemedBackground,
   ],
@@ -58,12 +48,5 @@ export const WithoutImagePhoneAndLink = {
     id: mockedCustomerDetail.id,
     fullName: mockedCustomerDetail.fullName,
     email: mockedCustomerDetail.email,
-  },
-} satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
   },
 } satisfies Story;

@@ -20,14 +20,12 @@ import {
 } from "../ProjectItem";
 
 import { memo } from "react";
-import { useProjectDetailModal } from "../ProjectDetailModal";
 import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { useSelectedProjects } from "../SelectedProjectsContext";
-import { useProjectCommentsModal } from "../ProjectCommentsModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { ProjectGridItemProgress } from "./ProjectGridItemProgress";
-import { useUserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectItemCheckbox } from "../ProjectItem/ProjectItemCheckbox";
 
 interface Props extends BaseProjectItemProps {
@@ -62,10 +60,11 @@ export const ProjectGridItemLargeInner = memo(
     tasksCompleted,
   }: Props) => {
     const { onOpenChange: onProjectDetailModalOpenChange } =
-      useProjectDetailModal();
-    const { onOpenChange: onUserDetailModalOpenChange } = useUserDetailModal();
+      useModal("projectDetail");
+    const { onOpenChange: onUserDetailModalOpenChange } =
+      useModal("userDetail");
     const { onOpenChange: onProjectCommentsModalOpenChange } =
-      useProjectCommentsModal();
+      useModal("projectComments");
 
     const creatorImg = (
       <ItemBaseUserImageContainer

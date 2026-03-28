@@ -11,7 +11,6 @@ import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
 import { CommentListStory } from "@/components/comments/CommentList/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
@@ -25,7 +24,6 @@ const meta = {
     withCreateSubtaskProvider,
     withUpdateTaskStatusesProvider,
     withDeleteTasksProvider,
-    withGuestModeModalProvider,
     withCurrentUserProvider,
     withSelectedTasksProvider,
     withThemedBackground,
@@ -89,12 +87,5 @@ export const WithCompletedStatus = {
   args: {
     ...Default.args,
     status: "completed",
-  },
-} satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
   },
 } satisfies Story;

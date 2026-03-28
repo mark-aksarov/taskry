@@ -1,8 +1,8 @@
 "use client";
 
+import { useModal } from "./ModalManagerContext";
 import { useSearchParams } from "next/navigation";
 import { useSearchBar } from "../search/SearchBar";
-import { useSearchModal } from "../search/SearchModal";
 import { SearchListItem } from "../search/SearchListItem";
 import { useApplyFilterURL } from "@/lib/hooks/useApplyFilterURL";
 import { SearchList, SearchListSkeleton } from "../search/SearchList";
@@ -22,7 +22,7 @@ export function RouterSearchContainer({
   const { data } = useFetchSearchKeywords(searchBarValue);
 
   // close the search modal when applying a new search query
-  const { onOpenChange } = useSearchModal();
+  const { onOpenChange } = useModal("search");
 
   // apply the filters when a search keyword is selected
   const applyFilterURL = useApplyFilterURL();

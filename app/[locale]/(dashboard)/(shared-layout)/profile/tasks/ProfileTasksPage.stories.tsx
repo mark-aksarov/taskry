@@ -29,7 +29,6 @@ import { withDeleteUserProvider } from "@/components/users/DeleteUserProvider/__
 import { withUpdateUserProvider } from "@/components/users/UpdateUserProvider/__stories__";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksContext/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withChangePasswordProvider } from "@/components/users/ChangePasswordProvider/__stories__";
@@ -48,7 +47,6 @@ const meta = {
     withDeleteUserProvider,
     withDeleteTasksProvider,
     withUpdateTaskStatusesProvider,
-    withGuestModeModalProvider,
     withCurrentUserProvider,
     withPageTransitionProvider,
     withSelectedTasksProvider,
@@ -124,10 +122,3 @@ export const Loading = {
 export const WithNoTasks = {
   args: { ...Default.args, totalTasksCount: 0 },
 };
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
-  },
-} satisfies Story;

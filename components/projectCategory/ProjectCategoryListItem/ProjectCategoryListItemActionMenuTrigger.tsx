@@ -9,10 +9,9 @@ import {
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { useUpdateProjectCategoryModal } from "../UpdateProjectCategoryModal";
 import { useProjectCategoryListItemPending } from "./useProjectCategoryListItemPending";
-import { useDeleteProjectCategoryModal } from "../DeleteProjectCategoryModal/DeleteProjectCategoryModalContext";
 
 export type ProjectCategoryListItemActionMenuTriggerProps = {
   projectCategoryId: number;
@@ -29,12 +28,14 @@ export function ProjectCategoryListItemActionMenuTrigger({
   const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
-  const { onOpenChange: onDeleteModalOpenChange } =
-    useDeleteProjectCategoryModal();
+  const { onOpenChange: onDeleteModalOpenChange } = useModal(
+    "deleteProjectCategory",
+  );
 
   // State for update project category modal from context
-  const { onOpenChange: onUpdateModalOpenChange } =
-    useUpdateProjectCategoryModal();
+  const { onOpenChange: onUpdateModalOpenChange } = useModal(
+    "updateProjectCategory",
+  );
 
   /**
    * Handles menu actions for a project category item

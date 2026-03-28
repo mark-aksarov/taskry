@@ -9,8 +9,7 @@ import {
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { useDeleteCompanyModal } from "../DeleteCompanyModal";
-import { useUpdateCompanyModal } from "../UpdateCompanyModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCompanyListItemPending } from "./useCompanyListItemPending";
 
@@ -27,10 +26,14 @@ export function CompanyListItemActionMenuTrigger({
   const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state from context
-  const { onOpenChange: onDeleteModalOpenChange } = useDeleteCompanyModal();
+  const { onOpenChange: onDeleteModalOpenChange } = useModal(
+    `deleteCompany-${companyId}`,
+  );
 
   // State for update modal from context
-  const { onOpenChange: onUpdateModalOpenChange } = useUpdateCompanyModal();
+  const { onOpenChange: onUpdateModalOpenChange } = useModal(
+    `updateCompany-${companyId}`,
+  );
 
   /**
    * Handles menu actions for a company item

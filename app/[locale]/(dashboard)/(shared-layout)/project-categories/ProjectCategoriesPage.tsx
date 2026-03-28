@@ -18,71 +18,60 @@ import { ProjectCategoriesEmptySectionCreateButton } from "@/components/projectC
 
 interface ProjectCategoriesPageProps {
   totalCount: number;
-  searchContainer: React.ReactNode;
   projectCategoriesContainer: React.ReactNode;
 }
 
 export function ProjectCategoriesPage({
   totalCount,
-  searchContainer,
   projectCategoriesContainer,
 }: ProjectCategoriesPageProps) {
   const t = useTranslations("app.ProjectCategoriesPage");
 
   if (totalCount === 0) {
     return (
-      <>
-        <PageContainer fullscreen headerOffset>
-          <PageGrid className="relative flex-auto">
-            <ToolbarMobile
-              firstSlot={
-                <>
-                  <BackButton href="/projects" />
-                  <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
-                </>
-              }
-            />
+      <PageContainer fullscreen headerOffset>
+        <PageGrid className="relative flex-auto">
+          <ToolbarMobile
+            firstSlot={
+              <>
+                <BackButton href="/projects" />
+                <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
+              </>
+            }
+          />
 
-            <PageEmptySection
-              heading={t("emptySection.heading")}
-              description={t("emptySection.description")}
-              createButton={<ProjectCategoriesEmptySectionCreateButton />}
-            />
-          </PageGrid>
-        </PageContainer>
-
-        <CreateProjectCategoryModal />
-      </>
+          <PageEmptySection
+            heading={t("emptySection.heading")}
+            description={t("emptySection.description")}
+            createButton={<ProjectCategoriesEmptySectionCreateButton />}
+          />
+        </PageGrid>
+      </PageContainer>
     );
   }
 
   return (
-    <>
-      <PageContainer>
-        <PageGrid>
-          <ViewModeProvider>
-            <ToolbarLarge
-              firstSlot={<ProjectCategoryActionsMenuTrigger />}
-              secondSlot={<CreateProjectCategoryModalTriggerLarge />}
-            />
+    <PageContainer>
+      <PageGrid>
+        <ViewModeProvider>
+          <ToolbarLarge
+            firstSlot={<ProjectCategoryActionsMenuTrigger />}
+            secondSlot={<CreateProjectCategoryModalTriggerLarge />}
+          />
 
-            <ToolbarMobile
-              firstSlot={
-                <>
-                  <BackButton href="/projects" />
-                  <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
-                </>
-              }
-              secondSlot={<CreateProjectCategoryModalTriggerMobile />}
-            />
+          <ToolbarMobile
+            firstSlot={
+              <>
+                <BackButton href="/projects" />
+                <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
+              </>
+            }
+            secondSlot={<CreateProjectCategoryModalTriggerMobile />}
+          />
 
-            {projectCategoriesContainer}
-          </ViewModeProvider>
-        </PageGrid>
-      </PageContainer>
-
-      <TaskSearchModal searchContainer={searchContainer} />
-      <CreateProjectCategoryModal />
-    </>
+          {projectCategoriesContainer}
+        </ViewModeProvider>
+      </PageGrid>
+    </PageContainer>
   );
 }

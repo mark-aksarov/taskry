@@ -24,12 +24,12 @@ import {
 import { memo } from "react";
 import { useTranslations } from "next-intl";
 import { Separator } from "@/components/ui/Separator";
-import { useCustomerDetailModal } from "../CustomerDetailModal";
 import { CustomerItemActionMenuTrigger } from "../CustomerItem";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { CustomerItemCheckbox } from "../CustomerItem/CustomerItemCheckbox";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 
 export function CustomerGridItemLarge(props: BaseCustomerItemProps) {
   const selected = useSelectedItems();
@@ -56,7 +56,7 @@ export const CustomerGridItemLargeInner = memo(
     const t = useTranslations("customers.CustomerGridItem");
 
     const { onOpenChange: onCustomerDetailModalOpenChange } =
-      useCustomerDetailModal();
+      useModal("customerDetail");
 
     const customerImg = (
       <ItemBaseUserImageContainer

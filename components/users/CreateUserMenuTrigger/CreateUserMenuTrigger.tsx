@@ -5,11 +5,11 @@ import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { useCreateUserModal } from "../CreateUserModal";
 import { BriefcaseBusiness, Users } from "lucide-react";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { CreateNewMenuTrigger } from "@/components/common/CreateNewMenuTrigger";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
-import { useCreatePositionModal } from "@/components/position/CreatePositionModal";
 
 interface CreateUserMenuTriggerProps {
   renderButton: () => React.ReactNode;
@@ -27,7 +27,7 @@ export function CreateUserMenuTrigger({
 
   // Create position form modal state
   const { onOpenChange: onCreatePositionModalOpenChange } =
-    useCreatePositionModal();
+    useModal("createPosition");
 
   // Create user form modal state
   const { onOpenChange: onCreateUserModalOpenChange } = useCreateUserModal();

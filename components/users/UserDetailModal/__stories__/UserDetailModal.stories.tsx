@@ -9,7 +9,6 @@ import { UserDetailHeader } from "../../UserDetailHeader";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { UserDetailSkeleton } from "../../UserDetail/UserDetailSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
 const meta = {
@@ -26,7 +25,6 @@ const meta = {
         </DialogTrigger>
       );
     },
-    withGuestModeModalProvider,
     withCurrentUserProvider,
     withThemedBackground,
   ],

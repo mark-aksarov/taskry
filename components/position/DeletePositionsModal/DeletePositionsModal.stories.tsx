@@ -1,5 +1,8 @@
-import React from "react";
-import { Button } from "@/components/ui/Button";
+import {
+  withOpenModal,
+  withModalManagerProvider,
+} from "@/components/common/ModalManagerContext/__stories__";
+
 import { Meta, StoryObj } from "@storybook/react";
 import { DeletePositionsModal } from "./DeletePositionsModal";
 import { withToastRegion } from "@/.storybook/withToastRegion";
@@ -11,20 +14,16 @@ const meta = {
   title: "components/positions/DeletePositionsModal",
   component: DeletePositionsModal,
   decorators: [
+    withOpenModal,
     withDeletePositionsProvider,
     withSelectedItemsProvider,
     withToastRegion,
+    withModalManagerProvider,
     withThemedBackground,
   ],
-  render: (args) => {
-    const [open, setOpen] = React.useState(true);
 
-    return (
-      <>
-        <Button label="Delete positions" onClick={() => setOpen(true)} />
-        <DeletePositionsModal {...args} isOpen={open} onOpenChange={setOpen} />
-      </>
-    );
+  parameters: {
+    modalId: "deletePositions",
   },
 } satisfies Meta<typeof DeletePositionsModal>;
 

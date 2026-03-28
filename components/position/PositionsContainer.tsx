@@ -2,9 +2,10 @@ import "server-only";
 
 import { PositionList } from "./PositionList";
 import { PositionListItem } from "./PositionListItem";
-import { PositionProviders } from "./PositionProviders";
 import { UpdatePositionModal } from "./UpdatePositionModal";
 import { DeletePositionModal } from "./DeletePositionModal";
+import { UpdatePositionProvider } from "./UpdatePositionProvider";
+import { DeletePositionProvider } from "./DeletePositionProvider";
 import { getPositionSummaries } from "@/lib/data/position/position.dal";
 
 export async function PositionsContainer() {
@@ -13,19 +14,21 @@ export async function PositionsContainer() {
   return (
     <PositionList>
       {positions.map((position) => (
-        <PositionProviders key={position.id}>
-          <PositionListItem id={position.id} name={position.name} />
+        <UpdatePositionProvider key={position.id} positionId={position.id}>
+          <DeletePositionProvider>
+            <PositionListItem id={position.id} name={position.name} />
 
-          <UpdatePositionModal
-            positionId={position.id}
-            positionName={position.name}
-          />
+            <UpdatePositionModal
+              positionId={position.id}
+              positionName={position.name}
+            />
 
-          <DeletePositionModal
-            positionId={position.id}
-            positionName={position.name}
-          />
-        </PositionProviders>
+            <DeletePositionModal
+              positionId={position.id}
+              positionName={position.name}
+            />
+          </DeletePositionProvider>
+        </UpdatePositionProvider>
       ))}
     </PositionList>
   );

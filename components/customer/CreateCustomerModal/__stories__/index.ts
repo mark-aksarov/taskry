@@ -1,1 +1,0 @@
-export { withCreateCustomerModalProvider } from "./withCreateCustomerModalProvider";

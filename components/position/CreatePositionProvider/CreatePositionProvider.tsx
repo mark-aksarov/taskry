@@ -1,10 +1,10 @@
 "use client";
 
-import { useActionState, useMemo } from "react";
 import { useRouter } from "@/i18n/navigation";
-import { ActionFn, ActionState } from "@/lib/actions/types";
-import { useCreatePositionModal } from "../CreatePositionModal";
+import { useActionState, useMemo } from "react";
+import { ActionState } from "@/lib/actions/types";
 import { CreatePositionContext } from "../CreatePositionContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
@@ -39,7 +39,7 @@ export function CreatePositionProvider({
 
   // we need to track CreatePositionModal open state to show toast
   const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } =
-    useCreatePositionModal();
+    useModal("createPosition");
 
   // hooks below wait for the transition to complete (reducerAction returns the new state)
   useCloseModalThenShowToastOnActionSuccess(

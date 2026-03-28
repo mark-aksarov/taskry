@@ -2,9 +2,9 @@
 
 import { startTransition } from "react";
 import { useDeleteCustomer } from "../DeleteCustomerContext";
-import { BaseDeleteCustomerModal } from "./BaseDeleteCustomerModal";
+import { useModal } from "@/components/common/ModalManagerContext";
+import { BaseDeleteCustomerModal } from "../BaseDeleteCustomerModal";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { useDeleteCustomerModal } from "./DeleteCustomerModalContext";
 
 interface DeleteCustomerModalProps {
   customerId: number;
@@ -16,7 +16,7 @@ export function DeleteCustomerModal({
   customerFullName,
 }: DeleteCustomerModalProps) {
   const { action } = useDeleteCustomer();
-  const { isOpen, onOpenChange } = useDeleteCustomerModal();
+  const { isOpen, onOpenChange } = useModal("deleteCustomer");
   const { remove: removeSelected } = useSelectedItems();
 
   function handleDelete() {

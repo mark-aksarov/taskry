@@ -1,13 +1,14 @@
-import { useEffect } from "react";
-import { Button } from "@/components/ui/Button";
+import {
+  withOpenModal,
+  withModalManagerProvider,
+} from "@/components/common/ModalManagerContext/__stories__";
+
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedCustomerDetail } from "@/mocks/customers";
 import { mockedCompanySummaries } from "@/mocks/companies";
 import { UpdateCustomerForm } from "../UpdateCustomerForm";
 import { UpdateCustomerModal } from "./UpdateCustomerModal";
 import { CustomerFormSkeleton } from "../CustomerFormSkeleton";
-import { withUpdateCustomerModalProvider } from "./__stories__";
-import { useUpdateCustomerModal } from "./UpdateCustomerModalContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateCustomerProvider } from "../UpdateCustomerProvider/__stories__";
 
@@ -15,22 +16,15 @@ const meta = {
   title: "components/customers/UpdateCustomerModal",
   component: UpdateCustomerModal,
   decorators: [
-    (Story) => {
-      const { onOpenChange } = useUpdateCustomerModal();
-
-      useEffect(() => onOpenChange(true), [onOpenChange]);
-
-      return (
-        <>
-          <Button label="Update customer" onClick={() => onOpenChange(true)} />
-          <Story />
-        </>
-      );
-    },
+    withOpenModal,
     withUpdateCustomerProvider,
-    withUpdateCustomerModalProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
+
+  parameters: {
+    modalId: "updateCustomer",
+  },
 } satisfies Meta<typeof UpdateCustomerModal>;
 
 export default meta;

@@ -1,11 +1,11 @@
 "use client";
 
+import { startTransition } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
-import { startTransition, useState } from "react";
 import { ActionsButton } from "../common/ActionsButton";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { DeleteProjectsModal } from "./DeleteProjectsModal";
+import { useModal } from "../common/ModalManagerContext";
 import { useSelectedProjects } from "./SelectedProjectsContext";
 import { ActionsMenuTrigger } from "../common/ActionsMenuTrigger";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
@@ -20,7 +20,7 @@ export const ProjectActionsMenuTrigger = () => {
   const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const { onOpenChange: onDeleteModalOpenChange } = useModal("deleteProjects");
 
   // Action for updating project statuses
   const {
@@ -39,7 +39,7 @@ export const ProjectActionsMenuTrigger = () => {
   const handleAction = (key: Key) => {
     guestGuard(() => {
       if (key === "delete") {
-        setIsDeleteModalOpen(true);
+        onDeleteModalOpenChange(true);
       } else {
         // I store the current ids separately so that checkbox changes
         // during the update process don’t affect status tracking.
@@ -63,43 +63,35 @@ export const ProjectActionsMenuTrigger = () => {
   );
 
   return (
-    <>
-      <ActionsMenuTrigger
-        onAction={handleAction}
-        disabledKeys={disabledKeys}
-        renderDialogHeader={() => (
-          <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
-        )}
-        renderButton={() => (
-          <ActionsButton
-            data-test="project-actions-menu-trigger"
-            selectedIds={selected.ids}
-          />
-        )}
-      >
-        <Item textValue={t("delete")} key="delete">
-          <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("delete")}
-        </Item>
-        <Item textValue={t("pending")} key="pending">
-          <CircleEllipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("pending")}
-        </Item>
-        <Item textValue={t("active")} key="active">
-          <Check size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("active")}
-        </Item>
-        <Item textValue={t("completed")} key="completed">
-          <Clock size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("completed")}
-        </Item>
-      </ActionsMenuTrigger>
-
-      {/* Modal for confirming project deletion */}
-      <DeleteProjectsModal
-        isOpen={isDeleteModalOpen}
-        onOpenChange={setIsDeleteModalOpen}
-      />
-    </>
+    <ActionsMenuTrigger
+      onAction={handleAction}
+      disabledKeys={disabledKeys}
+      renderDialogHeader={() => (
+        <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
+      )}
+      renderButton={() => (
+        <ActionsButton
+          data-test="project-actions-menu-trigger"
+          selectedIds={selected.ids}
+        />
+      )}
+    >
+      <Item textValue={t("delete")} key="delete">
+        <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        {t("delete")}
+      </Item>
+      <Item textValue={t("pending")} key="pending">
+        <CircleEllipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        {t("pending")}
+      </Item>
+      <Item textValue={t("active")} key="active">
+        <Check size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        {t("active")}
+      </Item>
+      <Item textValue={t("completed")} key="completed">
+        <Clock size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        {t("completed")}
+      </Item>
+    </ActionsMenuTrigger>
   );
 };

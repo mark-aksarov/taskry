@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import { getCustomerDetail } from "@/lib/data/customer/customer.dal";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { CustomerDetailHeaderInteractive } from "./CustomerDetailHeader";
-import { CustomerDetailHeaderInteractiveProviders } from "./CustomerDetailHeaderInteractiveProviders";
 
 interface CustomerDetailHeaderAltContainerProps {
   customerId: number;
@@ -31,13 +30,10 @@ async function CustomerDetailHeaderAltContainerInner({
   }
 
   return (
-    <CustomerDetailHeaderInteractiveProviders>
-      <CustomerDetailHeaderInteractive
-        customerId={customer.id}
-        fullName={customer.fullName}
-        imageUrl={customer.imageUrl}
-        companyName={customer.company?.name}
-      />
-    </CustomerDetailHeaderInteractiveProviders>
+    <CustomerDetailHeaderInteractive
+      fullName={customer.fullName}
+      imageUrl={customer.imageUrl}
+      companyName={customer.company?.name}
+    />
   );
 }

@@ -18,14 +18,29 @@ import { ProjectsPage } from "./ProjectsPage";
 import { projectSortFields } from "@/lib/types";
 import { customerId } from "@/lib/schemas/customer";
 import { projectStatus } from "@/lib/schemas/project";
-import { ProjectsPageProviders } from "./ProjectsPageProviders";
 import { projectCategoryId } from "@/lib/schemas/projectCategory";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { ProjectsContainer } from "@/components/projects/ProjectsContainer";
+import { CreateProjectModal } from "@/components/projects/CreateProjectModal";
+import { ProjectSearchModal } from "@/components/projects/ProjectSearchModal";
+import { ProjectFiltersModal } from "@/components/projects/ProjectFiltersModal";
+import { DeleteProjectsModal } from "@/components/projects/DeleteProjectsModal";
+import { CreateProjectProvider } from "@/components/projects/CreateProjectProvider";
+import { ProjectFiltersProvider } from "@/components/projects/ProjectFiltersContext";
+import { DeleteProjectsProvider } from "@/components/projects/DeleteProjectsProvider";
+import { SelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext";
+import { ProjectCreatorFiltersModal } from "@/components/projects/ProjectCreatorFiltersModal";
+import { CreateProjectFormContainer } from "@/components/projects/CreateProjectFormContainer";
+import { ProjectCategoryFiltersModal } from "@/components/projects/ProjectCategoryFiltersModal";
+import { ProjectCustomerFiltersModal } from "@/components/projects/ProjectCustomerFiltersModal";
+import { ProjectFiltersFormContainer } from "@/components/projects/ProjectFiltersFormContainer";
+import { ProjectRouterSearchContainer } from "@/components/projects/ProjectRouterSearchContainer";
+import { UpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusesProvider";
+import { CreateProjectCategoryModal } from "@/components/projectCategory/CreateProjectCategoryModal";
+import { CreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryProvider";
 import { ProjectCreatorFiltersFormContainer } from "@/components/projects/ProjectCreatorFiltersFormContainer";
-import { ProjectCategoryFiltersFormContainer } from "@/components/projects/ProjectCategoryFiltersFormContainer";
 import { ProjectCustomerFiltersFormContainer } from "@/components/projects/ProjectCustomerFiltersFormContainer";
-import { ProjectsPageModals } from "./ProjectsPageModals";
+import { ProjectCategoryFiltersFormContainer } from "@/components/projects/ProjectCategoryFiltersFormContainer";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -79,22 +94,51 @@ export default async function AppProjectsPage({
     });
 
   return (
-    <ProjectsPageProviders pageItems={projects} filters={filters}>
-      <ProjectsPage
-        totalCount={totalCount}
-        totalFilteredProjects={totalFilteredProjects}
-        selectedSortField={sort}
-        projectsContainer={
-          <ProjectsContainer
-            projects={projects}
-            totalCount={totalFilteredProjects}
-            page={page}
-            pageSize={pageSize}
-          />
-        }
-      />
+    <SelectedProjectsProvider pageItems={projects}>
+      <UpdateProjectStatusesProvider>
+        <DeleteProjectsProvider>
+          <CreateProjectProvider>
+            <CreateProjectCategoryProvider>
+              <ProjectFiltersProvider filters={filters}>
+                <ProjectsPage
+                  totalCount={totalCount}
+                  totalFilteredProjects={totalFilteredProjects}
+                  selectedSortField={sort}
+                  projectsContainer={
+                    <ProjectsContainer
+                      projects={projects}
+                      totalCount={totalFilteredProjects}
+                      page={page}
+                      pageSize={pageSize}
+                    />
+                  }
+                />
 
-      <ProjectsPageModals />
-    </ProjectsPageProviders>
+                <ProjectSearchModal
+                  searchContainer={<ProjectRouterSearchContainer />}
+                />
+                <CreateProjectModal
+                  createProjectFormContainer={<CreateProjectFormContainer />}
+                />
+                <CreateProjectCategoryModal />
+                <ProjectFiltersModal
+                  filtersFormContainer={<ProjectFiltersFormContainer />}
+                />
+                <ProjectCustomerFiltersModal
+                  filtersFormContainer={<ProjectCustomerFiltersFormContainer />}
+                />
+                <ProjectCategoryFiltersModal
+                  filtersFormContainer={<ProjectCategoryFiltersFormContainer />}
+                />
+                <ProjectCreatorFiltersModal
+                  filtersFormContainer={<ProjectCreatorFiltersFormContainer />}
+                />
+                <DeleteProjectsModal />
+              </ProjectFiltersProvider>
+            </CreateProjectCategoryProvider>
+          </CreateProjectProvider>
+        </DeleteProjectsProvider>
+      </UpdateProjectStatusesProvider>
+    </SelectedProjectsProvider>
   );
 }

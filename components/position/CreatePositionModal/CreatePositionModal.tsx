@@ -8,13 +8,13 @@ import {
 
 import { useTranslations } from "next-intl";
 import { CreatePositionForm } from "../CreatePositionForm";
-import { useCreatePositionModal } from "./CreatePositionModalContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 export function CreatePositionModal() {
   const t = useTranslations("positions.CreatePositionModal");
 
-  const { isOpen, onOpenChange } = useCreatePositionModal();
+  const { isOpen, onOpenChange } = useModal("createPosition");
 
   return (
     <FormBaseModal

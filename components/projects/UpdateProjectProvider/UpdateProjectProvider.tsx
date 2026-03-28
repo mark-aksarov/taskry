@@ -5,8 +5,8 @@ import { useActionState, useMemo } from "react";
 import { ActionState } from "@/lib/actions/types";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { UpdateProjectContext } from "../UpdateProjectContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { updateProject } from "@/lib/actions/project/updateProject";
-import { useUpdateProjectModal } from "../UpdateProjectModal/UpdateProjectModalContext";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
@@ -16,10 +16,12 @@ const initialState: ActionState = {
 };
 
 interface UpdateProjectProviderProps {
+  projectId: number;
   children: React.ReactNode;
 }
 
 export function UpdateProjectProvider({
+  projectId,
   children,
 }: UpdateProjectProviderProps) {
   const pathname = usePathname();
@@ -50,7 +52,7 @@ export function UpdateProjectProvider({
 
   // we need to track UpdateProjectModal open state to show toast
   const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } =
-    useUpdateProjectModal();
+    useModal("updateProject");
 
   // hooks below wait for the transition to complete (reducerAction returns the new state)
   useCloseModalThenShowToastOnActionSuccess(

@@ -1,1 +1,0 @@
-export { withCreateProjectCategoryModalProvider } from "./withCreateProjectCategoryModalProvider";

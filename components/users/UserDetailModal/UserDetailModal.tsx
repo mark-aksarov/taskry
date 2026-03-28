@@ -5,8 +5,8 @@ import {
 } from "@/components/common/DetailModal";
 
 import { useTranslations } from "next-intl";
-import { useUserDetailModal } from "./UserDetailModalContext";
 import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UserDetailModalProps {
@@ -22,7 +22,7 @@ export function UserDetailModal({
 }: UserDetailModalProps) {
   const t = useTranslations("users.UserDetailModal");
 
-  const { isOpen, onOpenChange } = useUserDetailModal();
+  const { isOpen, onOpenChange } = useModal("userDetail");
 
   return (
     <DetailModal isOpen={isOpen} onOpenChange={onOpenChange}>

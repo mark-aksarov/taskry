@@ -4,9 +4,7 @@ import { useTranslations } from "next-intl";
 import { useUpdateProject } from "../UpdateProjectContext";
 import { useDeleteProject } from "../DeleteProjectContext";
 import { MessageSquare, Pencil, Trash } from "lucide-react";
-import { useDeleteProjectModal } from "../DeleteProjectModal";
-import { useUpdateProjectModal } from "../UpdateProjectModal";
-import { useProjectCommentsModal } from "../ProjectCommentsModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { NavigationButton } from "@/components/common/NavigationButton";
 
@@ -17,15 +15,15 @@ export function ProjectDetailActions() {
   const guestGuard = useGuestModalGuard();
 
   // Delete project: action state + form modal state
-  const { isPending: isDeletePending, action: deleteAction } =
-    useDeleteProject();
-  const { onOpenChange: onDeleteModalOpenChange } = useDeleteProjectModal();
+  const { isPending: isDeletePending } = useDeleteProject();
+  const { onOpenChange: onDeleteModalOpenChange } = useModal("deleteProject");
 
   // Edit project: action state + form modal state from context
   const { isPending: isUpdatePending } = useUpdateProject();
-  const { onOpenChange: onUpdateModalOpenChange } = useUpdateProjectModal();
+  const { onOpenChange: onUpdateModalOpenChange } = useModal("updateProject");
 
-  const { onOpenChange: onCommentsModalOpenChange } = useProjectCommentsModal();
+  const { onOpenChange: onCommentsModalOpenChange } =
+    useModal("projectComments");
 
   function handleDeletePress() {
     guestGuard(() => onDeleteModalOpenChange(true));

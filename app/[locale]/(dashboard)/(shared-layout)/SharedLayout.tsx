@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import { AppHeader } from "@/components/layout/AppHeader";
 import { useParams, useSearchParams } from "next/navigation";
-import { SearchModalProvider } from "@/components/search/SearchModal";
 import { SearchBarProvider } from "@/components/search/SearchBar/index";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 
@@ -101,14 +100,12 @@ export default function SharedLayout({
        * when navigating to deeper segments, e.g., /tasks -> /tasks/[id].
        */}
       <SearchBarProvider key={pathname} initialValue={query ?? ""}>
-        <SearchModalProvider>
-          <AppHeader
-            profileLinkContainer={profileLinkContainer}
-            heading={t("heading" as never)}
-            backButtonHref={activeRoute?.backButtonHref}
-          />
-          <main>{children}</main>
-        </SearchModalProvider>
+        <AppHeader
+          profileLinkContainer={profileLinkContainer}
+          heading={t("heading" as never)}
+          backButtonHref={activeRoute?.backButtonHref}
+        />
+        <main>{children}</main>
       </SearchBarProvider>
     </PageTransitionProvider>
   );

@@ -5,7 +5,6 @@ import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskCategoryListItemStory } from "../../TaskCategoryListItem/__stories__";
 import { MockedTaskCategoryProviders } from "../../TaskCategoryProviders/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withDeleteTaskCategoriesProvider } from "../../DeleteTaskCategoriesProvider/__stories__";
@@ -15,7 +14,6 @@ const meta = {
   component: TaskCategoryList,
   decorators: [
     withDeleteTaskCategoriesProvider,
-    withGuestModeModalProvider,
     withCurrentUserProvider,
     withSelectedItemsProvider,
     withThemedBackground,
@@ -35,12 +33,5 @@ export const Default = {
         />
       </MockedTaskCategoryProviders>
     )),
-  },
-} satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
   },
 } satisfies Story;

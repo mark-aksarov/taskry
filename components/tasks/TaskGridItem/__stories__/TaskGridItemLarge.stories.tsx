@@ -13,15 +13,14 @@ import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { mockedUserDetail, mockedUserSummaries } from "@/mocks/users";
 import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { CreateSubtaskModal } from "@/components/subtasks/CreateSubtaskModal";
 import { withDeleteTasksProvider } from "../../DeleteTasksContext/__stories__";
 import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
 import { CommentListStory } from "@/components/comments/CommentList/__stories__";
 import { MockedTaskDetailProviders } from "../../TaskDetailProviders/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusesContext/__stories__";
-import { CreateSubtaskModal } from "@/components/subtasks/CreateSubtaskModal";
 
 const meta = {
   title: "components/tasks/TaskGridItemLarge",
@@ -29,7 +28,6 @@ const meta = {
   decorators: [
     withDeleteTasksProvider,
     withUpdateTaskStatusesProvider,
-    withGuestModeModalProvider,
     withCurrentUserProvider,
     withSelectedTasksProvider,
     withThemedBackground,
@@ -122,12 +120,5 @@ export const WithCompletedStatus = {
   args: {
     ...Default.args,
     status: TaskStatus.completed,
-  },
-} satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
   },
 } satisfies Story;

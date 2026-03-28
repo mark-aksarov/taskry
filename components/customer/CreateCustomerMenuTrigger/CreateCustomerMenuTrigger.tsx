@@ -4,11 +4,10 @@ import { Key } from "react-aria";
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Building2, Contact } from "lucide-react";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { useCreateCompanyModal } from "@/components/company/CreateCompanyModal";
 import { CreateNewMenuTrigger } from "@/components/common/CreateNewMenuTrigger";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
-import { useCreateCustomerModal } from "../CreateCustomerModal/CreateCustomerModalContext";
 
 interface CreateCustomerMenuTriggerProps {
   renderButton: () => React.ReactNode;
@@ -24,11 +23,11 @@ export function CreateCustomerMenuTrigger({
 
   // Create company modal state
   const { onOpenChange: onCreateCompanyModalOpenChange } =
-    useCreateCompanyModal();
+    useModal("createCompany");
 
   // Create customer modal state
   const { onOpenChange: onCreateCustomerModalOpenChange } =
-    useCreateCustomerModal();
+    useModal("createCustomer");
 
   /**
    * Handles menu actions for creating a customer or company

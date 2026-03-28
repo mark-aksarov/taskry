@@ -1,12 +1,12 @@
 "use client";
 
 import { tv } from "tailwind-variants";
-import { focusRing } from "@/components/ui/styles";
 import { useSearchBar } from "../SearchBar";
+import { focusRing } from "@/components/ui/styles";
 import { mergeProps, useFocusRing, usePress } from "react-aria";
 import { SearchModalTriggerIcon } from "./SearchModalTriggerIcon";
 import { SearchModalTriggerText } from "./SearchModalTriggerText";
-import { useSearchModal } from "../SearchModal/SearchModalContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { usePageTransition } from "@/components/common/PageTransitionContext";
 import { SearchModalTriggerPlaceholder } from "./SearchModalTriggerPlaceholder";
 import { SearchModalTriggerClearButton } from "./SearchModalTriggerClearButton";
@@ -25,7 +25,7 @@ export function SearchModalTrigger() {
   //sync trigger content with search bar value
   const { value: searchBarValue } = useSearchBar();
   const { isFilteringPending } = usePageTransition();
-  const { onOpenChange } = useSearchModal();
+  const { onOpenChange } = useModal("search");
 
   const isDisabled = isFilteringPending;
 

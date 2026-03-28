@@ -9,7 +9,6 @@ import { TaskDetail, TaskDetailSkeleton } from "../../TaskDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CreateSubtaskModal } from "@/components/subtasks/CreateSubtaskModal";
 import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
 import { withCreateSubtaskModalProvider } from "@/components/subtasks/CreateSubtaskModal/__stories__";
@@ -32,7 +31,6 @@ const meta = {
     },
     withCreateSubtaskProvider,
     withCreateSubtaskModalProvider,
-    withGuestModeModalProvider,
     withCurrentUserProvider,
     withThemedBackground,
   ],
@@ -73,12 +71,5 @@ export const WithoutOptionalTaskData = {
         deadline={task.deadline}
       />
     ),
-  },
-} satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
   },
 } satisfies Story;

@@ -6,7 +6,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { UpdatePositionForm } from "../UpdatePositionForm";
-import { useUpdatePositionModal } from "./UpdatePositionModalContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UpdatePositionModalProps {
@@ -20,7 +20,7 @@ export function UpdatePositionModal({
 }: UpdatePositionModalProps) {
   const t = useTranslations("positions.UpdatePositionModal");
 
-  const { isOpen, onOpenChange } = useUpdatePositionModal();
+  const { isOpen, onOpenChange } = useModal("updatePosition");
 
   return (
     <FormBaseModal

@@ -7,7 +7,7 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { useCreateProjectModal } from "./CreateProjectModalContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface CreateProjectModalProps {
@@ -19,7 +19,7 @@ export function CreateProjectModal({
 }: CreateProjectModalProps) {
   const t = useTranslations("projects.CreateProjectModal");
 
-  const { isOpen, onOpenChange } = useCreateProjectModal();
+  const { isOpen, onOpenChange } = useModal("createProject");
 
   return (
     <FormBaseModal

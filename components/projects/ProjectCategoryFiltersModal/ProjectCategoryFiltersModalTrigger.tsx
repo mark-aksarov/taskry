@@ -1,12 +1,12 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { FilterButtonMobile } from "@/components/common/FilterButton";
-import { useProjectCategoryFiltersModal } from "./ProjectCategoryFiltersModalContext";
 
 export function ProjectCategoryFiltersModalTrigger() {
   const t = useTranslations("projects.ProjectCategoryFiltersModalTrigger");
-  const { onOpenChange } = useProjectCategoryFiltersModal();
+  const { onOpenChange } = useModal("projectCategoryFilters");
 
   return (
     <FilterButtonMobile

@@ -3,12 +3,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { ProjectGridItemLarge } from "../ProjectGridItemLarge";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { MockedProjectItemModals } from "../../ProjectItemModals/__stories__";
-import { withProjectItemProviders } from "../../ProjectItemProviders/__stories__";
+import { withMockedProjectItemWrapper } from "../../ProjectItemWrapper/__stories__";
 import { withDeleteProjectsProvider } from "../../DeleteProjectsProvider/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusesProvider/__stories__";
 
 const mockedProject = mockedProjectList[0];
@@ -17,19 +16,12 @@ const meta = {
   title: "components/projects/ProjectGridItemLarge",
   component: ProjectGridItemLarge,
   decorators: [
-    (Story) => (
-      <>
-        <Story />
-        <MockedProjectItemModals />
-      </>
-    ),
-
-    withProjectItemProviders,
+    withMockedProjectItemWrapper,
     withDeleteProjectsProvider,
     withUpdateProjectStatusesProvider,
-    withGuestModeModalProvider,
     withCurrentUserProvider,
     withSelectedProjectsProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof ProjectGridItemLarge>;
@@ -83,12 +75,5 @@ export const WithCompletedStatus = {
   args: {
     ...Default.args,
     status: ProjectStatus.completed,
-  },
-} satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
   },
 } satisfies Story;

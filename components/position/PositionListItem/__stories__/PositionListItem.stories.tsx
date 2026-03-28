@@ -1,29 +1,25 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { PositionListItem } from "../PositionListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withPositionProviders } from "../../PositionProviders/__stories__";
-import { withDeletePositionModal } from "../../DeletePositionModal/__stories__";
+import { withUpdatePositionProvider } from "../../UpdatePositionProvider/__stories__";
+import { withDeletePositionProvider } from "../../DeletePositionProvider/__stories__";
 import { withDeletePositionsProvider } from "../../DeletePositionsProvider/__stories__";
-import { withGuestModeModalProvider } from "@/components/common/GuestModeModal/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 
 const meta = {
   title: "components/positions/PositionListItem",
   component: PositionListItem,
   decorators: [
-    // we open DeletePositionModal and UpdatePositionModal from PositionListItemActionMenuTrigger
-    withDeletePositionModal,
-    withDeletePositionModal,
+    withUpdatePositionProvider,
+    withDeletePositionProvider,
 
-    // mocking position item providers
-    withPositionProviders,
-
-    // mocking another providers
     withDeletePositionsProvider,
-    withGuestModeModalProvider,
     withCurrentUserProvider,
     withSelectedItemsProvider,
+    withModalManagerProvider,
+
     withThemedBackground,
   ],
 } satisfies Meta<typeof PositionListItem>;
@@ -35,12 +31,5 @@ export const Default = {
   args: {
     id: 1,
     name: "Position 1",
-  },
-} satisfies Story;
-
-export const GuestMode = {
-  ...Default,
-  parameters: {
-    isGuest: true,
   },
 } satisfies Story;
