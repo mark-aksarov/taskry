@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { TaskItemBaseBadge } from "./TaskItemBaseBadge";
 import { withSelectedTasksProvider } from "../SelectedTasksContext/__stories__";
-import { withUpdateTaskStatusProvider } from "../UpdateTaskStatusContext/__stories__";
-import { withUpdateTaskStatusesProvider } from "../UpdateTaskStatusesContext/__stories__";
+import { withUpdateTaskStatusProvider } from "../UpdateTaskStatusProvider/__stories__";
+import { withUpdateTaskStatusesProvider } from "../UpdateTaskStatusesProvider/__stories__";
 
 const meta: Meta<typeof TaskItemBaseBadge> = {
   title: "components/tasks/TaskItemBaseBadge",

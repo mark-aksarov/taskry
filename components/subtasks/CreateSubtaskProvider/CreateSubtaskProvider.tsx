@@ -3,10 +3,10 @@
 import { useActionState, useMemo } from "react";
 import { ActionState } from "@/lib/actions/types";
 import { CreateSubtaskContext } from "../CreateSubtaskContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { createSubtask } from "@/lib/actions/subtask/createSubtask";
 import { useRefreshTaskDetail } from "@/lib/swr/hooks/useRefreshTaskDetail";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
-import { useCreateSubtaskModal } from "../CreateSubtaskModal/CreateSubtaskModalContext";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 
 const initialState: ActionState = {
@@ -25,8 +25,8 @@ export function CreateSubtaskProvider({
   const refreshTaskDetail = useRefreshTaskDetail(taskId);
 
   const [state, action, isPending] = useActionState(
-    async (_prevState: ActionState, payload: FormData) => {
-      const newState = await createSubtask(payload);
+    async (_prevState: ActionState, formData: FormData) => {
+      const newState = await createSubtask(formData);
 
       if (newState.status === "success") {
         // The following line isn't marked as transition
@@ -41,7 +41,7 @@ export function CreateSubtaskProvider({
 
   // we need to track CreateSubtaskModal open state to show toast
   const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } =
-    useCreateSubtaskModal();
+    useModal("createSubtask");
 
   // hooks below wait for the transition to complete (reducerAction returns the new state)
   useCloseModalOnActionSuccess(state, onModalOpenChange);

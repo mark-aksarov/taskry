@@ -1,60 +1,39 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Pencil, Trash } from "lucide-react";
-import { startTransition, useState } from "react";
 import { useDeleteTask } from "../DeleteTaskContext";
 import { useUpdateTask } from "../UpdateTaskContext";
-import { TaskCommentsModal } from "../TaskCommentsModal";
-import { BaseDeleteTaskModal } from "../DeleteTaskModal";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { MessageSquare, Pencil, Trash } from "lucide-react";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { NavigationButton } from "@/components/common/NavigationButton";
-import { DetailActionsCommentsModalTrigger } from "@/components/common/DetailActionsCommentsModalTrigger";
 
-interface TaskDetailActionsProps {
-  taskId: number;
-  taskTitle: string;
-  taskCommentsContainer: React.ReactNode;
-  sendComment: ActionFn<ActionState, FormData>;
-  updateComment: ActionFn<ActionState, FormData>;
-}
-
-export function TaskDetailActions({
-  taskId,
-  taskTitle,
-  taskCommentsContainer,
-  sendComment,
-  updateComment,
-}: TaskDetailActionsProps) {
+export function TaskDetailActions() {
   const t = useTranslations("tasks.TaskDetailActions");
 
   // Show guest modal for guests
   const guestGuard = useGuestModalGuard();
 
   // Delete task: action state + form modal state
-  const { isPending: isDeletePending, action: deleteAction } = useDeleteTask();
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const { isPending: isDeletePending } = useDeleteTask();
+  const { onOpenChange: onDeleteModalOpenChange } = useModal("deleteTask");
 
-  // Edit task: action state + form modal state
-  const {
-    isPending: isUpdatePending,
-    onModalOpenChange: onEditModalOpenChange,
-  } = useUpdateTask();
+  // Edit task: action state + form modal state from context
+  const { isPending: isUpdatePending } = useUpdateTask();
+  const { onOpenChange: onUpdateModalOpenChange } = useModal("updateTask");
+
+  const { onOpenChange: onCommentsModalOpenChange } = useModal("taskComments");
 
   function handleDeletePress() {
-    guestGuard(() => setIsDeleteModalOpen(true));
+    guestGuard(() => onDeleteModalOpenChange(true));
   }
 
   function handleEditPress() {
-    guestGuard(() => onEditModalOpenChange(true));
+    guestGuard(() => onUpdateModalOpenChange(true));
   }
 
-  // Close modal and delete task
-  // We should redirect to the task list page after deletion
-  function handleDelete() {
-    setIsDeleteModalOpen(false);
-    startTransition(() => deleteAction({ id: taskId, shouldRedirect: true }));
+  function handleCommentsPress() {
+    onCommentsModalOpenChange(true);
   }
 
   return (
@@ -76,26 +55,16 @@ export function TaskDetailActions({
           iconLeft={<Pencil size={18} strokeWidth={1.5} absoluteStrokeWidth />}
           label={t("edit")}
         />
-        <DetailActionsCommentsModalTrigger
-          modal={
-            <TaskCommentsModal
-              taskId={taskId}
-              taskCommentsContainer={taskCommentsContainer}
-              sendComment={sendComment}
-              updateComment={updateComment}
-            />
+        <NavigationButton
+          data-test="task-comments-button"
+          onPress={handleCommentsPress}
+          variant="secondary"
+          iconLeft={
+            <MessageSquare size={18} strokeWidth={1.5} absoluteStrokeWidth />
           }
           label={t("comments")}
         />
       </div>
-
-      {/* Modal for confirming task deletion */}
-      <BaseDeleteTaskModal
-        taskTitle={taskTitle}
-        isOpen={isDeleteModalOpen}
-        onOpenChange={setIsDeleteModalOpen}
-        onDelete={handleDelete}
-      />
     </>
   );
 }

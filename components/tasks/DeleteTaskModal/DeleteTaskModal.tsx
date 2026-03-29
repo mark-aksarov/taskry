@@ -3,23 +3,17 @@
 import { startTransition } from "react";
 import { useDeleteTask } from "../DeleteTaskContext";
 import { useSelectedTasks } from "../SelectedTasksContext";
-import { BaseDeleteTaskModal } from "./BaseDeleteTaskModal";
+import { BaseDeleteTaskModal } from "../BaseDeleteTaskModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 
 interface DeleteTaskModalProps {
   taskId: number;
   taskTitle: string;
-  isOpen: boolean;
-  onOpenChange: (isOpen: boolean) => void;
 }
 
-export function DeleteTaskModal({
-  taskId,
-  taskTitle,
-  isOpen,
-  onOpenChange,
-}: DeleteTaskModalProps) {
+export function DeleteTaskModal({ taskId, taskTitle }: DeleteTaskModalProps) {
   const { action } = useDeleteTask();
-
+  const { isOpen, onOpenChange } = useModal("deleteTask");
   const { remove: removeSelected } = useSelectedTasks();
 
   function handleDelete() {

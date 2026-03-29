@@ -1,8 +1,10 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/Button";
+import {
+  withOpenModal,
+  withModalManagerProvider,
+} from "@/components/common/ModalManagerContext/__stories__";
+
 import { Meta, StoryObj } from "@storybook/react";
 import { mockedUserSummaries } from "@/mocks/users";
-import { DialogTrigger } from "react-aria-components";
 import { AssigneeFiltersForm } from "../AssigneeFiltersForm";
 import { AssigneeFiltersModal } from "./AssigneeFiltersModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -14,21 +16,16 @@ const meta = {
   title: "components/tasks/AssigneeFiltersModal",
   component: AssigneeFiltersModal,
   decorators: [
-    (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
-
-      return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Open modal" />
-          <Story />
-        </DialogTrigger>
-      );
-    },
+    withOpenModal,
     withTaskFiltersProvider,
     withSelectedTasksProvider,
     withPageTransitionProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
+  parameters: {
+    modalId: "assigneeFilters",
+  },
 } satisfies Meta<typeof AssigneeFiltersModal>;
 
 export default meta;

@@ -4,7 +4,7 @@ import { Plus } from "lucide-react";
 import { tv } from "tailwind-variants";
 import { linkStyles } from "../ui/Link";
 import { useTranslations } from "next-intl";
-import { useCreateSubtaskModal } from "./CreateSubtaskModal";
+import { useModal } from "../common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { composeRenderProps, ButtonProps, Button } from "react-aria-components";
 
@@ -22,7 +22,7 @@ export function CreateSubtasksButton({
   // Show guest modal for guests
   const guestGuard = useGuestModalGuard();
 
-  const { onOpenChange: onModalOpenChange } = useCreateSubtaskModal();
+  const { onOpenChange: onModalOpenChange } = useModal("createSubtask");
 
   function handlePress() {
     guestGuard(() => onModalOpenChange(true));

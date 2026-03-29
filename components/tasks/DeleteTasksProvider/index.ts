@@ -1,0 +1,1 @@
+export { DeleteTasksProvider } from "./DeleteTasksProvider";

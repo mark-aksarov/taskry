@@ -2,8 +2,8 @@
 
 import { useActionState, useMemo } from "react";
 import { ActionState } from "@/lib/actions/types";
-import { useUpdateSubtaskModal } from "../UpdateSubtaskModal";
 import { UpdateSubtaskContext } from "../UpdateSubtaskContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { updateSubtask } from "@/lib/actions/subtask/updateSubtask";
 import { useRefreshTaskDetail } from "@/lib/swr/hooks/useRefreshTaskDetail";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
@@ -41,7 +41,7 @@ export function UpdateSubtaskProvider({
 
   // we need to track CreateSubtaskModal open state to show toast
   const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } =
-    useUpdateSubtaskModal();
+    useModal("updateSubtask");
 
   // hooks below wait for the transition to complete (reducerAction returns the new state)
   useCloseModalOnActionSuccess(state, onModalOpenChange);

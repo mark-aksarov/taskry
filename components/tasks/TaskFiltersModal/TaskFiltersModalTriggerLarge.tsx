@@ -1,20 +1,10 @@
 "use client";
 
-import { DialogTrigger } from "react-aria-components";
-import { TaskFiltersModal } from "./TaskFiltersModal";
 import { FilterButtonLarge } from "@/components/common/FilterButton";
+import { useModal } from "@/components/common/ModalManagerContext";
 
-interface TaskFiltersModalTriggerLargeProps {
-  filtersFormContainer: React.ReactNode;
-}
+export function TaskFiltersModalTriggerLarge() {
+  const { onOpenChange } = useModal("taskFilters");
 
-export function TaskFiltersModalTriggerLarge({
-  filtersFormContainer,
-}: TaskFiltersModalTriggerLargeProps) {
-  return (
-    <DialogTrigger>
-      <FilterButtonLarge />
-      <TaskFiltersModal filtersFormContainer={filtersFormContainer} />
-    </DialogTrigger>
-  );
+  return <FilterButtonLarge onPress={() => onOpenChange(true)} />;
 }

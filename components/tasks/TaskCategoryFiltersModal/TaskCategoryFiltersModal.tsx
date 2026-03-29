@@ -12,6 +12,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { useTaskFilters } from "../TaskFiltersContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
@@ -23,9 +24,14 @@ export function TaskCategoryFiltersModal({
   filtersFormContainer,
 }: TaskCategoryFiltersModalProps) {
   const initialFilters = useTaskFilters();
+  const { isOpen, onOpenChange } = useModal("taskCategoryFilters");
 
   return (
-    <FormBaseModal data-test="task-category-filters-modal">
+    <FormBaseModal
+      data-test="task-category-filters-modal"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+    >
       <TaskFiltersFormProvider initialFilters={initialFilters}>
         <FilterModalDialog>
           <DialogHeader />

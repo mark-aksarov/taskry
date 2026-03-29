@@ -8,47 +8,34 @@ import {
 
 import {
   ItemBaseDeadline,
+  ItemBaseCommentsButton,
   ItemBaseUserImageContainer,
-  ItemBaseCommentsModalTrigger,
 } from "@/components/common/ItemBase";
 
 import { memo } from "react";
 import { Link } from "@/components/ui/Link";
-import { UpdateTaskModal } from "../UpdateTaskModal";
-import { TaskItemActionMenuTrigger } from "../TaskItem";
-import { TaskCommentsModal } from "../TaskCommentsModal";
+import { BaseTaskItemProps } from "../TaskItem";
 import { TaskItemBaseBadge } from "../TaskItemBaseBadge";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { TaskGridItemProgress } from "./TaskGridItemProgress";
-import { BaseTaskItemProps, TaskItemProviders } from "../TaskItem";
+import { useModal } from "@/components/common/ModalManagerContext";
+import { TaskItemActionMenuTrigger, TaskItemPendingOverlay } from "../TaskItem";
 
 interface Props extends BaseTaskItemProps {
   subtasksTotal: number;
   subtasksDone: number;
 }
 
-export function TaskGridItemMobile({
-  updateTask,
-  deleteTask,
-  updateTaskStatus,
-  ...props
-}: Props) {
+export function TaskGridItemMobile(props: Props) {
   return (
-    <TaskItemProviders
-      taskId={props.id}
-      deleteTask={deleteTask}
-      updateTask={updateTask}
-      updateTaskStatus={updateTaskStatus}
-    >
+    <TaskItemPendingOverlay taskId={props.id}>
       <div className="relative block">
         <Link href={`/tasks/${props.id}`} className="absolute inset-0 z-0" />
         <TaskGridItemMobileInner {...props} />
       </div>
-    </TaskItemProviders>
+    </TaskItemPendingOverlay>
   );
 }
-
-type InnerProps = Omit<Props, "updateTask" | "deleteTask" | "updateTaskStatus">;
 
 export const TaskGridItemMobileInner = memo(
   ({
@@ -60,11 +47,7 @@ export const TaskGridItemMobileInner = memo(
     status,
     subtasksTotal,
     subtasksDone,
-    taskCommentsContainer,
-    updateTaskFormContainer,
-    sendComment,
-    updateComment,
-  }: InnerProps) => {
+  }: Props) => {
     const assigneeImg = (
       <ItemBaseUserImageContainer
         user={assignee}
@@ -74,65 +57,51 @@ export const TaskGridItemMobileInner = memo(
       />
     );
 
-    return (
-      <>
-        <TaskGridItemLayout
-          menuTriggerSlot={
-            <TaskItemActionMenuTrigger
-              taskId={id}
-              taskTitle={title}
-              taskStatus={status}
-              className="relative z-1 -mr-2 ml-auto"
-            />
-          }
-          titleSlot={
-            <GridItemInfo className="flex-auto">
-              <GridItemTitle>{title}</GridItemTitle>
-              <GridItemText>
-                <ItemBaseDeadline deadline={deadline} />
-              </GridItemText>
-            </GridItemInfo>
-          }
-          assigneeImageSlot={
-            assignee ? (
-              <Link href={`/team/${assignee.id}`}>{assigneeImg}</Link>
-            ) : (
-              assigneeImg
-            )
-          }
-          commentsSlot={
-            <ItemBaseCommentsModalTrigger
-              data-test={`task-${id}-comments-modal-trigger`}
-              commentsCount={commentsCount}
-              modal={
-                <TaskCommentsModal
-                  taskId={id}
-                  taskCommentsContainer={taskCommentsContainer}
-                  sendComment={sendComment}
-                  updateComment={updateComment}
-                />
-              }
-              className="relative z-1"
-            />
-          }
-          statusSlot={
-            <TaskItemBaseBadge
-              taskId={id}
-              deadline={deadline}
-              status={status}
-            />
-          }
-          progressSlot={
-            <TaskGridItemProgress
-              subtasksDone={subtasksDone}
-              subtasksTotal={subtasksTotal}
-            />
-          }
-        />
+    const { onOpenChange: onTaskCommentsModalOpenChange } =
+      useModal("taskComments");
 
-        {/* Modal for editing task details */}
-        <UpdateTaskModal updateTaskFormContainer={updateTaskFormContainer} />
-      </>
+    return (
+      <TaskGridItemLayout
+        menuTriggerSlot={
+          <TaskItemActionMenuTrigger
+            taskId={id}
+            taskTitle={title}
+            taskStatus={status}
+            className="relative z-1 -mr-2 ml-auto"
+          />
+        }
+        titleSlot={
+          <GridItemInfo className="flex-auto">
+            <GridItemTitle>{title}</GridItemTitle>
+            <GridItemText>
+              <ItemBaseDeadline deadline={deadline} />
+            </GridItemText>
+          </GridItemInfo>
+        }
+        assigneeImageSlot={
+          assignee ? (
+            <Link href={`/team/${assignee.id}`}>{assigneeImg}</Link>
+          ) : (
+            assigneeImg
+          )
+        }
+        commentsSlot={
+          <ItemBaseCommentsButton
+            commentsCount={commentsCount}
+            onPress={() => onTaskCommentsModalOpenChange(true)}
+            className="relative z-1"
+          />
+        }
+        statusSlot={
+          <TaskItemBaseBadge taskId={id} deadline={deadline} status={status} />
+        }
+        progressSlot={
+          <TaskGridItemProgress
+            subtasksDone={subtasksDone}
+            subtasksTotal={subtasksTotal}
+          />
+        }
+      />
     );
   },
 );

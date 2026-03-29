@@ -1,7 +1,9 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/Button";
+import {
+  withOpenModal,
+  withModalManagerProvider,
+} from "@/components/common/ModalManagerContext/__stories__";
+
 import { Meta, StoryObj } from "@storybook/react";
-import { DialogTrigger } from "react-aria-components";
 import { TaskCategoryFiltersForm } from "../TaskCategoryFiltersForm";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { TaskCategoryFiltersModal } from "./TaskCategoryFiltersModal";
@@ -14,21 +16,17 @@ const meta = {
   title: "components/tasks/TaskCategoryFiltersModal",
   component: TaskCategoryFiltersModal,
   decorators: [
-    (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
-
-      return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Open modal" />
-          <Story />
-        </DialogTrigger>
-      );
-    },
+    withOpenModal,
     withTaskFiltersProvider,
     withSelectedTasksProvider,
     withPageTransitionProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
+
+  parameters: {
+    modalId: "taskCategoryFilters",
+  },
 } satisfies Meta<typeof TaskCategoryFiltersModal>;
 
 export default meta;

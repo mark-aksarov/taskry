@@ -1,11 +1,11 @@
 "use client";
 
+import { startTransition } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
-import { startTransition, useState } from "react";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { DeleteTasksModal } from "./DeleteTasksModal";
 import { ActionsButton } from "../common/ActionsButton";
+import { useModal } from "../common/ModalManagerContext";
 import { useSelectedTasks } from "./SelectedTasksContext";
 import { ActionsMenuTrigger } from "../common/ActionsMenuTrigger";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
@@ -27,7 +27,7 @@ export const TaskActionsMenuTrigger = ({
   const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const { onOpenChange: onDeleteModalOpenChange } = useModal("deleteTasks");
 
   // Action for updating task statuses
   const { action: updateTaskStatusesAction, setIds: setUpdateTaskStatusesIds } =
@@ -44,7 +44,7 @@ export const TaskActionsMenuTrigger = ({
   const handleAction = (key: Key) => {
     guestGuard(() => {
       if (key === "delete") {
-        setIsDeleteModalOpen(true);
+        onDeleteModalOpenChange(true);
       } else {
         // I store the current ids separately so that checkbox changes
         // during the update process don’t affect status tracking.
@@ -68,44 +68,36 @@ export const TaskActionsMenuTrigger = ({
   );
 
   return (
-    <>
-      <ActionsMenuTrigger
-        onAction={handleAction}
-        disabledKeys={disabledKeys}
-        renderDialogHeader={() => (
-          <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
-        )}
-        renderButton={() => (
-          <ActionsButton
-            showLabel={showLabel}
-            data-test="task-actions-menu-trigger"
-            selectedIds={selected.ids}
-          />
-        )}
-      >
-        <Item textValue={t("delete")} key="delete">
-          <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("delete")}
-        </Item>
-        <Item textValue={t("pending")} key="pending">
-          <CircleEllipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("pending")}
-        </Item>
-        <Item textValue={t("active")} key="active">
-          <Check size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("active")}
-        </Item>
-        <Item textValue={t("completed")} key="completed">
-          <Clock size={16} strokeWidth={1.5} absoluteStrokeWidth />
-          {t("completed")}
-        </Item>
-      </ActionsMenuTrigger>
-
-      {/* Modal for confirming task deletion */}
-      <DeleteTasksModal
-        isOpen={isDeleteModalOpen}
-        onOpenChange={setIsDeleteModalOpen}
-      />
-    </>
+    <ActionsMenuTrigger
+      onAction={handleAction}
+      disabledKeys={disabledKeys}
+      renderDialogHeader={() => (
+        <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
+      )}
+      renderButton={() => (
+        <ActionsButton
+          showLabel={showLabel}
+          data-test="task-actions-menu-trigger"
+          selectedIds={selected.ids}
+        />
+      )}
+    >
+      <Item textValue={t("delete")} key="delete">
+        <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        {t("delete")}
+      </Item>
+      <Item textValue={t("pending")} key="pending">
+        <CircleEllipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        {t("pending")}
+      </Item>
+      <Item textValue={t("active")} key="active">
+        <Check size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        {t("active")}
+      </Item>
+      <Item textValue={t("completed")} key="completed">
+        <Clock size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        {t("completed")}
+      </Item>
+    </ActionsMenuTrigger>
   );
 };

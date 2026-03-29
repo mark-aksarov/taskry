@@ -7,7 +7,7 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { useUpdateTask } from "../UpdateTaskContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UpdateTaskModalProps {
@@ -19,13 +19,13 @@ export function UpdateTaskModal({
 }: UpdateTaskModalProps) {
   const t = useTranslations("tasks.UpdateTaskModal");
 
-  const { isModalOpen, onModalOpenChange } = useUpdateTask();
+  const { isOpen, onOpenChange } = useModal("updateTask");
 
   return (
     <FormBaseModal
       data-test="edit-task-modal"
-      isOpen={isModalOpen}
-      onOpenChange={onModalOpenChange}
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>

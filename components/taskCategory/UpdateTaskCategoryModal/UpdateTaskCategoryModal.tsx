@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FormBaseModal,
   FormBaseModalDialog,
@@ -6,8 +8,8 @@ import {
 
 import { useTranslations } from "next-intl";
 import { UpdateTaskCategoryForm } from "../UpdateTaskCategoryForm";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
-import { useUpdateTaskCategoryModal } from "./UpdateTaskCategoryModalContext";
 
 interface UpdateTaskCategoryModalProps {
   taskCategoryId: number;
@@ -20,7 +22,7 @@ export function UpdateTaskCategoryModal({
 }: UpdateTaskCategoryModalProps) {
   const t = useTranslations("taskCategories.UpdateTaskCategoryModal");
 
-  const { isOpen, onOpenChange } = useUpdateTaskCategoryModal();
+  const { isOpen, onOpenChange } = useModal("updateTaskCategory");
 
   return (
     <FormBaseModal

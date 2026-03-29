@@ -8,12 +8,11 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { mockedCustomerDetail } from "@/mocks/customers";
 import { CustomerDetailPage } from "./CustomerDetailPage";
-import { SearchList } from "@/components/search/SearchList";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
+import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
 import { CustomerDetailHeaderInteractive } from "@/components/customer/CustomerDetailHeader";
 import { withUpdateCustomerProvider } from "@/components/customer/UpdateCustomerProvider/__stories__";
 import { withDeleteCustomerProvider } from "@/components/customer/DeleteCustomerProvider/__stories__";
@@ -26,6 +25,7 @@ const meta = {
   component: CustomerDetailPage,
   parameters: { layout: "fullscreen" },
   decorators: [
+    withTaskSearchModal,
     withUpdateCustomerProvider,
     withDeleteCustomerProvider,
     withUpdateCustomerImageProvider,

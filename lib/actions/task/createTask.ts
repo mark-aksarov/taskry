@@ -28,10 +28,7 @@ const schema = z.object({
   assigneeId: z.preprocess(emptyStringToUndefined, userId.optional()),
 });
 
-export async function createTask(
-  _prevState: ActionState,
-  formData: FormData,
-): Promise<ActionState> {
+export async function createTask(formData: FormData): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

@@ -40,7 +40,7 @@ export function ProjectItemWrapper({
 }: ProjectItemWrapperProps) {
   return (
     <ModalManagerProvider>
-      <UpdateProjectProvider projectId={project.id}>
+      <UpdateProjectProvider>
         <DeleteProjectProvider>
           <UpdateProjectStatusProvider>
             {children}

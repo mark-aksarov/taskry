@@ -25,16 +25,16 @@ import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { UserTaskListStory } from "@/components/users/UserTaskList/__stories__";
 import { UserTasksPresentation } from "@/components/users/UserTasksPresentation";
 import { UserDetailHeaderInteractive } from "@/components/users/UserDetailHeader";
-import { withCreateTaskProvider } from "@/components/tasks/CreateTaskContext/__stories__";
+import { withCreateTaskProvider } from "@/components/tasks/CreateTaskProvider/__stories__";
 import { withUpdateUserProvider } from "@/components/users/UpdateUserProvider/__stories__";
 import { withDeleteUserProvider } from "@/components/users/DeleteUserProvider/__stories__";
-import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksContext/__stories__";
+import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksProvider/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { MockedUserDetailHeaderProviders } from "@/components/users/UserDetailHeader/__stories__";
 import { withChangePasswordProvider } from "@/components/users/ChangePasswordProvider/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
-import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
+import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesProvider/__stories__";
 
 const meta = {
   title: "pages/TeamProfileTasksPage",

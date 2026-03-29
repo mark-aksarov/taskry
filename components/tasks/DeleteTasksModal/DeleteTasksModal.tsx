@@ -14,18 +14,11 @@ import { DialogHeading } from "@/components/ui/Dialog";
 import { useDeleteTasks } from "../DeleteTasksContext";
 import { useSelectedTasks } from "../SelectedTasksContext";
 import { overlayTransitionDuration } from "@/components/ui/styles";
+import { useModal } from "@/components/common/ModalManagerContext";
 
-interface DeleteTasksModalProps {
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
-}
-
-export function DeleteTasksModal({
-  isOpen,
-  onOpenChange,
-}: DeleteTasksModalProps) {
+export function DeleteTasksModal() {
   const t = useTranslations("tasks.DeleteTasksModal");
-
+  const { isOpen, onOpenChange } = useModal("deleteTasks");
   const { ids: selectedIds, clear: clearSelectedItems } = useSelectedTasks();
   const { action, setIds: setDeleteTaskIds } = useDeleteTasks();
 

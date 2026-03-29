@@ -23,8 +23,8 @@ export function DeleteSubtaskProvider({
   const refreshTaskDetail = useRefreshTaskDetail(taskId);
 
   const [state, action, isPending] = useActionState(
-    async (_prevState: ActionState, id: number) => {
-      const newState = await deleteSubtask(id);
+    async (_prevState: ActionState, subtaskId: number) => {
+      const newState = await deleteSubtask(subtaskId);
 
       if (newState.status === "success") {
         // The following line isn't marked as transition

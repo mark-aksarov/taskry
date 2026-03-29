@@ -3,7 +3,7 @@
 import { useRouter } from "@/i18n/navigation";
 import { useActionState, useMemo } from "react";
 import { ActionState } from "@/lib/actions/types";
-import { useCreateTaskCategoryModal } from "../CreateTaskCategoryModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { CreateTaskCategoryContext } from "../CreateTaskCategoryContext";
 import { createTaskCategory } from "@/lib/actions/taskCategory/createTaskCategory";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
@@ -40,7 +40,7 @@ export function CreateTaskCategoryProvider({
 
   // we need to track CreateTaskCategoryModal open state to show toast
   const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } =
-    useCreateTaskCategoryModal();
+    useModal("createTaskCategory");
 
   // hooks below wait for the transition to complete (reducerAction returns the new state)
   useCloseModalThenShowToastOnActionSuccess(

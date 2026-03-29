@@ -4,11 +4,13 @@ import { TaskListItem } from "../../TaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskListItemStory } from "../../TaskListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteTasksProvider } from "../../DeleteTasksContext/__stories__";
+import { MockedTaskItemWrapper } from "../../TaskItemWrapper/__stories__";
+import { withDeleteTasksProvider } from "../../DeleteTasksProvider/__stories__";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
-import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusesContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusesProvider/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 
 const meta = {
@@ -21,6 +23,7 @@ const meta = {
     withCurrentUserProvider,
     withPageTransitionProvider,
     withSelectedTasksProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
   excludeStories: ["getTaskListItems"],
@@ -32,12 +35,14 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedTaskList.map((task) => (
-      <TaskListItem
-        key={task.id}
-        {...TaskListItemStory.args}
-        {...task}
-        showCheckbox={true}
-      />
+      <MockedTaskItemWrapper>
+        <TaskListItem
+          key={task.id}
+          {...TaskListItemStory.args}
+          {...task}
+          showCheckbox={true}
+        />
+      </MockedTaskItemWrapper>
     )),
   },
 } satisfies Story;

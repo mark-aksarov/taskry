@@ -57,3 +57,17 @@ export const WithOverflowContent = {
     },
   },
 } satisfies Story;
+
+export const WithActiveStatus = {
+  args: {
+    ...Default.args,
+    status: "active",
+  },
+} satisfies Story;
+
+export const WithCompletedStatus = {
+  args: {
+    ...Default.args,
+    status: "completed",
+  },
+} satisfies Story;

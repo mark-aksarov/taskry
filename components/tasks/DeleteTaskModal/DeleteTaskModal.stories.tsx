@@ -1,28 +1,26 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/Button";
+import {
+  withOpenModal,
+  withModalManagerProvider,
+} from "@/components/common/ModalManagerContext/__stories__";
+
 import { Meta, StoryObj } from "@storybook/react";
 import { DeleteTaskModal } from "../DeleteTaskModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteTaskProvider } from "../DeleteTaskContext/__stories__";
+import { withDeleteTaskProvider } from "../DeleteTaskProvider/__stories__";
 import { withSelectedTasksProvider } from "../SelectedTasksContext/__stories__";
 
 const meta = {
   title: "components/tasks/DeleteTaskModal",
   component: DeleteTaskModal,
   decorators: [
+    withOpenModal,
     withDeleteTaskProvider,
     withSelectedTasksProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
-  render: (args) => {
-    const [open, setOpen] = useState(true);
-
-    return (
-      <>
-        <Button label="Delete task" onClick={() => setOpen(true)} />
-        <DeleteTaskModal {...args} isOpen={open} onOpenChange={setOpen} />
-      </>
-    );
+  parameters: {
+    modalId: "deleteTask",
   },
 } satisfies Meta<typeof DeleteTaskModal>;
 
@@ -34,7 +32,5 @@ export const Default = {
   args: {
     taskId: 1,
     taskTitle: "Task 1",
-    isOpen: true,
-    onOpenChange: () => {},
   },
 } satisfies Story;

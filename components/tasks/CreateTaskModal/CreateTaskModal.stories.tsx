@@ -1,35 +1,30 @@
-import { useEffect } from "react";
+import {
+  withOpenModal,
+  withModalManagerProvider,
+} from "@/components/common/ModalManagerContext/__stories__";
+
 import { CreateTaskForm } from "../CreateTaskForm";
 import { CreateTaskModal } from "./CreateTaskModal";
-import { Button } from "@/components/ui/Button";
 import { mockedUserSummaries } from "@/mocks/users";
-import { useCreateTask } from "../CreateTaskContext";
 import { TaskFormSkeleton } from "../TaskFormSkeleton";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedProjectSummaries } from "@/mocks/projects";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCreateTaskProvider } from "../CreateTaskContext/__stories__";
+import { withCreateTaskProvider } from "../CreateTaskProvider/__stories__";
 
 const meta = {
   title: "components/tasks/CreateTaskModal",
   component: CreateTaskModal,
   decorators: [
-    (Story) => {
-      const { onModalOpenChange } = useCreateTask();
-
-      useEffect(() => onModalOpenChange(true), [onModalOpenChange]);
-
-      return (
-        <>
-          <Button label="New task" onClick={() => onModalOpenChange(true)} />
-          <Story />
-        </>
-      );
-    },
+    withOpenModal,
     withCreateTaskProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
+  parameters: {
+    modalId: "createTask",
+  },
 } satisfies Meta<typeof CreateTaskModal>;
 
 export default meta;

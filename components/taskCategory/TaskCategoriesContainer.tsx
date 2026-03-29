@@ -1,8 +1,10 @@
 import { TaskCategoryList } from "./TaskCategoryList";
 import { TaskCategoryListItem } from "./TaskCategoryListItem";
-import { TaskCategoryProviders } from "./TaskCategoryProviders";
 import { UpdateTaskCategoryModal } from "./UpdateTaskCategoryModal";
 import { DeleteTaskCategoryModal } from "./DeleteTaskCategoryModal";
+import { ModalManagerProvider } from "../common/ModalManagerContext";
+import { UpdateTaskCategoryProvider } from "./UpdateTaskCategoryProvider";
+import { DeleteTaskCategoryProvider } from "./DeleteTaskCategoryProvider";
 import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
 
 export async function TaskCategoriesContainer() {
@@ -11,19 +13,26 @@ export async function TaskCategoriesContainer() {
   return (
     <TaskCategoryList>
       {taskCategories.map((taskCategory) => (
-        <TaskCategoryProviders key={taskCategory.id}>
-          <TaskCategoryListItem id={taskCategory.id} name={taskCategory.name} />
+        <ModalManagerProvider key={taskCategory.id}>
+          <UpdateTaskCategoryProvider>
+            <DeleteTaskCategoryProvider>
+              <TaskCategoryListItem
+                id={taskCategory.id}
+                name={taskCategory.name}
+              />
 
-          <UpdateTaskCategoryModal
-            taskCategoryId={taskCategory.id}
-            taskCategoryName={taskCategory.name}
-          />
+              <UpdateTaskCategoryModal
+                taskCategoryId={taskCategory.id}
+                taskCategoryName={taskCategory.name}
+              />
 
-          <DeleteTaskCategoryModal
-            taskCategoryId={taskCategory.id}
-            taskCategoryName={taskCategory.name}
-          />
-        </TaskCategoryProviders>
+              <DeleteTaskCategoryModal
+                taskCategoryId={taskCategory.id}
+                taskCategoryName={taskCategory.name}
+              />
+            </DeleteTaskCategoryProvider>
+          </UpdateTaskCategoryProvider>
+        </ModalManagerProvider>
       ))}
     </TaskCategoryList>
   );

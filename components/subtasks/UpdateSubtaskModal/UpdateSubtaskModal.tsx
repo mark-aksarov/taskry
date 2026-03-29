@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FormBaseModal,
   FormBaseModalDialog,
@@ -6,7 +8,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { UpdateSubtaskForm } from "../UpdateSubtaskForm";
-import { useUpdateSubtaskModal } from "./UpdateSubtaskModalContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UpdateSubtaskModalProps {
@@ -22,15 +24,14 @@ export function UpdateSubtaskModal({
 }: UpdateSubtaskModalProps) {
   const t = useTranslations("subtasks.UpdateSubtaskModal");
 
-  const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } =
-    useUpdateSubtaskModal();
+  const { isOpen, onOpenChange } = useModal("updateSubtask");
 
   return (
     <FormBaseModal
       data-test="edit-subtask-modal"
       className="md:w-[350px]"
-      isOpen={isModalOpen}
-      onOpenChange={onModalOpenChange}
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("heading")}</DialogHeaderWithClose>

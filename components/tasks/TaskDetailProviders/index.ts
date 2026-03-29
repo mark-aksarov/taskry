@@ -1,1 +1,0 @@
-export { TaskDetailProviders } from "./TaskDetailProviders";

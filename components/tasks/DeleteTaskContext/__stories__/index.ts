@@ -1,1 +1,0 @@
-export { withDeleteTaskProvider } from "./withDeleteTaskProvider";

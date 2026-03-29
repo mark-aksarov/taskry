@@ -1,5 +1,8 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/Button";
+import {
+  withOpenModal,
+  withModalManagerProvider,
+} from "@/components/common/ModalManagerContext/__stories__";
+
 import { Meta, StoryObj } from "@storybook/react";
 import { DeleteSubtaskModal } from "../DeleteSubtaskModal";
 import { withToastRegion } from "@/.storybook/withToastRegion";
@@ -10,19 +13,15 @@ const meta = {
   title: "components/subtasks/DeleteSubtaskModal",
   component: DeleteSubtaskModal,
   decorators: [
+    withOpenModal,
     withDeleteSubtaskProvider,
     withToastRegion,
+    withModalManagerProvider,
     withThemedBackground,
   ],
-  render: (args) => {
-    const [open, setOpen] = useState(true);
 
-    return (
-      <>
-        <Button label="Open modal" onClick={() => setOpen(true)} />
-        <DeleteSubtaskModal {...args} isOpen={open} onOpenChange={setOpen} />
-      </>
-    );
+  parameters: {
+    modalId: "deleteSubtask",
   },
 } satisfies Meta<typeof DeleteSubtaskModal>;
 
@@ -32,8 +31,6 @@ export type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     subtaskId: 1,
-    subtaskText: "Project Manager",
-    isOpen: true,
-    onOpenChange: () => {},
+    subtaskText: "Fake subtask",
   },
 } satisfies Story;

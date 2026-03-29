@@ -1,34 +1,26 @@
-import { TaskDetail } from "../../TaskDetail";
+import { mockedTaskList } from "@/mocks/tasks";
 import { TaskListItem } from "../TaskListItem";
-import { UpdateTaskForm } from "../../UpdateTaskForm";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { UserDetail } from "@/components/users/UserDetail";
-import { SubtaskList } from "@/components/subtasks/SubtaskList";
-import { CommentList } from "@/components/comments/CommentList";
-import { mockedTaskDetail, mockedTaskList } from "@/mocks/tasks";
-import { ProjectDetail } from "@/components/projects/ProjectDetail";
-import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
-import { mockedUserDetail, mockedUserSummaries } from "@/mocks/users";
-import { UserDetailHeader } from "@/components/users/UserDetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { CreateSubtaskModal } from "@/components/subtasks/CreateSubtaskModal";
-import { withDeleteTasksProvider } from "../../DeleteTasksContext/__stories__";
-import { mockedProjectDetail, mockedProjectSummaries } from "@/mocks/projects";
-import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
-import { CommentListStory } from "@/components/comments/CommentList/__stories__";
-import { MockedTaskDetailProviders } from "../../TaskDetailProviders/__stories__";
+import { withMockedTaskItemWrapper } from "../../TaskItemWrapper/__stories__";
+import { withDeleteTasksProvider } from "../../DeleteTasksProvider/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
-import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusesContext/__stories__";
+import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusesProvider/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
+
+const mockedTask = mockedTaskList[0];
 
 const meta = {
   title: "components/tasks/TaskListItem",
   component: TaskListItem,
   decorators: [
+    withMockedTaskItemWrapper,
     withDeleteTasksProvider,
     withUpdateTaskStatusesProvider,
     withCurrentUserProvider,
     withSelectedTasksProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof TaskListItem>;
@@ -36,45 +28,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const task = mockedTaskList[0];
-
 export const Default = {
   args: {
-    ...task,
-    taskCommentsContainer: <CommentList {...CommentListStory.args} />,
-    updateTaskFormContainer: (
-      <UpdateTaskForm
-        {...mockedTaskDetail}
-        taskId={mockedTaskDetail.id}
-        taskCategorySelectItems={mockedTaskCategorySummaries}
-        projectSelectItems={mockedProjectSummaries}
-        assigneeSelectItems={mockedUserSummaries}
-      />
-    ),
-    userDetailContainer: <UserDetail {...mockedUserDetail} />,
-    userDetailHeaderContainer: (
-      <UserDetailHeader
-        fullName={mockedUserDetail.fullName}
-        imageUrl={mockedUserDetail.imageUrl}
-        positionName={mockedUserDetail.position.name}
-      />
-    ),
-    projectDetailContainer: <ProjectDetail {...mockedProjectDetail} />,
-    taskDetailContainer: (
-      <MockedTaskDetailProviders>
-        <TaskDetail
-          {...mockedTaskDetail}
-          subtasksList={<SubtaskList {...SubtaskListStory.args} />}
-        />
-
-        <CreateSubtaskModal taskId={mockedTaskDetail.id} />
-      </MockedTaskDetailProviders>
-    ),
-    sendComment: () => ({ status: "success" }),
-    updateComment: () => ({ status: "success" }),
-    updateTask: () => ({ status: "success" }),
-    deleteTask: () => ({ status: "success" }),
-    updateTaskStatus: () => ({ status: "success" }),
+    ...mockedTask,
   },
 } satisfies Story;
 

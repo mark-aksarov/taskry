@@ -42,7 +42,7 @@ export default async function AppProjectDetailPage({
   }
 
   return (
-    <UpdateProjectProvider projectId={id}>
+    <UpdateProjectProvider>
       <DeleteProjectProvider>
         <UpdateProjectStatusProvider>
           <ProjectDetailPage

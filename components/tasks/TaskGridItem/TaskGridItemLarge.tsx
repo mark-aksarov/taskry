@@ -1,66 +1,44 @@
 "use client";
 
 import {
-  GridItemInfo,
-  GridItemText,
-  GridItemTitleDetailModalTrigger,
-} from "@/components/common/Grid";
-
-import {
-  ItemBaseDetailModalTrigger,
-  ItemBaseCommentsModalTrigger,
+  ItemBaseDetailButton,
+  ItemBaseCommentsButton,
   ItemBaseUserImageContainer,
 } from "@/components/common/ItemBase";
 
 import { memo } from "react";
-import { UpdateTaskModal } from "../UpdateTaskModal";
-import { TaskDetailModal } from "../TaskDetailModal";
-import { TaskItemActionMenuTrigger } from "../TaskItem";
-import { TaskCommentsModal } from "../TaskCommentsModal";
+import { BaseTaskItemProps } from "../TaskItem";
 import { TaskItemBaseBadge } from "../TaskItemBaseBadge";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { useSelectedTasks } from "../SelectedTasksContext";
 import { TaskGridItemProgress } from "./TaskGridItemProgress";
+import { ListItemTitleButton } from "@/components/common/List";
 import { ItemBaseDeadline } from "@/components/common/ItemBase";
 import { TaskItemCheckbox } from "../TaskItem/TaskItemCheckbox";
-import { BaseTaskItemProps, TaskItemProviders } from "../TaskItem";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { SelectableItem } from "@/components/common/SelectableItem";
-import { UserDetailModal } from "@/components/users/UserDetailModal";
+import { GridItemInfo, GridItemText } from "@/components/common/Grid";
+import { TaskItemActionMenuTrigger, TaskItemPendingOverlay } from "../TaskItem";
 
 interface Props extends BaseTaskItemProps {
   subtasksTotal: number;
   subtasksDone: number;
-  taskDetailContainer: React.ReactNode;
-  userDetailContainer: React.ReactNode;
-  userDetailHeaderContainer: React.ReactNode;
 }
 
-export function TaskGridItemLarge({
-  updateTask,
-  deleteTask,
-  updateTaskStatus,
-  ...props
-}: Props) {
+export function TaskGridItemLarge(props: Props) {
   const selected = useSelectedTasks();
 
   return (
-    <TaskItemProviders
-      taskId={props.id}
-      deleteTask={deleteTask}
-      updateTask={updateTask}
-      updateTaskStatus={updateTaskStatus}
-    >
+    <TaskItemPendingOverlay taskId={props.id}>
       <SelectableItem
         {...selected}
         item={{ id: props.id, status: props.status }}
       >
         <TaskGridItemLargeInner {...props} />
       </SelectableItem>
-    </TaskItemProviders>
+    </TaskItemPendingOverlay>
   );
 }
-
-type InnerProps = Omit<Props, "updateTask" | "deleteTask" | "updateTaskStatus">;
 
 export const TaskGridItemLargeInner = memo(
   ({
@@ -72,14 +50,7 @@ export const TaskGridItemLargeInner = memo(
     status,
     subtasksTotal,
     subtasksDone,
-    taskCommentsContainer,
-    updateTaskFormContainer,
-    taskDetailContainer,
-    userDetailContainer,
-    userDetailHeaderContainer,
-    sendComment,
-    updateComment,
-  }: InnerProps) => {
+  }: Props) => {
     const assigneeImg = (
       <ItemBaseUserImageContainer
         user={assignee}
@@ -89,87 +60,64 @@ export const TaskGridItemLargeInner = memo(
       />
     );
 
+    const { onOpenChange: onTaskDetailModalOpenChange } =
+      useModal("taskDetail");
+    const { onOpenChange: onUserDetailModalOpenChange } =
+      useModal("userDetail");
+    const { onOpenChange: onTaskCommentsModalOpenChange } =
+      useModal("taskComments");
+
     return (
-      <>
-        <TaskGridItemLayout
-          checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
-          menuTriggerSlot={
-            <TaskItemActionMenuTrigger
-              taskId={id}
-              taskTitle={title}
-              taskStatus={status}
-              className="-mr-2"
-            />
-          }
-          titleSlot={
-            <GridItemInfo className="flex-auto">
-              <GridItemTitleDetailModalTrigger
-                modal={
-                  <TaskDetailModal
-                    taskId={id}
-                    taskDetailContainer={taskDetailContainer}
-                  />
-                }
-              >
-                {title}
-              </GridItemTitleDetailModalTrigger>
+      <TaskGridItemLayout
+        checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
+        menuTriggerSlot={
+          <TaskItemActionMenuTrigger
+            taskId={id}
+            taskTitle={title}
+            taskStatus={status}
+            className="-mr-2"
+          />
+        }
+        titleSlot={
+          <GridItemInfo className="flex-auto">
+            <ListItemTitleButton
+              onPress={() => onTaskDetailModalOpenChange(true)}
+            >
+              {title}
+            </ListItemTitleButton>
 
-              <GridItemText>
-                <ItemBaseDeadline deadline={deadline} />
-              </GridItemText>
-            </GridItemInfo>
-          }
-          assigneeImageSlot={
-            assignee ? (
-              <>
-                <ItemBaseDetailModalTrigger
-                  modal={
-                    <UserDetailModal
-                      userId={assignee.id}
-                      userDetailHeaderContainer={userDetailHeaderContainer}
-                      userDetailContainer={userDetailContainer}
-                    />
-                  }
-                >
-                  {assigneeImg}
-                </ItemBaseDetailModalTrigger>
-              </>
-            ) : (
-              assigneeImg
-            )
-          }
-          commentsSlot={
-            <ItemBaseCommentsModalTrigger
-              data-test={`task-${id}-comments-modal-trigger`}
-              commentsCount={commentsCount}
-              modal={
-                <TaskCommentsModal
-                  taskId={id}
-                  taskCommentsContainer={taskCommentsContainer}
-                  sendComment={sendComment}
-                  updateComment={updateComment}
-                />
-              }
-            />
-          }
-          statusSlot={
-            <TaskItemBaseBadge
-              taskId={id}
-              deadline={deadline}
-              status={status}
-            />
-          }
-          progressSlot={
-            <TaskGridItemProgress
-              subtasksDone={subtasksDone}
-              subtasksTotal={subtasksTotal}
-            />
-          }
-        />
-
-        {/* Modal for editing task details */}
-        <UpdateTaskModal updateTaskFormContainer={updateTaskFormContainer} />
-      </>
+            <GridItemText>
+              <ItemBaseDeadline deadline={deadline} />
+            </GridItemText>
+          </GridItemInfo>
+        }
+        assigneeImageSlot={
+          assignee ? (
+            <ItemBaseDetailButton
+              onPress={() => onUserDetailModalOpenChange(true)}
+            >
+              {assigneeImg}
+            </ItemBaseDetailButton>
+          ) : (
+            assigneeImg
+          )
+        }
+        commentsSlot={
+          <ItemBaseCommentsButton
+            commentsCount={commentsCount}
+            onPress={() => onTaskCommentsModalOpenChange(true)}
+          />
+        }
+        statusSlot={
+          <TaskItemBaseBadge taskId={id} deadline={deadline} status={status} />
+        }
+        progressSlot={
+          <TaskGridItemProgress
+            subtasksDone={subtasksDone}
+            subtasksTotal={subtasksTotal}
+          />
+        }
+      />
     );
   },
 );

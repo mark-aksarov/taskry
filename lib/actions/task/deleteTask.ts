@@ -8,7 +8,6 @@ import { deleteTasks as deleteTaskQuery } from "@/lib/data/task/task.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
 export async function deleteTask(
-  _prevState: ActionState,
   payload: DeleteTaskPayload,
 ): Promise<ActionState> {
   // Authorization

@@ -1,4 +1,7 @@
+"use client";
+
 import { useTranslations } from "next-intl";
+import { useModal } from "../common/ModalManagerContext";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { CommentFormProvider } from "../comments/CommentFormContext";
 import { SendCommentProvider } from "../comments/SendCommentContext";
@@ -19,6 +22,7 @@ export function TaskCommentsModal({
   updateComment,
 }: TaskCommentsModalProps) {
   const t = useTranslations("tasks.TaskCommentsModal");
+  const { isOpen, onOpenChange } = useModal("taskComments");
 
   return (
     <CommentFormProvider
@@ -31,6 +35,8 @@ export function TaskCommentsModal({
           <EntityCommentsModal
             title={t("title")}
             commentsContainer={taskCommentsContainer}
+            isOpen={isOpen}
+            onOpenChange={onOpenChange}
           />
         </UpdateCommentProvider>
       </SendCommentProvider>

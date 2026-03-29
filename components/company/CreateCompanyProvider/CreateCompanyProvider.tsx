@@ -25,7 +25,7 @@ export function CreateCompanyProvider({
 
   const [state, action, isPending] = useActionState(
     async (state: ActionState, payload: FormData) => {
-      const newState = await createCompany(state, payload);
+      const newState = await createCompany(payload);
 
       if (newState.status === "success") {
         // router.refresh is wrapped in startTransition internally

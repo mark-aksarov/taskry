@@ -3,7 +3,10 @@ import { SubtaskListItem } from "../../SubtaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SubtaskListItemStory } from "../../SubtaskListItem/__stories__";
-import { MockedSubtaskProviders } from "../../SubtaskProviders/__stories__";
+import { ModalManagerProvider } from "@/components/common/ModalManagerContext";
+import { MockedDeleteSubtaskProvider } from "../../DeleteSubtaskProvider/__stories__";
+import { MockedUpdateSubtaskProvider } from "../../UpdateSubtaskProvider/__stories__";
+import { MockedToggleSubtaskProvider } from "../../ToggleSubtaskProvider/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
 const mockedSubtasks = [
@@ -29,9 +32,15 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedSubtasks.map((subtask) => (
-      <MockedSubtaskProviders key={subtask.id}>
-        <SubtaskListItem {...SubtaskListItemStory.args} {...subtask} />
-      </MockedSubtaskProviders>
+      <ModalManagerProvider>
+        <MockedDeleteSubtaskProvider>
+          <MockedUpdateSubtaskProvider>
+            <MockedToggleSubtaskProvider>
+              <SubtaskListItem {...SubtaskListItemStory.args} {...subtask} />
+            </MockedToggleSubtaskProvider>
+          </MockedUpdateSubtaskProvider>
+        </MockedDeleteSubtaskProvider>
+      </ModalManagerProvider>
     )),
   },
 } satisfies Story;

@@ -11,10 +11,7 @@ const schema = z.object({
   name: companyName,
 });
 
-export async function createCompany(
-  _prevState: ActionState,
-  formData: FormData,
-): Promise<ActionState> {
+export async function createCompany(formData: FormData): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

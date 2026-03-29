@@ -12,22 +12,19 @@ import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { useDeleteSubtask } from "../DeleteSubtaskContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 
 interface DeleteSubtaskModalProps {
   subtaskId: number;
   subtaskText: string;
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
 }
 
 export function DeleteSubtaskModal({
   subtaskId,
   subtaskText,
-  isOpen,
-  onOpenChange,
 }: DeleteSubtaskModalProps) {
   const t = useTranslations("subtasks.DeleteSubtaskModal");
-
+  const { isOpen, onOpenChange } = useModal("deleteSubtask");
   const { action } = useDeleteSubtask();
 
   function handleDelete() {

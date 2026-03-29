@@ -1,9 +1,3 @@
-import {
-  ActionFn,
-  ActionState,
-  DeleteTaskPayload,
-  UpdateTaskStatusPayload,
-} from "@/lib/actions/types";
 import { TaskStatus } from "@/generated/prisma/enums";
 
 export interface BaseTaskItemProps {
@@ -17,11 +11,4 @@ export interface BaseTaskItemProps {
   };
   commentsCount: number;
   status: TaskStatus;
-  taskCommentsContainer: React.ReactNode;
-  updateTaskFormContainer: React.ReactNode;
-  sendComment: ActionFn<ActionState, FormData>;
-  updateComment: ActionFn<ActionState, FormData>;
-  updateTask: ActionFn<ActionState, FormData>;
-  deleteTask: ActionFn<ActionState, DeleteTaskPayload>;
-  updateTaskStatus: ActionFn<ActionState, UpdateTaskStatusPayload>;
 }

@@ -1,23 +1,22 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { DialogTrigger } from "react-aria-components";
-import { TaskCategoryFiltersModal } from "./TaskCategoryFiltersModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { FilterButtonMobile } from "@/components/common/FilterButton";
 
 export interface TaskCategoryFiltersModalTriggerProps {
   filtersFormContainer: React.ReactNode;
 }
 
-export function TaskCategoryFiltersModalTrigger({
-  filtersFormContainer,
-}: TaskCategoryFiltersModalTriggerProps) {
+export function TaskCategoryFiltersModalTrigger() {
   const t = useTranslations("tasks.TaskCategoryFiltersModalTrigger");
+  const { onOpenChange } = useModal("taskCategoryFilters");
 
   return (
-    <DialogTrigger>
-      <FilterButtonMobile mode="single" label={t("buttonLabel")} />
-      <TaskCategoryFiltersModal filtersFormContainer={filtersFormContainer} />
-    </DialogTrigger>
+    <FilterButtonMobile
+      mode="single"
+      label={t("buttonLabel")}
+      onPress={() => onOpenChange(true)}
+    />
   );
 }

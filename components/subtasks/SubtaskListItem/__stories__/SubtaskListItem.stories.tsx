@@ -1,15 +1,21 @@
 import { SubtaskListItem } from "../SubtaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withSubtaskProviders } from "../../SubtaskProviders/__stories__";
+import { withDeleteSubtaskProvider } from "../../DeleteSubtaskProvider/__stories__";
+import { withUpdateSubtaskProvider } from "../../UpdateSubtaskProvider/__stories__";
+import { withToggleSubtaskProvider } from "../../ToggleSubtaskProvider/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 
 const meta = {
   title: "components/subtasks/SubtaskListItem",
   component: SubtaskListItem,
   decorators: [
-    withSubtaskProviders,
+    withDeleteSubtaskProvider,
+    withUpdateSubtaskProvider,
+    withToggleSubtaskProvider,
     withCurrentUserProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
   parameters: {

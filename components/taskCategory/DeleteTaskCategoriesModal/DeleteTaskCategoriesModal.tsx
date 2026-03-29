@@ -12,20 +12,13 @@ import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { overlayTransitionDuration } from "@/components/ui/styles";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useDeleteTaskCategories } from "../DeleteTaskCategoriesContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 
-interface DeleteTaskCategoriesModalProps {
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
-}
-
-export function DeleteTaskCategoriesModal({
-  isOpen,
-  onOpenChange,
-}: DeleteTaskCategoriesModalProps) {
+export function DeleteTaskCategoriesModal() {
   const t = useTranslations("taskCategories.DeleteTaskCategoriesModal");
-
+  const { isOpen, onOpenChange } = useModal("deleteTaskCategories");
   const { ids: selectedIds, clear: clearSelectedItems } = useSelectedItems();
   const { action, setIds: setDeleteTaskCategoryIds } =
     useDeleteTaskCategories();

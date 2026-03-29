@@ -6,6 +6,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface TaskDetailModalProps {
@@ -18,9 +19,14 @@ export function TaskDetailModal({
   taskDetailContainer,
 }: TaskDetailModalProps) {
   const t = useTranslations("tasks.TaskDetailModal");
+  const { isOpen, onOpenChange } = useModal("taskDetail");
 
   return (
-    <DetailModal data-test="task-detail-modal">
+    <DetailModal
+      data-test="task-detail-modal"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+    >
       <DetailModalDialog>
         <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
         <DialogBody>{taskDetailContainer}</DialogBody>

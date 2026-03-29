@@ -1,23 +1,18 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { DialogTrigger } from "react-aria-components";
-import { AssigneeFiltersModal } from "./AssigneeFiltersModal";
 import { FilterButtonMobile } from "@/components/common/FilterButton";
+import { useModal } from "@/components/common/ModalManagerContext";
 
-export interface AssigneeFiltersModalTriggerProps {
-  filtersFormContainer: React.ReactNode;
-}
-
-export function AssigneeFiltersModalTrigger({
-  filtersFormContainer,
-}: AssigneeFiltersModalTriggerProps) {
+export function AssigneeFiltersModalTrigger() {
   const t = useTranslations("tasks.AssigneeFiltersModalTrigger");
+  const { onOpenChange } = useModal("assigneeFilters");
 
   return (
-    <DialogTrigger>
-      <FilterButtonMobile mode="single" label={t("buttonLabel")} />
-      <AssigneeFiltersModal filtersFormContainer={filtersFormContainer} />
-    </DialogTrigger>
+    <FilterButtonMobile
+      mode="single"
+      label={t("buttonLabel")}
+      onPress={() => onOpenChange(true)}
+    />
   );
 }

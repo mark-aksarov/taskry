@@ -30,10 +30,7 @@ const schema = z.object({
   assigneeId: z.preprocess(emptyStringToNull, userId.nullable()),
 });
 
-export async function updateTask(
-  _prevState: ActionState,
-  formData: FormData,
-): Promise<ActionState> {
+export async function updateTask(formData: FormData): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

@@ -1,14 +1,16 @@
-import { TaskGridLarge } from "../TaskGridLarge";
 import { mockedTaskList } from "@/mocks/tasks";
+import { TaskGridLarge } from "../TaskGridLarge";
 import { TaskGridItemLarge } from "../../TaskGridItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskGridItemLargeStory } from "../../TaskGridItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteTasksProvider } from "../../DeleteTasksContext/__stories__";
+import { MockedTaskItemWrapper } from "../../TaskItemWrapper/__stories__";
+import { withDeleteTasksProvider } from "../../DeleteTasksProvider/__stories__";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
-import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusesContext/__stories__";
+import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusesProvider/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 
 const meta = {
@@ -21,6 +23,7 @@ const meta = {
     withCurrentUserProvider,
     withPageTransitionProvider,
     withSelectedTasksProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof TaskGridLarge>;
@@ -31,11 +34,13 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedTaskList.map((task) => (
-      <TaskGridItemLarge
-        {...TaskGridItemLargeStory.args}
-        key={task.id}
-        {...task}
-      />
+      <MockedTaskItemWrapper>
+        <TaskGridItemLarge
+          {...TaskGridItemLargeStory.args}
+          key={task.id}
+          {...task}
+        />
+      </MockedTaskItemWrapper>
     )),
   },
 } satisfies Story;

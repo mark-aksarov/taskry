@@ -11,9 +11,9 @@ import {
 import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useDeleteTaskCategory } from "../DeleteTaskCategoryContext";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { useDeleteTaskCategoryModal } from "./DeleteTaskCategoryModalContext";
 
 interface DeleteTaskCategoryModalProps {
   taskCategoryId: number;
@@ -25,10 +25,8 @@ export function DeleteTaskCategoryModal({
   taskCategoryName,
 }: DeleteTaskCategoryModalProps) {
   const t = useTranslations("taskCategories.DeleteTaskCategoryModal");
-
   const { action } = useDeleteTaskCategory();
-  const { isOpen, onOpenChange } = useDeleteTaskCategoryModal();
-
+  const { isOpen, onOpenChange } = useModal("deleteTaskCategory");
   const { remove: removeSelected } = useSelectedItems();
 
   function handleDelete() {

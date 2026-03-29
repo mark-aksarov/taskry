@@ -1,5 +1,8 @@
-import React from "react";
-import { Button } from "@/components/ui/Button";
+import {
+  withOpenModal,
+  withModalManagerProvider,
+} from "@/components/common/ModalManagerContext/__stories__";
+
 import { Meta, StoryObj } from "@storybook/react";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { DeleteTaskCategoriesModal } from "./DeleteTaskCategoriesModal";
@@ -11,24 +14,15 @@ const meta = {
   title: "components/task-categories/DeleteTaskCategoriesModal",
   component: DeleteTaskCategoriesModal,
   decorators: [
+    withOpenModal,
     withDeleteTaskCategoriesProvider,
     withSelectedItemsProvider,
     withToastRegion,
+    withModalManagerProvider,
     withThemedBackground,
   ],
-  render: (args) => {
-    const [open, setOpen] = React.useState(true);
-
-    return (
-      <>
-        <Button label="Delete task categories" onClick={() => setOpen(true)} />
-        <DeleteTaskCategoriesModal
-          {...args}
-          isOpen={open}
-          onOpenChange={setOpen}
-        />
-      </>
-    );
+  parameters: {
+    modalId: "deleteTaskCategories",
   },
 } satisfies Meta<typeof DeleteTaskCategoriesModal>;
 
@@ -37,8 +31,5 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
-  args: {
-    isOpen: false,
-    onOpenChange: () => {},
-  },
+  args: {},
 } satisfies Story;

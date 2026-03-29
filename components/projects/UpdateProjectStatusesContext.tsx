@@ -10,7 +10,7 @@ export function useUpdateProjectStatuses() {
   const context = useContext(UpdateProjectStatusesContext);
   if (!context) {
     throw new Error(
-      "useUpdateProjectStatuses must be used within a UpdateProjectStatusesProvider",
+      "useUpdateProjectStatuses must be used within a UpdateProjectStatusesContext.Provider",
     );
   }
   return context;

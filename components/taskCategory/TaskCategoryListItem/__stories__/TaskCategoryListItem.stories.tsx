@@ -3,6 +3,9 @@ import { TaskCategoryListItem } from "../TaskCategoryListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withTaskCategoryProviders } from "../../TaskCategoryProviders/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withDeleteTaskCategoryProvider } from "../../DeleteTaskCategoryProvider/__stories__";
+import { withUpdateTaskCategoryProvider } from "../../UpdateTaskCategoryProvider/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withDeleteTaskCategoriesProvider } from "../../DeleteTaskCategoriesProvider/__stories__";
 
@@ -10,10 +13,13 @@ const meta = {
   title: "components/task-categories/TaskCategoryListItem",
   component: TaskCategoryListItem,
   decorators: [
+    withUpdateTaskCategoryProvider,
+    withDeleteTaskCategoryProvider,
     withTaskCategoryProviders,
     withDeleteTaskCategoriesProvider,
     withCurrentUserProvider,
     withSelectedItemsProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof TaskCategoryListItem>;

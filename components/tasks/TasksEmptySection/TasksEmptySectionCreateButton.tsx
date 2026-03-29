@@ -1,13 +1,13 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useCreateTask } from "../CreateTaskContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { EmptySectionButton } from "@/components/common/EmptySection";
 
 export function TasksEmptySectionCreateButton() {
   const t = useTranslations("tasks.TasksEmptySection");
 
-  const { onModalOpenChange } = useCreateTask();
+  const { onOpenChange: onModalOpenChange } = useModal("createTask");
 
   return (
     <EmptySectionButton onPress={() => onModalOpenChange(true)}>

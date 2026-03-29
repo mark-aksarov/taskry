@@ -106,6 +106,7 @@ const CommentItemInner = memo(
             <CommentItemActionMenuTrigger
               commentId={id}
               commentContent={content}
+              className="-mr-2"
             />
           )
         }

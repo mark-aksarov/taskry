@@ -9,10 +9,7 @@ import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedir
 
 const taskIds = z.array(taskId).min(1);
 
-export async function deleteTasks(
-  _prevState: ActionState,
-  ids: number[],
-): Promise<ActionState> {
+export async function deleteTasks(ids: number[]): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

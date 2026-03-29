@@ -1,0 +1,1 @@
+export { UpdateTaskStatusesProvider } from "./UpdateTaskStatusesProvider";

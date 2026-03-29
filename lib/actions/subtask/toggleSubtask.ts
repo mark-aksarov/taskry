@@ -13,7 +13,6 @@ const schema = z.object({
 });
 
 export async function toggleSubtask(
-  _prevState: ActionState,
   data: ToggleSubtaskPayload,
 ): Promise<ActionState> {
   // Authorization

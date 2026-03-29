@@ -26,8 +26,6 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
 import { AbsoluteCenter } from "@/components/common/AbsoluteCenter";
-import { CreateTaskModal } from "@/components/tasks/CreateTaskModal";
-import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { TaskResultsCount } from "@/components/tasks/TaskResultsCount";
 import { TasksEmptySection } from "@/components/tasks/TasksEmptySection";
 import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
@@ -39,7 +37,6 @@ import { TaskSortingMenuTriggerLarge } from "@/components/tasks/TaskSortingMenuT
 import { TaskSortingMenuTriggerMobile } from "@/components/tasks/TaskSortingMenuTrigger";
 import { TasksFilteredEmptySection } from "@/components/tasks/TasksFilteredEmptySection";
 import { TaskStatusFiltersModalTrigger } from "@/components/tasks/TaskStatusFiltersModal";
-import { CreateTaskCategoryModal } from "@/components/taskCategory/CreateTaskCategoryModal";
 import { TaskProjectFiltersModalTrigger } from "@/components/tasks/TaskProjectFiltersModal";
 import { TaskCategoryFiltersModalTrigger } from "@/components/tasks/TaskCategoryFiltersModal";
 
@@ -48,12 +45,6 @@ interface TasksPageProps {
   selectedSortField: TaskSortField;
   totalFilteredTasks: number;
   tasksContainer: React.ReactNode;
-  searchContainer: React.ReactNode;
-  filtersFormContainer: React.ReactNode;
-  taskCategoryFiltersFormContainer: React.ReactNode;
-  projectFiltersFormContainer: React.ReactNode;
-  assigneeFiltersFormContainer: React.ReactNode;
-  createTaskFormContainer: React.ReactNode;
 }
 
 export function TasksPage({
@@ -61,116 +52,90 @@ export function TasksPage({
   selectedSortField,
   totalFilteredTasks,
   tasksContainer,
-  searchContainer,
-  filtersFormContainer,
-  taskCategoryFiltersFormContainer,
-  projectFiltersFormContainer,
-  assigneeFiltersFormContainer,
-  createTaskFormContainer,
 }: TasksPageProps) {
   const t = useTranslations("app.TasksPage");
 
   if (totalCount === 0) {
     return (
-      <>
-        <PageContainer fullscreen headerOffset>
-          <PageGrid className="relative flex-auto">
-            <ToolbarLarge firstSlot={<TaskManageMenuTriggerLarge />} />
+      <PageContainer fullscreen headerOffset>
+        <PageGrid className="relative flex-auto">
+          <ToolbarLarge firstSlot={<TaskManageMenuTriggerLarge />} />
 
-            <ToolbarMobile
-              firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
-              secondSlot={<TaskManageMenuTriggerMobile />}
-            />
+          <ToolbarMobile
+            firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
+            secondSlot={<TaskManageMenuTriggerMobile />}
+          />
 
-            <AbsoluteCenter className="w-full">
-              <TasksEmptySection />
-            </AbsoluteCenter>
-          </PageGrid>
-        </PageContainer>
-
-        <CreateTaskModal createTaskFormContainer={createTaskFormContainer} />
-      </>
+          <AbsoluteCenter className="w-full">
+            <TasksEmptySection />
+          </AbsoluteCenter>
+        </PageGrid>
+      </PageContainer>
     );
   }
 
   const isFilteredEmpty = totalFilteredTasks === 0;
 
   return (
-    <>
-      <PageContainer fullscreen={isFilteredEmpty} headerOffset>
-        <PageGrid className="relative flex-auto">
-          <ViewModeProvider>
-            <ToolbarLarge
-              firstSlot={
-                <>
-                  <TaskManageMenuTriggerLarge />
-                  <TaskSortingMenuTriggerLarge
-                    selectedSortField={selectedSortField}
-                  />
-                  <TaskFiltersModalTriggerLarge
-                    filtersFormContainer={filtersFormContainer}
-                  />
-                  <TaskActionsMenuTrigger />
-                </>
-              }
-              secondSlot={
-                <>
-                  <ViewModeToggleButtonGroup />
-                  <CreateTaskMenuTriggerLarge />
-                </>
-              }
-              twoRowsOnLg
-            />
+    <PageContainer fullscreen={isFilteredEmpty} headerOffset>
+      <PageGrid className="relative flex-auto">
+        <ViewModeProvider>
+          <ToolbarLarge
+            firstSlot={
+              <>
+                <TaskManageMenuTriggerLarge />
+                <TaskSortingMenuTriggerLarge
+                  selectedSortField={selectedSortField}
+                />
+                <TaskFiltersModalTriggerLarge />
+                <TaskActionsMenuTrigger />
+              </>
+            }
+            secondSlot={
+              <>
+                <ViewModeToggleButtonGroup />
+                <CreateTaskMenuTriggerLarge />
+              </>
+            }
+            twoRowsOnLg
+          />
 
+          <ToolbarMobile
+            firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
+            secondSlot={
+              <>
+                <CreateTaskMenuTriggerMobile />
+                <TaskManageMenuTriggerMobile />
+              </>
+            }
+          />
+
+          <ToolbarSearchMobile>
+            <SearchModalTrigger />
+          </ToolbarSearchMobile>
+
+          <ToolbarFiltersMobile>
+            <TaskFiltersModalTriggerMobile />
+            <TaskStatusFiltersModalTrigger />
+            <TaskCategoryFiltersModalTrigger />
+            <TaskProjectFiltersModalTrigger />
+            <AssigneeFiltersModalTrigger />
+          </ToolbarFiltersMobile>
+
+          {!isFilteredEmpty && (
             <ToolbarMobile
-              firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
+              firstSlot={<TaskResultsCount count={totalFilteredTasks} />}
               secondSlot={
-                <>
-                  <CreateTaskMenuTriggerMobile />
-                  <TaskManageMenuTriggerMobile />
-                </>
+                <TaskSortingMenuTriggerMobile
+                  selectedSortField={selectedSortField}
+                />
               }
             />
+          )}
 
-            <ToolbarSearchMobile>
-              <SearchModalTrigger />
-            </ToolbarSearchMobile>
-
-            <ToolbarFiltersMobile>
-              <TaskFiltersModalTriggerMobile
-                filtersFormContainer={filtersFormContainer}
-              />
-              <TaskStatusFiltersModalTrigger />
-              <TaskCategoryFiltersModalTrigger
-                filtersFormContainer={taskCategoryFiltersFormContainer}
-              />
-              <TaskProjectFiltersModalTrigger
-                filtersFormContainer={projectFiltersFormContainer}
-              />
-              <AssigneeFiltersModalTrigger
-                filtersFormContainer={assigneeFiltersFormContainer}
-              />
-            </ToolbarFiltersMobile>
-
-            {!isFilteredEmpty && (
-              <ToolbarMobile
-                firstSlot={<TaskResultsCount count={totalFilteredTasks} />}
-                secondSlot={
-                  <TaskSortingMenuTriggerMobile
-                    selectedSortField={selectedSortField}
-                  />
-                }
-              />
-            )}
-
-            {isFilteredEmpty ? <TasksFilteredEmptySection /> : tasksContainer}
-          </ViewModeProvider>
-        </PageGrid>
-      </PageContainer>
-
-      <TaskSearchModal searchContainer={searchContainer} />
-      <CreateTaskModal createTaskFormContainer={createTaskFormContainer} />
-      <CreateTaskCategoryModal />
-    </>
+          {isFilteredEmpty ? <TasksFilteredEmptySection /> : tasksContainer}
+        </ViewModeProvider>
+      </PageGrid>
+    </PageContainer>
   );
 }

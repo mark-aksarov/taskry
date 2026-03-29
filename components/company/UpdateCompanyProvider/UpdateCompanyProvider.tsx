@@ -15,19 +15,17 @@ const initialState: ActionState = {
 };
 
 interface UpdateCompanyProviderProps {
-  companyId: number;
   children: React.ReactNode;
 }
 
 export function UpdateCompanyProvider({
-  companyId,
   children,
 }: UpdateCompanyProviderProps) {
   const router = useRouter();
 
   const [state, action, isPending] = useActionState(
-    async (state: ActionState, payload: FormData) => {
-      const newState = await updateCompany(state, payload);
+    async (_prevState: ActionState, payload: FormData) => {
+      const newState = await updateCompany(payload);
 
       if (newState.status === "success") {
         // router.refresh is wrapped in startTransition internally

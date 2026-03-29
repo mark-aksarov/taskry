@@ -1,30 +1,25 @@
 import { mockedTaskList } from "@/mocks/tasks";
-import { mockedTaskDetail } from "@/mocks/tasks";
-import { UpdateTaskForm } from "../../UpdateTaskForm";
-import { mockedUserSummaries } from "@/mocks/users";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { mockedProjectSummaries } from "@/mocks/projects";
 import { TaskGridItemMobile } from "../TaskGridItemMobile";
-import { CommentList } from "@/components/comments/CommentList";
-import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteTasksProvider } from "../../DeleteTasksContext/__stories__";
-import { CommentListStory } from "@/components/comments/CommentList/__stories__";
+import { withMockedTaskItemWrapper } from "../../TaskItemWrapper/__stories__";
+import { withDeleteTasksProvider } from "../../DeleteTasksProvider/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
-import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusesContext/__stories__";
-import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
+import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusesProvider/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 
 const meta = {
   title: "components/tasks/TaskGridItemMobile",
   component: TaskGridItemMobile,
   decorators: [
-    withCreateSubtaskProvider,
+    withMockedTaskItemWrapper,
     withDeleteTasksProvider,
     withUpdateTaskStatusesProvider,
     withCurrentUserProvider,
     withSelectedTasksProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
   globals: {
@@ -42,21 +37,6 @@ export const Default = {
     ...mockedTask,
     subtasksTotal: mockedTask.subtasks.total,
     subtasksDone: mockedTask.subtasks.done,
-    taskCommentsContainer: <CommentList {...CommentListStory.args} />,
-    updateTaskFormContainer: (
-      <UpdateTaskForm
-        {...mockedTaskDetail}
-        taskId={mockedTaskDetail.id}
-        taskCategorySelectItems={mockedTaskCategorySummaries}
-        projectSelectItems={mockedProjectSummaries}
-        assigneeSelectItems={mockedUserSummaries}
-      />
-    ),
-    sendComment: () => ({ status: "success" }),
-    updateComment: () => ({ status: "success" }),
-    updateTask: () => ({ status: "success" }),
-    deleteTask: () => ({ status: "success" }),
-    updateTaskStatus: () => ({ status: "success" }),
   },
 } satisfies Story;
 

@@ -3,12 +3,11 @@
 import { Key } from "react-aria";
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
-import { useCreateTask } from "../CreateTaskContext";
 import { Blocks, CalendarCheck } from "lucide-react";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { CreateNewMenuTrigger } from "@/components/common/CreateNewMenuTrigger";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
-import { useCreateTaskCategoryModal } from "@/components/taskCategory/CreateTaskCategoryModal";
 
 interface CreateTaskMenuTriggerProps {
   renderButton: () => React.ReactNode;
@@ -23,11 +22,11 @@ export function CreateTaskMenuTrigger({
   const guestGuard = useGuestModalGuard();
 
   // Create create task category form modal state
-  const { onOpenChange: onCreateModalOpenChange } =
-    useCreateTaskCategoryModal();
+  const { onOpenChange: onCreateTaskCategoryModalOpenChange } =
+    useModal("createTaskCategory");
 
   // Create task form modal state
-  const { onModalOpenChange: onTaskModalOpenChange } = useCreateTask();
+  const { onOpenChange: onCreateTaskModalOpenChange } = useModal("createTask");
 
   /**
    * Handles menu actions for creating a task or task category
@@ -37,9 +36,9 @@ export function CreateTaskMenuTrigger({
   function handleAction(key: Key) {
     guestGuard(() => {
       if (key === "task") {
-        onTaskModalOpenChange(true);
+        onCreateTaskModalOpenChange(true);
       } else if (key === "category") {
-        onCreateModalOpenChange(true);
+        onCreateTaskCategoryModalOpenChange(true);
       }
     });
   }

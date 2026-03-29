@@ -8,7 +8,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { CreateSubtaskForm } from "../CreateSubtaskForm";
-import { useCreateSubtaskModal } from "./CreateSubtaskModalContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UpdateSubtaskModalProps {
@@ -18,11 +18,11 @@ interface UpdateSubtaskModalProps {
 export function CreateSubtaskModal({ taskId }: UpdateSubtaskModalProps) {
   const t = useTranslations("subtasks.CreateSubtaskModal");
 
-  const { isOpen, onOpenChange } = useCreateSubtaskModal();
+  const { isOpen, onOpenChange } = useModal("createSubtask");
 
   return (
     <FormBaseModal
-      data-test="new-subtask-modal"
+      data-test="create-subtask-modal"
       className="md:w-[350px]"
       isOpen={isOpen}
       onOpenChange={onOpenChange}

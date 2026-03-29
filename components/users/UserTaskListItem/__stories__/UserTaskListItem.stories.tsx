@@ -11,11 +11,11 @@ import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
 import { CommentListStory } from "@/components/comments/CommentList/__stories__";
-import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksContext/__stories__";
+import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksProvider/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
-import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext/__stories__";
+import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesProvider/__stories__";
 
 const meta = {
   title: "components/users/UserTaskListItem",

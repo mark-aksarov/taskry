@@ -16,12 +16,10 @@ const initialState: ActionState = {
 };
 
 interface UpdateProjectProviderProps {
-  projectId: number;
   children: React.ReactNode;
 }
 
 export function UpdateProjectProvider({
-  projectId,
   children,
 }: UpdateProjectProviderProps) {
   const pathname = usePathname();

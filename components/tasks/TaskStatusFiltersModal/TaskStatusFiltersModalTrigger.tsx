@@ -1,17 +1,18 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { DialogTrigger } from "react-aria-components";
-import { TaskStatusFiltersModal } from "./TaskStatusFiltersModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { FilterButtonMobile } from "@/components/common/FilterButton";
 
 export function TaskStatusFiltersModalTrigger() {
   const t = useTranslations("tasks.TaskStatusFiltersModalTrigger");
+  const { onOpenChange } = useModal("taskStatusFilters");
 
   return (
-    <DialogTrigger>
-      <FilterButtonMobile mode="single" label={t("buttonLabel")} />
-      <TaskStatusFiltersModal />
-    </DialogTrigger>
+    <FilterButtonMobile
+      mode="single"
+      label={t("buttonLabel")}
+      onPress={() => onOpenChange(true)}
+    />
   );
 }

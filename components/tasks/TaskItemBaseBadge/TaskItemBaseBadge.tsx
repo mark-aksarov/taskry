@@ -2,9 +2,9 @@ import { Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { ItemBaseBadge } from "@/components/common/ItemBase";
+import { useUpdateTaskStatus } from "../UpdateTaskStatusContext";
 import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { useUpdateTaskStatuses } from "../UpdateTaskStatusesContext";
-import { useUpdateTaskStatus } from "../UpdateTaskStatusContext";
 
 interface TaskItemBaseBadgeProps {
   taskId: number;

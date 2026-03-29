@@ -1,35 +1,17 @@
-import { CreateTaskForm } from "../CreateTaskForm";
-import { CreateTaskModal } from "../CreateTaskModal";
-import { mockedUserSummaries } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TasksEmptySection } from "./TasksEmptySection";
-import { mockedProjectSummaries } from "@/mocks/projects";
-import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCreateTaskProvider } from "../CreateTaskContext/__stories__";
+import { withCreateTaskProvider } from "../CreateTaskProvider/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 
 const meta = {
   title: "components/tasks/TasksEmptySection",
   component: TasksEmptySection,
   decorators: [
-    (Story) => (
-      <>
-        <Story />
-        <CreateTaskModal
-          createTaskFormContainer={
-            <CreateTaskForm
-              forcedAssigneeId="user-3"
-              categorySelectItems={mockedTaskCategorySummaries}
-              projectSelectItems={mockedProjectSummaries}
-              assigneeSelectItems={mockedUserSummaries}
-            />
-          }
-        />
-      </>
-    ),
     withCreateTaskProvider,
     withCurrentUserProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
   parameters: { layout: "centered" },

@@ -1,1 +1,0 @@
-export { withUpdateTaskProvider } from "./withUpdateTaskProvider";

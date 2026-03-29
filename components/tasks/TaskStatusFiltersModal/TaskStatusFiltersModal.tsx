@@ -13,14 +13,20 @@ import {
 import { useTranslations } from "next-intl";
 import { useTaskFilters } from "../TaskFiltersContext";
 import { TaskStatusFiltersForm } from "../TaskStatusFiltersForm";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
 export function TaskStatusFiltersModal() {
   const initialFilters = useTaskFilters();
+  const { isOpen, onOpenChange } = useModal("taskStatusFilters");
 
   return (
-    <FormBaseModal data-test="task-status-filters-modal">
+    <FormBaseModal
+      data-test="task-status-filters-modal"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+    >
       <TaskFiltersFormProvider initialFilters={initialFilters}>
         <FilterModalDialog>
           <DialogHeader />

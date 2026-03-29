@@ -7,7 +7,7 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { useCreateTask } from "../CreateTaskContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface CreateTaskModalProps {
@@ -19,13 +19,13 @@ export function CreateTaskModal({
 }: CreateTaskModalProps) {
   const t = useTranslations("tasks.CreateTaskModal");
 
-  const { isModalOpen, onModalOpenChange } = useCreateTask();
+  const { isOpen, onOpenChange } = useModal("createTask");
 
   return (
     <FormBaseModal
-      data-test="new-task-modal"
-      isOpen={isModalOpen}
-      onOpenChange={onModalOpenChange}
+      data-test="create-task-modal"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>

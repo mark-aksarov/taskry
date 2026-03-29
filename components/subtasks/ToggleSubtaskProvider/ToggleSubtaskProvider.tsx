@@ -23,8 +23,8 @@ export function ToggleSubtaskProvider({
   const refreshTaskDetail = useRefreshTaskDetail(taskId);
 
   const [state, action, isPending] = useActionState(
-    async (state: ActionState, payload: ToggleSubtaskPayload) => {
-      const newState = await toggleSubtask(state, payload);
+    async (_prevState: ActionState, payload: ToggleSubtaskPayload) => {
+      const newState = await toggleSubtask(payload);
 
       if (newState.status === "success") {
         // The following line isn't marked as transition

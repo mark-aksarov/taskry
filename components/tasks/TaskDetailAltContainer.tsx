@@ -5,11 +5,14 @@ import { notFound } from "next/navigation";
 import { SubtaskList } from "../subtasks/SubtaskList";
 import { TaskDetailAltSkeleton } from "./TaskDetailAlt";
 import { getTaskDetail } from "@/lib/data/task/task.dal";
-import { TaskDetailProviders } from "./TaskDetailProviders";
 import { SubtaskListItem } from "../subtasks/SubtaskListItem";
 import { TaskDetailAlt } from "./TaskDetailAlt/TaskDetailAlt";
-import { SubtaskProviders } from "../subtasks/SubtaskProviders";
-import { CreateSubtaskModal } from "../subtasks/CreateSubtaskModal";
+import { UpdateSubtaskModal } from "../subtasks/UpdateSubtaskModal";
+import { DeleteSubtaskModal } from "../subtasks/DeleteSubtaskModal";
+import { ModalManagerProvider } from "../common/ModalManagerContext";
+import { DeleteSubtaskAltProvider } from "../subtasks/DeleteSubtaskProvider";
+import { UpdateSubtaskAltProvider } from "../subtasks/UpdateSubtaskProvider";
+import { ToggleSubtaskAltProvider } from "../subtasks/ToggleSubtaskProvider";
 
 interface TaskDetailAltContainerProps {
   taskId: number;
@@ -33,35 +36,48 @@ async function TaskDetailAltContainerInner({
   }
 
   return (
-    <TaskDetailProviders taskId={task.id}>
-      <TaskDetailAlt
-        id={task.id}
-        creator={task.creator}
-        assignee={task.assignee}
-        deadline={task.deadline}
-        description={task.description}
-        category={task.category}
-        project={task.project}
-        status={task.status}
-        subtasksList={
-          task.subtasks.length !== 0 && (
-            <SubtaskList>
-              {task.subtasks.map((subtask) => (
-                <SubtaskProviders key={subtask.id} taskId={task.id}>
-                  <SubtaskListItem
-                    id={subtask.id}
-                    text={subtask.text}
-                    isDone={subtask.isDone}
-                    taskId={task.id}
-                  />
-                </SubtaskProviders>
-              ))}
-            </SubtaskList>
-          )
-        }
-      />
+    <TaskDetailAlt
+      id={task.id}
+      creator={task.creator}
+      assignee={task.assignee}
+      deadline={task.deadline}
+      description={task.description}
+      category={task.category}
+      project={task.project}
+      status={task.status}
+      subtasksList={
+        task.subtasks.length !== 0 && (
+          <SubtaskList>
+            {task.subtasks.map((subtask) => (
+              <ModalManagerProvider key={subtask.id}>
+                <DeleteSubtaskAltProvider>
+                  <UpdateSubtaskAltProvider>
+                    <ToggleSubtaskAltProvider>
+                      <SubtaskListItem
+                        id={subtask.id}
+                        text={subtask.text}
+                        isDone={subtask.isDone}
+                        taskId={task.id}
+                      />
 
-      <CreateSubtaskModal taskId={task.id} />
-    </TaskDetailProviders>
+                      <UpdateSubtaskModal
+                        taskId={task.id}
+                        subtaskId={subtask.id}
+                        subtaskText={subtask.text}
+                      />
+
+                      <DeleteSubtaskModal
+                        subtaskId={subtask.id}
+                        subtaskText={subtask.text}
+                      />
+                    </ToggleSubtaskAltProvider>
+                  </UpdateSubtaskAltProvider>
+                </DeleteSubtaskAltProvider>
+              </ModalManagerProvider>
+            ))}
+          </SubtaskList>
+        )
+      }
+    />
   );
 }

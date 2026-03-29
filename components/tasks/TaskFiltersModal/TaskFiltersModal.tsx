@@ -12,6 +12,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { useTaskFilters } from "../TaskFiltersContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
@@ -23,9 +24,14 @@ export function TaskFiltersModal({
   filtersFormContainer,
 }: TaskFiltersModalProps) {
   const initialFilters = useTaskFilters();
+  const { isOpen, onOpenChange } = useModal("taskFilters");
 
   return (
-    <FormBaseModal data-test="task-filters-modal">
+    <FormBaseModal
+      data-test="task-filters-modal"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+    >
       {
         // TaskFiltersFormProvider re-mount on each render, so it state is re-initialized
         // using values from TaskFiltersContext (derived from URL/search params)
