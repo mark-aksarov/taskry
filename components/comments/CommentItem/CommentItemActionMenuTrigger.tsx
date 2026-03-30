@@ -6,16 +6,15 @@ import {
   ItemBaseActionMenuDialogHeader,
 } from "@/components/common/ItemBase";
 
-import { useState } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { useSendComment } from "../SendCommentContext";
 import { useUpdateComment } from "../UpdateCommentContext";
-import { DeleteCommentModal } from "../DeleteCommentModal";
 import { useCommentFormContext } from "../CommentFormContext";
 import { useCommentItemPending } from "./useCommentItemPending";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
+import { useModal } from "@/components/common/ModalManagerContext";
 
 export type CommentItemActionMenuTriggerProps = {
   commentId: number;
@@ -36,7 +35,7 @@ export function CommentItemActionMenuTrigger({
   const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const { onOpenChange: onDeleteModalOpenChange } = useModal("deleteComment");
 
   /**
    * Handles menu actions for a comment item.
@@ -52,7 +51,7 @@ export function CommentItemActionMenuTrigger({
         setEditCommentId(commentId);
         setCommentContent(commentContent);
       } else if (action === "delete") {
-        setIsDeleteModalOpen(true);
+        onDeleteModalOpenChange(true);
       }
     });
   }
@@ -67,34 +66,26 @@ export function CommentItemActionMenuTrigger({
   const { isPending: isUpdateCommentPending } = useUpdateComment();
 
   return (
-    <>
-      <ItemBaseActionMenuTrigger
-        onAction={handleAction}
-        renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
-        renderButton={() => (
-          <ItemBaseActionMenuButton
-            className={className}
-            isPending={isPending}
-            isDisabled={
-              (isSendCommentPending || isUpdateCommentPending) && !isPending
-            }
-            data-test={`comment-item-${commentId}-action-menu-trigger`}
-          />
-        )}
-      >
-        <Item textValue={t("edit")} key="edit">
-          <Pencil size={16} /> {t("edit")}
-        </Item>
-        <Item textValue={t("delete")} key="delete">
-          <Trash size={16} /> {t("delete")}
-        </Item>
-      </ItemBaseActionMenuTrigger>
-
-      <DeleteCommentModal
-        commentId={commentId}
-        isOpen={isDeleteModalOpen}
-        onOpenChange={setIsDeleteModalOpen}
-      />
-    </>
+    <ItemBaseActionMenuTrigger
+      onAction={handleAction}
+      renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
+      renderButton={() => (
+        <ItemBaseActionMenuButton
+          className={className}
+          isPending={isPending}
+          isDisabled={
+            (isSendCommentPending || isUpdateCommentPending) && !isPending
+          }
+          data-test={`comment-item-${commentId}-action-menu-trigger`}
+        />
+      )}
+    >
+      <Item textValue={t("edit")} key="edit">
+        <Pencil size={16} /> {t("edit")}
+      </Item>
+      <Item textValue={t("delete")} key="delete">
+        <Trash size={16} /> {t("delete")}
+      </Item>
+    </ItemBaseActionMenuTrigger>
   );
 }

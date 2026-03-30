@@ -1,0 +1,1 @@
+export { UpdateCommentProvider } from "./UpdateCommentProvider";

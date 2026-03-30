@@ -11,7 +11,7 @@ import { Repeat } from "@/components/common/Repeat";
 import { notFound, useParams } from "next/navigation";
 import { CommentList } from "../comments/CommentList";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
-import { deleteComment } from "@/lib/actions/comment/deleteComment";
+import { CommentItemWrapper } from "../comments/CommentItemWrapper";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 
 interface TaskCommentsContainerProps {
@@ -60,15 +60,15 @@ export function TaskCommentsContainer({ taskId }: TaskCommentsContainerProps) {
     <CommentList>
       {comments.map((comment) => {
         return (
-          <CommentItem
-            key={comment.id}
-            id={comment.id}
-            content={comment.content}
-            createdAt={comment.createdAt}
-            sender={comment.sender}
-            canEdit={comment.canEdit}
-            deleteComment={deleteComment}
-          />
+          <CommentItemWrapper key={comment.id} commentId={comment.id}>
+            <CommentItem
+              id={comment.id}
+              content={comment.content}
+              createdAt={comment.createdAt}
+              sender={comment.sender}
+              canEdit={comment.canEdit}
+            />
+          </CommentItemWrapper>
         );
       })}
     </CommentList>

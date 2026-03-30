@@ -1,0 +1,1 @@
+export { DeleteCommentProvider } from "./DeleteCommentProvider";

@@ -16,10 +16,7 @@ const schema = z.object({
   projectId: projectId.optional(),
 });
 
-export async function sendComment(
-  _prevState: ActionState,
-  formData: FormData,
-): Promise<ActionState> {
+export async function sendComment(formData: FormData): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

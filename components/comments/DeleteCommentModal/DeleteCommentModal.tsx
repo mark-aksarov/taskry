@@ -13,20 +13,15 @@ import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { useDeleteComment } from "../DeleteCommentContext";
 import { useCommentFormContext } from "../CommentFormContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 
 interface DeleteCommentModalProps {
   commentId: number;
-  isOpen: boolean;
-  onOpenChange: (isOpen: boolean) => void;
 }
 
-export function DeleteCommentModal({
-  commentId,
-  isOpen,
-  onOpenChange,
-}: DeleteCommentModalProps) {
+export function DeleteCommentModal({ commentId }: DeleteCommentModalProps) {
   const t = useTranslations("comments.DeleteCommentModal");
-
+  const { isOpen, onOpenChange } = useModal("deleteComment");
   const { editCommentId, setEditCommentId, setCommentContent } =
     useCommentFormContext();
   const { action } = useDeleteComment();

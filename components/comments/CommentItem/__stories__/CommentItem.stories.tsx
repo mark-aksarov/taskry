@@ -2,18 +2,22 @@ import { CommentItem } from "../CommentItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withCommentFormProvider } from "../../CommentForm/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withSendCommentProvider } from "../../SendCommentContext/__stories__";
-import { withUpdateCommentProvider } from "../../UpdateCommentContext/__stories__";
+import { withSendCommentProvider } from "../../SendCommentProvider/__stories__";
+import { withUpdateCommentProvider } from "../../UpdateCommentProvider/__stories__";
+import { withDeleteCommentProvider } from "../../DeleteCommentProvider/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 
 const meta = {
   title: "components/comments/CommentItem",
   component: CommentItem,
   decorators: [
+    withDeleteCommentProvider,
     withUpdateCommentProvider,
     withSendCommentProvider,
     withCommentFormProvider,
     withCurrentUserProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
   parameters: {
@@ -37,7 +41,6 @@ export const Default = {
       imageUrl: "/woman.jpg",
     },
     canEdit: true,
-    deleteComment: () => ({ status: "success" }),
   },
 } satisfies Story;
 

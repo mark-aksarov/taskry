@@ -12,7 +12,9 @@ import { notFound, useParams } from "next/navigation";
 import { CommentList } from "../comments/CommentList";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { deleteComment } from "@/lib/actions/comment/deleteComment";
+import { DeleteCommentModal } from "../comments/DeleteCommentModal";
 import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
+import { CommentItemWrapper } from "../comments/CommentItemWrapper";
 
 interface ProjectCommentsContainerProps {
   projectId: number;
@@ -62,15 +64,15 @@ export function ProjectCommentsContainer({
     <CommentList>
       {comments.map((comment) => {
         return (
-          <CommentItem
-            key={comment.id}
-            id={comment.id}
-            content={comment.content}
-            createdAt={comment.createdAt}
-            sender={comment.sender}
-            canEdit={comment.canEdit}
-            deleteComment={deleteComment}
-          />
+          <CommentItemWrapper key={comment.id} commentId={comment.id}>
+            <CommentItem
+              id={comment.id}
+              content={comment.content}
+              createdAt={comment.createdAt}
+              sender={comment.sender}
+              canEdit={comment.canEdit}
+            />
+          </CommentItemWrapper>
         );
       })}
     </CommentList>

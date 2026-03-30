@@ -7,10 +7,7 @@ import { deleteComment as deleteCommentQuery } from "@/lib/data/comment/comment.
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { NotFoundError } from "@/lib/data/utils/error";
 
-export async function deleteComment(
-  _prevState: ActionState,
-  id: number,
-): Promise<ActionState> {
+export async function deleteComment(id: number): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

@@ -3,20 +3,17 @@
 import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
+import { NotFoundError } from "@/lib/data/utils/error";
 import { commentId, commentContent } from "@/lib/schemas/comment";
 import { updateComment as updateCommentQuery } from "@/lib/data/comment/comment.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
-import { NotFoundError } from "@/lib/data/utils/error";
 
 const schema = z.object({
   id: commentId,
   content: commentContent,
 });
 
-export async function updateComment(
-  _prevState: ActionState,
-  formData: FormData,
-): Promise<ActionState> {
+export async function updateComment(formData: FormData): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

@@ -2,18 +2,19 @@ import { DeleteProjectModal } from "../DeleteProjectModal";
 import { UpdateProjectModal } from "../UpdateProjectModal";
 import { ProjectDetailModal } from "../ProjectDetailModal";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
-import { sendComment } from "@/lib/actions/comment/sendComment";
 import { UpdateProjectProvider } from "../UpdateProjectProvider";
 import { DeleteProjectProvider } from "../DeleteProjectProvider";
 import { ProjectDetailContainer } from "../ProjectDetailContainer";
-import { updateComment } from "@/lib/actions/comment/updateComment";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectCommentsContainer } from "../ProjectCommentsContainer";
 import { UpdateProjectFormContainer } from "../UpdateProjectFormContainer";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { UpdateProjectStatusProvider } from "../UpdateProjectStatusProvider";
+import { CommentFormProvider } from "@/components/comments/CommentFormContext";
 import { ModalManagerProvider } from "@/components/common/ModalManagerContext";
 import { CustomerDetailModal } from "@/components/customer/CustomerDetailModal";
+import { SendCommentProvider } from "@/components/comments/SendCommentProvider";
+import { UpdateCommentProvider } from "@/components/comments/UpdateCommentProvider";
 import { CustomerDetailContainer } from "@/components/customer/CustomerDetailContainer";
 import { UserDetailHeaderContainer } from "@/components/users/UserDetailHeaderContainer";
 import { CustomerDetailHeaderContainer } from "@/components/customer/CustomerDetailHeaderContainer";
@@ -43,60 +44,71 @@ export function ProjectItemWrapper({
       <UpdateProjectProvider>
         <DeleteProjectProvider>
           <UpdateProjectStatusProvider>
-            {children}
+            <CommentFormProvider
+              entityId={project.id}
+              entityKey="projectId"
+              mutateUrl={`/api/projects/${project.id}/comments`}
+            >
+              <SendCommentProvider>
+                <UpdateCommentProvider>
+                  {children}
 
-            <ProjectDetailModal
-              projectId={project.id}
-              projectDetailContainer={
-                <ProjectDetailContainer projectId={project.id} />
-              }
-            />
-
-            {project.customer && (
-              <CustomerDetailModal
-                customerId={project.customer.id}
-                customerDetailContainer={
-                  <CustomerDetailContainer customerId={project.customer.id} />
-                }
-                customerDetailHeaderContainer={
-                  <CustomerDetailHeaderContainer
-                    customerId={project.customer.id}
+                  <ProjectDetailModal
+                    projectId={project.id}
+                    projectDetailContainer={
+                      <ProjectDetailContainer projectId={project.id} />
+                    }
                   />
-                }
-              />
-            )}
 
-            {project.creator && (
-              <UserDetailModal
-                userId={project.creator.id}
-                userDetailContainer={
-                  <UserDetailContainer userId={project.creator.id} />
-                }
-                userDetailHeaderContainer={
-                  <UserDetailHeaderContainer userId={project.creator.id} />
-                }
-              />
-            )}
+                  {project.customer && (
+                    <CustomerDetailModal
+                      customerId={project.customer.id}
+                      customerDetailContainer={
+                        <CustomerDetailContainer
+                          customerId={project.customer.id}
+                        />
+                      }
+                      customerDetailHeaderContainer={
+                        <CustomerDetailHeaderContainer
+                          customerId={project.customer.id}
+                        />
+                      }
+                    />
+                  )}
 
-            <ProjectCommentsModal
-              projectId={project.id}
-              projectCommentsContainer={
-                <ProjectCommentsContainer projectId={project.id} />
-              }
-              sendComment={sendComment}
-              updateComment={updateComment}
-            />
+                  {project.creator && (
+                    <UserDetailModal
+                      userId={project.creator.id}
+                      userDetailContainer={
+                        <UserDetailContainer userId={project.creator.id} />
+                      }
+                      userDetailHeaderContainer={
+                        <UserDetailHeaderContainer
+                          userId={project.creator.id}
+                        />
+                      }
+                    />
+                  )}
 
-            <UpdateProjectModal
-              updateProjectFormContainer={
-                <UpdateProjectFormContainer projectId={project.id} />
-              }
-            />
+                  <ProjectCommentsModal
+                    projectCommentsContainer={
+                      <ProjectCommentsContainer projectId={project.id} />
+                    }
+                  />
 
-            <DeleteProjectModal
-              projectId={project.id}
-              projectTitle={project.title}
-            />
+                  <UpdateProjectModal
+                    updateProjectFormContainer={
+                      <UpdateProjectFormContainer projectId={project.id} />
+                    }
+                  />
+
+                  <DeleteProjectModal
+                    projectId={project.id}
+                    projectTitle={project.title}
+                  />
+                </UpdateCommentProvider>
+              </SendCommentProvider>
+            </CommentFormProvider>
           </UpdateProjectStatusProvider>
         </DeleteProjectProvider>
       </UpdateProjectProvider>

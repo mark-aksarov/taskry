@@ -1,16 +1,20 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/Button";
+import {
+  withOpenModal,
+  withModalManagerProvider,
+} from "@/components/common/ModalManagerContext/__stories__";
+
 import { CommentList } from "../../CommentList";
 import { Meta, StoryObj } from "@storybook/react";
 import { Repeat } from "@/components/common/Repeat";
-import { DialogTrigger } from "react-aria-components";
 import { CommentItemSkeleton } from "../../CommentItem";
 import { EntityCommentsModal } from "../EntityCommentsModal";
 import { CommentListStory } from "../../CommentList/__stories__";
 import { CommentsEmptySection } from "../../CommentsEmptySection";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withSendCommentProvider } from "../../SendCommentContext/__stories__";
-import { withUpdateCommentProvider } from "../../UpdateCommentContext/__stories__";
+import { withSendCommentProvider } from "../../SendCommentProvider/__stories__";
+import { withUpdateCommentProvider } from "../../UpdateCommentProvider/__stories__";
+import { withDeleteCommentProvider } from "../../DeleteCommentProvider/__stories__";
 import { withCommentFormProvider } from "@/components/comments/CommentForm/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
@@ -18,22 +22,30 @@ const meta = {
   title: "components/comments/EntityCommentsModal",
   component: EntityCommentsModal,
   decorators: [
-    (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
-
-      return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Comments" />
-          <Story />
-        </DialogTrigger>
-      );
-    },
+    withOpenModal,
+    withDeleteCommentProvider,
     withUpdateCommentProvider,
     withSendCommentProvider,
     withCommentFormProvider,
     withCurrentUserProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
+
+  render: (args) => {
+    const { isOpen, onOpenChange } = useModal("entityComments");
+    return (
+      <EntityCommentsModal
+        {...args}
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+      />
+    );
+  },
+
+  parameters: {
+    modalId: "entityComments",
+  },
 } satisfies Meta<typeof EntityCommentsModal>;
 
 export default meta;

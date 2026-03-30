@@ -6,9 +6,7 @@ import { CommentItemText } from "./CommentItemText";
 import { CommentItemInfo } from "./CommentItemInfo";
 import { CommentItemTitle } from "./CommentItemTitle";
 import { CommentItemLayout } from "./CommentItemLayout";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { UnknownUser } from "@/components/common/UnknownUser";
-import { DeleteCommentProvider } from "../DeleteCommentContext";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { CommentItemPendingOverlay } from "./CommentItemPendingOverlay";
@@ -26,27 +24,18 @@ interface CommentItemProps {
     imageUrl?: string;
   };
   menuTrigger?: React.ReactNode;
-  deleteComment: ActionFn<ActionState, number>;
 }
 
-export function CommentItem({ deleteComment, ...props }: CommentItemProps) {
+export function CommentItem(props: CommentItemProps) {
   return (
-    <DeleteCommentProvider deleteComment={deleteComment}>
-      <CommentItemPendingOverlay commentId={props.id}>
-        <CommentItemInner {...props} />
-      </CommentItemPendingOverlay>
-    </DeleteCommentProvider>
+    <CommentItemPendingOverlay commentId={props.id}>
+      <CommentItemInner {...props} />
+    </CommentItemPendingOverlay>
   );
 }
 
 const CommentItemInner = memo(
-  ({
-    id,
-    content,
-    createdAt,
-    canEdit,
-    sender,
-  }: Omit<CommentItemProps, "deleteComment">) => {
+  ({ id, content, createdAt, canEdit, sender }: CommentItemProps) => {
     const t = useTranslations("comments.CommentItem");
     const locale = useLocale();
 

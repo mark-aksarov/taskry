@@ -4,6 +4,7 @@ import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withCommentFormProvider } from "./withCommentFormProvider";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 
 const meta = {
   title: "components/comments/CommentForm",
@@ -12,6 +13,7 @@ const meta = {
     withToastRegion,
     withCommentFormProvider,
     withCurrentUserProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof CommentForm>;

@@ -4,8 +4,8 @@ import { Meta, StoryObj } from "@storybook/react";
 import { mockedCommentList } from "@/mocks/comments";
 import { CommentItemStory } from "../../CommentItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withSendCommentProvider } from "../../SendCommentContext/__stories__";
-import { withUpdateCommentProvider } from "../../UpdateCommentContext/__stories__";
+import { withSendCommentProvider } from "../../SendCommentProvider/__stories__";
+import { withUpdateCommentProvider } from "../../UpdateCommentProvider/__stories__";
 import { withCommentFormProvider } from "@/components/comments/CommentForm/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
