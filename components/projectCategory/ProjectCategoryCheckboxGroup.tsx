@@ -31,23 +31,18 @@ export function ProjectCategoryCheckboxGroup({
 }: Props) {
   const t = useTranslations("projectCategories.ProjectCategoryCheckboxGroup");
 
-  const {
-    isExpanded,
-    setIsExpanded,
-    visibleItems,
-    hiddenItems,
-    hiddenSelectedItems,
-  } = useFilterCheckboxGroupExpansion(
-    items,
-    value,
-    disableExpansion ? Number.MAX_VALUE : undefined,
-  );
+  const { isExpanded, setIsExpanded, visibleItems, hiddenSelectedItems } =
+    useFilterCheckboxGroupExpansion(
+      items,
+      value,
+      disableExpansion ? Number.MAX_VALUE : undefined,
+    );
 
-  const renderCheckbox = (item: Item, hidden = false) => (
+  const renderCheckbox = (item: Item) => (
     <Checkbox
       key={item.id}
       value={item.id.toString()}
-      className={twMerge("font-normal capitalize", hidden && "hidden")}
+      className={twMerge("font-normal capitalize")}
       data-test={`category-${item.id}-checkbox`}
     >
       {item.name}
@@ -63,7 +58,6 @@ export function ProjectCategoryCheckboxGroup({
         onChange={onChange}
       >
         {visibleItems.map((item) => renderCheckbox(item))}
-        {hiddenItems.map((item) => renderCheckbox(item, true))}
       </CheckboxGroup>
 
       <FilterCheckboxGroupExpandButton
