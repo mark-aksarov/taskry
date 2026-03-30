@@ -1,10 +1,13 @@
 "use client";
 
+import {
+  ActionContextType,
+  UpdateProjectStatusPayload,
+} from "@/lib/actions/types";
 import { useContext, createContext } from "react";
-import { UpdateEntityStatusContextType } from "@/lib/hooks/useUpdateEntityStatusContextValue";
 
 export const UpdateProjectStatusContext =
-  createContext<UpdateEntityStatusContextType | null>(null);
+  createContext<ActionContextType<UpdateProjectStatusPayload> | null>(null);
 
 export function useUpdateProjectStatus() {
   const context = useContext(UpdateProjectStatusContext);

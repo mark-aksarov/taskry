@@ -15,7 +15,6 @@ export { GridItemContactLink } from "./GridItemContact";
 export { GridItemPublicLink } from "./GridItemPublicLink";
 export { GridItemContactText } from "./GridItemContactText";
 export { GridItemPhoneNumber } from "./GridItemPhoneNumber";
-export { GridItemTitleDetailModalTrigger } from "./GridItemTitle";
 export { GridItemInfo, GridItemInfoSkeleton } from "./GridItemInfo";
 export { GridItemContactIconWrapper } from "./GridItemContactIconWrapper";
 export { GridItemProgress, GridItemProgressSkeleton } from "./GridItemProgress";

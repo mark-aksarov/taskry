@@ -1,13 +1,7 @@
-import {
-  ItemBaseDetailButton,
-  ItemBaseDetailButtonProps,
-  ItemBaseDetailModalTrigger,
-} from "../ItemBase";
-
 import { twMerge } from "tailwind-merge";
 import { Link } from "@/components/ui/Link";
 import { Skeleton } from "@/components/ui/Skeleton";
-import { ItemBaseDetailModalTriggerProps } from "../ItemBase";
+import { ItemBaseDetailButton, ItemBaseDetailButtonProps } from "../ItemBase";
 
 // Truncate (overflow-hidden + text-overflow) works only on block elements.
 // See: https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow#formal_definition
@@ -57,22 +51,6 @@ export function ListItemTitleButton({
     >
       {children}
     </ItemBaseDetailButton>
-  );
-}
-
-// Detail modal title
-export function ListItemTitleDetailModalTrigger({
-  className,
-  children,
-  ...props
-}: ItemBaseDetailModalTriggerProps & ListItemTitleProps) {
-  return (
-    <ItemBaseDetailModalTrigger
-      className={twMerge(titleStyles, className)}
-      {...props}
-    >
-      {children}
-    </ItemBaseDetailModalTrigger>
   );
 }
 
