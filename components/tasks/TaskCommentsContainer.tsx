@@ -46,7 +46,7 @@ export function TaskCommentsContainer({ taskId }: TaskCommentsContainerProps) {
   if (!comments) {
     return (
       <CommentList>
-        <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />
+        <Repeat items={5} renderItem={() => <CommentItemSkeleton />} />
       </CommentList>
     );
   }

@@ -50,7 +50,7 @@ export function ProjectCommentsContainer({
   if (!comments) {
     return (
       <CommentList>
-        <Repeat items={10} renderItem={() => <CommentItemSkeleton />} />
+        <Repeat items={5} renderItem={() => <CommentItemSkeleton />} />
       </CommentList>
     );
   }
