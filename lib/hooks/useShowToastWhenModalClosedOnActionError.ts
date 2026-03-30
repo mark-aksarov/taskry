@@ -1,14 +1,16 @@
 import { useEffect, useRef } from "react";
 import { ActionState } from "../actions/types";
 import { useAddErrorToast } from "./useAddErrorToast";
+import { useModal } from "@/components/common/ModalManagerContext";
 
 // Hook than show an error toast when the modal is closed
 export function useShowToastWhenModalClosedOnActionError(
   state: ActionState,
-  isModalOpen: boolean,
+  modalId: string,
 ) {
   const prevStateRef = useRef<ActionState | null>(null);
   const addErrorToast = useAddErrorToast();
+  const { isOpen } = useModal(modalId);
 
   useEffect(() => {
     if (state !== prevStateRef.current) {
@@ -18,9 +20,9 @@ export function useShowToastWhenModalClosedOnActionError(
       // Show error toast if:
       // The action resulted in an error
       // The modal is currently closed
-      if (state.status === "error" && state.message && !isModalOpen) {
+      if (state.status === "error" && state.message && !isOpen) {
         addErrorToast(state.message);
       }
     }
-  }, [state, isModalOpen, addErrorToast]);
+  }, [state, isOpen, addErrorToast]);
 }

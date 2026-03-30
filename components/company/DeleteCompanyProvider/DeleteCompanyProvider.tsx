@@ -1,15 +1,9 @@
 "use client";
 
-import { useRouter } from "@/i18n/navigation";
-import { useActionState, useMemo } from "react";
-import { ActionState } from "@/lib/actions/types";
-import { deleteCompany } from "@/lib/actions/company/deleteCompany";
 import { DeleteCompanyContext } from "../DeleteCompanyContext";
+import { deleteCompany } from "@/lib/actions/company/deleteCompany";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
-
-export const initialState: ActionState = {
-  status: null,
-};
+import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
 
 interface DeleteCompanyProviderProps {
   children: React.ReactNode;
@@ -18,34 +12,8 @@ interface DeleteCompanyProviderProps {
 export function DeleteCompanyProvider({
   children,
 }: DeleteCompanyProviderProps) {
-  const router = useRouter();
-
-  const [state, action, isPending] = useActionState(
-    async (_prevState: ActionState, companyId: number) => {
-      const newState = await deleteCompany(companyId);
-
-      if (newState.status === "success") {
-        // router.refresh is wrapped in startTransition internally
-        // when success we need to refresh page to update company list
-        router.refresh();
-      }
-
-      return newState;
-    },
-    initialState,
-  );
-
-  // wait for transition to finish
-  useShowToastOnActionError(state);
-
-  const contextValue = useMemo(
-    () => ({
-      state,
-      action,
-      isPending,
-    }),
-    [state, action, isPending],
-  );
+  const contextValue = useActionStateWithRouteRefresh(deleteCompany);
+  useShowToastOnActionError(contextValue.state);
 
   return (
     <DeleteCompanyContext.Provider value={contextValue}>

@@ -11,10 +11,7 @@ const schema = z.object({
   name: positionName,
 });
 
-export async function createPosition(
-  _prevState: ActionState,
-  formData: FormData,
-): Promise<ActionState> {
+export async function createPosition(formData: FormData): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

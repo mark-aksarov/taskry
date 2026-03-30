@@ -47,7 +47,7 @@ export default async function AppCustomerDetailPage({
       <UpdateCustomerImageProvider>
         <ClearCustomerImageUrlProvider>
           <DeleteCustomerProvider>
-            <UpdateCustomerProvider customerId={customerSummary.id}>
+            <UpdateCustomerProvider>
               <CustomerDetailPage
                 customerDetailContainer={
                   <CustomerDetailAltContainer customerId={id} />

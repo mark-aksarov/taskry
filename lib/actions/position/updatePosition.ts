@@ -13,10 +13,7 @@ const schema = z.object({
   name: positionName,
 });
 
-export async function updatePosition(
-  _prevState: ActionState,
-  formData: FormData,
-): Promise<ActionState> {
+export async function updatePosition(formData: FormData): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

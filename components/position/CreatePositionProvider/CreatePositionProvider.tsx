@@ -1,11 +1,9 @@
 "use client";
 
-import { useRouter } from "@/i18n/navigation";
-import { useActionState, useMemo } from "react";
 import { ActionState } from "@/lib/actions/types";
 import { CreatePositionContext } from "../CreatePositionContext";
-import { useModal } from "@/components/common/ModalManagerContext";
 import { createPosition } from "@/lib/actions/position/createPosition";
+import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
@@ -21,42 +19,19 @@ interface CreatePositionProviderProps {
 export function CreatePositionProvider({
   children,
 }: CreatePositionProviderProps) {
-  const router = useRouter();
+  const contextValue = useActionStateWithRouteRefresh(createPosition);
 
-  const [state, action, isPending] = useActionState(
-    async (state: ActionState, payload: FormData) => {
-      const newState = await createPosition(state, payload);
-
-      if (newState.status === "success") {
-        // router.refresh is wrapped in startTransition internally
-        router.refresh();
-      }
-
-      return newState;
-    },
-    initialState,
-  );
-
-  // we need to track CreatePositionModal open state to show toast
-  const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } =
-    useModal("createPosition");
-
-  // hooks below wait for the transition to complete (reducerAction returns the new state)
   useCloseModalThenShowToastOnActionSuccess(
-    state,
-    isModalOpen,
-    onModalOpenChange,
+    contextValue.state,
+    "createPosition",
   );
-  useShowToastWhenModalClosedOnActionSuccess(state, isModalOpen);
-  useShowToastWhenModalClosedOnActionError(state, isModalOpen);
-
-  const contextValue = useMemo(
-    () => ({
-      state,
-      action,
-      isPending,
-    }),
-    [state, action, isPending],
+  useShowToastWhenModalClosedOnActionSuccess(
+    contextValue.state,
+    "createPosition",
+  );
+  useShowToastWhenModalClosedOnActionError(
+    contextValue.state,
+    "createPosition",
   );
 
   return (

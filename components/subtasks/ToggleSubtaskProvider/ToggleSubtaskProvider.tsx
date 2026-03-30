@@ -1,15 +1,10 @@
 "use client";
 
-import { useMemo, useActionState } from "react";
 import { ToggleSubtaskContext } from "../ToggleSubtaskContext";
 import { toggleSubtask } from "@/lib/actions/subtask/toggleSubtask";
-import { ActionState, ToggleSubtaskPayload } from "@/lib/actions/types";
 import { useRefreshTaskDetail } from "@/lib/swr/hooks/useRefreshTaskDetail";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
-
-export const initialState: ActionState = {
-  status: null,
-};
+import { useActionStateWithOnSuccess } from "@/lib/hooks/useActionStateWithOnSuccess";
 
 interface ToggleSubtaskProviderProps {
   taskId: number;
@@ -22,28 +17,12 @@ export function ToggleSubtaskProvider({
 }: ToggleSubtaskProviderProps) {
   const refreshTaskDetail = useRefreshTaskDetail(taskId);
 
-  const [state, action, isPending] = useActionState(
-    async (_prevState: ActionState, payload: ToggleSubtaskPayload) => {
-      const newState = await toggleSubtask(payload);
-
-      if (newState.status === "success") {
-        // The following line isn't marked as transition
-        // they help keep the UI in sync when refreshing task details.
-        await refreshTaskDetail();
-      }
-
-      return newState;
-    },
-    initialState,
+  const contextValue = useActionStateWithOnSuccess(
+    toggleSubtask,
+    // await refreshTaskDetail help keep the UI in sync when toggling a subtask
+    refreshTaskDetail,
   );
-
-  // hooks below wait for the transition to complete (reducerAction returns the new state)
-  useShowToastOnActionError(state);
-
-  const contextValue = useMemo(
-    () => ({ state, action, isPending }),
-    [state, action, isPending],
-  );
+  useShowToastOnActionError(contextValue.state);
 
   return (
     <ToggleSubtaskContext.Provider value={contextValue}>

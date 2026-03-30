@@ -9,10 +9,7 @@ import { deletePositions as deletePositionsQuery } from "@/lib/data/position/pos
 
 const positionIds = z.array(positionId).min(1);
 
-export async function deletePositions(
-  _prevState: ActionState,
-  ids: number[],
-): Promise<ActionState> {
+export async function deletePositions(ids: number[]): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

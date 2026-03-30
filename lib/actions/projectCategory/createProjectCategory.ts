@@ -10,7 +10,6 @@ import { createProjectCategory as createProjectCategoryQuery } from "@/lib/data/
 const schema = z.object({ name: projectCategoryName });
 
 export async function createProjectCategory(
-  _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
   // Authorization

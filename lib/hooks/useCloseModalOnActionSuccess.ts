@@ -1,11 +1,13 @@
 import { useEffect, useRef } from "react";
 import { ActionState } from "../actions/types";
+import { useModal } from "@/components/common/ModalManagerContext";
 
 export function useCloseModalOnActionSuccess(
   state: ActionState,
-  onModalOpenChange: (isOpen: boolean) => void,
+  modalId: string,
 ) {
   const prevStateRef = useRef<ActionState | null>(null);
+  const { onOpenChange: onModalOpenChange } = useModal(modalId);
 
   useEffect(() => {
     // Effect triggers when state changes

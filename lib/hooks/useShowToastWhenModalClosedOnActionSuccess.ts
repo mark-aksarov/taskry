@@ -1,14 +1,16 @@
 import { useEffect, useRef } from "react";
 import { ActionState } from "../actions/types";
 import { useAddSuccessToast } from "./useAddSuccessToast";
+import { useModal } from "@/components/common/ModalManagerContext";
 
 // Hook than show an success toast when the modal is closed
 export function useShowToastWhenModalClosedOnActionSuccess(
   state: ActionState,
-  isModalOpen: boolean,
+  modalId: string,
 ) {
   const prevStateRef = useRef<ActionState | null>(null);
   const addSuccessToast = useAddSuccessToast();
+  const { isOpen } = useModal(modalId);
 
   useEffect(() => {
     if (state !== prevStateRef.current) {
@@ -18,9 +20,9 @@ export function useShowToastWhenModalClosedOnActionSuccess(
       // Show success toast if:
       // The action resulted in an success
       // The modal is currently closed
-      if (state.status === "success" && state.message && !isModalOpen) {
+      if (state.status === "success" && state.message && !isOpen) {
         addSuccessToast(state.message);
       }
     }
-  }, [state, isModalOpen, addSuccessToast]);
+  }, [state, isOpen, addSuccessToast]);
 }

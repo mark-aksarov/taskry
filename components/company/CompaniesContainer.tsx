@@ -14,7 +14,7 @@ export async function CompaniesContainer() {
     <CompanyList>
       {companies.map((company) => (
         <ModalManagerProvider key={company.id}>
-          <UpdateCompanyProvider companyId={company.id}>
+          <UpdateCompanyProvider>
             <DeleteCompanyProvider>
               <CompanyListItem id={company.id} name={company.name} />
 

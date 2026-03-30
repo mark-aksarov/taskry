@@ -16,7 +16,7 @@ export async function ProjectCategoriesContainer() {
     <ProjectCategoryList>
       {projectCategories.map((projectCategory) => (
         <ModalManagerProvider key={projectCategory.id}>
-          <UpdateProjectCategoryProvider projectCategoryId={projectCategory.id}>
+          <UpdateProjectCategoryProvider>
             <DeleteProjectCategoryProvider>
               <ProjectCategoryListItem
                 id={projectCategory.id}

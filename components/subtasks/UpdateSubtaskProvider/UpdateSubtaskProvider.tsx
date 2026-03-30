@@ -1,17 +1,11 @@
 "use client";
 
-import { useActionState, useMemo } from "react";
-import { ActionState } from "@/lib/actions/types";
 import { UpdateSubtaskContext } from "../UpdateSubtaskContext";
-import { useModal } from "@/components/common/ModalManagerContext";
 import { updateSubtask } from "@/lib/actions/subtask/updateSubtask";
 import { useRefreshTaskDetail } from "@/lib/swr/hooks/useRefreshTaskDetail";
+import { useActionStateWithOnSuccess } from "@/lib/hooks/useActionStateWithOnSuccess";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
-
-const initialState: ActionState = {
-  status: null,
-};
 
 interface UpdateSubtaskProviderProps {
   taskId: number;
@@ -24,37 +18,14 @@ export function UpdateSubtaskProvider({
 }: UpdateSubtaskProviderProps) {
   const refreshTaskDetail = useRefreshTaskDetail(taskId);
 
-  const [state, action, isPending] = useActionState(
-    async (_prevState: ActionState, payload: FormData) => {
-      const newState = await updateSubtask(payload);
-
-      if (newState.status === "success") {
-        // The following line isn't marked as transition
-        // they help keep the UI in sync when refreshing task details.
-        await refreshTaskDetail();
-      }
-
-      return newState;
-    },
-    initialState,
+  const contextValue = useActionStateWithOnSuccess(
+    updateSubtask,
+    // await refreshTaskDetail help keep the UI in sync when updating a subtask
+    refreshTaskDetail,
   );
 
-  // we need to track CreateSubtaskModal open state to show toast
-  const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } =
-    useModal("updateSubtask");
-
-  // hooks below wait for the transition to complete (reducerAction returns the new state)
-  useCloseModalOnActionSuccess(state, onModalOpenChange);
-  useShowToastWhenModalClosedOnActionError(state, isModalOpen);
-
-  const contextValue = useMemo(
-    () => ({
-      state,
-      action,
-      isPending,
-    }),
-    [state, action, isPending],
-  );
+  useCloseModalOnActionSuccess(contextValue.state, "updateSubtask");
+  useShowToastWhenModalClosedOnActionError(contextValue.state, "updateSubtask");
 
   return (
     <UpdateSubtaskContext.Provider value={contextValue}>

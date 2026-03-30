@@ -1,84 +1,35 @@
 "use client";
 
-import { useRouter } from "@/i18n/navigation";
-import { ActionState } from "@/lib/actions/types";
-import { useContext, useActionState, useMemo } from "react";
-import { useModal } from "@/components/common/ModalManagerContext";
 import { UpdateProjectCategoryContext } from "../UpdateProjectCategoryContext";
 import { updateProjectCategory } from "@/lib/actions/projectCategory/updateProjectCategory";
+import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
 
-const initialState: ActionState = {
-  status: null,
-};
-
 interface UpdateProjectCategoryProviderProps {
-  projectCategoryId: number;
   children: React.ReactNode;
 }
 
 export function UpdateProjectCategoryProvider({
-  projectCategoryId,
   children,
 }: UpdateProjectCategoryProviderProps) {
-  const router = useRouter();
+  const contextValue = useActionStateWithRouteRefresh(updateProjectCategory);
 
-  const [state, action, isPending] = useActionState(
-    async (state: ActionState, payload: FormData) => {
-      const newState = await updateProjectCategory(state, payload);
+  const { state } = contextValue;
 
-      if (newState.status === "success") {
-        // router.refresh is wrapped in startTransition internally
-        router.refresh();
-      }
-
-      return newState;
-    },
-    initialState,
-  );
-
+  // if the project category was not found (e.g. deleted by another user)
   if (state.status === "error" && state.errorCode === "notFound") {
     throw new Error(state.message, { cause: "projectCategoryNotFound" });
   }
 
-  // we need to track UpdateProjectCategoryModal open state to show toast
-  const { isOpen: isModalOpen, onOpenChange: onModalOpenChange } = useModal(
-    "updateProjectCategory",
-  );
-
-  // hooks below wait for the transition to complete (reducerAction returns the new state)
-  useCloseModalThenShowToastOnActionSuccess(
-    state,
-    isModalOpen,
-    onModalOpenChange,
-  );
-  useShowToastWhenModalClosedOnActionSuccess(state, isModalOpen);
-  useShowToastWhenModalClosedOnActionError(state, isModalOpen);
-
-  const contextValue = useMemo(
-    () => ({
-      state,
-      action,
-      isPending,
-    }),
-    [state, action, isPending],
-  );
+  useCloseModalThenShowToastOnActionSuccess(state, "updateProjectCategory");
+  useShowToastWhenModalClosedOnActionSuccess(state, "updateProjectCategory");
+  useShowToastWhenModalClosedOnActionError(state, "updateProjectCategory");
 
   return (
     <UpdateProjectCategoryContext.Provider value={contextValue}>
       {children}
     </UpdateProjectCategoryContext.Provider>
   );
-}
-
-export function useUpdateProjectCategory() {
-  const context = useContext(UpdateProjectCategoryContext);
-  if (!context) {
-    throw new Error(
-      "useUpdateProjectCategory must be used within a UpdateProjectCategoryProvider",
-    );
-  }
-  return context;
 }

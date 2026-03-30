@@ -22,7 +22,7 @@ export function CustomerItemWrapper({
   return (
     <ModalManagerProvider>
       <DeleteCustomerProvider>
-        <UpdateCustomerProvider customerId={customerId}>
+        <UpdateCustomerProvider>
           {children}
 
           <CustomerDetailModal

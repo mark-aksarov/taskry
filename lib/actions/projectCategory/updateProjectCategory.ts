@@ -18,7 +18,6 @@ const schema = z.object({
 });
 
 export async function updateProjectCategory(
-  _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
   // Authorization

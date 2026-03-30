@@ -9,10 +9,7 @@ import { deleteCompanies as deleteCompaniesQuery } from "@/lib/data/company/comp
 
 const companyIds = z.array(companyId).min(1);
 
-export async function deleteCompanies(
-  _prevState: ActionState,
-  ids: number[],
-): Promise<ActionState> {
+export async function deleteCompanies(ids: number[]): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

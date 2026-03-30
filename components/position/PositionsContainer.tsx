@@ -14,7 +14,7 @@ export async function PositionsContainer() {
   return (
     <PositionList>
       {positions.map((position) => (
-        <UpdatePositionProvider key={position.id} positionId={position.id}>
+        <UpdatePositionProvider key={position.id}>
           <DeletePositionProvider>
             <PositionListItem id={position.id} name={position.name} />
 
