@@ -4,10 +4,16 @@ import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { getUserSummary } from "@/lib/data/user/user.dal";
 import { userId as userIdSchema } from "@/lib/schemas/user";
+import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
+import { UpdateUserModal } from "@/components/users/UpdateUserModal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { DeleteUserProvider } from "@/components/users/DeleteUserProvider";
 import { UpdateUserProvider } from "@/components/users/UpdateUserProvider";
+import { ChangePasswordModal } from "@/components/users/ChangePasswordModal";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
+import { UpdateUserImageModal } from "@/components/users/UpdateUserImageModal";
+import { DeleteUserImageModal } from "@/components/users/DeleteUserImageModal";
+import { DeleteUserDetailModal } from "@/components/users/DeleteUserDetailModal";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordProvider";
 import { UserDetailAltContainer } from "@/components/users/UserDetailAltContainer";
 import { UpdateUserFormContainer } from "@/components/users/UpdateUserFormContainer";
@@ -55,16 +61,31 @@ export default async function AppProfilePage({
                   showUserActions={showUserActions}
                   userId={userId}
                   userFullName={userSummary.fullName}
-                  searchContainer={<LinkSearchContainer pathname="/tasks" />}
                   userDetailContainer={
                     <UserDetailAltContainer userId={userId} />
                   }
                   userDetailHeaderContainer={
                     <UserDetailHeaderAltContainer userId={userId} />
                   }
+                />
+
+                <TaskSearchModal
+                  searchContainer={<LinkSearchContainer pathname="/tasks" />}
+                />
+                <ChangePasswordModal userId={userId} />
+                <UpdateUserModal
                   updateUserFormContainer={
                     <UpdateUserFormContainer userId={userId} />
                   }
+                />
+                <DeleteUserDetailModal
+                  userId={userId}
+                  userFullName={userSummary.fullName}
+                />
+                <UpdateUserImageModal userId={userId} />
+                <DeleteUserImageModal
+                  userId={userId}
+                  userFullName={userSummary.fullName}
                 />
               </ChangePasswordProvider>
             </UpdateUserProvider>

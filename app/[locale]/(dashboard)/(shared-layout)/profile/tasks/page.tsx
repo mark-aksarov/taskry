@@ -27,6 +27,8 @@ import { ClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlP
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesProvider";
 import { UpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext";
 import { UserDetailHeaderAltContainer } from "@/components/users/UserDetailHeaderAltContainer";
+import { UpdateUserImageModal } from "@/components/users/UpdateUserImageModal";
+import { DeleteUserImageModal } from "@/components/users/DeleteUserImageModal";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -120,6 +122,11 @@ export default async function AppProfileTasksPage({
                           updateUserFormContainer={
                             <UpdateUserFormContainer userId={userId} />
                           }
+                        />
+                        <UpdateUserImageModal userId={userId} />
+                        <DeleteUserImageModal
+                          userId={userId}
+                          userFullName={userFullName}
                         />
                       </CreateTaskProvider>
                     </DeleteTasksProvider>

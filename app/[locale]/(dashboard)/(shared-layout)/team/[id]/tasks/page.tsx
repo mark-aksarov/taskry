@@ -22,6 +22,8 @@ import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { UserNavigationLarge } from "@/components/users/UserNavigationLarge";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
+import { UpdateUserImageModal } from "@/components/users/UpdateUserImageModal";
+import { DeleteUserImageModal } from "@/components/users/DeleteUserImageModal";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordProvider";
 import { CreateTaskFormContainer } from "@/components/tasks/CreateTaskFormContainer";
@@ -139,6 +141,11 @@ export default async function AppProfileTasksPage({
                           updateUserFormContainer={
                             <UpdateUserFormContainer userId={userId} />
                           }
+                        />
+                        <UpdateUserImageModal userId={userId} />
+                        <DeleteUserImageModal
+                          userId={userId}
+                          userFullName={userSummary.fullName}
                         />
                       </CreateTaskProvider>
                     </DeleteTasksProvider>

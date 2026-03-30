@@ -51,14 +51,6 @@ export const Default = {
     userId: mockedUserDetail.id,
     userFullName: mockedUserDetail.fullName,
     showUserActions: true,
-    searchContainer: <SearchList {...SearchListStory.args} />,
-    updateUserFormContainer: (
-      <UpdateUserForm
-        {...mockedUserDetail}
-        userId={mockedUserDetail.id}
-        positionSelectItems={mockedPositionSummaries}
-      />
-    ),
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
       <UserDetailHeaderInteractive
