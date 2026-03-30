@@ -21,12 +21,12 @@ import { TaskGridItemProgress } from "./TaskGridItemProgress";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { TaskItemActionMenuTrigger, TaskItemPendingOverlay } from "../TaskItem";
 
-interface Props extends BaseTaskItemProps {
+export interface TaskGridItemMobileProps extends BaseTaskItemProps {
   subtasksTotal: number;
   subtasksDone: number;
 }
 
-export function TaskGridItemMobile(props: Props) {
+export function TaskGridItemMobile(props: TaskGridItemMobileProps) {
   return (
     <TaskItemPendingOverlay taskId={props.id}>
       <div className="relative block">
@@ -47,7 +47,7 @@ export const TaskGridItemMobileInner = memo(
     status,
     subtasksTotal,
     subtasksDone,
-  }: Props) => {
+  }: TaskGridItemMobileProps) => {
     const assigneeImg = (
       <ItemBaseUserImageContainer
         user={assignee}

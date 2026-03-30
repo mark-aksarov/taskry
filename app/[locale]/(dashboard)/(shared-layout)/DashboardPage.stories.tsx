@@ -18,12 +18,6 @@ import {
   TotalCustomersCardSkeleton,
 } from "@/components/customer/TotalCustomersCard";
 
-import {
-  AssignedTasksPresentation,
-  AssignedTasksSection,
-  AssignedTasksSectionHeading,
-} from "@/components/tasks/AssignedTasks";
-
 import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
 import { mockedTaskList } from "@/mocks/tasks";
@@ -41,16 +35,19 @@ import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskGridMobileStory } from "@/components/tasks/TaskGrid/__stories__";
 import { AssignedTaskListItem } from "@/components/tasks/AssignedTaskListItem";
+import { AssignedTasksSection } from "@/components/tasks/AssignedTasksSection";
 import { TaskListItemStory } from "@/components/tasks/TaskListItem/__stories__";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
+import { MockedTaskItemWrapper } from "@/components/tasks/TaskItemWrapper/__stories__";
+import { AssignedTasksPresentation } from "@/components/tasks/AssignedTasksPresentation";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskProvider/__stories__";
+import { AssignedTasksSectionHeading } from "@/components/tasks/AssignedTasksSectionHeading";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksProvider/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesProvider/__stories__";
-import { MockedTaskItemWrapper } from "@/components/tasks/TaskItemWrapper/__stories__";
 
 const meta = {
   title: "pages/DashboardPage",
@@ -80,7 +77,7 @@ const AssignedTasksContainer = ({ totalCount }: { totalCount: number }) => (
     totalCount={totalCount}
     page={1}
     pageSize={5}
-    listLarge={
+    listLarge={() => (
       <AssignedTaskList>
         {mockedTaskList.map((task) => (
           <MockedTaskItemWrapper key={task.id}>
@@ -88,8 +85,8 @@ const AssignedTasksContainer = ({ totalCount }: { totalCount: number }) => (
           </MockedTaskItemWrapper>
         ))}
       </AssignedTaskList>
-    }
-    gridMobile={<TaskGridMobile {...TaskGridMobileStory.args} />}
+    )}
+    gridMobile={() => <TaskGridMobile {...TaskGridMobileStory.args} />}
     totalPages={3}
   />
 );

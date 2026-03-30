@@ -1,15 +1,15 @@
-import { TasksEmptySection } from "../TasksEmptySection";
+"use client";
+
+import { useMediaQuery } from "react-responsive";
+import { TasksEmptySection } from "./TasksEmptySection";
 import { AssignedTasksSection } from "./AssignedTasksSection";
 import { AssignedTasksSectionHeading } from "./AssignedTasksSectionHeading";
 import { EntityContainerPagination } from "@/components/common/EntityContainerPagination";
+import { EntityContainerPresentationProps } from "@/components/common/EntityContainerPresentation";
 
-interface AssignedTasksPresentationProps {
+interface AssignedTasksPresentationProps
+  extends Omit<EntityContainerPresentationProps, "gridLarge"> {
   totalCount: number;
-  page: number;
-  pageSize: number;
-  listLarge: React.ReactNode;
-  gridMobile: React.ReactNode;
-  totalPages: number;
 }
 
 export function AssignedTasksPresentation({
@@ -20,6 +20,8 @@ export function AssignedTasksPresentation({
   gridMobile,
   totalPages,
 }: AssignedTasksPresentationProps) {
+  const isMd = useMediaQuery({ query: "(max-width: 47.999rem)" });
+
   if (totalCount === 0) {
     return (
       <AssignedTasksSection>
@@ -31,12 +33,19 @@ export function AssignedTasksPresentation({
     );
   }
 
+  let content;
+
+  if (isMd) {
+    content = gridMobile();
+  } else {
+    content = listLarge();
+  }
+
   return (
     <>
       <AssignedTasksSection>
         <AssignedTasksSectionHeading />
-        <div className="max-md:hidden">{listLarge}</div>
-        <div className="md:hidden">{gridMobile}</div>
+        {content}
       </AssignedTasksSection>
 
       <EntityContainerPagination

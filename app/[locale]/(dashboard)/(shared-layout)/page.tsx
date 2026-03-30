@@ -15,6 +15,7 @@ import { TotalUsersCardContainer } from "@/components/users/TotalUsersCardContai
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesProvider";
 import { TotalProjectsCardContainer } from "@/components/projects/TotalProjectsCardContainer";
 import { TotalCustomersCardContainer } from "@/components/customer/TotalCustomersCardContainer";
+import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksProvider";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -44,36 +45,38 @@ export default async function AppDashboardPage({
   });
 
   return (
-    <CreateTaskProvider>
-      <UpdateTaskStatusesProvider>
-        <SelectedTasksProvider
-          pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
-        >
-          <DashboardPage
-            totalProjectsCardContainer={<TotalProjectsCardContainer />}
-            totalTasksCardContainer={<TotalTasksCardContainer />}
-            totalUsersCardContainer={<TotalUsersCardContainer />}
-            totalCustomersCardContainer={<TotalCustomersCardContainer />}
-            assignedTasksContainer={
-              <AssignedTasksContainer
-                tasks={tasks}
-                totalCount={totalCount}
-                page={page}
-                pageSize={pageSize}
-              />
-            }
-          />
+    <DeleteTasksProvider>
+      <CreateTaskProvider>
+        <UpdateTaskStatusesProvider>
+          <SelectedTasksProvider
+            pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
+          >
+            <DashboardPage
+              totalProjectsCardContainer={<TotalProjectsCardContainer />}
+              totalTasksCardContainer={<TotalTasksCardContainer />}
+              totalUsersCardContainer={<TotalUsersCardContainer />}
+              totalCustomersCardContainer={<TotalCustomersCardContainer />}
+              assignedTasksContainer={
+                <AssignedTasksContainer
+                  tasks={tasks}
+                  totalCount={totalCount}
+                  page={page}
+                  pageSize={pageSize}
+                />
+              }
+            />
 
-          <CreateTaskModal
-            createTaskFormContainer={
-              <CreateTaskFormContainer forcedAssigneeId={session!.user.id} />
-            }
-          />
-          <TaskSearchModal
-            searchContainer={<LinkSearchContainer pathname="/tasks" />}
-          />
-        </SelectedTasksProvider>
-      </UpdateTaskStatusesProvider>
-    </CreateTaskProvider>
+            <CreateTaskModal
+              createTaskFormContainer={
+                <CreateTaskFormContainer forcedAssigneeId={session!.user.id} />
+              }
+            />
+            <TaskSearchModal
+              searchContainer={<LinkSearchContainer pathname="/tasks" />}
+            />
+          </SelectedTasksProvider>
+        </UpdateTaskStatusesProvider>
+      </CreateTaskProvider>
+    </DeleteTasksProvider>
   );
 }
