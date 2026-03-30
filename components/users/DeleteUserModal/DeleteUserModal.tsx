@@ -2,8 +2,8 @@
 
 import { startTransition } from "react";
 import { useDeleteUser } from "../DeleteUserContext";
-import { BaseDeleteUserModal } from "./BaseDeleteUserModal";
-import { useDeleteUserModal } from "./DeleteUserModalContext";
+import { BaseDeleteUserModal } from "../BaseDeleteUserModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 
 interface DeleteUserModalProps {
   userId: string;
@@ -15,7 +15,7 @@ export function DeleteUserModal({
   userFullName,
 }: DeleteUserModalProps) {
   const { action } = useDeleteUser();
-  const { isOpen, onOpenChange } = useDeleteUserModal();
+  const { isOpen, onOpenChange } = useModal("deleteUser");
 
   function handleDelete() {
     const payload = {

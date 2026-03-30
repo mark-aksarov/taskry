@@ -1,12 +1,11 @@
+import { useMediaQuery } from "react-responsive";
 import { EntityContainerPagination } from "../common/EntityContainerPagination";
+import { EntityContainerPresentationProps } from "../common/EntityContainerPresentation";
 
-interface UserTasksPresentationProps {
-  page: number;
-  pageSize: number;
-  listLarge: React.ReactNode;
-  gridMobile: React.ReactNode;
-  totalPages: number;
-}
+type UserTasksPresentationProps = Omit<
+  EntityContainerPresentationProps,
+  "gridLarge"
+>;
 
 export function UserTasksPresentation({
   page,
@@ -15,16 +14,24 @@ export function UserTasksPresentation({
   gridMobile,
   totalPages,
 }: UserTasksPresentationProps) {
+  const isMd = useMediaQuery({ query: "(max-width: 47.999rem)" });
+
+  let content;
+
+  if (isMd) {
+    content = gridMobile();
+  } else {
+    content = listLarge();
+  }
+
   return (
     <>
-      <div className="max-md:hidden">{listLarge}</div>
-      <div className="md:hidden">{gridMobile}</div>
+      {content}
 
       <EntityContainerPagination
         page={page}
         totalPages={totalPages}
         pageSize={pageSize}
-        className="md:my-4"
       />
     </>
   );

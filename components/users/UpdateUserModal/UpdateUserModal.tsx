@@ -7,7 +7,7 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { useUpdateUserModal } from "./UpdateUserModalContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UpdateUserModalProps {
@@ -19,7 +19,7 @@ export function UpdateUserModal({
 }: UpdateUserModalProps) {
   const t = useTranslations("users.UpdateUserModal");
 
-  const { isOpen, onOpenChange } = useUpdateUserModal();
+  const { isOpen, onOpenChange } = useModal("updateUser");
 
   return (
     <FormBaseModal

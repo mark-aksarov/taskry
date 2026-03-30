@@ -7,17 +7,12 @@ import {
 } from "../AssignedTasks";
 
 import { Suspense } from "react";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
 import { TaskGridMobile } from "../TaskGrid";
 import { TaskListSkeleton } from "../TaskList";
-import { CreateTaskModal } from "../CreateTaskModal";
 import { TaskGridItemMobile } from "../TaskGridItem";
 import { AssignedTaskList } from "../AssignedTaskList";
-import { CreateTaskProvider } from "../CreateTaskProvider";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
 import { AssignedTaskListItem } from "../AssignedTaskListItem";
-import { CreateTaskFormContainer } from "../CreateTaskFormContainer";
 
 interface AssignedTasksContainerProps {
   tasks: TaskListItemDTO[];
@@ -47,10 +42,6 @@ async function AssignedTasksContainerInner({
   page,
   pageSize,
 }: AssignedTasksContainerProps) {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
   const getTaskCommonProps = (task: TaskListItemDTO) => ({
     id: task.id,
     title: task.title,
@@ -61,43 +52,35 @@ async function AssignedTasksContainerInner({
   });
 
   return (
-    <CreateTaskProvider>
-      <AssignedTasksPresentation
-        totalCount={totalCount}
-        page={page}
-        pageSize={pageSize}
-        totalPages={Math.ceil(totalCount / pageSize)}
-        listLarge={
-          <AssignedTaskList>
-            {tasks.map((task) => (
-              <AssignedTaskListItem
-                key={task.id}
-                {...getTaskCommonProps(task)}
-                project={task.project}
-                category={task.category}
-              />
-            ))}
-          </AssignedTaskList>
-        }
-        gridMobile={
-          <TaskGridMobile>
-            {tasks.map((task) => (
-              <TaskGridItemMobile
-                key={task.id}
-                {...getTaskCommonProps(task)}
-                subtasksTotal={task.subtasks.total}
-                subtasksDone={task.subtasks.done}
-              />
-            ))}
-          </TaskGridMobile>
-        }
-      />
-
-      <CreateTaskModal
-        createTaskFormContainer={
-          <CreateTaskFormContainer forcedAssigneeId={session!.user.id} />
-        }
-      />
-    </CreateTaskProvider>
+    <AssignedTasksPresentation
+      totalCount={totalCount}
+      page={page}
+      pageSize={pageSize}
+      totalPages={Math.ceil(totalCount / pageSize)}
+      listLarge={
+        <AssignedTaskList>
+          {tasks.map((task) => (
+            <AssignedTaskListItem
+              key={task.id}
+              {...getTaskCommonProps(task)}
+              project={task.project}
+              category={task.category}
+            />
+          ))}
+        </AssignedTaskList>
+      }
+      gridMobile={
+        <TaskGridMobile>
+          {tasks.map((task) => (
+            <TaskGridItemMobile
+              key={task.id}
+              {...getTaskCommonProps(task)}
+              subtasksTotal={task.subtasks.total}
+              subtasksDone={task.subtasks.done}
+            />
+          ))}
+        </TaskGridMobile>
+      }
+    />
   );
 }

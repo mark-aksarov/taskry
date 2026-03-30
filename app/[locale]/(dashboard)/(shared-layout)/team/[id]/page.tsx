@@ -11,6 +11,9 @@ import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordProvider";
 import { UserDetailAltContainer } from "@/components/users/UserDetailAltContainer";
 import { UpdateUserFormContainer } from "@/components/users/UpdateUserFormContainer";
+import { UpdateUserImageProvider } from "@/components/users/UpdateUserImageProvider";
+import { ClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlProvider";
+import { UpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext";
 import { UserDetailHeaderAltContainer } from "@/components/users/UserDetailHeaderAltContainer";
 
 export default async function AppProfilePage({
@@ -42,24 +45,32 @@ export default async function AppProfilePage({
   const showUserActions = isOwner || isGuest || session.user.id === userId;
 
   return (
-    <UpdateUserProvider>
-      <ChangePasswordProvider>
-        <DeleteUserProvider>
-          <TeamProfilePage
-            showUserActions={showUserActions}
-            userId={userId}
-            userFullName={userSummary.fullName}
-            searchContainer={<LinkSearchContainer pathname="/tasks" />}
-            userDetailContainer={<UserDetailAltContainer userId={userId} />}
-            userDetailHeaderContainer={
-              <UserDetailHeaderAltContainer userId={userId} />
-            }
-            updateUserFormContainer={
-              <UpdateUserFormContainer userId={userId} />
-            }
-          />
-        </DeleteUserProvider>
-      </ChangePasswordProvider>
-    </UpdateUserProvider>
+    <UpdateUserImageFileProvider>
+      <UpdateUserImageProvider>
+        <ClearUserImageUrlProvider>
+          <DeleteUserProvider>
+            <UpdateUserProvider>
+              <ChangePasswordProvider>
+                <TeamProfilePage
+                  showUserActions={showUserActions}
+                  userId={userId}
+                  userFullName={userSummary.fullName}
+                  searchContainer={<LinkSearchContainer pathname="/tasks" />}
+                  userDetailContainer={
+                    <UserDetailAltContainer userId={userId} />
+                  }
+                  userDetailHeaderContainer={
+                    <UserDetailHeaderAltContainer userId={userId} />
+                  }
+                  updateUserFormContainer={
+                    <UpdateUserFormContainer userId={userId} />
+                  }
+                />
+              </ChangePasswordProvider>
+            </UpdateUserProvider>
+          </DeleteUserProvider>
+        </ClearUserImageUrlProvider>
+      </UpdateUserImageProvider>
+    </UpdateUserImageFileProvider>
   );
 }

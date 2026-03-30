@@ -17,9 +17,7 @@ export function UpdateCustomerProvider({
   children,
 }: UpdateCustomerProviderProps) {
   const pathname = usePathname();
-
   const contextValue = useActionStateWithRouteRefresh(updateCustomer);
-
   const { state } = contextValue;
 
   // if the customer was not found (e.g. deleted by another user)

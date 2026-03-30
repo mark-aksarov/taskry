@@ -1,31 +1,26 @@
-import { mockedUserSummaries } from "@/mocks/users";
+import { mockedTaskList } from "@/mocks/tasks";
 import { UserTaskListItem } from "../UserTaskListItem";
 import type { Meta, StoryObj } from "@storybook/react";
-import { mockedProjectSummaries } from "@/mocks/projects";
-import { TaskDetail } from "@/components/tasks/TaskDetail";
-import { UpdateTaskForm } from "@/components/tasks/UpdateTaskForm";
-import { CommentList } from "@/components/comments/CommentList";
-import { SubtaskList } from "@/components/subtasks/SubtaskList";
-import { mockedTaskDetail, mockedTaskList } from "@/mocks/tasks";
-import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
-import { CommentListStory } from "@/components/comments/CommentList/__stories__";
+import { withMockedTaskItemWrapper } from "@/components/tasks/TaskItemWrapper/__stories__";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksProvider/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
-import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesProvider/__stories__";
+
+const mockedTask = mockedTaskList[0];
 
 const meta = {
   title: "components/users/UserTaskListItem",
   component: UserTaskListItem,
   decorators: [
-    withCreateSubtaskProvider,
-    withUpdateTaskStatusesProvider,
+    withMockedTaskItemWrapper,
     withDeleteTasksProvider,
+    withUpdateTaskStatusesProvider,
     withCurrentUserProvider,
     withSelectedTasksProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
   parameters: {
@@ -36,36 +31,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const mockedTask = mockedTaskList[0];
-
 export const Default = {
   args: {
     ...mockedTask,
-    taskDetailContainer: (
-      <TaskDetail
-        {...mockedTaskDetail}
-        subtasksList={<SubtaskList {...SubtaskListStory.args} />}
-      />
-    ),
-    taskCommentsContainer: <CommentList {...CommentListStory.args} />,
-    updateTaskFormContainer: (
-      <UpdateTaskForm
-        {...mockedTaskDetail}
-        taskId={mockedTaskDetail.id}
-        taskCategorySelectItems={mockedTaskCategorySummaries}
-        projectSelectItems={mockedProjectSummaries}
-        assigneeSelectItems={mockedUserSummaries}
-      />
-    ),
-    sendComment: () => ({ status: "success" }),
-    updateComment: () => ({ status: "success" }),
-    updateTaskStatus: () => {
-      return new Promise((res) =>
-        setTimeout(() => res({ status: "success" }), 500),
-      );
-    },
-    updateTask: () => ({ status: "success" }),
-    deleteTask: () => ({ status: "success" }),
   },
 } satisfies Story;
 

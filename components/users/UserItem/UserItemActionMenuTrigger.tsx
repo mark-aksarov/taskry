@@ -9,9 +9,8 @@ import {
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { useUpdateUserModal } from "../UpdateUserModal";
-import { useDeleteUserModal } from "../DeleteUserModal";
 import { useUserItemPending } from "./useUserItemPending";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 
@@ -33,10 +32,10 @@ export function UserItemActionMenuTrigger({
   const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
-  const { onOpenChange: onDeleteModalOpenChange } = useDeleteUserModal();
+  const { onOpenChange: onDeleteModalOpenChange } = useModal("deleteUser");
 
   // State for update modal from context
-  const { onOpenChange: onUpdateModalOpenChange } = useUpdateUserModal();
+  const { onOpenChange: onUpdateModalOpenChange } = useModal("updateUser");
 
   /**
    * Handles menu actions for a user item

@@ -24,8 +24,8 @@ import {
 import { memo } from "react";
 import { useTranslations } from "next-intl";
 import { Separator } from "@/components/ui/Separator";
-import { useUserDetailModal } from "../UserDetailModal";
 import { UserGridItemLayout } from "./UserGridItemLayout";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 
 export function UserGridItemLarge(props: BaseUserItemProps) {
@@ -48,7 +48,8 @@ const UserGridItemLargeInner = memo(
   }: BaseUserItemProps) => {
     const t = useTranslations("users.UserGridItem");
     const { isOwner, isGuest } = useCurrentUser();
-    const { onOpenChange: onUserDetailModalOpenChange } = useUserDetailModal();
+    const { onOpenChange: onUserDetailModalOpenChange } =
+      useModal("userDetail");
 
     const userImg = (
       <ItemBaseUserImageContainer

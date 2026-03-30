@@ -12,21 +12,26 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
 import { UserDetailHeaderInteractive } from "@/components/users/UserDetailHeader";
+import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
 import { withUpdateUserProvider } from "@/components/users/UpdateUserProvider/__stories__";
 import { withDeleteUserProvider } from "@/components/users/DeleteUserProvider/__stories__";
-import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withChangePasswordProvider } from "@/components/users/ChangePasswordProvider/__stories__";
-import { MockedUserDetailHeaderProviders } from "@/components/users/UserDetailHeader/__stories__";
+import { withUpdateUserImageProvider } from "@/components/users/UpdateUserImageProvider/__stories__";
+import { withClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlProvider/__stories__";
+import { withUpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext/__stories__";
 
 const meta = {
   title: "pages/TeamProfilePage",
   component: TeamProfilePage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    withUpdateUserProvider,
+    withTaskSearchModal,
     withChangePasswordProvider,
+    withUpdateUserProvider,
     withDeleteUserProvider,
-    withCurrentUserProvider,
+    withUpdateUserImageProvider,
+    withClearUserImageUrlProvider,
+    withUpdateUserImageFileProvider,
     SharedPageDecorator,
     withThemedBackground,
   ],
@@ -56,14 +61,11 @@ export const Default = {
     ),
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
-      <MockedUserDetailHeaderProviders>
-        <UserDetailHeaderInteractive
-          userId={mockedUserDetail.id}
-          fullName={mockedUserDetail.fullName}
-          positionName={mockedUserDetail.position.name}
-          imageUrl={mockedUserDetail.imageUrl}
-        />
-      </MockedUserDetailHeaderProviders>
+      <UserDetailHeaderInteractive
+        fullName={mockedUserDetail.fullName}
+        positionName={mockedUserDetail.position.name}
+        imageUrl={mockedUserDetail.imageUrl}
+      />
     ),
   },
 } satisfies Story;
@@ -81,12 +83,7 @@ export const WithoutSomeData = {
     ...Default.args,
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
-      <MockedUserDetailHeaderProviders>
-        <UserDetailHeaderInteractive
-          userId={mockedUserDetail.id}
-          fullName={mockedUserDetail.fullName}
-        />
-      </MockedUserDetailHeaderProviders>
+      <UserDetailHeaderInteractive fullName={mockedUserDetail.fullName} />
     ),
   },
 } satisfies Story;

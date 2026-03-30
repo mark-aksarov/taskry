@@ -1,1 +1,0 @@
-export { withDeleteUserImageModalProvider } from "./withDeleteUserImageModalProvider";

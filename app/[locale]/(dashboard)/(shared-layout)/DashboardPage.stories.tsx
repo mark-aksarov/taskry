@@ -31,7 +31,6 @@ import { DashboardPage } from "./DashboardPage";
 import { mockedUserSummaries } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedProjectSummaries } from "@/mocks/projects";
-import { SearchList } from "@/components/search/SearchList";
 import { TaskGridMobile } from "@/components/tasks/TaskGrid";
 import { TaskListSkeleton } from "@/components/tasks/TaskList";
 import { CreateTaskForm } from "@/components/tasks/CreateTaskForm";
@@ -40,11 +39,10 @@ import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { AssignedTaskList } from "@/components/tasks/AssignedTaskList";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { SearchListStory } from "@/components/search/SearchList/__stories__";
-import { CreateSubtaskModal } from "@/components/subtasks/CreateSubtaskModal";
 import { TaskGridMobileStory } from "@/components/tasks/TaskGrid/__stories__";
 import { AssignedTaskListItem } from "@/components/tasks/AssignedTaskListItem";
 import { TaskListItemStory } from "@/components/tasks/TaskListItem/__stories__";
+import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskProvider/__stories__";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksProvider/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
@@ -52,18 +50,14 @@ import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksConte
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesProvider/__stories__";
+import { MockedTaskItemWrapper } from "@/components/tasks/TaskItemWrapper/__stories__";
 
 const meta = {
   title: "pages/DashboardPage",
   component: DashboardPage,
   parameters: { layout: "fullscreen" },
   decorators: [
-    (Story) => (
-      <>
-        <Story />
-        <CreateSubtaskModal taskId={1} />
-      </>
-    ),
+    withTaskSearchModal,
     withCreateSubtaskProvider,
     withUpdateTaskStatusesProvider,
     withDeleteTasksProvider,
@@ -89,15 +83,9 @@ const AssignedTasksContainer = ({ totalCount }: { totalCount: number }) => (
     listLarge={
       <AssignedTaskList>
         {mockedTaskList.map((task) => (
-          <AssignedTaskListItem
-            key={task.id}
-            {...TaskListItemStory.args}
-            {...task}
-            updateComment={() => ({ status: "success" })}
-            updateTask={() => ({ status: "success" })}
-            deleteTask={() => ({ status: "success" })}
-            updateTaskStatus={() => ({ status: "success" })}
-          />
+          <MockedTaskItemWrapper key={task.id}>
+            <AssignedTaskListItem {...TaskListItemStory.args} {...task} />
+          </MockedTaskItemWrapper>
         ))}
       </AssignedTaskList>
     }
@@ -108,7 +96,6 @@ const AssignedTasksContainer = ({ totalCount }: { totalCount: number }) => (
 
 export const Default = {
   args: {
-    searchContainer: <SearchList {...SearchListStory.args} />,
     totalProjectsCardContainer: <TotalProjectsCard totalProjects={50} />,
     totalTasksCardContainer: <TotalTasksCard totalTasks={500} />,
     totalUsersCardContainer: <TotalUsersCard totalUsers={15} />,
@@ -119,7 +106,6 @@ export const Default = {
 
 export const Loading = {
   args: {
-    searchContainer: <SearchList {...SearchListStory.args} />,
     totalProjectsCardContainer: <TotalProjectsCardSkeleton />,
     totalTasksCardContainer: <TotalTasksCardSkeleton />,
     totalUsersCardContainer: <TotalUsersCardSkeleton />,

@@ -8,7 +8,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { ChangePasswordForm } from "../ChangePasswordForm";
-import { useChangePasswordModal } from "./ChangePasswordModalContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface ChangePasswordModalProps {
@@ -18,7 +18,7 @@ interface ChangePasswordModalProps {
 export function ChangePasswordModal({ userId }: ChangePasswordModalProps) {
   const t = useTranslations("users.ChangePasswordModal");
 
-  const { isOpen, onOpenChange } = useChangePasswordModal();
+  const { isOpen, onOpenChange } = useModal("changePassword");
 
   return (
     <FormBaseModal

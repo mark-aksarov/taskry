@@ -2,12 +2,10 @@ import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ToolbarMobile } from "@/components/common/Toolbar";
 import { PageContainer } from "@/components/common/PageContainer";
-import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { DashboardCardsGrid } from "@/components/common/DashboardCardsGrid";
 
 interface DashboardPageProps {
-  searchContainer: React.ReactNode;
   totalProjectsCardContainer: React.ReactNode;
   totalTasksCardContainer: React.ReactNode;
   totalUsersCardContainer: React.ReactNode;
@@ -16,7 +14,6 @@ interface DashboardPageProps {
 }
 
 export function DashboardPage({
-  searchContainer,
   totalProjectsCardContainer,
   totalTasksCardContainer,
   totalUsersCardContainer,
@@ -26,24 +23,20 @@ export function DashboardPage({
   const t = useTranslations("app.DashboardPage");
 
   return (
-    <>
-      <PageContainer>
-        <PageGrid>
-          <ToolbarMobile
-            firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
-          />
-          <DashboardCardsGrid>
-            {totalProjectsCardContainer}
-            {totalTasksCardContainer}
-            {totalUsersCardContainer}
-            {totalCustomersCardContainer}
-          </DashboardCardsGrid>
+    <PageContainer>
+      <PageGrid>
+        <ToolbarMobile
+          firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
+        />
+        <DashboardCardsGrid>
+          {totalProjectsCardContainer}
+          {totalTasksCardContainer}
+          {totalUsersCardContainer}
+          {totalCustomersCardContainer}
+        </DashboardCardsGrid>
 
-          {assignedTasksContainer}
-        </PageGrid>
-      </PageContainer>
-
-      <TaskSearchModal searchContainer={searchContainer} />
-    </>
+        {assignedTasksContainer}
+      </PageGrid>
+    </PageContainer>
   );
 }

@@ -12,11 +12,7 @@ import { notFound } from "next/navigation";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { getUserDetail } from "@/lib/data/user/user.dal";
-import { UpdateUserImageProvider } from "./UpdateUserImageProvider/UpdateUserImageProvider";
-import { UpdateUserImageModalProvider } from "./UpdateUserImageModal";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
-import { ClearUserImageUrlProvider } from "./ClearUserImageUrlProvider/ClearUserImageUrlProvider";
-import { UpdateUserImageFileProvider } from "./UpdateUserImageFileContext";
 
 interface UserDetailHeaderAltContainerProps {
   userId: string;
@@ -66,19 +62,10 @@ async function UserDetailHeaderAltContainerInner({
   }
 
   return (
-    <UpdateUserImageModalProvider>
-      <UpdateUserImageFileProvider>
-        <UpdateUserImageProvider>
-          <ClearUserImageUrlProvider>
-            <UserDetailHeaderInteractive
-              userId={user.id}
-              fullName={user.fullName}
-              imageUrl={user.imageUrl}
-              positionName={user.position?.name}
-            />
-          </ClearUserImageUrlProvider>
-        </UpdateUserImageProvider>
-      </UpdateUserImageFileProvider>
-    </UpdateUserImageModalProvider>
+    <UserDetailHeaderInteractive
+      fullName={user.fullName}
+      imageUrl={user.imageUrl}
+      positionName={user.position?.name}
+    />
   );
 }

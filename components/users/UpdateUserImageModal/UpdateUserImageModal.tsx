@@ -2,11 +2,11 @@
 
 import { UpdateUserImageDialog } from "./UpdateUserImageDialog";
 import { PersonImageModal } from "../../common/PersonImageModal";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useUpdateUserImageFile } from "../UpdateUserImageFileContext";
-import { useUpdateUserImageModal } from "./UpdateUserImageModalContext";
 
 export function UpdateUserImageModal({ userId }: { userId: string }) {
-  const { isOpen, onOpenChange } = useUpdateUserImageModal();
+  const { isOpen, onOpenChange } = useModal("updateUserImage");
   const { imageFile, onImageFileChange } = useUpdateUserImageFile();
 
   return (

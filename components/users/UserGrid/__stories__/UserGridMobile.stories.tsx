@@ -2,10 +2,9 @@ import { mockedUserList } from "@/mocks/users";
 import { UserGridMobile } from "../UserGridMobile";
 import { UserGridItemMobile } from "../../UserGridItem";
 import type { Meta, StoryObj } from "@storybook/react";
-import { MockedUserItemModals } from "../../UserItemModals/__stories__";
 import { UserGridItemMobileStory } from "../../UserGridItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { MockedUserItemProviders } from "../../UserItemProviders/__stories__";
+import { MockedUserItemWrapper } from "../../UserItemWrapper/__stories__";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
@@ -30,10 +29,9 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedUserList.map((user) => (
-      <MockedUserItemProviders key={user.id}>
+      <MockedUserItemWrapper key={user.id}>
         <UserGridItemMobile {...UserGridItemMobileStory.args} {...user} />
-        <MockedUserItemModals />
-      </MockedUserItemProviders>
+      </MockedUserItemWrapper>
     )),
   },
 } satisfies Story;

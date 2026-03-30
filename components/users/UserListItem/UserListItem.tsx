@@ -24,8 +24,8 @@ import {
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
-import { useUserDetailModal } from "../UserDetailModal";
 import { UserListItemLayout } from "./UserListItemLayout";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 
 export function UserListItem(props: BaseUserItemProps) {
@@ -48,7 +48,8 @@ export const UserListItemInner = memo(
   }: BaseUserItemProps) => {
     const t = useTranslations("users.UserListItem");
     const { isOwner, isGuest } = useCurrentUser();
-    const { onOpenChange: onUserDetailModalOpenChange } = useUserDetailModal();
+    const { onOpenChange: onUserDetailModalOpenChange } =
+      useModal("userDetail");
 
     const userImg = (
       <ItemBaseUserImageContainer

@@ -1,23 +1,15 @@
 import { UserListItem } from "../UserListItem";
 import { mockedUserDetail } from "@/mocks/users";
 import type { Meta, StoryObj } from "@storybook/react";
-import { MockedUserItemModals } from "../../UserItemModals/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUserItemProviders } from "../../UserItemProviders/__stories__";
+import { withMockedUserItemWrapper } from "../../UserItemWrapper/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "components/users/UserListItem",
   component: UserListItem,
   decorators: [
-    (Story) => (
-      <>
-        <Story />
-        <MockedUserItemModals />
-      </>
-    ),
-
-    withUserItemProviders,
+    withMockedUserItemWrapper,
     withCurrentUserProvider,
     withThemedBackground,
   ],

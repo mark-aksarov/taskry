@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { UserTaskListItem } from "../../UserTaskListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserTaskListItemStory } from "../../UserTaskListItem/__stories__";
+import { MockedTaskItemWrapper } from "@/components/tasks/TaskItemWrapper/__stories__";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksProvider/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
@@ -34,12 +35,13 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedTaskList.map((task) => (
-      <UserTaskListItem
-        key={task.id}
-        {...UserTaskListItemStory.args}
-        {...task}
-        updateTask={() => ({ status: "success" })}
-      />
+      <MockedTaskItemWrapper>
+        <UserTaskListItem
+          key={task.id}
+          {...UserTaskListItemStory.args}
+          {...task}
+        />
+      </MockedTaskItemWrapper>
     )),
   },
 } satisfies Story;

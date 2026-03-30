@@ -1,10 +1,10 @@
 "use client";
 
 import { FilterButtonLarge } from "@/components/common/FilterButton";
-import { useUserFiltersModal } from "./UserFiltersModalContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 
 export function UserFiltersModalTriggerLarge() {
-  const { onOpenChange } = useUserFiltersModal();
+  const { onOpenChange } = useModal("userFilters");
 
   return <FilterButtonLarge onClick={() => onOpenChange(true)} />;
 }

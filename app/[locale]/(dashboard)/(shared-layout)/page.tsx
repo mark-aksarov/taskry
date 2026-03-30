@@ -1,17 +1,18 @@
 import { z } from "zod";
 import { DashboardPage } from "./DashboardPage";
 import { getTaskList } from "@/lib/data/task/task.dal";
-import { deleteTasks } from "@/lib/actions/task/deleteTasks";
+import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
+import { CreateTaskModal } from "@/components/tasks/CreateTaskModal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
-import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
-import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksContext";
+import { CreateTaskProvider } from "@/components/tasks/CreateTaskProvider";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { AssignedTasksContainer } from "@/components/tasks/AssignedTasksContainer";
+import { CreateTaskFormContainer } from "@/components/tasks/CreateTaskFormContainer";
 import { TotalTasksCardContainer } from "@/components/tasks/TotalTasksCardContainer";
 import { TotalUsersCardContainer } from "@/components/users/TotalUsersCardContainer";
-import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesContext";
+import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesProvider";
 import { TotalProjectsCardContainer } from "@/components/projects/TotalProjectsCardContainer";
 import { TotalCustomersCardContainer } from "@/components/customer/TotalCustomersCardContainer";
 
@@ -43,13 +44,12 @@ export default async function AppDashboardPage({
   });
 
   return (
-    <UpdateTaskStatusesProvider updateTaskStatuses={updateTaskStatuses}>
-      <SelectedTasksProvider
-        pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
-      >
-        <DeleteTasksProvider deleteTasks={deleteTasks}>
+    <CreateTaskProvider>
+      <UpdateTaskStatusesProvider>
+        <SelectedTasksProvider
+          pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
+        >
           <DashboardPage
-            searchContainer={<LinkSearchContainer pathname="/tasks" />}
             totalProjectsCardContainer={<TotalProjectsCardContainer />}
             totalTasksCardContainer={<TotalTasksCardContainer />}
             totalUsersCardContainer={<TotalUsersCardContainer />}
@@ -63,8 +63,17 @@ export default async function AppDashboardPage({
               />
             }
           />
-        </DeleteTasksProvider>
-      </SelectedTasksProvider>
-    </UpdateTaskStatusesProvider>
+
+          <CreateTaskModal
+            createTaskFormContainer={
+              <CreateTaskFormContainer forcedAssigneeId={session!.user.id} />
+            }
+          />
+          <TaskSearchModal
+            searchContainer={<LinkSearchContainer pathname="/tasks" />}
+          />
+        </SelectedTasksProvider>
+      </UpdateTaskStatusesProvider>
+    </CreateTaskProvider>
   );
 }

@@ -1,15 +1,12 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { startTransition, useState } from "react";
 import { useUpdateUser } from "../UpdateUserContext";
 import { useDeleteUser } from "../DeleteUserContext";
 import { KeyRound, Pencil, Trash } from "lucide-react";
-import { useUpdateUserModal } from "../UpdateUserModal";
-import { BaseDeleteUserModal } from "../DeleteUserModal";
 import { useChangePassword } from "../ChangePasswordContext";
-import { useChangePasswordModal } from "../ChangePasswordModal";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { NavigationButton } from "@/components/common/NavigationButton";
 
@@ -22,52 +19,34 @@ export function ProfileActions({ userId, userFullName }: ProfileActionsProps) {
   const t = useTranslations("users.ProfileActions");
 
   // Delete user action and modal states
-  const { action: deleteUserAction, isPending: isDeletePending } =
-    useDeleteUser();
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const { isPending: isDeletePending } = useDeleteUser();
+  const { onOpenChange: onDeleteModalOpenChange } = useModal("deleteUser");
 
-  // Guest mode
+  // Show guest modal for guests
+  const guestGuard = useGuestModalGuard();
+
+  // Current user
   const { isGuest, isOwner, userId: currentUserId } = useCurrentUser();
-  const { onOpenChange: onGuestModeModalOpenChange } = useModal("guestMode");
 
   // Change password action and modal states
   const { isPending: isChangePasswordPending } = useChangePassword();
   const { onOpenChange: onChangePasswordModalOpenChange } =
-    useChangePasswordModal();
+    useModal("changePassword");
 
   // Update user modal state
   const { isPending: isUpdateUserPending } = useUpdateUser();
-  const { onOpenChange: onUpdateModalOpenChange } = useUpdateUserModal();
+  const { onOpenChange: onUpdateModalOpenChange } = useModal("updateUser");
 
   function handlePasswordChangePress() {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-    onChangePasswordModalOpenChange(true);
+    guestGuard(() => onChangePasswordModalOpenChange(true));
   }
 
   function handleUpdatePress() {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-    onUpdateModalOpenChange(true);
+    guestGuard(() => onUpdateModalOpenChange(true));
   }
 
   function handleDeletePress() {
-    if (isGuest) {
-      onGuestModeModalOpenChange(true);
-      return;
-    }
-    setIsDeleteModalOpen(true);
-  }
-
-  function handleDelete() {
-    setIsDeleteModalOpen(false);
-    startTransition(() =>
-      deleteUserAction({ id: userId, shouldRedirect: true }),
-    );
+    guestGuard(() => onDeleteModalOpenChange(true));
   }
 
   // Only owners can delete the user, and user cannot delete his own account
@@ -106,15 +85,6 @@ export function ProfileActions({ userId, userFullName }: ProfileActionsProps) {
           label={t("editAccount")}
         />
       </div>
-
-      {showDeleteButton && (
-        <BaseDeleteUserModal
-          isOpen={isDeleteModalOpen}
-          onOpenChange={setIsDeleteModalOpen}
-          userFullName={userFullName}
-          onDelete={handleDelete}
-        />
-      )}
     </>
   );
 }

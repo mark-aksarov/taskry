@@ -13,14 +13,10 @@ import {
 
 import { useTranslations } from "next-intl";
 import { TaskSortField } from "@/lib/types";
-import { UpdateUserModal } from "../UpdateUserModal";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ToolbarMobile } from "@/components/common/Toolbar";
 import { BackButton } from "@/components/common/BackButton";
-import { ChangePasswordModal } from "../ChangePasswordModal";
-import { CreateTaskModal } from "@/components/tasks/CreateTaskModal";
 import { PageContainer } from "@/components/common/PageContainer";
-import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { UserTasksPageEmptyLayout } from "./UserTasksPageEmptyLayout";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { TaskActionsMenuTrigger } from "@/components/tasks/TaskActionsMenuTrigger";
@@ -29,47 +25,33 @@ import { TaskSortingMenuTriggerMobile } from "@/components/tasks/TaskSortingMenu
 
 interface UserTasksPageLayoutProps {
   totalTasksCount: number;
-  userId: string;
   selectedSortField: TaskSortField;
   backButton?: boolean;
-  searchContainer: React.ReactNode;
   navigationLarge: React.ReactNode;
   navigationMobile: React.ReactNode;
   userTasksContainer: React.ReactNode;
-  updateUserFormContainer: React.ReactNode;
-  createTaskFormContainer: React.ReactNode;
   userDetailHeaderContainer: React.ReactNode;
 }
 
 export function UserTasksPageLayout({
   totalTasksCount,
-  userId,
   selectedSortField,
   backButton,
-  searchContainer,
   navigationLarge,
   navigationMobile,
   userTasksContainer,
-  updateUserFormContainer,
-  createTaskFormContainer,
   userDetailHeaderContainer,
 }: UserTasksPageLayoutProps) {
   const t = useTranslations("users.UserTasksPageLayout");
 
   if (totalTasksCount === 0) {
     return (
-      <>
-        <UserTasksPageEmptyLayout
-          userDetailHeaderContainer={userDetailHeaderContainer}
-          navigationLarge={navigationLarge}
-          navigationMobile={navigationMobile}
-          backButton={backButton}
-        />
-
-        <ChangePasswordModal userId={userId} />
-        <CreateTaskModal createTaskFormContainer={createTaskFormContainer} />
-        <UpdateUserModal updateUserFormContainer={updateUserFormContainer} />
-      </>
+      <UserTasksPageEmptyLayout
+        userDetailHeaderContainer={userDetailHeaderContainer}
+        navigationLarge={navigationLarge}
+        navigationMobile={navigationMobile}
+        backButton={backButton}
+      />
     );
   }
 
@@ -122,11 +104,6 @@ export function UserTasksPageLayout({
           {userTasksContainer}
         </PageGrid>
       </PageContainer>
-
-      <TaskSearchModal searchContainer={searchContainer} />
-      <ChangePasswordModal userId={userId} />
-      <CreateTaskModal createTaskFormContainer={createTaskFormContainer} />
-      <UpdateUserModal updateUserFormContainer={updateUserFormContainer} />
     </>
   );
 }

@@ -2,9 +2,7 @@
 
 import { UserList } from "./UserList";
 import { UserListItem } from "./UserListItem";
-import { BaseUserItemProps } from "./UserItem";
-import { UserItemModals } from "./UserItemModals";
-import { UserItemProviders } from "./UserItemProviders";
+import { UserItemWrapper } from "./UserItemWrapper";
 import { UserListItemDTO } from "@/lib/data/user/user.dto";
 import { UserGridLarge, UserGridMobile } from "./UserGrid";
 import { UserGridItemLarge, UserGridItemMobile } from "./UserGridItem";
@@ -29,9 +27,11 @@ export function UsersDynamic({
         {users.map((user) => (
           <UserItemWrapper
             key={user.id}
-            user={user}
-            renderItem={(props) => <UserListItem {...props} />}
-          />
+            userId={user.id}
+            userFullName={user.fullName}
+          >
+            <UserListItem {...user} />
+          </UserItemWrapper>
         ))}
       </UserList>
     );
@@ -43,9 +43,11 @@ export function UsersDynamic({
         {users.map((user) => (
           <UserItemWrapper
             key={user.id}
-            user={user}
-            renderItem={(props) => <UserGridItemLarge {...props} />}
-          />
+            userId={user.id}
+            userFullName={user.fullName}
+          >
+            <UserGridItemLarge {...user} />
+          </UserItemWrapper>
         ))}
       </UserGridLarge>
     );
@@ -57,9 +59,11 @@ export function UsersDynamic({
         {users.map((user) => (
           <UserItemWrapper
             key={user.id}
-            user={user}
-            renderItem={(props) => <UserGridItemMobile {...props} />}
-          />
+            userId={user.id}
+            userFullName={user.fullName}
+          >
+            <UserGridItemMobile {...user} />
+          </UserItemWrapper>
         ))}
       </UserGridMobile>
     );
@@ -74,29 +78,5 @@ export function UsersDynamic({
       gridLarge={renderGridLarge}
       gridMobile={renderGridMobile}
     />
-  );
-}
-
-interface UserItemWrapperProps {
-  user: UserListItemDTO;
-  renderItem: (props: BaseUserItemProps) => React.ReactNode;
-}
-
-function UserItemWrapper({ user, renderItem }: UserItemWrapperProps) {
-  const commonProps: BaseUserItemProps = {
-    id: user.id,
-    fullName: user.fullName,
-    imageUrl: user.imageUrl,
-    email: user.email,
-    phoneNumber: user.phoneNumber,
-    publicLink: user.publicLink,
-    position: user.position,
-  };
-
-  return (
-    <UserItemProviders>
-      {renderItem(commonProps)}
-      <UserItemModals user={user} />
-    </UserItemProviders>
   );
 }

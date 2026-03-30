@@ -1,23 +1,15 @@
 import { mockedUserDetail } from "@/mocks/users";
 import type { Meta, StoryObj } from "@storybook/react";
 import { UserGridItemLarge } from "../UserGridItemLarge";
-import { MockedUserItemModals } from "../../UserItemModals/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUserItemProviders } from "../../UserItemProviders/__stories__";
+import { withMockedUserItemWrapper } from "../../UserItemWrapper/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "components/users/UserGridItemLarge",
   component: UserGridItemLarge,
   decorators: [
-    (Story) => (
-      <>
-        <Story />
-        <MockedUserItemModals />
-      </>
-    ),
-
-    withUserItemProviders,
+    withMockedUserItemWrapper,
     withCurrentUserProvider,
     withThemedBackground,
   ],

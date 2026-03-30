@@ -12,7 +12,7 @@ import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/components/ui/Dialog";
 import { useClearUserImageUrl } from "../ClearUserImageUrlContext";
-import { useDeleteUserImageModal } from "./DeleteUserImageModalContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 
 interface DeleteUserImageModalProps {
   userId: string;
@@ -24,7 +24,7 @@ export function DeleteUserImageModal({
   userFullName,
 }: DeleteUserImageModalProps) {
   const { action } = useClearUserImageUrl();
-  const { isOpen, onOpenChange } = useDeleteUserImageModal();
+  const { isOpen, onOpenChange } = useModal("deleteUserImage");
 
   function handleDelete() {
     //close modal before deleting

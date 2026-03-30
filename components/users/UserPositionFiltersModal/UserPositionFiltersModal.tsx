@@ -12,8 +12,8 @@ import {
 
 import { useTranslations } from "next-intl";
 import { useUserFilters } from "../UserFiltersContext";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
-import { useUserPositionFiltersModal } from "./UserPositionFiltersModalContext";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
 interface UserPositionFiltersModalProps {
@@ -24,7 +24,7 @@ export function UserPositionFiltersModal({
   filtersFormContainer,
 }: UserPositionFiltersModalProps) {
   const initialFilters = useUserFilters();
-  const { isOpen, onOpenChange } = useUserPositionFiltersModal();
+  const { isOpen, onOpenChange } = useModal("userPositionFilters");
 
   return (
     <FormBaseModal
