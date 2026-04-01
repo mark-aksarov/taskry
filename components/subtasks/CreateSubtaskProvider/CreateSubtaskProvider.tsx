@@ -19,8 +19,10 @@ export function CreateSubtaskProvider({
   const refreshTaskDetail = useRefreshTaskDetail(taskId);
 
   const contextValue = useActionStateWithCallbacks(createSubtask, {
-    onSuccess: async () => {
-      // await refreshTaskDetail help keep the UI in sync when creating a subtask
+    // Ensure the task detail stays up-to-date regardless of success or failure.
+    // For example, another user might delete the task while a subtask is being created.
+    // refreshTaskDetail triggers a re-render of TaskDetailContainer to sync the UI.
+    onSettled: async () => {
       await refreshTaskDetail();
     },
   });

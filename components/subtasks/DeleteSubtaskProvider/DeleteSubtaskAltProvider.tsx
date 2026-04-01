@@ -15,7 +15,7 @@ export function DeleteSubtaskAltProvider({
 }: DeleteSubtaskAltProviderProps) {
   const router = useRouter();
   const contextValue = useActionStateWithCallbacks(deleteSubtask, {
-    onSuccess: () => router.refresh(),
+    onSettled: () => router.refresh(),
   });
   useShowToastOnActionError(contextValue.state);
 

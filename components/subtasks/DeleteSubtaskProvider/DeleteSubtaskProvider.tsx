@@ -18,7 +18,7 @@ export function DeleteSubtaskProvider({
   const refreshTaskDetail = useRefreshTaskDetail(taskId);
 
   const contextValue = useActionStateWithCallbacks(deleteSubtask, {
-    onSuccess: async () => {
+    onSettled: async () => {
       // await refreshTaskDetail help keep the UI in sync when deleting a subtask
       await refreshTaskDetail();
     },
