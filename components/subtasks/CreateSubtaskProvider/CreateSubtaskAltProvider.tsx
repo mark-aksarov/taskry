@@ -16,9 +16,8 @@ export function CreateSubtaskAltProvider({
 }: CreateSubtaskAltProviderProps) {
   const router = useRouter();
   const contextValue = useActionStateWithCallbacks(createSubtask, {
-    // Always refresh the task/[id] page after creating a subtask
-    // This ensures the UI stays in sync even if an error occurs
-    // (e.g., the task was deleted by another user during subtask creation)
+    // Re-render task/[id] on success or error to keep UI in sync
+    // (e.g. show not found if deleted by another user)
     onSettled: () => router.refresh(),
   });
   useCloseModalOnActionSuccess(contextValue.state, "createSubtask");

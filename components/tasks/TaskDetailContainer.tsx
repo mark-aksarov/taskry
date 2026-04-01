@@ -14,6 +14,7 @@ import { CreateSubtaskProvider } from "../subtasks/CreateSubtaskProvider";
 import { DeleteSubtaskProvider } from "../subtasks/DeleteSubtaskProvider";
 import { UpdateSubtaskProvider } from "../subtasks/UpdateSubtaskProvider";
 import { ToggleSubtaskProvider } from "../subtasks/ToggleSubtaskProvider";
+import { useHandleDetailContainerError } from "@/lib/hooks/useHandleDetailContainerError";
 
 interface TaskDetailContainerProps {
   taskId: number;
@@ -23,14 +24,7 @@ export function TaskDetailContainer({ taskId }: TaskDetailContainerProps) {
   const { data: task, error } = useSWR<TaskDetailDTO>(`/api/tasks/${taskId}`, {
     revalidateOnFocus: false,
   });
-
-  if (error) {
-    if (error.status === 404) {
-      throw new Error(undefined, { cause: "taskNotFound" });
-    }
-
-    throw new Error();
-  }
+  useHandleDetailContainerError(error, "/tasks/not-found");
 
   // Show skeleton while loading
   if (!task) {

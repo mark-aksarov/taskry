@@ -15,6 +15,8 @@ export function DeleteSubtaskAltProvider({
 }: DeleteSubtaskAltProviderProps) {
   const router = useRouter();
   const contextValue = useActionStateWithCallbacks(deleteSubtask, {
+    // Re-render task/[id] on success or error to keep UI in sync
+    // (e.g. show not found if deleted by another user)
     onSettled: () => router.refresh(),
   });
   useShowToastOnActionError(contextValue.state);
