@@ -1,9 +1,10 @@
 "use client";
 
+import { useRouter } from "@/i18n/navigation";
 import { DeleteCompanyContext } from "../DeleteCompanyContext";
 import { deleteCompany } from "@/lib/actions/company/deleteCompany";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
 interface DeleteCompanyProviderProps {
   children: React.ReactNode;
@@ -12,7 +13,10 @@ interface DeleteCompanyProviderProps {
 export function DeleteCompanyProvider({
   children,
 }: DeleteCompanyProviderProps) {
-  const contextValue = useActionStateWithRouteRefresh(deleteCompany);
+  const router = useRouter();
+  const contextValue = useActionStateWithCallbacks(deleteCompany, {
+    onSuccess: () => router.refresh(),
+  });
   useShowToastOnActionError(contextValue.state);
 
   return (

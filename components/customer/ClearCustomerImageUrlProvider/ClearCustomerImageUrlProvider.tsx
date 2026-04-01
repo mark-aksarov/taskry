@@ -1,10 +1,11 @@
 "use client";
 
 import { notFound } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { ClearCustomerImageUrlContext } from "../ClearCustomerImageUrlContext";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 import { updateCustomerImageUrl } from "@/lib/actions/customer/updateCustomerImageUrl";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
 
 interface ClearCustomerImageUrlProviderProps {
   children: React.ReactNode;
@@ -13,12 +14,17 @@ interface ClearCustomerImageUrlProviderProps {
 export function ClearCustomerImageUrlProvider({
   children,
 }: ClearCustomerImageUrlProviderProps) {
+  const router = useRouter();
   // when success we need to refresh current route to show that image was deleted
-  const contextValue = useActionStateWithRouteRefresh((customerId: number) =>
-    updateCustomerImageUrl({
-      id: customerId,
-      imageUrl: null,
-    }),
+  const contextValue = useActionStateWithCallbacks(
+    (customerId: number) =>
+      updateCustomerImageUrl({
+        id: customerId,
+        imageUrl: null,
+      }),
+    {
+      onSuccess: () => router.refresh(),
+    },
   );
 
   const { state } = contextValue;

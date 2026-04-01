@@ -1,10 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRouter } from "@/i18n/navigation";
 import { DeleteTaskCategoriesContext } from "../DeleteTaskCategoriesContext";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 import { deleteTaskCategories } from "@/lib/actions/taskCategory/deleteTaskCategories";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
 
 interface DeleteTaskCategoriesProviderProps {
   children: React.ReactNode;
@@ -16,8 +17,13 @@ export function DeleteTaskCategoriesProvider({
   // store IDs to track task categories being deleted for UI purposes
   const [ids, setIds] = useState<number[]>([]);
 
-  const { state, action, isPending } =
-    useActionStateWithRouteRefresh(deleteTaskCategories);
+  const router = useRouter();
+  const { state, action, isPending } = useActionStateWithCallbacks(
+    deleteTaskCategories,
+    {
+      onSuccess: () => router.refresh(),
+    },
+  );
 
   useShowToastOnActionError(state);
 

@@ -4,7 +4,7 @@ import { ToggleSubtaskContext } from "../ToggleSubtaskContext";
 import { toggleSubtask } from "@/lib/actions/subtask/toggleSubtask";
 import { useRefreshTaskDetail } from "@/lib/swr/hooks/useRefreshTaskDetail";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
-import { useActionStateWithOnSuccess } from "@/lib/hooks/useActionStateWithOnSuccess";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
 interface ToggleSubtaskProviderProps {
   taskId: number;
@@ -17,11 +17,12 @@ export function ToggleSubtaskProvider({
 }: ToggleSubtaskProviderProps) {
   const refreshTaskDetail = useRefreshTaskDetail(taskId);
 
-  const contextValue = useActionStateWithOnSuccess(
-    toggleSubtask,
-    // await refreshTaskDetail help keep the UI in sync when toggling a subtask
-    refreshTaskDetail,
-  );
+  const contextValue = useActionStateWithCallbacks(toggleSubtask, {
+    onSuccess: async () => {
+      // await refreshTaskDetail help keep the UI in sync when toggling a subtask
+      await refreshTaskDetail();
+    },
+  });
   useShowToastOnActionError(contextValue.state);
 
   return (

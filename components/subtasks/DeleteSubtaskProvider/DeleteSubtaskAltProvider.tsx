@@ -1,9 +1,10 @@
 "use client";
 
+import { useRouter } from "@/i18n/navigation";
 import { DeleteSubtaskContext } from "../DeleteSubtaskContext";
 import { deleteSubtask } from "@/lib/actions/subtask/deleteSubtask";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
 interface DeleteSubtaskAltProviderProps {
   children: React.ReactNode;
@@ -12,7 +13,10 @@ interface DeleteSubtaskAltProviderProps {
 export function DeleteSubtaskAltProvider({
   children,
 }: DeleteSubtaskAltProviderProps) {
-  const contextValue = useActionStateWithRouteRefresh(deleteSubtask);
+  const router = useRouter();
+  const contextValue = useActionStateWithCallbacks(deleteSubtask, {
+    onSuccess: () => router.refresh(),
+  });
   useShowToastOnActionError(contextValue.state);
 
   return (

@@ -1,8 +1,9 @@
 "use client";
 
+import { useRouter } from "@/i18n/navigation";
 import { UpdateProjectCategoryContext } from "../UpdateProjectCategoryContext";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 import { updateProjectCategory } from "@/lib/actions/projectCategory/updateProjectCategory";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
@@ -14,7 +15,10 @@ interface UpdateProjectCategoryProviderProps {
 export function UpdateProjectCategoryProvider({
   children,
 }: UpdateProjectCategoryProviderProps) {
-  const contextValue = useActionStateWithRouteRefresh(updateProjectCategory);
+  const router = useRouter();
+  const contextValue = useActionStateWithCallbacks(updateProjectCategory, {
+    onSuccess: () => router.refresh(),
+  });
 
   const { state } = contextValue;
 

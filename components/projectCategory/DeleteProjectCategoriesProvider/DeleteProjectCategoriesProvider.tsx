@@ -1,9 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRouter } from "@/i18n/navigation";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 import { DeleteProjectCategoriesContext } from "../DeleteProjectCategoriesContext";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 import { deleteProjectCategories } from "@/lib/actions/projectCategory/deleteProjectCategories";
 
 interface DeleteProjectCategoriesProviderProps {
@@ -16,8 +17,12 @@ export function DeleteProjectCategoriesProvider({
   // store IDs to track project categories being deleted for UI purposes
   const [ids, setIds] = useState<number[]>([]);
 
-  const { state, action, isPending } = useActionStateWithRouteRefresh(
+  const router = useRouter();
+  const { state, action, isPending } = useActionStateWithCallbacks(
     deleteProjectCategories,
+    {
+      onSuccess: () => router.refresh(),
+    },
   );
 
   useShowToastOnActionError(state);

@@ -1,9 +1,10 @@
 "use client";
 
+import { useRouter } from "@/i18n/navigation";
 import { CreateSubtaskContext } from "../CreateSubtaskContext";
 import { createSubtask } from "@/lib/actions/subtask/createSubtask";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 
 interface CreateSubtaskAltProviderProps {
@@ -13,7 +14,10 @@ interface CreateSubtaskAltProviderProps {
 export function CreateSubtaskAltProvider({
   children,
 }: CreateSubtaskAltProviderProps) {
-  const contextValue = useActionStateWithRouteRefresh(createSubtask);
+  const router = useRouter();
+  const contextValue = useActionStateWithCallbacks(createSubtask, {
+    onSuccess: () => router.refresh(),
+  });
   useCloseModalOnActionSuccess(contextValue.state, "createSubtask");
   useShowToastWhenModalClosedOnActionError(contextValue.state, "createSubtask");
 

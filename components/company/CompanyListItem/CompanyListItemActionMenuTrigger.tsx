@@ -26,14 +26,10 @@ export function CompanyListItemActionMenuTrigger({
   const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state from context
-  const { onOpenChange: onDeleteModalOpenChange } = useModal(
-    `deleteCompany-${companyId}`,
-  );
+  const { onOpenChange: onDeleteModalOpenChange } = useModal("deleteCompany");
 
   // State for update modal from context
-  const { onOpenChange: onUpdateModalOpenChange } = useModal(
-    `updateCompany-${companyId}`,
-  );
+  const { onOpenChange: onUpdateModalOpenChange } = useModal("updateCompany");
 
   /**
    * Handles menu actions for a company item

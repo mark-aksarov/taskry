@@ -1,10 +1,10 @@
 "use client";
 
 import { notFound } from "next/navigation";
-import { usePathname } from "@/i18n/navigation";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { UpdateProjectContext } from "../UpdateProjectContext";
-import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
+import { updateProject } from "@/lib/actions/project/updateProject";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
@@ -17,7 +17,10 @@ export function UpdateProjectProvider({
   children,
 }: UpdateProjectProviderProps) {
   const pathname = usePathname();
-  const contextValue = useActionStateWithRouteRefresh(updateCustomer);
+  const router = useRouter();
+  const contextValue = useActionStateWithCallbacks(updateProject, {
+    onSuccess: () => router.refresh(),
+  });
   const { state } = contextValue;
 
   // if the project was not found (e.g. deleted by another user)

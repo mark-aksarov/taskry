@@ -1,9 +1,10 @@
 "use client";
 
+import { useRouter } from "@/i18n/navigation";
 import { DeleteProjectContext } from "../DeleteProjectContext";
 import { deleteProject } from "@/lib/actions/project/deleteProject";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
 interface DeleteProjectProviderProps {
   children: React.ReactNode;
@@ -12,7 +13,10 @@ interface DeleteProjectProviderProps {
 export function DeleteProjectProvider({
   children,
 }: DeleteProjectProviderProps) {
-  const contextValue = useActionStateWithRouteRefresh(deleteProject);
+  const router = useRouter();
+  const contextValue = useActionStateWithCallbacks(deleteProject, {
+    onSuccess: () => router.refresh(),
+  });
   useShowToastOnActionError(contextValue.state);
 
   return (

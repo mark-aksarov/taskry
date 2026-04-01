@@ -1,9 +1,10 @@
 "use client";
 
+import { useRouter } from "@/i18n/navigation";
 import { DeleteTaskCategoryContext } from "../DeleteTaskCategoryContext";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 import { deleteTaskCategory } from "@/lib/actions/taskCategory/deleteTaskCategory";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
 interface DeleteTaskCategoryProviderProps {
   children: React.ReactNode;
@@ -12,7 +13,10 @@ interface DeleteTaskCategoryProviderProps {
 export function DeleteTaskCategoryProvider({
   children,
 }: DeleteTaskCategoryProviderProps) {
-  const contextValue = useActionStateWithRouteRefresh(deleteTaskCategory);
+  const router = useRouter();
+  const contextValue = useActionStateWithCallbacks(deleteTaskCategory, {
+    onSuccess: () => router.refresh(),
+  });
   useShowToastOnActionError(contextValue.state);
 
   return (

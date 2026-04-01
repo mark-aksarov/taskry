@@ -5,7 +5,7 @@ import { DeleteCommentContext } from "../DeleteCommentContext";
 import { deleteComment } from "@/lib/actions/comment/deleteComment";
 import { useRefreshComments } from "@/lib/swr/hooks/useRefreshComments";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
-import { useActionStateWithOnSuccess } from "@/lib/hooks/useActionStateWithOnSuccess";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
 interface DeleteCommentProviderProps {
   children: React.ReactNode;
@@ -17,12 +17,14 @@ export function DeleteCommentProvider({
   const router = useRouter();
   const refreshComments = useRefreshComments();
 
-  const contextValue = useActionStateWithOnSuccess(deleteComment, async () => {
-    // The following line help keep the UI in sync when refreshing comments.
-    await refreshComments();
+  const contextValue = useActionStateWithCallbacks(deleteComment, {
+    onSuccess: async () => {
+      // The following line help keep the UI in sync when refreshing comments.
+      await refreshComments();
 
-    // router.refresh only updates the CommentButton label (comment count) after refresh
-    router.refresh();
+      // router.refresh only updates the CommentButton label (comment count) after refresh
+      router.refresh();
+    },
   });
 
   // wait for transition to finish

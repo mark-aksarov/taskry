@@ -1,9 +1,10 @@
 "use client";
 
+import { useRouter } from "@/i18n/navigation";
 import { ToggleSubtaskContext } from "../ToggleSubtaskContext";
 import { toggleSubtask } from "@/lib/actions/subtask/toggleSubtask";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
 interface ToggleSubtaskAltProviderProps {
   children: React.ReactNode;
@@ -12,7 +13,10 @@ interface ToggleSubtaskAltProviderProps {
 export function ToggleSubtaskAltProvider({
   children,
 }: ToggleSubtaskAltProviderProps) {
-  const contextValue = useActionStateWithRouteRefresh(toggleSubtask);
+  const router = useRouter();
+  const contextValue = useActionStateWithCallbacks(toggleSubtask, {
+    onSuccess: () => router.refresh(),
+  });
   useShowToastOnActionError(contextValue.state);
 
   return (

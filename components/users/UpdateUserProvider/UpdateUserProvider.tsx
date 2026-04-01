@@ -1,10 +1,10 @@
 "use client";
 
-import { usePathname } from "@/i18n/navigation";
 import { notFound, useParams } from "next/navigation";
 import { UpdateUserContext } from "../UpdateUserContext";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { updateUser } from "@/lib/actions/user/updateUser";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
@@ -16,7 +16,10 @@ interface UpdateUserProviderProps {
 export function UpdateUserProvider({ children }: UpdateUserProviderProps) {
   const pathname = usePathname();
   const params = useParams();
-  const contextValue = useActionStateWithRouteRefresh(updateUser);
+  const router = useRouter();
+  const contextValue = useActionStateWithCallbacks(updateUser, {
+    onSuccess: () => router.refresh(),
+  });
 
   const { state } = contextValue;
 

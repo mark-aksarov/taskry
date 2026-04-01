@@ -1,10 +1,10 @@
 "use client";
 
 import { notFound } from "next/navigation";
-import { usePathname } from "@/i18n/navigation";
 import { UpdateTaskContext } from "../UpdateTaskContext";
-import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { updateTask } from "@/lib/actions/task/updateTask";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
@@ -15,7 +15,10 @@ interface UpdateTaskProviderProps {
 
 export function UpdateTaskProvider({ children }: UpdateTaskProviderProps) {
   const pathname = usePathname();
-  const contextValue = useActionStateWithRouteRefresh(updateCustomer);
+  const router = useRouter();
+  const contextValue = useActionStateWithCallbacks(updateTask, {
+    onSuccess: () => router.refresh(),
+  });
   const { state } = contextValue;
 
   // if the task was not found (e.g. deleted by another user)

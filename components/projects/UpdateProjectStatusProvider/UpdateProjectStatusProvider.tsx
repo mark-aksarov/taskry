@@ -1,11 +1,11 @@
 "use client";
 
 import { notFound } from "next/navigation";
-import { usePathname } from "@/i18n/navigation";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { UpdateProjectStatusContext } from "../UpdateProjectStatusContext";
 import { updateProjectStatus } from "@/lib/actions/project/updateProjectStatus";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
 interface UpdateProjectStatusProviderProps {
   children: React.ReactNode;
@@ -15,7 +15,10 @@ export function UpdateProjectStatusProvider({
   children,
 }: UpdateProjectStatusProviderProps) {
   const pathname = usePathname();
-  const contextValue = useActionStateWithRouteRefresh(updateProjectStatus);
+  const router = useRouter();
+  const contextValue = useActionStateWithCallbacks(updateProjectStatus, {
+    onSuccess: () => router.refresh(),
+  });
   const { state } = contextValue;
 
   // if the project was not found (e.g. deleted by another user)

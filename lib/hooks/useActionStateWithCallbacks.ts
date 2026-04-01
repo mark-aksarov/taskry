@@ -5,18 +5,29 @@ const initialState: ActionState = {
   status: null,
 };
 
-// hook which wraps an action and calls onSuccess when it completes successfully
-export function useActionStateWithOnSuccess<T>(
+type Options = {
+  onSuccess?: (state: ActionState) => void | Promise<void>;
+  onError?: (state: ActionState) => void | Promise<void>;
+  onSettled?: (state: ActionState) => void | Promise<void>;
+};
+
+export function useActionStateWithCallbacks<T>(
   action: (payload: T) => Promise<ActionState>,
-  onSuccess: () => void,
+  { onSuccess, onError, onSettled }: Options = {},
 ) {
   const [state, dispatchAction, isPending] = useActionState(
     async (_prevState: ActionState, payload: T) => {
       const newState = await action(payload);
 
       if (newState.status === "success") {
-        await onSuccess();
+        await onSuccess?.(newState);
       }
+
+      if (newState.status === "error") {
+        await onError?.(newState);
+      }
+
+      await onSettled?.(newState);
 
       return newState;
     },

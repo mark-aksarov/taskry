@@ -1,10 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRouter } from "@/i18n/navigation";
 import { UpdateProjectStatusesContext } from "../UpdateProjectStatusesContext";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 import { updateProjectStatuses } from "@/lib/actions/project/updateProjectStatuses";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
 interface UpdateProjectStatusesProviderProps {
   children: React.ReactNode;
@@ -15,8 +16,12 @@ export function UpdateProjectStatusesProvider({
 }: UpdateProjectStatusesProviderProps) {
   const [ids, setIds] = useState<number[]>([]);
 
-  const { action, state, isPending } = useActionStateWithRouteRefresh(
+  const router = useRouter();
+  const { action, state, isPending } = useActionStateWithCallbacks(
     updateProjectStatuses,
+    {
+      onSuccess: () => router.refresh(),
+    },
   );
 
   useShowToastOnActionError(state);

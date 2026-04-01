@@ -1,9 +1,10 @@
 "use client";
 
+import { useRouter } from "@/i18n/navigation";
 import { DeleteProjectCategoryContext } from "../DeleteProjectCategoryContext";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 import { deleteProjectCategory } from "@/lib/actions/projectCategory/deleteProjectCategory";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
 
 interface DeleteProjectCategoryProviderProps {
   children: React.ReactNode;
@@ -12,7 +13,10 @@ interface DeleteProjectCategoryProviderProps {
 export function DeleteProjectCategoryProvider({
   children,
 }: DeleteProjectCategoryProviderProps) {
-  const contextValue = useActionStateWithRouteRefresh(deleteProjectCategory);
+  const router = useRouter();
+  const contextValue = useActionStateWithCallbacks(deleteProjectCategory, {
+    onSuccess: () => router.refresh(),
+  });
   useShowToastOnActionError(contextValue.state);
 
   return (

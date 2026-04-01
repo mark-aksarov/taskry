@@ -1,11 +1,11 @@
 "use client";
 
-import { usePathname } from "@/i18n/navigation";
 import { notFound, useParams } from "next/navigation";
 import { DeleteUserContext } from "../DeleteUserContext";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { deleteUser } from "@/lib/actions/user/deleteUser";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
 interface DeleteUserProviderProps {
   children: React.ReactNode;
@@ -15,7 +15,10 @@ export function DeleteUserProvider({ children }: DeleteUserProviderProps) {
   const pathname = usePathname();
   const params = useParams();
 
-  const contextValue = useActionStateWithRouteRefresh(deleteUser);
+  const router = useRouter();
+  const contextValue = useActionStateWithCallbacks(deleteUser, {
+    onSuccess: () => router.refresh(),
+  });
 
   const { state } = contextValue;
 

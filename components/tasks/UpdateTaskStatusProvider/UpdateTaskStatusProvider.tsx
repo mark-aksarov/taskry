@@ -1,11 +1,11 @@
 "use client";
 
 import { notFound } from "next/navigation";
-import { usePathname } from "@/i18n/navigation";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { UpdateTaskStatusContext } from "../UpdateTaskStatusContext";
 import { updateTaskStatus } from "@/lib/actions/task/updateTaskStatus";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
 interface UpdateTaskStatusProviderProps {
   children: React.ReactNode;
@@ -15,7 +15,10 @@ export function UpdateTaskStatusProvider({
   children,
 }: UpdateTaskStatusProviderProps) {
   const pathname = usePathname();
-  const contextValue = useActionStateWithRouteRefresh(updateTaskStatus);
+  const router = useRouter();
+  const contextValue = useActionStateWithCallbacks(updateTaskStatus, {
+    onSuccess: () => router.refresh(),
+  });
   const { state } = contextValue;
 
   // if the task was not found (e.g. deleted by another user)

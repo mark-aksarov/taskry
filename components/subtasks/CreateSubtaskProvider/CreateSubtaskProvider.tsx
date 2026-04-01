@@ -3,7 +3,7 @@
 import { CreateSubtaskContext } from "../CreateSubtaskContext";
 import { createSubtask } from "@/lib/actions/subtask/createSubtask";
 import { useRefreshTaskDetail } from "@/lib/swr/hooks/useRefreshTaskDetail";
-import { useActionStateWithOnSuccess } from "@/lib/hooks/useActionStateWithOnSuccess";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 
@@ -18,11 +18,12 @@ export function CreateSubtaskProvider({
 }: CreateSubtaskProviderProps) {
   const refreshTaskDetail = useRefreshTaskDetail(taskId);
 
-  const contextValue = useActionStateWithOnSuccess(
-    createSubtask,
-    // await refreshTaskDetail help keep the UI in sync when creating a subtask
-    refreshTaskDetail,
-  );
+  const contextValue = useActionStateWithCallbacks(createSubtask, {
+    onSuccess: async () => {
+      // await refreshTaskDetail help keep the UI in sync when creating a subtask
+      await refreshTaskDetail();
+    },
+  });
 
   useCloseModalOnActionSuccess(contextValue.state, "createSubtask");
   useShowToastWhenModalClosedOnActionError(contextValue.state, "createSubtask");

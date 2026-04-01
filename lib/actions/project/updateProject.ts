@@ -29,10 +29,7 @@ const schema = z.object({
   customerId: z.preprocess(emptyStringToNull, customerId.nullable()),
 });
 
-export async function updateProject(
-  _prevState: ActionState,
-  formData: FormData,
-): Promise<ActionState> {
+export async function updateProject(formData: FormData): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 

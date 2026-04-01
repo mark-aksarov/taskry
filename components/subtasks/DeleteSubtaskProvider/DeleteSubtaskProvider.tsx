@@ -4,7 +4,7 @@ import { DeleteSubtaskContext } from "../DeleteSubtaskContext";
 import { deleteSubtask } from "@/lib/actions/subtask/deleteSubtask";
 import { useRefreshTaskDetail } from "@/lib/swr/hooks/useRefreshTaskDetail";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
-import { useActionStateWithOnSuccess } from "@/lib/hooks/useActionStateWithOnSuccess";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
 interface DeleteSubtaskProviderProps {
   taskId: number;
@@ -17,11 +17,12 @@ export function DeleteSubtaskProvider({
 }: DeleteSubtaskProviderProps) {
   const refreshTaskDetail = useRefreshTaskDetail(taskId);
 
-  const contextValue = useActionStateWithOnSuccess(
-    deleteSubtask,
-    // await refreshTaskDetail help keep the UI in sync when deleting a subtask
-    refreshTaskDetail,
-  );
+  const contextValue = useActionStateWithCallbacks(deleteSubtask, {
+    onSuccess: async () => {
+      // await refreshTaskDetail help keep the UI in sync when deleting a subtask
+      await refreshTaskDetail();
+    },
+  });
 
   useShowToastOnActionError(contextValue.state);
 

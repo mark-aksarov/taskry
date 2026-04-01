@@ -1,10 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRouter } from "@/i18n/navigation";
 import { DeleteCustomersContext } from "../DeleteCustomersContext";
 import { deleteCustomers } from "@/lib/actions/customer/deleteCustomers";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
 interface DeleteCustomersProviderProps {
   children: React.ReactNode;
@@ -16,8 +17,13 @@ export function DeleteCustomersProvider({
   // store IDs to track customers being deleted for UI purposes
   const [ids, setIds] = useState<number[]>([]);
 
-  const { action, state, isPending } =
-    useActionStateWithRouteRefresh(deleteCustomers);
+  const router = useRouter();
+  const { action, state, isPending } = useActionStateWithCallbacks(
+    deleteCustomers,
+    {
+      onSuccess: () => router.refresh(),
+    },
+  );
   useShowToastOnActionError(state);
 
   const contextValue = useMemo(

@@ -1,8 +1,9 @@
 "use client";
 
+import { useRouter } from "@/i18n/navigation";
 import { CreateCompanyContext } from "../CreateCompanyContext";
 import { createCompany } from "@/lib/actions/company/createCompany";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
@@ -14,7 +15,10 @@ interface CreateCompanyProviderProps {
 export function CreateCompanyProvider({
   children,
 }: CreateCompanyProviderProps) {
-  const contextValue = useActionStateWithRouteRefresh(createCompany);
+  const router = useRouter();
+  const contextValue = useActionStateWithCallbacks(createCompany, {
+    onSuccess: () => router.refresh(),
+  });
 
   useCloseModalThenShowToastOnActionSuccess(
     contextValue.state,

@@ -1,8 +1,9 @@
 "use client";
 
+import { useRouter } from "@/i18n/navigation";
 import { CreateProjectCategoryContext } from "../CreateProjectCategoryContext";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
-import { useActionStateWithRouteRefresh } from "@/lib/hooks/useActionStateWithRouteRefresh";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
@@ -14,7 +15,10 @@ interface CreateProjectCategoryProviderProps {
 export function CreateProjectCategoryProvider({
   children,
 }: CreateProjectCategoryProviderProps) {
-  const contextValue = useActionStateWithRouteRefresh(createProjectCategory);
+  const router = useRouter();
+  const contextValue = useActionStateWithCallbacks(createProjectCategory, {
+    onSuccess: () => router.refresh(),
+  });
 
   useCloseModalThenShowToastOnActionSuccess(
     contextValue.state,
