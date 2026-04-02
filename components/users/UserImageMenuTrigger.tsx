@@ -5,11 +5,15 @@ import { useUpdateUserImage } from "./UpdateUserImageContext";
 import { useClearUserImageUrl } from "./ClearUserImageUrlContext";
 import { PersonImageMenuTrigger } from "../common/PersonImageMenuTrigger";
 
-export function UserImageMenuTrigger({
-  children,
-}: {
+interface UserImageMenuTriggerProps {
+  showDeleteMenuItem: boolean;
   children: React.ReactNode;
-}) {
+}
+
+export function UserImageMenuTrigger({
+  showDeleteMenuItem,
+  children,
+}: UserImageMenuTriggerProps) {
   const { isPending: isUpdatePending } = useUpdateUserImage();
   const { onOpenChange: onUpdateModalOpenChange } = useModal("updateUserImage");
 
@@ -18,6 +22,7 @@ export function UserImageMenuTrigger({
 
   return (
     <PersonImageMenuTrigger
+      showDeleteMenuItem={showDeleteMenuItem}
       onDelete={() => onDeleteModalOpenChange(true)}
       onUpdate={() => onUpdateModalOpenChange(true)}
       isDisabled={isUpdatePending || isDeletePending}

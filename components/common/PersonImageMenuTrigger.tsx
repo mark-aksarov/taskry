@@ -22,12 +22,14 @@ const styles = tv({
 });
 
 interface PersonImageMenuTriggerProps extends ButtonProps {
+  showDeleteMenuItem: boolean;
   onDelete: () => void;
   onUpdate: () => void;
   children: React.ReactNode;
 }
 
 export function PersonImageMenuTrigger({
+  showDeleteMenuItem,
   onDelete,
   onUpdate,
   children,
@@ -62,10 +64,12 @@ export function PersonImageMenuTrigger({
         </Button>
       )}
     >
-      <Item textValue={t("items.delete")} key="delete">
-        <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
-        {t("items.delete")}
-      </Item>
+      {showDeleteMenuItem ? (
+        <Item textValue={t("items.delete")} key="delete">
+          <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          {t("items.delete")}
+        </Item>
+      ) : null}
       <Item textValue={t("items.update")} key="update">
         <Camera size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {t("items.update")}
