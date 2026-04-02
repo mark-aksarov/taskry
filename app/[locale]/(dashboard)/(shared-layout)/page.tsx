@@ -52,11 +52,12 @@ export default async function AppDashboardPage({
             pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
           >
             <DashboardPage
+              totalTaskCount={totalCount}
               totalProjectsCardContainer={<TotalProjectsCardContainer />}
               totalTasksCardContainer={<TotalTasksCardContainer />}
               totalUsersCardContainer={<TotalUsersCardContainer />}
               totalCustomersCardContainer={<TotalCustomersCardContainer />}
-              assignedTasksContainer={
+              tasksContainer={
                 <AssignedTasksContainer
                   tasks={tasks}
                   totalCount={totalCount}

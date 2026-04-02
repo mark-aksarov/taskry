@@ -5,7 +5,11 @@ import { useCreateTaskTriggerPress } from "./useCreateTaskTriggerPress";
 import { CreateNewButtonLarge } from "@/components/common/CreateNewButton";
 import { useCreateTaskTriggerDisabled } from "./useCreateTaskTriggerDisabled";
 
-export function CreateTaskModalTriggerLarge() {
+export function CreateTaskModalTriggerLarge({
+  className,
+}: {
+  className?: string;
+}) {
   const t = useTranslations("tasks.CreateTaskModalTrigger");
 
   const isDisabled = useCreateTaskTriggerDisabled();
@@ -17,6 +21,7 @@ export function CreateTaskModalTriggerLarge() {
       data-test="create-task-modal-trigger-large"
       onPress={handlePress}
       isDisabled={isDisabled}
+      className={className}
     />
   );
 }

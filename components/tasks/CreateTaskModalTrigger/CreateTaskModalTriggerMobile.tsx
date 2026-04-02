@@ -5,7 +5,11 @@ import { useCreateTaskTriggerPress } from "./useCreateTaskTriggerPress";
 import { CreateNewButtonMobile } from "@/components/common/CreateNewButton";
 import { useCreateTaskTriggerDisabled } from "./useCreateTaskTriggerDisabled";
 
-export function CreateTaskModalTriggerMobile() {
+export function CreateTaskModalTriggerMobile({
+  className,
+}: {
+  className?: string;
+}) {
   const t = useTranslations("tasks.CreateTaskModalTrigger");
 
   const isDisabled = useCreateTaskTriggerDisabled();
@@ -17,6 +21,7 @@ export function CreateTaskModalTriggerMobile() {
       data-test="create-task-modal-trigger-mobile"
       onPress={handlePress}
       isDisabled={isDisabled}
+      className={className}
     />
   );
 }

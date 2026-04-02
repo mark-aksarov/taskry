@@ -1,12 +1,9 @@
 "use client";
 
-import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { TaskListSkeleton } from "./TaskList";
 import { TaskGridMobileSkeleton } from "./TaskGrid";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
-import { AssignedTasksSection } from "./AssignedTasksSection";
-import { AssignedTasksSectionHeading } from "./AssignedTasksSectionHeading";
 
 const AssignedTasksDynamic = dynamic(
   () =>
@@ -14,15 +11,14 @@ const AssignedTasksDynamic = dynamic(
   {
     ssr: false,
     loading: () => (
-      <AssignedTasksSection>
-        <AssignedTasksSectionHeading />
+      <>
         <TaskListSkeleton
           items={10}
           showCheckbox={false}
           className="max-md:hidden"
         />
         <TaskGridMobileSkeleton items={10} className="md:hidden" />
-      </AssignedTasksSection>
+      </>
     ),
   },
 );
@@ -34,27 +30,7 @@ interface AssignedTasksContainerProps {
   pageSize: number;
 }
 
-export function AssignedTasksContainer(props: AssignedTasksContainerProps) {
-  return (
-    <Suspense
-      fallback={
-        <AssignedTasksSection>
-          <AssignedTasksSectionHeading />
-          <TaskListSkeleton
-            items={10}
-            showCheckbox={false}
-            className="max-md:hidden"
-          />
-          <TaskGridMobileSkeleton items={10} className="md:hidden" />
-        </AssignedTasksSection>
-      }
-    >
-      <AssignedTasksContainerInner {...props} />
-    </Suspense>
-  );
-}
-
-function AssignedTasksContainerInner({
+export function AssignedTasksContainer({
   tasks,
   totalCount,
   page,
@@ -66,7 +42,6 @@ function AssignedTasksContainerInner({
       pageSize={pageSize}
       tasks={tasks}
       totalPages={Math.ceil(totalCount / pageSize)}
-      totalCount={totalCount}
     />
   );
 }

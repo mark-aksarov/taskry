@@ -13,7 +13,6 @@ interface AssignedTasksDynamicProps {
   totalPages: number;
   page: number;
   pageSize: number;
-  totalCount: number;
 }
 
 export function AssignedTasksDynamic({
@@ -21,7 +20,6 @@ export function AssignedTasksDynamic({
   totalPages,
   page,
   pageSize,
-  totalCount,
 }: AssignedTasksDynamicProps) {
   const renderListLarge = () => {
     return (
@@ -62,7 +60,6 @@ export function AssignedTasksDynamic({
       totalPages={totalPages}
       listLarge={renderListLarge}
       gridMobile={renderGridMobile}
-      totalCount={totalCount}
     />
   );
 }

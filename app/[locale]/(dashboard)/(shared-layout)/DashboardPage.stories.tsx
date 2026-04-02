@@ -1,7 +1,7 @@
 import {
-  TotalProjectsCard,
-  TotalProjectsCardSkeleton,
-} from "@/components/projects/TotalProjectsCard";
+  TaskGridMobile,
+  TaskGridMobileSkeleton,
+} from "@/components/tasks/TaskGrid";
 
 import {
   TotalTasksCard,
@@ -14,6 +14,11 @@ import {
 } from "@/components/users/TotalUsersCard";
 
 import {
+  TotalProjectsCard,
+  TotalProjectsCardSkeleton,
+} from "@/components/projects/TotalProjectsCard";
+
+import {
   TotalCustomersCard,
   TotalCustomersCardSkeleton,
 } from "@/components/customer/TotalCustomersCard";
@@ -22,30 +27,20 @@ import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
 import { mockedTaskList } from "@/mocks/tasks";
 import { DashboardPage } from "./DashboardPage";
-import { mockedUserSummaries } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { mockedProjectSummaries } from "@/mocks/projects";
-import { TaskGridMobile } from "@/components/tasks/TaskGrid";
 import { TaskListSkeleton } from "@/components/tasks/TaskList";
-import { CreateTaskForm } from "@/components/tasks/CreateTaskForm";
-import { CreateTaskModal } from "@/components/tasks/CreateTaskModal";
-import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { AssignedTaskList } from "@/components/tasks/AssignedTaskList";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskGridMobileStory } from "@/components/tasks/TaskGrid/__stories__";
 import { AssignedTaskListItem } from "@/components/tasks/AssignedTaskListItem";
-import { AssignedTasksSection } from "@/components/tasks/AssignedTasksSection";
 import { TaskListItemStory } from "@/components/tasks/TaskListItem/__stories__";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
 import { MockedTaskItemWrapper } from "@/components/tasks/TaskItemWrapper/__stories__";
 import { AssignedTasksPresentation } from "@/components/tasks/AssignedTasksPresentation";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskProvider/__stories__";
-import { AssignedTasksSectionHeading } from "@/components/tasks/AssignedTasksSectionHeading";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksProvider/__stories__";
-import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
-import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesProvider/__stories__";
 
@@ -58,9 +53,8 @@ const meta = {
     withCreateSubtaskProvider,
     withUpdateTaskStatusesProvider,
     withDeleteTasksProvider,
-    withCurrentUserProvider,
+    withCreateTaskProvider,
     withSelectedTasksProvider,
-    withPageTransitionProvider,
     SharedPageDecorator,
     withThemedBackground,
   ],
@@ -72,9 +66,8 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const AssignedTasksContainer = ({ totalCount }: { totalCount: number }) => (
+const AssignedTasksContainer = () => (
   <AssignedTasksPresentation
-    totalCount={totalCount}
     page={1}
     pageSize={5}
     listLarge={() => (
@@ -93,50 +86,38 @@ const AssignedTasksContainer = ({ totalCount }: { totalCount: number }) => (
 
 export const Default = {
   args: {
+    totalTaskCount: 10,
     totalProjectsCardContainer: <TotalProjectsCard totalProjects={50} />,
     totalTasksCardContainer: <TotalTasksCard totalTasks={500} />,
     totalUsersCardContainer: <TotalUsersCard totalUsers={15} />,
     totalCustomersCardContainer: <TotalCustomersCard totalCustomers={20} />,
-    assignedTasksContainer: <AssignedTasksContainer totalCount={5} />,
+    tasksContainer: <AssignedTasksContainer />,
   },
 } satisfies Story;
 
 export const Loading = {
   args: {
+    totalTaskCount: 10,
     totalProjectsCardContainer: <TotalProjectsCardSkeleton />,
     totalTasksCardContainer: <TotalTasksCardSkeleton />,
     totalUsersCardContainer: <TotalUsersCardSkeleton />,
     totalCustomersCardContainer: <TotalCustomersCardSkeleton />,
-    assignedTasksContainer: (
-      <AssignedTasksSection>
-        <AssignedTasksSectionHeading />
-        <TaskListSkeleton items={10} showCheckbox={false} />
-      </AssignedTasksSection>
+    tasksContainer: (
+      <AssignedTasksPresentation
+        page={1}
+        pageSize={5}
+        listLarge={() => <TaskListSkeleton items={10} showCheckbox={false} />}
+        gridMobile={() => <TaskGridMobileSkeleton items={10} />}
+        totalPages={3}
+      />
     ),
   },
 } satisfies Story;
 
 export const WithNoTasks = {
-  decorators: [
-    (Story) => (
-      <>
-        <Story />
-        <CreateTaskModal
-          createTaskFormContainer={
-            <CreateTaskForm
-              forcedAssigneeId={mockedUserSummaries[0].id}
-              categorySelectItems={mockedTaskCategorySummaries}
-              projectSelectItems={mockedProjectSummaries}
-              assigneeSelectItems={mockedUserSummaries}
-            />
-          }
-        />
-      </>
-    ),
-    withCreateTaskProvider,
-  ],
   args: {
     ...Default.args,
-    assignedTasksContainer: <AssignedTasksContainer totalCount={0} />,
+    totalTaskCount: 0,
+    tasksContainer: <AssignedTasksContainer />,
   },
 } satisfies Story;
