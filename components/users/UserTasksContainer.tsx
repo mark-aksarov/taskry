@@ -1,7 +1,22 @@
-import "server-only";
+"use client";
 
-import { UserTasksDynamic } from "./UserTasksDynamic";
+import dynamic from "next/dynamic";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
+import { TaskGridMobileSkeleton } from "../tasks/TaskGrid";
+import { UserTaskListSkeleton } from "./UserTaskList";
+
+const UserTasksDynamic = dynamic(
+  () => import("./UserTasksDynamic").then((mod) => mod.UserTasksDynamic),
+  {
+    ssr: false,
+    loading: () => (
+      <>
+        <UserTaskListSkeleton className="max-md:hidden" items={10} />
+        <TaskGridMobileSkeleton className="md:hidden" items={10} />
+      </>
+    ),
+  },
+);
 
 interface UserTasksContainerProps {
   tasks: TaskListItemDTO[];
@@ -10,7 +25,7 @@ interface UserTasksContainerProps {
   pageSize: number;
 }
 
-export async function UserTasksContainer({
+export function UserTasksContainer({
   tasks,
   totalCount,
   page,

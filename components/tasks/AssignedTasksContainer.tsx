@@ -1,11 +1,31 @@
-import "server-only";
+"use client";
 
 import { Suspense } from "react";
+import dynamic from "next/dynamic";
 import { TaskListSkeleton } from "./TaskList";
+import { TaskGridMobileSkeleton } from "./TaskGrid";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
-import { AssignedTasksDynamic } from "./AssignedTasksDynamic";
 import { AssignedTasksSection } from "./AssignedTasksSection";
 import { AssignedTasksSectionHeading } from "./AssignedTasksSectionHeading";
+
+const AssignedTasksDynamic = dynamic(
+  () =>
+    import("./AssignedTasksDynamic").then((mod) => mod.AssignedTasksDynamic),
+  {
+    ssr: false,
+    loading: () => (
+      <AssignedTasksSection>
+        <AssignedTasksSectionHeading />
+        <TaskListSkeleton
+          items={10}
+          showCheckbox={false}
+          className="max-md:hidden"
+        />
+        <TaskGridMobileSkeleton items={10} className="md:hidden" />
+      </AssignedTasksSection>
+    ),
+  },
+);
 
 interface AssignedTasksContainerProps {
   tasks: TaskListItemDTO[];
@@ -20,7 +40,12 @@ export function AssignedTasksContainer(props: AssignedTasksContainerProps) {
       fallback={
         <AssignedTasksSection>
           <AssignedTasksSectionHeading />
-          <TaskListSkeleton items={10} showCheckbox={false} />
+          <TaskListSkeleton
+            items={10}
+            showCheckbox={false}
+            className="max-md:hidden"
+          />
+          <TaskGridMobileSkeleton items={10} className="md:hidden" />
         </AssignedTasksSection>
       }
     >
@@ -29,7 +54,7 @@ export function AssignedTasksContainer(props: AssignedTasksContainerProps) {
   );
 }
 
-async function AssignedTasksContainerInner({
+function AssignedTasksContainerInner({
   tasks,
   totalCount,
   page,
