@@ -1,6 +1,6 @@
 "use client";
 
-import { useMediaQuery } from "react-responsive";
+import { useIsMd } from "@/lib/hooks/useIsMd";
 import { useViewMode } from "@/components/common/ViewMode";
 import { EntityContainerPagination } from "./EntityContainerPagination";
 
@@ -22,7 +22,7 @@ export function EntityContainerPresentation({
   totalPages,
 }: EntityContainerPresentationProps) {
   const { viewMode } = useViewMode();
-  const isMd = useMediaQuery({ query: "(max-width: 47.999rem)" });
+  const isMd = useIsMd();
 
   let content;
 

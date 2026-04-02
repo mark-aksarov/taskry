@@ -1,6 +1,6 @@
 "use client";
 
-import { useMediaQuery } from "react-responsive";
+import { useIsMd } from "@/lib/hooks/useIsMd";
 import { TasksEmptySection } from "./TasksEmptySection";
 import { AssignedTasksSection } from "./AssignedTasksSection";
 import { AssignedTasksSectionHeading } from "./AssignedTasksSectionHeading";
@@ -20,7 +20,7 @@ export function AssignedTasksPresentation({
   gridMobile,
   totalPages,
 }: AssignedTasksPresentationProps) {
-  const isMd = useMediaQuery({ query: "(max-width: 47.999rem)" });
+  const isMd = useIsMd();
 
   if (totalCount === 0) {
     return (

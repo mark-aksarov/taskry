@@ -1,4 +1,4 @@
-import { useMediaQuery } from "react-responsive";
+import { useIsMd } from "@/lib/hooks/useIsMd";
 import { EntityContainerPagination } from "../common/EntityContainerPagination";
 import { EntityContainerPresentationProps } from "../common/EntityContainerPresentation";
 
@@ -14,7 +14,7 @@ export function UserTasksPresentation({
   gridMobile,
   totalPages,
 }: UserTasksPresentationProps) {
-  const isMd = useMediaQuery({ query: "(max-width: 47.999rem)" });
+  const isMd = useIsMd();
 
   let content;
 

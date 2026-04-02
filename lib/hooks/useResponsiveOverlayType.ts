@@ -1,7 +1,7 @@
-import { useMediaQuery } from "react-responsive";
+import { useIsMd } from "@/lib/hooks/useIsMd";
 
 export const useResponsiveOverlayType = () => {
-  const isMd = useMediaQuery({ query: "(max-width: 47.999rem)" });
+  const isMd = useIsMd();
 
   return isMd ? "bottomsheet" : "popover";
 };

@@ -1,7 +1,7 @@
 "use client";
 
+import { useIsMd } from "@/lib/hooks/useIsMd";
 import { Modal } from "@/components/ui/Modal";
-import { useMediaQuery } from "react-responsive";
 import { UploadPersonImageDialog } from "./UploadPersonImageDialog";
 import { overlayTransitionDuration } from "@/components/ui/styles";
 
@@ -20,7 +20,7 @@ export function PersonImageModal({
   onOpenChange,
   updatePersonImageDialog,
 }: PersonImageModalProps) {
-  const isMd = useMediaQuery({ query: "(max-width: 47.999rem)" });
+  const isMd = useIsMd();
 
   const handleOpenChange = (isOpen: boolean) => {
     if (!isOpen) {
