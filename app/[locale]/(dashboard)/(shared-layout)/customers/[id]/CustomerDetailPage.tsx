@@ -32,7 +32,7 @@ export function CustomerDetailPage({
         <ToolbarMobile
           firstSlot={
             <>
-              <BackButton href="/customers" />
+              <BackButton fallbackHref="/customers" />
               <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
             </>
           }

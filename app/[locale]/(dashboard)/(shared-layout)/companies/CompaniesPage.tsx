@@ -32,7 +32,7 @@ export function CompaniesPage({
           <ToolbarMobile
             firstSlot={
               <>
-                <BackButton href="/customers" />
+                <BackButton fallbackHref="/customers" />
                 <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
               </>
             }
@@ -60,7 +60,7 @@ export function CompaniesPage({
           <ToolbarMobile
             firstSlot={
               <>
-                <BackButton href="/customers" />
+                <BackButton fallbackHref="/customers" />
                 <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
               </>
             }

@@ -25,7 +25,7 @@ export default function AppTaskDetailLoading() {
         <ToolbarMobile
           firstSlot={
             <>
-              <BackButton href="/tasks" />
+              <BackButton fallbackHref="/tasks" />
               <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
             </>
           }

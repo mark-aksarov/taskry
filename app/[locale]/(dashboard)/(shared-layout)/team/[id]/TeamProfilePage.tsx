@@ -47,7 +47,7 @@ export function TeamProfilePage({
         <ToolbarMobile
           firstSlot={
             <>
-              <BackButton href="/team" />
+              <BackButton fallbackHref="/team" />
               <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
             </>
           }

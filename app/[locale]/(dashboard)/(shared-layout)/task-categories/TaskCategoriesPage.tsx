@@ -32,7 +32,7 @@ export function TaskCategoriesPage({
           <ToolbarMobile
             firstSlot={
               <>
-                <BackButton href="/tasks" />
+                <BackButton fallbackHref="/tasks" />
                 <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
               </>
             }
@@ -60,7 +60,7 @@ export function TaskCategoriesPage({
           <ToolbarMobile
             firstSlot={
               <>
-                <BackButton href="/tasks" />
+                <BackButton fallbackHref="/tasks" />
                 <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
               </>
             }

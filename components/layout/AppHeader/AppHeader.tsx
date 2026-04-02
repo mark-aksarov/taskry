@@ -26,7 +26,7 @@ export const AppHeader = ({
         <div className="flex items-center gap-8 max-md:hidden">
           {
             <div className="flex flex-none items-center gap-4">
-              {backButtonHref && <BackButton href={backButtonHref} />}
+              {backButtonHref && <BackButton fallbackHref={backButtonHref} />}
               <AppHeaderHeading>{heading}</AppHeaderHeading>
             </div>
           }

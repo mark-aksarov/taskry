@@ -32,7 +32,7 @@ export function PositionsPage({
           <ToolbarMobile
             firstSlot={
               <>
-                <BackButton href="/team" />
+                <BackButton fallbackHref="/team" />
                 <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
               </>
             }
@@ -60,7 +60,7 @@ export function PositionsPage({
           <ToolbarMobile
             firstSlot={
               <>
-                <BackButton href="/team" />
+                <BackButton fallbackHref="/team" />
                 <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
               </>
             }

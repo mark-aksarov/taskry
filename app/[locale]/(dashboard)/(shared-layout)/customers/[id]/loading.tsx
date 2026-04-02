@@ -25,7 +25,7 @@ export default function AppCustomerDetailLoading() {
         <ToolbarMobile
           firstSlot={
             <>
-              <BackButton href="/customers" />
+              <BackButton fallbackHref="/customers" />
               <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
             </>
           }

@@ -86,7 +86,7 @@ export function UserTasksPageLayout({
           <ToolbarMobile
             firstSlot={
               <>
-                {backButton && <BackButton href="/team" />}
+                {backButton && <BackButton fallbackHref="/team" />}
                 <PageHeadingMobile>{t("title")}</PageHeadingMobile>
               </>
             }

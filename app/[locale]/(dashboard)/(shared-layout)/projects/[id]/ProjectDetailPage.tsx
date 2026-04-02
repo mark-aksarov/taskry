@@ -31,7 +31,7 @@ export function ProjectDetailPage({
         <ToolbarMobile
           firstSlot={
             <>
-              <BackButton href="/projects" />
+              <BackButton fallbackHref="/projects" />
               <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
             </>
           }

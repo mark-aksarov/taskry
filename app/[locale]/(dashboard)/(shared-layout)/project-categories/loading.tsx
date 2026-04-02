@@ -23,7 +23,7 @@ export default function AppProjectCategoriesPageLoading() {
         <ToolbarMobile
           firstSlot={
             <>
-              <BackButton href="/projects" />
+              <BackButton fallbackHref="/projects" />
               <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
             </>
           }
