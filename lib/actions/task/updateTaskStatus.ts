@@ -30,8 +30,7 @@ export async function updateTaskStatus(
     if (!result.length) {
       return {
         status: "error",
-        errorCode: "notFound",
-        message: t("task.common.error.notFound"),
+        message: t("task.updateStatus.error.internalServerError"),
       };
     }
 

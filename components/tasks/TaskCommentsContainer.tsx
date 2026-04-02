@@ -6,9 +6,7 @@ import {
 } from "@/components/comments/CommentItem";
 
 import useSWR from "swr";
-import { usePathname } from "@/i18n/navigation";
 import { Repeat } from "@/components/common/Repeat";
-import { notFound, useParams } from "next/navigation";
 import { CommentList } from "../comments/CommentList";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { CommentItemWrapper } from "../comments/CommentItemWrapper";
@@ -19,10 +17,7 @@ interface TaskCommentsContainerProps {
 }
 
 export function TaskCommentsContainer({ taskId }: TaskCommentsContainerProps) {
-  const pathname = usePathname();
-  const params = useParams();
-
-  const { data: comments, error: commentsError } = useSWR<CommentListItemDTO[]>(
+  const { data: comments, error } = useSWR<CommentListItemDTO[]>(
     `/api/tasks/${taskId}/comments`,
     {
       refreshInterval: 5000,
@@ -30,15 +25,7 @@ export function TaskCommentsContainer({ taskId }: TaskCommentsContainerProps) {
     },
   );
 
-  if (commentsError) {
-    if (commentsError.status === 404) {
-      if (pathname.startsWith("/tasks") && params.id) {
-        notFound();
-      }
-
-      throw new Error(undefined, { cause: "taskNotFound" });
-    }
-
+  if (error) {
     throw new Error();
   }
 

@@ -22,11 +22,6 @@ export function UpdatePositionProvider({
 
   const { state } = contextValue;
 
-  // if the position was not found (e.g. deleted by another user)
-  if (state.status === "error" && state.errorCode === "notFound") {
-    throw new Error(state.message, { cause: "positionNotFound" });
-  }
-
   useCloseModalThenShowToastOnActionSuccess(state, "updatePosition");
   useShowToastWhenModalClosedOnActionSuccess(state, "updatePosition");
   useShowToastWhenModalClosedOnActionError(state, "updatePosition");

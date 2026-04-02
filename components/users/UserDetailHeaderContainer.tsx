@@ -17,10 +17,6 @@ export function UserDetailHeaderContainer({
   });
 
   if (error) {
-    if (error.status === 404) {
-      throw new Error(undefined, { cause: "userNotFound" });
-    }
-
     throw new Error();
   }
 

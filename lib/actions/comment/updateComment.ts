@@ -3,7 +3,6 @@
 import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
-import { NotFoundError } from "@/lib/data/utils/error";
 import { commentId, commentContent } from "@/lib/schemas/comment";
 import { updateComment as updateCommentQuery } from "@/lib/data/comment/comment.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
@@ -31,14 +30,6 @@ export async function updateComment(formData: FormData): Promise<ActionState> {
     };
   } catch (error) {
     console.error("Server Action Error:", error);
-
-    if (error instanceof NotFoundError) {
-      return {
-        status: "error",
-        errorCode: "notFound",
-        message: t("comment.common.error.notFound"),
-      };
-    }
 
     return {
       status: "error",

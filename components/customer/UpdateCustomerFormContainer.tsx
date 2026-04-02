@@ -1,9 +1,7 @@
 "use client";
 
 import useSWR from "swr";
-import { usePathname } from "@/i18n/navigation";
 import { UpdateCustomerForm } from "./UpdateCustomerForm";
-import { notFound, useParams } from "next/navigation";
 import { CustomerFormSkeleton } from "./CustomerFormSkeleton";
 import { CompanySummaryDTO } from "@/lib/data/company/company.dto";
 import { CustomerFormDataDTO } from "@/lib/data/customer/customer.dto";
@@ -15,9 +13,6 @@ interface UpdateCustomerFormContainerProps {
 export function UpdateCustomerFormContainer({
   customerId,
 }: UpdateCustomerFormContainerProps) {
-  const pathname = usePathname();
-  const params = useParams();
-
   const { data: companies } = useSWR<CompanySummaryDTO[]>(`/api/companies`, {
     revalidateOnFocus: false,
   });
@@ -31,14 +26,6 @@ export function UpdateCustomerFormContainer({
   });
 
   if (customerError) {
-    if (customerError.status === 404) {
-      if (pathname.startsWith("/customers") && params.id) {
-        notFound();
-      }
-
-      throw new Error(undefined, { cause: "customerNotFound" });
-    }
-
     throw new Error();
   }
 

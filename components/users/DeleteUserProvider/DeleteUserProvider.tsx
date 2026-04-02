@@ -1,8 +1,7 @@
 "use client";
 
-import { notFound, useParams } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { DeleteUserContext } from "../DeleteUserContext";
-import { usePathname, useRouter } from "@/i18n/navigation";
 import { deleteUser } from "@/lib/actions/user/deleteUser";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
@@ -12,25 +11,12 @@ interface DeleteUserProviderProps {
 }
 
 export function DeleteUserProvider({ children }: DeleteUserProviderProps) {
-  const pathname = usePathname();
-  const params = useParams();
-
   const router = useRouter();
   const contextValue = useActionStateWithCallbacks(deleteUser, {
     onSuccess: () => router.refresh(),
   });
 
   const { state } = contextValue;
-
-  if (state.status === "error" && state.errorCode === "notFound") {
-    if (
-      (pathname.startsWith("/team") && params.id) ||
-      pathname.startsWith("/profile")
-    ) {
-      notFound();
-    }
-    throw new Error(state.message, { cause: "userNotFound" });
-  }
 
   useShowToastOnActionError(state);
 

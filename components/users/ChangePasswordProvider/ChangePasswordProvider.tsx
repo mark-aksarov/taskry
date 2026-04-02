@@ -1,6 +1,5 @@
 "use client";
 
-import { notFound } from "next/navigation";
 import { useRouter } from "@/i18n/navigation";
 import { ChangePasswordContext } from "../ChangePasswordContext";
 import { changePassword } from "@/lib/actions/user/changePassword";
@@ -23,22 +22,9 @@ export function ChangePasswordProvider({
 
   const { state } = contextValue;
 
-  if (state.status === "error" && state.errorCode === "notFound") {
-    notFound();
-  }
-
-  useCloseModalThenShowToastOnActionSuccess(
-    contextValue.state,
-    "changePassword",
-  );
-  useShowToastWhenModalClosedOnActionSuccess(
-    contextValue.state,
-    "changePassword",
-  );
-  useShowToastWhenModalClosedOnActionError(
-    contextValue.state,
-    "changePassword",
-  );
+  useCloseModalThenShowToastOnActionSuccess(state, "changePassword");
+  useShowToastWhenModalClosedOnActionSuccess(state, "changePassword");
+  useShowToastWhenModalClosedOnActionError(state, "changePassword");
 
   return (
     <ChangePasswordContext.Provider value={contextValue}>

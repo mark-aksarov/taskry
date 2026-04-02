@@ -1,382 +1,328 @@
 {
   "common": {
     "error": {
-      "internalServerError": "A server error occurred. Please try again later.",
+      "internalServerError": "Something went wrong. Refresh the page or try again later.",
       "authError": "A server error occurred. Details: {message}"
     }
   },
   "createPresignedUrl": {
     "error": {
-      "internalServerError": "A server error occurred. Failed to create presigned URL."
+      "internalServerError": "Something went wrong. Failed to create the URL. Refresh the page or try again later."
     }
   },
   "forgetPassword": {
     "error": {
-      "internalServerError": "A server error occurred. Failed to reset password."
+      "internalServerError": "Something went wrong. Failed to reset the password. Refresh the page or try again later."
     }
   },
   "resetPassword": {
     "error": {
-      "internalServerError": "A server error occurred. Failed to reset password."
+      "internalServerError": "Something went wrong. Failed to reset the password. Refresh the page or try again later."
     }
   },
   "signIn": {
     "error": {
-      "internalServerError": "A server error occurred. Failed to sign in."
+      "internalServerError": "Something went wrong. Failed to sign in. Refresh the page or try again later."
     }
   },
   "signUp": {
     "error": {
-      "internalServerError": "A server error occurred. Failed to sign up."
+      "internalServerError": "Something went wrong. Failed to sign up. Refresh the page or try again later."
     }
   },
   "position": {
-    "common": {
-      "error": {
-        "notFound": "Position not found. It may have been deleted by another user."
-      }
-    },
     "create": {
       "success": "Position created successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to create position."
+        "internalServerError": "Something went wrong. Failed to create the position. Refresh the page or try again later."
       }
     },
     "update": {
       "success": "Position updated successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to update position."
+        "internalServerError": "Something went wrong. Failed to update the position. Refresh the page or try again later."
       }
     },
     "delete": {
       "success": "Position deleted successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to delete position."
+        "internalServerError": "Something went wrong. Failed to delete the position. Refresh the page or try again later."
       }
     },
     "deleteMany": {
       "success": "Positions deleted successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to delete positions."
+        "internalServerError": "Something went wrong. Failed to delete the positions. Refresh the page or try again later."
       }
     }
   },
   "comment": {
-    "common": {
-      "error": {
-        "notFound": "Comment not found. It may have been deleted by another user."
-      }
-    },
     "create": {
       "success": "Comment sent successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to send comment."
+        "internalServerError": "Something went wrong. Failed to send the comment. Refresh the page or try again later."
       }
     },
     "update": {
       "success": "Comment updated successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to update comment."
+        "internalServerError": "Something went wrong. Failed to update the comment. Refresh the page or try again later."
       }
     },
     "delete": {
       "success": "Comment deleted successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to delete comment."
+        "internalServerError": "Something went wrong. Failed to delete the comment. Refresh the page or try again later."
       }
     },
     "deleteMany": {
       "success": "Comments deleted successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to delete comments."
+        "internalServerError": "Something went wrong. Failed to delete the comments. Refresh the page or try again later."
       }
     }
   },
   "company": {
-    "common": {
-      "error": {
-        "notFound": "Company not found. It may have been deleted by another user."
-      }
-    },
     "create": {
       "success": "Company created successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to create company."
+        "internalServerError": "Something went wrong. Failed to create the company. Refresh the page or try again later."
       }
     },
     "update": {
       "success": "Company updated successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to update company."
+        "internalServerError": "Something went wrong. Failed to update the company. Refresh the page or try again later."
       }
     },
     "delete": {
       "success": "Company deleted successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to delete company."
+        "internalServerError": "Something went wrong. Failed to delete the company. Refresh the page or try again later."
       }
     },
     "deleteMany": {
       "success": "Companies deleted successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to delete companies."
+        "internalServerError": "Something went wrong. Failed to delete the companies. Refresh the page or try again later."
       }
     }
   },
   "customer": {
-    "common": {
-      "error": {
-        "notFound": "Customer not found. It may have been deleted by another user.",
-        "relationNotFound": "Company not found. It may have been deleted by another user. Update the form data."
-      }
-    },
     "create": {
       "success": "Customer created successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to create customer."
+        "internalServerError": "Something went wrong. Failed to create the customer. Refresh the page or try again later."
       }
     },
     "update": {
       "success": "Customer updated successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to update customer."
+        "internalServerError": "Something went wrong. Failed to update the customer. Refresh the page or try again later."
       }
     },
     "updateImageUrl": {
       "success": "Customer image updated successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to update customer image."
+        "internalServerError": "Something went wrong. Failed to update the customer image. Refresh the page or try again later."
       }
     },
     "delete": {
       "success": "Customer deleted successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to delete customer."
+        "internalServerError": "Something went wrong. Failed to delete the customer. Refresh the page or try again later."
       }
     },
     "deleteMany": {
       "success": "Customers deleted successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to delete customers."
+        "internalServerError": "Something went wrong. Failed to delete the customers. Refresh the page or try again later."
       }
     }
   },
   "project": {
-    "common": {
-      "error": {
-        "notFound": "Project not found. It may have been deleted by another user.",
-        "relationNotFound": "Project category or customer not found. They may have been deleted by another user. Update the form data."
-      }
-    },
     "create": {
       "success": "Project created successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to create project."
+        "internalServerError": "Something went wrong. Failed to create the project. Refresh the page or try again later."
       }
     },
     "update": {
       "success": "Project updated successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to update project."
+        "internalServerError": "Something went wrong. Failed to update the project. Refresh the page or try again later."
       }
     },
     "updateStatus": {
       "success": "Project status updated successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to update project status."
+        "internalServerError": "Something went wrong. Failed to update the project status. Refresh the page or try again later."
       }
     },
     "updateStatuses": {
       "success": "Project statuses updated successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to update project statuses."
+        "internalServerError": "Something went wrong. Failed to update the project statuses. Refresh the page or try again later."
       }
     },
     "delete": {
       "success": "Project deleted successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to delete project."
+        "internalServerError": "Something went wrong. Failed to delete the project. Refresh the page or try again later."
       }
     },
     "deleteMany": {
       "success": "Projects deleted successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to delete projects."
+        "internalServerError": "Something went wrong. Failed to delete the projects. Refresh the page or try again later."
       }
     }
   },
   "task": {
-    "common": {
-      "error": {
-        "notFound": "Task not found. It may have been deleted by another user.",
-        "relationNotFound": "Task category, project or assigned user not found. They may have been deleted by another user. Update the form data."
-      }
-    },
     "create": {
       "success": "Task created successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to create task."
+        "internalServerError": "Something went wrong. Failed to create the task. Refresh the page or try again later."
       }
     },
     "update": {
       "success": "Task updated successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to update task."
+        "internalServerError": "Something went wrong. Failed to update the task. Refresh the page or try again later."
       }
     },
     "updateStatus": {
       "success": "Task status updated successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to update task status."
+        "internalServerError": "Something went wrong. Failed to update the task status. Refresh the page or try again later."
       }
     },
     "updateStatuses": {
       "success": "Task statuses updated successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to update task statuses."
+        "internalServerError": "Something went wrong. Failed to update the task statuses. Refresh the page or try again later."
       }
     },
     "delete": {
       "success": "Task deleted successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to delete task."
+        "internalServerError": "Something went wrong. Failed to delete the task. Refresh the page or try again later."
       }
     },
     "deleteMany": {
       "success": "Tasks deleted successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to delete tasks."
+        "internalServerError": "Something went wrong. Failed to delete the tasks. Refresh the page or try again later."
       }
     }
   },
   "projectCategory": {
-    "common": {
-      "error": {
-        "notFound": "Project category not found. It may have been deleted by another user."
-      }
-    },
     "create": {
       "success": "Project category created successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to create project category."
+        "internalServerError": "Something went wrong. Failed to create the project category. Refresh the page or try again later."
       }
     },
     "update": {
       "success": "Project category updated successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to update project category."
+        "internalServerError": "Something went wrong. Failed to update the project category. Refresh the page or try again later."
       }
     },
     "delete": {
       "success": "Project category deleted successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to delete project category."
+        "internalServerError": "Something went wrong. Failed to delete the project category. Refresh the page or try again later."
       }
     },
     "deleteMany": {
       "success": "Project categories deleted successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to delete project categories."
+        "internalServerError": "Something went wrong. Failed to delete the project categories. Refresh the page or try again later."
       }
     }
   },
   "taskCategory": {
-    "common": {
-      "error": {
-        "notFound": "Task category not found. It may have been deleted by another user."
-      }
-    },
     "create": {
       "success": "Task category created successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to create task category."
+        "internalServerError": "Something went wrong. Failed to create the task category. Refresh the page or try again later."
       }
     },
     "update": {
       "success": "Task category updated successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to update task category."
+        "internalServerError": "Something went wrong. Failed to update the task category. Refresh the page or try again later."
       }
     },
     "delete": {
       "success": "Task category deleted successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to delete task category."
+        "internalServerError": "Something went wrong. Failed to delete the task category. Refresh the page or try again later."
       }
     },
     "deleteMany": {
       "success": "Task categories deleted successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to delete task categories."
+        "internalServerError": "Something went wrong. Failed to delete the task categories. Refresh the page or try again later."
       }
     }
   },
   "subtask": {
-    "common": {
-      "error": {
-        "notFound": "Subtask not found. It may have been deleted by another user."
-      }
-    },
     "create": {
       "success": "Subtask created successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to create subtask."
+        "internalServerError": "Something went wrong. Failed to create the subtask. Refresh the page or try again later."
       }
     },
     "update": {
       "success": "Subtask updated successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to update subtask."
+        "internalServerError": "Something went wrong. Failed to update the subtask. Refresh the page or try again later."
       }
     },
     "updateStatus": {
       "success": "Subtask status updated successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to update subtask status."
+        "internalServerError": "Something went wrong. Failed to update the subtask status. Refresh the page or try again later."
       }
     },
     "delete": {
       "success": "Subtask deleted successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to delete subtask."
+        "internalServerError": "Something went wrong. Failed to delete the subtask. Refresh the page or try again later."
       }
     }
   },
   "user": {
-    "common": {
-      "error": {
-        "notFound": "User not found. It may have been deleted by another user.",
-        "relationNotFound": "Position not found. It may have been deleted by another user. Update the form data."
-      }
-    },
     "create": {
       "success": "User created successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to create user."
+        "internalServerError": "Something went wrong. Failed to create the user. Refresh the page or try again later."
       }
     },
     "update": {
       "success": "User updated successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to update user."
+        "internalServerError": "Something went wrong. Failed to update the user. Refresh the page or try again later."
       }
     },
     "updateImageUrl": {
       "success": "User image updated successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to update user image."
+        "internalServerError": "Something went wrong. Failed to update the user image. Refresh the page or try again later."
       }
     },
     "delete": {
       "success": "User deleted successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to delete user."
+        "internalServerError": "Something went wrong. Failed to delete the user. Refresh the page or try again later."
       }
     },
     "changePassword": {
       "success": "Password changed successfully",
       "error": {
-        "internalServerError": "A server error occurred. Failed to change password."
+        "internalServerError": "Something went wrong. Failed to change the password. Refresh the page or try again later."
       }
     }
   }

@@ -1,26 +1,4 @@
 {
-  "ProjectCategoriesPage": {
-    "heading": "Project Categories",
-    "emptySection": {
-      "heading": "No categories",
-      "description": "Create your first category to get started."
-    },
-    "error": {
-      "common": {
-        "heading": "Category error",
-        "description": "An error occurred while handling project category data. Please try again.",
-        "buttonLabel": "Try again"
-      },
-      "notFound": {
-        "heading": "Category not found",
-        "description": "The project category does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Try again"
-      }
-    }
-  },
-  "CustomerDetailPage": {
-    "heading": "Customer detail"
-  },
   "ErrorPage": {
     "heading": "Something went wrong",
     "description": "We encountered an unexpected error. Please try refreshing the page or contact support if the issue persists.",
@@ -29,59 +7,13 @@
   "NotFoundPage": {
     "heading": "Page not found",
     "description": "The page you are looking for doesn’t exist or has been moved. Please check the URL or return to the homepage.",
-    "toHome": "Try again"
-  },
-  "CheckEmailPage": {
-    "heading": "Check your email",
-    "subtitle": "We have sent a password reset link to your email.",
-    "backButtonLabel": "Back to reset password"
-  },
-  "ForgetPasswordPage": {
-    "heading": "Forget Password",
-    "subtitle": "Enter your email address to receive a link to reset your password."
-  },
-  "ResetPasswordPage": {
-    "heading": "Reset Password",
-    "subtitle": "Provide a new password for your account."
-  },
-  "ResetPasswordNotFound": {
-    "heading": "Invalid Link",
-    "body": "The password reset link has expired or is invalid. Please request a password reset again.",
-    "signInButtonLabel": "Sign in with email"
-  },
-  "SignInPage": {
-    "heading": "Sign In",
-    "subtitle": "Please sign in to your account.",
-    "resetPasswordSubtitle": "Your password has been reset successfully. You can now sign in with your new password."
-  },
-  "SignUpPage": {
-    "heading": "Sign Up",
-    "subtitle": "Please sign in to your account."
-  },
-  "VerifyEmailPage": {
-    "heading": "Verify Email",
-    "subtitle": "We've sent a verification email to {email}. Click the link in the email to activate your account."
-  },
-  "DashboardPage": {
-    "heading": "Dashboard"
+    "toHome": "Back to home"
   },
   "ProjectsPage": {
     "heading": "Projects",
     "emptySection": {
       "heading": "No projects",
       "description": "Create a new project to keep track of your work"
-    },
-    "error": {
-      "common": {
-        "heading": "Project error",
-        "description": "An error occurred while handling project data. Please try again.",
-        "buttonLabel": "Try again"
-      },
-      "notFound": {
-        "heading": "Project not found",
-        "description": "The project does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Try again"
-      }
     }
   },
   "TasksPage": {
@@ -89,18 +21,6 @@
     "emptySection": {
       "heading": "No tasks",
       "description": "Create a new task to keep track of your work"
-    },
-    "error": {
-      "common": {
-        "heading": "Task error",
-        "description": "An error occurred while handling task data. Please try again.",
-        "buttonLabel": "Try again"
-      },
-      "notFound": {
-        "heading": "Task not found",
-        "description": "The task does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Try again"
-      }
     }
   },
   "CustomersPage": {
@@ -108,67 +28,16 @@
     "emptySection": {
       "heading": "No customers",
       "description": "Add a customer to get started and organize your projects"
-    },
-    "error": {
-      "common": {
-        "heading": "Customer error",
-        "description": "An error occurred while handling customer data. Please try again.",
-        "buttonLabel": "Try again"
-      },
-      "notFound": {
-        "heading": "Customer not found",
-        "description": "The customer does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Try again"
-      }
     }
-  },
-  "CustomersPageLoading": {
-    "title": "All customers"
-  },
-  "ProfilePage": {
-    "heading": "Profile settings"
-  },
-  "ProjectsPageLoading": {
-    "title": "All projects"
-  },
-  "ProjectDetailPage": {
-    "heading": "Project details",
-    "successDeleteMessage": "Project deleted successfully"
-  },
-  "TasksPageLoading": {
-    "title": "All Tasks"
-  },
-  "TaskDetailPage": {
-    "heading": "Task Details"
-  },
-  "UsersPageLoading": {
-    "title": "Team"
   },
   "UsersPage": {
-    "heading": "Team",
-    "emptySection": {
-      "heading": "No users",
-      "description": "Add a new user to start building your team"
-    },
-    "error": {
-      "common": {
-        "heading": "User error",
-        "description": "An error occurred while handling user data. Please try again.",
-        "buttonLabel": "Try again"
-      },
-      "notFound": {
-        "heading": "User not found",
-        "description": "The user does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Try again"
-      }
-    }
+    "heading": "Team"
   },
-  "TeamProfilePage": {
-    "heading": "User detail",
-    "notFound": {
-      "heading": "User not found",
-      "description": "The user does not exist or was deleted by another user.",
-      "buttonLabel": "Try again"
+  "ProjectCategoriesPage": {
+    "heading": "Project Categories",
+    "emptySection": {
+      "heading": "No categories",
+      "description": "Create your first category to get started."
     }
   },
   "TaskCategoriesPage": {
@@ -176,18 +45,6 @@
     "emptySection": {
       "heading": "No categories",
       "description": "Create a new task category to better organize your tasks."
-    },
-    "error": {
-      "common": {
-        "heading": "Category error",
-        "description": "An error occurred while handling task category data. Please try again.",
-        "buttonLabel": "Try again"
-      },
-      "notFound": {
-        "heading": "Category not found",
-        "description": "The task category does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Try again"
-      }
     }
   },
   "CompaniesPage": {
@@ -195,43 +52,82 @@
     "emptySection": {
       "heading": "No companies",
       "description": "Add a company to get started and organize your projects"
-    },
-    "error": {
-      "common": {
-        "heading": "Companies error",
-        "description": "An error occurred while handling companies data. Please try again.",
-        "buttonLabel": "Try again"
-      },
-      "notFound": {
-        "heading": "Company not found",
-        "description": "This company does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Try again"
-      }
     }
-  },
-  "CompaniesPageLoading": {
-    "title": "All companies"
-  },
-  "PositionsPageLoading": {
-    "title": "All positions"
   },
   "PositionsPage": {
     "heading": "Positions",
     "emptySection": {
       "heading": "No positions",
       "description": "Create a new position to better organize your work with users."
-    },
-    "error": {
-      "common": {
-        "heading": "Positions error",
-        "description": "An error occurred while handling positions data. Please try again.",
-        "buttonLabel": "Try again"
-      },
-      "notFound": {
-        "heading": "Position not found",
-        "description": "This position does not exist. It may have been deleted by another user.",
-        "buttonLabel": "Try again"
-      }
     }
+  },
+  "TeamProfilePage": {
+    "heading": "User detail",
+    "notFound": {
+      "heading": "User not found",
+      "description": "The user does not exist or has been deleted.",
+      "buttonLabel": "Back to team"
+    }
+  },
+  "ProfilePage": {
+    "heading": "Profile settings"
+  },
+  "ProjectDetailPage": {
+    "heading": "Project details",
+    "notFound": {
+      "heading": "Project not found",
+      "description": "The project does not exist or has been deleted.",
+      "buttonLabel": "Back to projects"
+    }
+  },
+  "TaskDetailPage": {
+    "heading": "Task details",
+    "notFound": {
+      "heading": "Task not found",
+      "description": "This task does not exist or has been deleted.",
+      "buttonLabel": "Back to tasks"
+    }
+  },
+  "CustomerDetailPage": {
+    "heading": "Customer detail",
+    "notFound": {
+      "heading": "Customer not found",
+      "description": "The customer does not exist or has been deleted.",
+      "buttonLabel": "Back to customers"
+    }
+  },
+  "CheckEmailPage": {
+    "heading": "Check your email",
+    "subtitle": "We have sent a password reset link to your email.",
+    "backButtonLabel": "Back to reset password"
+  },
+  "ForgetPasswordPage": {
+    "heading": "Forgot password",
+    "subtitle": "Enter your email address to receive a link to reset your password."
+  },
+  "ResetPasswordPage": {
+    "heading": "Reset password",
+    "subtitle": "Provide a new password for your account."
+  },
+  "ResetPasswordNotFound": {
+    "heading": "Invalid link",
+    "body": "The password reset link has expired or is invalid. Please request a password reset again.",
+    "signInButtonLabel": "Sign in with email"
+  },
+  "SignInPage": {
+    "heading": "Sign in",
+    "subtitle": "Please sign in to your account.",
+    "resetPasswordSubtitle": "Your password has been reset successfully. You can now sign in with your new password."
+  },
+  "SignUpPage": {
+    "heading": "Sign up",
+    "subtitle": "Please sign in to your account."
+  },
+  "VerifyEmailPage": {
+    "heading": "Verify email",
+    "subtitle": "We've sent a verification email to {email}. Click the link in the email to activate your account."
+  },
+  "DashboardPage": {
+    "heading": "Dashboard"
   }
 }

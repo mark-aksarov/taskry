@@ -18,7 +18,6 @@ import { positionId } from "@/lib/schemas/position";
 import { emptyStringToNull } from "@/lib/schemas/base";
 import { updateUser as updateUserService } from "@/lib/data/user/user.service";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
-import { NotFoundError } from "@/lib/data/utils/error";
 
 const schema = z.object({
   id: userId,
@@ -48,22 +47,6 @@ export async function updateUser(formData: FormData): Promise<ActionState> {
     };
   } catch (error) {
     console.error("Server Action Error:", error);
-
-    if (error instanceof NotFoundError) {
-      if (error.code === "userNotFound") {
-        return {
-          status: "error",
-          errorCode: "notFound",
-          message: t("user.common.error.notFound"),
-        };
-      } else {
-        return {
-          status: "error",
-          errorCode: "badRequest",
-          message: t("user.common.error.relationNotFound"),
-        };
-      }
-    }
 
     if (error instanceof APIError) {
       return {

@@ -2,7 +2,6 @@
 
 import z from "zod";
 import { getTranslations } from "next-intl/server";
-import { NotFoundError } from "@/lib/data/utils/error";
 import { userId, userImageUrl } from "@/lib/schemas/user";
 import { ActionState, UpdateUserImageUrlPayload } from "../types";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
@@ -32,14 +31,6 @@ export async function updateUserImageUrl(
     };
   } catch (error) {
     console.error("Server Action Error:", error);
-
-    if (error instanceof NotFoundError) {
-      return {
-        status: "error",
-        errorCode: "notFound",
-        message: t("user.common.error.notFound"),
-      };
-    }
 
     return {
       status: "error",

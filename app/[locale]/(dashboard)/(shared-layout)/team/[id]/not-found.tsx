@@ -3,15 +3,15 @@
 import { useTranslations } from "next-intl";
 import NotFoundPageContainer from "@/components/layout/NotFoundPageContainer";
 
-export default function AppTaskDetailNotFound() {
-  const t = useTranslations("app.TaskDetailPage");
+export default function AppTeamProfileNotFound() {
+  const t = useTranslations("app.TeamProfilePage");
 
   return (
     <NotFoundPageContainer
       headerOffset
       heading={t("notFound.heading")}
       description={t("notFound.description")}
-      linkHref="/tasks"
+      linkHref="/team"
       linkLabel={t("notFound.buttonLabel")}
     />
   );

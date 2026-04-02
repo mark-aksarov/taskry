@@ -22,7 +22,7 @@ import { ClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlP
 import { UpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext";
 import { UserDetailHeaderAltContainer } from "@/components/users/UserDetailHeaderAltContainer";
 
-export default async function AppProfilePage({
+export default async function AppTeamProfilePage({
   params,
 }: {
   params: Promise<{ id: string }>;

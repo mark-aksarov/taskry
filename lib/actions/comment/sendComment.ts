@@ -8,7 +8,6 @@ import { getTranslations } from "next-intl/server";
 import { commentContent } from "@/lib/schemas/comment";
 import { createComment } from "@/lib/data/comment/comment.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
-import { NotFoundError } from "@/lib/data/utils/error";
 
 const schema = z.object({
   content: commentContent,
@@ -34,14 +33,6 @@ export async function sendComment(formData: FormData): Promise<ActionState> {
     };
   } catch (error) {
     console.error("Server Action Error:", error);
-
-    if (error instanceof NotFoundError) {
-      return {
-        status: "error",
-        errorCode: "notFound",
-        message: t("comment.common.error.notFound"),
-      };
-    }
 
     return {
       status: "error",

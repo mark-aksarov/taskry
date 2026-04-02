@@ -8,7 +8,6 @@ import {
 import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
-import { NotFoundError } from "@/lib/data/utils/error";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { updateProjectCategory as updateProjectCategoryQuery } from "@/lib/data/projectCategory/projectCategory.dal";
 
@@ -37,14 +36,6 @@ export async function updateProjectCategory(
     };
   } catch (error) {
     console.error("Server Action Error:", error);
-
-    if (error instanceof NotFoundError) {
-      return {
-        status: "error",
-        errorCode: "notFound",
-        message: t("projectCategory.common.error.notFound"),
-      };
-    }
 
     return {
       status: "error",

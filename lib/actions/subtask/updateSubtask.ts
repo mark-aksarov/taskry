@@ -6,7 +6,6 @@ import { getTranslations } from "next-intl/server";
 import { subtaskId, subtaskText } from "@/lib/schemas/subtask";
 import { updateSubtask as updateSubtaskQuery } from "@/lib/data/subtask/subtask.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
-import { NotFoundError } from "@/lib/data/utils/error";
 
 const schema = z.object({
   id: subtaskId,
@@ -30,14 +29,6 @@ export async function updateSubtask(formData: FormData): Promise<ActionState> {
     };
   } catch (error) {
     console.error("Server Action Error:", error);
-
-    if (error instanceof NotFoundError) {
-      return {
-        status: "error",
-        errorCode: "notFound",
-        message: t("subtask.common.error.notFound"),
-      };
-    }
 
     return {
       status: "error",

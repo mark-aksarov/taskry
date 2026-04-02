@@ -8,11 +8,9 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { BackButton } from "@/components/common/BackButton";
 import { ViewModeProvider } from "@/components/common/ViewMode";
 import { PageContainer } from "@/components/common/PageContainer";
-import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { PageEmptySection } from "@/components/common/PageEmptySection";
 import { ToolbarLarge, ToolbarMobile } from "@/components/common/Toolbar";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { CreateProjectCategoryModal } from "@/components/projectCategory/CreateProjectCategoryModal";
 import { ProjectCategoryActionsMenuTrigger } from "@/components/projectCategory/ProjectCategoryActionsMenuTrigger";
 import { ProjectCategoriesEmptySectionCreateButton } from "@/components/projectCategory/ProjectCategoriesEmptySectionCreateButton";
 

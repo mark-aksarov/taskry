@@ -22,11 +22,6 @@ export function UpdateTaskCategoryProvider({
 
   const { state } = contextValue;
 
-  // if the task category was not found (e.g. deleted by another user)
-  if (state.status === "error" && state.errorCode === "notFound") {
-    throw new Error(state.message, { cause: "taskCategoryNotFound" });
-  }
-
   useCloseModalThenShowToastOnActionSuccess(state, "updateTaskCategory");
   useShowToastWhenModalClosedOnActionSuccess(state, "updateTaskCategory");
   useShowToastWhenModalClosedOnActionError(state, "updateTaskCategory");

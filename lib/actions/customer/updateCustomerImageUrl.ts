@@ -2,7 +2,6 @@
 
 import z from "zod";
 import { getTranslations } from "next-intl/server";
-import { NotFoundError } from "@/lib/data/utils/error";
 import { ActionState, UpdateCustomerImageUrlPayload } from "../types";
 import { customerId, customerImageUrl } from "@/lib/schemas/customer";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
@@ -32,14 +31,6 @@ export async function updateCustomerImageUrl(
     };
   } catch (error) {
     console.error("Server Action Error:", error);
-
-    if (error instanceof NotFoundError) {
-      return {
-        status: "error",
-        errorCode: "notFound",
-        message: t("customer.common.error.notFound"),
-      };
-    }
 
     return {
       status: "error",

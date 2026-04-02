@@ -1,5 +1,4 @@
 import {
-  notFound,
   badRequest,
   unauthorized,
   internalServerError,
@@ -9,7 +8,6 @@ import z from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { projectId } from "@/lib/schemas/project";
-import { NotFoundError } from "@/lib/data/utils/error";
 import { NextRequest, NextResponse } from "next/server";
 import { getCommentList } from "@/lib/data/comment/comment.dal";
 
@@ -49,10 +47,6 @@ export async function GET(
     return NextResponse.json(comments);
   } catch (error) {
     console.error("API Error:", error);
-
-    if (error instanceof NotFoundError) {
-      return notFound(error.message);
-    }
 
     return internalServerError();
   }

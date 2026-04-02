@@ -1,6 +1,5 @@
 "use client";
 
-import { notFound } from "next/navigation";
 import { UpdateCustomerImageContext } from "../UpdateCustomerImageContext";
 import { useUpdateImageActionState } from "@/lib/hooks/useUpdateImageActionState";
 import { updateCustomerImageUrl } from "@/lib/actions/customer/updateCustomerImageUrl";
@@ -20,12 +19,6 @@ export function UpdateCustomerImageProvider({
   const contextValue = useUpdateImageActionState(updateCustomerImageUrl);
 
   const { state } = contextValue;
-
-  // users can update customer image only from customers/[id] page,
-  // so call notFound() when errorCode is "notFound"
-  if (state.status === "error" && state.errorCode === "notFound") {
-    notFound();
-  }
 
   useCloseModalThenShowToastOnActionSuccess(state, "updateCustomerImage");
   useShowToastWhenModalClosedOnActionSuccess(state, "updateCustomerImage");

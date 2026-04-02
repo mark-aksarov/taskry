@@ -11,7 +11,6 @@ import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
 import { customerId } from "@/lib/schemas/customer";
-import { NotFoundError } from "@/lib/data/utils/error";
 import { emptyStringToUndefined } from "@/lib/schemas/base";
 import { projectCategoryId } from "@/lib/schemas/projectCategory";
 import { createProject as createProjectQuery } from "@/lib/data/project/project.dal";
@@ -50,14 +49,6 @@ export async function createProject(formData: FormData): Promise<ActionState> {
     };
   } catch (error) {
     console.error("Server Action Error:", error);
-
-    if (error instanceof NotFoundError) {
-      return {
-        status: "error",
-        errorCode: "badRequest",
-        message: t("project.common.error.relationNotFound"),
-      };
-    }
 
     return {
       status: "error",

@@ -16,7 +16,9 @@ export function DeleteTaskProvider({ children }: DeleteTaskProviderProps) {
     onSuccess: () => router.refresh(),
   });
 
-  useShowToastOnActionError(contextValue.state);
+  const { state } = contextValue;
+
+  useShowToastOnActionError(state);
 
   return (
     <DeleteTaskContext.Provider value={contextValue}>

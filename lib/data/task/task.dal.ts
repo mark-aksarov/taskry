@@ -361,7 +361,7 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
     body: {
       userId,
       permission: {
-        task: ["create"],
+        task: ["update"],
       },
     },
   });

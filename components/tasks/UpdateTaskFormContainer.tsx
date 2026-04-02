@@ -2,9 +2,7 @@
 
 import useSWR from "swr";
 import { UpdateTaskForm } from "./UpdateTaskForm";
-import { usePathname } from "@/i18n/navigation";
 import { TaskFormSkeleton } from "./TaskFormSkeleton";
-import { notFound, useParams } from "next/navigation";
 import { UserSummaryDTO } from "@/lib/data/user/user.dto";
 import { TaskFormDataDTO } from "@/lib/data/task/task.dto";
 import { ProjectSummaryDTO } from "@/lib/data/project/project.dto";
@@ -17,9 +15,6 @@ interface UpdateTaskFormContainerProps {
 export function UpdateTaskFormContainer({
   taskId,
 }: UpdateTaskFormContainerProps) {
-  const pathname = usePathname();
-  const params = useParams();
-
   const { data: categories } = useSWR<TaskCategorySummaryDTO[]>(
     "/api/task-categories",
     {
@@ -44,14 +39,6 @@ export function UpdateTaskFormContainer({
   });
 
   if (taskError) {
-    if (taskError.status === 404) {
-      if (pathname.startsWith("/tasks") && params.id) {
-        notFound();
-      }
-
-      throw new Error(undefined, { cause: "taskNotFound" });
-    }
-
     throw new Error();
   }
 

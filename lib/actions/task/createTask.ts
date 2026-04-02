@@ -12,7 +12,6 @@ import { ActionState } from "../types";
 import { userId } from "@/lib/schemas/user";
 import { projectId } from "@/lib/schemas/project";
 import { getTranslations } from "next-intl/server";
-import { NotFoundError } from "@/lib/data/utils/error";
 import { emptyStringToUndefined } from "@/lib/schemas/base";
 import { taskCategoryId } from "@/lib/schemas/taskCategory";
 import { createTask as createTaskQuery } from "@/lib/data/task/task.dal";
@@ -45,14 +44,6 @@ export async function createTask(formData: FormData): Promise<ActionState> {
     };
   } catch (error) {
     console.error("Server Action Error:", error);
-
-    if (error instanceof NotFoundError) {
-      return {
-        status: "error",
-        errorCode: "badRequest",
-        message: t("task.common.error.relationNotFound"),
-      };
-    }
 
     return {
       status: "error",

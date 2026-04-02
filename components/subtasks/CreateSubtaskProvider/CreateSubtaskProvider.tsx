@@ -20,7 +20,6 @@ export function CreateSubtaskProvider({
 
   const contextValue = useActionStateWithCallbacks(createSubtask, {
     // Refresh task detail (inside TaskDetailContainer) on success or error to keep UI in sync
-    // (e.g., show not found if deleted by another user)
     onSettled: async () => {
       await refreshTaskDetail();
     },

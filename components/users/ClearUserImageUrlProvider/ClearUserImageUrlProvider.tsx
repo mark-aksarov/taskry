@@ -1,6 +1,5 @@
 "use client";
 
-import { notFound } from "next/navigation";
 import { useRouter } from "@/i18n/navigation";
 import { ClearUserImageUrlContext } from "../ClearUserImageUrlContext";
 import { updateUserImageUrl } from "@/lib/actions/user/updateUserImageUrl";
@@ -28,12 +27,6 @@ export function ClearUserImageUrlProvider({
   );
 
   const { state } = contextValue;
-
-  // users can delete user image only from users/[id] page,
-  // so call notFound() when errorCode is "notFound"
-  if (state.status === "error" && state.errorCode === "notFound") {
-    notFound();
-  }
 
   useShowToastOnActionError(state);
 

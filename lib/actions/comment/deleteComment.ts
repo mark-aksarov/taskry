@@ -5,7 +5,6 @@ import { commentId } from "@/lib/schemas/comment";
 import { getTranslations } from "next-intl/server";
 import { deleteComment as deleteCommentQuery } from "@/lib/data/comment/comment.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
-import { NotFoundError } from "@/lib/data/utils/error";
 
 export async function deleteComment(id: number): Promise<ActionState> {
   // Authorization
@@ -23,14 +22,6 @@ export async function deleteComment(id: number): Promise<ActionState> {
     };
   } catch (error) {
     console.error("Server Action Error:", error);
-
-    if (error instanceof NotFoundError) {
-      return {
-        status: "error",
-        errorCode: "notFound",
-        message: t("comment.common.error.notFound"),
-      };
-    }
 
     return {
       status: "error",

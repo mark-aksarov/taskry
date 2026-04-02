@@ -12,7 +12,6 @@ import z from "zod";
 import { ActionState } from "../types";
 import { companyId } from "@/lib/schemas/company";
 import { getTranslations } from "next-intl/server";
-import { NotFoundError } from "@/lib/data/utils/error";
 import { emptyStringToUndefined } from "@/lib/schemas/base";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { createCustomer as createCustomerQuery } from "@/lib/data/customer/customer.dal";
@@ -50,14 +49,6 @@ export async function createCustomer(formData: FormData): Promise<ActionState> {
     };
   } catch (error) {
     console.error("Server Action Error:", error);
-
-    if (error instanceof NotFoundError) {
-      return {
-        status: "error",
-        errorCode: "badRequest",
-        message: t("customer.common.error.relationNotFound"),
-      };
-    }
 
     return {
       status: "error",
