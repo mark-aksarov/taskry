@@ -22,18 +22,7 @@ export async function updateProjectStatus(
 
   try {
     const parsedData = schema.parse(payload);
-    const result = await updateProjectStatusesQuery(
-      [parsedData.id],
-      parsedData.nextStatus,
-    );
-
-    if (!result.length) {
-      return {
-        status: "error",
-        errorCode: "notFound",
-        message: t("project.common.error.notFound"),
-      };
-    }
+    await updateProjectStatusesQuery([parsedData.id], parsedData.nextStatus);
 
     return {
       status: "success",

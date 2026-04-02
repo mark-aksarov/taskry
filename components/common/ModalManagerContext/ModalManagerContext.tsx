@@ -1,12 +1,14 @@
 "use client";
 
 import {
-  createContext,
-  useCallback,
-  useContext,
   useMemo,
   useState,
+  useEffect,
+  useContext,
+  useCallback,
+  createContext,
 } from "react";
+import { usePathname } from "@/i18n/navigation";
 
 interface ModalManagerContextValue {
   openModalIds: string[];
@@ -32,6 +34,12 @@ export function ModalManagerProvider({
   const closeModal = useCallback((id: string) => {
     setOpenModalIds((prev) => prev.filter((modalId) => modalId !== id));
   }, []);
+
+  // Reset openModalIds when the page changes
+  const pathname = usePathname();
+  useEffect(() => {
+    setOpenModalIds([]);
+  }, [pathname]);
 
   const value = useMemo<ModalManagerContextValue>(
     () => ({

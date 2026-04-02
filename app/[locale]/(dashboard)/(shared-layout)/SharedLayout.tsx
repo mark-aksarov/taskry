@@ -12,6 +12,7 @@ interface SharedLayoutProps {
   children: React.ReactNode;
 }
 
+// The shared layout is a client component, but the layout itself is a server component that passes the page as a slot.
 export default function SharedLayout({
   profileLinkContainer,
   children,
