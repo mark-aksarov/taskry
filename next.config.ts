@@ -8,12 +8,6 @@ if (!process.env.S3_ENDPOINT) {
 const endpointUrl = new URL(process.env.S3_ENDPOINT);
 
 const nextConfig: NextConfig = {
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   images: {
     contentDispositionType: "inline",
     remotePatterns: [
