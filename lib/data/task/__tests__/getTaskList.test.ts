@@ -274,53 +274,6 @@ describe("getTaskList", () => {
       expect(result.items[1].title).toBe("Task A");
       expect(result.items[2].title).toBe("Task B");
     });
-
-    it("should correctly sort tasks by category", async () => {
-      await prisma.task.createMany({
-        data: [
-          {
-            id: 1,
-            title: "Task A",
-            deadline: new Date(),
-            projectId: 1,
-            categoryId: 1,
-            workspaceId: 1,
-            status: TaskStatus.pending,
-            assigneeId: "user-3",
-          },
-          {
-            id: 2,
-            title: "Task B",
-            deadline: new Date(),
-            projectId: 1,
-            categoryId: 2,
-            workspaceId: 1,
-            status: TaskStatus.completed,
-            assigneeId: "user-3",
-          },
-          {
-            id: 3,
-            title: "Task C",
-            deadline: new Date(),
-            projectId: 1,
-            categoryId: 1,
-            workspaceId: 1,
-            status: TaskStatus.active,
-            assigneeId: "user-3",
-          },
-        ],
-      });
-
-      const result = await getTaskList({
-        page: 1,
-        pageSize: 50,
-        sort: "category",
-      });
-
-      expect(result.items[0].title).toBe("Task A");
-      expect(result.items[1].title).toBe("Task C");
-      expect(result.items[2].title).toBe("Task B");
-    });
   });
 
   describe("filtering", () => {

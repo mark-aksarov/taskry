@@ -332,53 +332,6 @@ describe("getProjectList", () => {
       expect(result.items[1].title).toBe("Project A");
       expect(result.items[2].title).toBe("Project B");
     });
-
-    it("should correctly sort projects by category", async () => {
-      await prisma.project.createMany({
-        data: [
-          {
-            id: 1,
-            workspaceId: 1,
-            title: "Project A",
-            deadline: new Date(),
-            creatorId: "user-1",
-            categoryId: 1,
-            customerId: 1,
-            status: ProjectStatus.pending,
-          },
-          {
-            id: 2,
-            workspaceId: 1,
-            title: "Project B",
-            deadline: new Date(),
-            creatorId: "user-1",
-            categoryId: 2,
-            customerId: 1,
-            status: ProjectStatus.completed,
-          },
-          {
-            id: 3,
-            workspaceId: 1,
-            title: "Project C",
-            deadline: new Date(),
-            creatorId: "user-1",
-            categoryId: 1,
-            customerId: 1,
-            status: ProjectStatus.active,
-          },
-        ],
-      });
-
-      const result = await getProjectList({
-        page: 1,
-        pageSize: 50,
-        sort: "category",
-      });
-
-      expect(result.items[0].title).toBe("Project A");
-      expect(result.items[1].title).toBe("Project C");
-      expect(result.items[2].title).toBe("Project B");
-    });
   });
 
   describe("filtering", () => {

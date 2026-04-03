@@ -208,8 +208,6 @@ export const getProjectList = cache(
       orderBy = { deadline: "asc" };
     } else if (sort === "status") {
       orderBy = { status: "asc" };
-    } else if (sort === "category") {
-      orderBy = { category: { name: "asc" } };
     } else {
       orderBy = { createdAt: "desc" };
     }
