@@ -50,7 +50,6 @@ export async function updateTask(formData: FormData): Promise<ActionState> {
 
     return {
       status: "error",
-      errorCode: "internalServerError",
       message: t("task.update.error.internalServerError"),
     };
   }

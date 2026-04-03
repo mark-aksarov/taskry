@@ -48,7 +48,6 @@ export async function updateProject(formData: FormData): Promise<ActionState> {
 
     return {
       status: "error",
-      errorCode: "internalServerError",
       message: t("project.update.error.internalServerError"),
     };
   }

@@ -1,6 +1,5 @@
 "use client";
 
-import { notFound } from "next/navigation";
 import { UpdateUserImageContext } from "../UpdateUserImageContext";
 import { updateUserImageUrl } from "@/lib/actions/user/updateUserImageUrl";
 import { useUpdateImageActionState } from "@/lib/hooks/useUpdateImageActionState";
@@ -20,12 +19,6 @@ export function UpdateUserImageProvider({
   const contextValue = useUpdateImageActionState(updateUserImageUrl);
 
   const { state } = contextValue;
-
-  // users can update user image only from users/[id] page,
-  // so call notFound() when errorCode is "notFound"
-  if (state.status === "error" && state.errorCode === "notFound") {
-    notFound();
-  }
 
   useCloseModalThenShowToastOnActionSuccess(state, "updateUserImage");
   useShowToastWhenModalClosedOnActionSuccess(state, "updateUserImage");

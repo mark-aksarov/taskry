@@ -1,6 +1,5 @@
 "use client";
 
-import { notFound } from "next/navigation";
 import { useRouter } from "@/i18n/navigation";
 import { ClearCustomerImageUrlContext } from "../ClearCustomerImageUrlContext";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
@@ -28,12 +27,6 @@ export function ClearCustomerImageUrlProvider({
   );
 
   const { state } = contextValue;
-
-  // users can delete customer image only from customers/[id] page,
-  // so call notFound() when errorCode is "notFound"
-  if (state.status === "error" && state.errorCode === "notFound") {
-    notFound();
-  }
 
   useShowToastOnActionError(state);
 

@@ -22,11 +22,6 @@ export function UpdateCompanyProvider({
 
   const { state } = contextValue;
 
-  // if the company was not found (e.g. deleted by another user)
-  if (state.status === "error" && state.errorCode === "notFound") {
-    throw new Error(state.message, { cause: "companyNotFound" });
-  }
-
   useCloseModalThenShowToastOnActionSuccess(state, "updateCompany");
   useShowToastWhenModalClosedOnActionSuccess(state, "updateCompany");
   useShowToastWhenModalClosedOnActionError(state, "updateCompany");

@@ -16,23 +16,11 @@ interface UpdateProjectProviderProps {
 export function UpdateProjectProvider({
   children,
 }: UpdateProjectProviderProps) {
-  const pathname = usePathname();
   const router = useRouter();
   const contextValue = useActionStateWithCallbacks(updateProject, {
     onSuccess: () => router.refresh(),
   });
   const { state } = contextValue;
-
-  // if the project was not found (e.g. deleted by another user)
-  // from the projects page, show error.tsx
-  // from the project detail page, show not-found.tsx
-  if (state.status === "error" && state.errorCode === "notFound") {
-    if (pathname === "/projects") {
-      throw new Error(state.message, { cause: "projectNotFound" });
-    }
-
-    notFound();
-  }
 
   useCloseModalThenShowToastOnActionSuccess(state, "updateProject");
   useShowToastWhenModalClosedOnActionSuccess(state, "updateProject");
