@@ -33,6 +33,7 @@ export const SearchField = () => {
       onChange={debouncedSetQuery}
       className="flex-auto"
       inputClassName={searchInputStyles}
+      maxLength={255}
     />
   );
 };
