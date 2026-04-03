@@ -5,6 +5,7 @@ import { ClearCustomerImageUrlContext } from "../ClearCustomerImageUrlContext";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 import { updateCustomerImageUrl } from "@/lib/actions/customer/updateCustomerImageUrl";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
 
 interface ClearCustomerImageUrlProviderProps {
   children: React.ReactNode;
@@ -28,6 +29,7 @@ export function ClearCustomerImageUrlProvider({
 
   const { state } = contextValue;
 
+  useShowToastOnActionSuccess(state);
   useShowToastOnActionError(state);
 
   return (
