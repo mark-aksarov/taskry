@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskItemBaseBadge } from "./TaskItemBaseBadge";
 import { withSelectedTasksProvider } from "../SelectedTasksContext/__stories__";
 import { withUpdateTaskStatusProvider } from "../UpdateTaskStatusProvider/__stories__";

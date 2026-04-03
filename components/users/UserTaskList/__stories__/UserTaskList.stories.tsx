@@ -1,7 +1,7 @@
 import { UserTaskList } from "../UserTaskList";
 import { mockedTaskList } from "@/mocks/tasks";
-import type { Meta, StoryObj } from "@storybook/react";
 import { UserTaskListItem } from "../../UserTaskListItem";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserTaskListItemStory } from "../../UserTaskListItem/__stories__";
 import { MockedTaskItemWrapper } from "@/components/tasks/TaskItemWrapper/__stories__";
@@ -35,12 +35,8 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedTaskList.map((task) => (
-      <MockedTaskItemWrapper>
-        <UserTaskListItem
-          key={task.id}
-          {...UserTaskListItemStory.args}
-          {...task}
-        />
+      <MockedTaskItemWrapper key={task.id}>
+        <UserTaskListItem {...UserTaskListItemStory.args} {...task} />
       </MockedTaskItemWrapper>
     )),
   },

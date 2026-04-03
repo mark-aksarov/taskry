@@ -1,6 +1,6 @@
 import { mockedProjectList } from "@/mocks/projects";
-import type { Meta, StoryObj } from "@storybook/react";
 import { ProjectStatus } from "@/generated/prisma/enums";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectGridItemLarge } from "../ProjectGridItemLarge";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withMockedProjectItemWrapper } from "../../ProjectItemWrapper/__stories__";

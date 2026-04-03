@@ -37,7 +37,6 @@ async function TaskDetailAltContainerInner({
 
   return (
     <TaskDetailAlt
-      id={task.id}
       creator={task.creator}
       assignee={task.assignee}
       deadline={task.deadline}
@@ -57,7 +56,6 @@ async function TaskDetailAltContainerInner({
                         id={subtask.id}
                         text={subtask.text}
                         isDone={subtask.isDone}
-                        taskId={task.id}
                       />
 
                       <UpdateSubtaskModal

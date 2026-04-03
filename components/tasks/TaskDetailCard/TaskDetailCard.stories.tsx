@@ -63,7 +63,6 @@ export const WithoutOptionalTaskData = {
   args: {
     taskDetailContainer: (
       <TaskDetailAlt
-        id={mockedTaskDetail.id}
         deadline={mockedTaskDetail.deadline}
         status={mockedTaskDetail.status}
       />

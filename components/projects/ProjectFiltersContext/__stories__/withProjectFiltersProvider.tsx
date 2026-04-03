@@ -1,4 +1,4 @@
-import { type Decorator } from "@storybook/react";
+import { type Decorator } from "@storybook/nextjs-vite";
 import { ProjectFiltersProvider } from "../ProjectFiltersContext";
 
 export const withProjectFiltersProvider: Decorator = (Story) => {

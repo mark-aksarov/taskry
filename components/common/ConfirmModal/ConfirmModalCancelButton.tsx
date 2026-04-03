@@ -1,7 +1,6 @@
 "use client";
 
 import { useContext } from "react";
-import { PressEvent } from "react-aria";
 import { Button } from "@/components/ui/Button";
 import { OverlayTriggerStateContext } from "react-aria-components";
 
@@ -16,7 +15,7 @@ export function ConfirmModalCancelButton({
 }: ConfirmModalProps) {
   const state = useContext(OverlayTriggerStateContext);
 
-  function handlePress(e: PressEvent) {
+  function handlePress() {
     if (state) state.close();
     onCancel?.();
   }

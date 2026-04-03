@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { CustomerListItem } from "../CustomerListItem";
 import { mockedCustomerDetail } from "@/mocks/customers";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withMockedCustomerItemWrapper } from "../../CustomerItemWrapper/__stories__";
 import { withDeleteCustomersProvider } from "../../DeleteCustomersProvider/__stories__";

@@ -1,5 +1,5 @@
-import { type Decorator } from "@storybook/react";
 import { TaskSearchModal } from "../TaskSearchModal";
+import { type Decorator } from "@storybook/nextjs-vite";
 import { SearchList } from "@/components/search/SearchList";
 import { SearchListStory } from "@/components/search/SearchList/__stories__";
 

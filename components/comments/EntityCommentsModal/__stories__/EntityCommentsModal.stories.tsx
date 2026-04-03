@@ -4,8 +4,8 @@ import {
 } from "@/components/common/ModalManagerContext/__stories__";
 
 import { CommentList } from "../../CommentList";
-import { Meta, StoryObj } from "@storybook/react";
 import { Repeat } from "@/components/common/Repeat";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CommentItemSkeleton } from "../../CommentItem";
 import { EntityCommentsModal } from "../EntityCommentsModal";
 import { CommentListStory } from "../../CommentList/__stories__";

@@ -72,14 +72,7 @@ export const Loading = {
 export const WithoutOptionalTaskData = {
   args: {
     ...Default.args,
-    taskDetailContainer: (
-      <TaskDetailAlt
-        id={mockedTaskDetail.id}
-        project={mockedTaskDetail.project}
-        deadline={mockedTaskDetail.deadline}
-        status={mockedTaskDetail.status}
-      />
-    ),
+    taskDetailContainer: <TaskDetailAltSkeleton />,
     taskHeaderContainer: (
       <TaskDetailHeader taskTitle={mockedTaskDetail.title} />
     ),

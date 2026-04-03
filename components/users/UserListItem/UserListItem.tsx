@@ -36,97 +36,92 @@ export function UserListItem(props: BaseUserItemProps) {
   );
 }
 
-export const UserListItemInner = memo(
-  ({
-    id,
-    fullName,
-    imageUrl,
-    email,
-    phoneNumber,
-    publicLink,
-    position,
-  }: BaseUserItemProps) => {
-    const t = useTranslations("users.UserListItem");
-    const { isOwner, isGuest } = useCurrentUser();
-    const { onOpenChange: onUserDetailModalOpenChange } =
-      useModal("userDetail");
+export const UserListItemInner = memo(function UserListItemInner({
+  id,
+  fullName,
+  imageUrl,
+  email,
+  phoneNumber,
+  publicLink,
+  position,
+}: BaseUserItemProps) {
+  const t = useTranslations("users.UserListItem");
+  const { isOwner, isGuest } = useCurrentUser();
+  const { onOpenChange: onUserDetailModalOpenChange } = useModal("userDetail");
 
-    const userImg = (
-      <ItemBaseUserImageContainer
-        user={{ fullName, imageUrl }}
-        width={36}
-        height={36}
-        className="h-9 w-9"
-      />
-    );
+  const userImg = (
+    <ItemBaseUserImageContainer
+      user={{ fullName, imageUrl }}
+      width={36}
+      height={36}
+      className="h-9 w-9"
+    />
+  );
 
-    // We show the action menu only for owners and guests
-    const showActionMenuTrigger = isOwner || isGuest;
+  // We show the action menu only for owners and guests
+  const showActionMenuTrigger = isOwner || isGuest;
 
-    return (
-      <UserListItemLayout
-        id={id}
-        imgSlot={
-          <ItemBaseDetailButton
-            className="h-9 w-9"
+  return (
+    <UserListItemLayout
+      id={id}
+      imgSlot={
+        <ItemBaseDetailButton
+          className="h-9 w-9"
+          onPress={() => onUserDetailModalOpenChange(true)}
+        >
+          {userImg}
+        </ItemBaseDetailButton>
+      }
+      mainSlot={
+        <>
+          <ListItemTitleButton
             onPress={() => onUserDetailModalOpenChange(true)}
           >
-            {userImg}
-          </ItemBaseDetailButton>
-        }
-        mainSlot={
-          <>
-            <ListItemTitleButton
-              onPress={() => onUserDetailModalOpenChange(true)}
-            >
-              {fullName}
-            </ListItemTitleButton>
-            <ListItemTextLink href={`mailto:${email}`}>
-              {email}
-            </ListItemTextLink>
-          </>
-        }
-        phoneNumberSlot={
-          <>
-            {phoneNumber ? (
-              <ListItemTitleLink href={`tel:${phoneNumber}`}>
-                {phoneNumber}
-              </ListItemTitleLink>
-            ) : (
-              <ListItemTitle>{t("noPhoneNumber")}</ListItemTitle>
-            )}
+            {fullName}
+          </ListItemTitleButton>
+          <ListItemTextLink href={`mailto:${email}`}>{email}</ListItemTextLink>
+        </>
+      }
+      phoneNumberSlot={
+        <>
+          {phoneNumber ? (
+            <ListItemTitleLink href={`tel:${phoneNumber}`}>
+              {phoneNumber}
+            </ListItemTitleLink>
+          ) : (
+            <ListItemTitle>{t("noPhoneNumber")}</ListItemTitle>
+          )}
 
-            <ListItemText>{t("phoneNumber")}</ListItemText>
-          </>
-        }
-        publicLinkSlot={
-          <>
-            {publicLink ? (
-              <ListItemTitleLink href={publicLink}>
-                {publicLink}
-              </ListItemTitleLink>
-            ) : (
-              <ListItemTitle>{t("noPublicLink")}</ListItemTitle>
-            )}
+          <ListItemText>{t("phoneNumber")}</ListItemText>
+        </>
+      }
+      publicLinkSlot={
+        <>
+          {publicLink ? (
+            <ListItemTitleLink href={publicLink}>
+              {publicLink}
+            </ListItemTitleLink>
+          ) : (
+            <ListItemTitle>{t("noPublicLink")}</ListItemTitle>
+          )}
 
-            <ListItemText>{t("publicLink")}</ListItemText>
-          </>
-        }
-        positionSlot={
-          <>
-            <ListItemTitle>
-              {position ? position.name : t("noPosition")}
-            </ListItemTitle>
+          <ListItemText>{t("publicLink")}</ListItemText>
+        </>
+      }
+      positionSlot={
+        <>
+          <ListItemTitle>
+            {position ? position.name : t("noPosition")}
+          </ListItemTitle>
 
-            <ListItemText>{t("position")}</ListItemText>
-          </>
-        }
-        menuTriggerSlot={
-          showActionMenuTrigger ? (
-            <UserItemActionMenuTrigger userId={id} />
-          ) : undefined
-        }
-      />
-    );
-  },
-);
+          <ListItemText>{t("position")}</ListItemText>
+        </>
+      }
+      menuTriggerSlot={
+        showActionMenuTrigger ? (
+          <UserItemActionMenuTrigger userId={id} />
+        ) : undefined
+      }
+    />
+  );
+});

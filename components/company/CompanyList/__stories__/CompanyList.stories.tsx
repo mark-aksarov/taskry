@@ -1,5 +1,5 @@
 import { CompanyList } from "../CompanyList";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CompanyListItem } from "../../CompanyListItem";
 import { mockedCompanySummaries } from "@/mocks/companies";
 import { CompanyListItemStory } from "../../CompanyListItem/__stories__";

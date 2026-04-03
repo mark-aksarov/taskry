@@ -163,7 +163,7 @@ export const getProjectSummaries = cache(
       user: { workspaceId },
     } = await requireSession();
 
-    let where = { workspaceId };
+    const where = { workspaceId };
 
     // Get projects
     const projects = await prisma.project.findMany({
@@ -436,6 +436,8 @@ export const updateProject = async (input: UpdateProjectInputDTO) => {
     ) {
       throw new NotFoundError("Project not found.", "projectNotFound");
     }
+
+    throw error;
   }
 };
 

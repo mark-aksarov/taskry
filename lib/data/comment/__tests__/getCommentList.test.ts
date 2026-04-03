@@ -11,7 +11,6 @@ import {
   projectCategories,
 } from "@/prisma/test-utils/data";
 
-import prisma from "@/lib/prisma";
 import { getCommentList } from "../comment.dal";
 import { describe, beforeAll, it, expect } from "vitest";
 import { seed } from "@/prisma/test-utils/seed";

@@ -2,6 +2,7 @@
 
 import {
   createContext,
+  useCallback,
   useContext,
   useMemo,
   useOptimistic,
@@ -30,12 +31,15 @@ export function ViewModeProvider({
   const [optimisticViewMode, setOptimisticViewMode] = useOptimistic(viewMode);
   const [isPending, startTransition] = useTransition();
 
-  const changeViewMode = (mode: ViewMode) => {
-    startTransition(() => {
-      setOptimisticViewMode(mode);
-      setViewModeState(mode);
-    });
-  };
+  const changeViewMode = useCallback(
+    (mode: ViewMode) => {
+      startTransition(() => {
+        setOptimisticViewMode(mode);
+        setViewModeState(mode);
+      });
+    },
+    [setOptimisticViewMode],
+  );
 
   const contextValue = useMemo(
     () => ({
@@ -43,7 +47,7 @@ export function ViewModeProvider({
       changeViewMode,
       isPending,
     }),
-    [optimisticViewMode, isPending],
+    [optimisticViewMode, changeViewMode, isPending],
   );
 
   return (

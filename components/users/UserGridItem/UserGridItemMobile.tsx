@@ -35,62 +35,60 @@ export function UserGridItemMobile(props: BaseUserItemProps) {
   );
 }
 
-export const UserGridItemMobileInner = memo(
-  ({
-    id,
-    fullName,
-    imageUrl,
-    position,
-    phoneNumber,
-    publicLink,
-    email,
-  }: BaseUserItemProps) => {
-    const t = useTranslations("users.UserGridItem");
+export const UserGridItemMobileInner = memo(function UserGridItemMobileInner({
+  id,
+  fullName,
+  imageUrl,
+  position,
+  phoneNumber,
+  publicLink,
+  email,
+}: BaseUserItemProps) {
+  const t = useTranslations("users.UserGridItem");
 
-    const { isOwner, isGuest } = useCurrentUser();
+  const { isOwner, isGuest } = useCurrentUser();
 
-    const userImg = (
-      <ItemBaseUserImageContainer
-        user={{ fullName, imageUrl }}
-        width={44}
-        height={44}
-        className="pointer-events-none h-11 w-11"
-      />
-    );
+  const userImg = (
+    <ItemBaseUserImageContainer
+      user={{ fullName, imageUrl }}
+      width={44}
+      height={44}
+      className="pointer-events-none h-11 w-11"
+    />
+  );
 
-    // We show the action menu only for owners and guests
-    const showActionMenuTrigger = isOwner || isGuest;
+  // We show the action menu only for owners and guests
+  const showActionMenuTrigger = isOwner || isGuest;
 
-    return (
-      <UserGridItemLayout
-        actionMenuSlot={
-          showActionMenuTrigger ? (
-            <UserItemActionMenuTrigger
-              userId={id}
-              className="relative z-1 -mr-2"
-            />
-          ) : undefined
-        }
-        imageSlot={userImg}
-        titleSlot={
-          <GridItemInfo className="flex-auto">
-            <GridItemTitle>{fullName}</GridItemTitle>
-            <GridItemText>
-              {position ? position.name : t("noPosition")}
-            </GridItemText>
-          </GridItemInfo>
-        }
-        phoneNumberSlot={
-          <>
-            <Separator />
-            <GridItemContactList>
-              <GridItemPhoneNumber phoneNumber={phoneNumber} />
-              <GridItemPublicLink publicLink={publicLink} />
-              <GridItemEmail email={email} />
-            </GridItemContactList>
-          </>
-        }
-      />
-    );
-  },
-);
+  return (
+    <UserGridItemLayout
+      actionMenuSlot={
+        showActionMenuTrigger ? (
+          <UserItemActionMenuTrigger
+            userId={id}
+            className="relative z-1 -mr-2"
+          />
+        ) : undefined
+      }
+      imageSlot={userImg}
+      titleSlot={
+        <GridItemInfo className="flex-auto">
+          <GridItemTitle>{fullName}</GridItemTitle>
+          <GridItemText>
+            {position ? position.name : t("noPosition")}
+          </GridItemText>
+        </GridItemInfo>
+      }
+      phoneNumberSlot={
+        <>
+          <Separator />
+          <GridItemContactList>
+            <GridItemPhoneNumber phoneNumber={phoneNumber} />
+            <GridItemPublicLink publicLink={publicLink} />
+            <GridItemEmail email={email} />
+          </GridItemContactList>
+        </>
+      }
+    />
+  );
+});

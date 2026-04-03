@@ -36,71 +36,66 @@ export function UserGridItemLarge(props: BaseUserItemProps) {
   );
 }
 
-const UserGridItemLargeInner = memo(
-  ({
-    id,
-    fullName,
-    imageUrl,
-    position,
-    phoneNumber,
-    publicLink,
-    email,
-  }: BaseUserItemProps) => {
-    const t = useTranslations("users.UserGridItem");
-    const { isOwner, isGuest } = useCurrentUser();
-    const { onOpenChange: onUserDetailModalOpenChange } =
-      useModal("userDetail");
+const UserGridItemLargeInner = memo(function UserGridItemLargeInner({
+  id,
+  fullName,
+  imageUrl,
+  position,
+  phoneNumber,
+  publicLink,
+  email,
+}: BaseUserItemProps) {
+  const t = useTranslations("users.UserGridItem");
+  const { isOwner, isGuest } = useCurrentUser();
+  const { onOpenChange: onUserDetailModalOpenChange } = useModal("userDetail");
 
-    const userImg = (
-      <ItemBaseUserImageContainer
-        user={{ fullName, imageUrl }}
-        width={36}
-        height={36}
-        className="h-9 w-9"
-      />
-    );
+  const userImg = (
+    <ItemBaseUserImageContainer
+      user={{ fullName, imageUrl }}
+      width={36}
+      height={36}
+      className="h-9 w-9"
+    />
+  );
 
-    // We show the action menu only for owners and guests
-    const showActionMenuTrigger = isOwner || isGuest;
+  // We show the action menu only for owners and guests
+  const showActionMenuTrigger = isOwner || isGuest;
 
-    return (
-      <UserGridItemLayout
-        actionMenuSlot={
-          showActionMenuTrigger ? (
-            <UserItemActionMenuTrigger userId={id} className="-mr-2" />
-          ) : undefined
-        }
-        imageSlot={
-          <ItemBaseDetailButton
+  return (
+    <UserGridItemLayout
+      actionMenuSlot={
+        showActionMenuTrigger ? (
+          <UserItemActionMenuTrigger userId={id} className="-mr-2" />
+        ) : undefined
+      }
+      imageSlot={
+        <ItemBaseDetailButton onPress={() => onUserDetailModalOpenChange(true)}>
+          {userImg}
+        </ItemBaseDetailButton>
+      }
+      titleSlot={
+        <GridItemInfo className="flex-auto">
+          <GridItemTitleButton
             onPress={() => onUserDetailModalOpenChange(true)}
           >
-            {userImg}
-          </ItemBaseDetailButton>
-        }
-        titleSlot={
-          <GridItemInfo className="flex-auto">
-            <GridItemTitleButton
-              onPress={() => onUserDetailModalOpenChange(true)}
-            >
-              {fullName}
-            </GridItemTitleButton>
+            {fullName}
+          </GridItemTitleButton>
 
-            <GridItemText>
-              {position ? position.name : t("noPosition")}
-            </GridItemText>
-          </GridItemInfo>
-        }
-        phoneNumberSlot={
-          <>
-            <Separator />
-            <GridItemContactList>
-              <GridItemPhoneNumber phoneNumber={phoneNumber} />
-              <GridItemPublicLink publicLink={publicLink} />
-              <GridItemEmail email={email} />
-            </GridItemContactList>
-          </>
-        }
-      />
-    );
-  },
-);
+          <GridItemText>
+            {position ? position.name : t("noPosition")}
+          </GridItemText>
+        </GridItemInfo>
+      }
+      phoneNumberSlot={
+        <>
+          <Separator />
+          <GridItemContactList>
+            <GridItemPhoneNumber phoneNumber={phoneNumber} />
+            <GridItemPublicLink publicLink={publicLink} />
+            <GridItemEmail email={email} />
+          </GridItemContactList>
+        </>
+      }
+    />
+  );
+});

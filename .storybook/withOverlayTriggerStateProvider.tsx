@@ -1,5 +1,5 @@
 import { fn } from "storybook/test";
-import { type Decorator } from "@storybook/react";
+import { type Decorator } from "@storybook/nextjs-vite";
 import { OverlayTriggerStateContext } from "react-aria-components";
 
 export const withOverlayTriggerStateProvider: Decorator = (Story) => {

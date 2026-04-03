@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { Meta, StoryObj } from "@storybook/react";
 import { DialogTrigger } from "react-aria-components";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectStatusFiltersForm } from "../ProjectStatusFiltersForm";
 import { ProjectStatusFiltersModal } from "./ProjectStatusFiltersModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";

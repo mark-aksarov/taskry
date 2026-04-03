@@ -56,12 +56,7 @@ export const Default = {
     ),
     navigationLarge: (
       <UserNavigationLarge
-        userActions={
-          <ProfileActions
-            userId={mockedUserDetail.id}
-            userFullName={mockedUserDetail.fullName}
-          />
-        }
+        userActions={<ProfileActions userId={mockedUserDetail.id} />}
       />
     ),
   },
@@ -85,12 +80,7 @@ export const WithoutOptionalUserData = {
     ),
     navigationLarge: (
       <UserNavigationLarge
-        userActions={
-          <ProfileActions
-            userId={mockedUserDetail.id}
-            userFullName={mockedUserDetail.fullName}
-          />
-        }
+        userActions={<ProfileActions userId={mockedUserDetail.id} />}
       />
     ),
   },

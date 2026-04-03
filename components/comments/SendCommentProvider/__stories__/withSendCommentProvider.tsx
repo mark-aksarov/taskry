@@ -1,4 +1,4 @@
-import { type Decorator } from "@storybook/react";
+import { type Decorator } from "@storybook/nextjs-vite";
 import { SendCommentContext } from "../../SendCommentContext";
 
 export const withSendCommentProvider: Decorator = (Story) => {

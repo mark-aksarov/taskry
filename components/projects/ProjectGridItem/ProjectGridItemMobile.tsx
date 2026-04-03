@@ -42,7 +42,7 @@ export function ProjectGridItemMobile(props: Props) {
 }
 
 export const ProjectGridItemMobileInner = memo(
-  ({
+  function ProjectGridItemMobileInner({
     id,
     title,
     deadline,
@@ -51,7 +51,7 @@ export const ProjectGridItemMobileInner = memo(
     status,
     tasksTotal,
     tasksCompleted,
-  }: Props) => {
+  }: Props) {
     const { onOpenChange: onProjectCommentsModalOpenChange } =
       useModal("projectComments");
 

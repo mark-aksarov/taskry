@@ -12,10 +12,9 @@ import { NavigationButton } from "@/components/common/NavigationButton";
 
 interface ProfileActionsProps {
   userId: string;
-  userFullName: string;
 }
 
-export function ProfileActions({ userId, userFullName }: ProfileActionsProps) {
+export function ProfileActions({ userId }: ProfileActionsProps) {
   const t = useTranslations("users.ProfileActions");
 
   // Delete user action and modal states

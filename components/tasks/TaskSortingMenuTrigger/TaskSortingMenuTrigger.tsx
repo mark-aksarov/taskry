@@ -4,7 +4,7 @@ import { Item } from "react-stately";
 import { TaskSortField } from "@/lib/types";
 import { useTranslations } from "next-intl";
 import { useSelectedTasks } from "../SelectedTasksContext";
-import { Calendar, CircleCheck, ALargeSmall, Blocks } from "lucide-react";
+import { Calendar, CircleCheck, ALargeSmall } from "lucide-react";
 import { SortingMenuTrigger } from "@/components/common/SortingMenuTrigger";
 
 export interface TaskSortingMenuTriggerProps {

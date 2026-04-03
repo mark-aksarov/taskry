@@ -1,4 +1,4 @@
-import { type Decorator } from "@storybook/react";
+import { type Decorator } from "@storybook/nextjs-vite";
 import { ProfileLink } from "@/components/layout/ProfileLink";
 import { DashboardLayout } from "../app/[locale]/(dashboard)/DashboardLayout";
 import SharedLayout from "@/app/[locale]/(dashboard)/(shared-layout)/SharedLayout";

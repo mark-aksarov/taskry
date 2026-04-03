@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import ErrorPageContainer from "@/components/layout/ErrorPageContainer";
 
@@ -11,6 +12,10 @@ export default function Error({
   reset: () => void;
 }) {
   const t = useTranslations("app.ErrorPage");
+
+  useEffect(() => {
+    console.error(error);
+  }, [error]);
 
   return (
     <ErrorPageContainer

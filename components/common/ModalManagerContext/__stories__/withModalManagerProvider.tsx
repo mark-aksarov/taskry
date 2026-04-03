@@ -1,4 +1,4 @@
-import { type Decorator } from "@storybook/react";
+import { type Decorator } from "@storybook/nextjs-vite";
 import { ModalManagerProvider } from "../ModalManagerContext";
 
 export const withModalManagerProvider: Decorator = (Story) => {

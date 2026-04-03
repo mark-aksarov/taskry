@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { mockedCustomerDetail } from "@/mocks/customers";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CustomerGridItemLarge } from "../CustomerGridItemLarge";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withMockedCustomerItemWrapper } from "../../CustomerItemWrapper/__stories__";

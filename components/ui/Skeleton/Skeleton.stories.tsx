@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from "@storybook/react";
 import { Skeleton } from "./Skeleton";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof Skeleton> = {

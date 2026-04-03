@@ -18,14 +18,12 @@ import { Check, Clock, Trash, Pencil, CircleEllipsis } from "lucide-react";
 
 export type TaskItemActionMenuTriggerProps = {
   taskId: number;
-  taskTitle: string;
   taskStatus: TaskStatus;
   className?: string;
 };
 
 export function TaskItemActionMenuTrigger({
   taskId,
-  taskTitle,
   taskStatus,
   className,
 }: TaskItemActionMenuTriggerProps) {

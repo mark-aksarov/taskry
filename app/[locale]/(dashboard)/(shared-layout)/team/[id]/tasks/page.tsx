@@ -101,10 +101,7 @@ export default async function AppProfileTasksPage({
                             <UserNavigationLarge
                               userActions={
                                 showUserActions && (
-                                  <ProfileActions
-                                    userId={userId}
-                                    userFullName={userSummary.fullName}
-                                  />
+                                  <ProfileActions userId={userId} />
                                 )
                               }
                             />

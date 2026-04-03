@@ -83,10 +83,7 @@ export default async function AppProfileTasksPage({
                           navigationLarge={
                             <ProfileNavigationLarge
                               profileActions={
-                                <ProfileActions
-                                  userId={userId}
-                                  userFullName={userFullName}
-                                />
+                                <ProfileActions userId={userId} />
                               }
                             />
                           }

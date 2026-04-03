@@ -40,84 +40,79 @@ export function TaskGridItemLarge(props: Props) {
   );
 }
 
-export const TaskGridItemLargeInner = memo(
-  ({
-    id,
-    title,
-    deadline,
-    assignee,
-    commentsCount,
-    status,
-    subtasksTotal,
-    subtasksDone,
-  }: Props) => {
-    const assigneeImg = (
-      <ItemBaseUserImageContainer
-        user={assignee}
-        className="h-9 w-9"
-        width={36}
-        height={36}
-      />
-    );
+export const TaskGridItemLargeInner = memo(function TaskGridItemLargeInner({
+  id,
+  title,
+  deadline,
+  assignee,
+  commentsCount,
+  status,
+  subtasksTotal,
+  subtasksDone,
+}: Props) {
+  const assigneeImg = (
+    <ItemBaseUserImageContainer
+      user={assignee}
+      className="h-9 w-9"
+      width={36}
+      height={36}
+    />
+  );
 
-    const { onOpenChange: onTaskDetailModalOpenChange } =
-      useModal("taskDetail");
-    const { onOpenChange: onUserDetailModalOpenChange } =
-      useModal("userDetail");
-    const { onOpenChange: onTaskCommentsModalOpenChange } =
-      useModal("taskComments");
+  const { onOpenChange: onTaskDetailModalOpenChange } = useModal("taskDetail");
+  const { onOpenChange: onUserDetailModalOpenChange } = useModal("userDetail");
+  const { onOpenChange: onTaskCommentsModalOpenChange } =
+    useModal("taskComments");
 
-    return (
-      <TaskGridItemLayout
-        checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
-        menuTriggerSlot={
-          <TaskItemActionMenuTrigger
-            taskId={id}
-            taskTitle={title}
-            taskStatus={status}
-            className="-mr-2"
-          />
-        }
-        titleSlot={
-          <GridItemInfo className="flex-auto">
-            <ListItemTitleButton
-              onPress={() => onTaskDetailModalOpenChange(true)}
-            >
-              {title}
-            </ListItemTitleButton>
+  return (
+    <TaskGridItemLayout
+      checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
+      menuTriggerSlot={
+        <TaskItemActionMenuTrigger
+          taskId={id}
+          taskStatus={status}
+          className="-mr-2"
+        />
+      }
+      titleSlot={
+        <GridItemInfo className="flex-auto">
+          <ListItemTitleButton
+            onPress={() => onTaskDetailModalOpenChange(true)}
+          >
+            {title}
+          </ListItemTitleButton>
 
-            <GridItemText>
-              <ItemBaseDeadline deadline={deadline} />
-            </GridItemText>
-          </GridItemInfo>
-        }
-        assigneeImageSlot={
-          assignee ? (
-            <ItemBaseDetailButton
-              onPress={() => onUserDetailModalOpenChange(true)}
-            >
-              {assigneeImg}
-            </ItemBaseDetailButton>
-          ) : (
-            assigneeImg
-          )
-        }
-        commentsSlot={
-          <ItemBaseCommentsButton
-            commentsCount={commentsCount}
-            onPress={() => onTaskCommentsModalOpenChange(true)}
-          />
-        }
-        statusSlot={
-          <TaskItemBaseBadge taskId={id} deadline={deadline} status={status} />
-        }
-        progressSlot={
-          <TaskGridItemProgress
-            subtasksDone={subtasksDone}
-            subtasksTotal={subtasksTotal}
-          />
-        }
-      />
-    );
-  },
-);
+          <GridItemText>
+            <ItemBaseDeadline deadline={deadline} />
+          </GridItemText>
+        </GridItemInfo>
+      }
+      assigneeImageSlot={
+        assignee ? (
+          <ItemBaseDetailButton
+            onPress={() => onUserDetailModalOpenChange(true)}
+          >
+            {assigneeImg}
+          </ItemBaseDetailButton>
+        ) : (
+          assigneeImg
+        )
+      }
+      commentsSlot={
+        <ItemBaseCommentsButton
+          commentsCount={commentsCount}
+          onPress={() => onTaskCommentsModalOpenChange(true)}
+        />
+      }
+      statusSlot={
+        <TaskItemBaseBadge taskId={id} deadline={deadline} status={status} />
+      }
+      progressSlot={
+        <TaskGridItemProgress
+          subtasksDone={subtasksDone}
+          subtasksTotal={subtasksTotal}
+        />
+      }
+    />
+  );
+});

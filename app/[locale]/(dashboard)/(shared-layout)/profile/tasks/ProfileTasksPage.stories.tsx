@@ -78,12 +78,7 @@ export const Default = {
     ),
     navigationLarge: (
       <ProfileNavigationLarge
-        profileActions={
-          <ProfileActions
-            userId={mockedUserDetail.id}
-            userFullName={mockedUserDetail.fullName}
-          />
-        }
+        profileActions={<ProfileActions userId={mockedUserDetail.id} />}
       />
     ),
     navigationMobile: <ProfileNavigationMobile />,

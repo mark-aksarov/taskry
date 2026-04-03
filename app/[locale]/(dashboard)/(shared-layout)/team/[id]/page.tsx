@@ -60,7 +60,6 @@ export default async function AppTeamProfilePage({
                 <TeamProfilePage
                   showUserActions={showUserActions}
                   userId={userId}
-                  userFullName={userSummary.fullName}
                   userDetailContainer={
                     <UserDetailAltContainer userId={userId} />
                   }

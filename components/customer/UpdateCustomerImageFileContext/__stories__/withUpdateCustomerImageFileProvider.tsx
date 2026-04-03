@@ -1,4 +1,4 @@
-import { type Decorator } from "@storybook/react";
+import { type Decorator } from "@storybook/nextjs-vite";
 import { UpdateCustomerImageFileProvider } from "../UpdateCustomerImageFileContext";
 
 export const withUpdateCustomerImageFileProvider: Decorator = (Story) => {

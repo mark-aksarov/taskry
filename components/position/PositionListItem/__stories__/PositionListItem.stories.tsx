@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PositionListItem } from "../PositionListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdatePositionProvider } from "../../UpdatePositionProvider/__stories__";

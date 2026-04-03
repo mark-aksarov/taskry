@@ -18,6 +18,7 @@ import { requireSession } from "../utils/requireSession";
 import { CustomerFilters, CustomerSortField } from "@/lib/types";
 import { AccessDeniedError, NotFoundError } from "../utils/error";
 import { Prisma, ProjectStatus } from "@/generated/prisma/client";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 export const getCustomerDetail = cache(
   async (id: number): Promise<CustomerDetailDTO | null> => {
@@ -139,7 +140,7 @@ export const getCustomerSummaries = cache(
       user: { workspaceId },
     } = await requireSession();
 
-    let where = { workspaceId };
+    const where = { workspaceId };
 
     // Get customers
     const customers = await prisma.customer.findMany({
@@ -422,7 +423,14 @@ export const updateCustomer = async (input: UpdateCustomerInputDTO) => {
 
     return updatedCustomer;
   } catch (error) {
-    throw new NotFoundError("Customer not found", "customerNotFound");
+    if (
+      error instanceof PrismaClientKnownRequestError &&
+      error.code === "P2025"
+    ) {
+      throw new NotFoundError("Customer not found", "customerNotFound");
+    }
+
+    throw error;
   }
 };
 
@@ -464,7 +472,14 @@ export const updateCustomerImageUrl = async (
 
     return updatedCustomer;
   } catch (error) {
-    throw new NotFoundError("Customer not found", "customerNotFound");
+    if (
+      error instanceof PrismaClientKnownRequestError &&
+      error.code === "P2025"
+    ) {
+      throw new NotFoundError("Customer not found", "customerNotFound");
+    }
+
+    throw error;
   }
 };
 

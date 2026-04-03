@@ -4,8 +4,10 @@ import { useIsMd } from "@/lib/hooks/useIsMd";
 import { EntityContainerPagination } from "@/components/common/EntityContainerPagination";
 import { EntityContainerPresentationProps } from "@/components/common/EntityContainerPresentation";
 
-interface AssignedTasksPresentationProps
-  extends Omit<EntityContainerPresentationProps, "gridLarge"> {}
+type AssignedTasksPresentationProps = Omit<
+  EntityContainerPresentationProps,
+  "gridLarge"
+>;
 
 export function AssignedTasksPresentation({
   page,

@@ -13,7 +13,6 @@ import { UserNavigationLarge } from "@/components/users/UserNavigationLarge";
 interface TeamProfilePageProps {
   showUserActions: boolean;
   userId: string;
-  userFullName: string;
   userDetailContainer: React.ReactNode;
   userDetailHeaderContainer: React.ReactNode;
 }
@@ -21,7 +20,6 @@ interface TeamProfilePageProps {
 export function TeamProfilePage({
   showUserActions,
   userId,
-  userFullName,
   userDetailContainer,
   userDetailHeaderContainer,
 }: TeamProfilePageProps) {
@@ -35,9 +33,7 @@ export function TeamProfilePage({
         navigationLarge={
           <UserNavigationLarge
             userActions={
-              showUserActions ? (
-                <ProfileActions userId={userId} userFullName={userFullName} />
-              ) : undefined
+              showUserActions ? <ProfileActions userId={userId} /> : undefined
             }
           />
         }
@@ -58,7 +54,7 @@ export function TeamProfilePage({
         <div className="flex flex-col">{userDetailHeaderContainer}</div>
         {showUserActions && (
           <Card className="flex flex-col p-1.5">
-            <ProfileActions userId={userId} userFullName={userFullName} />
+            <ProfileActions userId={userId} />
           </Card>
         )}
         <Card className="flex flex-col">{userDetailContainer}</Card>

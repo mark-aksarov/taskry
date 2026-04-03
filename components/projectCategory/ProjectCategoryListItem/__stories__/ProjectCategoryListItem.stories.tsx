@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectCategoryListItem } from "../ProjectCategoryListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";

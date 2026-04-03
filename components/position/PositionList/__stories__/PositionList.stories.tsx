@@ -1,5 +1,5 @@
 import { PositionList } from "../PositionList";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PositionListItem } from "../../PositionListItem";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";

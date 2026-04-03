@@ -1,13 +1,14 @@
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
-import { getCompanySummaries } from "@/lib/data/company/company.dal";
 import {
-  internalServerError,
   unauthorized,
+  internalServerError,
 } from "@/lib/utils/routeHandlerErrors";
 
-export async function GET(req: NextRequest) {
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { NextResponse } from "next/server";
+import { getCompanySummaries } from "@/lib/data/company/company.dal";
+
+export async function GET() {
   // Authorization
   const session = await auth.api.getSession({
     headers: await headers(),

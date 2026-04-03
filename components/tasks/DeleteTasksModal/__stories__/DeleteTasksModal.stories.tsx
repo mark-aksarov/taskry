@@ -3,8 +3,8 @@ import {
   withModalManagerProvider,
 } from "@/components/common/ModalManagerContext/__stories__";
 
-import { Meta, StoryObj } from "@storybook/react";
 import { DeleteTasksModal } from "../DeleteTasksModal";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteTasksProvider } from "../../DeleteTasksProvider/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";

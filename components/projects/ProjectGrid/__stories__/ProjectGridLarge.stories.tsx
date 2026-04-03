@@ -34,9 +34,8 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedProjectList.map((project) => (
-      <MockedProjectItemWrapper>
+      <MockedProjectItemWrapper key={project.id}>
         <ProjectGridItemLarge
-          key={project.id}
           {...ProjectGridItemLargeStory.args}
           {...project}
         />

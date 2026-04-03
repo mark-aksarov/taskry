@@ -31,7 +31,6 @@ export const Default = {
     isDone: false,
     id: 1,
     text: "Subtask 1",
-    taskId: 1,
   },
 } satisfies Story;
 

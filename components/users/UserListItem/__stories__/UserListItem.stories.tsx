@@ -1,6 +1,6 @@
 import { UserListItem } from "../UserListItem";
 import { mockedUserDetail } from "@/mocks/users";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withMockedUserItemWrapper } from "../../UserItemWrapper/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";

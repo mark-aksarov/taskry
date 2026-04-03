@@ -33,7 +33,6 @@ export function ProjectDetailContainer({
 
   return (
     <ProjectDetail
-      id={project.id}
       title={project.title}
       creator={project.creator}
       deadline={project.deadline}

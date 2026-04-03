@@ -16,6 +16,7 @@ import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { requireSession } from "../utils/requireSession";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 export const getCommentList = cache(
   async ({
@@ -183,7 +184,14 @@ export const deleteComment = async (commentId: number) => {
 
     return deletedComment;
   } catch (error) {
-    throw new NotFoundError("Comment not found", "commentNotFound");
+    if (
+      error instanceof PrismaClientKnownRequestError &&
+      error.code === "P2025"
+    ) {
+      throw new NotFoundError("Comment not found.", "commentNotFound");
+    }
+
+    throw error;
   }
 };
 
@@ -232,7 +240,14 @@ export const updateComment = async (input: UpdateCommentInputDTO) => {
 
     return comment;
   } catch (error) {
-    throw new NotFoundError("Comment not found", "commentNotFound");
+    if (
+      error instanceof PrismaClientKnownRequestError &&
+      error.code === "P2025"
+    ) {
+      throw new NotFoundError("Comment not found.", "commentNotFound");
+    }
+
+    throw error;
   }
 };
 

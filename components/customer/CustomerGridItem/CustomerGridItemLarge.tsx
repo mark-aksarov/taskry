@@ -44,7 +44,7 @@ export function CustomerGridItemLarge(props: BaseCustomerItemProps) {
 }
 
 export const CustomerGridItemLargeInner = memo(
-  ({
+  function CustomerGridItemLargeInner({
     id,
     fullName,
     email,
@@ -52,7 +52,7 @@ export const CustomerGridItemLargeInner = memo(
     publicLink,
     imageUrl,
     company,
-  }: BaseCustomerItemProps) => {
+  }: BaseCustomerItemProps) {
     const t = useTranslations("customers.CustomerGridItem");
 
     const { onOpenChange: onCustomerDetailModalOpenChange } =

@@ -1,5 +1,5 @@
 import AppAuthLayout from "../app/[locale]/(auth)/layout";
-import { type Decorator } from "@storybook/react";
+import { type Decorator } from "@storybook/nextjs-vite";
 
 export const AuthPageDecorator: Decorator = (Story) => {
   return (

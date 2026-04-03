@@ -3,7 +3,7 @@ import {
   withModalManagerProvider,
 } from "@/components/common/ModalManagerContext/__stories__";
 
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DeleteCustomerImageModal } from "./DeleteCustomerImageModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withClearCustomerImageUrlProvider } from "../ClearCustomerImageUrlProvider/__stories__";

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { type Decorator } from "@storybook/react";
+import { type Decorator } from "@storybook/nextjs-vite";
 
 export type BackgroundVariant = "default" | "alt";
 

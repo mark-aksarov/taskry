@@ -32,7 +32,10 @@ export function CompanyListItem(props: CompanyListItemProps) {
   );
 }
 
-const CompanyListItemInner = memo(({ id, name }: CompanyListItemProps) => {
+const CompanyListItemInner = memo(function CompanyListItemInner({
+  id,
+  name,
+}: CompanyListItemProps) {
   const t = useTranslations("company.CompanyListItem");
 
   return (

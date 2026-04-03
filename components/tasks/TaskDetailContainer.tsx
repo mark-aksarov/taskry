@@ -36,7 +36,6 @@ export function TaskDetailContainer({ taskId }: TaskDetailContainerProps) {
   return (
     <CreateSubtaskProvider taskId={taskId}>
       <TaskDetail
-        id={task.id}
         title={task.title}
         creator={task.creator}
         assignee={task.assignee}
@@ -57,7 +56,6 @@ export function TaskDetailContainer({ taskId }: TaskDetailContainerProps) {
                           id={subtask.id}
                           text={subtask.text}
                           isDone={subtask.isDone}
-                          taskId={task.id}
                         />
 
                         <UpdateSubtaskModal

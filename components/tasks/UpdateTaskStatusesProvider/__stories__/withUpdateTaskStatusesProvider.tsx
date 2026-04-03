@@ -1,4 +1,4 @@
-import { type Decorator } from "@storybook/react";
+import { type Decorator } from "@storybook/nextjs-vite";
 import { MockedUpdateTaskStatusesProvider } from "./MockedUpdateTaskStatusesProvider";
 
 export const withUpdateTaskStatusesProvider: Decorator = (Story) => {

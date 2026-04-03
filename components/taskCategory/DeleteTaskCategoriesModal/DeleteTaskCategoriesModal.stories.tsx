@@ -3,7 +3,7 @@ import {
   withModalManagerProvider,
 } from "@/components/common/ModalManagerContext/__stories__";
 
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { DeleteTaskCategoriesModal } from "./DeleteTaskCategoriesModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";

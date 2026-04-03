@@ -32,7 +32,6 @@ export default async function AppProfilePage() {
               <ChangePasswordProvider>
                 <ProfilePage
                   userId={userId}
-                  userFullName={userFullName}
                   userDetailContainer={
                     <UserDetailAltContainer userId={userId} />
                   }

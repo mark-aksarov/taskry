@@ -1,7 +1,7 @@
 import { CustomerList } from "../CustomerList";
 import { mockedCustomerList } from "@/mocks/customers";
-import type { Meta, StoryObj } from "@storybook/react";
 import { CustomerListItem } from "../../CustomerListItem";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerListItemStory } from "../../CustomerListItem/__stories__";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";

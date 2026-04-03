@@ -42,7 +42,6 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     userId: mockedUserDetail.id,
-    userFullName: mockedUserDetail.fullName,
     userDetailContainer: <UserDetail {...mockedUserDetail} />,
     userDetailHeaderContainer: (
       <UserDetailHeaderInteractive

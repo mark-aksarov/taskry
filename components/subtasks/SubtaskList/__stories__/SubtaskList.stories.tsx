@@ -32,7 +32,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedSubtasks.map((subtask) => (
-      <ModalManagerProvider>
+      <ModalManagerProvider key={subtask.id}>
         <MockedDeleteSubtaskProvider>
           <MockedUpdateSubtaskProvider>
             <MockedToggleSubtaskProvider>

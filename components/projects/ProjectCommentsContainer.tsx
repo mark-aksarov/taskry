@@ -11,10 +11,8 @@ import { usePathname } from "@/i18n/navigation";
 import { notFound, useParams } from "next/navigation";
 import { CommentList } from "../comments/CommentList";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
-import { deleteComment } from "@/lib/actions/comment/deleteComment";
-import { DeleteCommentModal } from "../comments/DeleteCommentModal";
-import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 import { CommentItemWrapper } from "../comments/CommentItemWrapper";
+import { CommentsEmptySection } from "@/components/comments/CommentsEmptySection";
 
 interface ProjectCommentsContainerProps {
   projectId: number;

@@ -3,8 +3,8 @@ import {
   withModalManagerProvider,
 } from "@/components/common/ModalManagerContext/__stories__";
 
-import { Meta, StoryObj } from "@storybook/react";
 import { mockedUserSummaries } from "@/mocks/users";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AssigneeFiltersForm } from "../AssigneeFiltersForm";
 import { AssigneeFiltersModal } from "./AssigneeFiltersModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";

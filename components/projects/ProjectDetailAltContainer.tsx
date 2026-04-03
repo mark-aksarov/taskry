@@ -30,7 +30,6 @@ async function ProjectDetailAltContainerInner({
 
   return (
     <ProjectDetailAlt
-      id={project.id}
       creator={project.creator}
       deadline={project.deadline}
       description={project.description}

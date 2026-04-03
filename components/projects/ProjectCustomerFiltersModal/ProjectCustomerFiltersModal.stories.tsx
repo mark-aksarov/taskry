@@ -8,7 +8,7 @@ import {
   withModalManagerProvider,
 } from "@/components/common/ModalManagerContext/__stories__";
 
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedCustomerSummaries } from "@/mocks/customers";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectCustomerFiltersModal } from "../ProjectCustomerFiltersModal";

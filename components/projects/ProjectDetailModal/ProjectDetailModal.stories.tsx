@@ -42,7 +42,6 @@ export const WithoutOptionalProjectData = {
     projectId: project.id,
     projectDetailContainer: (
       <ProjectDetail
-        id={project.id}
         title={project.title}
         status={project.status}
         deadline={project.deadline}

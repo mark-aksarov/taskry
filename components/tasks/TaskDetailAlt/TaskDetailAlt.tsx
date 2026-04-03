@@ -11,7 +11,6 @@ import { TaskDetailAltLayout } from "./TaskDetailAltLayout";
 import { CreateSubtasksButton } from "@/components/subtasks/CreateSubtaskButton";
 
 interface TaskDetailAltProps {
-  id: number;
   assignee?: {
     id: string;
     fullName: string;
@@ -37,7 +36,6 @@ interface TaskDetailAltProps {
 }
 
 export function TaskDetailAlt({
-  id,
   assignee,
   creator,
   deadline,

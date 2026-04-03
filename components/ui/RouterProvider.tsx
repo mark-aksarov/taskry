@@ -4,7 +4,7 @@ import { useRouter } from "@/i18n/navigation";
 import { RouterProvider as ReactAriaRouterProvider } from "react-aria";
 
 export function RouterProvider({ children }: { children: React.ReactNode }) {
-  let router = useRouter();
+  const router = useRouter();
 
   return (
     <ReactAriaRouterProvider

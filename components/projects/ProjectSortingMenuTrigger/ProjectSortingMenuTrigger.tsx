@@ -4,7 +4,7 @@ import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ProjectSortField } from "@/lib/types";
 import { useSelectedProjects } from "../SelectedProjectsContext";
-import { ALargeSmall, Blocks, Calendar, CircleCheck } from "lucide-react";
+import { ALargeSmall, Calendar, CircleCheck } from "lucide-react";
 import { SortingMenuTrigger } from "@/components/common/SortingMenuTrigger";
 
 export interface ProjectSortingMenuTriggerProps {

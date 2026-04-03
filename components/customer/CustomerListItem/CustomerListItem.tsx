@@ -42,91 +42,87 @@ export function CustomerListItem(props: BaseCustomerItemProps) {
   );
 }
 
-export const CustomerListItemInner = memo(
-  ({
-    id,
-    fullName,
-    email,
-    phoneNumber,
-    publicLink,
-    imageUrl,
-    company,
-  }: BaseCustomerItemProps) => {
-    const t = useTranslations("customers.CustomerListItem");
+export const CustomerListItemInner = memo(function CustomerListItemInner({
+  id,
+  fullName,
+  email,
+  phoneNumber,
+  publicLink,
+  imageUrl,
+  company,
+}: BaseCustomerItemProps) {
+  const t = useTranslations("customers.CustomerListItem");
 
-    const { onOpenChange: onCustomerDetailModalOpenChange } =
-      useModal("customerDetail");
+  const { onOpenChange: onCustomerDetailModalOpenChange } =
+    useModal("customerDetail");
 
-    const customerImg = (
-      <ItemBaseUserImageContainer
-        user={{ fullName, imageUrl }}
-        width={36}
-        height={36}
-        className="h-9 w-9"
-      />
-    );
+  const customerImg = (
+    <ItemBaseUserImageContainer
+      user={{ fullName, imageUrl }}
+      width={36}
+      height={36}
+      className="h-9 w-9"
+    />
+  );
 
-    return (
-      <CustomerListItemLayout
-        id={id}
-        checkboxSlot={<CustomerItemCheckbox id={id} />}
-        imgSlot={
-          <ItemBaseDetailButton
+  return (
+    <CustomerListItemLayout
+      id={id}
+      checkboxSlot={<CustomerItemCheckbox id={id} />}
+      imgSlot={
+        <ItemBaseDetailButton
+          onPress={() => onCustomerDetailModalOpenChange(true)}
+          className="h-9 w-9"
+        >
+          {customerImg}
+        </ItemBaseDetailButton>
+      }
+      mainSlot={
+        <>
+          <ListItemTitleButton
             onPress={() => onCustomerDetailModalOpenChange(true)}
-            className="h-9 w-9"
           >
-            {customerImg}
-          </ItemBaseDetailButton>
-        }
-        mainSlot={
-          <>
-            <ListItemTitleButton
-              onPress={() => onCustomerDetailModalOpenChange(true)}
-            >
-              {fullName}
-            </ListItemTitleButton>
+            {fullName}
+          </ListItemTitleButton>
 
-            <ListItemTextLink href={`mailto:${email}`}>
-              {email}
-            </ListItemTextLink>
-          </>
-        }
-        phoneNumberSlot={
-          <>
-            {phoneNumber ? (
-              <ListItemTitleLink href={`tel:${phoneNumber}`}>
-                {phoneNumber}
-              </ListItemTitleLink>
-            ) : (
-              <ListItemTitle>{t("noPhoneNumber")}</ListItemTitle>
-            )}
+          <ListItemTextLink href={`mailto:${email}`}>{email}</ListItemTextLink>
+        </>
+      }
+      phoneNumberSlot={
+        <>
+          {phoneNumber ? (
+            <ListItemTitleLink href={`tel:${phoneNumber}`}>
+              {phoneNumber}
+            </ListItemTitleLink>
+          ) : (
+            <ListItemTitle>{t("noPhoneNumber")}</ListItemTitle>
+          )}
 
-            <ListItemText>{t("phoneNumber")}</ListItemText>
-          </>
-        }
-        publicLinkSlot={
-          <>
-            {publicLink ? (
-              <ListItemTitleLink href={publicLink}>
-                {publicLink}
-              </ListItemTitleLink>
-            ) : (
-              <ListItemTitle>{t("noPublicLink")}</ListItemTitle>
-            )}
+          <ListItemText>{t("phoneNumber")}</ListItemText>
+        </>
+      }
+      publicLinkSlot={
+        <>
+          {publicLink ? (
+            <ListItemTitleLink href={publicLink}>
+              {publicLink}
+            </ListItemTitleLink>
+          ) : (
+            <ListItemTitle>{t("noPublicLink")}</ListItemTitle>
+          )}
 
-            <ListItemText>{t("publicLink")}</ListItemText>
-          </>
-        }
-        companySlot={
-          <>
-            <ListItemTitle>
-              {company ? company.name : t("noCompany")}
-            </ListItemTitle>
-            <ListItemText>{t("company")}</ListItemText>
-          </>
-        }
-        menuTriggerSlot={<CustomerItemActionMenuTrigger customerId={id} />}
-      />
-    );
-  },
-);
+          <ListItemText>{t("publicLink")}</ListItemText>
+        </>
+      }
+      companySlot={
+        <>
+          <ListItemTitle>
+            {company ? company.name : t("noCompany")}
+          </ListItemTitle>
+          <ListItemText>{t("company")}</ListItemText>
+        </>
+      }
+      menuTriggerSlot={<CustomerItemActionMenuTrigger customerId={id} />}
+    />
+  );
+});

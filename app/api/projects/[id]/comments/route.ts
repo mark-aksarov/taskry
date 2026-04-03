@@ -12,7 +12,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getCommentList } from "@/lib/data/comment/comment.dal";
 
 export async function GET(
-  req: NextRequest,
+  _req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
   // Authorization

@@ -5,23 +5,19 @@ import {
   ItemBaseActionMenuDialogHeader,
 } from "../../common/ItemBase";
 
-import { UpdateSubtaskModal } from "../UpdateSubtaskModal";
-
 import { tv } from "tailwind-variants";
 import { startTransition } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Button } from "react-aria-components";
 import { focusRing } from "@/components/ui/styles";
-import { DeleteSubtaskModal } from "../DeleteSubtaskModal";
 import { useToggleSubtask } from "../ToggleSubtaskContext";
 import { CheckCheck, Loader2, Pencil, Trash } from "lucide-react";
+import { useModal } from "@/components/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useSubtaskListItemPending } from "../SubtaskListItem/useSubtaskListItemPending";
-import { useModal } from "@/components/common/ModalManagerContext";
 
 interface SubtaskActionMenuTriggerProps {
-  taskId: number;
   subtaskId: number;
   subtaskText: string;
   isDone: boolean;
@@ -39,7 +35,6 @@ const buttonStyles = tv({
 });
 
 export function SubtaskActionMenuTrigger({
-  taskId,
   subtaskId,
   subtaskText,
   isDone,

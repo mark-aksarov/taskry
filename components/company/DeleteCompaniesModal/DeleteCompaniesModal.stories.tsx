@@ -1,6 +1,4 @@
-import React from "react";
-import { Button } from "@/components/ui/Button";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DeleteCompaniesModal } from "./DeleteCompaniesModal";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";

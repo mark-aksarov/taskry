@@ -1,4 +1,4 @@
-import { type Decorator } from "@storybook/react";
+import { type Decorator } from "@storybook/nextjs-vite";
 import { MockedDeleteCommentProvider } from "./MockedDeleteCommentProvider";
 
 export const withDeleteCommentProvider: Decorator = (Story) => {

@@ -1,11 +1,11 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import NotFoundPageContainer from "@/components/layout/NotFoundPageContainer";
 
 export default async function NotFound() {
   await requireProtectedPage();
 
-  const t = useTranslations("app.NotFoundPage");
+  const t = await getTranslations("app.NotFoundPage");
 
   return (
     <NotFoundPageContainer

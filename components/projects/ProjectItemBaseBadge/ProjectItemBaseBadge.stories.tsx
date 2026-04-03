@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectItemBaseBadge } from "./ProjectItemBaseBadge";
 import { withSelectedProjectsProvider } from "../SelectedProjectsContext/__stories__";
 import { withUpdateProjectStatusProvider } from "../UpdateProjectStatusProvider/__stories__";

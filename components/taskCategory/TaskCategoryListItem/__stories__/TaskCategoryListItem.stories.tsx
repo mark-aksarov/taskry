@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskCategoryListItem } from "../TaskCategoryListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withTaskCategoryProviders } from "../../TaskCategoryProviders/__stories__";

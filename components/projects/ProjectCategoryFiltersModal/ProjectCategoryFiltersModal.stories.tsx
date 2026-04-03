@@ -3,7 +3,7 @@ import {
   ProjectCategoryFiltersFormSkeleton,
 } from "../ProjectCategoryFiltersForm";
 
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
 import { ProjectCategoryFiltersModal } from "../ProjectCategoryFiltersModal";

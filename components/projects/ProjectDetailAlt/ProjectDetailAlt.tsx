@@ -10,7 +10,6 @@ import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailAltLayout } from "./ProjectDetailAltLayout";
 
 interface ProjectDetailAltProps {
-  id: number;
   creator?: {
     id: string;
     fullName: string;
@@ -31,7 +30,6 @@ interface ProjectDetailAltProps {
 }
 
 export function ProjectDetailAlt({
-  id,
   creator,
   deadline,
   description,

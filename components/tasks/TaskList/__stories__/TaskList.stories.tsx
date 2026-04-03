@@ -35,9 +35,8 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedTaskList.map((task) => (
-      <MockedTaskItemWrapper>
+      <MockedTaskItemWrapper key={task.id}>
         <TaskListItem
-          key={task.id}
           {...TaskListItemStory.args}
           {...task}
           showCheckbox={true}

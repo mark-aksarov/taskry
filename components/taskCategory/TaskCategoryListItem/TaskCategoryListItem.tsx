@@ -32,23 +32,24 @@ export function TaskCategoryListItem(props: TaskCategoryListItemProps) {
   );
 }
 
-const TaskCategoryListItemInner = memo(
-  ({ id, name }: TaskCategoryListItemProps) => {
-    const t = useTranslations("taskCategories.TaskCategoryListItem");
+const TaskCategoryListItemInner = memo(function TaskCategoryListItemInner({
+  id,
+  name,
+}: TaskCategoryListItemProps) {
+  const t = useTranslations("taskCategories.TaskCategoryListItem");
 
-    return (
-      <ListItem
-        data-test="task-category-list-item"
-        className="flex w-full items-center gap-4"
-      >
-        <TaskCategoryItemCheckbox id={id} />
-        <ListItemInfo>
-          <ListItemTitle>{name}</ListItemTitle>
-          <ListItemText>{t("name")}</ListItemText>
-        </ListItemInfo>
+  return (
+    <ListItem
+      data-test="task-category-list-item"
+      className="flex w-full items-center gap-4"
+    >
+      <TaskCategoryItemCheckbox id={id} />
+      <ListItemInfo>
+        <ListItemTitle>{name}</ListItemTitle>
+        <ListItemText>{t("name")}</ListItemText>
+      </ListItemInfo>
 
-        <TaskCategoryListItemActionMenuTrigger taskCategoryId={id} />
-      </ListItem>
-    );
-  },
-);
+      <TaskCategoryListItemActionMenuTrigger taskCategoryId={id} />
+    </ListItem>
+  );
+});

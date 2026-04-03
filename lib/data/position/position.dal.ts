@@ -116,6 +116,8 @@ export const updatePosition = async (input: UpdatePositionInputDTO) => {
     ) {
       throw new NotFoundError("Position not found.", "positionNotFound");
     }
+
+    throw error;
   }
 };
 

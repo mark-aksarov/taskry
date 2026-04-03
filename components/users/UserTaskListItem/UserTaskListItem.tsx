@@ -35,45 +35,44 @@ export const UserTaskListItem = (props: BaseTaskItemProps) => {
   );
 };
 
-export const UserTaskListItemInner = memo(
-  ({ id, title, deadline, status, commentsCount }: BaseTaskItemProps) => {
-    const { onOpenChange: onTaskDetailModalOpenChange } =
-      useModal("taskDetail");
-    const { onOpenChange: onTaskCommentsModalOpenChange } =
-      useModal("taskComments");
+export const UserTaskListItemInner = memo(function UserTaskListItemInner({
+  id,
+  title,
+  deadline,
+  status,
+  commentsCount,
+}: BaseTaskItemProps) {
+  const { onOpenChange: onTaskDetailModalOpenChange } = useModal("taskDetail");
+  const { onOpenChange: onTaskCommentsModalOpenChange } =
+    useModal("taskComments");
 
-    return (
-      <UserTaskListItemLayout
-        checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
-        mainSlot={
-          <>
-            <ListItemTitleButton
-              onPress={() => onTaskDetailModalOpenChange(true)}
-            >
-              {title}
-            </ListItemTitleButton>
-            <ListItemText>
-              <ItemBaseDeadline deadline={deadline} />
-            </ListItemText>
-          </>
-        }
-        statusSlot={
-          <TaskItemBaseBadge taskId={id} deadline={deadline} status={status} />
-        }
-        commentsModalTriggerSlot={
-          <ItemBaseCommentsButton
-            commentsCount={commentsCount}
-            onPress={() => onTaskCommentsModalOpenChange(true)}
-          />
-        }
-        menuTriggerSlot={
-          <TaskItemActionMenuTrigger
-            taskId={id}
-            taskTitle={title}
-            taskStatus={status}
-          />
-        }
-      />
-    );
-  },
-);
+  return (
+    <UserTaskListItemLayout
+      checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
+      mainSlot={
+        <>
+          <ListItemTitleButton
+            onPress={() => onTaskDetailModalOpenChange(true)}
+          >
+            {title}
+          </ListItemTitleButton>
+          <ListItemText>
+            <ItemBaseDeadline deadline={deadline} />
+          </ListItemText>
+        </>
+      }
+      statusSlot={
+        <TaskItemBaseBadge taskId={id} deadline={deadline} status={status} />
+      }
+      commentsModalTriggerSlot={
+        <ItemBaseCommentsButton
+          commentsCount={commentsCount}
+          onPress={() => onTaskCommentsModalOpenChange(true)}
+        />
+      }
+      menuTriggerSlot={
+        <TaskItemActionMenuTrigger taskId={id} taskStatus={status} />
+      }
+    />
+  );
+});

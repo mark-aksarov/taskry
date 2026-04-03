@@ -1,6 +1,6 @@
 import { mockedTaskList } from "@/mocks/tasks";
 import { UserTaskListItem } from "../UserTaskListItem";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withMockedTaskItemWrapper } from "@/components/tasks/TaskItemWrapper/__stories__";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksProvider/__stories__";

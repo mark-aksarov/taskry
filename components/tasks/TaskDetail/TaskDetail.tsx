@@ -16,7 +16,6 @@ import { ImageContainer } from "@/components/common/ImageContainer";
 import { CreateSubtasksButton } from "@/components/subtasks/CreateSubtaskButton";
 
 interface TaskDetailProps {
-  id: number;
   title: string;
   assignee?: {
     id: string;
@@ -43,7 +42,6 @@ interface TaskDetailProps {
 }
 
 export function TaskDetail({
-  id,
   title,
   assignee,
   creator,

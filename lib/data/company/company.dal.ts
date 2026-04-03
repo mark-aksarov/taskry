@@ -86,6 +86,8 @@ export const updateCompany = async (input: UpdateCompanyInputDTO) => {
     ) {
       throw new NotFoundError("Company not found.", "companyNotFound");
     }
+
+    throw error;
   }
 };
 

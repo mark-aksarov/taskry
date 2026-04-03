@@ -11,14 +11,12 @@ import { ProfileNavigationLarge } from "@/components/users/ProfileNavigationLarg
 
 interface ProfilePageProps {
   userId: string;
-  userFullName: string;
   userDetailContainer: React.ReactNode;
   userDetailHeaderContainer: React.ReactNode;
 }
 
 export function ProfilePage({
   userId,
-  userFullName,
   userDetailContainer,
   userDetailHeaderContainer,
 }: ProfilePageProps) {
@@ -31,9 +29,7 @@ export function ProfilePage({
         userDetailHeaderContainer={userDetailHeaderContainer}
         navigationLarge={
           <ProfileNavigationLarge
-            profileActions={
-              <ProfileActions userId={userId} userFullName={userFullName} />
-            }
+            profileActions={<ProfileActions userId={userId} />}
           />
         }
       />
@@ -47,7 +43,7 @@ export function ProfilePage({
 
         <div className="flex flex-col">{userDetailHeaderContainer}</div>
         <Card className="flex flex-col p-1.5">
-          <ProfileActions userId={userId} userFullName={userFullName} />
+          <ProfileActions userId={userId} />
         </Card>
         <Card className="flex flex-col">{userDetailContainer}</Card>
       </PageGrid>

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CompanyListItem } from "../CompanyListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateCompanyProvider } from "../../UpdateCompanyProvider/__stories__";

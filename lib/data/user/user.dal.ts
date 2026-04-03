@@ -128,7 +128,7 @@ export const getUserSummaries = cache(async (): Promise<UserSummaryDTO[]> => {
     user: { workspaceId },
   } = await requireSession();
 
-  let where = { workspaceId };
+  const where = { workspaceId };
 
   const users = await prisma.user.findMany({
     where,

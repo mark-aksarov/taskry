@@ -1,7 +1,6 @@
 "use client";
 
-import { notFound } from "next/navigation";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { UpdateProjectContext } from "../UpdateProjectContext";
 import { updateProject } from "@/lib/actions/project/updateProject";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";

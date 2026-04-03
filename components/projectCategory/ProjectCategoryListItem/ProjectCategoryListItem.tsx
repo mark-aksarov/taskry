@@ -33,7 +33,10 @@ export function ProjectCategoryListItem(props: ProjectCategoryListItemProps) {
 }
 
 const ProjectCategoryListItemInner = memo(
-  ({ id, name }: ProjectCategoryListItemProps) => {
+  function ProjectCategoryListItemInner({
+    id,
+    name,
+  }: ProjectCategoryListItemProps) {
     const t = useTranslations("projectCategories.ProjectCategoryListItem");
 
     return (

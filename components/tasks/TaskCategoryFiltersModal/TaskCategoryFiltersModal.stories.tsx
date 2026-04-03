@@ -3,7 +3,7 @@ import {
   withModalManagerProvider,
 } from "@/components/common/ModalManagerContext/__stories__";
 
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskCategoryFiltersForm } from "../TaskCategoryFiltersForm";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { TaskCategoryFiltersModal } from "./TaskCategoryFiltersModal";

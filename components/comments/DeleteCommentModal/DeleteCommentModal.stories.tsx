@@ -3,7 +3,7 @@ import {
   withModalManagerProvider,
 } from "@/components/common/ModalManagerContext/__stories__";
 
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DeleteCommentModal } from "../DeleteCommentModal";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withCommentFormProvider } from "../CommentForm/__stories__";

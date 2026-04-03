@@ -1,7 +1,7 @@
 import { mockedUserList } from "@/mocks/users";
 import { UserGridMobile } from "../UserGridMobile";
 import { UserGridItemMobile } from "../../UserGridItem";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserGridItemMobileStory } from "../../UserGridItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { MockedUserItemWrapper } from "../../UserItemWrapper/__stories__";

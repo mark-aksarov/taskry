@@ -37,12 +37,8 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedTaskList.map((task) => (
-      <MockedTaskItemWrapper>
-        <TaskGridItemMobile
-          {...TaskGridItemMobileStory.args}
-          key={task.id}
-          {...task}
-        />
+      <MockedTaskItemWrapper key={task.id}>
+        <TaskGridItemMobile {...TaskGridItemMobileStory.args} {...task} />
       </MockedTaskItemWrapper>
     )),
   },

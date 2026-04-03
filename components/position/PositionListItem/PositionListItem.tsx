@@ -32,23 +32,24 @@ export function PositionListItem(props: PositionListItemProps) {
   );
 }
 
-const PositionListItemInner = memo(
-  ({ id, name }: Omit<PositionListItemProps, "deletePosition">) => {
-    const t = useTranslations("positions.PositionListItem");
+const PositionListItemInner = memo(function PositionListItemInner({
+  id,
+  name,
+}: Omit<PositionListItemProps, "deletePosition">) {
+  const t = useTranslations("positions.PositionListItem");
 
-    return (
-      <ListItem
-        data-test="position-list-item"
-        className="flex w-full items-center gap-4"
-      >
-        <PositionItemCheckbox id={id} />
-        <ListItemInfo>
-          <ListItemTitle>{name}</ListItemTitle>
-          <ListItemText>{t("name")}</ListItemText>
-        </ListItemInfo>
+  return (
+    <ListItem
+      data-test="position-list-item"
+      className="flex w-full items-center gap-4"
+    >
+      <PositionItemCheckbox id={id} />
+      <ListItemInfo>
+        <ListItemTitle>{name}</ListItemTitle>
+        <ListItemText>{t("name")}</ListItemText>
+      </ListItemInfo>
 
-        <PositionListItemActionMenuTrigger positionId={id} />
-      </ListItem>
-    );
-  },
-);
+      <PositionListItemActionMenuTrigger positionId={id} />
+    </ListItem>
+  );
+});

@@ -108,6 +108,8 @@ export const updateSubtask = async (input: UpdateSubtaskInputDTO) => {
     ) {
       throw new NotFoundError("Subtask not found", "subtaskNotFound");
     }
+
+    throw error;
   }
 };
 

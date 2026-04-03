@@ -39,7 +39,7 @@ export function CustomerGridItemMobile(props: BaseCustomerItemProps) {
 }
 
 export const CustomerGridItemMobileInner = memo(
-  ({
+  function CustomerGridItemMobileInner({
     id,
     fullName,
     email,
@@ -47,7 +47,7 @@ export const CustomerGridItemMobileInner = memo(
     publicLink,
     imageUrl,
     company,
-  }: BaseCustomerItemProps) => {
+  }: BaseCustomerItemProps) {
     const t = useTranslations("customers.CustomerGridItem");
 
     const customerImg = (

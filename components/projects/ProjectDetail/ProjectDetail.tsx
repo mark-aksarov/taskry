@@ -14,7 +14,6 @@ import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
 
 interface ProjectDetailProps {
-  id: number;
   title: string;
   creator?: {
     id: string;
@@ -36,7 +35,6 @@ interface ProjectDetailProps {
 }
 
 export function ProjectDetail({
-  id,
   title,
   creator,
   deadline,

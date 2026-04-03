@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskCategoryList } from "../TaskCategoryList";
 import { TaskCategoryListItem } from "../../TaskCategoryListItem";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";

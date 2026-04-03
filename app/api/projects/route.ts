@@ -5,10 +5,10 @@ import {
 
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { getProjectSummaries } from "@/lib/data/project/project.dal";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   // Authorization
   const session = await auth.api.getSession({
     headers: await headers(),

@@ -409,6 +409,8 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
     ) {
       throw new NotFoundError("Task not found.", "taskNotFound");
     }
+
+    throw error;
   }
 };
 

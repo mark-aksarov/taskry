@@ -1,13 +1,14 @@
+import {
+  unauthorized,
+  internalServerError,
+} from "@/lib/utils/routeHandlerErrors";
+
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
-import {
-  internalServerError,
-  unauthorized,
-} from "@/lib/utils/routeHandlerErrors";
+import { NextResponse } from "next/server";
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   // Authorization
   const session = await auth.api.getSession({
     headers: await headers(),

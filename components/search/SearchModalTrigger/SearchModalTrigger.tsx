@@ -29,8 +29,8 @@ export function SearchModalTrigger() {
 
   const isDisabled = isFilteringPending;
 
-  let { focusProps, isFocusVisible } = useFocusRing();
-  let { pressProps } = usePress({
+  const { focusProps, isFocusVisible } = useFocusRing();
+  const { pressProps } = usePress({
     onPress: () => {
       onOpenChange(true);
     },

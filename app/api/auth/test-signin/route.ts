@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   try {
     const { email, password } = await req.json();
 
-    const response = await auth.api.signInEmail({
+    await auth.api.signInEmail({
       body: {
         email,
         password,

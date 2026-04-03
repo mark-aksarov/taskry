@@ -51,127 +51,117 @@ export function TaskListItem(props: Props) {
   );
 }
 
-export const TaskListItemInner = memo(
-  ({
-    id,
-    title,
-    deadline,
-    assignee,
-    category,
-    project,
-    commentsCount,
-    status,
-    showCheckbox,
-  }: Props) => {
-    const t = useTranslations("tasks.TaskListItem");
+export const TaskListItemInner = memo(function TaskListItemInner({
+  id,
+  title,
+  deadline,
+  assignee,
+  category,
+  project,
+  commentsCount,
+  status,
+  showCheckbox,
+}: Props) {
+  const t = useTranslations("tasks.TaskListItem");
 
-    const assigneeImg = (
-      <ItemBaseUserImageContainer
-        user={assignee}
-        className="h-9 w-9"
-        width={36}
-        height={36}
-      />
-    );
+  const assigneeImg = (
+    <ItemBaseUserImageContainer
+      user={assignee}
+      className="h-9 w-9"
+      width={36}
+      height={36}
+    />
+  );
 
-    const { onOpenChange: onTaskDetailModalOpenChange } =
-      useModal("taskDetail");
-    const { onOpenChange: onUserDetailModalOpenChange } =
-      useModal("userDetail");
-    const { onOpenChange: onProjectDetailModalOpenChange } =
-      useModal("projectDetail");
-    const { onOpenChange: onTaskCommentsModalOpenChange } =
-      useModal("taskComments");
+  const { onOpenChange: onTaskDetailModalOpenChange } = useModal("taskDetail");
+  const { onOpenChange: onUserDetailModalOpenChange } = useModal("userDetail");
+  const { onOpenChange: onProjectDetailModalOpenChange } =
+    useModal("projectDetail");
+  const { onOpenChange: onTaskCommentsModalOpenChange } =
+    useModal("taskComments");
 
-    return (
-      <TaskListItemLayout
-        id={id}
-        checkboxSlot={
-          showCheckbox ? (
-            <TaskItemCheckbox id={id} status={status} />
-          ) : undefined
-        }
-        mainSlot={
-          <>
-            <ListItemTitleButton
-              onPress={() => onTaskDetailModalOpenChange(true)}
+  return (
+    <TaskListItemLayout
+      id={id}
+      checkboxSlot={
+        showCheckbox ? <TaskItemCheckbox id={id} status={status} /> : undefined
+      }
+      mainSlot={
+        <>
+          <ListItemTitleButton
+            onPress={() => onTaskDetailModalOpenChange(true)}
+          >
+            {title}
+          </ListItemTitleButton>
+
+          <ListItemText>
+            <ItemBaseDeadline deadline={deadline} />
+          </ListItemText>
+        </>
+      }
+      assigneeImgSlot={
+        <>
+          {assignee ? (
+            <ItemBaseDetailButton
+              onPress={() => onUserDetailModalOpenChange(true)}
             >
-              {title}
+              {assigneeImg}
+            </ItemBaseDetailButton>
+          ) : (
+            assigneeImg
+          )}
+        </>
+      }
+      assigneeSlot={
+        <>
+          {assignee ? (
+            <ListItemTitleButton
+              onPress={() => onUserDetailModalOpenChange(true)}
+            >
+              {assignee.fullName}
             </ListItemTitleButton>
+          ) : (
+            <ListItemTitle>{t("noAssignee")}</ListItemTitle>
+          )}
 
-            <ListItemText>
-              <ItemBaseDeadline deadline={deadline} />
-            </ListItemText>
-          </>
-        }
-        assigneeImgSlot={
-          <>
-            {assignee ? (
-              <ItemBaseDetailButton
-                onPress={() => onUserDetailModalOpenChange(true)}
-              >
-                {assigneeImg}
-              </ItemBaseDetailButton>
-            ) : (
-              assigneeImg
-            )}
-          </>
-        }
-        assigneeSlot={
-          <>
-            {assignee ? (
-              <ListItemTitleButton
-                onPress={() => onUserDetailModalOpenChange(true)}
-              >
-                {assignee.fullName}
-              </ListItemTitleButton>
-            ) : (
-              <ListItemTitle>{t("noAssignee")}</ListItemTitle>
-            )}
+          <ListItemText>{t("assignee")}</ListItemText>
+        </>
+      }
+      categorySlot={
+        <>
+          <ListItemTitle>
+            {category ? category.name : t("noCategory")}
+          </ListItemTitle>
+          <ListItemText>{t("category")}</ListItemText>
+        </>
+      }
+      projectSlot={
+        <>
+          {project ? (
+            <ListItemTitleButton
+              onPress={() => onProjectDetailModalOpenChange(true)}
+            >
+              {project.title}
+            </ListItemTitleButton>
+          ) : (
+            <ListItemTitle>{t("noProject")}</ListItemTitle>
+          )}
 
-            <ListItemText>{t("assignee")}</ListItemText>
-          </>
-        }
-        categorySlot={
-          <>
-            <ListItemTitle>
-              {category ? category.name : t("noCategory")}
-            </ListItemTitle>
-            <ListItemText>{t("category")}</ListItemText>
-          </>
-        }
-        projectSlot={
-          <>
-            {project ? (
-              <ListItemTitleButton
-                onPress={() => onProjectDetailModalOpenChange(true)}
-              >
-                {project.title}
-              </ListItemTitleButton>
-            ) : (
-              <ListItemTitle>{t("noProject")}</ListItemTitle>
-            )}
-
-            <ListItemText>{t("project")}</ListItemText>
-          </>
-        }
-        statusSlot={
-          <TaskItemBaseBadge taskId={id} deadline={deadline} status={status} />
-        }
-        commentsModalTriggerSlot={
-          <ItemBaseCommentsButton
-            commentsCount={commentsCount}
-            onPress={() => onTaskCommentsModalOpenChange(true)}
-          />
-        }
-        menuTriggerSlot={
-          <TaskItemActionMenuTrigger
-            taskId={id}
-            taskTitle={title}
-            taskStatus={status}
-          />
-        }
-      />
-    );
-  },
-);
+          <ListItemText>{t("project")}</ListItemText>
+        </>
+      }
+      statusSlot={
+        <TaskItemBaseBadge taskId={id} deadline={deadline} status={status} />
+      }
+      commentsModalTriggerSlot={
+        <ItemBaseCommentsButton
+          commentsCount={commentsCount}
+          onPress={() => onTaskCommentsModalOpenChange(true)}
+        />
+      }
+      menuTriggerSlot={
+        <TaskItemActionMenuTrigger taskId={id} taskStatus={status} />
+      }
+    />
+  );
+});

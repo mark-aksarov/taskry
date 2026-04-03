@@ -49,7 +49,7 @@ export function ProjectGridItemLarge(props: Props) {
 }
 
 export const ProjectGridItemLargeInner = memo(
-  ({
+  function ProjectGridItemLargeInner({
     id,
     title,
     deadline,
@@ -58,7 +58,7 @@ export const ProjectGridItemLargeInner = memo(
     status,
     tasksTotal,
     tasksCompleted,
-  }: Props) => {
+  }: Props) {
     const { onOpenChange: onProjectDetailModalOpenChange } =
       useModal("projectDetail");
     const { onOpenChange: onUserDetailModalOpenChange } =

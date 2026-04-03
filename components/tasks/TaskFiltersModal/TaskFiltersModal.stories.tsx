@@ -3,10 +3,10 @@ import {
   withModalManagerProvider,
 } from "@/components/common/ModalManagerContext/__stories__";
 
-import { Meta, StoryObj } from "@storybook/react";
 import { mockedUserSummaries } from "@/mocks/users";
 import { TaskFiltersForm } from "../TaskFiltersForm";
 import { TaskFiltersModal } from "./TaskFiltersModal";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedProjectSummaries } from "@/mocks/projects";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";

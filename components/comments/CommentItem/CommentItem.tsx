@@ -34,72 +34,76 @@ export function CommentItem(props: CommentItemProps) {
   );
 }
 
-const CommentItemInner = memo(
-  ({ id, content, createdAt, canEdit, sender }: CommentItemProps) => {
-    const t = useTranslations("comments.CommentItem");
-    const locale = useLocale();
+const CommentItemInner = memo(function CommentItemInner({
+  id,
+  content,
+  createdAt,
+  canEdit,
+  sender,
+}: CommentItemProps) {
+  const t = useTranslations("comments.CommentItem");
+  const locale = useLocale();
 
-    // use useFormatter to format the date according to the user's locale
-    const format = useFormatter();
+  // use useFormatter to format the date according to the user's locale
+  const format = useFormatter();
 
-    const formattedDate = format.dateTime(new Date(createdAt), {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: locale === "en" ? true : false,
-    });
+  const formattedDate = format.dateTime(new Date(createdAt), {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: locale === "en" ? true : false,
+  });
 
-    const { isGuest } = useCurrentUser();
+  const { isGuest } = useCurrentUser();
 
-    return (
-      <CommentItemLayout
-        senderImageSlot={
-          <>
-            {sender?.imageUrl ? (
-              <Link href={`/team/${sender.id}`}>
-                <ImageContainer className="h-9 w-9">
-                  <Image
-                    src={sender.imageUrl}
-                    alt={sender.fullName}
-                    width={36}
-                    height={36}
-                  />
-                </ImageContainer>
-              </Link>
+  return (
+    <CommentItemLayout
+      senderImageSlot={
+        <>
+          {sender?.imageUrl ? (
+            <Link href={`/team/${sender.id}`}>
+              <ImageContainer className="h-9 w-9">
+                <Image
+                  src={sender.imageUrl}
+                  alt={sender.fullName}
+                  width={36}
+                  height={36}
+                />
+              </ImageContainer>
+            </Link>
+          ) : (
+            <UnknownUser className="h-9 w-9" />
+          )}
+        </>
+      }
+      senderNameAndDateSlot={
+        <CommentItemInfo>
+          <CommentItemTitle>
+            {!sender ? (
+              t("unknownUser")
             ) : (
-              <UnknownUser className="h-9 w-9" />
+              <Link href={`/team/${sender.id}`}>{sender.fullName}</Link>
             )}
-          </>
-        }
-        senderNameAndDateSlot={
-          <CommentItemInfo>
-            <CommentItemTitle>
-              {!sender ? (
-                t("unknownUser")
-              ) : (
-                <Link href={`/team/${sender.id}`}>{sender.fullName}</Link>
-              )}
-            </CommentItemTitle>
-            <CommentItemDate>{formattedDate}</CommentItemDate>
-          </CommentItemInfo>
-        }
-        contentSlot={
-          <>
-            <CommentItemText>{content}</CommentItemText>
-          </>
-        }
-        menuTriggerSlot={
-          (canEdit || isGuest) && (
-            <CommentItemActionMenuTrigger
-              commentId={id}
-              commentContent={content}
-              className="-mr-2"
-            />
-          )
-        }
-      />
-    );
-  },
-);
+          </CommentItemTitle>
+          <CommentItemDate>{formattedDate}</CommentItemDate>
+        </CommentItemInfo>
+      }
+      contentSlot={
+        <>
+          <CommentItemText>{content}</CommentItemText>
+        </>
+      }
+      menuTriggerSlot={
+        (canEdit || isGuest) && (
+          <CommentItemActionMenuTrigger
+            commentId={id}
+            commentContent={content}
+            className="-mr-2"
+          />
+        )
+      }
+    />
+  );
+});

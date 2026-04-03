@@ -1,7 +1,7 @@
 import { ProjectList } from "../ProjectList";
 import { mockedProjectList } from "@/mocks/projects";
-import type { Meta, StoryObj } from "@storybook/react";
 import { ProjectListItem } from "../../ProjectListItem";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectListItemStory } from "../../ProjectListItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { MockedProjectItemWrapper } from "../../ProjectItemWrapper/__stories__";
@@ -34,12 +34,8 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     children: mockedProjectList.map((project) => (
-      <MockedProjectItemWrapper>
-        <ProjectListItem
-          key={project.id}
-          {...ProjectListItemStory.args}
-          {...project}
-        />
+      <MockedProjectItemWrapper key={project.id}>
+        <ProjectListItem {...ProjectListItemStory.args} {...project} />
       </MockedProjectItemWrapper>
     )),
   },

@@ -1,7 +1,7 @@
 import { CommentList } from "../CommentList";
 import { CommentItem } from "../../CommentItem";
-import { Meta, StoryObj } from "@storybook/react";
 import { mockedCommentList } from "@/mocks/comments";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CommentItemStory } from "../../CommentItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withSendCommentProvider } from "../../SendCommentProvider/__stories__";
