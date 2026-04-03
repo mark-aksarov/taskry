@@ -1,14 +1,14 @@
 {
   "UpdateSubtaskForm": {
-    "submitButtonLabel": "Edit Subtask",
+    "submitButtonLabel": "Edit subtask",
     "successMessage": "Subtask updated successfully"
   },
   "CreateSubtaskForm": {
-    "submitButtonLabel": "Add Subtask",
+    "submitButtonLabel": "Add subtask",
     "successMessage": "Subtask created successfully"
   },
   "DeleteSubtaskModal": {
-    "heading": "Delete Subtask",
+    "heading": "Delete subtask",
     "text": "Are you sure you want to delete subtask <strong>«{text}»</strong>?",
     "deleteButton": "Delete",
     "cancelButton": "Cancel",
@@ -16,8 +16,8 @@
   },
   "SubtaskActionMenuTrigger": {
     "edit": "Edit",
-    "done": "Mark as Done",
-    "undone": "Mark as Undone",
+    "done": "Mark as done",
+    "undone": "Mark as undone",
     "delete": "Delete",
     "toggleSuccess": "Subtask updated successfully"
   },
@@ -33,18 +33,18 @@
     }
   },
   "SubtaskFormDialogHeader": {
-    "heading": "New Subtask"
+    "heading": "New subtask"
   },
   "CreateSubtaskModal": {
-    "heading": "New Subtask"
+    "heading": "New subtask"
   },
   "UpdateSubtaskModal": {
-    "heading": "Edit Subtask"
+    "heading": "Edit subtask"
   },
   "CreateSubtaskDialogAddButton": {
-    "label": "Add Subtask"
+    "label": "Add subtask"
   },
   "CreateSubtasksButton": {
-    "label": "New Subtask"
+    "label": "New subtask"
   }
 }

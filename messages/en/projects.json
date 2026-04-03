@@ -29,15 +29,15 @@
     "description": "No projects match the selected filters. Try changing or resetting the filters."
   },
   "UpdateProjectForm": {
-    "submitButtonLabel": "Update Project",
+    "submitButtonLabel": "Update project",
     "successMessage": "Project updated successfully."
   },
   "CreateProjectForm": {
-    "submitButtonLabel": "Create Project",
+    "submitButtonLabel": "Create project",
     "successMessage": "Project created successfully."
   },
   "ProjectDetailCard": {
-    "title": "Project Information"
+    "title": "Project information"
   },
   "ProjectDetailActions": {
     "delete": "Delete project",
@@ -45,29 +45,29 @@
     "comments": "Comments"
   },
   "TotalProjectsCard": {
-    "text": "Total Projects"
+    "text": "Total projects"
   },
   "ProjectSortingMenuTrigger": {
-    "byTitle": "By Title",
-    "byDeadline": "By Deadline",
-    "byStatus": "By Status",
+    "byTitle": "By title",
+    "byDeadline": "By deadline",
+    "byStatus": "By status",
     "byCreatedAt": "By creation date"
   },
   "CreateProjectModal": {
-    "title": "New Project"
+    "title": "New project"
   },
   "UpdateProjectModal": {
-    "title": "Edit Project"
+    "title": "Edit project"
   },
   "ProjectFiltersModal": {
-    "title": "Project Filters"
+    "title": "Project filters"
   },
   "ProjectActionsMenuTrigger": {
     "dialogHeading": "Actions",
     "delete": "Delete",
-    "pending": "Mark as Pending",
-    "active": "Mark as Active",
-    "completed": "Mark as Completed"
+    "pending": "Mark as pending",
+    "active": "Mark as active",
+    "completed": "Mark as completed"
   },
   "ProjectManageMenuTrigger": {
     "categories": "Categories"
@@ -109,8 +109,8 @@
     "label": "Creator"
   },
   "CreateProjectMenuTrigger": {
-    "dialogHeading": "Create New",
-    "label": "Create New",
+    "dialogHeading": "Create new",
+    "label": "Create new",
     "items": {
       "project": "Project",
       "category": "Category"
@@ -134,20 +134,20 @@
   "ProjectItemActionMenuTrigger": {
     "edit": "Edit",
     "delete": "Delete",
-    "markPending": "Mark as Pending",
-    "markCompleted": "Mark as Completed",
-    "markActive": "Mark as Active",
+    "markPending": "Mark as pending",
+    "markCompleted": "Mark as completed",
+    "markActive": "Mark as active",
     "details": "Open details"
   },
   "DeleteProjectModal": {
-    "heading": "Delete Project",
+    "heading": "Delete project",
     "text": "Are you sure you want to delete <strong>«{name}»</strong>? All contents will be permanently removed, and all related tasks will also be deleted.",
     "deleteButton": "Delete",
     "cancelButton": "Cancel",
     "successMessage": "Project deleted successfully"
   },
   "DeleteProjectsModal": {
-    "heading": "Delete Projects",
+    "heading": "Delete projects",
     "text": "Are you sure you want to delete <strong>{count} projects</strong>? All contents will be permanently removed, and all related tasks will also be deleted.",
     "deleteButton": "Delete",
     "cancelButton": "Cancel",
@@ -206,7 +206,7 @@
     "projectsFound": "{count, plural, one {# project found} other {# projects found}}"
   },
   "ProjectDetailStatusMenuTrigger": {
-    "dialogHeading": "Project Status",
+    "dialogHeading": "Project status",
     "items": {
       "pending": "Pending",
       "active": "Active",
@@ -214,7 +214,7 @@
     }
   },
   "ProjectDetailModal": {
-    "dialogHeading": "Project Details",
-    "openInFullPage": "Open in Full Page"
+    "dialogHeading": "Project details",
+    "openInFullPage": "Open in full page"
   }
 }

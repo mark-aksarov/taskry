@@ -7,11 +7,11 @@
     "label": "New position"
   },
   "CreatePositionForm": {
-    "submitButtonLabel": "Create Position",
+    "submitButtonLabel": "Create position",
     "successMessage": "Position created successfully"
   },
   "CreatePositionModal": {
-    "title": "New Position"
+    "title": "New position"
   },
   "PositionNameTextField": {
     "label": "Name",

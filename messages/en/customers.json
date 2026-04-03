@@ -22,15 +22,15 @@
     "notFound": "Сustomer not found. It may have been deleted by another user."
   },
   "UpdateCustomerForm": {
-    "submitButtonLabel": "Update Customer",
+    "submitButtonLabel": "Update customer",
     "successMessage": "Customer updated successfully"
   },
   "CreateCustomerForm": {
-    "submitButtonLabel": "Create Customer",
+    "submitButtonLabel": "Create customer",
     "successMessage": "Customer created successfully"
   },
   "TotalCustomersCard": {
-    "text": "Total Customers"
+    "text": "Total customers"
   },
   "CustomerDetailActions": {
     "delete": "Delete customer",
@@ -57,13 +57,13 @@
     "noCompany": "Company not specified"
   },
   "CreateCustomerModal": {
-    "title": "New Customer"
+    "title": "New customer"
   },
   "UpdateCustomerModal": {
-    "title": "Edit Customer"
+    "title": "Edit customer"
   },
   "CustomerDetailCard": {
-    "title": "Customer Information"
+    "title": "Customer information"
   },
   "CustomerFullNameTextField": {
     "label": "Full name",
@@ -96,7 +96,7 @@
     }
   },
   "CustomerDetailModal": {
-    "dialogHeading": "Customer Details",
+    "dialogHeading": "Customer details",
     "openInFullPage": "Open in Full Page"
   },
   "CustomerItemActionMenuTrigger": {
@@ -141,15 +141,15 @@
     "customersFound": "{count, plural, one {# customer found} other {# customers found}}"
   },
   "CustomerFiltersModal": {
-    "heading": "Customer Filters"
+    "heading": "Customer filters"
   },
   "CustomerActionsMenuTrigger": {
     "dialogHeading": "Actions",
     "delete": "Delete"
   },
   "CreateCustomerMenuTrigger": {
-    "dialogHeading": "Create New",
-    "label": "Create New",
+    "dialogHeading": "Create new",
+    "label": "Create new",
     "items": {
       "customer": "Customer",
       "company": "Company"

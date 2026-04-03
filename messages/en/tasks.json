@@ -15,15 +15,15 @@
     "notFound": "Task not found. It may have been deleted by another user."
   },
   "UpdateTaskForm": {
-    "submitButtonLabel": "Update Task",
+    "submitButtonLabel": "Update task",
     "successMessage": "Task updated successfully."
   },
   "CreateTaskForm": {
-    "submitButtonLabel": "Create Task",
+    "submitButtonLabel": "Create task",
     "successMessage": "Task created successfully."
   },
   "TaskDetailCard": {
-    "title": "Task Information"
+    "title": "Task information"
   },
   "TaskDetailActions": {
     "delete": "Delete task",
@@ -31,7 +31,7 @@
     "comments": "Comments"
   },
   "AssignedTasksSectionHeading": {
-    "text": "Assigned Tasks"
+    "text": "Assigned tasks"
   },
   "TasksEmptySection": {
     "heading": "No tasks",
@@ -39,7 +39,7 @@
     "button": "New task"
   },
   "TotalTasksCard": {
-    "text": "Total Tasks"
+    "text": "Total tasks"
   },
   "TaskGridItemProgress": {
     "ariaLabel": "task progress"
@@ -53,69 +53,66 @@
     "noProject": "No project"
   },
   "TaskSortingMenuTrigger": {
-    "byTitle": "By Title",
-    "byDeadline": "By Deadline",
-    "byStatus": "By Status",
+    "byTitle": "By title",
+    "byDeadline": "By deadline",
+    "byStatus": "By status",
     "byCreatedAt": "By creation date"
   },
   "TaskFiltersModal": {
-    "heading": "Task Filters"
+    "heading": "Task filters"
   },
   "TaskActionsMenuTrigger": {
     "dialogHeading": "Actions",
     "delete": "Delete",
-    "pending": "Mark as Pending",
-    "active": "Mark as Active",
-    "completed": "Mark as Completed"
+    "pending": "Mark as pending",
+    "active": "Mark as active",
+    "completed": "Mark as completed"
   },
   "TaskItemActionMenuTrigger": {
     "edit": "Edit",
     "delete": "Delete",
-    "markPending": "Mark as Pending",
-    "markCompleted": "Mark as Completed",
-    "markActive": "Mark as Active",
+    "markPending": "Mark as pending",
+    "markCompleted": "Mark as completed",
+    "markActive": "Mark as active",
     "details": "Open details"
   },
   "CreateTaskMenuTrigger": {
     "label": "Create new",
-    "dialogHeading": "Create New",
+    "dialogHeading": "Create new",
     "items": {
       "task": "Task",
       "category": "Category"
     }
   },
-  "CreateTaskModalTrigger": {
-    "label": "Create task"
-  },
   "DeleteTaskModal": {
-    "heading": "Delete Task",
+    "heading": "Delete task",
     "text": "Are you sure you want to delete <strong>«{name}»</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
     "cancelButton": "Cancel",
     "successMessage": "Task deleted successfully"
   },
   "DeleteTasksModal": {
-    "heading": "Delete Tasks",
+    "heading": "Delete tasks",
     "text": "Are you sure you want to delete <strong>{count} tasks</strong>? All contents will be permanently removed.",
     "deleteButton": "Delete",
     "cancelButton": "Cancel",
     "successMessage": "Tasks deleted successfully"
   },
   "CreateTaskModal": {
-    "title": "New Task"
+    "title": "New task"
   },
   "UpdateTaskModal": {
-    "title": "Edit Task"
+    "title": "Edit task"
   },
   "TaskCommentsModal": {
-    "title": "Task Comments"
+    "title": "Task comments"
   },
   "CreateTaskModalTrigger": {
-    "label": "New Task"
+    "label": "New task"
   },
   "TaskDetailModal": {
-    "dialogHeading": "Task Details",
-    "openInFullPage": "Open in Full Page"
+    "dialogHeading": "Task details",
+    "openInFullPage": "Open in full page"
   },
   "OnlyMyTasksSwitch": {
     "text": "Show only my tasks"

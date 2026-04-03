@@ -10,10 +10,10 @@
     "notFound": "User not found. It may have been deleted by another user."
   },
   "ChangePasswordModal": {
-    "title": "Change Password"
+    "title": "Change password"
   },
   "ChangePasswordForm": {
-    "submitButtonLabel": "Change Password",
+    "submitButtonLabel": "Change password",
     "successMessage": "Password changed successfully"
   },
   "UpdateUserForm": {
@@ -21,11 +21,11 @@
     "successMessage": "User updated successfully"
   },
   "CreateUserForm": {
-    "submitButtonLabel": "Create User",
+    "submitButtonLabel": "Create user",
     "successMessage": "User created successfully"
   },
   "CreateUserModal": {
-    "title": "New User"
+    "title": "New user"
   },
   "UpdateUserModal": {
     "title": "Edit user"
@@ -78,7 +78,7 @@
     }
   },
   "TotalUsersCard": {
-    "text": "Total Users"
+    "text": "Total users"
   },
   "UserSortingMenuTrigger": {
     "byFullName": "By full name",
@@ -92,12 +92,12 @@
     "changePasswordSuccessMessage": "Password changed successfully"
   },
   "ProfileNavigationLarge": {
-    "userInformation": "User Information",
-    "assignedTasks": "Assigned Tasks"
+    "userInformation": "User information",
+    "assignedTasks": "Assigned tasks"
   },
   "ProfileNavigationMobile": {
     "info": "Info",
-    "assignedTasks": "Assigned Tasks"
+    "assignedTasks": "Assigned tasks"
   },
   "UserDetail": {
     "bio": "Bio",
@@ -124,8 +124,8 @@
     "noPosition": "No position"
   },
   "UserDetailModal": {
-    "dialogHeading": "User Details",
-    "openInFullPage": "Open in Full Page"
+    "dialogHeading": "User details",
+    "openInFullPage": "Open in full page"
   },
   "UserFiltersFormRoleCheckboxGroup": {
     "label": "Role",
@@ -175,12 +175,12 @@
     "noPosition": "No position"
   },
   "UserNavigationLarge": {
-    "userInformation": "User Information",
-    "assignedTasks": "Assigned Tasks"
+    "userInformation": "User information",
+    "assignedTasks": "Assigned tasks"
   },
   "UserNavigationMobile": {
     "info": "Info",
-    "assignedTasks": "Assigned Tasks"
+    "assignedTasks": "Assigned tasks"
   },
   "UserTaskListItem": {
     "checkboxAriaLabel": "task checkbox",
@@ -194,11 +194,11 @@
     "title": "Tasks"
   },
   "UserFiltersModal": {
-    "heading": "User Filters"
+    "heading": "User filters"
   },
   "CreateUserMenuTrigger": {
-    "dialogHeading": "Create New",
-    "label": "Create New",
+    "dialogHeading": "Create new",
+    "label": "Create new",
     "items": {
       "user": "User",
       "position": "Position"
@@ -218,7 +218,7 @@
     "usersFound": "{count, plural, one {# user found} other {# users found}}"
   },
   "UserPositionFiltersModal": {
-    "heading": "Position Filters",
+    "heading": "Position filters",
     "label": "Position"
   }
 }
