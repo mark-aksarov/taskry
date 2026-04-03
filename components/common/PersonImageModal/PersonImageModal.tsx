@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useIsMd } from "@/lib/hooks/useIsMd";
 import { Modal } from "@/components/ui/Modal";
 import { UploadPersonImageDialog } from "./UploadPersonImageDialog";
@@ -22,15 +23,13 @@ export function PersonImageModal({
 }: PersonImageModalProps) {
   const isMd = useIsMd();
 
-  const handleOpenChange = (isOpen: boolean) => {
+  useEffect(() => {
     if (!isOpen) {
       setTimeout(() => {
         onImageFileChange(null);
       }, overlayTransitionDuration);
     }
-
-    onOpenChange(isOpen);
-  };
+  }, [isOpen]);
 
   return (
     <Modal
@@ -43,7 +42,7 @@ export function PersonImageModal({
       }
       isOpen={isOpen}
       isDismissable
-      onOpenChange={handleOpenChange}
+      onOpenChange={onOpenChange}
     >
       {imageFile ? (
         updatePersonImageDialog
