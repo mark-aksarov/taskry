@@ -9,6 +9,7 @@
     "build:no-lint": "next build --no-lint",
     "start": "next start",
     "lint": "next lint",
+    "type-check": "tsc --noEmit",
     "prisma:generate": "dotenv -e .env.development -- prisma generate",
     "migrate:dev:reset": "dotenv -e .env.development -- prisma migrate reset",
     "migrate:dev": "dotenv -e .env.development -- prisma migrate dev",
