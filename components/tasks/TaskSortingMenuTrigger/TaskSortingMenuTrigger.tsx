@@ -41,10 +41,6 @@ export function TaskSortingMenuTrigger({
         <CircleCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {t("byStatus")}
       </Item>
-      <Item textValue={t("byCategory")} key="category">
-        <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth />
-        {t("byCategory")}
-      </Item>
     </SortingMenuTrigger>
   );
 }

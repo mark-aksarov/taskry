@@ -56,7 +56,6 @@
     "byTitle": "By Title",
     "byDeadline": "By Deadline",
     "byStatus": "By Status",
-    "byCategory": "By Category",
     "byCreatedAt": "By creation date"
   },
   "TaskFiltersModal": {
