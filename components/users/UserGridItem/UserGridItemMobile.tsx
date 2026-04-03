@@ -28,7 +28,11 @@ export function UserGridItemMobile(props: BaseUserItemProps) {
   return (
     <UserItemPendingOverlay>
       <div className="relative block">
-        <Link href={`/team/${props.id}`} className="absolute inset-0 z-0" />
+        <Link
+          aria-label={props.fullName}
+          href={`/team/${props.id}`}
+          className="absolute inset-0 z-0"
+        />
         <UserGridItemMobileInner {...props} />
       </div>
     </UserItemPendingOverlay>

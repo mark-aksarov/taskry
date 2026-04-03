@@ -220,5 +220,8 @@
   "UserPositionFiltersModal": {
     "heading": "Position filters",
     "label": "Position"
+  },
+  "UserImageMenuTrigger": {
+    "label": "Profile image menu"
   }
 }

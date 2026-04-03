@@ -101,5 +101,8 @@
   },
   "ManageButtonLarge": {
     "label": "Управление"
+  },
+  "BackButton": {
+    "label": "Назад"
   }
 }

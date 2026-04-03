@@ -103,6 +103,7 @@ export const TaskListItemInner = memo(function TaskListItemInner({
         <>
           {assignee ? (
             <ItemBaseDetailButton
+              aria-label={assignee.fullName}
               onPress={() => onUserDetailModalOpenChange(true)}
             >
               {assigneeImg}

@@ -6,6 +6,7 @@ import { withMockedCustomerItemWrapper } from "../../CustomerItemWrapper/__stori
 import { withDeleteCustomersProvider } from "../../DeleteCustomersProvider/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 
 const meta = {
   title: "components/customers/CustomerGridItemMobile",
@@ -15,6 +16,7 @@ const meta = {
     withDeleteCustomersProvider,
     withSelectedItemsProvider,
     withCurrentUserProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
   globals: {

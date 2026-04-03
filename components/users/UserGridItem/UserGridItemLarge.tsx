@@ -69,7 +69,10 @@ const UserGridItemLargeInner = memo(function UserGridItemLargeInner({
         ) : undefined
       }
       imageSlot={
-        <ItemBaseDetailButton onPress={() => onUserDetailModalOpenChange(true)}>
+        <ItemBaseDetailButton
+          aria-label={fullName}
+          onPress={() => onUserDetailModalOpenChange(true)}
+        >
           {userImg}
         </ItemBaseDetailButton>
       }

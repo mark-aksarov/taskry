@@ -120,6 +120,7 @@ export const ProjectListItemInner = memo(function ProjectListItemInner({
           <>
             {creator ? (
               <ItemBaseDetailButton
+                aria-label={creator.fullName}
                 onPress={() => onUserDetailModalOpenChange(true)}
               >
                 {creatorImg}

@@ -34,7 +34,11 @@ export function ProjectGridItemMobile(props: Props) {
   return (
     <ProjectItemPendingOverlay projectId={props.id}>
       <div className="relative block">
-        <Link href={`/projects/${props.id}`} className="absolute inset-0 z-0" />
+        <Link
+          aria-label={props.title}
+          href={`/projects/${props.id}`}
+          className="absolute inset-0 z-0"
+        />
         <ProjectGridItemMobileInner {...props} />
       </div>
     </ProjectItemPendingOverlay>
@@ -83,7 +87,9 @@ export const ProjectGridItemMobileInner = memo(
         }
         creatorImageSlot={
           creator ? (
-            <Link href={`/team/${creator.id}`}>{creatorImg}</Link>
+            <Link aria-label={creator.fullName} href={`/team/${creator.id}`}>
+              {creatorImg}
+            </Link>
           ) : (
             creatorImg
           )

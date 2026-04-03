@@ -22,7 +22,7 @@ export function CustomerDetailHeader({
   return (
     <CustomerDetailHeaderLayout
       fullName={fullName}
-      imageSlot={<PersonDetailHeaderImage alt={fullName} imageUrl={imageUrl} />}
+      imageSlot={<PersonDetailHeaderImage imageUrl={imageUrl} />}
       companyName={companyName}
     />
   );

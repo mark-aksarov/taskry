@@ -217,5 +217,8 @@
   "UserPositionFiltersModal": {
     "heading": "Фильтры должностей",
     "label": "Должность"
+  },
+  "UserImageMenuTrigger": {
+    "label": "Меню изображения профиля"
   }
 }

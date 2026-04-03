@@ -6,18 +6,22 @@ import { CommentItemStory } from "../../CommentItem/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withSendCommentProvider } from "../../SendCommentProvider/__stories__";
 import { withUpdateCommentProvider } from "../../UpdateCommentProvider/__stories__";
+import { withDeleteCommentProvider } from "../../DeleteCommentProvider/__stories__";
 import { withCommentFormProvider } from "@/components/comments/CommentForm/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 
 const meta = {
   title: "components/comments/CommentList",
   tags: ["!dev"],
   component: CommentList,
   decorators: [
+    withDeleteCommentProvider,
     withUpdateCommentProvider,
     withSendCommentProvider,
     withCommentFormProvider,
     withCurrentUserProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
   parameters: {

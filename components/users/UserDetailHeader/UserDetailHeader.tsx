@@ -22,7 +22,7 @@ export function UserDetailHeader({
   return (
     <UserDetailHeaderLayout
       fullName={fullName}
-      imageSlot={<PersonDetailHeaderImage alt={fullName} imageUrl={imageUrl} />}
+      imageSlot={<PersonDetailHeaderImage imageUrl={imageUrl} />}
       positionName={positionName}
     />
   );

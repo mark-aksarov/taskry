@@ -161,5 +161,11 @@
   },
   "CustomerManageMenuTrigger": {
     "companies": "Companies"
+  },
+  "CustomerImageMenuTrigger": {
+    "label": "Profile image menu"
+  },
+  "PersonDetailHeaderImage": {
+    "imageAlt": "Profile image"
   }
 }

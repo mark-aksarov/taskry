@@ -8,6 +8,7 @@ import { CustomerGridItemMobileStory } from "../../CustomerGridItem/__stories__"
 import { MockedCustomerItemWrapper } from "../../CustomerItemWrapper/__stories__";
 import { withDeleteCustomersProvider } from "../../DeleteCustomersProvider/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 
@@ -20,6 +21,7 @@ const meta = {
     withCurrentUserProvider,
     withViewModeProvider,
     withPageTransitionProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
   globals: {

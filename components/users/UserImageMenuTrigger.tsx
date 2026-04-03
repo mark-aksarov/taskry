@@ -4,6 +4,7 @@ import { useModal } from "../common/ModalManagerContext";
 import { useUpdateUserImage } from "./UpdateUserImageContext";
 import { useClearUserImageUrl } from "./ClearUserImageUrlContext";
 import { PersonImageMenuTrigger } from "../common/PersonImageMenuTrigger";
+import { useTranslations } from "next-intl";
 
 interface UserImageMenuTriggerProps {
   showDeleteMenuItem: boolean;
@@ -14,6 +15,8 @@ export function UserImageMenuTrigger({
   showDeleteMenuItem,
   children,
 }: UserImageMenuTriggerProps) {
+  const t = useTranslations("users.UserImageMenuTrigger");
+
   const { isPending: isUpdatePending } = useUpdateUserImage();
   const { onOpenChange: onUpdateModalOpenChange } = useModal("updateUserImage");
 
@@ -26,6 +29,7 @@ export function UserImageMenuTrigger({
       onDelete={() => onDeleteModalOpenChange(true)}
       onUpdate={() => onUpdateModalOpenChange(true)}
       isDisabled={isUpdatePending || isDeletePending}
+      aria-label={t("label")}
     >
       {children}
     </PersonImageMenuTrigger>

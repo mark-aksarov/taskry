@@ -24,7 +24,7 @@ export const styles = tv({
       true: "bg-blue-600 text-white! dark:bg-blue-700",
     },
     isPending: {
-      true: "pointer-events-none opacity-50",
+      true: "pointer-events-none text-gray-500 dark:text-gray-400",
     },
   },
   compoundVariants: [

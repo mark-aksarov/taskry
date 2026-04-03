@@ -101,6 +101,7 @@ export const ProjectGridItemLargeInner = memo(
         creatorImageSlot={
           creator ? (
             <ItemBaseDetailButton
+              aria-label={creator.fullName}
               onPress={() => onUserDetailModalOpenChange(true)}
             >
               {creatorImg}

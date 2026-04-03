@@ -67,12 +67,7 @@ export function TaskDetail({
 
   const assigneeImg = assignee?.imageUrl ? (
     <ImageContainer className="h-9 w-9">
-      <Image
-        src={assignee.imageUrl}
-        alt={assignee.fullName}
-        width={36}
-        height={36}
-      />
+      <Image src={assignee.imageUrl} alt="" width={36} height={36} />
     </ImageContainer>
   ) : (
     <UnknownUser className="h-9 w-9" />
@@ -98,7 +93,7 @@ export function TaskDetail({
             </DetailLink>
           ) : (
             <div className="flex items-center gap-2">
-              {assigneeImg}
+              <UnknownUser className="h-9 w-9" />
               <DetailText>{t("noAssignee")}</DetailText>
             </div>
           )}

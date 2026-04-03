@@ -67,6 +67,7 @@ export const UserListItemInner = memo(function UserListItemInner({
       imgSlot={
         <ItemBaseDetailButton
           className="h-9 w-9"
+          aria-label={fullName}
           onPress={() => onUserDetailModalOpenChange(true)}
         >
           {userImg}

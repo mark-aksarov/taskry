@@ -30,7 +30,11 @@ export function TaskGridItemMobile(props: TaskGridItemMobileProps) {
   return (
     <TaskItemPendingOverlay taskId={props.id}>
       <div className="relative block">
-        <Link href={`/tasks/${props.id}`} className="absolute inset-0 z-0" />
+        <Link
+          aria-label={props.title}
+          href={`/tasks/${props.id}`}
+          className="absolute inset-0 z-0"
+        />
         <TaskGridItemMobileInner {...props} />
       </div>
     </TaskItemPendingOverlay>
@@ -78,7 +82,9 @@ export const TaskGridItemMobileInner = memo(function TaskGridItemMobileInner({
       }
       assigneeImageSlot={
         assignee ? (
-          <Link href={`/team/${assignee.id}`}>{assigneeImg}</Link>
+          <Link aria-label={assignee.fullName} href={`/team/${assignee.id}`}>
+            {assigneeImg}
+          </Link>
         ) : (
           assigneeImg
         )

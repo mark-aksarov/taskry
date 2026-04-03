@@ -71,6 +71,7 @@ export const CustomerListItemInner = memo(function CustomerListItemInner({
       checkboxSlot={<CustomerItemCheckbox id={id} />}
       imgSlot={
         <ItemBaseDetailButton
+          aria-label={fullName}
           onPress={() => onCustomerDetailModalOpenChange(true)}
           className="h-9 w-9"
         >

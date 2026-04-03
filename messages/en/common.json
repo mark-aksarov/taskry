@@ -101,5 +101,8 @@
   },
   "ManageButtonLarge": {
     "label": "Manage"
+  },
+  "BackButton": {
+    "label": "Back"
   }
 }

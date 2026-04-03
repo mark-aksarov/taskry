@@ -4,12 +4,14 @@ import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
+import { useTranslations } from "next-intl";
 
 interface BackButtonProps {
   fallbackHref: string;
 }
 
 export function BackButton({ fallbackHref }: BackButtonProps) {
+  const t = useTranslations("common.BackButton");
   const router = useRouter();
 
   const handleClick = useCallback(() => {
@@ -22,6 +24,7 @@ export function BackButton({ fallbackHref }: BackButtonProps) {
 
   return (
     <Button
+      aria-label={t("label")}
       onClick={handleClick}
       variant="outlined"
       iconLeft={<ChevronLeft size={16} absoluteStrokeWidth strokeWidth={1.5} />}

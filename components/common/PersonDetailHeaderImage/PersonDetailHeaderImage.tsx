@@ -3,20 +3,21 @@
 import Image from "next/image";
 import { UnknownUser } from "@/components/common/UnknownUser";
 import { ImageContainer } from "@/components/common/ImageContainer";
+import { useTranslations } from "next-intl";
 
 export interface PersonDetailHeaderImageProps {
-  alt?: string;
   imageUrl?: string;
 }
 
 export function PersonDetailHeaderImage({
-  alt,
   imageUrl,
 }: PersonDetailHeaderImageProps) {
+  const t = useTranslations("customers.PersonDetailHeaderImage");
+
   return (
     <ImageContainer className="h-21 w-21">
       {imageUrl ? (
-        <Image src={imageUrl} alt={alt ?? ""} width={84} height={84} />
+        <Image src={imageUrl} alt={t("imageAlt")} width={84} height={84} />
       ) : (
         <UnknownUser className="h-21 w-21" iconSize={50} />
       )}

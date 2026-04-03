@@ -25,7 +25,7 @@ export function CustomerDetailHeaderInteractive({
       fullName={fullName}
       imageSlot={
         <CustomerImageMenuTrigger showDeleteMenuItem={!!imageUrl}>
-          <PersonDetailHeaderImage alt={fullName} imageUrl={imageUrl} />
+          <PersonDetailHeaderImage imageUrl={imageUrl} />
         </CustomerImageMenuTrigger>
       }
       companyName={companyName}

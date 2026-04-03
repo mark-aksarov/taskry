@@ -31,6 +31,7 @@ export function CustomerGridItemMobile(props: BaseCustomerItemProps) {
         <Link
           href={`/customers/${props.id}`}
           className="absolute inset-0 z-0"
+          aria-label={props.fullName}
         />
         <CustomerGridItemMobileInner {...props} />
       </div>

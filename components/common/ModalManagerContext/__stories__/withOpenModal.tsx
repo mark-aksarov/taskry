@@ -1,28 +1,7 @@
 import { useEffect } from "react";
 import { useModal } from "../useModal";
 import { Button } from "@/components/ui/Button";
-import { type Decorator } from "@storybook/nextjs-vite";
-
-function WithOpenModalComponent({
-  Story,
-  modalId,
-}: {
-  Story: any;
-  modalId: string;
-}) {
-  const { onOpenChange } = useModal(modalId);
-
-  useEffect(() => {
-    onOpenChange(true);
-  }, [onOpenChange]);
-
-  return (
-    <>
-      <Button label="Open modal" onClick={() => onOpenChange(true)} />
-      <Story />
-    </>
-  );
-}
+import { type Decorator } from "@storybook/react";
 
 export const withOpenModal: Decorator = (Story, context) => {
   const modalId = context.parameters.modalId;
@@ -31,5 +10,14 @@ export const withOpenModal: Decorator = (Story, context) => {
     throw new Error("modalId is required");
   }
 
-  return <WithOpenModalComponent Story={Story} modalId={modalId} />;
+  const { onOpenChange } = useModal(modalId);
+
+  useEffect(() => onOpenChange(true), [onOpenChange]);
+
+  return (
+    <>
+      <Button label="Open modal" onClick={() => onOpenChange(true)} />
+      <Story />
+    </>
+  );
 };

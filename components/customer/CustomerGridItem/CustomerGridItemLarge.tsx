@@ -77,6 +77,7 @@ export const CustomerGridItemLargeInner = memo(
         }
         imageSlot={
           <ItemBaseDetailButton
+            aria-label={fullName}
             onPress={() => onCustomerDetailModalOpenChange(true)}
           >
             {customerImg}

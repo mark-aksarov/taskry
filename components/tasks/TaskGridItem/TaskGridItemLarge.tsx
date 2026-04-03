@@ -90,6 +90,7 @@ export const TaskGridItemLargeInner = memo(function TaskGridItemLargeInner({
       assigneeImageSlot={
         assignee ? (
           <ItemBaseDetailButton
+            aria-label={assignee.fullName}
             onPress={() => onUserDetailModalOpenChange(true)}
           >
             {assigneeImg}

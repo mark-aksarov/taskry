@@ -58,12 +58,7 @@ export function ProjectDetail({
 
   const creatorImg = creator?.imageUrl ? (
     <ImageContainer className="h-9 w-9">
-      <Image
-        src={creator.imageUrl}
-        alt={creator.fullName}
-        width={36}
-        height={36}
-      />
+      <Image src={creator.imageUrl} alt="" width={36} height={36} />
     </ImageContainer>
   ) : (
     <UnknownUser className="h-9 w-9" />
@@ -89,7 +84,7 @@ export function ProjectDetail({
             </DetailLink>
           ) : (
             <div className="flex items-center gap-2">
-              {creatorImg}
+              <UnknownUser className="h-9 w-9" />
               <DetailText>{t("noCreator")}</DetailText>
             </div>
           )}
