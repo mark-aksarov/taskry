@@ -21,7 +21,7 @@ export function CommentCancelEditingButton() {
   return (
     <Button
       variant="outlined"
-      className="mt-4 ml-4 gap-1 px-2 py-1 text-xs"
+      className="z-1 mt-4 ml-4 gap-1 px-2 py-1 text-xs"
       onPress={handlePress}
       label={t("label")}
       iconLeft={<X size={14} className="-ml-1" />}
