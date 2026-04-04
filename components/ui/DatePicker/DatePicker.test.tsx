@@ -39,7 +39,7 @@ describe("DatePicker", () => {
     await user.tab();
 
     const group = screen.getByRole("group");
-    expect(group).toHaveClass("border-blue-500 dark:border-blue-800");
+    expect(group).toHaveClass("border-blue-500 dark:border-blue-700");
   });
 
   test("applies invalid styles", async () => {

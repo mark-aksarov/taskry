@@ -31,7 +31,7 @@ describe("Select", () => {
     await user.tab();
 
     const button = screen.getByRole("button");
-    expect(button).toHaveClass("border-blue-500 dark:border-blue-800");
+    expect(button).toHaveClass("border-blue-500 dark:border-blue-700");
   });
 
   test("applies invalid styles", async () => {

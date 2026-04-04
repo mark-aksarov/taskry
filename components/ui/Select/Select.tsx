@@ -58,8 +58,6 @@ export const Select = <T extends object = any>({
   };
 
   /**
-   * https://github.com/adobe/react-spectrum/blob/main/packages/react-aria-components/src/Select.tsx
-   *
    * It measures the trigger button width, which is used to make the Popover match the width of the button.
    */
   const [buttonWidth, setButtonWidth] = useState<string | null>(null);

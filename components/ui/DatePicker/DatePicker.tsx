@@ -22,7 +22,7 @@ import { CalendarIcon } from "lucide-react";
 import { focusRing } from "../styles";
 import { BottomSheet } from "../BottomSheet";
 import { buttonStyles } from "../Select/SelectButton";
-import { useResizeObserver } from "@react-aria/utils";
+import { mergeProps, useResizeObserver } from "@react-aria/utils";
 import { DateSegment } from "react-aria-components";
 import { Dialog } from "../Dialog";
 import { twMerge } from "tailwind-merge";
@@ -136,8 +136,6 @@ export const DatePicker = <T extends DateValue>({
   });
 
   /**
-   * https://github.com/adobe/react-spectrum/blob/main/packages/react-aria-components/src/DatePicker.tsx
-   *
    * It measures the group width, which is used to make the Popover match the width of the group.
    */
   const [groupWidth, setGroupWidth] = useState<string | null>(null);
@@ -159,7 +157,6 @@ export const DatePicker = <T extends DateValue>({
      */
     <DateFieldContext value={fieldProps}>
       <div
-        {...focusProps}
         data-testid="datepicker"
         ref={props.ref}
         className={fieldStyles({ className })}
@@ -172,7 +169,7 @@ export const DatePicker = <T extends DateValue>({
 
         <div
           ref={groupRef}
-          {...groupProps}
+          {...mergeProps(groupProps, focusProps)}
           className={groupStyles({
             isFocused,
             isPressed: state.isOpen,

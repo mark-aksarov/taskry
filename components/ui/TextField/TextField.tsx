@@ -30,7 +30,7 @@ export const fieldInputStyles = tv({
       true: "resize-none",
     },
     isFocused: {
-      true: "border-blue-500 dark:border-blue-800",
+      true: "border-blue-500 dark:border-blue-700",
     },
     isInvalid: {
       true: "border-red-300 dark:border-red-800",
