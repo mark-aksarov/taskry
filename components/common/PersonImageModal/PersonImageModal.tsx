@@ -29,7 +29,7 @@ export function PersonImageModal({
         onImageFileChange(null);
       }, overlayTransitionDuration);
     }
-  }, [isOpen]);
+  }, [isOpen, onImageFileChange]);
 
   return (
     <Modal
