@@ -1,10 +1,8 @@
 import { DashboardLayout } from "./DashboardLayout";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
-import { ModalManagerProvider } from "@/components/common/ModalManagerContext";
 
 export default async function AppDashboardLayout({
   children,
@@ -23,12 +21,8 @@ export default async function AppDashboardLayout({
   };
 
   return (
-    <ModalManagerProvider>
-      <CurrentUserProvider value={currentUserContextValue}>
-        <DashboardLayout>{children}</DashboardLayout>
-      </CurrentUserProvider>
-
-      <GuestModeModal />
-    </ModalManagerProvider>
+    <CurrentUserProvider value={currentUserContextValue}>
+      <DashboardLayout>{children}</DashboardLayout>
+    </CurrentUserProvider>
   );
 }

@@ -4,7 +4,9 @@ import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import { AppHeader } from "@/components/layout/AppHeader";
 import { useParams, useSearchParams } from "next/navigation";
+import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { SearchBarProvider } from "@/components/search/SearchBar/index";
+import { ModalManagerProvider } from "@/components/common/ModalManagerContext";
 import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
 
 interface SharedLayoutProps {
@@ -94,20 +96,24 @@ export default function SharedLayout({
   const t = useTranslations(translationNamespace as any);
 
   return (
-    <PageTransitionProvider>
-      {/**
-       * We need to reset the search bar state whenever the route changes.
-       * We cannot use templates because the search bar value does not reset
-       * when navigating to deeper segments, e.g., /tasks -> /tasks/[id].
-       */}
-      <SearchBarProvider key={pathname} initialValue={query ?? ""}>
-        <AppHeader
-          profileLinkContainer={profileLinkContainer}
-          heading={t("heading" as never)}
-          backButtonHref={activeRoute?.backButtonHref}
-        />
-        <main>{children}</main>
-      </SearchBarProvider>
-    </PageTransitionProvider>
+    /**
+     * We need to reset the search bar and modal manager state whenever the route changes.
+     * We cannot use templates because the state does not reset
+     * when navigating to deeper segments, e.g., /tasks -> /tasks/[id].
+     */
+    <ModalManagerProvider key={pathname}>
+      <PageTransitionProvider>
+        <SearchBarProvider key={pathname} initialValue={query ?? ""}>
+          <AppHeader
+            profileLinkContainer={profileLinkContainer}
+            heading={t("heading" as never)}
+            backButtonHref={activeRoute?.backButtonHref}
+          />
+          <main>{children}</main>
+        </SearchBarProvider>
+      </PageTransitionProvider>
+
+      <GuestModeModal />
+    </ModalManagerProvider>
   );
 }
