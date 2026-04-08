@@ -73,8 +73,8 @@ export function UpdateTaskForm({
       <FormBaseBody>
         {taskId && <input type="hidden" name="id" value={taskId} />}
         <TaskTitleTextField defaultValue={title} />
-        <TaskDescriptionTextField defaultValue={description} />
         <TaskDeadlineDatePicker defaultValue={deadlineValue} />
+        <TaskDescriptionTextField defaultValue={description} />
         <TaskStatusSelect defaultSelectedKey={status} />
         <TaskCategorySelect
           defaultSelectedKey={categoryId?.toString()}

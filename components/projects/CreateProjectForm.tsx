@@ -44,8 +44,8 @@ export function CreateProjectForm({
     <FormBase id="new-project-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <ProjectTitleTextField />
-        <ProjectDescriptionTextField />
         <ProjectDeadlineDatePicker />
+        <ProjectDescriptionTextField />
         <ProjectStatusSelect />
         <ProjectCategorySelect items={projectCategorySelectItems} />
         <CustomerSelect items={customerSelectItems} />

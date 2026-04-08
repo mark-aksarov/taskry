@@ -49,8 +49,8 @@ export function CreateTaskForm({
     <FormBase id="new-task-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         <TaskTitleTextField />
-        <TaskDescriptionTextField />
         <TaskDeadlineDatePicker />
+        <TaskDescriptionTextField />
         <TaskStatusSelect />
         <TaskCategorySelect items={categorySelectItems} />
         <ProjectSelect items={projectSelectItems} />

@@ -68,8 +68,8 @@ export function UpdateProjectForm({
       <FormBaseBody>
         {projectId && <input type="hidden" name="id" value={projectId} />}
         <ProjectTitleTextField defaultValue={title} />
-        <ProjectDescriptionTextField defaultValue={description} />
         <ProjectDeadlineDatePicker defaultValue={deadlineValue} />
+        <ProjectDescriptionTextField defaultValue={description} />
         <ProjectStatusSelect defaultSelectedKey={status} />
         <ProjectCategorySelect
           defaultSelectedKey={categoryId?.toString()}
