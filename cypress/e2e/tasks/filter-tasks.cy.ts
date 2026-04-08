@@ -29,7 +29,7 @@ const createPayload = (payload: E2ESeedPayload): E2ESeedPayload => {
         id: 1,
         title: "Project A",
         status: ProjectStatus.active,
-        deadline: new Date("2022-01-01"),
+        deadline: new Date("2030-01-01"),
         categoryId: 1,
         customerId: 1,
         workspaceId: 1,
@@ -39,7 +39,7 @@ const createPayload = (payload: E2ESeedPayload): E2ESeedPayload => {
         id: 2,
         title: "Project B",
         status: ProjectStatus.active,
-        deadline: new Date("2022-01-01"),
+        deadline: new Date("2031-01-01"),
         categoryId: 1,
         customerId: 1,
         workspaceId: 1,
@@ -104,11 +104,9 @@ describe("filter tasks", () => {
       }),
     );
 
-    cy.getByData("task-toolbar-filters-button-desktop")
-      .filter(":visible")
-      .click();
+    cy.getByData("task-filters-modal-trigger-large").click();
 
-    cy.getByData("show-only-my-tasks").click();
+    cy.getByData("only-my-tasks").click();
     cy.get('button[type="submit"]').click();
 
     cy.getByData("task-list-item").should("have.length", 2);
@@ -126,7 +124,7 @@ describe("filter tasks", () => {
             id: 1,
             title: "Task A",
             status: TaskStatus.active,
-            deadline: new Date("2025-12-31"),
+            deadline: new Date("2030-12-31"),
             categoryId: 1,
             projectId: 1,
             workspaceId: 1,
@@ -137,7 +135,7 @@ describe("filter tasks", () => {
             id: 2,
             title: "Task B",
             status: TaskStatus.active,
-            deadline: new Date("2026-01-01"),
+            deadline: new Date("2031-01-01"),
             categoryId: 1,
             projectId: 1,
             workspaceId: 1,
@@ -148,7 +146,7 @@ describe("filter tasks", () => {
             id: 3,
             title: "Task С",
             status: TaskStatus.active,
-            deadline: new Date("2026-01-02"),
+            deadline: new Date("2031-01-02"),
             categoryId: 1,
             projectId: 1,
             workspaceId: 1,
@@ -159,12 +157,10 @@ describe("filter tasks", () => {
       }),
     );
 
-    cy.getByData("task-toolbar-filters-button-desktop")
-      .filter(":visible")
-      .click();
+    cy.getByData("task-filters-modal-trigger-large").click();
 
-    cy.setDatePickerDate("deadline-from-date-picker", "12", "31", "2025");
-    cy.setDatePickerDate("deadline-to-date-picker", "01", "01", "2026");
+    cy.setDatePickerDate("deadline-from-date-picker", "12", "31", "2030");
+    cy.setDatePickerDate("deadline-to-date-picker", "01", "01", "2031");
     cy.get('button[type="submit"]').click();
 
     cy.getByData("task-list-item").should("have.length", 2);
@@ -172,8 +168,8 @@ describe("filter tasks", () => {
     cy.getByData("task-list-item", "2").should("contain", "Task B");
 
     cy.location("search")
-      .should("include", "deadlineFrom=2025-12-31")
-      .should("include", "deadlineTo=2026-01-01");
+      .should("include", "deadlineFrom=2030-12-31")
+      .should("include", "deadlineTo=2031-01-01");
   });
 
   describe("filter by status", () => {
@@ -185,7 +181,7 @@ describe("filter tasks", () => {
               id: 1,
               title: "Task A",
               status: TaskStatus.active,
-              deadline: new Date("2025-12-31"),
+              deadline: new Date("2030-12-31"),
               categoryId: 1,
               projectId: 1,
               workspaceId: 1,
@@ -196,7 +192,7 @@ describe("filter tasks", () => {
               id: 2,
               title: "Task B",
               status: TaskStatus.pending,
-              deadline: new Date("2026-01-01"),
+              deadline: new Date("2031-01-01"),
               categoryId: 1,
               projectId: 1,
               workspaceId: 1,
@@ -207,7 +203,7 @@ describe("filter tasks", () => {
               id: 3,
               title: "Task C",
               status: TaskStatus.completed,
-              deadline: new Date("2026-01-02"),
+              deadline: new Date("2031-01-02"),
               categoryId: 1,
               projectId: 1,
               workspaceId: 1,
@@ -220,9 +216,7 @@ describe("filter tasks", () => {
     });
 
     it("filter by 'active' status", () => {
-      cy.getByData("task-toolbar-filters-button-desktop")
-        .filter(":visible")
-        .click();
+      cy.getByData("task-filters-modal-trigger-large").click();
 
       cy.getByData("active-checkbox").click();
       cy.get('button[type="submit"]').click();
@@ -231,13 +225,11 @@ describe("filter tasks", () => {
         .should("have.length", 1)
         .and("contain", "Task A");
 
-      cy.location("search").should("include", "status=active");
+      cy.location("search").should("include", "statuses=active");
     });
 
     it("filter by 'pending' status", () => {
-      cy.getByData("task-toolbar-filters-button-desktop")
-        .filter(":visible")
-        .click();
+      cy.getByData("task-filters-modal-trigger-large").click();
 
       cy.getByData("pending-checkbox").click();
       cy.get('button[type="submit"]').click();
@@ -246,13 +238,11 @@ describe("filter tasks", () => {
         .should("have.length", 1)
         .and("contain", "Task B");
 
-      cy.location("search").should("include", "status=pending");
+      cy.location("search").should("include", "statuses=pending");
     });
 
     it("filter by 'completed' status", () => {
-      cy.getByData("task-toolbar-filters-button-desktop")
-        .filter(":visible")
-        .click();
+      cy.getByData("task-filters-modal-trigger-large").click();
 
       cy.getByData("completed-checkbox").click();
       cy.get('button[type="submit"]').click();
@@ -261,7 +251,7 @@ describe("filter tasks", () => {
         .should("have.length", 1)
         .and("contain", "Task C");
 
-      cy.location("search").should("include", "status=completed");
+      cy.location("search").should("include", "statuses=completed");
     });
   });
 
@@ -273,7 +263,7 @@ describe("filter tasks", () => {
             id: 1,
             title: "Task A",
             status: TaskStatus.active,
-            deadline: new Date("2025-12-31"),
+            deadline: new Date("2030-12-31"),
             categoryId: 1,
             projectId: 1,
             workspaceId: 1,
@@ -284,7 +274,7 @@ describe("filter tasks", () => {
             id: 2,
             title: "Task B",
             status: TaskStatus.pending,
-            deadline: new Date("2026-01-01"),
+            deadline: new Date("2031-01-01"),
             categoryId: 2,
             projectId: 1,
             workspaceId: 1,
@@ -295,16 +285,14 @@ describe("filter tasks", () => {
       }),
     );
 
-    cy.getByData("task-toolbar-filters-button-desktop")
-      .filter(":visible")
-      .click();
+    cy.getByData("task-filters-modal-trigger-large").click();
 
-    cy.getByData("category-1-checkbox").click();
+    cy.getByData("task-category-checkbox", "1").click();
     cy.get('button[type="submit"]').click();
 
     cy.getByData("task-list-item").should("have.length", 1).and("contain", "A");
 
-    cy.location("search").should("include", "category=1");
+    cy.location("search").should("include", "categoryIds=1");
   });
 
   it("filter by task project", () => {
@@ -315,7 +303,7 @@ describe("filter tasks", () => {
             id: 1,
             title: "Task A",
             status: TaskStatus.active,
-            deadline: new Date("2025-12-31"),
+            deadline: new Date("2030-12-31"),
             categoryId: 1,
             projectId: 1,
             workspaceId: 1,
@@ -326,7 +314,7 @@ describe("filter tasks", () => {
             id: 2,
             title: "Task B",
             status: TaskStatus.pending,
-            deadline: new Date("2026-01-01"),
+            deadline: new Date("2031-01-01"),
             categoryId: 1,
             projectId: 2,
             workspaceId: 1,
@@ -337,18 +325,16 @@ describe("filter tasks", () => {
       }),
     );
 
-    cy.getByData("task-toolbar-filters-button-desktop")
-      .filter(":visible")
-      .click();
+    cy.getByData("task-filters-modal-trigger-large").click();
 
-    cy.getByData("project-1-checkbox").click();
+    cy.getByData("project-checkbox", "1").click();
     cy.get('button[type="submit"]').click();
 
     cy.getByData("task-list-item")
       .should("have.length", 1)
       .and("contain", "Task A");
 
-    cy.location("search").should("include", "project=1");
+    cy.location("search").should("include", "projectIds=1");
   });
 
   it("filter by task assignee", () => {
@@ -359,7 +345,7 @@ describe("filter tasks", () => {
             id: 1,
             title: "Task A",
             status: TaskStatus.active,
-            deadline: new Date("2025-12-31"),
+            deadline: new Date("2030-12-31"),
             categoryId: 1,
             projectId: 1,
             workspaceId: 1,
@@ -370,7 +356,7 @@ describe("filter tasks", () => {
             id: 2,
             title: "Task B",
             status: TaskStatus.pending,
-            deadline: new Date("2026-01-01"),
+            deadline: new Date("2031-01-01"),
             categoryId: 1,
             projectId: 1,
             workspaceId: 1,
@@ -381,17 +367,15 @@ describe("filter tasks", () => {
       }),
     );
 
-    cy.getByData("task-toolbar-filters-button-desktop")
-      .filter(":visible")
-      .click();
+    cy.getByData("task-filters-modal-trigger-large").click();
 
-    cy.getByData("assignee-user-1-checkbox").click();
+    cy.getByData("user-checkbox", "user-1").click();
     cy.get('button[type="submit"]').click();
 
     cy.getByData("task-list-item")
       .should("have.length", 1)
       .and("contain", "Task A");
 
-    cy.location("search").should("include", "assignee=user-1");
+    cy.location("search").should("include", "assigneeIds=user-1");
   });
 });

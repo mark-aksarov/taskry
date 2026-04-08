@@ -26,5 +26,7 @@ describe("change password of user", () => {
     // sign in with new password
     cy.signOutViaUI();
     cy.signIn("user-1@test.com", "new-password");
+    cy.visit("/en/profile");
+    cy.getByData("user-card").should("contain", "User 1");
   });
 });

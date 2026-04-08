@@ -1,5 +1,8 @@
+import { TaskStatus } from "@/generated/prisma/enums";
 import {
   users,
+  tasks,
+  projects,
   accounts,
   positions,
   companies,
@@ -9,109 +12,37 @@ import {
   taskCategories,
 } from "@/prisma/test-utils/data";
 
-import { E2ESeedPayload } from "@/prisma/test-utils/types";
-import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
-
 describe("update task status", () => {
-  const createPayload = (payload: E2ESeedPayload): E2ESeedPayload => {
-    const basePayload: E2ESeedPayload = {
-      workspaces,
-      users,
-      accounts,
-      positions,
-      companies,
-      customers,
-      projectCategories,
-      taskCategories,
-    };
-
-    return { ...basePayload, ...payload };
-  };
-
   beforeEach(() => {
     cy.viewport(1440, 900);
 
-    const payload = createPayload({
-      projects: [
-        {
-          id: 1,
-          title: "Project 1",
-          status: ProjectStatus.active,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          customerId: 1,
-          workspaceId: 1,
-          creatorId: "user-1",
-        },
-        {
-          id: 2,
-          title: "Project 2",
-          status: ProjectStatus.pending,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          customerId: 1,
-          workspaceId: 1,
-          creatorId: "user-1",
-        },
-      ],
+    const payload = {
+      users,
       tasks: [
         {
           id: 1,
           title: "Task 1",
+          deadline: new Date("2030-12-31"),
           status: TaskStatus.active,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          projectId: 1,
           workspaceId: 1,
-          creatorId: "user-1",
-          assigneeId: "user-1",
         },
         {
           id: 2,
           title: "Task 2",
+          deadline: new Date("2030-12-30"),
           status: TaskStatus.pending,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          projectId: 1,
           workspaceId: 1,
-          creatorId: "user-1",
-          assigneeId: "user-1",
-        },
-        {
-          id: 3,
-          title: "Task 3",
-          status: TaskStatus.completed,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          projectId: 1,
-          workspaceId: 1,
-          creatorId: "user-1",
-          assigneeId: "user-1",
-        },
-        {
-          id: 4,
-          title: "Task 4",
-          status: TaskStatus.pending,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          projectId: 2,
-          workspaceId: 1,
-          creatorId: "user-1",
-          assigneeId: "user-1",
-        },
-        {
-          id: 5,
-          title: "Task 5",
-          status: TaskStatus.completed,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          projectId: 2,
-          workspaceId: 1,
-          creatorId: "user-1",
-          assigneeId: "user-1",
         },
       ],
-    });
+      projects,
+      accounts,
+      positions,
+      companies,
+      customers,
+      workspaces,
+      taskCategories,
+      projectCategories,
+    };
 
     cy.task("db:reset");
     cy.task("db:seed", payload);

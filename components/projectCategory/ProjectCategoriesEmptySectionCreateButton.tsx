@@ -9,12 +9,13 @@ export function ProjectCategoriesEmptySectionCreateButton() {
     "projectCategories.ProjectCategoriesEmptySectionCreateButton",
   );
 
-  const { onOpenChange: onModalOpenChange } = useModal(
-    "deleteProjectCategories",
-  );
+  const { onOpenChange: onModalOpenChange } = useModal("createProjectCategory");
 
   return (
-    <EmptySectionButton onPress={() => onModalOpenChange(true)}>
+    <EmptySectionButton
+      data-test="project-categories-empty-section-create-button"
+      onPress={() => onModalOpenChange(true)}
+    >
       {t("label")}
     </EmptySectionButton>
   );

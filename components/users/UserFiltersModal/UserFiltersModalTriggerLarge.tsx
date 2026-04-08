@@ -6,5 +6,10 @@ import { useModal } from "@/components/common/ModalManagerContext";
 export function UserFiltersModalTriggerLarge() {
   const { onOpenChange } = useModal("userFilters");
 
-  return <FilterButtonLarge onClick={() => onOpenChange(true)} />;
+  return (
+    <FilterButtonLarge
+      data-test="user-filters-modal-trigger-large"
+      onClick={() => onOpenChange(true)}
+    />
+  );
 }

@@ -76,7 +76,8 @@ export function CommentItemActionMenuTrigger({
           isDisabled={
             (isSendCommentPending || isUpdateCommentPending) && !isPending
           }
-          data-test={`comment-item-${commentId}-action-menu-trigger`}
+          data-test="comment-item-action-menu-trigger"
+          data-id={commentId}
         />
       )}
     >

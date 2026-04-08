@@ -20,7 +20,7 @@ export function ProjectSelect({
 
   return (
     <ResponsiveSelect
-      data-test="task-project-select"
+      data-test="project-select"
       name="projectId"
       label={t("label")}
       defaultSelectedKey={defaultSelectedKey || ""}

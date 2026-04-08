@@ -31,6 +31,7 @@ export function CreateSubtasksButton({
   return (
     <Button
       {...props}
+      data-test="create-subtask-button"
       className={composeRenderProps(className, (className, renderProps) =>
         styles({ ...renderProps, variant: "primary", className }),
       )}

@@ -35,10 +35,9 @@ describe("Customer creation", () => {
   });
 
   it("creates a new customer with valid data", () => {
-    cy.getByData("customer-toolbar-create-new-menu-trigger")
+    cy.getByData("customers-empty-section-create-button")
       .filter(":visible")
       .click();
-    cy.getMenuItem("customer").click();
 
     cy.fillCustomerForm(customerData);
     cy.get('button[type="submit"]').click();
@@ -53,10 +52,7 @@ describe("Customer creation", () => {
   });
 
   it("shows validation errors and prevents submission with invalid data", () => {
-    cy.getByData("customer-toolbar-create-new-menu-trigger")
-      .filter(":visible")
-      .click();
-    cy.getMenuItem("customer").click();
+    cy.getByData("customers-empty-section-create-button").click();
 
     cy.get('button[type="submit"]').click();
 
@@ -72,10 +68,7 @@ describe("Customer creation", () => {
   });
 
   it("creates a customer when optional fields are empty", () => {
-    cy.getByData("customer-toolbar-create-new-menu-trigger")
-      .filter(":visible")
-      .click();
-    cy.getMenuItem("customer").click();
+    cy.getByData("customers-empty-section-create-button").click();
 
     cy.fillCustomerForm({
       fullName: customerData.fullName,

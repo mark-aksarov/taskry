@@ -24,7 +24,7 @@ export function UserSelect({
 
   return (
     <ResponsiveSelect
-      data-test="task-assignee-select"
+      data-test="user-select"
       name="assigneeId"
       defaultSelectedKey={defaultSelectedKey || forcedAssigneeId || ""}
       label={t("label")}

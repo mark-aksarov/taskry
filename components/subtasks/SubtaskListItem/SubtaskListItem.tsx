@@ -29,7 +29,11 @@ const SubtaskListItemInner = memo(function SubtaskListItemInner({
   "toggleSubtask" | "updateSubtask" | "deleteSubtask"
 >) {
   return (
-    <div className="flex items-start justify-between">
+    <div
+      data-test="subtask-list-item"
+      data-id={id}
+      className="flex items-start justify-between"
+    >
       <div className="flex items-start gap-2">
         <Check
           size={16}

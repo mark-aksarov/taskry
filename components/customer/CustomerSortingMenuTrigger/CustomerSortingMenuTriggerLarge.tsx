@@ -15,7 +15,7 @@ export function CustomerSortingMenuTriggerLarge({
     <CustomerSortingMenuTrigger
       selectedSortField={selectedSortField}
       renderButton={() => (
-        <SortingButtonLarge data-test="customer-sorting-menu-trigger-large" />
+        <SortingButtonLarge data-test="customers-sorting-menu-trigger-large" />
       )}
     />
   );

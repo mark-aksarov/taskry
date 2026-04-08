@@ -22,7 +22,7 @@ export function CustomerSelect({
 
   return (
     <ResponsiveSelect
-      data-test="project-customer-select"
+      data-test="customer-select"
       label={t("label")}
       name="customerId"
       overlayClassName="w-[var(--trigger-width)]"

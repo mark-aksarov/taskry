@@ -86,10 +86,11 @@ export interface ProjectListItemDTO {
     id: number;
     fullName: string;
     imageUrl?: string;
-    company?: {
-      id: number;
-      name: string;
-    };
+  };
+
+  company?: {
+    id: number;
+    name: string;
   };
 
   commentsCount: number;

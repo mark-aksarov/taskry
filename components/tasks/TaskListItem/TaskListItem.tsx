@@ -156,6 +156,8 @@ export const TaskListItemInner = memo(function TaskListItemInner({
       }
       commentsModalTriggerSlot={
         <ItemBaseCommentsButton
+          data-test="task-comments-modal-trigger"
+          data-id={id.toString()}
           commentsCount={commentsCount}
           onPress={() => onTaskCommentsModalOpenChange(true)}
         />

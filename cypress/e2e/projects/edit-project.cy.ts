@@ -7,6 +7,7 @@ import {
   customers,
   workspaces,
 } from "@/prisma/test-utils/data";
+import { ProjectStatus } from "@/generated/prisma/enums";
 
 describe("Project editing", () => {
   beforeEach(() => {
@@ -38,7 +39,7 @@ describe("Project editing", () => {
     cy.fillProjectForm({
       title: "Updated Project Title",
       description: "Updated Project Description",
-      deadline: { day: "01", month: "02", year: "2026" },
+      deadline: { day: "01", month: "02", year: "2030" },
       statusKey: "pending",
       categoryKey: "2",
       customerKey: "2",
@@ -66,7 +67,7 @@ describe("Project editing", () => {
       cy.get("textarea").should("have.value", "Description 1"),
     );
     cy.getByData("project-deadline-date-picker").within(() =>
-      cy.get("input").should("have.value", "2025-12-31"),
+      cy.get("input").should("have.value", "2030-12-31"),
     );
     cy.getByData("project-status-select").within(() =>
       cy.get("select").should("have.value", "active"),
@@ -74,28 +75,28 @@ describe("Project editing", () => {
     cy.getByData("project-category-select").within(() =>
       cy.get("select").should("have.value", "1"),
     );
-    cy.getByData("project-customer-select").within(() =>
+    cy.getByData("customer-select").within(() =>
       cy.get("select").should("have.value", "1"),
     );
   });
 
   it("updates a project when optional fields are empty", () => {
-    cy.getByData("project-toolbar-create-new-menu-trigger")
-      .filter(":visible")
-      .click();
-    cy.getMenuItem("project").click();
+    cy.getByData("project-item-action-menu-trigger", "1").click();
+    cy.getMenuItem("edit").click();
 
     cy.fillProjectForm({
       title: "Updated Project Title",
-      deadline: { day: "01", month: "02", year: "2026" },
-      statusKey: "pending",
+      deadline: { day: "01", month: "02", year: "2030" },
+      statusKey: ProjectStatus.active,
+      categoryKey: "",
+      customerKey: "",
     });
 
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("projects-list").within(() => {
+    cy.getByData("project-list-item", "1").within(() => {
       cy.contains("Updated Project Title");
-      cy.contains("2026");
+      cy.contains("2030");
       cy.contains(/active/i);
       cy.contains("No category");
       cy.contains("No company");

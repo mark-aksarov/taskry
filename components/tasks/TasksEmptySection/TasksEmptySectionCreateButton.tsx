@@ -10,7 +10,10 @@ export function TasksEmptySectionCreateButton() {
   const { onOpenChange: onModalOpenChange } = useModal("createTask");
 
   return (
-    <EmptySectionButton onPress={() => onModalOpenChange(true)}>
+    <EmptySectionButton
+      data-test="tasks-empty-section-create-button"
+      onPress={() => onModalOpenChange(true)}
+    >
       {t("button")}
     </EmptySectionButton>
   );

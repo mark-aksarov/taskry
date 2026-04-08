@@ -5,7 +5,7 @@ import {
   workspaces,
 } from "@/prisma/test-utils/data";
 
-describe("delete positions", () => {
+describe("delete position", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
@@ -29,18 +29,15 @@ describe("delete positions", () => {
     cy.visit("/en/positions");
   });
 
-  it("can delete positions", () => {
-    cy.getByData("position-checkbox", "1").click();
-    cy.getByData("position-checkbox", "3").click();
-
-    cy.getByData("position-actions-menu-trigger").filter(":visible").click();
+  it("can delete position", () => {
+    cy.getByData("position-item-action-menu-trigger", "1").click();
     cy.getMenuItem("delete").click();
 
-    cy.getByData("delete-positions-modal")
+    cy.getByData("delete-position-modal")
       .should("be.visible")
-      .contains("2 positions");
+      .contains("Position 1");
 
-    cy.getByData("delete-positions-modal-confirm-button").click();
-    cy.getByData("position-list-item").should("not.exist");
+    cy.getByData("delete-position-modal-confirm-button").click();
+    cy.getByData("position-list-item", "1").should("not.exist");
   });
 });

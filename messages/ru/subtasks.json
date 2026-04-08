@@ -26,10 +26,10 @@
   },
   "SubtaskTextField": {
     "label": "Текст",
-    "placeholder": "Введите новую подзадачу...",
+    "placeholder": "Введите текст подзадачи...",
     "validation": {
-      "required": "Заголовок обязателен",
-      "tooLong": "Заголовок слишком длинный"
+      "required": "Текст подзадачи обязателен",
+      "tooLong": "Текст подзадачи слишком длинный"
     }
   },
   "SubtaskFormDialogHeader": {

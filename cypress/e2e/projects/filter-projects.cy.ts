@@ -114,11 +114,9 @@ describe("filter projects", () => {
       }),
     );
 
-    cy.getByData("project-toolbar-filters-button-desktop")
-      .filter(":visible")
-      .click();
+    cy.getByData("project-filters-modal-trigger-large").click();
 
-    cy.getByData("no-active-tasks-switch").click();
+    cy.getByData("has-no-active-tasks-switch").click();
     cy.get('button[type="submit"]').click();
 
     cy.getByData("project-list-item")
@@ -166,9 +164,7 @@ describe("filter projects", () => {
       }),
     );
 
-    cy.getByData("project-toolbar-filters-button-desktop")
-      .filter(":visible")
-      .click();
+    cy.getByData("project-filters-modal-trigger-large").click();
 
     cy.setDatePickerDate("deadline-from-date-picker", "12", "31", "2025");
     cy.setDatePickerDate("deadline-to-date-picker", "01", "01", "2026");
@@ -224,42 +220,36 @@ describe("filter projects", () => {
     });
 
     it("filter by 'active' status", () => {
-      cy.getByData("project-toolbar-filters-button-desktop")
-        .filter(":visible")
-        .click();
+      cy.getByData("project-filters-modal-trigger-large").click();
 
       cy.getByData("active-checkbox").click();
       cy.get('button[type="submit"]').click();
 
       cy.getByData("project-list-item").and("contain", "Project A");
 
-      cy.location("search").should("include", "status=active");
+      cy.location("search").should("include", "statuses=active");
     });
 
     it("filter by 'pending' status", () => {
-      cy.getByData("project-toolbar-filters-button-desktop")
-        .filter(":visible")
-        .click();
+      cy.getByData("project-filters-modal-trigger-large").click();
 
       cy.getByData("pending-checkbox").click();
       cy.get('button[type="submit"]').click();
 
       cy.getByData("project-list-item").and("contain", "Project B");
 
-      cy.location("search").should("include", "status=pending");
+      cy.location("search").should("include", "statuses=pending");
     });
 
     it("filter by 'completed' status", () => {
-      cy.getByData("project-toolbar-filters-button-desktop")
-        .filter(":visible")
-        .click();
+      cy.getByData("project-filters-modal-trigger-large").click();
 
       cy.getByData("completed-checkbox").click();
       cy.get('button[type="submit"]').click();
 
       cy.getByData("project-list-item").and("contain", "Project C");
 
-      cy.location("search").should("include", "status=completed");
+      cy.location("search").should("include", "statuses=completed");
     });
   });
 
@@ -291,16 +281,14 @@ describe("filter projects", () => {
       }),
     );
 
-    cy.getByData("project-toolbar-filters-button-desktop")
-      .filter(":visible")
-      .click();
+    cy.getByData("project-filters-modal-trigger-large").click();
 
-    cy.getByData("category-1-checkbox").click();
+    cy.getByData("category-checkbox", "1").click();
     cy.get('button[type="submit"]').click();
 
     cy.getByData("project-list-item").and("contain", "A");
 
-    cy.location("search").should("include", "category=1");
+    cy.location("search").should("include", "categoryIds=1");
   });
 
   it("filter by customer", () => {
@@ -331,18 +319,16 @@ describe("filter projects", () => {
       }),
     );
 
-    cy.getByData("project-toolbar-filters-button-desktop")
-      .filter(":visible")
-      .click();
+    cy.getByData("project-filters-modal-trigger-large").click();
 
-    cy.getByData("customer-1-checkbox").click();
+    cy.getByData("customer-checkbox", "1").click();
     cy.get('button[type="submit"]').click();
 
     cy.getByData("project-list-item")
       .should("have.length", 1)
       .and("contain", "Project A");
 
-    cy.location("search").should("include", "customer=1");
+    cy.location("search").should("include", "customerIds=1");
   });
 
   it("filter by project creator", () => {
@@ -373,17 +359,15 @@ describe("filter projects", () => {
       }),
     );
 
-    cy.getByData("project-toolbar-filters-button-desktop")
-      .filter(":visible")
-      .click();
+    cy.getByData("project-filters-modal-trigger-large").click();
 
-    cy.getByData("user-user-1-checkbox").click();
+    cy.getByData("user-checkbox", "user-1").click();
     cy.get('button[type="submit"]').click();
 
     cy.getByData("project-list-item")
       .should("have.length", 1)
       .and("contain", "Project A");
 
-    cy.location("search").should("include", "user=user-1");
+    cy.location("search").should("include", "creatorIds=user-1");
   });
 });

@@ -24,7 +24,7 @@ describe("Task category creation", () => {
   });
 
   it("creates a new task category with valid data", () => {
-    cy.getByData("task-category-toolbar-create-new-modal-trigger")
+    cy.getByData("task-categories-empty-section-create-button")
       .filter(":visible")
       .click();
 
@@ -37,7 +37,7 @@ describe("Task category creation", () => {
   });
 
   it("shows validation errors and prevents submission with invalid data", () => {
-    cy.getByData("task-category-toolbar-create-new-modal-trigger")
+    cy.getByData("task-categories-empty-section-create-button")
       .filter(":visible")
       .click();
 

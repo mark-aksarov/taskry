@@ -43,7 +43,8 @@ export function CompanyCheckboxGroup({
       key={item.id}
       value={item.id.toString()}
       className={twMerge("font-normal capitalize")}
-      data-test={`company-${item.id}-checkbox`}
+      data-test="company-checkbox"
+      data-id={item.id}
     >
       {item.name}
     </Checkbox>

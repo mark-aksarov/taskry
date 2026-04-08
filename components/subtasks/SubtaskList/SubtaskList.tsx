@@ -3,5 +3,9 @@ interface SubtaskListProps {
 }
 
 export function SubtaskList({ children }: SubtaskListProps) {
-  return <div className="flex flex-col gap-3">{children}</div>;
+  return (
+    <div data-test="subtask-list" className="flex flex-col gap-3">
+      {children}
+    </div>
+  );
 }

@@ -11,7 +11,7 @@ import {
   projectCategories,
 } from "@/prisma/test-utils/data";
 
-describe("delete multiple projects", () => {
+describe("delete projects", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
@@ -38,9 +38,7 @@ describe("delete multiple projects", () => {
     cy.getByData("project-checkbox", "1").click();
     cy.getByData("project-checkbox", "2").click();
 
-    cy.getByData("project-toolbar-actions-button-desktop")
-      .filter(":visible")
-      .click();
+    cy.getByData("project-actions-menu-trigger").filter(":visible").click();
     cy.getMenuItem("delete").click();
 
     cy.getByData("delete-projects-modal")

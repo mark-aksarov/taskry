@@ -12,7 +12,7 @@ import {
 
 import { TaskStatus } from "@/generated/prisma/enums";
 
-describe("update multiple task status", () => {
+describe("update task statuses", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
@@ -31,67 +31,43 @@ describe("update multiple task status", () => {
           id: 1,
           title: "Task 1",
           status: TaskStatus.active,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          projectId: 1,
+          deadline: new Date("2030-01-01"),
           workspaceId: 1,
-          creatorId: "user-1",
-          assigneeId: "user-1",
         },
         {
           id: 2,
           title: "Task 2",
           status: TaskStatus.pending,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          projectId: 1,
+          deadline: new Date("2030-01-01"),
           workspaceId: 1,
-          creatorId: "user-1",
-          assigneeId: "user-1",
         },
         {
           id: 3,
           title: "Task 3",
           status: TaskStatus.completed,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          projectId: 1,
+          deadline: new Date("2030-01-01"),
           workspaceId: 1,
-          creatorId: "user-1",
-          assigneeId: "user-1",
         },
         {
           id: 4,
           title: "Task 4",
           status: TaskStatus.pending,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          projectId: 2,
+          deadline: new Date("2030-01-01"),
           workspaceId: 1,
-          creatorId: "user-1",
-          assigneeId: "user-1",
         },
         {
           id: 5,
           title: "Task 5",
           status: TaskStatus.completed,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          projectId: 2,
+          deadline: new Date("2030-01-01"),
           workspaceId: 1,
-          creatorId: "user-1",
-          assigneeId: "user-1",
         },
         {
           id: 6,
           title: "Task 6",
           status: TaskStatus.completed,
-          deadline: new Date("2022-01-01"),
-          categoryId: 1,
-          projectId: 3,
+          deadline: new Date("2030-01-01"),
           workspaceId: 1,
-          creatorId: "user-1",
-          assigneeId: "user-3",
         },
       ],
     };
@@ -106,9 +82,7 @@ describe("update multiple task status", () => {
     it("should change status for active task to pending", () => {
       cy.getByData("task-checkbox", "1").click();
 
-      cy.getByData("task-toolbar-actions-button-desktop")
-        .filter(":visible")
-        .click();
+      cy.getByData("task-actions-menu-trigger").click();
       cy.getMenuItem("pending").click();
       cy.getByData("task-list-item", "1").contains(/pending/i);
     });
@@ -116,9 +90,7 @@ describe("update multiple task status", () => {
     it("should change status for completed task to pending", () => {
       cy.getByData("task-checkbox", "3").click();
 
-      cy.getByData("task-toolbar-actions-button-desktop")
-        .filter(":visible")
-        .click();
+      cy.getByData("task-actions-menu-trigger").click();
       cy.getMenuItem("pending").click();
       cy.getByData("task-list-item", "3").contains(/pending/i);
     });
@@ -126,9 +98,7 @@ describe("update multiple task status", () => {
     it("should change status for active task to completed", () => {
       cy.getByData("task-checkbox", "1").click();
 
-      cy.getByData("task-toolbar-actions-button-desktop")
-        .filter(":visible")
-        .click();
+      cy.getByData("task-actions-menu-trigger").click();
       cy.getMenuItem("completed").click();
       cy.getByData("task-list-item", "1").contains(/completed/i);
     });
@@ -137,9 +107,7 @@ describe("update multiple task status", () => {
       cy.getByData("task-checkbox", "1").click();
       cy.getByData("task-checkbox", "4").click();
 
-      cy.getByData("task-toolbar-actions-button-desktop")
-        .filter(":visible")
-        .click();
+      cy.getByData("task-actions-menu-trigger").click();
       cy.getMenuItem("completed").click();
 
       cy.getByData("task-list-item", "1").contains(/completed/i);
@@ -150,9 +118,7 @@ describe("update multiple task status", () => {
       cy.getByData("task-checkbox", "2").click();
       cy.getByData("task-checkbox", "3").click();
 
-      cy.getByData("task-toolbar-actions-button-desktop")
-        .filter(":visible")
-        .click();
+      cy.getByData("task-actions-menu-trigger").click();
       cy.getMenuItem("active").click();
 
       cy.getByData("task-list-item", "2").contains(/active/i);
@@ -164,9 +130,7 @@ describe("update multiple task status", () => {
       cy.getByData("task-checkbox", "3").click();
       cy.getByData("task-checkbox", "4").click();
 
-      cy.getByData("task-toolbar-actions-button-desktop")
-        .filter(":visible")
-        .click();
+      cy.getByData("task-actions-menu-trigger").click();
       cy.getMenuItem("pending").click();
 
       cy.getByData("task-list-item", "1").contains(/pending/i);
@@ -179,9 +143,7 @@ describe("update multiple task status", () => {
       cy.getByData("task-checkbox", "3").click();
       cy.getByData("task-checkbox", "5").click();
 
-      cy.getByData("task-toolbar-actions-button-desktop")
-        .filter(":visible")
-        .click();
+      cy.getByData("task-actions-menu-trigger").click();
       cy.getMenuItem("completed").click();
 
       cy.getByData("task-list-item", "1").contains(/completed/i);
@@ -192,9 +154,7 @@ describe("update multiple task status", () => {
     it("should disable 'active' item when all selected tasks are active", () => {
       cy.getByData("task-checkbox", "1").click();
 
-      cy.getByData("task-toolbar-actions-button-desktop")
-        .filter(":visible")
-        .click();
+      cy.getByData("task-actions-menu-trigger").click();
       cy.getMenuItem("active").should("have.attr", "aria-disabled", "true");
     });
 
@@ -202,9 +162,7 @@ describe("update multiple task status", () => {
       cy.getByData("task-checkbox", "2").click();
       cy.getByData("task-checkbox", "4").click();
 
-      cy.getByData("task-toolbar-actions-button-desktop")
-        .filter(":visible")
-        .click();
+      cy.getByData("task-actions-menu-trigger").click();
       cy.getMenuItem("pending").should("have.attr", "aria-disabled", "true");
     });
 
@@ -213,9 +171,7 @@ describe("update multiple task status", () => {
       cy.getByData("task-checkbox", "5").click();
       cy.getByData("task-checkbox", "6").click();
 
-      cy.getByData("task-toolbar-actions-button-desktop")
-        .filter(":visible")
-        .click();
+      cy.getByData("task-actions-menu-trigger").click();
       cy.getMenuItem("completed").should("have.attr", "aria-disabled", "true");
     });
   });

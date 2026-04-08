@@ -1,6 +1,7 @@
-import { ModalManagerProvider } from "@/components/common/ModalManagerContext";
-import { DeleteCommentProvider } from "../DeleteCommentProvider";
 import { DeleteCommentModal } from "../DeleteCommentModal";
+import { DeleteCommentProvider } from "../DeleteCommentProvider";
+import { GuestModeModal } from "@/components/common/GuestModeModal";
+import { ModalManagerProvider } from "@/components/common/ModalManagerContext";
 
 interface CommentItemWrapperProps {
   commentId: number;
@@ -17,6 +18,7 @@ export function CommentItemWrapper({
         {children}
 
         <DeleteCommentModal commentId={commentId} />
+        <GuestModeModal />
       </DeleteCommentProvider>
     </ModalManagerProvider>
   );

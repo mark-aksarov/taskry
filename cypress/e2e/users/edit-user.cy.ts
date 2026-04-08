@@ -75,7 +75,7 @@ describe("User editing", () => {
     cy.getByData("user-address-field").within(() =>
       cy.get("input").should("have.value", "address user 1"),
     );
-    cy.getByData("user-position-select").within(() =>
+    cy.getByData("position-select").within(() =>
       cy.get("select").should("have.value", "1"),
     );
   });

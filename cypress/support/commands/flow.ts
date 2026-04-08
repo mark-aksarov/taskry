@@ -58,7 +58,7 @@ Cypress.Commands.add(
 
     // Select position
     if (data.positionKey !== undefined) {
-      cy.getByData("user-position-select").click();
+      cy.getByData("position-select").click();
       cy.getSelectOption(data.positionKey).click();
     }
   },
@@ -103,8 +103,8 @@ Cypress.Commands.add(
     const selects = {
       "task-status-select": data.statusKey,
       "task-category-select": data.categoryKey,
-      "task-project-select": data.projectKey,
-      "task-assignee-select": data.assigneeKey,
+      "project-select": data.projectKey,
+      "user-select": data.assigneeKey,
     };
 
     Object.entries(selects).forEach(([selectTestId, optionKey]) => {
@@ -154,7 +154,7 @@ Cypress.Commands.add(
     const selects = {
       "project-status-select": data.statusKey,
       "project-category-select": data.categoryKey,
-      "project-customer-select": data.customerKey,
+      "customer-select": data.customerKey,
     };
 
     Object.entries(selects).forEach(([selectTestId, optionKey]) => {
@@ -195,7 +195,7 @@ Cypress.Commands.add(
 
     // Select company
     if (data.companyKey !== undefined) {
-      cy.getByData("customer-company-select").click();
+      cy.getByData("company-select").click();
       cy.getSelectOption(data.companyKey).click();
     }
   },

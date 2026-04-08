@@ -24,7 +24,7 @@ export function PositionSelect({
     <ResponsiveSelect
       label={t("label")}
       name="positionId"
-      data-test="user-position-select"
+      data-test="position-select"
       overlayClassName="w-[var(--trigger-width)]"
       defaultSelectedKey={defaultSelectedKey || ""}
       items={withNoPositionItems}

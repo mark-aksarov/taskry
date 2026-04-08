@@ -36,7 +36,7 @@ describe("send comments", () => {
   it("send a comment to a task", () => {
     cy.visit("/en/tasks");
 
-    cy.getByData("task-1-comments-modal-trigger").click();
+    cy.getByData("task-comments-modal-trigger", "1").click();
 
     // fill form
     cy.get("[id=content]").type("This is a test comment.");
@@ -51,7 +51,7 @@ describe("send comments", () => {
   it("send a comment to a project", () => {
     cy.visit("/en/projects");
 
-    cy.getByData("project-1-comments-modal-trigger").click();
+    cy.getByData("project-comments-modal-trigger", "1").click();
 
     // fill form
     cy.get("[id=content]").type("This is a test comment.");

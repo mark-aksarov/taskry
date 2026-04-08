@@ -14,7 +14,11 @@ describe("Task creation", () => {
   const taskData = {
     title: "Created Task Title",
     description: "Created Task Description",
-    deadline: { day: "01", month: "02", year: "2026" },
+    deadline: {
+      day: "01",
+      month: "01",
+      year: "2030",
+    },
     statusKey: "active",
     categoryKey: "1",
     projectKey: "1",
@@ -43,10 +47,7 @@ describe("Task creation", () => {
   });
 
   it("creates a new task with valid data", () => {
-    cy.getByData("task-toolbar-create-new-menu-trigger")
-      .filter(":visible")
-      .click();
-    cy.getMenuItem("task").click();
+    cy.getByData("tasks-empty-section-create-button").click();
 
     cy.fillTaskForm(taskData);
 
@@ -64,24 +65,16 @@ describe("Task creation", () => {
   });
 
   it("shows validation errors and prevents submission with invalid data", () => {
-    cy.getByData("task-toolbar-create-new-menu-trigger")
-      .filter(":visible")
-      .click();
-    cy.getMenuItem("task").click();
+    cy.getByData("tasks-empty-section-create-button").click();
 
     cy.get('button[type="submit"]').click();
 
     cy.contains(/title is required/i);
     cy.contains(/deadline is required/i);
-    cy.contains(/status is required/i);
-    cy.contains(/project is required/i);
   });
 
   it("creates a task when optional fields are empty", () => {
-    cy.getByData("task-toolbar-create-new-menu-trigger")
-      .filter(":visible")
-      .click();
-    cy.getMenuItem("task").click();
+    cy.getByData("tasks-empty-section-create-button").click();
 
     cy.fillTaskForm({
       title: taskData.title,

@@ -6,7 +6,7 @@ import {
   workspaces,
 } from "@/prisma/test-utils/data";
 
-describe("delete companies", () => {
+describe("delete company", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
@@ -31,18 +31,15 @@ describe("delete companies", () => {
     cy.visit("/en/companies");
   });
 
-  it("can delete companies", () => {
-    cy.getByData("company-checkbox", "1").click();
-    cy.getByData("company-checkbox", "3").click();
-
-    cy.getByData("company-actions-menu-trigger").click();
+  it("can delete company", () => {
+    cy.getByData("company-item-action-menu-trigger", "1").click();
     cy.getMenuItem("delete").click();
 
-    cy.getByData("delete-companies-modal")
+    cy.getByData("delete-company-modal")
       .should("be.visible")
-      .contains("2 companies");
+      .contains("Company 1");
 
-    cy.getByData("delete-companies-modal-confirm-button").click();
-    cy.getByData("company-list-item").should("not.exist");
+    cy.getByData("delete-company-modal-confirm-button").click();
+    cy.getByData("company-list-item", "1").should("not.exist");
   });
 });

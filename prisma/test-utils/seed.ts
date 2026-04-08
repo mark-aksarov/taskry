@@ -70,6 +70,13 @@ export async function seed(payload: E2ESeedPayload) {
     await syncSequence("task");
   }
 
+  if (payload.subtasks) {
+    await prisma.subtask.createMany({
+      data: payload.subtasks,
+    });
+    await syncSequence("subtask");
+  }
+
   if (payload.comments) {
     await prisma.comment.createMany({
       data: payload.comments,

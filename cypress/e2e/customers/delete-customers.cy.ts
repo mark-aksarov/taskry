@@ -7,7 +7,7 @@ import {
   workspaces,
 } from "@/prisma/test-utils/data";
 
-describe("delete multiple customers", () => {
+describe("delete customers", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
@@ -30,9 +30,7 @@ describe("delete multiple customers", () => {
     cy.getByData("customer-checkbox", "1").click();
     cy.getByData("customer-checkbox", "2").click();
 
-    cy.getByData("customer-toolbar-actions-button-desktop")
-      .filter(":visible")
-      .click();
+    cy.getByData("customer-actions-menu-trigger").filter(":visible").click();
     cy.getMenuItem("delete").click();
 
     cy.getByData("delete-customers-modal")

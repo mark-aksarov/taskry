@@ -24,9 +24,7 @@ describe("Company creation", () => {
   });
 
   it("creates a new company with valid data", () => {
-    cy.getByData("company-toolbar-create-new-modal-trigger")
-      .filter(":visible")
-      .click();
+    cy.getByData("companies-empty-section-create-button").click();
 
     cy.getByData("company-name-field").type("Created Company Name");
     cy.get('button[type="submit"]').click();
@@ -37,9 +35,7 @@ describe("Company creation", () => {
   });
 
   it("shows validation errors and prevents submission with invalid data", () => {
-    cy.getByData("company-toolbar-create-new-modal-trigger")
-      .filter(":visible")
-      .click();
+    cy.getByData("companies-empty-section-create-button").click();
 
     cy.get('button[type="submit"]').click();
 

@@ -12,7 +12,10 @@ export function TaskCategoriesEmptySectionCreateButton() {
   const { onOpenChange: onModalOpenChange } = useModal("createTaskCategory");
 
   return (
-    <EmptySectionButton onPress={() => onModalOpenChange(true)}>
+    <EmptySectionButton
+      data-test="task-categories-empty-section-create-button"
+      onPress={() => onModalOpenChange(true)}
+    >
       {t("label")}
     </EmptySectionButton>
   );

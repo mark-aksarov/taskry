@@ -37,18 +37,18 @@ describe("dashboard cards", () => {
   it("Displays correct dashboard cards", () => {
     cy.getByData("dashboard-card-text")
       .eq(0)
-      .should("contain", "Total Projects");
+      .should("contain", "Total projects");
     cy.getByData("dashboard-card-value").eq(0).should("contain", "2");
 
-    cy.getByData("dashboard-card-text").eq(1).should("contain", "Total Tasks");
+    cy.getByData("dashboard-card-text").eq(1).should("contain", "Total tasks");
     cy.getByData("dashboard-card-value").eq(1).should("contain", "2");
 
-    cy.getByData("dashboard-card-text").eq(2).should("contain", "Total Users");
+    cy.getByData("dashboard-card-text").eq(2).should("contain", "Total users");
     cy.getByData("dashboard-card-value").eq(2).should("contain", "3");
 
     cy.getByData("dashboard-card-text")
       .eq(3)
-      .should("contain", "Total Customers");
+      .should("contain", "Total customers");
     cy.getByData("dashboard-card-value").eq(3).should("contain", "2");
   });
 });

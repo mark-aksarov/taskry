@@ -24,7 +24,7 @@ export function CompanySelect({
     <ResponsiveSelect
       label={t("label")}
       name="companyId"
-      data-test="customer-company-select"
+      data-test="company-select"
       overlayClassName="w-[var(--trigger-width)]"
       defaultSelectedKey={defaultSelectedKey || ""}
       items={withNoCompanyItems}

@@ -26,10 +26,10 @@
   },
   "SubtaskTextField": {
     "label": "Text",
-    "placeholder": "Typing a new subtask...",
+    "placeholder": "Typing a subtask text...",
     "validation": {
-      "required": "Title is required",
-      "tooLong": "Title is too long"
+      "required": "Subtask text is required",
+      "tooLong": "Subtask text is too long"
     }
   },
   "SubtaskFormDialogHeader": {

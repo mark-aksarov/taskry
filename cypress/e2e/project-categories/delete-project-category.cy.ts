@@ -5,7 +5,7 @@ import {
   workspaces,
 } from "@/prisma/test-utils/data";
 
-describe("delete project categories", () => {
+describe("delete project category", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
@@ -26,20 +26,15 @@ describe("delete project categories", () => {
     cy.visit("/en/project-categories");
   });
 
-  it("can delete project categories", () => {
-    cy.getByData("project-category-checkbox", "1").click();
-    cy.getByData("project-category-checkbox", "2").click();
-
-    cy.getByData("project-category-actions-menu-trigger")
-      .filter(":visible")
-      .click();
+  it("can delete project category", () => {
+    cy.getByData("project-category-item-action-menu-trigger", "1").click();
     cy.getMenuItem("delete").click();
 
-    cy.getByData("delete-project-categories-modal")
+    cy.getByData("delete-project-category-modal")
       .should("be.visible")
-      .contains("2 project categories");
+      .contains("Project Category 1");
 
-    cy.getByData("delete-project-categories-modal-confirm-button").click();
-    cy.getByData("project-category-list-item").should("not.exist");
+    cy.getByData("delete-project-category-modal-confirm-button").click();
+    cy.getByData("project-category-list-item", "1").should("not.exist");
   });
 });

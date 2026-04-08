@@ -200,6 +200,8 @@ export const ProjectListItemInner = memo(function ProjectListItemInner({
         }
         commentsModalTriggerSlot={
           <ItemBaseCommentsButton
+            data-test="project-comments-modal-trigger"
+            data-id={id.toString()}
             commentsCount={commentsCount}
             onPress={() => onProjectCommentsModalOpenChange(true)}
           />

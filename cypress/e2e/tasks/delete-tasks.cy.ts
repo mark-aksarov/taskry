@@ -11,7 +11,7 @@ import {
   projectCategories,
 } from "@/prisma/test-utils/data";
 
-describe("delete multiple tasks", () => {
+describe("delete tasks", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
@@ -38,9 +38,7 @@ describe("delete multiple tasks", () => {
     cy.getByData("task-checkbox", "1").click();
     cy.getByData("task-checkbox", "2").click();
 
-    cy.getByData("task-toolbar-actions-button-desktop")
-      .filter(":visible")
-      .click();
+    cy.getByData("task-actions-menu-trigger").click();
     cy.getMenuItem("delete").click();
 
     cy.getByData("delete-tasks-modal").should("be.visible").contains("2 tasks");

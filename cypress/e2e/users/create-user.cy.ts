@@ -21,9 +21,7 @@ describe("creates a new project", () => {
   });
 
   it("can create an user and sign in", () => {
-    cy.getByData("user-toolbar-create-new-menu-trigger")
-      .filter(":visible")
-      .click();
+    cy.getByData("create-user-menu-trigger-large").click();
     cy.getMenuItem("user").click();
 
     // fill form
@@ -52,9 +50,7 @@ describe("creates a new project", () => {
   });
 
   it("shows validation errors and prevents submission with invalid data", () => {
-    cy.getByData("user-toolbar-create-new-menu-trigger")
-      .filter(":visible")
-      .click();
+    cy.getByData("create-user-menu-trigger-large").click();
     cy.getMenuItem("user").click();
 
     cy.get('button[type="submit"]').click();
@@ -70,9 +66,7 @@ describe("creates a new project", () => {
   });
 
   it("cannot create an user with an existing email", () => {
-    cy.getByData("user-toolbar-create-new-menu-trigger")
-      .filter(":visible")
-      .click();
+    cy.getByData("create-user-menu-trigger-large").click();
     cy.getMenuItem("user").click();
 
     // fill form

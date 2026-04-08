@@ -78,6 +78,8 @@ export function SubtaskActionMenuTrigger({
       renderButton={() => (
         <Button
           isPending={isPending}
+          data-test="subtask-item-action-menu-trigger"
+          data-id={subtaskId}
           className={(renderProps) => buttonStyles({ ...renderProps, isDone })}
         >
           {subtaskText}

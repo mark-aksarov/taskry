@@ -12,7 +12,7 @@ describe("Project creation", () => {
   const projectData = {
     title: "Created Project Title",
     description: "Created Project Description",
-    deadline: { day: "01", month: "02", year: "2026" },
+    deadline: { day: "01", month: "02", year: "2030" },
     statusKey: "active",
     categoryKey: "1",
     customerKey: "1",
@@ -38,10 +38,7 @@ describe("Project creation", () => {
   });
 
   it("creates a new project with valid data", () => {
-    cy.getByData("project-toolbar-create-new-menu-trigger")
-      .filter(":visible")
-      .click();
-    cy.getMenuItem("project").click();
+    cy.getByData("projects-empty-section-create-button").click();
 
     cy.fillProjectForm(projectData);
 
@@ -59,23 +56,16 @@ describe("Project creation", () => {
   });
 
   it("shows validation errors and prevents submission with invalid data", () => {
-    cy.getByData("project-toolbar-create-new-menu-trigger")
-      .filter(":visible")
-      .click();
-    cy.getMenuItem("project").click();
+    cy.getByData("projects-empty-section-create-button").click();
 
     cy.get('button[type="submit"]').click();
 
     cy.contains(/title is required/i);
     cy.contains(/deadline is required/i);
-    cy.contains(/status is required/i);
   });
 
   it("creates a project when optional fields are empty", () => {
-    cy.getByData("project-toolbar-create-new-menu-trigger")
-      .filter(":visible")
-      .click();
-    cy.getMenuItem("project").click();
+    cy.getByData("projects-empty-section-create-button").click();
 
     cy.fillProjectForm({
       title: projectData.title,

@@ -37,8 +37,8 @@ describe("deletes a comment", () => {
 
   it("can delete a project comment", () => {
     cy.visit("/en/projects");
-    cy.getByData("project-1-comments-modal-trigger").click();
-    cy.getByData("comment-item-1-action-menu-trigger").click();
+    cy.getByData("project-comments-modal-trigger", "1").click();
+    cy.getByData("comment-item-action-menu-trigger", "1").click();
     cy.getMenuItem("delete").click();
     cy.getByData("delete-comment-modal-confirm-button").click();
     cy.getByData("comment-item").should("not.exist");
@@ -46,8 +46,8 @@ describe("deletes a comment", () => {
 
   it("can delete a task comment", () => {
     cy.visit("/en/tasks");
-    cy.getByData("task-1-comments-modal-trigger").click();
-    cy.getByData("comment-item-3-action-menu-trigger").click();
+    cy.getByData("task-comments-modal-trigger", "1").click();
+    cy.getByData("comment-item-action-menu-trigger", "3").click();
     cy.getMenuItem("delete").click();
     cy.getByData("delete-comment-modal-confirm-button").click();
     cy.getByData("comment-item").should("not.exist");
@@ -56,15 +56,15 @@ describe("deletes a comment", () => {
   it("cannot delete a project comment if user has user role and he is not sender", () => {
     cy.signIn("user-2@test.com", "12345abc");
     cy.visit("/en/projects");
-    cy.getByData("project-1-comments-modal-trigger").click();
-    cy.getByData("comment-item-1-action-menu-trigger").should("not.exist");
+    cy.getByData("project-comments-modal-trigger", "1").click();
+    cy.getByData("comment-item-action-menu-trigger", "1").should("not.exist");
   });
 
   it("cannot delete a comment in guest mode", () => {
     cy.signIn("user-3@test.com", "12345abc");
     cy.visit("/en/projects");
-    cy.getByData("project-1-comments-modal-trigger").click();
-    cy.getByData("comment-item-1-action-menu-trigger").click();
+    cy.getByData("project-comments-modal-trigger", "1").click();
+    cy.getByData("comment-item-action-menu-trigger", "1").click();
     cy.getMenuItem("delete").click();
     cy.getByData("guest-mode-modal").should("be.visible");
   });

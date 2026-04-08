@@ -5,7 +5,7 @@ import {
   workspaces,
 } from "@/prisma/test-utils/data";
 
-describe("delete task categories", () => {
+describe("delete task category", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
@@ -26,20 +26,15 @@ describe("delete task categories", () => {
     cy.visit("/en/task-categories");
   });
 
-  it("can delete task categories", () => {
-    cy.getByData("task-category-checkbox", "1").click();
-    cy.getByData("task-category-checkbox", "2").click();
-
-    cy.getByData("task-category-actions-menu-trigger")
-      .filter(":visible")
-      .click();
+  it("can delete task category", () => {
+    cy.getByData("task-category-item-action-menu-trigger", "1").click();
     cy.getMenuItem("delete").click();
 
-    cy.getByData("delete-task-categories-modal")
+    cy.getByData("delete-task-category-modal")
       .should("be.visible")
-      .contains("2 task categories");
+      .contains("Task Category 1");
 
-    cy.getByData("delete-task-categories-modal-confirm-button").click();
-    cy.getByData("task-category-list-item").should("not.exist");
+    cy.getByData("delete-task-category-modal-confirm-button").click();
+    cy.getByData("task-category-list-item", "1").should("not.exist");
   });
 });

@@ -43,7 +43,8 @@ export function ProjectCategoryCheckboxGroup({
       key={item.id}
       value={item.id.toString()}
       className={twMerge("font-normal capitalize")}
-      data-test={`category-${item.id}-checkbox`}
+      data-test="category-checkbox"
+      data-id={item.id}
     >
       {item.name}
     </Checkbox>

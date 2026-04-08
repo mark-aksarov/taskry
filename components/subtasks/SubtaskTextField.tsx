@@ -14,6 +14,7 @@ export function SubtaskTextField({ defaultValue }: SubtaskTextFieldProps) {
     <TextField
       name="text"
       label={t("label")}
+      data-test="subtask-text-field"
       placeholder={t("placeholder")}
       errorMessage={(validation) => {
         const details = validation.validationDetails;

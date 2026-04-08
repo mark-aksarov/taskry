@@ -12,8 +12,8 @@ import {
 import { cache } from "react";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
-import { ProjectFilters, ProjectSortField } from "@/lib/types";
 import { requireSession } from "../utils/requireSession";
+import { ProjectFilters, ProjectSortField } from "@/lib/types";
 import { AccessDeniedError, NotFoundError } from "../utils/error";
 import { Prisma, TaskStatus, ProjectStatus } from "@/generated/prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
@@ -293,12 +293,12 @@ export const getProjectList = cache(
                 id: p.customer.id,
                 fullName: p.customer.fullName,
                 imageUrl: p.customer.imageUrl ?? undefined,
-                company: p.customer.company
-                  ? {
-                      id: p.customer.company.id,
-                      name: p.customer.company.name,
-                    }
-                  : undefined,
+              }
+            : undefined,
+          company: p.customer?.company
+            ? {
+                id: p.customer.company.id,
+                name: p.customer.company.name,
               }
             : undefined,
           category: p.category

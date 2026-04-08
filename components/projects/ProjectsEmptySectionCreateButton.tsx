@@ -11,7 +11,10 @@ export function ProjectsEmptySectionCreateButton() {
     useModal(`createProject`);
 
   return (
-    <EmptySectionButton onPress={() => onCreateProjectModalOpenChange(true)}>
+    <EmptySectionButton
+      data-test="projects-empty-section-create-button"
+      onPress={() => onCreateProjectModalOpenChange(true)}
+    >
       {t("label")}
     </EmptySectionButton>
   );

@@ -69,7 +69,7 @@ describe("Customer editing", () => {
     cy.getByData("customer-public-link-field").within(() =>
       cy.get("input").should("have.value", "https://example.com/customer-1"),
     );
-    cy.getByData("customer-company-select").within(() =>
+    cy.getByData("company-select").within(() =>
       cy.get("select").should("have.value", "1"),
     );
   });

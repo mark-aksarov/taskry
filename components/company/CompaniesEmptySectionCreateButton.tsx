@@ -10,7 +10,10 @@ export function CompaniesEmptySectionCreateButton() {
   const { onOpenChange: onModalOpenChange } = useModal("createCompany");
 
   return (
-    <EmptySectionButton onPress={() => onModalOpenChange(true)}>
+    <EmptySectionButton
+      data-test="companies-empty-section-create-button"
+      onPress={() => onModalOpenChange(true)}
+    >
       {t("label")}
     </EmptySectionButton>
   );

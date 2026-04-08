@@ -10,7 +10,10 @@ export function PositionsEmptySectionCreateButton() {
   const { onOpenChange: onModalOpenChange } = useModal("createPosition");
 
   return (
-    <EmptySectionButton onPress={() => onModalOpenChange(true)}>
+    <EmptySectionButton
+      data-test="positions-empty-section-create-button"
+      onPress={() => onModalOpenChange(true)}
+    >
       {t("label")}
     </EmptySectionButton>
   );

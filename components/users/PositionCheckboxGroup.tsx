@@ -43,7 +43,8 @@ export function PositionCheckboxGroup({
       key={item.id}
       value={item.id.toString()}
       className={twMerge("font-normal capitalize")}
-      data-test={`position-${item.id}-checkbox`}
+      data-test="position-checkbox"
+      data-id={item.id}
     >
       {item.name}
     </Checkbox>

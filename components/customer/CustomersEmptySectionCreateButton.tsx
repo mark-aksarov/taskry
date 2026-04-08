@@ -11,7 +11,10 @@ export function CustomersEmptySectionCreateButton() {
     useModal("createCustomer");
 
   return (
-    <EmptySectionButton onPress={() => onCreateCustomerModalOpenChange(true)}>
+    <EmptySectionButton
+      data-test="customers-empty-section-create-button"
+      onPress={() => onCreateCustomerModalOpenChange(true)}
+    >
       {t("label")}
     </EmptySectionButton>
   );

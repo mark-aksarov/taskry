@@ -14,7 +14,7 @@ export function NoActiveTasksSwitch({
 
   return (
     <Switch
-      data-test="no-active-tasks-switch"
+      data-test="has-no-active-tasks-switch"
       className="justify-between"
       name="noActiveTasks"
       isSelected={isSelected}

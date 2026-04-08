@@ -9,6 +9,7 @@ import {
   workspaces,
   projectCategories,
 } from "@/prisma/test-utils/data";
+import { TaskStatus } from "@/generated/prisma/enums";
 
 describe("Task editing", () => {
   beforeEach(() => {
@@ -42,7 +43,11 @@ describe("Task editing", () => {
     cy.fillTaskForm({
       title: "Updated Task Title",
       description: "Updated Task Description",
-      deadline: { day: "01", month: "02", year: "2026" },
+      deadline: {
+        day: "01",
+        month: "01",
+        year: "2030",
+      },
       statusKey: "pending",
       categoryKey: "2",
       projectKey: "2",
@@ -70,7 +75,7 @@ describe("Task editing", () => {
       cy.get("textarea").should("have.value", "Description 1"),
     );
     cy.getByData("task-deadline-date-picker").within(() =>
-      cy.get("input").should("have.value", "2025-12-31"),
+      cy.get("input").should("have.value", "2030-12-31"),
     );
     cy.getByData("task-status-select").within(() =>
       cy.get("select").should("have.value", "active"),
@@ -78,34 +83,45 @@ describe("Task editing", () => {
     cy.getByData("task-category-select").within(() =>
       cy.get("select").should("have.value", "1"),
     );
-    cy.getByData("task-project-select").within(() =>
+    cy.getByData("project-select").within(() =>
       cy.get("select").should("have.value", "1"),
     );
-    cy.getByData("task-assignee-select").within(() =>
+    cy.getByData("user-select").within(() =>
       cy.get("select").should("have.value", "user-1"),
     );
   });
 
   it("updates a task when optional fields are empty", () => {
-    cy.getByData("task-toolbar-create-new-menu-trigger")
-      .filter(":visible")
-      .click();
-    cy.getMenuItem("task").click();
+    cy.getByData("task-item-action-menu-trigger", "1").click();
+    cy.getMenuItem("edit").click();
 
     cy.fillTaskForm({
       title: "Updated Task Title",
-      deadline: { day: "01", month: "02", year: "2026" },
-      statusKey: "pending",
-      projectKey: "2",
+      deadline: { day: "01", month: "02", year: "2030" },
+      statusKey: TaskStatus.active,
+      projectKey: "",
+      categoryKey: "",
+      assigneeKey: "",
     });
+
+    cy.getByData("task-description-field").clear();
+
+    cy.getByData("project-select").click();
+    cy.getSelectOption("").click();
+
+    cy.getByData("task-category-select").click();
+    cy.getSelectOption("").click();
+
+    cy.getByData("user-select").click();
+    cy.getSelectOption("").click();
 
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("tasks-list").within(() => {
-      cy.contains("Updated Task Title");
-      cy.contains("2026");
+    cy.getByData("task-list-item", "1").within(() => {
+      cy.contains("Task 1");
+      cy.contains("2030");
       cy.contains(/active/i);
-      cy.contains("Project 1");
+      cy.contains("No project");
       cy.contains("No category");
       cy.contains("No assignee");
     });
