@@ -18,8 +18,9 @@ export function CommentItemWrapper({
         {children}
 
         <DeleteCommentModal commentId={commentId} />
-        <GuestModeModal />
       </DeleteCommentProvider>
+
+      <GuestModeModal />
     </ModalManagerProvider>
   );
 }

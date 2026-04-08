@@ -5,6 +5,7 @@ import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { UpdateProjectProvider } from "../UpdateProjectProvider";
 import { DeleteProjectProvider } from "../DeleteProjectProvider";
 import { ProjectDetailContainer } from "../ProjectDetailContainer";
+import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectCommentsContainer } from "../ProjectCommentsContainer";
 import { UpdateProjectFormContainer } from "../UpdateProjectFormContainer";
@@ -112,6 +113,8 @@ export function ProjectItemWrapper({
           </UpdateProjectStatusProvider>
         </DeleteProjectProvider>
       </UpdateProjectProvider>
+
+      <GuestModeModal />
     </ModalManagerProvider>
   );
 }

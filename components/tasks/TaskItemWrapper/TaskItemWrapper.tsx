@@ -6,6 +6,7 @@ import { UpdateTaskProvider } from "../UpdateTaskProvider";
 import { DeleteTaskProvider } from "../DeleteTaskProvider";
 import { TaskDetailContainer } from "../TaskDetailContainer";
 import { TaskCommentsContainer } from "../TaskCommentsContainer";
+import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { UpdateTaskFormContainer } from "../UpdateTaskFormContainer";
 import { UpdateTaskStatusProvider } from "../UpdateTaskStatusProvider";
@@ -96,6 +97,8 @@ export function TaskItemWrapper({ task, children }: TaskItemWrapperProps) {
           </UpdateTaskStatusProvider>
         </DeleteTaskProvider>
       </UpdateTaskProvider>
+
+      <GuestModeModal />
     </ModalManagerProvider>
   );
 }

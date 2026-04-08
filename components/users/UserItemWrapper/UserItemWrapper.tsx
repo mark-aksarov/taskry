@@ -4,6 +4,7 @@ import { DeleteUserModal } from "../DeleteUserModal";
 import { UpdateUserProvider } from "../UpdateUserProvider";
 import { DeleteUserProvider } from "../DeleteUserProvider";
 import { UserDetailContainer } from "../UserDetailContainer";
+import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { UpdateUserFormContainer } from "../UpdateUserFormContainer";
 import { UserDetailHeaderContainer } from "../UserDetailHeaderContainer";
 import { ModalManagerProvider } from "@/components/common/ModalManagerContext";
@@ -42,6 +43,8 @@ export function UserItemWrapper({
           <DeleteUserModal userId={userId} userFullName={userFullName} />
         </UpdateUserProvider>
       </DeleteUserProvider>
+
+      <GuestModeModal />
     </ModalManagerProvider>
   );
 }

@@ -3,6 +3,7 @@ import { UpdateCustomerModal } from "../UpdateCustomerModal";
 import { DeleteCustomerModal } from "../DeleteCustomerModal";
 import { UpdateCustomerProvider } from "../UpdateCustomerProvider";
 import { DeleteCustomerProvider } from "../DeleteCustomerProvider";
+import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { CustomerDetailContainer } from "../CustomerDetailContainer";
 import { UpdateCustomerFormContainer } from "../UpdateCustomerFormContainer";
 import { CustomerDetailHeaderContainer } from "../CustomerDetailHeaderContainer";
@@ -47,6 +48,8 @@ export function CustomerItemWrapper({
           />
         </UpdateCustomerProvider>
       </DeleteCustomerProvider>
+
+      <GuestModeModal />
     </ModalManagerProvider>
   );
 }
