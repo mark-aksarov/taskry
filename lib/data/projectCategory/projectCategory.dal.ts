@@ -104,29 +104,17 @@ export const updateProjectCategory = async (
   }
 
   // Update project category
-  try {
-    const updatedProjectCategory = await prisma.projectCategory.update({
-      where: {
-        id: input.id,
-        workspaceId,
-      },
-      data: {
-        name: input.name,
-      },
-    });
+  const updatedProjectCategory = await prisma.projectCategory.update({
+    where: {
+      id: input.id,
+      workspaceId,
+    },
+    data: {
+      name: input.name,
+    },
+  });
 
-    return updatedProjectCategory;
-  } catch (error) {
-    if (
-      error instanceof PrismaClientKnownRequestError &&
-      error.code === "P2025"
-    ) {
-      throw new NotFoundError(
-        "Project category not found.",
-        "projectCategoryNotFound",
-      );
-    }
-  }
+  return updatedProjectCategory;
 };
 
 export const deleteProjectCategories = async (ids: number[]) => {

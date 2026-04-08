@@ -46,10 +46,9 @@ describe("getTaskFormData", () => {
       id: 1,
       title: "Task 1",
       description: "Description 1",
-      deadline: new Date("2025-12-31").toISOString(),
+      deadline: new Date("2030-12-31").toISOString(),
       status: TaskStatus.active,
       projectId: 1,
-      projectStatus: ProjectStatus.active,
       categoryId: 1,
       assigneeId: "user-1",
     });

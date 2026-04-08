@@ -44,7 +44,7 @@ describe("getProjectFormData", () => {
       id: 1,
       title: "Project 1",
       description: "Description 1",
-      deadline: new Date("2025-12-31").toISOString(),
+      deadline: new Date("2030-12-31").toISOString(),
       status: ProjectStatus.active,
       categoryId: 1,
       customerId: 1,

@@ -16,7 +16,6 @@ import { requireSession } from "../utils/requireSession";
 import { ProjectFilters, ProjectSortField } from "@/lib/types";
 import { AccessDeniedError, NotFoundError } from "../utils/error";
 import { Prisma, TaskStatus, ProjectStatus } from "@/generated/prisma/client";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 export const getProjectDetail = cache(
   async (id: number): Promise<ProjectDetailDTO | null> => {
@@ -412,33 +411,22 @@ export const updateProject = async (input: UpdateProjectInputDTO) => {
   }
 
   // Update project
-  try {
-    const updatedProject = await prisma.project.update({
-      where: {
-        id: input.id,
-        workspaceId,
-      },
-      data: {
-        title: input.title,
-        description: input.description,
-        deadline: new Date(input.deadline),
-        customerId: input.customerId,
-        categoryId: input.categoryId,
-        status: input.status,
-      },
-    });
+  const updatedProject = await prisma.project.update({
+    where: {
+      id: input.id,
+      workspaceId,
+    },
+    data: {
+      title: input.title,
+      description: input.description,
+      deadline: new Date(input.deadline),
+      customerId: input.customerId,
+      categoryId: input.categoryId,
+      status: input.status,
+    },
+  });
 
-    return updatedProject;
-  } catch (error) {
-    if (
-      error instanceof PrismaClientKnownRequestError &&
-      error.code === "P2025"
-    ) {
-      throw new NotFoundError("Project not found.", "projectNotFound");
-    }
-
-    throw error;
-  }
+  return updatedProject;
 };
 
 export const updateProjectStatuses = async (

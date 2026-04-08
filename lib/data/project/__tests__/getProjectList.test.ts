@@ -120,10 +120,11 @@ describe("getProjectList", () => {
             id: 1,
             fullName: "Customer 1",
             imageUrl: "/man.jpg",
-            company: {
-              id: 1,
-              name: "Company 1",
-            },
+          },
+
+          company: {
+            id: 1,
+            name: "Company 1",
           },
 
           commentsCount: 1,

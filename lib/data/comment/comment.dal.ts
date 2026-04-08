@@ -16,7 +16,6 @@ import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { requireSession } from "../utils/requireSession";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 export const getCommentList = cache(
   async ({
@@ -161,38 +160,27 @@ export const deleteComment = async (commentId: number) => {
   }
 
   // Delete comment
-  try {
-    const deletedComment = await prisma.comment.delete({
-      where: {
-        ...(role === "user" ? { senderId } : {}),
-        workspaceId,
-        id: commentId,
+  const deletedComment = await prisma.comment.delete({
+    where: {
+      ...(role === "user" ? { senderId } : {}),
+      workspaceId,
+      id: commentId,
+    },
+    select: {
+      id: true,
+      content: true,
+      taskId: true,
+      projectId: true,
+      project: {
+        select: { title: true },
       },
-      select: {
-        id: true,
-        content: true,
-        taskId: true,
-        projectId: true,
-        project: {
-          select: { title: true },
-        },
-        task: {
-          select: { title: true },
-        },
+      task: {
+        select: { title: true },
       },
-    });
+    },
+  });
 
-    return deletedComment;
-  } catch (error) {
-    if (
-      error instanceof PrismaClientKnownRequestError &&
-      error.code === "P2025"
-    ) {
-      throw new NotFoundError("Comment not found.", "commentNotFound");
-    }
-
-    throw error;
-  }
+  return deletedComment;
 };
 
 export const updateComment = async (input: UpdateCommentInputDTO) => {
@@ -218,37 +206,26 @@ export const updateComment = async (input: UpdateCommentInputDTO) => {
   }
 
   // Update comment
-  try {
-    const comment = await prisma.comment.update({
-      where: {
-        workspaceId,
-        ...(role === "user" ? { senderId } : {}),
-        id: input.id,
+  const comment = await prisma.comment.update({
+    where: {
+      workspaceId,
+      ...(role === "user" ? { senderId } : {}),
+      id: input.id,
+    },
+    data: {
+      content: input.content,
+    },
+    include: {
+      task: {
+        select: { title: true },
       },
-      data: {
-        content: input.content,
+      project: {
+        select: { title: true },
       },
-      include: {
-        task: {
-          select: { title: true },
-        },
-        project: {
-          select: { title: true },
-        },
-      },
-    });
+    },
+  });
 
-    return comment;
-  } catch (error) {
-    if (
-      error instanceof PrismaClientKnownRequestError &&
-      error.code === "P2025"
-    ) {
-      throw new NotFoundError("Comment not found.", "commentNotFound");
-    }
-
-    throw error;
-  }
+  return comment;
 };
 
 /**

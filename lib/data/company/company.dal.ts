@@ -9,9 +9,8 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
+import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
-import { AccessDeniedError, NotFoundError } from "../utils/error";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 export const getCompanyCount = cache(async () => {
   // Authorization
@@ -67,28 +66,17 @@ export const updateCompany = async (input: UpdateCompanyInputDTO) => {
   }
 
   // Update company
-  try {
-    const updatedCompany = await prisma.company.update({
-      where: {
-        id: input.id,
-        workspaceId,
-      },
-      data: {
-        name: input.name,
-      },
-    });
+  const updatedCompany = await prisma.company.update({
+    where: {
+      id: input.id,
+      workspaceId,
+    },
+    data: {
+      name: input.name,
+    },
+  });
 
-    return updatedCompany;
-  } catch (error) {
-    if (
-      error instanceof PrismaClientKnownRequestError &&
-      error.code === "P2025"
-    ) {
-      throw new NotFoundError("Company not found.", "companyNotFound");
-    }
-
-    throw error;
-  }
+  return updatedCompany;
 };
 
 export const createCompany = async (input: CreateCompanyInputDTO) => {

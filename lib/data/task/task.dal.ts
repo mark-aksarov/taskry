@@ -14,7 +14,6 @@ import { TaskFilters, TaskSortField } from "@/lib/types";
 import { requireSession } from "../utils/requireSession";
 import { Prisma, TaskStatus } from "@/generated/prisma/client";
 import { AccessDeniedError, NotFoundError } from "../utils/error";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 export const getTaskDetail = cache(
   async (id: number): Promise<TaskDetailDTO | null> => {
@@ -384,34 +383,23 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
   }
 
   // Update task
-  try {
-    const updatedTask = await prisma.task.update({
-      where: {
-        id: input.id,
-        workspaceId,
-      },
-      data: {
-        title: input.title,
-        description: input.description,
-        deadline: new Date(input.deadline),
-        status: input.status,
-        projectId: input.projectId,
-        categoryId: input.categoryId,
-        assigneeId: input.assigneeId,
-      },
-    });
+  const updatedTask = await prisma.task.update({
+    where: {
+      id: input.id,
+      workspaceId,
+    },
+    data: {
+      title: input.title,
+      description: input.description,
+      deadline: new Date(input.deadline),
+      status: input.status,
+      projectId: input.projectId,
+      categoryId: input.categoryId,
+      assigneeId: input.assigneeId,
+    },
+  });
 
-    return updatedTask;
-  } catch (error) {
-    if (
-      error instanceof PrismaClientKnownRequestError &&
-      error.code === "P2025"
-    ) {
-      throw new NotFoundError("Task not found.", "taskNotFound");
-    }
-
-    throw error;
-  }
+  return updatedTask;
 };
 
 export const updateTaskStatuses = async (

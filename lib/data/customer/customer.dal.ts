@@ -18,7 +18,6 @@ import { requireSession } from "../utils/requireSession";
 import { CustomerFilters, CustomerSortField } from "@/lib/types";
 import { AccessDeniedError, NotFoundError } from "../utils/error";
 import { Prisma, ProjectStatus } from "@/generated/prisma/client";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 export const getCustomerDetail = cache(
   async (id: number): Promise<CustomerDetailDTO | null> => {
@@ -405,33 +404,22 @@ export const updateCustomer = async (input: UpdateCustomerInputDTO) => {
   }
 
   // Update customer
-  try {
-    const updatedCustomer = await prisma.customer.update({
-      where: {
-        id: input.id,
-        workspaceId,
-      },
-      data: {
-        fullName: input.fullName,
-        bio: input.bio,
-        companyId: input.companyId,
-        email: input.email,
-        phoneNumber: input.phoneNumber,
-        publicLink: input.publicLink,
-      },
-    });
+  const updatedCustomer = await prisma.customer.update({
+    where: {
+      id: input.id,
+      workspaceId,
+    },
+    data: {
+      fullName: input.fullName,
+      bio: input.bio,
+      companyId: input.companyId,
+      email: input.email,
+      phoneNumber: input.phoneNumber,
+      publicLink: input.publicLink,
+    },
+  });
 
-    return updatedCustomer;
-  } catch (error) {
-    if (
-      error instanceof PrismaClientKnownRequestError &&
-      error.code === "P2025"
-    ) {
-      throw new NotFoundError("Customer not found", "customerNotFound");
-    }
-
-    throw error;
-  }
+  return updatedCustomer;
 };
 
 export const updateCustomerImageUrl = async (
@@ -459,28 +447,17 @@ export const updateCustomerImageUrl = async (
   }
 
   // Update customer
-  try {
-    const updatedCustomer = await prisma.customer.update({
-      where: {
-        id: input.id,
-        workspaceId,
-      },
-      data: {
-        imageUrl: input.imageUrl,
-      },
-    });
+  const updatedCustomer = await prisma.customer.update({
+    where: {
+      id: input.id,
+      workspaceId,
+    },
+    data: {
+      imageUrl: input.imageUrl,
+    },
+  });
 
-    return updatedCustomer;
-  } catch (error) {
-    if (
-      error instanceof PrismaClientKnownRequestError &&
-      error.code === "P2025"
-    ) {
-      throw new NotFoundError("Customer not found", "customerNotFound");
-    }
-
-    throw error;
-  }
+  return updatedCustomer;
 };
 
 /**
