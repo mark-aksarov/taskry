@@ -37,10 +37,10 @@ export function ProjectItemBaseBadge({
     (isUpdateProjectStatusesPending && isProjectInBatchUpdate);
 
   // Check if the project is overdue
-  const isOverdue = new Date(deadline) < new Date();
+  const isOverdue =
+    new Date(deadline) < new Date() && status !== ProjectStatus.completed;
 
   const color = isOverdue ? "red" : getProjectStatusBadgeColor(status);
-  const text = isOverdue ? t("overdue") : t(`${status}`);
 
   return (
     <ItemBaseBadge className={className} color={isPending ? "gray" : color}>
@@ -53,7 +53,7 @@ export function ProjectItemBaseBadge({
           className="animate-spin text-gray-400 dark:text-gray-900"
         />
       ) : (
-        text
+        t(`${status}`)
       )}
     </ItemBaseBadge>
   );

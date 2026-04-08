@@ -36,10 +36,10 @@ export function TaskItemBaseBadge({
     isUpdateTaskStatusPending ||
     (isUpdateTaskStatusesPending && isTaskInBatchUpdate);
 
-  const isOverdue = new Date(deadline) < new Date();
+  const isOverdue =
+    new Date(deadline) < new Date() && status !== TaskStatus.completed;
 
   const color = isOverdue ? "red" : getTaskStatusBadgeColor(status);
-  const text = isOverdue ? t("overdue") : t(`${status}`);
 
   return (
     <ItemBaseBadge className={className} color={isPending ? "gray" : color}>
@@ -52,7 +52,7 @@ export function TaskItemBaseBadge({
           className="animate-spin text-gray-400 dark:text-gray-900"
         />
       ) : (
-        text
+        t(`${status}`)
       )}
     </ItemBaseBadge>
   );
