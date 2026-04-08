@@ -21,7 +21,7 @@ describe("Button", () => {
 
   test.each<[ButtonVariant, string]>([
     ["primary", "hover:bg-blue-500"],
-    ["secondary", "hover:bg-blue-200"],
+    ["secondary", "hover:bg-gray-300"],
     ["ghost", "hover:bg-gray-200"],
     ["outlined", "hover:bg-gray-200"],
     ["contrast", "hover:bg-gray-900"],
@@ -35,7 +35,7 @@ describe("Button", () => {
     ["primary", true, "bg-gray-200"],
     ["ghost", true, "text-gray-400"],
     ["primary", false, "bg-blue-600"],
-    ["secondary", false, "bg-blue-50"],
+    ["secondary", false, "bg-gray-200"],
     ["outlined", false, "border border-gray-300"],
     ["contrast", false, "bg-black"],
     ["ghost", false, "text-black"],

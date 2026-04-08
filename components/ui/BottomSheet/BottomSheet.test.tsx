@@ -51,7 +51,7 @@ describe("BottomSheet", () => {
     const bottomSheet = screen.getByTestId("bottom-sheet");
     expect(bottomSheet).toBeInTheDocument();
 
-    const title = screen.getByText("Bottom sheet title");
+    const title = screen.getByText("Bottom sheet");
     expect(title).toBeInTheDocument();
 
     const input = screen.getByRole("textbox");
