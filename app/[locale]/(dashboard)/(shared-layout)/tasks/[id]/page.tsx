@@ -52,7 +52,7 @@ export default async function AppTaskDetailPage({
             <CommentFormProvider
               entityId={taskSummary.id}
               entityKey="taskId"
-              mutateUrl={`/api/tasks/${taskId}/comments`}
+              mutateUrl={`/api/tasks/${taskSummary.id}/comments`}
             >
               <SendCommentProvider>
                 <UpdateCommentProvider>
