@@ -1,5 +1,4 @@
 import {
-  DetailLink,
   DetailInfo,
   DetailText,
   DetailTitle,
@@ -83,20 +82,19 @@ export function TaskDetail({
       assigneesSlot={
         <DetailInfo>
           <DetailTitle>{t("assignee")}</DetailTitle>
-          {assignee ? (
-            <DetailLink
-              href={`/team/${assignee.id}`}
-              className="flex items-center gap-2"
-            >
-              {assigneeImg}
-              <DetailText>{assignee.fullName}</DetailText>
-            </DetailLink>
-          ) : (
-            <div className="flex items-center gap-2">
-              <UnknownUser className="h-9 w-9" />
-              <DetailText>{t("noAssignee")}</DetailText>
-            </div>
-          )}
+          <div className="flex items-center gap-2">
+            {assignee ? (
+              <>
+                {assigneeImg}
+                <DetailText>{assignee.fullName}</DetailText>
+              </>
+            ) : (
+              <>
+                <UnknownUser className="h-9 w-9" />
+                <DetailText>{t("noAssignee")}</DetailText>
+              </>
+            )}
+          </div>
         </DetailInfo>
       }
       deadlineSlot={
@@ -119,9 +117,7 @@ export function TaskDetail({
         <DetailInfo>
           <DetailTitle>{t("creator")}</DetailTitle>
           {creator ? (
-            <DetailLink href={`/team/${creator.id}`}>
-              <DetailText>{creator.fullName}</DetailText>
-            </DetailLink>
+            <DetailText>{creator.fullName}</DetailText>
           ) : (
             <DetailText>{t("noCreator")}</DetailText>
           )}
@@ -143,9 +139,7 @@ export function TaskDetail({
         <DetailInfo>
           <DetailTitle>{t("project")}</DetailTitle>
           {project ? (
-            <DetailLink href={`/projects/${project.id}`}>
-              <DetailText>{project.title}</DetailText>
-            </DetailLink>
+            <DetailText>{project.title}</DetailText>
           ) : (
             <DetailText>{t("noProject")}</DetailText>
           )}

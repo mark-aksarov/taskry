@@ -1,6 +1,5 @@
 import {
   DetailInfo,
-  DetailLink,
   DetailText,
   DetailTitle,
 } from "@/components/common/Detail";
@@ -66,18 +65,14 @@ export function UserDetail({
       emailSlot={
         <DetailInfo>
           <DetailTitle>{t("email")}</DetailTitle>
-          <DetailLink href={`mailto:${email}`}>
-            <DetailText>{email}</DetailText>
-          </DetailLink>
+          <DetailText>{email}</DetailText>
         </DetailInfo>
       }
       phoneNumberSlot={
         <DetailInfo>
           <DetailTitle>{t("phoneNumber")}</DetailTitle>
           {phoneNumber ? (
-            <DetailLink href={`tel:${phoneNumber}`}>
-              <DetailText>{phoneNumber}</DetailText>
-            </DetailLink>
+            <DetailText>{phoneNumber}</DetailText>
           ) : (
             <DetailText>{t("noPhoneNumber")}</DetailText>
           )}
@@ -93,9 +88,7 @@ export function UserDetail({
         <DetailInfo>
           <DetailTitle>{t("publicLink")}</DetailTitle>
           {publicLink ? (
-            <DetailLink href={publicLink}>
-              <DetailText>{publicLink}</DetailText>
-            </DetailLink>
+            <DetailText>{publicLink}</DetailText>
           ) : (
             <DetailText>{t("noPublicLink")}</DetailText>
           )}

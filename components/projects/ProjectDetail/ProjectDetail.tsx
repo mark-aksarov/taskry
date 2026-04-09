@@ -1,6 +1,5 @@
 import {
   DetailInfo,
-  DetailLink,
   DetailText,
   DetailTitle,
 } from "@/components/common/Detail";
@@ -74,20 +73,19 @@ export function ProjectDetail({
       creatorSlot={
         <DetailInfo>
           <DetailTitle>{t("creator")}</DetailTitle>
-          {creator ? (
-            <DetailLink
-              href={`/team/${creator.id}`}
-              className="flex items-center gap-2"
-            >
-              {creatorImg}
-              <DetailText>{creator.fullName}</DetailText>
-            </DetailLink>
-          ) : (
-            <div className="flex items-center gap-2">
-              <UnknownUser className="h-9 w-9" />
-              <DetailText>{t("noCreator")}</DetailText>
-            </div>
-          )}
+          <div className="flex items-center gap-2">
+            {creator ? (
+              <>
+                {creatorImg}
+                <DetailText>{creator.fullName}</DetailText>
+              </>
+            ) : (
+              <>
+                <UnknownUser className="h-9 w-9" />
+                <DetailText>{t("noCreator")}</DetailText>
+              </>
+            )}
+          </div>
         </DetailInfo>
       }
       deadlineSlot={
@@ -122,9 +120,7 @@ export function ProjectDetail({
         <DetailInfo className="border-none pb-0">
           <DetailTitle>{t("customer")}</DetailTitle>
           {customer ? (
-            <DetailLink href={`/customers/${customer.id}`}>
-              <DetailText>{customer.fullName}</DetailText>
-            </DetailLink>
+            <DetailText>{customer.fullName}</DetailText>
           ) : (
             <DetailText>{t("noCustomer")}</DetailText>
           )}

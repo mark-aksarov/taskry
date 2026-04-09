@@ -1,6 +1,5 @@
 import {
   DetailInfo,
-  DetailLink,
   DetailText,
   DetailTitle,
 } from "@/components/common/Detail";
@@ -74,9 +73,7 @@ export function ProjectDetailAlt({
         <DetailInfo>
           <DetailTitle>{t("customer")}</DetailTitle>
           {customer ? (
-            <DetailLink href={`/customers/${customer.id}`}>
-              <DetailText>{customer.fullName}</DetailText>
-            </DetailLink>
+            <DetailText>{customer.fullName}</DetailText>
           ) : (
             <DetailText>{t("noCustomer")}</DetailText>
           )}
@@ -92,9 +89,7 @@ export function ProjectDetailAlt({
         <DetailInfo className="border-none pb-0">
           <DetailTitle>{t("creator")}</DetailTitle>
           {creator ? (
-            <DetailLink href={`/team/${creator.id}`}>
-              <DetailText>{creator.fullName}</DetailText>
-            </DetailLink>
+            <DetailText>{creator.fullName}</DetailText>
           ) : (
             <DetailText>{t("noCreator")}</DetailText>
           )}

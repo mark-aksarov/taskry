@@ -1,6 +1,5 @@
 import {
   DetailInfo,
-  DetailLink,
   DetailText,
   DetailTitle,
 } from "@/components/common/Detail";
@@ -70,9 +69,7 @@ export function TaskDetailAlt({
         <DetailInfo>
           <DetailTitle>{t("assignee")}</DetailTitle>
           {assignee ? (
-            <DetailLink href={`/team/${assignee.id}`}>
-              <DetailText>{assignee.fullName}</DetailText>
-            </DetailLink>
+            <DetailText>{assignee.fullName}</DetailText>
           ) : (
             <DetailText>{t("noAssignee")}</DetailText>
           )}
@@ -88,9 +85,7 @@ export function TaskDetailAlt({
         <DetailInfo>
           <DetailTitle>{t("creator")}</DetailTitle>
           {creator ? (
-            <DetailLink href={`/team/${creator.id}`}>
-              <DetailText>{creator.fullName}</DetailText>
-            </DetailLink>
+            <DetailText>{creator.fullName}</DetailText>
           ) : (
             <DetailText>{t("noCreator")}</DetailText>
           )}
@@ -106,9 +101,7 @@ export function TaskDetailAlt({
         <DetailInfo>
           <DetailTitle>{t("project")}</DetailTitle>
           {project ? (
-            <DetailLink href={`/projects/${project.id}`}>
-              <DetailText>{project.title}</DetailText>
-            </DetailLink>
+            <DetailText>{project.title}</DetailText>
           ) : (
             <DetailText>{t("noProject")}</DetailText>
           )}
