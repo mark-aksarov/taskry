@@ -18,7 +18,6 @@ export function UpdateUserFormContainer({
   const params = useParams();
 
   const { data: positions } = useSWR<PositionSummaryDTO[]>(`/api/positions`, {
-    revalidateIfStale: false, // don't revalidate on each mount
     revalidateOnFocus: false,
   });
 
