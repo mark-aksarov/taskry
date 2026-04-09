@@ -59,6 +59,8 @@ export function CustomersPage({
     return (
       <PageContainer fullscreen headerOffset>
         <PageGrid className="relative flex-auto">
+          <ToolbarLarge firstSlot={<CustomerManageMenuTriggerLarge />} />
+
           <ToolbarMobile
             firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
             secondSlot={<CustomerManageMenuTriggerMobile />}
