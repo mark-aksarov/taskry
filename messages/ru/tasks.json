@@ -85,7 +85,7 @@
     }
   },
   "CreateTaskModalTrigger": {
-    "label": "Создать задачу"
+    "label": "Новая задача"
   },
   "DeleteTaskModal": {
     "heading": "Удалить задачу",
@@ -109,9 +109,6 @@
   },
   "TaskCommentsModal": {
     "title": "Комментарии к задаче"
-  },
-  "CreateTaskModalTrigger": {
-    "label": "Новая задача"
   },
   "TaskDetailModal": {
     "dialogHeading": "Детали задачи",
@@ -222,5 +219,10 @@
   },
   "AssigneeFiltersModalTrigger": {
     "buttonLabel": "Назначенный"
+  },
+  "TaskDetailFallbackSection": {
+    "heading": "Только для мобильных",
+    "description": "Мы ещё работаем над версией для компьютера. Пока вы можете воспользоваться этой функцией на телефоне.",
+    "button": "К задачам"
   }
 }

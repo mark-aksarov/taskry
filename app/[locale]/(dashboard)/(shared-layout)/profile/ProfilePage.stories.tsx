@@ -1,15 +1,11 @@
-import {
-  UserDetailAlt,
-  UserDetailAltSkeleton,
-} from "@/components/users/UserDetailAlt";
-
 import { mocked } from "storybook/test";
+import AppProfileLoading from "./loading";
 import { ProfilePage } from "./ProfilePage";
 import { usePathname } from "next/navigation";
 import { mockedUserDetail } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { UserDetailAlt } from "@/components/users/UserDetailAlt";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
-import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserDetailHeaderInteractive } from "@/components/users/UserDetailHeader";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
@@ -58,11 +54,8 @@ export const Default = {
 } satisfies Story;
 
 export const Loading = {
-  args: {
-    ...Default.args,
-    userDetailContainer: <UserDetailAltSkeleton />,
-    userDetailHeaderContainer: <DetailHeaderSkeleton />,
-  },
+  args: { ...Default.args },
+  render: () => <AppProfileLoading />,
 } satisfies Story;
 
 export const WithoutOptionalUserData = {

@@ -219,5 +219,10 @@
   },
   "AssigneeFiltersModalTrigger": {
     "buttonLabel": "Assignee"
+  },
+  "TaskDetailFallbackSection": {
+    "heading": "Mobile only",
+    "description": "We’re still working on the desktop version. For now, you can use this feature on your phone.",
+    "button": "Back to tasks"
   }
 }

@@ -1,32 +1,16 @@
-import { DetailInfo, DetailInfoSkeleton } from "@/components/common/Detail";
 import { TaskDetailAltLayout } from "./TaskDetailAltLayout";
-import { Skeleton } from "@/components/ui/Skeleton";
-import { FieldSkeleton } from "@/components/ui/Skeleton";
+import { DetailInfoSkeleton } from "@/components/common/Detail";
 
 export function TaskDetailAltSkeleton() {
   return (
     <TaskDetailAltLayout
-      descriptionSlot={
-        <DetailInfo>
-          <Skeleton className="w-[7rem]" size="xs" />
-          <Skeleton size="sm" className="w-[15rem]" />
-        </DetailInfo>
-      }
+      descriptionSlot={<DetailInfoSkeleton />}
       assigneesSlot={<DetailInfoSkeleton />}
       deadlineSlot={<DetailInfoSkeleton />}
-      creatorSlot={<DetailInfoSkeleton />}
       categoryNameSlot={<DetailInfoSkeleton />}
       statusSlot={<DetailInfoSkeleton />}
-      projectTitleSlot={<DetailInfoSkeleton />}
-      subtasksSlot={
-        <DetailInfo className="border-none pb-0">
-          <FieldSkeleton>
-            <Skeleton size="sm" className="w-[12rem]" />
-            <Skeleton size="sm" className="w-[15rem]" />
-            <Skeleton size="sm" className="w-[13rem]" />
-          </FieldSkeleton>
-        </DetailInfo>
-      }
+      projectTitleSlot={<DetailInfoSkeleton className="border-none pb-0" />}
+      creatorSlot={<DetailInfoSkeleton className="border-none pb-0" />}
     />
   );
 }

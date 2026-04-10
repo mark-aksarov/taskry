@@ -1,13 +1,13 @@
 import {
-  DetailInfo,
   DetailText,
   DetailTitle,
+  DetailInfoAlt,
+  DetailEditButton,
 } from "@/components/common/Detail";
 
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { TaskDetailAltLayout } from "./TaskDetailAltLayout";
-import { CreateSubtasksButton } from "@/components/subtasks/CreateSubtaskButton";
 
 interface TaskDetailAltProps {
   assignee?: {
@@ -31,7 +31,6 @@ interface TaskDetailAltProps {
     title: string;
   };
   status: TaskStatus;
-  subtasksList?: React.ReactNode;
 }
 
 export function TaskDetailAlt({
@@ -42,7 +41,6 @@ export function TaskDetailAlt({
   category,
   project,
   status,
-  subtasksList,
 }: TaskDetailAltProps) {
   const tStatus = useTranslations("tasks.TaskStatus");
   const t = useTranslations("tasks.TaskDetail");
@@ -58,67 +56,81 @@ export function TaskDetailAlt({
   return (
     <TaskDetailAltLayout
       descriptionSlot={
-        <DetailInfo>
-          <DetailTitle>{t("description")}</DetailTitle>
-          <DetailText>
-            {description ? description : t("noDescription")}
-          </DetailText>
-        </DetailInfo>
+        <DetailInfoAlt
+          title={<DetailTitle>{t("description")}</DetailTitle>}
+          text={
+            <DetailText>
+              {description ? description : t("noDescription")}
+            </DetailText>
+          }
+          editButton={<DetailEditButton />}
+        />
       }
       assigneesSlot={
-        <DetailInfo>
-          <DetailTitle>{t("assignee")}</DetailTitle>
-          {assignee ? (
-            <DetailText>{assignee.fullName}</DetailText>
-          ) : (
-            <DetailText>{t("noAssignee")}</DetailText>
-          )}
-        </DetailInfo>
+        <DetailInfoAlt
+          title={<DetailTitle>{t("assignee")}</DetailTitle>}
+          text={
+            assignee ? (
+              <DetailText>{assignee.fullName}</DetailText>
+            ) : (
+              <DetailText>{t("noAssignee")}</DetailText>
+            )
+          }
+          editButton={<DetailEditButton />}
+        />
       }
       deadlineSlot={
-        <DetailInfo>
-          <DetailTitle>{t("deadline")}</DetailTitle>
-          <DetailText>{formattedDeadline}</DetailText>
-        </DetailInfo>
-      }
-      creatorSlot={
-        <DetailInfo>
-          <DetailTitle>{t("creator")}</DetailTitle>
-          {creator ? (
-            <DetailText>{creator.fullName}</DetailText>
-          ) : (
-            <DetailText>{t("noCreator")}</DetailText>
-          )}
-        </DetailInfo>
-      }
-      categoryNameSlot={
-        <DetailInfo>
-          <DetailTitle>{t("category")}</DetailTitle>
-          <DetailText>{category ? category.name : t("noCategory")}</DetailText>
-        </DetailInfo>
-      }
-      projectTitleSlot={
-        <DetailInfo>
-          <DetailTitle>{t("project")}</DetailTitle>
-          {project ? (
-            <DetailText>{project.title}</DetailText>
-          ) : (
-            <DetailText>{t("noProject")}</DetailText>
-          )}
-        </DetailInfo>
+        <DetailInfoAlt
+          title={<DetailTitle>{t("deadline")}</DetailTitle>}
+          text={<DetailText>{formattedDeadline}</DetailText>}
+          editButton={<DetailEditButton />}
+        />
       }
       statusSlot={
-        <DetailInfo>
-          <DetailTitle>{t("status")}</DetailTitle>
-          <DetailText>{tStatus(status)}</DetailText>
-        </DetailInfo>
+        <DetailInfoAlt
+          title={<DetailTitle>{t("status")}</DetailTitle>}
+          text={<DetailText>{tStatus(status)}</DetailText>}
+          editButton={<DetailEditButton />}
+        />
       }
-      subtasksSlot={
-        <DetailInfo className="border-none pb-0">
-          <DetailTitle>{t("subtasks")}</DetailTitle>
-          {subtasksList}
-          <CreateSubtasksButton />
-        </DetailInfo>
+      categoryNameSlot={
+        <DetailInfoAlt
+          title={<DetailTitle>{t("category")}</DetailTitle>}
+          text={
+            <DetailText>
+              {category ? category.name : t("noCategory")}
+            </DetailText>
+          }
+          editButton={<DetailEditButton />}
+        />
+      }
+      projectTitleSlot={
+        <DetailInfoAlt
+          className="border-none pb-0"
+          title={<DetailTitle>{t("project")}</DetailTitle>}
+          text={
+            project ? (
+              <DetailText>{project.title}</DetailText>
+            ) : (
+              <DetailText>{t("noProject")}</DetailText>
+            )
+          }
+          editButton={<DetailEditButton />}
+        />
+      }
+      creatorSlot={
+        <DetailInfoAlt
+          className="border-none pb-0"
+          title={<DetailTitle>{t("creator")}</DetailTitle>}
+          text={
+            creator ? (
+              <DetailText>{creator.fullName}</DetailText>
+            ) : (
+              <DetailText>{t("noCreator")}</DetailText>
+            )
+          }
+          editButton={<DetailEditButton />}
+        />
       }
     />
   );

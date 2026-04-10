@@ -46,5 +46,8 @@
   },
   "CreateSubtasksButton": {
     "label": "Новая подзадача"
+  },
+  "SubtasksCard": {
+    "title": "Подзадачи"
   }
 }

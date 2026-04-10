@@ -4,8 +4,8 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { ToolbarMobile } from "@/components/common/Toolbar";
 import { PageContainer } from "@/components/common/PageContainer";
 import { UserDetailCard } from "@/components/users/UserDetailCard";
-import { UserDetailSkeleton } from "@/components/users/UserDetail";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
+import { UserDetailAltSkeleton } from "@/components/users/UserDetailAlt";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { ProfileActionsSkeleton } from "@/components/users/ProfileActions";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
@@ -18,7 +18,7 @@ export default function AppProfileLoading() {
     <>
       <PageContainer>
         <UserDetailCard
-          userDetailContainer={<UserDetailSkeleton />}
+          userDetailContainer={<UserDetailAltSkeleton />}
           userDetailHeaderContainer={<DetailHeaderSkeleton />}
           navigationLarge={
             <ProfileNavigationLarge
@@ -41,7 +41,7 @@ export default function AppProfileLoading() {
             <ProfileActionsSkeleton />
           </Card>
           <Card className="flex flex-col">
-            <UserDetailSkeleton />
+            <UserDetailAltSkeleton />
           </Card>
         </PageGrid>
       </PageContainer>

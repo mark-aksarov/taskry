@@ -1,17 +1,13 @@
-import {
-  TaskDetailAlt,
-  TaskDetailAltSkeleton,
-} from "@/components/tasks/TaskDetailAlt";
-
 import { mocked } from "storybook/test";
+import AppTaskDetailLoading from "./loading";
 import { mockedTaskDetail } from "@/mocks/tasks";
 import { TaskDetailPage } from "./TaskDetailPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { SubtaskList } from "@/components/subtasks/SubtaskList";
+import { TaskDetailAlt } from "@/components/tasks/TaskDetailAlt";
 import { TaskDetailHeader } from "@/components/tasks/TaskDetailHeader";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
-import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
@@ -46,12 +42,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    taskDetailContainer: (
-      <TaskDetailAlt
-        {...mockedTaskDetail}
-        subtasksList={<SubtaskList {...SubtaskListStory.args} />}
-      />
-    ),
+    subtasksContainer: <SubtaskList {...SubtaskListStory.args} />,
+    taskDetailContainer: <TaskDetailAlt {...mockedTaskDetail} />,
     taskHeaderContainer: (
       <TaskDetailHeader
         taskTitle={mockedTaskDetail.title}
@@ -62,17 +54,19 @@ export const Default = {
 } satisfies Story;
 
 export const Loading = {
-  args: {
-    ...Default.args,
-    taskDetailContainer: <TaskDetailAltSkeleton />,
-    taskHeaderContainer: <DetailHeaderSkeleton />,
-  },
+  args: { ...Default.args },
+  render: () => <AppTaskDetailLoading />,
 } satisfies Story;
 
 export const WithoutOptionalTaskData = {
   args: {
     ...Default.args,
-    taskDetailContainer: <TaskDetailAltSkeleton />,
+    taskDetailContainer: (
+      <TaskDetailAlt
+        deadline={mockedTaskDetail.deadline}
+        status={mockedTaskDetail.status}
+      />
+    ),
     taskHeaderContainer: (
       <TaskDetailHeader taskTitle={mockedTaskDetail.title} />
     ),
