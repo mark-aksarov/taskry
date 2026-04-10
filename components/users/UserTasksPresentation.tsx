@@ -28,11 +28,13 @@ export function UserTasksPresentation({
     <>
       {content}
 
-      <EntityContainerPagination
-        page={page}
-        totalPages={totalPages}
-        pageSize={pageSize}
-      />
+      <div className="md:py-4">
+        <EntityContainerPagination
+          page={page}
+          totalPages={totalPages}
+          pageSize={pageSize}
+        />
+      </div>
     </>
   );
 }

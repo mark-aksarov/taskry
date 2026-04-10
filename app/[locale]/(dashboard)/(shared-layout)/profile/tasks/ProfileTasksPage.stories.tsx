@@ -1,10 +1,6 @@
-import {
-  UserTasksPageLayout,
-  UserTasksPageLoadingLayout,
-} from "@/components/users/UserTasksPageLayout";
-
 import { mocked } from "storybook/test";
 import { mockedUserDetail } from "@/mocks/users";
+import AppProfileTasksPageLoading from "./loading";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { TaskGridMobile } from "@/components/tasks/TaskGrid";
@@ -12,6 +8,7 @@ import { UserTaskList } from "@/components/users/UserTaskList";
 import { ProfileActions } from "@/components/users/ProfileActions";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { TaskGridMobileStory } from "@/components/tasks/TaskGrid/__stories__";
 import { UserTaskListStory } from "@/components/users/UserTaskList/__stories__";
 import { UserTasksPresentation } from "@/components/users/UserTasksPresentation";
@@ -86,7 +83,7 @@ export const Default = {
 } satisfies Story;
 
 export const Loading = {
-  render: () => <UserTasksPageLoadingLayout {...Default.args} />,
+  render: () => <AppProfileTasksPageLoading />,
 };
 
 export const WithNoTasks = {
