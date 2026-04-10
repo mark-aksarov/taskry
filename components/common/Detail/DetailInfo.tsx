@@ -16,8 +16,32 @@ export function DetailInfo({ className, children }: DetailInfoProps) {
 export function DetailInfoSkeleton({ className }: { className?: string }) {
   return (
     <div className={twMerge(styles, className)}>
-      <Skeleton className="w-[7rem]" size="xs" />
+      <Skeleton className="w-[7rem]" size="sm" />
       <Skeleton className="w-[10rem]" size="sm" />
+    </div>
+  );
+}
+
+interface DetailInfoAltProps {
+  className?: string;
+  title: React.ReactNode;
+  text: React.ReactNode;
+  editButton?: React.ReactNode;
+}
+
+export function DetailInfoAlt({
+  className,
+  title,
+  text,
+  editButton,
+}: DetailInfoAltProps) {
+  return (
+    <div className={twMerge(styles, className)}>
+      <div className="flex items-center justify-between self-stretch">
+        {title}
+        {editButton}
+      </div>
+      {text}
     </div>
   );
 }

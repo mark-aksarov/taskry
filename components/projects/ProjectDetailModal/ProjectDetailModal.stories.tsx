@@ -25,21 +25,18 @@ const project = mockedProjectDetail;
 
 export const Default = {
   args: {
-    projectId: project.id,
     projectDetailContainer: <ProjectDetail {...project} />,
   },
 } satisfies Story;
 
 export const WithSkeleton = {
   args: {
-    projectId: project.id,
     projectDetailContainer: <ProjectDetailSkeleton />,
   },
 } satisfies Story;
 
 export const WithoutOptionalProjectData = {
   args: {
-    projectId: project.id,
     projectDetailContainer: (
       <ProjectDetail
         title={project.title}

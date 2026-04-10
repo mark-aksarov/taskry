@@ -16,9 +16,6 @@ const meta = {
   title: "components/customers/CustomerDetailModal",
   component: CustomerDetailModal,
   decorators: [withOpenModal, withModalManagerProvider, withThemedBackground],
-  args: {
-    customerId: 1,
-  },
   parameters: {
     modalId: "customerDetail",
   },
@@ -29,7 +26,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    customerId: 1,
     customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
     customerDetailHeaderContainer: (
       <CustomerDetailHeader
@@ -43,7 +39,6 @@ export const Default = {
 
 export const WithSkeletonContent = {
   args: {
-    customerId: mockedCustomerDetail.id,
     customerDetailContainer: <CustomerDetailSkeleton />,
     customerDetailHeaderContainer: <DetailHeaderSkeleton />,
   },

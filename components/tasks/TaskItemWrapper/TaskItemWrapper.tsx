@@ -51,7 +51,6 @@ export function TaskItemWrapper({ task, children }: TaskItemWrapperProps) {
                   {children}
 
                   <TaskDetailModal
-                    taskId={task.id}
                     taskDetailContainer={
                       <TaskDetailContainer taskId={task.id} />
                     }
@@ -59,7 +58,6 @@ export function TaskItemWrapper({ task, children }: TaskItemWrapperProps) {
 
                   {task.project && (
                     <ProjectDetailModal
-                      projectId={task.project.id}
                       projectDetailContainer={
                         <ProjectDetailContainer projectId={task.project.id} />
                       }
@@ -68,7 +66,6 @@ export function TaskItemWrapper({ task, children }: TaskItemWrapperProps) {
 
                   {task.assignee && (
                     <UserDetailModal
-                      userId={task.assignee.id}
                       userDetailContainer={
                         <UserDetailContainer userId={task.assignee.id} />
                       }

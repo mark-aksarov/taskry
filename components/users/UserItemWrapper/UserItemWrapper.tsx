@@ -27,7 +27,6 @@ export function UserItemWrapper({
           {children}
 
           <UserDetailModal
-            userId={userId}
             userDetailContainer={<UserDetailContainer userId={userId} />}
             userDetailHeaderContainer={
               <UserDetailHeaderContainer userId={userId} />

@@ -55,7 +55,6 @@ export function ProjectItemWrapper({
                   {children}
 
                   <ProjectDetailModal
-                    projectId={project.id}
                     projectDetailContainer={
                       <ProjectDetailContainer projectId={project.id} />
                     }
@@ -63,7 +62,6 @@ export function ProjectItemWrapper({
 
                   {project.customer && (
                     <CustomerDetailModal
-                      customerId={project.customer.id}
                       customerDetailContainer={
                         <CustomerDetailContainer
                           customerId={project.customer.id}
@@ -79,7 +77,6 @@ export function ProjectItemWrapper({
 
                   {project.creator && (
                     <UserDetailModal
-                      userId={project.creator.id}
                       userDetailContainer={
                         <UserDetailContainer userId={project.creator.id} />
                       }

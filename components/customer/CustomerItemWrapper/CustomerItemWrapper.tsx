@@ -27,7 +27,6 @@ export function CustomerItemWrapper({
           {children}
 
           <CustomerDetailModal
-            customerId={customerId}
             customerDetailContainer={
               <CustomerDetailContainer customerId={customerId} />
             }

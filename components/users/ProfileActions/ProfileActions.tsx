@@ -1,9 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useUpdateUser } from "../UpdateUserContext";
+import { KeyRound, Trash } from "lucide-react";
 import { useDeleteUser } from "../DeleteUserContext";
-import { KeyRound, Pencil, Trash } from "lucide-react";
 import { useChangePassword } from "../ChangePasswordContext";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
@@ -32,16 +31,8 @@ export function ProfileActions({ userId }: ProfileActionsProps) {
   const { onOpenChange: onChangePasswordModalOpenChange } =
     useModal("changePassword");
 
-  // Update user modal state
-  const { isPending: isUpdateUserPending } = useUpdateUser();
-  const { onOpenChange: onUpdateModalOpenChange } = useModal("updateUser");
-
   function handlePasswordChangePress() {
     guestGuard(() => onChangePasswordModalOpenChange(true));
-  }
-
-  function handleUpdatePress() {
-    guestGuard(() => onUpdateModalOpenChange(true));
   }
 
   function handleDeletePress() {
@@ -74,14 +65,6 @@ export function ProfileActions({ userId }: ProfileActionsProps) {
             <KeyRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
           }
           label={t("changePassword")}
-        />
-        <NavigationButton
-          data-test="edit-user-button"
-          onPress={handleUpdatePress}
-          variant="secondary"
-          isPending={isUpdateUserPending}
-          iconLeft={<Pencil size={18} strokeWidth={1.5} absoluteStrokeWidth />}
-          label={t("editAccount")}
         />
       </div>
     </>

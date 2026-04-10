@@ -3,7 +3,7 @@ import "server-only";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getUserDetail } from "@/lib/data/user/user.dal";
-import { UserDetail, UserDetailSkeleton } from "./UserDetail";
+import { UserDetailAlt, UserDetailAltSkeleton } from "./UserDetailAlt";
 
 interface UserDetailAltContainerProps {
   userId: string;
@@ -11,7 +11,7 @@ interface UserDetailAltContainerProps {
 
 export function UserDetailAltContainer(props: UserDetailAltContainerProps) {
   return (
-    <Suspense fallback={<UserDetailSkeleton />}>
+    <Suspense fallback={<UserDetailAltSkeleton />}>
       <UserDetailAltContainerInner {...props} />
     </Suspense>
   );
@@ -27,7 +27,7 @@ async function UserDetailAltContainerInner({
   }
 
   return (
-    <UserDetail
+    <UserDetailAlt
       id={user.id}
       fullName={user.fullName}
       bio={user.bio}

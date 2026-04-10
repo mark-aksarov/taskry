@@ -1,3 +1,8 @@
+import {
+  UserDetailAlt,
+  UserDetailAltSkeleton,
+} from "@/components/users/UserDetailAlt";
+
 import { mocked } from "storybook/test";
 import { mockedUserDetail } from "@/mocks/users";
 import { TeamProfilePage } from "./TeamProfilePage";
@@ -6,7 +11,6 @@ import { useParams, usePathname } from "next/navigation";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { UserDetail, UserDetailSkeleton } from "@/components/users/UserDetail";
 import { UserDetailHeaderInteractive } from "@/components/users/UserDetailHeader";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
 import { withUpdateUserProvider } from "@/components/users/UpdateUserProvider/__stories__";
@@ -46,7 +50,7 @@ export const Default = {
   args: {
     userId: mockedUserDetail.id,
     showUserActions: true,
-    userDetailContainer: <UserDetail {...mockedUserDetail} />,
+    userDetailContainer: <UserDetailAlt {...mockedUserDetail} />,
     userDetailHeaderContainer: (
       <UserDetailHeaderInteractive
         fullName={mockedUserDetail.fullName}
@@ -60,7 +64,7 @@ export const Default = {
 export const Loading = {
   args: {
     ...Default.args,
-    userDetailContainer: <UserDetailSkeleton />,
+    userDetailContainer: <UserDetailAltSkeleton />,
     userDetailHeaderContainer: <DetailHeaderSkeleton />,
   },
 } satisfies Story;
@@ -68,7 +72,7 @@ export const Loading = {
 export const WithoutSomeData = {
   args: {
     ...Default.args,
-    userDetailContainer: <UserDetail {...mockedUserDetail} />,
+    userDetailContainer: <UserDetailAlt {...mockedUserDetail} />,
     userDetailHeaderContainer: (
       <UserDetailHeaderInteractive fullName={mockedUserDetail.fullName} />
     ),

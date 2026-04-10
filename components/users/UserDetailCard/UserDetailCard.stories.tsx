@@ -1,5 +1,5 @@
 import { mocked } from "storybook/test";
-import { UserDetail } from "../UserDetail";
+import { UserDetailAlt } from "../UserDetailAlt";
 import { mockedUserDetail } from "@/mocks/users";
 import { UserDetailCard } from "./UserDetailCard";
 import { UserDetailSkeleton } from "../UserDetail";
@@ -46,7 +46,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    userDetailContainer: <UserDetail {...mockedUserDetail} />,
+    userDetailContainer: <UserDetailAlt {...mockedUserDetail} />,
     userDetailHeaderContainer: (
       <UserDetailHeaderInteractive
         fullName={mockedUserDetail.fullName}
@@ -74,7 +74,7 @@ export const Loading = {
 
 export const WithoutOptionalUserData = {
   args: {
-    userDetailContainer: <UserDetail {...mockedUserDetail} />,
+    userDetailContainer: <UserDetailAlt {...mockedUserDetail} />,
     userDetailHeaderContainer: (
       <UserDetailHeaderInteractive fullName={mockedUserDetail.fullName} />
     ),
