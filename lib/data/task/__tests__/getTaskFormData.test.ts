@@ -12,10 +12,10 @@ import {
 
 import { getTaskFormData } from "../task.dal";
 import { seed } from "@/prisma/test-utils/seed";
+import { TaskStatus } from "@/generated/prisma/enums";
 import { it, expect, describe, beforeAll } from "vitest";
 import { requireSession } from "@/lib/data/utils/requireSession";
 import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
-import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
 describe("getTaskFormData", () => {
   beforeAll(async () => {

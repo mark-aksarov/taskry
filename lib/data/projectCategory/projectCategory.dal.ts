@@ -9,9 +9,8 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
+import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
-import { AccessDeniedError, NotFoundError } from "../utils/error";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 export const getProjectCategoryCount = cache(async () => {
   // Authorization

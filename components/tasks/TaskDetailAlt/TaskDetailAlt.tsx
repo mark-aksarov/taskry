@@ -106,7 +106,6 @@ export function TaskDetailAlt({
       }
       projectTitleSlot={
         <DetailInfoAlt
-          className="border-none pb-0"
           title={<DetailTitle>{t("project")}</DetailTitle>}
           text={
             project ? (
