@@ -41,11 +41,11 @@ export function ProfilePage({
 
         <ToolbarMobile firstSlot={<ProfileNavigationMobile />} />
 
-        <div className="flex flex-col">{userDetailHeaderContainer}</div>
-        <Card className="flex flex-col p-1.5">
+        <div>{userDetailHeaderContainer}</div>
+        <Card className="p-1.5">
           <ProfileActions userId={userId} />
         </Card>
-        <Card className="flex flex-col">{userDetailContainer}</Card>
+        <Card>{userDetailContainer}</Card>
       </PageGrid>
     </PageContainer>
   );

@@ -1,16 +1,12 @@
-import {
-  CustomerDetail,
-  CustomerDetailSkeleton,
-} from "@/components/customer/CustomerDetail";
-
 import { mocked } from "storybook/test";
+import AppCustomerDetailLoading from "./loading";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { mockedCustomerDetail } from "@/mocks/customers";
 import { CustomerDetailPage } from "./CustomerDetailPage";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
-import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { CustomerDetailAlt } from "@/components/customer/CustomerDetailAlt";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
 import { CustomerDetailHeaderInteractive } from "@/components/customer/CustomerDetailHeader";
@@ -34,6 +30,9 @@ const meta = {
     SharedPageDecorator,
     withThemedBackground,
   ],
+  globals: {
+    viewport: { value: "mobile2", isRotated: false },
+  },
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/customers/1");
     mocked(useParams).mockReturnValue({
@@ -47,7 +46,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
+    customerDetailContainer: <CustomerDetailAlt {...mockedCustomerDetail} />,
     customerDetailHeaderContainer: (
       <CustomerDetailHeaderInteractive
         fullName={mockedCustomerDetail.fullName}
@@ -60,16 +59,18 @@ export const Default = {
 } satisfies Story;
 
 export const Loading = {
-  args: {
-    customerDetailContainer: <CustomerDetailSkeleton />,
-    customerDetailHeaderContainer: <DetailHeaderSkeleton />,
-    customerDetailActions: <CustomerDetailActions />,
-  },
+  args: { ...Default.args },
+  render: () => <AppCustomerDetailLoading />,
 } satisfies Story;
 
 export const WithoutSomeData = {
   args: {
-    customerDetailContainer: <CustomerDetail {...mockedCustomerDetail} />,
+    customerDetailContainer: (
+      <CustomerDetailAlt
+        fullName={mockedCustomerDetail.fullName}
+        email={mockedCustomerDetail.email}
+      />
+    ),
     customerDetailHeaderContainer: (
       <CustomerDetailHeaderInteractive
         fullName={mockedCustomerDetail.fullName}

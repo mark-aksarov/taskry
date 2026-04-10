@@ -31,13 +31,13 @@ export default function AppTeamProfileLoading() {
 
         <ToolbarMobile firstSlot={<ProfileNavigationMobile />} />
 
-        <div className="flex flex-col">
+        <div>
           <DetailHeaderSkeleton />
         </div>
-        <Card className="flex flex-col p-1.5">
+        <Card className="p-1.5">
           <ProfileActionsSkeleton />
         </Card>
-        <Card className="flex flex-col">
+        <Card>
           <UserDetailSkeleton />
         </Card>
       </PageGrid>

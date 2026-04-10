@@ -32,11 +32,11 @@ export function ProjectDetailPage({
           }
         />
 
-        <div className="flex flex-col">{projectHeaderContainer}</div>
-        <Card className="flex flex-col p-1.5">
+        <div>{projectHeaderContainer}</div>
+        <Card className="p-1.5">
           <ProjectDetailActions />
         </Card>
-        <Card className="flex flex-col">{projectDetailContainer}</Card>
+        <Card>{projectDetailContainer}</Card>
       </PageGrid>
     </PageContainer>
   );

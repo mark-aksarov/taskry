@@ -65,7 +65,13 @@ export const Loading = {
 export const WithoutSomeData = {
   args: {
     ...Default.args,
-    userDetailContainer: <UserDetailAlt {...mockedUserDetail} />,
+    userDetailContainer: (
+      <UserDetailAlt
+        id={mockedUserDetail.id}
+        fullName={mockedUserDetail.fullName}
+        email={mockedUserDetail.email}
+      />
+    ),
     userDetailHeaderContainer: (
       <UserDetailHeaderInteractive fullName={mockedUserDetail.fullName} />
     ),

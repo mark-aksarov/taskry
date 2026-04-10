@@ -51,13 +51,13 @@ export function TeamProfilePage({
 
         <ToolbarMobile firstSlot={<UserNavigationMobile />} />
 
-        <div className="flex flex-col">{userDetailHeaderContainer}</div>
+        <div>{userDetailHeaderContainer}</div>
         {showUserActions && (
-          <Card className="flex flex-col p-1.5">
+          <Card className="p-1.5">
             <ProfileActions userId={userId} />
           </Card>
         )}
-        <Card className="flex flex-col">{userDetailContainer}</Card>
+        <Card>{userDetailContainer}</Card>
       </PageGrid>
     </PageContainer>
   );

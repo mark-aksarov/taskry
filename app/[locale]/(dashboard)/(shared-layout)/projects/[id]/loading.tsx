@@ -28,13 +28,13 @@ export default function AppProjectDetailLoading() {
           }
         />
 
-        <div className="flex flex-col">
+        <div>
           <DetailHeaderSkeleton />
         </div>
-        <Card className="flex flex-col p-1.5">
+        <Card className="p-1.5">
           <ProjectDetailActionsSkeleton />
         </Card>
-        <Card className="flex flex-col">
+        <Card>
           <ProjectDetailAltSkeleton />
         </Card>
       </PageGrid>

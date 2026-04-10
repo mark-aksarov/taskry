@@ -6,8 +6,7 @@ import { ToolbarMobile } from "@/components/common/Toolbar";
 import { PageContainer } from "@/components/common/PageContainer";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { CustomerDetailCard } from "@/components/customer/CustomerDetailCard";
-import { CustomerDetailSkeleton } from "@/components/customer/CustomerDetail";
+import { CustomerDetailAltSkeleton } from "@/components/customer/CustomerDetailAlt";
 import { CustomerDetailActionsSkeleton } from "@/components/customer/CustomerDetailActions";
 
 export default function AppCustomerDetailLoading() {
@@ -15,11 +14,9 @@ export default function AppCustomerDetailLoading() {
 
   return (
     <PageContainer>
-      <CustomerDetailCard
-        customerDetailContainer={<CustomerDetailSkeleton />}
-        customerDetailHeaderContainer={<DetailHeaderSkeleton />}
-        customerDetailActions={<CustomerDetailActionsSkeleton />}
-      />
+      <Card className="max-md:hidden">
+        <CustomerDetailAltSkeleton />
+      </Card>
 
       <PageGrid className="md:hidden">
         <ToolbarMobile
@@ -38,7 +35,7 @@ export default function AppCustomerDetailLoading() {
           <CustomerDetailActionsSkeleton />
         </Card>
         <Card className="flex flex-col">
-          <CustomerDetailSkeleton />
+          <CustomerDetailAltSkeleton />
         </Card>
       </PageGrid>
     </PageContainer>

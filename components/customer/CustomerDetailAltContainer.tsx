@@ -1,7 +1,10 @@
+import {
+  CustomerDetailAlt,
+  CustomerDetailAltSkeleton,
+} from "./CustomerDetailAlt";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getCustomerDetail } from "@/lib/data/customer/customer.dal";
-import { CustomerDetail, CustomerDetailSkeleton } from "./CustomerDetail";
 
 interface CustomerDetailAltContainerProps {
   customerId: number;
@@ -11,7 +14,7 @@ export function CustomerDetailAltContainer(
   props: CustomerDetailAltContainerProps,
 ) {
   return (
-    <Suspense fallback={<CustomerDetailSkeleton />}>
+    <Suspense fallback={<CustomerDetailAltSkeleton />}>
       <CustomerDetailAltContainerInner {...props} />
     </Suspense>
   );
@@ -27,7 +30,7 @@ async function CustomerDetailAltContainerInner({
   }
 
   return (
-    <CustomerDetail
+    <CustomerDetailAlt
       fullName={customer.fullName}
       bio={customer.bio}
       email={customer.email}
