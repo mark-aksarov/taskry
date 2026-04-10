@@ -6,7 +6,6 @@ import { ToolbarMobile } from "@/components/common/Toolbar";
 import { PageContainer } from "@/components/common/PageContainer";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { ProjectDetailCard } from "@/components/projects/ProjectDetailCard";
 import { ProjectDetailAltSkeleton } from "@/components/projects/ProjectDetailAlt";
 import { ProjectDetailActionsSkeleton } from "@/components/projects/ProjectDetailActions";
 
@@ -15,11 +14,9 @@ export default function AppProjectDetailLoading() {
 
   return (
     <PageContainer>
-      <ProjectDetailCard
-        projectDetailContainer={<ProjectDetailAltSkeleton />}
-        projectDetailHeaderContainer={<DetailHeaderSkeleton />}
-        projectDetailActions={<ProjectDetailActionsSkeleton />}
-      />
+      <Card className="max-md:hidden">
+        <ProjectDetailAltSkeleton />
+      </Card>
 
       <PageGrid className="md:hidden">
         <ToolbarMobile

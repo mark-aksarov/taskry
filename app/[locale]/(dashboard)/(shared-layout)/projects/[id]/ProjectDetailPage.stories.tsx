@@ -1,16 +1,12 @@
-import {
-  ProjectDetailAlt,
-  ProjectDetailAltSkeleton,
-} from "@/components/projects/ProjectDetailAlt";
-
 import { mocked } from "storybook/test";
+import AppProjectDetailLoading from "./loading";
 import { mockedProjectDetail } from "@/mocks/projects";
 import { ProjectDetailPage } from "./ProjectDetailPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
-import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { ProjectDetailAlt } from "@/components/projects/ProjectDetailAlt";
 import { ProjectDetailHeader } from "@/components/projects/ProjectDetailHeader";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
 import { withDeleteProjectProvider } from "@/components/projects/DeleteProjectProvider/__stories__";
@@ -29,6 +25,9 @@ const meta = {
     SharedPageDecorator,
     withThemedBackground,
   ],
+  globals: {
+    viewport: { value: "mobile2", isRotated: false },
+  },
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/projects/1");
     mocked(useParams).mockReturnValue({
@@ -53,11 +52,8 @@ export const Default = {
 } satisfies Story;
 
 export const Loading = {
-  args: {
-    ...Default.args,
-    projectDetailContainer: <ProjectDetailAltSkeleton />,
-    projectHeaderContainer: <DetailHeaderSkeleton />,
-  },
+  args: { ...Default.args },
+  render: () => <AppProjectDetailLoading />,
 } satisfies Story;
 
 export const WithoutSomeData = {

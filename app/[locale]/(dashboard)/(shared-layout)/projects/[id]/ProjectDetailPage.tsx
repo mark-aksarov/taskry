@@ -5,7 +5,6 @@ import { BackButton } from "@/components/common/BackButton";
 import { ToolbarMobile } from "@/components/common/Toolbar";
 import { PageContainer } from "@/components/common/PageContainer";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { ProjectDetailCard } from "@/components/projects/ProjectDetailCard";
 import { ProjectDetailActions } from "@/components/projects/ProjectDetailActions";
 
 interface ProjectPageProps {
@@ -21,11 +20,7 @@ export function ProjectDetailPage({
 
   return (
     <PageContainer>
-      <ProjectDetailCard
-        projectDetailContainer={projectDetailContainer}
-        projectDetailHeaderContainer={projectHeaderContainer}
-        projectDetailActions={<ProjectDetailActions />}
-      />
+      <Card className="max-md:hidden">{projectDetailContainer}</Card>
 
       <PageGrid className="md:hidden">
         <ToolbarMobile

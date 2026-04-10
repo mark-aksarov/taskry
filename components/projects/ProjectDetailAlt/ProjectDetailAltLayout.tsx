@@ -1,5 +1,3 @@
-import { DetailRow } from "@/components/common/Detail";
-
 interface ProjectDetailAltLayoutProps {
   descriptionSlot: React.ReactNode;
   creatorSlot: React.ReactNode;
@@ -17,20 +15,14 @@ export function ProjectDetailAltLayout({
   customerSlot,
   categorySlot,
 }: ProjectDetailAltLayoutProps) {
-  const rowStyles = "max-lg:flex-col max-lg:gap-4";
-
   return (
     <div className="flex flex-col gap-4">
-      <DetailRow className={rowStyles}>{descriptionSlot}</DetailRow>
-      <DetailRow className={rowStyles}>
-        {statusSlot}
-        {deadlineSlot}
-      </DetailRow>
-      <DetailRow className={rowStyles}>
-        {customerSlot}
-        {categorySlot}
-      </DetailRow>
-      <DetailRow>{creatorSlot}</DetailRow>
+      {descriptionSlot}
+      {statusSlot}
+      {deadlineSlot}
+      {customerSlot}
+      {categorySlot}
+      {creatorSlot}
     </div>
   );
 }

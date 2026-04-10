@@ -1,7 +1,8 @@
 import {
-  DetailInfo,
   DetailText,
   DetailTitle,
+  DetailInfoAlt,
+  DetailEditButton,
 } from "@/components/common/Detail";
 
 import { ProjectStatus } from "@/generated/prisma/enums";
@@ -50,50 +51,67 @@ export function ProjectDetailAlt({
   return (
     <ProjectDetailAltLayout
       descriptionSlot={
-        <DetailInfo>
-          <DetailTitle>{t("description")}</DetailTitle>
-          <DetailText>
-            {description ? description : t("noDescription")}
-          </DetailText>
-        </DetailInfo>
+        <DetailInfoAlt
+          title={<DetailTitle>{t("description")}</DetailTitle>}
+          text={
+            <DetailText>
+              {description ? description : t("noDescription")}
+            </DetailText>
+          }
+          editButton={<DetailEditButton />}
+        />
       }
       statusSlot={
-        <DetailInfo>
-          <DetailTitle>{t("status")}</DetailTitle>
-          <DetailText>{tStatus(status)}</DetailText>
-        </DetailInfo>
+        <DetailInfoAlt
+          title={<DetailTitle>{t("status")}</DetailTitle>}
+          text={<DetailText>{tStatus(status)}</DetailText>}
+          editButton={<DetailEditButton />}
+        />
       }
       deadlineSlot={
-        <DetailInfo>
-          <DetailTitle>{t("deadline")}</DetailTitle>
-          <DetailText>{formattedDeadline}</DetailText>
-        </DetailInfo>
+        <DetailInfoAlt
+          title={<DetailTitle>{t("deadline")}</DetailTitle>}
+          text={formattedDeadline}
+          editButton={<DetailEditButton />}
+        />
       }
       customerSlot={
-        <DetailInfo>
-          <DetailTitle>{t("customer")}</DetailTitle>
-          {customer ? (
-            <DetailText>{customer.fullName}</DetailText>
-          ) : (
-            <DetailText>{t("noCustomer")}</DetailText>
-          )}
-        </DetailInfo>
+        <DetailInfoAlt
+          title={<DetailTitle>{t("customer")}</DetailTitle>}
+          text={
+            customer ? (
+              <DetailText>{customer.fullName}</DetailText>
+            ) : (
+              <DetailText>{t("noCustomer")}</DetailText>
+            )
+          }
+          editButton={<DetailEditButton />}
+        />
       }
       categorySlot={
-        <DetailInfo>
-          <DetailTitle>{t("category")}</DetailTitle>
-          <DetailText>{category ? category.name : t("noCategory")}</DetailText>
-        </DetailInfo>
+        <DetailInfoAlt
+          title={<DetailTitle>{t("category")}</DetailTitle>}
+          text={
+            <DetailText>
+              {category ? category.name : t("noCategory")}
+            </DetailText>
+          }
+          editButton={<DetailEditButton />}
+        />
       }
       creatorSlot={
-        <DetailInfo className="border-none pb-0">
-          <DetailTitle>{t("creator")}</DetailTitle>
-          {creator ? (
-            <DetailText>{creator.fullName}</DetailText>
-          ) : (
-            <DetailText>{t("noCreator")}</DetailText>
-          )}
-        </DetailInfo>
+        <DetailInfoAlt
+          className="border-none pb-0"
+          title={<DetailTitle>{t("creator")}</DetailTitle>}
+          text={
+            creator ? (
+              <DetailText>{creator.fullName}</DetailText>
+            ) : (
+              <DetailText>{t("noCreator")}</DetailText>
+            )
+          }
+          editButton={<DetailEditButton />}
+        />
       }
     />
   );

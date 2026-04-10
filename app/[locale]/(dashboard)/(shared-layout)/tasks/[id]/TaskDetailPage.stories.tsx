@@ -29,6 +29,9 @@ const meta = {
     SharedPageDecorator,
     withThemedBackground,
   ],
+  globals: {
+    viewport: { value: "mobile2", isRotated: false },
+  },
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/tasks/1");
     mocked(useParams).mockReturnValue({
