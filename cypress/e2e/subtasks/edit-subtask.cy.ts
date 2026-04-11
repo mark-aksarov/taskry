@@ -13,7 +13,7 @@ import { TaskStatus } from "@/generated/prisma/enums";
 
 describe("Subtask editing", () => {
   beforeEach(() => {
-    cy.viewport(1440, 900);
+    cy.viewport(414, 896);
 
     const payload = {
       users,

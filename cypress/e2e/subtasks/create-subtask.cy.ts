@@ -13,7 +13,7 @@ import {
 
 describe("Subtask creation", () => {
   beforeEach(() => {
-    cy.viewport(1440, 900);
+    cy.viewport(414, 896);
 
     const payload = {
       users,
