@@ -14,8 +14,9 @@ import { withUpdateUserBioProvider } from "@/components/users/UpdateUserBioProvi
 import { withChangePasswordProvider } from "@/components/users/ChangePasswordProvider/__stories__";
 import { withUpdateUserImageProvider } from "@/components/users/UpdateUserImageProvider/__stories__";
 import { withClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlProvider/__stories__";
-import { withUpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext/__stories__";
 import { withUpdateUserFullNameProvider } from "@/components/users/UpdateUserFullNameProvider/__stories__";
+import { withUpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext/__stories__";
+import { withUpdateUserBirthdateProvider } from "@/components/users/UpdateUserBirthdateProvider/__stories__";
 import { withUpdateUserPhoneNumberProvider } from "@/components/users/UpdateUserPhoneNumberProvider/__stories__";
 
 const meta = {
@@ -28,6 +29,7 @@ const meta = {
     withUpdateUserPhoneNumberProvider,
     withUpdateUserBioProvider,
     withUpdateUserFullNameProvider,
+    withUpdateUserBirthdateProvider,
     withDeleteUserProvider,
     withUpdateUserImageProvider,
     withClearUserImageUrlProvider,

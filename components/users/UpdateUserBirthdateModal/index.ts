@@ -1,0 +1,1 @@
+export { UpdateUserBirthdateModal } from "./UpdateUserBirthdateModal";

@@ -229,5 +229,8 @@
   },
   "UpdateUserPhoneNumberModal": {
     "title": "Изменить номер телефон"
+  },
+  "UpdateUserBirthdateModal": {
+    "title": "Изменить дату рождения"
   }
 }

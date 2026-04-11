@@ -232,5 +232,8 @@
   },
   "UpdateUserPhoneNumberModal": {
     "title": "Edit phone number"
+  },
+  "UpdateUserBirthdateModal": {
+    "title": "Edit birthdate"
   }
 }

@@ -4,10 +4,12 @@ import { ResponsiveDatePicker } from "@/components/common/ResponsiveDatePicker";
 
 interface UserBirthdateDatePickerProps {
   defaultValue?: DateValue;
+  matchTriggerWidth?: boolean;
 }
 
 export function UserBirthdateDatePicker({
   defaultValue,
+  matchTriggerWidth = true,
 }: UserBirthdateDatePickerProps) {
   const t = useTranslations("users.UserBirthdateDatePicker");
 
@@ -16,7 +18,7 @@ export function UserBirthdateDatePicker({
       data-test="user-birthdate-date-picker"
       name="birthdate"
       label={t("label")}
-      overlayClassName="w-[var(--trigger-width)]"
+      overlayClassName={matchTriggerWidth ? "w-[var(--trigger-width)]" : ""}
       defaultValue={defaultValue}
     />
   );

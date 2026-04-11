@@ -9,6 +9,7 @@ import { UserDetailAltLayout } from "./UserDetailAltLayout";
 import { UserBioDetailInfoAlt } from "./UserBioDetailInfoAlt";
 import { UserFullNameDetailInfoAlt } from "./UserFullNameDetailInfoAlt";
 import { UserPhoneNumberDetailInfoAlt } from "./UserPhoneNumberDetailInfoAlt";
+import { UserBirthdateDetailInfoAlt } from "./UserBirthdateDetailInfoAlt";
 
 export interface UserDetailAltProps {
   id: string;
@@ -35,16 +36,6 @@ export function UserDetailAlt({
   position,
 }: UserDetailAltProps) {
   const t = useTranslations("users.UserDetail");
-
-  const format = useFormatter();
-
-  const formattedBirthdate = birthdate
-    ? format.dateTime(new Date(birthdate), {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      })
-    : t("noBirthdate");
 
   return (
     <UserDetailAltLayout
@@ -86,14 +77,7 @@ export function UserDetailAlt({
           editButton={<DetailEditButton />}
         />
       }
-      birthdateSlot={
-        <DetailInfoAlt
-          className="border-none pb-0"
-          title={<DetailTitle>{t("birthdate")}</DetailTitle>}
-          text={<DetailText>{formattedBirthdate}</DetailText>}
-          editButton={<DetailEditButton />}
-        />
-      }
+      birthdateSlot={<UserBirthdateDetailInfoAlt birthdate={birthdate} />}
     />
   );
 }
