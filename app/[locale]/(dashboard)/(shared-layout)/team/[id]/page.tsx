@@ -2,10 +2,10 @@ import { notFound } from "next/navigation";
 import { TeamProfilePage } from "./TeamProfilePage";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
+import { getUserFormData } from "@/lib/data/user/user.dal";
 import { userId as userIdSchema } from "@/lib/schemas/user";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { getUserDetail, getUserFormData } from "@/lib/data/user/user.dal";
 import { UpdateUserBioModal } from "@/components/users/UpdateUserBioModal";
 import { DeleteUserProvider } from "@/components/users/DeleteUserProvider";
 import { ChangePasswordModal } from "@/components/users/ChangePasswordModal";
@@ -18,16 +18,21 @@ import { UpdateUserAddressModal } from "@/components/users/UpdateUserAddressModa
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordProvider";
 import { UserDetailAltContainer } from "@/components/users/UserDetailAltContainer";
 import { UpdateUserFullNameModal } from "@/components/users/UpdateUserFullNameModal";
+import { UpdateUserPositionModal } from "@/components/users/UpdateUserPositionModal";
 import { UpdateUserImageProvider } from "@/components/users/UpdateUserImageProvider";
 import { UpdateUserBirthdateModal } from "@/components/users/UpdateUserBirthdateModal";
+import { UpdateUserPublicLinkModal } from "@/components/users/UpdateUserPublicLinkModal";
 import { ClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlProvider";
 import { UpdateUserAddressProvider } from "@/components/users/UpdateUserAddressProvider";
 import { UpdateUserFullNameProvider } from "@/components/users/UpdateUserFullNameProvider";
+import { UpdateUserPositionProvider } from "@/components/users/UpdateUserPositionProvider";
 import { UpdateUserPhoneNumberModal } from "@/components/users/UpdateUserPhoneNumberModal";
 import { UpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext";
 import { UpdateUserBirthdateProvider } from "@/components/users/UpdateUserBirthdateProvider";
 import { UserDetailHeaderAltContainer } from "@/components/users/UserDetailHeaderAltContainer";
+import { UpdateUserPublicLinkProvider } from "@/components/users/UpdateUserPublicLinkProvider";
 import { UpdateUserPhoneNumberProvider } from "@/components/users/UpdateUserPhoneNumberProvider";
+import { UpdateUserPositionFormContainer } from "@/components/users/UpdateUserPositionFormContainer";
 
 export default async function AppTeamProfilePage({
   params,
@@ -67,63 +72,80 @@ export default async function AppTeamProfilePage({
                 <UpdateUserPhoneNumberProvider>
                   <UpdateUserBirthdateProvider>
                     <UpdateUserAddressProvider>
-                      <ChangePasswordProvider>
-                        <TeamProfilePage
-                          showUserActions={showUserActions}
-                          userId={userId}
-                          userDetailContainer={
-                            <UserDetailAltContainer userId={userId} />
-                          }
-                          userDetailHeaderContainer={
-                            <UserDetailHeaderAltContainer userId={userId} />
-                          }
-                        />
+                      <UpdateUserPublicLinkProvider>
+                        <UpdateUserPositionProvider>
+                          <ChangePasswordProvider>
+                            <TeamProfilePage
+                              showUserActions={showUserActions}
+                              userId={userId}
+                              userDetailContainer={
+                                <UserDetailAltContainer userId={userId} />
+                              }
+                              userDetailHeaderContainer={
+                                <UserDetailHeaderAltContainer userId={userId} />
+                              }
+                            />
 
-                        <TaskSearchModal
-                          searchContainer={
-                            <LinkSearchContainer pathname="/tasks" />
-                          }
-                        />
+                            <TaskSearchModal
+                              searchContainer={
+                                <LinkSearchContainer pathname="/tasks" />
+                              }
+                            />
 
-                        <ChangePasswordModal userId={userId} />
+                            <ChangePasswordModal userId={userId} />
 
-                        <DeleteUserDetailModal
-                          userId={userId}
-                          userFullName={userFormData.fullName}
-                        />
+                            <DeleteUserDetailModal
+                              userId={userId}
+                              userFullName={userFormData.fullName}
+                            />
 
-                        <UpdateUserBioModal
-                          userId={userId}
-                          userBio={userFormData.bio}
-                        />
+                            <UpdateUserBioModal
+                              userId={userId}
+                              userBio={userFormData.bio}
+                            />
 
-                        <UpdateUserFullNameModal
-                          userId={userId}
-                          userFullName={userFormData.fullName}
-                        />
+                            <UpdateUserFullNameModal
+                              userId={userId}
+                              userFullName={userFormData.fullName}
+                            />
 
-                        <UpdateUserPhoneNumberModal
-                          userId={userId}
-                          userPhoneNumber={userFormData.phoneNumber}
-                        />
+                            <UpdateUserPhoneNumberModal
+                              userId={userId}
+                              userPhoneNumber={userFormData.phoneNumber}
+                            />
 
-                        <UpdateUserBirthdateModal
-                          userId={userId}
-                          userBirthdate={userFormData.birthdate}
-                        />
+                            <UpdateUserBirthdateModal
+                              userId={userId}
+                              userBirthdate={userFormData.birthdate}
+                            />
 
-                        <UpdateUserAddressModal
-                          userId={userId}
-                          userAddress={userFormData.address}
-                        />
+                            <UpdateUserAddressModal
+                              userId={userId}
+                              userAddress={userFormData.address}
+                            />
 
-                        <UpdateUserImageModal userId={userId} />
+                            <UpdateUserPublicLinkModal
+                              userId={userId}
+                              userPublicLink={userFormData.publicLink}
+                            />
 
-                        <DeleteUserImageModal
-                          userId={userId}
-                          userFullName={userFormData.fullName}
-                        />
-                      </ChangePasswordProvider>
+                            <UpdateUserPositionModal
+                              updateUserPositionFormContainer={
+                                <UpdateUserPositionFormContainer
+                                  userId={userId}
+                                />
+                              }
+                            />
+
+                            <UpdateUserImageModal userId={userId} />
+
+                            <DeleteUserImageModal
+                              userId={userId}
+                              userFullName={userFormData.fullName}
+                            />
+                          </ChangePasswordProvider>
+                        </UpdateUserPositionProvider>
+                      </UpdateUserPublicLinkProvider>
                     </UpdateUserAddressProvider>
                   </UpdateUserBirthdateProvider>
                 </UpdateUserPhoneNumberProvider>
