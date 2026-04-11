@@ -13,6 +13,7 @@ import { withDeleteUserProvider } from "@/components/users/DeleteUserProvider/__
 import { withUpdateUserBioProvider } from "@/components/users/UpdateUserBioProvider/__stories__";
 import { withChangePasswordProvider } from "@/components/users/ChangePasswordProvider/__stories__";
 import { withUpdateUserImageProvider } from "@/components/users/UpdateUserImageProvider/__stories__";
+import { withUpdateUserAddressProvider } from "@/components/users/UpdateUserAddressProvider/__stories__";
 import { withClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlProvider/__stories__";
 import { withUpdateUserFullNameProvider } from "@/components/users/UpdateUserFullNameProvider/__stories__";
 import { withUpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext/__stories__";
@@ -30,6 +31,7 @@ const meta = {
     withUpdateUserBioProvider,
     withUpdateUserFullNameProvider,
     withUpdateUserBirthdateProvider,
+    withUpdateUserAddressProvider,
     withDeleteUserProvider,
     withUpdateUserImageProvider,
     withClearUserImageUrlProvider,

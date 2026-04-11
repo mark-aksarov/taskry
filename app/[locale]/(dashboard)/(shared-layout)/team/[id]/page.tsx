@@ -14,12 +14,14 @@ import { UpdateUserImageModal } from "@/components/users/UpdateUserImageModal";
 import { DeleteUserImageModal } from "@/components/users/DeleteUserImageModal";
 import { UpdateUserBioProvider } from "@/components/users/UpdateUserBioProvider";
 import { DeleteUserDetailModal } from "@/components/users/DeleteUserDetailModal";
+import { UpdateUserAddressModal } from "@/components/users/UpdateUserAddressModal";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordProvider";
 import { UserDetailAltContainer } from "@/components/users/UserDetailAltContainer";
 import { UpdateUserFullNameModal } from "@/components/users/UpdateUserFullNameModal";
 import { UpdateUserImageProvider } from "@/components/users/UpdateUserImageProvider";
 import { UpdateUserBirthdateModal } from "@/components/users/UpdateUserBirthdateModal";
 import { ClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlProvider";
+import { UpdateUserAddressProvider } from "@/components/users/UpdateUserAddressProvider";
 import { UpdateUserFullNameProvider } from "@/components/users/UpdateUserFullNameProvider";
 import { UpdateUserPhoneNumberModal } from "@/components/users/UpdateUserPhoneNumberModal";
 import { UpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext";
@@ -64,58 +66,65 @@ export default async function AppTeamProfilePage({
               <UpdateUserBioProvider>
                 <UpdateUserPhoneNumberProvider>
                   <UpdateUserBirthdateProvider>
-                    <ChangePasswordProvider>
-                      <TeamProfilePage
-                        showUserActions={showUserActions}
-                        userId={userId}
-                        userDetailContainer={
-                          <UserDetailAltContainer userId={userId} />
-                        }
-                        userDetailHeaderContainer={
-                          <UserDetailHeaderAltContainer userId={userId} />
-                        }
-                      />
+                    <UpdateUserAddressProvider>
+                      <ChangePasswordProvider>
+                        <TeamProfilePage
+                          showUserActions={showUserActions}
+                          userId={userId}
+                          userDetailContainer={
+                            <UserDetailAltContainer userId={userId} />
+                          }
+                          userDetailHeaderContainer={
+                            <UserDetailHeaderAltContainer userId={userId} />
+                          }
+                        />
 
-                      <TaskSearchModal
-                        searchContainer={
-                          <LinkSearchContainer pathname="/tasks" />
-                        }
-                      />
+                        <TaskSearchModal
+                          searchContainer={
+                            <LinkSearchContainer pathname="/tasks" />
+                          }
+                        />
 
-                      <ChangePasswordModal userId={userId} />
+                        <ChangePasswordModal userId={userId} />
 
-                      <DeleteUserDetailModal
-                        userId={userId}
-                        userFullName={userFormData.fullName}
-                      />
+                        <DeleteUserDetailModal
+                          userId={userId}
+                          userFullName={userFormData.fullName}
+                        />
 
-                      <UpdateUserBioModal
-                        userId={userId}
-                        userBio={userFormData.bio}
-                      />
+                        <UpdateUserBioModal
+                          userId={userId}
+                          userBio={userFormData.bio}
+                        />
 
-                      <UpdateUserFullNameModal
-                        userId={userId}
-                        userFullName={userFormData.fullName}
-                      />
+                        <UpdateUserFullNameModal
+                          userId={userId}
+                          userFullName={userFormData.fullName}
+                        />
 
-                      <UpdateUserPhoneNumberModal
-                        userId={userId}
-                        userPhoneNumber={userFormData.phoneNumber}
-                      />
+                        <UpdateUserPhoneNumberModal
+                          userId={userId}
+                          userPhoneNumber={userFormData.phoneNumber}
+                        />
 
-                      <UpdateUserBirthdateModal
-                        userId={userId}
-                        userBirthdate={userFormData.birthdate}
-                      />
+                        <UpdateUserBirthdateModal
+                          userId={userId}
+                          userBirthdate={userFormData.birthdate}
+                        />
 
-                      <UpdateUserImageModal userId={userId} />
+                        <UpdateUserAddressModal
+                          userId={userId}
+                          userAddress={userFormData.address}
+                        />
 
-                      <DeleteUserImageModal
-                        userId={userId}
-                        userFullName={userFormData.fullName}
-                      />
-                    </ChangePasswordProvider>
+                        <UpdateUserImageModal userId={userId} />
+
+                        <DeleteUserImageModal
+                          userId={userId}
+                          userFullName={userFormData.fullName}
+                        />
+                      </ChangePasswordProvider>
+                    </UpdateUserAddressProvider>
                   </UpdateUserBirthdateProvider>
                 </UpdateUserPhoneNumberProvider>
               </UpdateUserBioProvider>

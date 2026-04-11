@@ -1,0 +1,41 @@
+"use client";
+
+import {
+  DetailText,
+  DetailTitle,
+  DetailInfoAlt,
+  DetailEditButton,
+} from "@/components/common/Detail";
+import { useTranslations } from "next-intl";
+import { useUpdateUserAddress } from "../UpdateUserAddressContext";
+import { useModal } from "@/components/common/ModalManagerContext";
+
+interface UserAddressDetailInfoAltProps {
+  address?: string;
+}
+
+export function UserAddressDetailInfoAlt({
+  address,
+}: UserAddressDetailInfoAltProps) {
+  const t = useTranslations("users.UserDetail");
+
+  const { onOpenChange: onUpdateAddressModalOpenChange } =
+    useModal("updateUserAddress");
+
+  const { isPending: isUpdateUserAddressPending } = useUpdateUserAddress();
+
+  return (
+    <DetailInfoAlt
+      data-test="user-address-detail-info"
+      title={<DetailTitle>{t("address")}</DetailTitle>}
+      text={<DetailText>{address || t("noAddress")}</DetailText>}
+      editButton={
+        <DetailEditButton
+          data-test="update-user-address-edit-button"
+          isPending={isUpdateUserAddressPending}
+          onPress={() => onUpdateAddressModalOpenChange(true)}
+        />
+      }
+    />
+  );
+}

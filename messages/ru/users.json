@@ -232,5 +232,8 @@
   },
   "UpdateUserBirthdateModal": {
     "title": "Изменить дату рождения"
+  },
+  "UpdateUserAddressModal": {
+    "title": "Изменить адрес"
   }
 }

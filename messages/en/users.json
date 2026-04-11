@@ -235,5 +235,8 @@
   },
   "UpdateUserBirthdateModal": {
     "title": "Edit birthdate"
+  },
+  "UpdateUserAddressModal": {
+    "title": "Edit address"
   }
 }

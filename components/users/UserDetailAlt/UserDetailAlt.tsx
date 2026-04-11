@@ -4,12 +4,13 @@ import {
   DetailInfoAlt,
   DetailEditButton,
 } from "@/components/common/Detail";
-import { useFormatter, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { UserDetailAltLayout } from "./UserDetailAltLayout";
 import { UserBioDetailInfoAlt } from "./UserBioDetailInfoAlt";
+import { UserAddressDetailInfoAlt } from "./UserAddressDetailInfoAlt";
 import { UserFullNameDetailInfoAlt } from "./UserFullNameDetailInfoAlt";
-import { UserPhoneNumberDetailInfoAlt } from "./UserPhoneNumberDetailInfoAlt";
 import { UserBirthdateDetailInfoAlt } from "./UserBirthdateDetailInfoAlt";
+import { UserPhoneNumberDetailInfoAlt } from "./UserPhoneNumberDetailInfoAlt";
 
 export interface UserDetailAltProps {
   id: string;
@@ -57,13 +58,7 @@ export function UserDetailAlt({
       phoneNumberSlot={
         <UserPhoneNumberDetailInfoAlt phoneNumber={phoneNumber} />
       }
-      addressSlot={
-        <DetailInfoAlt
-          title={<DetailTitle>{t("address")}</DetailTitle>}
-          text={<DetailText>{address || t("noAddress")}</DetailText>}
-          editButton={<DetailEditButton />}
-        />
-      }
+      addressSlot={<UserAddressDetailInfoAlt address={address} />}
       publicLinkSlot={
         <DetailInfoAlt
           title={<DetailTitle>{t("publicLink")}</DetailTitle>}
