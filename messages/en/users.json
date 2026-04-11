@@ -229,5 +229,8 @@
   },
   "UpdateUserFullNameModal": {
     "title": "Edit full name"
+  },
+  "UpdateUserPhoneNumberModal": {
+    "title": "Edit phone number"
   }
 }

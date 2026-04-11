@@ -19,7 +19,7 @@ export function UserPhoneNumberTextField({
       label={t("label")}
       placeholder={t("placeholder")}
       type="tel"
-      maxLength={255}
+      maxLength={20}
       defaultValue={defaultValue}
     />
   );

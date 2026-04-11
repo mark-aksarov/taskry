@@ -16,6 +16,7 @@ import { withUpdateUserImageProvider } from "@/components/users/UpdateUserImageP
 import { withClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlProvider/__stories__";
 import { withUpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext/__stories__";
 import { withUpdateUserFullNameProvider } from "@/components/users/UpdateUserFullNameProvider/__stories__";
+import { withUpdateUserPhoneNumberProvider } from "@/components/users/UpdateUserPhoneNumberProvider/__stories__";
 
 const meta = {
   title: "pages/TeamProfilePage",
@@ -24,6 +25,7 @@ const meta = {
   decorators: [
     withTaskSearchModal,
     withChangePasswordProvider,
+    withUpdateUserPhoneNumberProvider,
     withUpdateUserBioProvider,
     withUpdateUserFullNameProvider,
     withDeleteUserProvider,

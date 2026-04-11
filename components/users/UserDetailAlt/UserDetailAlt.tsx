@@ -8,6 +8,7 @@ import { useFormatter, useTranslations } from "next-intl";
 import { UserDetailAltLayout } from "./UserDetailAltLayout";
 import { UserBioDetailInfoAlt } from "./UserBioDetailInfoAlt";
 import { UserFullNameDetailInfoAlt } from "./UserFullNameDetailInfoAlt";
+import { UserPhoneNumberDetailInfoAlt } from "./UserPhoneNumberDetailInfoAlt";
 
 export interface UserDetailAltProps {
   id: string;
@@ -63,17 +64,7 @@ export function UserDetailAlt({
         />
       }
       phoneNumberSlot={
-        <DetailInfoAlt
-          title={<DetailTitle>{t("phoneNumber")}</DetailTitle>}
-          text={
-            phoneNumber ? (
-              <DetailText>{phoneNumber}</DetailText>
-            ) : (
-              <DetailText>{t("noPhoneNumber")}</DetailText>
-            )
-          }
-          editButton={<DetailEditButton />}
-        />
+        <UserPhoneNumberDetailInfoAlt phoneNumber={phoneNumber} />
       }
       addressSlot={
         <DetailInfoAlt
