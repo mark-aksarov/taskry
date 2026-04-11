@@ -19,7 +19,7 @@ export function TaskDescriptionDetailInfoAlt({
 }: TaskDescriptionDetailInfoAltProps) {
   const t = useTranslations("tasks.TaskDetail");
 
-  const { onOpenChange: onUpdateEmailModalOpenChange } = useModal(
+  const { onOpenChange: onUpdateDescriptionModalOpenChange } = useModal(
     "updateTaskDescription",
   );
 
@@ -39,7 +39,7 @@ export function TaskDescriptionDetailInfoAlt({
         <DetailEditButton
           data-test="update-task-description-edit-button"
           isPending={isUpdateTaskDescriptionPending}
-          onPress={() => onUpdateEmailModalOpenChange(true)}
+          onPress={() => onUpdateDescriptionModalOpenChange(true)}
         />
       }
     />

@@ -20,7 +20,7 @@ export function TaskDetailAltLayout({
   statusSlot,
 }: TaskDetailAltLayoutProps) {
   return (
-    <div className="flex flex-col gap-4">
+    <div data-test="task-detail-alt" className="flex flex-col gap-4">
       {titleSlot}
       {descriptionSlot}
       {assigneesSlot}

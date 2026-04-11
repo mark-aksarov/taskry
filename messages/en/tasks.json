@@ -238,5 +238,11 @@
   },
   "UpdateTaskDeadlineModal": {
     "title": "Edit deadline"
+  },
+  "UpdateTaskStatusForm": {
+    "submitButtonLabel": "Update status"
+  },
+  "UpdateTaskStatusModal": {
+    "title": "Edit status"
   }
 }

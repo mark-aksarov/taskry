@@ -238,5 +238,11 @@
   },
   "UpdateTaskDeadlineModal": {
     "title": "Изменить срок выполнения"
+  },
+  "UpdateTaskStatusForm": {
+    "submitButtonLabel": "Обновить статус"
+  },
+  "UpdateTaskStatusModal": {
+    "title": "Изменить статус"
   }
 }

@@ -17,7 +17,7 @@ interface TaskTitleDetailInfoAltProps {
 export function TaskTitleDetailInfoAlt({ title }: TaskTitleDetailInfoAltProps) {
   const t = useTranslations("tasks.TaskDetail");
 
-  const { onOpenChange: onUpdateEmailModalOpenChange } =
+  const { onOpenChange: onUpdateTitleModalOpenChange } =
     useModal("updateTaskTitle");
 
   const { isPending: isUpdateTaskTitlePending } = useUpdateTaskTitle();
@@ -31,7 +31,7 @@ export function TaskTitleDetailInfoAlt({ title }: TaskTitleDetailInfoAltProps) {
         <DetailEditButton
           data-test="update-task-title-edit-button"
           isPending={isUpdateTaskTitlePending}
-          onPress={() => onUpdateEmailModalOpenChange(true)}
+          onPress={() => onUpdateTitleModalOpenChange(true)}
         />
       }
     />

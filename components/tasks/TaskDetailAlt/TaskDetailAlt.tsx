@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { TaskDetailAltLayout } from "./TaskDetailAltLayout";
 import { TaskTitleDetailInfoAlt } from "./TaskTitleDetailInfoAlt";
+import { TaskStatusDetailInfoAlt } from "./TaskStatusDetailInfoAlt";
 import { TaskDeadlineDetailInfoAlt } from "./TaskDeadlineDetailInfoAlt";
 import { TaskDescriptionDetailInfoAlt } from "./TaskDescriptionDetailInfoAlt";
 
@@ -47,7 +48,6 @@ export function TaskDetailAlt({
   project,
   status,
 }: TaskDetailAltProps) {
-  const tStatus = useTranslations("tasks.TaskStatus");
   const t = useTranslations("tasks.TaskDetail");
 
   return (
@@ -70,13 +70,7 @@ export function TaskDetailAlt({
         />
       }
       deadlineSlot={<TaskDeadlineDetailInfoAlt deadline={deadline} />}
-      statusSlot={
-        <DetailInfoAlt
-          title={<DetailTitle>{t("status")}</DetailTitle>}
-          text={<DetailText>{tStatus(status)}</DetailText>}
-          editButton={<DetailEditButton />}
-        />
-      }
+      statusSlot={<TaskStatusDetailInfoAlt status={status} />}
       categoryNameSlot={
         <DetailInfoAlt
           title={<DetailTitle>{t("category")}</DetailTitle>}
