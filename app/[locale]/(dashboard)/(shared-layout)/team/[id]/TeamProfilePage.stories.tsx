@@ -15,6 +15,7 @@ import { withChangePasswordProvider } from "@/components/users/ChangePasswordPro
 import { withUpdateUserImageProvider } from "@/components/users/UpdateUserImageProvider/__stories__";
 import { withClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlProvider/__stories__";
 import { withUpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext/__stories__";
+import { withUpdateUserFullNameProvider } from "@/components/users/UpdateUserFullNameProvider/__stories__";
 
 const meta = {
   title: "pages/TeamProfilePage",
@@ -24,6 +25,7 @@ const meta = {
     withTaskSearchModal,
     withChangePasswordProvider,
     withUpdateUserBioProvider,
+    withUpdateUserFullNameProvider,
     withDeleteUserProvider,
     withUpdateUserImageProvider,
     withClearUserImageUrlProvider,

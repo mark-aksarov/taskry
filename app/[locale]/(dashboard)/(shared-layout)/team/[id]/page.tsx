@@ -2,10 +2,10 @@ import { notFound } from "next/navigation";
 import { TeamProfilePage } from "./TeamProfilePage";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
-import { getUserDetail } from "@/lib/data/user/user.dal";
 import { userId as userIdSchema } from "@/lib/schemas/user";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { getUserDetail, getUserFormData } from "@/lib/data/user/user.dal";
 import { UpdateUserBioModal } from "@/components/users/UpdateUserBioModal";
 import { DeleteUserProvider } from "@/components/users/DeleteUserProvider";
 import { ChangePasswordModal } from "@/components/users/ChangePasswordModal";
@@ -16,8 +16,10 @@ import { UpdateUserBioProvider } from "@/components/users/UpdateUserBioProvider"
 import { DeleteUserDetailModal } from "@/components/users/DeleteUserDetailModal";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordProvider";
 import { UserDetailAltContainer } from "@/components/users/UserDetailAltContainer";
+import { UpdateUserFullNameModal } from "@/components/users/UpdateUserFullNameModal";
 import { UpdateUserImageProvider } from "@/components/users/UpdateUserImageProvider";
 import { ClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlProvider";
+import { UpdateUserFullNameProvider } from "@/components/users/UpdateUserFullNameProvider";
 import { UpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext";
 import { UserDetailHeaderAltContainer } from "@/components/users/UserDetailHeaderAltContainer";
 
@@ -38,9 +40,9 @@ export default async function AppTeamProfilePage({
   const userId = parsed.data;
 
   // Get user summary
-  const userDetail = await getUserDetail(userId);
+  const userFormData = await getUserFormData(userId);
 
-  if (!userDetail) {
+  if (!userFormData) {
     notFound();
   }
 
@@ -54,40 +56,50 @@ export default async function AppTeamProfilePage({
       <UpdateUserImageProvider>
         <ClearUserImageUrlProvider>
           <DeleteUserProvider>
-            <UpdateUserBioProvider>
-              <ChangePasswordProvider>
-                <TeamProfilePage
-                  showUserActions={showUserActions}
-                  userId={userId}
-                  userDetailContainer={
-                    <UserDetailAltContainer userId={userId} />
-                  }
-                  userDetailHeaderContainer={
-                    <UserDetailHeaderAltContainer userId={userId} />
-                  }
-                />
+            <UpdateUserFullNameProvider>
+              <UpdateUserBioProvider>
+                <ChangePasswordProvider>
+                  <TeamProfilePage
+                    showUserActions={showUserActions}
+                    userId={userId}
+                    userDetailContainer={
+                      <UserDetailAltContainer userId={userId} />
+                    }
+                    userDetailHeaderContainer={
+                      <UserDetailHeaderAltContainer userId={userId} />
+                    }
+                  />
 
-                <TaskSearchModal
-                  searchContainer={<LinkSearchContainer pathname="/tasks" />}
-                />
+                  <TaskSearchModal
+                    searchContainer={<LinkSearchContainer pathname="/tasks" />}
+                  />
 
-                <ChangePasswordModal userId={userId} />
+                  <ChangePasswordModal userId={userId} />
 
-                <DeleteUserDetailModal
-                  userId={userId}
-                  userFullName={userDetail.fullName}
-                />
+                  <DeleteUserDetailModal
+                    userId={userId}
+                    userFullName={userFormData.fullName}
+                  />
 
-                <UpdateUserBioModal userId={userId} userBio={userDetail.bio} />
+                  <UpdateUserBioModal
+                    userId={userId}
+                    userBio={userFormData.bio}
+                  />
 
-                <UpdateUserImageModal userId={userId} />
+                  <UpdateUserFullNameModal
+                    userId={userId}
+                    userFullName={userFormData.fullName}
+                  />
 
-                <DeleteUserImageModal
-                  userId={userId}
-                  userFullName={userDetail.fullName}
-                />
-              </ChangePasswordProvider>
-            </UpdateUserBioProvider>
+                  <UpdateUserImageModal userId={userId} />
+
+                  <DeleteUserImageModal
+                    userId={userId}
+                    userFullName={userFormData.fullName}
+                  />
+                </ChangePasswordProvider>
+              </UpdateUserBioProvider>
+            </UpdateUserFullNameProvider>
           </DeleteUserProvider>
         </ClearUserImageUrlProvider>
       </UpdateUserImageProvider>

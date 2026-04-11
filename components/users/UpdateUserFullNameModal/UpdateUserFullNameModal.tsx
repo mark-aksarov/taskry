@@ -7,34 +7,34 @@ import {
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { UpdateUserBioForm } from "../UpdateUserBioForm";
+import { UpdateUserFullNameForm } from "../UpdateUserFullNameForm";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
-interface UpdateUserBioModalProps {
+interface UpdateUserFullNameModalProps {
   userId: string;
-  userBio?: string;
+  userFullName?: string;
 }
 
-export function UpdateUserBioModal({
+export function UpdateUserFullNameModal({
   userId,
-  userBio,
-}: UpdateUserBioModalProps) {
-  const t = useTranslations("users.UpdateUserBioModal");
+  userFullName,
+}: UpdateUserFullNameModalProps) {
+  const t = useTranslations("users.UpdateUserFullNameModal");
 
-  const { isOpen, onOpenChange } = useModal("updateUserBio");
+  const { isOpen, onOpenChange } = useModal("updateUserFullName");
 
   return (
     <FormBaseModal
-      data-test="update-user-bio-modal"
+      data-test="update-user-full-name-modal"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
-      className="md:w-[400px]"
+      className="md:w-[350px]"
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
-          <UpdateUserBioForm userId={userId} bio={userBio} />
+          <UpdateUserFullNameForm userId={userId} fullName={userFullName} />
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

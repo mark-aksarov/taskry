@@ -226,5 +226,8 @@
   },
   "UpdateUserBioModal": {
     "title": "Edit bio"
+  },
+  "UpdateUserFullNameModal": {
+    "title": "Edit full name"
   }
 }

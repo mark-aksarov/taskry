@@ -223,5 +223,8 @@
   },
   "UpdateUserBioModal": {
     "title": "Изменить биографию"
+  },
+  "UpdateUserFullNameModal": {
+    "title": "Изменить полное имя"
   }
 }

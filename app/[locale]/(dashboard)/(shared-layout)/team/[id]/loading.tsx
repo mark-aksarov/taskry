@@ -4,8 +4,8 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { ToolbarMobile } from "@/components/common/Toolbar";
 import { PageContainer } from "@/components/common/PageContainer";
 import { UserDetailCard } from "@/components/users/UserDetailCard";
-import { UserDetailSkeleton } from "@/components/users/UserDetail";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
+import { UserDetailAltSkeleton } from "@/components/users/UserDetailAlt";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { ProfileActionsSkeleton } from "@/components/users/ProfileActions";
 import { UserNavigationLarge } from "@/components/users/UserNavigationLarge";
@@ -17,7 +17,7 @@ export default function AppTeamProfileLoading() {
   return (
     <PageContainer>
       <UserDetailCard
-        userDetailContainer={<UserDetailSkeleton />}
+        userDetailContainer={<UserDetailAltSkeleton />}
         userDetailHeaderContainer={<DetailHeaderSkeleton />}
         navigationLarge={
           <UserNavigationLarge userActions={<ProfileActionsSkeleton />} />
@@ -38,7 +38,7 @@ export default function AppTeamProfileLoading() {
           <ProfileActionsSkeleton />
         </Card>
         <Card>
-          <UserDetailSkeleton />
+          <UserDetailAltSkeleton />
         </Card>
       </PageGrid>
     </PageContainer>

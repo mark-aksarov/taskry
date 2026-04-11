@@ -13,8 +13,10 @@ import { UpdateUserBioProvider } from "@/components/users/UpdateUserBioProvider"
 import { DeleteUserDetailModal } from "@/components/users/DeleteUserDetailModal";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordProvider";
 import { UserDetailAltContainer } from "@/components/users/UserDetailAltContainer";
+import { UpdateUserFullNameModal } from "@/components/users/UpdateUserFullNameModal";
 import { UpdateUserImageProvider } from "@/components/users/UpdateUserImageProvider";
 import { ClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlProvider";
+import { UpdateUserFullNameProvider } from "@/components/users/UpdateUserFullNameProvider";
 import { UpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext";
 import { UserDetailHeaderAltContainer } from "@/components/users/UserDetailHeaderAltContainer";
 
@@ -33,42 +35,49 @@ export default async function AppProfilePage() {
       <UpdateUserImageProvider>
         <ClearUserImageUrlProvider>
           <DeleteUserProvider>
-            <UpdateUserBioProvider>
-              <ChangePasswordProvider>
-                <ProfilePage
-                  userId={userId}
-                  userDetailContainer={
-                    <UserDetailAltContainer userId={userId} />
-                  }
-                  userDetailHeaderContainer={
-                    <UserDetailHeaderAltContainer userId={userId} />
-                  }
-                />
+            <UpdateUserFullNameProvider>
+              <UpdateUserBioProvider>
+                <ChangePasswordProvider>
+                  <ProfilePage
+                    userId={userId}
+                    userDetailContainer={
+                      <UserDetailAltContainer userId={userId} />
+                    }
+                    userDetailHeaderContainer={
+                      <UserDetailHeaderAltContainer userId={userId} />
+                    }
+                  />
 
-                <DeleteUserDetailModal
-                  userId={userId}
-                  userFullName={userFormData.fullName}
-                />
+                  <DeleteUserDetailModal
+                    userId={userId}
+                    userFullName={userFormData.fullName}
+                  />
 
-                <UpdateUserImageModal userId={userId} />
+                  <UpdateUserImageModal userId={userId} />
 
-                <DeleteUserImageModal
-                  userId={userId}
-                  userFullName={userFormData.fullName}
-                />
+                  <DeleteUserImageModal
+                    userId={userId}
+                    userFullName={userFormData.fullName}
+                  />
 
-                <UpdateUserBioModal
-                  userId={userId}
-                  userBio={userFormData.bio}
-                />
+                  <UpdateUserFullNameModal
+                    userId={userId}
+                    userFullName={userFormData.fullName}
+                  />
 
-                <ChangePasswordModal userId={userId} />
+                  <UpdateUserBioModal
+                    userId={userId}
+                    userBio={userFormData.bio}
+                  />
 
-                <TaskSearchModal
-                  searchContainer={<LinkSearchContainer pathname="/tasks" />}
-                />
-              </ChangePasswordProvider>
-            </UpdateUserBioProvider>
+                  <ChangePasswordModal userId={userId} />
+
+                  <TaskSearchModal
+                    searchContainer={<LinkSearchContainer pathname="/tasks" />}
+                  />
+                </ChangePasswordProvider>
+              </UpdateUserBioProvider>
+            </UpdateUserFullNameProvider>
           </DeleteUserProvider>
         </ClearUserImageUrlProvider>
       </UpdateUserImageProvider>

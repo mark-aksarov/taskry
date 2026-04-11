@@ -7,6 +7,7 @@ import {
 import { useFormatter, useTranslations } from "next-intl";
 import { UserDetailAltLayout } from "./UserDetailAltLayout";
 import { UserBioDetailInfoAlt } from "./UserBioDetailInfoAlt";
+import { UserFullNameDetailInfoAlt } from "./UserFullNameDetailInfoAlt";
 
 export interface UserDetailAltProps {
   id: string;
@@ -47,13 +48,7 @@ export function UserDetailAlt({
   return (
     <UserDetailAltLayout
       bioSlot={<UserBioDetailInfoAlt bio={bio} />}
-      fullNameSlot={
-        <DetailInfoAlt
-          title={<DetailTitle>{t("fullName")}</DetailTitle>}
-          text={<DetailText>{fullName || t("noFullName")}</DetailText>}
-          editButton={<DetailEditButton />}
-        />
-      }
+      fullNameSlot={<UserFullNameDetailInfoAlt fullName={fullName} />}
       positionSlot={
         <DetailInfoAlt
           title={<DetailTitle>{t("position")}</DetailTitle>}

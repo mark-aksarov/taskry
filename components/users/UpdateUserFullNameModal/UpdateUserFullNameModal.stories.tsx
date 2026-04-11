@@ -5,24 +5,24 @@ import {
 
 import { mockedUserDetail } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { UpdateUserBioModal } from "../UpdateUserBioModal";
+import { UpdateUserFullNameModal } from "../UpdateUserFullNameModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateUserBioProvider } from "../UpdateUserBioProvider/__stories__";
+import { withUpdateUserFullNameProvider } from "../UpdateUserFullNameProvider/__stories__";
 
 const meta = {
-  title: "components/users/UpdateUserBioModal",
-  component: UpdateUserBioModal,
+  title: "components/users/UpdateUserFullNameModal",
+  component: UpdateUserFullNameModal,
   decorators: [
     withOpenModal,
-    withUpdateUserBioProvider,
+    withUpdateUserFullNameProvider,
     withModalManagerProvider,
     withThemedBackground,
   ],
 
   parameters: {
-    modalId: "updateUserBio",
+    modalId: "updateUserFullName",
   },
-} satisfies Meta<typeof UpdateUserBioModal>;
+} satisfies Meta<typeof UpdateUserFullNameModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -30,6 +30,6 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     userId: mockedUserDetail.id,
-    userBio: mockedUserDetail.bio,
+    userFullName: mockedUserDetail.fullName,
   },
 } satisfies Story;
