@@ -238,5 +238,8 @@
   },
   "UpdateUserAddressModal": {
     "title": "Edit address"
+  },
+  "UpdateUserPublicLinkModal": {
+    "title": "Edit public link"
   }
 }

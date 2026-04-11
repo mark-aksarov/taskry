@@ -235,5 +235,8 @@
   },
   "UpdateUserAddressModal": {
     "title": "Изменить адрес"
+  },
+  "UpdateUserPublicLinkModal": {
+    "title": "Изменить публичную ссылку"
   }
 }

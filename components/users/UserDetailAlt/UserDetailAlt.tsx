@@ -11,6 +11,7 @@ import { UserAddressDetailInfoAlt } from "./UserAddressDetailInfoAlt";
 import { UserFullNameDetailInfoAlt } from "./UserFullNameDetailInfoAlt";
 import { UserBirthdateDetailInfoAlt } from "./UserBirthdateDetailInfoAlt";
 import { UserPhoneNumberDetailInfoAlt } from "./UserPhoneNumberDetailInfoAlt";
+import { UserPublicLinkDetailInfoAlt } from "./UserPublicLinkDetailInfoAlt";
 
 export interface UserDetailAltProps {
   id: string;
@@ -59,19 +60,7 @@ export function UserDetailAlt({
         <UserPhoneNumberDetailInfoAlt phoneNumber={phoneNumber} />
       }
       addressSlot={<UserAddressDetailInfoAlt address={address} />}
-      publicLinkSlot={
-        <DetailInfoAlt
-          title={<DetailTitle>{t("publicLink")}</DetailTitle>}
-          text={
-            publicLink ? (
-              <DetailText>{publicLink}</DetailText>
-            ) : (
-              <DetailText>{t("noPublicLink")}</DetailText>
-            )
-          }
-          editButton={<DetailEditButton />}
-        />
-      }
+      publicLinkSlot={<UserPublicLinkDetailInfoAlt publicLink={publicLink} />}
       birthdateSlot={<UserBirthdateDetailInfoAlt birthdate={birthdate} />}
     />
   );

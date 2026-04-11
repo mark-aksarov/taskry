@@ -19,6 +19,7 @@ import { withUpdateUserFullNameProvider } from "@/components/users/UpdateUserFul
 import { withUpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext/__stories__";
 import { withUpdateUserBirthdateProvider } from "@/components/users/UpdateUserBirthdateProvider/__stories__";
 import { withUpdateUserPhoneNumberProvider } from "@/components/users/UpdateUserPhoneNumberProvider/__stories__";
+import { withUpdateUserPublicLinkProvider } from "@/components/users/UpdateUserPublicLinkProvider/__stories__";
 
 const meta = {
   title: "pages/TeamProfilePage",
@@ -32,6 +33,7 @@ const meta = {
     withUpdateUserFullNameProvider,
     withUpdateUserBirthdateProvider,
     withUpdateUserAddressProvider,
+    withUpdateUserPublicLinkProvider,
     withDeleteUserProvider,
     withUpdateUserImageProvider,
     withClearUserImageUrlProvider,
