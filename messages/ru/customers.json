@@ -170,5 +170,11 @@
   },
   "UpdateCustomerBioModal": {
     "title": "Изменить биографию"
+  },
+  "UpdateCustomerFullNameModal": {
+    "title": "Изменить полное имя"
+  },
+  "UpdateCustomerPhoneNumberModal": {
+    "title": "Изменить номер телефона"
   }
 }

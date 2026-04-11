@@ -14,9 +14,13 @@ import { UpdateCustomerBioProvider } from "@/components/customer/UpdateCustomerB
 import { DeleteCustomerDetailModal } from "@/components/customer/DeleteCustomerDetailModal";
 import { CustomerDetailAltContainer } from "@/components/customer/CustomerDetailAltContainer";
 import { UpdateCustomerImageProvider } from "@/components/customer/UpdateCustomerImageProvider";
+import { UpdateCustomerFullNameModal } from "@/components/customer/UpdateCustomerFullNameModal";
 import { ClearCustomerImageUrlProvider } from "@/components/customer/ClearCustomerImageUrlProvider";
+import { UpdateCustomerFullNameProvider } from "@/components/customer/UpdateCustomerFullNameProvider";
 import { UpdateCustomerImageFileProvider } from "@/components/customer/UpdateCustomerImageFileContext";
 import { CustomerDetailHeaderAltContainer } from "@/components/customer/CustomerDetailHeaderAltContainer";
+import { UpdateCustomerPhoneNumberProvider } from "@/components/customer/UpdateCustomerPhoneNumberProvider";
+import { UpdateCustomerPhoneNumberModal } from "@/components/customer/UpdateCustomerPhoneNumberModal";
 
 export default async function AppCustomerDetailPage({
   params,
@@ -47,36 +51,50 @@ export default async function AppCustomerDetailPage({
         <ClearCustomerImageUrlProvider>
           <DeleteCustomerProvider>
             <UpdateCustomerBioProvider>
-              <CustomerDetailPage
-                customerDetailContainer={
-                  <CustomerDetailAltContainer customerId={id} />
-                }
-                customerDetailHeaderContainer={
-                  <CustomerDetailHeaderAltContainer customerId={id} />
-                }
-                customerDetailActions={<CustomerDetailActions />}
-              />
+              <UpdateCustomerFullNameProvider>
+                <UpdateCustomerPhoneNumberProvider>
+                  <CustomerDetailPage
+                    customerDetailContainer={
+                      <CustomerDetailAltContainer customerId={id} />
+                    }
+                    customerDetailHeaderContainer={
+                      <CustomerDetailHeaderAltContainer customerId={id} />
+                    }
+                    customerDetailActions={<CustomerDetailActions />}
+                  />
 
-              <UpdateCustomerBioModal
-                customerId={customerFormData.id}
-                customerBio={customerFormData.bio}
-              />
+                  <UpdateCustomerBioModal
+                    customerId={customerFormData.id}
+                    customerBio={customerFormData.bio}
+                  />
 
-              <DeleteCustomerDetailModal
-                customerId={customerFormData.id}
-                customerFullName={customerFormData.fullName}
-              />
+                  <UpdateCustomerFullNameModal
+                    customerId={customerFormData.id}
+                    customerFullName={customerFormData.fullName}
+                  />
 
-              <UpdateCustomerImageModal customerId={customerFormData.id} />
+                  <UpdateCustomerPhoneNumberModal
+                    customerId={customerFormData.id}
+                    customerPhoneNumber={customerFormData.phoneNumber}
+                  />
 
-              <DeleteCustomerImageModal
-                customerId={customerFormData.id}
-                customerFullName={customerFormData.fullName}
-              />
+                  <DeleteCustomerDetailModal
+                    customerId={customerFormData.id}
+                    customerFullName={customerFormData.fullName}
+                  />
 
-              <TaskSearchModal
-                searchContainer={<LinkSearchContainer pathname="/tasks" />}
-              />
+                  <UpdateCustomerImageModal customerId={customerFormData.id} />
+
+                  <DeleteCustomerImageModal
+                    customerId={customerFormData.id}
+                    customerFullName={customerFormData.fullName}
+                  />
+
+                  <TaskSearchModal
+                    searchContainer={<LinkSearchContainer pathname="/tasks" />}
+                  />
+                </UpdateCustomerPhoneNumberProvider>
+              </UpdateCustomerFullNameProvider>
             </UpdateCustomerBioProvider>
           </DeleteCustomerProvider>
         </ClearCustomerImageUrlProvider>

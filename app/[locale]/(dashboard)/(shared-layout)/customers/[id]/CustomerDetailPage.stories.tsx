@@ -14,7 +14,9 @@ import { withDeleteCustomerProvider } from "@/components/customer/DeleteCustomer
 import { withUpdateCustomerBioProvider } from "@/components/customer/UpdateCustomerBioProvider/__stories__";
 import { withUpdateCustomerImageProvider } from "@/components/customer/UpdateCustomerImageProvider/__stories__";
 import { withClearCustomerImageUrlProvider } from "@/components/customer/ClearCustomerImageUrlProvider/__stories__";
+import { withUpdateCustomerFullNameProvider } from "@/components/customer/UpdateCustomerFullNameProvider/__stories__";
 import { withUpdateCustomerImageFileProvider } from "@/components/customer/UpdateCustomerImageFileContext/__stories__";
+import { withUpdateCustomerPhoneNumberProvider } from "@/components/customer/UpdateCustomerPhoneNumberProvider/__stories__";
 
 const meta = {
   title: "pages/CustomerDetailPage",
@@ -22,6 +24,8 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     withTaskSearchModal,
+    withUpdateCustomerPhoneNumberProvider,
+    withUpdateCustomerFullNameProvider,
     withUpdateCustomerBioProvider,
     withDeleteCustomerProvider,
     withUpdateCustomerImageProvider,

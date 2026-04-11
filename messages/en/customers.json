@@ -170,5 +170,11 @@
   },
   "UpdateCustomerBioModal": {
     "title": "Edit customer"
+  },
+  "UpdateCustomerFullNameModal": {
+    "title": "Edit full name"
+  },
+  "UpdateCustomerPhoneNumberModal": {
+    "title": "Edit phone number"
   }
 }

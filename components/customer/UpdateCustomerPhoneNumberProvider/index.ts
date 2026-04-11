@@ -1,0 +1,1 @@
+export { UpdateCustomerPhoneNumberProvider } from "./UpdateCustomerPhoneNumberProvider";

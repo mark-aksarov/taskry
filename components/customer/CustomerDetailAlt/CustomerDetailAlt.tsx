@@ -8,6 +8,8 @@ import {
 import { useTranslations } from "next-intl";
 import { CustomerDetailAltLayout } from "./CustomerDetailAltLayout";
 import { CustomerBioDetailInfoAlt } from "./CustomerBioDetailInfoAlt";
+import { CustomerFullNameDetailInfoAlt } from "./CustomerFullNameDetailInfoAlt";
+import { CustomerPhoneNumberDetailInfoAlt } from "./CustomerPhoneNumberDetailInfoAlt";
 
 export interface CustomerDetailAltProps {
   fullName: string;
@@ -33,13 +35,7 @@ export function CustomerDetailAlt({
   return (
     <CustomerDetailAltLayout
       bioSlot={<CustomerBioDetailInfoAlt bio={bio} />}
-      fullNameSlot={
-        <DetailInfoAlt
-          title={<DetailTitle>{t("fullName")}</DetailTitle>}
-          text={<DetailText>{fullName || t("noFullName")}</DetailText>}
-          editButton={<DetailEditButton />}
-        />
-      }
+      fullNameSlot={<CustomerFullNameDetailInfoAlt fullName={fullName} />}
       emailSlot={
         <DetailInfoAlt
           title={<DetailTitle>{t("email")}</DetailTitle>}
@@ -48,17 +44,7 @@ export function CustomerDetailAlt({
         />
       }
       phoneNumberSlot={
-        <DetailInfoAlt
-          title={<DetailTitle>{t("phoneNumber")}</DetailTitle>}
-          text={
-            phoneNumber ? (
-              <DetailText>{phoneNumber}</DetailText>
-            ) : (
-              <DetailText>{t("noPhoneNumber")}</DetailText>
-            )
-          }
-          editButton={<DetailEditButton />}
-        />
+        <CustomerPhoneNumberDetailInfoAlt phoneNumber={phoneNumber} />
       }
       companySlot={
         <DetailInfoAlt
