@@ -69,13 +69,13 @@ export interface CreateUserInputDTO {
 
 export interface UpdateUserInputDTO {
   id: string;
-  fullName: string;
-  positionId: number | null;
-  bio: string | null;
-  birthdate: string | null;
-  phoneNumber: string | null;
-  address: string | null;
-  publicLink: string | null;
+  fullName?: string;
+  positionId?: number | null;
+  bio?: string | null;
+  birthdate?: string | null;
+  phoneNumber?: string | null;
+  address?: string | null;
+  publicLink?: string | null;
 }
 
 export interface UpdateUserImageUrlInputDTO {

@@ -223,5 +223,8 @@
   },
   "UserImageMenuTrigger": {
     "label": "Profile image menu"
+  },
+  "UpdateUserBioModal": {
+    "title": "Edit bio"
   }
 }

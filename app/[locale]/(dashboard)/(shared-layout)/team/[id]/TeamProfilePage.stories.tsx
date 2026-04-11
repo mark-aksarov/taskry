@@ -9,8 +9,8 @@ import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserDetailHeaderInteractive } from "@/components/users/UserDetailHeader";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
-import { withUpdateUserProvider } from "@/components/users/UpdateUserProvider/__stories__";
 import { withDeleteUserProvider } from "@/components/users/DeleteUserProvider/__stories__";
+import { withUpdateUserBioProvider } from "@/components/users/UpdateUserBioProvider/__stories__";
 import { withChangePasswordProvider } from "@/components/users/ChangePasswordProvider/__stories__";
 import { withUpdateUserImageProvider } from "@/components/users/UpdateUserImageProvider/__stories__";
 import { withClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlProvider/__stories__";
@@ -23,7 +23,7 @@ const meta = {
   decorators: [
     withTaskSearchModal,
     withChangePasswordProvider,
-    withUpdateUserProvider,
+    withUpdateUserBioProvider,
     withDeleteUserProvider,
     withUpdateUserImageProvider,
     withClearUserImageUrlProvider,

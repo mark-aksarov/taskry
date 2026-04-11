@@ -2,15 +2,17 @@ import { notFound } from "next/navigation";
 import { TeamProfilePage } from "./TeamProfilePage";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
-import { getUserSummary } from "@/lib/data/user/user.dal";
+import { getUserDetail } from "@/lib/data/user/user.dal";
 import { userId as userIdSchema } from "@/lib/schemas/user";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { UpdateUserBioModal } from "@/components/users/UpdateUserBioModal";
 import { DeleteUserProvider } from "@/components/users/DeleteUserProvider";
 import { ChangePasswordModal } from "@/components/users/ChangePasswordModal";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { UpdateUserImageModal } from "@/components/users/UpdateUserImageModal";
 import { DeleteUserImageModal } from "@/components/users/DeleteUserImageModal";
+import { UpdateUserBioProvider } from "@/components/users/UpdateUserBioProvider";
 import { DeleteUserDetailModal } from "@/components/users/DeleteUserDetailModal";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordProvider";
 import { UserDetailAltContainer } from "@/components/users/UserDetailAltContainer";
@@ -36,9 +38,9 @@ export default async function AppTeamProfilePage({
   const userId = parsed.data;
 
   // Get user summary
-  const userSummary = await getUserSummary(userId);
+  const userDetail = await getUserDetail(userId);
 
-  if (!userSummary) {
+  if (!userDetail) {
     notFound();
   }
 
@@ -52,30 +54,40 @@ export default async function AppTeamProfilePage({
       <UpdateUserImageProvider>
         <ClearUserImageUrlProvider>
           <DeleteUserProvider>
-            <ChangePasswordProvider>
-              <TeamProfilePage
-                showUserActions={showUserActions}
-                userId={userId}
-                userDetailContainer={<UserDetailAltContainer userId={userId} />}
-                userDetailHeaderContainer={
-                  <UserDetailHeaderAltContainer userId={userId} />
-                }
-              />
+            <UpdateUserBioProvider>
+              <ChangePasswordProvider>
+                <TeamProfilePage
+                  showUserActions={showUserActions}
+                  userId={userId}
+                  userDetailContainer={
+                    <UserDetailAltContainer userId={userId} />
+                  }
+                  userDetailHeaderContainer={
+                    <UserDetailHeaderAltContainer userId={userId} />
+                  }
+                />
 
-              <TaskSearchModal
-                searchContainer={<LinkSearchContainer pathname="/tasks" />}
-              />
-              <ChangePasswordModal userId={userId} />
-              <DeleteUserDetailModal
-                userId={userId}
-                userFullName={userSummary.fullName}
-              />
-              <UpdateUserImageModal userId={userId} />
-              <DeleteUserImageModal
-                userId={userId}
-                userFullName={userSummary.fullName}
-              />
-            </ChangePasswordProvider>
+                <TaskSearchModal
+                  searchContainer={<LinkSearchContainer pathname="/tasks" />}
+                />
+
+                <ChangePasswordModal userId={userId} />
+
+                <DeleteUserDetailModal
+                  userId={userId}
+                  userFullName={userDetail.fullName}
+                />
+
+                <UpdateUserBioModal userId={userId} userBio={userDetail.bio} />
+
+                <UpdateUserImageModal userId={userId} />
+
+                <DeleteUserImageModal
+                  userId={userId}
+                  userFullName={userDetail.fullName}
+                />
+              </ChangePasswordProvider>
+            </UpdateUserBioProvider>
           </DeleteUserProvider>
         </ClearUserImageUrlProvider>
       </UpdateUserImageProvider>

@@ -4,8 +4,9 @@ import {
   DetailInfoAlt,
   DetailEditButton,
 } from "@/components/common/Detail";
-import { UserDetailAltLayout } from "./UserDetailAltLayout";
 import { useFormatter, useTranslations } from "next-intl";
+import { UserDetailAltLayout } from "./UserDetailAltLayout";
+import { UserBioDetailInfoAlt } from "./UserBioDetailInfoAlt";
 
 export interface UserDetailAltProps {
   id: string;
@@ -45,13 +46,7 @@ export function UserDetailAlt({
 
   return (
     <UserDetailAltLayout
-      bioSlot={
-        <DetailInfoAlt
-          title={<DetailTitle>{t("bio")}</DetailTitle>}
-          text={<DetailText>{bio || t("noBio")}</DetailText>}
-          editButton={<DetailEditButton />}
-        />
-      }
+      bioSlot={<UserBioDetailInfoAlt bio={bio} />}
       fullNameSlot={
         <DetailInfoAlt
           title={<DetailTitle>{t("fullName")}</DetailTitle>}
@@ -70,7 +65,6 @@ export function UserDetailAlt({
         <DetailInfoAlt
           title={<DetailTitle>{t("email")}</DetailTitle>}
           text={<DetailText>{email}</DetailText>}
-          editButton={<DetailEditButton />}
         />
       }
       phoneNumberSlot={

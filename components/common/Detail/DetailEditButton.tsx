@@ -8,7 +8,11 @@ export function DetailEditButton(props: ButtonProps) {
       className="-m-2 rounded-full"
       variant="ghost"
       size="small"
-      iconLeft={<Pen size={16} absoluteStrokeWidth strokeWidth={1.5} />}
+      iconLeft={
+        props.isPending ? undefined : (
+          <Pen size={16} absoluteStrokeWidth strokeWidth={1.5} />
+        )
+      }
     />
   );
 }

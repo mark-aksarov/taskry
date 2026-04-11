@@ -27,6 +27,7 @@ interface DetailInfoAltProps {
   title: React.ReactNode;
   text: React.ReactNode;
   editButton?: React.ReactNode;
+  "data-test"?: string;
 }
 
 export function DetailInfoAlt({
@@ -34,9 +35,10 @@ export function DetailInfoAlt({
   title,
   text,
   editButton,
+  "data-test": dataTest,
 }: DetailInfoAltProps) {
   return (
-    <div className={twMerge(styles, className)}>
+    <div data-test={dataTest} className={twMerge(styles, className)}>
       <div className="flex items-center justify-between self-stretch">
         {title}
         {editButton}

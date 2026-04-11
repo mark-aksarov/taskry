@@ -220,5 +220,8 @@
   },
   "UserImageMenuTrigger": {
     "label": "Меню изображения профиля"
+  },
+  "UpdateUserBioModal": {
+    "title": "Изменить биографию"
   }
 }

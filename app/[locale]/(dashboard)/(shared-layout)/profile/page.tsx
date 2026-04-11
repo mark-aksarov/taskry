@@ -1,11 +1,15 @@
+import { notFound } from "next/navigation";
 import { ProfilePage } from "./ProfilePage";
+import { getUserFormData } from "@/lib/data/user/user.dal";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { UpdateUserBioModal } from "@/components/users/UpdateUserBioModal";
 import { DeleteUserProvider } from "@/components/users/DeleteUserProvider";
 import { ChangePasswordModal } from "@/components/users/ChangePasswordModal";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { DeleteUserImageModal } from "@/components/users/DeleteUserImageModal";
 import { UpdateUserImageModal } from "@/components/users/UpdateUserImageModal";
+import { UpdateUserBioProvider } from "@/components/users/UpdateUserBioProvider";
 import { DeleteUserDetailModal } from "@/components/users/DeleteUserDetailModal";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordProvider";
 import { UserDetailAltContainer } from "@/components/users/UserDetailAltContainer";
@@ -18,40 +22,53 @@ export default async function AppProfilePage() {
   const session = await requireProtectedPage();
 
   const userId = session.user.id;
-  const userFullName = session.user.name;
+  const userFormData = await getUserFormData(userId);
+
+  if (!userFormData) {
+    notFound();
+  }
 
   return (
     <UpdateUserImageFileProvider>
       <UpdateUserImageProvider>
         <ClearUserImageUrlProvider>
           <DeleteUserProvider>
-            <ChangePasswordProvider>
-              <ProfilePage
-                userId={userId}
-                userDetailContainer={<UserDetailAltContainer userId={userId} />}
-                userDetailHeaderContainer={
-                  <UserDetailHeaderAltContainer userId={userId} />
-                }
-              />
+            <UpdateUserBioProvider>
+              <ChangePasswordProvider>
+                <ProfilePage
+                  userId={userId}
+                  userDetailContainer={
+                    <UserDetailAltContainer userId={userId} />
+                  }
+                  userDetailHeaderContainer={
+                    <UserDetailHeaderAltContainer userId={userId} />
+                  }
+                />
 
-              <DeleteUserDetailModal
-                userId={userId}
-                userFullName={userFullName}
-              />
+                <DeleteUserDetailModal
+                  userId={userId}
+                  userFullName={userFormData.fullName}
+                />
 
-              <UpdateUserImageModal userId={userId} />
+                <UpdateUserImageModal userId={userId} />
 
-              <DeleteUserImageModal
-                userId={userId}
-                userFullName={userFullName}
-              />
+                <DeleteUserImageModal
+                  userId={userId}
+                  userFullName={userFormData.fullName}
+                />
 
-              <ChangePasswordModal userId={userId} />
+                <UpdateUserBioModal
+                  userId={userId}
+                  userBio={userFormData.bio}
+                />
 
-              <TaskSearchModal
-                searchContainer={<LinkSearchContainer pathname="/tasks" />}
-              />
-            </ChangePasswordProvider>
+                <ChangePasswordModal userId={userId} />
+
+                <TaskSearchModal
+                  searchContainer={<LinkSearchContainer pathname="/tasks" />}
+                />
+              </ChangePasswordProvider>
+            </UpdateUserBioProvider>
           </DeleteUserProvider>
         </ClearUserImageUrlProvider>
       </UpdateUserImageProvider>

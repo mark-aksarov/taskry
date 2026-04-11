@@ -21,13 +21,19 @@ import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedir
 
 const schema = z.object({
   id: userId,
-  fullName: userFullName,
-  bio: z.preprocess(emptyStringToNull, userBio.nullable()),
-  address: z.preprocess(emptyStringToNull, userAddress.nullable()),
-  birthdate: z.preprocess(emptyStringToNull, userBirthdate.nullable()),
-  phoneNumber: z.preprocess(emptyStringToNull, userPhoneNumber.nullable()),
-  publicLink: z.preprocess(emptyStringToNull, userPublicLink.nullable()),
-  positionId: z.preprocess(emptyStringToNull, positionId.nullable()),
+  fullName: userFullName.optional(),
+  bio: z.preprocess(emptyStringToNull, userBio.nullable()).optional(),
+  address: z.preprocess(emptyStringToNull, userAddress.nullable()).optional(),
+  birthdate: z
+    .preprocess(emptyStringToNull, userBirthdate.nullable())
+    .optional(),
+  phoneNumber: z
+    .preprocess(emptyStringToNull, userPhoneNumber.nullable())
+    .optional(),
+  publicLink: z
+    .preprocess(emptyStringToNull, userPublicLink.nullable())
+    .optional(),
+  positionId: z.preprocess(emptyStringToNull, positionId.nullable()).optional(),
 });
 
 export async function updateUser(formData: FormData): Promise<ActionState> {

@@ -1,0 +1,1 @@
+export { UpdateUserBioModal } from "./UpdateUserBioModal";

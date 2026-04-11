@@ -1,6 +1,6 @@
 import { users, accounts, workspaces } from "@/prisma/test-utils/data";
 
-describe("User editing", () => {
+describe("User updating", () => {
   beforeEach(() => {
     const payload = {
       workspaces,
