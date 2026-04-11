@@ -24,7 +24,7 @@ export function UpdateUserPositionForm({
   positionId,
   positionSelectItems,
 }: UpdateUserPositionFormProps) {
-  const t = useTranslations("users.UpdateUserForm");
+  const t = useTranslations("users.UpdateUserPositionForm");
 
   const { state, action, isPending } = useUpdateUserPosition();
 

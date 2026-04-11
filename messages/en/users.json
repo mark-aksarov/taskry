@@ -244,5 +244,26 @@
   },
   "UpdateUserPositionModal": {
     "title": "Edit position"
+  },
+  "UpdateUserPublicLinkForm": {
+    "submitButtonLabel": "Update public link"
+  },
+  "UpdateUserPhoneNumberForm": {
+    "submitButtonLabel": "Update phone number"
+  },
+  "UpdateUserFullNameForm": {
+    "submitButtonLabel": "Update full name"
+  },
+  "UpdateUserAddressForm": {
+    "submitButtonLabel": "Update address"
+  },
+  "UpdateUserBioForm": {
+    "submitButtonLabel": "Update bio"
+  },
+  "UpdateUserBirthdateForm": {
+    "submitButtonLabel": "Update birthdate"
+  },
+  "UpdateUserPositionForm": {
+    "submitButtonLabel": "Update position"
   }
 }

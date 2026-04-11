@@ -22,7 +22,7 @@ export function UpdateUserPublicLinkForm({
   userId,
   publicLink,
 }: UpdateUserPublicLinkFormProps) {
-  const t = useTranslations("users.UpdateUserForm");
+  const t = useTranslations("users.UpdateUserPublicLinkForm");
 
   const { state, action, isPending } = useUpdateUserPublicLink();
 

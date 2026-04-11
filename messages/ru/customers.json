@@ -176,5 +176,14 @@
   },
   "UpdateCustomerPhoneNumberModal": {
     "title": "Изменить номер телефона"
+  },
+  "UpdateCustomerFullNameForm": {
+    "submitButtonLabel": "Обновить полное имя"
+  },
+  "UpdateCustomerPhoneNumberForm": {
+    "submitButtonLabel": "Обновить номер телефона"
+  },
+  "UpdateCustomerBioForm": {
+    "submitButtonLabel": "Обновить биографию"
   }
 }

@@ -176,5 +176,14 @@
   },
   "UpdateCustomerPhoneNumberModal": {
     "title": "Edit phone number"
+  },
+  "UpdateCustomerFullNameForm": {
+    "submitButtonLabel": "Update full name"
+  },
+  "UpdateCustomerPhoneNumberForm": {
+    "submitButtonLabel": "Update phone number"
+  },
+  "UpdateCustomerBioForm": {
+    "submitButtonLabel": "Update bio"
   }
 }

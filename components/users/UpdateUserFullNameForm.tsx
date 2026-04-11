@@ -22,7 +22,7 @@ export function UpdateUserFullNameForm({
   userId,
   fullName,
 }: UpdateUserFullNameFormProps) {
-  const t = useTranslations("users.UpdateUserForm");
+  const t = useTranslations("users.UpdateUserFullNameForm");
 
   const { state, action, isPending } = useUpdateUserFullName();
 

@@ -219,10 +219,5 @@
   },
   "AssigneeFiltersModalTrigger": {
     "buttonLabel": "Назначенный"
-  },
-  "TaskDetailFallbackSection": {
-    "heading": "Только для мобильных",
-    "description": "Мы ещё работаем над версией для компьютера. Пока вы можете воспользоваться этой функцией на телефоне.",
-    "button": "К задачам"
   }
 }

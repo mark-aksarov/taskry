@@ -22,7 +22,7 @@ export function UpdateUserAddressForm({
   userId,
   address,
 }: UpdateUserAddressFormProps) {
-  const t = useTranslations("users.UpdateUserForm");
+  const t = useTranslations("users.UpdateUserAddressForm");
 
   const { state, action, isPending } = useUpdateUserAddress();
 

@@ -241,5 +241,26 @@
   },
   "UpdateUserPositionModal": {
     "title": "Изменить должность"
+  },
+  "UpdateUserPublicLinkForm": {
+    "submitButtonLabel": "Обновить публичную ссылку"
+  },
+  "UpdateUserPhoneNumberForm": {
+    "submitButtonLabel": "Обновить номер телефона"
+  },
+  "UpdateUserFullNameForm": {
+    "submitButtonLabel": "Обновить полное имя"
+  },
+  "UpdateUserAddressForm": {
+    "submitButtonLabel": "Обновить адрес"
+  },
+  "UpdateUserBioForm": {
+    "submitButtonLabel": "Обновить биографию"
+  },
+  "UpdateUserBirthdateForm": {
+    "submitButtonLabel": "Обновить дату рождения"
+  },
+  "UpdateUserPositionForm": {
+    "submitButtonLabel": "Обновить должность"
   }
 }

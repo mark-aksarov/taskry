@@ -19,7 +19,7 @@ export interface UpdateUserBioFormProps {
 }
 
 export function UpdateUserBioForm({ userId, bio }: UpdateUserBioFormProps) {
-  const t = useTranslations("users.UpdateUserForm");
+  const t = useTranslations("users.UpdateUserBioForm");
 
   const { state, action, isPending } = useUpdateUserBio();
 

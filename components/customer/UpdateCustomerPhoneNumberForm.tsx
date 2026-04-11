@@ -22,7 +22,7 @@ export function UpdateCustomerPhoneNumberForm({
   customerId,
   phoneNumber,
 }: UpdateCustomerPhoneNumberFormProps) {
-  const t = useTranslations("customers.UpdateCustomerForm");
+  const t = useTranslations("customers.UpdateCustomerPhoneNumberForm");
 
   const { state, action, isPending } = useUpdateCustomerPhoneNumber();
 

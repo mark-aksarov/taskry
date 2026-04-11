@@ -23,7 +23,7 @@ export function UpdateUserBirthdateForm({
   userId,
   birthdate,
 }: UpdateUserBirthdateFormProps) {
-  const t = useTranslations("users.UpdateUserForm");
+  const t = useTranslations("users.UpdateUserBirthdateForm");
 
   const { state, action, isPending } = useUpdateUserBirthdate();
 

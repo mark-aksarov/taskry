@@ -22,7 +22,7 @@ export function UpdateCustomerBioForm({
   customerId,
   bio,
 }: UpdateCustomerBioFormProps) {
-  const t = useTranslations("customers.UpdateCustomerForm");
+  const t = useTranslations("customers.UpdateCustomerBioForm");
 
   const { state, action, isPending } = useUpdateCustomerBio();
 
