@@ -232,5 +232,11 @@
   },
   "UpdateTaskDescriptionModal": {
     "title": "Изменить описание"
+  },
+  "UpdateTaskDeadlineForm": {
+    "submitButtonLabel": "Обновить срок выполнения"
+  },
+  "UpdateTaskDeadlineModal": {
+    "title": "Изменить срок выполнения"
   }
 }

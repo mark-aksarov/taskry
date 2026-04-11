@@ -15,6 +15,7 @@ import { withDeleteTaskProvider } from "@/components/tasks/DeleteTaskProvider/__
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
 import { withUpdateTaskTitleProvider } from "@/components/tasks/UpdateTaskTitleProvider/__stories__";
 import { withUpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusProvider/__stories__";
+import { withUpdateTaskDeadlineProvider } from "@/components/tasks/UpdateTaskDeadlineProvider/__stories__";
 import { withUpdateTaskDescriptionProvider } from "@/components/tasks/UpdateTaskDescriptionProvider/__stories__";
 
 const meta = {
@@ -23,6 +24,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     withTaskSearchModal,
+    withUpdateTaskDeadlineProvider,
     withUpdateTaskDescriptionProvider,
     withUpdateTaskTitleProvider,
     withUpdateTaskStatusProvider,

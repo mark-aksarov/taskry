@@ -12,11 +12,13 @@ import { UpdateTaskTitleModal } from "@/components/tasks/UpdateTaskTitleModal";
 import { DeleteTaskDetailModal } from "@/components/tasks/DeleteTaskDetailModal";
 import { TaskDetailAltContainer } from "@/components/tasks/TaskDetailAltContainer";
 import { UpdateTaskTitleProvider } from "@/components/tasks/UpdateTaskTitleProvider";
+import { UpdateTaskDeadlineModal } from "@/components/tasks/UpdateTaskDeadlineModal";
 import { CreateSubtaskAltProvider } from "@/components/subtasks/CreateSubtaskProvider";
 import { UpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusProvider";
 import { TaskDetailHeaderContainer } from "@/components/tasks/TaskDetailHeaderContainer";
-import { UpdateTaskDescriptionProvider } from "@/components/tasks/UpdateTaskDescriptionProvider";
 import { UpdateTaskDescriptionModal } from "@/components/tasks/UpdateTaskDescriptionModal";
+import { UpdateTaskDeadlineProvider } from "@/components/tasks/UpdateTaskDeadlineProvider";
+import { UpdateTaskDescriptionProvider } from "@/components/tasks/UpdateTaskDescriptionProvider";
 
 export default async function AppTaskDetailPage({
   params,
@@ -47,32 +49,41 @@ export default async function AppTaskDetailPage({
         <UpdateTaskStatusProvider>
           <UpdateTaskTitleProvider>
             <UpdateTaskDescriptionProvider>
-              <TaskDetailPage
-                subtasksContainer={<SubtasksContainer taskId={id} />}
-                taskDetailContainer={<TaskDetailAltContainer taskId={id} />}
-                taskHeaderContainer={<TaskDetailHeaderContainer taskId={id} />}
-              />
+              <UpdateTaskDeadlineProvider>
+                <TaskDetailPage
+                  subtasksContainer={<SubtasksContainer taskId={id} />}
+                  taskDetailContainer={<TaskDetailAltContainer taskId={id} />}
+                  taskHeaderContainer={
+                    <TaskDetailHeaderContainer taskId={id} />
+                  }
+                />
 
-              <DeleteTaskDetailModal
-                taskId={taskFormData.id}
-                taskTitle={taskFormData.title}
-              />
+                <DeleteTaskDetailModal
+                  taskId={taskFormData.id}
+                  taskTitle={taskFormData.title}
+                />
 
-              <UpdateTaskTitleModal
-                taskId={taskFormData.id}
-                taskTitle={taskFormData.title}
-              />
+                <UpdateTaskTitleModal
+                  taskId={taskFormData.id}
+                  taskTitle={taskFormData.title}
+                />
 
-              <UpdateTaskDescriptionModal
-                taskId={taskFormData.id}
-                taskDescription={taskFormData.description}
-              />
+                <UpdateTaskDescriptionModal
+                  taskId={taskFormData.id}
+                  taskDescription={taskFormData.description}
+                />
 
-              <TaskSearchModal
-                searchContainer={<LinkSearchContainer pathname="/tasks" />}
-              />
+                <UpdateTaskDeadlineModal
+                  taskId={taskFormData.id}
+                  taskDeadline={taskFormData.deadline}
+                />
 
-              <CreateSubtaskModal taskId={taskFormData.id} />
+                <TaskSearchModal
+                  searchContainer={<LinkSearchContainer pathname="/tasks" />}
+                />
+
+                <CreateSubtaskModal taskId={taskFormData.id} />
+              </UpdateTaskDeadlineProvider>
             </UpdateTaskDescriptionProvider>
           </UpdateTaskTitleProvider>
         </UpdateTaskStatusProvider>

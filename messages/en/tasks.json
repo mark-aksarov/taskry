@@ -232,5 +232,11 @@
   },
   "UpdateTaskDescriptionModal": {
     "title": "Edit description"
+  },
+  "UpdateTaskDeadlineForm": {
+    "submitButtonLabel": "Update deadline"
+  },
+  "UpdateTaskDeadlineModal": {
+    "title": "Edit deadline"
   }
 }

@@ -5,10 +5,11 @@ import {
   DetailEditButton,
 } from "@/components/common/Detail";
 
+import { useTranslations } from "next-intl";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { useFormatter, useTranslations } from "next-intl";
 import { TaskDetailAltLayout } from "./TaskDetailAltLayout";
 import { TaskTitleDetailInfoAlt } from "./TaskTitleDetailInfoAlt";
+import { TaskDeadlineDetailInfoAlt } from "./TaskDeadlineDetailInfoAlt";
 import { TaskDescriptionDetailInfoAlt } from "./TaskDescriptionDetailInfoAlt";
 
 interface TaskDetailAltProps {
@@ -49,14 +50,6 @@ export function TaskDetailAlt({
   const tStatus = useTranslations("tasks.TaskStatus");
   const t = useTranslations("tasks.TaskDetail");
 
-  const format = useFormatter();
-
-  const formattedDeadline = format.dateTime(new Date(deadline), {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  });
-
   return (
     <TaskDetailAltLayout
       titleSlot={<TaskTitleDetailInfoAlt title={title} />}
@@ -76,13 +69,7 @@ export function TaskDetailAlt({
           editButton={<DetailEditButton />}
         />
       }
-      deadlineSlot={
-        <DetailInfoAlt
-          title={<DetailTitle>{t("deadline")}</DetailTitle>}
-          text={<DetailText>{formattedDeadline}</DetailText>}
-          editButton={<DetailEditButton />}
-        />
-      }
+      deadlineSlot={<TaskDeadlineDetailInfoAlt deadline={deadline} />}
       statusSlot={
         <DetailInfoAlt
           title={<DetailTitle>{t("status")}</DetailTitle>}
