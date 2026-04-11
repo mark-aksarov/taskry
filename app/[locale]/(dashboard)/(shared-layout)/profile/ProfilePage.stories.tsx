@@ -15,11 +15,12 @@ import { withChangePasswordProvider } from "@/components/users/ChangePasswordPro
 import { withUpdateUserImageProvider } from "@/components/users/UpdateUserImageProvider/__stories__";
 import { withClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlProvider/__stories__";
 import { withUpdateUserAddressProvider } from "@/components/users/UpdateUserAddressProvider/__stories__";
+import { withUpdateUserPositionProvider } from "@/components/users/UpdateUserPositionProvider/__stories__";
 import { withUpdateUserFullNameProvider } from "@/components/users/UpdateUserFullNameProvider/__stories__";
 import { withUpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext/__stories__";
 import { withUpdateUserBirthdateProvider } from "@/components/users/UpdateUserBirthdateProvider/__stories__";
-import { withUpdateUserPhoneNumberProvider } from "@/components/users/UpdateUserPhoneNumberProvider/__stories__";
 import { withUpdateUserPublicLinkProvider } from "@/components/users/UpdateUserPublicLinkProvider/__stories__";
+import { withUpdateUserPhoneNumberProvider } from "@/components/users/UpdateUserPhoneNumberProvider/__stories__";
 
 const meta = {
   title: "pages/ProfilePage",
@@ -34,6 +35,7 @@ const meta = {
     withUpdateUserBirthdateProvider,
     withUpdateUserAddressProvider,
     withUpdateUserPublicLinkProvider,
+    withUpdateUserPositionProvider,
     withDeleteUserProvider,
     withUpdateUserImageProvider,
     withClearUserImageUrlProvider,

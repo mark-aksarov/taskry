@@ -1,0 +1,1 @@
+export { UpdateUserPositionModal } from "./UpdateUserPositionModal";

@@ -9,9 +9,10 @@ import { UserDetailAltLayout } from "./UserDetailAltLayout";
 import { UserBioDetailInfoAlt } from "./UserBioDetailInfoAlt";
 import { UserAddressDetailInfoAlt } from "./UserAddressDetailInfoAlt";
 import { UserFullNameDetailInfoAlt } from "./UserFullNameDetailInfoAlt";
+import { UserPositionDetailInfoAlt } from "./UserPositionDetailInfoAlt";
 import { UserBirthdateDetailInfoAlt } from "./UserBirthdateDetailInfoAlt";
-import { UserPhoneNumberDetailInfoAlt } from "./UserPhoneNumberDetailInfoAlt";
 import { UserPublicLinkDetailInfoAlt } from "./UserPublicLinkDetailInfoAlt";
+import { UserPhoneNumberDetailInfoAlt } from "./UserPhoneNumberDetailInfoAlt";
 
 export interface UserDetailAltProps {
   id: string;
@@ -43,13 +44,7 @@ export function UserDetailAlt({
     <UserDetailAltLayout
       bioSlot={<UserBioDetailInfoAlt bio={bio} />}
       fullNameSlot={<UserFullNameDetailInfoAlt fullName={fullName} />}
-      positionSlot={
-        <DetailInfoAlt
-          title={<DetailTitle>{t("position")}</DetailTitle>}
-          text={<DetailText>{position?.name || t("noPosition")}</DetailText>}
-          editButton={<DetailEditButton />}
-        />
-      }
+      positionSlot={<UserPositionDetailInfoAlt position={position} />}
       emailSlot={
         <DetailInfoAlt
           title={<DetailTitle>{t("email")}</DetailTitle>}

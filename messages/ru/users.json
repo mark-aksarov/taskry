@@ -238,5 +238,8 @@
   },
   "UpdateUserPublicLinkModal": {
     "title": "Изменить публичную ссылку"
+  },
+  "UpdateUserPositionModal": {
+    "title": "Изменить должность"
   }
 }

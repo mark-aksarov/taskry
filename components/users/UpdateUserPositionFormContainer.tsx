@@ -1,17 +1,21 @@
 "use client";
 
+import {
+  UpdateUserPositionForm,
+  UpdateUserPositionFormSkeleton,
+} from "./UpdateUserPositionForm";
+
 import useSWR from "swr";
 import { UserFormDataDTO } from "@/lib/data/user/user.dto";
-import { UpdateUserForm, UpdateUserFormSkeleton } from "./UpdateUserForm";
 import { PositionSummaryDTO } from "@/lib/data/position/position.dto";
 
-interface UpdateUserFormContainerProps {
+interface UpdateUserPositionFormContainerProps {
   userId: string;
 }
 
-export function UpdateUserFormContainer({
+export function UpdateUserPositionFormContainer({
   userId,
-}: UpdateUserFormContainerProps) {
+}: UpdateUserPositionFormContainerProps) {
   const { data: positions } = useSWR<PositionSummaryDTO[]>(`/api/positions`, {
     revalidateOnFocus: false,
   });
@@ -33,18 +37,12 @@ export function UpdateUserFormContainer({
   const showSkeleton = !positions || !user || isValidatingUser;
 
   if (showSkeleton) {
-    return <UpdateUserFormSkeleton />;
+    return <UpdateUserPositionFormSkeleton />;
   }
 
   return (
-    <UpdateUserForm
+    <UpdateUserPositionForm
       userId={userId}
-      fullName={user.fullName}
-      bio={user.bio}
-      birthdate={user.birthdate}
-      phoneNumber={user.phoneNumber}
-      publicLink={user.publicLink}
-      address={user.address}
       positionId={user.positionId}
       positionSelectItems={positions}
     />

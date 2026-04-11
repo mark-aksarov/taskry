@@ -241,5 +241,8 @@
   },
   "UpdateUserPublicLinkModal": {
     "title": "Edit public link"
+  },
+  "UpdateUserPositionModal": {
+    "title": "Edit position"
   }
 }
