@@ -11,7 +11,7 @@ import { useUpdateCustomerFullName } from "../UpdateCustomerFullNameContext";
 import { useModal } from "@/components/common/ModalManagerContext";
 
 interface CustomerFullNameDetailInfoAltProps {
-  fullName?: string;
+  fullName: string;
 }
 
 export function CustomerFullNameDetailInfoAlt({
@@ -30,7 +30,7 @@ export function CustomerFullNameDetailInfoAlt({
     <DetailInfoAlt
       data-test="customer-full-name-detail-info"
       title={<DetailTitle>{t("fullName")}</DetailTitle>}
-      text={<DetailText>{fullName || t("noFullName")}</DetailText>}
+      text={<DetailText>{fullName}</DetailText>}
       editButton={
         <DetailEditButton
           data-test="update-customer-full-name-edit-button"

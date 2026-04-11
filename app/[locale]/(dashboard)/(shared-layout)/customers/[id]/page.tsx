@@ -15,12 +15,14 @@ import { DeleteCustomerDetailModal } from "@/components/customer/DeleteCustomerD
 import { CustomerDetailAltContainer } from "@/components/customer/CustomerDetailAltContainer";
 import { UpdateCustomerImageProvider } from "@/components/customer/UpdateCustomerImageProvider";
 import { UpdateCustomerFullNameModal } from "@/components/customer/UpdateCustomerFullNameModal";
+import { UpdateCustomerPublicLinkModal } from "@/components/customer/UpdateCustomerPublicLinkModal";
 import { ClearCustomerImageUrlProvider } from "@/components/customer/ClearCustomerImageUrlProvider";
 import { UpdateCustomerFullNameProvider } from "@/components/customer/UpdateCustomerFullNameProvider";
+import { UpdateCustomerPhoneNumberModal } from "@/components/customer/UpdateCustomerPhoneNumberModal";
 import { UpdateCustomerImageFileProvider } from "@/components/customer/UpdateCustomerImageFileContext";
 import { CustomerDetailHeaderAltContainer } from "@/components/customer/CustomerDetailHeaderAltContainer";
+import { UpdateCustomerPublicLinkProvider } from "@/components/customer/UpdateCustomerPublicLinkProvider";
 import { UpdateCustomerPhoneNumberProvider } from "@/components/customer/UpdateCustomerPhoneNumberProvider";
-import { UpdateCustomerPhoneNumberModal } from "@/components/customer/UpdateCustomerPhoneNumberModal";
 
 export default async function AppCustomerDetailPage({
   params,
@@ -53,46 +55,57 @@ export default async function AppCustomerDetailPage({
             <UpdateCustomerBioProvider>
               <UpdateCustomerFullNameProvider>
                 <UpdateCustomerPhoneNumberProvider>
-                  <CustomerDetailPage
-                    customerDetailContainer={
-                      <CustomerDetailAltContainer customerId={id} />
-                    }
-                    customerDetailHeaderContainer={
-                      <CustomerDetailHeaderAltContainer customerId={id} />
-                    }
-                    customerDetailActions={<CustomerDetailActions />}
-                  />
+                  <UpdateCustomerPublicLinkProvider>
+                    <CustomerDetailPage
+                      customerDetailContainer={
+                        <CustomerDetailAltContainer customerId={id} />
+                      }
+                      customerDetailHeaderContainer={
+                        <CustomerDetailHeaderAltContainer customerId={id} />
+                      }
+                      customerDetailActions={<CustomerDetailActions />}
+                    />
 
-                  <UpdateCustomerBioModal
-                    customerId={customerFormData.id}
-                    customerBio={customerFormData.bio}
-                  />
+                    <UpdateCustomerBioModal
+                      customerId={customerFormData.id}
+                      customerBio={customerFormData.bio}
+                    />
 
-                  <UpdateCustomerFullNameModal
-                    customerId={customerFormData.id}
-                    customerFullName={customerFormData.fullName}
-                  />
+                    <UpdateCustomerFullNameModal
+                      customerId={customerFormData.id}
+                      customerFullName={customerFormData.fullName}
+                    />
 
-                  <UpdateCustomerPhoneNumberModal
-                    customerId={customerFormData.id}
-                    customerPhoneNumber={customerFormData.phoneNumber}
-                  />
+                    <UpdateCustomerPhoneNumberModal
+                      customerId={customerFormData.id}
+                      customerPhoneNumber={customerFormData.phoneNumber}
+                    />
 
-                  <DeleteCustomerDetailModal
-                    customerId={customerFormData.id}
-                    customerFullName={customerFormData.fullName}
-                  />
+                    <UpdateCustomerPublicLinkModal
+                      customerId={customerFormData.id}
+                      customerPublicLink={customerFormData.publicLink}
+                    />
 
-                  <UpdateCustomerImageModal customerId={customerFormData.id} />
+                    <DeleteCustomerDetailModal
+                      customerId={customerFormData.id}
+                      customerFullName={customerFormData.fullName}
+                    />
 
-                  <DeleteCustomerImageModal
-                    customerId={customerFormData.id}
-                    customerFullName={customerFormData.fullName}
-                  />
+                    <UpdateCustomerImageModal
+                      customerId={customerFormData.id}
+                    />
 
-                  <TaskSearchModal
-                    searchContainer={<LinkSearchContainer pathname="/tasks" />}
-                  />
+                    <DeleteCustomerImageModal
+                      customerId={customerFormData.id}
+                      customerFullName={customerFormData.fullName}
+                    />
+
+                    <TaskSearchModal
+                      searchContainer={
+                        <LinkSearchContainer pathname="/tasks" />
+                      }
+                    />
+                  </UpdateCustomerPublicLinkProvider>
                 </UpdateCustomerPhoneNumberProvider>
               </UpdateCustomerFullNameProvider>
             </UpdateCustomerBioProvider>

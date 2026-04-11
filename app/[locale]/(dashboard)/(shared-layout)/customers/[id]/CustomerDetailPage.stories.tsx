@@ -16,6 +16,7 @@ import { withUpdateCustomerImageProvider } from "@/components/customer/UpdateCus
 import { withClearCustomerImageUrlProvider } from "@/components/customer/ClearCustomerImageUrlProvider/__stories__";
 import { withUpdateCustomerFullNameProvider } from "@/components/customer/UpdateCustomerFullNameProvider/__stories__";
 import { withUpdateCustomerImageFileProvider } from "@/components/customer/UpdateCustomerImageFileContext/__stories__";
+import { withUpdateCustomerPublicLinkProvider } from "@/components/customer/UpdateCustomerPublicLinkProvider/__stories__";
 import { withUpdateCustomerPhoneNumberProvider } from "@/components/customer/UpdateCustomerPhoneNumberProvider/__stories__";
 
 const meta = {
@@ -24,6 +25,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     withTaskSearchModal,
+    withUpdateCustomerPublicLinkProvider,
     withUpdateCustomerPhoneNumberProvider,
     withUpdateCustomerFullNameProvider,
     withUpdateCustomerBioProvider,

@@ -1,0 +1,1 @@
+export { UpdateCustomerPublicLinkProvider } from "./UpdateCustomerPublicLinkProvider";

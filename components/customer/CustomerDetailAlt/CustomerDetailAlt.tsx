@@ -10,6 +10,7 @@ import { CustomerDetailAltLayout } from "./CustomerDetailAltLayout";
 import { CustomerBioDetailInfoAlt } from "./CustomerBioDetailInfoAlt";
 import { CustomerFullNameDetailInfoAlt } from "./CustomerFullNameDetailInfoAlt";
 import { CustomerPhoneNumberDetailInfoAlt } from "./CustomerPhoneNumberDetailInfoAlt";
+import { CustomerPublicLinkDetailInfoAlt } from "./CustomerPublicLinkDetailInfoAlt";
 
 export interface CustomerDetailAltProps {
   fullName: string;
@@ -54,18 +55,7 @@ export function CustomerDetailAlt({
         />
       }
       publicLinkSlot={
-        <DetailInfoAlt
-          className="border-none pb-0"
-          title={<DetailTitle>{t("publicLink")}</DetailTitle>}
-          text={
-            publicLink ? (
-              <DetailText>{publicLink}</DetailText>
-            ) : (
-              <DetailText>{t("noPublicLink")}</DetailText>
-            )
-          }
-          editButton={<DetailEditButton />}
-        />
+        <CustomerPublicLinkDetailInfoAlt publicLink={publicLink} />
       }
     />
   );

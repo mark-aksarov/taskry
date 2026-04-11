@@ -185,5 +185,11 @@
   },
   "UpdateCustomerBioForm": {
     "submitButtonLabel": "Обновить биографию"
+  },
+  "UpdateCustomerPublicLinkForm": {
+    "submitButtonLabel": "Обновить публичную ссылку"
+  },
+  "UpdateCustomerPublicLinkModal": {
+    "title": "Изменить публичную ссылку"
   }
 }
