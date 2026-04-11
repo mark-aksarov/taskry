@@ -1,0 +1,1 @@
+export { UpdateCustomerEmailModal } from "./UpdateCustomerEmailModal";

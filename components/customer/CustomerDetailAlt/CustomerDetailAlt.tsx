@@ -8,9 +8,10 @@ import {
 import { useTranslations } from "next-intl";
 import { CustomerDetailAltLayout } from "./CustomerDetailAltLayout";
 import { CustomerBioDetailInfoAlt } from "./CustomerBioDetailInfoAlt";
+import { CustomerEmailDetailInfoAlt } from "./CustomerEmailDetailInfoAlt";
 import { CustomerFullNameDetailInfoAlt } from "./CustomerFullNameDetailInfoAlt";
-import { CustomerPhoneNumberDetailInfoAlt } from "./CustomerPhoneNumberDetailInfoAlt";
 import { CustomerPublicLinkDetailInfoAlt } from "./CustomerPublicLinkDetailInfoAlt";
+import { CustomerPhoneNumberDetailInfoAlt } from "./CustomerPhoneNumberDetailInfoAlt";
 
 export interface CustomerDetailAltProps {
   fullName: string;
@@ -37,13 +38,7 @@ export function CustomerDetailAlt({
     <CustomerDetailAltLayout
       bioSlot={<CustomerBioDetailInfoAlt bio={bio} />}
       fullNameSlot={<CustomerFullNameDetailInfoAlt fullName={fullName} />}
-      emailSlot={
-        <DetailInfoAlt
-          title={<DetailTitle>{t("email")}</DetailTitle>}
-          text={<DetailText>{email}</DetailText>}
-          editButton={<DetailEditButton />}
-        />
-      }
+      emailSlot={<CustomerEmailDetailInfoAlt email={email} />}
       phoneNumberSlot={
         <CustomerPhoneNumberDetailInfoAlt phoneNumber={phoneNumber} />
       }

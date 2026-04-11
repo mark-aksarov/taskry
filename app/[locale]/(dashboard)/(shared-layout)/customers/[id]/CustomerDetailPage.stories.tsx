@@ -13,6 +13,7 @@ import { CustomerDetailHeaderInteractive } from "@/components/customer/CustomerD
 import { withDeleteCustomerProvider } from "@/components/customer/DeleteCustomerProvider/__stories__";
 import { withUpdateCustomerBioProvider } from "@/components/customer/UpdateCustomerBioProvider/__stories__";
 import { withUpdateCustomerImageProvider } from "@/components/customer/UpdateCustomerImageProvider/__stories__";
+import { withUpdateCustomerEmailProvider } from "@/components/customer/UpdateCustomerEmailProvider/__stories__";
 import { withClearCustomerImageUrlProvider } from "@/components/customer/ClearCustomerImageUrlProvider/__stories__";
 import { withUpdateCustomerFullNameProvider } from "@/components/customer/UpdateCustomerFullNameProvider/__stories__";
 import { withUpdateCustomerImageFileProvider } from "@/components/customer/UpdateCustomerImageFileContext/__stories__";
@@ -25,6 +26,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     withTaskSearchModal,
+    withUpdateCustomerEmailProvider,
     withUpdateCustomerPublicLinkProvider,
     withUpdateCustomerPhoneNumberProvider,
     withUpdateCustomerFullNameProvider,

@@ -191,5 +191,11 @@
   },
   "UpdateCustomerPublicLinkModal": {
     "title": "Edit public link"
+  },
+  "UpdateCustomerEmailForm": {
+    "submitButtonLabel": "Update email"
+  },
+  "UpdateCustomerEmailModal": {
+    "title": "Edit email"
   }
 }

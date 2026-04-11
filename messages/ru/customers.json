@@ -191,5 +191,11 @@
   },
   "UpdateCustomerPublicLinkModal": {
     "title": "Изменить публичную ссылку"
+  },
+  "UpdateCustomerEmailForm": {
+    "submitButtonLabel": "Обновить почту"
+  },
+  "UpdateCustomerEmailModal": {
+    "title": "Изменить почту"
   }
 }
