@@ -15,6 +15,8 @@ import { UpdateTaskTitleProvider } from "@/components/tasks/UpdateTaskTitleProvi
 import { CreateSubtaskAltProvider } from "@/components/subtasks/CreateSubtaskProvider";
 import { UpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusProvider";
 import { TaskDetailHeaderContainer } from "@/components/tasks/TaskDetailHeaderContainer";
+import { UpdateTaskDescriptionProvider } from "@/components/tasks/UpdateTaskDescriptionProvider";
+import { UpdateTaskDescriptionModal } from "@/components/tasks/UpdateTaskDescriptionModal";
 
 export default async function AppTaskDetailPage({
   params,
@@ -44,27 +46,34 @@ export default async function AppTaskDetailPage({
       <DeleteTaskProvider>
         <UpdateTaskStatusProvider>
           <UpdateTaskTitleProvider>
-            <TaskDetailPage
-              subtasksContainer={<SubtasksContainer taskId={id} />}
-              taskDetailContainer={<TaskDetailAltContainer taskId={id} />}
-              taskHeaderContainer={<TaskDetailHeaderContainer taskId={id} />}
-            />
+            <UpdateTaskDescriptionProvider>
+              <TaskDetailPage
+                subtasksContainer={<SubtasksContainer taskId={id} />}
+                taskDetailContainer={<TaskDetailAltContainer taskId={id} />}
+                taskHeaderContainer={<TaskDetailHeaderContainer taskId={id} />}
+              />
 
-            <DeleteTaskDetailModal
-              taskId={taskFormData.id}
-              taskTitle={taskFormData.title}
-            />
+              <DeleteTaskDetailModal
+                taskId={taskFormData.id}
+                taskTitle={taskFormData.title}
+              />
 
-            <UpdateTaskTitleModal
-              taskId={taskFormData.id}
-              taskTitle={taskFormData.title}
-            />
+              <UpdateTaskTitleModal
+                taskId={taskFormData.id}
+                taskTitle={taskFormData.title}
+              />
 
-            <TaskSearchModal
-              searchContainer={<LinkSearchContainer pathname="/tasks" />}
-            />
+              <UpdateTaskDescriptionModal
+                taskId={taskFormData.id}
+                taskDescription={taskFormData.description}
+              />
 
-            <CreateSubtaskModal taskId={taskFormData.id} />
+              <TaskSearchModal
+                searchContainer={<LinkSearchContainer pathname="/tasks" />}
+              />
+
+              <CreateSubtaskModal taskId={taskFormData.id} />
+            </UpdateTaskDescriptionProvider>
           </UpdateTaskTitleProvider>
         </UpdateTaskStatusProvider>
       </DeleteTaskProvider>

@@ -226,5 +226,11 @@
   },
   "UpdateTaskTitleModal": {
     "title": "Изменить заголовок"
+  },
+  "UpdateTaskDescriptionForm": {
+    "submitButtonLabel": "Обновить описание"
+  },
+  "UpdateTaskDescriptionModal": {
+    "title": "Изменить описание"
   }
 }

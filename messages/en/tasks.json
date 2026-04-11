@@ -226,5 +226,11 @@
   },
   "UpdateTaskTitleModal": {
     "title": "Edit title"
+  },
+  "UpdateTaskDescriptionForm": {
+    "submitButtonLabel": "Update description"
+  },
+  "UpdateTaskDescriptionModal": {
+    "title": "Edit description"
   }
 }

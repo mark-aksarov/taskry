@@ -9,22 +9,22 @@ import {
 
 import { startTransition } from "react";
 import { useTranslations } from "next-intl";
-import { TaskTitleTextField } from "./TaskTitleTextField";
-import { useUpdateTaskTitle } from "./UpdateTaskTitleContext";
+import { TaskDescriptionTextField } from "./TaskDescriptionTextField";
+import { useUpdateTaskDescription } from "./UpdateTaskDescriptionContext";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 
-export interface UpdateTaskTitleFormProps {
+export interface UpdateTaskDescriptionFormProps {
   taskId: number;
-  title: string;
+  description?: string;
 }
 
-export function UpdateTaskTitleForm({
+export function UpdateTaskDescriptionForm({
   taskId,
-  title,
-}: UpdateTaskTitleFormProps) {
-  const t = useTranslations("tasks.UpdateTaskTitleForm");
+  description,
+}: UpdateTaskDescriptionFormProps) {
+  const t = useTranslations("tasks.UpdateTaskDescriptionForm");
 
-  const { state, action, isPending } = useUpdateTaskTitle();
+  const { state, action, isPending } = useUpdateTaskDescription();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -36,10 +36,10 @@ export function UpdateTaskTitleForm({
   }
 
   return (
-    <FormBase id="update-task-title-form" onSubmit={handleSubmit}>
+    <FormBase id="update-task-description-form" onSubmit={handleSubmit}>
       <FormBaseBody>
         {taskId && <input type="hidden" name="id" value={taskId} />}
-        <TaskTitleTextField defaultValue={title} />
+        <TaskDescriptionTextField defaultValue={description} />
 
         <FormErrorBanner status={state.status} isPending={isPending}>
           {state.message}

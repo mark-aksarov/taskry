@@ -9,6 +9,7 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { TaskDetailAltLayout } from "./TaskDetailAltLayout";
 import { TaskTitleDetailInfoAlt } from "./TaskTitleDetailInfoAlt";
+import { TaskDescriptionDetailInfoAlt } from "./TaskDescriptionDetailInfoAlt";
 
 interface TaskDetailAltProps {
   title: string;
@@ -60,15 +61,7 @@ export function TaskDetailAlt({
     <TaskDetailAltLayout
       titleSlot={<TaskTitleDetailInfoAlt title={title} />}
       descriptionSlot={
-        <DetailInfoAlt
-          title={<DetailTitle>{t("description")}</DetailTitle>}
-          text={
-            <DetailText>
-              {description ? description : t("noDescription")}
-            </DetailText>
-          }
-          editButton={<DetailEditButton />}
-        />
+        <TaskDescriptionDetailInfoAlt description={description} />
       }
       assigneesSlot={
         <DetailInfoAlt
