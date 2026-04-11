@@ -19,12 +19,16 @@ import { updateCustomer as updateCustomerQuery } from "@/lib/data/customer/custo
 
 const schema = z.object({
   id: customerId,
-  fullName: customerFullName,
-  bio: z.preprocess(emptyStringToNull, customerBio.nullable()),
-  email: customerEmail,
-  phoneNumber: z.preprocess(emptyStringToNull, customerPhoneNumber.nullable()),
-  publicLink: z.preprocess(emptyStringToNull, customerPublicLink.nullable()),
-  companyId: z.preprocess(emptyStringToNull, companyId.nullable()),
+  fullName: customerFullName.optional(),
+  bio: z.preprocess(emptyStringToNull, customerBio.nullable()).optional(),
+  email: customerEmail.optional(),
+  phoneNumber: z
+    .preprocess(emptyStringToNull, customerPhoneNumber.nullable())
+    .optional(),
+  publicLink: z
+    .preprocess(emptyStringToNull, customerPublicLink.nullable())
+    .optional(),
+  companyId: z.preprocess(emptyStringToNull, companyId.nullable()).optional(),
 });
 
 export async function updateCustomer(formData: FormData): Promise<ActionState> {

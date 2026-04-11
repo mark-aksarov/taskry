@@ -49,7 +49,7 @@
     "phoneNumber": "Phone number",
     "publicLink": "Public link",
     "company": "Company",
-    "noBio": "This user hasn’t written a bio yet.",
+    "noBio": "This customer hasn’t written a bio yet.",
     "noFullName": "No name provided",
     "noEmail": "No email provided",
     "noPhoneNumber": "No phone number provided",
@@ -167,5 +167,8 @@
   },
   "PersonDetailHeaderImage": {
     "imageAlt": "Profile image"
+  },
+  "UpdateCustomerBioModal": {
+    "title": "Edit customer"
   }
 }

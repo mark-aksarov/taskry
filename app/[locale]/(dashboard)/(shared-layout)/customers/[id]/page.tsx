@@ -2,18 +2,17 @@ import { notFound } from "next/navigation";
 import { customerId } from "@/lib/schemas/customer";
 import { CustomerDetailPage } from "./CustomerDetailPage";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
-import { getCustomerSummary } from "@/lib/data/customer/customer.dal";
+import { getCustomerFormData } from "@/lib/data/customer/customer.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
-import { UpdateCustomerModal } from "@/components/customer/UpdateCustomerModal";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
+import { UpdateCustomerBioModal } from "@/components/customer/UpdateCustomerBioModal";
 import { DeleteCustomerProvider } from "@/components/customer/DeleteCustomerProvider";
-import { UpdateCustomerProvider } from "@/components/customer/UpdateCustomerProvider";
 import { UpdateCustomerImageModal } from "@/components/customer/UpdateCustomerImageModal";
 import { DeleteCustomerImageModal } from "@/components/customer/DeleteCustomerImageModal";
+import { UpdateCustomerBioProvider } from "@/components/customer/UpdateCustomerBioProvider";
 import { DeleteCustomerDetailModal } from "@/components/customer/DeleteCustomerDetailModal";
 import { CustomerDetailAltContainer } from "@/components/customer/CustomerDetailAltContainer";
-import { UpdateCustomerFormContainer } from "@/components/customer/UpdateCustomerFormContainer";
 import { UpdateCustomerImageProvider } from "@/components/customer/UpdateCustomerImageProvider";
 import { ClearCustomerImageUrlProvider } from "@/components/customer/ClearCustomerImageUrlProvider";
 import { UpdateCustomerImageFileProvider } from "@/components/customer/UpdateCustomerImageFileContext";
@@ -36,9 +35,9 @@ export default async function AppCustomerDetailPage({
   const id = parsed.data;
 
   // Get customer summary
-  const customerSummary = await getCustomerSummary(id);
+  const customerFormData = await getCustomerFormData(id);
 
-  if (!customerSummary) {
+  if (!customerFormData) {
     notFound();
   }
 
@@ -47,7 +46,7 @@ export default async function AppCustomerDetailPage({
       <UpdateCustomerImageProvider>
         <ClearCustomerImageUrlProvider>
           <DeleteCustomerProvider>
-            <UpdateCustomerProvider>
+            <UpdateCustomerBioProvider>
               <CustomerDetailPage
                 customerDetailContainer={
                   <CustomerDetailAltContainer customerId={id} />
@@ -58,30 +57,27 @@ export default async function AppCustomerDetailPage({
                 customerDetailActions={<CustomerDetailActions />}
               />
 
-              <UpdateCustomerModal
-                updateCustomerFormContainer={
-                  <UpdateCustomerFormContainer
-                    customerId={customerSummary.id}
-                  />
-                }
+              <UpdateCustomerBioModal
+                customerId={customerFormData.id}
+                customerBio={customerFormData.bio}
               />
 
               <DeleteCustomerDetailModal
-                customerId={customerSummary.id}
-                customerFullName={customerSummary.fullName}
+                customerId={customerFormData.id}
+                customerFullName={customerFormData.fullName}
               />
 
-              <UpdateCustomerImageModal customerId={customerSummary.id} />
+              <UpdateCustomerImageModal customerId={customerFormData.id} />
 
               <DeleteCustomerImageModal
-                customerId={customerSummary.id}
-                customerFullName={customerSummary.fullName}
+                customerId={customerFormData.id}
+                customerFullName={customerFormData.fullName}
               />
 
               <TaskSearchModal
                 searchContainer={<LinkSearchContainer pathname="/tasks" />}
               />
-            </UpdateCustomerProvider>
+            </UpdateCustomerBioProvider>
           </DeleteCustomerProvider>
         </ClearCustomerImageUrlProvider>
       </UpdateCustomerImageProvider>

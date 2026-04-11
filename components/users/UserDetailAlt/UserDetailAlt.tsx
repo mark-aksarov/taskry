@@ -2,7 +2,6 @@ import {
   DetailText,
   DetailTitle,
   DetailInfoAlt,
-  DetailEditButton,
 } from "@/components/common/Detail";
 import { useTranslations } from "next-intl";
 import { UserDetailAltLayout } from "./UserDetailAltLayout";

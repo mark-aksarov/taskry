@@ -10,8 +10,8 @@ import { CustomerDetailAlt } from "@/components/customer/CustomerDetailAlt";
 import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
 import { CustomerDetailHeaderInteractive } from "@/components/customer/CustomerDetailHeader";
-import { withUpdateCustomerProvider } from "@/components/customer/UpdateCustomerProvider/__stories__";
 import { withDeleteCustomerProvider } from "@/components/customer/DeleteCustomerProvider/__stories__";
+import { withUpdateCustomerBioProvider } from "@/components/customer/UpdateCustomerBioProvider/__stories__";
 import { withUpdateCustomerImageProvider } from "@/components/customer/UpdateCustomerImageProvider/__stories__";
 import { withClearCustomerImageUrlProvider } from "@/components/customer/ClearCustomerImageUrlProvider/__stories__";
 import { withUpdateCustomerImageFileProvider } from "@/components/customer/UpdateCustomerImageFileContext/__stories__";
@@ -22,7 +22,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     withTaskSearchModal,
-    withUpdateCustomerProvider,
+    withUpdateCustomerBioProvider,
     withDeleteCustomerProvider,
     withUpdateCustomerImageProvider,
     withClearCustomerImageUrlProvider,

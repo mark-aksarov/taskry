@@ -1,0 +1,1 @@
+export { UpdateCustomerBioProvider } from "./UpdateCustomerBioProvider";
