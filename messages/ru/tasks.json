@@ -167,7 +167,8 @@
     "noAssignee": "Нет исполнителя",
     "status": "Статус",
     "subtasks": "Подзадачи",
-    "noCategory": "Нет категории"
+    "noCategory": "Нет категории",
+    "title": "Заголовок"
   },
   "TaskDetailHeader": {
     "noCategory": "Нет категории"
@@ -219,5 +220,11 @@
   },
   "AssigneeFiltersModalTrigger": {
     "buttonLabel": "Назначенный"
+  },
+  "UpdateTaskTitleForm": {
+    "submitButtonLabel": "Обновить заголовок"
+  },
+  "UpdateTaskTitleModal": {
+    "title": "Изменить заголовок"
   }
 }

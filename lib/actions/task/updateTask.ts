@@ -20,13 +20,17 @@ import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedir
 
 const schema = z.object({
   id: taskId,
-  title: taskTitle,
-  description: z.preprocess(emptyStringToNull, taskDescription.nullable()),
-  deadline: taskDeadline,
-  status: taskStatus,
-  projectId: z.preprocess(emptyStringToNull, projectId.nullable()),
-  categoryId: z.preprocess(emptyStringToNull, taskCategoryId.nullable()),
-  assigneeId: z.preprocess(emptyStringToNull, userId.nullable()),
+  title: taskTitle.optional(),
+  description: z
+    .preprocess(emptyStringToNull, taskDescription.nullable())
+    .optional(),
+  deadline: taskDeadline.optional(),
+  status: taskStatus.optional(),
+  projectId: z.preprocess(emptyStringToNull, projectId.nullable()).optional(),
+  categoryId: z
+    .preprocess(emptyStringToNull, taskCategoryId.nullable())
+    .optional(),
+  assigneeId: z.preprocess(emptyStringToNull, userId.nullable()).optional(),
 });
 
 export async function updateTask(formData: FormData): Promise<ActionState> {

@@ -391,7 +391,7 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
     data: {
       title: input.title,
       description: input.description,
-      deadline: new Date(input.deadline),
+      deadline: input.deadline ? new Date(input.deadline) : undefined,
       status: input.status,
       projectId: input.projectId,
       categoryId: input.categoryId,

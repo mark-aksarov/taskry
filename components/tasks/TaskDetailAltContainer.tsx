@@ -29,6 +29,7 @@ async function TaskDetailAltContainerInner({
 
   return (
     <TaskDetailAlt
+      title={task.title}
       creator={task.creator}
       assignee={task.assignee}
       deadline={task.deadline}

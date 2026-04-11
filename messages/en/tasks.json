@@ -167,7 +167,8 @@
     "assignee": "Assignee",
     "noAssignee": "No assignee",
     "status": "Status",
-    "subtasks": "Subtasks"
+    "subtasks": "Subtasks",
+    "title": "Title"
   },
   "TaskDetailHeader": {
     "noCategory": "No category"
@@ -219,5 +220,11 @@
   },
   "AssigneeFiltersModalTrigger": {
     "buttonLabel": "Assignee"
+  },
+  "UpdateTaskTitleForm": {
+    "submitButtonLabel": "Update title"
+  },
+  "UpdateTaskTitleModal": {
+    "title": "Edit title"
   }
 }

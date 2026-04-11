@@ -12,9 +12,9 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
 import { withDeleteTaskProvider } from "@/components/tasks/DeleteTaskProvider/__stories__";
-import { withUpdateTaskProvider } from "@/components/tasks/UpdateTaskProvider/__stories__";
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
 import { withUpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusProvider/__stories__";
+import { withUpdateTaskTitleProvider } from "@/components/tasks/UpdateTaskTitleProvider/__stories__";
 
 const meta = {
   title: "pages/TaskDetailPage",
@@ -22,8 +22,8 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     withTaskSearchModal,
+    withUpdateTaskTitleProvider,
     withUpdateTaskStatusProvider,
-    withUpdateTaskProvider,
     withDeleteTaskProvider,
     withCreateSubtaskProvider,
     SharedPageDecorator,
@@ -66,6 +66,7 @@ export const WithoutOptionalTaskData = {
     ...Default.args,
     taskDetailContainer: (
       <TaskDetailAlt
+        title={mockedTaskDetail.title}
         deadline={mockedTaskDetail.deadline}
         status={mockedTaskDetail.status}
       />

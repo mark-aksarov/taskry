@@ -28,13 +28,13 @@ export interface CreateTaskInputDTO {
 
 export interface UpdateTaskInputDTO {
   id: number;
-  title: string;
-  description: string | null;
-  deadline: string;
-  status: TaskStatus;
-  projectId: number | null;
-  categoryId: number | null;
-  assigneeId: string | null;
+  title?: string;
+  description?: string | null;
+  deadline?: string;
+  status?: TaskStatus;
+  projectId?: number | null;
+  categoryId?: number | null;
+  assigneeId?: string | null;
 }
 
 export interface TaskDetailDTO {

@@ -11,7 +11,7 @@ import {
 } from "@/prisma/test-utils/data";
 import { TaskStatus } from "@/generated/prisma/enums";
 
-describe("Task editing", () => {
+describe("Task updating", () => {
   beforeEach(() => {
     const payload = {
       workspaces,
