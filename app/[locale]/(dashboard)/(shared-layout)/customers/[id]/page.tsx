@@ -9,12 +9,16 @@ import { CustomerDetailActions } from "@/components/customer/CustomerDetailActio
 import { UpdateCustomerBioModal } from "@/components/customer/UpdateCustomerBioModal";
 import { DeleteCustomerProvider } from "@/components/customer/DeleteCustomerProvider";
 import { UpdateCustomerImageModal } from "@/components/customer/UpdateCustomerImageModal";
+import { UpdateCustomerEmailModal } from "@/components/customer/UpdateCustomerEmailModal";
 import { DeleteCustomerImageModal } from "@/components/customer/DeleteCustomerImageModal";
 import { UpdateCustomerBioProvider } from "@/components/customer/UpdateCustomerBioProvider";
 import { DeleteCustomerDetailModal } from "@/components/customer/DeleteCustomerDetailModal";
 import { CustomerDetailAltContainer } from "@/components/customer/CustomerDetailAltContainer";
+import { UpdateCustomerCompanyModal } from "@/components/customer/UpdateCustomerCompanyModal";
+import { UpdateCustomerEmailProvider } from "@/components/customer/UpdateCustomerEmailProvider";
 import { UpdateCustomerImageProvider } from "@/components/customer/UpdateCustomerImageProvider";
 import { UpdateCustomerFullNameModal } from "@/components/customer/UpdateCustomerFullNameModal";
+import { UpdateCustomerCompanyProvider } from "@/components/customer/UpdateCustomerCompanyProvider";
 import { UpdateCustomerPublicLinkModal } from "@/components/customer/UpdateCustomerPublicLinkModal";
 import { ClearCustomerImageUrlProvider } from "@/components/customer/ClearCustomerImageUrlProvider";
 import { UpdateCustomerFullNameProvider } from "@/components/customer/UpdateCustomerFullNameProvider";
@@ -23,8 +27,7 @@ import { UpdateCustomerImageFileProvider } from "@/components/customer/UpdateCus
 import { CustomerDetailHeaderAltContainer } from "@/components/customer/CustomerDetailHeaderAltContainer";
 import { UpdateCustomerPublicLinkProvider } from "@/components/customer/UpdateCustomerPublicLinkProvider";
 import { UpdateCustomerPhoneNumberProvider } from "@/components/customer/UpdateCustomerPhoneNumberProvider";
-import { UpdateCustomerEmailProvider } from "@/components/customer/UpdateCustomerEmailProvider";
-import { UpdateCustomerEmailModal } from "@/components/customer/UpdateCustomerEmailModal";
+import { UpdateCustomerCompanyFormContainer } from "@/components/customer/UpdateCustomerCompanyFormContainer";
 
 export default async function AppCustomerDetailPage({
   params,
@@ -59,60 +62,70 @@ export default async function AppCustomerDetailPage({
                 <UpdateCustomerPhoneNumberProvider>
                   <UpdateCustomerPublicLinkProvider>
                     <UpdateCustomerEmailProvider>
-                      <CustomerDetailPage
-                        customerDetailContainer={
-                          <CustomerDetailAltContainer customerId={id} />
-                        }
-                        customerDetailHeaderContainer={
-                          <CustomerDetailHeaderAltContainer customerId={id} />
-                        }
-                        customerDetailActions={<CustomerDetailActions />}
-                      />
+                      <UpdateCustomerCompanyProvider>
+                        <CustomerDetailPage
+                          customerDetailContainer={
+                            <CustomerDetailAltContainer customerId={id} />
+                          }
+                          customerDetailHeaderContainer={
+                            <CustomerDetailHeaderAltContainer customerId={id} />
+                          }
+                          customerDetailActions={<CustomerDetailActions />}
+                        />
 
-                      <UpdateCustomerBioModal
-                        customerId={customerFormData.id}
-                        customerBio={customerFormData.bio}
-                      />
+                        <UpdateCustomerBioModal
+                          customerId={customerFormData.id}
+                          customerBio={customerFormData.bio}
+                        />
 
-                      <UpdateCustomerFullNameModal
-                        customerId={customerFormData.id}
-                        customerFullName={customerFormData.fullName}
-                      />
+                        <UpdateCustomerFullNameModal
+                          customerId={customerFormData.id}
+                          customerFullName={customerFormData.fullName}
+                        />
 
-                      <UpdateCustomerPhoneNumberModal
-                        customerId={customerFormData.id}
-                        customerPhoneNumber={customerFormData.phoneNumber}
-                      />
+                        <UpdateCustomerPhoneNumberModal
+                          customerId={customerFormData.id}
+                          customerPhoneNumber={customerFormData.phoneNumber}
+                        />
 
-                      <UpdateCustomerPublicLinkModal
-                        customerId={customerFormData.id}
-                        customerPublicLink={customerFormData.publicLink}
-                      />
+                        <UpdateCustomerPublicLinkModal
+                          customerId={customerFormData.id}
+                          customerPublicLink={customerFormData.publicLink}
+                        />
 
-                      <UpdateCustomerEmailModal
-                        customerId={customerFormData.id}
-                        customerEmail={customerFormData.email}
-                      />
+                        <UpdateCustomerEmailModal
+                          customerId={customerFormData.id}
+                          customerEmail={customerFormData.email}
+                        />
 
-                      <DeleteCustomerDetailModal
-                        customerId={customerFormData.id}
-                        customerFullName={customerFormData.fullName}
-                      />
+                        <UpdateCustomerCompanyModal
+                          updateCustomerCompanyFormContainer={
+                            <UpdateCustomerCompanyFormContainer
+                              customerId={customerFormData.id}
+                            />
+                          }
+                        />
 
-                      <UpdateCustomerImageModal
-                        customerId={customerFormData.id}
-                      />
+                        <DeleteCustomerDetailModal
+                          customerId={customerFormData.id}
+                          customerFullName={customerFormData.fullName}
+                        />
 
-                      <DeleteCustomerImageModal
-                        customerId={customerFormData.id}
-                        customerFullName={customerFormData.fullName}
-                      />
+                        <UpdateCustomerImageModal
+                          customerId={customerFormData.id}
+                        />
 
-                      <TaskSearchModal
-                        searchContainer={
-                          <LinkSearchContainer pathname="/tasks" />
-                        }
-                      />
+                        <DeleteCustomerImageModal
+                          customerId={customerFormData.id}
+                          customerFullName={customerFormData.fullName}
+                        />
+
+                        <TaskSearchModal
+                          searchContainer={
+                            <LinkSearchContainer pathname="/tasks" />
+                          }
+                        />
+                      </UpdateCustomerCompanyProvider>
                     </UpdateCustomerEmailProvider>
                   </UpdateCustomerPublicLinkProvider>
                 </UpdateCustomerPhoneNumberProvider>

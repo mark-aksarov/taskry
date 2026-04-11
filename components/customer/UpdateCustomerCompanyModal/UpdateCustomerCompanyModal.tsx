@@ -10,20 +10,20 @@ import { useTranslations } from "next-intl";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
-interface UpdateUserPositionModalProps {
-  updateUserPositionFormContainer: React.ReactNode;
+interface UpdateCustomerCompanyModalProps {
+  updateCustomerCompanyFormContainer: React.ReactNode;
 }
 
-export function UpdateUserPositionModal({
-  updateUserPositionFormContainer,
-}: UpdateUserPositionModalProps) {
-  const t = useTranslations("users.UpdateUserPositionModal");
+export function UpdateCustomerCompanyModal({
+  updateCustomerCompanyFormContainer,
+}: UpdateCustomerCompanyModalProps) {
+  const t = useTranslations("customers.UpdateCustomerCompanyModal");
 
-  const { isOpen, onOpenChange } = useModal("updateUserPosition");
+  const { isOpen, onOpenChange } = useModal("updateCustomerCompany");
 
   return (
     <FormBaseModal
-      data-test="update-user-position-modal"
+      data-test="update-customer-company-modal"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       className="md:w-[350px]"
@@ -31,7 +31,7 @@ export function UpdateUserPositionModal({
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <FormBaseModalDialogBody>
-          {updateUserPositionFormContainer}
+          {updateCustomerCompanyFormContainer}
         </FormBaseModalDialogBody>
       </FormBaseModalDialog>
     </FormBaseModal>

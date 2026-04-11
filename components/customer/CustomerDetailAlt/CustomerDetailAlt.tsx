@@ -1,14 +1,7 @@
-import {
-  DetailText,
-  DetailTitle,
-  DetailInfoAlt,
-  DetailEditButton,
-} from "@/components/common/Detail";
-
-import { useTranslations } from "next-intl";
 import { CustomerDetailAltLayout } from "./CustomerDetailAltLayout";
 import { CustomerBioDetailInfoAlt } from "./CustomerBioDetailInfoAlt";
 import { CustomerEmailDetailInfoAlt } from "./CustomerEmailDetailInfoAlt";
+import { CustomerCompanyDetailInfoAlt } from "./CustomerCompanyDetailInfoAlt";
 import { CustomerFullNameDetailInfoAlt } from "./CustomerFullNameDetailInfoAlt";
 import { CustomerPublicLinkDetailInfoAlt } from "./CustomerPublicLinkDetailInfoAlt";
 import { CustomerPhoneNumberDetailInfoAlt } from "./CustomerPhoneNumberDetailInfoAlt";
@@ -32,8 +25,6 @@ export function CustomerDetailAlt({
   publicLink,
   company,
 }: CustomerDetailAltProps) {
-  const t = useTranslations("customers.CustomerDetail");
-
   return (
     <CustomerDetailAltLayout
       bioSlot={<CustomerBioDetailInfoAlt bio={bio} />}
@@ -42,13 +33,7 @@ export function CustomerDetailAlt({
       phoneNumberSlot={
         <CustomerPhoneNumberDetailInfoAlt phoneNumber={phoneNumber} />
       }
-      companySlot={
-        <DetailInfoAlt
-          title={<DetailTitle>{t("company")}</DetailTitle>}
-          text={<DetailText>{company?.name || t("noCompany")}</DetailText>}
-          editButton={<DetailEditButton />}
-        />
-      }
+      companySlot={<CustomerCompanyDetailInfoAlt company={company} />}
       publicLinkSlot={
         <CustomerPublicLinkDetailInfoAlt publicLink={publicLink} />
       }

@@ -7,7 +7,7 @@ import {
   workspaces,
 } from "@/prisma/test-utils/data";
 
-describe("Customer editing", () => {
+describe("Customer updating", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 

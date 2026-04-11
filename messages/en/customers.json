@@ -197,5 +197,11 @@
   },
   "UpdateCustomerEmailModal": {
     "title": "Edit email"
+  },
+  "UpdateCustomerCompanyForm": {
+    "submitButtonLabel": "Update company"
+  },
+  "UpdateCustomerCompanyModal": {
+    "title": "Edit company"
   }
 }

@@ -18,7 +18,7 @@ describe("User bio updating", () => {
       customers,
     };
 
-    cy.viewport(1440, 900);
+    cy.viewport(414, 896);
     cy.task("db:reset");
     cy.task("db:seed", payload);
     cy.signIn("user-1@test.com", "12345abc");

@@ -197,5 +197,11 @@
   },
   "UpdateCustomerEmailModal": {
     "title": "Изменить почту"
+  },
+  "UpdateCustomerCompanyForm": {
+    "submitButtonLabel": "Обновить компанию"
+  },
+  "UpdateCustomerCompanyModal": {
+    "title": "Изменить компанию"
   }
 }
