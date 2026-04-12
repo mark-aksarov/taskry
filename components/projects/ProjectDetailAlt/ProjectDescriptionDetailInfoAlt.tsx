@@ -1,0 +1,47 @@
+"use client";
+
+import {
+  DetailText,
+  DetailTitle,
+  DetailInfoAlt,
+  DetailEditButton,
+} from "@/components/common/Detail";
+import { useTranslations } from "next-intl";
+import { useModal } from "@/components/common/ModalManagerContext";
+import { useUpdateProjectDescription } from "../UpdateProjectDescriptionContext";
+
+interface ProjectDescriptionDetailInfoAltProps {
+  description?: string;
+}
+
+export function ProjectDescriptionDetailInfoAlt({
+  description,
+}: ProjectDescriptionDetailInfoAltProps) {
+  const t = useTranslations("projects.ProjectDetail");
+
+  const { onOpenChange: onUpdateDescriptionModalOpenChange } = useModal(
+    "updateProjectDescription",
+  );
+
+  const { isPending: isUpdateProjectDescriptionPending } =
+    useUpdateProjectDescription();
+
+  return (
+    <DetailInfoAlt
+      data-test="project-description-detail-info"
+      title={<DetailTitle>{t("description")}</DetailTitle>}
+      text={
+        <DetailText>
+          {description ? description : t("noDescription")}
+        </DetailText>
+      }
+      editButton={
+        <DetailEditButton
+          data-test="update-project-description-edit-button"
+          isPending={isUpdateProjectDescriptionPending}
+          onPress={() => onUpdateDescriptionModalOpenChange(true)}
+        />
+      }
+    />
+  );
+}

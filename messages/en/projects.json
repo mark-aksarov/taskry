@@ -173,7 +173,8 @@
     "noCustomer": "No customer",
     "category": "Category",
     "noCategory": "No category",
-    "status": "Status"
+    "status": "Status",
+    "title": "Title"
   },
   "ProjectDetailHeader": {
     "noCategory": "No category"
@@ -216,5 +217,11 @@
   "ProjectDetailModal": {
     "dialogHeading": "Project details",
     "openInFullPage": "Open in full page"
+  },
+  "UpdateProjectDescriptionForm": {
+    "submitButtonLabel": "Update description"
+  },
+  "UpdateProjectDescriptionModal": {
+    "title": "Edit description"
   }
 }

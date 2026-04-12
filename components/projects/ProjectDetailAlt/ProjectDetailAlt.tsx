@@ -8,8 +8,10 @@ import {
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailAltLayout } from "./ProjectDetailAltLayout";
+import { ProjectDescriptionDetailInfoAlt } from "./ProjectDescriptionDetailInfoAlt";
 
 interface ProjectDetailAltProps {
+  title: string;
   creator?: {
     id: string;
     fullName: string;
@@ -30,6 +32,7 @@ interface ProjectDetailAltProps {
 }
 
 export function ProjectDetailAlt({
+  title,
   creator,
   deadline,
   description,
@@ -50,16 +53,15 @@ export function ProjectDetailAlt({
 
   return (
     <ProjectDetailAltLayout
-      descriptionSlot={
+      titleSlot={
         <DetailInfoAlt
-          title={<DetailTitle>{t("description")}</DetailTitle>}
-          text={
-            <DetailText>
-              {description ? description : t("noDescription")}
-            </DetailText>
-          }
+          title={<DetailTitle>{t("title")}</DetailTitle>}
+          text={<DetailText>{title}</DetailText>}
           editButton={<DetailEditButton />}
         />
+      }
+      descriptionSlot={
+        <ProjectDescriptionDetailInfoAlt description={description} />
       }
       statusSlot={
         <DetailInfoAlt
@@ -71,7 +73,7 @@ export function ProjectDetailAlt({
       deadlineSlot={
         <DetailInfoAlt
           title={<DetailTitle>{t("deadline")}</DetailTitle>}
-          text={formattedDeadline}
+          text={<DetailText>{formattedDeadline}</DetailText>}
           editButton={<DetailEditButton />}
         />
       }

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { projectId } from "@/lib/schemas/project";
 import { ProjectDetailPage } from "./ProjectDetailPage";
-import { getProjectSummary } from "@/lib/data/project/project.dal";
+import { getProjectFormData } from "@/lib/data/project/project.dal";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
@@ -10,6 +10,8 @@ import { DeleteProjectDetailModal } from "@/components/projects/DeleteProjectDet
 import { ProjectDetailAltContainer } from "@/components/projects/ProjectDetailAltContainer";
 import { UpdateProjectStatusProvider } from "@/components/projects/UpdateProjectStatusProvider";
 import { ProjectDetailHeaderContainer } from "@/components/projects/ProjectDetailHeaderContainer";
+import { UpdateProjectDescriptionProvider } from "@/components/projects/UpdateProjectDescriptionProvider";
+import { UpdateProjectDescriptionModal } from "@/components/projects/UpdateProjectDescriptionModal";
 
 export default async function AppProjectDetailPage({
   params,
@@ -27,31 +29,40 @@ export default async function AppProjectDetailPage({
   }
   const id = parsed.data;
 
-  // Get project summary
-  const projectSummary = await getProjectSummary(id);
+  // Get project
+  const projectFormData = await getProjectFormData(id);
 
-  if (!projectSummary) {
+  if (!projectFormData) {
     notFound();
   }
 
   return (
     <DeleteProjectProvider>
       <UpdateProjectStatusProvider>
-        <ProjectDetailPage
-          projectDetailContainer={<ProjectDetailAltContainer projectId={id} />}
-          projectHeaderContainer={
-            <ProjectDetailHeaderContainer projectId={id} />
-          }
-        />
+        <UpdateProjectDescriptionProvider>
+          <ProjectDetailPage
+            projectDetailContainer={
+              <ProjectDetailAltContainer projectId={id} />
+            }
+            projectHeaderContainer={
+              <ProjectDetailHeaderContainer projectId={id} />
+            }
+          />
 
-        <DeleteProjectDetailModal
-          projectId={projectSummary.id}
-          projectTitle={projectSummary.title}
-        />
+          <DeleteProjectDetailModal
+            projectId={projectFormData.id}
+            projectTitle={projectFormData.title}
+          />
 
-        <TaskSearchModal
-          searchContainer={<LinkSearchContainer pathname="/tasks" />}
-        />
+          <UpdateProjectDescriptionModal
+            projectId={projectFormData.id}
+            description={projectFormData.description}
+          />
+
+          <TaskSearchModal
+            searchContainer={<LinkSearchContainer pathname="/tasks" />}
+          />
+        </UpdateProjectDescriptionProvider>
       </UpdateProjectStatusProvider>
     </DeleteProjectProvider>
   );

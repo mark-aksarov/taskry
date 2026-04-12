@@ -173,7 +173,8 @@
     "noCustomer": "Нет клиента",
     "category": "Категория",
     "noCategory": "Нет категории",
-    "status": "Статус"
+    "status": "Статус",
+    "title": "Заголовок"
   },
   "ProjectDetailHeader": {
     "noCategory": "Нет категории"
@@ -216,5 +217,11 @@
   "ProjectDetailModal": {
     "dialogHeading": "Детали проекта",
     "openInFullPage": "Открыть в полном окне"
+  },
+  "UpdateProjectDescriptionForm": {
+    "submitButtonLabel": "Обновить описание"
+  },
+  "UpdateProjectDescriptionModal": {
+    "title": "Изменить описание"
   }
 }

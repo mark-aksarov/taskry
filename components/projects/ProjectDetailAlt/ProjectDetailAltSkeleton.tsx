@@ -4,6 +4,7 @@ import { DetailInfoSkeleton } from "@/components/common/Detail";
 export function ProjectDetailAltSkeleton() {
   return (
     <ProjectDetailAltLayout
+      titleSlot={<DetailInfoSkeleton />}
       descriptionSlot={<DetailInfoSkeleton />}
       statusSlot={<DetailInfoSkeleton />}
       deadlineSlot={<DetailInfoSkeleton />}

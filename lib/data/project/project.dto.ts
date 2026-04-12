@@ -16,12 +16,12 @@ export interface CreateProjectInputDTO {
 
 export interface UpdateProjectInputDTO {
   id: number;
-  title: string;
-  description: string | null;
-  deadline: string;
-  customerId: number | null;
-  categoryId: number | null;
-  status: ProjectStatus;
+  title?: string;
+  description?: string | null;
+  deadline?: string;
+  customerId?: number | null;
+  categoryId?: number | null;
+  status?: ProjectStatus;
 }
 
 export interface ProjectFormDataDTO {

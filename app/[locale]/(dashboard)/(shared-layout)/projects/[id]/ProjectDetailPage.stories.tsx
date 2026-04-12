@@ -12,6 +12,7 @@ import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__storie
 import { withDeleteProjectProvider } from "@/components/projects/DeleteProjectProvider/__stories__";
 import { withUpdateProjectProvider } from "@/components/projects/UpdateProjectProvider/__stories__";
 import { withUpdateProjectStatusProvider } from "@/components/projects/UpdateProjectStatusProvider/__stories__";
+import { withUpdateProjectDescriptionProvider } from "@/components/projects/UpdateProjectDescriptionProvider/__stories__";
 
 const meta = {
   title: "pages/ProjectDetailPage",
@@ -19,6 +20,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     withTaskSearchModal,
+    withUpdateProjectDescriptionProvider,
     withUpdateProjectStatusProvider,
     withDeleteProjectProvider,
     withUpdateProjectProvider,
