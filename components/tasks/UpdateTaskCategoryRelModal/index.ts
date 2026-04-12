@@ -1,0 +1,1 @@
+export { UpdateTaskCategoryRelModal } from "./UpdateTaskCategoryRelModal";

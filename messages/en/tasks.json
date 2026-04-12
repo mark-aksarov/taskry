@@ -251,10 +251,10 @@
   "UpdateTaskAssigneeModal": {
     "title": "Edit assignee"
   },
-  "UpdateTaskCategoryForTaskForm": {
+  "UpdateTaskCategoryRelForm": {
     "submitButtonLabel": "Update category"
   },
-  "UpdateTaskCategoryForTaskModal": {
+  "UpdateTaskCategoryRelModal": {
     "title": "Edit category"
   },
   "UpdateTaskProjectForm": {

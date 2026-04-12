@@ -25,11 +25,11 @@ import { UpdateTaskDeadlineProvider } from "@/components/tasks/UpdateTaskDeadlin
 import { UpdateTaskAssigneeProvider } from "@/components/tasks/UpdateTaskAssigneeProvider";
 import { UpdateTaskStatusAltProvider } from "@/components/tasks/UpdateTaskStatusAltProvider";
 import { UpdateTaskDescriptionProvider } from "@/components/tasks/UpdateTaskDescriptionProvider";
-import { UpdateTaskCategoryForTaskModal } from "@/components/tasks/UpdateTaskCategoryForTaskModal";
+import { UpdateTaskCategoryRelModal } from "@/components/tasks/UpdateTaskCategoryRelModal";
 import { UpdateTaskProjectFormContainer } from "@/components/tasks/UpdateTaskProjectFormContainer";
 import { UpdateTaskAssigneeFormContainer } from "@/components/tasks/UpdateTaskAssigneeFormContainer";
-import { UpdateTaskCategoryForTaskProvider } from "@/components/tasks/UpdateTaskCategoryForTaskProvider";
-import { UpdateTaskCategoryForTaskFormContainer } from "@/components/tasks/UpdateTaskCategoryForTaskFormContainer";
+import { UpdateTaskCategoryRelProvider } from "@/components/tasks/UpdateTaskCategoryRelProvider";
+import { UpdateTaskCategoryRelFormContainer } from "@/components/tasks/UpdateTaskCategoryRelFormContainer";
 
 export default async function AppTaskDetailPage({
   params,
@@ -63,7 +63,7 @@ export default async function AppTaskDetailPage({
               <UpdateTaskDeadlineProvider>
                 <UpdateTaskStatusAltProvider>
                   <UpdateTaskAssigneeProvider>
-                    <UpdateTaskCategoryForTaskProvider>
+                    <UpdateTaskCategoryRelProvider>
                       <UpdateTaskProjectProvider>
                         <TaskDetailPage
                           subtasksContainer={<SubtasksContainer taskId={id} />}
@@ -100,9 +100,9 @@ export default async function AppTaskDetailPage({
                           taskStatus={taskFormData.status}
                         />
 
-                        <UpdateTaskCategoryForTaskModal
-                          updateTaskCategoryForTaskFormContainer={
-                            <UpdateTaskCategoryForTaskFormContainer
+                        <UpdateTaskCategoryRelModal
+                          updateTaskCategoryRelFormContainer={
+                            <UpdateTaskCategoryRelFormContainer
                               taskId={taskFormData.id}
                               categoryId={taskFormData.categoryId}
                             />
@@ -135,7 +135,7 @@ export default async function AppTaskDetailPage({
 
                         <CreateSubtaskModal taskId={taskFormData.id} />
                       </UpdateTaskProjectProvider>
-                    </UpdateTaskCategoryForTaskProvider>
+                    </UpdateTaskCategoryRelProvider>
                   </UpdateTaskAssigneeProvider>
                 </UpdateTaskStatusAltProvider>
               </UpdateTaskDeadlineProvider>

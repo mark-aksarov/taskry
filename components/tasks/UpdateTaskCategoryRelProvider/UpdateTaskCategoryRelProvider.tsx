@@ -2,19 +2,19 @@
 
 import { useRouter } from "@/i18n/navigation";
 import { updateTask } from "@/lib/actions/task/updateTask";
-import { UpdateTaskCategoryForTaskContext } from "../UpdateTaskCategoryForTaskContext";
+import { UpdateTaskCategoryRelContext } from "../UpdateTaskCategoryRelContext";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
 
-interface UpdateTaskCategoryForTaskProviderProps {
+interface UpdateTaskCategoryRelProviderProps {
   children: React.ReactNode;
 }
 
-export function UpdateTaskCategoryForTaskProvider({
+export function UpdateTaskCategoryRelProvider({
   children,
-}: UpdateTaskCategoryForTaskProviderProps) {
+}: UpdateTaskCategoryRelProviderProps) {
   const router = useRouter();
   const contextValue = useActionStateWithCallbacks(updateTask, {
     onSuccess: () => router.refresh(),
@@ -22,16 +22,13 @@ export function UpdateTaskCategoryForTaskProvider({
 
   const { state } = contextValue;
 
-  useCloseModalThenShowToastOnActionSuccess(state, "updateTaskCategoryForTask");
-  useShowToastWhenModalClosedOnActionSuccess(
-    state,
-    "updateTaskCategoryForTask",
-  );
-  useShowToastWhenModalClosedOnActionError(state, "updateTaskCategoryForTask");
+  useCloseModalThenShowToastOnActionSuccess(state, "updateTaskCategoryRel");
+  useShowToastWhenModalClosedOnActionSuccess(state, "updateTaskCategoryRel");
+  useShowToastWhenModalClosedOnActionError(state, "updateTaskCategoryRel");
 
   return (
-    <UpdateTaskCategoryForTaskContext.Provider value={contextValue}>
+    <UpdateTaskCategoryRelContext.Provider value={contextValue}>
       {children}
-    </UpdateTaskCategoryForTaskContext.Provider>
+    </UpdateTaskCategoryRelContext.Provider>
   );
 }

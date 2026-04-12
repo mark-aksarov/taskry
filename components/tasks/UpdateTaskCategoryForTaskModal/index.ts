@@ -1,1 +1,0 @@
-export { UpdateTaskCategoryForTaskModal } from "./UpdateTaskCategoryForTaskModal";

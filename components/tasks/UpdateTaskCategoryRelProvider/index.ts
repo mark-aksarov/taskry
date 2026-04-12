@@ -1,0 +1,1 @@
+export { UpdateTaskCategoryRelProvider } from "./UpdateTaskCategoryRelProvider";

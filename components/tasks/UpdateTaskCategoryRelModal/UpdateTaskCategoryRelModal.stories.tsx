@@ -1,7 +1,7 @@
 import {
-  UpdateTaskCategoryForTaskForm,
-  UpdateTaskCategoryForTaskFormSkeleton,
-} from "../UpdateTaskCategoryForTaskForm";
+  UpdateTaskCategoryRelForm,
+  UpdateTaskCategoryRelFormSkeleton,
+} from "../UpdateTaskCategoryRelForm";
 
 import {
   withOpenModal,
@@ -12,30 +12,30 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedTaskDetail as mockedTask } from "@/mocks/tasks";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateTaskProvider } from "../UpdateTaskProvider/__stories__";
-import { UpdateTaskCategoryForTaskModal } from "./UpdateTaskCategoryForTaskModal";
+import { UpdateTaskCategoryRelModal } from "./UpdateTaskCategoryRelModal";
+import { withUpdateTaskCategoryRelProvider } from "../UpdateTaskCategoryRelProvider/__stories__";
 
 const meta = {
-  title: "components/tasks/UpdateTaskCategoryForTaskModal",
-  component: UpdateTaskCategoryForTaskModal,
+  title: "components/tasks/UpdateTaskCategoryRelModal",
+  component: UpdateTaskCategoryRelModal,
   decorators: [
     withOpenModal,
-    withUpdateTaskProvider,
+    withUpdateTaskCategoryRelProvider,
     withModalManagerProvider,
     withThemedBackground,
   ],
   parameters: {
-    modalId: "updateTaskCategoryForTask",
+    modalId: "updateTaskCategoryRel",
   },
-} satisfies Meta<typeof UpdateTaskCategoryForTaskModal>;
+} satisfies Meta<typeof UpdateTaskCategoryRelModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    updateTaskCategoryForTaskFormContainer: (
-      <UpdateTaskCategoryForTaskForm
+    updateTaskCategoryRelFormContainer: (
+      <UpdateTaskCategoryRelForm
         taskId={mockedTask.id}
         categoryId={mockedTask.category.id}
         taskCategorySelectItems={mockedTaskCategorySummaries}
@@ -46,8 +46,6 @@ export const Default = {
 
 export const WithSkeleton = {
   args: {
-    updateTaskCategoryForTaskFormContainer: (
-      <UpdateTaskCategoryForTaskFormSkeleton />
-    ),
+    updateTaskCategoryRelFormContainer: <UpdateTaskCategoryRelFormSkeleton />,
   },
 } satisfies Story;

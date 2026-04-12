@@ -8,7 +8,7 @@ import {
 } from "@/components/common/Detail";
 import { useTranslations } from "next-intl";
 import { useModal } from "@/components/common/ModalManagerContext";
-import { useUpdateTaskCategoryForTask } from "../UpdateTaskCategoryForTaskContext";
+import { useUpdateTaskCategoryRel } from "../UpdateTaskCategoryRelContext";
 
 interface TaskCategoryDetailInfoAltProps {
   category?: {
@@ -23,11 +23,10 @@ export function TaskCategoryDetailInfoAlt({
   const t = useTranslations("tasks.TaskDetail");
 
   const { onOpenChange: onUpdateCategoryModalOpenChange } = useModal(
-    "updateTaskCategoryForTask",
+    "updateTaskCategoryRel",
   );
 
-  const { isPending: isUpdateTaskCategoryPending } =
-    useUpdateTaskCategoryForTask();
+  const { isPending: isUpdateTaskCategoryPending } = useUpdateTaskCategoryRel();
 
   return (
     <DetailInfoAlt
