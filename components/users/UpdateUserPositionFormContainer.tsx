@@ -6,43 +6,28 @@ import {
 } from "./UpdateUserPositionForm";
 
 import useSWR from "swr";
-import { UserFormDataDTO } from "@/lib/data/user/user.dto";
 import { PositionSummaryDTO } from "@/lib/data/position/position.dto";
 
 interface UpdateUserPositionFormContainerProps {
   userId: string;
+  positionId?: number;
 }
 
 export function UpdateUserPositionFormContainer({
   userId,
+  positionId,
 }: UpdateUserPositionFormContainerProps) {
   const { data: positions } = useSWR<PositionSummaryDTO[]>(`/api/positions`);
 
-  const {
-    data: user,
-    error: userError,
-    isValidating,
-  } = useSWR<UserFormDataDTO>(`/api/users/${userId}?view=edit`, {
-    // disable revalidation on focus to prevent UI flicker caused by isValidating
-    revalidateOnFocus: false,
-  });
-
-  if (userError) {
-    throw new Error();
-  }
-
   // Show skeleton while loading
-  // or revalidating to prevent stale data rendering
-  const showSkeleton = !positions || !user || isValidating;
-
-  if (showSkeleton) {
+  if (!positions) {
     return <UpdateUserPositionFormSkeleton />;
   }
 
   return (
     <UpdateUserPositionForm
       userId={userId}
-      positionId={user.positionId}
+      positionId={positionId}
       positionSelectItems={positions}
     />
   );

@@ -102,6 +102,7 @@ export default async function AppCustomerDetailPage({
                           updateCustomerCompanyFormContainer={
                             <UpdateCustomerCompanyFormContainer
                               customerId={customerFormData.id}
+                              companyId={customerFormData.companyId}
                             />
                           }
                         />

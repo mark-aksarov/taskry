@@ -50,7 +50,7 @@ export default async function AppTeamProfilePage({
   }
   const userId = parsed.data;
 
-  // Get user summary
+  // Get user form data
   const userFormData = await getUserFormData(userId);
 
   if (!userFormData) {
@@ -133,6 +133,7 @@ export default async function AppTeamProfilePage({
                               updateUserPositionFormContainer={
                                 <UpdateUserPositionFormContainer
                                   userId={userId}
+                                  positionId={userFormData.positionId}
                                 />
                               }
                             />

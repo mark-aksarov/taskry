@@ -63,6 +63,7 @@ export const WithoutSomeData = {
     ...Default.args,
     projectDetailContainer: (
       <ProjectDetailAlt
+        title={mockedProjectDetail.title}
         status={mockedProjectDetail.status}
         deadline={mockedProjectDetail.deadline}
       />

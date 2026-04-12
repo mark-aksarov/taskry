@@ -110,6 +110,7 @@ export default async function AppProfilePage() {
                               updateUserPositionFormContainer={
                                 <UpdateUserPositionFormContainer
                                   userId={userId}
+                                  positionId={userFormData.positionId}
                                 />
                               }
                             />

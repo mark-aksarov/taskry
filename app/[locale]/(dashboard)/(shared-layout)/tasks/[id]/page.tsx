@@ -104,6 +104,7 @@ export default async function AppTaskDetailPage({
                           updateTaskCategoryForTaskFormContainer={
                             <UpdateTaskCategoryForTaskFormContainer
                               taskId={taskFormData.id}
+                              categoryId={taskFormData.categoryId}
                             />
                           }
                         />
@@ -112,6 +113,7 @@ export default async function AppTaskDetailPage({
                           updateTaskProjectFormContainer={
                             <UpdateTaskProjectFormContainer
                               taskId={taskFormData.id}
+                              projectId={taskFormData.projectId}
                             />
                           }
                         />
@@ -120,6 +122,7 @@ export default async function AppTaskDetailPage({
                           updateTaskAssigneeFormContainer={
                             <UpdateTaskAssigneeFormContainer
                               taskId={taskFormData.id}
+                              assigneeId={taskFormData.assigneeId}
                             />
                           }
                         />
