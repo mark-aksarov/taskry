@@ -250,5 +250,11 @@
   },
   "UpdateTaskAssigneeModal": {
     "title": "Edit assignee"
+  },
+  "UpdateTaskCategoryForTaskForm": {
+    "submitButtonLabel": "Update category"
+  },
+  "UpdateTaskCategoryForTaskModal": {
+    "title": "Edit category"
   }
 }

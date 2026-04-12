@@ -250,5 +250,11 @@
   },
   "UpdateTaskAssigneeModal": {
     "title": "Изменить назначенного"
+  },
+  "UpdateTaskCategoryForTaskForm": {
+    "submitButtonLabel": "Обновить категорию"
+  },
+  "UpdateTaskCategoryForTaskModal": {
+    "title": "Изменить категорию"
   }
 }

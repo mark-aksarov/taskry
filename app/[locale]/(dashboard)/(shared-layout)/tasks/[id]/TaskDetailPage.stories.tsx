@@ -19,6 +19,7 @@ import { withUpdateTaskDeadlineProvider } from "@/components/tasks/UpdateTaskDea
 import { withUpdateTaskAssigneeProvider } from "@/components/tasks/UpdateTaskAssigneeProvider/__stories__";
 import { withUpdateTaskStatusAltProvider } from "@/components/tasks/UpdateTaskStatusAltProvider/__stories__";
 import { withUpdateTaskDescriptionProvider } from "@/components/tasks/UpdateTaskDescriptionProvider/__stories__";
+import { withUpdateTaskCategoryForTaskProvider } from "@/components/tasks/UpdateTaskCategoryForTaskProvider/__stories__";
 
 const meta = {
   title: "pages/TaskDetailPage",
@@ -26,6 +27,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     withTaskSearchModal,
+    withUpdateTaskCategoryForTaskProvider,
     withUpdateTaskAssigneeProvider,
     withUpdateTaskStatusAltProvider,
     withUpdateTaskDeadlineProvider,

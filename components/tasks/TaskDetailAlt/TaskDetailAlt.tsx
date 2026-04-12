@@ -12,6 +12,7 @@ import { TaskTitleDetailInfoAlt } from "./TaskTitleDetailInfoAlt";
 import { TaskStatusDetailInfoAlt } from "./TaskStatusDetailInfoAlt";
 import { TaskDeadlineDetailInfoAlt } from "./TaskDeadlineDetailInfoAlt";
 import { TaskAssigneeDetailInfoAlt } from "./TaskAssigneeDetailInfoAlt";
+import { TaskCategoryDetailInfoAlt } from "./TaskCategoryDetailInfoAlt";
 import { TaskDescriptionDetailInfoAlt } from "./TaskDescriptionDetailInfoAlt";
 
 interface TaskDetailAltProps {
@@ -59,17 +60,7 @@ export function TaskDetailAlt({
       assigneesSlot={<TaskAssigneeDetailInfoAlt assignee={assignee} />}
       deadlineSlot={<TaskDeadlineDetailInfoAlt deadline={deadline} />}
       statusSlot={<TaskStatusDetailInfoAlt status={status} />}
-      categoryNameSlot={
-        <DetailInfoAlt
-          title={<DetailTitle>{t("category")}</DetailTitle>}
-          text={
-            <DetailText>
-              {category ? category.name : t("noCategory")}
-            </DetailText>
-          }
-          editButton={<DetailEditButton />}
-        />
-      }
+      categoryNameSlot={<TaskCategoryDetailInfoAlt category={category} />}
       projectTitleSlot={
         <DetailInfoAlt
           title={<DetailTitle>{t("project")}</DetailTitle>}

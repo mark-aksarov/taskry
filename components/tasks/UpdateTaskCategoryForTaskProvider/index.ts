@@ -1,0 +1,1 @@
+export { UpdateTaskCategoryForTaskProvider } from "./UpdateTaskCategoryForTaskProvider";
