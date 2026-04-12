@@ -20,9 +20,7 @@ interface TaskDetailContainerProps {
 }
 
 export function TaskDetailContainer({ taskId }: TaskDetailContainerProps) {
-  const { data: task, error } = useSWR<TaskDetailDTO>(`/api/tasks/${taskId}`, {
-    revalidateOnFocus: false,
-  });
+  const { data: task, error } = useSWR<TaskDetailDTO>(`/api/tasks/${taskId}`);
 
   if (error) {
     throw new Error();

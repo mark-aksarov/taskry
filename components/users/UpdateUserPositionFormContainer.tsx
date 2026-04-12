@@ -16,16 +16,14 @@ interface UpdateUserPositionFormContainerProps {
 export function UpdateUserPositionFormContainer({
   userId,
 }: UpdateUserPositionFormContainerProps) {
-  const { data: positions } = useSWR<PositionSummaryDTO[]>(`/api/positions`, {
-    revalidateOnFocus: false,
-  });
+  const { data: positions } = useSWR<PositionSummaryDTO[]>(`/api/positions`);
 
-  // Current user data for editing (loaded each modal open)
   const {
     data: user,
-    isValidating: isValidatingUser,
     error: userError,
+    isValidating,
   } = useSWR<UserFormDataDTO>(`/api/users/${userId}?view=edit`, {
+    // disable revalidation on focus to prevent UI flicker caused by isValidating
     revalidateOnFocus: false,
   });
 
@@ -33,8 +31,9 @@ export function UpdateUserPositionFormContainer({
     throw new Error();
   }
 
-  // Show skeleton while loading or revalidating
-  const showSkeleton = !positions || !user || isValidatingUser;
+  // Show skeleton while loading
+  // or revalidating to prevent stale data rendering
+  const showSkeleton = !positions || !user || isValidating;
 
   if (showSkeleton) {
     return <UpdateUserPositionFormSkeleton />;

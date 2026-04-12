@@ -13,15 +13,14 @@ interface UpdateCustomerFormContainerProps {
 export function UpdateCustomerFormContainer({
   customerId,
 }: UpdateCustomerFormContainerProps) {
-  const { data: companies } = useSWR<CompanySummaryDTO[]>(`/api/companies`, {
-    revalidateOnFocus: false,
-  });
+  const { data: companies } = useSWR<CompanySummaryDTO[]>(`/api/companies`);
 
   const {
     data: customer,
     error: customerError,
-    isValidating: isValidatingCustomer,
+    isValidating,
   } = useSWR<CustomerFormDataDTO>(`/api/customers/${customerId}?view=edit`, {
+    // disable revalidation on focus to prevent UI flicker caused by isValidating
     revalidateOnFocus: false,
   });
 
@@ -29,8 +28,9 @@ export function UpdateCustomerFormContainer({
     throw new Error();
   }
 
-  // Show skeleton while loading or revalidating
-  const showSkeleton = !companies || !customer || isValidatingCustomer;
+  // Show skeleton while loading
+  // or revalidating to prevent stale data rendering
+  const showSkeleton = !companies || !customer || isValidating;
 
   if (showSkeleton) {
     return <CustomerFormSkeleton />;

@@ -1,9 +1,7 @@
 "use client";
 
 import useSWR from "swr";
-import { usePathname } from "@/i18n/navigation";
 import { UpdateProjectForm } from "./UpdateProjectForm";
-import { notFound, useParams } from "next/navigation";
 import { ProjectFormSkeleton } from "./ProjectFormSkeleton";
 import { ProjectFormDataDTO } from "@/lib/data/project/project.dto";
 import { CustomerSummaryDTO } from "@/lib/data/customer/customer.dto";
@@ -16,43 +14,28 @@ interface UpdateProjectFormContainerProps {
 export function UpdateProjectFormContainer({
   projectId,
 }: UpdateProjectFormContainerProps) {
-  const pathname = usePathname();
-  const params = useParams();
-
   const { data: categories } = useSWR<ProjectCategorySummaryDTO[]>(
     `/api/project-categories`,
-    {
-      revalidateOnFocus: false,
-    },
   );
 
-  const { data: customers } = useSWR<CustomerSummaryDTO[]>(`/api/customers`, {
-    revalidateOnFocus: false,
-  });
+  const { data: customers } = useSWR<CustomerSummaryDTO[]>(`/api/customers`);
 
   const {
     data: project,
-    isValidating: isValidatingProject,
     error: projectError,
+    isValidating,
   } = useSWR<ProjectFormDataDTO>(`/api/projects/${projectId}?view=edit`, {
+    // disable revalidation on focus to prevent UI flicker caused by isValidating
     revalidateOnFocus: false,
   });
 
   if (projectError) {
-    if (projectError.status === 404) {
-      if (pathname.startsWith("/projects") && params.id) {
-        notFound();
-      }
-
-      throw new Error(undefined, { cause: "projectNotFound" });
-    }
-
     throw new Error();
   }
 
-  // Show skeleton while loading or revalidating
-  const showSkeleton =
-    !categories || !customers || !project || isValidatingProject;
+  // Show skeleton while loading
+  // or revalidating to prevent stale data rendering
+  const showSkeleton = !categories || !customers || !project || isValidating;
 
   if (showSkeleton) {
     return <ProjectFormSkeleton />;

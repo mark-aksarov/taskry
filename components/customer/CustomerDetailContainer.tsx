@@ -13,9 +13,6 @@ export function CustomerDetailContainer({
 }: CustomerDetailContainerProps) {
   const { data: customer, error } = useSWR<CustomerDetailDTO>(
     `/api/customers/${customerId}`,
-    {
-      revalidateOnFocus: false,
-    },
   );
 
   if (error) {

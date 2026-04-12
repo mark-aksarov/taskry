@@ -17,24 +17,17 @@ export function UpdateTaskFormContainer({
 }: UpdateTaskFormContainerProps) {
   const { data: categories } = useSWR<TaskCategorySummaryDTO[]>(
     "/api/task-categories",
-    {
-      revalidateOnFocus: false,
-    },
   );
+  const { data: projects } = useSWR<ProjectSummaryDTO[]>("/api/projects");
 
-  const { data: projects } = useSWR<ProjectSummaryDTO[]>("/api/projects", {
-    revalidateOnFocus: false,
-  });
-
-  const { data: users } = useSWR<UserSummaryDTO[]>("/api/users", {
-    revalidateOnFocus: false,
-  });
+  const { data: users } = useSWR<UserSummaryDTO[]>("/api/users");
 
   const {
     data: task,
-    isValidating: isValidatingTask,
     error: taskError,
+    isValidating,
   } = useSWR<TaskFormDataDTO | null>(`/api/tasks/${taskId}?view=edit`, {
+    // disable revalidation on focus to prevent UI flicker caused by isValidating
     revalidateOnFocus: false,
   });
 
@@ -42,9 +35,10 @@ export function UpdateTaskFormContainer({
     throw new Error();
   }
 
-  // Show skeleton while loading or revalidating
+  // Show skeleton while loading
+  // or revalidating to prevent stale data rendering
   const showSkeleton =
-    !categories || !projects || !users || !task || isValidatingTask;
+    !categories || !projects || !users || !task || isValidating;
 
   if (showSkeleton) {
     return <TaskFormSkeleton />;

@@ -10,9 +10,7 @@ interface UserDetailContainerProps {
 }
 
 export function UserDetailContainer({ userId }: UserDetailContainerProps) {
-  const { data: user, error } = useSWR<UserDetailDTO>(`/api/users/${userId}`, {
-    revalidateOnFocus: false,
-  });
+  const { data: user, error } = useSWR<UserDetailDTO>(`/api/users/${userId}`);
 
   if (error) {
     throw new Error();

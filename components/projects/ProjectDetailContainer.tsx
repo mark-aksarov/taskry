@@ -13,16 +13,9 @@ export function ProjectDetailContainer({
 }: ProjectDetailContainerProps) {
   const { data: project, error } = useSWR<ProjectDetailDTO>(
     `/api/projects/${projectId}`,
-    {
-      revalidateOnFocus: false,
-    },
   );
 
   if (error) {
-    if (error.status === 404) {
-      throw new Error(undefined, { cause: "projectNotFound" });
-    }
-
     throw new Error();
   }
 

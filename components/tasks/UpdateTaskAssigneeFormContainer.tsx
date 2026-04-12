@@ -16,15 +16,14 @@ interface UpdateTaskAssigneeFormContainerProps {
 export function UpdateTaskAssigneeFormContainer({
   taskId,
 }: UpdateTaskAssigneeFormContainerProps) {
-  const { data: users } = useSWR<UserSummaryDTO[]>("/api/users", {
-    revalidateOnFocus: false,
-  });
+  const { data: users } = useSWR<UserSummaryDTO[]>("/api/users");
 
   const {
     data: task,
-    isValidating: isValidatingTask,
     error: taskError,
+    isValidating,
   } = useSWR<TaskFormDataDTO | null>(`/api/tasks/${taskId}?view=edit`, {
+    // disable revalidation on focus to prevent UI flicker caused by isValidating
     revalidateOnFocus: false,
   });
 
@@ -32,8 +31,9 @@ export function UpdateTaskAssigneeFormContainer({
     throw new Error();
   }
 
-  // Show skeleton while loading or revalidating
-  const showSkeleton = !users || !task || isValidatingTask;
+  // Show skeleton while loading
+  // or revalidating to prevent stale data rendering
+  const showSkeleton = !users || !task || isValidating;
 
   if (showSkeleton) {
     return <UpdateTaskAssigneeFormSkeleton />;
