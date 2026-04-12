@@ -244,5 +244,11 @@
   },
   "UpdateTaskStatusModal": {
     "title": "Изменить статус"
+  },
+  "UpdateTaskAssigneeForm": {
+    "submitButtonLabel": "Обновить назначенного"
+  },
+  "UpdateTaskAssigneeModal": {
+    "title": "Изменить назначенного"
   }
 }

@@ -244,5 +244,11 @@
   },
   "UpdateTaskStatusModal": {
     "title": "Edit status"
+  },
+  "UpdateTaskAssigneeForm": {
+    "submitButtonLabel": "Update assignee"
+  },
+  "UpdateTaskAssigneeModal": {
+    "title": "Edit assignee"
   }
 }
