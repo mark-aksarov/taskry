@@ -1,11 +1,15 @@
 import {
+  AssigneeFiltersForm,
+  AssigneeFiltersFormSkeleton,
+} from "../AssigneeFiltersForm";
+
+import {
   withOpenModal,
   withModalManagerProvider,
 } from "@/components/common/ModalManagerContext/__stories__";
 
 import { mockedUserSummaries } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { AssigneeFiltersForm } from "../AssigneeFiltersForm";
 import { AssigneeFiltersModal } from "./AssigneeFiltersModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withTaskFiltersProvider } from "../TaskFiltersContext/__stories__";
@@ -36,5 +40,11 @@ export const Default = {
     filtersFormContainer: (
       <AssigneeFiltersForm assigneeCheckboxGroupItems={mockedUserSummaries} />
     ),
+  },
+} satisfies Story;
+
+export const Skeleton = {
+  args: {
+    filtersFormContainer: <AssigneeFiltersFormSkeleton />,
   },
 } satisfies Story;

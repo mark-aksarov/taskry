@@ -7,7 +7,10 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedCompanySummaries } from "@/mocks/companies";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerCompanyFiltersModal } from "./CustomerCompanyFiltersModal";
-import { CustomerCompanyFiltersForm } from "../CustomerCompanyFiltersForm";
+import {
+  CustomerCompanyFiltersForm,
+  CustomerCompanyFiltersFormSkeleton,
+} from "../CustomerCompanyFiltersForm";
 import { withCustomerFiltersProvider } from "../CustomerFiltersContext/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
@@ -39,5 +42,11 @@ export const Default = {
         companyCheckboxGroupItems={mockedCompanySummaries}
       />
     ),
+  },
+} satisfies Story;
+
+export const Skeleton = {
+  args: {
+    filtersFormContainer: <CustomerCompanyFiltersFormSkeleton />,
   },
 } satisfies Story;

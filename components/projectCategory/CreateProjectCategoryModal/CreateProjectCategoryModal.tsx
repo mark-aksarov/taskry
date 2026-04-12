@@ -1,14 +1,18 @@
 "use client";
 
 import {
+  CreateProjectCategoryForm,
+  CreateProjectCategoryFormSubmitButton,
+} from "../CreateProjectCategoryForm";
+
+import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
-import { CreateProjectCategoryForm } from "../CreateProjectCategoryForm";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 export function CreateProjectCategoryModal() {
@@ -24,9 +28,12 @@ export function CreateProjectCategoryModal() {
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <CreateProjectCategoryForm />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <CreateProjectCategoryFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

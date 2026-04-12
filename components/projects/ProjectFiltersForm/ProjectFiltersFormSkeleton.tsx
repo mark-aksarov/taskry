@@ -1,10 +1,4 @@
-import {
-  FieldSkeleton,
-  FieldGroupSkeleton,
-  ButtonSkeleton,
-} from "@/components/ui/Skeleton";
-
-import { FormBaseBody, FormBaseFooter } from "@/components/common/FormBase";
+import { FieldSkeleton, FieldGroupSkeleton } from "@/components/ui/Skeleton";
 
 import { Skeleton } from "@/components/ui/Skeleton";
 import { Separator } from "@/components/ui/Separator";
@@ -12,50 +6,45 @@ import { SwitchSkeleton } from "@/components/ui/Skeleton/SwitchSkeleton";
 
 export function ProjectFiltersFormSkeleton() {
   return (
-    <div className="flex h-full flex-col gap-4">
-      <FormBaseBody>
-        <SwitchSkeleton />
-        <Separator />
+    <div className="flex flex-col gap-4">
+      <SwitchSkeleton />
+      <Separator />
 
-        <FieldSkeleton>
-          <FieldGroupSkeleton />
-        </FieldSkeleton>
+      <FieldSkeleton>
+        <FieldGroupSkeleton />
+      </FieldSkeleton>
 
-        <FieldSkeleton>
-          <FieldGroupSkeleton />
-        </FieldSkeleton>
-        <Separator />
+      <FieldSkeleton>
+        <FieldGroupSkeleton />
+      </FieldSkeleton>
+      <Separator />
 
-        <FieldSkeleton>
-          <Skeleton size="sm" className="w-[7rem]" />
-          <Skeleton size="sm" className="w-[7rem]" />
-          <Skeleton size="sm" className="w-[7rem]" />
-        </FieldSkeleton>
-        <Separator />
+      <FieldSkeleton>
+        <Skeleton size="sm" className="w-[7rem]" />
+        <Skeleton size="sm" className="w-[7rem]" />
+        <Skeleton size="sm" className="w-[7rem]" />
+      </FieldSkeleton>
+      <Separator />
 
-        <FieldSkeleton>
-          <Skeleton size="sm" className="w-[7rem]" />
-          <Skeleton size="sm" className="w-[7rem]" />
-          <Skeleton size="sm" className="w-[7rem]" />
-        </FieldSkeleton>
-        <Separator />
+      <FieldSkeleton>
+        <Skeleton size="sm" className="w-[7rem]" />
+        <Skeleton size="sm" className="w-[7rem]" />
+        <Skeleton size="sm" className="w-[7rem]" />
+      </FieldSkeleton>
+      <Separator />
 
-        <FieldSkeleton>
-          <Skeleton size="sm" className="w-[7rem]" />
-          <Skeleton size="sm" className="w-[7rem]" />
-          <Skeleton size="sm" className="w-[7rem]" />
-        </FieldSkeleton>
-        <Separator />
+      <FieldSkeleton>
+        <Skeleton size="sm" className="w-[7rem]" />
+        <Skeleton size="sm" className="w-[7rem]" />
+        <Skeleton size="sm" className="w-[7rem]" />
+      </FieldSkeleton>
+      <Separator />
 
-        <FieldSkeleton>
-          <Skeleton size="sm" className="w-[7rem]" />
-          <Skeleton size="sm" className="w-[7rem]" />
-          <Skeleton size="sm" className="w-[7rem]" />
-        </FieldSkeleton>
-      </FormBaseBody>
-      <FormBaseFooter>
-        <ButtonSkeleton size="medium" />
-      </FormBaseFooter>
+      <FieldSkeleton>
+        <Skeleton size="sm" className="w-[7rem]" />
+        <Skeleton size="sm" className="w-[7rem]" />
+        <Skeleton size="sm" className="w-[7rem]" />
+      </FieldSkeleton>
     </div>
   );
 }

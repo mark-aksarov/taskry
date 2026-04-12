@@ -1,46 +1,35 @@
-import {
-  FieldSkeleton,
-  FieldGroupSkeleton,
-  ButtonSkeleton,
-} from "@/components/ui/Skeleton";
-
-import { FormBaseBody, FormBaseFooter } from "@/components/common/FormBase";
+import { FieldSkeleton, FieldGroupSkeleton } from "@/components/ui/Skeleton";
 
 export function UpdateUserFormSkeleton() {
   return (
-    <div className="flex h-full flex-col gap-4">
-      <FormBaseBody>
-        <FieldSkeleton>
-          <FieldGroupSkeleton />
-        </FieldSkeleton>
+    <div className="flex flex-col gap-4">
+      <FieldSkeleton>
+        <FieldGroupSkeleton />
+      </FieldSkeleton>
 
-        <FieldSkeleton>
-          <FieldGroupSkeleton className="h-[9rem]" />
-        </FieldSkeleton>
+      <FieldSkeleton>
+        <FieldGroupSkeleton className="h-[9rem]" />
+      </FieldSkeleton>
 
-        <FieldSkeleton>
-          <FieldGroupSkeleton />
-        </FieldSkeleton>
+      <FieldSkeleton>
+        <FieldGroupSkeleton />
+      </FieldSkeleton>
 
-        <FieldSkeleton>
-          <FieldGroupSkeleton />
-        </FieldSkeleton>
+      <FieldSkeleton>
+        <FieldGroupSkeleton />
+      </FieldSkeleton>
 
-        <FieldSkeleton>
-          <FieldGroupSkeleton />
-        </FieldSkeleton>
+      <FieldSkeleton>
+        <FieldGroupSkeleton />
+      </FieldSkeleton>
 
-        <FieldSkeleton>
-          <FieldGroupSkeleton />
-        </FieldSkeleton>
+      <FieldSkeleton>
+        <FieldGroupSkeleton />
+      </FieldSkeleton>
 
-        <FieldSkeleton>
-          <FieldGroupSkeleton />
-        </FieldSkeleton>
-      </FormBaseBody>
-      <FormBaseFooter>
-        <ButtonSkeleton size="medium" />
-      </FormBaseFooter>
+      <FieldSkeleton>
+        <FieldGroupSkeleton />
+      </FieldSkeleton>
     </div>
   );
 }

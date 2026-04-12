@@ -5,16 +5,10 @@ import {
   useProjectFiltersFormDispatch,
 } from "../ProjectFiltersForm";
 
-import {
-  FormBase,
-  FormBaseBody,
-  FormBaseFooter,
-} from "@/components/common/FormBase";
-
 import { useSearchParams } from "next/navigation";
+import { FormBase } from "@/components/common/FormBase";
 import { useSelectedProjects } from "../SelectedProjectsContext";
 import { useApplyFilterURL } from "@/lib/hooks/useApplyFilterURL";
-import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { ProjectCreatorCheckboxGroup } from "../ProjectCreatorCheckboxGroup";
 import { useFilterSubmitSideEffects } from "@/lib/hooks/useFilterSubmitSideEffects";
 
@@ -52,20 +46,15 @@ export function ProjectCreatorFiltersForm({
   };
 
   return (
-    <FormBase id="project-creator-filter-form" onSubmit={handleSubmit}>
-      <FormBaseBody>
-        <ProjectCreatorCheckboxGroup
-          disableExpansion
-          items={creatorCheckboxGroupItems}
-          value={creatorIds}
-          onChange={(value) =>
-            dispatch({ type: "setCreatorIds", payload: value })
-          }
-        />
-      </FormBaseBody>
-      <FormBaseFooter>
-        <FiltersFormSubmitButton />
-      </FormBaseFooter>
+    <FormBase id="project-creator-filters-form" onSubmit={handleSubmit}>
+      <ProjectCreatorCheckboxGroup
+        disableExpansion
+        items={creatorCheckboxGroupItems}
+        value={creatorIds}
+        onChange={(value) =>
+          dispatch({ type: "setCreatorIds", payload: value })
+        }
+      />
     </FormBase>
   );
 }

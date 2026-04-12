@@ -1,14 +1,14 @@
 "use client";
 
 import {
-  FormBaseModal,
-  FormBaseModalDialog,
-  FormBaseModalDialogBody,
-} from "../../common/FormBaseModal";
+  CreateSubtaskForm,
+  CreateSubtaskFormSubmitButton,
+} from "../CreateSubtaskForm";
 
 import { useTranslations } from "next-intl";
-import { CreateSubtaskForm } from "../CreateSubtaskForm";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { FormBaseModal, FormBaseModalDialog } from "../../common/FormBaseModal";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UpdateSubtaskModalProps {
@@ -29,9 +29,12 @@ export function CreateSubtaskModal({ taskId }: UpdateSubtaskModalProps) {
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("heading")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <CreateSubtaskForm taskId={taskId} />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <CreateSubtaskFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

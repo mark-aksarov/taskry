@@ -3,11 +3,12 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { UpdateTaskAssigneeFormSubmitButton } from "../UpdateTaskAssigneeForm";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UpdateTaskModalProps {
@@ -30,9 +31,10 @@ export function UpdateTaskAssigneeModal({
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
-          {updateTaskAssigneeFormContainer}
-        </FormBaseModalDialogBody>
+        <DialogBody>{updateTaskAssigneeFormContainer}</DialogBody>
+        <DialogFooter>
+          <UpdateTaskAssigneeFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

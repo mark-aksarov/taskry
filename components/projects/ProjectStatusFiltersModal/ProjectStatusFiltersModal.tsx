@@ -5,15 +5,13 @@ import {
   useProjectFiltersFormDispatch,
 } from "../ProjectFiltersForm";
 
-import {
-  FormBaseModal,
-  FormBaseModalDialogBody,
-} from "@/components/common/FormBaseModal";
-
 import { useTranslations } from "next-intl";
 import { useProjectFilters } from "../ProjectFiltersContext";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
+import { FormBaseModal } from "@/components/common/FormBaseModal";
 import { ProjectStatusFiltersForm } from "../ProjectStatusFiltersForm";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
+import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
 export function ProjectStatusFiltersModal() {
@@ -24,9 +22,12 @@ export function ProjectStatusFiltersModal() {
       <ProjectFiltersFormProvider initialFilters={initialFilters}>
         <FilterModalDialog>
           <DialogHeader />
-          <FormBaseModalDialogBody>
+          <DialogBody>
             <ProjectStatusFiltersForm />
-          </FormBaseModalDialogBody>
+          </DialogBody>
+          <DialogFooter>
+            <FiltersFormSubmitButton form="project-status-filters-form" />
+          </DialogFooter>
         </FilterModalDialog>
       </ProjectFiltersFormProvider>
     </FormBaseModal>

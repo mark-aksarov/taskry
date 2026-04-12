@@ -1,14 +1,7 @@
 "use client";
 
-import {
-  FormBase,
-  FormBaseBody,
-  FormBaseFooter,
-  FormBaseSubmitButton,
-} from "@/components/common/FormBase";
-
 import { startTransition } from "react";
-import { useTranslations } from "next-intl";
+import { FormBase } from "@/components/common/FormBase";
 import { CompanySelect } from "@/components/company/CompanySelect";
 import { FormErrorBanner } from "@/components/common/FormErrorBanner";
 import { useUpdateCustomerCompany } from "../UpdateCustomerCompanyContext";
@@ -24,8 +17,6 @@ export function UpdateCustomerCompanyForm({
   companyId,
   companySelectItems,
 }: UpdateCustomerCompanyFormProps) {
-  const t = useTranslations("customers.UpdateCustomerCompanyForm");
-
   const { state, action, isPending } = useUpdateCustomerCompany();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -39,24 +30,15 @@ export function UpdateCustomerCompanyForm({
 
   return (
     <FormBase id="update-customer-company-form" onSubmit={handleSubmit}>
-      <FormBaseBody>
-        {customerId && <input type="hidden" name="id" value={customerId} />}
-        <CompanySelect
-          defaultSelectedKey={companyId?.toString()}
-          items={companySelectItems}
-        />
+      {customerId && <input type="hidden" name="id" value={customerId} />}
+      <CompanySelect
+        defaultSelectedKey={companyId?.toString()}
+        items={companySelectItems}
+      />
 
-        <FormErrorBanner status={state.status} isPending={isPending}>
-          {state.message}
-        </FormErrorBanner>
-      </FormBaseBody>
-
-      <FormBaseFooter>
-        <FormBaseSubmitButton
-          isPending={isPending}
-          label={t("submitButtonLabel")}
-        />
-      </FormBaseFooter>
+      <FormErrorBanner status={state.status} isPending={isPending}>
+        {state.message}
+      </FormErrorBanner>
     </FormBase>
   );
 }

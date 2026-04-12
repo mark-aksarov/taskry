@@ -1,20 +1,14 @@
 "use client";
 
 import {
-  FormBase,
-  FormBaseBody,
-  FormBaseFooter,
-} from "@/components/common/FormBase";
-
-import {
   useTaskFiltersForm,
   useTaskFiltersFormDispatch,
 } from "../TaskFiltersForm/TaskFiltersFormContext";
 
 import { useSearchParams } from "next/navigation";
+import { FormBase } from "@/components/common/FormBase";
 import { useSelectedTasks } from "../SelectedTasksContext";
 import { useApplyFilterURL } from "@/lib/hooks/useApplyFilterURL";
-import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { useFilterSubmitSideEffects } from "@/lib/hooks/useFilterSubmitSideEffects";
 import { TaskCategoryCheckboxGroup } from "@/components/taskCategory/TaskCategoryCheckboxGroup";
 
@@ -52,20 +46,15 @@ export function TaskCategoryFiltersForm({
   };
 
   return (
-    <FormBase id="task-category-filter-form" onSubmit={handleSubmit}>
-      <FormBaseBody>
-        <TaskCategoryCheckboxGroup
-          disableExpansion
-          items={categoryCheckboxGroupItems}
-          value={assigneeIds}
-          onChange={(value) =>
-            dispatch({ type: "setAssigneeIds", payload: value })
-          }
-        />
-      </FormBaseBody>
-      <FormBaseFooter>
-        <FiltersFormSubmitButton />
-      </FormBaseFooter>
+    <FormBase id="task-category-filters-form" onSubmit={handleSubmit}>
+      <TaskCategoryCheckboxGroup
+        disableExpansion
+        items={categoryCheckboxGroupItems}
+        value={assigneeIds}
+        onChange={(value) =>
+          dispatch({ type: "setAssigneeIds", payload: value })
+        }
+      />
     </FormBase>
   );
 }

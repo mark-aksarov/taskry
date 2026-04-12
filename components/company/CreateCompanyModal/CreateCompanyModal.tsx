@@ -1,13 +1,17 @@
 "use client";
 
 import {
+  CreateCompanyForm,
+  CreateCompanyFormSubmitButton,
+} from "../CreateCompanyForm";
+
+import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { CreateCompanyForm } from "../CreateCompanyForm";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
@@ -24,9 +28,12 @@ export function CreateCompanyModal() {
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <CreateCompanyForm />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <CreateCompanyFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

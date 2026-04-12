@@ -1,13 +1,17 @@
 "use client";
 
 import {
+  CreatePositionForm,
+  CreatePositionFormSubmitButton,
+} from "../CreatePositionForm";
+
+import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { CreatePositionForm } from "../CreatePositionForm";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
@@ -24,9 +28,12 @@ export function CreatePositionModal() {
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <CreatePositionForm />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <CreatePositionFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

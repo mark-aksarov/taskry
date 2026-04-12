@@ -3,12 +3,13 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
+import { UpdateCustomerCompanyFormSubmitButton } from "../UpdateCustomerCompanyForm";
 
 interface UpdateCustomerCompanyModalProps {
   updateCustomerCompanyFormContainer: React.ReactNode;
@@ -30,9 +31,10 @@ export function UpdateCustomerCompanyModal({
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
-          {updateCustomerCompanyFormContainer}
-        </FormBaseModalDialogBody>
+        <DialogBody>{updateCustomerCompanyFormContainer}</DialogBody>
+        <DialogFooter>
+          <UpdateCustomerCompanyFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

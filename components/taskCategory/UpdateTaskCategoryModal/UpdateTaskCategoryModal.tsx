@@ -1,13 +1,17 @@
 "use client";
 
 import {
+  UpdateTaskCategoryForm,
+  UpdateTaskCategoryFormSubmitButton,
+} from "../UpdateTaskCategoryForm";
+
+import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { UpdateTaskCategoryForm } from "../UpdateTaskCategoryForm";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
@@ -32,12 +36,15 @@ export function UpdateTaskCategoryModal({
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <UpdateTaskCategoryForm
             taskCategoryId={taskCategoryId}
             nameDefaultValue={taskCategoryName}
           />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <UpdateTaskCategoryFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

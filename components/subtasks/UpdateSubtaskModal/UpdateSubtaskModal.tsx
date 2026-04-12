@@ -1,13 +1,17 @@
 "use client";
 
 import {
+  UpdateSubtaskForm,
+  UpdateSubtaskFormSubmitButton,
+} from "../UpdateSubtaskForm";
+
+import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { UpdateSubtaskForm } from "../UpdateSubtaskForm";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
@@ -28,20 +32,23 @@ export function UpdateSubtaskModal({
 
   return (
     <FormBaseModal
-      data-test="edit-subtask-modal"
+      data-test="update-subtask-modal"
       className="md:w-[350px]"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("heading")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <UpdateSubtaskForm
             taskId={taskId}
             subtaskId={subtaskId}
             textDefaultValue={subtaskText}
           />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <UpdateSubtaskFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

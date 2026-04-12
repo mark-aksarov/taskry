@@ -3,10 +3,11 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
+import { UpdateTaskFormSubmitButton } from "../UpdateTaskForm";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
@@ -23,15 +24,16 @@ export function UpdateTaskModal({
 
   return (
     <FormBaseModal
-      data-test="edit-task-modal"
+      data-test="update-task-modal"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
-          {updateTaskFormContainer}
-        </FormBaseModalDialogBody>
+        <DialogBody>{updateTaskFormContainer}</DialogBody>
+        <DialogFooter>
+          <UpdateTaskFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

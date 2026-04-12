@@ -3,11 +3,12 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { CreateCustomerFormSubmitButton } from "../CreateCustomerForm";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface NewCustomerModalProps {
@@ -29,9 +30,10 @@ export function CreateCustomerModal({
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
-          {createCustomerFormContainer}
-        </FormBaseModalDialogBody>
+        <DialogBody>{createCustomerFormContainer}</DialogBody>
+        <DialogFooter>
+          <CreateCustomerFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

@@ -1,19 +1,17 @@
 "use client";
 
 import {
-  FormBaseModal,
-  FormBaseModalDialogBody,
-} from "@/components/common/FormBaseModal";
-
-import {
   CustomerFiltersFormProvider,
   useCustomerFiltersFormDispatch,
 } from "../CustomerFiltersForm/CustomerFiltersFormContext";
 
 import { useTranslations } from "next-intl";
 import { useCustomerFilters } from "../CustomerFiltersContext";
+import { FormBaseModal } from "@/components/common/FormBaseModal";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
+import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
 export function CustomerFiltersModal({
@@ -33,9 +31,10 @@ export function CustomerFiltersModal({
       <CustomerFiltersFormProvider initialFilters={initialFilters}>
         <FilterModalDialog>
           <DialogHeader />
-          <FormBaseModalDialogBody>
-            {filtersFormContainer}
-          </FormBaseModalDialogBody>
+          <DialogBody>{filtersFormContainer}</DialogBody>
+          <DialogFooter>
+            <FiltersFormSubmitButton form="customer-filters-form" />
+          </DialogFooter>
         </FilterModalDialog>
       </CustomerFiltersFormProvider>
     </FormBaseModal>

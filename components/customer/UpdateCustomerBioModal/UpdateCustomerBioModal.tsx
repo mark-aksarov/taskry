@@ -1,13 +1,17 @@
 "use client";
 
 import {
+  UpdateCustomerBioForm,
+  UpdateCustomerBioFormSubmitButton,
+} from "../UpdateCustomerBioForm";
+
+import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { UpdateCustomerBioForm } from "../UpdateCustomerBioForm";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
@@ -33,9 +37,12 @@ export function UpdateCustomerBioModal({
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <UpdateCustomerBioForm customerId={customerId} bio={customerBio} />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <UpdateCustomerBioFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

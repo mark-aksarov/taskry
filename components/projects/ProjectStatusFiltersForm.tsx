@@ -5,18 +5,12 @@ import {
   useProjectFiltersFormDispatch,
 } from "./ProjectFiltersForm";
 
-import {
-  FormBase,
-  FormBaseBody,
-  FormBaseFooter,
-} from "@/components/common/FormBase";
-
 import { useSearchParams } from "next/navigation";
+import { FormBase } from "@/components/common/FormBase";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useSelectedProjects } from "./SelectedProjectsContext";
 import { useApplyFilterURL } from "@/lib/hooks/useApplyFilterURL";
 import { ProjectStatusCheckboxGroup } from "./ProjectStatusCheckboxGroup";
-import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { useFilterSubmitSideEffects } from "@/lib/hooks/useFilterSubmitSideEffects";
 
 export function ProjectStatusFiltersForm() {
@@ -50,18 +44,13 @@ export function ProjectStatusFiltersForm() {
   };
 
   return (
-    <FormBase id="project-status-filter-form" onSubmit={handleSubmit}>
-      <FormBaseBody>
-        <ProjectStatusCheckboxGroup
-          value={statuses}
-          onChange={(value) =>
-            dispatch({ type: "setStatuses", payload: value as ProjectStatus[] })
-          }
-        />
-      </FormBaseBody>
-      <FormBaseFooter>
-        <FiltersFormSubmitButton />
-      </FormBaseFooter>
+    <FormBase id="project-status-filters-form" onSubmit={handleSubmit}>
+      <ProjectStatusCheckboxGroup
+        value={statuses}
+        onChange={(value) =>
+          dispatch({ type: "setStatuses", payload: value as ProjectStatus[] })
+        }
+      />
     </FormBase>
   );
 }

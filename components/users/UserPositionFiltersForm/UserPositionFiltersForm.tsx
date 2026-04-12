@@ -1,20 +1,14 @@
 "use client";
 
 import {
-  FormBase,
-  FormBaseBody,
-  FormBaseFooter,
-} from "@/components/common/FormBase";
-
-import {
   useUserFiltersForm,
   useUserFiltersFormDispatch,
 } from "../UserFiltersForm/UserFiltersFormContext";
 
 import { useSearchParams } from "next/navigation";
+import { FormBase } from "@/components/common/FormBase";
 import { PositionCheckboxGroup } from "../PositionCheckboxGroup";
 import { useApplyFilterURL } from "@/lib/hooks/useApplyFilterURL";
-import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { useFilterSubmitSideEffects } from "@/lib/hooks/useFilterSubmitSideEffects";
 
 interface UserPositionFiltersFormProps {
@@ -48,20 +42,15 @@ export function UserPositionFiltersForm({
   };
 
   return (
-    <FormBase id="user-position-filter-form" onSubmit={handleSubmit}>
-      <FormBaseBody>
-        <PositionCheckboxGroup
-          items={positionCheckboxGroupItems}
-          disableExpansion
-          value={positionIds}
-          onChange={(value) =>
-            dispatch({ type: "setPositionIds", payload: value })
-          }
-        />
-      </FormBaseBody>
-      <FormBaseFooter>
-        <FiltersFormSubmitButton />
-      </FormBaseFooter>
+    <FormBase id="user-position-filters-form" onSubmit={handleSubmit}>
+      <PositionCheckboxGroup
+        items={positionCheckboxGroupItems}
+        disableExpansion
+        value={positionIds}
+        onChange={(value) =>
+          dispatch({ type: "setPositionIds", payload: value })
+        }
+      />
     </FormBase>
   );
 }

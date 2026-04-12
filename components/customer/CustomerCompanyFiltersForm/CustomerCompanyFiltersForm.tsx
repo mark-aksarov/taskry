@@ -1,19 +1,13 @@
 "use client";
 
 import {
-  FormBase,
-  FormBaseBody,
-  FormBaseFooter,
-} from "@/components/common/FormBase";
-
-import {
   useCustomerFiltersForm,
   useCustomerFiltersFormDispatch,
 } from "../CustomerFiltersForm/CustomerFiltersFormContext";
 
 import { useSearchParams } from "next/navigation";
+import { FormBase } from "@/components/common/FormBase";
 import { useApplyFilterURL } from "@/lib/hooks/useApplyFilterURL";
-import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { CompanyCheckboxGroup } from "@/components/company/CompanyCheckboxGroup";
 import { useFilterSubmitSideEffects } from "@/lib/hooks/useFilterSubmitSideEffects";
@@ -52,20 +46,15 @@ export function CustomerCompanyFiltersForm({
   };
 
   return (
-    <FormBase id="company-filter-form" onSubmit={handleSubmit}>
-      <FormBaseBody>
-        <CompanyCheckboxGroup
-          disableExpansion
-          items={companyCheckboxGroupItems}
-          value={companyIds}
-          onChange={(value) =>
-            dispatch({ type: "setCompanyIds", payload: value })
-          }
-        />
-      </FormBaseBody>
-      <FormBaseFooter>
-        <FiltersFormSubmitButton />
-      </FormBaseFooter>
+    <FormBase id="customer-company-filters-form" onSubmit={handleSubmit}>
+      <CompanyCheckboxGroup
+        disableExpansion
+        items={companyCheckboxGroupItems}
+        value={companyIds}
+        onChange={(value) =>
+          dispatch({ type: "setCompanyIds", payload: value })
+        }
+      />
     </FormBase>
   );
 }

@@ -5,18 +5,12 @@ import {
   useTaskFiltersFormDispatch,
 } from "./TaskFiltersForm";
 
-import {
-  FormBase,
-  FormBaseBody,
-  FormBaseFooter,
-} from "@/components/common/FormBase";
-
 import { useSearchParams } from "next/navigation";
 import { TaskStatus } from "@/generated/prisma/enums";
+import { FormBase } from "@/components/common/FormBase";
 import { useSelectedTasks } from "./SelectedTasksContext";
 import { useApplyFilterURL } from "@/lib/hooks/useApplyFilterURL";
 import { TaskStatusCheckboxGroup } from "./TaskStatusCheckboxGroup";
-import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { useFilterSubmitSideEffects } from "@/lib/hooks/useFilterSubmitSideEffects";
 
 export function TaskStatusFiltersForm() {
@@ -47,18 +41,13 @@ export function TaskStatusFiltersForm() {
   };
 
   return (
-    <FormBase id="task-status-filter-form" onSubmit={handleSubmit}>
-      <FormBaseBody>
-        <TaskStatusCheckboxGroup
-          value={statuses}
-          onChange={(value) =>
-            dispatch({ type: "setStatuses", payload: value as TaskStatus[] })
-          }
-        />
-      </FormBaseBody>
-      <FormBaseFooter>
-        <FiltersFormSubmitButton />
-      </FormBaseFooter>
+    <FormBase id="task-status-filters-form" onSubmit={handleSubmit}>
+      <TaskStatusCheckboxGroup
+        value={statuses}
+        onChange={(value) =>
+          dispatch({ type: "setStatuses", payload: value as TaskStatus[] })
+        }
+      />
     </FormBase>
   );
 }

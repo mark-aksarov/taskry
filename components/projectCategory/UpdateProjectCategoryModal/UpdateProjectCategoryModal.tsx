@@ -1,14 +1,18 @@
 "use client";
 
 import {
+  UpdateProjectCategoryForm,
+  UpdateProjectCategoryFormSubmitButton,
+} from "../UpdateProjectCategoryForm";
+
+import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
-import { UpdateProjectCategoryForm } from "../UpdateProjectCategoryForm";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UpdateProjectCategoryModalProps {
@@ -32,12 +36,15 @@ export function UpdateProjectCategoryModal({
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <UpdateProjectCategoryForm
             projectCategoryId={projectCategoryId}
             nameDefaultValue={projectCategoryName}
           />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <UpdateProjectCategoryFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

@@ -5,16 +5,14 @@ import {
   useTaskFiltersFormDispatch,
 } from "../TaskFiltersForm";
 
-import {
-  FormBaseModal,
-  FormBaseModalDialogBody,
-} from "@/components/common/FormBaseModal";
-
 import { useTranslations } from "next-intl";
 import { useTaskFilters } from "../TaskFiltersContext";
 import { TaskStatusFiltersForm } from "../TaskStatusFiltersForm";
+import { FormBaseModal } from "@/components/common/FormBaseModal";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
+import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
 export function TaskStatusFiltersModal() {
@@ -30,9 +28,12 @@ export function TaskStatusFiltersModal() {
       <TaskFiltersFormProvider initialFilters={initialFilters}>
         <FilterModalDialog>
           <DialogHeader />
-          <FormBaseModalDialogBody>
+          <DialogBody>
             <TaskStatusFiltersForm />
-          </FormBaseModalDialogBody>
+          </DialogBody>
+          <DialogFooter>
+            <FiltersFormSubmitButton form="task-status-filters-form" />
+          </DialogFooter>
         </FilterModalDialog>
       </TaskFiltersFormProvider>
     </FormBaseModal>

@@ -1,17 +1,10 @@
 "use client";
 
-import {
-  FormBase,
-  FormBaseBody,
-  FormBaseFooter,
-  FormBaseSubmitButton,
-} from "@/components/common/FormBase";
-
 import { startTransition } from "react";
-import { useTranslations } from "next-intl";
 import { useUpdateUser } from "../UpdateUserContext";
 import { CalendarDate } from "@internationalized/date";
 import { UserBioTextField } from "../UserBioTextField";
+import { FormBase } from "@/components/common/FormBase";
 import { PositionSelect } from "../../position/PositionSelect";
 import { UserAddressTextField } from "../UserAddressTextField";
 import { UserFullNameTextField } from "../UserFullNameTextField";
@@ -43,8 +36,6 @@ export function UpdateUserForm({
   positionId,
   positionSelectItems,
 }: UpdateUserFormProps) {
-  const t = useTranslations("users.UpdateUserForm");
-
   const { state, action, isPending } = useUpdateUser();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -68,30 +59,21 @@ export function UpdateUserForm({
 
   return (
     <FormBase id="update-user-form" onSubmit={handleSubmit}>
-      <FormBaseBody>
-        {userId && <input type="hidden" name="id" value={userId} />}
-        <UserFullNameTextField defaultValue={fullName} />
-        <UserBioTextField defaultValue={bio} />
-        <UserBirthdateDatePicker defaultValue={birthdateValue} />
-        <UserPhoneNumberTextField defaultValue={phoneNumber} />
-        <UserPublicLinkTextField defaultValue={publicLink} />
-        <UserAddressTextField defaultValue={address} />
-        <PositionSelect
-          defaultSelectedKey={positionId?.toString()}
-          items={positionSelectItems}
-        />
+      {userId && <input type="hidden" name="id" value={userId} />}
+      <UserFullNameTextField defaultValue={fullName} />
+      <UserBioTextField defaultValue={bio} />
+      <UserBirthdateDatePicker defaultValue={birthdateValue} />
+      <UserPhoneNumberTextField defaultValue={phoneNumber} />
+      <UserPublicLinkTextField defaultValue={publicLink} />
+      <UserAddressTextField defaultValue={address} />
+      <PositionSelect
+        defaultSelectedKey={positionId?.toString()}
+        items={positionSelectItems}
+      />
 
-        <FormErrorBanner status={state.status} isPending={isPending}>
-          {state.message}
-        </FormErrorBanner>
-      </FormBaseBody>
-
-      <FormBaseFooter>
-        <FormBaseSubmitButton
-          isPending={isPending}
-          label={t("submitButtonLabel")}
-        />
-      </FormBaseFooter>
+      <FormErrorBanner status={state.status} isPending={isPending}>
+        {state.message}
+      </FormErrorBanner>
     </FormBase>
   );
 }

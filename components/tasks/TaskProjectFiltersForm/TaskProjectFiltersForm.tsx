@@ -5,19 +5,13 @@ import {
   useTaskFiltersFormDispatch,
 } from "../TaskFiltersForm";
 
-import {
-  FormBase,
-  FormBaseBody,
-  FormBaseFooter,
-} from "@/components/common/FormBase";
-
 import { useContext } from "react";
 import { useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
+import { FormBase } from "@/components/common/FormBase";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useSelectedTasks } from "../SelectedTasksContext";
 import { OverlayTriggerStateContext } from "react-aria-components";
-import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { usePageTransition } from "@/components/common/PageTransitionContext";
 import { ProjectCheckboxGroup } from "@/components/projects/ProjectCheckboxGroup";
 
@@ -67,18 +61,13 @@ export function TaskProjectFiltersForm({
   };
 
   return (
-    <FormBase id="task-project-filter-form" onSubmit={handleSubmit}>
-      <FormBaseBody>
-        <ProjectCheckboxGroup
-          disableExpansion
-          items={projectCheckboxGroupItems}
-          value={projectIds}
-          onChange={(ids) => dispatch({ type: "setProjectIds", payload: ids })}
-        />
-      </FormBaseBody>
-      <FormBaseFooter>
-        <FiltersFormSubmitButton />
-      </FormBaseFooter>
+    <FormBase id="task-project-filters-form" onSubmit={handleSubmit}>
+      <ProjectCheckboxGroup
+        disableExpansion
+        items={projectCheckboxGroupItems}
+        value={projectIds}
+        onChange={(ids) => dispatch({ type: "setProjectIds", payload: ids })}
+      />
     </FormBase>
   );
 }

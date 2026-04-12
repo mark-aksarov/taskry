@@ -3,11 +3,12 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { UpdateProjectFormSubmitButton } from "../UpdateProjectForm";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UpdateProjectModalProps {
@@ -29,9 +30,10 @@ export function UpdateProjectModal({
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
-          {updateProjectFormContainer}
-        </FormBaseModalDialogBody>
+        <DialogBody>{updateProjectFormContainer}</DialogBody>
+        <DialogFooter>
+          <UpdateProjectFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

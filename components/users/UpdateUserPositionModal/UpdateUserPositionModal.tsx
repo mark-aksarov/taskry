@@ -3,11 +3,12 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { UpdateUserPositionFormSubmitButton } from "../UpdateUserPositionForm";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UpdateUserPositionModalProps {
@@ -30,9 +31,10 @@ export function UpdateUserPositionModal({
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
-          {updateUserPositionFormContainer}
-        </FormBaseModalDialogBody>
+        <DialogBody>{updateUserPositionFormContainer}</DialogBody>
+        <DialogFooter>
+          <UpdateUserPositionFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

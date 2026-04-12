@@ -1,13 +1,17 @@
 "use client";
 
 import {
+  UpdateTaskDeadlineForm,
+  UpdateTaskDeadlineFormSubmitButton,
+} from "../UpdateTaskDeadlineForm";
+
+import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { UpdateTaskDeadlineForm } from "../UpdateTaskDeadlineForm";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
@@ -33,9 +37,12 @@ export function UpdateTaskDeadlineModal({
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <UpdateTaskDeadlineForm taskId={taskId} deadline={taskDeadline} />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <UpdateTaskDeadlineFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

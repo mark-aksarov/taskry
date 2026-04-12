@@ -3,13 +3,14 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { UpdateCustomerFullNameForm } from "../UpdateCustomerFullNameForm";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
+import { UpdateCustomerFullNameFormSubmitButton } from "../UpdateCustomerFullNameForm";
 
 interface UpdateCustomerFullNameModalProps {
   customerId: number;
@@ -33,12 +34,15 @@ export function UpdateCustomerFullNameModal({
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <UpdateCustomerFullNameForm
             customerId={customerId}
             fullName={customerFullName}
           />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <UpdateCustomerFullNameFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

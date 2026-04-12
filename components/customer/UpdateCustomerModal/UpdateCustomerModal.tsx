@@ -3,11 +3,12 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { UpdateCustomerFormSubmitButton } from "../UpdateCustomerForm";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UpdateCustomerModalProps {
@@ -29,9 +30,10 @@ export function UpdateCustomerModal({
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
-          {updateCustomerFormContainer}
-        </FormBaseModalDialogBody>
+        <DialogBody>{updateCustomerFormContainer}</DialogBody>
+        <DialogFooter>
+          <UpdateCustomerFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

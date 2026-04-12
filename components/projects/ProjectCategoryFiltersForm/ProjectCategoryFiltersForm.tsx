@@ -5,16 +5,10 @@ import {
   useProjectFiltersFormDispatch,
 } from "../ProjectFiltersForm";
 
-import {
-  FormBase,
-  FormBaseBody,
-  FormBaseFooter,
-} from "@/components/common/FormBase";
-
 import { useSearchParams } from "next/navigation";
+import { FormBase } from "@/components/common/FormBase";
 import { useSelectedProjects } from "../SelectedProjectsContext";
 import { useApplyFilterURL } from "@/lib/hooks/useApplyFilterURL";
-import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { useFilterSubmitSideEffects } from "@/lib/hooks/useFilterSubmitSideEffects";
 import { ProjectCategoryCheckboxGroup } from "@/components/projectCategory/ProjectCategoryCheckboxGroup";
 
@@ -52,20 +46,15 @@ export function ProjectCategoryFiltersForm({
   };
 
   return (
-    <FormBase id="project-category-filter-form" onSubmit={handleSubmit}>
-      <FormBaseBody>
-        <ProjectCategoryCheckboxGroup
-          disableExpansion
-          items={categoryCheckboxGroupItems}
-          value={categoryIds}
-          onChange={(value) =>
-            dispatch({ type: "setCategoryIds", payload: value })
-          }
-        />
-      </FormBaseBody>
-      <FormBaseFooter>
-        <FiltersFormSubmitButton />
-      </FormBaseFooter>
+    <FormBase id="project-category-filters-form" onSubmit={handleSubmit}>
+      <ProjectCategoryCheckboxGroup
+        disableExpansion
+        items={categoryCheckboxGroupItems}
+        value={categoryIds}
+        onChange={(value) =>
+          dispatch({ type: "setCategoryIds", payload: value })
+        }
+      />
     </FormBase>
   );
 }

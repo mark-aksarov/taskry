@@ -5,21 +5,15 @@ import {
   useTaskFiltersFormDispatch,
 } from "./TaskFiltersFormContext";
 
-import {
-  FormBase,
-  FormBaseBody,
-  FormBaseFooter,
-} from "@/components/common/FormBase";
-
 import { useSearchParams } from "next/navigation";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { Separator } from "@/components/ui/Separator";
+import { FormBase } from "@/components/common/FormBase";
 import { OnlyMyTasksSwitch } from "../OnlyMyTasksSwitch";
 import { useSelectedTasks } from "../SelectedTasksContext";
 import { AssigneeCheckboxGroup } from "../AssigneeCheckboxGroup";
 import { useApplyFilterURL } from "@/lib/hooks/useApplyFilterURL";
 import { TaskStatusCheckboxGroup } from "../TaskStatusCheckboxGroup";
-import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { DeadlineToDatePicker } from "@/components/common/DeadlineToDatePicker";
 import { ProjectCheckboxGroup } from "@/components/projects/ProjectCheckboxGroup";
 import { DeadlineFromDatePicker } from "@/components/common/DeadlineFromDatePicker";
@@ -94,70 +88,65 @@ export function TaskFiltersForm({
   };
 
   return (
-    <FormBase id="task-filter-form" onSubmit={handleSubmit}>
-      <FormBaseBody>
-        <OnlyMyTasksSwitch
-          isSelected={onlyMyTasks}
-          onChange={(value) =>
-            dispatch({ type: "changeOnlyMyTasks", payload: value })
-          }
-        />
+    <FormBase id="task-filters-form" onSubmit={handleSubmit}>
+      <OnlyMyTasksSwitch
+        isSelected={onlyMyTasks}
+        onChange={(value) =>
+          dispatch({ type: "changeOnlyMyTasks", payload: value })
+        }
+      />
 
-        <Separator />
+      <Separator />
 
-        <DeadlineFromDatePicker
-          value={deadlineFrom}
-          onChange={(value) =>
-            dispatch({ type: "changeDeadlineFrom", payload: value })
-          }
-        />
-        <DeadlineToDatePicker
-          value={deadlineTo}
-          deadlineFromValue={deadlineFrom}
-          onChange={(value) =>
-            dispatch({ type: "changeDeadlineTo", payload: value })
-          }
-        />
+      <DeadlineFromDatePicker
+        value={deadlineFrom}
+        onChange={(value) =>
+          dispatch({ type: "changeDeadlineFrom", payload: value })
+        }
+      />
+      <DeadlineToDatePicker
+        value={deadlineTo}
+        deadlineFromValue={deadlineFrom}
+        onChange={(value) =>
+          dispatch({ type: "changeDeadlineTo", payload: value })
+        }
+      />
 
-        <Separator />
+      <Separator />
 
-        <TaskStatusCheckboxGroup
-          value={statuses}
-          onChange={(value) =>
-            dispatch({ type: "setStatuses", payload: value as TaskStatus[] })
-          }
-        />
-        <Separator />
+      <TaskStatusCheckboxGroup
+        value={statuses}
+        onChange={(value) =>
+          dispatch({ type: "setStatuses", payload: value as TaskStatus[] })
+        }
+      />
+      <Separator />
 
-        <TaskCategoryCheckboxGroup
-          items={categoryCheckboxGroupItems}
-          value={categoryIds}
-          onChange={(value) =>
-            dispatch({ type: "setCategoryIds", payload: value })
-          }
-        />
-        <Separator />
+      <TaskCategoryCheckboxGroup
+        items={categoryCheckboxGroupItems}
+        value={categoryIds}
+        onChange={(value) =>
+          dispatch({ type: "setCategoryIds", payload: value })
+        }
+      />
+      <Separator />
 
-        <ProjectCheckboxGroup
-          items={projectCheckboxGroupItems}
-          value={projectIds}
-          onChange={(value) =>
-            dispatch({ type: "setProjectIds", payload: value })
-          }
-        />
-        <Separator />
+      <ProjectCheckboxGroup
+        items={projectCheckboxGroupItems}
+        value={projectIds}
+        onChange={(value) =>
+          dispatch({ type: "setProjectIds", payload: value })
+        }
+      />
+      <Separator />
 
-        <AssigneeCheckboxGroup
-          items={assigneeCheckboxGroupItems}
-          value={assigneeIds}
-          onChange={(value) =>
-            dispatch({ type: "setAssigneeIds", payload: value })
-          }
-        />
-      </FormBaseBody>
-      <FormBaseFooter>
-        <FiltersFormSubmitButton />
-      </FormBaseFooter>
+      <AssigneeCheckboxGroup
+        items={assigneeCheckboxGroupItems}
+        value={assigneeIds}
+        onChange={(value) =>
+          dispatch({ type: "setAssigneeIds", payload: value })
+        }
+      />
     </FormBase>
   );
 }

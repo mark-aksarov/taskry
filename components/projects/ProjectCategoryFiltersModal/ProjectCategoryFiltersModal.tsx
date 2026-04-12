@@ -5,15 +5,13 @@ import {
   useProjectFiltersFormDispatch,
 } from "../ProjectFiltersForm";
 
-import {
-  FormBaseModal,
-  FormBaseModalDialogBody,
-} from "@/components/common/FormBaseModal";
-
 import { useTranslations } from "next-intl";
 import { useProjectFilters } from "../ProjectFiltersContext";
+import { FormBaseModal } from "@/components/common/FormBaseModal";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
+import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
 interface ProjectCategoryFiltersModalProps {
@@ -35,9 +33,10 @@ export function ProjectCategoryFiltersModal({
       <ProjectFiltersFormProvider initialFilters={initialFilters}>
         <FilterModalDialog>
           <DialogHeader />
-          <FormBaseModalDialogBody>
-            {filtersFormContainer}
-          </FormBaseModalDialogBody>
+          <DialogBody>{filtersFormContainer}</DialogBody>
+          <DialogFooter>
+            <FiltersFormSubmitButton form="project-category-filters-form" />
+          </DialogFooter>
         </FilterModalDialog>
       </ProjectFiltersFormProvider>
     </FormBaseModal>

@@ -7,7 +7,7 @@ export function FormBase({
   ...props
 }: FormProps & React.RefAttributes<HTMLFormElement>) {
   return (
-    <Form {...props} className="flex h-full flex-col gap-4">
+    <Form {...props} className="flex flex-col gap-4">
       {children}
     </Form>
   );

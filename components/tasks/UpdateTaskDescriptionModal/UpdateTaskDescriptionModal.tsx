@@ -1,14 +1,18 @@
 "use client";
 
 import {
+  UpdateTaskDescriptionForm,
+  UpdateTaskDescriptionFormSubmitButton,
+} from "../UpdateTaskDescriptionForm";
+
+import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
-import { UpdateTaskDescriptionForm } from "../UpdateTaskDescriptionForm";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UpdateTaskDescriptionModalProps {
@@ -33,12 +37,15 @@ export function UpdateTaskDescriptionModal({
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <UpdateTaskDescriptionForm
             taskId={taskId}
             description={taskDescription}
           />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <UpdateTaskDescriptionFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

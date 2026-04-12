@@ -1,4 +1,9 @@
 import {
+  UpdateCustomerCompanyForm,
+  UpdateCustomerCompanyFormSkeleton,
+} from "../UpdateCustomerCompanyForm";
+
+import {
   withOpenModal,
   withModalManagerProvider,
 } from "@/components/common/ModalManagerContext/__stories__";
@@ -6,7 +11,6 @@ import {
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedCustomerDetail } from "@/mocks/customers";
 import { mockedCompanySummaries } from "@/mocks/companies";
-import { UpdateCustomerCompanyForm } from "../UpdateCustomerCompanyForm";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UpdateCustomerCompanyModal } from "./UpdateCustomerCompanyModal";
 import { withUpdateCustomerCompanyProvider } from "../UpdateCustomerCompanyProvider/__stories__";
@@ -38,5 +42,11 @@ export const Default = {
         companySelectItems={mockedCompanySummaries}
       />
     ),
+  },
+} satisfies Story;
+
+export const Skeleton = {
+  args: {
+    updateCustomerCompanyFormContainer: <UpdateCustomerCompanyFormSkeleton />,
   },
 } satisfies Story;

@@ -1,13 +1,17 @@
 "use client";
 
 import {
+  CreateTaskCategoryForm,
+  CreateTaskCategoryFormSubmitButton,
+} from "../CreateTaskCategoryForm";
+
+import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { CreateTaskCategoryForm } from "../CreateTaskCategoryForm";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
@@ -24,9 +28,12 @@ export function CreateTaskCategoryModal() {
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <CreateTaskCategoryForm />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <CreateTaskCategoryFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

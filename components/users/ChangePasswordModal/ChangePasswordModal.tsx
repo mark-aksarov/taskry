@@ -1,13 +1,17 @@
 "use client";
 
 import {
+  ChangePasswordForm,
+  ChangePasswordFormSubmitButton,
+} from "../ChangePasswordForm";
+
+import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { ChangePasswordForm } from "../ChangePasswordForm";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
@@ -29,9 +33,12 @@ export function ChangePasswordModal({ userId }: ChangePasswordModalProps) {
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <ChangePasswordForm userId={userId} />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <ChangePasswordFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

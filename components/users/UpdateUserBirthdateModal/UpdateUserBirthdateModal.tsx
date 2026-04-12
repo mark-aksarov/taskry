@@ -1,13 +1,17 @@
 "use client";
 
 import {
+  UpdateUserBirthdateForm,
+  UpdateUserBirthdateFormSubmitButton,
+} from "../UpdateUserBirthdateForm";
+
+import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { UpdateUserBirthdateForm } from "../UpdateUserBirthdateForm";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
@@ -33,9 +37,12 @@ export function UpdateUserBirthdateModal({
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <UpdateUserBirthdateForm userId={userId} birthdate={userBirthdate} />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <UpdateUserBirthdateFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

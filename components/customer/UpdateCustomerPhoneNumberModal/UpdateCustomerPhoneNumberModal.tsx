@@ -3,12 +3,16 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
+import {
+  UpdateCustomerPhoneNumberForm,
+  UpdateCustomerPhoneNumberFormSubmitButton,
+} from "../UpdateCustomerPhoneNumberForm";
+
 import { useTranslations } from "next-intl";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
-import { UpdateCustomerPhoneNumberForm } from "../UpdateCustomerPhoneNumberForm";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UpdateCustomerPhoneNumberModalProps {
@@ -33,12 +37,15 @@ export function UpdateCustomerPhoneNumberModal({
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <UpdateCustomerPhoneNumberForm
             customerId={customerId}
             phoneNumber={customerPhoneNumber}
           />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <UpdateCustomerPhoneNumberFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

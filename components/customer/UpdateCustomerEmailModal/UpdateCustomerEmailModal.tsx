@@ -1,13 +1,17 @@
 "use client";
 
 import {
+  UpdateCustomerEmailForm,
+  UpdateCustomerEmailFormSubmitButton,
+} from "../UpdateCustomerEmailForm";
+
+import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { UpdateCustomerEmailForm } from "../UpdateCustomerEmailForm";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
@@ -33,12 +37,15 @@ export function UpdateCustomerEmailModal({
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <UpdateCustomerEmailForm
             customerId={customerId}
             email={customerEmail}
           />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <UpdateCustomerEmailFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

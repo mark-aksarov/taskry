@@ -3,11 +3,15 @@
 import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
+import {
+  UpdateCustomerPublicLinkForm,
+  UpdateCustomerPublicLinkFormSubmitButton,
+} from "../UpdateCustomerPublicLinkForm";
+
 import { useTranslations } from "next-intl";
-import { UpdateCustomerPublicLinkForm } from "../UpdateCustomerPublicLinkForm";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
@@ -33,12 +37,15 @@ export function UpdateCustomerPublicLinkModal({
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <UpdateCustomerPublicLinkForm
             customerId={customerId}
             publicLink={customerPublicLink}
           />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <UpdateCustomerPublicLinkFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

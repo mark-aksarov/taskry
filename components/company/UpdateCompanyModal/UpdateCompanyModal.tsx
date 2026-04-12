@@ -1,15 +1,19 @@
 "use client";
 
 import {
+  UpdateCompanyForm,
+  UpdateCompanyFormSubmitButton,
+} from "../UpdateCompanyForm";
+
+import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { UpdateCompanyForm } from "../UpdateCompanyForm";
-import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UpdateCompanyModalProps {
   companyId: number;
@@ -32,12 +36,15 @@ export function UpdateCompanyModal({
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <UpdateCompanyForm
             companyId={companyId}
             nameDefaultValue={companyName}
           />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <UpdateCompanyFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

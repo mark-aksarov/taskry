@@ -5,14 +5,12 @@ import {
   useProjectFiltersFormDispatch,
 } from "../ProjectFiltersForm";
 
-import {
-  FormBaseModal,
-  FormBaseModalDialogBody,
-} from "@/components/common/FormBaseModal";
-
 import { useTranslations } from "next-intl";
 import { useProjectFilters } from "../ProjectFiltersContext";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
+import { FormBaseModal } from "@/components/common/FormBaseModal";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { FilterModalDialog } from "@/components/common/FilterModalDialog";
 import { FilterModalDialogHeader } from "@/components/common/FilterModalDialogHeader";
 
@@ -35,9 +33,10 @@ export function ProjectCustomerFiltersModal({
       <ProjectFiltersFormProvider initialFilters={initialFilters}>
         <FilterModalDialog>
           <DialogHeader />
-          <FormBaseModalDialogBody>
-            {filtersFormContainer}
-          </FormBaseModalDialogBody>
+          <DialogBody>{filtersFormContainer}</DialogBody>
+          <DialogFooter>
+            <FiltersFormSubmitButton form="project-customer-filters-form" />
+          </DialogFooter>
         </FilterModalDialog>
       </ProjectFiltersFormProvider>
     </FormBaseModal>

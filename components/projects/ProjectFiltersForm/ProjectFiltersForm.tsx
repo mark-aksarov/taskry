@@ -1,22 +1,16 @@
 "use client";
 
 import {
-  FormBase,
-  FormBaseBody,
-  FormBaseFooter,
-} from "@/components/common/FormBase";
-
-import {
   useProjectFiltersForm,
   useProjectFiltersFormDispatch,
 } from "./ProjectFiltersFormContext";
 
 import { useSearchParams } from "next/navigation";
 import { Separator } from "@/components/ui/Separator";
+import { FormBase } from "@/components/common/FormBase";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useSelectedProjects } from "../SelectedProjectsContext";
 import { useApplyFilterURL } from "@/lib/hooks/useApplyFilterURL";
-import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { ProjectStatusCheckboxGroup } from "../ProjectStatusCheckboxGroup";
 import { ProjectCreatorCheckboxGroup } from "../ProjectCreatorCheckboxGroup";
 import { NoActiveTasksSwitch } from "@/components/tasks/NoActiveTasksSwitch";
@@ -95,68 +89,62 @@ export function ProjectFiltersForm({
 
   return (
     <FormBase id="project-filters-form" onSubmit={handleSubmit}>
-      <FormBaseBody>
-        <NoActiveTasksSwitch
-          isSelected={noActiveTasks}
-          onChange={(value) =>
-            dispatch({ type: "changeNoActiveTasks", payload: value })
-          }
-        />
-        <Separator />
+      <NoActiveTasksSwitch
+        isSelected={noActiveTasks}
+        onChange={(value) =>
+          dispatch({ type: "changeNoActiveTasks", payload: value })
+        }
+      />
+      <Separator />
 
-        <DeadlineFromDatePicker
-          value={deadlineFrom}
-          onChange={(value) =>
-            dispatch({ type: "changeDeadlineFrom", payload: value })
-          }
-        />
-        <DeadlineToDatePicker
-          deadlineFromValue={deadlineFrom}
-          value={deadlineTo}
-          onChange={(value) =>
-            dispatch({ type: "changeDeadlineTo", payload: value })
-          }
-        />
-        <Separator />
+      <DeadlineFromDatePicker
+        value={deadlineFrom}
+        onChange={(value) =>
+          dispatch({ type: "changeDeadlineFrom", payload: value })
+        }
+      />
+      <DeadlineToDatePicker
+        deadlineFromValue={deadlineFrom}
+        value={deadlineTo}
+        onChange={(value) =>
+          dispatch({ type: "changeDeadlineTo", payload: value })
+        }
+      />
+      <Separator />
 
-        <ProjectStatusCheckboxGroup
-          value={statuses}
-          onChange={(value) =>
-            dispatch({ type: "setStatuses", payload: value as ProjectStatus[] })
-          }
-        />
-        <Separator />
+      <ProjectStatusCheckboxGroup
+        value={statuses}
+        onChange={(value) =>
+          dispatch({ type: "setStatuses", payload: value as ProjectStatus[] })
+        }
+      />
+      <Separator />
 
-        <ProjectCategoryCheckboxGroup
-          items={categoryCheckboxGroupItems}
-          value={categoryIds}
-          onChange={(value) =>
-            dispatch({ type: "setCategoryIds", payload: value })
-          }
-        />
-        <Separator />
+      <ProjectCategoryCheckboxGroup
+        items={categoryCheckboxGroupItems}
+        value={categoryIds}
+        onChange={(value) =>
+          dispatch({ type: "setCategoryIds", payload: value })
+        }
+      />
+      <Separator />
 
-        <CustomerCheckboxGroup
-          items={customerCheckboxGroupItems}
-          value={customerIds}
-          onChange={(value) =>
-            dispatch({ type: "setCustomerIds", payload: value })
-          }
-        />
-        <Separator />
+      <CustomerCheckboxGroup
+        items={customerCheckboxGroupItems}
+        value={customerIds}
+        onChange={(value) =>
+          dispatch({ type: "setCustomerIds", payload: value })
+        }
+      />
+      <Separator />
 
-        <ProjectCreatorCheckboxGroup
-          items={userCheckboxGroupItems}
-          value={creatorIds}
-          onChange={(value) =>
-            dispatch({ type: "setCreatorIds", payload: value })
-          }
-        />
-      </FormBaseBody>
-
-      <FormBaseFooter>
-        <FiltersFormSubmitButton />
-      </FormBaseFooter>
+      <ProjectCreatorCheckboxGroup
+        items={userCheckboxGroupItems}
+        value={creatorIds}
+        onChange={(value) =>
+          dispatch({ type: "setCreatorIds", payload: value })
+        }
+      />
     </FormBase>
   );
 }

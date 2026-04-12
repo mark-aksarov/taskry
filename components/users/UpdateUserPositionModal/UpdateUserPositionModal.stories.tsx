@@ -1,4 +1,9 @@
 import {
+  UpdateUserPositionForm,
+  UpdateUserPositionFormSkeleton,
+} from "../UpdateUserPositionForm";
+
+import {
   withOpenModal,
   withModalManagerProvider,
 } from "@/components/common/ModalManagerContext/__stories__";
@@ -6,7 +11,6 @@ import {
 import { mockedUserDetail } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedPositionSummaries } from "@/mocks/positions";
-import { UpdateUserPositionForm } from "../UpdateUserPositionForm";
 import { UpdateUserPositionModal } from "../UpdateUserPositionModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateUserPositionProvider } from "../UpdateUserPositionProvider/__stories__";
@@ -38,5 +42,11 @@ export const Default = {
         positionSelectItems={mockedPositionSummaries}
       />
     ),
+  },
+} satisfies Story;
+
+export const Skeleton = {
+  args: {
+    updateUserPositionFormContainer: <UpdateUserPositionFormSkeleton />,
   },
 } satisfies Story;

@@ -1,14 +1,18 @@
 "use client";
 
 import {
+  UpdateTaskStatusForm,
+  UpdateTaskStatusFormSubmitButton,
+} from "../UpdateTaskStatusForm";
+
+import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { UpdateTaskStatusForm } from "../UpdateTaskStatusForm";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
@@ -34,9 +38,12 @@ export function UpdateTaskStatusModal({
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <UpdateTaskStatusForm taskId={taskId} status={taskStatus} />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <UpdateTaskStatusFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

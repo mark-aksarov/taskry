@@ -1,14 +1,18 @@
 "use client";
 
 import {
+  UpdateUserPhoneNumberForm,
+  UpdateUserPhoneNumberFormSubmitButton,
+} from "../UpdateUserPhoneNumberForm";
+
+import {
   FormBaseModal,
   FormBaseModalDialog,
-  FormBaseModalDialogBody,
 } from "@/components/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
-import { UpdateUserPhoneNumberForm } from "../UpdateUserPhoneNumberForm";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface UpdateUserPhoneNumberModalProps {
@@ -33,12 +37,15 @@ export function UpdateUserPhoneNumberModal({
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
-        <FormBaseModalDialogBody>
+        <DialogBody>
           <UpdateUserPhoneNumberForm
             userId={userId}
             phoneNumber={userPhoneNumber}
           />
-        </FormBaseModalDialogBody>
+        </DialogBody>
+        <DialogFooter>
+          <UpdateUserPhoneNumberFormSubmitButton />
+        </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>
   );

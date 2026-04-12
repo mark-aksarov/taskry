@@ -1,11 +1,15 @@
 import {
+  TaskProjectFiltersForm,
+  TaskProjectFiltersFormSkeleton,
+} from "../TaskProjectFiltersForm";
+
+import {
   withOpenModal,
   withModalManagerProvider,
 } from "@/components/common/ModalManagerContext/__stories__";
 
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedProjectSummaries } from "@/mocks/projects";
-import { TaskProjectFiltersForm } from "../TaskProjectFiltersForm";
 import { TaskProjectFiltersModal } from "./TaskProjectFiltersModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withTaskFiltersProvider } from "../TaskFiltersContext/__stories__";
@@ -38,5 +42,11 @@ export const Default = {
         projectCheckboxGroupItems={mockedProjectSummaries}
       />
     ),
+  },
+} satisfies Story;
+
+export const Skeleton = {
+  args: {
+    filtersFormContainer: <TaskProjectFiltersFormSkeleton />,
   },
 } satisfies Story;

@@ -1,11 +1,15 @@
 import {
+  CustomerFiltersForm,
+  CustomerFiltersFormSkeleton,
+} from "../CustomerFiltersForm";
+
+import {
   withOpenModal,
   withModalManagerProvider,
 } from "@/components/common/ModalManagerContext/__stories__";
 
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedCompanySummaries } from "@/mocks/companies";
-import { CustomerFiltersForm } from "../CustomerFiltersForm";
 import { CustomerFiltersModal } from "./CustomerFiltersModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCustomerFiltersProvider } from "../CustomerFiltersContext/__stories__";
@@ -37,5 +41,11 @@ export const Default = {
     filtersFormContainer: (
       <CustomerFiltersForm companyCheckboxGroupItems={mockedCompanySummaries} />
     ),
+  },
+} satisfies Story;
+
+export const Skeleton = {
+  args: {
+    filtersFormContainer: <CustomerFiltersFormSkeleton />,
   },
 } satisfies Story;

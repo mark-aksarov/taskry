@@ -1,22 +1,16 @@
 "use client";
 
 import {
-  FormBase,
-  FormBaseBody,
-  FormBaseFooter,
-} from "@/components/common/FormBase";
-
-import {
   useUserFiltersForm,
   useUserFiltersFormDispatch,
 } from "./UserFiltersFormContext";
 
 import { useSearchParams } from "next/navigation";
 import { Separator } from "@/components/ui/Separator";
+import { FormBase } from "@/components/common/FormBase";
 import { PositionCheckboxGroup } from "../PositionCheckboxGroup";
 import { useApplyFilterURL } from "@/lib/hooks/useApplyFilterURL";
 import { ActiveTasksSwitch } from "@/components/tasks/ActiveTasksSwitch";
-import { FiltersFormSubmitButton } from "@/components/common/FiltersForm";
 import { OverdueTasksSwitch } from "@/components/tasks/OverdueTasksSwitch";
 import { NoActiveTasksSwitch } from "@/components/tasks/NoActiveTasksSwitch";
 import { useFilterSubmitSideEffects } from "@/lib/hooks/useFilterSubmitSideEffects";
@@ -69,43 +63,38 @@ export function UserFiltersForm({ positionCheckboxGroupItems }: Props) {
   };
 
   return (
-    <FormBase id="user-filter-form" onSubmit={handleSubmit}>
-      <FormBaseBody>
-        <NoActiveTasksSwitch
-          isSelected={hasNoActiveTasks}
-          onChange={(value) =>
-            dispatch({ type: "changeHasNoActiveTasks", payload: value })
-          }
-        />
-        <Separator />
+    <FormBase id="user-filters-form" onSubmit={handleSubmit}>
+      <NoActiveTasksSwitch
+        isSelected={hasNoActiveTasks}
+        onChange={(value) =>
+          dispatch({ type: "changeHasNoActiveTasks", payload: value })
+        }
+      />
+      <Separator />
 
-        <ActiveTasksSwitch
-          isSelected={hasActiveTasks}
-          onChange={(value) =>
-            dispatch({ type: "changeHasActiveTasks", payload: value })
-          }
-        />
-        <Separator />
+      <ActiveTasksSwitch
+        isSelected={hasActiveTasks}
+        onChange={(value) =>
+          dispatch({ type: "changeHasActiveTasks", payload: value })
+        }
+      />
+      <Separator />
 
-        <OverdueTasksSwitch
-          isSelected={hasOverdueTasks}
-          onChange={(value) =>
-            dispatch({ type: "changeHasOverdueTasks", payload: value })
-          }
-        />
-        <Separator />
+      <OverdueTasksSwitch
+        isSelected={hasOverdueTasks}
+        onChange={(value) =>
+          dispatch({ type: "changeHasOverdueTasks", payload: value })
+        }
+      />
+      <Separator />
 
-        <PositionCheckboxGroup
-          items={positionCheckboxGroupItems}
-          value={positionIds}
-          onChange={(value) =>
-            dispatch({ type: "setPositionIds", payload: value })
-          }
-        />
-      </FormBaseBody>
-      <FormBaseFooter>
-        <FiltersFormSubmitButton />
-      </FormBaseFooter>
+      <PositionCheckboxGroup
+        items={positionCheckboxGroupItems}
+        value={positionIds}
+        onChange={(value) =>
+          dispatch({ type: "setPositionIds", payload: value })
+        }
+      />
     </FormBase>
   );
 }
