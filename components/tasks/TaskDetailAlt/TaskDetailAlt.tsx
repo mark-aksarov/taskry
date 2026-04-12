@@ -2,7 +2,6 @@ import {
   DetailText,
   DetailTitle,
   DetailInfoAlt,
-  DetailEditButton,
 } from "@/components/common/Detail";
 
 import { useTranslations } from "next-intl";
@@ -74,7 +73,6 @@ export function TaskDetailAlt({
               <DetailText>{t("noCreator")}</DetailText>
             )
           }
-          editButton={<DetailEditButton />}
         />
       }
     />
