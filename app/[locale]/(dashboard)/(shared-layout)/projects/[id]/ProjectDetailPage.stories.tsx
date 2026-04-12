@@ -13,6 +13,7 @@ import { withDeleteProjectProvider } from "@/components/projects/DeleteProjectPr
 import { withUpdateProjectProvider } from "@/components/projects/UpdateProjectProvider/__stories__";
 import { withUpdateProjectTitleProvider } from "@/components/projects/UpdateProjectTitleProvider/__stories__";
 import { withUpdateProjectStatusProvider } from "@/components/projects/UpdateProjectStatusProvider/__stories__";
+import { withUpdateProjectDeadlineProvider } from "@/components/projects/UpdateProjectDeadlineProvider/__stories__";
 import { withUpdateProjectStatusAltProvider } from "@/components/projects/UpdateProjectStatusAltProvider/__stories__";
 import { withUpdateProjectDescriptionProvider } from "@/components/projects/UpdateProjectDescriptionProvider/__stories__";
 import { withUpdateProjectCategoryRelProvider } from "@/components/projects/UpdateProjectCategoryRelProvider/__stories__";
@@ -23,6 +24,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     withTaskSearchModal,
+    withUpdateProjectDeadlineProvider,
     withUpdateProjectCategoryRelProvider,
     withUpdateProjectStatusAltProvider,
     withUpdateProjectTitleProvider,

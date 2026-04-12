@@ -241,5 +241,11 @@
   },
   "UpdateProjectCategoryRelModal": {
     "title": "Edit category"
+  },
+  "UpdateProjectDeadlineForm": {
+    "submitButtonLabel": "Update deadline"
+  },
+  "UpdateProjectDeadlineModal": {
+    "title": "Edit deadline"
   }
 }

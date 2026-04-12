@@ -5,12 +5,13 @@ import {
   DetailEditButton,
 } from "@/components/common/Detail";
 
+import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailAltLayout } from "./ProjectDetailAltLayout";
 import { ProjectTitleDetailInfoAlt } from "./ProjectTitleDetailInfoAlt";
 import { ProjectStatusDetailInfoAlt } from "./ProjectStatusDetailInfoAlt";
 import { ProjectCategoryDetailInfoAlt } from "./ProjectCategoryDetailInfoAlt";
+import { ProjectDeadlineDetailInfoAlt } from "./ProjectDeadlineDetailInfoAlt";
 import { ProjectDescriptionDetailInfoAlt } from "./ProjectDescriptionDetailInfoAlt";
 
 interface ProjectDetailAltProps {
@@ -45,14 +46,6 @@ export function ProjectDetailAlt({
 }: ProjectDetailAltProps) {
   const t = useTranslations("projects.ProjectDetail");
 
-  const format = useFormatter();
-
-  const formattedDeadline = format.dateTime(new Date(deadline), {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  });
-
   return (
     <ProjectDetailAltLayout
       titleSlot={<ProjectTitleDetailInfoAlt title={title} />}
@@ -60,13 +53,7 @@ export function ProjectDetailAlt({
         <ProjectDescriptionDetailInfoAlt description={description} />
       }
       statusSlot={<ProjectStatusDetailInfoAlt status={status} />}
-      deadlineSlot={
-        <DetailInfoAlt
-          title={<DetailTitle>{t("deadline")}</DetailTitle>}
-          text={<DetailText>{formattedDeadline}</DetailText>}
-          editButton={<DetailEditButton />}
-        />
-      }
+      deadlineSlot={<ProjectDeadlineDetailInfoAlt deadline={deadline} />}
       customerSlot={
         <DetailInfoAlt
           title={<DetailTitle>{t("customer")}</DetailTitle>}

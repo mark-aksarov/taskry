@@ -241,5 +241,11 @@
   },
   "UpdateProjectCategoryRelModal": {
     "title": "Изменить категорию"
+  },
+  "UpdateProjectDeadlineForm": {
+    "submitButtonLabel": "Обновить срок выполнения"
+  },
+  "UpdateProjectDeadlineModal": {
+    "title": "Изменить срок выполнения"
   }
 }

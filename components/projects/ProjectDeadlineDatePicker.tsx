@@ -4,10 +4,12 @@ import { ResponsiveDatePicker } from "@/components/common/ResponsiveDatePicker";
 
 interface ProjectDeadlineDatePickerProps {
   defaultValue?: DateValue;
+  matchTriggerWidth?: boolean;
 }
 
 export function ProjectDeadlineDatePicker({
   defaultValue,
+  matchTriggerWidth,
 }: ProjectDeadlineDatePickerProps) {
   const t = useTranslations("projects.ProjectDeadlineDatePicker");
 
@@ -16,7 +18,7 @@ export function ProjectDeadlineDatePicker({
       data-test="project-deadline-date-picker"
       name="deadline"
       label={t("label")}
-      overlayClassName="w-[var(--trigger-width)]"
+      overlayClassName={matchTriggerWidth ? "w-[var(--trigger-width)]" : ""}
       isRequired
       errorMessage={t("validation.required")}
       defaultValue={defaultValue}
