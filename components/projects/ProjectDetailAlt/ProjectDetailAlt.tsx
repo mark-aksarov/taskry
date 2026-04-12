@@ -9,6 +9,7 @@ import { ProjectStatus } from "@/generated/prisma/enums";
 import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailAltLayout } from "./ProjectDetailAltLayout";
 import { ProjectTitleDetailInfoAlt } from "./ProjectTitleDetailInfoAlt";
+import { ProjectStatusDetailInfoAlt } from "./ProjectStatusDetailInfoAlt";
 import { ProjectDescriptionDetailInfoAlt } from "./ProjectDescriptionDetailInfoAlt";
 
 interface ProjectDetailAltProps {
@@ -41,7 +42,6 @@ export function ProjectDetailAlt({
   category,
   status,
 }: ProjectDetailAltProps) {
-  const tStatus = useTranslations("projects.ProjectStatus");
   const t = useTranslations("projects.ProjectDetail");
 
   const format = useFormatter();
@@ -58,13 +58,7 @@ export function ProjectDetailAlt({
       descriptionSlot={
         <ProjectDescriptionDetailInfoAlt description={description} />
       }
-      statusSlot={
-        <DetailInfoAlt
-          title={<DetailTitle>{t("status")}</DetailTitle>}
-          text={<DetailText>{tStatus(status)}</DetailText>}
-          editButton={<DetailEditButton />}
-        />
-      }
+      statusSlot={<ProjectStatusDetailInfoAlt status={status} />}
       deadlineSlot={
         <DetailInfoAlt
           title={<DetailTitle>{t("deadline")}</DetailTitle>}

@@ -229,5 +229,11 @@
   },
   "UpdateProjectTitleModal": {
     "title": "Edit title"
+  },
+  "UpdateProjectStatusForm": {
+    "submitButtonLabel": "Update status"
+  },
+  "UpdateProjectStatusModal": {
+    "title": "Edit status"
   }
 }

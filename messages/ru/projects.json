@@ -229,5 +229,11 @@
   },
   "UpdateProjectTitleModal": {
     "title": "Изменить заголовок"
+  },
+  "UpdateProjectStatusForm": {
+    "submitButtonLabel": "Обновить cтатус"
+  },
+  "UpdateProjectStatusModal": {
+    "title": "Изменить статус"
   }
 }

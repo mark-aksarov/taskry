@@ -6,14 +6,16 @@ import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { DeleteProjectProvider } from "@/components/projects/DeleteProjectProvider";
+import { UpdateProjectTitleModal } from "@/components/projects/UpdateProjectTitleModal";
+import { UpdateProjectStatusModal } from "@/components/projects/UpdateProjectStatusModal";
 import { DeleteProjectDetailModal } from "@/components/projects/DeleteProjectDetailModal";
 import { ProjectDetailAltContainer } from "@/components/projects/ProjectDetailAltContainer";
+import { UpdateProjectTitleProvider } from "@/components/projects/UpdateProjectTitleProvider";
 import { UpdateProjectStatusProvider } from "@/components/projects/UpdateProjectStatusProvider";
 import { ProjectDetailHeaderContainer } from "@/components/projects/ProjectDetailHeaderContainer";
-import { UpdateProjectDescriptionProvider } from "@/components/projects/UpdateProjectDescriptionProvider";
 import { UpdateProjectDescriptionModal } from "@/components/projects/UpdateProjectDescriptionModal";
-import { UpdateProjectTitleProvider } from "@/components/projects/UpdateProjectTitleProvider";
-import { UpdateProjectTitleModal } from "@/components/projects/UpdateProjectTitleModal";
+import { UpdateProjectStatusAltProvider } from "@/components/projects/UpdateProjectStatusAltProvider";
+import { UpdateProjectDescriptionProvider } from "@/components/projects/UpdateProjectDescriptionProvider";
 
 export default async function AppProjectDetailPage({
   params,
@@ -43,33 +45,40 @@ export default async function AppProjectDetailPage({
       <UpdateProjectStatusProvider>
         <UpdateProjectDescriptionProvider>
           <UpdateProjectTitleProvider>
-            <ProjectDetailPage
-              projectDetailContainer={
-                <ProjectDetailAltContainer projectId={id} />
-              }
-              projectHeaderContainer={
-                <ProjectDetailHeaderContainer projectId={id} />
-              }
-            />
+            <UpdateProjectStatusAltProvider>
+              <ProjectDetailPage
+                projectDetailContainer={
+                  <ProjectDetailAltContainer projectId={id} />
+                }
+                projectHeaderContainer={
+                  <ProjectDetailHeaderContainer projectId={id} />
+                }
+              />
 
-            <DeleteProjectDetailModal
-              projectId={projectFormData.id}
-              projectTitle={projectFormData.title}
-            />
+              <DeleteProjectDetailModal
+                projectId={projectFormData.id}
+                projectTitle={projectFormData.title}
+              />
 
-            <UpdateProjectDescriptionModal
-              projectId={projectFormData.id}
-              description={projectFormData.description}
-            />
+              <UpdateProjectDescriptionModal
+                projectId={projectFormData.id}
+                description={projectFormData.description}
+              />
 
-            <UpdateProjectTitleModal
-              projectId={projectFormData.id}
-              title={projectFormData.title}
-            />
+              <UpdateProjectTitleModal
+                projectId={projectFormData.id}
+                title={projectFormData.title}
+              />
 
-            <TaskSearchModal
-              searchContainer={<LinkSearchContainer pathname="/tasks" />}
-            />
+              <UpdateProjectStatusModal
+                projectId={projectFormData.id}
+                projectStatus={projectFormData.status}
+              />
+
+              <TaskSearchModal
+                searchContainer={<LinkSearchContainer pathname="/tasks" />}
+              />
+            </UpdateProjectStatusAltProvider>
           </UpdateProjectTitleProvider>
         </UpdateProjectDescriptionProvider>
       </UpdateProjectStatusProvider>
