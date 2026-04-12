@@ -11,6 +11,7 @@ import { ProjectDetailHeader } from "@/components/projects/ProjectDetailHeader";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
 import { withDeleteProjectProvider } from "@/components/projects/DeleteProjectProvider/__stories__";
 import { withUpdateProjectProvider } from "@/components/projects/UpdateProjectProvider/__stories__";
+import { withUpdateProjectTitleProvider } from "@/components/projects/UpdateProjectTitleProvider/__stories__";
 import { withUpdateProjectStatusProvider } from "@/components/projects/UpdateProjectStatusProvider/__stories__";
 import { withUpdateProjectDescriptionProvider } from "@/components/projects/UpdateProjectDescriptionProvider/__stories__";
 
@@ -20,6 +21,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     withTaskSearchModal,
+    withUpdateProjectTitleProvider,
     withUpdateProjectDescriptionProvider,
     withUpdateProjectStatusProvider,
     withDeleteProjectProvider,

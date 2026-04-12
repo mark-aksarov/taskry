@@ -12,6 +12,8 @@ import { UpdateProjectStatusProvider } from "@/components/projects/UpdateProject
 import { ProjectDetailHeaderContainer } from "@/components/projects/ProjectDetailHeaderContainer";
 import { UpdateProjectDescriptionProvider } from "@/components/projects/UpdateProjectDescriptionProvider";
 import { UpdateProjectDescriptionModal } from "@/components/projects/UpdateProjectDescriptionModal";
+import { UpdateProjectTitleProvider } from "@/components/projects/UpdateProjectTitleProvider";
+import { UpdateProjectTitleModal } from "@/components/projects/UpdateProjectTitleModal";
 
 export default async function AppProjectDetailPage({
   params,
@@ -40,28 +42,35 @@ export default async function AppProjectDetailPage({
     <DeleteProjectProvider>
       <UpdateProjectStatusProvider>
         <UpdateProjectDescriptionProvider>
-          <ProjectDetailPage
-            projectDetailContainer={
-              <ProjectDetailAltContainer projectId={id} />
-            }
-            projectHeaderContainer={
-              <ProjectDetailHeaderContainer projectId={id} />
-            }
-          />
+          <UpdateProjectTitleProvider>
+            <ProjectDetailPage
+              projectDetailContainer={
+                <ProjectDetailAltContainer projectId={id} />
+              }
+              projectHeaderContainer={
+                <ProjectDetailHeaderContainer projectId={id} />
+              }
+            />
 
-          <DeleteProjectDetailModal
-            projectId={projectFormData.id}
-            projectTitle={projectFormData.title}
-          />
+            <DeleteProjectDetailModal
+              projectId={projectFormData.id}
+              projectTitle={projectFormData.title}
+            />
 
-          <UpdateProjectDescriptionModal
-            projectId={projectFormData.id}
-            description={projectFormData.description}
-          />
+            <UpdateProjectDescriptionModal
+              projectId={projectFormData.id}
+              description={projectFormData.description}
+            />
 
-          <TaskSearchModal
-            searchContainer={<LinkSearchContainer pathname="/tasks" />}
-          />
+            <UpdateProjectTitleModal
+              projectId={projectFormData.id}
+              title={projectFormData.title}
+            />
+
+            <TaskSearchModal
+              searchContainer={<LinkSearchContainer pathname="/tasks" />}
+            />
+          </UpdateProjectTitleProvider>
         </UpdateProjectDescriptionProvider>
       </UpdateProjectStatusProvider>
     </DeleteProjectProvider>
