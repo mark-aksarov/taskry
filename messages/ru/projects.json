@@ -247,5 +247,11 @@
   },
   "UpdateProjectDeadlineModal": {
     "title": "Изменить срок выполнения"
+  },
+  "UpdateProjectCustomerForm": {
+    "submitButtonLabel": "Обновить клиента"
+  },
+  "UpdateProjectCustomerModal": {
+    "title": "Изменить клиента"
   }
 }

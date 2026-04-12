@@ -247,5 +247,11 @@
   },
   "UpdateProjectDeadlineModal": {
     "title": "Edit deadline"
+  },
+  "UpdateProjectCustomerForm": {
+    "submitButtonLabel": "Update customer"
+  },
+  "UpdateProjectCustomerModal": {
+    "title": "Edit customer"
   }
 }

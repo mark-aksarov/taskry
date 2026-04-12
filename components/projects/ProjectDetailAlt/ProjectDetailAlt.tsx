@@ -2,7 +2,6 @@ import {
   DetailText,
   DetailTitle,
   DetailInfoAlt,
-  DetailEditButton,
 } from "@/components/common/Detail";
 
 import { useTranslations } from "next-intl";
@@ -12,6 +11,7 @@ import { ProjectTitleDetailInfoAlt } from "./ProjectTitleDetailInfoAlt";
 import { ProjectStatusDetailInfoAlt } from "./ProjectStatusDetailInfoAlt";
 import { ProjectCategoryDetailInfoAlt } from "./ProjectCategoryDetailInfoAlt";
 import { ProjectDeadlineDetailInfoAlt } from "./ProjectDeadlineDetailInfoAlt";
+import { ProjectCustomerDetailInfoAlt } from "./ProjectCustomerDetailInfoAlt";
 import { ProjectDescriptionDetailInfoAlt } from "./ProjectDescriptionDetailInfoAlt";
 
 interface ProjectDetailAltProps {
@@ -54,19 +54,7 @@ export function ProjectDetailAlt({
       }
       statusSlot={<ProjectStatusDetailInfoAlt status={status} />}
       deadlineSlot={<ProjectDeadlineDetailInfoAlt deadline={deadline} />}
-      customerSlot={
-        <DetailInfoAlt
-          title={<DetailTitle>{t("customer")}</DetailTitle>}
-          text={
-            customer ? (
-              <DetailText>{customer.fullName}</DetailText>
-            ) : (
-              <DetailText>{t("noCustomer")}</DetailText>
-            )
-          }
-          editButton={<DetailEditButton />}
-        />
-      }
+      customerSlot={<ProjectCustomerDetailInfoAlt customer={customer} />}
       categorySlot={<ProjectCategoryDetailInfoAlt category={category} />}
       creatorSlot={
         <DetailInfoAlt
