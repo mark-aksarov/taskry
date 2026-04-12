@@ -256,5 +256,11 @@
   },
   "UpdateTaskCategoryForTaskModal": {
     "title": "Edit category"
+  },
+  "UpdateTaskProjectForm": {
+    "submitButtonLabel": "Update project"
+  },
+  "UpdateTaskProjectModal": {
+    "title": "Edit project"
   }
 }

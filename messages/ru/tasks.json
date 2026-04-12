@@ -256,5 +256,11 @@
   },
   "UpdateTaskCategoryForTaskModal": {
     "title": "Изменить категорию"
+  },
+  "UpdateTaskProjectForm": {
+    "submitButtonLabel": "Обновить проект"
+  },
+  "UpdateTaskProjectModal": {
+    "title": "Изменить проект"
   }
 }

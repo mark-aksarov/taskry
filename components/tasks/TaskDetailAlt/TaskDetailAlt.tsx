@@ -10,6 +10,7 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { TaskDetailAltLayout } from "./TaskDetailAltLayout";
 import { TaskTitleDetailInfoAlt } from "./TaskTitleDetailInfoAlt";
 import { TaskStatusDetailInfoAlt } from "./TaskStatusDetailInfoAlt";
+import { TaskProjectDetailInfoAlt } from "./TaskProjectDetailInfoAlt";
 import { TaskDeadlineDetailInfoAlt } from "./TaskDeadlineDetailInfoAlt";
 import { TaskAssigneeDetailInfoAlt } from "./TaskAssigneeDetailInfoAlt";
 import { TaskCategoryDetailInfoAlt } from "./TaskCategoryDetailInfoAlt";
@@ -61,19 +62,7 @@ export function TaskDetailAlt({
       deadlineSlot={<TaskDeadlineDetailInfoAlt deadline={deadline} />}
       statusSlot={<TaskStatusDetailInfoAlt status={status} />}
       categoryNameSlot={<TaskCategoryDetailInfoAlt category={category} />}
-      projectTitleSlot={
-        <DetailInfoAlt
-          title={<DetailTitle>{t("project")}</DetailTitle>}
-          text={
-            project ? (
-              <DetailText>{project.title}</DetailText>
-            ) : (
-              <DetailText>{t("noProject")}</DetailText>
-            )
-          }
-          editButton={<DetailEditButton />}
-        />
-      }
+      projectTitleSlot={<TaskProjectDetailInfoAlt project={project} />}
       creatorSlot={
         <DetailInfoAlt
           className="border-none pb-0"

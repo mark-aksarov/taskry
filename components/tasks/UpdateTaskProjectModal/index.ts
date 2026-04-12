@@ -1,0 +1,1 @@
+export { UpdateTaskProjectModal } from "./UpdateTaskProjectModal";
