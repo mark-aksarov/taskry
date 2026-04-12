@@ -235,5 +235,11 @@
   },
   "UpdateProjectStatusModal": {
     "title": "Edit status"
+  },
+  "UpdateProjectCategoryRelForm": {
+    "submitButtonLabel": "Update category"
+  },
+  "UpdateProjectCategoryRelModal": {
+    "title": "Edit category"
   }
 }

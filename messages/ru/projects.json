@@ -235,5 +235,11 @@
   },
   "UpdateProjectStatusModal": {
     "title": "Изменить статус"
+  },
+  "UpdateProjectCategoryRelForm": {
+    "submitButtonLabel": "Обновить категорию"
+  },
+  "UpdateProjectCategoryRelModal": {
+    "title": "Изменить категорию"
   }
 }

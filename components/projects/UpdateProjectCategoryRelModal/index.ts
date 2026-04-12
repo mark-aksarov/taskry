@@ -1,0 +1,1 @@
+export { UpdateProjectCategoryRelModal } from "./UpdateProjectCategoryRelModal";

@@ -10,6 +10,7 @@ import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailAltLayout } from "./ProjectDetailAltLayout";
 import { ProjectTitleDetailInfoAlt } from "./ProjectTitleDetailInfoAlt";
 import { ProjectStatusDetailInfoAlt } from "./ProjectStatusDetailInfoAlt";
+import { ProjectCategoryDetailInfoAlt } from "./ProjectCategoryDetailInfoAlt";
 import { ProjectDescriptionDetailInfoAlt } from "./ProjectDescriptionDetailInfoAlt";
 
 interface ProjectDetailAltProps {
@@ -79,17 +80,7 @@ export function ProjectDetailAlt({
           editButton={<DetailEditButton />}
         />
       }
-      categorySlot={
-        <DetailInfoAlt
-          title={<DetailTitle>{t("category")}</DetailTitle>}
-          text={
-            <DetailText>
-              {category ? category.name : t("noCategory")}
-            </DetailText>
-          }
-          editButton={<DetailEditButton />}
-        />
-      }
+      categorySlot={<ProjectCategoryDetailInfoAlt category={category} />}
       creatorSlot={
         <DetailInfoAlt
           className="border-none pb-0"
