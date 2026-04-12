@@ -110,7 +110,6 @@ export function ProjectDetailAlt({
               <DetailText>{t("noCreator")}</DetailText>
             )
           }
-          editButton={<DetailEditButton />}
         />
       }
     />
