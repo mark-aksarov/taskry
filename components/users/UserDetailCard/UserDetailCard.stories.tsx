@@ -10,7 +10,6 @@ import { UserDetailHeaderInteractive } from "../UserDetailHeader";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteUserProvider } from "../DeleteUserProvider/__stories__";
-import { withUpdateUserProvider } from "../UpdateUserProvider/__stories__";
 import { ProfileActions, ProfileActionsSkeleton } from "../ProfileActions";
 import { withChangePasswordProvider } from "../ChangePasswordProvider/__stories__";
 import { withUpdateUserImageProvider } from "../UpdateUserImageProvider/__stories__";
@@ -18,6 +17,13 @@ import { withClearUserImageUrlProvider } from "../ClearUserImageUrlProvider/__st
 import { withUpdateUserImageFileProvider } from "../UpdateUserImageFileContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
+import { withUpdateUserBioProvider } from "@/components/users/UpdateUserBioProvider/__stories__";
+import { withUpdateUserAddressProvider } from "@/components/users/UpdateUserAddressProvider/__stories__";
+import { withUpdateUserPositionProvider } from "@/components/users/UpdateUserPositionProvider/__stories__";
+import { withUpdateUserFullNameProvider } from "@/components/users/UpdateUserFullNameProvider/__stories__";
+import { withUpdateUserBirthdateProvider } from "@/components/users/UpdateUserBirthdateProvider/__stories__";
+import { withUpdateUserPublicLinkProvider } from "@/components/users/UpdateUserPublicLinkProvider/__stories__";
+import { withUpdateUserPhoneNumberProvider } from "@/components/users/UpdateUserPhoneNumberProvider/__stories__";
 
 const meta = {
   title: "components/users/UserDetailCard",
@@ -29,7 +35,13 @@ const meta = {
     });
   },
   decorators: [
-    withUpdateUserProvider,
+    withUpdateUserPhoneNumberProvider,
+    withUpdateUserBioProvider,
+    withUpdateUserFullNameProvider,
+    withUpdateUserBirthdateProvider,
+    withUpdateUserAddressProvider,
+    withUpdateUserPublicLinkProvider,
+    withUpdateUserPositionProvider,
     withDeleteUserProvider,
     withUpdateUserImageProvider,
     withClearUserImageUrlProvider,
