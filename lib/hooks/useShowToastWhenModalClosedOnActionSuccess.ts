@@ -20,9 +20,12 @@ export function useShowToastWhenModalClosedOnActionSuccess(
       // Show success toast if:
       // The action resulted in an success
       // The modal is currently closed
-      if (state.status === "success" && state.message && !isOpen) {
-        addSuccessToast(state.message);
-      }
+      // FIXME: Temporary workaround using setTimeout to ensure toast animation triggers correctly
+      setTimeout(() => {
+        if (state.status === "success" && state.message && !isOpen) {
+          addSuccessToast(state.message);
+        }
+      });
     }
   }, [state, isOpen, addSuccessToast]);
 }

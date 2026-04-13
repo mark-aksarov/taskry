@@ -13,9 +13,12 @@ export function useShowToastOnActionError(state: ActionState) {
       prevStateRef.current = state;
 
       // Show error toast when the status is error
-      if (state.status === "error" && state.message) {
-        addErrorToast(state.message);
-      }
+      //FIXME: Temporary workaround using setTimeout to ensure toast animation triggers correctly
+      setTimeout(() => {
+        if (state.status === "error" && state.message) {
+          addErrorToast(state.message);
+        }
+      });
     }
   }, [state, addErrorToast]);
 }

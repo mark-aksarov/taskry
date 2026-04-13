@@ -13,9 +13,12 @@ export function useShowToastOnActionSuccess(state: ActionState) {
       prevStateRef.current = state;
 
       // Show success toast when the status is success
-      if (state.status === "success" && state.message) {
-        addSuccessToast(state.message);
-      }
+      //FIXME: Temporary workaround using setTimeout to ensure toast animation triggers correctly
+      setTimeout(() => {
+        if (state.status === "success" && state.message) {
+          addSuccessToast(state.message);
+        }
+      });
     }
   }, [state, addSuccessToast]);
 }
