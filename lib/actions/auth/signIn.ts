@@ -33,15 +33,20 @@ export async function signIn(
     };
   }
 
+  let signedInUser;
+
   try {
     const input = Object.fromEntries(formData.entries());
     const parsedData = schema.parse(input);
 
-    await auth.api.signInEmail({ body: parsedData });
+    const result = await auth.api.signInEmail({
+      body: parsedData,
+    });
+
+    signedInUser = result.user;
   } catch (error: unknown) {
     console.error("Sign-in Error:", error);
 
-    //Better auth error
     if (error instanceof APIError) {
       return {
         status: "error",
@@ -56,9 +61,11 @@ export async function signIn(
   }
 
   //we cannot call redirect in try/catch block
-  redirect({ href: "/", locale });
+  if (signedInUser.emailVerified) {
+    redirect({ href: "/", locale });
+  }
 
-  return {
-    status: "success",
-  };
+  redirect({ href: "/verify-email", locale });
+
+  return { status: "success" };
 }
