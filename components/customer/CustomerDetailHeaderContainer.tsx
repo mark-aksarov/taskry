@@ -2,8 +2,8 @@
 
 import useSWR from "swr";
 import { DetailHeaderSkeleton } from "../common/DetailHeader";
-import { CustomerDetailHeader } from "./CustomerDetailHeader";
 import { CustomerDetailDTO } from "@/lib/data/customer/customer.dto";
+import { CustomerDetailHeaderInteractive } from "./CustomerDetailHeader";
 
 interface CustomerDetailHeaderContainerProps {
   customerId: number;
@@ -26,7 +26,7 @@ export function CustomerDetailHeaderContainer({
   }
 
   return (
-    <CustomerDetailHeader
+    <CustomerDetailHeaderInteractive
       fullName={customer.fullName}
       imageUrl={customer.imageUrl}
       companyName={customer.company?.name}

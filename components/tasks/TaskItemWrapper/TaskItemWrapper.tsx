@@ -12,12 +12,17 @@ import { UpdateTaskFormContainer } from "../UpdateTaskFormContainer";
 import { UpdateTaskStatusProvider } from "../UpdateTaskStatusProvider";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
+import { UpdateUserImageModal } from "@/components/users/UpdateUserImageModal";
+import { DeleteUserImageModal } from "@/components/users/DeleteUserImageModal";
 import { CommentFormProvider } from "@/components/comments/CommentFormContext";
 import { ModalManagerProvider } from "@/components/common/ModalManagerContext";
 import { SendCommentProvider } from "@/components/comments/SendCommentProvider";
 import { UpdateCommentProvider } from "@/components/comments/UpdateCommentProvider";
+import { UpdateUserImageProvider } from "@/components/users/UpdateUserImageProvider";
 import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
 import { UserDetailHeaderContainer } from "@/components/users/UserDetailHeaderContainer";
+import { ClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlProvider";
+import { UpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext";
 
 interface TaskItemWrapperProps {
   task: {
@@ -65,14 +70,29 @@ export function TaskItemWrapper({ task, children }: TaskItemWrapperProps) {
                   )}
 
                   {task.assignee && (
-                    <UserDetailModal
-                      userDetailContainer={
-                        <UserDetailContainer userId={task.assignee.id} />
-                      }
-                      userDetailHeaderContainer={
-                        <UserDetailHeaderContainer userId={task.assignee.id} />
-                      }
-                    />
+                    <UpdateUserImageFileProvider>
+                      <UpdateUserImageProvider>
+                        <ClearUserImageUrlProvider userId={task.assignee.id}>
+                          <UserDetailModal
+                            userDetailContainer={
+                              <UserDetailContainer userId={task.assignee.id} />
+                            }
+                            userDetailHeaderContainer={
+                              <UserDetailHeaderContainer
+                                userId={task.assignee.id}
+                              />
+                            }
+                          />
+
+                          <UpdateUserImageModal userId={task.assignee.id} />
+
+                          <DeleteUserImageModal
+                            userId={task.assignee.id}
+                            userFullName={task.assignee.fullName}
+                          />
+                        </ClearUserImageUrlProvider>
+                      </UpdateUserImageProvider>
+                    </UpdateUserImageFileProvider>
                   )}
 
                   <TaskCommentsModal

@@ -26,6 +26,7 @@ interface UpdateImageUrlPayload<T extends TId> {
  */
 export function useUpdateImageActionState<T extends TId>(
   updateImageUrl: (payload: UpdateImageUrlPayload<T>) => Promise<ActionState>,
+  onRefreshDetail: (id: T) => Promise<any>,
 ) {
   const router = useRouter();
 
@@ -52,6 +53,7 @@ export function useUpdateImageActionState<T extends TId>(
       });
 
       if (updateImageUrlState.status === "success") {
+        await onRefreshDetail(id);
         // router.refresh is wrapped in startTransition internally
         // when success we need to refresh page to show new image
         router.refresh();

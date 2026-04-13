@@ -11,14 +11,24 @@ import { ProjectCommentsContainer } from "../ProjectCommentsContainer";
 import { UpdateProjectFormContainer } from "../UpdateProjectFormContainer";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { UpdateProjectStatusProvider } from "../UpdateProjectStatusProvider";
+import { UpdateUserImageModal } from "@/components/users/UpdateUserImageModal";
+import { DeleteUserImageModal } from "@/components/users/DeleteUserImageModal";
 import { CommentFormProvider } from "@/components/comments/CommentFormContext";
 import { ModalManagerProvider } from "@/components/common/ModalManagerContext";
 import { CustomerDetailModal } from "@/components/customer/CustomerDetailModal";
 import { SendCommentProvider } from "@/components/comments/SendCommentProvider";
 import { UpdateCommentProvider } from "@/components/comments/UpdateCommentProvider";
+import { UpdateUserImageProvider } from "@/components/users/UpdateUserImageProvider";
 import { CustomerDetailContainer } from "@/components/customer/CustomerDetailContainer";
 import { UserDetailHeaderContainer } from "@/components/users/UserDetailHeaderContainer";
+import { ClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlProvider";
+import { UpdateCustomerImageModal } from "@/components/customer/UpdateCustomerImageModal";
+import { DeleteCustomerImageModal } from "@/components/customer/DeleteCustomerImageModal";
+import { UpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext";
+import { UpdateCustomerImageProvider } from "@/components/customer/UpdateCustomerImageProvider";
 import { CustomerDetailHeaderContainer } from "@/components/customer/CustomerDetailHeaderContainer";
+import { ClearCustomerImageUrlProvider } from "@/components/customer/ClearCustomerImageUrlProvider";
+import { UpdateCustomerImageFileProvider } from "@/components/customer/UpdateCustomerImageFileContext";
 
 interface ProjectItemWrapperProps {
   project: {
@@ -61,31 +71,63 @@ export function ProjectItemWrapper({
                   />
 
                   {project.customer && (
-                    <CustomerDetailModal
-                      customerDetailContainer={
-                        <CustomerDetailContainer
+                    <UpdateCustomerImageFileProvider>
+                      <UpdateCustomerImageProvider>
+                        <ClearCustomerImageUrlProvider
                           customerId={project.customer.id}
-                        />
-                      }
-                      customerDetailHeaderContainer={
-                        <CustomerDetailHeaderContainer
-                          customerId={project.customer.id}
-                        />
-                      }
-                    />
+                        >
+                          <CustomerDetailModal
+                            customerDetailContainer={
+                              <CustomerDetailContainer
+                                customerId={project.customer.id}
+                              />
+                            }
+                            customerDetailHeaderContainer={
+                              <CustomerDetailHeaderContainer
+                                customerId={project.customer.id}
+                              />
+                            }
+                          />
+
+                          <UpdateCustomerImageModal
+                            customerId={project.customer.id}
+                          />
+
+                          <DeleteCustomerImageModal
+                            customerId={project.customer.id}
+                            customerFullName={project.customer.fullName}
+                          />
+                        </ClearCustomerImageUrlProvider>
+                      </UpdateCustomerImageProvider>
+                    </UpdateCustomerImageFileProvider>
                   )}
 
                   {project.creator && (
-                    <UserDetailModal
-                      userDetailContainer={
-                        <UserDetailContainer userId={project.creator.id} />
-                      }
-                      userDetailHeaderContainer={
-                        <UserDetailHeaderContainer
-                          userId={project.creator.id}
-                        />
-                      }
-                    />
+                    <UpdateUserImageFileProvider>
+                      <UpdateUserImageProvider>
+                        <ClearUserImageUrlProvider userId={project.creator.id}>
+                          <UserDetailModal
+                            userDetailContainer={
+                              <UserDetailContainer
+                                userId={project.creator.id}
+                              />
+                            }
+                            userDetailHeaderContainer={
+                              <UserDetailHeaderContainer
+                                userId={project.creator.id}
+                              />
+                            }
+                          />
+
+                          <UpdateUserImageModal userId={project.creator.id} />
+
+                          <DeleteUserImageModal
+                            userId={project.creator.id}
+                            userFullName={project.creator.fullName}
+                          />
+                        </ClearUserImageUrlProvider>
+                      </UpdateUserImageProvider>
+                    </UpdateUserImageFileProvider>
                   )}
 
                   <ProjectCommentsModal

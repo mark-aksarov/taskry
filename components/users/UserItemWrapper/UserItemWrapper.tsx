@@ -4,9 +4,14 @@ import { DeleteUserModal } from "../DeleteUserModal";
 import { UpdateUserProvider } from "../UpdateUserProvider";
 import { DeleteUserProvider } from "../DeleteUserProvider";
 import { UserDetailContainer } from "../UserDetailContainer";
+import { UpdateUserImageModal } from "../UpdateUserImageModal";
+import { DeleteUserImageModal } from "../DeleteUserImageModal";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { UpdateUserFormContainer } from "../UpdateUserFormContainer";
+import { UpdateUserImageProvider } from "../UpdateUserImageProvider";
+import { ClearUserImageUrlProvider } from "../ClearUserImageUrlProvider";
 import { UserDetailHeaderContainer } from "../UserDetailHeaderContainer";
+import { UpdateUserImageFileProvider } from "../UpdateUserImageFileContext";
 import { ModalManagerProvider } from "@/components/common/ModalManagerContext";
 
 interface UserItemWrapperProps {
@@ -24,22 +29,35 @@ export function UserItemWrapper({
     <ModalManagerProvider>
       <DeleteUserProvider>
         <UpdateUserProvider>
-          {children}
+          <UpdateUserImageFileProvider>
+            <UpdateUserImageProvider>
+              <ClearUserImageUrlProvider userId={userId}>
+                {children}
 
-          <UserDetailModal
-            userDetailContainer={<UserDetailContainer userId={userId} />}
-            userDetailHeaderContainer={
-              <UserDetailHeaderContainer userId={userId} />
-            }
-          />
+                <UserDetailModal
+                  userDetailContainer={<UserDetailContainer userId={userId} />}
+                  userDetailHeaderContainer={
+                    <UserDetailHeaderContainer userId={userId} />
+                  }
+                />
 
-          <UpdateUserModal
-            updateUserFormContainer={
-              <UpdateUserFormContainer userId={userId} />
-            }
-          />
+                <UpdateUserImageModal userId={userId} />
 
-          <DeleteUserModal userId={userId} userFullName={userFullName} />
+                <DeleteUserImageModal
+                  userId={userId}
+                  userFullName={userFullName}
+                />
+
+                <UpdateUserModal
+                  updateUserFormContainer={
+                    <UpdateUserFormContainer userId={userId} />
+                  }
+                />
+
+                <DeleteUserModal userId={userId} userFullName={userFullName} />
+              </ClearUserImageUrlProvider>
+            </UpdateUserImageProvider>
+          </UpdateUserImageFileProvider>
         </UpdateUserProvider>
       </DeleteUserProvider>
 

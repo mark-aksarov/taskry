@@ -44,7 +44,7 @@ export default async function AppProfilePage() {
   return (
     <UpdateUserImageFileProvider>
       <UpdateUserImageProvider>
-        <ClearUserImageUrlProvider>
+        <ClearUserImageUrlProvider userId={userId}>
           <DeleteUserProvider>
             <UpdateUserFullNameProvider>
               <UpdateUserBioProvider>

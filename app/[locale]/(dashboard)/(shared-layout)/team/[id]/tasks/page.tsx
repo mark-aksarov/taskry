@@ -80,7 +80,7 @@ export default async function AppProfileTasksPage({
   return (
     <UpdateUserImageFileProvider>
       <UpdateUserImageProvider>
-        <ClearUserImageUrlProvider>
+        <ClearUserImageUrlProvider userId={userId}>
           <DeleteUserProvider>
             <UpdateUserProvider>
               <ChangePasswordProvider>
