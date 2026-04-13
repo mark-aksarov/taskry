@@ -3,14 +3,19 @@
 import { useTranslations } from "next-intl";
 import { FilterButtonMobile } from "@/components/common/FilterButton";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { useCustomerFilters } from "../CustomerFiltersContext";
 
 export function CustomerCompanyFiltersModalTrigger() {
   const t = useTranslations("customers.CustomerCompanyFiltersModalTrigger");
   const { onOpenChange } = useModal("customerCompanyFilters");
+  const initialFilters = useCustomerFilters();
+
+  const selectedCount = initialFilters.companyIds?.length ?? 0;
 
   return (
     <FilterButtonMobile
       mode="single"
+      selectedCount={selectedCount}
       label={t("label")}
       onPress={() => onOpenChange(true)}
     />
