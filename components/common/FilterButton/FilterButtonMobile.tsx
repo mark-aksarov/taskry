@@ -1,3 +1,4 @@
+import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
 import { Plus, SlidersHorizontal } from "lucide-react";
 import { Button, ButtonProps } from "@/components/ui/Button";
@@ -14,6 +15,7 @@ export function FilterButtonMobile({
   mode,
   selectedCount = 0,
   label,
+  className,
   ...props
 }: FilterButtonMobileProps) {
   const t = useTranslations("common.FilterButtonMobile");
@@ -29,7 +31,7 @@ export function FilterButtonMobile({
   return (
     <Button
       variant={selectedCount > 0 ? "contrast" : "secondary"}
-      className="rounded-full px-3"
+      className={twMerge("rounded-full px-3", className)}
       iconLeft={icon}
       isDisabled={isDisabled}
       label={selectedCount > 0 ? `${label || ""} ${selectedCount}` : label}

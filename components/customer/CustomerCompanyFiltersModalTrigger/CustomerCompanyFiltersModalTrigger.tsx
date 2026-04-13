@@ -16,6 +16,7 @@ export function CustomerCompanyFiltersModalTrigger() {
     <FilterButtonMobile
       mode="single"
       selectedCount={selectedCount}
+      className={selectedCount ? "order-2" : "order-3"}
       label={t("label")}
       onPress={() => onOpenChange(true)}
     />

@@ -18,6 +18,7 @@ export function UserFiltersModalTriggerMobile() {
     <FilterButtonMobile
       mode="multiple"
       selectedCount={selectedCount}
+      className="order-1"
       onPress={() => onOpenChange(true)}
     />
   );

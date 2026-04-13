@@ -20,6 +20,7 @@ export function TaskCategoryFiltersModalTrigger() {
     <FilterButtonMobile
       mode="single"
       selectedCount={selectedCount}
+      className={selectedCount ? "order-2" : "order-3"}
       label={t("buttonLabel")}
       onPress={() => onOpenChange(true)}
     />
