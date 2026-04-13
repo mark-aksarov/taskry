@@ -180,25 +180,25 @@
     "noCategory": "Нет категории"
   },
   "ProjectStatusFiltersModal": {
-    "heading": "Фильтры статусов"
+    "heading": "Статус"
   },
   "ProjectStatusFiltersModalTrigger": {
     "buttonLabel": "Статус"
   },
   "ProjectCategoryFiltersModal": {
-    "heading": "Фильтры категорий"
+    "heading": "Категория"
   },
   "ProjectCategoryFiltersModalTrigger": {
     "buttonLabel": "Категория"
   },
   "ProjectCreatorFiltersModal": {
-    "heading": "Фильтры создателей"
+    "heading": "Создатель"
   },
   "ProjectCreatorFiltersModalTrigger": {
     "buttonLabel": "Создатель"
   },
   "ProjectCustomerFiltersModal": {
-    "heading": "Фильтры клиентов"
+    "heading": "Клиент"
   },
   "ProjectCustomerFiltersModalTrigger": {
     "buttonLabel": "Клиент"

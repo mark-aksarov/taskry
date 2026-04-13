@@ -195,7 +195,7 @@
     "description": "No tasks match the selected filters. Try changing or resetting the filters."
   },
   "TaskStatusFiltersModal": {
-    "heading": "Status filters"
+    "heading": "Status"
   },
   "TaskStatusFiltersModalTrigger": {
     "buttonLabel": "Status"
@@ -204,7 +204,7 @@
     "buttonLabel": "Category"
   },
   "TaskCategoryFiltersModal": {
-    "heading": "Category filters"
+    "heading": "Category"
   },
   "TaskResultsCount": {
     "tasksFound": "{count, plural, one {# task found} other {# tasks found}}"
@@ -213,10 +213,10 @@
     "buttonLabel": "Project"
   },
   "TaskProjectFiltersModal": {
-    "heading": "Project filters"
+    "heading": "Project"
   },
   "AssigneeFiltersModal": {
-    "heading": "Assignee filters"
+    "heading": "Assignee"
   },
   "AssigneeFiltersModalTrigger": {
     "buttonLabel": "Assignee"

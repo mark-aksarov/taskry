@@ -180,25 +180,25 @@
     "noCategory": "No category"
   },
   "ProjectStatusFiltersModal": {
-    "heading": "Status filters"
+    "heading": "Status"
   },
   "ProjectStatusFiltersModalTrigger": {
     "buttonLabel": "Status"
   },
   "ProjectCategoryFiltersModal": {
-    "heading": "Category filters"
+    "heading": "Category"
   },
   "ProjectCategoryFiltersModalTrigger": {
     "buttonLabel": "Category"
   },
   "ProjectCreatorFiltersModal": {
-    "heading": "Creator filters"
+    "heading": "Creator"
   },
   "ProjectCreatorFiltersModalTrigger": {
     "buttonLabel": "Creator"
   },
   "ProjectCustomerFiltersModal": {
-    "heading": "Customer filters"
+    "heading": "Customer"
   },
   "ProjectCustomerFiltersModalTrigger": {
     "buttonLabel": "Customer"

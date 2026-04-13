@@ -194,7 +194,7 @@
     "title": "Задачи"
   },
   "UserFiltersModal": {
-    "heading": "Фильтры пользователя"
+    "heading": "Фильтры пользователей"
   },
   "CreateUserMenuTrigger": {
     "dialogHeading": "Создать нового",
@@ -215,7 +215,7 @@
     "usersFound": "{count, plural, one {Найден # пользователь} few {Найдено # пользователя} many {Найдено # пользователей} other {Найдено # пользователей}}"
   },
   "UserPositionFiltersModal": {
-    "heading": "Фильтры должностей",
+    "heading": "Должность",
     "label": "Должность"
   },
   "UserImageMenuTrigger": {

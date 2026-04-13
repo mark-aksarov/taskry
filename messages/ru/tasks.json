@@ -195,7 +195,7 @@
     "description": "По выбранным фильтрам задачи отсутствуют. Попробуйте изменить или сбросить фильтры"
   },
   "TaskStatusFiltersModal": {
-    "heading": "Фильтры статусов"
+    "heading": "Статус"
   },
   "TaskStatusFiltersModalTrigger": {
     "buttonLabel": "Статус"
@@ -204,7 +204,7 @@
     "buttonLabel": "Категория"
   },
   "TaskCategoryFiltersModal": {
-    "heading": "Фильтры категорий"
+    "heading": "Категория"
   },
   "TaskResultsCount": {
     "tasksFound": "{count, plural, one {Найдена # задача} few {Найдено # задачи} many {Найдено # задач} other {Найдено # задач}}"
@@ -213,13 +213,13 @@
     "buttonLabel": "Проект"
   },
   "TaskProjectFiltersModal": {
-    "heading": "Фильтры проектов"
+    "heading": "Проект"
   },
   "AssigneeFiltersModal": {
-    "heading": "Фильтры назначенных"
+    "heading": "Исполнитель"
   },
   "AssigneeFiltersModalTrigger": {
-    "buttonLabel": "Назначенный"
+    "buttonLabel": "Исполнитель"
   },
   "UpdateTaskTitleForm": {
     "submitButtonLabel": "Обновить заголовок"
@@ -246,10 +246,10 @@
     "title": "Изменить статус"
   },
   "UpdateTaskAssigneeForm": {
-    "submitButtonLabel": "Обновить назначенного"
+    "submitButtonLabel": "Обновить исполнителя"
   },
   "UpdateTaskAssigneeModal": {
-    "title": "Изменить назначенного"
+    "title": "Изменить исполнителя"
   },
   "UpdateTaskCategoryRelForm": {
     "submitButtonLabel": "Обновить категорию"
