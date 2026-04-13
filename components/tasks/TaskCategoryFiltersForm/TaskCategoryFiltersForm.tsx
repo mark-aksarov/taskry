@@ -26,7 +26,7 @@ export function TaskCategoryFiltersForm({
     clearSelectedItems,
   });
 
-  const { assigneeIds } = useTaskFiltersForm();
+  const { categoryIds } = useTaskFiltersForm();
   const dispatch = useTaskFiltersFormDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -40,7 +40,7 @@ export function TaskCategoryFiltersForm({
 
     // Replace categoryIds: remove old ones and add the new values
     newSearchParams.delete("categoryIds");
-    assigneeIds.forEach((id) => newSearchParams.append("categoryIds", id));
+    categoryIds.forEach((id) => newSearchParams.append("categoryIds", id));
 
     applyFilterURL(newSearchParams);
   };
@@ -50,7 +50,7 @@ export function TaskCategoryFiltersForm({
       <TaskCategoryCheckboxGroup
         disableExpansion
         items={categoryCheckboxGroupItems}
-        value={assigneeIds}
+        value={categoryIds}
         onChange={(value) =>
           dispatch({ type: "setAssigneeIds", payload: value })
         }
