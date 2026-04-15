@@ -1,19 +1,4 @@
 {
-  "AppHeaderTitle": {
-    "dashboard": "Dashboard",
-    "projects": "All projects",
-    "tasks": "All tasks",
-    "team": "Team",
-    "customers": "All customers",
-    "profileSettings": "Profile settings",
-    "taskDetails": "Task details",
-    "projectDetails": "Project details",
-    "userInfo": "User information",
-    "positions": "Positions",
-    "projectCategories": "Project categories",
-    "taskCategories": "Task categories",
-    "companies": "Companies"
-  },
   "ThemeToggleButton": {
     "darkLabel": "Dark mode",
     "lightLabel": "Light mode"

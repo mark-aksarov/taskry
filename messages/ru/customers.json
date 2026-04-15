@@ -63,7 +63,7 @@
     "title": "Изменить клиента"
   },
   "CustomerDetailCard": {
-    "title": "Информация о клиенте"
+    "title": "Детали клиента"
   },
   "CustomerFullNameTextField": {
     "label": "Полное имя",

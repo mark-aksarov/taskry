@@ -92,11 +92,11 @@
     "changePasswordSuccessMessage": "Пароль успешно изменен"
   },
   "ProfileNavigationLarge": {
-    "userInformation": "Информация о пользователе",
+    "userInformation": "Детали пользователя",
     "assignedTasks": "Назначенные задачи"
   },
   "ProfileNavigationMobile": {
-    "info": "Информация",
+    "info": "Детали",
     "assignedTasks": "Задачи"
   },
   "UserDetail": {
@@ -175,11 +175,11 @@
     "noPosition": "Нет должности"
   },
   "UserNavigationLarge": {
-    "userInformation": "Информация о пользователе",
+    "userInformation": "Детали пользователя",
     "assignedTasks": "Назначенные задачи"
   },
   "UserNavigationMobile": {
-    "info": "Информация",
+    "info": "Детали",
     "assignedTasks": "Задачи"
   },
   "UserTaskListItem": {

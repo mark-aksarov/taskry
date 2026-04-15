@@ -1,19 +1,4 @@
 {
-  "AppHeaderTitle": {
-    "dashboard": "Панель управления",
-    "projects": "Все проекты",
-    "tasks": "Все задачи",
-    "team": "Команда",
-    "customers": "Все клиенты",
-    "profileSettings": "Настройки профиля",
-    "taskDetails": "Детали задачи",
-    "projectDetails": "Детали проекта",
-    "userInfo": "Информация о пользователе",
-    "positions": "Должности",
-    "projectCategories": "Категории проектов",
-    "taskCategories": "Категории задач",
-    "companies": "Компании"
-  },
   "ThemeToggleButton": {
     "darkLabel": "Темная тема",
     "lightLabel": "Светлая тема"

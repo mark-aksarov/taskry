@@ -92,11 +92,11 @@
     "changePasswordSuccessMessage": "Password changed successfully"
   },
   "ProfileNavigationLarge": {
-    "userInformation": "User information",
+    "userInformation": "User details",
     "assignedTasks": "Assigned tasks"
   },
   "ProfileNavigationMobile": {
-    "info": "Info",
+    "info": "Details",
     "assignedTasks": "Assigned tasks"
   },
   "UserDetail": {
@@ -175,11 +175,11 @@
     "noPosition": "No position"
   },
   "UserNavigationLarge": {
-    "userInformation": "User information",
+    "userInformation": "User details",
     "assignedTasks": "Assigned tasks"
   },
   "UserNavigationMobile": {
-    "info": "Info",
+    "info": "Details",
     "assignedTasks": "Assigned tasks"
   },
   "UserTaskListItem": {

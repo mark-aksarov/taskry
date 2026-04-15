@@ -63,7 +63,7 @@
     "title": "Edit customer"
   },
   "CustomerDetailCard": {
-    "title": "Customer information"
+    "title": "Customer details"
   },
   "CustomerFullNameTextField": {
     "label": "Full name",
