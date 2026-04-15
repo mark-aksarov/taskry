@@ -23,7 +23,7 @@
     "successMessage": "Задача успешно создана"
   },
   "TaskDetailCard": {
-    "title": "Информация о задаче"
+    "title": "Детали задачи"
   },
   "TaskDetailActions": {
     "delete": "Удалить задачу",

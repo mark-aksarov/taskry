@@ -37,7 +37,7 @@
     "successMessage": "Проект успешно создан"
   },
   "ProjectDetailCard": {
-    "title": "Информация о проекте"
+    "title": "Детали проекта"
   },
   "ProjectDetailActions": {
     "delete": "Удалить проект",

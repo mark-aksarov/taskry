@@ -23,7 +23,7 @@
     "successMessage": "Task created successfully."
   },
   "TaskDetailCard": {
-    "title": "Task information"
+    "title": "Task details"
   },
   "TaskDetailActions": {
     "delete": "Delete task",
