@@ -1,8 +1,8 @@
-import { UserDetailModal } from "../UserDetailModal";
 import { UpdateUserModal } from "../UpdateUserModal";
 import { DeleteUserModal } from "../DeleteUserModal";
 import { UpdateUserProvider } from "../UpdateUserProvider";
 import { DeleteUserProvider } from "../DeleteUserProvider";
+import { UserDetailSideSheet } from "../UserDetailSideSheet";
 import { UserDetailContainer } from "../UserDetailContainer";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { UpdateUserFormContainer } from "../UpdateUserFormContainer";
@@ -26,7 +26,7 @@ export function UserItemWrapper({
         <UpdateUserProvider>
           {children}
 
-          <UserDetailModal
+          <UserDetailSideSheet
             userId={userId}
             userDetailContainer={<UserDetailContainer userId={userId} />}
             userDetailHeaderContainer={

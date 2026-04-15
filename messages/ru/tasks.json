@@ -110,7 +110,7 @@
   "TaskCommentsModal": {
     "title": "Комментарии к задаче"
   },
-  "TaskDetailModal": {
+  "TaskDetailSideSheet": {
     "dialogHeading": "Детали задачи",
     "openInFullPage": "Открыть задачу"
   },

@@ -1,1 +1,0 @@
-export { CustomerDetailModal } from "./CustomerDetailModal";

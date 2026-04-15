@@ -95,7 +95,7 @@
       "format": "Please enter a valid URL, for example https://example.com"
     }
   },
-  "CustomerDetailModal": {
+  "CustomerDetailSideSheet": {
     "dialogHeading": "Customer details",
     "openInFullPage": "Open customer"
   },

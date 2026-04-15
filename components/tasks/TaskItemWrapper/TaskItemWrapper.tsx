@@ -1,21 +1,21 @@
 import { DeleteTaskModal } from "../DeleteTaskModal";
 import { UpdateTaskModal } from "../UpdateTaskModal";
-import { TaskDetailModal } from "../TaskDetailModal";
 import { TaskCommentsModal } from "../TaskCommentsModal";
 import { UpdateTaskProvider } from "../UpdateTaskProvider";
 import { DeleteTaskProvider } from "../DeleteTaskProvider";
+import { TaskDetailSideSheet } from "../TaskDetailSideSheet";
 import { TaskDetailContainer } from "../TaskDetailContainer";
 import { TaskCommentsContainer } from "../TaskCommentsContainer";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
-import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { UpdateTaskFormContainer } from "../UpdateTaskFormContainer";
 import { UpdateTaskStatusProvider } from "../UpdateTaskStatusProvider";
+import { UserDetailSideSheet } from "@/components/users/UserDetailSideSheet";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
-import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
 import { CommentFormProvider } from "@/components/comments/CommentFormContext";
 import { ModalManagerProvider } from "@/components/common/ModalManagerContext";
 import { SendCommentProvider } from "@/components/comments/SendCommentProvider";
 import { UpdateCommentProvider } from "@/components/comments/UpdateCommentProvider";
+import { ProjectDetailSideSheet } from "@/components/projects/ProjectDetailSideSheet";
 import { ProjectDetailContainer } from "@/components/projects/ProjectDetailContainer";
 import { UserDetailHeaderContainer } from "@/components/users/UserDetailHeaderContainer";
 
@@ -50,7 +50,7 @@ export function TaskItemWrapper({ task, children }: TaskItemWrapperProps) {
                 <UpdateCommentProvider>
                   {children}
 
-                  <TaskDetailModal
+                  <TaskDetailSideSheet
                     taskId={task.id}
                     taskDetailContainer={
                       <TaskDetailContainer taskId={task.id} />
@@ -58,7 +58,7 @@ export function TaskItemWrapper({ task, children }: TaskItemWrapperProps) {
                   />
 
                   {task.project && (
-                    <ProjectDetailModal
+                    <ProjectDetailSideSheet
                       projectId={task.project.id}
                       projectDetailContainer={
                         <ProjectDetailContainer projectId={task.project.id} />
@@ -67,7 +67,7 @@ export function TaskItemWrapper({ task, children }: TaskItemWrapperProps) {
                   )}
 
                   {task.assignee && (
-                    <UserDetailModal
+                    <UserDetailSideSheet
                       userId={task.assignee.id}
                       userDetailContainer={
                         <UserDetailContainer userId={task.assignee.id} />

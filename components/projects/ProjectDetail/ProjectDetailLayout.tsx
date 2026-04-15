@@ -1,5 +1,3 @@
-import { DetailRow } from "@/components/common/Detail";
-
 interface ProjectDetailLayoutProps {
   titleSlot: React.ReactNode;
   statusSlot: React.ReactNode;
@@ -19,22 +17,16 @@ export function ProjectDetailLayout({
   customerSlot,
   categorySlot,
 }: ProjectDetailLayoutProps) {
-  const rowStyles = "max-lg:flex-col max-lg:gap-4";
-
   return (
     <div className="flex flex-col gap-6">
       {titleSlot}
       <div className="flex flex-col gap-4">
-        <DetailRow className={rowStyles}>
-          {creatorSlot}
-          {deadlineSlot}
-        </DetailRow>
-        <DetailRow className={rowStyles}>{descriptionSlot}</DetailRow>
-        <DetailRow className={rowStyles}>
-          {statusSlot}
-          {categorySlot}
-        </DetailRow>
-        <DetailRow className={rowStyles}>{customerSlot}</DetailRow>
+        {creatorSlot}
+        {deadlineSlot}
+        {descriptionSlot}
+        {statusSlot}
+        {categorySlot}
+        {customerSlot}
       </div>
     </div>
   );

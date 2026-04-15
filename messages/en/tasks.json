@@ -110,7 +110,7 @@
   "CreateTaskModalTrigger": {
     "label": "New task"
   },
-  "TaskDetailModal": {
+  "TaskDetailSideSheet": {
     "dialogHeading": "Task details",
     "openInFullPage": "Open task"
   },

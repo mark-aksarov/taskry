@@ -5,18 +5,18 @@ import {
 
 import { mockedProjectDetail } from "@/mocks/projects";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProjectDetailModal } from "../ProjectDetailModal";
+import { ProjectDetailSideSheet } from "./ProjectDetailSideSheet";
 import { ProjectDetail, ProjectDetailSkeleton } from "../ProjectDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/projects/ProjectDetailModal",
-  component: ProjectDetailModal,
+  title: "components/projects/ProjectDetailSideSheet",
+  component: ProjectDetailSideSheet,
   decorators: [withOpenModal, withModalManagerProvider, withThemedBackground],
   parameters: {
     modalId: "projectDetail",
   },
-} satisfies Meta<typeof ProjectDetailModal>;
+} satisfies Meta<typeof ProjectDetailSideSheet>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

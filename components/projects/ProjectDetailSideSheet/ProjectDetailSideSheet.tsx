@@ -1,43 +1,43 @@
 import {
-  DetailModal,
-  DetailModalDialog,
-  DetailModalLink,
-} from "@/components/common/DetailModal";
+  DetailSideSheet,
+  DetailSideSheetDialog,
+  DetailSideSheetLink,
+} from "@/components/common/DetailSideSheet";
 
 import { useTranslations } from "next-intl";
 import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
-interface ProjectDetailModalProps {
+interface ProjectDetailSideSheetProps {
   projectId: number;
   projectDetailContainer: React.ReactNode;
 }
 
-export function ProjectDetailModal({
+export function ProjectDetailSideSheet({
   projectId,
   projectDetailContainer,
-}: ProjectDetailModalProps) {
-  const t = useTranslations("projects.ProjectDetailModal");
+}: ProjectDetailSideSheetProps) {
+  const t = useTranslations("projects.ProjectDetailSideSheet");
 
   const { isOpen, onOpenChange } = useModal("projectDetail");
 
   return (
-    <DetailModal
-      data-test="project-detail-modal"
+    <DetailSideSheet
+      data-test="project-detail-side-sheet"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
     >
-      <DetailModalDialog>
+      <DetailSideSheetDialog>
         <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
         <DialogBody>{projectDetailContainer}</DialogBody>
         <DialogFooter>
-          <DetailModalLink
+          <DetailSideSheetLink
             href={`/projects/${projectId}`}
             label={t("openInFullPage")}
           />
         </DialogFooter>
-      </DetailModalDialog>
-    </DetailModal>
+      </DetailSideSheetDialog>
+    </DetailSideSheet>
   );
 }

@@ -1,42 +1,42 @@
 import {
-  DetailModal,
-  DetailModalDialog,
-  DetailModalLink,
-} from "@/components/common/DetailModal";
+  DetailSideSheet,
+  DetailSideSheetDialog,
+  DetailSideSheetLink,
+} from "@/components/common/DetailSideSheet";
 
 import { useTranslations } from "next-intl";
 import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
-interface TaskDetailModalProps {
+interface TaskDetailSideSheetProps {
   taskId: number;
   taskDetailContainer: React.ReactNode;
 }
 
-export function TaskDetailModal({
+export function TaskDetailSideSheet({
   taskId,
   taskDetailContainer,
-}: TaskDetailModalProps) {
-  const t = useTranslations("tasks.TaskDetailModal");
+}: TaskDetailSideSheetProps) {
+  const t = useTranslations("tasks.TaskDetailSideSheet");
   const { isOpen, onOpenChange } = useModal("taskDetail");
 
   return (
-    <DetailModal
+    <DetailSideSheet
       data-test="task-detail-modal"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
     >
-      <DetailModalDialog>
+      <DetailSideSheetDialog>
         <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
         <DialogBody>{taskDetailContainer}</DialogBody>
         <DialogFooter>
-          <DetailModalLink
+          <DetailSideSheetLink
             href={`/tasks/${taskId}`}
             label={t("openInFullPage")}
           />
         </DialogFooter>
-      </DetailModalDialog>
-    </DetailModal>
+      </DetailSideSheetDialog>
+    </DetailSideSheet>
   );
 }

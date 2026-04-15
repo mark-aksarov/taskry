@@ -1,5 +1,3 @@
-import { DetailRow } from "@/components/common/Detail";
-
 export interface CustomerDetailLayoutProps {
   bioSlot: React.ReactNode;
   fullNameSlot: React.ReactNode;
@@ -19,19 +17,12 @@ export function CustomerDetailLayout({
 }: CustomerDetailLayoutProps) {
   return (
     <div className="flex flex-col gap-4">
-      <DetailRow>{bioSlot}</DetailRow>
-
-      <DetailRow>
-        {fullNameSlot}
-        {emailSlot}
-      </DetailRow>
-
-      <DetailRow>
-        {companySlot}
-        {phoneNumberSlot}
-      </DetailRow>
-
-      <DetailRow>{publicLinkSlot}</DetailRow>
+      {bioSlot}
+      {fullNameSlot}
+      {emailSlot}
+      {companySlot}
+      {phoneNumberSlot}
+      {publicLinkSlot}
     </div>
   );
 }

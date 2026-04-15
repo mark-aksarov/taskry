@@ -1,21 +1,21 @@
 import { DeleteProjectModal } from "../DeleteProjectModal";
 import { UpdateProjectModal } from "../UpdateProjectModal";
-import { ProjectDetailModal } from "../ProjectDetailModal";
 import { ProjectCommentsModal } from "../ProjectCommentsModal";
 import { UpdateProjectProvider } from "../UpdateProjectProvider";
 import { DeleteProjectProvider } from "../DeleteProjectProvider";
+import { ProjectDetailSideSheet } from "../ProjectDetailSideSheet";
 import { ProjectDetailContainer } from "../ProjectDetailContainer";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
-import { UserDetailModal } from "@/components/users/UserDetailModal";
 import { ProjectCommentsContainer } from "../ProjectCommentsContainer";
 import { UpdateProjectFormContainer } from "../UpdateProjectFormContainer";
+import { UserDetailSideSheet } from "@/components/users/UserDetailSideSheet";
 import { UserDetailContainer } from "@/components/users/UserDetailContainer";
 import { UpdateProjectStatusProvider } from "../UpdateProjectStatusProvider";
 import { CommentFormProvider } from "@/components/comments/CommentFormContext";
 import { ModalManagerProvider } from "@/components/common/ModalManagerContext";
-import { CustomerDetailModal } from "@/components/customer/CustomerDetailModal";
 import { SendCommentProvider } from "@/components/comments/SendCommentProvider";
 import { UpdateCommentProvider } from "@/components/comments/UpdateCommentProvider";
+import { CustomerDetailSideSheet } from "@/components/customer/CustomerDetailSideSheet";
 import { CustomerDetailContainer } from "@/components/customer/CustomerDetailContainer";
 import { UserDetailHeaderContainer } from "@/components/users/UserDetailHeaderContainer";
 import { CustomerDetailHeaderContainer } from "@/components/customer/CustomerDetailHeaderContainer";
@@ -54,7 +54,7 @@ export function ProjectItemWrapper({
                 <UpdateCommentProvider>
                   {children}
 
-                  <ProjectDetailModal
+                  <ProjectDetailSideSheet
                     projectId={project.id}
                     projectDetailContainer={
                       <ProjectDetailContainer projectId={project.id} />
@@ -62,7 +62,7 @@ export function ProjectItemWrapper({
                   />
 
                   {project.customer && (
-                    <CustomerDetailModal
+                    <CustomerDetailSideSheet
                       customerId={project.customer.id}
                       customerDetailContainer={
                         <CustomerDetailContainer
@@ -78,7 +78,7 @@ export function ProjectItemWrapper({
                   )}
 
                   {project.creator && (
-                    <UserDetailModal
+                    <UserDetailSideSheet
                       userId={project.creator.id}
                       userDetailContainer={
                         <UserDetailContainer userId={project.creator.id} />

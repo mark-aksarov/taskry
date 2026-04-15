@@ -1,44 +1,44 @@
 import {
-  DetailModal,
-  DetailModalDialog,
-  DetailModalLink,
-} from "@/components/common/DetailModal";
+  DetailSideSheet,
+  DetailSideSheetDialog,
+  DetailSideSheetLink,
+} from "@/components/common/DetailSideSheet";
 
 import { useTranslations } from "next-intl";
 import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
-interface UserDetailModalProps {
+interface UserDetailSideSheetProps {
   userId: string;
   userDetailHeaderContainer: React.ReactNode;
   userDetailContainer: React.ReactNode;
 }
 
-export function UserDetailModal({
+export function UserDetailSideSheet({
   userId,
   userDetailHeaderContainer,
   userDetailContainer,
-}: UserDetailModalProps) {
-  const t = useTranslations("users.UserDetailModal");
+}: UserDetailSideSheetProps) {
+  const t = useTranslations("users.UserDetailSideSheet");
 
   const { isOpen, onOpenChange } = useModal("userDetail");
 
   return (
-    <DetailModal isOpen={isOpen} onOpenChange={onOpenChange}>
-      <DetailModalDialog>
+    <DetailSideSheet isOpen={isOpen} onOpenChange={onOpenChange}>
+      <DetailSideSheetDialog>
         <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
         <DialogBody className="flex flex-col gap-6">
           {userDetailHeaderContainer}
           {userDetailContainer}
         </DialogBody>
         <DialogFooter>
-          <DetailModalLink
+          <DetailSideSheetLink
             href={`/team/${userId}`}
             label={t("openInFullPage")}
           />
         </DialogFooter>
-      </DetailModalDialog>
-    </DetailModal>
+      </DetailSideSheetDialog>
+    </DetailSideSheet>
   );
 }

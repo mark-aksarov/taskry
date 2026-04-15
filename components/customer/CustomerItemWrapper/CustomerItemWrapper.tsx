@@ -1,10 +1,10 @@
-import { CustomerDetailModal } from "../CustomerDetailModal";
 import { UpdateCustomerModal } from "../UpdateCustomerModal";
 import { DeleteCustomerModal } from "../DeleteCustomerModal";
 import { UpdateCustomerProvider } from "../UpdateCustomerProvider";
 import { DeleteCustomerProvider } from "../DeleteCustomerProvider";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { CustomerDetailContainer } from "../CustomerDetailContainer";
+import { CustomerDetailSideSheet } from "../CustomerDetailSideSheet";
 import { UpdateCustomerFormContainer } from "../UpdateCustomerFormContainer";
 import { ModalManagerProvider } from "@/components/common/ModalManagerContext";
 import { CustomerDetailHeaderContainer } from "../CustomerDetailHeaderContainer";
@@ -26,7 +26,7 @@ export function CustomerItemWrapper({
         <UpdateCustomerProvider>
           {children}
 
-          <CustomerDetailModal
+          <CustomerDetailSideSheet
             customerId={customerId}
             customerDetailContainer={
               <CustomerDetailContainer customerId={customerId} />

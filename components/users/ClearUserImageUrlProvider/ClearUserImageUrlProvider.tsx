@@ -8,12 +8,10 @@ import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallb
 import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
 
 interface ClearUserImageUrlProviderProps {
-  userId: string;
   children: React.ReactNode;
 }
 
 export function ClearUserImageUrlProvider({
-  userId,
   children,
 }: ClearUserImageUrlProviderProps) {
   const router = useRouter();

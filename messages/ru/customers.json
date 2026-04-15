@@ -95,7 +95,7 @@
       "format": "Введите корректный URL, например https://example.com"
     }
   },
-  "CustomerDetailModal": {
+  "CustomerDetailSideSheet": {
     "dialogHeading": "Детали клиента",
     "openInFullPage": "Открыть клиента"
   },

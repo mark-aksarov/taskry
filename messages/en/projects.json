@@ -214,7 +214,7 @@
       "completed": "Completed"
     }
   },
-  "ProjectDetailModal": {
+  "ProjectDetailSideSheet": {
     "dialogHeading": "Project details",
     "openInFullPage": "Open project"
   },

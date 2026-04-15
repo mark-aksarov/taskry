@@ -65,7 +65,7 @@ export default async function AppTeamProfilePage({
   return (
     <UpdateUserImageFileProvider>
       <UpdateUserImageProvider>
-        <ClearUserImageUrlProvider userId={userId}>
+        <ClearUserImageUrlProvider>
           <DeleteUserProvider>
             <UpdateUserFullNameProvider>
               <UpdateUserBioProvider>

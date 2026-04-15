@@ -1,10 +1,10 @@
 import { Button, ButtonProps } from "@/components/ui/Button";
 
-interface DetailModalLinkProps extends ButtonProps<"a"> {
+interface DetailSideSheetLinkProps extends ButtonProps<"a"> {
   "data-test"?: string;
 }
 
-export function DetailModalLink(props: DetailModalLinkProps) {
+export function DetailSideSheetLink(props: DetailSideSheetLinkProps) {
   return (
     <Button
       as="a"

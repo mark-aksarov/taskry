@@ -1,1 +1,0 @@
-export { UserDetailModal } from "./UserDetailModal";
