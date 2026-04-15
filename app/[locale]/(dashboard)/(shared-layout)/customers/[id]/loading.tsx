@@ -8,15 +8,18 @@ import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { CustomerDetailAltSkeleton } from "@/components/customer/CustomerDetailAlt";
 import { CustomerDetailActionsSkeleton } from "@/components/customer/CustomerDetailActions";
+import { CustomerDetailCard } from "@/components/customer/CustomerDetailCard";
 
 export default function AppCustomerDetailLoading() {
   const t = useTranslations("app.CustomerDetailPage");
 
   return (
     <PageContainer>
-      <Card className="max-md:hidden">
-        <CustomerDetailAltSkeleton />
-      </Card>
+      <CustomerDetailCard
+        customerDetailContainer={<CustomerDetailAltSkeleton />}
+        customerDetailHeaderContainer={<DetailHeaderSkeleton />}
+        customerDetailActions={<CustomerDetailActionsSkeleton />}
+      />
 
       <PageGrid className="md:hidden">
         <ToolbarMobile
