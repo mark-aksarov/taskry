@@ -9,7 +9,7 @@ interface ProjectDeadlineDatePickerProps {
 
 export function ProjectDeadlineDatePicker({
   defaultValue,
-  matchTriggerWidth,
+  matchTriggerWidth = true,
 }: ProjectDeadlineDatePickerProps) {
   const t = useTranslations("projects.ProjectDeadlineDatePicker");
 

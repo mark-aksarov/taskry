@@ -9,7 +9,7 @@ interface TaskDeadlineDatePickerProps {
 
 export function TaskDeadlineDatePicker({
   defaultValue,
-  matchTriggerWidth,
+  matchTriggerWidth = true,
 }: TaskDeadlineDatePickerProps) {
   const t = useTranslations("tasks.TaskDeadlineDatePicker");
 
