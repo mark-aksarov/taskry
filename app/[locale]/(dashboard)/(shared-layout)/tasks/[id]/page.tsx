@@ -4,12 +4,9 @@ import { TaskDetailPage } from "./TaskDetailPage";
 import { getTaskFormData } from "@/lib/data/task/task.dal";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { DeleteTaskProvider } from "@/components/tasks/DeleteTaskProvider";
-import { SubtasksContainer } from "@/components/subtasks/SubtasksContainer";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
 import { CreateSubtaskModal } from "@/components/subtasks/CreateSubtaskModal";
 import { UpdateTaskTitleModal } from "@/components/tasks/UpdateTaskTitleModal";
-import { DeleteTaskDetailModal } from "@/components/tasks/DeleteTaskDetailModal";
 import { UpdateTaskStatusModal } from "@/components/tasks/UpdateTaskStatusModal";
 import { TaskDetailAltContainer } from "@/components/tasks/TaskDetailAltContainer";
 import { UpdateTaskProjectModal } from "@/components/tasks/UpdateTaskProjectModal";
@@ -18,7 +15,6 @@ import { UpdateTaskAssigneeModal } from "@/components/tasks/UpdateTaskAssigneeMo
 import { UpdateTaskDeadlineModal } from "@/components/tasks/UpdateTaskDeadlineModal";
 import { CreateSubtaskAltProvider } from "@/components/subtasks/CreateSubtaskProvider";
 import { UpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusProvider";
-import { TaskDetailHeaderContainer } from "@/components/tasks/TaskDetailHeaderContainer";
 import { UpdateTaskProjectProvider } from "@/components/tasks/UpdateTaskProjectProvider";
 import { UpdateTaskDescriptionModal } from "@/components/tasks/UpdateTaskDescriptionModal";
 import { UpdateTaskDeadlineProvider } from "@/components/tasks/UpdateTaskDeadlineProvider";
@@ -56,93 +52,82 @@ export default async function AppTaskDetailPage({
 
   return (
     <CreateSubtaskAltProvider>
-      <DeleteTaskProvider>
-        <UpdateTaskStatusProvider>
-          <UpdateTaskTitleProvider>
-            <UpdateTaskDescriptionProvider>
-              <UpdateTaskDeadlineProvider>
-                <UpdateTaskStatusAltProvider>
-                  <UpdateTaskAssigneeProvider>
-                    <UpdateTaskCategoryRelProvider>
-                      <UpdateTaskProjectProvider>
-                        <TaskDetailPage
-                          subtasksContainer={<SubtasksContainer taskId={id} />}
-                          taskDetailContainer={
-                            <TaskDetailAltContainer taskId={id} />
-                          }
-                          taskHeaderContainer={
-                            <TaskDetailHeaderContainer taskId={id} />
-                          }
-                        />
+      <UpdateTaskStatusProvider>
+        <UpdateTaskTitleProvider>
+          <UpdateTaskDescriptionProvider>
+            <UpdateTaskDeadlineProvider>
+              <UpdateTaskStatusAltProvider>
+                <UpdateTaskAssigneeProvider>
+                  <UpdateTaskCategoryRelProvider>
+                    <UpdateTaskProjectProvider>
+                      <TaskDetailPage
+                        taskDetailContainer={
+                          <TaskDetailAltContainer taskId={id} />
+                        }
+                      />
 
-                        <DeleteTaskDetailModal
-                          taskId={taskFormData.id}
-                          taskTitle={taskFormData.title}
-                        />
+                      <UpdateTaskTitleModal
+                        taskId={taskFormData.id}
+                        taskTitle={taskFormData.title}
+                      />
 
-                        <UpdateTaskTitleModal
-                          taskId={taskFormData.id}
-                          taskTitle={taskFormData.title}
-                        />
+                      <UpdateTaskDescriptionModal
+                        taskId={taskFormData.id}
+                        taskDescription={taskFormData.description}
+                      />
 
-                        <UpdateTaskDescriptionModal
-                          taskId={taskFormData.id}
-                          taskDescription={taskFormData.description}
-                        />
+                      <UpdateTaskDeadlineModal
+                        taskId={taskFormData.id}
+                        taskDeadline={taskFormData.deadline}
+                      />
 
-                        <UpdateTaskDeadlineModal
-                          taskId={taskFormData.id}
-                          taskDeadline={taskFormData.deadline}
-                        />
+                      <UpdateTaskStatusModal
+                        taskId={taskFormData.id}
+                        taskStatus={taskFormData.status}
+                      />
 
-                        <UpdateTaskStatusModal
-                          taskId={taskFormData.id}
-                          taskStatus={taskFormData.status}
-                        />
+                      <UpdateTaskCategoryRelModal
+                        updateTaskCategoryRelFormContainer={
+                          <UpdateTaskCategoryRelFormContainer
+                            taskId={taskFormData.id}
+                            categoryId={taskFormData.categoryId}
+                          />
+                        }
+                      />
 
-                        <UpdateTaskCategoryRelModal
-                          updateTaskCategoryRelFormContainer={
-                            <UpdateTaskCategoryRelFormContainer
-                              taskId={taskFormData.id}
-                              categoryId={taskFormData.categoryId}
-                            />
-                          }
-                        />
+                      <UpdateTaskProjectModal
+                        updateTaskProjectFormContainer={
+                          <UpdateTaskProjectFormContainer
+                            taskId={taskFormData.id}
+                            projectId={taskFormData.projectId}
+                          />
+                        }
+                      />
 
-                        <UpdateTaskProjectModal
-                          updateTaskProjectFormContainer={
-                            <UpdateTaskProjectFormContainer
-                              taskId={taskFormData.id}
-                              projectId={taskFormData.projectId}
-                            />
-                          }
-                        />
+                      <UpdateTaskAssigneeModal
+                        updateTaskAssigneeFormContainer={
+                          <UpdateTaskAssigneeFormContainer
+                            taskId={taskFormData.id}
+                            assigneeId={taskFormData.assigneeId}
+                          />
+                        }
+                      />
 
-                        <UpdateTaskAssigneeModal
-                          updateTaskAssigneeFormContainer={
-                            <UpdateTaskAssigneeFormContainer
-                              taskId={taskFormData.id}
-                              assigneeId={taskFormData.assigneeId}
-                            />
-                          }
-                        />
+                      <TaskSearchModal
+                        searchContainer={
+                          <LinkSearchContainer pathname="/tasks" />
+                        }
+                      />
 
-                        <TaskSearchModal
-                          searchContainer={
-                            <LinkSearchContainer pathname="/tasks" />
-                          }
-                        />
-
-                        <CreateSubtaskModal taskId={taskFormData.id} />
-                      </UpdateTaskProjectProvider>
-                    </UpdateTaskCategoryRelProvider>
-                  </UpdateTaskAssigneeProvider>
-                </UpdateTaskStatusAltProvider>
-              </UpdateTaskDeadlineProvider>
-            </UpdateTaskDescriptionProvider>
-          </UpdateTaskTitleProvider>
-        </UpdateTaskStatusProvider>
-      </DeleteTaskProvider>
+                      <CreateSubtaskModal taskId={taskFormData.id} />
+                    </UpdateTaskProjectProvider>
+                  </UpdateTaskCategoryRelProvider>
+                </UpdateTaskAssigneeProvider>
+              </UpdateTaskStatusAltProvider>
+            </UpdateTaskDeadlineProvider>
+          </UpdateTaskDescriptionProvider>
+        </UpdateTaskTitleProvider>
+      </UpdateTaskStatusProvider>
     </CreateSubtaskAltProvider>
   );
 }

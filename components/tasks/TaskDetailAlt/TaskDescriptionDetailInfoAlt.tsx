@@ -30,7 +30,7 @@ export function TaskDescriptionDetailInfoAlt({
     <DetailInfoAlt
       data-test="task-description-detail-info"
       title={<DetailTitle>{t("description")}</DetailTitle>}
-      text={
+      content={
         <DetailText>
           {description ? description : t("noDescription")}
         </DetailText>

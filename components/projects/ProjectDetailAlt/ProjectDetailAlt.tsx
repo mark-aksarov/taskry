@@ -60,7 +60,7 @@ export function ProjectDetailAlt({
         <DetailInfoAlt
           className="border-none pb-0"
           title={<DetailTitle>{t("creator")}</DetailTitle>}
-          text={
+          content={
             creator ? (
               <DetailText>{creator.fullName}</DetailText>
             ) : (

@@ -97,7 +97,7 @@
   },
   "CustomerDetailModal": {
     "dialogHeading": "Customer details",
-    "openInFullPage": "Open in Full Page"
+    "openInFullPage": "Open customer"
   },
   "CustomerItemActionMenuTrigger": {
     "edit": "Edit",

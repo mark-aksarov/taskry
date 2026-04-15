@@ -62,7 +62,7 @@
     }
   },
   "TeamProfilePage": {
-    "heading": "User detail",
+    "heading": "User",
     "notFound": {
       "heading": "User not found",
       "description": "The user does not exist or has been deleted.",
@@ -70,10 +70,10 @@
     }
   },
   "ProfilePage": {
-    "heading": "Profile settings"
+    "heading": "Profile"
   },
   "ProjectDetailPage": {
-    "heading": "Project details",
+    "heading": "Project",
     "notFound": {
       "heading": "Project not found",
       "description": "The project does not exist or has been deleted.",
@@ -81,7 +81,7 @@
     }
   },
   "TaskDetailPage": {
-    "heading": "Task details",
+    "heading": "Task",
     "notFound": {
       "heading": "Task not found",
       "description": "This task does not exist or has been deleted.",
@@ -89,7 +89,7 @@
     }
   },
   "CustomerDetailPage": {
-    "heading": "Customer detail",
+    "heading": "Customer",
     "notFound": {
       "heading": "Customer not found",
       "description": "The customer does not exist or has been deleted.",

@@ -216,7 +216,7 @@
   },
   "ProjectDetailModal": {
     "dialogHeading": "Project details",
-    "openInFullPage": "Open in full page"
+    "openInFullPage": "Open project"
   },
   "UpdateProjectDescriptionForm": {
     "submitButtonLabel": "Update description"

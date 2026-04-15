@@ -32,6 +32,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    userId: mockedUserDetail.id,
     userDetailHeaderContainer: (
       <UserDetailHeader
         fullName={mockedUserDetail.fullName}
@@ -45,6 +46,7 @@ export const Default = {
 
 export const WithSkeletonContent = {
   args: {
+    userId: mockedUserDetail.id,
     userDetailHeaderContainer: <DetailHeaderSkeleton />,
     userDetailContainer: <UserDetailSkeleton />,
   },

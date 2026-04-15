@@ -1,18 +1,23 @@
 import {
   DetailModal,
   DetailModalDialog,
+  DetailModalLink,
 } from "@/components/common/DetailModal";
 
 import { useTranslations } from "next-intl";
-import { DialogBody } from "@/components/ui/Dialog";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface TaskDetailModalProps {
+  taskId: number;
   taskDetailContainer: React.ReactNode;
 }
 
-export function TaskDetailModal({ taskDetailContainer }: TaskDetailModalProps) {
+export function TaskDetailModal({
+  taskId,
+  taskDetailContainer,
+}: TaskDetailModalProps) {
   const t = useTranslations("tasks.TaskDetailModal");
   const { isOpen, onOpenChange } = useModal("taskDetail");
 
@@ -25,6 +30,12 @@ export function TaskDetailModal({ taskDetailContainer }: TaskDetailModalProps) {
       <DetailModalDialog>
         <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
         <DialogBody>{taskDetailContainer}</DialogBody>
+        <DialogFooter>
+          <DetailModalLink
+            href={`/tasks/${taskId}`}
+            label={t("openInFullPage")}
+          />
+        </DialogFooter>
       </DetailModalDialog>
     </DetailModal>
   );

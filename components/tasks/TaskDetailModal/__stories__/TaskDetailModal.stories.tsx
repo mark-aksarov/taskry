@@ -35,6 +35,7 @@ const task = mockedTaskDetail;
 
 export const Default = {
   args: {
+    taskId: task.id,
     taskDetailContainer: (
       <TaskDetail
         {...task}
@@ -46,12 +47,14 @@ export const Default = {
 
 export const WithSkeleton = {
   args: {
+    taskId: task.id,
     taskDetailContainer: <TaskDetailSkeleton />,
   },
 } satisfies Story;
 
 export const WithoutOptionalTaskData = {
   args: {
+    taskId: task.id,
     taskDetailContainer: (
       <TaskDetail
         title={task.title}

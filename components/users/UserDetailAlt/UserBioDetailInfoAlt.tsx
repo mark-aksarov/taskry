@@ -26,7 +26,7 @@ export function UserBioDetailInfoAlt({ bio }: UserBioDetailInfoAltProps) {
     <DetailInfoAlt
       data-test="user-bio-detail-info"
       title={<DetailTitle>{t("bio")}</DetailTitle>}
-      text={<DetailText>{bio || t("noBio")}</DetailText>}
+      content={<DetailText>{bio || t("noBio")}</DetailText>}
       editButton={
         <DetailEditButton
           data-test="update-user-bio-edit-button"

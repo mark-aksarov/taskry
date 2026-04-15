@@ -1,18 +1,21 @@
 import {
   DetailModal,
   DetailModalDialog,
+  DetailModalLink,
 } from "@/components/common/DetailModal";
 
 import { useTranslations } from "next-intl";
-import { DialogBody } from "@/components/ui/Dialog";
+import { DialogBody, DialogFooter } from "@/components/ui/Dialog";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/components/common/DialogHeaderWithClose";
 
 interface ProjectDetailModalProps {
+  projectId: number;
   projectDetailContainer: React.ReactNode;
 }
 
 export function ProjectDetailModal({
+  projectId,
   projectDetailContainer,
 }: ProjectDetailModalProps) {
   const t = useTranslations("projects.ProjectDetailModal");
@@ -28,6 +31,12 @@ export function ProjectDetailModal({
       <DetailModalDialog>
         <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
         <DialogBody>{projectDetailContainer}</DialogBody>
+        <DialogFooter>
+          <DetailModalLink
+            href={`/projects/${projectId}`}
+            label={t("openInFullPage")}
+          />
+        </DialogFooter>
       </DetailModalDialog>
     </DetailModal>
   );

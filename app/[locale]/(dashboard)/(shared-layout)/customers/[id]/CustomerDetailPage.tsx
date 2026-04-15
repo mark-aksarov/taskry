@@ -5,6 +5,7 @@ import { ToolbarMobile } from "@/components/common/Toolbar";
 import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
+import { CustomerDetailCard } from "@/components/customer/CustomerDetailCard";
 
 interface CustomerDetailPageProps {
   customerDetailContainer: React.ReactNode;
@@ -21,7 +22,11 @@ export function CustomerDetailPage({
 
   return (
     <PageContainer>
-      <Card className="max-md:hidden">{customerDetailContainer}</Card>
+      <CustomerDetailCard
+        customerDetailContainer={customerDetailContainer}
+        customerDetailHeaderContainer={customerDetailHeaderContainer}
+        customerDetailActions={customerDetailActions}
+      />
 
       <PageGrid className="md:hidden">
         <ToolbarMobile

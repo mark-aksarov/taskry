@@ -28,7 +28,7 @@ export function UserAddressDetailInfoAlt({
     <DetailInfoAlt
       data-test="user-address-detail-info"
       title={<DetailTitle>{t("address")}</DetailTitle>}
-      text={<DetailText>{address || t("noAddress")}</DetailText>}
+      content={<DetailText>{address || t("noAddress")}</DetailText>}
       editButton={
         <DetailEditButton
           data-test="update-user-address-edit-button"

@@ -31,7 +31,7 @@ export function TaskAssigneeDetailInfoAlt({
     <DetailInfoAlt
       data-test="task-assignee-detail-info"
       title={<DetailTitle>{t("assignee")}</DetailTitle>}
-      text={
+      content={
         <DetailText>
           {assignee ? assignee.fullName : t("noAssignee")}
         </DetailText>

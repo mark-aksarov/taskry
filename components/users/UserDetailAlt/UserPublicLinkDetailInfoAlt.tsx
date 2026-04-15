@@ -30,7 +30,7 @@ export function UserPublicLinkDetailInfoAlt({
     <DetailInfoAlt
       data-test="user-public-link-detail-info"
       title={<DetailTitle>{t("publicLink")}</DetailTitle>}
-      text={<DetailText>{publicLink || t("noPublicLink")}</DetailText>}
+      content={<DetailText>{publicLink || t("noPublicLink")}</DetailText>}
       editButton={
         <DetailEditButton
           data-test="update-user-public-link-edit-button"

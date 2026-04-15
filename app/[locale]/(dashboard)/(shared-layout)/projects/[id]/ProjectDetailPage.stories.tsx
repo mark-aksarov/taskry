@@ -7,10 +7,8 @@ import { useParams, usePathname } from "next/navigation";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectDetailAlt } from "@/components/projects/ProjectDetailAlt";
-import { ProjectDetailHeader } from "@/components/projects/ProjectDetailHeader";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
 import { withDeleteProjectProvider } from "@/components/projects/DeleteProjectProvider/__stories__";
-import { withUpdateProjectProvider } from "@/components/projects/UpdateProjectProvider/__stories__";
 import { withUpdateProjectTitleProvider } from "@/components/projects/UpdateProjectTitleProvider/__stories__";
 import { withUpdateProjectStatusProvider } from "@/components/projects/UpdateProjectStatusProvider/__stories__";
 import { withUpdateProjectDeadlineProvider } from "@/components/projects/UpdateProjectDeadlineProvider/__stories__";
@@ -33,13 +31,9 @@ const meta = {
     withUpdateProjectDescriptionProvider,
     withUpdateProjectStatusProvider,
     withDeleteProjectProvider,
-    withUpdateProjectProvider,
     SharedPageDecorator,
     withThemedBackground,
   ],
-  globals: {
-    viewport: { value: "mobile2", isRotated: false },
-  },
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/projects/1");
     mocked(useParams).mockReturnValue({
@@ -54,12 +48,6 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     projectDetailContainer: <ProjectDetailAlt {...mockedProjectDetail} />,
-    projectHeaderContainer: (
-      <ProjectDetailHeader
-        projectTitle={mockedProjectDetail.title}
-        categoryName={mockedProjectDetail.category.name}
-      />
-    ),
   },
 } satisfies Story;
 
@@ -77,9 +65,6 @@ export const WithoutSomeData = {
         status={mockedProjectDetail.status}
         deadline={mockedProjectDetail.deadline}
       />
-    ),
-    projectHeaderContainer: (
-      <ProjectDetailHeader projectTitle={mockedProjectDetail.title} />
     ),
   },
 } satisfies Story;

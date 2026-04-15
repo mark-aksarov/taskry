@@ -32,7 +32,7 @@ export function TaskCategoryDetailInfoAlt({
     <DetailInfoAlt
       data-test="task-category-detail-info"
       title={<DetailTitle>{t("category")}</DetailTitle>}
-      text={
+      content={
         <DetailText>{category ? category.name : t("noCategory")}</DetailText>
       }
       editButton={

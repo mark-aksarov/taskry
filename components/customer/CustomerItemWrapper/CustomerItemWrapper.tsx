@@ -6,13 +6,8 @@ import { DeleteCustomerProvider } from "../DeleteCustomerProvider";
 import { GuestModeModal } from "@/components/common/GuestModeModal";
 import { CustomerDetailContainer } from "../CustomerDetailContainer";
 import { UpdateCustomerFormContainer } from "../UpdateCustomerFormContainer";
-import { UpdateCustomerImageProvider } from "../UpdateCustomerImageProvider";
 import { ModalManagerProvider } from "@/components/common/ModalManagerContext";
 import { CustomerDetailHeaderContainer } from "../CustomerDetailHeaderContainer";
-import { ClearCustomerImageUrlProvider } from "../ClearCustomerImageUrlProvider";
-import { UpdateCustomerImageFileProvider } from "../UpdateCustomerImageFileContext";
-import { UpdateCustomerImageModal } from "../UpdateCustomerImageModal";
-import { DeleteCustomerImageModal } from "../DeleteCustomerImageModal";
 
 interface CustomerItemWrapperProps {
   customerId: number;
@@ -29,40 +24,28 @@ export function CustomerItemWrapper({
     <ModalManagerProvider>
       <DeleteCustomerProvider>
         <UpdateCustomerProvider>
-          <UpdateCustomerImageFileProvider>
-            <UpdateCustomerImageProvider>
-              <ClearCustomerImageUrlProvider customerId={customerId}>
-                {children}
+          {children}
 
-                <CustomerDetailModal
-                  customerDetailContainer={
-                    <CustomerDetailContainer customerId={customerId} />
-                  }
-                  customerDetailHeaderContainer={
-                    <CustomerDetailHeaderContainer customerId={customerId} />
-                  }
-                />
+          <CustomerDetailModal
+            customerId={customerId}
+            customerDetailContainer={
+              <CustomerDetailContainer customerId={customerId} />
+            }
+            customerDetailHeaderContainer={
+              <CustomerDetailHeaderContainer customerId={customerId} />
+            }
+          />
 
-                <UpdateCustomerImageModal customerId={customerId} />
+          <UpdateCustomerModal
+            updateCustomerFormContainer={
+              <UpdateCustomerFormContainer customerId={customerId} />
+            }
+          />
 
-                <DeleteCustomerImageModal
-                  customerId={customerId}
-                  customerFullName={customerFullName}
-                />
-
-                <UpdateCustomerModal
-                  updateCustomerFormContainer={
-                    <UpdateCustomerFormContainer customerId={customerId} />
-                  }
-                />
-
-                <DeleteCustomerModal
-                  customerId={customerId}
-                  customerFullName={customerFullName}
-                />
-              </ClearCustomerImageUrlProvider>
-            </UpdateCustomerImageProvider>
-          </UpdateCustomerImageFileProvider>
+          <DeleteCustomerModal
+            customerId={customerId}
+            customerFullName={customerFullName}
+          />
         </UpdateCustomerProvider>
       </DeleteCustomerProvider>
 

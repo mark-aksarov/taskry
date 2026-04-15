@@ -6,12 +6,10 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { SubtaskList } from "@/components/subtasks/SubtaskList";
 import { TaskDetailAlt } from "@/components/tasks/TaskDetailAlt";
-import { TaskDetailHeader } from "@/components/tasks/TaskDetailHeader";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
-import { withDeleteTaskProvider } from "@/components/tasks/DeleteTaskProvider/__stories__";
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
 import { withUpdateTaskTitleProvider } from "@/components/tasks/UpdateTaskTitleProvider/__stories__";
 import { withUpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusProvider/__stories__";
@@ -36,14 +34,10 @@ const meta = {
     withUpdateTaskDescriptionProvider,
     withUpdateTaskTitleProvider,
     withUpdateTaskStatusProvider,
-    withDeleteTaskProvider,
     withCreateSubtaskProvider,
     SharedPageDecorator,
     withThemedBackground,
   ],
-  globals: {
-    viewport: { value: "mobile2", isRotated: false },
-  },
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/tasks/1");
     mocked(useParams).mockReturnValue({
@@ -57,12 +51,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    subtasksContainer: <SubtaskList {...SubtaskListStory.args} />,
-    taskDetailContainer: <TaskDetailAlt {...mockedTaskDetail} />,
-    taskHeaderContainer: (
-      <TaskDetailHeader
-        taskTitle={mockedTaskDetail.title}
-        categoryName={mockedTaskDetail.category?.name}
+    taskDetailContainer: (
+      <TaskDetailAlt
+        {...mockedTaskDetail}
+        subtasksList={<SubtaskList {...SubtaskListStory.args} />}
       />
     ),
   },
@@ -82,9 +74,6 @@ export const WithoutOptionalTaskData = {
         deadline={mockedTaskDetail.deadline}
         status={mockedTaskDetail.status}
       />
-    ),
-    taskHeaderContainer: (
-      <TaskDetailHeader taskTitle={mockedTaskDetail.title} />
     ),
   },
 } satisfies Story;

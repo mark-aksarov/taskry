@@ -5,16 +5,13 @@ import { getProjectFormData } from "@/lib/data/project/project.dal";
 import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
-import { DeleteProjectProvider } from "@/components/projects/DeleteProjectProvider";
 import { UpdateProjectTitleModal } from "@/components/projects/UpdateProjectTitleModal";
 import { UpdateProjectStatusModal } from "@/components/projects/UpdateProjectStatusModal";
-import { DeleteProjectDetailModal } from "@/components/projects/DeleteProjectDetailModal";
 import { ProjectDetailAltContainer } from "@/components/projects/ProjectDetailAltContainer";
 import { UpdateProjectCustomerModal } from "@/components/projects/UpdateProjectCustomerModal";
 import { UpdateProjectTitleProvider } from "@/components/projects/UpdateProjectTitleProvider";
 import { UpdateProjectDeadlineModal } from "@/components/projects/UpdateProjectDeadlineModal";
 import { UpdateProjectStatusProvider } from "@/components/projects/UpdateProjectStatusProvider";
-import { ProjectDetailHeaderContainer } from "@/components/projects/ProjectDetailHeaderContainer";
 import { UpdateProjectCustomerProvider } from "@/components/projects/UpdateProjectCustomerProvider";
 import { UpdateProjectDescriptionModal } from "@/components/projects/UpdateProjectDescriptionModal";
 import { UpdateProjectCategoryRelModal } from "@/components/projects/UpdateProjectCategoryRelModal";
@@ -49,78 +46,66 @@ export default async function AppProjectDetailPage({
   }
 
   return (
-    <DeleteProjectProvider>
-      <UpdateProjectStatusProvider>
-        <UpdateProjectDescriptionProvider>
-          <UpdateProjectTitleProvider>
-            <UpdateProjectStatusAltProvider>
-              <UpdateProjectCategoryRelProvider>
-                <UpdateProjectDeadlineProvider>
-                  <UpdateProjectCustomerProvider>
-                    <ProjectDetailPage
-                      projectDetailContainer={
-                        <ProjectDetailAltContainer projectId={id} />
-                      }
-                      projectHeaderContainer={
-                        <ProjectDetailHeaderContainer projectId={id} />
-                      }
-                    />
+    <UpdateProjectStatusProvider>
+      <UpdateProjectDescriptionProvider>
+        <UpdateProjectTitleProvider>
+          <UpdateProjectStatusAltProvider>
+            <UpdateProjectCategoryRelProvider>
+              <UpdateProjectDeadlineProvider>
+                <UpdateProjectCustomerProvider>
+                  <ProjectDetailPage
+                    projectDetailContainer={
+                      <ProjectDetailAltContainer projectId={id} />
+                    }
+                  />
 
-                    <DeleteProjectDetailModal
-                      projectId={projectFormData.id}
-                      projectTitle={projectFormData.title}
-                    />
+                  <UpdateProjectDescriptionModal
+                    projectId={projectFormData.id}
+                    description={projectFormData.description}
+                  />
 
-                    <UpdateProjectDescriptionModal
-                      projectId={projectFormData.id}
-                      description={projectFormData.description}
-                    />
+                  <UpdateProjectTitleModal
+                    projectId={projectFormData.id}
+                    title={projectFormData.title}
+                  />
 
-                    <UpdateProjectTitleModal
-                      projectId={projectFormData.id}
-                      title={projectFormData.title}
-                    />
+                  <UpdateProjectDeadlineModal
+                    projectId={projectFormData.id}
+                    projectDeadline={projectFormData.deadline}
+                  />
 
-                    <UpdateProjectDeadlineModal
-                      projectId={projectFormData.id}
-                      projectDeadline={projectFormData.deadline}
-                    />
+                  <UpdateProjectCategoryRelModal
+                    updateProjectCategoryRelFormContainer={
+                      <UpdateProjectCategoryRelFormContainer
+                        projectId={projectFormData.id}
+                        categoryId={projectFormData.categoryId}
+                      />
+                    }
+                  />
 
-                    <UpdateProjectCategoryRelModal
-                      updateProjectCategoryRelFormContainer={
-                        <UpdateProjectCategoryRelFormContainer
-                          projectId={projectFormData.id}
-                          categoryId={projectFormData.categoryId}
-                        />
-                      }
-                    />
+                  <UpdateProjectCustomerModal
+                    updateProjectCustomerFormContainer={
+                      <UpdateProjectCustomerFormContainer
+                        projectId={projectFormData.id}
+                        customerId={projectFormData.customerId}
+                      />
+                    }
+                  />
 
-                    <UpdateProjectCustomerModal
-                      updateProjectCustomerFormContainer={
-                        <UpdateProjectCustomerFormContainer
-                          projectId={projectFormData.id}
-                          customerId={projectFormData.customerId}
-                        />
-                      }
-                    />
+                  <UpdateProjectStatusModal
+                    projectId={projectFormData.id}
+                    projectStatus={projectFormData.status}
+                  />
 
-                    <UpdateProjectStatusModal
-                      projectId={projectFormData.id}
-                      projectStatus={projectFormData.status}
-                    />
-
-                    <TaskSearchModal
-                      searchContainer={
-                        <LinkSearchContainer pathname="/tasks" />
-                      }
-                    />
-                  </UpdateProjectCustomerProvider>
-                </UpdateProjectDeadlineProvider>
-              </UpdateProjectCategoryRelProvider>
-            </UpdateProjectStatusAltProvider>
-          </UpdateProjectTitleProvider>
-        </UpdateProjectDescriptionProvider>
-      </UpdateProjectStatusProvider>
-    </DeleteProjectProvider>
+                  <TaskSearchModal
+                    searchContainer={<LinkSearchContainer pathname="/tasks" />}
+                  />
+                </UpdateProjectCustomerProvider>
+              </UpdateProjectDeadlineProvider>
+            </UpdateProjectCategoryRelProvider>
+          </UpdateProjectStatusAltProvider>
+        </UpdateProjectTitleProvider>
+      </UpdateProjectDescriptionProvider>
+    </UpdateProjectStatusProvider>
   );
 }

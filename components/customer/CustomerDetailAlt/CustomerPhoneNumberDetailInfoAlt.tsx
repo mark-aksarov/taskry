@@ -30,7 +30,7 @@ export function CustomerPhoneNumberDetailInfoAlt({
     <DetailInfoAlt
       data-test="customer-phone-number-detail-info"
       title={<DetailTitle>{t("phoneNumber")}</DetailTitle>}
-      text={<DetailText>{phoneNumber || t("noPhoneNumber")}</DetailText>}
+      content={<DetailText>{phoneNumber || t("noPhoneNumber")}</DetailText>}
       editButton={
         <DetailEditButton
           data-test="update-customer-phone-number-edit-button"

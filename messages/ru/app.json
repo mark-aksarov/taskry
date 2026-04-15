@@ -62,7 +62,7 @@
     }
   },
   "TeamProfilePage": {
-    "heading": "Профиль пользователя",
+    "heading": "Пользователь",
     "notFound": {
       "heading": "Пользователь не найден",
       "description": "Этот пользователь не существует или был удалён.",
@@ -70,10 +70,10 @@
     }
   },
   "ProfilePage": {
-    "heading": "Настройки профиля"
+    "heading": "Профиль"
   },
   "ProjectDetailPage": {
-    "heading": "Детали проекта",
+    "heading": "Проект",
     "notFound": {
       "heading": "Проект не найден",
       "description": "Этот проект не существует или был удалён.",
@@ -81,7 +81,7 @@
     }
   },
   "TaskDetailPage": {
-    "heading": "Детали задачи",
+    "heading": "Задача",
     "notFound": {
       "heading": "Задача не найдена",
       "description": "Эта задача не существует или была удалена.",
@@ -89,7 +89,7 @@
     }
   },
   "CustomerDetailPage": {
-    "heading": "Детали клиента",
+    "heading": "Клиент",
     "notFound": {
       "heading": "Клиент не найден",
       "description": "Этот клиент не существует или был удалён.",

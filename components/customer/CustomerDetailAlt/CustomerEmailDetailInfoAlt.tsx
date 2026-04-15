@@ -29,7 +29,7 @@ export function CustomerEmailDetailInfoAlt({
     <DetailInfoAlt
       data-test="customer-email-detail-info"
       title={<DetailTitle>{t("email")}</DetailTitle>}
-      text={<DetailText>{email}</DetailText>}
+      content={<DetailText>{email}</DetailText>}
       editButton={
         <DetailEditButton
           data-test="update-customer-email-edit-button"

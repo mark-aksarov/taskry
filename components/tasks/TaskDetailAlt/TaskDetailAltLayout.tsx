@@ -7,6 +7,7 @@ interface TaskDetailAltLayoutProps {
   categoryNameSlot: React.ReactNode;
   projectTitleSlot: React.ReactNode;
   statusSlot: React.ReactNode;
+  subtasksSlot: React.ReactNode;
 }
 
 export function TaskDetailAltLayout({
@@ -18,6 +19,7 @@ export function TaskDetailAltLayout({
   categoryNameSlot,
   projectTitleSlot,
   statusSlot,
+  subtasksSlot,
 }: TaskDetailAltLayoutProps) {
   return (
     <div data-test="task-detail-alt" className="flex flex-col gap-4">
@@ -29,6 +31,7 @@ export function TaskDetailAltLayout({
       {categoryNameSlot}
       {projectTitleSlot}
       {creatorSlot}
+      {subtasksSlot}
     </div>
   );
 }

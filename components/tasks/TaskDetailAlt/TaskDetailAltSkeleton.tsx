@@ -11,7 +11,8 @@ export function TaskDetailAltSkeleton() {
       categoryNameSlot={<DetailInfoSkeleton />}
       statusSlot={<DetailInfoSkeleton />}
       projectTitleSlot={<DetailInfoSkeleton />}
-      creatorSlot={<DetailInfoSkeleton className="border-none pb-0" />}
+      creatorSlot={<DetailInfoSkeleton />}
+      subtasksSlot={<DetailInfoSkeleton className="border-none pb-0" />}
     />
   );
 }

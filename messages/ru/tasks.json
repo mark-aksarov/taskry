@@ -112,7 +112,7 @@
   },
   "TaskDetailModal": {
     "dialogHeading": "Детали задачи",
-    "openInFullPage": "Открыть на полной странице"
+    "openInFullPage": "Открыть задачу"
   },
   "OnlyMyTasksSwitch": {
     "text": "Только мои задачи"

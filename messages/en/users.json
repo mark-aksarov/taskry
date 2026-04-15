@@ -118,14 +118,14 @@
     "noBirthdate": "No birthdate"
   },
   "UserDetailCard": {
-    "title": "User Information"
+    "title": "User details"
   },
   "UserDetailContainer": {
     "noPosition": "No position"
   },
   "UserDetailModal": {
     "dialogHeading": "User details",
-    "openInFullPage": "Open in full page"
+    "openInFullPage": "Open user"
   },
   "UserFiltersFormRoleCheckboxGroup": {
     "label": "Role",

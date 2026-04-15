@@ -25,7 +25,7 @@ export function DetailInfoSkeleton({ className }: { className?: string }) {
 interface DetailInfoAltProps {
   className?: string;
   title: React.ReactNode;
-  text: React.ReactNode;
+  content: React.ReactNode;
   editButton?: React.ReactNode;
   "data-test"?: string;
 }
@@ -33,7 +33,7 @@ interface DetailInfoAltProps {
 export function DetailInfoAlt({
   className,
   title,
-  text,
+  content,
   editButton,
   "data-test": dataTest,
 }: DetailInfoAltProps) {
@@ -43,7 +43,7 @@ export function DetailInfoAlt({
         {title}
         {editButton}
       </div>
-      {text}
+      {content}
     </div>
   );
 }

@@ -1,0 +1,61 @@
+import {
+  ProjectDetailAlt,
+  ProjectDetailAltSkeleton,
+} from "../ProjectDetailAlt";
+import { mockedProjectDetail } from "@/mocks/projects";
+import { ProjectDetailCard } from "./ProjectDetailCard";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
+import { withUpdateProjectTitleProvider } from "@/components/projects/UpdateProjectTitleProvider/__stories__";
+import { withUpdateProjectStatusProvider } from "@/components/projects/UpdateProjectStatusProvider/__stories__";
+import { withUpdateProjectDeadlineProvider } from "@/components/projects/UpdateProjectDeadlineProvider/__stories__";
+import { withUpdateProjectCustomerProvider } from "@/components/projects/UpdateProjectCustomerProvider/__stories__";
+import { withUpdateProjectStatusAltProvider } from "@/components/projects/UpdateProjectStatusAltProvider/__stories__";
+import { withUpdateProjectDescriptionProvider } from "@/components/projects/UpdateProjectDescriptionProvider/__stories__";
+import { withUpdateProjectCategoryRelProvider } from "@/components/projects/UpdateProjectCategoryRelProvider/__stories__";
+
+const meta = {
+  title: "components/projects/ProjectDetailCard",
+  component: ProjectDetailCard,
+  decorators: [
+    withCurrentUserProvider,
+    withUpdateProjectCustomerProvider,
+    withUpdateProjectDeadlineProvider,
+    withUpdateProjectCategoryRelProvider,
+    withUpdateProjectStatusAltProvider,
+    withUpdateProjectTitleProvider,
+    withUpdateProjectDescriptionProvider,
+    withUpdateProjectStatusProvider,
+    withModalManagerProvider,
+    withThemedBackground,
+  ],
+} satisfies Meta<typeof ProjectDetailCard>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default = {
+  args: {
+    projectDetailContainer: <ProjectDetailAlt {...mockedProjectDetail} />,
+  },
+} satisfies Story;
+
+export const WithSkeleton = {
+  args: {
+    projectDetailContainer: <ProjectDetailAltSkeleton />,
+  },
+} satisfies Story;
+
+export const WithoutOptionalProjectData = {
+  args: {
+    projectDetailContainer: (
+      <ProjectDetailAlt
+        title={mockedProjectDetail.title}
+        deadline={mockedProjectDetail.deadline}
+        status={mockedProjectDetail.status}
+      />
+    ),
+  },
+} satisfies Story;

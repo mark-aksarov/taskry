@@ -112,7 +112,7 @@
   },
   "TaskDetailModal": {
     "dialogHeading": "Task details",
-    "openInFullPage": "Open in full page"
+    "openInFullPage": "Open task"
   },
   "OnlyMyTasksSwitch": {
     "text": "Show only my tasks"

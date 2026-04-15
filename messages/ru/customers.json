@@ -97,7 +97,7 @@
   },
   "CustomerDetailModal": {
     "dialogHeading": "Детали клиента",
-    "openInFullPage": "Открыть в полном окне"
+    "openInFullPage": "Открыть клиента"
   },
   "CustomerItemActionMenuTrigger": {
     "edit": "Редактировать",

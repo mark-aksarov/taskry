@@ -28,7 +28,7 @@ export function ProjectTitleDetailInfoAlt({
     <DetailInfoAlt
       data-test="project-title-detail-info"
       title={<DetailTitle>{t("title")}</DetailTitle>}
-      text={<DetailText>{title}</DetailText>}
+      content={<DetailText>{title}</DetailText>}
       editButton={
         <DetailEditButton
           data-test="update-project-title-edit-button"

@@ -5,13 +5,11 @@ import {
 } from "@/components/common/Detail";
 
 import React from "react";
-import Image from "next/image";
-import { Badge } from "@/components/ui/Badge";
+import { useTranslations } from "next-intl";
 import { TaskDetailLayout } from "./TaskDetailLayout";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { useFormatter, useTranslations } from "next-intl";
-import { UnknownUser } from "@/components/common/UnknownUser";
-import { ImageContainer } from "@/components/common/ImageContainer";
+import { TaskDetailAssignee } from "./TaskDetailAssignee";
+import { TaskDetailDeadline } from "./TaskDetailDeadline";
 import { CreateSubtasksButton } from "@/components/subtasks/CreateSubtaskButton";
 
 interface TaskDetailProps {
@@ -54,24 +52,6 @@ export function TaskDetail({
   const tStatus = useTranslations("tasks.TaskStatus");
   const t = useTranslations("tasks.TaskDetail");
 
-  const format = useFormatter();
-
-  const formattedDeadline = deadline
-    ? format.dateTime(new Date(deadline), {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      })
-    : t("noDeadline");
-
-  const assigneeImg = assignee?.imageUrl ? (
-    <ImageContainer className="h-9 w-9">
-      <Image src={assignee.imageUrl} alt="" width={36} height={36} />
-    </ImageContainer>
-  ) : (
-    <UnknownUser className="h-9 w-9" />
-  );
-
   return (
     <TaskDetailLayout
       titleSlot={
@@ -82,27 +62,13 @@ export function TaskDetail({
       assigneesSlot={
         <DetailInfo>
           <DetailTitle>{t("assignee")}</DetailTitle>
-          <div className="flex items-center gap-2">
-            {assignee ? (
-              <>
-                {assigneeImg}
-                <DetailText>{assignee.fullName}</DetailText>
-              </>
-            ) : (
-              <>
-                <UnknownUser className="h-9 w-9" />
-                <DetailText>{t("noAssignee")}</DetailText>
-              </>
-            )}
-          </div>
+          <TaskDetailAssignee assignee={assignee} />
         </DetailInfo>
       }
       deadlineSlot={
         <DetailInfo className="md:gap-3.5">
           <DetailTitle>{t("deadline")}</DetailTitle>
-          <Badge color="gray" className="self-start">
-            {formattedDeadline}
-          </Badge>
+          <TaskDetailDeadline deadline={deadline} />
         </DetailInfo>
       }
       descriptionSlot={

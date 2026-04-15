@@ -2,7 +2,6 @@
 
 import { UpdateCustomerImageContext } from "../UpdateCustomerImageContext";
 import { useUpdateImageActionState } from "@/lib/hooks/useUpdateImageActionState";
-import { useRefreshCustomerDetail } from "@/lib/swr/hooks/useRefreshCustomerDetail";
 import { updateCustomerImageUrl } from "@/lib/actions/customer/updateCustomerImageUrl";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
@@ -15,15 +14,9 @@ interface UpdateCustomerImageProviderProps {
 export function UpdateCustomerImageProvider({
   children,
 }: UpdateCustomerImageProviderProps) {
-  // When updating the image from CustomerDetailModal, we need to revalidate (refresh) user details via SWR
-  const refreshUserDetail = useRefreshCustomerDetail();
-
   // create presigned url, then upload image to S3, then update customer image url in database
   // after success, refresh page to show new image
-  const contextValue = useUpdateImageActionState(
-    updateCustomerImageUrl,
-    refreshUserDetail,
-  );
+  const contextValue = useUpdateImageActionState(updateCustomerImageUrl);
 
   const { state } = contextValue;
 

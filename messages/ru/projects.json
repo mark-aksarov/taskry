@@ -216,7 +216,7 @@
   },
   "ProjectDetailModal": {
     "dialogHeading": "Детали проекта",
-    "openInFullPage": "Открыть в полном окне"
+    "openInFullPage": "Открыть проект"
   },
   "UpdateProjectDescriptionForm": {
     "submitButtonLabel": "Обновить описание"

@@ -125,7 +125,7 @@
   },
   "UserDetailModal": {
     "dialogHeading": "Детали пользователя",
-    "openInFullPage": "Открыть в полном окне"
+    "openInFullPage": "Открыть пользователя"
   },
   "UserFiltersFormRoleCheckboxGroup": {
     "label": "Роль",

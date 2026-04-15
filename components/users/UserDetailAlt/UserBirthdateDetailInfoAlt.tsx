@@ -40,7 +40,7 @@ export function UserBirthdateDetailInfoAlt({
       className="border-none pb-0"
       data-test="user-birthdate-detail-info"
       title={<DetailTitle>{t("birthdate")}</DetailTitle>}
-      text={<DetailText>{formattedBirthdate}</DetailText>}
+      content={<DetailText>{formattedBirthdate}</DetailText>}
       editButton={
         <DetailEditButton
           data-test="update-user-birthdate-edit-button"

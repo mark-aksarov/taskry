@@ -31,7 +31,9 @@ export function TaskProjectDetailInfoAlt({
     <DetailInfoAlt
       data-test="task-project-detail-info"
       title={<DetailTitle>{t("project")}</DetailTitle>}
-      text={<DetailText>{project ? project.title : t("noProject")}</DetailText>}
+      content={
+        <DetailText>{project ? project.title : t("noProject")}</DetailText>
+      }
       editButton={
         <DetailEditButton
           data-test="update-task-project-edit-button"

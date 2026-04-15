@@ -28,7 +28,7 @@ export function CustomerBioDetailInfoAlt({
     <DetailInfoAlt
       data-test="customer-bio-detail-info"
       title={<DetailTitle>{t("bio")}</DetailTitle>}
-      text={<DetailText>{bio || t("noBio")}</DetailText>}
+      content={<DetailText>{bio || t("noBio")}</DetailText>}
       editButton={
         <DetailEditButton
           data-test="update-customer-bio-edit-button"

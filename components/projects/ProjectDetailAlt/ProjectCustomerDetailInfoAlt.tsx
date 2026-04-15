@@ -33,7 +33,7 @@ export function ProjectCustomerDetailInfoAlt({
     <DetailInfoAlt
       data-test="project-customer-detail-info"
       title={<DetailTitle>{t("customer")}</DetailTitle>}
-      text={
+      content={
         <DetailText>
           {customer ? customer.fullName : t("noCustomer")}
         </DetailText>

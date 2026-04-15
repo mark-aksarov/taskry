@@ -32,7 +32,7 @@ export function ProjectStatusDetailInfoAlt({
     <DetailInfoAlt
       data-test="project-status-detail-info"
       title={<DetailTitle>{t("status")}</DetailTitle>}
-      text={<DetailText>{tStatus(status)}</DetailText>}
+      content={<DetailText>{tStatus(status)}</DetailText>}
       editButton={
         <DetailEditButton
           data-test="update-project-status-edit-button"

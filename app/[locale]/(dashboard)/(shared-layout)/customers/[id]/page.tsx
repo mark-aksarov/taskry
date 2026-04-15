@@ -55,7 +55,7 @@ export default async function AppCustomerDetailPage({
   return (
     <UpdateCustomerImageFileProvider>
       <UpdateCustomerImageProvider>
-        <ClearCustomerImageUrlProvider customerId={id}>
+        <ClearCustomerImageUrlProvider>
           <DeleteCustomerProvider>
             <UpdateCustomerBioProvider>
               <UpdateCustomerFullNameProvider>

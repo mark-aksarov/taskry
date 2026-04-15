@@ -38,7 +38,7 @@ export function ProjectDeadlineDetailInfoAlt({
     <DetailInfoAlt
       data-test="project-deadline-detail-info"
       title={<DetailTitle>{t("deadline")}</DetailTitle>}
-      text={<DetailText>{formattedBirthdate}</DetailText>}
+      content={<DetailText>{formattedBirthdate}</DetailText>}
       editButton={
         <DetailEditButton
           data-test="update-project-deadline-edit-button"

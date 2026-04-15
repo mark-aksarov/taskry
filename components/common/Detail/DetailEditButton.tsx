@@ -5,7 +5,7 @@ export function DetailEditButton(props: ButtonProps) {
   return (
     <Button
       {...props}
-      className="-m-2 rounded-full"
+      className="-m-2 rounded-full text-gray-500 dark:text-gray-400"
       variant="ghost"
       size="small"
       iconLeft={

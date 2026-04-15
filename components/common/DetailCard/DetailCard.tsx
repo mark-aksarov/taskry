@@ -16,7 +16,7 @@ export function DetailCard({
     <Card
       data-test={dataTest}
       className={twMerge(
-        "m-auto flex max-h-full p-0 max-2xl:w-full max-md:hidden 2xl:w-[1024px]",
+        "m-auto flex p-0 max-2xl:w-full max-md:hidden 2xl:w-[1024px]",
         className,
       )}
     >

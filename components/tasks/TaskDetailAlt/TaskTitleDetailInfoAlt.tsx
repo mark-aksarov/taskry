@@ -26,7 +26,7 @@ export function TaskTitleDetailInfoAlt({ title }: TaskTitleDetailInfoAltProps) {
     <DetailInfoAlt
       data-test="task-title-detail-info"
       title={<DetailTitle>{t("title")}</DetailTitle>}
-      text={<DetailText>{title}</DetailText>}
+      content={<DetailText>{title}</DetailText>}
       editButton={
         <DetailEditButton
           data-test="update-task-title-edit-button"

@@ -2,6 +2,7 @@ import {
   DetailText,
   DetailTitle,
   DetailInfoAlt,
+  DetailInfo,
 } from "@/components/common/Detail";
 
 import { useTranslations } from "next-intl";
@@ -14,6 +15,7 @@ import { TaskDeadlineDetailInfoAlt } from "./TaskDeadlineDetailInfoAlt";
 import { TaskAssigneeDetailInfoAlt } from "./TaskAssigneeDetailInfoAlt";
 import { TaskCategoryDetailInfoAlt } from "./TaskCategoryDetailInfoAlt";
 import { TaskDescriptionDetailInfoAlt } from "./TaskDescriptionDetailInfoAlt";
+import { CreateSubtasksButton } from "@/components/subtasks/CreateSubtaskButton";
 
 interface TaskDetailAltProps {
   title: string;
@@ -37,6 +39,7 @@ interface TaskDetailAltProps {
     title: string;
   };
   status: TaskStatus;
+  subtasksList?: React.ReactNode;
 }
 
 export function TaskDetailAlt({
@@ -48,6 +51,7 @@ export function TaskDetailAlt({
   category,
   project,
   status,
+  subtasksList,
 }: TaskDetailAltProps) {
   const t = useTranslations("tasks.TaskDetail");
 
@@ -64,9 +68,8 @@ export function TaskDetailAlt({
       projectTitleSlot={<TaskProjectDetailInfoAlt project={project} />}
       creatorSlot={
         <DetailInfoAlt
-          className="border-none pb-0"
           title={<DetailTitle>{t("creator")}</DetailTitle>}
-          text={
+          content={
             creator ? (
               <DetailText>{creator.fullName}</DetailText>
             ) : (
@@ -74,6 +77,13 @@ export function TaskDetailAlt({
             )
           }
         />
+      }
+      subtasksSlot={
+        <DetailInfo className="border-none pb-0">
+          <DetailTitle>{t("subtasks")}</DetailTitle>
+          {subtasksList}
+          <CreateSubtasksButton />
+        </DetailInfo>
       }
     />
   );

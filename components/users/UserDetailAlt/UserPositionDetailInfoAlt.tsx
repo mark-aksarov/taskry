@@ -30,7 +30,7 @@ export function UserPositionDetailInfoAlt({
     <DetailInfoAlt
       data-test="user-position-detail-info"
       title={<DetailTitle>{t("position")}</DetailTitle>}
-      text={<DetailText>{position?.name || t("noPosition")}</DetailText>}
+      content={<DetailText>{position?.name || t("noPosition")}</DetailText>}
       editButton={
         <DetailEditButton
           data-test="update-user-position-edit-button"
