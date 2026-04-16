@@ -31,13 +31,14 @@ export function UserPublicLinkDetailInfoAlt({
       data-test="user-public-link-detail-info"
       title={<DetailTitle>{t("publicLink")}</DetailTitle>}
       content={<DetailText>{publicLink || t("noPublicLink")}</DetailText>}
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-user-public-link-edit-button"
           isPending={isUpdateUserPublicLinkPending}
           onPress={() => onUpdatePublicLinkModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

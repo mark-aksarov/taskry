@@ -29,13 +29,14 @@ export function CustomerBioDetailInfoAlt({
       data-test="customer-bio-detail-info"
       title={<DetailTitle>{t("bio")}</DetailTitle>}
       content={<DetailText>{bio || t("noBio")}</DetailText>}
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-customer-bio-edit-button"
           isPending={isUpdateCustomerBioPending}
           onPress={() => onUpdateBioModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

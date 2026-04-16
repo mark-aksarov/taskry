@@ -9,8 +9,7 @@ import { useTranslations } from "next-intl";
 import { TaskDetailLayout } from "./TaskDetailLayout";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { TaskDetailAssignee } from "./TaskDetailAssignee";
-import { TaskDetailDeadline } from "./TaskDetailDeadline";
-import { CreateSubtasksButton } from "@/components/subtasks/CreateSubtaskButton";
+import { DeadlineBadge } from "@/components/common/DeadlineBadge";
 
 interface TaskDetailProps {
   title: string;
@@ -68,7 +67,7 @@ export function TaskDetail({
       deadlineSlot={
         <DetailInfo className="md:gap-3.5">
           <DetailTitle>{t("deadline")}</DetailTitle>
-          <TaskDetailDeadline deadline={deadline} />
+          <DeadlineBadge deadline={deadline} className="self-start" />
         </DetailInfo>
       }
       descriptionSlot={

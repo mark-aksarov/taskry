@@ -8,9 +8,9 @@ import {
 
 import { memo } from "react";
 import { BaseTaskItemProps } from "../TaskItem";
-import { TaskItemBaseBadge } from "../TaskItemBaseBadge";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { useSelectedTasks } from "../SelectedTasksContext";
+import { TaskItemStatusBadge } from "../TaskItemStatusBadge";
 import { TaskGridItemProgress } from "./TaskGridItemProgress";
 import { ListItemTitleButton } from "@/components/common/List";
 import { ItemBaseDeadline } from "@/components/common/ItemBase";
@@ -106,7 +106,7 @@ export const TaskGridItemLargeInner = memo(function TaskGridItemLargeInner({
         />
       }
       statusSlot={
-        <TaskItemBaseBadge taskId={id} deadline={deadline} status={status} />
+        <TaskItemStatusBadge taskId={id} deadline={deadline} status={status} />
       }
       progressSlot={
         <TaskGridItemProgress

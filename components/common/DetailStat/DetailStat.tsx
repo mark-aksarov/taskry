@@ -1,0 +1,29 @@
+import { Skeleton } from "@/components/ui/Skeleton";
+
+interface DetailStatProps {
+  value: React.ReactNode;
+  text: React.ReactNode;
+  icon?: React.ReactNode;
+}
+
+export function DetailStat({ value, text, icon }: DetailStatProps) {
+  return (
+    <div className="flex flex-1 flex-col gap-2 rounded-md bg-gray-50 p-4 dark:bg-gray-700/30">
+      {value}
+      <div className="flex items-center gap-2">
+        {icon}
+        {text}
+      </div>
+    </div>
+  );
+}
+
+export function DetailStatSkeleton() {
+  return (
+    <DetailStat
+      value={<Skeleton size="base" className="w-[5rem]" />}
+      text={<Skeleton size="sm" className="w-[7rem]" />}
+      icon={null}
+    />
+  );
+}

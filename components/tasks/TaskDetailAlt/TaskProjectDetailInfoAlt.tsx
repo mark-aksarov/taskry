@@ -34,13 +34,14 @@ export function TaskProjectDetailInfoAlt({
       content={
         <DetailText>{project ? project.title : t("noProject")}</DetailText>
       }
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-task-project-edit-button"
           isPending={isUpdateTaskProjectPending}
           onPress={() => onUpdateProjectModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

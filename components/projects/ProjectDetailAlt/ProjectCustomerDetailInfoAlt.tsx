@@ -38,13 +38,14 @@ export function ProjectCustomerDetailInfoAlt({
           {customer ? customer.fullName : t("noCustomer")}
         </DetailText>
       }
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-project-customer-edit-button"
           isPending={isUpdateProjectCustomerPending}
           onPress={() => onUpdateCustomerModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

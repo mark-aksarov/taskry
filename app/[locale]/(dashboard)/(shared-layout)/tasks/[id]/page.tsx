@@ -19,13 +19,14 @@ import { UpdateTaskProjectProvider } from "@/components/tasks/UpdateTaskProjectP
 import { UpdateTaskDescriptionModal } from "@/components/tasks/UpdateTaskDescriptionModal";
 import { UpdateTaskDeadlineProvider } from "@/components/tasks/UpdateTaskDeadlineProvider";
 import { UpdateTaskAssigneeProvider } from "@/components/tasks/UpdateTaskAssigneeProvider";
+import { UpdateTaskCategoryRelModal } from "@/components/tasks/UpdateTaskCategoryRelModal";
 import { UpdateTaskStatusAltProvider } from "@/components/tasks/UpdateTaskStatusAltProvider";
 import { UpdateTaskDescriptionProvider } from "@/components/tasks/UpdateTaskDescriptionProvider";
-import { UpdateTaskCategoryRelModal } from "@/components/tasks/UpdateTaskCategoryRelModal";
+import { UpdateTaskCategoryRelProvider } from "@/components/tasks/UpdateTaskCategoryRelProvider";
 import { UpdateTaskProjectFormContainer } from "@/components/tasks/UpdateTaskProjectFormContainer";
 import { UpdateTaskAssigneeFormContainer } from "@/components/tasks/UpdateTaskAssigneeFormContainer";
-import { UpdateTaskCategoryRelProvider } from "@/components/tasks/UpdateTaskCategoryRelProvider";
 import { UpdateTaskCategoryRelFormContainer } from "@/components/tasks/UpdateTaskCategoryRelFormContainer";
+import { TaskDetailCardHeaderContainer } from "@/components/tasks/TaskDetailCardHeaderContainer";
 
 export default async function AppTaskDetailPage({
   params,
@@ -61,6 +62,9 @@ export default async function AppTaskDetailPage({
                   <UpdateTaskCategoryRelProvider>
                     <UpdateTaskProjectProvider>
                       <TaskDetailPage
+                        taskDetailCardHeaderContainer={
+                          <TaskDetailCardHeaderContainer taskId={id} />
+                        }
                         taskDetailContainer={
                           <TaskDetailAltContainer taskId={id} />
                         }

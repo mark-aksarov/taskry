@@ -1,1 +1,2 @@
-export { Default as SubtaskListStory } from "./SubtaskList.stories";
+export { Plain as SubtaskListPlainStory } from "./SubtaskList.stories";
+export { Rich as SubtaskListRichStory } from "./SubtaskList.stories";

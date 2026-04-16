@@ -29,6 +29,6 @@ export const Default = {
   args: {
     subtaskId: 1,
     taskId: 1,
-    subtaskText: "Subtask 1",
+    subtaskText: "Subtask placeholder text 1",
   },
 } satisfies Story;

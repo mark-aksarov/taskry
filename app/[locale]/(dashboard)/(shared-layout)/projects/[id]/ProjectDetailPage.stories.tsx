@@ -7,6 +7,7 @@ import { useParams, usePathname } from "next/navigation";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectDetailAlt } from "@/components/projects/ProjectDetailAlt";
+import { ProjectDetailCardHeader } from "@/components/projects/ProjectDetailCard";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
 import { withDeleteProjectProvider } from "@/components/projects/DeleteProjectProvider/__stories__";
 import { withUpdateProjectTitleProvider } from "@/components/projects/UpdateProjectTitleProvider/__stories__";
@@ -47,6 +48,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    projectDetailCardHeaderContainer: (
+      <ProjectDetailCardHeader
+        projectStatus={mockedProjectDetail.status}
+        projectDeadline={mockedProjectDetail.deadline}
+      />
+    ),
     projectDetailContainer: <ProjectDetailAlt {...mockedProjectDetail} />,
   },
 } satisfies Story;
@@ -64,6 +71,7 @@ export const WithoutSomeData = {
         title={mockedProjectDetail.title}
         status={mockedProjectDetail.status}
         deadline={mockedProjectDetail.deadline}
+        tasks={mockedProjectDetail.tasks}
       />
     ),
   },

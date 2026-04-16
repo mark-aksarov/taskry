@@ -55,12 +55,29 @@ export const getProjectDetail = cache(
             name: true,
           },
         },
+
+        tasks: {
+          select: {
+            status: true,
+          },
+        },
       },
     });
 
     if (!project) {
       return null;
     }
+
+    const totalTasks = project.tasks.length;
+    const activeTasks = project.tasks.filter(
+      (t) => t.status === "active",
+    ).length;
+    const pendingTasks = project.tasks.filter(
+      (t) => t.status === "pending",
+    ).length;
+    const completedTasks = project.tasks.filter(
+      (t) => t.status === "completed",
+    ).length;
 
     // Map to DTO
     return {
@@ -85,6 +102,12 @@ export const getProjectDetail = cache(
           }
         : undefined,
       category: project.category ?? undefined,
+      tasks: {
+        total: totalTasks,
+        completed: completedTasks,
+        active: activeTasks,
+        pending: pendingTasks,
+      },
     };
   },
 );
@@ -272,7 +295,7 @@ export const getProjectList = cache(
       items: items.map((p) => {
         const totalTasks = p.tasks.length;
         const completedTasks = p.tasks.filter(
-          (t: any) => t.status === "completed",
+          (t) => t.status === "completed",
         ).length;
 
         return {

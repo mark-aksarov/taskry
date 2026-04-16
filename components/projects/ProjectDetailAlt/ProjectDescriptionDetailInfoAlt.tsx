@@ -35,13 +35,14 @@ export function ProjectDescriptionDetailInfoAlt({
           {description ? description : t("noDescription")}
         </DetailText>
       }
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-project-description-edit-button"
           isPending={isUpdateProjectDescriptionPending}
           onPress={() => onUpdateDescriptionModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

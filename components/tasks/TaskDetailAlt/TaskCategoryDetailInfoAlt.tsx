@@ -35,13 +35,14 @@ export function TaskCategoryDetailInfoAlt({
       content={
         <DetailText>{category ? category.name : t("noCategory")}</DetailText>
       }
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-task-category-edit-button"
           isPending={isUpdateTaskCategoryPending}
           onPress={() => onUpdateCategoryModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

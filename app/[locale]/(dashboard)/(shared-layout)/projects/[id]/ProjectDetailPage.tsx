@@ -5,12 +5,15 @@ import { ToolbarMobile } from "@/components/common/Toolbar";
 import { PageContainer } from "@/components/common/PageContainer";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { ProjectDetailCard } from "@/components/projects/ProjectDetailCard";
+import { ProjectDetailDeleteButton } from "@/components/projects/ProjectDetailDeleteButton";
 
 interface ProjectPageProps {
+  projectDetailCardHeaderContainer: React.ReactNode;
   projectDetailContainer: React.ReactNode;
 }
 
 export function ProjectDetailPage({
+  projectDetailCardHeaderContainer,
   projectDetailContainer,
 }: ProjectPageProps) {
   const t = useTranslations("app.ProjectDetailPage");
@@ -25,9 +28,13 @@ export function ProjectDetailPage({
               <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
             </>
           }
+          secondSlot={<ProjectDetailDeleteButton />}
         />
 
-        <ProjectDetailCard projectDetailContainer={projectDetailContainer} />
+        <ProjectDetailCard
+          projectDetailCardHeaderContainer={projectDetailCardHeaderContainer}
+          projectDetailContainer={projectDetailContainer}
+        />
       </PageGrid>
     </PageContainer>
   );

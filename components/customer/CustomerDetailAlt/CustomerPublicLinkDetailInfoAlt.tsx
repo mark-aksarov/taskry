@@ -32,13 +32,14 @@ export function CustomerPublicLinkDetailInfoAlt({
       className="border-none pb-0"
       title={<DetailTitle>{t("publicLink")}</DetailTitle>}
       content={<DetailText>{publicLink || t("noPublicLink")}</DetailText>}
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-customer-public-link-edit-button"
           isPending={isUpdateCustomerPublicLinkPending}
           onPress={() => onUpdatePublicLinkModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

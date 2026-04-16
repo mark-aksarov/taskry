@@ -37,6 +37,7 @@ async function ProjectDetailAltContainerInner({
       customer={project.customer}
       category={project.category}
       status={project.status}
+      tasks={project.tasks}
     />
   );
 }

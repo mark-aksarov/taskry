@@ -31,13 +31,14 @@ export function CustomerPhoneNumberDetailInfoAlt({
       data-test="customer-phone-number-detail-info"
       title={<DetailTitle>{t("phoneNumber")}</DetailTitle>}
       content={<DetailText>{phoneNumber || t("noPhoneNumber")}</DetailText>}
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-customer-phone-number-edit-button"
           isPending={isUpdateCustomerPhoneNumberPending}
           onPress={() => onUpdatePhoneNumberModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

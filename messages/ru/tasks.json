@@ -154,7 +154,6 @@
     }
   },
   "TaskDetail": {
-    "noDeadline": "Без срока",
     "deadline": "Срок",
     "description": "Описание",
     "noDescription": "Нет описания",
@@ -168,7 +167,9 @@
     "status": "Статус",
     "subtasks": "Подзадачи",
     "noCategory": "Нет категории",
-    "title": "Заголовок"
+    "title": "Заголовок",
+    "progress": "Прогресс",
+    "noSubtasks": "Пока нет ни одной подзадачи"
   },
   "TaskDetailHeader": {
     "noCategory": "Нет категории"

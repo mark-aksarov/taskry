@@ -6,6 +6,7 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { ProjectDetailCard } from "@/components/projects/ProjectDetailCard";
 import { ProjectDetailAltSkeleton } from "@/components/projects/ProjectDetailAlt";
+import { ProjectDetailCardHeaderSkeleton } from "@/components/projects/ProjectDetailCard";
 
 export default function AppProjectDetailLoading() {
   const t = useTranslations("app.ProjectDetailPage");
@@ -23,6 +24,7 @@ export default function AppProjectDetailLoading() {
         />
 
         <ProjectDetailCard
+          projectDetailCardHeaderContainer={<ProjectDetailCardHeaderSkeleton />}
           projectDetailContainer={<ProjectDetailAltSkeleton />}
         />
       </PageGrid>

@@ -17,4 +17,4 @@ export { GridItemContactText } from "./GridItemContactText";
 export { GridItemPhoneNumber } from "./GridItemPhoneNumber";
 export { GridItemInfo, GridItemInfoSkeleton } from "./GridItemInfo";
 export { GridItemContactIconWrapper } from "./GridItemContactIconWrapper";
-export { GridItemProgress, GridItemProgressSkeleton } from "./GridItemProgress";
+export { GridItemProgress } from "./GridItemProgress";

@@ -1,7 +1,15 @@
 import { BadgeColor } from "@/components/ui/Badge";
 import { TaskStatus } from "@/generated/prisma/enums";
 
-export function getTaskStatusBadgeColor(status: TaskStatus): BadgeColor {
+export function getTaskStatusBadgeColor(
+  status: TaskStatus,
+  deadline: string,
+): BadgeColor {
+  const isOverdue =
+    new Date(deadline) < new Date() && status !== TaskStatus.completed;
+
+  if (isOverdue) return "red";
+
   switch (status) {
     case "pending":
       return "orange";

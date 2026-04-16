@@ -6,6 +6,7 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { TaskDetailCard } from "@/components/tasks/TaskDetailCard";
 import { TaskDetailAltSkeleton } from "@/components/tasks/TaskDetailAlt";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
+import { TaskDetailCardHeaderSkeleton } from "@/components/tasks/TaskDetailCard";
 
 export default function AppTaskDetailLoading() {
   const t = useTranslations("app.TaskDetailPage");
@@ -22,7 +23,10 @@ export default function AppTaskDetailLoading() {
           }
         />
 
-        <TaskDetailCard taskDetailContainer={<TaskDetailAltSkeleton />} />
+        <TaskDetailCard
+          taskDetailCardHeaderContainer={<TaskDetailCardHeaderSkeleton />}
+          taskDetailContainer={<TaskDetailAltSkeleton />}
+        />
       </PageGrid>
     </PageContainer>
   );

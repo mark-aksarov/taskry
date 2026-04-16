@@ -1,7 +1,7 @@
 import { SubtasksCard } from "../SubtasksCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { SubtaskListStory } from "../SubtaskList/__stories__";
 import { SubtaskList, SubtaskListSkeleton } from "../SubtaskList";
+import { SubtaskListPlainStory } from "../SubtaskList/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    subtasksContainer: <SubtaskList {...SubtaskListStory.args} />,
+    subtasksContainer: <SubtaskList {...SubtaskListPlainStory.args} />,
   },
 } satisfies Story;
 

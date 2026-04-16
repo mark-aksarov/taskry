@@ -1,18 +1,18 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ProjectItemBaseBadge } from "./ProjectItemBaseBadge";
+import { ProjectItemStatusBadge } from "./ProjectItemStatusBadge";
 import { withSelectedProjectsProvider } from "../SelectedProjectsContext/__stories__";
 import { withUpdateProjectStatusProvider } from "../UpdateProjectStatusProvider/__stories__";
 import { withUpdateProjectStatusesProvider } from "../UpdateProjectStatusesProvider/__stories__";
 
-const meta: Meta<typeof ProjectItemBaseBadge> = {
-  title: "components/projects/ProjectItemBaseBadge",
-  component: ProjectItemBaseBadge,
+const meta: Meta<typeof ProjectItemStatusBadge> = {
+  title: "components/projects/ProjectItemStatusBadge",
+  component: ProjectItemStatusBadge,
   decorators: [
     withUpdateProjectStatusProvider,
     withUpdateProjectStatusesProvider,
     withSelectedProjectsProvider,
   ],
-} satisfies Meta<typeof ProjectItemBaseBadge>;
+} satisfies Meta<typeof ProjectItemStatusBadge>;
 
 export default meta;
 export type Story = StoryObj<typeof meta>;

@@ -1,12 +1,13 @@
 import { Badge } from "@/components/ui/Badge";
 import { useFormatter, useTranslations } from "next-intl";
 
-interface TaskDetailDeadlineProps {
+interface DeadlineBadgeProps {
+  className?: string;
   deadline?: string;
 }
 
-export function TaskDetailDeadline({ deadline }: TaskDetailDeadlineProps) {
-  const t = useTranslations("tasks.TaskDetail");
+export function DeadlineBadge({ className, deadline }: DeadlineBadgeProps) {
+  const t = useTranslations("common.DeadlineBadge");
 
   const format = useFormatter();
 
@@ -19,7 +20,7 @@ export function TaskDetailDeadline({ deadline }: TaskDetailDeadlineProps) {
     : t("noDeadline");
 
   return (
-    <Badge color="gray" className="self-start">
+    <Badge color="gray" className={className}>
       {formattedDeadline}
     </Badge>
   );

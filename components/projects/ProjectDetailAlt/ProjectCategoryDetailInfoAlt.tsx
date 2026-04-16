@@ -36,13 +36,14 @@ export function ProjectCategoryDetailInfoAlt({
       content={
         <DetailText>{category ? category.name : t("noCategory")}</DetailText>
       }
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-project-category-edit-button"
           isPending={isUpdateProjectCategoryPending}
           onPress={() => onUpdateCategoryModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

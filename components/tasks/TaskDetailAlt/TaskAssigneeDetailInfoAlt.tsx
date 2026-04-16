@@ -36,13 +36,14 @@ export function TaskAssigneeDetailInfoAlt({
           {assignee ? assignee.fullName : t("noAssignee")}
         </DetailText>
       }
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-task-assignee-edit-button"
           isPending={isUpdateTaskAssigneePending}
           onPress={() => onUpdateAssigneeModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

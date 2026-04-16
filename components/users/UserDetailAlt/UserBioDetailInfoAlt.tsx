@@ -27,13 +27,14 @@ export function UserBioDetailInfoAlt({ bio }: UserBioDetailInfoAltProps) {
       data-test="user-bio-detail-info"
       title={<DetailTitle>{t("bio")}</DetailTitle>}
       content={<DetailText>{bio || t("noBio")}</DetailText>}
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-user-bio-edit-button"
           isPending={isUpdateUserBioPending}
           onPress={() => onUpdateBioModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

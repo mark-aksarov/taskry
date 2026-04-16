@@ -14,15 +14,18 @@ import { useToggleSubtask } from "../ToggleSubtaskContext";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useSubtaskListItemPending } from "../SubtaskListItem/useSubtaskListItemPending";
+import { twMerge } from "tailwind-merge";
 
 interface SubtaskActionMenuTriggerProps {
   subtaskId: number;
   isDone: boolean;
+  buttonClassName?: string;
 }
 
 export function SubtaskActionMenuTrigger({
   subtaskId,
   isDone,
+  buttonClassName,
 }: SubtaskActionMenuTriggerProps) {
   const t = useTranslations("subtasks.SubtaskActionMenuTrigger");
 
@@ -64,7 +67,10 @@ export function SubtaskActionMenuTrigger({
           isPending={isPending}
           data-test="subtask-item-action-menu-trigger"
           data-id={subtaskId}
-          className="-mx-2 -mt-1.25 shrink-0 self-start"
+          className={twMerge(
+            "-mx-2 -my-1.25 shrink-0 self-start",
+            buttonClassName,
+          )}
         />
       )}
     >

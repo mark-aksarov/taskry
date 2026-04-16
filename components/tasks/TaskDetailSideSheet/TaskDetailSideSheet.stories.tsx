@@ -9,7 +9,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SubtaskList } from "@/components/subtasks/SubtaskList";
 import { TaskDetail, TaskDetailSkeleton } from "../TaskDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
+import { SubtaskListPlainStory } from "@/components/subtasks/SubtaskList/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
 const meta = {
@@ -37,7 +37,7 @@ export const Default = {
     taskDetailContainer: (
       <TaskDetail
         {...task}
-        subtasksList={<SubtaskList {...SubtaskListStory.args} />}
+        subtasksList={<SubtaskList {...SubtaskListPlainStory.args} />}
       />
     ),
   },

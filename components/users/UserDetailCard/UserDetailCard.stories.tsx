@@ -2,8 +2,8 @@ import { mocked } from "storybook/test";
 import { UserDetailAlt } from "../UserDetailAlt";
 import { mockedUserDetail } from "@/mocks/users";
 import { UserDetailCard } from "./UserDetailCard";
-import { UserDetailSkeleton } from "../UserDetail";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { UserDetailAltSkeleton } from "../UserDetailAlt";
 import { useParams, usePathname } from "next/navigation";
 import { UserNavigationLarge } from "../UserNavigationLarge";
 import { UserDetailHeaderInteractive } from "../UserDetailHeader";
@@ -76,7 +76,7 @@ export const Default = {
 
 export const Loading = {
   args: {
-    userDetailContainer: <UserDetailSkeleton />,
+    userDetailContainer: <UserDetailAltSkeleton />,
     userDetailHeaderContainer: <DetailHeaderSkeleton />,
     navigationLarge: (
       <UserNavigationLarge userActions={<ProfileActionsSkeleton />} />

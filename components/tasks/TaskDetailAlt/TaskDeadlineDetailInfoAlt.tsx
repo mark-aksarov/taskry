@@ -37,13 +37,14 @@ export function TaskDeadlineDetailInfoAlt({
       data-test="task-deadline-detail-info"
       title={<DetailTitle>{t("deadline")}</DetailTitle>}
       content={<DetailText>{formattedBirthdate}</DetailText>}
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-task-deadline-edit-button"
           isPending={isUpdateTaskDeadlinePending}
           onPress={() => onUpdateBirthdateModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

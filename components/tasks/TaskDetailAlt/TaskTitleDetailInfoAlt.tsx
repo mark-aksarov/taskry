@@ -27,13 +27,14 @@ export function TaskTitleDetailInfoAlt({ title }: TaskTitleDetailInfoAltProps) {
       data-test="task-title-detail-info"
       title={<DetailTitle>{t("title")}</DetailTitle>}
       content={<DetailText>{title}</DetailText>}
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-task-title-edit-button"
           isPending={isUpdateTaskTitlePending}
           onPress={() => onUpdateTitleModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

@@ -1,15 +1,12 @@
 import {
-  GridItemInfoSkeleton,
-  GridItemProgressSkeleton,
-} from "@/components/common/Grid";
-
-import {
   ItemBaseBadgeSkeleton,
   ItemBaseButtonSkeleton,
   ItemBaseActionMenuTriggerSkeleton,
 } from "@/components/common/ItemBase";
 
+import { ProgressSkeleton } from "@/components/ui/Skeleton";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
+import { GridItemInfoSkeleton } from "@/components/common/Grid";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
 import { CheckboxSkeleton } from "@/components/ui/Skeleton/CheckboxSkeleton";
 
@@ -34,7 +31,7 @@ function ProjectGridItemSkeleton({
       }
       commentsSlot={<ItemBaseButtonSkeleton />}
       statusSlot={<ItemBaseBadgeSkeleton />}
-      progressSlot={<GridItemProgressSkeleton />}
+      progressSlot={<ProgressSkeleton />}
     />
   );
 }

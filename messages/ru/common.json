@@ -104,5 +104,11 @@
   },
   "BackButton": {
     "label": "Назад"
+  },
+  "ProgressDetailInfoAlt": {
+    "progress": "Прогресс"
+  },
+  "DeadlineBadge": {
+    "noDeadline": "Без срока"
   }
 }

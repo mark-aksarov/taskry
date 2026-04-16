@@ -33,13 +33,14 @@ export function ProjectStatusDetailInfoAlt({
       data-test="project-status-detail-info"
       title={<DetailTitle>{t("status")}</DetailTitle>}
       content={<DetailText>{tStatus(status)}</DetailText>}
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-project-status-edit-button"
           isPending={isUpdateProjectStatusPending}
           onPress={() => onUpdateStatusModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

@@ -41,13 +41,14 @@ export function UserBirthdateDetailInfoAlt({
       data-test="user-birthdate-detail-info"
       title={<DetailTitle>{t("birthdate")}</DetailTitle>}
       content={<DetailText>{formattedBirthdate}</DetailText>}
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-user-birthdate-edit-button"
           isPending={isUpdateUserBirthdatePending}
           onPress={() => onUpdateBirthdateModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

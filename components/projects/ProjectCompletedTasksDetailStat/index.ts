@@ -1,0 +1,1 @@
+export { ProjectCompletedTasksDetailStat } from "./ProjectCompletedTasksDetailStat";

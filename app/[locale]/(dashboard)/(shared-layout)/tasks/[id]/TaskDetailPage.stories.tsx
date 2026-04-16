@@ -8,8 +8,9 @@ import { SubtaskList } from "@/components/subtasks/SubtaskList";
 import { TaskDetailAlt } from "@/components/tasks/TaskDetailAlt";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
+import { TaskDetailCardHeader } from "@/components/tasks/TaskDetailCard";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
+import { SubtaskListRichStory } from "@/components/subtasks/SubtaskList/__stories__";
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
 import { withUpdateTaskTitleProvider } from "@/components/tasks/UpdateTaskTitleProvider/__stories__";
 import { withUpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusProvider/__stories__";
@@ -51,10 +52,17 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    taskDetailCardHeaderContainer: (
+      <TaskDetailCardHeader
+        taskStatus={mockedTaskDetail.status}
+        taskDeadline={mockedTaskDetail.deadline}
+      />
+    ),
     taskDetailContainer: (
       <TaskDetailAlt
         {...mockedTaskDetail}
-        subtasksList={<SubtaskList {...SubtaskListStory.args} />}
+        progress={75}
+        subtasksList={<SubtaskList {...SubtaskListRichStory.args} />}
       />
     ),
   },
@@ -73,6 +81,7 @@ export const WithoutOptionalTaskData = {
         title={mockedTaskDetail.title}
         deadline={mockedTaskDetail.deadline}
         status={mockedTaskDetail.status}
+        progress={75}
       />
     ),
   },

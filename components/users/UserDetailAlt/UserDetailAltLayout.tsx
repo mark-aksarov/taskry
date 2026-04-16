@@ -20,7 +20,7 @@ export function UserDetailAltLayout({
   birthdateSlot,
 }: UserDetailAltProps) {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col max-md:gap-4 md:gap-6">
       {bioSlot}
       {fullNameSlot}
       {positionSlot}

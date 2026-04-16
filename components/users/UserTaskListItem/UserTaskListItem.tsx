@@ -14,7 +14,7 @@ import { memo } from "react";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { SelectableItem } from "@/components/common/SelectableItem";
-import { TaskItemBaseBadge } from "@/components/tasks/TaskItemBaseBadge";
+import { TaskItemStatusBadge } from "@/components/tasks/TaskItemStatusBadge";
 import { useSelectedTasks } from "@/components/tasks/SelectedTasksContext";
 import { ListItemText, ListItemTitleButton } from "@/components/common/List";
 import { TaskItemCheckbox } from "@/components/tasks/TaskItem/TaskItemCheckbox";
@@ -62,7 +62,7 @@ export const UserTaskListItemInner = memo(function UserTaskListItemInner({
         </>
       }
       statusSlot={
-        <TaskItemBaseBadge taskId={id} deadline={deadline} status={status} />
+        <TaskItemStatusBadge taskId={id} deadline={deadline} status={status} />
       }
       commentsModalTriggerSlot={
         <ItemBaseCommentsButton

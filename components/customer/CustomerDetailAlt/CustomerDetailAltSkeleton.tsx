@@ -1,15 +1,15 @@
-import { DetailInfoSkeleton } from "@/components/common/Detail";
+import { DetailInfoAltSkeleton } from "@/components/common/Detail";
 import { CustomerDetailAltLayout } from "./CustomerDetailAltLayout";
 
 export function CustomerDetailAltSkeleton() {
   return (
     <CustomerDetailAltLayout
-      bioSlot={<DetailInfoSkeleton />}
-      fullNameSlot={<DetailInfoSkeleton />}
-      emailSlot={<DetailInfoSkeleton />}
-      phoneNumberSlot={<DetailInfoSkeleton />}
-      companySlot={<DetailInfoSkeleton />}
-      publicLinkSlot={<DetailInfoSkeleton className="border-none pb-0" />}
+      bioSlot={<DetailInfoAltSkeleton surface />}
+      fullNameSlot={<DetailInfoAltSkeleton surface />}
+      emailSlot={<DetailInfoAltSkeleton surface />}
+      phoneNumberSlot={<DetailInfoAltSkeleton surface />}
+      companySlot={<DetailInfoAltSkeleton surface />}
+      publicLinkSlot={<DetailInfoAltSkeleton surface />}
     />
   );
 }

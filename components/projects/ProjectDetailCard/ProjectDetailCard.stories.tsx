@@ -15,6 +15,10 @@ import { withUpdateProjectCustomerProvider } from "@/components/projects/UpdateP
 import { withUpdateProjectStatusAltProvider } from "@/components/projects/UpdateProjectStatusAltProvider/__stories__";
 import { withUpdateProjectDescriptionProvider } from "@/components/projects/UpdateProjectDescriptionProvider/__stories__";
 import { withUpdateProjectCategoryRelProvider } from "@/components/projects/UpdateProjectCategoryRelProvider/__stories__";
+import {
+  ProjectDetailCardHeader,
+  ProjectDetailCardHeaderSkeleton,
+} from "./ProjectDetailCardHeader";
 
 const meta = {
   title: "components/projects/ProjectDetailCard",
@@ -38,23 +42,32 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    projectDetailCardHeaderContainer: (
+      <ProjectDetailCardHeader
+        projectStatus={mockedProjectDetail.status}
+        projectDeadline={mockedProjectDetail.deadline}
+      />
+    ),
     projectDetailContainer: <ProjectDetailAlt {...mockedProjectDetail} />,
   },
 } satisfies Story;
 
 export const WithSkeleton = {
   args: {
+    projectDetailCardHeaderContainer: <ProjectDetailCardHeaderSkeleton />,
     projectDetailContainer: <ProjectDetailAltSkeleton />,
   },
 } satisfies Story;
 
 export const WithoutOptionalProjectData = {
   args: {
+    ...Default.args,
     projectDetailContainer: (
       <ProjectDetailAlt
         title={mockedProjectDetail.title}
         deadline={mockedProjectDetail.deadline}
         status={mockedProjectDetail.status}
+        tasks={mockedProjectDetail.tasks}
       />
     ),
   },

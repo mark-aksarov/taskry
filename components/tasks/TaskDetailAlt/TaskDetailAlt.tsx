@@ -2,7 +2,6 @@ import {
   DetailText,
   DetailTitle,
   DetailInfoAlt,
-  DetailInfo,
 } from "@/components/common/Detail";
 
 import { useTranslations } from "next-intl";
@@ -16,6 +15,7 @@ import { TaskAssigneeDetailInfoAlt } from "./TaskAssigneeDetailInfoAlt";
 import { TaskCategoryDetailInfoAlt } from "./TaskCategoryDetailInfoAlt";
 import { TaskDescriptionDetailInfoAlt } from "./TaskDescriptionDetailInfoAlt";
 import { CreateSubtasksButton } from "@/components/subtasks/CreateSubtaskButton";
+import { ProgressDetailInfoAlt } from "@/components/common/ProgressDetailInfoAlt";
 
 interface TaskDetailAltProps {
   title: string;
@@ -39,6 +39,7 @@ interface TaskDetailAltProps {
     title: string;
   };
   status: TaskStatus;
+  progress: number;
   subtasksList?: React.ReactNode;
 }
 
@@ -51,6 +52,7 @@ export function TaskDetailAlt({
   category,
   project,
   status,
+  progress,
   subtasksList,
 }: TaskDetailAltProps) {
   const t = useTranslations("tasks.TaskDetail");
@@ -70,20 +72,27 @@ export function TaskDetailAlt({
         <DetailInfoAlt
           title={<DetailTitle>{t("creator")}</DetailTitle>}
           content={
-            creator ? (
-              <DetailText>{creator.fullName}</DetailText>
-            ) : (
-              <DetailText>{t("noCreator")}</DetailText>
-            )
+            <DetailText>
+              {creator ? creator.fullName : t("noCreator")}
+            </DetailText>
           }
+          surface
         />
       }
+      progressSlot={<ProgressDetailInfoAlt progress={progress} />}
       subtasksSlot={
-        <DetailInfo className="border-none pb-0">
-          <DetailTitle>{t("subtasks")}</DetailTitle>
-          {subtasksList}
-          <CreateSubtasksButton />
-        </DetailInfo>
+        <DetailInfoAlt
+          title={<DetailTitle>{t("subtasks")}</DetailTitle>}
+          content={
+            subtasksList ? (
+              subtasksList
+            ) : (
+              <DetailText>{t("noSubtasks")}</DetailText>
+            )
+          }
+          rightSlot={<CreateSubtasksButton />}
+          surface={!subtasksList}
+        />
       }
     />
   );

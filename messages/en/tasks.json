@@ -154,7 +154,6 @@
     }
   },
   "TaskDetail": {
-    "noDeadline": "No deadline",
     "deadline": "Deadline",
     "description": "Description",
     "noDescription": "No description",
@@ -168,7 +167,9 @@
     "noAssignee": "No assignee",
     "status": "Status",
     "subtasks": "Subtasks",
-    "title": "Title"
+    "title": "Title",
+    "progress": "Progress",
+    "noSubtasks": "No one subtask yet"
   },
   "TaskDetailHeader": {
     "noCategory": "No category"

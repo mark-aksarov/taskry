@@ -5,12 +5,17 @@ import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { TaskDetailCard } from "@/components/tasks/TaskDetailCard/TaskDetailCard";
+import { TaskDetailDeleteButton } from "@/components/tasks/TaskDetailDeleteButton";
 
 interface TaskDetailPageProps {
+  taskDetailCardHeaderContainer: React.ReactNode;
   taskDetailContainer: React.ReactNode;
 }
 
-export function TaskDetailPage({ taskDetailContainer }: TaskDetailPageProps) {
+export function TaskDetailPage({
+  taskDetailCardHeaderContainer,
+  taskDetailContainer,
+}: TaskDetailPageProps) {
   const t = useTranslations("app.TaskDetailPage");
 
   return (
@@ -23,9 +28,13 @@ export function TaskDetailPage({ taskDetailContainer }: TaskDetailPageProps) {
               <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
             </>
           }
+          secondSlot={<TaskDetailDeleteButton />}
         />
 
-        <TaskDetailCard taskDetailContainer={taskDetailContainer} />
+        <TaskDetailCard
+          taskDetailCardHeaderContainer={taskDetailCardHeaderContainer}
+          taskDetailContainer={taskDetailContainer}
+        />
       </PageGrid>
     </PageContainer>
   );

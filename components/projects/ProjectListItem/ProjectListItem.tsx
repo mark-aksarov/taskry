@@ -21,9 +21,9 @@ import {
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
-import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { useSelectedProjects } from "../SelectedProjectsContext";
+import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { SelectableItem } from "@/components/common/SelectableItem";
 import { ProjectItemCheckbox } from "../ProjectItem/ProjectItemCheckbox";
@@ -192,7 +192,7 @@ export const ProjectListItemInner = memo(function ProjectListItemInner({
           </>
         }
         statusSlot={
-          <ProjectItemBaseBadge
+          <ProjectItemStatusBadge
             projectId={id}
             deadline={deadline}
             status={status}

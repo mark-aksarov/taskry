@@ -33,13 +33,14 @@ export function CustomerCompanyDetailInfoAlt({
       data-test="customer-company-detail-info"
       title={<DetailTitle>{t("company")}</DetailTitle>}
       content={<DetailText>{company?.name || t("noCompany")}</DetailText>}
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-customer-company-edit-button"
           isPending={isUpdateCustomerCompanyPending}
           onPress={() => onUpdatePositionModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

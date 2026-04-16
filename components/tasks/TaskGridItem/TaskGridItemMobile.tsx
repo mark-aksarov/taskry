@@ -15,8 +15,8 @@ import {
 import { memo } from "react";
 import { Link } from "@/components/ui/Link";
 import { BaseTaskItemProps } from "../TaskItem";
-import { TaskItemBaseBadge } from "../TaskItemBaseBadge";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
+import { TaskItemStatusBadge } from "../TaskItemStatusBadge";
 import { TaskGridItemProgress } from "./TaskGridItemProgress";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { TaskItemActionMenuTrigger, TaskItemPendingOverlay } from "../TaskItem";
@@ -97,7 +97,7 @@ export const TaskGridItemMobileInner = memo(function TaskGridItemMobileInner({
         />
       }
       statusSlot={
-        <TaskItemBaseBadge taskId={id} deadline={deadline} status={status} />
+        <TaskItemStatusBadge taskId={id} deadline={deadline} status={status} />
       }
       progressSlot={
         <TaskGridItemProgress

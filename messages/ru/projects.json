@@ -174,7 +174,8 @@
     "category": "Категория",
     "noCategory": "Нет категории",
     "status": "Статус",
-    "title": "Заголовок"
+    "title": "Заголовок",
+    "tasksStats": "Статистика задач"
   },
   "ProjectDetailHeader": {
     "noCategory": "Нет категории"
@@ -253,5 +254,14 @@
   },
   "UpdateProjectCustomerModal": {
     "title": "Изменить клиента"
+  },
+  "ProjectActiveTasksDetailStat": {
+    "text": "Активные задачи"
+  },
+  "ProjectPendingTasksDetailStat": {
+    "text": "Ожидающие задачи"
+  },
+  "ProjectCompletedTasksDetailStat": {
+    "text": "Завершенные задачи"
   }
 }

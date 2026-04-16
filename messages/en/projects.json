@@ -174,7 +174,8 @@
     "category": "Category",
     "noCategory": "No category",
     "status": "Status",
-    "title": "Title"
+    "title": "Title",
+    "tasksStats": "Tasks stats"
   },
   "ProjectDetailHeader": {
     "noCategory": "No category"
@@ -253,5 +254,14 @@
   },
   "UpdateProjectCustomerModal": {
     "title": "Edit customer"
+  },
+  "ProjectActiveTasksDetailStat": {
+    "text": "Active tasks"
+  },
+  "ProjectPendingTasksDetailStat": {
+    "text": "Pending tasks"
+  },
+  "ProjectCompletedTasksDetailStat": {
+    "text": "Completed tasks"
   }
 }

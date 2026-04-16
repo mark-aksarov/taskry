@@ -1,24 +1,24 @@
-import { Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { ItemBaseBadge } from "@/components/common/ItemBase";
+import { StatusLoader } from "@/components/common/StatusLoader";
 import { useUpdateTaskStatus } from "../UpdateTaskStatusContext";
-import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 import { useUpdateTaskStatuses } from "../UpdateTaskStatusesContext";
+import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 
-interface TaskItemBaseBadgeProps {
+interface TaskItemStatusBadgeProps {
   taskId: number;
   className?: string;
   status: TaskStatus;
   deadline: string;
 }
 
-export function TaskItemBaseBadge({
+export function TaskItemStatusBadge({
   taskId,
   className,
   status,
   deadline,
-}: TaskItemBaseBadgeProps) {
+}: TaskItemStatusBadgeProps) {
   const t = useTranslations("tasks.TaskStatus");
 
   // Pending state for single task status update
@@ -36,24 +36,11 @@ export function TaskItemBaseBadge({
     isUpdateTaskStatusPending ||
     (isUpdateTaskStatusesPending && isTaskInBatchUpdate);
 
-  const isOverdue =
-    new Date(deadline) < new Date() && status !== TaskStatus.completed;
-
-  const color = isOverdue ? "red" : getTaskStatusBadgeColor(status);
+  const color = getTaskStatusBadgeColor(status, deadline);
 
   return (
     <ItemBaseBadge className={className} color={isPending ? "gray" : color}>
-      {isPending ? (
-        <Loader2
-          data-testid="loader-icon"
-          size={16}
-          strokeWidth={1.5}
-          absoluteStrokeWidth
-          className="animate-spin text-gray-400 dark:text-gray-900"
-        />
-      ) : (
-        t(`${status}`)
-      )}
+      {isPending ? <StatusLoader /> : t(`${status}`)}
     </ItemBaseBadge>
   );
 }

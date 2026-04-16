@@ -1,18 +1,18 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { TaskItemBaseBadge } from "./TaskItemBaseBadge";
+import { TaskItemStatusBadge } from "./TaskItemStatusBadge";
 import { withSelectedTasksProvider } from "../SelectedTasksContext/__stories__";
 import { withUpdateTaskStatusProvider } from "../UpdateTaskStatusProvider/__stories__";
 import { withUpdateTaskStatusesProvider } from "../UpdateTaskStatusesProvider/__stories__";
 
-const meta: Meta<typeof TaskItemBaseBadge> = {
-  title: "components/tasks/TaskItemBaseBadge",
-  component: TaskItemBaseBadge,
+const meta: Meta<typeof TaskItemStatusBadge> = {
+  title: "components/tasks/TaskItemStatusBadge",
+  component: TaskItemStatusBadge,
   decorators: [
     withUpdateTaskStatusProvider,
     withUpdateTaskStatusesProvider,
     withSelectedTasksProvider,
   ],
-} satisfies Meta<typeof TaskItemBaseBadge>;
+} satisfies Meta<typeof TaskItemStatusBadge>;
 
 export default meta;
 export type Story = StoryObj<typeof meta>;

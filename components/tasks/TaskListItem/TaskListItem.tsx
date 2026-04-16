@@ -15,9 +15,9 @@ import {
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
-import { TaskItemBaseBadge } from "../TaskItemBaseBadge";
 import { TaskListItemLayout } from "./TaskListItemLayout";
 import { useSelectedTasks } from "../SelectedTasksContext";
+import { TaskItemStatusBadge } from "../TaskItemStatusBadge";
 import { TaskItemCheckbox } from "../TaskItem/TaskItemCheckbox";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { SelectableItem } from "@/components/common/SelectableItem";
@@ -152,7 +152,7 @@ export const TaskListItemInner = memo(function TaskListItemInner({
         </>
       }
       statusSlot={
-        <TaskItemBaseBadge taskId={id} deadline={deadline} status={status} />
+        <TaskItemStatusBadge taskId={id} deadline={deadline} status={status} />
       }
       commentsModalTriggerSlot={
         <ItemBaseCommentsButton

@@ -41,6 +41,7 @@ export const mockedProjectDetail = {
     name: "Fake category",
   },
   status: ProjectStatus.pending,
+  tasks: { total: 12, completed: 8, active: 2, pending: 2 },
 };
 
 export const mockedProjectList = [

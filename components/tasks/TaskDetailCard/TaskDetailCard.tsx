@@ -1,23 +1,18 @@
-import {
-  DetailCardHeader,
-  DetailCardTitle,
-} from "@/components/common/DetailCard";
-import { useTranslations } from "next-intl";
-import { Card } from "@/components/common/Card";
+import { DetailCardAlt } from "@/components/common/DetailCardAlt";
 
 interface TaskDetailCardProps {
+  taskDetailCardHeaderContainer: React.ReactNode;
   taskDetailContainer: React.ReactNode;
 }
 
-export function TaskDetailCard({ taskDetailContainer }: TaskDetailCardProps) {
-  const t = useTranslations("tasks.TaskDetailCard");
-
+export function TaskDetailCard({
+  taskDetailCardHeaderContainer,
+  taskDetailContainer,
+}: TaskDetailCardProps) {
   return (
-    <Card className="mx-auto w-[700px] max-w-full p-0">
-      <DetailCardHeader className="max-md:hidden">
-        <DetailCardTitle>{t("title")}</DetailCardTitle>
-      </DetailCardHeader>
-      <div className="max-md:p-4 md:p-6">{taskDetailContainer}</div>
-    </Card>
+    <DetailCardAlt
+      detailCardHeaderContainer={taskDetailCardHeaderContainer}
+      entityDetailContainer={taskDetailContainer}
+    />
   );
 }

@@ -29,13 +29,14 @@ export function UserAddressDetailInfoAlt({
       data-test="user-address-detail-info"
       title={<DetailTitle>{t("address")}</DetailTitle>}
       content={<DetailText>{address || t("noAddress")}</DetailText>}
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-user-address-edit-button"
           isPending={isUpdateUserAddressPending}
           onPress={() => onUpdateAddressModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

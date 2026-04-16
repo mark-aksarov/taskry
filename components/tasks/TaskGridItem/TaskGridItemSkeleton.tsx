@@ -1,15 +1,12 @@
 import {
-  GridItemInfoSkeleton,
-  GridItemProgressSkeleton,
-} from "@/components/common/Grid";
-
-import {
   ItemBaseBadgeSkeleton,
   ItemBaseButtonSkeleton,
   ItemBaseActionMenuTriggerSkeleton,
 } from "@/components/common/ItemBase";
 
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
+import { ProgressSkeleton } from "@/components/ui/Skeleton";
+import { GridItemInfoSkeleton } from "@/components/common/Grid";
 import { CheckboxSkeleton } from "@/components/ui/Skeleton/CheckboxSkeleton";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
 
@@ -34,7 +31,7 @@ const TaskGridItemSkeleton = ({
       }
       commentsSlot={<ItemBaseButtonSkeleton />}
       statusSlot={<ItemBaseBadgeSkeleton />}
-      progressSlot={<GridItemProgressSkeleton />}
+      progressSlot={<ProgressSkeleton />}
     />
   );
 };

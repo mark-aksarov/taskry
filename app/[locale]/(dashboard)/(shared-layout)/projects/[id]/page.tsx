@@ -21,6 +21,7 @@ import { UpdateProjectDescriptionProvider } from "@/components/projects/UpdatePr
 import { UpdateProjectCategoryRelProvider } from "@/components/projects/UpdateProjectCategoryRelProvider";
 import { UpdateProjectCustomerFormContainer } from "@/components/projects/UpdateProjectCustomerFormContainer";
 import { UpdateProjectCategoryRelFormContainer } from "@/components/projects/UpdateProjectCategoryRelFormContainer";
+import { ProjectDetailCardHeaderContainer } from "@/components/projects/ProjectDetailCardHeaderContainer";
 
 export default async function AppProjectDetailPage({
   params,
@@ -54,6 +55,9 @@ export default async function AppProjectDetailPage({
               <UpdateProjectDeadlineProvider>
                 <UpdateProjectCustomerProvider>
                   <ProjectDetailPage
+                    projectDetailCardHeaderContainer={
+                      <ProjectDetailCardHeaderContainer projectId={id} />
+                    }
                     projectDetailContainer={
                       <ProjectDetailAltContainer projectId={id} />
                     }

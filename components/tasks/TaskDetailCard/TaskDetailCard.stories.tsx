@@ -1,10 +1,14 @@
+import {
+  TaskDetailCardHeader,
+  TaskDetailCardHeaderSkeleton,
+} from "./TaskDetailCardHeader";
 import { mockedTaskDetail } from "@/mocks/tasks";
 import { TaskDetailCard } from "./TaskDetailCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SubtaskList } from "@/components/subtasks/SubtaskList";
 import { TaskDetailAlt, TaskDetailAltSkeleton } from "../TaskDetailAlt";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
+import { SubtaskListRichStory } from "@/components/subtasks/SubtaskList/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
@@ -41,10 +45,17 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    taskDetailCardHeaderContainer: (
+      <TaskDetailCardHeader
+        taskStatus={mockedTaskDetail.status}
+        taskDeadline={mockedTaskDetail.deadline}
+      />
+    ),
     taskDetailContainer: (
       <TaskDetailAlt
         {...mockedTaskDetail}
-        subtasksList={<SubtaskList {...SubtaskListStory.args} />}
+        progress={75}
+        subtasksList={<SubtaskList {...SubtaskListRichStory.args} />}
       />
     ),
   },
@@ -52,17 +63,20 @@ export const Default = {
 
 export const WithSkeleton = {
   args: {
+    taskDetailCardHeaderContainer: <TaskDetailCardHeaderSkeleton />,
     taskDetailContainer: <TaskDetailAltSkeleton />,
   },
 } satisfies Story;
 
 export const WithoutOptionalTaskData = {
   args: {
+    ...Default.args,
     taskDetailContainer: (
       <TaskDetailAlt
         title={mockedTaskDetail.title}
         deadline={mockedTaskDetail.deadline}
         status={mockedTaskDetail.status}
+        progress={75}
       />
     ),
   },

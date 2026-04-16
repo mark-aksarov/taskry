@@ -48,6 +48,7 @@ export function UserDetailAlt({
         <DetailInfoAlt
           title={<DetailTitle>{t("email")}</DetailTitle>}
           content={<DetailText>{email}</DetailText>}
+          surface
         />
       }
       phoneNumberSlot={

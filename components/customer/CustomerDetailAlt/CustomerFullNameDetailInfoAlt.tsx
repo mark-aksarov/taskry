@@ -31,13 +31,14 @@ export function CustomerFullNameDetailInfoAlt({
       data-test="customer-full-name-detail-info"
       title={<DetailTitle>{t("fullName")}</DetailTitle>}
       content={<DetailText>{fullName}</DetailText>}
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-customer-full-name-edit-button"
           isPending={isUpdateCustomerFullNamePending}
           onPress={() => onUpdateFullNameModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

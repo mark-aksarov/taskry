@@ -31,13 +31,14 @@ export function UserPositionDetailInfoAlt({
       data-test="user-position-detail-info"
       title={<DetailTitle>{t("position")}</DetailTitle>}
       content={<DetailText>{position?.name || t("noPosition")}</DetailText>}
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-user-position-edit-button"
           isPending={isUpdateUserPositionPending}
           onPress={() => onUpdatePositionModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

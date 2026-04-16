@@ -20,7 +20,7 @@ import {
 
 import { memo } from "react";
 import { Link } from "@/components/ui/Link";
-import { ProjectItemBaseBadge } from "../ProjectItemBaseBadge";
+import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { ProjectGridItemProgress } from "./ProjectGridItemProgress";
 import { useModal } from "@/components/common/ModalManagerContext";
@@ -102,7 +102,7 @@ export const ProjectGridItemMobileInner = memo(
           />
         }
         statusSlot={
-          <ProjectItemBaseBadge
+          <ProjectItemStatusBadge
             projectId={id}
             deadline={deadline}
             status={status}

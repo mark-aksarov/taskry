@@ -35,6 +35,9 @@ async function TaskDetailAltContainerInner({
     notFound();
   }
 
+  const totalCount = task.subtasks.length;
+  const doneCount = task.subtasks.filter((s) => s.isDone).length;
+
   return (
     <TaskDetailAlt
       title={task.title}
@@ -45,6 +48,7 @@ async function TaskDetailAltContainerInner({
       category={task.category}
       project={task.project}
       status={task.status}
+      progress={(doneCount / totalCount) * 100}
       subtasksList={
         task.subtasks.length ? (
           <SubtaskList>
@@ -57,6 +61,7 @@ async function TaskDetailAltContainerInner({
                         id={subtask.id}
                         text={subtask.text}
                         isDone={subtask.isDone}
+                        variant="rich"
                       />
 
                       <UpdateSubtaskModal

@@ -58,6 +58,13 @@ export interface ProjectDetailDTO {
     id: number;
     name: string;
   };
+
+  tasks: {
+    total: number;
+    active: number;
+    pending: number;
+    completed: number;
+  };
 }
 
 export interface ProjectListDTO {

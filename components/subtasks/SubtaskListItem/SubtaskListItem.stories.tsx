@@ -1,9 +1,9 @@
 import { SubtaskListItem } from "../SubtaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteSubtaskProvider } from "../../DeleteSubtaskProvider/__stories__";
-import { withUpdateSubtaskProvider } from "../../UpdateSubtaskProvider/__stories__";
-import { withToggleSubtaskProvider } from "../../ToggleSubtaskProvider/__stories__";
+import { withDeleteSubtaskProvider } from "../DeleteSubtaskProvider/__stories__";
+import { withUpdateSubtaskProvider } from "../UpdateSubtaskProvider/__stories__";
+import { withToggleSubtaskProvider } from "../ToggleSubtaskProvider/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 
@@ -21,22 +21,44 @@ const meta = {
   parameters: {
     backgroundVariant: "alt",
   },
+  args: {
+    id: 1,
+    text: "Subtask placeholder text 1",
+  },
 } satisfies Meta<typeof SubtaskListItem>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default = {
+export const WithoutActionMenu = {
   args: {
     isDone: false,
-    id: 1,
-    text: "Subtask 1",
+    showActionMenu: false,
   },
 } satisfies Story;
 
-export const IsDone = {
+export const Plain = {
   args: {
-    ...Default.args,
+    isDone: false,
+  },
+} satisfies Story;
+
+export const PlainIsDone = {
+  args: {
+    isDone: true,
+  },
+} satisfies Story;
+
+export const Rich = {
+  args: {
+    variant: "rich",
+    isDone: false,
+  },
+} satisfies Story;
+
+export const RichIsDone = {
+  args: {
+    variant: "rich",
     isDone: true,
   },
 } satisfies Story;

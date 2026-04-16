@@ -31,13 +31,14 @@ export function TaskStatusDetailInfoAlt({
       data-test="task-status-detail-info"
       title={<DetailTitle>{t("status")}</DetailTitle>}
       content={<DetailText>{tStatus(status)}</DetailText>}
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-task-status-edit-button"
           isPending={isUpdateTaskStatusPending}
           onPress={() => onUpdateStatusModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

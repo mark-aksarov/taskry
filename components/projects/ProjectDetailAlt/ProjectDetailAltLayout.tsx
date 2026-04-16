@@ -6,6 +6,8 @@ interface ProjectDetailAltLayoutProps {
   deadlineSlot: React.ReactNode;
   customerSlot: React.ReactNode;
   categorySlot: React.ReactNode;
+  progressSlot: React.ReactNode;
+  tasksStatsSlot: React.ReactNode;
 }
 
 export function ProjectDetailAltLayout({
@@ -16,9 +18,11 @@ export function ProjectDetailAltLayout({
   deadlineSlot,
   customerSlot,
   categorySlot,
+  progressSlot,
+  tasksStatsSlot,
 }: ProjectDetailAltLayoutProps) {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col max-md:gap-4 md:gap-6">
       {titleSlot}
       {descriptionSlot}
       {statusSlot}
@@ -26,6 +30,8 @@ export function ProjectDetailAltLayout({
       {customerSlot}
       {categorySlot}
       {creatorSlot}
+      {progressSlot}
+      {tasksStatsSlot}
     </div>
   );
 }

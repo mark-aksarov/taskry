@@ -1,16 +1,19 @@
 import { ProjectDetailAltLayout } from "./ProjectDetailAltLayout";
-import { DetailInfoSkeleton } from "@/components/common/Detail";
+import { DetailInfoAltSkeleton } from "@/components/common/Detail";
+import { ProjectTasksStatsDetailInfoAltSkeleton } from "./ProjectTasksStatsDetailInfoAlt";
 
 export function ProjectDetailAltSkeleton() {
   return (
     <ProjectDetailAltLayout
-      titleSlot={<DetailInfoSkeleton />}
-      descriptionSlot={<DetailInfoSkeleton />}
-      statusSlot={<DetailInfoSkeleton />}
-      deadlineSlot={<DetailInfoSkeleton />}
-      customerSlot={<DetailInfoSkeleton />}
-      categorySlot={<DetailInfoSkeleton />}
-      creatorSlot={<DetailInfoSkeleton className="border-none pb-0" />}
+      titleSlot={<DetailInfoAltSkeleton surface />}
+      descriptionSlot={<DetailInfoAltSkeleton surface />}
+      statusSlot={<DetailInfoAltSkeleton surface />}
+      deadlineSlot={<DetailInfoAltSkeleton surface />}
+      customerSlot={<DetailInfoAltSkeleton surface />}
+      categorySlot={<DetailInfoAltSkeleton surface />}
+      progressSlot={<DetailInfoAltSkeleton surface />}
+      creatorSlot={<DetailInfoAltSkeleton surface />}
+      tasksStatsSlot={<ProjectTasksStatsDetailInfoAltSkeleton />}
     />
   );
 }

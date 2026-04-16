@@ -30,13 +30,14 @@ export function CustomerEmailDetailInfoAlt({
       data-test="customer-email-detail-info"
       title={<DetailTitle>{t("email")}</DetailTitle>}
       content={<DetailText>{email}</DetailText>}
-      editButton={
+      rightSlot={
         <DetailEditButton
           data-test="update-customer-email-edit-button"
           isPending={isUpdateCustomerEmailPending}
           onPress={() => onUpdateEmailModalOpenChange(true)}
         />
       }
+      surface
     />
   );
 }

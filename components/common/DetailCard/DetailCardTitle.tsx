@@ -1,6 +1,18 @@
-export function DetailCardTitle({ children }: { children: React.ReactNode }) {
+import { twMerge } from "tailwind-merge";
+
+interface DetailCardTitleProps {
+  className?: string;
+  children: React.ReactNode;
+}
+
+export function DetailCardTitle({ className, children }: DetailCardTitleProps) {
   return (
-    <h2 className="text-lg font-extrabold text-black dark:text-white">
+    <h2
+      className={twMerge(
+        "text-lg font-extrabold text-black dark:text-white",
+        className,
+      )}
+    >
       {children}
     </h2>
   );

@@ -12,7 +12,9 @@ import { ProjectStatusDetailInfoAlt } from "./ProjectStatusDetailInfoAlt";
 import { ProjectCategoryDetailInfoAlt } from "./ProjectCategoryDetailInfoAlt";
 import { ProjectDeadlineDetailInfoAlt } from "./ProjectDeadlineDetailInfoAlt";
 import { ProjectCustomerDetailInfoAlt } from "./ProjectCustomerDetailInfoAlt";
+import { ProgressDetailInfoAlt } from "@/components/common/ProgressDetailInfoAlt";
 import { ProjectDescriptionDetailInfoAlt } from "./ProjectDescriptionDetailInfoAlt";
+import { ProjectTasksStatsDetailInfoAlt } from "./ProjectTasksStatsDetailInfoAlt";
 
 interface ProjectDetailAltProps {
   title: string;
@@ -33,6 +35,12 @@ interface ProjectDetailAltProps {
     name: string;
   };
   status: ProjectStatus;
+  tasks: {
+    total: number;
+    active: number;
+    pending: number;
+    completed: number;
+  };
 }
 
 export function ProjectDetailAlt({
@@ -43,6 +51,7 @@ export function ProjectDetailAlt({
   customer,
   category,
   status,
+  tasks,
 }: ProjectDetailAltProps) {
   const t = useTranslations("projects.ProjectDetail");
 
@@ -67,8 +76,15 @@ export function ProjectDetailAlt({
               <DetailText>{t("noCreator")}</DetailText>
             )
           }
+          surface
         />
       }
+      progressSlot={
+        <ProgressDetailInfoAlt
+          progress={(tasks.completed / tasks.total) * 100}
+        />
+      }
+      tasksStatsSlot={<ProjectTasksStatsDetailInfoAlt tasks={tasks} />}
     />
   );
 }
