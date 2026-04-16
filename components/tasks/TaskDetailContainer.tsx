@@ -5,15 +5,9 @@ import { TaskDetailSkeleton } from "./TaskDetail";
 import { TaskDetail } from "./TaskDetail/TaskDetail";
 import { SubtaskList } from "../subtasks/SubtaskList";
 import { TaskDetailDTO } from "@/lib/data/task/task.dto";
-import { SubtaskListItem } from "../subtasks/SubtaskListItem";
-import { UpdateSubtaskModal } from "../subtasks/UpdateSubtaskModal";
-import { DeleteSubtaskModal } from "../subtasks/DeleteSubtaskModal";
+import { SubtaskListItemInner } from "../subtasks/SubtaskListItem";
 import { CreateSubtaskModal } from "../subtasks/CreateSubtaskModal";
-import { ModalManagerProvider } from "../common/ModalManagerContext";
 import { CreateSubtaskProvider } from "../subtasks/CreateSubtaskProvider";
-import { DeleteSubtaskProvider } from "../subtasks/DeleteSubtaskProvider";
-import { UpdateSubtaskProvider } from "../subtasks/UpdateSubtaskProvider";
-import { ToggleSubtaskProvider } from "../subtasks/ToggleSubtaskProvider";
 
 interface TaskDetailContainerProps {
   taskId: number;
@@ -46,30 +40,13 @@ export function TaskDetailContainer({ taskId }: TaskDetailContainerProps) {
           task.subtasks.length ? (
             <SubtaskList>
               {task.subtasks.map((subtask) => (
-                <ModalManagerProvider key={subtask.id}>
-                  <DeleteSubtaskProvider taskId={task.id}>
-                    <UpdateSubtaskProvider taskId={task.id}>
-                      <ToggleSubtaskProvider taskId={task.id}>
-                        <SubtaskListItem
-                          id={subtask.id}
-                          text={subtask.text}
-                          isDone={subtask.isDone}
-                        />
-
-                        <UpdateSubtaskModal
-                          taskId={task.id}
-                          subtaskId={subtask.id}
-                          subtaskText={subtask.text}
-                        />
-
-                        <DeleteSubtaskModal
-                          subtaskId={subtask.id}
-                          subtaskText={subtask.text}
-                        />
-                      </ToggleSubtaskProvider>
-                    </UpdateSubtaskProvider>
-                  </DeleteSubtaskProvider>
-                </ModalManagerProvider>
+                <SubtaskListItemInner
+                  key={subtask.id}
+                  id={subtask.id}
+                  text={subtask.text}
+                  isDone={subtask.isDone}
+                  showActionMenu={false}
+                />
               ))}
             </SubtaskList>
           ) : undefined

@@ -11,14 +11,12 @@ import { TaskDetail, TaskDetailSkeleton } from "../TaskDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { SubtaskListStory } from "@/components/subtasks/SubtaskList/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
-import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
 
 const meta = {
   title: "components/tasks/TaskDetailSideSheet",
   component: TaskDetailSideSheet,
   decorators: [
     withOpenModal,
-    withCreateSubtaskProvider,
     withCurrentUserProvider,
     withModalManagerProvider,
     withThemedBackground,

@@ -10,6 +10,7 @@ interface SubtaskListItemProps {
   id: number;
   text: string;
   isDone: boolean;
+  showActionMenu?: boolean;
 }
 
 export function SubtaskListItem(props: SubtaskListItemProps) {
@@ -20,10 +21,11 @@ export function SubtaskListItem(props: SubtaskListItemProps) {
   );
 }
 
-const SubtaskListItemInner = memo(function SubtaskListItemInner({
+export const SubtaskListItemInner = memo(function SubtaskListItemInner({
   id,
   text,
   isDone,
+  showActionMenu = true,
 }: Omit<
   SubtaskListItemProps,
   "toggleSubtask" | "updateSubtask" | "deleteSubtask"
@@ -32,7 +34,7 @@ const SubtaskListItemInner = memo(function SubtaskListItemInner({
     <div
       data-test="subtask-list-item"
       data-id={id}
-      className="flex items-start justify-between gap-2"
+      className="flex items-start gap-2"
     >
       <Check
         size={16}
@@ -44,14 +46,16 @@ const SubtaskListItemInner = memo(function SubtaskListItemInner({
       />
       <div
         className={twMerge(
-          "text-sm",
+          "mr-auto text-sm",
           isDone && "text-black dark:text-white",
           !isDone && "text-gray-500 dark:text-gray-400",
         )}
       >
         {text}
       </div>
-      <SubtaskActionMenuTrigger subtaskId={id} isDone={isDone} />
+      {showActionMenu && (
+        <SubtaskActionMenuTrigger subtaskId={id} isDone={isDone} />
+      )}
     </div>
   );
 });

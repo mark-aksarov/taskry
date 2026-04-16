@@ -115,7 +115,6 @@ export function TaskDetail({
         <DetailInfo className="border-none pb-0">
           <DetailTitle>{t("subtasks")}</DetailTitle>
           {subtasksList}
-          <CreateSubtasksButton />
         </DetailInfo>
       }
     />
