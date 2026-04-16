@@ -3,40 +3,25 @@
 import {
   ItemBaseActionMenuTrigger,
   ItemBaseActionMenuDialogHeader,
+  ItemBaseActionMenuButton,
 } from "../../common/ItemBase";
 
-import { tv } from "tailwind-variants";
 import { startTransition } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
-import { Button } from "react-aria-components";
-import { focusRing } from "@/components/ui/styles";
+import { CheckCheck, Pencil, Trash } from "lucide-react";
 import { useToggleSubtask } from "../ToggleSubtaskContext";
-import { CheckCheck, Loader2, Pencil, Trash } from "lucide-react";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useSubtaskListItemPending } from "../SubtaskListItem/useSubtaskListItemPending";
 
 interface SubtaskActionMenuTriggerProps {
   subtaskId: number;
-  subtaskText: string;
   isDone: boolean;
 }
 
-const buttonStyles = tv({
-  extend: focusRing,
-  base: "pressed:underline flex cursor-pointer items-center gap-2 text-left text-sm hover:underline",
-  variants: {
-    isDone: {
-      true: "text-black dark:text-white",
-      false: "text-gray-500 dark:text-gray-400",
-    },
-  },
-});
-
 export function SubtaskActionMenuTrigger({
   subtaskId,
-  subtaskText,
   isDone,
 }: SubtaskActionMenuTriggerProps) {
   const t = useTranslations("subtasks.SubtaskActionMenuTrigger");
@@ -73,26 +58,14 @@ export function SubtaskActionMenuTrigger({
   return (
     <ItemBaseActionMenuTrigger
       onAction={handleAction}
-      placement="bottom left"
       renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
       renderButton={() => (
-        <Button
+        <ItemBaseActionMenuButton
           isPending={isPending}
           data-test="subtask-item-action-menu-trigger"
           data-id={subtaskId}
-          className={(renderProps) => buttonStyles({ ...renderProps, isDone })}
-        >
-          {subtaskText}
-          {isPending && (
-            <Loader2
-              data-testid="loader-icon"
-              size={16}
-              strokeWidth={1.5}
-              absoluteStrokeWidth
-              className="mt-0.75 shrink-0 animate-spin self-start"
-            />
-          )}
-        </Button>
+          className="-mx-2 -mt-1.25 shrink-0 self-start"
+        />
       )}
     >
       <Item textValue={t("edit")} key="edit">

@@ -32,23 +32,26 @@ const SubtaskListItemInner = memo(function SubtaskListItemInner({
     <div
       data-test="subtask-list-item"
       data-id={id}
-      className="flex items-start justify-between"
+      className="flex items-start justify-between gap-2"
     >
-      <div className="flex items-start gap-2">
-        <Check
-          size={16}
-          className={twMerge(
-            "mt-0.5 shrink-0",
-            isDone && "text-blue-600 dark:text-blue-400",
-            !isDone && "text-gray-500 dark:text-gray-400",
-          )}
-        />
-        <SubtaskActionMenuTrigger
-          subtaskId={id}
-          isDone={isDone}
-          subtaskText={text}
-        />
+      <Check
+        size={16}
+        className={twMerge(
+          "mt-0.5 shrink-0",
+          isDone && "text-blue-600 dark:text-blue-400",
+          !isDone && "text-gray-500 dark:text-gray-400",
+        )}
+      />
+      <div
+        className={twMerge(
+          "text-sm",
+          isDone && "text-black dark:text-white",
+          !isDone && "text-gray-500 dark:text-gray-400",
+        )}
+      >
+        {text}
       </div>
+      <SubtaskActionMenuTrigger subtaskId={id} isDone={isDone} />
     </div>
   );
 });
