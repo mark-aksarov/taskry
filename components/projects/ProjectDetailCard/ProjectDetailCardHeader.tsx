@@ -6,7 +6,7 @@ import {
 import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { ProjectStatusBadge } from "../ProjectStatusBadge";
-import { ProjectDetailDeleteButton } from "../ProjectDetailDeleteButton";
+import { DeleteProjectModalTrigger } from "../DeleteProjectModalTrigger";
 
 interface ProjectDetailCardHeaderProps {
   projectStatus: ProjectStatus;
@@ -30,7 +30,7 @@ export function ProjectDetailCardHeader({
         />
       }
       deadline={projectDeadline}
-      deleteButtonSlot={<ProjectDetailDeleteButton />}
+      deleteButtonSlot={<DeleteProjectModalTrigger />}
     />
   );
 }

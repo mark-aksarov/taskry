@@ -7,8 +7,9 @@ import {
   DetailEditButton,
 } from "@/components/common/Detail";
 import { useFormatter, useTranslations } from "next-intl";
-import { useUpdateProjectDeadline } from "../UpdateProjectDeadlineContext";
+import { useDeleteProject } from "../DeleteProjectContext";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { useUpdateProjectDeadline } from "../UpdateProjectDeadlineContext";
 
 interface ProjectDeadlineDetailInfoAltProps {
   deadline: string;
@@ -23,6 +24,10 @@ export function ProjectDeadlineDetailInfoAlt({
     "updateProjectDeadline",
   );
 
+  //Disable edit button while the project is being deleted
+  const { isPending: isDeleteProjectPending } = useDeleteProject();
+
+  //Pending state while updating project deadline
   const { isPending: isUpdateProjectDeadlinePending } =
     useUpdateProjectDeadline();
 
@@ -43,6 +48,7 @@ export function ProjectDeadlineDetailInfoAlt({
         <DetailEditButton
           data-test="update-project-deadline-edit-button"
           isPending={isUpdateProjectDeadlinePending}
+          isDisabled={isDeleteProjectPending}
           onPress={() => onUpdateBirthdateModalOpenChange(true)}
         />
       }

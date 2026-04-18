@@ -7,6 +7,7 @@ import {
   DetailEditButton,
 } from "@/components/common/Detail";
 import { useTranslations } from "next-intl";
+import { useDeleteProject } from "../DeleteProjectContext";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { useUpdateProjectDescription } from "../UpdateProjectDescriptionContext";
 
@@ -19,6 +20,10 @@ export function ProjectDescriptionDetailInfoAlt({
 }: ProjectDescriptionDetailInfoAltProps) {
   const t = useTranslations("projects.ProjectDetail");
 
+  //Disable edit button while the project is being deleted
+  const { isPending: isDeleteProjectPending } = useDeleteProject();
+
+  //Pending state while updating project description
   const { onOpenChange: onUpdateDescriptionModalOpenChange } = useModal(
     "updateProjectDescription",
   );
@@ -39,6 +44,7 @@ export function ProjectDescriptionDetailInfoAlt({
         <DetailEditButton
           data-test="update-project-description-edit-button"
           isPending={isUpdateProjectDescriptionPending}
+          isDisabled={isDeleteProjectPending}
           onPress={() => onUpdateDescriptionModalOpenChange(true)}
         />
       }

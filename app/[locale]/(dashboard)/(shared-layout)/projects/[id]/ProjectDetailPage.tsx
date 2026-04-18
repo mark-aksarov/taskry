@@ -5,7 +5,7 @@ import { ToolbarMobile } from "@/components/common/Toolbar";
 import { PageContainer } from "@/components/common/PageContainer";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { ProjectDetailCard } from "@/components/projects/ProjectDetailCard";
-import { ProjectDetailDeleteButton } from "@/components/projects/ProjectDetailDeleteButton";
+import { DeleteProjectModalTrigger } from "@/components/projects/DeleteProjectModalTrigger";
 
 interface ProjectPageProps {
   projectDetailCardHeaderContainer: React.ReactNode;
@@ -28,7 +28,7 @@ export function ProjectDetailPage({
               <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
             </>
           }
-          secondSlot={<ProjectDetailDeleteButton />}
+          secondSlot={<DeleteProjectModalTrigger />}
         />
 
         <ProjectDetailCard

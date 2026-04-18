@@ -7,6 +7,7 @@ import {
   DetailEditButton,
 } from "@/components/common/Detail";
 import { useTranslations } from "next-intl";
+import { useDeleteProject } from "../DeleteProjectContext";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { useUpdateProjectCategoryRel } from "../UpdateProjectCategoryRelContext";
 
@@ -26,6 +27,10 @@ export function ProjectCategoryDetailInfoAlt({
     "updateProjectCategoryRel",
   );
 
+  //Disable edit button while the project is being deleted
+  const { isPending: isDeleteProjectPending } = useDeleteProject();
+
+  //Pending state while updating project category
   const { isPending: isUpdateProjectCategoryPending } =
     useUpdateProjectCategoryRel();
 
@@ -40,6 +45,7 @@ export function ProjectCategoryDetailInfoAlt({
         <DetailEditButton
           data-test="update-project-category-edit-button"
           isPending={isUpdateProjectCategoryPending}
+          isDisabled={isDeleteProjectPending}
           onPress={() => onUpdateCategoryModalOpenChange(true)}
         />
       }

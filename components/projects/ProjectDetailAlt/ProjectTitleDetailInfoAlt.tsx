@@ -7,8 +7,9 @@ import {
   DetailEditButton,
 } from "@/components/common/Detail";
 import { useTranslations } from "next-intl";
-import { useUpdateProjectTitle } from "../UpdateProjectTitleContext";
+import { useDeleteProject } from "../DeleteProjectContext";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { useUpdateProjectTitle } from "../UpdateProjectTitleContext";
 
 interface ProjectTitleDetailInfoAltProps {
   title: string;
@@ -22,6 +23,10 @@ export function ProjectTitleDetailInfoAlt({
   const { onOpenChange: onUpdateTitleModalOpenChange } =
     useModal("updateProjectTitle");
 
+  //Disable edit button while the project is being deleted
+  const { isPending: isDeleteProjectPending } = useDeleteProject();
+
+  //Pending state while updating project title
   const { isPending: isUpdateProjectTitlePending } = useUpdateProjectTitle();
 
   return (
@@ -33,6 +38,7 @@ export function ProjectTitleDetailInfoAlt({
         <DetailEditButton
           data-test="update-project-title-edit-button"
           isPending={isUpdateProjectTitlePending}
+          isDisabled={isDeleteProjectPending}
           onPress={() => onUpdateTitleModalOpenChange(true)}
         />
       }

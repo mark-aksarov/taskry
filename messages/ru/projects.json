@@ -263,5 +263,8 @@
   },
   "ProjectCompletedTasksDetailStat": {
     "text": "Завершенные задачи"
+  },
+  "DeleteProjectModalTrigger": {
+    "label": "Удалить проект"
   }
 }

@@ -8,6 +8,7 @@ import {
 } from "@/components/common/Detail";
 import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
+import { useDeleteProject } from "../DeleteProjectContext";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { useUpdateProjectStatusAlt } from "../UpdateProjectStatusAltContext";
 
@@ -21,6 +22,10 @@ export function ProjectStatusDetailInfoAlt({
   const tStatus = useTranslations("projects.ProjectStatus");
   const t = useTranslations("projects.ProjectDetail");
 
+  //Disable edit button while the project is being deleted
+  const { isPending: isDeleteProjectPending } = useDeleteProject();
+
+  //Pending state while updating project status
   const { onOpenChange: onUpdateStatusModalOpenChange } = useModal(
     "updateProjectStatus",
   );
@@ -37,6 +42,7 @@ export function ProjectStatusDetailInfoAlt({
         <DetailEditButton
           data-test="update-project-status-edit-button"
           isPending={isUpdateProjectStatusPending}
+          isDisabled={isDeleteProjectPending}
           onPress={() => onUpdateStatusModalOpenChange(true)}
         />
       }
