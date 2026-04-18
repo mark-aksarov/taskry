@@ -6,7 +6,7 @@ import {
 import { useTranslations } from "next-intl";
 import { TaskStatusBadge } from "../TaskStatusBadge";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { TaskDetailDeleteButton } from "../TaskDetailDeleteButton";
+import { DeleteTaskModalTrigger } from "../DeleteTaskModalTrigger";
 
 interface TaskDetailCardHeaderProps {
   taskStatus: TaskStatus;
@@ -26,7 +26,7 @@ export function TaskDetailCardHeader({
         <TaskStatusBadge status={taskStatus} deadline={taskDeadline} />
       }
       deadline={taskDeadline}
-      deleteButtonSlot={<TaskDetailDeleteButton />}
+      deleteButtonSlot={<DeleteTaskModalTrigger />}
     />
   );
 }

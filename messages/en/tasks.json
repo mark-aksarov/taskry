@@ -263,5 +263,8 @@
   },
   "UpdateTaskProjectModal": {
     "title": "Edit project"
+  },
+  "DeleteTaskModalTrigger": {
+    "label": "Delete task"
   }
 }

@@ -4,6 +4,7 @@ import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button, ButtonProps } from "../ui/Button";
 import { useModal } from "../common/ModalManagerContext";
+import { useDeleteTask } from "../tasks/DeleteTaskContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
 export function CreateSubtasksButton(
@@ -20,6 +21,9 @@ export function CreateSubtasksButton(
     guestGuard(() => onModalOpenChange(true));
   }
 
+  // Disable button while the task is being deleted
+  const { isPending: isDeleteTaskPending } = useDeleteTask();
+
   return (
     <Button
       {...props}
@@ -28,6 +32,7 @@ export function CreateSubtasksButton(
       iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
       aria-label={t("label")}
       onPress={handlePress}
+      isDisabled={isDeleteTaskPending}
     />
   );
 }

@@ -7,6 +7,7 @@ import {
   DetailEditButton,
 } from "@/components/common/Detail";
 import { useTranslations } from "next-intl";
+import { useDeleteTask } from "../DeleteTaskContext";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { useUpdateTaskCategoryRel } from "../UpdateTaskCategoryRelContext";
 
@@ -26,6 +27,10 @@ export function TaskCategoryDetailInfoAlt({
     "updateTaskCategoryRel",
   );
 
+  //Disable edit button while the task is being deleted
+  const { isPending: isDeleteTaskPending } = useDeleteTask();
+
+  //Pending state while updating task category
   const { isPending: isUpdateTaskCategoryPending } = useUpdateTaskCategoryRel();
 
   return (
@@ -39,6 +44,7 @@ export function TaskCategoryDetailInfoAlt({
         <DetailEditButton
           data-test="update-task-category-edit-button"
           isPending={isUpdateTaskCategoryPending}
+          isDisabled={isDeleteTaskPending}
           onPress={() => onUpdateCategoryModalOpenChange(true)}
         />
       }

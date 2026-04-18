@@ -5,7 +5,7 @@ import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { TaskDetailCard } from "@/components/tasks/TaskDetailCard/TaskDetailCard";
-import { TaskDetailDeleteButton } from "@/components/tasks/TaskDetailDeleteButton";
+import { DeleteTaskModalTrigger } from "@/components/tasks/DeleteTaskModalTrigger";
 
 interface TaskDetailPageProps {
   taskDetailCardHeaderContainer: React.ReactNode;
@@ -28,7 +28,7 @@ export function TaskDetailPage({
               <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
             </>
           }
-          secondSlot={<TaskDetailDeleteButton />}
+          secondSlot={<DeleteTaskModalTrigger />}
         />
 
         <TaskDetailCard

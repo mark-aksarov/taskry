@@ -7,14 +7,15 @@ import {
 } from "../../common/ItemBase";
 
 import { startTransition } from "react";
+import { twMerge } from "tailwind-merge";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { CheckCheck, Pencil, Trash } from "lucide-react";
 import { useToggleSubtask } from "../ToggleSubtaskContext";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
+import { useDeleteTask } from "@/components/tasks/DeleteTaskContext";
 import { useSubtaskListItemPending } from "../SubtaskListItem/useSubtaskListItemPending";
-import { twMerge } from "tailwind-merge";
 
 interface SubtaskActionMenuTriggerProps {
   subtaskId: number;
@@ -55,6 +56,9 @@ export function SubtaskActionMenuTrigger({
     });
   }
 
+  // Disable button while the task is being deleted
+  const { isPending: isDeleteTaskPending } = useDeleteTask();
+
   //Pending state while deleting or updating
   const isPending = useSubtaskListItemPending();
 
@@ -64,6 +68,7 @@ export function SubtaskActionMenuTrigger({
       renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
       renderButton={() => (
         <ItemBaseActionMenuButton
+          isDisabled={isDeleteTaskPending}
           isPending={isPending}
           data-test="subtask-item-action-menu-trigger"
           data-id={subtaskId}

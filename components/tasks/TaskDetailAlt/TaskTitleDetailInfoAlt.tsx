@@ -7,6 +7,7 @@ import {
   DetailEditButton,
 } from "@/components/common/Detail";
 import { useTranslations } from "next-intl";
+import { useDeleteTask } from "../DeleteTaskContext";
 import { useUpdateTaskTitle } from "../UpdateTaskTitleContext";
 import { useModal } from "@/components/common/ModalManagerContext";
 
@@ -20,6 +21,10 @@ export function TaskTitleDetailInfoAlt({ title }: TaskTitleDetailInfoAltProps) {
   const { onOpenChange: onUpdateTitleModalOpenChange } =
     useModal("updateTaskTitle");
 
+  //Disable edit button while the task is being deleted
+  const { isPending: isDeleteTaskPending } = useDeleteTask();
+
+  //Pending state while updating task title
   const { isPending: isUpdateTaskTitlePending } = useUpdateTaskTitle();
 
   return (
@@ -31,6 +36,7 @@ export function TaskTitleDetailInfoAlt({ title }: TaskTitleDetailInfoAltProps) {
         <DetailEditButton
           data-test="update-task-title-edit-button"
           isPending={isUpdateTaskTitlePending}
+          isDisabled={isDeleteTaskPending}
           onPress={() => onUpdateTitleModalOpenChange(true)}
         />
       }

@@ -9,6 +9,7 @@ import {
 import { useTranslations } from "next-intl";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { useUpdateTaskAssignee } from "../UpdateTaskAssigneeContext";
+import { useDeleteTask } from "../DeleteTaskContext";
 
 interface TaskAssigneeDetailInfoAltProps {
   assignee?: {
@@ -25,6 +26,10 @@ export function TaskAssigneeDetailInfoAlt({
   const { onOpenChange: onUpdateAssigneeModalOpenChange } =
     useModal("updateTaskAssignee");
 
+  //Disable edit button while the task is being deleted
+  const { isPending: isDeleteTaskPending } = useDeleteTask();
+
+  //Pending state while updating task assignee
   const { isPending: isUpdateTaskAssigneePending } = useUpdateTaskAssignee();
 
   return (
@@ -40,6 +45,7 @@ export function TaskAssigneeDetailInfoAlt({
         <DetailEditButton
           data-test="update-task-assignee-edit-button"
           isPending={isUpdateTaskAssigneePending}
+          isDisabled={isDeleteTaskPending}
           onPress={() => onUpdateAssigneeModalOpenChange(true)}
         />
       }

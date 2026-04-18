@@ -9,6 +9,7 @@ import {
 import { useTranslations } from "next-intl";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { useUpdateTaskProject } from "../UpdateTaskProjectContext";
+import { useDeleteTask } from "../DeleteTaskContext";
 
 interface TaskProjectDetailInfoAltProps {
   project?: {
@@ -25,6 +26,10 @@ export function TaskProjectDetailInfoAlt({
   const { onOpenChange: onUpdateProjectModalOpenChange } =
     useModal("updateTaskProject");
 
+  //Disable edit button while the task is being deleted
+  const { isPending: isDeleteTaskPending } = useDeleteTask();
+
+  //Pending state while updating task project
   const { isPending: isUpdateTaskProjectPending } = useUpdateTaskProject();
 
   return (
@@ -38,6 +43,7 @@ export function TaskProjectDetailInfoAlt({
         <DetailEditButton
           data-test="update-task-project-edit-button"
           isPending={isUpdateTaskProjectPending}
+          isDisabled={isDeleteTaskPending}
           onPress={() => onUpdateProjectModalOpenChange(true)}
         />
       }

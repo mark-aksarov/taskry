@@ -6,9 +6,10 @@ import {
   DetailInfoAlt,
   DetailEditButton,
 } from "@/components/common/Detail";
+import { useDeleteTask } from "../DeleteTaskContext";
 import { useFormatter, useTranslations } from "next-intl";
-import { useUpdateTaskDeadline } from "../UpdateTaskDeadlineContext";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { useUpdateTaskDeadline } from "../UpdateTaskDeadlineContext";
 
 interface TaskDeadlineDetailInfoAltProps {
   deadline: string;
@@ -22,6 +23,10 @@ export function TaskDeadlineDetailInfoAlt({
   const { onOpenChange: onUpdateBirthdateModalOpenChange } =
     useModal("updateTaskDeadline");
 
+  //Disable edit button while the task is being deleted
+  const { isPending: isDeleteTaskPending } = useDeleteTask();
+
+  //Pending state while updating task deadline
   const { isPending: isUpdateTaskDeadlinePending } = useUpdateTaskDeadline();
 
   const format = useFormatter();
@@ -41,6 +46,7 @@ export function TaskDeadlineDetailInfoAlt({
         <DetailEditButton
           data-test="update-task-deadline-edit-button"
           isPending={isUpdateTaskDeadlinePending}
+          isDisabled={isDeleteTaskPending}
           onPress={() => onUpdateBirthdateModalOpenChange(true)}
         />
       }

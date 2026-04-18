@@ -5,7 +5,7 @@ export function DetailEditButton(props: ButtonProps) {
   return (
     <Button
       {...props}
-      className="-my-2 rounded-full text-gray-600 dark:text-gray-400"
+      className="-my-2 rounded-full"
       variant="ghost"
       size="small"
       iconLeft={props.isPending ? undefined : <Pencil size={14} />}
