@@ -113,7 +113,11 @@ export function TaskDetail({
       subtasksSlot={
         <DetailInfo className="border-none pb-0">
           <DetailTitle>{t("subtasks")}</DetailTitle>
-          {subtasksList}
+          {subtasksList ? (
+            subtasksList
+          ) : (
+            <DetailText>{t("noSubtasks")}</DetailText>
+          )}
         </DetailInfo>
       }
     />
