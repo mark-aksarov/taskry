@@ -1,6 +1,7 @@
 import { GridItem, GridItemRow } from "@/components/common/Grid";
 
 export interface TaskGridItemProps {
+  className?: string;
   checkboxSlot?: React.ReactNode;
   menuTriggerSlot: React.ReactNode;
   titleSlot: React.ReactNode;
@@ -11,6 +12,7 @@ export interface TaskGridItemProps {
 }
 
 export function TaskGridItemLayout({
+  className,
   checkboxSlot,
   menuTriggerSlot,
   titleSlot,
@@ -20,7 +22,7 @@ export function TaskGridItemLayout({
   progressSlot,
 }: TaskGridItemProps) {
   return (
-    <GridItem>
+    <GridItem className={className}>
       <GridItemRow>
         {checkboxSlot}
         {menuTriggerSlot}

@@ -13,13 +13,14 @@ import {
 } from "@/components/common/ItemBase";
 
 import { memo } from "react";
+import { twMerge } from "tailwind-merge";
 import { Link } from "@/components/ui/Link";
-import { BaseTaskItemProps } from "../TaskItem";
+import { TaskItemActionMenuTrigger } from "../TaskItem";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { TaskItemStatusBadge } from "../TaskItemStatusBadge";
 import { TaskGridItemProgress } from "./TaskGridItemProgress";
 import { useModal } from "@/components/common/ModalManagerContext";
-import { TaskItemActionMenuTrigger, TaskItemPendingOverlay } from "../TaskItem";
+import { BaseTaskItemProps, useTaskItemPending } from "../TaskItem";
 
 export interface TaskGridItemMobileProps extends BaseTaskItemProps {
   subtasksTotal: number;
@@ -27,22 +28,15 @@ export interface TaskGridItemMobileProps extends BaseTaskItemProps {
 }
 
 export function TaskGridItemMobile(props: TaskGridItemMobileProps) {
-  return (
-    <TaskItemPendingOverlay taskId={props.id}>
-      <div className="relative block">
-        <Link
-          aria-label={props.title}
-          href={`/tasks/${props.id}`}
-          className="absolute inset-0 z-0"
-        />
-        <TaskGridItemMobileInner {...props} />
-      </div>
-    </TaskItemPendingOverlay>
-  );
+  const isPending = useTaskItemPending(props.id);
+  return <TaskGridItemMobileInner {...props} isPending={isPending} />;
 }
+
+type InnerProps = TaskGridItemMobileProps & { isPending: boolean };
 
 export const TaskGridItemMobileInner = memo(function TaskGridItemMobileInner({
   id,
+  isPending,
   title,
   deadline,
   assignee,
@@ -50,7 +44,7 @@ export const TaskGridItemMobileInner = memo(function TaskGridItemMobileInner({
   status,
   subtasksTotal,
   subtasksDone,
-}: TaskGridItemMobileProps) {
+}: InnerProps) {
   const assigneeImg = (
     <ItemBaseUserImageContainer
       user={assignee}
@@ -64,47 +58,62 @@ export const TaskGridItemMobileInner = memo(function TaskGridItemMobileInner({
     useModal("taskComments");
 
   return (
-    <TaskGridItemLayout
-      menuTriggerSlot={
-        <TaskItemActionMenuTrigger
-          taskId={id}
-          taskStatus={status}
-          className="relative z-1 -mr-2 ml-auto"
-        />
-      }
-      titleSlot={
-        <GridItemInfo className="flex-auto">
-          <GridItemTitle>{title}</GridItemTitle>
-          <GridItemText>
-            <ItemBaseDeadline deadline={deadline} />
-          </GridItemText>
-        </GridItemInfo>
-      }
-      assigneeImageSlot={
-        assignee ? (
-          <Link aria-label={assignee.fullName} href={`/team/${assignee.id}`}>
-            {assigneeImg}
-          </Link>
-        ) : (
-          assigneeImg
-        )
-      }
-      commentsSlot={
-        <ItemBaseCommentsButton
-          commentsCount={commentsCount}
-          onPress={() => onTaskCommentsModalOpenChange(true)}
-          className="relative z-1"
-        />
-      }
-      statusSlot={
-        <TaskItemStatusBadge taskId={id} deadline={deadline} status={status} />
-      }
-      progressSlot={
-        <TaskGridItemProgress
-          subtasksDone={subtasksDone}
-          subtasksTotal={subtasksTotal}
-        />
-      }
-    />
+    <div
+      className={twMerge("relative block", isPending && "pointer-events-none")}
+    >
+      <Link
+        aria-label={title}
+        href={`/tasks/${id}`}
+        className="absolute inset-0 z-0"
+      />
+
+      <TaskGridItemLayout
+        className={isPending ? "*:opacity-50" : undefined}
+        menuTriggerSlot={
+          <TaskItemActionMenuTrigger
+            taskId={id}
+            taskStatus={status}
+            className="relative z-1 -mr-2 ml-auto"
+          />
+        }
+        titleSlot={
+          <GridItemInfo className="flex-auto">
+            <GridItemTitle>{title}</GridItemTitle>
+            <GridItemText>
+              <ItemBaseDeadline deadline={deadline} />
+            </GridItemText>
+          </GridItemInfo>
+        }
+        assigneeImageSlot={
+          assignee ? (
+            <Link aria-label={assignee.fullName} href={`/team/${assignee.id}`}>
+              {assigneeImg}
+            </Link>
+          ) : (
+            assigneeImg
+          )
+        }
+        commentsSlot={
+          <ItemBaseCommentsButton
+            commentsCount={commentsCount}
+            onPress={() => onTaskCommentsModalOpenChange(true)}
+            className="relative z-1"
+          />
+        }
+        statusSlot={
+          <TaskItemStatusBadge
+            taskId={id}
+            deadline={deadline}
+            status={status}
+          />
+        }
+        progressSlot={
+          <TaskGridItemProgress
+            subtasksDone={subtasksDone}
+            subtasksTotal={subtasksTotal}
+          />
+        }
+      />
+    </div>
   );
 });

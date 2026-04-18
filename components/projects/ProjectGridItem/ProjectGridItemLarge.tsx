@@ -1,6 +1,12 @@
 "use client";
 
 import {
+  BaseProjectItemProps,
+  useProjectItemPending,
+  ProjectItemActionMenuTrigger,
+} from "../ProjectItem";
+
+import {
   GridItemText,
   GridItemInfo,
   GridItemTitleButton,
@@ -13,18 +19,11 @@ import {
   ItemBaseUserImageContainer,
 } from "@/components/common/ItemBase";
 
-import {
-  BaseProjectItemProps,
-  ProjectItemPendingOverlay,
-  ProjectItemActionMenuTrigger,
-} from "../ProjectItem";
-
 import { memo } from "react";
-import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
-import { useSelectedProjects } from "../SelectedProjectsContext";
+import { SelectableProjectItem } from "../SelectableProjectItem";
+import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
 import { useModal } from "@/components/common/ModalManagerContext";
-import { SelectableItem } from "@/components/common/SelectableItem";
 import { ProjectGridItemProgress } from "./ProjectGridItemProgress";
 import { ProjectItemCheckbox } from "../ProjectItem/ProjectItemCheckbox";
 
@@ -34,23 +33,23 @@ interface Props extends BaseProjectItemProps {
 }
 
 export function ProjectGridItemLarge(props: Props) {
-  const selected = useSelectedProjects();
+  const isPending = useProjectItemPending(props.id);
 
   return (
-    <ProjectItemPendingOverlay projectId={props.id}>
-      <SelectableItem
-        {...selected}
-        item={{ id: props.id, status: props.status }}
-      >
-        <ProjectGridItemLargeInner {...props} />
-      </SelectableItem>
-    </ProjectItemPendingOverlay>
+    <SelectableProjectItem projectId={props.id} projectStatus={props.status}>
+      <ProjectGridItemLargeInner {...props} isPending={isPending} />
+    </SelectableProjectItem>
   );
 }
+
+type InnerProps = Props & {
+  isPending: boolean;
+};
 
 export const ProjectGridItemLargeInner = memo(
   function ProjectGridItemLargeInner({
     id,
+    isPending,
     title,
     deadline,
     creator,
@@ -58,7 +57,7 @@ export const ProjectGridItemLargeInner = memo(
     status,
     tasksTotal,
     tasksCompleted,
-  }: Props) {
+  }: InnerProps) {
     const { onOpenChange: onProjectDetailModalOpenChange } =
       useModal("projectDetail");
     const { onOpenChange: onUserDetailModalOpenChange } =
@@ -77,6 +76,7 @@ export const ProjectGridItemLargeInner = memo(
 
     return (
       <ProjectGridItemLayout
+        className={isPending ? "*:opacity-50" : undefined}
         checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
         menuTriggerSlot={
           <ProjectItemActionMenuTrigger

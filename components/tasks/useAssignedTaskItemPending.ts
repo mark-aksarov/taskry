@@ -1,5 +1,5 @@
-import { useDeleteTask } from "../DeleteTaskContext";
-import { useUpdateTask } from "../UpdateTaskContext";
+import { useDeleteTask } from "./DeleteTaskContext";
+import { useUpdateTask } from "./UpdateTaskContext";
 
 export function useAssignedTaskItemPending() {
   const { isPending: isDeleteTaskPending } = useDeleteTask();

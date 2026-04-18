@@ -1,11 +1,6 @@
 "use client";
 
 import {
-  BaseCustomerItemProps,
-  CustomerItemPendingOverlay,
-} from "../CustomerItem";
-
-import {
   ListItemText,
   ListItemTextLink,
   ListItemTitle,
@@ -26,31 +21,34 @@ import { useTranslations } from "next-intl";
 import { CustomerItemCheckbox } from "../CustomerItem";
 import { CustomerItemActionMenuTrigger } from "../CustomerItem";
 import { CustomerListItemLayout } from "./CustomerListItemLayout";
-import { SelectableItem } from "@/components/common/SelectableItem";
-import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { SelectableCustomerItem } from "../SelectableCustomerItem";
+import { BaseCustomerItemProps, useCustomerItemPending } from "../CustomerItem";
 
 export function CustomerListItem(props: BaseCustomerItemProps) {
-  const selected = useSelectedItems();
+  const isPending = useCustomerItemPending(props.id);
 
   return (
-    <CustomerItemPendingOverlay customerId={props.id}>
-      <SelectableItem {...selected} item={{ id: props.id }}>
-        <CustomerListItemInner {...props} />
-      </SelectableItem>
-    </CustomerItemPendingOverlay>
+    <SelectableCustomerItem customerId={props.id}>
+      <CustomerListItemInner {...props} isPending={isPending} />
+    </SelectableCustomerItem>
   );
 }
 
+type InnerProps = BaseCustomerItemProps & {
+  isPending: boolean;
+};
+
 export const CustomerListItemInner = memo(function CustomerListItemInner({
   id,
+  isPending,
   fullName,
   email,
   phoneNumber,
   publicLink,
   imageUrl,
   company,
-}: BaseCustomerItemProps) {
+}: InnerProps) {
   const t = useTranslations("customers.CustomerListItem");
 
   const { onOpenChange: onCustomerDetailModalOpenChange } =
@@ -67,7 +65,8 @@ export const CustomerListItemInner = memo(function CustomerListItemInner({
 
   return (
     <CustomerListItemLayout
-      id={id}
+      data-id={id}
+      className={isPending ? "*:opacity-50" : undefined}
       checkboxSlot={<CustomerItemCheckbox id={id} />}
       imgSlot={
         <ItemBaseDetailButton

@@ -1,7 +1,8 @@
 import { ListItem, ListItemInfo } from "@/components/common/List";
 
 export interface ProjectListItemLayoutProps {
-  id?: number;
+  "data-id"?: number;
+  className?: string;
   checkboxSlot: React.ReactNode;
   mainSlot: React.ReactNode;
   categorySlot: React.ReactNode;
@@ -16,7 +17,8 @@ export interface ProjectListItemLayoutProps {
 }
 
 export const ProjectListItemLayout = ({
-  id,
+  "data-id": dataId,
+  className,
   checkboxSlot,
   mainSlot,
   creatorImgSlot,
@@ -30,7 +32,11 @@ export const ProjectListItemLayout = ({
   menuTriggerSlot,
 }: ProjectListItemLayoutProps) => {
   return (
-    <ListItem data-test="project-list-item" data-id={id}>
+    <ListItem
+      data-test="project-list-item"
+      data-id={dataId}
+      className={className}
+    >
       <div className="flex w-full items-center gap-4">
         {checkboxSlot}
         <ListItemInfo>{mainSlot}</ListItemInfo>

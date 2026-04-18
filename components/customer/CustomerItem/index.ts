@@ -1,4 +1,4 @@
 export { type BaseCustomerItemProps } from "./types";
 export { CustomerItemCheckbox } from "./CustomerItemCheckbox";
-export { CustomerItemPendingOverlay } from "./CustomerItemPendingOverlay";
+export { useCustomerItemPending } from "./useCustomerItemPending";
 export { CustomerItemActionMenuTrigger } from "./CustomerItemActionMenuTrigger";

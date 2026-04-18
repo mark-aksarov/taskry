@@ -2,7 +2,7 @@
 
 import {
   BaseUserItemProps,
-  UserItemPendingOverlay,
+  useUserItemPending,
   UserItemActionMenuTrigger,
 } from "../UserItem";
 
@@ -29,22 +29,24 @@ import { useModal } from "@/components/common/ModalManagerContext";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 
 export function UserGridItemLarge(props: BaseUserItemProps) {
-  return (
-    <UserItemPendingOverlay>
-      <UserGridItemLargeInner {...props} />
-    </UserItemPendingOverlay>
-  );
+  const isPending = useUserItemPending();
+  return <UserGridItemLargeInner {...props} isPending={isPending} />;
 }
+
+type InnerProps = BaseUserItemProps & {
+  isPending: boolean;
+};
 
 const UserGridItemLargeInner = memo(function UserGridItemLargeInner({
   id,
+  isPending,
   fullName,
   imageUrl,
   position,
   phoneNumber,
   publicLink,
   email,
-}: BaseUserItemProps) {
+}: InnerProps) {
   const t = useTranslations("users.UserGridItem");
   const { isOwner, isGuest } = useCurrentUser();
   const { onOpenChange: onUserDetailModalOpenChange } = useModal("userDetail");
@@ -63,6 +65,7 @@ const UserGridItemLargeInner = memo(function UserGridItemLargeInner({
 
   return (
     <UserGridItemLayout
+      className={isPending ? "pointer-events-none *:opacity-50" : undefined}
       actionMenuSlot={
         showActionMenuTrigger ? (
           <UserItemActionMenuTrigger userId={id} className="-mr-2" />

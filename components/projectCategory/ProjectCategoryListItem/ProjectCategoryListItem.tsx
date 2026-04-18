@@ -8,11 +8,11 @@ import {
 } from "@/components/common/List";
 
 import { memo } from "react";
+import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
-import { SelectableItem } from "@/components/common/SelectableItem";
-import { useSelectedItems } from "@/components/common/SelectedItemsContext";
+import { SelectableProjectCategoryItem } from "../SelectableProjectCategoryItem";
 import { ProjectCategoryListItemCheckbox } from "./ProjectCategoryListItemCheckbox";
-import { ProjectCategoryListItemPendingOverlay } from "./ProjectCategoryListItemPendingOverlay";
+import { useProjectCategoryListItemPending } from "./useProjectCategoryListItemPending";
 import { ProjectCategoryListItemActionMenuTrigger } from "./ProjectCategoryListItemActionMenuTrigger";
 
 interface ProjectCategoryListItemProps {
@@ -21,28 +21,30 @@ interface ProjectCategoryListItemProps {
 }
 
 export function ProjectCategoryListItem(props: ProjectCategoryListItemProps) {
-  const selected = useSelectedItems();
+  const isPending = useProjectCategoryListItemPending(props.id);
 
   return (
-    <ProjectCategoryListItemPendingOverlay projectCategoryId={props.id}>
-      <SelectableItem {...selected} item={{ id: props.id }}>
-        <ProjectCategoryListItemInner {...props} />
-      </SelectableItem>
-    </ProjectCategoryListItemPendingOverlay>
+    <SelectableProjectCategoryItem projectCategoryId={props.id}>
+      <ProjectCategoryListItemInner {...props} isPending={isPending} />
+    </SelectableProjectCategoryItem>
   );
 }
 
+type InnerProps = ProjectCategoryListItemProps & {
+  isPending: boolean;
+};
+
 const ProjectCategoryListItemInner = memo(
-  function ProjectCategoryListItemInner({
-    id,
-    name,
-  }: ProjectCategoryListItemProps) {
+  function ProjectCategoryListItemInner({ id, name, isPending }: InnerProps) {
     const t = useTranslations("projectCategories.ProjectCategoryListItem");
 
     return (
       <ListItem
         data-test="project-category-list-item"
-        className="flex w-full items-center gap-4"
+        className={twMerge(
+          "flex w-full items-center gap-4",
+          isPending && "*:opacity-50",
+        )}
       >
         <ProjectCategoryListItemCheckbox id={id} />
         <ListItemInfo>

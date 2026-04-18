@@ -1,8 +1,19 @@
+import { twMerge } from "tailwind-merge";
 import { Card } from "../Card";
 
-export function GridItem({ children }: { children: React.ReactNode }) {
+interface GridItemProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function GridItem({ children, className }: GridItemProps) {
   return (
-    <Card className="flex flex-col gap-4 max-md:rounded-lg md:rounded-md">
+    <Card
+      className={twMerge(
+        "flex flex-col gap-4 max-md:rounded-lg md:rounded-md",
+        className,
+      )}
+    >
       {children}
     </Card>
   );

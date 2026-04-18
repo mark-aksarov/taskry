@@ -2,8 +2,8 @@
 
 import {
   BaseProjectItemProps,
+  useProjectItemPending,
   ProjectItemActionMenuTrigger,
-  ProjectItemPendingOverlay,
 } from "../ProjectItem";
 
 import {
@@ -14,18 +14,17 @@ import {
 
 import {
   ItemBaseDeadline,
-  ItemBaseUserImageContainer,
   ItemBaseDetailButton,
   ItemBaseCommentsButton,
+  ItemBaseUserImageContainer,
 } from "@/components/common/ItemBase";
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
-import { useSelectedProjects } from "../SelectedProjectsContext";
+import { SelectableProjectItem } from "../SelectableProjectItem";
 import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
 import { useModal } from "@/components/common/ModalManagerContext";
-import { SelectableItem } from "@/components/common/SelectableItem";
 import { ProjectItemCheckbox } from "../ProjectItem/ProjectItemCheckbox";
 
 export interface Props extends BaseProjectItemProps {
@@ -46,22 +45,22 @@ export interface Props extends BaseProjectItemProps {
 }
 
 export function ProjectListItem(props: Props) {
-  const selected = useSelectedProjects();
+  const isPending = useProjectItemPending(props.id);
 
   return (
-    <ProjectItemPendingOverlay projectId={props.id}>
-      <SelectableItem
-        {...selected}
-        item={{ id: props.id, status: props.status }}
-      >
-        <ProjectListItemInner {...props} />
-      </SelectableItem>
-    </ProjectItemPendingOverlay>
+    <SelectableProjectItem projectId={props.id} projectStatus={props.status}>
+      <ProjectListItemInner {...props} isPending={isPending} />
+    </SelectableProjectItem>
   );
 }
 
+type InnerProps = Props & {
+  isPending: boolean;
+};
+
 export const ProjectListItemInner = memo(function ProjectListItemInner({
   id,
+  isPending,
   title,
   deadline,
   category,
@@ -70,7 +69,7 @@ export const ProjectListItemInner = memo(function ProjectListItemInner({
   commentsCount,
   status,
   creator,
-}: Props) {
+}: InnerProps) {
   const t = useTranslations("projects.ProjectListItem");
 
   const { onOpenChange: onProjectDetailModalOpenChange } =
@@ -100,116 +99,115 @@ export const ProjectListItemInner = memo(function ProjectListItemInner({
   );
 
   return (
-    <>
-      <ProjectListItemLayout
-        id={id}
-        checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
-        mainSlot={
-          <>
-            <ListItemTitleButton
-              onPress={() => onProjectDetailModalOpenChange(true)}
+    <ProjectListItemLayout
+      data-id={id}
+      className={isPending ? "*:opacity-50" : undefined}
+      checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
+      mainSlot={
+        <>
+          <ListItemTitleButton
+            onPress={() => onProjectDetailModalOpenChange(true)}
+          >
+            {title}
+          </ListItemTitleButton>
+          <ListItemText>
+            <ItemBaseDeadline deadline={deadline} />
+          </ListItemText>
+        </>
+      }
+      creatorImgSlot={
+        <>
+          {creator ? (
+            <ItemBaseDetailButton
+              aria-label={creator.fullName}
+              onPress={() => onUserDetailModalOpenChange(true)}
             >
-              {title}
+              {creatorImg}
+            </ItemBaseDetailButton>
+          ) : (
+            creatorImg
+          )}
+        </>
+      }
+      creatorSlot={
+        <>
+          {creator ? (
+            <ListItemTitleButton
+              onPress={() => onUserDetailModalOpenChange(true)}
+            >
+              {creator.fullName}
             </ListItemTitleButton>
-            <ListItemText>
-              <ItemBaseDeadline deadline={deadline} />
-            </ListItemText>
-          </>
-        }
-        creatorImgSlot={
-          <>
-            {creator ? (
-              <ItemBaseDetailButton
-                aria-label={creator.fullName}
-                onPress={() => onUserDetailModalOpenChange(true)}
-              >
-                {creatorImg}
-              </ItemBaseDetailButton>
-            ) : (
-              creatorImg
-            )}
-          </>
-        }
-        creatorSlot={
-          <>
-            {creator ? (
-              <ListItemTitleButton
-                onPress={() => onUserDetailModalOpenChange(true)}
-              >
-                {creator.fullName}
-              </ListItemTitleButton>
-            ) : (
-              <ListItemTitle>{t("noCreator")}</ListItemTitle>
-            )}
+          ) : (
+            <ListItemTitle>{t("noCreator")}</ListItemTitle>
+          )}
 
-            <ListItemText>{t("creator")}</ListItemText>
-          </>
-        }
-        customerImgSlot={
-          <>
-            {customer ? (
-              <ItemBaseDetailButton
-                onPress={() => onCustomerDetailModalOpenChange(true)}
-              >
-                {customerImg}
-              </ItemBaseDetailButton>
-            ) : (
-              customerImg
-            )}
-          </>
-        }
-        customerSlot={
-          <>
-            {customer ? (
-              <ListItemTitleButton
-                onPress={() => onCustomerDetailModalOpenChange(true)}
-              >
-                {customer.fullName}
-              </ListItemTitleButton>
-            ) : (
-              <ListItemTitle>{t("noCustomer")} </ListItemTitle>
-            )}
+          <ListItemText>{t("creator")}</ListItemText>
+        </>
+      }
+      customerImgSlot={
+        <>
+          {customer ? (
+            <ItemBaseDetailButton
+              onPress={() => onCustomerDetailModalOpenChange(true)}
+            >
+              {customerImg}
+            </ItemBaseDetailButton>
+          ) : (
+            customerImg
+          )}
+        </>
+      }
+      customerSlot={
+        <>
+          {customer ? (
+            <ListItemTitleButton
+              onPress={() => onCustomerDetailModalOpenChange(true)}
+            >
+              {customer.fullName}
+            </ListItemTitleButton>
+          ) : (
+            <ListItemTitle>{t("noCustomer")} </ListItemTitle>
+          )}
 
-            <ListItemText>{t("customer")}</ListItemText>
-          </>
-        }
-        categorySlot={
-          <>
-            <ListItemTitle>
-              {category ? category.name : t("noCategory")}
-            </ListItemTitle>
+          <ListItemText>{t("customer")}</ListItemText>
+        </>
+      }
+      categorySlot={
+        <>
+          <ListItemTitle>
+            {category ? category.name : t("noCategory")}
+          </ListItemTitle>
 
-            <ListItemText>{t("category")}</ListItemText>
-          </>
-        }
-        companySlot={
-          <>
-            <ListItemTitle>
-              {company ? company.name : t("noCompany")}
-            </ListItemTitle>
+          <ListItemText>{t("category")}</ListItemText>
+        </>
+      }
+      companySlot={
+        <>
+          <ListItemTitle>
+            {company ? company.name : t("noCompany")}
+          </ListItemTitle>
 
-            <ListItemText>{t("company")}</ListItemText>
-          </>
-        }
-        statusSlot={
-          <ProjectItemStatusBadge
-            projectId={id}
-            deadline={deadline}
-            status={status}
-          />
-        }
-        commentsModalTriggerSlot={
-          <ItemBaseCommentsButton
-            data-test="project-comments-modal-trigger"
-            data-id={id.toString()}
-            commentsCount={commentsCount}
-            onPress={() => onProjectCommentsModalOpenChange(true)}
-          />
-        }
-        menuTriggerSlot={
-          <ProjectItemActionMenuTrigger projectId={id} projectStatus={status} />
-        }
-      />
-    </>
+          <ListItemText>{t("company")}</ListItemText>
+        </>
+      }
+      statusSlot={
+        <ProjectItemStatusBadge
+          projectId={id}
+          deadline={deadline}
+          status={status}
+        />
+      }
+      commentsModalTriggerSlot={
+        <ItemBaseCommentsButton
+          data-test="project-comments-modal-trigger"
+          data-id={id.toString()}
+          commentsCount={commentsCount}
+          onPress={() => onProjectCommentsModalOpenChange(true)}
+        />
+      }
+      menuTriggerSlot={
+        <ProjectItemActionMenuTrigger projectId={id} projectStatus={status} />
+      }
+    />
   );
 });

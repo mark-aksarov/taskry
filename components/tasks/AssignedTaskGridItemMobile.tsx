@@ -1,18 +1,11 @@
 import {
-  TaskGridItemMobileInner,
   TaskGridItemMobileProps,
+  TaskGridItemMobileInner,
 } from "./TaskGridItem";
 
-import { Link } from "@/components/ui/Link";
-import { AssignedTaskItemPendingOverlay } from "./AssignedTaskItem";
+import { useAssignedTaskItemPending } from "./useAssignedTaskItemPending";
 
 export function AssignedTaskGridItemMobile(props: TaskGridItemMobileProps) {
-  return (
-    <AssignedTaskItemPendingOverlay>
-      <div className="relative block">
-        <Link href={`/tasks/${props.id}`} className="absolute inset-0 z-0" />
-        <TaskGridItemMobileInner {...props} />
-      </div>
-    </AssignedTaskItemPendingOverlay>
-  );
+  const isPending = useAssignedTaskItemPending();
+  return <TaskGridItemMobileInner {...props} isPending={isPending} />;
 }

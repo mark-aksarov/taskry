@@ -2,7 +2,7 @@
 
 import {
   BaseTaskItemProps,
-  TaskItemPendingOverlay,
+  useTaskItemPending,
 } from "@/components/tasks/TaskItem";
 
 import {
@@ -13,41 +13,39 @@ import {
 import { memo } from "react";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
 import { useModal } from "@/components/common/ModalManagerContext";
-import { SelectableItem } from "@/components/common/SelectableItem";
+import { SelectableTaskItem } from "@/components/tasks/SelectableTaskItem";
 import { TaskItemStatusBadge } from "@/components/tasks/TaskItemStatusBadge";
-import { useSelectedTasks } from "@/components/tasks/SelectedTasksContext";
 import { ListItemText, ListItemTitleButton } from "@/components/common/List";
 import { TaskItemCheckbox } from "@/components/tasks/TaskItem/TaskItemCheckbox";
 import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItem/TaskItemActionMenuTrigger";
 
 export const UserTaskListItem = (props: BaseTaskItemProps) => {
-  const selected = useSelectedTasks();
+  const isPending = useTaskItemPending(props.id);
 
   return (
-    <TaskItemPendingOverlay taskId={props.id}>
-      <SelectableItem
-        {...selected}
-        item={{ id: props.id, status: props.status }}
-      >
-        <UserTaskListItemInner {...props} />
-      </SelectableItem>
-    </TaskItemPendingOverlay>
+    <SelectableTaskItem taskId={props.id} taskStatus={props.status}>
+      <UserTaskListItemInner {...props} isPending={isPending} />
+    </SelectableTaskItem>
   );
 };
 
+type InnerProps = BaseTaskItemProps & { isPending: boolean };
+
 export const UserTaskListItemInner = memo(function UserTaskListItemInner({
   id,
+  isPending,
   title,
   deadline,
   status,
   commentsCount,
-}: BaseTaskItemProps) {
+}: InnerProps) {
   const { onOpenChange: onTaskDetailModalOpenChange } = useModal("taskDetail");
   const { onOpenChange: onTaskCommentsModalOpenChange } =
     useModal("taskComments");
 
   return (
     <UserTaskListItemLayout
+      className={isPending ? "*:opacity-50" : undefined}
       checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
       mainSlot={
         <>

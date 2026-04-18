@@ -7,9 +7,9 @@ import { CommentItemInfo } from "./CommentItemInfo";
 import { CommentItemTitle } from "./CommentItemTitle";
 import { CommentItemLayout } from "./CommentItemLayout";
 import { UnknownUser } from "@/components/common/UnknownUser";
+import { useCommentItemPending } from "./useCommentItemPending";
 import { ImageContainer } from "@/components/common/ImageContainer";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
-import { CommentItemPendingOverlay } from "./CommentItemPendingOverlay";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { CommentItemActionMenuTrigger } from "./CommentItemActionMenuTrigger";
 
@@ -27,20 +27,23 @@ interface CommentItemProps {
 }
 
 export function CommentItem(props: CommentItemProps) {
-  return (
-    <CommentItemPendingOverlay commentId={props.id}>
-      <CommentItemInner {...props} />
-    </CommentItemPendingOverlay>
-  );
+  const isPending = useCommentItemPending(props.id);
+
+  return <CommentItemInner {...props} isPending={isPending} />;
 }
+
+type InnerProps = CommentItemProps & {
+  isPending: boolean;
+};
 
 const CommentItemInner = memo(function CommentItemInner({
   id,
+  isPending,
   content,
   createdAt,
   canEdit,
   sender,
-}: CommentItemProps) {
+}: InnerProps) {
   const t = useTranslations("comments.CommentItem");
   const locale = useLocale();
 
@@ -60,6 +63,7 @@ const CommentItemInner = memo(function CommentItemInner({
 
   return (
     <CommentItemLayout
+      className={isPending ? "*:opacity-50" : undefined}
       senderImageSlot={
         <>
           {sender?.imageUrl ? (

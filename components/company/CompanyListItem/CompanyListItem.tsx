@@ -8,11 +8,11 @@ import {
 } from "@/components/common/List";
 
 import { memo } from "react";
+import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
+import { SelectableCompanyItem } from "../SelectableCompanyItem";
 import { CompanyListItemCheckbox } from "./CompanyListItemCheckbox";
-import { SelectableItem } from "@/components/common/SelectableItem";
-import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { CompanyListItemPendingOverlay } from "./CompanyListItemPendingOverlay";
+import { useCompanyListItemPending } from "./useCompanyListItemPending";
 import { CompanyListItemActionMenuTrigger } from "./CompanyListItemActionMenuTrigger";
 
 interface CompanyListItemProps {
@@ -21,27 +21,33 @@ interface CompanyListItemProps {
 }
 
 export function CompanyListItem(props: CompanyListItemProps) {
-  const selected = useSelectedItems();
+  const isPending = useCompanyListItemPending(props.id);
 
   return (
-    <CompanyListItemPendingOverlay companyId={props.id}>
-      <SelectableItem {...selected} item={{ id: props.id }}>
-        <CompanyListItemInner {...props} />
-      </SelectableItem>
-    </CompanyListItemPendingOverlay>
+    <SelectableCompanyItem companyId={props.id}>
+      <CompanyListItemInner {...props} isPending={isPending} />
+    </SelectableCompanyItem>
   );
 }
+
+type InnerProps = CompanyListItemProps & {
+  isPending: boolean;
+};
 
 const CompanyListItemInner = memo(function CompanyListItemInner({
   id,
   name,
-}: CompanyListItemProps) {
+  isPending,
+}: InnerProps) {
   const t = useTranslations("company.CompanyListItem");
 
   return (
     <ListItem
       data-test="company-list-item "
-      className="flex w-full items-center gap-4"
+      className={twMerge(
+        "flex w-full items-center gap-4",
+        isPending && "*:opacity-50",
+      )}
     >
       <CompanyListItemCheckbox id={id} />
       <ListItemInfo>

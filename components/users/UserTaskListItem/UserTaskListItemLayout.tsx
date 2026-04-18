@@ -1,6 +1,8 @@
 import { ListItem, ListItemInfo } from "@/components/common/List";
+import { twMerge } from "tailwind-merge";
 
 export interface UserTaskListItemLayoutProps {
+  className?: string;
   checkboxSlot?: React.ReactNode;
   mainSlot: React.ReactNode;
   statusSlot: React.ReactNode;
@@ -9,6 +11,7 @@ export interface UserTaskListItemLayoutProps {
 }
 
 export const UserTaskListItemLayout = ({
+  className,
   checkboxSlot,
   mainSlot,
   statusSlot,
@@ -16,7 +19,12 @@ export const UserTaskListItemLayout = ({
   menuTriggerSlot,
 }: UserTaskListItemLayoutProps) => {
   return (
-    <ListItem className="border-gray-300 md:rounded-none md:border-b-1 md:px-0 md:py-4 md:shadow-none dark:border-gray-600">
+    <ListItem
+      className={twMerge(
+        "border-gray-300 md:rounded-none md:border-b-1 md:px-0 md:py-4 md:shadow-none dark:border-gray-600",
+        className,
+      )}
+    >
       <div className="flex w-full items-center gap-4">
         {checkboxSlot}
         <ListItemInfo>{mainSlot}</ListItemInfo>

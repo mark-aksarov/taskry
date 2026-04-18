@@ -1,6 +1,8 @@
+import { twMerge } from "tailwind-merge";
 import { CommentItemContent } from "./CommentItemContent";
 
 interface CommentItemLayoutProps {
+  className?: string;
   senderImageSlot: React.ReactNode;
   senderNameAndDateSlot: React.ReactNode;
   contentSlot: React.ReactNode;
@@ -8,6 +10,7 @@ interface CommentItemLayoutProps {
 }
 
 export function CommentItemLayout({
+  className,
   senderImageSlot,
   senderNameAndDateSlot,
   contentSlot,
@@ -16,7 +19,10 @@ export function CommentItemLayout({
   return (
     <div
       data-test="comment-item"
-      className="flex flex-col gap-4 border-gray-300 not-last:border-b-1 not-last:pb-4 dark:border-gray-600"
+      className={twMerge(
+        "flex flex-col gap-4 border-gray-300 not-last:border-b-1 not-last:pb-4 dark:border-gray-600",
+        className,
+      )}
     >
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-3">

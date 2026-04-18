@@ -1,7 +1,9 @@
+import { twMerge } from "tailwind-merge";
 import { ListItem, ListItemInfo } from "@/components/common/List";
 
 interface CustomerListItemLayoutProps {
-  id?: number;
+  "data-id"?: number;
+  className?: string;
   checkboxSlot: React.ReactNode;
   imgSlot: React.ReactNode;
   mainSlot: React.ReactNode;
@@ -12,7 +14,8 @@ interface CustomerListItemLayoutProps {
 }
 
 export const CustomerListItemLayout = ({
-  id,
+  "data-id": dataId,
+  className,
   checkboxSlot,
   imgSlot,
   mainSlot,
@@ -24,8 +27,8 @@ export const CustomerListItemLayout = ({
   return (
     <ListItem
       data-test="customer-list-item"
-      data-id={id}
-      className="flex w-full items-center gap-4"
+      data-id={dataId}
+      className={twMerge("flex w-full items-center gap-4", className)}
     >
       {checkboxSlot}
       {imgSlot}

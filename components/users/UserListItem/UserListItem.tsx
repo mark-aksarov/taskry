@@ -1,12 +1,6 @@
 "use client";
 
 import {
-  BaseUserItemProps,
-  UserItemPendingOverlay,
-  UserItemActionMenuTrigger,
-} from "../UserItem";
-
-import {
   ListItemText,
   ListItemTitle,
   ListItemTextLink,
@@ -26,25 +20,29 @@ import { memo } from "react";
 import { useTranslations } from "next-intl";
 import { UserListItemLayout } from "./UserListItemLayout";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { useUserItemPending } from "../UserItem/useUserItemPending";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
+import { BaseUserItemProps, UserItemActionMenuTrigger } from "../UserItem";
 
 export function UserListItem(props: BaseUserItemProps) {
-  return (
-    <UserItemPendingOverlay>
-      <UserListItemInner {...props} />
-    </UserItemPendingOverlay>
-  );
+  const isPending = useUserItemPending();
+  return <UserListItemInner {...props} isPending={isPending} />;
 }
+
+type InnerProps = BaseUserItemProps & {
+  isPending: boolean;
+};
 
 export const UserListItemInner = memo(function UserListItemInner({
   id,
+  isPending,
   fullName,
   imageUrl,
   email,
   phoneNumber,
   publicLink,
   position,
-}: BaseUserItemProps) {
+}: InnerProps) {
   const t = useTranslations("users.UserListItem");
   const { isOwner, isGuest } = useCurrentUser();
   const { onOpenChange: onUserDetailModalOpenChange } = useModal("userDetail");
@@ -63,7 +61,8 @@ export const UserListItemInner = memo(function UserListItemInner({
 
   return (
     <UserListItemLayout
-      id={id}
+      data-id={id}
+      className={isPending ? "pointer-events-none *:opacity-50" : undefined}
       imgSlot={
         <ItemBaseDetailButton
           className="h-9 w-9"

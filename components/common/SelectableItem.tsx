@@ -12,6 +12,7 @@ interface SelectableItemProps<T extends SelectedItem> {
   remove: ReturnType<typeof useSelectedItemsState<T>>["remove"];
   get: ReturnType<typeof useSelectedItemsState<T>>["get"];
   children: React.ReactNode;
+  isPending: boolean;
 }
 
 export function SelectableItem<T extends SelectedItem>({
@@ -20,6 +21,7 @@ export function SelectableItem<T extends SelectedItem>({
   remove,
   get,
   children,
+  isPending,
 }: SelectableItemProps<T>) {
   const { pressProps } = usePress({
     onPress: () => {
@@ -28,5 +30,9 @@ export function SelectableItem<T extends SelectedItem>({
     },
   });
 
-  return <div {...pressProps}>{children}</div>;
+  return (
+    <div {...pressProps} className={isPending ? "pointer-events-none" : ""}>
+      {children}
+    </div>
+  );
 }

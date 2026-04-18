@@ -15,14 +15,13 @@ import {
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
+import { TaskItemActionMenuTrigger } from "../TaskItem";
 import { TaskListItemLayout } from "./TaskListItemLayout";
-import { useSelectedTasks } from "../SelectedTasksContext";
+import { SelectableTaskItem } from "../SelectableTaskItem";
 import { TaskItemStatusBadge } from "../TaskItemStatusBadge";
 import { TaskItemCheckbox } from "../TaskItem/TaskItemCheckbox";
 import { useModal } from "@/components/common/ModalManagerContext";
-import { SelectableItem } from "@/components/common/SelectableItem";
-import { BaseTaskItemProps, TaskItemPendingOverlay } from "../TaskItem";
-import { TaskItemActionMenuTrigger } from "../TaskItem/TaskItemActionMenuTrigger";
+import { BaseTaskItemProps, useTaskItemPending } from "../TaskItem";
 
 export interface Props extends BaseTaskItemProps {
   category?: {
@@ -37,22 +36,20 @@ export interface Props extends BaseTaskItemProps {
 }
 
 export function TaskListItem(props: Props) {
-  const selected = useSelectedTasks();
+  const isPending = useTaskItemPending(props.id);
 
   return (
-    <TaskItemPendingOverlay taskId={props.id}>
-      <SelectableItem
-        {...selected}
-        item={{ id: props.id, status: props.status }}
-      >
-        <TaskListItemInner {...props} />
-      </SelectableItem>
-    </TaskItemPendingOverlay>
+    <SelectableTaskItem taskId={props.id} taskStatus={props.status}>
+      <TaskListItemInner {...props} isPending={isPending} />
+    </SelectableTaskItem>
   );
 }
 
+type InnerProps = Props & { isPending: boolean };
+
 export const TaskListItemInner = memo(function TaskListItemInner({
   id,
+  isPending,
   title,
   deadline,
   assignee,
@@ -61,7 +58,7 @@ export const TaskListItemInner = memo(function TaskListItemInner({
   commentsCount,
   status,
   showCheckbox,
-}: Props) {
+}: InnerProps) {
   const t = useTranslations("tasks.TaskListItem");
 
   const assigneeImg = (
@@ -82,7 +79,8 @@ export const TaskListItemInner = memo(function TaskListItemInner({
 
   return (
     <TaskListItemLayout
-      id={id}
+      data-id={id}
+      className={isPending ? "*:opacity-50" : undefined}
       checkboxSlot={
         showCheckbox ? <TaskItemCheckbox id={id} status={status} /> : undefined
       }

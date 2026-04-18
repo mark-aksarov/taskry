@@ -1,3 +1,3 @@
 export { type BaseUserItemProps } from "./types";
-export { UserItemPendingOverlay } from "./UserItemPendingOverlay";
+export { useUserItemPending } from "./useUserItemPending";
 export { UserItemActionMenuTrigger } from "./UserItemActionMenuTrigger";

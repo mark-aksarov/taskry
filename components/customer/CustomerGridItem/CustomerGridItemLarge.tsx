@@ -12,11 +12,6 @@ import {
 } from "@/components/common/Grid";
 
 import {
-  BaseCustomerItemProps,
-  CustomerItemPendingOverlay,
-} from "../CustomerItem";
-
-import {
   ItemBaseDetailButton,
   ItemBaseUserImageContainer,
 } from "@/components/common/ItemBase";
@@ -26,33 +21,36 @@ import { useTranslations } from "next-intl";
 import { Separator } from "@/components/ui/Separator";
 import { CustomerItemActionMenuTrigger } from "../CustomerItem";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
-import { SelectableItem } from "@/components/common/SelectableItem";
-import { CustomerItemCheckbox } from "../CustomerItem/CustomerItemCheckbox";
-import { useSelectedItems } from "@/components/common/SelectedItemsContext";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { SelectableCustomerItem } from "../SelectableCustomerItem";
+import { CustomerItemCheckbox } from "../CustomerItem/CustomerItemCheckbox";
+import { BaseCustomerItemProps, useCustomerItemPending } from "../CustomerItem";
 
 export function CustomerGridItemLarge(props: BaseCustomerItemProps) {
-  const selected = useSelectedItems();
+  const isPending = useCustomerItemPending(props.id);
 
   return (
-    <CustomerItemPendingOverlay customerId={props.id}>
-      <SelectableItem {...selected} item={{ id: props.id }}>
-        <CustomerGridItemLargeInner {...props} />
-      </SelectableItem>
-    </CustomerItemPendingOverlay>
+    <SelectableCustomerItem customerId={props.id}>
+      <CustomerGridItemLargeInner {...props} isPending={isPending} />
+    </SelectableCustomerItem>
   );
 }
+
+type InnerProps = BaseCustomerItemProps & {
+  isPending: boolean;
+};
 
 export const CustomerGridItemLargeInner = memo(
   function CustomerGridItemLargeInner({
     id,
+    isPending,
     fullName,
     email,
     phoneNumber,
     publicLink,
     imageUrl,
     company,
-  }: BaseCustomerItemProps) {
+  }: InnerProps) {
     const t = useTranslations("customers.CustomerGridItem");
 
     const { onOpenChange: onCustomerDetailModalOpenChange } =
@@ -69,6 +67,7 @@ export const CustomerGridItemLargeInner = memo(
 
     return (
       <CustomerGridItemLayout
+        className={isPending ? "*:opacity-50" : undefined}
         topRowSlot={
           <GridItemRow>
             <CustomerItemCheckbox id={id} />

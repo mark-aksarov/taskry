@@ -4,11 +4,11 @@ import { memo } from "react";
 import { tv } from "tailwind-variants";
 import { Check, Circle, CircleCheck } from "lucide-react";
 import { SubtaskActionMenuTrigger } from "../SubtaskActionMenuTrigger";
-import { SubtaskListItemPendingOverlay } from "./SubtaskListItemPendingOverlay";
+import { useSubtaskListItemPending } from "./useSubtaskListItemPending";
 
 export type SubtaskListItemVariant = "plain" | "rich";
 
-interface SubtaskListItemProps {
+interface Props {
   id: number;
   text: string;
   isDone: boolean;
@@ -79,13 +79,12 @@ const iconStyles = tv({
   ],
 });
 
-export function SubtaskListItem(props: SubtaskListItemProps) {
-  return (
-    <SubtaskListItemPendingOverlay>
-      <SubtaskListItemInner {...props} />
-    </SubtaskListItemPendingOverlay>
-  );
+export function SubtaskListItem(props: Props) {
+  const isPending = useSubtaskListItemPending();
+  return <SubtaskListItemInner {...props} isPending={isPending} />;
 }
+
+type InnerProps = Props & { isPending?: boolean };
 
 export const SubtaskListItemInner = memo(function SubtaskListItemInner({
   id,
@@ -93,10 +92,8 @@ export const SubtaskListItemInner = memo(function SubtaskListItemInner({
   isDone,
   showActionMenu = true,
   variant = "plain",
-}: Omit<
-  SubtaskListItemProps,
-  "toggleSubtask" | "updateSubtask" | "deleteSubtask"
->) {
+  isPending,
+}: InnerProps) {
   let icon;
 
   if (variant === "rich") {
@@ -113,7 +110,11 @@ export const SubtaskListItemInner = memo(function SubtaskListItemInner({
     <div
       data-test="subtask-list-item"
       data-id={id}
-      className={styles({ isDone, variant })}
+      className={styles({
+        isDone,
+        variant,
+        className: isPending ? "*:opacity-50" : "",
+      })}
     >
       {icon}
       <div className="mr-auto text-sm">{text}</div>

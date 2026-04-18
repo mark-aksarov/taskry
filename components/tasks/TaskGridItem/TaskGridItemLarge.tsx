@@ -7,18 +7,17 @@ import {
 } from "@/components/common/ItemBase";
 
 import { memo } from "react";
-import { BaseTaskItemProps } from "../TaskItem";
+import { TaskItemActionMenuTrigger } from "../TaskItem";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
-import { useSelectedTasks } from "../SelectedTasksContext";
+import { SelectableTaskItem } from "../SelectableTaskItem";
 import { TaskItemStatusBadge } from "../TaskItemStatusBadge";
 import { TaskGridItemProgress } from "./TaskGridItemProgress";
 import { ListItemTitleButton } from "@/components/common/List";
 import { ItemBaseDeadline } from "@/components/common/ItemBase";
 import { TaskItemCheckbox } from "../TaskItem/TaskItemCheckbox";
 import { useModal } from "@/components/common/ModalManagerContext";
-import { SelectableItem } from "@/components/common/SelectableItem";
+import { BaseTaskItemProps, useTaskItemPending } from "../TaskItem";
 import { GridItemInfo, GridItemText } from "@/components/common/Grid";
-import { TaskItemActionMenuTrigger, TaskItemPendingOverlay } from "../TaskItem";
 
 interface Props extends BaseTaskItemProps {
   subtasksTotal: number;
@@ -26,19 +25,16 @@ interface Props extends BaseTaskItemProps {
 }
 
 export function TaskGridItemLarge(props: Props) {
-  const selected = useSelectedTasks();
+  const isPending = useTaskItemPending(props.id);
 
   return (
-    <TaskItemPendingOverlay taskId={props.id}>
-      <SelectableItem
-        {...selected}
-        item={{ id: props.id, status: props.status }}
-      >
-        <TaskGridItemLargeInner {...props} />
-      </SelectableItem>
-    </TaskItemPendingOverlay>
+    <SelectableTaskItem taskId={props.id} taskStatus={props.status}>
+      <TaskGridItemLargeInner {...props} isPending={isPending} />
+    </SelectableTaskItem>
   );
 }
+
+type InnerProps = Props & { isPending: boolean };
 
 export const TaskGridItemLargeInner = memo(function TaskGridItemLargeInner({
   id,
@@ -49,7 +45,8 @@ export const TaskGridItemLargeInner = memo(function TaskGridItemLargeInner({
   status,
   subtasksTotal,
   subtasksDone,
-}: Props) {
+  isPending,
+}: InnerProps) {
   const assigneeImg = (
     <ItemBaseUserImageContainer
       user={assignee}
@@ -66,6 +63,7 @@ export const TaskGridItemLargeInner = memo(function TaskGridItemLargeInner({
 
   return (
     <TaskGridItemLayout
+      className={isPending ? "*:opacity-50" : undefined}
       checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
       menuTriggerSlot={
         <TaskItemActionMenuTrigger

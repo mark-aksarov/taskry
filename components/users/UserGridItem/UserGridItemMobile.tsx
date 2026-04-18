@@ -2,7 +2,7 @@
 
 import {
   BaseUserItemProps,
-  UserItemPendingOverlay,
+  useUserItemPending,
   UserItemActionMenuTrigger,
 } from "../UserItem";
 
@@ -17,6 +17,7 @@ import {
 } from "@/components/common/Grid";
 
 import { memo } from "react";
+import { twMerge } from "tailwind-merge";
 import { Link } from "@/components/ui/Link";
 import { useTranslations } from "next-intl";
 import { Separator } from "@/components/ui/Separator";
@@ -25,29 +26,24 @@ import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { ItemBaseUserImageContainer } from "@/components/common/ItemBase";
 
 export function UserGridItemMobile(props: BaseUserItemProps) {
-  return (
-    <UserItemPendingOverlay>
-      <div className="relative block">
-        <Link
-          aria-label={props.fullName}
-          href={`/team/${props.id}`}
-          className="absolute inset-0 z-0"
-        />
-        <UserGridItemMobileInner {...props} />
-      </div>
-    </UserItemPendingOverlay>
-  );
+  const isPending = useUserItemPending();
+  return <UserGridItemMobileInner {...props} isPending={isPending} />;
 }
+
+type InnerProps = BaseUserItemProps & {
+  isPending: boolean;
+};
 
 export const UserGridItemMobileInner = memo(function UserGridItemMobileInner({
   id,
+  isPending,
   fullName,
   imageUrl,
   position,
   phoneNumber,
   publicLink,
   email,
-}: BaseUserItemProps) {
+}: InnerProps) {
   const t = useTranslations("users.UserGridItem");
 
   const { isOwner, isGuest } = useCurrentUser();
@@ -65,34 +61,44 @@ export const UserGridItemMobileInner = memo(function UserGridItemMobileInner({
   const showActionMenuTrigger = isOwner || isGuest;
 
   return (
-    <UserGridItemLayout
-      actionMenuSlot={
-        showActionMenuTrigger ? (
-          <UserItemActionMenuTrigger
-            userId={id}
-            className="relative z-1 -mr-2"
-          />
-        ) : undefined
-      }
-      imageSlot={userImg}
-      titleSlot={
-        <GridItemInfo className="flex-auto">
-          <GridItemTitle>{fullName}</GridItemTitle>
-          <GridItemText>
-            {position ? position.name : t("noPosition")}
-          </GridItemText>
-        </GridItemInfo>
-      }
-      phoneNumberSlot={
-        <>
-          <Separator />
-          <GridItemContactList>
-            <GridItemPhoneNumber phoneNumber={phoneNumber} />
-            <GridItemPublicLink publicLink={publicLink} />
-            <GridItemEmail email={email} />
-          </GridItemContactList>
-        </>
-      }
-    />
+    <div
+      className={twMerge("relative block", isPending && "pointer-events-none")}
+    >
+      <Link
+        aria-label={fullName}
+        href={`/team/${id}`}
+        className="absolute inset-0 z-0"
+      />
+      <UserGridItemLayout
+        className={isPending ? "*:opacity-50" : undefined}
+        actionMenuSlot={
+          showActionMenuTrigger ? (
+            <UserItemActionMenuTrigger
+              userId={id}
+              className="relative z-1 -mr-2"
+            />
+          ) : undefined
+        }
+        imageSlot={userImg}
+        titleSlot={
+          <GridItemInfo className="flex-auto">
+            <GridItemTitle>{fullName}</GridItemTitle>
+            <GridItemText>
+              {position ? position.name : t("noPosition")}
+            </GridItemText>
+          </GridItemInfo>
+        }
+        phoneNumberSlot={
+          <>
+            <Separator />
+            <GridItemContactList>
+              <GridItemPhoneNumber phoneNumber={phoneNumber} />
+              <GridItemPublicLink publicLink={publicLink} />
+              <GridItemEmail email={email} />
+            </GridItemContactList>
+          </>
+        }
+      />
+    </div>
   );
 });

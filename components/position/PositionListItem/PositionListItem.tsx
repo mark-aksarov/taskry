@@ -8,11 +8,11 @@ import {
 } from "@/components/common/List";
 
 import { memo } from "react";
+import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
 import { PositionItemCheckbox } from "../PositionItemCheckbox";
-import { SelectableItem } from "@/components/common/SelectableItem";
-import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { PositionListItemPendingOverlay } from "./PositionListItemPendingOverlay";
+import { SelectablePositionItem } from "../SelectablePositionItem";
+import { usePositionListItemPending } from "./usePositionListItemPending";
 import { PositionListItemActionMenuTrigger } from "./PositionListItemActionMenuTrigger";
 
 interface PositionListItemProps {
@@ -21,27 +21,33 @@ interface PositionListItemProps {
 }
 
 export function PositionListItem(props: PositionListItemProps) {
-  const selected = useSelectedItems();
+  const isPending = usePositionListItemPending(props.id);
 
   return (
-    <PositionListItemPendingOverlay positionId={props.id}>
-      <SelectableItem {...selected} item={{ id: props.id }}>
-        <PositionListItemInner {...props} />
-      </SelectableItem>
-    </PositionListItemPendingOverlay>
+    <SelectablePositionItem positionId={props.id}>
+      <PositionListItemInner {...props} isPending={isPending} />
+    </SelectablePositionItem>
   );
 }
+
+type InnerProps = PositionListItemProps & {
+  isPending: boolean;
+};
 
 const PositionListItemInner = memo(function PositionListItemInner({
   id,
   name,
-}: Omit<PositionListItemProps, "deletePosition">) {
+  isPending,
+}: InnerProps) {
   const t = useTranslations("positions.PositionListItem");
 
   return (
     <ListItem
       data-test="position-list-item"
-      className="flex w-full items-center gap-4"
+      className={twMerge(
+        "flex w-full items-center gap-4",
+        isPending && "*:opacity-50",
+      )}
     >
       <PositionItemCheckbox id={id} />
       <ListItemInfo>

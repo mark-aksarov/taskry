@@ -8,11 +8,11 @@ import {
 } from "@/components/common/List";
 
 import { memo } from "react";
+import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
-import { SelectableItem } from "@/components/common/SelectableItem";
 import { TaskCategoryItemCheckbox } from "../TaskCategoryItemCheckbox";
-import { useSelectedItems } from "@/components/common/SelectedItemsContext";
-import { TaskCategoryListItemPendingOverlay } from "./TaskCategoryListItemPendingOverlay";
+import { SelectableTaskCategoryItem } from "../SelectableTaskCategoryItem";
+import { useTaskCategoryListItemPending } from "./useTaskCategoryListItemPending";
 import { TaskCategoryListItemActionMenuTrigger } from "./TaskCategoryListItemActionMenuTrigger";
 
 interface TaskCategoryListItemProps {
@@ -21,27 +21,33 @@ interface TaskCategoryListItemProps {
 }
 
 export function TaskCategoryListItem(props: TaskCategoryListItemProps) {
-  const selected = useSelectedItems();
+  const isPending = useTaskCategoryListItemPending(props.id);
 
   return (
-    <TaskCategoryListItemPendingOverlay taskCategoryId={props.id}>
-      <SelectableItem {...selected} item={{ id: props.id }}>
-        <TaskCategoryListItemInner {...props} />
-      </SelectableItem>
-    </TaskCategoryListItemPendingOverlay>
+    <SelectableTaskCategoryItem taskCategoryId={props.id}>
+      <TaskCategoryListItemInner {...props} isPending={isPending} />
+    </SelectableTaskCategoryItem>
   );
 }
+
+type InnerProps = TaskCategoryListItemProps & {
+  isPending: boolean;
+};
 
 const TaskCategoryListItemInner = memo(function TaskCategoryListItemInner({
   id,
   name,
-}: TaskCategoryListItemProps) {
+  isPending,
+}: InnerProps) {
   const t = useTranslations("taskCategories.TaskCategoryListItem");
 
   return (
     <ListItem
       data-test="task-category-list-item"
-      className="flex w-full items-center gap-4"
+      className={twMerge(
+        "flex w-full items-center gap-4",
+        isPending && "*:opacity-50",
+      )}
     >
       <TaskCategoryItemCheckbox id={id} />
       <ListItemInfo>

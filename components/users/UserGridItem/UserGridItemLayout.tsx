@@ -1,6 +1,7 @@
 import { GridItem, GridItemRow } from "@/components/common/Grid";
 
 export interface UserGridItemProps {
+  className?: string;
   actionMenuSlot: React.ReactNode;
   imageSlot: React.ReactNode;
   titleSlot: React.ReactNode;
@@ -8,13 +9,14 @@ export interface UserGridItemProps {
 }
 
 export function UserGridItemLayout({
+  className,
   actionMenuSlot,
   imageSlot,
   titleSlot,
   phoneNumberSlot,
 }: UserGridItemProps) {
   return (
-    <GridItem>
+    <GridItem className={className}>
       <GridItemRow className="justify-end">{actionMenuSlot}</GridItemRow>
 
       <GridItemRow>

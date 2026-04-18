@@ -1,7 +1,8 @@
 import { ListItem, ListItemInfo } from "@/components/common/List";
 
 interface TaskListItemLayoutProps {
-  id?: number;
+  "data-id"?: number;
+  className?: string;
   checkboxSlot?: React.ReactNode;
   mainSlot: React.ReactNode;
   assigneeImgSlot: React.ReactNode;
@@ -14,7 +15,8 @@ interface TaskListItemLayoutProps {
 }
 
 export const TaskListItemLayout = ({
-  id,
+  "data-id": dataId,
+  className,
   checkboxSlot,
   mainSlot,
   assigneeImgSlot,
@@ -26,7 +28,7 @@ export const TaskListItemLayout = ({
   menuTriggerSlot,
 }: TaskListItemLayoutProps) => {
   return (
-    <ListItem data-test="task-list-item" data-id={id}>
+    <ListItem data-test="task-list-item" data-id={dataId} className={className}>
       <div className="flex w-full items-center gap-4">
         {checkboxSlot}
         <ListItemInfo>{mainSlot}</ListItemInfo>

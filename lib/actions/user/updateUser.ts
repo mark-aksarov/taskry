@@ -40,6 +40,8 @@ export async function updateUser(formData: FormData): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 
+  await new Promise((resolve) => setTimeout(resolve, 6000));
+
   const t = await getTranslations("actions");
 
   try {

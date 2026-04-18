@@ -1,6 +1,7 @@
 import { GridItem, GridItemRow } from "@/components/common/Grid";
 
 interface CustomerGridItemProps {
+  className?: string;
   topRowSlot: React.ReactNode;
   imageSlot: React.ReactNode;
   titleSlot: React.ReactNode;
@@ -8,13 +9,14 @@ interface CustomerGridItemProps {
 }
 
 export function CustomerGridItemLayout({
+  className,
   topRowSlot,
   imageSlot,
   titleSlot,
   contactSlot,
 }: CustomerGridItemProps) {
   return (
-    <GridItem>
+    <GridItem className={className}>
       {topRowSlot}
 
       <GridItemRow>
