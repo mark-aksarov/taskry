@@ -31,6 +31,9 @@ export const getTaskCategorySummaries = cache(
     return await prisma.taskCategory.findMany({
       where: { workspaceId },
       select: { id: true, name: true },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
   },
 );

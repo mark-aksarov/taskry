@@ -37,6 +37,9 @@ export const getCompanySummaries = cache(
         id: true,
         name: true,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     return companies;

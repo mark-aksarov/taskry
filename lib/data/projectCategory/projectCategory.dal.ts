@@ -32,6 +32,9 @@ export const getProjectCategorySummaries = cache(
     const projectCategories = await prisma.projectCategory.findMany({
       where: { workspaceId },
       select: { id: true, name: true },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     return projectCategories.map((p) => {

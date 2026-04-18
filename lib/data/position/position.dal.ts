@@ -34,6 +34,9 @@ export const getPositionSummaries = cache(
         id: true,
         name: true,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     return positions;
