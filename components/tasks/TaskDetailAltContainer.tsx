@@ -48,7 +48,7 @@ async function TaskDetailAltContainerInner({
       category={task.category}
       project={task.project}
       status={task.status}
-      progress={(doneCount / totalCount) * 100}
+      progress={totalCount ? (doneCount / totalCount) * 100 : 0}
       subtasksList={
         task.subtasks.length ? (
           <SubtaskList>

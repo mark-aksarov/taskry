@@ -81,7 +81,7 @@ export function ProjectDetailAlt({
       }
       progressSlot={
         <ProgressDetailInfoAlt
-          progress={(tasks.completed / tasks.total) * 100}
+          progress={tasks.total ? (tasks.completed / tasks.total) * 100 : 0}
         />
       }
       tasksStatsSlot={<ProjectTasksStatsDetailInfoAlt tasks={tasks} />}

@@ -76,7 +76,7 @@ export const WithoutOptionalTaskData = {
         title={mockedTaskDetail.title}
         deadline={mockedTaskDetail.deadline}
         status={mockedTaskDetail.status}
-        progress={75}
+        progress={0}
       />
     ),
   },
