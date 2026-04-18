@@ -20,12 +20,9 @@ export function useShowToastWhenModalClosedOnActionError(
       // Show error toast if:
       // The action resulted in an error
       // The modal is currently closed
-      // FIXME: Temporary workaround using setTimeout to ensure toast animation triggers correctly
-      setTimeout(() => {
-        if (state.status === "error" && state.message && !isOpen) {
-          addErrorToast(state.message);
-        }
-      });
+      if (state.status === "error" && state.message && !isOpen) {
+        addErrorToast(state.message);
+      }
     }
   }, [state, isOpen, addErrorToast]);
 }

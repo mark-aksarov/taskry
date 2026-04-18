@@ -54,12 +54,3 @@
     display: none;
   }
 }
-
-::view-transition-new(.toast):only-child {
-  animation: slide-in 300ms;
-}
-
-::view-transition-old(.toast):only-child {
-  animation: slide-out 300ms;
-  animation-fill-mode: forwards;
-}
