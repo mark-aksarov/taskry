@@ -5,9 +5,9 @@ import { ActionState } from "@/lib/actions/types";
 import { CreatePositionContext } from "../CreatePositionContext";
 import { createPosition } from "@/lib/actions/position/createPosition";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
-import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
-import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
 
 export const initialState: ActionState = {
   status: null,
@@ -25,14 +25,8 @@ export function CreatePositionProvider({
     onSuccess: () => router.refresh(),
   });
 
-  useCloseModalThenShowToastOnActionSuccess(
-    contextValue.state,
-    "createPosition",
-  );
-  useShowToastWhenModalClosedOnActionSuccess(
-    contextValue.state,
-    "createPosition",
-  );
+  useCloseModalOnActionSuccess(contextValue.state, "createPosition");
+  useShowToastOnActionSuccess(contextValue.state);
   useShowToastWhenModalClosedOnActionError(
     contextValue.state,
     "createPosition",

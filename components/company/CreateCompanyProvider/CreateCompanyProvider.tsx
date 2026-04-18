@@ -4,9 +4,9 @@ import { useRouter } from "@/i18n/navigation";
 import { CreateCompanyContext } from "../CreateCompanyContext";
 import { createCompany } from "@/lib/actions/company/createCompany";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
-import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
-import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
 
 interface CreateCompanyProviderProps {
   children: React.ReactNode;
@@ -20,14 +20,8 @@ export function CreateCompanyProvider({
     onSuccess: () => router.refresh(),
   });
 
-  useCloseModalThenShowToastOnActionSuccess(
-    contextValue.state,
-    "createCompany",
-  );
-  useShowToastWhenModalClosedOnActionSuccess(
-    contextValue.state,
-    "createCompany",
-  );
+  useCloseModalOnActionSuccess(contextValue.state, "createCompany");
+  useShowToastOnActionSuccess(contextValue.state);
   useShowToastWhenModalClosedOnActionError(contextValue.state, "createCompany");
 
   return (

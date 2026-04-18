@@ -4,9 +4,9 @@ import { useRouter } from "@/i18n/navigation";
 import { updateProject } from "@/lib/actions/project/updateProject";
 import { UpdateProjectStatusAltContext } from "../UpdateProjectStatusAltContext";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
-import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
-import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
 
 interface UpdateProjectStatusAltProviderProps {
   children: React.ReactNode;
@@ -22,8 +22,8 @@ export function UpdateProjectStatusAltProvider({
 
   const { state } = contextValue;
 
-  useCloseModalThenShowToastOnActionSuccess(state, "updateProjectStatus");
-  useShowToastWhenModalClosedOnActionSuccess(state, "updateProjectStatus");
+  useCloseModalOnActionSuccess(contextValue.state, "updateProjectStatus");
+  useShowToastOnActionSuccess(contextValue.state);
   useShowToastWhenModalClosedOnActionError(state, "updateProjectStatus");
 
   return (

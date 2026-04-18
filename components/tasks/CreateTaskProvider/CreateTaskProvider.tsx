@@ -4,9 +4,9 @@ import { useRouter } from "@/i18n/navigation";
 import { CreateTaskContext } from "../CreateTaskContext";
 import { createTask } from "@/lib/actions/task/createTask";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
-import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
-import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
 
 interface CreateTaskProviderProps {
   children: React.ReactNode;
@@ -18,8 +18,8 @@ export function CreateTaskProvider({ children }: CreateTaskProviderProps) {
     onSuccess: () => router.refresh(),
   });
 
-  useCloseModalThenShowToastOnActionSuccess(contextValue.state, "createTask");
-  useShowToastWhenModalClosedOnActionSuccess(contextValue.state, "createTask");
+  useCloseModalOnActionSuccess(contextValue.state, "createTask");
+  useShowToastOnActionSuccess(contextValue.state);
   useShowToastWhenModalClosedOnActionError(contextValue.state, "createTask");
 
   return (

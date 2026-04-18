@@ -4,9 +4,9 @@ import { useRouter } from "@/i18n/navigation";
 import { updateUser } from "@/lib/actions/user/updateUser";
 import { UpdateUserBioContext } from "../UpdateUserBioContext";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
-import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
-import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
 
 interface UpdateUserBioProviderProps {
   children: React.ReactNode;
@@ -22,8 +22,8 @@ export function UpdateUserBioProvider({
 
   const { state } = contextValue;
 
-  useCloseModalThenShowToastOnActionSuccess(state, "updateUserBio");
-  useShowToastWhenModalClosedOnActionSuccess(state, "updateUserBio");
+  useCloseModalOnActionSuccess(contextValue.state, "updateUserBio");
+  useShowToastOnActionSuccess(contextValue.state);
   useShowToastWhenModalClosedOnActionError(state, "updateUserBio");
 
   return (

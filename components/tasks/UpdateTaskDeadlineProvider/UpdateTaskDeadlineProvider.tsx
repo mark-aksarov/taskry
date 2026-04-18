@@ -4,9 +4,9 @@ import { useRouter } from "@/i18n/navigation";
 import { updateTask } from "@/lib/actions/task/updateTask";
 import { UpdateTaskDeadlineContext } from "../UpdateTaskDeadlineContext";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
-import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
-import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
 
 interface UpdateTaskDeadlineProviderProps {
   children: React.ReactNode;
@@ -22,8 +22,8 @@ export function UpdateTaskDeadlineProvider({
 
   const { state } = contextValue;
 
-  useCloseModalThenShowToastOnActionSuccess(state, "updateTaskDeadline");
-  useShowToastWhenModalClosedOnActionSuccess(state, "updateTaskDeadline");
+  useCloseModalOnActionSuccess(contextValue.state, "updateTaskDeadline");
+  useShowToastOnActionSuccess(contextValue.state);
   useShowToastWhenModalClosedOnActionError(state, "updateTaskDeadline");
 
   return (

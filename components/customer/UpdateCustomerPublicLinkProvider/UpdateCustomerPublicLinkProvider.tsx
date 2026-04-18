@@ -4,9 +4,9 @@ import { useRouter } from "@/i18n/navigation";
 import { updateCustomer } from "@/lib/actions/customer/updateCustomer";
 import { UpdateCustomerPublicLinkContext } from "../UpdateCustomerPublicLinkContext";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
-import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
-import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
 
 interface UpdateCustomerPublicLinkProviderProps {
   children: React.ReactNode;
@@ -22,8 +22,8 @@ export function UpdateCustomerPublicLinkProvider({
 
   const { state } = contextValue;
 
-  useCloseModalThenShowToastOnActionSuccess(state, "updateCustomerPublicLink");
-  useShowToastWhenModalClosedOnActionSuccess(state, "updateCustomerPublicLink");
+  useCloseModalOnActionSuccess(contextValue.state, "updateCustomerPublicLink");
+  useShowToastOnActionSuccess(contextValue.state);
   useShowToastWhenModalClosedOnActionError(state, "updateCustomerPublicLink");
 
   return (

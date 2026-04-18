@@ -4,9 +4,9 @@ import { useRouter } from "@/i18n/navigation";
 import { updateProject } from "@/lib/actions/project/updateProject";
 import { UpdateProjectDescriptionContext } from "../UpdateProjectDescriptionContext";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
-import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
-import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
 
 interface UpdateProjectDescriptionProviderProps {
   children: React.ReactNode;
@@ -21,8 +21,8 @@ export function UpdateProjectDescriptionProvider({
   });
   const { state } = contextValue;
 
-  useCloseModalThenShowToastOnActionSuccess(state, "updateProjectDescription");
-  useShowToastWhenModalClosedOnActionSuccess(state, "updateProjectDescription");
+  useCloseModalOnActionSuccess(contextValue.state, "updateProjectDescription");
+  useShowToastOnActionSuccess(contextValue.state);
   useShowToastWhenModalClosedOnActionError(state, "updateProjectDescription");
 
   return (

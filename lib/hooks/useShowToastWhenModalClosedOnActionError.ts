@@ -4,6 +4,7 @@ import { useAddErrorToast } from "./useAddErrorToast";
 import { useModal } from "@/components/common/ModalManagerContext";
 
 // Hook than show an error toast when the modal is closed
+// When the modal opens, an error shown in the form
 export function useShowToastWhenModalClosedOnActionError(
   state: ActionState,
   modalId: string,

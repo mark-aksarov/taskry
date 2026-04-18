@@ -4,9 +4,9 @@ import { useRouter } from "@/i18n/navigation";
 import { UpdatePositionContext } from "../UpdatePositionContext";
 import { updatePosition } from "@/lib/actions/position/updatePosition";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
-import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
-import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
 
 interface UpdatePositionProviderProps {
   children: React.ReactNode;
@@ -22,8 +22,8 @@ export function UpdatePositionProvider({
 
   const { state } = contextValue;
 
-  useCloseModalThenShowToastOnActionSuccess(state, "updatePosition");
-  useShowToastWhenModalClosedOnActionSuccess(state, "updatePosition");
+  useCloseModalOnActionSuccess(contextValue.state, "updatePosition");
+  useShowToastOnActionSuccess(contextValue.state);
   useShowToastWhenModalClosedOnActionError(state, "updatePosition");
 
   return (

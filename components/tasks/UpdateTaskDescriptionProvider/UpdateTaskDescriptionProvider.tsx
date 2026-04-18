@@ -4,9 +4,9 @@ import { useRouter } from "@/i18n/navigation";
 import { updateTask } from "@/lib/actions/task/updateTask";
 import { UpdateTaskDescriptionContext } from "../UpdateTaskDescriptionContext";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
-import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
-import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
 
 interface UpdateTaskDescriptionProviderProps {
   children: React.ReactNode;
@@ -22,8 +22,8 @@ export function UpdateTaskDescriptionProvider({
 
   const { state } = contextValue;
 
-  useCloseModalThenShowToastOnActionSuccess(state, "updateTaskDescription");
-  useShowToastWhenModalClosedOnActionSuccess(state, "updateTaskDescription");
+  useCloseModalOnActionSuccess(contextValue.state, "updateTaskDescription");
+  useShowToastOnActionSuccess(contextValue.state);
   useShowToastWhenModalClosedOnActionError(state, "updateTaskDescription");
 
   return (

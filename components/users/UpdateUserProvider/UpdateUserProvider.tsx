@@ -4,9 +4,9 @@ import { useRouter } from "@/i18n/navigation";
 import { UpdateUserContext } from "../UpdateUserContext";
 import { updateUser } from "@/lib/actions/user/updateUser";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
-import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
-import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
 
 interface UpdateUserProviderProps {
   children: React.ReactNode;
@@ -20,8 +20,8 @@ export function UpdateUserProvider({ children }: UpdateUserProviderProps) {
 
   const { state } = contextValue;
 
-  useCloseModalThenShowToastOnActionSuccess(state, "updateUser");
-  useShowToastWhenModalClosedOnActionSuccess(state, "updateUser");
+  useCloseModalOnActionSuccess(contextValue.state, "updateUser");
+  useShowToastOnActionSuccess(contextValue.state);
   useShowToastWhenModalClosedOnActionError(state, "updateUser");
 
   return (

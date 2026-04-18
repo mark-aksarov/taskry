@@ -4,9 +4,9 @@ import { useRouter } from "@/i18n/navigation";
 import { UpdateCompanyContext } from "../UpdateCompanyContext";
 import { updateCompany } from "@/lib/actions/company/updateCompany";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
-import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
-import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
 
 interface UpdateCompanyProviderProps {
   children: React.ReactNode;
@@ -22,8 +22,8 @@ export function UpdateCompanyProvider({
 
   const { state } = contextValue;
 
-  useCloseModalThenShowToastOnActionSuccess(state, "updateCompany");
-  useShowToastWhenModalClosedOnActionSuccess(state, "updateCompany");
+  useCloseModalOnActionSuccess(contextValue.state, "updateCompany");
+  useShowToastOnActionSuccess(contextValue.state);
   useShowToastWhenModalClosedOnActionError(state, "updateCompany");
 
   return (

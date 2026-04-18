@@ -3,9 +3,9 @@
 import { UpdateUserImageContext } from "../UpdateUserImageContext";
 import { updateUserImageUrl } from "@/lib/actions/user/updateUserImageUrl";
 import { useUpdateImageActionState } from "@/lib/hooks/useUpdateImageActionState";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
-import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
-import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
 
 interface UpdateUserImageProviderProps {
   children: React.ReactNode;
@@ -20,8 +20,8 @@ export function UpdateUserImageProvider({
 
   const { state } = contextValue;
 
-  useCloseModalThenShowToastOnActionSuccess(state, "updateUserImage");
-  useShowToastWhenModalClosedOnActionSuccess(state, "updateUserImage");
+  useCloseModalOnActionSuccess(contextValue.state, "updateUserImage");
+  useShowToastOnActionSuccess(contextValue.state);
   useShowToastWhenModalClosedOnActionError(state, "updateUserImage");
 
   return (

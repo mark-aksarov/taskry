@@ -4,9 +4,9 @@ import { useRouter } from "@/i18n/navigation";
 import { CreateCustomerContext } from "../CreateCustomerContext";
 import { createCustomer } from "@/lib/actions/customer/createCustomer";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
-import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
-import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
 
 interface CreateCustomerProviderProps {
   children: React.ReactNode;
@@ -20,14 +20,8 @@ export function CreateCustomerProvider({
     onSuccess: () => router.refresh(),
   });
 
-  useCloseModalThenShowToastOnActionSuccess(
-    contextValue.state,
-    "createCustomer",
-  );
-  useShowToastWhenModalClosedOnActionSuccess(
-    contextValue.state,
-    "createCustomer",
-  );
+  useCloseModalOnActionSuccess(contextValue.state, "createCustomer");
+  useShowToastOnActionSuccess(contextValue.state);
   useShowToastWhenModalClosedOnActionError(
     contextValue.state,
     "createCustomer",

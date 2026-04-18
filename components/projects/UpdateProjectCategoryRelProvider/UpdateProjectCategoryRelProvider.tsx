@@ -4,9 +4,9 @@ import { useRouter } from "@/i18n/navigation";
 import { updateProject } from "@/lib/actions/project/updateProject";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 import { UpdateProjectCategoryRelContext } from "../UpdateProjectCategoryRelContext";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
-import { useCloseModalThenShowToastOnActionSuccess } from "@/lib/hooks/useCloseModalThenShowToastOnActionSuccess";
-import { useShowToastWhenModalClosedOnActionSuccess } from "@/lib/hooks/useShowToastWhenModalClosedOnActionSuccess";
 
 interface UpdateProjectCategoryRelProviderProps {
   children: React.ReactNode;
@@ -22,8 +22,8 @@ export function UpdateProjectCategoryRelProvider({
 
   const { state } = contextValue;
 
-  useCloseModalThenShowToastOnActionSuccess(state, "updateProjectCategoryRel");
-  useShowToastWhenModalClosedOnActionSuccess(state, "updateProjectCategoryRel");
+  useCloseModalOnActionSuccess(contextValue.state, "updateProjectCategoryRel");
+  useShowToastOnActionSuccess(contextValue.state);
   useShowToastWhenModalClosedOnActionError(state, "updateProjectCategoryRel");
 
   return (
