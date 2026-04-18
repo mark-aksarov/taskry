@@ -1,5 +1,6 @@
 import { mocked } from "storybook/test";
 import AppTeamProfileLoading from "./loading";
+import AppTeamProfileNotFound from "./not-found";
 import { mockedUserDetail } from "@/mocks/users";
 import { TeamProfilePage } from "./TeamProfilePage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
@@ -88,4 +89,9 @@ export const WithoutSomeData = {
       <UserDetailHeaderInteractive fullName={mockedUserDetail.fullName} />
     ),
   },
+} satisfies Story;
+
+export const NotFound = {
+  args: { ...Default.args },
+  render: () => <AppTeamProfileNotFound />,
 } satisfies Story;

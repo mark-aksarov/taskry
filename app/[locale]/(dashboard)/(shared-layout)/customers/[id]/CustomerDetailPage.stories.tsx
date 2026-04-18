@@ -1,5 +1,6 @@
 import { mocked } from "storybook/test";
 import AppCustomerDetailLoading from "./loading";
+import AppCustomerDetailNotFound from "./not-found";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { mockedCustomerDetail } from "@/mocks/customers";
@@ -85,4 +86,9 @@ export const WithoutSomeData = {
     ),
     customerDetailActions: <CustomerDetailActions />,
   },
+} satisfies Story;
+
+export const NotFound = {
+  args: { ...Default.args },
+  render: () => <AppCustomerDetailNotFound />,
 } satisfies Story;

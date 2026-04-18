@@ -1,5 +1,6 @@
 import { mocked } from "storybook/test";
 import AppProjectDetailLoading from "./loading";
+import AppProjectDetailNotFound from "./not-found";
 import { mockedProjectDetail } from "@/mocks/projects";
 import { ProjectDetailPage } from "./ProjectDetailPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
@@ -75,4 +76,9 @@ export const WithoutSomeData = {
       />
     ),
   },
+} satisfies Story;
+
+export const NotFound = {
+  args: { ...Default.args },
+  render: () => <AppProjectDetailNotFound />,
 } satisfies Story;

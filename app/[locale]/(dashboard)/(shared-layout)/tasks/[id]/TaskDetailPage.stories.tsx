@@ -1,5 +1,6 @@
 import { mocked } from "storybook/test";
 import AppTaskDetailLoading from "./loading";
+import AppTaskDetailNotFound from "./not-found";
 import { mockedTaskDetail } from "@/mocks/tasks";
 import { TaskDetailPage } from "./TaskDetailPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
@@ -85,4 +86,9 @@ export const WithoutOptionalTaskData = {
       />
     ),
   },
+} satisfies Story;
+
+export const NotFound = {
+  args: { ...Default.args },
+  render: () => <AppTaskDetailNotFound />,
 } satisfies Story;

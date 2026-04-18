@@ -33,33 +33,3 @@ export const Default = {
     error: new Error("Something went wrong"),
   },
 } satisfies Story;
-
-export const CustomersNotFound = {
-  beforeEach: () => {
-    mocked(usePathname).mockReturnValue("/customers/123");
-  },
-} satisfies Story;
-
-export const ProjectsNotFound = {
-  beforeEach: () => {
-    mocked(usePathname).mockReturnValue("/projects/456");
-  },
-} satisfies Story;
-
-export const TasksNotFound = {
-  beforeEach: () => {
-    mocked(usePathname).mockReturnValue("/tasks/789");
-  },
-} satisfies Story;
-
-export const UsersNotFound = {
-  beforeEach: () => {
-    mocked(usePathname).mockReturnValue("/team/1");
-  },
-} satisfies Story;
-
-export const ProfileNotFound = {
-  beforeEach: () => {
-    mocked(usePathname).mockReturnValue("/profile/1");
-  },
-} satisfies Story;
