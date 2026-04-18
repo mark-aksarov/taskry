@@ -1,9 +1,7 @@
-import { Heart } from "lucide-react";
-import { DetailStat, DetailStatSkeleton } from "./DetailStat";
 import { DetailStatText } from "./DetailStatText";
-import { DetailStatIcon } from "./DetailStatIcon";
 import { DetailStatValue } from "./DetailStatValue";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { DetailStat, DetailStatSkeleton } from "./DetailStat";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
@@ -12,11 +10,6 @@ const meta = {
   decorators: [withThemedBackground],
   args: {
     text: <DetailStatText>Detail stat text</DetailStatText>,
-    icon: (
-      <DetailStatIcon>
-        <Heart size={16} strokeWidth={1.5} absoluteStrokeWidth />
-      </DetailStatIcon>
-    ),
     value: <DetailStatValue>20</DetailStatValue>,
   },
   parameters: {
