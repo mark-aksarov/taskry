@@ -1,28 +1,23 @@
 "use client";
 
+import { useRouter } from "@/i18n/navigation";
 import { ToggleSubtaskContext } from "../ToggleSubtaskContext";
 import { toggleSubtask } from "@/lib/actions/subtask/toggleSubtask";
-import { useRefreshTaskDetail } from "@/lib/swr/hooks/useRefreshTaskDetail";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
 interface ToggleSubtaskProviderProps {
-  taskId: number;
   children: React.ReactNode;
 }
 
 export function ToggleSubtaskProvider({
-  taskId,
   children,
 }: ToggleSubtaskProviderProps) {
-  const refreshTaskDetail = useRefreshTaskDetail(taskId);
-
+  const router = useRouter();
   const contextValue = useActionStateWithCallbacks(toggleSubtask, {
-    onSettled: async () => {
-      // Refresh task detail (inside TaskDetailContainer) on success or error to keep UI in sync
-      // (e.g., show not found if deleted by another user)
-      await refreshTaskDetail();
-    },
+    // Re-render task/[id] on success or error to keep UI in sync
+    // (e.g. show not found if deleted by another user)
+    onSettled: () => router.refresh(),
   });
   useShowToastOnActionError(contextValue.state);
 

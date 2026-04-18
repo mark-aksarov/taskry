@@ -10,9 +10,9 @@ import { TaskDetailAlt } from "./TaskDetailAlt/TaskDetailAlt";
 import { UpdateSubtaskModal } from "../subtasks/UpdateSubtaskModal";
 import { DeleteSubtaskModal } from "../subtasks/DeleteSubtaskModal";
 import { ModalManagerProvider } from "../common/ModalManagerContext";
-import { DeleteSubtaskAltProvider } from "../subtasks/DeleteSubtaskProvider";
-import { UpdateSubtaskAltProvider } from "../subtasks/UpdateSubtaskProvider";
-import { ToggleSubtaskAltProvider } from "../subtasks/ToggleSubtaskProvider";
+import { DeleteSubtaskProvider } from "../subtasks/DeleteSubtaskProvider";
+import { UpdateSubtaskProvider } from "../subtasks/UpdateSubtaskProvider";
+import { ToggleSubtaskProvider } from "../subtasks/ToggleSubtaskProvider";
 
 interface TaskDetailAltContainerProps {
   taskId: number;
@@ -54,9 +54,9 @@ async function TaskDetailAltContainerInner({
           <SubtaskList>
             {task.subtasks.map((subtask) => (
               <ModalManagerProvider key={subtask.id}>
-                <DeleteSubtaskAltProvider>
-                  <UpdateSubtaskAltProvider>
-                    <ToggleSubtaskAltProvider>
+                <DeleteSubtaskProvider>
+                  <UpdateSubtaskProvider>
+                    <ToggleSubtaskProvider>
                       <SubtaskListItem
                         id={subtask.id}
                         text={subtask.text}
@@ -74,9 +74,9 @@ async function TaskDetailAltContainerInner({
                         subtaskId={subtask.id}
                         subtaskText={subtask.text}
                       />
-                    </ToggleSubtaskAltProvider>
-                  </UpdateSubtaskAltProvider>
-                </DeleteSubtaskAltProvider>
+                    </ToggleSubtaskProvider>
+                  </UpdateSubtaskProvider>
+                </DeleteSubtaskProvider>
               </ModalManagerProvider>
             ))}
           </SubtaskList>

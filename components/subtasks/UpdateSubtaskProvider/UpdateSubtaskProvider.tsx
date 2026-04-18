@@ -1,31 +1,29 @@
 "use client";
 
+import { useRouter } from "@/i18n/navigation";
 import { UpdateSubtaskContext } from "../UpdateSubtaskContext";
 import { updateSubtask } from "@/lib/actions/subtask/updateSubtask";
-import { useRefreshTaskDetail } from "@/lib/swr/hooks/useRefreshTaskDetail";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 
 interface UpdateSubtaskProviderProps {
-  taskId: number;
   children: React.ReactNode;
 }
 
 export function UpdateSubtaskProvider({
-  taskId,
   children,
 }: UpdateSubtaskProviderProps) {
-  const refreshTaskDetail = useRefreshTaskDetail(taskId);
-
+  const router = useRouter();
   const contextValue = useActionStateWithCallbacks(updateSubtask, {
-    onSettled: async () => {
-      // Refresh task detail (inside TaskDetailContainer) on success or error to keep UI in sync
-      await refreshTaskDetail();
-    },
+    // Re-render task/[id] on success or error to keep UI in sync
+    // (e.g. show not found if deleted by another user)
+    onSettled: () => router.refresh(),
   });
 
   useCloseModalOnActionSuccess(contextValue.state, "updateSubtask");
+  useShowToastOnActionSuccess(contextValue.state);
   useShowToastWhenModalClosedOnActionError(contextValue.state, "updateSubtask");
 
   return (

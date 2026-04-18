@@ -13,7 +13,7 @@ import { UpdateTaskProjectModal } from "@/components/tasks/UpdateTaskProjectModa
 import { UpdateTaskTitleProvider } from "@/components/tasks/UpdateTaskTitleProvider";
 import { UpdateTaskAssigneeModal } from "@/components/tasks/UpdateTaskAssigneeModal";
 import { UpdateTaskDeadlineModal } from "@/components/tasks/UpdateTaskDeadlineModal";
-import { CreateSubtaskAltProvider } from "@/components/subtasks/CreateSubtaskProvider";
+import { CreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider";
 import { UpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusProvider";
 import { UpdateTaskProjectProvider } from "@/components/tasks/UpdateTaskProjectProvider";
 import { UpdateTaskDescriptionModal } from "@/components/tasks/UpdateTaskDescriptionModal";
@@ -52,7 +52,7 @@ export default async function AppTaskDetailPage({
   }
 
   return (
-    <CreateSubtaskAltProvider>
+    <CreateSubtaskProvider>
       <UpdateTaskStatusProvider>
         <UpdateTaskTitleProvider>
           <UpdateTaskDescriptionProvider>
@@ -132,6 +132,6 @@ export default async function AppTaskDetailPage({
           </UpdateTaskDescriptionProvider>
         </UpdateTaskTitleProvider>
       </UpdateTaskStatusProvider>
-    </CreateSubtaskAltProvider>
+    </CreateSubtaskProvider>
   );
 }

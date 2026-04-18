@@ -1,29 +1,23 @@
 "use client";
 
+import { useRouter } from "@/i18n/navigation";
 import { DeleteSubtaskContext } from "../DeleteSubtaskContext";
 import { deleteSubtask } from "@/lib/actions/subtask/deleteSubtask";
-import { useRefreshTaskDetail } from "@/lib/swr/hooks/useRefreshTaskDetail";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
 interface DeleteSubtaskProviderProps {
-  taskId: number;
   children: React.ReactNode;
 }
 
 export function DeleteSubtaskProvider({
-  taskId,
   children,
 }: DeleteSubtaskProviderProps) {
-  const refreshTaskDetail = useRefreshTaskDetail(taskId);
-
+  const router = useRouter();
   const contextValue = useActionStateWithCallbacks(deleteSubtask, {
-    onSettled: async () => {
-      // Refresh task detail (inside TaskDetailContainer) on success or error to keep UI in sync
-      await refreshTaskDetail();
-    },
+    // Re-render task/[id] on success or error to keep UI in sync
+    onSettled: () => router.refresh(),
   });
-
   useShowToastOnActionError(contextValue.state);
 
   return (

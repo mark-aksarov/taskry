@@ -7,7 +7,6 @@ import { SubtaskList } from "../subtasks/SubtaskList";
 import { TaskDetailDTO } from "@/lib/data/task/task.dto";
 import { SubtaskListItemInner } from "../subtasks/SubtaskListItem";
 import { CreateSubtaskModal } from "../subtasks/CreateSubtaskModal";
-import { CreateSubtaskProvider } from "../subtasks/CreateSubtaskProvider";
 
 interface TaskDetailContainerProps {
   taskId: number;
@@ -26,7 +25,7 @@ export function TaskDetailContainer({ taskId }: TaskDetailContainerProps) {
   }
 
   return (
-    <CreateSubtaskProvider taskId={taskId}>
+    <>
       <TaskDetail
         title={task.title}
         creator={task.creator}
@@ -54,6 +53,6 @@ export function TaskDetailContainer({ taskId }: TaskDetailContainerProps) {
       />
 
       <CreateSubtaskModal taskId={taskId} />
-    </CreateSubtaskProvider>
+    </>
   );
 }
