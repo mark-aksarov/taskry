@@ -45,7 +45,7 @@ describe("Project creation", () => {
     // Submit
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("projects-list").within(() => {
+    cy.getByData("entity-grid").within(() => {
       cy.contains(projectData.title);
       cy.contains(projectData.deadline.year);
       cy.contains(/active/i);
@@ -75,7 +75,7 @@ describe("Project creation", () => {
 
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("projects-list").within(() => {
+    cy.getByData("entity-grid").within(() => {
       cy.contains(projectData.title);
       cy.contains(projectData.deadline.year);
       cy.contains(/active/i);

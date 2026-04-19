@@ -1,13 +1,11 @@
 import { useTranslations } from "next-intl";
-import { List } from "@/components/common/List";
-import { Repeat } from "@/components/common/Repeat";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ButtonSkeleton } from "@/components/ui/Skeleton";
 import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
+import { CompanyGridSkeleton } from "@/components/company/CompanyGrid";
 import { ToolbarLarge, ToolbarMobile } from "@/components/common/Toolbar";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { CompanyListItemSkeleton } from "@/components/company/CompanyListItem";
 
 export default function CompaniesPageLoading() {
   const t = useTranslations("app.CompaniesPage");
@@ -30,9 +28,7 @@ export default function CompaniesPageLoading() {
           secondSlot={<ButtonSkeleton className="w-8" />}
         />
 
-        <List>
-          <Repeat items={10} renderItem={CompanyListItemSkeleton} />
-        </List>
+        <CompanyGridSkeleton />
       </PageGrid>
     </PageContainer>
   );

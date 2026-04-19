@@ -4,7 +4,7 @@ import {
   GridItemText,
   GridItemInfo,
   GridItemTitle,
-} from "@/components/common/Grid";
+} from "@/components/common/GridItem";
 
 import {
   ItemBaseDeadline,
@@ -21,10 +21,12 @@ import {
 import { memo } from "react";
 import { twMerge } from "tailwind-merge";
 import { Link } from "@/components/ui/Link";
-import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
-import { ProjectGridItemProgress } from "./ProjectGridItemProgress";
+import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { ProjectGridItemProgress } from "./ProjectGridItemProgress";
+import { ProjectGridItemMobileSkeleton } from "./ProjectGridItemSkeleton";
+import { GridItemMobileGate } from "@/components/common/GridItemMobileGate";
 
 interface Props extends BaseProjectItemProps {
   tasksTotal: number;
@@ -33,7 +35,12 @@ interface Props extends BaseProjectItemProps {
 
 export function ProjectGridItemMobile(props: Props) {
   const isPending = useProjectItemPending(props.id);
-  return <ProjectGridItemMobileInner {...props} isPending={isPending} />;
+
+  return (
+    <GridItemMobileGate skeleton={<ProjectGridItemMobileSkeleton />}>
+      <ProjectGridItemMobileInner {...props} isPending={isPending} />
+    </GridItemMobileGate>
+  );
 }
 
 type InnerProps = Props & { isPending: boolean };

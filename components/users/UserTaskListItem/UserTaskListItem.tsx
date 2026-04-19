@@ -11,21 +11,28 @@ import {
 } from "@/components/common/ItemBase";
 
 import { memo } from "react";
+import { ListItemGate } from "@/components/common/ListItemGate";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { UserTaskListItemSkeleton } from "./UserTaskListItemSkeleton";
+import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItem";
 import { SelectableTaskItem } from "@/components/tasks/SelectableTaskItem";
 import { TaskItemStatusBadge } from "@/components/tasks/TaskItemStatusBadge";
-import { ListItemText, ListItemTitleButton } from "@/components/common/List";
+import {
+  ListItemText,
+  ListItemTitleButton,
+} from "@/components/common/ListItem";
 import { TaskItemCheckbox } from "@/components/tasks/TaskItem/TaskItemCheckbox";
-import { TaskItemActionMenuTrigger } from "@/components/tasks/TaskItem/TaskItemActionMenuTrigger";
 
 export const UserTaskListItem = (props: BaseTaskItemProps) => {
   const isPending = useTaskItemPending(props.id);
 
   return (
-    <SelectableTaskItem taskId={props.id} taskStatus={props.status}>
-      <UserTaskListItemInner {...props} isPending={isPending} />
-    </SelectableTaskItem>
+    <ListItemGate skeleton={<UserTaskListItemSkeleton />}>
+      <SelectableTaskItem taskId={props.id} taskStatus={props.status}>
+        <UserTaskListItemInner {...props} isPending={isPending} />
+      </SelectableTaskItem>
+    </ListItemGate>
   );
 };
 

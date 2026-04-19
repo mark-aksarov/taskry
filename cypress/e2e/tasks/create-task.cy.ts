@@ -54,7 +54,7 @@ describe("Task creation", () => {
     // Submit
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("tasks-list").within(() => {
+    cy.getByData("entity-grid").within(() => {
       cy.contains(taskData.title);
       cy.contains(taskData.deadline.year);
       cy.contains(/active/i);
@@ -85,7 +85,7 @@ describe("Task creation", () => {
 
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("tasks-list").within(() => {
+    cy.getByData("entity-grid").within(() => {
       cy.contains(taskData.title);
       cy.contains(taskData.deadline.year);
       cy.contains(/active/i);

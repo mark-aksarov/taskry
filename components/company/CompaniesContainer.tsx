@@ -1,4 +1,6 @@
-import { CompanyList } from "./CompanyList";
+import "server-only";
+
+import { CompanyGrid } from "./CompanyGrid";
 import { CompanyListItem } from "./CompanyListItem";
 import { UpdateCompanyModal } from "./UpdateCompanyModal";
 import { DeleteCompanyModal } from "./DeleteCompanyModal";
@@ -11,7 +13,7 @@ export async function CompaniesContainer() {
   const companies = await getCompanySummaries();
 
   return (
-    <CompanyList>
+    <CompanyGrid>
       {companies.map((company) => (
         <ModalManagerProvider key={company.id}>
           <UpdateCompanyProvider>
@@ -31,6 +33,6 @@ export async function CompaniesContainer() {
           </UpdateCompanyProvider>
         </ModalManagerProvider>
       ))}
-    </CompanyList>
+    </CompanyGrid>
   );
 }

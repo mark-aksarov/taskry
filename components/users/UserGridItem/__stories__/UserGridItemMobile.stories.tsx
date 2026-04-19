@@ -2,15 +2,23 @@ import { mockedUserDetail } from "@/mocks/users";
 import { UserGridItemMobile } from "../UserGridItemMobile";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withMockedUserItemWrapper } from "../../UserItemWrapper/__stories__";
+import { withDeleteUserProvider } from "../../DeleteUserProvider/__stories__";
+import { withUpdateUserProvider } from "../../UpdateUserProvider/__stories__";
+import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
+import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 
 const meta = {
   title: "components/users/UserGridItemMobile",
   component: UserGridItemMobile,
   decorators: [
-    withMockedUserItemWrapper,
+    withUpdateUserProvider,
+    withDeleteUserProvider,
     withCurrentUserProvider,
+    withViewModeProvider,
+    withPageTransitionProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
   globals: {

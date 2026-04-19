@@ -1,6 +1,6 @@
 import "server-only";
 
-import { ProjectCategoryList } from "./ProjectCategoryList";
+import { ProjectCategoryGrid } from "./ProjectCategoryGrid";
 import { ProjectCategoryListItem } from "./ProjectCategoryListItem";
 import { ModalManagerProvider } from "../common/ModalManagerContext";
 import { UpdateProjectCategoryModal } from "./UpdateProjectCategoryModal";
@@ -13,7 +13,7 @@ export async function ProjectCategoriesContainer() {
   const projectCategories = await getProjectCategorySummaries();
 
   return (
-    <ProjectCategoryList>
+    <ProjectCategoryGrid>
       {projectCategories.map((projectCategory) => (
         <ModalManagerProvider key={projectCategory.id}>
           <UpdateProjectCategoryProvider>
@@ -36,6 +36,6 @@ export async function ProjectCategoriesContainer() {
           </UpdateProjectCategoryProvider>
         </ModalManagerProvider>
       ))}
-    </ProjectCategoryList>
+    </ProjectCategoryGrid>
   );
 }

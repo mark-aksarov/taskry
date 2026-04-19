@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { taskSortFields } from "@/lib/types";
 import { getTaskList } from "@/lib/data/task/task.dal";
+import { ViewModeProvider } from "@/components/common/ViewMode";
 import { ProfileActions } from "@/components/users/ProfileActions";
 import { CreateTaskModal } from "@/components/tasks/CreateTaskModal";
 import { UpdateUserModal } from "@/components/users/UpdateUserModal";
@@ -16,6 +17,8 @@ import { ChangePasswordModal } from "@/components/users/ChangePasswordModal";
 import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksProvider";
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
+import { UpdateUserImageModal } from "@/components/users/UpdateUserImageModal";
+import { DeleteUserImageModal } from "@/components/users/DeleteUserImageModal";
 import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
 import { ChangePasswordProvider } from "@/components/users/ChangePasswordProvider";
 import { ProfileNavigationLarge } from "@/components/users/ProfileNavigationLarge";
@@ -27,8 +30,6 @@ import { ClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlP
 import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesProvider";
 import { UpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext";
 import { UserDetailHeaderAltContainer } from "@/components/users/UserDetailHeaderAltContainer";
-import { UpdateUserImageModal } from "@/components/users/UpdateUserImageModal";
-import { DeleteUserImageModal } from "@/components/users/DeleteUserImageModal";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -68,67 +69,69 @@ export default async function AppProfileTasksPage({
           <DeleteUserProvider>
             <UpdateUserProvider>
               <ChangePasswordProvider>
-                <SelectedTasksProvider
-                  pageItems={tasks.map((task) => ({
-                    id: task.id,
-                    status: task.status,
-                  }))}
-                >
-                  <UpdateTaskStatusesProvider>
-                    <DeleteTasksProvider>
-                      <CreateTaskProvider>
-                        <UserTasksPageLayout
-                          totalTasksCount={totalTasksCount}
-                          selectedSortField={sort}
-                          navigationLarge={
-                            <ProfileNavigationLarge
-                              profileActions={
-                                <ProfileActions userId={userId} />
-                              }
-                            />
-                          }
-                          navigationMobile={<ProfileNavigationMobile />}
-                          userTasksContainer={
-                            <UserTasksContainer
-                              tasks={tasks}
-                              totalCount={totalTasksCount}
-                              page={page}
-                              pageSize={pageSize}
-                            />
-                          }
-                          userDetailHeaderContainer={
-                            <UserDetailHeaderAltContainer userId={userId} />
-                          }
-                        />
+                <ViewModeProvider>
+                  <SelectedTasksProvider
+                    pageItems={tasks.map((task) => ({
+                      id: task.id,
+                      status: task.status,
+                    }))}
+                  >
+                    <UpdateTaskStatusesProvider>
+                      <DeleteTasksProvider>
+                        <CreateTaskProvider>
+                          <UserTasksPageLayout
+                            totalTasksCount={totalTasksCount}
+                            selectedSortField={sort}
+                            navigationLarge={
+                              <ProfileNavigationLarge
+                                profileActions={
+                                  <ProfileActions userId={userId} />
+                                }
+                              />
+                            }
+                            navigationMobile={<ProfileNavigationMobile />}
+                            userTasksContainer={
+                              <UserTasksContainer
+                                tasks={tasks}
+                                totalCount={totalTasksCount}
+                                page={page}
+                                pageSize={pageSize}
+                              />
+                            }
+                            userDetailHeaderContainer={
+                              <UserDetailHeaderAltContainer userId={userId} />
+                            }
+                          />
 
-                        <TaskSearchModal
-                          searchContainer={
-                            <LinkSearchContainer pathname="/tasks" />
-                          }
-                        />
-                        <DeleteTasksModal />
-                        <ChangePasswordModal userId={userId} />
-                        <CreateTaskModal
-                          createTaskFormContainer={
-                            <CreateTaskFormContainer
-                              forcedAssigneeId={userId}
-                            />
-                          }
-                        />
-                        <UpdateUserModal
-                          updateUserFormContainer={
-                            <UpdateUserFormContainer userId={userId} />
-                          }
-                        />
-                        <UpdateUserImageModal userId={userId} />
-                        <DeleteUserImageModal
-                          userId={userId}
-                          userFullName={userFullName}
-                        />
-                      </CreateTaskProvider>
-                    </DeleteTasksProvider>
-                  </UpdateTaskStatusesProvider>
-                </SelectedTasksProvider>
+                          <TaskSearchModal
+                            searchContainer={
+                              <LinkSearchContainer pathname="/tasks" />
+                            }
+                          />
+                          <DeleteTasksModal />
+                          <ChangePasswordModal userId={userId} />
+                          <CreateTaskModal
+                            createTaskFormContainer={
+                              <CreateTaskFormContainer
+                                forcedAssigneeId={userId}
+                              />
+                            }
+                          />
+                          <UpdateUserModal
+                            updateUserFormContainer={
+                              <UpdateUserFormContainer userId={userId} />
+                            }
+                          />
+                          <UpdateUserImageModal userId={userId} />
+                          <DeleteUserImageModal
+                            userId={userId}
+                            userFullName={userFullName}
+                          />
+                        </CreateTaskProvider>
+                      </DeleteTasksProvider>
+                    </UpdateTaskStatusesProvider>
+                  </SelectedTasksProvider>
+                </ViewModeProvider>
               </ChangePasswordProvider>
             </UpdateUserProvider>
           </DeleteUserProvider>

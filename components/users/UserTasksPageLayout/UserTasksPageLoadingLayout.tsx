@@ -17,7 +17,6 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { UserTaskListSkeleton } from "@/components/users/UserTaskList";
 import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { TaskGridMobileSkeleton } from "@/components/tasks/TaskGrid";
 
 interface UserTasksPageLoadingLayoutProps {
   navigationLarge: React.ReactNode;
@@ -72,7 +71,7 @@ export function UserTasksPageLoadingLayout({
             secondSlot={<ButtonSkeleton ghost className="w-[7rem]" />}
           />
 
-          <TaskGridMobileSkeleton items={10} />
+          <UserTaskListSkeleton items={10} />
         </PageGrid>
       </PageContainer>
     </>

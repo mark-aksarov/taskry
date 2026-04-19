@@ -7,10 +7,9 @@ import {
 
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
-import { UserListSkeleton } from "@/components/users/UserList";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ButtonSkeleton, Skeleton } from "@/components/ui/Skeleton";
-import { UserGridMobileSkeleton } from "@/components/users/UserGrid";
+import { UserGridSkeleton } from "@/components/users/UserGridSkeleton";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { SearchModalTriggerSkeleton } from "@/components/search/SearchModalTrigger";
 
@@ -62,8 +61,7 @@ export default function AppUsersPageLoading() {
           secondSlot={<ButtonSkeleton ghost className="w-[7rem]" />}
         />
 
-        <UserListSkeleton className="max-md:hidden" items={10} />
-        <UserGridMobileSkeleton className="md:hidden" items={10} />
+        <UserGridSkeleton viewMode="list" />
       </PageGrid>
     </PageContainer>
   );

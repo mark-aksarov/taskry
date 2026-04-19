@@ -1,1 +1,0 @@
-export { CustomerItemWrapper } from "./CustomerItemWrapper";

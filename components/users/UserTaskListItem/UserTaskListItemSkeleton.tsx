@@ -7,7 +7,7 @@ import {
 import {
   ListItemTextSkeleton,
   ListItemTitleSkeleton,
-} from "@/components/common/List";
+} from "@/components/common/ListItem";
 
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
 import { CheckboxSkeleton } from "@/components/ui/Skeleton/CheckboxSkeleton";
@@ -15,6 +15,7 @@ import { CheckboxSkeleton } from "@/components/ui/Skeleton/CheckboxSkeleton";
 export const UserTaskListItemSkeleton = () => {
   return (
     <UserTaskListItemLayout
+      className="max-md:hidden"
       checkboxSlot={<CheckboxSkeleton />}
       mainSlot={
         <>

@@ -4,7 +4,7 @@ import {
   ListItemText,
   ListItemTitle,
   ListItemTitleButton,
-} from "@/components/common/List";
+} from "@/components/common/ListItem";
 
 import {
   ItemBaseDeadline,
@@ -19,7 +19,9 @@ import { TaskItemActionMenuTrigger } from "../TaskItem";
 import { TaskListItemLayout } from "./TaskListItemLayout";
 import { SelectableTaskItem } from "../SelectableTaskItem";
 import { TaskItemStatusBadge } from "../TaskItemStatusBadge";
+import { TaskListItemSkeleton } from "./TaskListItemSkeleton";
 import { TaskItemCheckbox } from "../TaskItem/TaskItemCheckbox";
+import { ListItemGate } from "@/components/common/ListItemGate";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { BaseTaskItemProps, useTaskItemPending } from "../TaskItem";
 
@@ -32,16 +34,20 @@ export interface Props extends BaseTaskItemProps {
     id: number;
     title: string;
   };
-  showCheckbox?: boolean;
+  showCheckbox: boolean;
 }
 
 export function TaskListItem(props: Props) {
   const isPending = useTaskItemPending(props.id);
 
   return (
-    <SelectableTaskItem taskId={props.id} taskStatus={props.status}>
-      <TaskListItemInner {...props} isPending={isPending} />
-    </SelectableTaskItem>
+    <ListItemGate
+      skeleton={<TaskListItemSkeleton showCheckbox={props.showCheckbox} />}
+    >
+      <SelectableTaskItem taskId={props.id} taskStatus={props.status}>
+        <TaskListItemInner {...props} isPending={isPending} />
+      </SelectableTaskItem>
+    </ListItemGate>
   );
 }
 

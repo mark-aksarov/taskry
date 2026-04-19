@@ -1,6 +1,6 @@
 "use client";
 
-import { useIsMd } from "@/lib/hooks/useIsMd";
+import { Grid } from "./Grid";
 import { useViewMode } from "@/components/common/ViewMode";
 import { EntityContainerPagination } from "./EntityContainerPagination";
 
@@ -8,35 +8,20 @@ export interface EntityContainerPresentationProps {
   page: number;
   pageSize: number;
   totalPages: number;
-  listLarge: () => React.ReactNode;
-  gridLarge: () => React.ReactNode;
-  gridMobile: () => React.ReactNode;
+  children: React.ReactNode;
 }
 
 export function EntityContainerPresentation({
   page,
   pageSize,
-  listLarge,
-  gridLarge,
-  gridMobile,
   totalPages,
+  children,
 }: EntityContainerPresentationProps) {
   const { viewMode } = useViewMode();
-  const isMd = useIsMd();
-
-  let content;
-
-  if (isMd) {
-    content = gridMobile();
-  } else if (viewMode === "list") {
-    content = listLarge();
-  } else {
-    content = gridLarge();
-  }
 
   return (
     <>
-      {content}
+      <Grid viewMode={viewMode}>{children}</Grid>
 
       <EntityContainerPagination
         page={page}

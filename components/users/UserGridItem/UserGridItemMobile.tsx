@@ -14,7 +14,7 @@ import {
   GridItemPublicLink,
   GridItemContactList,
   GridItemPhoneNumber,
-} from "@/components/common/Grid";
+} from "@/components/common/GridItem";
 
 import { memo } from "react";
 import { twMerge } from "tailwind-merge";
@@ -22,12 +22,18 @@ import { Link } from "@/components/ui/Link";
 import { useTranslations } from "next-intl";
 import { Separator } from "@/components/ui/Separator";
 import { UserGridItemLayout } from "./UserGridItemLayout";
+import { UserGridItemMobileSkeleton } from "./UserGridItemSkeleton";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
 import { ItemBaseUserImageContainer } from "@/components/common/ItemBase";
+import { GridItemMobileGate } from "@/components/common/GridItemMobileGate";
 
 export function UserGridItemMobile(props: BaseUserItemProps) {
   const isPending = useUserItemPending();
-  return <UserGridItemMobileInner {...props} isPending={isPending} />;
+  return (
+    <GridItemMobileGate skeleton={<UserGridItemMobileSkeleton />}>
+      <UserGridItemMobileInner {...props} isPending={isPending} />
+    </GridItemMobileGate>
+  );
 }
 
 type InnerProps = BaseUserItemProps & {

@@ -1,7 +1,7 @@
 import {
   GridItemInfoSkeleton,
   GridItemContactListSkeleton,
-} from "@/components/common/Grid";
+} from "@/components/common/GridItem";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { UserGridItemLayout } from "./UserGridItemLayout";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
@@ -9,11 +9,16 @@ import { ItemBaseActionMenuTriggerSkeleton } from "@/components/common/ItemBase"
 
 interface UserGridItemSkeletonProps {
   imageClassName?: string;
+  className?: string;
 }
 
-function UserGridItemSkeleton({ imageClassName }: UserGridItemSkeletonProps) {
+function UserGridItemSkeleton({
+  imageClassName,
+  className,
+}: UserGridItemSkeletonProps) {
   return (
     <UserGridItemLayout
+      className={className}
       actionMenuSlot={
         <ItemBaseActionMenuTriggerSkeleton className="-mr-2 ml-auto" />
       }
@@ -30,9 +35,13 @@ function UserGridItemSkeleton({ imageClassName }: UserGridItemSkeletonProps) {
 }
 
 export const UserGridItemLargeSkeleton = () => {
-  return <UserGridItemSkeleton imageClassName="h-9 w-9" />;
+  return (
+    <UserGridItemSkeleton className="max-md:hidden" imageClassName="h-9 w-9" />
+  );
 };
 
 export const UserGridItemMobileSkeleton = () => {
-  return <UserGridItemSkeleton imageClassName="h-11 w-11" />;
+  return (
+    <UserGridItemSkeleton className="md:hidden" imageClassName="h-11 w-11" />
+  );
 };

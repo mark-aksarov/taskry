@@ -4,7 +4,7 @@ import {
   GridItemInfo,
   GridItemText,
   GridItemTitle,
-} from "@/components/common/Grid";
+} from "@/components/common/GridItem";
 
 import {
   ItemBaseDeadline,
@@ -21,6 +21,8 @@ import { TaskItemStatusBadge } from "../TaskItemStatusBadge";
 import { TaskGridItemProgress } from "./TaskGridItemProgress";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { BaseTaskItemProps, useTaskItemPending } from "../TaskItem";
+import { TaskGridItemMobileSkeleton } from "./TaskGridItemSkeleton";
+import { GridItemMobileGate } from "@/components/common/GridItemMobileGate";
 
 export interface TaskGridItemMobileProps extends BaseTaskItemProps {
   subtasksTotal: number;
@@ -29,7 +31,12 @@ export interface TaskGridItemMobileProps extends BaseTaskItemProps {
 
 export function TaskGridItemMobile(props: TaskGridItemMobileProps) {
   const isPending = useTaskItemPending(props.id);
-  return <TaskGridItemMobileInner {...props} isPending={isPending} />;
+
+  return (
+    <GridItemMobileGate skeleton={<TaskGridItemMobileSkeleton />}>
+      <TaskGridItemMobileInner {...props} isPending={isPending} />
+    </GridItemMobileGate>
+  );
 }
 
 type InnerProps = TaskGridItemMobileProps & { isPending: boolean };

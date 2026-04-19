@@ -4,7 +4,7 @@ import {
   ListItemText,
   ListItemTitle,
   ListItemTextLink,
-} from "@/components/common/List";
+} from "@/components/common/ListItem";
 
 import {
   ItemBaseDetailButton,
@@ -14,11 +14,13 @@ import {
 import {
   ListItemTitleLink,
   ListItemTitleButton,
-} from "@/components/common/List/ListItemTitle";
+} from "@/components/common/ListItem/ListItemTitle";
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
 import { UserListItemLayout } from "./UserListItemLayout";
+import { UserListItemSkeleton } from "./UserListItemSkeleton";
+import { ListItemGate } from "@/components/common/ListItemGate";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { useUserItemPending } from "../UserItem/useUserItemPending";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
@@ -26,7 +28,12 @@ import { BaseUserItemProps, UserItemActionMenuTrigger } from "../UserItem";
 
 export function UserListItem(props: BaseUserItemProps) {
   const isPending = useUserItemPending();
-  return <UserListItemInner {...props} isPending={isPending} />;
+
+  return (
+    <ListItemGate skeleton={<UserListItemSkeleton />}>
+      <UserListItemInner {...props} isPending={isPending} />
+    </ListItemGate>
+  );
 }
 
 type InnerProps = BaseUserItemProps & {

@@ -31,7 +31,7 @@ describe("Task category creation", () => {
     cy.getByData("task-category-name-field").type("Created Category Name");
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("task-category-list").within(() => {
+    cy.getByData("entity-grid").within(() => {
       cy.contains("Created Category Name");
     });
   });

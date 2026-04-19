@@ -41,7 +41,7 @@ describe("Customer updating", () => {
 
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("customers-list").within(() => {
+    cy.getByData("entity-grid").within(() => {
       cy.contains("Updated Customer Name");
       cy.contains("updated-customer@test.com");
       cy.contains("+654321");
@@ -86,7 +86,7 @@ describe("Customer updating", () => {
 
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("customers-list").within(() => {
+    cy.getByData("entity-grid").within(() => {
       cy.contains("Updated Customer Name");
       cy.contains("updated-customer@test.com");
       cy.contains("No phone number");

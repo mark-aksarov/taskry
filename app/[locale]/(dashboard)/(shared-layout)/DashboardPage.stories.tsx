@@ -1,9 +1,4 @@
 import {
-  TaskGridMobile,
-  TaskGridMobileSkeleton,
-} from "@/components/tasks/TaskGrid";
-
-import {
   TotalTasksCard,
   TotalTasksCardSkeleton,
 } from "@/components/tasks/TotalTasksCard";
@@ -23,25 +18,34 @@ import {
   TotalCustomersCardSkeleton,
 } from "@/components/customer/TotalCustomersCard";
 
+import {
+  TaskListItem,
+  TaskListItemSkeleton,
+} from "@/components/tasks/TaskListItem";
+
+import {
+  TaskGridItemMobile,
+  TaskGridItemMobileSkeleton,
+} from "@/components/tasks/TaskGridItem";
+
 import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
 import { mockedTaskList } from "@/mocks/tasks";
 import { DashboardPage } from "./DashboardPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { TaskListSkeleton } from "@/components/tasks/TaskList";
-import { AssignedTaskList } from "@/components/tasks/AssignedTaskList";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { TaskGridMobileStory } from "@/components/tasks/TaskGrid/__stories__";
-import { AssignedTaskListItem } from "@/components/tasks/AssignedTaskListItem";
 import { TaskListItemStory } from "@/components/tasks/TaskListItem/__stories__";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
-import { MockedTaskItemWrapper } from "@/components/tasks/TaskItemWrapper/__stories__";
-import { AssignedTasksPresentation } from "@/components/tasks/AssignedTasksPresentation";
+import { TaskGridItemMobileStory } from "@/components/tasks/TaskGridItem/__stories__";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskProvider/__stories__";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksProvider/__stories__";
+import { MockedDeleteTaskProvider } from "@/components/tasks/DeleteTaskProvider/__stories__";
+import { MockedUpdateTaskProvider } from "@/components/tasks/UpdateTaskProvider/__stories__";
+import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
+import { MockedUpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusProvider/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesProvider/__stories__";
 
 const meta = {
@@ -66,23 +70,26 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const AssignedTasksContainer = () => (
-  <AssignedTasksPresentation
-    page={1}
-    pageSize={5}
-    listLarge={() => (
-      <AssignedTaskList>
-        {mockedTaskList.map((task) => (
-          <MockedTaskItemWrapper key={task.id}>
-            <AssignedTaskListItem {...TaskListItemStory.args} {...task} />
-          </MockedTaskItemWrapper>
-        ))}
-      </AssignedTaskList>
-    )}
-    gridMobile={() => <TaskGridMobile {...TaskGridMobileStory.args} />}
-    totalPages={3}
-  />
-);
+function AssignedTasksContainer() {
+  return (
+    <EntityContainerPresentation page={1} pageSize={10} totalPages={3}>
+      {mockedTaskList.map((task) => (
+        <MockedDeleteTaskProvider>
+          <MockedUpdateTaskProvider>
+            <MockedUpdateTaskStatusProvider>
+              <TaskListItem
+                {...TaskListItemStory.args}
+                {...task}
+                showCheckbox={false}
+              />
+              <TaskGridItemMobile {...TaskGridItemMobileStory.args} {...task} />
+            </MockedUpdateTaskStatusProvider>
+          </MockedUpdateTaskProvider>
+        </MockedDeleteTaskProvider>
+      ))}
+    </EntityContainerPresentation>
+  );
+}
 
 export const Default = {
   args: {
@@ -103,13 +110,14 @@ export const Loading = {
     totalUsersCardContainer: <TotalUsersCardSkeleton />,
     totalCustomersCardContainer: <TotalCustomersCardSkeleton />,
     tasksContainer: (
-      <AssignedTasksPresentation
-        page={1}
-        pageSize={5}
-        listLarge={() => <TaskListSkeleton items={10} showCheckbox={false} />}
-        gridMobile={() => <TaskGridMobileSkeleton items={10} />}
-        totalPages={3}
-      />
+      <EntityContainerPresentation page={1} pageSize={10} totalPages={3}>
+        {mockedTaskList.map(() => (
+          <>
+            <TaskListItemSkeleton showCheckbox={false} />
+            <TaskGridItemMobileSkeleton />
+          </>
+        ))}
+      </EntityContainerPresentation>
     ),
   },
 } satisfies Story;

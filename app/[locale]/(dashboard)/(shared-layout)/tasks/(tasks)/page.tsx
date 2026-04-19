@@ -105,6 +105,7 @@ export default async function AppTasksPage({
                       totalCount={totalFilteredTasks}
                       page={page}
                       pageSize={pageSize}
+                      showCheckbox={true}
                     />
                   }
                 />

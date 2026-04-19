@@ -9,7 +9,7 @@ import {
   GridItemPhoneNumber,
   GridItemContactList,
   GridItemTitleButton,
-} from "@/components/common/Grid";
+} from "@/components/common/GridItem";
 
 import {
   ItemBaseDetailButton,
@@ -23,6 +23,8 @@ import { CustomerItemActionMenuTrigger } from "../CustomerItem";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { SelectableCustomerItem } from "../SelectableCustomerItem";
+import { GridItemLargeGate } from "@/components/common/GridItemLargeGate";
+import { CustomerGridItemLargeSkeleton } from "./CustomerGridItemSkeleton";
 import { CustomerItemCheckbox } from "../CustomerItem/CustomerItemCheckbox";
 import { BaseCustomerItemProps, useCustomerItemPending } from "../CustomerItem";
 
@@ -30,9 +32,11 @@ export function CustomerGridItemLarge(props: BaseCustomerItemProps) {
   const isPending = useCustomerItemPending(props.id);
 
   return (
-    <SelectableCustomerItem customerId={props.id}>
-      <CustomerGridItemLargeInner {...props} isPending={isPending} />
-    </SelectableCustomerItem>
+    <GridItemLargeGate skeleton={<CustomerGridItemLargeSkeleton />}>
+      <SelectableCustomerItem customerId={props.id}>
+        <CustomerGridItemLargeInner {...props} isPending={isPending} />
+      </SelectableCustomerItem>
+    </GridItemLargeGate>
   );
 }
 

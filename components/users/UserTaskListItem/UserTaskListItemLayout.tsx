@@ -1,4 +1,4 @@
-import { ListItem, ListItemInfo } from "@/components/common/List";
+import { ListItem, ListItemInfo } from "@/components/common/ListItem";
 import { twMerge } from "tailwind-merge";
 
 export interface UserTaskListItemLayoutProps {

@@ -1,20 +1,14 @@
-"use client";
-
-import { Children } from "react";
-import { UserTaskListLayout } from "./UserTaskListLayout";
-import { UserTaskListSkeleton } from "./UserTaskListSkeleton";
-import { usePageTransition } from "@/components/common/PageTransitionContext";
-
 interface UserTaskListProps {
   children: React.ReactNode;
 }
 
 export function UserTaskList({ children }: UserTaskListProps) {
-  const { isSortingPending, isPaginationPending } = usePageTransition();
-
-  if (isPaginationPending || isSortingPending) {
-    return <UserTaskListSkeleton items={Children.count(children)} />;
-  }
-
-  return <UserTaskListLayout>{children}</UserTaskListLayout>;
+  return (
+    <div
+      data-test="user-task-list"
+      className="flex flex-col max-md:gap-4 md:gap-0 md:px-6"
+    >
+      {children}
+    </div>
+  );
 }

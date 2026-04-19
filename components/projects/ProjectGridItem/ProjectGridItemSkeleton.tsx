@@ -6,21 +6,24 @@ import {
 
 import { ProgressSkeleton } from "@/components/ui/Skeleton";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
-import { GridItemInfoSkeleton } from "@/components/common/Grid";
+import { GridItemInfoSkeleton } from "@/components/common/GridItem";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
 import { CheckboxSkeleton } from "@/components/ui/Skeleton/CheckboxSkeleton";
 
 interface ProjectGridItemSkeletonProps {
   showCheckbox?: boolean;
   creatorImageClassName?: string;
+  className?: string;
 }
 
 function ProjectGridItemSkeleton({
   showCheckbox,
   creatorImageClassName,
+  className,
 }: ProjectGridItemSkeletonProps) {
   return (
     <ProjectGridItemLayout
+      className={className}
       checkboxSlot={showCheckbox ? <CheckboxSkeleton /> : undefined}
       menuTriggerSlot={
         <ItemBaseActionMenuTriggerSkeleton className="-mr-2 ml-auto" />
@@ -38,10 +41,19 @@ function ProjectGridItemSkeleton({
 
 export const ProjectGridItemLargeSkeleton = () => {
   return (
-    <ProjectGridItemSkeleton creatorImageClassName="h-9 w-9" showCheckbox />
+    <ProjectGridItemSkeleton
+      className="max-md:hidden"
+      creatorImageClassName="h-9 w-9"
+      showCheckbox
+    />
   );
 };
 
 export const ProjectGridItemMobileSkeleton = () => {
-  return <ProjectGridItemSkeleton creatorImageClassName="h-11 w-11" />;
+  return (
+    <ProjectGridItemSkeleton
+      className="md:hidden"
+      creatorImageClassName="h-11 w-11"
+    />
+  );
 };

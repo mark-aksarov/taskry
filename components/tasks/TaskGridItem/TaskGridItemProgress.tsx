@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { GridItemProgress } from "@/components/common/Grid";
+import { GridItemProgress } from "@/components/common/GridItem";
 
 interface TaskGridItemProgressProps {
   subtasksDone: number;

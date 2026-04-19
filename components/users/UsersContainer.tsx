@@ -1,20 +1,41 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { UserListSkeleton } from "./UserList";
-import { UserGridMobileSkeleton } from "./UserGrid";
+import { UpdateUserModal } from "./UpdateUserModal";
+import { DeleteUserModal } from "./DeleteUserModal";
+import { UserListItemSkeleton } from "./UserListItem";
+import { DeleteUserProvider } from "./DeleteUserProvider";
+import { UpdateUserProvider } from "./UpdateUserProvider";
+import { GuestModeModal } from "../common/GuestModeModal";
 import { UserListItemDTO } from "@/lib/data/user/user.dto";
+import { UserDetailSideSheet } from "./UserDetailSideSheet";
+import { UserDetailContainer } from "./UserDetailContainer";
+import { UserGridItemMobileSkeleton } from "./UserGridItem";
+import { UpdateUserFormContainer } from "./UpdateUserFormContainer";
+import { ModalManagerProvider } from "../common/ModalManagerContext";
+import { UserDetailHeaderContainer } from "./UserDetailHeaderContainer";
+import { EntityContainerPresentation } from "../common/EntityContainerPresentation";
 
-const UsersDynamic = dynamic(
-  () => import("./UsersDynamic").then((mod) => mod.UsersDynamic),
+const UserListItem = dynamic(
+  () => import("./UserListItem").then((mod) => mod.UserListItem),
   {
     ssr: false,
-    loading: () => (
-      <>
-        <UserListSkeleton className="max-md:hidden" items={10} />
-        <UserGridMobileSkeleton className="md:hidden" items={10} />
-      </>
-    ),
+    loading: () => <UserListItemSkeleton />,
+  },
+);
+
+const UserGridItemLarge = dynamic(
+  () => import("./UserGridItem").then((mod) => mod.UserGridItemLarge),
+  {
+    ssr: false,
+  },
+);
+
+const UserGridItemMobile = dynamic(
+  () => import("./UserGridItem").then((mod) => mod.UserGridItemMobile),
+  {
+    ssr: false,
+    loading: () => <UserGridItemMobileSkeleton />,
   },
 );
 
@@ -32,11 +53,42 @@ export function UsersContainer({
   pageSize,
 }: UsersContainerProps) {
   return (
-    <UsersDynamic
+    <EntityContainerPresentation
       page={page}
       pageSize={pageSize}
-      users={users}
       totalPages={Math.ceil(totalCount / pageSize)}
-    />
+    >
+      {users.map((user) => (
+        <ModalManagerProvider key={user.id}>
+          <DeleteUserProvider>
+            <UpdateUserProvider>
+              {/* Dynamic */}
+              <UserListItem {...user} />
+              <UserGridItemMobile {...user} />
+              <UserGridItemLarge {...user} />
+
+              {/* Modals and side sheets */}
+              <UserDetailSideSheet
+                userId={user.id}
+                userDetailContainer={<UserDetailContainer userId={user.id} />}
+                userDetailHeaderContainer={
+                  <UserDetailHeaderContainer userId={user.id} />
+                }
+              />
+
+              <UpdateUserModal
+                updateUserFormContainer={
+                  <UpdateUserFormContainer userId={user.id} />
+                }
+              />
+
+              <DeleteUserModal userId={user.id} userFullName={user.fullName} />
+            </UpdateUserProvider>
+          </DeleteUserProvider>
+
+          <GuestModeModal />
+        </ModalManagerProvider>
+      ))}
+    </EntityContainerPresentation>
   );
 }

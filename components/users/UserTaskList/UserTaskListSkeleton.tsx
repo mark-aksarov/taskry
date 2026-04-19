@@ -1,19 +1,24 @@
+import { UserTaskList } from "./UserTaskList";
 import { Repeat } from "@/components/common/Repeat";
-import { UserTaskListLayout } from "./UserTaskListLayout";
 import { UserTaskListItemSkeleton } from "../UserTaskListItem";
+import { TaskGridItemMobileSkeleton } from "@/components/tasks/TaskGridItem";
 
 interface UserTaskListSkeletonProps {
-  className?: string;
   items: number;
 }
 
-export function UserTaskListSkeleton({
-  className,
-  items,
-}: UserTaskListSkeletonProps) {
+export function UserTaskListSkeleton({ items }: UserTaskListSkeletonProps) {
   return (
-    <UserTaskListLayout className={className}>
-      <Repeat items={items} renderItem={() => <UserTaskListItemSkeleton />} />
-    </UserTaskListLayout>
+    <UserTaskList>
+      <Repeat
+        items={items}
+        renderItem={() => (
+          <div>
+            <UserTaskListItemSkeleton />
+            <TaskGridItemMobileSkeleton />
+          </div>
+        )}
+      />
+    </UserTaskList>
   );
 }

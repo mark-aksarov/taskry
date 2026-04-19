@@ -31,7 +31,7 @@ describe("Position updating", () => {
     cy.getByData("position-name-field").clear().type("Updated Position Name");
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("position-list").within(() => {
+    cy.getByData("entity-grid").within(() => {
       cy.contains("Updated Position Name");
     });
   });

@@ -10,8 +10,7 @@ import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ButtonSkeleton, Skeleton } from "@/components/ui/Skeleton";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { CustomerListSkeleton } from "@/components/customer/CustomerList";
-import { CustomerGridMobileSkeleton } from "@/components/customer/CustomerGrid";
+import { CustomerGridSkeleton } from "@/components/customer/CustomerGridSkeleton";
 import { SearchModalTriggerSkeleton } from "@/components/search/SearchModalTrigger";
 
 export default function AppCustomersPageLoading() {
@@ -62,8 +61,7 @@ export default function AppCustomersPageLoading() {
           secondSlot={<ButtonSkeleton ghost className="w-[7rem]" />}
         />
 
-        <CustomerListSkeleton className="max-md:hidden" items={10} />
-        <CustomerGridMobileSkeleton className="md:hidden" items={10} />
+        <CustomerGridSkeleton viewMode="list" />
       </PageGrid>
     </PageContainer>
   );

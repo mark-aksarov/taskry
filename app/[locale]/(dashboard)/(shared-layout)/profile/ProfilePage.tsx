@@ -6,8 +6,8 @@ import { PageContainer } from "@/components/common/PageContainer";
 import { UserDetailCard } from "@/components/users/UserDetailCard";
 import { ProfileActions } from "@/components/users/ProfileActions";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 import { ProfileNavigationLarge } from "@/components/users/ProfileNavigationLarge";
+import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
 
 interface ProfilePageProps {
   userId: string;

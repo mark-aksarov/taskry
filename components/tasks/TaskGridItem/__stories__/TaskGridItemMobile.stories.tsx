@@ -3,22 +3,30 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskGridItemMobile } from "../TaskGridItemMobile";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withMockedTaskItemWrapper } from "../../TaskItemWrapper/__stories__";
+import { withUpdateTaskProvider } from "../../UpdateTaskProvider/__stories__";
+import { withDeleteTaskProvider } from "../../DeleteTaskProvider/__stories__";
 import { withDeleteTasksProvider } from "../../DeleteTasksProvider/__stories__";
+import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
+import { withUpdateTaskStatusProvider } from "../../UpdateTaskStatusProvider/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusesProvider/__stories__";
 import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 
 const meta = {
   title: "components/tasks/TaskGridItemMobile",
   component: TaskGridItemMobile,
   decorators: [
-    withMockedTaskItemWrapper,
+    withUpdateTaskStatusProvider,
+    withUpdateTaskProvider,
+    withDeleteTaskProvider,
     withDeleteTasksProvider,
     withUpdateTaskStatusesProvider,
     withCurrentUserProvider,
     withSelectedTasksProvider,
+    withViewModeProvider,
+    withPageTransitionProvider,
     withModalManagerProvider,
     withThemedBackground,
   ],

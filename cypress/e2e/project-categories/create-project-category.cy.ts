@@ -31,7 +31,7 @@ describe("Project category creation", () => {
     cy.getByData("project-category-name-field").type("Created Category Name");
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("project-category-list").within(() => {
+    cy.getByData("entity-grid").within(() => {
       cy.contains("Created Category Name");
     });
   });

@@ -7,10 +7,9 @@ import {
 } from "@/components/common/EmptySection";
 
 import { useTranslations } from "next-intl";
-import { TaskListSkeleton } from "../TaskList";
+import { TaskGridSkeleton } from "../TaskGridSkeleton";
 import { useViewMode } from "@/components/common/ViewMode";
 import { AbsoluteCenter } from "@/components/common/AbsoluteCenter";
-import { TaskGridLargeSkeleton, TaskGridMobileSkeleton } from "../TaskGrid";
 import { FiltersResetButton } from "@/components/common/FiltersResetButton";
 import { usePageTransition } from "@/components/common/PageTransitionContext";
 
@@ -20,17 +19,7 @@ export function TasksFilteredEmptySection() {
   const { viewMode } = useViewMode();
 
   if (isFilteringPending) {
-    return (
-      <>
-        {viewMode === "list" ? (
-          <TaskListSkeleton className="max-md:hidden" items={10} />
-        ) : (
-          <TaskGridLargeSkeleton className="max-md:hidden" items={10} />
-        )}
-
-        <TaskGridMobileSkeleton className="md:hidden" items={10} />
-      </>
-    );
+    return <TaskGridSkeleton viewMode={viewMode} showCheckbox />;
   }
 
   return (

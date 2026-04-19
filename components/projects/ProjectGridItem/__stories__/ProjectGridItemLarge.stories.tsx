@@ -3,11 +3,15 @@ import { ProjectStatus } from "@/generated/prisma/enums";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectGridItemLarge } from "../ProjectGridItemLarge";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withMockedProjectItemWrapper } from "../../ProjectItemWrapper/__stories__";
+import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
+import { withUpdateProjectProvider } from "../../UpdateProjectProvider/__stories__";
+import { withDeleteProjectProvider } from "../../DeleteProjectProvider/__stories__";
 import { withDeleteProjectsProvider } from "../../DeleteProjectsProvider/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
+import { withUpdateProjectStatusProvider } from "../../UpdateProjectStatusProvider/__stories__";
+import { withPageTransitionProvider } from "@/components/common/PageTransitionContext/__stories__";
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusesProvider/__stories__";
 
 const mockedProject = mockedProjectList[0];
@@ -16,14 +20,21 @@ const meta = {
   title: "components/projects/ProjectGridItemLarge",
   component: ProjectGridItemLarge,
   decorators: [
-    withMockedProjectItemWrapper,
+    withUpdateProjectStatusProvider,
+    withUpdateProjectProvider,
+    withDeleteProjectProvider,
     withDeleteProjectsProvider,
     withUpdateProjectStatusesProvider,
     withCurrentUserProvider,
     withSelectedProjectsProvider,
+    withViewModeProvider,
+    withPageTransitionProvider,
     withModalManagerProvider,
     withThemedBackground,
   ],
+  parameters: {
+    viewMode: "grid",
+  },
 } satisfies Meta<typeof ProjectGridItemLarge>;
 
 export default meta;

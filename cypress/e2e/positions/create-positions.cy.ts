@@ -31,7 +31,7 @@ describe("Position creation", () => {
     cy.getByData("position-name-field").type("Created Position Name");
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("position-list").within(() => {
+    cy.getByData("entity-grid").within(() => {
       cy.contains("Created Position Name");
     });
   });

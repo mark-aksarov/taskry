@@ -1,4 +1,4 @@
-import { GridItemProgress } from "@/components/common/Grid";
+import { GridItemProgress } from "@/components/common/GridItem";
 import { useTranslations } from "next-intl";
 
 interface ProjectGridItemProgressProps {

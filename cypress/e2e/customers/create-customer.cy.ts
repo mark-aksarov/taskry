@@ -42,7 +42,7 @@ describe("Customer creation", () => {
     cy.fillCustomerForm(customerData);
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("customers-list").within(() => {
+    cy.getByData("entity-grid").within(() => {
       cy.contains(customerData.fullName);
       cy.contains(customerData.email);
       cy.contains(customerData.phoneNumber);
@@ -77,7 +77,7 @@ describe("Customer creation", () => {
 
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("customers-list").within(() => {
+    cy.getByData("entity-grid").within(() => {
       cy.contains(customerData.fullName);
       cy.contains(customerData.email);
       cy.contains("No phone number");

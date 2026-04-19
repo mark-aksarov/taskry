@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import { ListItem, ListItemInfo } from "@/components/common/List";
+import { ListItem, ListItemInfo } from "@/components/common/ListItem";
 
 interface CustomerListItemLayoutProps {
   "data-id"?: number;

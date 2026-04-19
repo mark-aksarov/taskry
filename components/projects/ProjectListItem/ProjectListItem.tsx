@@ -10,7 +10,7 @@ import {
   ListItemText,
   ListItemTitle,
   ListItemTitleButton,
-} from "@/components/common/List";
+} from "@/components/common/ListItem";
 
 import {
   ItemBaseDeadline,
@@ -21,10 +21,12 @@ import {
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
+import { ListItemGate } from "@/components/common/ListItemGate";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { SelectableProjectItem } from "../SelectableProjectItem";
 import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { ProjectListItemSkeleton } from "./ProjectListItemSkeleton";
 import { ProjectItemCheckbox } from "../ProjectItem/ProjectItemCheckbox";
 
 export interface Props extends BaseProjectItemProps {
@@ -48,9 +50,11 @@ export function ProjectListItem(props: Props) {
   const isPending = useProjectItemPending(props.id);
 
   return (
-    <SelectableProjectItem projectId={props.id} projectStatus={props.status}>
-      <ProjectListItemInner {...props} isPending={isPending} />
-    </SelectableProjectItem>
+    <ListItemGate skeleton={<ProjectListItemSkeleton />}>
+      <SelectableProjectItem projectId={props.id} projectStatus={props.status}>
+        <ProjectListItemInner {...props} isPending={isPending} />
+      </SelectableProjectItem>
+    </ListItemGate>
   );
 }
 

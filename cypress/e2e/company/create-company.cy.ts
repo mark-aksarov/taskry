@@ -29,7 +29,7 @@ describe("Company creation", () => {
     cy.getByData("company-name-field").type("Created Company Name");
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("company-list").within(() => {
+    cy.getByData("entity-grid").within(() => {
       cy.contains("Created Company Name");
     });
   });

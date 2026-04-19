@@ -1,4 +1,4 @@
-import { TaskCategoryList } from "./TaskCategoryList";
+import { TaskCategoryGrid } from "./TaskCategoryGrid";
 import { TaskCategoryListItem } from "./TaskCategoryListItem";
 import { UpdateTaskCategoryModal } from "./UpdateTaskCategoryModal";
 import { DeleteTaskCategoryModal } from "./DeleteTaskCategoryModal";
@@ -11,7 +11,7 @@ export async function TaskCategoriesContainer() {
   const taskCategories = await getTaskCategorySummaries();
 
   return (
-    <TaskCategoryList>
+    <TaskCategoryGrid>
       {taskCategories.map((taskCategory) => (
         <ModalManagerProvider key={taskCategory.id}>
           <UpdateTaskCategoryProvider>
@@ -34,6 +34,6 @@ export async function TaskCategoriesContainer() {
           </UpdateTaskCategoryProvider>
         </ModalManagerProvider>
       ))}
-    </TaskCategoryList>
+    </TaskCategoryGrid>
   );
 }

@@ -33,7 +33,7 @@ describe("Company updating", () => {
     cy.getByData("company-name-field").clear().type("Updated Company Name");
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("company-list").within(() => {
+    cy.getByData("entity-grid").within(() => {
       cy.contains("Updated Company Name");
     });
   });

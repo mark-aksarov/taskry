@@ -5,7 +5,7 @@ import {
   ListItemInfo,
   ListItemText,
   ListItemTitle,
-} from "@/components/common/List";
+} from "@/components/common/ListItem";
 
 import { memo } from "react";
 import { twMerge } from "tailwind-merge";

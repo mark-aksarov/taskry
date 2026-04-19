@@ -7,7 +7,7 @@ import {
 import {
   ListItemTextSkeleton,
   ListItemTitleSkeleton,
-} from "@/components/common/List";
+} from "@/components/common/ListItem";
 
 import { TaskListItemLayout } from "./TaskListItemLayout";
 import { CheckboxSkeleton } from "@/components/ui/Skeleton/CheckboxSkeleton";
@@ -16,10 +16,11 @@ import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
 export const TaskListItemSkeleton = ({
   showCheckbox,
 }: {
-  showCheckbox?: boolean;
+  showCheckbox: boolean;
 }) => {
   return (
     <TaskListItemLayout
+      className="max-md:hidden"
       checkboxSlot={showCheckbox ? <CheckboxSkeleton /> : undefined}
       mainSlot={
         <>

@@ -33,7 +33,7 @@ describe("Project category updating", () => {
       .type("Updated Project Category Name");
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("project-category-list").within(() => {
+    cy.getByData("entity-grid").within(() => {
       cy.contains("Updated Project Category Name");
     });
   });

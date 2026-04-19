@@ -1,4 +1,4 @@
-import { GridItem, GridItemRow } from "@/components/common/Grid";
+import { GridItem, GridItemRow } from "@/components/common/GridItem";
 
 interface ProjectGridItemLayoutProps {
   className?: string;

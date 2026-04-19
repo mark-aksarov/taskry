@@ -9,9 +9,8 @@ import { useTranslations } from "next-intl";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ButtonSkeleton } from "@/components/ui/Skeleton";
-import { TaskListSkeleton } from "@/components/tasks/TaskList";
 import { PageContainer } from "@/components/common/PageContainer";
-import { TaskGridMobileSkeleton } from "@/components/tasks/TaskGrid";
+import { TaskGridSkeleton } from "@/components/tasks/TaskGridSkeleton";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { SearchModalTriggerSkeleton } from "@/components/search/SearchModalTrigger";
 
@@ -65,8 +64,7 @@ export default function AppTasksPageLoading() {
           secondSlot={<ButtonSkeleton ghost className="w-[7rem]" />}
         />
 
-        <TaskListSkeleton className="max-md:hidden" items={10} />
-        <TaskGridMobileSkeleton className="md:hidden" items={10} />
+        <TaskGridSkeleton viewMode="list" showCheckbox={true} />
       </PageGrid>
     </PageContainer>
   );

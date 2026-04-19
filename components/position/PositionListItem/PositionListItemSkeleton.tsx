@@ -3,7 +3,7 @@ import {
   ListItemInfo,
   ListItemTextSkeleton,
   ListItemTitleSkeleton,
-} from "@/components/common/List";
+} from "@/components/common/ListItem";
 
 import { CheckboxSkeleton } from "@/components/ui/Skeleton/CheckboxSkeleton";
 import { ItemBaseActionMenuTriggerSkeleton } from "@/components/common/ItemBase";

@@ -14,7 +14,7 @@ import {
   GridItemContactList,
   GridItemPhoneNumber,
   GridItemTitleButton,
-} from "@/components/common/Grid";
+} from "@/components/common/GridItem";
 
 import {
   ItemBaseDetailButton,
@@ -26,11 +26,18 @@ import { useTranslations } from "next-intl";
 import { Separator } from "@/components/ui/Separator";
 import { UserGridItemLayout } from "./UserGridItemLayout";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { UserGridItemLargeSkeleton } from "./UserGridItemSkeleton";
 import { useCurrentUser } from "@/components/common/CurrentUserContext";
+import { GridItemLargeGate } from "@/components/common/GridItemLargeGate";
 
 export function UserGridItemLarge(props: BaseUserItemProps) {
   const isPending = useUserItemPending();
-  return <UserGridItemLargeInner {...props} isPending={isPending} />;
+
+  return (
+    <GridItemLargeGate skeleton={<UserGridItemLargeSkeleton />}>
+      <UserGridItemLargeInner {...props} isPending={isPending} />
+    </GridItemLargeGate>
+  );
 }
 
 type InnerProps = BaseUserItemProps & {

@@ -1,6 +1,6 @@
 import "server-only";
 
-import { PositionList } from "./PositionList";
+import { PositionGrid } from "./PositionGrid";
 import { PositionListItem } from "./PositionListItem";
 import { UpdatePositionModal } from "./UpdatePositionModal";
 import { DeletePositionModal } from "./DeletePositionModal";
@@ -13,7 +13,7 @@ export async function PositionsContainer() {
   const positions = await getPositionSummaries();
 
   return (
-    <PositionList>
+    <PositionGrid>
       {positions.map((position) => (
         <ModalManagerProvider key={position.id}>
           <UpdatePositionProvider>
@@ -33,6 +33,6 @@ export async function PositionsContainer() {
           </UpdatePositionProvider>
         </ModalManagerProvider>
       ))}
-    </PositionList>
+    </PositionGrid>
   );
 }

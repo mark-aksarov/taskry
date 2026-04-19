@@ -7,7 +7,7 @@ import {
 import {
   ListItemTextSkeleton,
   ListItemTitleSkeleton,
-} from "@/components/common/List";
+} from "@/components/common/ListItem";
 
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { ImageContainerSkeleton } from "@/components/common/ImageContainer";
@@ -16,6 +16,7 @@ import { CheckboxSkeleton } from "@/components/ui/Skeleton/CheckboxSkeleton";
 export const ProjectListItemSkeleton = () => {
   return (
     <ProjectListItemLayout
+      className="max-md:hidden"
       checkboxSlot={<CheckboxSkeleton />}
       mainSlot={
         <>

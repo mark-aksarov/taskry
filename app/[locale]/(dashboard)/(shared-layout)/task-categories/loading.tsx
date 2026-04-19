@@ -1,13 +1,11 @@
 import { useTranslations } from "next-intl";
-import { List } from "@/components/common/List";
-import { Repeat } from "@/components/common/Repeat";
 import { PageGrid } from "@/components/common/PageGrid";
 import { ButtonSkeleton } from "@/components/ui/Skeleton";
 import { BackButton } from "@/components/common/BackButton";
 import { PageContainer } from "@/components/common/PageContainer";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { ToolbarLarge, ToolbarMobile } from "@/components/common/Toolbar";
-import { TaskCategoryListItemSkeleton } from "@/components/taskCategory/TaskCategoryListItem";
+import { TaskCategoryGridSkeleton } from "@/components/taskCategory/TaskCategoryGrid";
 
 export default function AppTaskCategoriesPageLoading() {
   const t = useTranslations("app.TaskCategoriesPage");
@@ -30,9 +28,7 @@ export default function AppTaskCategoriesPageLoading() {
           secondSlot={<ButtonSkeleton className="w-8" />}
         />
 
-        <List>
-          <Repeat items={10} renderItem={TaskCategoryListItemSkeleton} />
-        </List>
+        <TaskCategoryGridSkeleton />
       </PageGrid>
     </PageContainer>
   );

@@ -10,7 +10,7 @@ import {
   GridItemText,
   GridItemInfo,
   GridItemTitleButton,
-} from "@/components/common/Grid";
+} from "@/components/common/GridItem";
 
 import {
   ItemBaseDeadline,
@@ -26,6 +26,8 @@ import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { ProjectGridItemProgress } from "./ProjectGridItemProgress";
 import { ProjectItemCheckbox } from "../ProjectItem/ProjectItemCheckbox";
+import { ProjectGridItemLargeSkeleton } from "./ProjectGridItemSkeleton";
+import { GridItemLargeGate } from "@/components/common/GridItemLargeGate";
 
 interface Props extends BaseProjectItemProps {
   tasksTotal: number;
@@ -36,9 +38,11 @@ export function ProjectGridItemLarge(props: Props) {
   const isPending = useProjectItemPending(props.id);
 
   return (
-    <SelectableProjectItem projectId={props.id} projectStatus={props.status}>
-      <ProjectGridItemLargeInner {...props} isPending={isPending} />
-    </SelectableProjectItem>
+    <GridItemLargeGate skeleton={<ProjectGridItemLargeSkeleton />}>
+      <SelectableProjectItem projectId={props.id} projectStatus={props.status}>
+        <ProjectGridItemLargeInner {...props} isPending={isPending} />
+      </SelectableProjectItem>
+    </GridItemLargeGate>
   );
 }
 

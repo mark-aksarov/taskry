@@ -3,10 +3,10 @@ import PositionsPageLoading from "./loading";
 import { usePathname } from "next/navigation";
 import { PositionsPage } from "./PositionsPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { PositionList } from "@/components/position/PositionList";
+import { PositionGrid } from "@/components/position/PositionGrid";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { PositionListStory } from "@/components/position/PositionList/__stories__";
+import { PositionGridStory } from "@/components/position/PositionGrid/__stories__";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withCreatePositionProvider } from "@/components/position/CreatePositionProvider/__stories__";
@@ -35,7 +35,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     totalCount: 10,
-    positionsContainer: <PositionList {...PositionListStory.args} />,
+    positionsContainer: <PositionGrid {...PositionGridStory.args} />,
   },
 } satisfies Story;
 

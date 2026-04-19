@@ -9,7 +9,7 @@ import {
   GridItemPublicLink,
   GridItemContactList,
   GridItemPhoneNumber,
-} from "@/components/common/Grid";
+} from "@/components/common/GridItem";
 
 import { memo } from "react";
 import { twMerge } from "tailwind-merge";
@@ -19,11 +19,18 @@ import { Separator } from "@/components/ui/Separator";
 import { CustomerItemActionMenuTrigger } from "../CustomerItem";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
 import { ItemBaseUserImageContainer } from "@/components/common/ItemBase";
+import { CustomerGridItemMobileSkeleton } from "./CustomerGridItemSkeleton";
+import { GridItemMobileGate } from "@/components/common/GridItemMobileGate";
 import { BaseCustomerItemProps, useCustomerItemPending } from "../CustomerItem";
 
 export function CustomerGridItemMobile(props: BaseCustomerItemProps) {
   const isPending = useCustomerItemPending(props.id);
-  return <CustomerGridItemMobileInner {...props} isPending={isPending} />;
+
+  return (
+    <GridItemMobileGate skeleton={<CustomerGridItemMobileSkeleton />}>
+      <CustomerGridItemMobileInner {...props} isPending={isPending} />
+    </GridItemMobileGate>
+  );
 }
 
 type InnerProps = BaseCustomerItemProps & {

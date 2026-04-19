@@ -1,40 +1,31 @@
-import { useIsMd } from "@/lib/hooks/useIsMd";
-import { EntityContainerPagination } from "../common/EntityContainerPagination";
-import { EntityContainerPresentationProps } from "../common/EntityContainerPresentation";
+"use client";
 
-type UserTasksPresentationProps = Omit<
-  EntityContainerPresentationProps,
-  "gridLarge"
->;
+import { UserTaskList } from "./UserTaskList";
+import { EntityContainerPagination } from "../common/EntityContainerPagination";
+
+export interface UserTasksPresentationProps {
+  page: number;
+  pageSize: number;
+  totalPages: number;
+  children: React.ReactNode;
+}
 
 export function UserTasksPresentation({
   page,
   pageSize,
-  listLarge,
-  gridMobile,
   totalPages,
+  children,
 }: UserTasksPresentationProps) {
-  const isMd = useIsMd();
-
-  let content;
-
-  if (isMd) {
-    content = gridMobile();
-  } else {
-    content = listLarge();
-  }
-
   return (
     <>
-      {content}
+      <UserTaskList>{children}</UserTaskList>
 
-      <div className="md:py-4">
-        <EntityContainerPagination
-          page={page}
-          totalPages={totalPages}
-          pageSize={pageSize}
-        />
-      </div>
+      <EntityContainerPagination
+        page={page}
+        totalPages={totalPages}
+        pageSize={pageSize}
+        className="md:py-4"
+      />
     </>
   );
 }

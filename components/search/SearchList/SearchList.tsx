@@ -1,21 +1,22 @@
 "use client";
 
-import { List } from "@/components/common/List";
 import { Repeat } from "@/components/common/Repeat";
 import { SearchListItemSkeleton } from "../SearchListItem";
 
+const styles = "flex flex-col";
+
 export function SearchList({ children }: { children: React.ReactNode }) {
   return (
-    <List data-test="search-list" className="gap-0">
+    <div data-test="search-list" className={styles}>
       {children}
-    </List>
+    </div>
   );
 }
 
 export function SearchListSkeleton() {
   return (
-    <List className="gap-0">
+    <div className={styles}>
       <Repeat items={5} renderItem={() => <SearchListItemSkeleton />} />
-    </List>
+    </div>
   );
 }

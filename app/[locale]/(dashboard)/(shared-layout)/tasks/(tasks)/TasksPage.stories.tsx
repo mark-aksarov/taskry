@@ -1,22 +1,32 @@
+import {
+  TaskGridItemLarge,
+  TaskGridItemMobile,
+} from "@/components/tasks/TaskGridItem";
+
+import {
+  TaskGridItemLargeStory,
+  TaskGridItemMobileStory,
+} from "@/components/tasks/TaskGridItem/__stories__";
+
 import { TasksPage } from "./TasksPage";
 import TasksPageLoading from "./loading";
 import { mocked } from "storybook/test";
-import { TaskList } from "@/components/tasks/TaskList";
+import { mockedTaskList } from "@/mocks/tasks";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
-import { TaskGridLarge } from "@/components/tasks/TaskGrid";
-import { TaskGridMobile } from "@/components/tasks/TaskGrid";
+import { TaskListItem } from "@/components/tasks/TaskListItem";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
-import { TaskListStory } from "@/components/tasks/TaskList/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { TaskGridLargeStory } from "@/components/tasks/TaskGrid/__stories__";
-import { TaskGridMobileStory } from "@/components/tasks/TaskGrid/__stories__";
+import { TaskListItemStory } from "@/components/tasks/TaskListItem/__stories__";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskProvider/__stories__";
 import { withTaskFiltersProvider } from "@/components/tasks/TaskFiltersContext/__stories__";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksProvider/__stories__";
+import { MockedDeleteTaskProvider } from "@/components/tasks/DeleteTaskProvider/__stories__";
+import { MockedUpdateTaskProvider } from "@/components/tasks/UpdateTaskProvider/__stories__";
 import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
+import { MockedUpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusProvider/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesProvider/__stories__";
 import { withCreateTaskCategoryProvider } from "@/components/taskCategory/CreateTaskCategoryProvider/__stories__";
 
@@ -52,14 +62,26 @@ export const Default = {
     totalFilteredTasks: 3,
     selectedSortField: "title",
     tasksContainer: (
-      <EntityContainerPresentation
-        page={1}
-        pageSize={3}
-        listLarge={() => <TaskList {...TaskListStory.args} />}
-        gridLarge={() => <TaskGridLarge {...TaskGridLargeStory.args} />}
-        gridMobile={() => <TaskGridMobile {...TaskGridMobileStory.args} />}
-        totalPages={3}
-      />
+      <EntityContainerPresentation page={1} pageSize={10} totalPages={3}>
+        {mockedTaskList.map((task) => (
+          <MockedDeleteTaskProvider>
+            <MockedUpdateTaskProvider>
+              <MockedUpdateTaskStatusProvider>
+                <TaskListItem
+                  {...TaskListItemStory.args}
+                  {...task}
+                  showCheckbox={true}
+                />
+                <TaskGridItemMobile
+                  {...TaskGridItemMobileStory.args}
+                  {...task}
+                />
+                <TaskGridItemLarge {...TaskGridItemLargeStory.args} {...task} />
+              </MockedUpdateTaskStatusProvider>
+            </MockedUpdateTaskProvider>
+          </MockedDeleteTaskProvider>
+        ))}
+      </EntityContainerPresentation>
     ),
   },
 } satisfies Story;

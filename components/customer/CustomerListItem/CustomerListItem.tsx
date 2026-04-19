@@ -4,7 +4,7 @@ import {
   ListItemText,
   ListItemTextLink,
   ListItemTitle,
-} from "@/components/common/List";
+} from "@/components/common/ListItem";
 
 import {
   ItemBaseDetailButton,
@@ -14,24 +14,28 @@ import {
 import {
   ListItemTitleLink,
   ListItemTitleButton,
-} from "@/components/common/List/ListItemTitle";
+} from "@/components/common/ListItem/ListItemTitle";
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
 import { CustomerItemCheckbox } from "../CustomerItem";
+import { ListItemGate } from "@/components/common/ListItemGate";
 import { CustomerItemActionMenuTrigger } from "../CustomerItem";
 import { CustomerListItemLayout } from "./CustomerListItemLayout";
 import { useModal } from "@/components/common/ModalManagerContext";
 import { SelectableCustomerItem } from "../SelectableCustomerItem";
+import { CustomerListItemSkeleton } from "./CustomerListItemSkeleton";
 import { BaseCustomerItemProps, useCustomerItemPending } from "../CustomerItem";
 
 export function CustomerListItem(props: BaseCustomerItemProps) {
   const isPending = useCustomerItemPending(props.id);
 
   return (
-    <SelectableCustomerItem customerId={props.id}>
-      <CustomerListItemInner {...props} isPending={isPending} />
-    </SelectableCustomerItem>
+    <ListItemGate skeleton={<CustomerListItemSkeleton />}>
+      <SelectableCustomerItem customerId={props.id}>
+        <CustomerListItemInner {...props} isPending={isPending} />
+      </SelectableCustomerItem>
+    </ListItemGate>
   );
 }
 

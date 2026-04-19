@@ -9,9 +9,8 @@ import { useTranslations } from "next-intl";
 import { PageGrid } from "@/components/common/PageGrid";
 import { PageContainer } from "@/components/common/PageContainer";
 import { ButtonSkeleton, Skeleton } from "@/components/ui/Skeleton";
-import { ProjectListSkeleton } from "@/components/projects/ProjectList";
 import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { ProjectGridMobileSkeleton } from "@/components/projects/ProjectGrid";
+import { ProjectGridSkeleton } from "@/components/projects/ProjectGridSkeleton";
 import { SearchModalTriggerSkeleton } from "@/components/search/SearchModalTrigger";
 
 export default function AppProjectsPageLoading() {
@@ -64,8 +63,7 @@ export default function AppProjectsPageLoading() {
           secondSlot={<ButtonSkeleton ghost className="w-[7rem]" />}
         />
 
-        <ProjectListSkeleton className="max-md:hidden" items={10} />
-        <ProjectGridMobileSkeleton className="md:hidden" items={10} />
+        <ProjectGridSkeleton viewMode="list" />
       </PageGrid>
     </PageContainer>
   );

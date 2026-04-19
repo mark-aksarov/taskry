@@ -11,6 +11,7 @@ import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
 import { DashboardCardsGrid } from "@/components/common/DashboardCardsGrid";
 import { AssignedTasksSection } from "@/components/tasks/AssignedTasksSection";
 import { AssignedTasksEmptySection } from "@/components/tasks/AssignedTasksEmptySection";
+import { ViewModeProvider } from "@/components/common/ViewMode";
 
 interface DashboardPageProps {
   totalTaskCount: React.ReactNode;
@@ -34,29 +35,31 @@ export function DashboardPage({
   return (
     <PageContainer>
       <PageGrid>
-        <ToolbarMobile
-          firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
-        />
-        <DashboardCardsGrid>
-          {totalProjectsCardContainer}
-          {totalTasksCardContainer}
-          {totalUsersCardContainer}
-          {totalCustomersCardContainer}
-        </DashboardCardsGrid>
+        <ViewModeProvider>
+          <ToolbarMobile
+            firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
+          />
+          <DashboardCardsGrid>
+            {totalProjectsCardContainer}
+            {totalTasksCardContainer}
+            {totalUsersCardContainer}
+            {totalCustomersCardContainer}
+          </DashboardCardsGrid>
 
-        <AssignedTasksSection
-          createTaskButton={
-            totalTaskCount ? (
-              <>
-                <CreateTaskModalTriggerLarge className="max-md:hidden" />
-                <CreateTaskModalTriggerMobile className="md:hidden" />
-              </>
-            ) : undefined
-          }
-          tasksContainer={
-            totalTaskCount ? tasksContainer : <AssignedTasksEmptySection />
-          }
-        />
+          <AssignedTasksSection
+            createTaskButton={
+              totalTaskCount ? (
+                <>
+                  <CreateTaskModalTriggerLarge className="max-md:hidden" />
+                  <CreateTaskModalTriggerMobile className="md:hidden" />
+                </>
+              ) : undefined
+            }
+            tasksContainer={
+              totalTaskCount ? tasksContainer : <AssignedTasksEmptySection />
+            }
+          />
+        </ViewModeProvider>
       </PageGrid>
     </PageContainer>
   );

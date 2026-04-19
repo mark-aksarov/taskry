@@ -12,12 +12,14 @@ import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { SelectableTaskItem } from "../SelectableTaskItem";
 import { TaskItemStatusBadge } from "../TaskItemStatusBadge";
 import { TaskGridItemProgress } from "./TaskGridItemProgress";
-import { ListItemTitleButton } from "@/components/common/List";
+import { ListItemTitleButton } from "@/components/common/ListItem";
 import { ItemBaseDeadline } from "@/components/common/ItemBase";
 import { TaskItemCheckbox } from "../TaskItem/TaskItemCheckbox";
 import { useModal } from "@/components/common/ModalManagerContext";
+import { TaskGridItemLargeSkeleton } from "./TaskGridItemSkeleton";
 import { BaseTaskItemProps, useTaskItemPending } from "../TaskItem";
-import { GridItemInfo, GridItemText } from "@/components/common/Grid";
+import { GridItemInfo, GridItemText } from "@/components/common/GridItem";
+import { GridItemLargeGate } from "@/components/common/GridItemLargeGate";
 
 interface Props extends BaseTaskItemProps {
   subtasksTotal: number;
@@ -28,9 +30,11 @@ export function TaskGridItemLarge(props: Props) {
   const isPending = useTaskItemPending(props.id);
 
   return (
-    <SelectableTaskItem taskId={props.id} taskStatus={props.status}>
-      <TaskGridItemLargeInner {...props} isPending={isPending} />
-    </SelectableTaskItem>
+    <GridItemLargeGate skeleton={<TaskGridItemLargeSkeleton />}>
+      <SelectableTaskItem taskId={props.id} taskStatus={props.status}>
+        <TaskGridItemLargeInner {...props} isPending={isPending} />
+      </SelectableTaskItem>
+    </GridItemLargeGate>
   );
 }
 

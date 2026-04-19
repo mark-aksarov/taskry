@@ -35,7 +35,7 @@ describe("creates a new project", () => {
     cy.get('button[type="submit"]').click();
 
     // assert
-    cy.getByData("users-list").within(() => {
+    cy.getByData("entity-grid").within(() => {
       cy.contains("Created User Name");
       cy.contains("created-user@test.com");
     });

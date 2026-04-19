@@ -33,7 +33,7 @@ describe("Task category updating", () => {
       .type("Updated Task Category Name");
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("task-category-list").within(() => {
+    cy.getByData("entity-grid").within(() => {
       cy.contains("Updated Task Category Name");
     });
   });
