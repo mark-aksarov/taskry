@@ -58,7 +58,7 @@ export const Default = {
     customersContainer: (
       <EntityContainerPresentation page={1} pageSize={10} totalPages={3}>
         {mockedCustomerList.map((customer) => (
-          <MockedDeleteCustomerProvider>
+          <MockedDeleteCustomerProvider key={customer.id}>
             <MockedUpdateCustomerProvider>
               <CustomerListItem {...CustomerListItemStory.args} {...customer} />
               <CustomerGridItemMobile

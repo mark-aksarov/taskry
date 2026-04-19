@@ -64,7 +64,7 @@ export const Default = {
     tasksContainer: (
       <EntityContainerPresentation page={1} pageSize={10} totalPages={3}>
         {mockedTaskList.map((task) => (
-          <MockedDeleteTaskProvider>
+          <MockedDeleteTaskProvider key={task.id}>
             <MockedUpdateTaskProvider>
               <MockedUpdateTaskStatusProvider>
                 <TaskListItem

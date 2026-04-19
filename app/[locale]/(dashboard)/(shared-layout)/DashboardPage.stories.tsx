@@ -28,6 +28,7 @@ import {
   TaskGridItemMobileSkeleton,
 } from "@/components/tasks/TaskGridItem";
 
+import { Fragment } from "react";
 import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
 import { mockedTaskList } from "@/mocks/tasks";
@@ -74,7 +75,7 @@ function AssignedTasksContainer() {
   return (
     <EntityContainerPresentation page={1} pageSize={10} totalPages={3}>
       {mockedTaskList.map((task) => (
-        <MockedDeleteTaskProvider>
+        <MockedDeleteTaskProvider key={task.id}>
           <MockedUpdateTaskProvider>
             <MockedUpdateTaskStatusProvider>
               <TaskListItem
@@ -111,11 +112,11 @@ export const Loading = {
     totalCustomersCardContainer: <TotalCustomersCardSkeleton />,
     tasksContainer: (
       <EntityContainerPresentation page={1} pageSize={10} totalPages={3}>
-        {mockedTaskList.map(() => (
-          <>
+        {mockedTaskList.map((task) => (
+          <Fragment key={task.id}>
             <TaskListItemSkeleton showCheckbox={false} />
             <TaskGridItemMobileSkeleton />
-          </>
+          </Fragment>
         ))}
       </EntityContainerPresentation>
     ),

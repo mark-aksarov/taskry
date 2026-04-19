@@ -61,7 +61,7 @@ export const Default = {
     projectsContainer: (
       <EntityContainerPresentation page={1} pageSize={10} totalPages={3}>
         {mockedProjectList.map((project) => (
-          <MockedDeleteProjectProvider>
+          <MockedDeleteProjectProvider key={project.id}>
             <MockedUpdateProjectProvider>
               <MockedUpdateProjectStatusProvider>
                 <ProjectListItem {...ProjectListItemStory.args} {...project} />

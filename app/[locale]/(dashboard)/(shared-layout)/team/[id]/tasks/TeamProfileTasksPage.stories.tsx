@@ -67,7 +67,7 @@ export const Default = {
     userTasksContainer: (
       <UserTasksPresentation page={1} pageSize={10} totalPages={3}>
         {mockedTaskList.map((task) => (
-          <MockedDeleteTaskProvider>
+          <MockedDeleteTaskProvider key={task.id}>
             <MockedUpdateTaskProvider>
               <MockedUpdateTaskStatusProvider>
                 <UserTaskListItem {...UserTaskListItemStory.args} {...task} />

@@ -53,7 +53,7 @@ export const Default = {
     usersContainer: (
       <EntityContainerPresentation page={1} pageSize={10} totalPages={3}>
         {mockedUserList.map((user) => (
-          <MockedDeleteUserProvider>
+          <MockedDeleteUserProvider key={user.id}>
             <MockedUpdateUserProvider>
               <UserListItem {...UserListItemStory.args} {...user} />
               <UserGridItemMobile {...UserGridItemMobileStory.args} {...user} />
