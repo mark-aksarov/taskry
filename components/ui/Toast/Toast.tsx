@@ -75,7 +75,7 @@ export function Toast(props: RACToastProps<ToastContent>) {
       className={composeRenderProps(props.className, (className) =>
         twMerge(
           className,
-          "flex w-[330px] overflow-hidden rounded-lg shadow-sm max-md:w-[calc(100vw-2rem)]",
+          "animate-slide-in flex w-[330px] overflow-hidden rounded-lg shadow-sm max-md:w-[calc(100vw-2rem)]",
         ),
       )}
     />

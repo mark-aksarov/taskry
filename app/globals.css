@@ -53,4 +53,19 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
+  .animate-slide-in {
+    animation: slide-in 0.3s ease-out forwards;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    translate: -100% 0;
+    opacity: 0;
+  }
+  to {
+    translate: 0 0;
+    opacity: 1;
+  }
 }
