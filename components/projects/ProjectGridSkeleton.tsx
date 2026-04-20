@@ -4,12 +4,12 @@ import {
 } from "./ProjectGridItem";
 
 import { ViewMode } from "../common/ViewMode";
-import { GridSkeleton } from "../common/Grid";
+import { EntityGridSkeleton } from "../common/EntityGrid";
 import { ProjectListItemSkeleton } from "./ProjectListItem";
 
 export function ProjectGridSkeleton({ viewMode }: { viewMode: ViewMode }) {
   return (
-    <GridSkeleton
+    <EntityGridSkeleton
       viewMode={viewMode}
       listItem={<ProjectListItemSkeleton />}
       gridItemLarge={<ProjectGridItemLargeSkeleton />}

@@ -4,8 +4,8 @@ import {
 } from "./TaskGridItem";
 
 import { ViewMode } from "../common/ViewMode";
-import { GridSkeleton } from "../common/Grid";
 import { TaskListItemSkeleton } from "./TaskListItem";
+import { EntityGridSkeleton } from "../common/EntityGrid";
 
 interface TaskGridSkeletonProps {
   viewMode: ViewMode;
@@ -17,7 +17,7 @@ export function TaskGridSkeleton({
   showCheckbox,
 }: TaskGridSkeletonProps) {
   return (
-    <GridSkeleton
+    <EntityGridSkeleton
       viewMode={viewMode}
       listItem={<TaskListItemSkeleton showCheckbox={showCheckbox} />}
       gridItemLarge={<TaskGridItemLargeSkeleton />}

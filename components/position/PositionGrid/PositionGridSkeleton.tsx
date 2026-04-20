@@ -1,9 +1,9 @@
-import { GridSkeleton } from "../../common/Grid";
+import { EntityGridSkeleton } from "../../common/EntityGrid";
 import { PositionListItemSkeleton } from "../PositionListItem";
 
 export function PositionGridSkeleton() {
   return (
-    <GridSkeleton
+    <EntityGridSkeleton
       viewMode="list"
       listItem={<PositionListItemSkeleton />}
       className="max-md:gap-2"

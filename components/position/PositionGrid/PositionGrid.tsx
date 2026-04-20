@@ -1,5 +1,5 @@
-import { Grid } from "@/components/common/Grid";
+import { EntityGrid } from "@/components/common/EntityGrid";
 
 export function PositionGrid({ children }: { children: React.ReactNode }) {
-  return <Grid className="max-md:gap-2">{children}</Grid>;
+  return <EntityGrid className="max-md:gap-2">{children}</EntityGrid>;
 }

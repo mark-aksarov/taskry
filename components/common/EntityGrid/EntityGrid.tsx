@@ -1,13 +1,13 @@
 import { ViewMode } from "../ViewMode";
 import { twMerge } from "tailwind-merge";
 
-interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
+interface EntityGridProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
   viewMode?: ViewMode;
   children: React.ReactNode;
 }
 
-export function Grid({ className, viewMode, children }: GridProps) {
+export function EntityGrid({ className, viewMode, children }: EntityGridProps) {
   return (
     <div data-test="entity-grid" className="@container">
       <div

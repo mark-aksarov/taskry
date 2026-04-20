@@ -1,8 +1,8 @@
-import { Grid } from "./Grid";
+import { EntityGrid } from "./EntityGrid";
 import { Repeat } from "../Repeat";
 import { ViewMode } from "../ViewMode";
 
-interface GridSkeletonProps {
+interface EntityGridSkeletonProps {
   viewMode: ViewMode;
   items?: number;
   listItem?: React.ReactNode;
@@ -11,16 +11,16 @@ interface GridSkeletonProps {
   className?: string;
 }
 
-export function GridSkeleton({
+export function EntityGridSkeleton({
   viewMode,
   items = 10,
   listItem,
   gridItemLarge,
   gridItemMobile,
   className,
-}: GridSkeletonProps) {
+}: EntityGridSkeletonProps) {
   return (
-    <Grid viewMode={viewMode} className={className}>
+    <EntityGrid viewMode={viewMode} className={className}>
       <Repeat
         items={items}
         renderItem={() => (
@@ -41,6 +41,6 @@ export function GridSkeleton({
           </div>
         )}
       />
-    </Grid>
+    </EntityGrid>
   );
 }

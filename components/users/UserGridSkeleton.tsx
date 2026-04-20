@@ -4,12 +4,12 @@ import {
 } from "./UserGridItem";
 
 import { ViewMode } from "../common/ViewMode";
-import { GridSkeleton } from "../common/Grid";
 import { UserListItemSkeleton } from "./UserListItem";
+import { EntityGridSkeleton } from "../common/EntityGrid";
 
 export function UserGridSkeleton({ viewMode }: { viewMode: ViewMode }) {
   return (
-    <GridSkeleton
+    <EntityGridSkeleton
       viewMode={viewMode}
       listItem={<UserListItemSkeleton />}
       gridItemLarge={<UserGridItemLargeSkeleton />}

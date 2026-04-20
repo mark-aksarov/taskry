@@ -1,9 +1,9 @@
-import { GridSkeleton } from "../../common/Grid";
+import { EntityGridSkeleton } from "../../common/EntityGrid";
 import { TaskCategoryListItemSkeleton } from "../TaskCategoryListItem";
 
 export function TaskCategoryGridSkeleton() {
   return (
-    <GridSkeleton
+    <EntityGridSkeleton
       viewMode="list"
       listItem={<TaskCategoryListItemSkeleton />}
       className="max-md:gap-2!"

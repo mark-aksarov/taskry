@@ -1,9 +1,9 @@
-import { GridSkeleton } from "../../common/Grid";
+import { EntityGridSkeleton } from "../../common/EntityGrid";
 import { ProjectCategoryListItemSkeleton } from "../ProjectCategoryListItem";
 
 export function ProjectCategoryGridSkeleton() {
   return (
-    <GridSkeleton
+    <EntityGridSkeleton
       viewMode="list"
       listItem={<ProjectCategoryListItemSkeleton />}
       className="max-md:gap-2!"

@@ -1,6 +1,6 @@
 "use client";
 
-import { Grid } from "./Grid";
+import { EntityGrid } from "./EntityGrid";
 import { useViewMode } from "@/components/common/ViewMode";
 import { EntityContainerPagination } from "./EntityContainerPagination";
 
@@ -21,7 +21,7 @@ export function EntityContainerPresentation({
 
   return (
     <>
-      <Grid viewMode={viewMode}>{children}</Grid>
+      <EntityGrid viewMode={viewMode}>{children}</EntityGrid>
 
       <EntityContainerPagination
         page={page}
