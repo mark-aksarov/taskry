@@ -36,9 +36,7 @@ import { DashboardPage } from "./DashboardPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { TaskListItemStory } from "@/components/tasks/TaskListItem/__stories__";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
-import { TaskGridItemMobileStory } from "@/components/tasks/TaskGridItem/__stories__";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskProvider/__stories__";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksProvider/__stories__";
 import { MockedDeleteTaskProvider } from "@/components/tasks/DeleteTaskProvider/__stories__";
@@ -78,12 +76,12 @@ function AssignedTasksContainer() {
         <MockedDeleteTaskProvider key={task.id}>
           <MockedUpdateTaskProvider>
             <MockedUpdateTaskStatusProvider>
-              <TaskListItem
-                {...TaskListItemStory.args}
+              <TaskListItem {...task} showCheckbox={false} />
+              <TaskGridItemMobile
                 {...task}
-                showCheckbox={false}
+                subtasksTotal={task.subtasks.total}
+                subtasksDone={task.subtasks.done}
               />
-              <TaskGridItemMobile {...TaskGridItemMobileStory.args} {...task} />
             </MockedUpdateTaskStatusProvider>
           </MockedUpdateTaskProvider>
         </MockedDeleteTaskProvider>

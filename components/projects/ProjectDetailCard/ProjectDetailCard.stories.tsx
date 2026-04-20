@@ -2,10 +2,17 @@ import {
   ProjectDetailAlt,
   ProjectDetailAltSkeleton,
 } from "../ProjectDetailAlt";
+
+import {
+  ProjectDetailCardHeader,
+  ProjectDetailCardHeaderSkeleton,
+} from "./ProjectDetailCardHeader";
+
 import { mockedProjectDetail } from "@/mocks/projects";
 import { ProjectDetailCard } from "./ProjectDetailCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDeleteProjectProvider } from "../DeleteProjectProvider/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 import { withUpdateProjectTitleProvider } from "@/components/projects/UpdateProjectTitleProvider/__stories__";
@@ -15,15 +22,12 @@ import { withUpdateProjectCustomerProvider } from "@/components/projects/UpdateP
 import { withUpdateProjectStatusAltProvider } from "@/components/projects/UpdateProjectStatusAltProvider/__stories__";
 import { withUpdateProjectDescriptionProvider } from "@/components/projects/UpdateProjectDescriptionProvider/__stories__";
 import { withUpdateProjectCategoryRelProvider } from "@/components/projects/UpdateProjectCategoryRelProvider/__stories__";
-import {
-  ProjectDetailCardHeader,
-  ProjectDetailCardHeaderSkeleton,
-} from "./ProjectDetailCardHeader";
 
 const meta = {
   title: "components/projects/ProjectDetailCard",
   component: ProjectDetailCard,
   decorators: [
+    withDeleteProjectProvider,
     withCurrentUserProvider,
     withUpdateProjectCustomerProvider,
     withUpdateProjectDeadlineProvider,

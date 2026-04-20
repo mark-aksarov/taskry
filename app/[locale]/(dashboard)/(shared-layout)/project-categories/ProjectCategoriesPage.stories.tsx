@@ -6,9 +6,8 @@ import { ProjectCategoriesPage } from "./ProjectCategoriesPage";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
-import { ProjectCategoryGrid } from "@/components/projectCategory/ProjectCategoryGrid";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
-import { ProjectCategoryGridStory } from "@/components/projectCategory/ProjectCategoryGrid/__stories__";
+import { ProjectCategoryGridExample } from "@/components/projectCategory/ProjectCategoryGrid/__stories__";
 import { withCreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryProvider/__stories__";
 import { withDeleteProjectCategoriesProvider } from "@/components/projectCategory/DeleteProjectCategoriesProvider/__stories__";
 
@@ -35,9 +34,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     totalCount: 10,
-    projectCategoriesContainer: (
-      <ProjectCategoryGrid {...ProjectCategoryGridStory.args} />
-    ),
+    projectCategoriesContainer: <ProjectCategoryGridExample />,
   },
 } satisfies Story;
 

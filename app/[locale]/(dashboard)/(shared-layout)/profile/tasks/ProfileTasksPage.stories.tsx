@@ -1,32 +1,24 @@
 import { mocked } from "storybook/test";
-import { mockedTaskList } from "@/mocks/tasks";
 import { mockedUserDetail } from "@/mocks/users";
 import AppProfileTasksPageLoading from "./loading";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { ProfileActions } from "@/components/users/ProfileActions";
-import { TaskGridItemMobile } from "@/components/tasks/TaskGridItem";
-import { UserTaskListItem } from "@/components/users/UserTaskListItem";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserTasksPageLayout } from "@/components/users/UserTasksPageLayout";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
-import { UserTasksPresentation } from "@/components/users/UserTasksPresentation";
 import { UserDetailHeaderInteractive } from "@/components/users/UserDetailHeader";
 import { ProfileNavigationLarge } from "@/components/users/ProfileNavigationLarge";
 import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
-import { TaskGridItemMobileStory } from "@/components/tasks/TaskGridItem/__stories__";
-import { UserTaskListItemStory } from "@/components/users/UserTaskListItem/__stories__";
 import { withDeleteUserProvider } from "@/components/users/DeleteUserProvider/__stories__";
 import { withUpdateUserProvider } from "@/components/users/UpdateUserProvider/__stories__";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskProvider/__stories__";
-import { MockedDeleteTaskProvider } from "@/components/tasks/DeleteTaskProvider/__stories__";
-import { MockedUpdateTaskProvider } from "@/components/tasks/UpdateTaskProvider/__stories__";
 import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksProvider/__stories__";
 import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
 import { withChangePasswordProvider } from "@/components/users/ChangePasswordProvider/__stories__";
+import { UserTasksPresentationExample } from "@/components/users/UserTasksPresentation/__stories__";
 import { withUpdateUserImageProvider } from "@/components/users/UpdateUserImageProvider/__stories__";
-import { MockedUpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusProvider/__stories__";
 import { withClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlProvider/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesProvider/__stories__";
 import { withUpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext/__stories__";
@@ -63,23 +55,7 @@ export const Default = {
   args: {
     totalTasksCount: 10,
     selectedSortField: "title",
-    userTasksContainer: (
-      <UserTasksPresentation page={1} pageSize={10} totalPages={3}>
-        {mockedTaskList.map((task) => (
-          <MockedDeleteTaskProvider key={task.id}>
-            <MockedUpdateTaskProvider>
-              <MockedUpdateTaskStatusProvider>
-                <UserTaskListItem {...UserTaskListItemStory.args} {...task} />
-                <TaskGridItemMobile
-                  {...TaskGridItemMobileStory.args}
-                  {...task}
-                />
-              </MockedUpdateTaskStatusProvider>
-            </MockedUpdateTaskProvider>
-          </MockedDeleteTaskProvider>
-        ))}
-      </UserTasksPresentation>
-    ),
+    userTasksContainer: <UserTasksPresentationExample />,
     userDetailHeaderContainer: (
       <UserDetailHeaderInteractive
         fullName={mockedUserDetail.fullName}

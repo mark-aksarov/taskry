@@ -1,8 +1,6 @@
 import { CommentList } from "../CommentList";
-import { CommentItem } from "../../CommentItem";
-import { mockedCommentList } from "@/mocks/comments";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { CommentItemStory } from "../../CommentItem/__stories__";
+import { CommentListExample } from "./CommentListExample";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withSendCommentProvider } from "../../SendCommentProvider/__stories__";
 import { withUpdateCommentProvider } from "../../UpdateCommentProvider/__stories__";
@@ -34,8 +32,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    children: mockedCommentList.map((position) => (
-      <CommentItem key={position.id} {...CommentItemStory.args} {...position} />
-    )),
+    children: null,
   },
+  render: () => <CommentListExample />,
 } satisfies Story;

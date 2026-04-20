@@ -1,1 +1,1 @@
-export { Default as PositionGridStory } from "./PositionGrid.stories";
+export { PositionGridExample } from "./PositionGridExample";

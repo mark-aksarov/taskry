@@ -3,10 +3,9 @@ import CompaniesPageLoading from "./loading";
 import { usePathname } from "next/navigation";
 import { CompaniesPage } from "./CompaniesPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { CompanyGrid } from "@/components/company/CompanyGrid";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { CompanyGridStory } from "@/components/company/CompanyGrid/__stories__";
+import { CompanyGridExample } from "@/components/company/CompanyGrid/__stories__";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withCreateCompanyProvider } from "@/components/company/CreateCompanyProvider/__stories__";
@@ -18,11 +17,9 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     withTaskSearchModal,
-
     withCreateCompanyProvider,
     withDeleteCompaniesProvider,
     withSelectedItemsProvider,
-
     SharedPageDecorator,
     withThemedBackground,
   ],
@@ -37,7 +34,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     totalCount: 10,
-    companiesContainer: <CompanyGrid {...CompanyGridStory.args} />,
+    companiesContainer: <CompanyGridExample />,
   },
 } satisfies Story;
 

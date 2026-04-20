@@ -1,6 +1,8 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/Button";
-import { DialogTrigger } from "react-aria-components";
+import {
+  withOpenModal,
+  withModalManagerProvider,
+} from "@/components/common/ModalManagerContext/__stories__";
+
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectStatusFiltersForm } from "../ProjectStatusFiltersForm";
 import { ProjectStatusFiltersModal } from "./ProjectStatusFiltersModal";
@@ -13,21 +15,16 @@ const meta = {
   title: "components/projects/ProjectStatusFiltersModal",
   component: ProjectStatusFiltersModal,
   decorators: [
-    (Story) => {
-      const [isOpen, setIsOpen] = useState(true);
-
-      return (
-        <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Open modal" />
-          <Story />
-        </DialogTrigger>
-      );
-    },
+    withOpenModal,
     withProjectFiltersProvider,
     withSelectedProjectsProvider,
     withPageTransitionProvider,
+    withModalManagerProvider,
     withThemedBackground,
   ],
+  parameters: {
+    modalId: "projectStatusFilters",
+  },
 } satisfies Meta<typeof ProjectStatusFiltersModal>;
 
 export default meta;

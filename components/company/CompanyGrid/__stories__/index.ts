@@ -1,1 +1,1 @@
-export { Default as CompanyGridStory } from "./CompanyGrid.stories";
+export { CompanyGridExample } from "./CompanyGridExample";

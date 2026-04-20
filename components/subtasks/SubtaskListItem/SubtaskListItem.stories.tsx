@@ -4,6 +4,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteSubtaskProvider } from "../DeleteSubtaskProvider/__stories__";
 import { withUpdateSubtaskProvider } from "../UpdateSubtaskProvider/__stories__";
 import { withToggleSubtaskProvider } from "../ToggleSubtaskProvider/__stories__";
+import { withDeleteTaskProvider } from "@/components/tasks/DeleteTaskProvider/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
 
@@ -11,6 +12,7 @@ const meta = {
   title: "components/subtasks/SubtaskListItem",
   component: SubtaskListItem,
   decorators: [
+    withDeleteTaskProvider,
     withDeleteSubtaskProvider,
     withUpdateSubtaskProvider,
     withToggleSubtaskProvider,

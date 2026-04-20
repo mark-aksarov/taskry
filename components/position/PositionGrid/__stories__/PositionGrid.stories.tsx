@@ -1,11 +1,7 @@
 import { PositionGrid } from "../PositionGrid";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { PositionListItem } from "../../PositionListItem";
-import { mockedPositionSummaries } from "@/mocks/positions";
+import { PositionGridExample } from "./PositionGridExample";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { PositionListItemStory } from "../../PositionListItem/__stories__";
-import { MockedUpdatePositionProvider } from "../../UpdatePositionProvider/__stories__";
-import { MockedDeletePositionProvider } from "../../DeletePositionProvider/__stories__";
 import { withDeletePositionsProvider } from "../../DeletePositionsProvider/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 import { withModalManagerProvider } from "@/components/common/ModalManagerContext/__stories__";
@@ -28,16 +24,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    children: mockedPositionSummaries.map((position) => (
-      <MockedUpdatePositionProvider key={position.id}>
-        <MockedDeletePositionProvider>
-          <PositionListItem
-            key={position.id}
-            {...PositionListItemStory.args}
-            {...position}
-          />
-        </MockedDeletePositionProvider>
-      </MockedUpdatePositionProvider>
-    )),
+    children: <PositionGridExample />,
   },
 } satisfies Story;

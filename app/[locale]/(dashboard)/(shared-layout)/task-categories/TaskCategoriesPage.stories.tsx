@@ -5,9 +5,8 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskCategoriesPage } from "./TaskCategoriesPage";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { TaskCategoryGrid } from "@/components/taskCategory/TaskCategoryGrid";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
-import { TaskCategoryGridStory } from "@/components/taskCategory/TaskCategoryGrid/__stories__";
+import { TaskCategoryGridExample } from "@/components/taskCategory/TaskCategoryGrid/__stories__";
 import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
 import { withCreateTaskCategoryProvider } from "@/components/taskCategory/CreateTaskCategoryProvider/__stories__";
 import { withDeleteTaskCategoriesProvider } from "@/components/taskCategory/DeleteTaskCategoriesProvider/__stories__";
@@ -35,9 +34,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     totalCount: 10,
-    taskCategoriesContainer: (
-      <TaskCategoryGrid {...TaskCategoryGridStory.args} />
-    ),
+    taskCategoriesContainer: <TaskCategoryGridExample />,
   },
 } satisfies Story;
 

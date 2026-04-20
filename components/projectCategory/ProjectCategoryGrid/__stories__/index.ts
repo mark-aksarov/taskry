@@ -1,1 +1,1 @@
-export { Default as ProjectCategoryGridStory } from "./ProjectCategoryGrid.stories";
+export { ProjectCategoryGridExample } from "./ProjectCategoryGridExample";

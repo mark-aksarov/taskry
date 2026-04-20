@@ -1,1 +1,1 @@
-export { Default as CommentListStory } from "./CommentList.stories";
+export { CommentListExample } from "./CommentListExample";

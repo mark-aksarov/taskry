@@ -15,8 +15,6 @@ import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
 import { withViewModeProvider } from "@/components/common/ViewMode/__stories__";
 import { UserTasksPresentation } from "@/components/users/UserTasksPresentation";
 import { UserDetailHeaderInteractive } from "@/components/users/UserDetailHeader";
-import { TaskGridItemMobileStory } from "@/components/tasks/TaskGridItem/__stories__";
-import { UserTaskListItemStory } from "@/components/users/UserTaskListItem/__stories__";
 import { withCreateTaskProvider } from "@/components/tasks/CreateTaskProvider/__stories__";
 import { withUpdateUserProvider } from "@/components/users/UpdateUserProvider/__stories__";
 import { withDeleteUserProvider } from "@/components/users/DeleteUserProvider/__stories__";
@@ -70,10 +68,11 @@ export const Default = {
           <MockedDeleteTaskProvider key={task.id}>
             <MockedUpdateTaskProvider>
               <MockedUpdateTaskStatusProvider>
-                <UserTaskListItem {...UserTaskListItemStory.args} {...task} />
+                <UserTaskListItem {...task} />
                 <TaskGridItemMobile
-                  {...TaskGridItemMobileStory.args}
                   {...task}
+                  subtasksTotal={task.subtasks.total}
+                  subtasksDone={task.subtasks.done}
                 />
               </MockedUpdateTaskStatusProvider>
             </MockedUpdateTaskProvider>

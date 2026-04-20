@@ -1,1 +1,1 @@
-export { Default as TaskCategoryGridStory } from "./TaskCategoryGrid.stories";
+export { TaskCategoryGridExample } from "./TaskCategoryGridExample";

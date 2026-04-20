@@ -4,12 +4,12 @@ import {
 } from "@/components/common/ModalManagerContext/__stories__";
 
 import { mockedTaskDetail } from "@/mocks/tasks";
-import { TaskDetailSideSheet } from "./TaskDetailSideSheet";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { SubtaskList } from "@/components/subtasks/SubtaskList";
+import { TaskDetailSideSheet } from "./TaskDetailSideSheet";
 import { TaskDetail, TaskDetailSkeleton } from "../TaskDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { SubtaskListPlainStory } from "@/components/subtasks/SubtaskList/__stories__";
+import { withDeleteTaskProvider } from "../DeleteTaskProvider/__stories__";
+import { SubtaskListExample } from "@/components/subtasks/SubtaskList/__stories__";
 import { withCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
 
 const meta = {
@@ -17,6 +17,7 @@ const meta = {
   component: TaskDetailSideSheet,
   decorators: [
     withOpenModal,
+    withDeleteTaskProvider,
     withCurrentUserProvider,
     withModalManagerProvider,
     withThemedBackground,
@@ -37,7 +38,9 @@ export const Default = {
     taskDetailContainer: (
       <TaskDetail
         {...task}
-        subtasksList={<SubtaskList {...SubtaskListPlainStory.args} />}
+        subtasksList={
+          <SubtaskListExample variant="plain" showActionMenu={false} />
+        }
       />
     ),
   },

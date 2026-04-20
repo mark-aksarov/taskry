@@ -1,1 +1,1 @@
-export { Default as SearchListStory } from "./SearchList.stories";
+export { SearchListExample } from "./SearchListExample";

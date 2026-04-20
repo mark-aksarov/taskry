@@ -5,13 +5,12 @@ import { mockedTaskDetail } from "@/mocks/tasks";
 import { TaskDetailPage } from "./TaskDetailPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
-import { SubtaskList } from "@/components/subtasks/SubtaskList";
 import { TaskDetailAlt } from "@/components/tasks/TaskDetailAlt";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskDetailCardHeader } from "@/components/tasks/TaskDetailCard";
+import { SubtaskListExample } from "@/components/subtasks/SubtaskList/__stories__";
 import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
-import { SubtaskListRichStory } from "@/components/subtasks/SubtaskList/__stories__";
 import { withDeleteTaskProvider } from "@/components/tasks/DeleteTaskProvider/__stories__";
 import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
 import { withUpdateTaskTitleProvider } from "@/components/tasks/UpdateTaskTitleProvider/__stories__";
@@ -65,7 +64,7 @@ export const Default = {
       <TaskDetailAlt
         {...mockedTaskDetail}
         progress={75}
-        subtasksList={<SubtaskList {...SubtaskListRichStory.args} />}
+        subtasksList={<SubtaskListExample variant="rich" showActionMenu />}
       />
     ),
   },

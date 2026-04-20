@@ -1,5 +1,5 @@
-import { CompanyListItemSkeleton } from "../CompanyListItemSkeleton";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { CompanyListItemSkeleton } from "../CompanyListItemSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
