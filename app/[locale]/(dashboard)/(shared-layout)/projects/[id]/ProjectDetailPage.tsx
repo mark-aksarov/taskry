@@ -1,11 +1,11 @@
 import { useTranslations } from "next-intl";
-import { PageGrid } from "@/components/common/PageGrid";
-import { BackButton } from "@/components/common/BackButton";
-import { ToolbarMobile } from "@/components/common/Toolbar";
-import { PageContainer } from "@/components/common/PageContainer";
-import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { ProjectDetailCard } from "@/components/projects/ProjectDetailCard";
-import { DeleteProjectModalTrigger } from "@/components/projects/DeleteProjectModalTrigger";
+import { PageGrid } from "@/dashboard/common/PageGrid";
+import { BackButton } from "@/dashboard/common/BackButton";
+import { ToolbarMobile } from "@/dashboard/common/Toolbar";
+import { PageContainer } from "@/dashboard/common/PageContainer";
+import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
+import { ProjectDetailCard } from "@/dashboard/projects/ProjectDetailCard";
+import { DeleteProjectModalTrigger } from "@/dashboard/projects/DeleteProjectModalTrigger";
 
 interface ProjectPageProps {
   projectDetailCardHeaderContainer: React.ReactNode;

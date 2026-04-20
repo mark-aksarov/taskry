@@ -3,9 +3,9 @@ import {
   AppSidebarBody,
   AppSidebarHeader,
   AppSidebarHeading,
-} from "@/components/layout/AppSidebar";
+} from "@/dashboard/layout/AppSidebar";
 
-import { AppNavigation } from "@/components/layout/AppNavigation";
+import { AppNavigation } from "@/dashboard/layout/AppNavigation";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;

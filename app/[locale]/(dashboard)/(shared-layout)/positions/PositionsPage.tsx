@@ -1,18 +1,18 @@
 import {
   CreatePositionModalTriggerLarge,
   CreatePositionModalTriggerMobile,
-} from "@/components/position/CreatePositionModalTrigger";
+} from "@/dashboard/position/CreatePositionModalTrigger";
 
 import { useTranslations } from "next-intl";
-import { PageGrid } from "@/components/common/PageGrid";
-import { BackButton } from "@/components/common/BackButton";
-import { ViewModeProvider } from "@/components/common/ViewMode";
-import { PageContainer } from "@/components/common/PageContainer";
-import { PageEmptySection } from "@/components/common/PageEmptySection";
-import { ToolbarLarge, ToolbarMobile } from "@/components/common/Toolbar";
-import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { PositionActionsMenuTrigger } from "@/components/position/PositionActionsMenuTrigger";
-import { PositionsEmptySectionCreateButton } from "@/components/position/PositionsEmptySectionCreateButton";
+import { PageGrid } from "@/dashboard/common/PageGrid";
+import { BackButton } from "@/dashboard/common/BackButton";
+import { ViewModeProvider } from "@/dashboard/common/ViewMode";
+import { PageContainer } from "@/dashboard/common/PageContainer";
+import { PageEmptySection } from "@/dashboard/common/PageEmptySection";
+import { ToolbarLarge, ToolbarMobile } from "@/dashboard/common/Toolbar";
+import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
+import { PositionActionsMenuTrigger } from "@/dashboard/position/PositionActionsMenuTrigger";
+import { PositionsEmptySectionCreateButton } from "@/dashboard/position/PositionsEmptySectionCreateButton";
 
 interface PositionsPageProps {
   totalCount: number;

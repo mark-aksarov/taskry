@@ -1,0 +1,33 @@
+"use client";
+
+import { Item } from "react-stately";
+import { useTranslations } from "next-intl";
+import { ResponsiveSelect } from "@/dashboard/common/ResponsiveSelect";
+
+interface TaskStatusSelectProps {
+  defaultSelectedKey?: string;
+}
+
+export function TaskStatusSelect({
+  defaultSelectedKey,
+}: TaskStatusSelectProps) {
+  const tStatus = useTranslations("dashboard.tasks.TaskStatus");
+  const t = useTranslations("dashboard.tasks.TaskStatusSelect");
+
+  return (
+    <ResponsiveSelect
+      data-test="task-status-select"
+      name="status"
+      label={t("label")}
+      defaultSelectedKey={defaultSelectedKey || "active"}
+      placeholder={t("placeholder")}
+      isRequired
+      errorMessage={t("validation.required")}
+      overlayClassName="w-[var(--trigger-width)]"
+    >
+      <Item key="pending">{tStatus("pending")}</Item>
+      <Item key="active">{tStatus("active")}</Item>
+      <Item key="completed">{tStatus("completed")}</Item>
+    </ResponsiveSelect>
+  );
+}

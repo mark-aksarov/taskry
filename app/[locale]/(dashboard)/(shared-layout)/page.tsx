@@ -1,21 +1,21 @@
 import { z } from "zod";
 import { DashboardPage } from "./DashboardPage";
 import { getTaskList } from "@/lib/data/task/task.dal";
-import { TasksContainer } from "@/components/tasks/TasksContainer";
-import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
-import { CreateTaskModal } from "@/components/tasks/CreateTaskModal";
+import { TasksContainer } from "@/dashboard/tasks/TasksContainer";
+import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
+import { CreateTaskModal } from "@/dashboard/tasks/CreateTaskModal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
-import { CreateTaskProvider } from "@/components/tasks/CreateTaskProvider";
-import { DeleteTasksProvider } from "@/components/tasks/DeleteTasksProvider";
-import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
-import { SelectedTasksProvider } from "@/components/tasks/SelectedTasksContext";
-import { CreateTaskFormContainer } from "@/components/tasks/CreateTaskFormContainer";
-import { TotalTasksCardContainer } from "@/components/tasks/TotalTasksCardContainer";
-import { TotalUsersCardContainer } from "@/components/users/TotalUsersCardContainer";
-import { UpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesProvider";
-import { TotalProjectsCardContainer } from "@/components/projects/TotalProjectsCardContainer";
-import { TotalCustomersCardContainer } from "@/components/customer/TotalCustomersCardContainer";
+import { CreateTaskProvider } from "@/dashboard/tasks/CreateTaskProvider";
+import { DeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider";
+import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
+import { SelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext";
+import { CreateTaskFormContainer } from "@/dashboard/tasks/CreateTaskFormContainer";
+import { TotalTasksCardContainer } from "@/dashboard/tasks/TotalTasksCardContainer";
+import { TotalUsersCardContainer } from "@/dashboard/users/TotalUsersCardContainer";
+import { UpdateTaskStatusesProvider } from "@/dashboard/tasks/UpdateTaskStatusesProvider";
+import { TotalProjectsCardContainer } from "@/dashboard/projects/TotalProjectsCardContainer";
+import { TotalCustomersCardContainer } from "@/dashboard/customer/TotalCustomersCardContainer";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,

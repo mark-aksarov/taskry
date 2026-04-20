@@ -4,11 +4,11 @@ import {
   AuthCardHeader,
   AuthCardHeading,
   AuthCardSubtitle,
-} from "@/components/auth/AuthCard";
+} from "@/auth/AuthCard";
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/Button";
-import { AuthLangMenuTrigger } from "@/components/auth/AuthLangMenuTrigger";
-import { AuthCardSignInFooter } from "@/components/auth/AuthCardSignInFooter";
+import { Button } from "@/ui/Button";
+import { AuthLangMenuTrigger } from "@/auth/AuthLangMenuTrigger";
+import { AuthCardSignInFooter } from "@/auth/AuthCardSignInFooter";
 
 export function CheckEmailPage() {
   const t = useTranslations("app.CheckEmailPage");

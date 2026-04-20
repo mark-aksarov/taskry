@@ -1,18 +1,18 @@
 import {
   CreateTaskCategoryModalTriggerLarge,
   CreateTaskCategoryModalTriggerMobile,
-} from "@/components/taskCategory/CreateTaskCategoryModalTrigger";
+} from "@/dashboard/taskCategory/CreateTaskCategoryModalTrigger";
 
 import { useTranslations } from "next-intl";
-import { PageGrid } from "@/components/common/PageGrid";
-import { BackButton } from "@/components/common/BackButton";
-import { ViewModeProvider } from "@/components/common/ViewMode";
-import { PageContainer } from "@/components/common/PageContainer";
-import { PageEmptySection } from "@/components/common/PageEmptySection";
-import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { ToolbarLarge, ToolbarMobile } from "@/components/common/Toolbar";
-import { TaskCategoryActionsMenuTrigger } from "@/components/taskCategory/TaskCategoryActionsMenuTrigger";
-import { TaskCategoriesEmptySectionCreateButton } from "@/components/taskCategory/TaskCategoriesEmptySectionCreateButton";
+import { PageGrid } from "@/dashboard/common/PageGrid";
+import { BackButton } from "@/dashboard/common/BackButton";
+import { ViewModeProvider } from "@/dashboard/common/ViewMode";
+import { PageContainer } from "@/dashboard/common/PageContainer";
+import { PageEmptySection } from "@/dashboard/common/PageEmptySection";
+import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
+import { ToolbarLarge, ToolbarMobile } from "@/dashboard/common/Toolbar";
+import { TaskCategoryActionsMenuTrigger } from "@/dashboard/taskCategory/TaskCategoryActionsMenuTrigger";
+import { TaskCategoriesEmptySectionCreateButton } from "@/dashboard/taskCategory/TaskCategoriesEmptySectionCreateButton";
 
 interface TaskCategoriesPageProps {
   totalCount: number;

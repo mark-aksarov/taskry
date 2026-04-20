@@ -4,12 +4,12 @@ import {
   AuthCardHeader,
   AuthCardHeading,
   AuthCardSubtitle,
-} from "@/components/auth/AuthCard";
+} from "@/auth/AuthCard";
 import { useTranslations } from "next-intl";
-import { SignUpForm } from "@/components/auth/SignUpForm";
+import { SignUpForm } from "@/auth/SignUpForm";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { AuthLangMenuTrigger } from "@/components/auth/AuthLangMenuTrigger";
-import { AuthCardSignInFooter } from "@/components/auth/AuthCardSignInFooter";
+import { AuthLangMenuTrigger } from "@/auth/AuthLangMenuTrigger";
+import { AuthCardSignInFooter } from "@/auth/AuthCardSignInFooter";
 
 export function SignUpPage({
   action,

@@ -1,7 +1,7 @@
-import { ProfileActionsSkeleton } from "@/components/users/ProfileActions";
-import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
-import { UserNavigationLarge } from "@/components/users/UserNavigationLarge";
-import { UserTasksPageLoadingLayout } from "@/components/users/UserTasksPageLayout";
+import { ProfileActionsSkeleton } from "@/dashboard/users/ProfileActions";
+import { UserNavigationMobile } from "@/dashboard/users/UserNavigationMobile";
+import { UserNavigationLarge } from "@/dashboard/users/UserNavigationLarge";
+import { UserTasksPageLoadingLayout } from "@/dashboard/users/UserTasksPageLayout";
 
 export default function AppProfileTasksPageLoading() {
   return (

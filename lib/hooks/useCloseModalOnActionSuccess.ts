@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { ActionState } from "../actions/types";
-import { useModal } from "@/components/common/ModalManagerContext";
+import { useModal } from "@/dashboard/common/ModalManagerContext";
 
 export function useCloseModalOnActionSuccess(
   state: ActionState,

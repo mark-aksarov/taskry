@@ -5,14 +5,14 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
-import { withCreateTaskProvider } from "@/components/tasks/CreateTaskProvider/__stories__";
-import { withTaskFiltersProvider } from "@/components/tasks/TaskFiltersContext/__stories__";
-import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksProvider/__stories__";
-import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
-import { TasksContainerPresentationExample } from "@/components/tasks/TasksContainer/__stories__";
-import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesProvider/__stories__";
-import { withCreateTaskCategoryProvider } from "@/components/taskCategory/CreateTaskCategoryProvider/__stories__";
+import { withTaskSearchModal } from "@/dashboard/tasks/TaskSearchModal/__stories__";
+import { withCreateTaskProvider } from "@/dashboard/tasks/CreateTaskProvider/__stories__";
+import { withTaskFiltersProvider } from "@/dashboard/tasks/TaskFiltersContext/__stories__";
+import { withDeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider/__stories__";
+import { withSelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext/__stories__";
+import { TasksContainerPresentationExample } from "@/dashboard/tasks/TasksContainer/__stories__";
+import { withUpdateTaskStatusesProvider } from "@/dashboard/tasks/UpdateTaskStatusesProvider/__stories__";
+import { withCreateTaskCategoryProvider } from "@/dashboard/taskCategory/CreateTaskCategoryProvider/__stories__";
 
 const meta = {
   title: "pages/TasksPage",

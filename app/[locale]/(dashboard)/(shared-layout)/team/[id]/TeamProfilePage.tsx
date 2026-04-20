@@ -1,14 +1,14 @@
 import { useTranslations } from "next-intl";
-import { Card } from "@/components/common/Card";
-import { PageGrid } from "@/components/common/PageGrid";
-import { ToolbarMobile } from "@/components/common/Toolbar";
-import { BackButton } from "@/components/common/BackButton";
-import { PageContainer } from "@/components/common/PageContainer";
-import { UserDetailCard } from "@/components/users/UserDetailCard";
-import { ProfileActions } from "@/components/users/ProfileActions";
-import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { UserNavigationMobile } from "@/components/users/UserNavigationMobile";
-import { UserNavigationLarge } from "@/components/users/UserNavigationLarge";
+import { Card } from "@/dashboard/common/Card";
+import { PageGrid } from "@/dashboard/common/PageGrid";
+import { ToolbarMobile } from "@/dashboard/common/Toolbar";
+import { BackButton } from "@/dashboard/common/BackButton";
+import { PageContainer } from "@/dashboard/common/PageContainer";
+import { UserDetailCard } from "@/dashboard/users/UserDetailCard";
+import { ProfileActions } from "@/dashboard/users/ProfileActions";
+import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
+import { UserNavigationMobile } from "@/dashboard/users/UserNavigationMobile";
+import { UserNavigationLarge } from "@/dashboard/users/UserNavigationLarge";
 
 interface TeamProfilePageProps {
   showUserActions: boolean;

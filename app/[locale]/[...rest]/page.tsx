@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import NotFoundPageContainer from "@/components/layout/NotFoundPageContainer";
+import NotFoundPageContainer from "@/dashboard/layout/NotFoundPageContainer";
 
 export default async function NotFound() {
   await requireProtectedPage();

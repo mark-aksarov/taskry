@@ -5,11 +5,11 @@ import { CompaniesPage } from "./CompaniesPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { CompanyGridExample } from "@/components/company/CompanyGrid/__stories__";
-import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
-import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
-import { withCreateCompanyProvider } from "@/components/company/CreateCompanyProvider/__stories__";
-import { withDeleteCompaniesProvider } from "@/components/company/DeleteCompaniesProvider/__stories__";
+import { CompanyGridExample } from "@/dashboard/company/CompanyGrid/__stories__";
+import { withTaskSearchModal } from "@/dashboard/tasks/TaskSearchModal/__stories__";
+import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
+import { withCreateCompanyProvider } from "@/dashboard/company/CreateCompanyProvider/__stories__";
+import { withDeleteCompaniesProvider } from "@/dashboard/company/DeleteCompaniesProvider/__stories__";
 
 const meta = {
   title: "pages/CompaniesPage",

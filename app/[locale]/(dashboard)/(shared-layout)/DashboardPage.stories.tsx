@@ -1,32 +1,32 @@
 import {
   TotalTasksCard,
   TotalTasksCardSkeleton,
-} from "@/components/tasks/TotalTasksCard";
+} from "@/dashboard/tasks/TotalTasksCard";
 
 import {
   TotalUsersCard,
   TotalUsersCardSkeleton,
-} from "@/components/users/TotalUsersCard";
+} from "@/dashboard/users/TotalUsersCard";
 
 import {
   TotalProjectsCard,
   TotalProjectsCardSkeleton,
-} from "@/components/projects/TotalProjectsCard";
+} from "@/dashboard/projects/TotalProjectsCard";
 
 import {
   TotalCustomersCard,
   TotalCustomersCardSkeleton,
-} from "@/components/customer/TotalCustomersCard";
+} from "@/dashboard/customer/TotalCustomersCard";
 
 import {
   TaskListItem,
   TaskListItemSkeleton,
-} from "@/components/tasks/TaskListItem";
+} from "@/dashboard/tasks/TaskListItem";
 
 import {
   TaskGridItemMobile,
   TaskGridItemMobileSkeleton,
-} from "@/components/tasks/TaskGridItem";
+} from "@/dashboard/tasks/TaskGridItem";
 
 import { Fragment } from "react";
 import { mocked } from "storybook/test";
@@ -36,16 +36,16 @@ import { DashboardPage } from "./DashboardPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
-import { withCreateTaskProvider } from "@/components/tasks/CreateTaskProvider/__stories__";
-import { withDeleteTasksProvider } from "@/components/tasks/DeleteTasksProvider/__stories__";
-import { MockedDeleteTaskProvider } from "@/components/tasks/DeleteTaskProvider/__stories__";
-import { MockedUpdateTaskProvider } from "@/components/tasks/UpdateTaskProvider/__stories__";
-import { EntityContainerPresentation } from "@/components/common/EntityContainerPresentation";
-import { withSelectedTasksProvider } from "@/components/tasks/SelectedTasksContext/__stories__";
-import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
-import { MockedUpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusProvider/__stories__";
-import { withUpdateTaskStatusesProvider } from "@/components/tasks/UpdateTaskStatusesProvider/__stories__";
+import { withTaskSearchModal } from "@/dashboard/tasks/TaskSearchModal/__stories__";
+import { withCreateTaskProvider } from "@/dashboard/tasks/CreateTaskProvider/__stories__";
+import { withDeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider/__stories__";
+import { MockedDeleteTaskProvider } from "@/dashboard/tasks/DeleteTaskProvider/__stories__";
+import { MockedUpdateTaskProvider } from "@/dashboard/tasks/UpdateTaskProvider/__stories__";
+import { EntityContainerPresentation } from "@/dashboard/common/EntityContainerPresentation";
+import { withSelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext/__stories__";
+import { withCreateSubtaskProvider } from "@/dashboard/subtasks/CreateSubtaskProvider/__stories__";
+import { MockedUpdateTaskStatusProvider } from "@/dashboard/tasks/UpdateTaskStatusProvider/__stories__";
+import { withUpdateTaskStatusesProvider } from "@/dashboard/tasks/UpdateTaskStatusesProvider/__stories__";
 
 const meta = {
   title: "pages/DashboardPage",

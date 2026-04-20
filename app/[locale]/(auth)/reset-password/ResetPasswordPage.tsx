@@ -4,12 +4,12 @@ import {
   AuthCardHeader,
   AuthCardHeading,
   AuthCardSubtitle,
-} from "@/components/auth/AuthCard";
+} from "@/auth/AuthCard";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { ResetPasswordForm } from "@/components/auth/ResetPasswordForm";
-import { AuthLangMenuTrigger } from "@/components/auth/AuthLangMenuTrigger";
-import { AuthCardSignInFooter } from "@/components/auth/AuthCardSignInFooter";
+import { ResetPasswordForm } from "@/auth/ResetPasswordForm";
+import { AuthLangMenuTrigger } from "@/auth/AuthLangMenuTrigger";
+import { AuthCardSignInFooter } from "@/auth/AuthCardSignInFooter";
 
 interface ResetPasswordPageProps {
   resetPassword: ActionFn<ActionState, FormData>;

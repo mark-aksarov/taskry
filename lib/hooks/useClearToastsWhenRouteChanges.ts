@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { usePathname } from "@/i18n/navigation";
-import { ToastContext } from "@/components/ui/Toast";
+import { ToastContext } from "@/ui/Toast";
 
 export function useClearToastQueueWhenRouteChanges() {
   const toastQueue = useContext(ToastContext);

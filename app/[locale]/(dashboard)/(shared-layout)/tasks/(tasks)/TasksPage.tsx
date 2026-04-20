@@ -3,42 +3,42 @@ import {
   ToolbarLarge,
   ToolbarSearchMobile,
   ToolbarFiltersMobile,
-} from "@/components/common/Toolbar";
+} from "@/dashboard/common/Toolbar";
 
 import {
   TaskFiltersModalTriggerLarge,
   TaskFiltersModalTriggerMobile,
-} from "@/components/tasks/TaskFiltersModal";
+} from "@/dashboard/tasks/TaskFiltersModal";
 
 import {
   CreateTaskMenuTriggerMobile,
   CreateTaskMenuTriggerLarge,
-} from "@/components/tasks/CreateTaskMenuTrigger";
+} from "@/dashboard/tasks/CreateTaskMenuTrigger";
 
 import {
   TaskManageMenuTriggerLarge,
   TaskManageMenuTriggerMobile,
-} from "@/components/tasks/TaskManageMenuTrigger";
+} from "@/dashboard/tasks/TaskManageMenuTrigger";
 
 import { useTranslations } from "next-intl";
 import { TaskSortField } from "@/lib/types";
-import { PageGrid } from "@/components/common/PageGrid";
-import { ViewModeProvider } from "@/components/common/ViewMode";
-import { PageContainer } from "@/components/common/PageContainer";
-import { AbsoluteCenter } from "@/components/common/AbsoluteCenter";
-import { TaskResultsCount } from "@/components/tasks/TaskResultsCount";
-import { TasksEmptySection } from "@/components/tasks/TasksEmptySection";
-import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
-import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { SearchModalTrigger } from "@/components/search/SearchModalTrigger";
-import { TaskActionsMenuTrigger } from "@/components/tasks/TaskActionsMenuTrigger";
-import { AssigneeFiltersModalTrigger } from "@/components/tasks/AssigneeFiltersModal";
-import { TaskSortingMenuTriggerLarge } from "@/components/tasks/TaskSortingMenuTrigger";
-import { TaskSortingMenuTriggerMobile } from "@/components/tasks/TaskSortingMenuTrigger";
-import { TasksFilteredEmptySection } from "@/components/tasks/TasksFilteredEmptySection";
-import { TaskStatusFiltersModalTrigger } from "@/components/tasks/TaskStatusFiltersModal";
-import { TaskProjectFiltersModalTrigger } from "@/components/tasks/TaskProjectFiltersModal";
-import { TaskCategoryFiltersModalTrigger } from "@/components/tasks/TaskCategoryFiltersModal";
+import { PageGrid } from "@/dashboard/common/PageGrid";
+import { ViewModeProvider } from "@/dashboard/common/ViewMode";
+import { PageContainer } from "@/dashboard/common/PageContainer";
+import { AbsoluteCenter } from "@/dashboard/common/AbsoluteCenter";
+import { TaskResultsCount } from "@/dashboard/tasks/TaskResultsCount";
+import { TasksEmptySection } from "@/dashboard/tasks/TasksEmptySection";
+import { ViewModeToggleButtonGroup } from "@/dashboard/common/ViewMode";
+import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
+import { SearchModalTrigger } from "@/dashboard/search/SearchModalTrigger";
+import { TaskActionsMenuTrigger } from "@/dashboard/tasks/TaskActionsMenuTrigger";
+import { AssigneeFiltersModalTrigger } from "@/dashboard/tasks/AssigneeFiltersModal";
+import { TaskSortingMenuTriggerLarge } from "@/dashboard/tasks/TaskSortingMenuTrigger";
+import { TaskSortingMenuTriggerMobile } from "@/dashboard/tasks/TaskSortingMenuTrigger";
+import { TasksFilteredEmptySection } from "@/dashboard/tasks/TasksFilteredEmptySection";
+import { TaskStatusFiltersModalTrigger } from "@/dashboard/tasks/TaskStatusFiltersModal";
+import { TaskProjectFiltersModalTrigger } from "@/dashboard/tasks/TaskProjectFiltersModal";
+import { TaskCategoryFiltersModalTrigger } from "@/dashboard/tasks/TaskCategoryFiltersModal";
 
 interface TasksPageProps {
   totalCount: number;

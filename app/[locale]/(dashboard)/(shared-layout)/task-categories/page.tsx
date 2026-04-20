@@ -1,14 +1,14 @@
 import { TaskCategoriesPage } from "./TaskCategoriesPage";
-import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
+import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
-import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
+import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
+import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
 import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
-import { CreateTaskCategoryModal } from "@/components/taskCategory/CreateTaskCategoryModal";
-import { TaskCategoriesContainer } from "@/components/taskCategory/TaskCategoriesContainer";
-import { DeleteTaskCategoriesModal } from "@/components/taskCategory/DeleteTaskCategoriesModal";
-import { CreateTaskCategoryProvider } from "@/components/taskCategory/CreateTaskCategoryProvider";
-import { DeleteTaskCategoriesProvider } from "@/components/taskCategory/DeleteTaskCategoriesProvider";
+import { CreateTaskCategoryModal } from "@/dashboard/taskCategory/CreateTaskCategoryModal";
+import { TaskCategoriesContainer } from "@/dashboard/taskCategory/TaskCategoriesContainer";
+import { DeleteTaskCategoriesModal } from "@/dashboard/taskCategory/DeleteTaskCategoriesModal";
+import { CreateTaskCategoryProvider } from "@/dashboard/taskCategory/CreateTaskCategoryProvider";
+import { DeleteTaskCategoriesProvider } from "@/dashboard/taskCategory/DeleteTaskCategoriesProvider";
 
 export default async function AppTaskCategoriesPage() {
   // Authorization

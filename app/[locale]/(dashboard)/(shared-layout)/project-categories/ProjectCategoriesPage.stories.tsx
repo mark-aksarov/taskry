@@ -5,11 +5,11 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectCategoriesPage } from "./ProjectCategoriesPage";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
-import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
-import { ProjectCategoryGridExample } from "@/components/projectCategory/ProjectCategoryGrid/__stories__";
-import { withCreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryProvider/__stories__";
-import { withDeleteProjectCategoriesProvider } from "@/components/projectCategory/DeleteProjectCategoriesProvider/__stories__";
+import { withTaskSearchModal } from "@/dashboard/tasks/TaskSearchModal/__stories__";
+import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
+import { ProjectCategoryGridExample } from "@/dashboard/projectCategory/ProjectCategoryGrid/__stories__";
+import { withCreateProjectCategoryProvider } from "@/dashboard/projectCategory/CreateProjectCategoryProvider/__stories__";
+import { withDeleteProjectCategoriesProvider } from "@/dashboard/projectCategory/DeleteProjectCategoriesProvider/__stories__";
 
 const meta = {
   title: "pages/ProjectCategoriesPage",

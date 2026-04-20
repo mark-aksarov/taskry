@@ -3,42 +3,42 @@ import {
   ToolbarMobile,
   ToolbarSearchMobile,
   ToolbarFiltersMobile,
-} from "@/components/common/Toolbar";
+} from "@/dashboard/common/Toolbar";
 
 import {
   CustomerFiltersModalTriggerLarge,
   CustomerFiltersModalTriggerMobile,
-} from "@/components/customer/CustomerFiltersModalTrigger";
+} from "@/dashboard/customer/CustomerFiltersModalTrigger";
 
 import {
   CustomerManageMenuTriggerLarge,
   CustomerManageMenuTriggerMobile,
-} from "@/components/customer/CustomerManageMenuTrigger";
+} from "@/dashboard/customer/CustomerManageMenuTrigger";
 
 import {
   CustomerSortingMenuTriggerLarge,
   CustomerSortingMenuTriggerMobile,
-} from "@/components/customer/CustomerSortingMenuTrigger";
+} from "@/dashboard/customer/CustomerSortingMenuTrigger";
 
 import {
   CreateCustomerMenuTriggerLarge,
   CreateCustomerMenuTriggerMobile,
-} from "@/components/customer/CreateCustomerMenuTrigger";
+} from "@/dashboard/customer/CreateCustomerMenuTrigger";
 
 import { useTranslations } from "next-intl";
 import { CustomerSortField } from "@/lib/types";
-import { PageGrid } from "@/components/common/PageGrid";
-import { ViewModeProvider } from "@/components/common/ViewMode";
-import { PageContainer } from "@/components/common/PageContainer";
-import { PageEmptySection } from "@/components/common/PageEmptySection";
-import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
-import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { SearchModalTrigger } from "@/components/search/SearchModalTrigger";
-import { CustomerResultsCount } from "@/components/customer/CustomerResultsCount";
-import { CustomerActionsMenuTrigger } from "@/components/customer/CustomerActionsMenuTrigger";
-import { CustomersFilteredEmptySection } from "@/components/customer/CustomersFilteredEmptySection";
-import { CustomersEmptySectionCreateButton } from "@/components/customer/CustomersEmptySectionCreateButton";
-import { CustomerCompanyFiltersModalTrigger } from "@/components/customer/CustomerCompanyFiltersModalTrigger";
+import { PageGrid } from "@/dashboard/common/PageGrid";
+import { ViewModeProvider } from "@/dashboard/common/ViewMode";
+import { PageContainer } from "@/dashboard/common/PageContainer";
+import { PageEmptySection } from "@/dashboard/common/PageEmptySection";
+import { ViewModeToggleButtonGroup } from "@/dashboard/common/ViewMode";
+import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
+import { SearchModalTrigger } from "@/dashboard/search/SearchModalTrigger";
+import { CustomerResultsCount } from "@/dashboard/customer/CustomerResultsCount";
+import { CustomerActionsMenuTrigger } from "@/dashboard/customer/CustomerActionsMenuTrigger";
+import { CustomersFilteredEmptySection } from "@/dashboard/customer/CustomersFilteredEmptySection";
+import { CustomersEmptySectionCreateButton } from "@/dashboard/customer/CustomersEmptySectionCreateButton";
+import { CustomerCompanyFiltersModalTrigger } from "@/dashboard/customer/CustomerCompanyFiltersModalTrigger";
 
 interface CustomersPageProps {
   totalCount: number;

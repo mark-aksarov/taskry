@@ -3,39 +3,39 @@ import {
   ToolbarMobile,
   ToolbarSearchMobile,
   ToolbarFiltersMobile,
-} from "@/components/common/Toolbar";
+} from "@/dashboard/common/Toolbar";
 
 import {
   UserManageMenuTriggerLarge,
   UserManageMenuTriggerMobile,
-} from "@/components/users/UserManageMenuTrigger";
+} from "@/dashboard/users/UserManageMenuTrigger";
 
 import {
   UserSortingMenuTriggerLarge,
   UserSortingMenuTriggerMobile,
-} from "@/components/users/UserSortingMenuTrigger";
+} from "@/dashboard/users/UserSortingMenuTrigger";
 
 import {
   CreateUserMenuTriggerLarge,
   CreateUserMenuTriggerMobile,
-} from "@/components/users/CreateUserMenuTrigger";
+} from "@/dashboard/users/CreateUserMenuTrigger";
 
 import {
   UserFiltersModalTriggerLarge,
   UserFiltersModalTriggerMobile,
-} from "@/components/users/UserFiltersModal";
+} from "@/dashboard/users/UserFiltersModal";
 
 import { useTranslations } from "next-intl";
 import { UserSortField } from "@/lib/types";
-import { PageGrid } from "@/components/common/PageGrid";
-import { ViewModeProvider } from "@/components/common/ViewMode";
-import { PageContainer } from "@/components/common/PageContainer";
-import { UserResultsCount } from "@/components/users/UserResultsCount";
-import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
-import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { SearchModalTrigger } from "@/components/search/SearchModalTrigger";
-import { UsersFilteredEmptySection } from "@/components/users/UsersFilteredEmptySection";
-import { UserPositionFiltersModalTrigger } from "@/components/users/UserPositionFiltersModal";
+import { PageGrid } from "@/dashboard/common/PageGrid";
+import { ViewModeProvider } from "@/dashboard/common/ViewMode";
+import { PageContainer } from "@/dashboard/common/PageContainer";
+import { UserResultsCount } from "@/dashboard/users/UserResultsCount";
+import { ViewModeToggleButtonGroup } from "@/dashboard/common/ViewMode";
+import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
+import { SearchModalTrigger } from "@/dashboard/search/SearchModalTrigger";
+import { UsersFilteredEmptySection } from "@/dashboard/users/UsersFilteredEmptySection";
+import { UserPositionFiltersModalTrigger } from "@/dashboard/users/UserPositionFiltersModal";
 
 interface UsersPageProps {
   totalFilteredUsers: number;

@@ -1,5 +1,5 @@
 import { useEffect, RefObject, useRef } from "react";
-import { useSendComment } from "@/components/comments/SendCommentContext";
+import { useSendComment } from "@/dashboard/comments/SendCommentContext";
 
 /**
  * Hook that scrolls a given ref to top when sending a comment succeeds.

@@ -4,11 +4,11 @@ import {
   AuthCardHeader,
   AuthCardHeading,
   AuthCardSubtitle,
-} from "@/components/auth/AuthCard";
+} from "@/auth/AuthCard";
 import { LogIn } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/Button";
-import { AuthLangMenuTrigger } from "@/components/auth/AuthLangMenuTrigger";
+import { Button } from "@/ui/Button";
+import { AuthLangMenuTrigger } from "@/auth/AuthLangMenuTrigger";
 
 export default function ResetPasswordNotFound() {
   const t = useTranslations("app.ResetPasswordNotFound");

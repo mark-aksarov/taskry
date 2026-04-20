@@ -5,22 +5,22 @@ import { mockedTaskDetail } from "@/mocks/tasks";
 import { TaskDetailPage } from "./TaskDetailPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
-import { TaskDetailAlt } from "@/components/tasks/TaskDetailAlt";
+import { TaskDetailAlt } from "@/dashboard/tasks/TaskDetailAlt";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { TaskDetailCardHeader } from "@/components/tasks/TaskDetailCard";
-import { SubtaskListExample } from "@/components/subtasks/SubtaskList/__stories__";
-import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
-import { withDeleteTaskProvider } from "@/components/tasks/DeleteTaskProvider/__stories__";
-import { withCreateSubtaskProvider } from "@/components/subtasks/CreateSubtaskProvider/__stories__";
-import { withUpdateTaskTitleProvider } from "@/components/tasks/UpdateTaskTitleProvider/__stories__";
-import { withUpdateTaskStatusProvider } from "@/components/tasks/UpdateTaskStatusProvider/__stories__";
-import { withUpdateTaskProjectProvider } from "@/components/tasks/UpdateTaskProjectProvider/__stories__";
-import { withUpdateTaskDeadlineProvider } from "@/components/tasks/UpdateTaskDeadlineProvider/__stories__";
-import { withUpdateTaskAssigneeProvider } from "@/components/tasks/UpdateTaskAssigneeProvider/__stories__";
-import { withUpdateTaskStatusAltProvider } from "@/components/tasks/UpdateTaskStatusAltProvider/__stories__";
-import { withUpdateTaskDescriptionProvider } from "@/components/tasks/UpdateTaskDescriptionProvider/__stories__";
-import { withUpdateTaskCategoryRelProvider } from "@/components/tasks/UpdateTaskCategoryRelProvider/__stories__";
+import { TaskDetailCardHeader } from "@/dashboard/tasks/TaskDetailCard";
+import { SubtaskListExample } from "@/dashboard/subtasks/SubtaskList/__stories__";
+import { withTaskSearchModal } from "@/dashboard/tasks/TaskSearchModal/__stories__";
+import { withDeleteTaskProvider } from "@/dashboard/tasks/DeleteTaskProvider/__stories__";
+import { withCreateSubtaskProvider } from "@/dashboard/subtasks/CreateSubtaskProvider/__stories__";
+import { withUpdateTaskTitleProvider } from "@/dashboard/tasks/UpdateTaskTitleProvider/__stories__";
+import { withUpdateTaskStatusProvider } from "@/dashboard/tasks/UpdateTaskStatusProvider/__stories__";
+import { withUpdateTaskProjectProvider } from "@/dashboard/tasks/UpdateTaskProjectProvider/__stories__";
+import { withUpdateTaskDeadlineProvider } from "@/dashboard/tasks/UpdateTaskDeadlineProvider/__stories__";
+import { withUpdateTaskAssigneeProvider } from "@/dashboard/tasks/UpdateTaskAssigneeProvider/__stories__";
+import { withUpdateTaskStatusAltProvider } from "@/dashboard/tasks/UpdateTaskStatusAltProvider/__stories__";
+import { withUpdateTaskDescriptionProvider } from "@/dashboard/tasks/UpdateTaskDescriptionProvider/__stories__";
+import { withUpdateTaskCategoryRelProvider } from "@/dashboard/tasks/UpdateTaskCategoryRelProvider/__stories__";
 
 const meta = {
   title: "pages/TaskDetailPage",

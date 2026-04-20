@@ -5,13 +5,13 @@ import { CustomersPage } from "./CustomersPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCustomerSearchModal } from "@/components/customer/CustomerSearchModal/__stories__";
-import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
-import { withCreateCompanyProvider } from "@/components/company/CreateCompanyProvider/__stories__";
-import { withCreateCustomerProvider } from "@/components/customer/CreateCustomerProvider/__stories__";
-import { withCustomerFiltersProvider } from "@/components/customer/CustomerFiltersContext/__stories__";
-import { withDeleteCustomersProvider } from "@/components/customer/DeleteCustomersProvider/__stories__";
-import { CustomersContainerPresentationExample } from "@/components/customer/CustomersContainer/__stories__";
+import { withCustomerSearchModal } from "@/dashboard/customer/CustomerSearchModal/__stories__";
+import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
+import { withCreateCompanyProvider } from "@/dashboard/company/CreateCompanyProvider/__stories__";
+import { withCreateCustomerProvider } from "@/dashboard/customer/CreateCustomerProvider/__stories__";
+import { withCustomerFiltersProvider } from "@/dashboard/customer/CustomerFiltersContext/__stories__";
+import { withDeleteCustomersProvider } from "@/dashboard/customer/DeleteCustomersProvider/__stories__";
+import { CustomersContainerPresentationExample } from "@/dashboard/customer/CustomersContainer/__stories__";
 
 const meta = {
   title: "pages/CustomersPage",

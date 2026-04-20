@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
-import ErrorPageContainer from "@/components/layout/ErrorPageContainer";
+import ErrorPageContainer from "@/dashboard/layout/ErrorPageContainer";
 
 export default function Error({
   error,

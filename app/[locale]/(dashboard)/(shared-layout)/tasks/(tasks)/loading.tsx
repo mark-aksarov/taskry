@@ -3,16 +3,16 @@ import {
   ToolbarMobile,
   ToolbarSearchMobile,
   ToolbarFiltersMobile,
-} from "@/components/common/Toolbar";
+} from "@/dashboard/common/Toolbar";
 
 import { useTranslations } from "next-intl";
-import { Skeleton } from "@/components/ui/Skeleton";
-import { PageGrid } from "@/components/common/PageGrid";
-import { ButtonSkeleton } from "@/components/ui/Skeleton";
-import { PageContainer } from "@/components/common/PageContainer";
-import { TaskGridSkeleton } from "@/components/tasks/TaskGridSkeleton";
-import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { SearchModalTriggerSkeleton } from "@/components/search/SearchModalTrigger";
+import { Skeleton } from "@/ui/Skeleton";
+import { PageGrid } from "@/dashboard/common/PageGrid";
+import { ButtonSkeleton } from "@/ui/Skeleton";
+import { PageContainer } from "@/dashboard/common/PageContainer";
+import { TaskGridSkeleton } from "@/dashboard/tasks/TaskGridSkeleton";
+import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
+import { SearchModalTriggerSkeleton } from "@/dashboard/search/SearchModalTrigger";
 
 export default function AppTasksPageLoading() {
   const t = useTranslations("app.TasksPage");

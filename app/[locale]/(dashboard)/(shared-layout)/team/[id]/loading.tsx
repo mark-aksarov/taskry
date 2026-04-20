@@ -1,15 +1,15 @@
 import { useTranslations } from "next-intl";
-import { Card } from "@/components/common/Card";
-import { PageGrid } from "@/components/common/PageGrid";
-import { ToolbarMobile } from "@/components/common/Toolbar";
-import { PageContainer } from "@/components/common/PageContainer";
-import { UserDetailCard } from "@/components/users/UserDetailCard";
-import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
-import { UserDetailAltSkeleton } from "@/components/users/UserDetailAlt";
-import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { ProfileActionsSkeleton } from "@/components/users/ProfileActions";
-import { UserNavigationLarge } from "@/components/users/UserNavigationLarge";
-import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
+import { Card } from "@/dashboard/common/Card";
+import { PageGrid } from "@/dashboard/common/PageGrid";
+import { ToolbarMobile } from "@/dashboard/common/Toolbar";
+import { PageContainer } from "@/dashboard/common/PageContainer";
+import { UserDetailCard } from "@/dashboard/users/UserDetailCard";
+import { DetailHeaderSkeleton } from "@/dashboard/common/DetailHeader";
+import { UserDetailAltSkeleton } from "@/dashboard/users/UserDetailAlt";
+import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
+import { ProfileActionsSkeleton } from "@/dashboard/users/ProfileActions";
+import { UserNavigationLarge } from "@/dashboard/users/UserNavigationLarge";
+import { ProfileNavigationMobile } from "@/dashboard/users/ProfileNavigationMobile";
 
 export default function AppTeamProfileLoading() {
   const t = useTranslations("app.TeamProfilePage");

@@ -1,0 +1,10 @@
+import { Skeleton } from "@/ui/Skeleton";
+import { TotalCustomersCardLayout } from "./TotalCustomersCardLayout";
+
+export const TotalCustomersCardSkeleton = () => {
+  return (
+    <TotalCustomersCardLayout>
+      <Skeleton className="w-[3rem]" size="xl" />
+    </TotalCustomersCardLayout>
+  );
+};

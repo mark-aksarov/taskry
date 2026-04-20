@@ -1,9 +1,9 @@
 import { type Decorator } from "@storybook/nextjs-vite";
-import { ProfileLink } from "@/components/layout/ProfileLink";
+import { ProfileLink } from "@/dashboard/layout/ProfileLink";
 import { DashboardLayout } from "../app/[locale]/(dashboard)/DashboardLayout";
 import SharedLayout from "@/app/[locale]/(dashboard)/(shared-layout)/SharedLayout";
-import { MockedCurrentUserProvider } from "@/components/common/CurrentUserContext/__stories__";
-import { ModalManagerProvider } from "@/components/common/ModalManagerContext";
+import { MockedCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
+import { ModalManagerProvider } from "@/dashboard/common/ModalManagerContext";
 
 /**
  * The page decorator is used to wrap the story in the page layout

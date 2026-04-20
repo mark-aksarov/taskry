@@ -4,23 +4,23 @@ import { ProfilePage } from "./ProfilePage";
 import { usePathname } from "next/navigation";
 import { mockedUserDetail } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { UserDetailAlt } from "@/components/users/UserDetailAlt";
+import { UserDetailAlt } from "@/dashboard/users/UserDetailAlt";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { UserDetailHeaderInteractive } from "@/components/users/UserDetailHeader";
-import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
-import { withDeleteUserProvider } from "@/components/users/DeleteUserProvider/__stories__";
-import { withUpdateUserBioProvider } from "@/components/users/UpdateUserBioProvider/__stories__";
-import { withChangePasswordProvider } from "@/components/users/ChangePasswordProvider/__stories__";
-import { withUpdateUserImageProvider } from "@/components/users/UpdateUserImageProvider/__stories__";
-import { withClearUserImageUrlProvider } from "@/components/users/ClearUserImageUrlProvider/__stories__";
-import { withUpdateUserAddressProvider } from "@/components/users/UpdateUserAddressProvider/__stories__";
-import { withUpdateUserPositionProvider } from "@/components/users/UpdateUserPositionProvider/__stories__";
-import { withUpdateUserFullNameProvider } from "@/components/users/UpdateUserFullNameProvider/__stories__";
-import { withUpdateUserImageFileProvider } from "@/components/users/UpdateUserImageFileContext/__stories__";
-import { withUpdateUserBirthdateProvider } from "@/components/users/UpdateUserBirthdateProvider/__stories__";
-import { withUpdateUserPublicLinkProvider } from "@/components/users/UpdateUserPublicLinkProvider/__stories__";
-import { withUpdateUserPhoneNumberProvider } from "@/components/users/UpdateUserPhoneNumberProvider/__stories__";
+import { UserDetailHeaderInteractive } from "@/dashboard/users/UserDetailHeader";
+import { withTaskSearchModal } from "@/dashboard/tasks/TaskSearchModal/__stories__";
+import { withDeleteUserProvider } from "@/dashboard/users/DeleteUserProvider/__stories__";
+import { withUpdateUserBioProvider } from "@/dashboard/users/UpdateUserBioProvider/__stories__";
+import { withChangePasswordProvider } from "@/dashboard/users/ChangePasswordProvider/__stories__";
+import { withUpdateUserImageProvider } from "@/dashboard/users/UpdateUserImageProvider/__stories__";
+import { withClearUserImageUrlProvider } from "@/dashboard/users/ClearUserImageUrlProvider/__stories__";
+import { withUpdateUserAddressProvider } from "@/dashboard/users/UpdateUserAddressProvider/__stories__";
+import { withUpdateUserPositionProvider } from "@/dashboard/users/UpdateUserPositionProvider/__stories__";
+import { withUpdateUserFullNameProvider } from "@/dashboard/users/UpdateUserFullNameProvider/__stories__";
+import { withUpdateUserImageFileProvider } from "@/dashboard/users/UpdateUserImageFileContext/__stories__";
+import { withUpdateUserBirthdateProvider } from "@/dashboard/users/UpdateUserBirthdateProvider/__stories__";
+import { withUpdateUserPublicLinkProvider } from "@/dashboard/users/UpdateUserPublicLinkProvider/__stories__";
+import { withUpdateUserPhoneNumberProvider } from "@/dashboard/users/UpdateUserPhoneNumberProvider/__stories__";
 
 const meta = {
   title: "pages/ProfilePage",

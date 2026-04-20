@@ -1,12 +1,12 @@
 import { useTranslations } from "next-intl";
-import { PageGrid } from "@/components/common/PageGrid";
-import { ToolbarMobile } from "@/components/common/Toolbar";
-import { BackButton } from "@/components/common/BackButton";
-import { PageContainer } from "@/components/common/PageContainer";
-import { TaskDetailCard } from "@/components/tasks/TaskDetailCard";
-import { TaskDetailAltSkeleton } from "@/components/tasks/TaskDetailAlt";
-import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { TaskDetailCardHeaderSkeleton } from "@/components/tasks/TaskDetailCard";
+import { PageGrid } from "@/dashboard/common/PageGrid";
+import { ToolbarMobile } from "@/dashboard/common/Toolbar";
+import { BackButton } from "@/dashboard/common/BackButton";
+import { PageContainer } from "@/dashboard/common/PageContainer";
+import { TaskDetailCard } from "@/dashboard/tasks/TaskDetailCard";
+import { TaskDetailAltSkeleton } from "@/dashboard/tasks/TaskDetailAlt";
+import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
+import { TaskDetailCardHeaderSkeleton } from "@/dashboard/tasks/TaskDetailCard";
 
 export default function AppTaskDetailLoading() {
   const t = useTranslations("app.TaskDetailPage");

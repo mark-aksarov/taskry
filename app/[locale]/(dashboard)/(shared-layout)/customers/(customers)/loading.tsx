@@ -3,15 +3,15 @@ import {
   ToolbarMobile,
   ToolbarSearchMobile,
   ToolbarFiltersMobile,
-} from "@/components/common/Toolbar";
+} from "@/dashboard/common/Toolbar";
 
 import { useTranslations } from "next-intl";
-import { PageGrid } from "@/components/common/PageGrid";
-import { PageContainer } from "@/components/common/PageContainer";
-import { ButtonSkeleton, Skeleton } from "@/components/ui/Skeleton";
-import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { CustomerGridSkeleton } from "@/components/customer/CustomerGridSkeleton";
-import { SearchModalTriggerSkeleton } from "@/components/search/SearchModalTrigger";
+import { PageGrid } from "@/dashboard/common/PageGrid";
+import { ButtonSkeleton, Skeleton } from "@/ui/Skeleton";
+import { PageContainer } from "@/dashboard/common/PageContainer";
+import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
+import { CustomerGridSkeleton } from "@/dashboard/customer/CustomerGridSkeleton";
+import { SearchModalTriggerSkeleton } from "@/dashboard/search/SearchModalTrigger";
 
 export default function AppCustomersPageLoading() {
   const t = useTranslations("app.CustomersPage");

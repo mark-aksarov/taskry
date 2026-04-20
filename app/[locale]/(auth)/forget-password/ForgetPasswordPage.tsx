@@ -6,12 +6,12 @@ import {
   AuthCardHeader,
   AuthCardHeading,
   AuthCardSubtitle,
-} from "@/components/auth/AuthCard";
+} from "@/auth/AuthCard";
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { ForgetPasswordForm } from "@/components/auth/ForgetPasswordForm";
-import { AuthLangMenuTrigger } from "@/components/auth/AuthLangMenuTrigger";
-import { AuthCardSignInFooter } from "@/components/auth/AuthCardSignInFooter";
+import { ForgetPasswordForm } from "@/auth/ForgetPasswordForm";
+import { AuthLangMenuTrigger } from "@/auth/AuthLangMenuTrigger";
+import { AuthCardSignInFooter } from "@/auth/AuthCardSignInFooter";
 
 export function ForgetPasswordPage({
   action,

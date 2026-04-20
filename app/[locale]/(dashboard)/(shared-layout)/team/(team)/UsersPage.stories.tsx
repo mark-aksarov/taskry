@@ -5,11 +5,11 @@ import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUserSearchModal } from "@/components/users/UserSearchModal/__stories__";
-import { withCreateUserProvider } from "@/components/users/CreateUserProvider/__stories__";
-import { withUserFiltersProvider } from "@/components/users/UserFiltersContext/__stories__";
-import { UsersContainerPresentationExample } from "@/components/users/UsersContainer/__stories__";
-import { withCreatePositionProvider } from "@/components/position/CreatePositionProvider/__stories__";
+import { withUserSearchModal } from "@/dashboard/users/UserSearchModal/__stories__";
+import { withCreateUserProvider } from "@/dashboard/users/CreateUserProvider/__stories__";
+import { withUserFiltersProvider } from "@/dashboard/users/UserFiltersContext/__stories__";
+import { UsersContainerPresentationExample } from "@/dashboard/users/UsersContainer/__stories__";
+import { withCreatePositionProvider } from "@/dashboard/position/CreatePositionProvider/__stories__";
 
 const meta = {
   title: "pages/UsersPage",

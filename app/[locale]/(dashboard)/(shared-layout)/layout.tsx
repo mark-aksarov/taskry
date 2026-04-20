@@ -1,5 +1,5 @@
 import SharedLayout from "./SharedLayout";
-import { ProfileLinkContainer } from "@/components/layout/ProfileLinkContainer";
+import { ProfileLinkContainer } from "@/dashboard/layout/ProfileLinkContainer";
 
 interface AppSharedLayoutProps {
   children: React.ReactNode;

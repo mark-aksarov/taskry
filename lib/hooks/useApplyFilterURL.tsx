@@ -1,6 +1,6 @@
 import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { usePageTransition } from "@/components/common/PageTransitionContext";
+import { usePageTransition } from "@/dashboard/common/PageTransitionContext";
 
 /**
  * Applies new filter params by updating the URL search params.

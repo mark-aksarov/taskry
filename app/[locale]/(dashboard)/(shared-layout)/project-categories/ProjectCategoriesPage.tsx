@@ -1,18 +1,18 @@
 import {
   CreateProjectCategoryModalTriggerLarge,
   CreateProjectCategoryModalTriggerMobile,
-} from "@/components/projectCategory/CreateProjectCategoryModalTrigger";
+} from "@/dashboard/projectCategory/CreateProjectCategoryModalTrigger";
 
 import { useTranslations } from "next-intl";
-import { PageGrid } from "@/components/common/PageGrid";
-import { BackButton } from "@/components/common/BackButton";
-import { ViewModeProvider } from "@/components/common/ViewMode";
-import { PageContainer } from "@/components/common/PageContainer";
-import { PageEmptySection } from "@/components/common/PageEmptySection";
-import { ToolbarLarge, ToolbarMobile } from "@/components/common/Toolbar";
-import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { ProjectCategoryActionsMenuTrigger } from "@/components/projectCategory/ProjectCategoryActionsMenuTrigger";
-import { ProjectCategoriesEmptySectionCreateButton } from "@/components/projectCategory/ProjectCategoriesEmptySectionCreateButton";
+import { PageGrid } from "@/dashboard/common/PageGrid";
+import { BackButton } from "@/dashboard/common/BackButton";
+import { ViewModeProvider } from "@/dashboard/common/ViewMode";
+import { PageContainer } from "@/dashboard/common/PageContainer";
+import { PageEmptySection } from "@/dashboard/common/PageEmptySection";
+import { ToolbarLarge, ToolbarMobile } from "@/dashboard/common/Toolbar";
+import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
+import { ProjectCategoryActionsMenuTrigger } from "@/dashboard/projectCategory/ProjectCategoryActionsMenuTrigger";
+import { ProjectCategoriesEmptySectionCreateButton } from "@/dashboard/projectCategory/ProjectCategoriesEmptySectionCreateButton";
 
 interface ProjectCategoriesPageProps {
   totalCount: number;

@@ -1,0 +1,43 @@
+"use client";
+
+import {
+  DetailText,
+  DetailTitle,
+  DetailInfoAlt,
+  DetailEditButton,
+} from "@/dashboard/common/Detail";
+import { useTranslations } from "next-intl";
+import { useUpdateCustomerEmail } from "../UpdateCustomerEmailContext";
+import { useModal } from "@/dashboard/common/ModalManagerContext";
+
+interface CustomerEmailDetailInfoAltProps {
+  email: string;
+}
+
+export function CustomerEmailDetailInfoAlt({
+  email,
+}: CustomerEmailDetailInfoAltProps) {
+  const t = useTranslations("dashboard.customers.CustomerDetail");
+
+  const { onOpenChange: onUpdateEmailModalOpenChange } = useModal(
+    "updateCustomerEmail",
+  );
+
+  const { isPending: isUpdateCustomerEmailPending } = useUpdateCustomerEmail();
+
+  return (
+    <DetailInfoAlt
+      data-test="customer-email-detail-info"
+      title={<DetailTitle>{t("email")}</DetailTitle>}
+      content={<DetailText>{email}</DetailText>}
+      rightSlot={
+        <DetailEditButton
+          data-test="update-customer-email-edit-button"
+          isPending={isUpdateCustomerEmailPending}
+          onPress={() => onUpdateEmailModalOpenChange(true)}
+        />
+      }
+      surface
+    />
+  );
+}

@@ -4,10 +4,10 @@ import {
   AuthCardHeader,
   AuthCardHeading,
   AuthCardSubtitle,
-} from "@/components/auth/AuthCard";
+} from "@/auth/AuthCard";
 import { useTranslations } from "next-intl";
-import { VerifyEmailContent } from "@/components/auth/VerifyEmailContent";
-import { AuthLangMenuTrigger } from "@/components/auth/AuthLangMenuTrigger";
+import { VerifyEmailContent } from "@/auth/VerifyEmailContent";
+import { AuthLangMenuTrigger } from "@/auth/AuthLangMenuTrigger";
 
 interface VerifyEmailPageProps {
   email: string;

@@ -2,12 +2,12 @@
 
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
-import { AppHeader } from "@/components/layout/AppHeader";
+import { AppHeader } from "@/dashboard/layout/AppHeader";
 import { useParams, useSearchParams } from "next/navigation";
-import { GuestModeModal } from "@/components/common/GuestModeModal";
-import { SearchBarProvider } from "@/components/search/SearchBar/index";
-import { ModalManagerProvider } from "@/components/common/ModalManagerContext";
-import { PageTransitionProvider } from "@/components/common/PageTransitionContext";
+import { GuestModeModal } from "@/dashboard/common/GuestModeModal";
+import { SearchBarProvider } from "@/dashboard/search/SearchBar/index";
+import { ModalManagerProvider } from "@/dashboard/common/ModalManagerContext";
+import { PageTransitionProvider } from "@/dashboard/common/PageTransitionContext";
 
 interface SharedLayoutProps {
   profileLinkContainer: React.ReactNode;

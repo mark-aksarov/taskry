@@ -1,0 +1,127 @@
+import { DetailInfo, DetailText, DetailTitle } from "@/dashboard/common/Detail";
+
+import Image from "next/image";
+import { Badge } from "@/ui/Badge";
+import { ProjectStatus } from "@/generated/prisma/enums";
+import { useFormatter, useTranslations } from "next-intl";
+import { ProjectDetailLayout } from "./ProjectDetailLayout";
+import { UnknownUser } from "@/dashboard/common/UnknownUser";
+import { ImageContainer } from "@/dashboard/common/ImageContainer";
+
+interface ProjectDetailProps {
+  title: string;
+  creator?: {
+    id: string;
+    fullName: string;
+    imageUrl?: string;
+  };
+  deadline?: string;
+  description?: string;
+  customer?: {
+    id: number;
+    fullName: string;
+    imageUrl?: string;
+  };
+  category?: {
+    id: number;
+    name: string;
+  };
+  status: ProjectStatus;
+}
+
+export function ProjectDetail({
+  title,
+  creator,
+  deadline,
+  description,
+  customer,
+  category,
+  status,
+}: ProjectDetailProps) {
+  const tStatus = useTranslations("dashboard.projects.ProjectStatus");
+  const t = useTranslations("dashboard.projects.ProjectDetail");
+
+  const format = useFormatter();
+
+  const formattedDeadline = deadline
+    ? format.dateTime(new Date(deadline), {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      })
+    : t("noDeadline");
+
+  const creatorImg = creator?.imageUrl ? (
+    <ImageContainer className="h-9 w-9">
+      <Image src={creator.imageUrl} alt="" width={36} height={36} />
+    </ImageContainer>
+  ) : (
+    <UnknownUser className="h-9 w-9" />
+  );
+
+  return (
+    <ProjectDetailLayout
+      titleSlot={
+        <h2 className="text-base font-bold text-black dark:text-white">
+          {title}
+        </h2>
+      }
+      creatorSlot={
+        <DetailInfo>
+          <DetailTitle>{t("creator")}</DetailTitle>
+          <div className="flex items-center gap-2">
+            {creator ? (
+              <>
+                {creatorImg}
+                <DetailText>{creator.fullName}</DetailText>
+              </>
+            ) : (
+              <>
+                <UnknownUser className="h-9 w-9" />
+                <DetailText>{t("noCreator")}</DetailText>
+              </>
+            )}
+          </div>
+        </DetailInfo>
+      }
+      deadlineSlot={
+        <DetailInfo className="md:gap-3.5">
+          <DetailTitle>{t("deadline")}</DetailTitle>
+          <Badge color="gray" className="self-start">
+            {formattedDeadline}
+          </Badge>
+        </DetailInfo>
+      }
+      descriptionSlot={
+        <DetailInfo>
+          <DetailTitle>{t("description")}</DetailTitle>
+          <DetailText>
+            {description ? description : t("noDescription")}
+          </DetailText>
+        </DetailInfo>
+      }
+      statusSlot={
+        <DetailInfo>
+          <DetailTitle>{t("status")}</DetailTitle>
+          <DetailText>{tStatus(status)}</DetailText>
+        </DetailInfo>
+      }
+      categorySlot={
+        <DetailInfo>
+          <DetailTitle>{t("category")}</DetailTitle>
+          <DetailText>{category ? category.name : t("noCategory")}</DetailText>
+        </DetailInfo>
+      }
+      customerSlot={
+        <DetailInfo className="border-none pb-0">
+          <DetailTitle>{t("customer")}</DetailTitle>
+          {customer ? (
+            <DetailText>{customer.fullName}</DetailText>
+          ) : (
+            <DetailText>{t("noCustomer")}</DetailText>
+          )}
+        </DetailInfo>
+      }
+    />
+  );
+}

@@ -7,20 +7,20 @@ import { mockedCustomerDetail } from "@/mocks/customers";
 import { CustomerDetailPage } from "./CustomerDetailPage";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { CustomerDetailAlt } from "@/components/customer/CustomerDetailAlt";
-import { CustomerDetailActions } from "@/components/customer/CustomerDetailActions";
-import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
-import { CustomerDetailHeaderInteractive } from "@/components/customer/CustomerDetailHeader";
-import { withDeleteCustomerProvider } from "@/components/customer/DeleteCustomerProvider/__stories__";
-import { withUpdateCustomerBioProvider } from "@/components/customer/UpdateCustomerBioProvider/__stories__";
-import { withUpdateCustomerImageProvider } from "@/components/customer/UpdateCustomerImageProvider/__stories__";
-import { withUpdateCustomerEmailProvider } from "@/components/customer/UpdateCustomerEmailProvider/__stories__";
-import { withClearCustomerImageUrlProvider } from "@/components/customer/ClearCustomerImageUrlProvider/__stories__";
-import { withUpdateCustomerCompanyProvider } from "@/components/customer/UpdateCustomerCompanyProvider/__stories__";
-import { withUpdateCustomerFullNameProvider } from "@/components/customer/UpdateCustomerFullNameProvider/__stories__";
-import { withUpdateCustomerImageFileProvider } from "@/components/customer/UpdateCustomerImageFileContext/__stories__";
-import { withUpdateCustomerPublicLinkProvider } from "@/components/customer/UpdateCustomerPublicLinkProvider/__stories__";
-import { withUpdateCustomerPhoneNumberProvider } from "@/components/customer/UpdateCustomerPhoneNumberProvider/__stories__";
+import { CustomerDetailAlt } from "@/dashboard/customer/CustomerDetailAlt";
+import { CustomerDetailActions } from "@/dashboard/customer/CustomerDetailActions";
+import { withTaskSearchModal } from "@/dashboard/tasks/TaskSearchModal/__stories__";
+import { CustomerDetailHeaderInteractive } from "@/dashboard/customer/CustomerDetailHeader";
+import { withDeleteCustomerProvider } from "@/dashboard/customer/DeleteCustomerProvider/__stories__";
+import { withUpdateCustomerBioProvider } from "@/dashboard/customer/UpdateCustomerBioProvider/__stories__";
+import { withUpdateCustomerImageProvider } from "@/dashboard/customer/UpdateCustomerImageProvider/__stories__";
+import { withUpdateCustomerEmailProvider } from "@/dashboard/customer/UpdateCustomerEmailProvider/__stories__";
+import { withClearCustomerImageUrlProvider } from "@/dashboard/customer/ClearCustomerImageUrlProvider/__stories__";
+import { withUpdateCustomerCompanyProvider } from "@/dashboard/customer/UpdateCustomerCompanyProvider/__stories__";
+import { withUpdateCustomerFullNameProvider } from "@/dashboard/customer/UpdateCustomerFullNameProvider/__stories__";
+import { withUpdateCustomerImageFileProvider } from "@/dashboard/customer/UpdateCustomerImageFileContext/__stories__";
+import { withUpdateCustomerPublicLinkProvider } from "@/dashboard/customer/UpdateCustomerPublicLinkProvider/__stories__";
+import { withUpdateCustomerPhoneNumberProvider } from "@/dashboard/customer/UpdateCustomerPhoneNumberProvider/__stories__";
 
 const meta = {
   title: "pages/CustomerDetailPage",

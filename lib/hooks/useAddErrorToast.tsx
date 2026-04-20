@@ -1,6 +1,6 @@
 import { CircleX } from "lucide-react";
 import { useCallback, useContext } from "react";
-import { ToastContext } from "@/components/ui/Toast";
+import { ToastContext } from "@/ui/Toast";
 
 export function useAddErrorToast() {
   const toastQueue = useContext(ToastContext);

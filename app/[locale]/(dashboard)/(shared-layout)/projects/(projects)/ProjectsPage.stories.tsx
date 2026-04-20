@@ -5,14 +5,14 @@ import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withProjectSearchModal } from "@/components/projects/ProjectSearchModal/__stories__";
-import { withCreateProjectProvider } from "@/components/projects/CreateProjectProvider/__stories__";
-import { withProjectFiltersProvider } from "@/components/projects/ProjectFiltersContext/__stories__";
-import { withDeleteProjectsProvider } from "@/components/projects/DeleteProjectsProvider/__stories__";
-import { withSelectedProjectsProvider } from "@/components/projects/SelectedProjectsContext/__stories__";
-import { ProjectsContainerPresentationExample } from "@/components/projects/ProjectsContainer/__stories__";
-import { withUpdateProjectStatusesProvider } from "@/components/projects/UpdateProjectStatusesProvider/__stories__";
-import { withCreateProjectCategoryProvider } from "@/components/projectCategory/CreateProjectCategoryProvider/__stories__";
+import { withProjectSearchModal } from "@/dashboard/projects/ProjectSearchModal/__stories__";
+import { withCreateProjectProvider } from "@/dashboard/projects/CreateProjectProvider/__stories__";
+import { withProjectFiltersProvider } from "@/dashboard/projects/ProjectFiltersContext/__stories__";
+import { withDeleteProjectsProvider } from "@/dashboard/projects/DeleteProjectsProvider/__stories__";
+import { withSelectedProjectsProvider } from "@/dashboard/projects/SelectedProjectsContext/__stories__";
+import { ProjectsContainerPresentationExample } from "@/dashboard/projects/ProjectsContainer/__stories__";
+import { withUpdateProjectStatusesProvider } from "@/dashboard/projects/UpdateProjectStatusesProvider/__stories__";
+import { withCreateProjectCategoryProvider } from "@/dashboard/projectCategory/CreateProjectCategoryProvider/__stories__";
 
 const meta = {
   title: "pages/ProjectsPage",

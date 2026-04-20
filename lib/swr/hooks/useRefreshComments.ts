@@ -1,6 +1,6 @@
 import { useSWRConfig } from "swr";
 import { useCallback } from "react";
-import { useCommentFormContext } from "@/components/comments/CommentFormContext";
+import { useCommentFormContext } from "@/dashboard/comments/CommentFormContext";
 
 /**
  * Refresh comments

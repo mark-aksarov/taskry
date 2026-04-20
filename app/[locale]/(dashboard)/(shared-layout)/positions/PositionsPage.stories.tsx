@@ -5,11 +5,11 @@ import { PositionsPage } from "./PositionsPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskSearchModal } from "@/components/tasks/TaskSearchModal/__stories__";
-import { PositionGridExample } from "@/components/position/PositionGrid/__stories__";
-import { withSelectedItemsProvider } from "@/components/common/SelectedItemsContext/__stories__";
-import { withCreatePositionProvider } from "@/components/position/CreatePositionProvider/__stories__";
-import { withDeletePositionsProvider } from "@/components/position/DeletePositionsProvider/__stories__";
+import { withTaskSearchModal } from "@/dashboard/tasks/TaskSearchModal/__stories__";
+import { PositionGridExample } from "@/dashboard/position/PositionGrid/__stories__";
+import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
+import { withCreatePositionProvider } from "@/dashboard/position/CreatePositionProvider/__stories__";
+import { withDeletePositionsProvider } from "@/dashboard/position/DeletePositionsProvider/__stories__";
 
 const meta = {
   title: "pages/PositionsPage",

@@ -2,7 +2,7 @@ import { DashboardLayout } from "./DashboardLayout";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { CurrentUserProvider } from "@/components/common/CurrentUserContext";
+import { CurrentUserProvider } from "@/dashboard/common/CurrentUserContext";
 
 export default async function AppDashboardLayout({
   children,

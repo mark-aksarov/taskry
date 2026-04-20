@@ -1,0 +1,1512 @@
+{
+  "comments": {
+    "CommentItemActionMenuTrigger": {
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "DeleteCommentModal": {
+      "heading": "Delete comment",
+      "text": "Are you sure you want to delete this comment? This action cannot be undone.",
+      "cancelButton": "Cancel",
+      "confirmButton": "Delete",
+      "successMessage": "Comment deleted successfully"
+    },
+    "CommentItem": {
+      "unknownUser": "Unknown user"
+    },
+    "CommentsEmptySection": {
+      "heading": "No comments?",
+      "description": "No comments yet. Add the first one to share updates, ask a question, or start a discussion about this task."
+    },
+    "CommentTextField": {
+      "placeholder": "Type a comment...",
+      "ariaLabel": "Type a comment"
+    },
+    "CommentTextFieldSendButton": {
+      "ariaLabel": "Send message"
+    },
+    "ReplyButton": "Reply",
+    "CommentCancelEditingButton": {
+      "label": "Cancel editing"
+    }
+  },
+  "common": {
+    "LangMenuTrigger": {
+      "dialogHeading": "Language",
+      "label": "English",
+      "items": {
+        "english": "English",
+        "russian": "Russian"
+      }
+    },
+    "GridItemPhoneNumber": {
+      "noPhoneNumber": "No phone number"
+    },
+    "GridItemPublicLink": {
+      "noPublicLink": "No public link"
+    },
+    "ItemBaseDeadline": {
+      "deadlineOn": "Deadline on {date}"
+    },
+    "PersonImageMenuTrigger": {
+      "heading": "Profile image",
+      "items": {
+        "delete": "Delete",
+        "update": "Update"
+      }
+    },
+    "UploadPersonImageDialog": {
+      "heading": "Upload image",
+      "text": "Upload the profile image. Allowed file types: JPG, PNG, WEBP. Maximum file size is 200 KB. Minimum image size is 300x300 pixels."
+    },
+    "UpdatePersonImageDialog": {
+      "heading": "Change image",
+      "save": "Save",
+      "error": "An error occurred while uploading the image"
+    },
+    "PersonImageFileTrigger": {
+      "label": "Upload",
+      "error": {
+        "fileSize": "The file is too large. Maximum size is 200 KB.",
+        "imageSize": "The image is too small. Minimum size is 300x300 pixels.",
+        "aspectRatio": "The image should not be too wide or too tall.",
+        "unknown": "Unknown error loading image"
+      }
+    },
+    "GuestModeModal": {
+      "heading": "Guest mode",
+      "text": "<strong>Action is restricted in guest mode.</strong> An account is required to access all features. Please sign in or create a new account to remove guest mode restrictions.",
+      "cancelButton": "Cancel"
+    },
+    "SortingMenuTrigger": {
+      "dialogHeading": "Sorting"
+    },
+    "ManageMenuTrigger": {
+      "dialogHeading": "Manage"
+    },
+    "SortingButtonMobile": {
+      "ariaLabel": "Sort"
+    },
+    "SortingButtonLarge": {
+      "label": "Sort"
+    },
+    "FilterButtonLarge": {
+      "label": "Filters"
+    },
+    "FiltersFormSubmitButton": {
+      "label": "Apply filters"
+    },
+    "FiltersResetButton": {
+      "label": "Reset filters"
+    },
+    "FiltersFormResetButton": {
+      "label": "Reset"
+    },
+    "ActionsButton": {
+      "label": "Actions"
+    },
+    "ViewModeToggleButtonGroup": {
+      "list": "List",
+      "cards": "Cards"
+    },
+    "ItemBaseActionMenuTrigger": {
+      "ariaLabel": "Actions"
+    },
+    "ItemBaseActionMenuDialogHeader": {
+      "heading": "Actions"
+    },
+    "Pagination": {
+      "previousPage": "Previous page",
+      "nextPage": "Next page",
+      "page": "page {pageNumber}"
+    },
+    "FilterCheckboxGroupExpandButton": {
+      "collapse": "Collapse",
+      "expand": "Expand",
+      "more": "More"
+    },
+    "FilterButtonMobile": {
+      "ariaLabel": "Open filters"
+    },
+    "ManageButtonMobile": {
+      "ariaLabel": "Manage"
+    },
+    "ManageButtonLarge": {
+      "label": "Manage"
+    },
+    "BackButton": {
+      "label": "Back"
+    },
+    "ProgressDetailInfoAlt": {
+      "progress": "Progress"
+    },
+    "DeadlineBadge": {
+      "noDeadline": "No deadline"
+    }
+  },
+  "company": {
+    "CompanyCheckboxGroup": {
+      "label": "Company"
+    },
+    "CompanySelect": {
+      "label": "Company",
+      "noCompany": "No company"
+    },
+    "CompaniesEmptySectionCreateButton": {
+      "label": "New company"
+    },
+    "CreateCompanyForm": {
+      "submitButtonLabel": "Create company"
+    },
+    "CreateCompanyModal": {
+      "title": "New company"
+    },
+    "CompanyNameTextField": {
+      "label": "Name",
+      "placeholder": "Enter name",
+      "validation": {
+        "required": "Name is required"
+      }
+    },
+    "CompanyListItem": {
+      "name": "Name"
+    },
+    "CompanyActionsMenuTrigger": {
+      "dialogHeading": "Actions",
+      "delete": "Delete"
+    },
+    "CreateCompanyModalTrigger": {
+      "label": "Create new"
+    },
+    "CompanyListItemActionMenuTrigger": {
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "UpdateCompanyForm": {
+      "submitButtonLabel": "Update company",
+      "successMessage": "Company updated successfully"
+    },
+    "UpdateCompanyModal": {
+      "title": "Edit company"
+    },
+    "DeleteCompaniesModal": {
+      "heading": "Delete companies",
+      "text": "Are you sure you want to delete <strong>{count} companies</strong>? All contents will be permanently removed.",
+      "cancelButton": "Cancel",
+      "deleteButton": "Delete",
+      "successMessage": "Companies deleted successfully"
+    },
+    "DeleteCompanyModal": {
+      "heading": "Delete company",
+      "text": "Are you sure you want to delete company <strong>«{name}»</strong>? All contents will be permanently removed.",
+      "cancelButton": "Cancel",
+      "deleteButton": "Delete",
+      "successMessage": "Company deleted successfully"
+    }
+  },
+  "customers": {
+    "CustomerCheckboxGroup": {
+      "label": "Customer"
+    },
+    "CustomerCompanyFiltersModal": {
+      "heading": "Company"
+    },
+    "CustomerCompanyFiltersModalTrigger": {
+      "label": "Company"
+    },
+    "CustomerSearchModal": {
+      "heading": "Search customers"
+    },
+    "CustomerSelect": {
+      "label": "Customer",
+      "noCustomer": "No customer"
+    },
+    "CustomersEmptySectionCreateButton": {
+      "label": "New customer"
+    },
+    "CustomerContainer": {
+      "notFound": "Сustomer not found. It may have been deleted by another user."
+    },
+    "UpdateCustomerForm": {
+      "submitButtonLabel": "Update customer",
+      "successMessage": "Customer updated successfully"
+    },
+    "CreateCustomerForm": {
+      "submitButtonLabel": "Create customer",
+      "successMessage": "Customer created successfully"
+    },
+    "TotalCustomersCard": {
+      "text": "Total customers"
+    },
+    "CustomerDetailActions": {
+      "delete": "Delete customer",
+      "edit": "Edit customer",
+      "deleteImage": "Delete image",
+      "updateImage": "Update image"
+    },
+    "CustomerSortingMenuTrigger": {
+      "byFullName": "By full name",
+      "byCompany": "By company"
+    },
+    "CustomerDetail": {
+      "bio": "Bio",
+      "fullName": "Full name",
+      "email": "Email address",
+      "phoneNumber": "Phone number",
+      "publicLink": "Public link",
+      "company": "Company",
+      "noBio": "This customer hasn’t written a bio yet.",
+      "noFullName": "No name provided",
+      "noEmail": "No email provided",
+      "noPhoneNumber": "No phone number provided",
+      "noPublicLink": "No public link",
+      "noCompany": "Company not specified"
+    },
+    "CreateCustomerModal": {
+      "title": "New customer"
+    },
+    "UpdateCustomerModal": {
+      "title": "Edit customer"
+    },
+    "CustomerDetailCard": {
+      "title": "Customer details"
+    },
+    "CustomerFullNameTextField": {
+      "label": "Full name",
+      "placeholder": "Enter full name",
+      "validation": {
+        "required": "Full name is required"
+      }
+    },
+    "CustomerBioTextField": {
+      "label": "Bio",
+      "placeholder": "Enter bio"
+    },
+    "CustomerEmailTextField": {
+      "label": "Email",
+      "placeholder": "Enter email",
+      "validation": {
+        "required": "Email is required",
+        "format": "Enter a valid email address, for example user@example.com"
+      }
+    },
+    "CustomerPhoneNumberTextField": {
+      "label": "Phone number",
+      "placeholder": "Enter phone number"
+    },
+    "CustomerPublicLinkTextField": {
+      "label": "Public link",
+      "placeholder": "Enter a public link",
+      "validation": {
+        "format": "Please enter a valid URL, for example https://example.com"
+      }
+    },
+    "CustomerDetailSideSheet": {
+      "dialogHeading": "Customer details",
+      "openInFullPage": "Open customer"
+    },
+    "CustomerItemActionMenuTrigger": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "details": "Open details"
+    },
+    "DeleteCustomerModal": {
+      "heading": "Delete customer",
+      "text": "Are you sure you want to delete customer <strong>«{name}»</strong>? All contents will be permanently removed.",
+      "deleteButton": "Delete",
+      "cancelButton": "Cancel",
+      "successMessage": "Customer deleted successfully"
+    },
+    "DeleteCustomerImageModal": {
+      "heading": "Delete image",
+      "text": "Are you sure you want to delete image of customer <strong>«{name}»</strong>?",
+      "deleteButton": "Delete",
+      "cancelButton": "Cancel",
+      "successMessage": "Image deleted successfully"
+    },
+    "DeleteCustomersModal": {
+      "heading": "Delete customers",
+      "text": "Are you sure you want to delete <strong>{count} customers</strong>? All contents will be permanently removed.",
+      "deleteButton": "Delete",
+      "cancelButton": "Cancel",
+      "successMessage": "Customers deleted successfully"
+    },
+    "CustomerGridItem": {
+      "noCompany": "No company"
+    },
+    "CustomerListItem": {
+      "checkboxAriaLabel": "customer checkbox",
+      "phoneNumber": "Phone number",
+      "publicLink": "Public link",
+      "noPhoneNumber": "No phone number",
+      "noPublicLink": "No public link",
+      "noCompany": "No company",
+      "company": "Company"
+    },
+    "CustomerResultsCount": {
+      "customersFound": "{count, plural, one {# customer found} other {# customers found}}"
+    },
+    "CustomerFiltersModal": {
+      "heading": "Customer filters"
+    },
+    "CustomerActionsMenuTrigger": {
+      "dialogHeading": "Actions",
+      "delete": "Delete"
+    },
+    "CreateCustomerMenuTrigger": {
+      "dialogHeading": "Create new",
+      "label": "Create new",
+      "items": {
+        "customer": "Customer",
+        "company": "Company"
+      }
+    },
+    "CustomersFilteredEmptySection": {
+      "heading": "No customers found",
+      "description": "No customers match the selected filters. Try changing or resetting the filters."
+    },
+    "CustomerManageMenuTrigger": {
+      "companies": "Companies"
+    },
+    "CustomerImageMenuTrigger": {
+      "label": "Profile image menu"
+    },
+    "PersonDetailHeaderImage": {
+      "imageAlt": "Profile image"
+    },
+    "UpdateCustomerBioModal": {
+      "title": "Edit customer"
+    },
+    "UpdateCustomerFullNameModal": {
+      "title": "Edit full name"
+    },
+    "UpdateCustomerPhoneNumberModal": {
+      "title": "Edit phone number"
+    },
+    "UpdateCustomerFullNameForm": {
+      "submitButtonLabel": "Update full name"
+    },
+    "UpdateCustomerPhoneNumberForm": {
+      "submitButtonLabel": "Update phone number"
+    },
+    "UpdateCustomerBioForm": {
+      "submitButtonLabel": "Update bio"
+    },
+    "UpdateCustomerPublicLinkForm": {
+      "submitButtonLabel": "Update public link"
+    },
+    "UpdateCustomerPublicLinkModal": {
+      "title": "Edit public link"
+    },
+    "UpdateCustomerEmailForm": {
+      "submitButtonLabel": "Update email"
+    },
+    "UpdateCustomerEmailModal": {
+      "title": "Edit email"
+    },
+    "UpdateCustomerCompanyForm": {
+      "submitButtonLabel": "Update company"
+    },
+    "UpdateCustomerCompanyModal": {
+      "title": "Edit company"
+    }
+  },
+  "layout": {
+    "ThemeToggleButton": {
+      "darkLabel": "Dark mode",
+      "lightLabel": "Light mode"
+    },
+    "AppNavigation": {
+      "dashboard": "Dashboard",
+      "projects": "Projects",
+      "tasks": "Tasks",
+      "team": "Team",
+      "customers": "Customers",
+      "profile": "Profile"
+    },
+    "AppNavigationLogoutButton": {
+      "logout": "Logout"
+    },
+    "AppBottomSheetTrigger": {
+      "triggerAriaLabel": "language",
+      "dialogAriaLabel": "App navigation"
+    },
+    "AppSidebarSheetTrigger": {
+      "triggerAriaLabel": "menu"
+    }
+  },
+  "positions": {
+    "PositionSelect": {
+      "label": "Position",
+      "noPosition": "No position"
+    },
+    "PositionsEmptySectionCreateButton": {
+      "label": "New position"
+    },
+    "CreatePositionForm": {
+      "submitButtonLabel": "Create position",
+      "successMessage": "Position created successfully"
+    },
+    "CreatePositionModal": {
+      "title": "New position"
+    },
+    "PositionNameTextField": {
+      "label": "Name",
+      "placeholder": "Enter name",
+      "validation": {
+        "required": "Name is required"
+      }
+    },
+    "PositionListItem": {
+      "name": "Name"
+    },
+    "PositionActionsMenuTrigger": {
+      "dialogHeading": "Actions",
+      "delete": "Delete"
+    },
+    "CreatePositionModalTrigger": {
+      "label": "Create new"
+    },
+    "PositionListItemActionMenuTrigger": {
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "UpdatePositionForm": {
+      "submitButtonLabel": "Update position",
+      "successMessage": "Position updated successfully"
+    },
+    "UpdatePositionModal": {
+      "title": "Edit position"
+    },
+    "DeletePositionsModal": {
+      "heading": "Delete positions",
+      "text": "Are you sure you want to delete <strong>{count} positions</strong>? All contents will be permanently removed.",
+      "cancelButton": "Cancel",
+      "deleteButton": "Delete",
+      "successMessage": "Positions deleted successfully"
+    },
+    "DeletePositionModal": {
+      "heading": "Delete position",
+      "text": "Are you sure you want to delete position <strong>«{name}»</strong>? All contents will be permanently removed.",
+      "cancelButton": "Cancel",
+      "deleteButton": "Delete",
+      "successMessage": "Position deleted successfully"
+    }
+  },
+  "projectCategories": {
+    "ProjectCategoryCheckboxGroup": {
+      "label": "Category"
+    },
+    "ProjectCategorySelect": {
+      "label": "Category",
+      "noProjectCategory": "No project category"
+    },
+    "ProjectCategoriesEmptySectionCreateButton": {
+      "label": "New project category"
+    },
+    "CreateProjectCategoryForm": {
+      "submitButtonLabel": "Create category",
+      "successMessage": "Project category created successfully."
+    },
+    "CreateProjectCategoryModal": {
+      "title": "New project category"
+    },
+    "ProjectCategoryNameTextField": {
+      "label": "Name",
+      "placeholder": "Enter name",
+      "validation": {
+        "required": "Name is required"
+      }
+    },
+    "ProjectCategoryListItem": {
+      "name": "Name"
+    },
+    "ProjectCategoryListItemActionMenuTrigger": {
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "CreateProjectCategoryModalTrigger": {
+      "label": "Create new"
+    },
+    "ProjectCategoryActionsMenuTrigger": {
+      "dialogHeading": "Actions",
+      "delete": "Delete"
+    },
+    "UpdateProjectCategoryForm": {
+      "submitButtonLabel": "Update project category",
+      "successMessage": "Project category updated successfully"
+    },
+    "UpdateProjectCategoryModal": {
+      "title": "Edit project category"
+    },
+    "DeleteProjectCategoryModal": {
+      "heading": "Delete project category",
+      "text": "Are you sure you want to delete project category <strong>«{name}»</strong>? All contents will be permanently removed.",
+      "cancelButton": "Cancel",
+      "deleteButton": "Delete",
+      "successMessage": "Project category deleted successfully"
+    },
+    "DeleteProjectCategoriesModal": {
+      "heading": "Delete project categories",
+      "text": "Are you sure you want to delete <strong>{count} project categories</strong>? All contents will be permanently removed.",
+      "cancelButton": "Cancel",
+      "deleteButton": "Delete",
+      "successMessage": "Project categories deleted successfully"
+    }
+  },
+  "projects": {
+    "NoActiveProjectsSwitch": {
+      "text": "Has no active projects"
+    },
+    "ActiveProjectsSwitch": {
+      "text": "Has active projects"
+    },
+    "OverdueProjectsSwitch": {
+      "text": "Has overdue projects"
+    },
+    "ProjectCheckboxGroup": {
+      "label": "Project"
+    },
+    "ProjectSearchModal": {
+      "heading": "Search projects"
+    },
+    "ProjectSelect": {
+      "label": "Project",
+      "noProject": "No project"
+    },
+    "ProjectsEmptySectionCreateButton": {
+      "label": "New project"
+    },
+    "ProjectContainer": {
+      "notFound": "Project not found. It may have been deleted by another user."
+    },
+    "ProjectsFilteredEmptySection": {
+      "heading": "No projects found",
+      "description": "No projects match the selected filters. Try changing or resetting the filters."
+    },
+    "UpdateProjectForm": {
+      "submitButtonLabel": "Update project",
+      "successMessage": "Project updated successfully."
+    },
+    "CreateProjectForm": {
+      "submitButtonLabel": "Create project",
+      "successMessage": "Project created successfully."
+    },
+    "ProjectDetailCard": {
+      "title": "Project details"
+    },
+    "ProjectDetailActions": {
+      "delete": "Delete project",
+      "edit": "Edit project",
+      "comments": "Comments"
+    },
+    "TotalProjectsCard": {
+      "text": "Total projects"
+    },
+    "ProjectSortingMenuTrigger": {
+      "byTitle": "By title",
+      "byDeadline": "By deadline",
+      "byStatus": "By status",
+      "byCreatedAt": "By creation date"
+    },
+    "CreateProjectModal": {
+      "title": "New project"
+    },
+    "UpdateProjectModal": {
+      "title": "Edit project"
+    },
+    "ProjectFiltersModal": {
+      "title": "Project filters"
+    },
+    "ProjectActionsMenuTrigger": {
+      "dialogHeading": "Actions",
+      "delete": "Delete",
+      "pending": "Mark as pending",
+      "active": "Mark as active",
+      "completed": "Mark as completed"
+    },
+    "ProjectManageMenuTrigger": {
+      "categories": "Categories"
+    },
+    "ProjectTitleTextField": {
+      "label": "Title",
+      "placeholder": "Enter title",
+      "validation": {
+        "required": "Title is required"
+      }
+    },
+    "ProjectDescriptionTextField": {
+      "label": "Description",
+      "placeholder": "Enter description"
+    },
+    "ProjectDeadlineDatePicker": {
+      "label": "Deadline",
+      "validation": {
+        "required": "Deadline is required"
+      }
+    },
+    "ProjectStatusSelect": {
+      "label": "Status",
+      "placeholder": "Select status",
+      "validation": {
+        "required": "Status is required"
+      }
+    },
+    "ProjectFiltersFormDeadlineFromDatePicker": {
+      "label": "Deadline from"
+    },
+    "ProjectFiltersFormDeadlineToDatePicker": {
+      "label": "Deadline to"
+    },
+    "ProjectStatusCheckboxGroup": {
+      "label": "Status"
+    },
+    "ProjectCreatorCheckboxGroup": {
+      "label": "Creator"
+    },
+    "CreateProjectMenuTrigger": {
+      "dialogHeading": "Create new",
+      "label": "Create new",
+      "items": {
+        "project": "Project",
+        "category": "Category"
+      }
+    },
+    "ProjectGridItemProgress": {
+      "progressAriaLabel": "project progress"
+    },
+    "ProjectListItem": {
+      "noDeadline": "No deadline",
+      "deadlineOn": "Deadline on {date}",
+      "noCreator": "No creator",
+      "creator": "Creator",
+      "noCustomer": "No customer",
+      "customer": "Customer",
+      "category": "Category",
+      "noCategory": "No category",
+      "company": "Company",
+      "noCompany": "No company"
+    },
+    "ProjectItemActionMenuTrigger": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "markPending": "Mark as pending",
+      "markCompleted": "Mark as completed",
+      "markActive": "Mark as active",
+      "details": "Open details"
+    },
+    "DeleteProjectModal": {
+      "heading": "Delete project",
+      "text": "Are you sure you want to delete <strong>«{name}»</strong>? All contents will be permanently removed, and all related tasks will also be deleted.",
+      "deleteButton": "Delete",
+      "cancelButton": "Cancel",
+      "successMessage": "Project deleted successfully"
+    },
+    "DeleteProjectsModal": {
+      "heading": "Delete projects",
+      "text": "Are you sure you want to delete <strong>{count} projects</strong>? All contents will be permanently removed, and all related tasks will also be deleted.",
+      "deleteButton": "Delete",
+      "cancelButton": "Cancel",
+      "successMessage": "Projects deleted successfully"
+    },
+    "ProjectStatus": {
+      "pending": "Pending",
+      "active": "Active",
+      "completed": "Completed",
+      "overdue": "Overdue"
+    },
+    "ProjectCommentsModal": {
+      "title": "Project comments"
+    },
+    "ProjectDetail": {
+      "creator": "Creator",
+      "noCreator": "No creator",
+      "deadline": "Deadline",
+      "noDeadline": "No deadline",
+      "description": "Description",
+      "noDescription": "No description",
+      "customer": "Customer",
+      "noCustomer": "No customer",
+      "category": "Category",
+      "noCategory": "No category",
+      "status": "Status",
+      "title": "Title",
+      "tasksStats": "Tasks stats"
+    },
+    "ProjectDetailHeader": {
+      "noCategory": "No category"
+    },
+    "ProjectStatusFiltersModal": {
+      "heading": "Status"
+    },
+    "ProjectStatusFiltersModalTrigger": {
+      "buttonLabel": "Status"
+    },
+    "ProjectCategoryFiltersModal": {
+      "heading": "Category"
+    },
+    "ProjectCategoryFiltersModalTrigger": {
+      "buttonLabel": "Category"
+    },
+    "ProjectCreatorFiltersModal": {
+      "heading": "Creator"
+    },
+    "ProjectCreatorFiltersModalTrigger": {
+      "buttonLabel": "Creator"
+    },
+    "ProjectCustomerFiltersModal": {
+      "heading": "Customer"
+    },
+    "ProjectCustomerFiltersModalTrigger": {
+      "buttonLabel": "Customer"
+    },
+    "ProjectResultsCount": {
+      "projectsFound": "{count, plural, one {# project found} other {# projects found}}"
+    },
+    "ProjectDetailStatusMenuTrigger": {
+      "dialogHeading": "Project status",
+      "items": {
+        "pending": "Pending",
+        "active": "Active",
+        "completed": "Completed"
+      }
+    },
+    "ProjectDetailSideSheet": {
+      "dialogHeading": "Project details",
+      "openInFullPage": "Open project"
+    },
+    "UpdateProjectDescriptionForm": {
+      "submitButtonLabel": "Update description"
+    },
+    "UpdateProjectDescriptionModal": {
+      "title": "Edit description"
+    },
+    "UpdateProjectTitleForm": {
+      "submitButtonLabel": "Update title"
+    },
+    "UpdateProjectTitleModal": {
+      "title": "Edit title"
+    },
+    "UpdateProjectStatusForm": {
+      "submitButtonLabel": "Update status"
+    },
+    "UpdateProjectStatusModal": {
+      "title": "Edit status"
+    },
+    "UpdateProjectCategoryRelForm": {
+      "submitButtonLabel": "Update category"
+    },
+    "UpdateProjectCategoryRelModal": {
+      "title": "Edit category"
+    },
+    "UpdateProjectDeadlineForm": {
+      "submitButtonLabel": "Update deadline"
+    },
+    "UpdateProjectDeadlineModal": {
+      "title": "Edit deadline"
+    },
+    "UpdateProjectCustomerForm": {
+      "submitButtonLabel": "Update customer"
+    },
+    "UpdateProjectCustomerModal": {
+      "title": "Edit customer"
+    },
+    "ProjectActiveTasksDetailStat": {
+      "text": "Active tasks"
+    },
+    "ProjectPendingTasksDetailStat": {
+      "text": "Pending tasks"
+    },
+    "ProjectCompletedTasksDetailStat": {
+      "text": "Completed tasks"
+    },
+    "DeleteProjectModalTrigger": {
+      "label": "Delete project"
+    }
+  },
+  "search": {
+    "SearchListItem": {
+      "deadlineOn": "Deadline on {date}"
+    },
+    "SearchToggleButtonGroup": {
+      "users": "Users",
+      "tasks": "Tasks",
+      "projects": "Projects",
+      "customers": "Customers"
+    },
+    "SearchModalTrigger": {
+      "placeholder": "Search",
+      "clearButtonLabel": "Clear search"
+    },
+    "SearchEmptySection": {
+      "heading": "No results found",
+      "description": "We couldn't find what you’re looking for. Try a different keyword or check for typos."
+    },
+    "SearchModal": {
+      "dialogHeading": "Search",
+      "closeButtonLabel": "close"
+    },
+    "SearchField": {
+      "ariaLabel": "Search",
+      "placeholder": "Search"
+    },
+    "SearchPaginationStatus": {
+      "tasks": "Tasks",
+      "projects": "Projects",
+      "of": "of"
+    }
+  },
+  "subtasks": {
+    "UpdateSubtaskForm": {
+      "submitButtonLabel": "Edit subtask",
+      "successMessage": "Subtask updated successfully"
+    },
+    "CreateSubtaskForm": {
+      "submitButtonLabel": "Add subtask",
+      "successMessage": "Subtask created successfully"
+    },
+    "DeleteSubtaskModal": {
+      "heading": "Delete subtask",
+      "text": "Are you sure you want to delete subtask <strong>«{text}»</strong>?",
+      "deleteButton": "Delete",
+      "cancelButton": "Cancel",
+      "successMessage": "Subtask deleted successfully"
+    },
+    "SubtaskActionMenuTrigger": {
+      "edit": "Edit",
+      "done": "Mark as done",
+      "undone": "Mark as undone",
+      "delete": "Delete",
+      "toggleSuccess": "Subtask updated successfully"
+    },
+    "SubtasksCheckboxGroup": {
+      "label": "Subtasks"
+    },
+    "SubtaskTextField": {
+      "label": "Text",
+      "placeholder": "Typing a subtask text...",
+      "validation": {
+        "required": "Subtask text is required",
+        "tooLong": "Subtask text is too long"
+      }
+    },
+    "SubtaskFormDialogHeader": {
+      "heading": "New subtask"
+    },
+    "CreateSubtaskModal": {
+      "heading": "New subtask"
+    },
+    "UpdateSubtaskModal": {
+      "heading": "Edit subtask"
+    },
+    "CreateSubtaskDialogAddButton": {
+      "label": "Add subtask"
+    },
+    "CreateSubtasksButton": {
+      "label": "New subtask"
+    },
+    "SubtasksCard": {
+      "title": "Subtasks"
+    }
+  },
+  "taskCategories": {
+    "TaskCategoryCheckboxGroup": {
+      "label": "Category"
+    },
+    "TaskCategorySelect": {
+      "label": "Category",
+      "noTaskCategory": "No task category"
+    },
+    "TaskCategoriesEmptySectionCreateButton": {
+      "label": "New task category"
+    },
+    "CreateTaskCategoryForm": {
+      "submitButtonLabel": "Create category",
+      "successMessage": "Task category created successfully."
+    },
+    "CreateTaskCategoryModal": {
+      "title": "New task category"
+    },
+    "TaskCategoryNameTextField": {
+      "label": "Name",
+      "placeholder": "Enter name",
+      "validation": {
+        "required": "Name is required"
+      }
+    },
+    "TaskCategoryListItem": {
+      "name": "Name"
+    },
+    "TaskCategoryActionsMenuTrigger": {
+      "dialogHeading": "Actions",
+      "delete": "Delete"
+    },
+    "CreateTaskCategoryModalTrigger": {
+      "label": "Create new"
+    },
+    "TaskCategoryListItemActionMenuTrigger": {
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "UpdateTaskCategoryForm": {
+      "submitButtonLabel": "Update task category",
+      "successMessage": "Task category updated successfully"
+    },
+    "UpdateTaskCategoryModal": {
+      "title": "Edit task category"
+    },
+    "DeleteTaskCategoriesModal": {
+      "heading": "Delete task categories",
+      "text": "Are you sure you want to delete <strong>{count} task categories</strong>? All contents will be permanently removed.",
+      "deleteButton": "Delete",
+      "cancelButton": "Cancel",
+      "successMessage": "Task categories deleted successfully"
+    },
+    "DeleteTaskCategoryModal": {
+      "heading": "Delete task category",
+      "text": "Are you sure you want to delete task category <strong>«{name}»</strong>? All contents will be permanently removed.",
+      "cancelButton": "Cancel",
+      "deleteButton": "Delete",
+      "successMessage": "Task category deleted successfully"
+    }
+  },
+  "tasks": {
+    "NoActiveTasksSwitch": {
+      "text": "Has no active tasks"
+    },
+    "ActiveTasksSwitch": {
+      "text": "Has active tasks"
+    },
+    "OverdueTasksSwitch": {
+      "text": "Has overdue tasks"
+    },
+    "TaskSearchModal": {
+      "heading": "Search tasks"
+    },
+    "TaskContainer": {
+      "notFound": "Task not found. It may have been deleted by another user."
+    },
+    "UpdateTaskForm": {
+      "submitButtonLabel": "Update task",
+      "successMessage": "Task updated successfully."
+    },
+    "CreateTaskForm": {
+      "submitButtonLabel": "Create task",
+      "successMessage": "Task created successfully."
+    },
+    "TaskDetailCard": {
+      "title": "Task details"
+    },
+    "TaskDetailActions": {
+      "delete": "Delete task",
+      "edit": "Edit task",
+      "comments": "Comments"
+    },
+    "AssignedTasksSectionHeading": {
+      "text": "Assigned tasks"
+    },
+    "TasksEmptySection": {
+      "heading": "No tasks",
+      "description": "Create a new task to keep track of your work",
+      "button": "New task"
+    },
+    "TotalTasksCard": {
+      "text": "Total tasks"
+    },
+    "TaskGridItemProgress": {
+      "ariaLabel": "task progress"
+    },
+    "TaskListItem": {
+      "assignee": "Assignee",
+      "noAssignee": "No assignee",
+      "category": "Category",
+      "noCategory": "No category",
+      "project": "Project",
+      "noProject": "No project"
+    },
+    "TaskSortingMenuTrigger": {
+      "byTitle": "By title",
+      "byDeadline": "By deadline",
+      "byStatus": "By status",
+      "byCreatedAt": "By creation date"
+    },
+    "TaskFiltersModal": {
+      "heading": "Task filters"
+    },
+    "TaskActionsMenuTrigger": {
+      "dialogHeading": "Actions",
+      "delete": "Delete",
+      "pending": "Mark as pending",
+      "active": "Mark as active",
+      "completed": "Mark as completed"
+    },
+    "TaskItemActionMenuTrigger": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "markPending": "Mark as pending",
+      "markCompleted": "Mark as completed",
+      "markActive": "Mark as active",
+      "details": "Open details"
+    },
+    "CreateTaskMenuTrigger": {
+      "label": "Create new",
+      "dialogHeading": "Create new",
+      "items": {
+        "task": "Task",
+        "category": "Category"
+      }
+    },
+    "DeleteTaskModal": {
+      "heading": "Delete task",
+      "text": "Are you sure you want to delete <strong>«{name}»</strong>? All contents will be permanently removed.",
+      "deleteButton": "Delete",
+      "cancelButton": "Cancel",
+      "successMessage": "Task deleted successfully"
+    },
+    "DeleteTasksModal": {
+      "heading": "Delete tasks",
+      "text": "Are you sure you want to delete <strong>{count} tasks</strong>? All contents will be permanently removed.",
+      "deleteButton": "Delete",
+      "cancelButton": "Cancel",
+      "successMessage": "Tasks deleted successfully"
+    },
+    "CreateTaskModal": {
+      "title": "New task"
+    },
+    "UpdateTaskModal": {
+      "title": "Edit task"
+    },
+    "TaskCommentsModal": {
+      "title": "Task comments"
+    },
+    "CreateTaskModalTrigger": {
+      "label": "New task"
+    },
+    "TaskDetailSideSheet": {
+      "dialogHeading": "Task details",
+      "openInFullPage": "Open task"
+    },
+    "OnlyMyTasksSwitch": {
+      "text": "Show only my tasks"
+    },
+    "DeadlineFromDatePicker": {
+      "label": "Deadline from"
+    },
+    "DeadlineToDatePicker": {
+      "label": "Deadline to"
+    },
+    "TaskStatusCheckboxGroup": {
+      "label": "Status"
+    },
+    "AssigneeCheckboxGroup": {
+      "label": "Assignee"
+    },
+    "TaskTitleTextField": {
+      "label": "Title",
+      "placeholder": "Enter title",
+      "validation": {
+        "required": "Title is required"
+      }
+    },
+    "TaskDescriptionTextField": {
+      "label": "Description",
+      "placeholder": "Enter description"
+    },
+    "TaskDeadlineDatePicker": {
+      "label": "Deadline",
+      "validation": {
+        "required": "Deadline is required"
+      }
+    },
+    "TaskStatusSelect": {
+      "label": "Status",
+      "placeholder": "Select status",
+      "validation": {
+        "required": "Status is required"
+      }
+    },
+    "TaskDetail": {
+      "deadline": "Deadline",
+      "description": "Description",
+      "noDescription": "No description",
+      "creator": "Creator",
+      "noCreator": "No creator",
+      "category": "Category",
+      "noCategory": "No category",
+      "project": "Project",
+      "noProject": "No project",
+      "assignee": "Assignee",
+      "noAssignee": "No assignee",
+      "status": "Status",
+      "subtasks": "Subtasks",
+      "title": "Title",
+      "progress": "Progress",
+      "noSubtasks": "No one subtask yet"
+    },
+    "TaskDetailHeader": {
+      "noCategory": "No category"
+    },
+    "TaskDetailStatusMenuTrigger": {
+      "dialogHeading": "Task Status",
+      "items": {
+        "pending": "Pending",
+        "active": "Active",
+        "completed": "Completed"
+      }
+    },
+    "TaskStatus": {
+      "pending": "Pending",
+      "active": "Active",
+      "completed": "Completed",
+      "overdue": "Overdue"
+    },
+    "TaskManageMenuTrigger": {
+      "categories": "Categories"
+    },
+    "TasksFilteredEmptySection": {
+      "heading": "No tasks found",
+      "description": "No tasks match the selected filters. Try changing or resetting the filters."
+    },
+    "TaskStatusFiltersModal": {
+      "heading": "Status"
+    },
+    "TaskStatusFiltersModalTrigger": {
+      "buttonLabel": "Status"
+    },
+    "TaskCategoryFiltersModalTrigger": {
+      "buttonLabel": "Category"
+    },
+    "TaskCategoryFiltersModal": {
+      "heading": "Category"
+    },
+    "TaskResultsCount": {
+      "tasksFound": "{count, plural, one {# task found} other {# tasks found}}"
+    },
+    "TaskProjectFiltersModalTrigger": {
+      "buttonLabel": "Project"
+    },
+    "TaskProjectFiltersModal": {
+      "heading": "Project"
+    },
+    "AssigneeFiltersModal": {
+      "heading": "Assignee"
+    },
+    "AssigneeFiltersModalTrigger": {
+      "buttonLabel": "Assignee"
+    },
+    "UpdateTaskTitleForm": {
+      "submitButtonLabel": "Update title"
+    },
+    "UpdateTaskTitleModal": {
+      "title": "Edit title"
+    },
+    "UpdateTaskDescriptionForm": {
+      "submitButtonLabel": "Update description"
+    },
+    "UpdateTaskDescriptionModal": {
+      "title": "Edit description"
+    },
+    "UpdateTaskDeadlineForm": {
+      "submitButtonLabel": "Update deadline"
+    },
+    "UpdateTaskDeadlineModal": {
+      "title": "Edit deadline"
+    },
+    "UpdateTaskStatusForm": {
+      "submitButtonLabel": "Update status"
+    },
+    "UpdateTaskStatusModal": {
+      "title": "Edit status"
+    },
+    "UpdateTaskAssigneeForm": {
+      "submitButtonLabel": "Update assignee"
+    },
+    "UpdateTaskAssigneeModal": {
+      "title": "Edit assignee"
+    },
+    "UpdateTaskCategoryRelForm": {
+      "submitButtonLabel": "Update category"
+    },
+    "UpdateTaskCategoryRelModal": {
+      "title": "Edit category"
+    },
+    "UpdateTaskProjectForm": {
+      "submitButtonLabel": "Update project"
+    },
+    "UpdateTaskProjectModal": {
+      "title": "Edit project"
+    },
+    "DeleteTaskModalTrigger": {
+      "label": "Delete task"
+    }
+  },
+  "users": {
+    "UserSearchModal": {
+      "heading": "Search users"
+    },
+    "UserSelect": {
+      "label": "Assignee",
+      "noAssignee": "No assignee"
+    },
+    "UserContainer": {
+      "notFound": "User not found. It may have been deleted by another user."
+    },
+    "ChangePasswordModal": {
+      "title": "Change password"
+    },
+    "ChangePasswordForm": {
+      "submitButtonLabel": "Change password",
+      "successMessage": "Password changed successfully"
+    },
+    "UpdateUserForm": {
+      "submitButtonLabel": "Update user",
+      "successMessage": "User updated successfully"
+    },
+    "CreateUserForm": {
+      "submitButtonLabel": "Create user",
+      "successMessage": "User created successfully"
+    },
+    "CreateUserModal": {
+      "title": "New user"
+    },
+    "UpdateUserModal": {
+      "title": "Edit user"
+    },
+    "UserFullNameTextField": {
+      "label": "Full name",
+      "placeholder": "Enter full name",
+      "validation": {
+        "required": "Full name is required"
+      }
+    },
+    "UserBioTextField": {
+      "label": "Bio",
+      "placeholder": "Enter bio"
+    },
+    "UserBirthdateDatePicker": {
+      "label": "Birthdate"
+    },
+    "UserPhoneNumberTextField": {
+      "label": "Phone number",
+      "placeholder": "Enter phone number"
+    },
+    "UserPublicLinkTextField": {
+      "label": "Public link",
+      "placeholder": "Enter a public link",
+      "validation": {
+        "format": "Please enter a valid URL, for example https://example.com"
+      }
+    },
+    "UserAddressTextField": {
+      "label": "Address",
+      "placeholder": "Enter address"
+    },
+    "UserEmailTextField": {
+      "label": "Email",
+      "placeholder": "Enter email",
+      "validation": {
+        "required": "Email is required",
+        "format": "Enter a valid email address, for example user@example.com"
+      }
+    },
+    "UserPasswordTextField": {
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password"
+      },
+      "validation": {
+        "required": "Password is required",
+        "tooShort": "The password is too short. It must contain at least {minLength} characters."
+      }
+    },
+    "TotalUsersCard": {
+      "text": "Total users"
+    },
+    "UserSortingMenuTrigger": {
+      "byFullName": "By full name",
+      "byPosition": "By position"
+    },
+    "ProfileActions": {
+      "deleteAccount": "Delete account",
+      "changePassword": "Change password",
+      "editAccount": "Edit account",
+      "delete": "Delete user",
+      "changePasswordSuccessMessage": "Password changed successfully"
+    },
+    "ProfileNavigationLarge": {
+      "userInformation": "User details",
+      "assignedTasks": "Assigned tasks"
+    },
+    "ProfileNavigationMobile": {
+      "info": "Details",
+      "assignedTasks": "Assigned tasks"
+    },
+    "UserDetail": {
+      "bio": "Bio",
+      "noBio": "This user hasn’t written a bio yet.",
+      "fullName": "Full name",
+      "noFullName": "No name provided",
+      "email": "Email address",
+      "phoneNumber": "Phone number",
+      "noPhoneNumber": "No phone number",
+      "address": "Address",
+      "noAddress": "No address provided",
+      "publicLink": "Public link",
+      "noPublicLink": "No public link",
+      "company": "Company",
+      "position": "Position",
+      "noPosition": "Position not specified",
+      "birthdate": "Birthdate",
+      "noBirthdate": "No birthdate"
+    },
+    "UserDetailCard": {
+      "title": "User details"
+    },
+    "UserDetailContainer": {
+      "noPosition": "No position"
+    },
+    "UserDetailSideSheet": {
+      "dialogHeading": "User details",
+      "openInFullPage": "Open user"
+    },
+    "UserFiltersFormRoleCheckboxGroup": {
+      "label": "Role",
+      "items": {
+        "admin": "Admin",
+        "manager": "Manager",
+        "user": "User"
+      }
+    },
+    "PositionCheckboxGroup": {
+      "label": "Position"
+    },
+    "UserItemActionMenuTrigger": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "details": "Open details"
+    },
+    "DeleteUserModal": {
+      "heading": "Delete user",
+      "text": "Are you sure you want to delete user <strong>«{name}»</strong>? All contents will be permanently removed.",
+      "deleteButton": "Delete",
+      "cancelButton": "Cancel",
+      "successMessage": "User deleted successfully"
+    },
+    "DeleteUserImageModal": {
+      "heading": "Delete image",
+      "text": "Are you sure you want to delete image of user <strong>«{name}»</strong>?",
+      "deleteButton": "Delete",
+      "cancelButton": "Cancel",
+      "successMessage": "Image deleted successfully"
+    },
+    "UserGridItem": {
+      "noPosition": "No position",
+      "noPhoneNumber": "No phone number",
+      "noPublicLink": "No public link"
+    },
+    "UserDetailHeader": {
+      "noPosition": "No position"
+    },
+    "UserListItem": {
+      "checkboxAriaLabel": "user checkbox",
+      "phoneNumber": "Phone number",
+      "noPhoneNumber": "No phone number",
+      "publicLink": "Public link",
+      "noPublicLink": "No public link",
+      "position": "Position",
+      "noPosition": "No position"
+    },
+    "UserNavigationLarge": {
+      "userInformation": "User details",
+      "assignedTasks": "Assigned tasks"
+    },
+    "UserNavigationMobile": {
+      "info": "Details",
+      "assignedTasks": "Assigned tasks"
+    },
+    "UserTaskListItem": {
+      "checkboxAriaLabel": "task checkbox",
+      "noDeadline": "No deadline",
+      "deadlineOn": "Deadline on {date}"
+    },
+    "UserTasksPageEmptyLayout": {
+      "title": "Tasks"
+    },
+    "UserTasksPageLayout": {
+      "title": "Tasks"
+    },
+    "UserFiltersModal": {
+      "heading": "User filters"
+    },
+    "CreateUserMenuTrigger": {
+      "dialogHeading": "Create new",
+      "label": "Create new",
+      "items": {
+        "user": "User",
+        "position": "Position"
+      }
+    },
+    "UserManageMenuTrigger": {
+      "positions": "Positions"
+    },
+    "UsersFilteredEmptySection": {
+      "heading": "No users found",
+      "description": "No users match the selected filters. Try changing or resetting the filters."
+    },
+    "DeleteUserProvider": {
+      "successMessage": "User created successfully"
+    },
+    "UserResultsCount": {
+      "usersFound": "{count, plural, one {# user found} other {# users found}}"
+    },
+    "UserPositionFiltersModal": {
+      "heading": "Position",
+      "label": "Position"
+    },
+    "UserImageMenuTrigger": {
+      "label": "Profile image menu"
+    },
+    "UpdateUserBioModal": {
+      "title": "Edit bio"
+    },
+    "UpdateUserFullNameModal": {
+      "title": "Edit full name"
+    },
+    "UpdateUserPhoneNumberModal": {
+      "title": "Edit phone number"
+    },
+    "UpdateUserBirthdateModal": {
+      "title": "Edit birthdate"
+    },
+    "UpdateUserAddressModal": {
+      "title": "Edit address"
+    },
+    "UpdateUserPublicLinkModal": {
+      "title": "Edit public link"
+    },
+    "UpdateUserPositionModal": {
+      "title": "Edit position"
+    },
+    "UpdateUserPublicLinkForm": {
+      "submitButtonLabel": "Update public link"
+    },
+    "UpdateUserPhoneNumberForm": {
+      "submitButtonLabel": "Update phone number"
+    },
+    "UpdateUserFullNameForm": {
+      "submitButtonLabel": "Update full name"
+    },
+    "UpdateUserAddressForm": {
+      "submitButtonLabel": "Update address"
+    },
+    "UpdateUserBioForm": {
+      "submitButtonLabel": "Update bio"
+    },
+    "UpdateUserBirthdateForm": {
+      "submitButtonLabel": "Update birthdate"
+    },
+    "UpdateUserPositionForm": {
+      "submitButtonLabel": "Update position"
+    }
+  }
+}

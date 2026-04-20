@@ -1,14 +1,14 @@
 import { useTranslations } from "next-intl";
-import { Card } from "@/components/common/Card";
-import { PageGrid } from "@/components/common/PageGrid";
-import { BackButton } from "@/components/common/BackButton";
-import { ToolbarMobile } from "@/components/common/Toolbar";
-import { PageContainer } from "@/components/common/PageContainer";
-import { DetailHeaderSkeleton } from "@/components/common/DetailHeader";
-import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { CustomerDetailAltSkeleton } from "@/components/customer/CustomerDetailAlt";
-import { CustomerDetailActionsSkeleton } from "@/components/customer/CustomerDetailActions";
-import { CustomerDetailCard } from "@/components/customer/CustomerDetailCard";
+import { Card } from "@/dashboard/common/Card";
+import { PageGrid } from "@/dashboard/common/PageGrid";
+import { BackButton } from "@/dashboard/common/BackButton";
+import { ToolbarMobile } from "@/dashboard/common/Toolbar";
+import { PageContainer } from "@/dashboard/common/PageContainer";
+import { DetailHeaderSkeleton } from "@/dashboard/common/DetailHeader";
+import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
+import { CustomerDetailAltSkeleton } from "@/dashboard/customer/CustomerDetailAlt";
+import { CustomerDetailActionsSkeleton } from "@/dashboard/customer/CustomerDetailActions";
+import { CustomerDetailCard } from "@/dashboard/customer/CustomerDetailCard";
 
 export default function AppCustomerDetailLoading() {
   const t = useTranslations("app.CustomerDetailPage");

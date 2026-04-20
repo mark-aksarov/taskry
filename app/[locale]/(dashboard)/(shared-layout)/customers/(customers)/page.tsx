@@ -17,22 +17,22 @@ import { CustomersPage } from "./CustomersPage";
 import { customerSortFields } from "@/lib/types";
 import { companyId } from "@/lib/schemas/company";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { CreateCompanyModal } from "@/components/company/CreateCompanyModal";
-import { CustomersContainer } from "@/components/customer/CustomersContainer";
-import { CreateCustomerModal } from "@/components/customer/CreateCustomerModal";
-import { CustomerSearchModal } from "@/components/customer/CustomerSearchModal";
-import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
-import { DeleteCustomersModal } from "@/components/customer/DeleteCustomersModal";
-import { CustomerFiltersModal } from "@/components/customer/CustomerFiltersModal";
-import { CreateCompanyProvider } from "@/components/company/CreateCompanyProvider";
-import { CreateCustomerProvider } from "@/components/customer/CreateCustomerProvider";
-import { CustomerFiltersProvider } from "@/components/customer/CustomerFiltersContext";
-import { DeleteCustomersProvider } from "@/components/customer/DeleteCustomersProvider";
-import { CustomerCompanyFiltersModal } from "@/components/customer/CustomerCompanyFiltersModal";
-import { CreateCustomerFormContainer } from "@/components/customer/CreateCustomerFormContainer";
-import { CustomerFiltersFormContainer } from "@/components/customer/CustomerFiltersFormContainer";
-import { CustomerRouterSearchContainer } from "@/components/customer/CustomerRouterSearchContainer";
-import { CustomerCompanyFiltersFormContainer } from "@/components/customer/CustomerCompanyFiltersFormContainer";
+import { CreateCompanyModal } from "@/dashboard/company/CreateCompanyModal";
+import { CustomersContainer } from "@/dashboard/customer/CustomersContainer";
+import { CreateCustomerModal } from "@/dashboard/customer/CreateCustomerModal";
+import { CustomerSearchModal } from "@/dashboard/customer/CustomerSearchModal";
+import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
+import { DeleteCustomersModal } from "@/dashboard/customer/DeleteCustomersModal";
+import { CustomerFiltersModal } from "@/dashboard/customer/CustomerFiltersModal";
+import { CreateCompanyProvider } from "@/dashboard/company/CreateCompanyProvider";
+import { CreateCustomerProvider } from "@/dashboard/customer/CreateCustomerProvider";
+import { CustomerFiltersProvider } from "@/dashboard/customer/CustomerFiltersContext";
+import { DeleteCustomersProvider } from "@/dashboard/customer/DeleteCustomersProvider";
+import { CustomerCompanyFiltersModal } from "@/dashboard/customer/CustomerCompanyFiltersModal";
+import { CreateCustomerFormContainer } from "@/dashboard/customer/CreateCustomerFormContainer";
+import { CustomerFiltersFormContainer } from "@/dashboard/customer/CustomerFiltersFormContainer";
+import { CustomerRouterSearchContainer } from "@/dashboard/customer/CustomerRouterSearchContainer";
+import { CustomerCompanyFiltersFormContainer } from "@/dashboard/customer/CustomerCompanyFiltersFormContainer";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,

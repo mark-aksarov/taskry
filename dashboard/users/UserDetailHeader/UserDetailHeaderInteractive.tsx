@@ -1,0 +1,34 @@
+"use client";
+
+import {
+  UserDetailHeaderLayout,
+  UserDetailHeaderLayoutProps,
+} from "./UserDetailHeaderLayout";
+
+import { UserImageMenuTrigger } from "../UserImageMenuTrigger";
+import { PersonDetailHeaderImage } from "@/dashboard/common/PersonDetailHeaderImage";
+
+interface UserDetailHeaderInteractiveProps
+  extends Omit<UserDetailHeaderLayoutProps, "imageSlot"> {
+  fullName: string;
+  imageUrl?: string;
+  positionName?: string;
+}
+
+export function UserDetailHeaderInteractive({
+  fullName,
+  imageUrl,
+  positionName,
+}: UserDetailHeaderInteractiveProps) {
+  return (
+    <UserDetailHeaderLayout
+      fullName={fullName}
+      imageSlot={
+        <UserImageMenuTrigger showDeleteMenuItem={!!imageUrl}>
+          <PersonDetailHeaderImage imageUrl={imageUrl} />
+        </UserImageMenuTrigger>
+      }
+      positionName={positionName}
+    />
+  );
+}

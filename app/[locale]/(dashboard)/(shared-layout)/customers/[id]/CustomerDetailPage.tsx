@@ -1,11 +1,11 @@
 import { useTranslations } from "next-intl";
-import { Card } from "@/components/common/Card";
-import { PageGrid } from "@/components/common/PageGrid";
-import { ToolbarMobile } from "@/components/common/Toolbar";
-import { BackButton } from "@/components/common/BackButton";
-import { PageContainer } from "@/components/common/PageContainer";
-import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { CustomerDetailCard } from "@/components/customer/CustomerDetailCard";
+import { Card } from "@/dashboard/common/Card";
+import { PageGrid } from "@/dashboard/common/PageGrid";
+import { ToolbarMobile } from "@/dashboard/common/Toolbar";
+import { BackButton } from "@/dashboard/common/BackButton";
+import { PageContainer } from "@/dashboard/common/PageContainer";
+import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
+import { CustomerDetailCard } from "@/dashboard/customer/CustomerDetailCard";
 
 interface CustomerDetailPageProps {
   customerDetailContainer: React.ReactNode;

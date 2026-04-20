@@ -5,11 +5,11 @@ import { notFound } from "next/navigation";
 import { SWRProvider } from "./SWRProvider";
 import type { Metadata, Viewport } from "next";
 import { Nunito_Sans } from "next/font/google";
-import { I18nProvider } from "@/components/ui/I18nProvider";
+import { I18nProvider } from "@/ui/I18nProvider";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
-import { RouterProvider } from "@/components/ui/RouterProvider";
-import { ThemeProvider } from "@/components/layout/ThemeProvider";
-import { ToastRegionWrapper } from "@/components/layout/ToastRegionWrapper";
+import { RouterProvider } from "@/ui/RouterProvider";
+import { ThemeProvider } from "@/dashboard/layout/ThemeProvider";
+import { ToastRegionWrapper } from "@/dashboard/layout/ToastRegionWrapper";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",

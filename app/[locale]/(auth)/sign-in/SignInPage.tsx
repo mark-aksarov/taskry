@@ -4,12 +4,12 @@ import {
   AuthCardHeader,
   AuthCardHeading,
   AuthCardSubtitle,
-} from "@/components/auth/AuthCard";
+} from "@/auth/AuthCard";
 import { useTranslations } from "next-intl";
-import { SignInForm } from "@/components/auth/SignInForm";
+import { SignInForm } from "@/auth/SignInForm";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { AuthLangMenuTrigger } from "@/components/auth/AuthLangMenuTrigger";
-import { AuthCardSignUpFooter } from "@/components/auth/AuthCardSignUpFooter";
+import { AuthLangMenuTrigger } from "@/auth/AuthLangMenuTrigger";
+import { AuthCardSignUpFooter } from "@/auth/AuthCardSignUpFooter";
 
 interface SignInPageProps {
   resetPasswordSuccess?: boolean;

@@ -1,7 +1,7 @@
-import { ProfileActionsSkeleton } from "@/components/users/ProfileActions";
-import { UserTasksPageLoadingLayout } from "@/components/users/UserTasksPageLayout";
-import { ProfileNavigationMobile } from "@/components/users/ProfileNavigationMobile";
-import { ProfileNavigationLarge } from "@/components/users/ProfileNavigationLarge";
+import { ProfileActionsSkeleton } from "@/dashboard/users/ProfileActions";
+import { UserTasksPageLoadingLayout } from "@/dashboard/users/UserTasksPageLayout";
+import { ProfileNavigationMobile } from "@/dashboard/users/ProfileNavigationMobile";
+import { ProfileNavigationLarge } from "@/dashboard/users/ProfileNavigationLarge";
 
 export default async function AppProfileTasksPageLoading() {
   return (

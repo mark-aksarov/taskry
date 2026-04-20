@@ -1,14 +1,14 @@
 import { PositionsPage } from "./PositionsPage";
-import { TaskSearchModal } from "@/components/tasks/TaskSearchModal";
+import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
 import { getPositionSummaries } from "@/lib/data/position/position.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { PositionsContainer } from "@/components/position/PositionsContainer";
-import { LinkSearchContainer } from "@/components/common/LinkSearchContainer";
-import { CreatePositionModal } from "@/components/position/CreatePositionModal";
-import { SelectedItemsProvider } from "@/components/common/SelectedItemsContext";
-import { CreatePositionProvider } from "@/components/position/CreatePositionProvider";
-import { DeletePositionsProvider } from "@/components/position/DeletePositionsProvider";
-import { DeletePositionsModal } from "@/components/position/DeletePositionsModal";
+import { PositionsContainer } from "@/dashboard/position/PositionsContainer";
+import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
+import { CreatePositionModal } from "@/dashboard/position/CreatePositionModal";
+import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
+import { CreatePositionProvider } from "@/dashboard/position/CreatePositionProvider";
+import { DeletePositionsProvider } from "@/dashboard/position/DeletePositionsProvider";
+import { DeletePositionsModal } from "@/dashboard/position/DeletePositionsModal";
 
 export default async function AppPositionsPage() {
   // Authorization

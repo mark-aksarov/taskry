@@ -1,0 +1,1509 @@
+{
+  "comments": {
+    "CommentItemActionMenuTrigger": {
+      "edit": "Редактировать",
+      "delete": "Удалить"
+    },
+    "DeleteCommentModal": {
+      "heading": "Удалить комментарий",
+      "text": "Вы уверены, что хотите удалить этот комментарий? Это действие нельзя будет отменить.",
+      "cancelButton": "Отмена",
+      "confirmButton": "Удалить",
+      "successMessage": "Комментарий успешно удалён"
+    },
+    "CommentItem": {
+      "unknownUser": "Неизвестный пользователь"
+    },
+    "CommentsEmptySection": {
+      "heading": "Пока нет комментариев",
+      "description": "Комментариев пока нет. Добавьте первый, чтобы поделиться обновлениями, задать вопрос или начать обсуждение по этой задаче."
+    },
+    "CommentTextField": {
+      "placeholder": "Напишите комментарий...",
+      "ariaLabel": "Написать комментарий"
+    },
+    "CommentTextFieldSendButton": {
+      "ariaLabel": "Отправить сообщение"
+    },
+    "ReplyButton": "Ответить",
+    "CommentCancelEditingButton": {
+      "label": "Отменить редактирование"
+    }
+  },
+  "common": {
+    "LangMenuTrigger": {
+      "dialogHeading": "Язык",
+      "label": "Русский",
+      "items": {
+        "english": "Английский",
+        "russian": "Русский"
+      }
+    },
+    "GridItemPhoneNumber": {
+      "noPhoneNumber": "Нет номера телефона"
+    },
+    "GridItemPublicLink": {
+      "noPublicLink": "Нет публичной ссылки"
+    },
+    "ItemBaseDeadline": {
+      "deadlineOn": "Срок до {date}"
+    },
+    "PersonImageMenuTrigger": {
+      "heading": "Изображение профиля",
+      "items": {
+        "delete": "Удалить",
+        "update": "Обновить"
+      }
+    },
+    "UploadPersonImageDialog": {
+      "heading": "Загрузить изображение",
+      "text": "Загрузите изображение профиля. Допустимые типы файлов: JPG, PNG, WEBP. Максимальный размер — 200 KB. Минимальный размер изображения — 300x300 пикселей."
+    },
+    "UpdatePersonImageDialog": {
+      "heading": "Изменить изображение",
+      "save": "Сохранить",
+      "error": "Произошла ошибка при загрузке изображения"
+    },
+    "PersonImageFileTrigger": {
+      "label": "Загрузить",
+      "error": {
+        "fileSize": "Файл слишком большой. Максимальный размер — 200 KB.",
+        "imageSize": "Изображение слишком маленькое. Минимальный размер — 300x300 пикселей.",
+        "aspectRatio": "Изображение не должно быть слишком широким или высоким.",
+        "unknown": "Неизвестная ошибка загрузки изображения"
+      }
+    },
+    "GuestModeModal": {
+      "heading": "Гостевой режим",
+      "text": "<strong>Действие ограничено в гостевом режиме.</strong> Для доступа ко всем функциям требуется аккаунт. Пожалуйста, войдите в систему или создайте новый аккаунт, чтобы снять ограничения гостевого режима.",
+      "cancelButton": "Отмена"
+    },
+    "SortingMenuTrigger": {
+      "dialogHeading": "Сортировка"
+    },
+    "ManageMenuTrigger": {
+      "dialogHeading": "Управление"
+    },
+    "SortingButtonMobile": {
+      "ariaLabel": "Сортировка"
+    },
+    "SortingButtonLarge": {
+      "label": "Сортировка"
+    },
+    "FilterButtonLarge": {
+      "label": "Фильтры"
+    },
+    "FiltersFormSubmitButton": {
+      "label": "Применить фильтры"
+    },
+    "FiltersResetButton": {
+      "label": "Сбросить фильтры"
+    },
+    "FiltersFormResetButton": {
+      "label": "Сбросить"
+    },
+    "ActionsButton": {
+      "label": "Действия"
+    },
+    "ViewModeToggleButtonGroup": {
+      "list": "Список",
+      "cards": "Карточки"
+    },
+    "ItemBaseActionMenuTrigger": {
+      "ariaLabel": "Действия"
+    },
+    "ItemBaseActionMenuDialogHeader": {
+      "heading": "Действия"
+    },
+    "Pagination": {
+      "previousPage": "Предыдущая страница",
+      "nextPage": "Следующая страница",
+      "page": "страница {pageNumber}"
+    },
+    "FilterCheckboxGroupExpandButton": {
+      "collapse": "Свернуть",
+      "expand": "Развернуть",
+      "more": "Еще"
+    },
+    "FilterButtonMobile": {
+      "ariaLabel": "Открыть фильтры"
+    },
+    "ManageButtonMobile": {
+      "ariaLabel": "Управление"
+    },
+    "ManageButtonLarge": {
+      "label": "Управление"
+    },
+    "BackButton": {
+      "label": "Назад"
+    },
+    "ProgressDetailInfoAlt": {
+      "progress": "Прогресс"
+    },
+    "DeadlineBadge": {
+      "noDeadline": "Без срока"
+    }
+  },
+  "company": {
+    "CompanyCheckboxGroup": {
+      "label": "Компания"
+    },
+    "CompanySelect": {
+      "label": "Компания",
+      "noCompany": "Нет компании"
+    },
+    "CompaniesEmptySectionCreateButton": {
+      "label": "Новая компания"
+    },
+    "CreateCompanyForm": {
+      "submitButtonLabel": "Создать компанию"
+    },
+    "CreateCompanyModal": {
+      "title": "Новая компания"
+    },
+    "CompanyNameTextField": {
+      "label": "Название",
+      "placeholder": "Введите название",
+      "validation": {
+        "required": "Требуется название"
+      }
+    },
+    "CompanyListItem": {
+      "name": "Название"
+    },
+    "CompanyActionsMenuTrigger": {
+      "dialogHeading": "Действия",
+      "delete": "Удалить"
+    },
+    "CreateCompanyModalTrigger": {
+      "label": "Создать новую"
+    },
+    "CompanyListItemActionMenuTrigger": {
+      "edit": "Редактировать",
+      "delete": "Удалить"
+    },
+    "UpdateCompanyForm": {
+      "submitButtonLabel": "Обновить компанию",
+      "successMessage": "Компания успешно обновлена"
+    },
+    "UpdateCompanyModal": {
+      "title": "Изменить компанию"
+    },
+    "DeleteCompaniesModal": {
+      "heading": "Удалить компании",
+      "text": "Вы уверены, что хотите удалить <strong>{count} выбранные компании</strong>? Все содержимое будет безвозвратно удалено.",
+      "cancelButton": "Отменить",
+      "deleteButton": "Удалить",
+      "successMessage": "Компании успешно удалены"
+    },
+    "DeleteCompanyModal": {
+      "heading": "Удалить компанию",
+      "text": "Вы уверены, что хотите удалить компанию <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
+      "cancelButton": "Отменить",
+      "deleteButton": "Удалить",
+      "successMessage": "Компания успешно удалена"
+    }
+  },
+  "customers": {
+    "CustomerCheckboxGroup": {
+      "label": "Клиент"
+    },
+    "CustomerCompanyFiltersModal": {
+      "heading": "Компания"
+    },
+    "CustomerCompanyFiltersModalTrigger": {
+      "label": "Компания"
+    },
+    "CustomerSearchModal": {
+      "heading": "Поиск клиентов"
+    },
+    "CustomerSelect": {
+      "label": "Клиент",
+      "noCustomer": "Нет клиента"
+    },
+    "CustomersEmptySectionCreateButton": {
+      "label": "Новый клиент"
+    },
+    "CustomerContainer": {
+      "notFound": "Клиент не найден. Возможно, он был удален другим пользователем."
+    },
+    "UpdateCustomerForm": {
+      "submitButtonLabel": "Обновить клиента",
+      "successMessage": "Клиент успешно обновлен"
+    },
+    "CreateCustomerForm": {
+      "submitButtonLabel": "Создать клиента",
+      "successMessage": "Клиент успешно создан"
+    },
+    "TotalCustomersCard": {
+      "text": "Всего клиентов"
+    },
+    "CustomerDetailActions": {
+      "delete": "Удалить клиента",
+      "edit": "Редактировать клиента",
+      "deleteImage": "Удалить изображение",
+      "updateImage": "Обновить изображение"
+    },
+    "CustomerSortingMenuTrigger": {
+      "byFullName": "По полному имени",
+      "byCompany": "По компании"
+    },
+    "CustomerDetail": {
+      "bio": "Биография",
+      "fullName": "Полное имя",
+      "email": "Электронная почта",
+      "phoneNumber": "Номер телефона",
+      "publicLink": "Публичная ссылка",
+      "company": "Компания",
+      "noBio": "Клиент ещё не написал биографию.",
+      "noFullName": "Имя не указано",
+      "noEmail": "Электронная почта не указана",
+      "noPhoneNumber": "Номер телефона не указан",
+      "noPublicLink": "Публичная ссылка отсутствует",
+      "noCompany": "Компания не указана"
+    },
+    "CreateCustomerModal": {
+      "title": "Новый клиент"
+    },
+    "UpdateCustomerModal": {
+      "title": "Изменить клиента"
+    },
+    "CustomerDetailCard": {
+      "title": "Детали клиента"
+    },
+    "CustomerFullNameTextField": {
+      "label": "Полное имя",
+      "placeholder": "Введите полное имя",
+      "validation": {
+        "required": "«Полное имя» обязательно для заполнения"
+      }
+    },
+    "CustomerBioTextField": {
+      "label": "О себе",
+      "placeholder": "Введите информацию о себе"
+    },
+    "CustomerEmailTextField": {
+      "label": "Email",
+      "placeholder": "Введите email",
+      "validation": {
+        "required": "Требуется электронная почта",
+        "format": "Введите корректный адрес электронной почты, например user@example.com"
+      }
+    },
+    "CustomerPhoneNumberTextField": {
+      "label": "Номер телефона",
+      "placeholder": "Введите номер телефона"
+    },
+    "CustomerPublicLinkTextField": {
+      "label": "Публичная ссылка",
+      "placeholder": "Введите публичную ссылку",
+      "validation": {
+        "format": "Введите корректный URL, например https://example.com"
+      }
+    },
+    "CustomerDetailSideSheet": {
+      "dialogHeading": "Детали клиента",
+      "openInFullPage": "Открыть клиента"
+    },
+    "CustomerItemActionMenuTrigger": {
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "details": "Открыть детали"
+    },
+    "DeleteCustomerModal": {
+      "heading": "Удалить клиента",
+      "text": "Вы уверены, что хотите удалить клиента <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
+      "deleteButton": "Удалить",
+      "cancelButton": "Отменить",
+      "successMessage": "Клиент успешно удален"
+    },
+    "DeleteCustomerImageModal": {
+      "heading": "Удалить изображение",
+      "text": "Вы уверены, что хотите удалить изображение клиента <strong>«{name}»</strong>?",
+      "deleteButton": "Удалить",
+      "cancelButton": "Отменить",
+      "successMessage": "Изображение успешно удалено"
+    },
+    "DeleteCustomersModal": {
+      "heading": "Удалить клиентов",
+      "text": "Вы уверены, что хотите удалить <strong>{count} выбранных клиентов </strong>? Все содержимое будет безвозвратно удалено.",
+      "deleteButton": "Удалить",
+      "cancelButton": "Отменить",
+      "successMessage": "Клиенты успешно удалены"
+    },
+    "CustomerGridItem": {
+      "noCompany": "Нет компании"
+    },
+    "CustomerListItem": {
+      "checkboxAriaLabel": "чекбокс клиента",
+      "phoneNumber": "Номер телефона",
+      "publicLink": "Публичная ссылка",
+      "noPhoneNumber": "Нет номера телефона",
+      "noPublicLink": "Нет публичной ссылки",
+      "company": "Компания",
+      "noCompany": "Нет компании"
+    },
+    "CustomerResultsCount": {
+      "customersFound": "{count, plural, one {Найден # клиент} few {Найдено # клиента} many {Найдено # клиентов} other {Найдено # клиентов}}"
+    },
+    "CustomerFiltersModal": {
+      "heading": "Фильтры клиентов"
+    },
+    "CustomerActionsMenuTrigger": {
+      "dialogHeading": "Действия",
+      "delete": "Удалить"
+    },
+    "CreateCustomerMenuTrigger": {
+      "dialogHeading": "Создать нового",
+      "label": "Создать нового",
+      "items": {
+        "customer": "Клиент",
+        "company": "Компания"
+      }
+    },
+    "CustomersFilteredEmptySection": {
+      "heading": "Клиенты не найдены",
+      "description": "По выбранным фильтрам клиенты отсутствуют. Попробуйте изменить или сбросить фильтры"
+    },
+    "CustomerManageMenuTrigger": {
+      "companies": "Компании"
+    },
+    "CustomerImageMenuTrigger": {
+      "label": "Меню изображения профиля"
+    },
+    "PersonDetailHeaderImage": {
+      "imageAlt": "Изображение профиля"
+    },
+    "UpdateCustomerBioModal": {
+      "title": "Изменить биографию"
+    },
+    "UpdateCustomerFullNameModal": {
+      "title": "Изменить полное имя"
+    },
+    "UpdateCustomerPhoneNumberModal": {
+      "title": "Изменить номер телефона"
+    },
+    "UpdateCustomerFullNameForm": {
+      "submitButtonLabel": "Обновить полное имя"
+    },
+    "UpdateCustomerPhoneNumberForm": {
+      "submitButtonLabel": "Обновить номер телефона"
+    },
+    "UpdateCustomerBioForm": {
+      "submitButtonLabel": "Обновить биографию"
+    },
+    "UpdateCustomerPublicLinkForm": {
+      "submitButtonLabel": "Обновить публичную ссылку"
+    },
+    "UpdateCustomerPublicLinkModal": {
+      "title": "Изменить публичную ссылку"
+    },
+    "UpdateCustomerEmailForm": {
+      "submitButtonLabel": "Обновить почту"
+    },
+    "UpdateCustomerEmailModal": {
+      "title": "Изменить почту"
+    },
+    "UpdateCustomerCompanyForm": {
+      "submitButtonLabel": "Обновить компанию"
+    },
+    "UpdateCustomerCompanyModal": {
+      "title": "Изменить компанию"
+    }
+  },
+  "layout": {
+    "ThemeToggleButton": {
+      "darkLabel": "Темная тема",
+      "lightLabel": "Светлая тема"
+    },
+    "AppNavigation": {
+      "dashboard": "Панель",
+      "projects": "Проекты",
+      "tasks": "Задачи",
+      "team": "Команда",
+      "customers": "Клиенты",
+      "profile": "Профиль"
+    },
+    "AppNavigationLogoutButton": {
+      "logout": "Выйти"
+    },
+    "AppBottomSheetTrigger": {
+      "triggerAriaLabel": "язык",
+      "dialogAriaLabel": "Навигация по приложению"
+    },
+    "AppSidebarSheetTrigger": {
+      "triggerAriaLabel": "меню"
+    }
+  },
+  "positions": {
+    "PositionSelect": {
+      "label": "Должность",
+      "noPosition": "Нет должности"
+    },
+    "PositionsEmptySectionCreateButton": {
+      "label": "Новая должность"
+    },
+    "CreatePositionForm": {
+      "submitButtonLabel": "Создать должность",
+      "successMessage": "Должность успешно создана"
+    },
+    "CreatePositionModal": {
+      "title": "Новая должность"
+    },
+    "PositionNameTextField": {
+      "label": "Название",
+      "placeholder": "Введите название",
+      "validation": {
+        "required": "Требуется название"
+      }
+    },
+    "PositionListItem": {
+      "name": "Название"
+    },
+    "PositionActionsMenuTrigger": {
+      "dialogHeading": "Действия",
+      "delete": "Удалить"
+    },
+    "CreatePositionModalTrigger": {
+      "label": "Создать новую"
+    },
+    "PositionListItemActionMenuTrigger": {
+      "edit": "Редактировать",
+      "delete": "Удалить"
+    },
+    "UpdatePositionForm": {
+      "submitButtonLabel": "Обновить должность",
+      "successMessage": "Должность успешно обновлена"
+    },
+    "UpdatePositionModal": {
+      "title": "Изменить должность"
+    },
+    "DeletePositionsModal": {
+      "heading": "Удалить должности",
+      "text": "Вы уверены, что хотите удалить <strong>{count} выбранные должности</strong>? Все содержимое будет безвозвратно удалено.",
+      "cancelButton": "Отменить",
+      "deleteButton": "Удалить",
+      "successMessage": "Должности успешно удалены"
+    },
+    "DeletePositionModal": {
+      "heading": "Удалить должность",
+      "text": "Вы уверены, что хотите удалить должность <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
+      "cancelButton": "Отменить",
+      "deleteButton": "Удалить",
+      "successMessage": "Должность успешно удалена"
+    }
+  },
+  "projectCategories": {
+    "ProjectCategoryCheckboxGroup": {
+      "label": "Категория"
+    },
+    "ProjectCategorySelect": {
+      "label": "Категория",
+      "noProjectCategory": "Нет категории"
+    },
+    "ProjectCategoriesEmptySectionCreateButton": {
+      "label": "Новая категория проекта"
+    },
+    "CreateProjectCategoryForm": {
+      "submitButtonLabel": "Создать категорию",
+      "successMessage": "Категория проекта успешно создана"
+    },
+    "CreateProjectCategoryModal": {
+      "title": "Новая категория проекта"
+    },
+    "ProjectCategoryNameTextField": {
+      "label": "Название",
+      "placeholder": "Введите название",
+      "validation": {
+        "required": "Требуется название"
+      }
+    },
+    "ProjectCategoryListItem": {
+      "name": "Название"
+    },
+    "ProjectCategoryListItemActionMenuTrigger": {
+      "edit": "Редактировать",
+      "delete": "Удалить"
+    },
+    "CreateProjectCategoryModalTrigger": {
+      "label": "Создать новую"
+    },
+    "ProjectCategoryActionsMenuTrigger": {
+      "dialogHeading": "Действия",
+      "delete": "Удалить"
+    },
+    "UpdateProjectCategoryForm": {
+      "submitButtonLabel": "Обновить категорию проекта",
+      "successMessage": "Категория проекта успешно обновлена"
+    },
+    "UpdateProjectCategoryModal": {
+      "title": "Изменить категорию проекта"
+    },
+    "DeleteProjectCategoryModal": {
+      "heading": "Удалить категорию проекта",
+      "text": "Вы уверены, что хотите удалить категорию проекта <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
+      "cancelButton": "Отменить",
+      "deleteButton": "Удалить",
+      "successMessage": "Категория проекта успешно удалена"
+    },
+    "DeleteProjectCategoriesModal": {
+      "heading": "Удалить категории проектов",
+      "text": "Вы уверены, что хотите удалить <strong>{count} выбранные категории проектов</strong>? Все содержимое будет безвозвратно удалено.",
+      "cancelButton": "Отменить",
+      "deleteButton": "Удалить",
+      "successMessage": "Категории проектов успешно удалена"
+    }
+  },
+  "projects": {
+    "NoActiveProjectsSwitch": {
+      "text": "Не имеет активных проектов"
+    },
+    "ActiveProjectsSwitch": {
+      "text": "Имеет активные проекты"
+    },
+    "OverdueProjectsSwitch": {
+      "text": "Имеет просроченные проекты"
+    },
+    "ProjectCheckboxGroup": {
+      "label": "Проект"
+    },
+    "ProjectSearchModal": {
+      "heading": "Поиск проектов"
+    },
+    "ProjectSelect": {
+      "label": "Проект",
+      "noProject": "Нет проекта"
+    },
+    "ProjectsEmptySectionCreateButton": {
+      "label": "Новый проект"
+    },
+    "ProjectContainer": {
+      "notFound": "Проект не найден. Возможно, он был удален другим пользователем."
+    },
+    "ProjectsFilteredEmptySection": {
+      "heading": "Проекты не найдены",
+      "description": "По выбранным фильтрам проекты отсутствуют. Попробуйте изменить или сбросить фильтры"
+    },
+    "UpdateProjectForm": {
+      "submitButtonLabel": "Обновить проект",
+      "successMessage": "Проект успешно обновлен"
+    },
+    "CreateProjectForm": {
+      "submitButtonLabel": "Создать проект",
+      "successMessage": "Проект успешно создан"
+    },
+    "ProjectDetailCard": {
+      "title": "Детали проекта"
+    },
+    "ProjectDetailActions": {
+      "delete": "Удалить проект",
+      "edit": "Редактировать проект",
+      "comments": "Комментарии"
+    },
+    "TotalProjectsCard": {
+      "text": "Всего проектов"
+    },
+    "ProjectSortingMenuTrigger": {
+      "byTitle": "По названию",
+      "byDeadline": "По сроку",
+      "byStatus": "По статусу",
+      "byCreatedAt": "По дате создания"
+    },
+    "CreateProjectModal": {
+      "title": "Новый проект"
+    },
+    "UpdateProjectModal": {
+      "title": "Изменить проект"
+    },
+    "ProjectFiltersModal": {
+      "title": "Фильтры проектов"
+    },
+    "ProjectActionsMenuTrigger": {
+      "dialogHeading": "Действия",
+      "delete": "Удалить",
+      "pending": "Отметить как «В ожидании»",
+      "active": "Отметить как «Активно»",
+      "completed": "Отметить как «Завершено»"
+    },
+    "ProjectManageMenuTrigger": {
+      "categories": "Категории"
+    },
+    "ProjectTitleTextField": {
+      "label": "Заголовок",
+      "placeholder": "Введите заголовок",
+      "validation": {
+        "required": "«Заголовок» обязателен для заполнения"
+      }
+    },
+    "ProjectDescriptionTextField": {
+      "label": "Описание",
+      "placeholder": "Введите описание"
+    },
+    "ProjectDeadlineDatePicker": {
+      "label": "Срок выполнения",
+      "validation": {
+        "required": "Укажите срок выполнения"
+      }
+    },
+    "ProjectStatusSelect": {
+      "label": "Статус",
+      "placeholder": "Выберите статус",
+      "validation": {
+        "required": "Требуется статус"
+      }
+    },
+    "ProjectFiltersFormDeadlineFromDatePicker": {
+      "label": "Дедлайн с"
+    },
+    "ProjectFiltersFormDeadlineToDatePicker": {
+      "label": "Дедлайн по"
+    },
+    "ProjectStatusCheckboxGroup": {
+      "label": "Статус"
+    },
+    "ProjectCreatorCheckboxGroup": {
+      "label": "Создатель"
+    },
+    "CreateProjectMenuTrigger": {
+      "dialogHeading": "Создать новый",
+      "label": "Создать новый",
+      "items": {
+        "project": "Проект",
+        "category": "Категорию"
+      }
+    },
+    "ProjectGridItemProgress": {
+      "progressAriaLabel": "Прогресс проекта"
+    },
+    "ProjectListItem": {
+      "noDeadline": "Без срока",
+      "deadlineOn": "Срок до {date}",
+      "noCreator": "Нет создателя",
+      "creator": "Создатель",
+      "noCustomer": "Нет клиента",
+      "customer": "Клиент",
+      "category": "Категория",
+      "noCategory": "Нет категории",
+      "company": "Компания",
+      "noCompany": "Нет компании"
+    },
+    "ProjectItemActionMenuTrigger": {
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "markPending": "Отметить как «В ожидании»",
+      "markCompleted": "Отметить как «Готово»",
+      "markActive": "Отметить как «Активно»",
+      "details": "Открыть детали"
+    },
+    "DeleteProjectModal": {
+      "heading": "Удалить проект",
+      "text": "Вы уверены, что хотите удалить <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено. Связанные задачи также будут удалены.",
+      "deleteButton": "Удалить",
+      "cancelButton": "Отменить",
+      "successMessage": "Проект успешно удалён"
+    },
+    "DeleteProjectsModal": {
+      "heading": "Удалить проекты",
+      "text": "Вы уверены, что хотите удалить <strong>{count} выбранных проектов </strong>? Все содержимое будет безвозвратно удалено. Связанные задачи также будут удалены.",
+      "deleteButton": "Удалить",
+      "cancelButton": "Отменить",
+      "successMessage": "Проекты успешно удалены"
+    },
+    "ProjectStatus": {
+      "pending": "В ожидании",
+      "active": "Активный",
+      "completed": "Завершён",
+      "overdue": "Просрочен"
+    },
+    "ProjectCommentsModal": {
+      "title": "Комментарии проекта"
+    },
+    "ProjectDetail": {
+      "creator": "Создатель",
+      "noCreator": "Нет создателя",
+      "deadline": "Дедлайн",
+      "noDeadline": "Без дедлайна",
+      "description": "Описание",
+      "noDescription": "Нет описания",
+      "customer": "Клиент",
+      "noCustomer": "Нет клиента",
+      "category": "Категория",
+      "noCategory": "Нет категории",
+      "status": "Статус",
+      "title": "Заголовок",
+      "tasksStats": "Статистика задач"
+    },
+    "ProjectDetailHeader": {
+      "noCategory": "Нет категории"
+    },
+    "ProjectStatusFiltersModal": {
+      "heading": "Статус"
+    },
+    "ProjectStatusFiltersModalTrigger": {
+      "buttonLabel": "Статус"
+    },
+    "ProjectCategoryFiltersModal": {
+      "heading": "Категория"
+    },
+    "ProjectCategoryFiltersModalTrigger": {
+      "buttonLabel": "Категория"
+    },
+    "ProjectCreatorFiltersModal": {
+      "heading": "Создатель"
+    },
+    "ProjectCreatorFiltersModalTrigger": {
+      "buttonLabel": "Создатель"
+    },
+    "ProjectCustomerFiltersModal": {
+      "heading": "Клиент"
+    },
+    "ProjectCustomerFiltersModalTrigger": {
+      "buttonLabel": "Клиент"
+    },
+    "ProjectResultsCount": {
+      "projectsFound": "{count, plural, one {Найден # проект} few {Найдено # проекта} many {Найдено # проектов} other {Найдено # проектов}}"
+    },
+    "ProjectDetailStatusMenuTrigger": {
+      "dialogHeading": "Статус проекта",
+      "items": {
+        "pending": "В ожидании",
+        "active": "Активен",
+        "completed": "Завершен"
+      }
+    },
+    "ProjectDetailSideSheet": {
+      "dialogHeading": "Детали проекта",
+      "openInFullPage": "Открыть проект"
+    },
+    "UpdateProjectDescriptionForm": {
+      "submitButtonLabel": "Обновить описание"
+    },
+    "UpdateProjectDescriptionModal": {
+      "title": "Изменить описание"
+    },
+    "UpdateProjectTitleForm": {
+      "submitButtonLabel": "Обновить заголовок"
+    },
+    "UpdateProjectTitleModal": {
+      "title": "Изменить заголовок"
+    },
+    "UpdateProjectStatusForm": {
+      "submitButtonLabel": "Обновить cтатус"
+    },
+    "UpdateProjectStatusModal": {
+      "title": "Изменить статус"
+    },
+    "UpdateProjectCategoryRelForm": {
+      "submitButtonLabel": "Обновить категорию"
+    },
+    "UpdateProjectCategoryRelModal": {
+      "title": "Изменить категорию"
+    },
+    "UpdateProjectDeadlineForm": {
+      "submitButtonLabel": "Обновить срок выполнения"
+    },
+    "UpdateProjectDeadlineModal": {
+      "title": "Изменить срок выполнения"
+    },
+    "UpdateProjectCustomerForm": {
+      "submitButtonLabel": "Обновить клиента"
+    },
+    "UpdateProjectCustomerModal": {
+      "title": "Изменить клиента"
+    },
+    "ProjectActiveTasksDetailStat": {
+      "text": "Активные задачи"
+    },
+    "ProjectPendingTasksDetailStat": {
+      "text": "Ожидающие задачи"
+    },
+    "ProjectCompletedTasksDetailStat": {
+      "text": "Завершенные задачи"
+    },
+    "DeleteProjectModalTrigger": {
+      "label": "Удалить проект"
+    }
+  },
+  "search": {
+    "SearchListItem": {
+      "deadlineOn": "Срок до {date}"
+    },
+    "SearchToggleButtonGroup": {
+      "users": "Пользователи",
+      "tasks": "Задачи",
+      "projects": "Проекты",
+      "customers": "Клиенты"
+    },
+    "SearchModalTrigger": {
+      "placeholder": "Поиск",
+      "clearButtonLabel": "Очистить поиск"
+    },
+    "SearchEmptySection": {
+      "heading": "Ничего не найдено",
+      "description": "По вашему запросу нет результатов. Попробуйте изменить формулировку или проверить орфографию."
+    },
+    "SearchModal": {
+      "dialogHeading": "Поиск",
+      "closeButtonLabel": "Закрыть"
+    },
+    "SearchField": {
+      "ariaLabel": "Поиск",
+      "placeholder": "Поиск"
+    },
+    "SearchPaginationStatus": {
+      "tasks": "Задачи",
+      "projects": "Проекты",
+      "of": "из"
+    }
+  },
+  "subtasks": {
+    "UpdateSubtaskForm": {
+      "submitButtonLabel": "Обновить подзадачу",
+      "successMessage": "Подзадача успешно обновлена"
+    },
+    "CreateSubtaskForm": {
+      "submitButtonLabel": "Добавить подзадачу",
+      "successMessage": "Подзадача успешно добавлена"
+    },
+    "DeleteSubtaskModal": {
+      "heading": "Удалить подзадачу",
+      "text": "Вы уверены, что хотите удалить подзадачу <strong>«{text}»</strong>?",
+      "deleteButton": "Удалить",
+      "cancelButton": "Отмена",
+      "successMessage": "Подзадача успешно удалена"
+    },
+    "SubtaskActionMenuTrigger": {
+      "edit": "Редактировать",
+      "done": "Отметить как «Выполнено»",
+      "undone": "Отметить как «Не выполнено»",
+      "delete": "Удалить",
+      "toggleSuccess": "Подзадача успешно обновлена"
+    },
+    "SubtasksCheckboxGroup": {
+      "label": "Подзадачи"
+    },
+    "SubtaskTextField": {
+      "label": "Текст",
+      "placeholder": "Введите текст подзадачи...",
+      "validation": {
+        "required": "Текст подзадачи обязателен",
+        "tooLong": "Текст подзадачи слишком длинный"
+      }
+    },
+    "SubtaskFormDialogHeader": {
+      "heading": "Новая подзадача"
+    },
+    "CreateSubtaskModal": {
+      "heading": "Новая подзадача"
+    },
+    "UpdateSubtaskModal": {
+      "heading": "Редактировать подзадачу"
+    },
+    "CreateSubtaskDialogAddButton": {
+      "label": "Добавить подзадачу"
+    },
+    "CreateSubtasksButton": {
+      "label": "Новая подзадача"
+    },
+    "SubtasksCard": {
+      "title": "Подзадачи"
+    }
+  },
+  "taskCategories": {
+    "TaskCategoryCheckboxGroup": {
+      "label": "Категория"
+    },
+    "TaskCategorySelect": {
+      "label": "Категория",
+      "noTaskCategory": "Нет категории"
+    },
+    "TaskCategoriesEmptySectionCreateButton": {
+      "label": "Новая категория задач"
+    },
+    "CreateTaskCategoryForm": {
+      "submitButtonLabel": "Создать категорию",
+      "successMessage": "Категория задач успешно создана"
+    },
+    "CreateTaskCategoryModal": {
+      "title": "Новая категория задач"
+    },
+    "TaskCategoryNameTextField": {
+      "label": "Название",
+      "placeholder": "Введите название",
+      "validation": {
+        "required": "Требуется название"
+      }
+    },
+    "TaskCategoryListItem": {
+      "name": "Название"
+    },
+    "TaskCategoryActionsMenuTrigger": {
+      "dialogHeading": "Действия",
+      "delete": "Удалить"
+    },
+    "CreateTaskCategoryModalTrigger": {
+      "label": "Создать новую"
+    },
+    "TaskCategoryListItemActionMenuTrigger": {
+      "edit": "Редактировать",
+      "delete": "Удалить"
+    },
+    "UpdateTaskCategoryForm": {
+      "submitButtonLabel": "Обновить категорию задачи",
+      "successMessage": "Категория задач успешно обновлена"
+    },
+    "UpdateTaskCategoryModal": {
+      "title": "Изменить категорию задачи"
+    },
+    "DeleteTaskCategoriesModal": {
+      "heading": "Удалить категории задач",
+      "text": "Вы уверены, что хотите удалить <strong>{count} выбранные категории задач</strong>? Все содержимое будет безвозвратно удалено.",
+      "cancelButton": "Отменить",
+      "deleteButton": "Удалить",
+      "successMessage": "Категории задач успешно удалены"
+    },
+    "DeleteTaskCategoryModal": {
+      "heading": "Удалить категорию задач",
+      "text": "Вы уверены, что хотите удалить категорию задач <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
+      "cancelButton": "Отменить",
+      "deleteButton": "Удалить",
+      "successMessage": "Категория задач успешно удалена"
+    }
+  },
+  "tasks": {
+    "NoActiveTasksSwitch": {
+      "text": "Нет активных задач"
+    },
+    "ActiveTasksSwitch": {
+      "text": "Есть активные задачи"
+    },
+    "OverdueTasksSwitch": {
+      "text": "Есть просроченные задачи"
+    },
+    "TaskSearchModal": {
+      "heading": "Поиск задач"
+    },
+    "TaskContainer": {
+      "notFound": "Задача не найдена. Возможно, она была удалена другим пользователем."
+    },
+    "UpdateTaskForm": {
+      "submitButtonLabel": "Обновить задачу",
+      "successMessage": "Задача успешно обновлена"
+    },
+    "CreateTaskForm": {
+      "submitButtonLabel": "Создать задачу",
+      "successMessage": "Задача успешно создана"
+    },
+    "TaskDetailCard": {
+      "title": "Детали задачи"
+    },
+    "TaskDetailActions": {
+      "delete": "Удалить задачу",
+      "edit": "Редактировать задачу",
+      "comments": "Комментарии"
+    },
+    "AssignedTasksSectionHeading": {
+      "text": "Назначенные задачи"
+    },
+    "TasksEmptySection": {
+      "heading": "Нет задач",
+      "description": "Создайте новую задачу, чтобы отслеживать свою работу",
+      "button": "Новая задача"
+    },
+    "TotalTasksCard": {
+      "text": "Всего задач"
+    },
+    "TaskGridItemProgress": {
+      "ariaLabel": "Прогресс задачи"
+    },
+    "TaskListItem": {
+      "assignee": "Исполнитель",
+      "noAssignee": "Без исполнителя",
+      "category": "Категория",
+      "noCategory": "Без категории",
+      "project": "Проект",
+      "noProject": "Без проекта"
+    },
+    "TaskSortingMenuTrigger": {
+      "byTitle": "По названию",
+      "byDeadline": "По сроку",
+      "byStatus": "По статусу",
+      "byCreatedAt": "По дате создания"
+    },
+    "TaskFiltersModal": {
+      "heading": "Фильтры задач"
+    },
+    "TaskActionsMenuTrigger": {
+      "dialogHeading": "Действия",
+      "delete": "Удалить",
+      "pending": "Отметить как «В ожидании»",
+      "active": "Отметить как «Активно»",
+      "completed": "Отметить как «Завершено»"
+    },
+    "TaskItemActionMenuTrigger": {
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "markPending": "Пометить как ожидающую",
+      "markCompleted": "Пометить как выполненную",
+      "markActive": "Пометить как активную",
+      "details": "Открыть детали"
+    },
+    "CreateTaskMenuTrigger": {
+      "label": "Создать новую",
+      "dialogHeading": "Создать новую",
+      "items": {
+        "task": "Задачу",
+        "category": "Категорию"
+      }
+    },
+    "CreateTaskModalTrigger": {
+      "label": "Новая задача"
+    },
+    "DeleteTaskModal": {
+      "heading": "Удалить задачу",
+      "text": "Вы уверены, что хотите удалить <strong>«{name}»</strong>? Всё содержимое будет безвозвратно удалено.",
+      "deleteButton": "Удалить",
+      "cancelButton": "Отмена",
+      "successMessage": "Задача успешно удалена"
+    },
+    "DeleteTasksModal": {
+      "heading": "Удалить задачи",
+      "text": "Вы уверены, что хотите удалить <strong>{count} выбранных задач</strong>? Всё содержимое будет безвозвратно удалено.",
+      "deleteButton": "Удалить",
+      "cancelButton": "Отмена",
+      "successMessage": "Задачи успешно удалены"
+    },
+    "CreateTaskModal": {
+      "title": "Новая задача"
+    },
+    "UpdateTaskModal": {
+      "title": "Редактировать задачу"
+    },
+    "TaskCommentsModal": {
+      "title": "Комментарии к задаче"
+    },
+    "TaskDetailSideSheet": {
+      "dialogHeading": "Детали задачи",
+      "openInFullPage": "Открыть задачу"
+    },
+    "OnlyMyTasksSwitch": {
+      "text": "Только мои задачи"
+    },
+    "DeadlineFromDatePicker": {
+      "label": "Дедлайн с"
+    },
+    "DeadlineToDatePicker": {
+      "label": "Дедлайн по"
+    },
+    "TaskStatusCheckboxGroup": {
+      "label": "Статус"
+    },
+    "AssigneeCheckboxGroup": {
+      "label": "Исполнитель"
+    },
+    "TaskTitleTextField": {
+      "label": "Заголовок",
+      "placeholder": "Введите заголовок",
+      "validation": {
+        "required": "«Заголовок» обязателен для заполнения"
+      }
+    },
+    "TaskDescriptionTextField": {
+      "label": "Описание",
+      "placeholder": "Введите описание"
+    },
+    "TaskDeadlineDatePicker": {
+      "label": "Срок выполнения",
+      "validation": {
+        "required": "Укажите срок выполнения"
+      }
+    },
+    "TaskStatusSelect": {
+      "label": "Статус",
+      "placeholder": "Выберите статус",
+      "validation": {
+        "required": "Требуется статус"
+      }
+    },
+    "TaskDetail": {
+      "deadline": "Срок",
+      "description": "Описание",
+      "noDescription": "Нет описания",
+      "creator": "Создатель",
+      "noCreator": "Нет создателя",
+      "category": "Категория",
+      "project": "Проект",
+      "noProject": "Нет проекта",
+      "assignee": "Исполнитель",
+      "noAssignee": "Нет исполнителя",
+      "status": "Статус",
+      "subtasks": "Подзадачи",
+      "noCategory": "Нет категории",
+      "title": "Заголовок",
+      "progress": "Прогресс",
+      "noSubtasks": "Пока нет ни одной подзадачи"
+    },
+    "TaskDetailHeader": {
+      "noCategory": "Нет категории"
+    },
+    "TaskDetailStatusMenuTrigger": {
+      "dialogHeading": "Статус задачи",
+      "items": {
+        "pending": "В ожидании",
+        "active": "Активная",
+        "completed": "Завершённая"
+      }
+    },
+    "TaskStatus": {
+      "pending": "Ожидает",
+      "active": "Активна",
+      "completed": "Завершена",
+      "overdue": "Просрочена"
+    },
+    "TaskManageMenuTrigger": {
+      "categories": "Категории"
+    },
+    "TasksFilteredEmptySection": {
+      "heading": "Задачи не найдены",
+      "description": "По выбранным фильтрам задачи отсутствуют. Попробуйте изменить или сбросить фильтры"
+    },
+    "TaskStatusFiltersModal": {
+      "heading": "Статус"
+    },
+    "TaskStatusFiltersModalTrigger": {
+      "buttonLabel": "Статус"
+    },
+    "TaskCategoryFiltersModalTrigger": {
+      "buttonLabel": "Категория"
+    },
+    "TaskCategoryFiltersModal": {
+      "heading": "Категория"
+    },
+    "TaskResultsCount": {
+      "tasksFound": "{count, plural, one {Найдена # задача} few {Найдено # задачи} many {Найдено # задач} other {Найдено # задач}}"
+    },
+    "TaskProjectFiltersModalTrigger": {
+      "buttonLabel": "Проект"
+    },
+    "TaskProjectFiltersModal": {
+      "heading": "Проект"
+    },
+    "AssigneeFiltersModal": {
+      "heading": "Исполнитель"
+    },
+    "AssigneeFiltersModalTrigger": {
+      "buttonLabel": "Исполнитель"
+    },
+    "UpdateTaskTitleForm": {
+      "submitButtonLabel": "Обновить заголовок"
+    },
+    "UpdateTaskTitleModal": {
+      "title": "Изменить заголовок"
+    },
+    "UpdateTaskDescriptionForm": {
+      "submitButtonLabel": "Обновить описание"
+    },
+    "UpdateTaskDescriptionModal": {
+      "title": "Изменить описание"
+    },
+    "UpdateTaskDeadlineForm": {
+      "submitButtonLabel": "Обновить срок выполнения"
+    },
+    "UpdateTaskDeadlineModal": {
+      "title": "Изменить срок выполнения"
+    },
+    "UpdateTaskStatusForm": {
+      "submitButtonLabel": "Обновить статус"
+    },
+    "UpdateTaskStatusModal": {
+      "title": "Изменить статус"
+    },
+    "UpdateTaskAssigneeForm": {
+      "submitButtonLabel": "Обновить исполнителя"
+    },
+    "UpdateTaskAssigneeModal": {
+      "title": "Изменить исполнителя"
+    },
+    "UpdateTaskCategoryRelForm": {
+      "submitButtonLabel": "Обновить категорию"
+    },
+    "UpdateTaskCategoryRelModal": {
+      "title": "Изменить категорию"
+    },
+    "UpdateTaskProjectForm": {
+      "submitButtonLabel": "Обновить проект"
+    },
+    "UpdateTaskProjectModal": {
+      "title": "Изменить проект"
+    },
+    "DeleteTaskModalTrigger": {
+      "label": "Удалить задачу"
+    }
+  },
+  "users": {
+    "UserSearchModal": {
+      "heading": "Поиск пользователей"
+    },
+    "UserSelect": {
+      "label": "Исполнитель",
+      "noAssignee": "Нет исполнителя"
+    },
+    "UserContainer": {
+      "notFound": "Пользователь не найден. Возможно, он был удален другим пользователем."
+    },
+    "ChangePasswordModal": {
+      "title": "Изменить пароль"
+    },
+    "ChangePasswordForm": {
+      "submitButtonLabel": "Изменить пароль",
+      "successMessage": "Пароль успешно изменен"
+    },
+    "UpdateUserForm": {
+      "submitButtonLabel": "Обновить пользователя",
+      "successMessage": "Пользователь успешно обновлен"
+    },
+    "CreateUserForm": {
+      "submitButtonLabel": "Создать пользователя",
+      "successMessage": "Пользователь успешно создан"
+    },
+    "CreateUserModal": {
+      "title": "Новый пользователь"
+    },
+    "UpdateUserModal": {
+      "title": "Изменить пользователя"
+    },
+    "UserFullNameTextField": {
+      "label": "Полное имя",
+      "placeholder": "Введите полное имя",
+      "validation": {
+        "required": "«Полное имя» обязательно для заполнения"
+      }
+    },
+    "UserBioTextField": {
+      "label": "О себе",
+      "placeholder": "Введите информацию о себе"
+    },
+    "UserBirthdateDatePicker": {
+      "label": "Дата рождения"
+    },
+    "UserPhoneNumberTextField": {
+      "label": "Номер телефона",
+      "placeholder": "Введите номер телефона"
+    },
+    "UserPublicLinkTextField": {
+      "label": "Публичная ссылка",
+      "placeholder": "Введите публичную ссылку",
+      "validation": {
+        "format": "Введите корректный URL, например https://example.com"
+      }
+    },
+    "UserAddressTextField": {
+      "label": "Адрес",
+      "placeholder": "Введите адрес"
+    },
+    "UserEmailTextField": {
+      "label": "Email",
+      "placeholder": "Введите email",
+      "validation": {
+        "required": "Требуется электронная почта",
+        "format": "Введите корректный адрес электронной почты, например user@example.com"
+      }
+    },
+    "UserPasswordTextField": {
+      "password": {
+        "label": "Пароль",
+        "placeholder": "Введите ваш пароль"
+      },
+      "validation": {
+        "required": "Требуется пароль",
+        "tooShort": "Пароль слишком короткий. Он должен содержать не менее {minLength} символов."
+      }
+    },
+    "TotalUsersCard": {
+      "text": "Всего пользователей"
+    },
+    "UserSortingMenuTrigger": {
+      "byFullName": "По полному имени",
+      "byPosition": "По должности"
+    },
+    "ProfileActions": {
+      "deleteAccount": "Удалить аккаунт",
+      "changePassword": "Сменить пароль",
+      "editAccount": "Редактировать аккаунт",
+      "delete": "Удалить пользователя",
+      "changePasswordSuccessMessage": "Пароль успешно изменен"
+    },
+    "ProfileNavigationLarge": {
+      "userInformation": "Детали пользователя",
+      "assignedTasks": "Назначенные задачи"
+    },
+    "ProfileNavigationMobile": {
+      "info": "Детали",
+      "assignedTasks": "Задачи"
+    },
+    "UserDetail": {
+      "bio": "Биография",
+      "noBio": "Этот пользователь еще не написал биографию.",
+      "fullName": "Полное имя",
+      "noFullName": "Имя не указано",
+      "email": "Адрес электронной почты",
+      "phoneNumber": "Номер телефона",
+      "noPhoneNumber": "Номер телефона не указан",
+      "address": "Адрес",
+      "noAddress": "Адрес не указан",
+      "publicLink": "Публичная ссылка",
+      "noPublicLink": "Публичная ссылка отсутствует",
+      "company": "Компания",
+      "position": "Должность",
+      "noPosition": "Должность не указана",
+      "birthdate": "Дата рождения",
+      "noBirthdate": "Дата рождения не указана"
+    },
+    "UserDetailCard": {
+      "title": "Детали пользователя"
+    },
+    "UserDetailContainer": {
+      "noPosition": "Нет должности"
+    },
+    "UserDetailSideSheet": {
+      "dialogHeading": "Детали пользователя",
+      "openInFullPage": "Открыть пользователя"
+    },
+    "UserFiltersFormRoleCheckboxGroup": {
+      "label": "Роль",
+      "items": {
+        "admin": "Администратор",
+        "manager": "Менеджер",
+        "user": "Пользователь"
+      }
+    },
+    "PositionCheckboxGroup": {
+      "label": "Должность"
+    },
+    "UserItemActionMenuTrigger": {
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "details": "Открыть детали"
+    },
+    "DeleteUserModal": {
+      "heading": "Удалить пользователя",
+      "text": "Вы уверены, что хотите удалить пользователя <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
+      "deleteButton": "Удалить",
+      "cancelButton": "Отменить",
+      "successMessage": "Пользователь успешно удален"
+    },
+    "DeleteUserImageModal": {
+      "heading": "Удалить изображение",
+      "text": "Вы уверены, что хотите удалить изображение пользователя <strong>«{name}»</strong>?",
+      "deleteButton": "Удалить",
+      "cancelButton": "Отменить",
+      "successMessage": "Изображение успешно удалено"
+    },
+    "UserGridItem": {
+      "noPosition": "Нет должности",
+      "noPhoneNumber": "Номер телефона не указан",
+      "noPublicLink": "Публичная ссылка отсутствует"
+    },
+    "UserDetailHeader": {
+      "noPosition": "Нет должности"
+    },
+    "UserListItem": {
+      "checkboxAriaLabel": "чекбокс пользователя",
+      "phoneNumber": "Номер телефона",
+      "noPhoneNumber": "Нет номера телефона",
+      "publicLink": "Публичная ссылка",
+      "noPublicLink": "Нет публичной ссылки",
+      "position": "Должность",
+      "noPosition": "Нет должности"
+    },
+    "UserNavigationLarge": {
+      "userInformation": "Детали пользователя",
+      "assignedTasks": "Назначенные задачи"
+    },
+    "UserNavigationMobile": {
+      "info": "Детали",
+      "assignedTasks": "Задачи"
+    },
+    "UserTaskListItem": {
+      "checkboxAriaLabel": "чекбокс задачи",
+      "noDeadline": "Без дедлайна",
+      "deadlineOn": "Срок до {date}"
+    },
+    "UserTasksPageEmptyLayout": {
+      "title": "Задачи"
+    },
+    "UserTasksPageLayout": {
+      "title": "Задачи"
+    },
+    "UserFiltersModal": {
+      "heading": "Фильтры пользователей"
+    },
+    "CreateUserMenuTrigger": {
+      "dialogHeading": "Создать нового",
+      "label": "Создать нового",
+      "items": {
+        "user": "Пользователь",
+        "position": "Должность"
+      }
+    },
+    "UserManageMenuTrigger": {
+      "positions": "Должности"
+    },
+    "UsersFilteredEmptySection": {
+      "heading": "Пользователи не найдены",
+      "description": "По выбранным фильтрам пользователи отсутствуют. Попробуйте изменить или сбросить фильтры"
+    },
+    "UserResultsCount": {
+      "usersFound": "{count, plural, one {Найден # пользователь} few {Найдено # пользователя} many {Найдено # пользователей} other {Найдено # пользователей}}"
+    },
+    "UserPositionFiltersModal": {
+      "heading": "Должность",
+      "label": "Должность"
+    },
+    "UserImageMenuTrigger": {
+      "label": "Меню изображения профиля"
+    },
+    "UpdateUserBioModal": {
+      "title": "Изменить биографию"
+    },
+    "UpdateUserFullNameModal": {
+      "title": "Изменить полное имя"
+    },
+    "UpdateUserPhoneNumberModal": {
+      "title": "Изменить номер телефон"
+    },
+    "UpdateUserBirthdateModal": {
+      "title": "Изменить дату рождения"
+    },
+    "UpdateUserAddressModal": {
+      "title": "Изменить адрес"
+    },
+    "UpdateUserPublicLinkModal": {
+      "title": "Изменить публичную ссылку"
+    },
+    "UpdateUserPositionModal": {
+      "title": "Изменить должность"
+    },
+    "UpdateUserPublicLinkForm": {
+      "submitButtonLabel": "Обновить публичную ссылку"
+    },
+    "UpdateUserPhoneNumberForm": {
+      "submitButtonLabel": "Обновить номер телефона"
+    },
+    "UpdateUserFullNameForm": {
+      "submitButtonLabel": "Обновить полное имя"
+    },
+    "UpdateUserAddressForm": {
+      "submitButtonLabel": "Обновить адрес"
+    },
+    "UpdateUserBioForm": {
+      "submitButtonLabel": "Обновить биографию"
+    },
+    "UpdateUserBirthdateForm": {
+      "submitButtonLabel": "Обновить дату рождения"
+    },
+    "UpdateUserPositionForm": {
+      "submitButtonLabel": "Обновить должность"
+    }
+  }
+}

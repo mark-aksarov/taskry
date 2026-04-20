@@ -3,45 +3,45 @@ import {
   ToolbarMobile,
   ToolbarSearchMobile,
   ToolbarFiltersMobile,
-} from "@/components/common/Toolbar";
+} from "@/dashboard/common/Toolbar";
 
 import {
   ProjectManageMenuTriggerLarge,
   ProjectManageMenuTriggerMobile,
-} from "@/components/projects/ProjectManageMenuTrigger";
+} from "@/dashboard/projects/ProjectManageMenuTrigger";
 
 import {
   ProjectSortingMenuTriggerLarge,
   ProjectSortingMenuTriggerMobile,
-} from "@/components/projects/ProjectSortingMenuTrigger";
+} from "@/dashboard/projects/ProjectSortingMenuTrigger";
 
 import {
   CreateProjectMenuTriggerLarge,
   CreateProjectMenuTriggerMobile,
-} from "@/components/projects/CreateProjectMenuTrigger";
+} from "@/dashboard/projects/CreateProjectMenuTrigger";
 
 import {
   ProjectFiltersModalTriggerLarge,
   ProjectFiltersModalTriggerMobile,
-} from "@/components/projects/ProjectFiltersModal";
+} from "@/dashboard/projects/ProjectFiltersModal";
 
 import { useTranslations } from "next-intl";
 import { ProjectSortField } from "@/lib/types";
-import { PageGrid } from "@/components/common/PageGrid";
-import { ViewModeProvider } from "@/components/common/ViewMode";
-import { PageContainer } from "@/components/common/PageContainer";
-import { PageEmptySection } from "@/components/common/PageEmptySection";
-import { ViewModeToggleButtonGroup } from "@/components/common/ViewMode";
-import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { SearchModalTrigger } from "@/components/search/SearchModalTrigger";
-import { ProjectResultsCount } from "@/components/projects/ProjectResultsCount";
-import { ProjectActionsMenuTrigger } from "@/components/projects/ProjectActionsMenuTrigger";
-import { ProjectsFilteredEmptySection } from "@/components/projects/ProjectsFilteredEmptySection";
-import { ProjectStatusFiltersModalTrigger } from "@/components/projects/ProjectStatusFiltersModal";
-import { ProjectCreatorFiltersModalTrigger } from "@/components/projects/ProjectCreatorFiltersModal";
-import { ProjectCategoryFiltersModalTrigger } from "@/components/projects/ProjectCategoryFiltersModal";
-import { ProjectCustomerFiltersModalTrigger } from "@/components/projects/ProjectCustomerFiltersModal";
-import { ProjectsEmptySectionCreateButton } from "@/components/projects/ProjectsEmptySectionCreateButton";
+import { PageGrid } from "@/dashboard/common/PageGrid";
+import { ViewModeProvider } from "@/dashboard/common/ViewMode";
+import { PageContainer } from "@/dashboard/common/PageContainer";
+import { PageEmptySection } from "@/dashboard/common/PageEmptySection";
+import { ViewModeToggleButtonGroup } from "@/dashboard/common/ViewMode";
+import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
+import { SearchModalTrigger } from "@/dashboard/search/SearchModalTrigger";
+import { ProjectResultsCount } from "@/dashboard/projects/ProjectResultsCount";
+import { ProjectActionsMenuTrigger } from "@/dashboard/projects/ProjectActionsMenuTrigger";
+import { ProjectsFilteredEmptySection } from "@/dashboard/projects/ProjectsFilteredEmptySection";
+import { ProjectStatusFiltersModalTrigger } from "@/dashboard/projects/ProjectStatusFiltersModal";
+import { ProjectCreatorFiltersModalTrigger } from "@/dashboard/projects/ProjectCreatorFiltersModal";
+import { ProjectCategoryFiltersModalTrigger } from "@/dashboard/projects/ProjectCategoryFiltersModal";
+import { ProjectCustomerFiltersModalTrigger } from "@/dashboard/projects/ProjectCustomerFiltersModal";
+import { ProjectsEmptySectionCreateButton } from "@/dashboard/projects/ProjectsEmptySectionCreateButton";
 
 interface ProjectsPageProps {
   totalCount: number;

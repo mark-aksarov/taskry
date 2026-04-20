@@ -1,18 +1,18 @@
 import {
   CreateCompanyModalTriggerLarge,
   CreateCompanyModalTriggerMobile,
-} from "@/components/company/CreateCompanyModalTrigger";
+} from "@/dashboard/company/CreateCompanyModalTrigger";
 
 import { useTranslations } from "next-intl";
-import { PageGrid } from "@/components/common/PageGrid";
-import { BackButton } from "@/components/common/BackButton";
-import { ViewModeProvider } from "@/components/common/ViewMode";
-import { PageContainer } from "@/components/common/PageContainer";
-import { PageEmptySection } from "@/components/common/PageEmptySection";
-import { PageHeadingMobile } from "@/components/common/PageHeadingMobile";
-import { ToolbarLarge, ToolbarMobile } from "@/components/common/Toolbar";
-import { CompanyActionsMenuTrigger } from "@/components/company/CompanyActionsMenuTrigger";
-import { CompaniesEmptySectionCreateButton } from "@/components/company/CompaniesEmptySectionCreateButton";
+import { PageGrid } from "@/dashboard/common/PageGrid";
+import { BackButton } from "@/dashboard/common/BackButton";
+import { ViewModeProvider } from "@/dashboard/common/ViewMode";
+import { PageContainer } from "@/dashboard/common/PageContainer";
+import { PageEmptySection } from "@/dashboard/common/PageEmptySection";
+import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
+import { ToolbarLarge, ToolbarMobile } from "@/dashboard/common/Toolbar";
+import { CompanyActionsMenuTrigger } from "@/dashboard/company/CompanyActionsMenuTrigger";
+import { CompaniesEmptySectionCreateButton } from "@/dashboard/company/CompaniesEmptySectionCreateButton";
 
 interface CompaniesPageProps {
   totalCount: number;
