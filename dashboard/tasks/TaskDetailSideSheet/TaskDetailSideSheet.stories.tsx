@@ -13,7 +13,7 @@ import { SubtaskListExample } from "@/dashboard/subtasks/SubtaskList/__stories__
 import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
 
 const meta = {
-  title: "components/tasks/TaskDetailSideSheet",
+  title: "dashboard/tasks/TaskDetailSideSheet",
   component: TaskDetailSideSheet,
   decorators: [
     withOpenModal,

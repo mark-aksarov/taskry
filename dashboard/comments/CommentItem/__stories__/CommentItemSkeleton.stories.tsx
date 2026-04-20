@@ -3,7 +3,7 @@ import { CommentItemSkeleton } from "../CommentItemSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/comments/CommentItemSkeleton",
+  title: "dashboard/comments/CommentItemSkeleton",
   component: CommentItemSkeleton,
   decorators: [withThemedBackground],
   parameters: {

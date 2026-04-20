@@ -10,7 +10,7 @@ import { withDeleteCompanyProvider } from "../DeleteCompanyProvider/__stories__"
 import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
 
 const meta = {
-  title: "components/companies/DeleteCompanyModal",
+  title: "dashboard/companies/DeleteCompanyModal",
   component: DeleteCompanyModal,
   decorators: [
     withOpenModal,

@@ -9,7 +9,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCreateCompanyProvider } from "../CreateCompanyProvider/__stories__";
 
 const meta = {
-  title: "components/companies/CreateCompanyModal",
+  title: "dashboard/companies/CreateCompanyModal",
   component: CreateCompanyModal,
   decorators: [
     withOpenModal,

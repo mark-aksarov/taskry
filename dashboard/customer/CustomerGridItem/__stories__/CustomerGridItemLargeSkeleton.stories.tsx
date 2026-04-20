@@ -3,7 +3,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerGridItemLargeSkeleton } from "../CustomerGridItemSkeleton";
 
 const meta = {
-  title: "components/customers/CustomerGridItemLargeSkeleton",
+  title: "dashboard/customers/CustomerGridItemLargeSkeleton",
   component: CustomerGridItemLargeSkeleton,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof CustomerGridItemLargeSkeleton>;

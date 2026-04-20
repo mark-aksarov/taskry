@@ -16,7 +16,7 @@ import {
 } from "@/dashboard/common/ModalManagerContext/__stories__";
 
 const meta = {
-  title: "components/projects/ProjectCategoryFiltersModal",
+  title: "dashboard/projects/ProjectCategoryFiltersModal",
   component: ProjectCategoryFiltersModal,
   decorators: [
     withOpenModal,

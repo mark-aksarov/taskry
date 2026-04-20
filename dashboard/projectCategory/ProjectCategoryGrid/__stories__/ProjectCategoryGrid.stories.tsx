@@ -8,7 +8,7 @@ import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsConte
 import { withDeleteProjectCategoriesProvider } from "../../DeleteProjectCategoriesProvider/__stories__";
 
 const meta = {
-  title: "components/project-categories/ProjectCategoryGrid",
+  title: "dashboard/project-categories/ProjectCategoryGrid",
   component: ProjectCategoryGrid,
   decorators: [
     withDeleteProjectCategoriesProvider,

@@ -16,7 +16,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateUserPositionProvider } from "../UpdateUserPositionProvider/__stories__";
 
 const meta = {
-  title: "components/users/UpdateUserPositionModal",
+  title: "dashboard/users/UpdateUserPositionModal",
   component: UpdateUserPositionModal,
   decorators: [
     withOpenModal,

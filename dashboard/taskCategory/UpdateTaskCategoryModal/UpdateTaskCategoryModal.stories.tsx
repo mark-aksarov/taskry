@@ -9,7 +9,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateTaskCategoryProvider } from "../UpdateTaskCategoryProvider/__stories__";
 
 const meta = {
-  title: "components/task-categories/UpdateTaskCategoryModal",
+  title: "dashboard/task-categories/UpdateTaskCategoryModal",
   component: UpdateTaskCategoryModal,
   decorators: [
     withOpenModal,

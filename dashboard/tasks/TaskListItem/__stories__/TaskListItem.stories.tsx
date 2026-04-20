@@ -16,7 +16,7 @@ import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionCon
 const mockedTask = mockedTaskList[0];
 
 const meta = {
-  title: "components/tasks/TaskListItem",
+  title: "dashboard/tasks/TaskListItem",
   component: TaskListItem,
   decorators: [
     withUpdateTaskStatusProvider,

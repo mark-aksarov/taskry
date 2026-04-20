@@ -5,7 +5,7 @@ import { withUpdateProjectStatusProvider } from "../UpdateProjectStatusProvider/
 import { withUpdateProjectStatusesProvider } from "../UpdateProjectStatusesProvider/__stories__";
 
 const meta: Meta<typeof ProjectItemStatusBadge> = {
-  title: "components/projects/ProjectItemStatusBadge",
+  title: "dashboard/projects/ProjectItemStatusBadge",
   component: ProjectItemStatusBadge,
   decorators: [
     withUpdateProjectStatusProvider,

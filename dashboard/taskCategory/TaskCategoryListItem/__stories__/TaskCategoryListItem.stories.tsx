@@ -10,7 +10,7 @@ import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsConte
 import { withDeleteTaskCategoriesProvider } from "../../DeleteTaskCategoriesProvider/__stories__";
 
 const meta = {
-  title: "components/task-categories/TaskCategoryListItem",
+  title: "dashboard/task-categories/TaskCategoryListItem",
   component: TaskCategoryListItem,
   decorators: [
     withUpdateTaskCategoryProvider,

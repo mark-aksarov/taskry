@@ -10,7 +10,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateUserFullNameProvider } from "../UpdateUserFullNameProvider/__stories__";
 
 const meta = {
-  title: "components/users/UpdateUserFullNameModal",
+  title: "dashboard/users/UpdateUserFullNameModal",
   component: UpdateUserFullNameModal,
   decorators: [
     withOpenModal,

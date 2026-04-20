@@ -10,7 +10,7 @@ import { UpdateProjectDescriptionModal } from "./UpdateProjectDescriptionModal";
 import { withUpdateProjectDescriptionProvider } from "../UpdateProjectDescriptionProvider/__stories__";
 
 const meta = {
-  title: "components/projects/UpdateProjectDescriptionModal",
+  title: "dashboard/projects/UpdateProjectDescriptionModal",
   component: UpdateProjectDescriptionModal,
   decorators: [
     withOpenModal,

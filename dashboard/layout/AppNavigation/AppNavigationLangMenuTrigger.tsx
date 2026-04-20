@@ -2,11 +2,11 @@
 
 import { Languages } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { LangMenuTrigger } from "@/common/LangMenuTrigger";
 import { NavigationButton } from "@/dashboard/common/NavigationButton";
-import { LangMenuTrigger } from "@/dashboard/common/LangMenuTrigger";
 
 export const AppNavigationLangMenuTrigger = () => {
-  const t = useTranslations("dashboard.common.LangMenuTrigger");
+  const t = useTranslations("common.LangMenuTrigger");
   return (
     <LangMenuTrigger
       renderButton={() => (

@@ -11,7 +11,7 @@ import { withDeleteProjectProvider } from "../DeleteProjectProvider/__stories__"
 import { withSelectedProjectsProvider } from "../SelectedProjectsContext/__stories__";
 
 const meta = {
-  title: "components/projects/DeleteProjectModal",
+  title: "dashboard/projects/DeleteProjectModal",
   component: DeleteProjectModal,
   decorators: [
     withOpenModal,

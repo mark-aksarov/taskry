@@ -9,7 +9,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCreateUserProvider } from "../CreateUserProvider/__stories__";
 
 const meta = {
-  title: "components/users/CreateUserModal",
+  title: "dashboard/users/CreateUserModal",
   component: CreateUserModal,
   decorators: [
     withOpenModal,

@@ -5,7 +5,7 @@ import { withUpdateTaskStatusProvider } from "../UpdateTaskStatusProvider/__stor
 import { withUpdateTaskStatusesProvider } from "../UpdateTaskStatusesProvider/__stories__";
 
 const meta: Meta<typeof TaskItemStatusBadge> = {
-  title: "components/tasks/TaskItemStatusBadge",
+  title: "dashboard/tasks/TaskItemStatusBadge",
   component: TaskItemStatusBadge,
   decorators: [
     withUpdateTaskStatusProvider,

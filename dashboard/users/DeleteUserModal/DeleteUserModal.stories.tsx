@@ -11,7 +11,7 @@ import { withDeleteUserProvider } from "../DeleteUserProvider/__stories__";
 import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
 
 const meta = {
-  title: "components/users/DeleteUserModal",
+  title: "dashboard/users/DeleteUserModal",
   component: DeleteUserModal,
   decorators: [
     withOpenModal,

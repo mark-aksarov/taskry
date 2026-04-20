@@ -17,7 +17,7 @@ import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsConte
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
 
 const meta = {
-  title: "components/customers/CustomerFiltersModal",
+  title: "dashboard/customers/CustomerFiltersModal",
   component: CustomerFiltersModal,
   decorators: [
     withOpenModal,

@@ -16,7 +16,7 @@ import { withUserFiltersProvider } from "../UserFiltersContext/__stories__";
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
 
 const meta = {
-  title: "components/users/UserPositionFiltersModal",
+  title: "dashboard/users/UserPositionFiltersModal",
   component: UserPositionFiltersModal,
   decorators: [
     withOpenModal,

@@ -6,8 +6,8 @@ import { RussiaFlag } from "@/icons/RussiaFlag";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { ResponsiveMenuTrigger } from "./ResponsiveMenuTrigger";
-import { DialogHeaderWithClose } from "./DialogHeaderWithClose";
+import { ResponsiveMenuTrigger } from "../dashboard/common/ResponsiveMenuTrigger";
+import { DialogHeaderWithClose } from "../dashboard/common/DialogHeaderWithClose";
 import { UnitedKingdomFlag } from "@/icons/UnitedKingdomFlag";
 
 interface LangMenuTriggerProps {
@@ -19,7 +19,7 @@ export const LangMenuTrigger = ({
   renderButton,
   placement = "bottom right",
 }: LangMenuTriggerProps) => {
-  const t = useTranslations("dashboard.common.LangMenuTrigger");
+  const t = useTranslations("common.LangMenuTrigger");
   const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale();

@@ -3,7 +3,7 @@ import { TotalCustomersCard } from "./TotalCustomersCard";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/customers/TotalCustomersCard",
+  title: "dashboard/customers/TotalCustomersCard",
   component: TotalCustomersCard,
   decorators: [withThemedBackground],
   args: {

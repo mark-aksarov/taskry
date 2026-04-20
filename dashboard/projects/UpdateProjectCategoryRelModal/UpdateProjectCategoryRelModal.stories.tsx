@@ -16,7 +16,7 @@ import { UpdateProjectCategoryRelModal } from "./UpdateProjectCategoryRelModal";
 import { withUpdateProjectCategoryRelProvider } from "../UpdateProjectCategoryRelProvider/__stories__";
 
 const meta = {
-  title: "components/projects/UpdateProjectCategoryRelModal",
+  title: "dashboard/projects/UpdateProjectCategoryRelModal",
   component: UpdateProjectCategoryRelModal,
   decorators: [
     withOpenModal,

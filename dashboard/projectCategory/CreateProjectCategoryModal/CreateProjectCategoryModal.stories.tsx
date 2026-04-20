@@ -9,7 +9,7 @@ import { CreateProjectCategoryModal } from "../CreateProjectCategoryModal";
 import { withCreateProjectCategoryProvider } from "../CreateProjectCategoryProvider/__stories__";
 
 const meta = {
-  title: "components/project-categories/CreateProjectCategoryModal",
+  title: "dashboard/project-categories/CreateProjectCategoryModal",
   component: CreateProjectCategoryModal,
   decorators: [
     withOpenModal,

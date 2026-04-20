@@ -9,7 +9,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCreateTaskCategoryProvider } from "../CreateTaskCategoryProvider/__stories__";
 
 const meta = {
-  title: "components/task-categories/CreateTaskCategoryModal",
+  title: "dashboard/task-categories/CreateTaskCategoryModal",
   component: CreateTaskCategoryModal,
   decorators: [
     withOpenModal,

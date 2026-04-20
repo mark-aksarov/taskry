@@ -8,7 +8,7 @@ import { withModalManagerProvider } from "@/dashboard/common/ModalManagerContext
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
 
 const meta = {
-  title: "components/users/UsersContainer",
+  title: "dashboard/users/UsersContainer",
   component: UsersContainerPresentationExample,
   decorators: [
     withViewModeProvider,

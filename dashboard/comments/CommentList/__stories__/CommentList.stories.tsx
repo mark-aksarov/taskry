@@ -10,7 +10,7 @@ import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/_
 import { withModalManagerProvider } from "@/dashboard/common/ModalManagerContext/__stories__";
 
 const meta = {
-  title: "components/comments/CommentList",
+  title: "dashboard/comments/CommentList",
   tags: ["!dev"],
   component: CommentList,
   decorators: [

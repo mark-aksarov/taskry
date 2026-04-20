@@ -10,7 +10,7 @@ import {
 } from "@/dashboard/common/ModalManagerContext/__stories__";
 
 const meta = {
-  title: "components/companies/DeleteCompaniesModal",
+  title: "dashboard/companies/DeleteCompaniesModal",
   component: DeleteCompaniesModal,
   decorators: [
     withOpenModal,

@@ -9,7 +9,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateSubtaskProvider } from "../UpdateSubtaskProvider/__stories__";
 
 const meta = {
-  title: "components/subtasks/UpdateSubtaskModal",
+  title: "dashboard/subtasks/UpdateSubtaskModal",
   component: UpdateSubtaskModal,
   decorators: [
     withOpenModal,

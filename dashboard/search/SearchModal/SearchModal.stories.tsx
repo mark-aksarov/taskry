@@ -14,7 +14,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withModalManagerProvider } from "@/dashboard/common/ModalManagerContext/__stories__";
 
 const meta = {
-  title: "components/search/SearchModal",
+  title: "dashboard/search/SearchModal",
   component: SearchModal,
   decorators: [
     withModalManagerProvider,

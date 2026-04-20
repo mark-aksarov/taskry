@@ -10,7 +10,7 @@ import { withDeletePositionProvider } from "../DeletePositionProvider/__stories_
 import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
 
 const meta = {
-  title: "components/positions/DeletePositionModal",
+  title: "dashboard/positions/DeletePositionModal",
   component: DeletePositionModal,
   decorators: [
     withOpenModal,

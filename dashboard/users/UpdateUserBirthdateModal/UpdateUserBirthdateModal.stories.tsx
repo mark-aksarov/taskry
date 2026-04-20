@@ -10,7 +10,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateUserBirthdateProvider } from "../UpdateUserBirthdateProvider/__stories__";
 
 const meta = {
-  title: "components/users/UpdateUserBirthdateModal",
+  title: "dashboard/users/UpdateUserBirthdateModal",
   component: UpdateUserBirthdateModal,
   decorators: [
     withOpenModal,

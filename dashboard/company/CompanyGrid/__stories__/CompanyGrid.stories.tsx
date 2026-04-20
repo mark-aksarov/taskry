@@ -8,7 +8,7 @@ import { withModalManagerProvider } from "@/dashboard/common/ModalManagerContext
 import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
 
 const meta = {
-  title: "components/companies/CompanyGrid",
+  title: "dashboard/companies/CompanyGrid",
   component: CompanyGrid,
   decorators: [
     withDeleteCompaniesProvider,

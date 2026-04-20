@@ -10,7 +10,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateTaskStatusAltProvider } from "../UpdateTaskStatusAltProvider/__stories__";
 
 const meta = {
-  title: "components/tasks/UpdateTaskStatusModal",
+  title: "dashboard/tasks/UpdateTaskStatusModal",
   component: UpdateTaskStatusModal,
   decorators: [
     withOpenModal,

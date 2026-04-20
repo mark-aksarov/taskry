@@ -3,7 +3,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/positions/PositionListItemSkeleton",
+  title: "dashboard/positions/PositionListItemSkeleton",
   component: PositionListItemSkeleton,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof PositionListItemSkeleton>;

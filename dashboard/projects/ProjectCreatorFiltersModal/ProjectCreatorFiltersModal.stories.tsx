@@ -18,7 +18,7 @@ import { withSelectedProjectsProvider } from "../SelectedProjectsContext/__stori
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
 
 const meta = {
-  title: "components/projects/ProjectCreatorFiltersModal",
+  title: "dashboard/projects/ProjectCreatorFiltersModal",
   component: ProjectCreatorFiltersModal,
   decorators: [
     withOpenModal,

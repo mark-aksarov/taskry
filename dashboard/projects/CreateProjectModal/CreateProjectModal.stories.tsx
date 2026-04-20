@@ -13,7 +13,7 @@ import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
 import { withCreateProjectProvider } from "../CreateProjectProvider/__stories__";
 
 const meta = {
-  title: "components/projects/CreateProjectModal",
+  title: "dashboard/projects/CreateProjectModal",
   component: CreateProjectModal,
   decorators: [
     withOpenModal,

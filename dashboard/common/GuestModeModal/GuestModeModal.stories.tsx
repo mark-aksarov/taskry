@@ -8,7 +8,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/common/GuestModeModal",
+  title: "dashboard/common/GuestModeModal",
   component: GuestModeModal,
   decorators: [withOpenModal, withModalManagerProvider, withThemedBackground],
   parameters: {

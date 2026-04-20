@@ -10,7 +10,7 @@ import { ProjectDetail, ProjectDetailSkeleton } from "../ProjectDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/projects/ProjectDetailSideSheet",
+  title: "dashboard/projects/ProjectDetailSideSheet",
   component: ProjectDetailSideSheet,
   decorators: [withOpenModal, withModalManagerProvider, withThemedBackground],
   parameters: {

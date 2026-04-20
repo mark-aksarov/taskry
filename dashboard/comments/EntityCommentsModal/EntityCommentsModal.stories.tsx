@@ -19,7 +19,7 @@ import { withCommentFormProvider } from "@/dashboard/comments/CommentForm/__stor
 import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
 
 const meta = {
-  title: "components/comments/EntityCommentsModal",
+  title: "dashboard/comments/EntityCommentsModal",
   component: EntityCommentsModal,
   decorators: [
     withOpenModal,

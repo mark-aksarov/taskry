@@ -1,0 +1,14 @@
+{
+  "LangMenuTrigger": {
+    "dialogHeading": "Language",
+    "label": "English",
+    "items": {
+      "english": "English",
+      "russian": "Russian"
+    }
+  },
+  "ThemeToggleButton": {
+    "darkLabel": "Dark mode",
+    "lightLabel": "Light mode"
+  }
+}

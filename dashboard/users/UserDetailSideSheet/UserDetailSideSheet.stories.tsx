@@ -13,7 +13,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
 
 const meta = {
-  title: "components/users/UserDetailSideSheet",
+  title: "dashboard/users/UserDetailSideSheet",
   component: UserDetailSideSheet,
   decorators: [
     withOpenModal,

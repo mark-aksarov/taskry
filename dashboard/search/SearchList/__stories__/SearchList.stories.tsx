@@ -4,7 +4,7 @@ import { SearchListExample } from "./SearchListExample";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/search/SearchList",
+  title: "dashboard/search/SearchList",
   component: SearchList,
   tags: ["!dev"],
   decorators: [withThemedBackground],

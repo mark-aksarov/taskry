@@ -12,7 +12,7 @@ import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsConte
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
 
 const meta = {
-  title: "components/customers/CustomerGridItemMobile",
+  title: "dashboard/customers/CustomerGridItemMobile",
   component: CustomerGridItemMobile,
   decorators: [
     withUpdateCustomerProvider,

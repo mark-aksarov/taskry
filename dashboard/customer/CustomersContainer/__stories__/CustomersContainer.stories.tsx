@@ -10,7 +10,7 @@ import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsConte
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
 
 const meta = {
-  title: "components/customers/CustomersContainer",
+  title: "dashboard/customers/CustomersContainer",
   component: CustomersContainerPresentationExample,
   decorators: [
     withDeleteCustomersProvider,

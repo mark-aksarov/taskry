@@ -9,7 +9,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withClearUserImageUrlProvider } from "../ClearUserImageUrlProvider/__stories__";
 
 const meta = {
-  title: "components/users/DeleteUserImageModal",
+  title: "dashboard/users/DeleteUserImageModal",
   component: DeleteUserImageModal,
   decorators: [
     withOpenModal,

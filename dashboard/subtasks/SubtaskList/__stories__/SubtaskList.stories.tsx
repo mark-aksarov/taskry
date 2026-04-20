@@ -7,7 +7,7 @@ import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/_
 import { withDeleteTaskProvider } from "@/dashboard/tasks/DeleteTaskProvider/__stories__";
 
 const meta = {
-  title: "components/subtasks/SubtaskList",
+  title: "dashboard/subtasks/SubtaskList",
   component: SubtaskList,
   decorators: [
     withDeleteTaskProvider,

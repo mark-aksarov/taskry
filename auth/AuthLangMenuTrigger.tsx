@@ -6,7 +6,7 @@ import { Button } from "react-aria-components";
 import { RussiaFlag } from "@/icons/RussiaFlag";
 import { useLocale, useTranslations } from "next-intl";
 import { UnitedKingdomFlag } from "@/icons/UnitedKingdomFlag";
-import { LangMenuTrigger } from "@/dashboard/common/LangMenuTrigger";
+import { LangMenuTrigger } from "@/common/LangMenuTrigger";
 
 const styles = tv({
   extend: focusRing,
@@ -14,7 +14,7 @@ const styles = tv({
 });
 
 export const AuthLangMenuTrigger = () => {
-  const t = useTranslations("dashboard.common.LangMenuTrigger");
+  const t = useTranslations("common.LangMenuTrigger");
   const locale = useLocale();
 
   return (

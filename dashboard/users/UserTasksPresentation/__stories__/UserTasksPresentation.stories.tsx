@@ -10,7 +10,7 @@ import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionCon
 import { withUpdateTaskStatusesProvider } from "@/dashboard/tasks/UpdateTaskStatusesProvider/__stories__";
 
 const meta = {
-  title: "components/users/UserTasksPresentation",
+  title: "dashboard/users/UserTasksPresentation",
   component: UserTasksPresentationExample,
   decorators: [
     withUpdateTaskStatusesProvider,

@@ -3,7 +3,7 @@ import { TaskGridItemMobileSkeleton } from "../TaskGridItemSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/tasks/TaskGridItemMobileSkeleton",
+  title: "dashboard/tasks/TaskGridItemMobileSkeleton",
   component: TaskGridItemMobileSkeleton,
   decorators: [withThemedBackground],
   globals: {

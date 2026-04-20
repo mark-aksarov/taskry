@@ -15,7 +15,7 @@ import { withSelectedTasksProvider } from "../SelectedTasksContext/__stories__";
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
 
 const meta = {
-  title: "components/tasks/TaskFiltersModal",
+  title: "dashboard/tasks/TaskFiltersModal",
   component: TaskFiltersModal,
   decorators: [
     withOpenModal,

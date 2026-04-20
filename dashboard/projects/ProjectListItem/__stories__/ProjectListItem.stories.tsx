@@ -16,7 +16,7 @@ import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusesPr
 const mockedProject = mockedProjectList[0];
 
 const meta = {
-  title: "components/projects/ProjectListItem",
+  title: "dashboard/projects/ProjectListItem",
   component: ProjectListItem,
   decorators: [
     withUpdateProjectStatusProvider,

@@ -7,7 +7,7 @@ import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/_
 import { withModalManagerProvider } from "@/dashboard/common/ModalManagerContext/__stories__";
 
 const meta = {
-  title: "components/comments/CommentForm",
+  title: "dashboard/comments/CommentForm",
   component: CommentForm,
   decorators: [
     withToastRegion,

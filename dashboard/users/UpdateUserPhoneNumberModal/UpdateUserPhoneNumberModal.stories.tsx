@@ -10,7 +10,7 @@ import { UpdateUserPhoneNumberModal } from "../UpdateUserPhoneNumberModal";
 import { withUpdateUserPhoneNumberProvider } from "../UpdateUserPhoneNumberProvider/__stories__";
 
 const meta = {
-  title: "components/users/UpdateUserPhoneNumberModal",
+  title: "dashboard/users/UpdateUserPhoneNumberModal",
   component: UpdateUserPhoneNumberModal,
   decorators: [
     withOpenModal,

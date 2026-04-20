@@ -8,7 +8,7 @@ import { withModalManagerProvider } from "@/dashboard/common/ModalManagerContext
 import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
 
 const meta = {
-  title: "components/positions/PositionGrid",
+  title: "dashboard/positions/PositionGrid",
   component: PositionGrid,
   decorators: [
     withDeletePositionsProvider,

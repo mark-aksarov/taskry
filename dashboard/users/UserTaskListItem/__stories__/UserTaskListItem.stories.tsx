@@ -16,7 +16,7 @@ import { withUpdateTaskStatusesProvider } from "@/dashboard/tasks/UpdateTaskStat
 const mockedTask = mockedTaskList[0];
 
 const meta = {
-  title: "components/users/UserTaskListItem",
+  title: "dashboard/users/UserTaskListItem",
   component: UserTaskListItem,
   decorators: [
     withUpdateTaskStatusProvider,

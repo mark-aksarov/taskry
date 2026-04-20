@@ -10,7 +10,7 @@ import { withModalManagerProvider } from "@/dashboard/common/ModalManagerContext
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
 
 const meta = {
-  title: "components/layout/AppHeader",
+  title: "dashboard/layout/AppHeader",
   component: AppHeader,
   decorators: [
     withTaskSearchModal,

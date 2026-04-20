@@ -4,17 +4,11 @@ import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { Button } from "@/ui/Button";
 import { ButtonSkeleton } from "@/ui/Skeleton";
+import { Button, ButtonVariant } from "@/ui/Button";
 
-export interface AppHeaderThemeToggleButtonProps {
-  className?: string;
-}
-
-export function AppHeaderThemeToggleButton({
-  className,
-}: AppHeaderThemeToggleButtonProps) {
-  const t = useTranslations("dashboard.layout.ThemeToggleButton");
+export function AppHeaderThemeToggleButton() {
+  const t = useTranslations("common.ThemeToggleButton");
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -26,15 +20,19 @@ export function AppHeaderThemeToggleButton({
     return <ButtonSkeleton ghost className="h-10 w-10" />;
   }
 
+  const commonProps = {
+    variant: "ghost" as ButtonVariant,
+    className: "rounded-full p-3",
+  };
+
   if (theme === "dark") {
     return (
       <>
         <Button
           onPress={() => setTheme("light")}
           aria-label={t("darkLabel")}
-          variant="ghost"
           iconLeft={<Moon size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-          className={className}
+          {...commonProps}
         />
       </>
     );
@@ -45,9 +43,8 @@ export function AppHeaderThemeToggleButton({
       <Button
         onPress={() => setTheme("dark")}
         aria-label={t("lightLabel")}
-        variant="ghost"
         iconLeft={<Sun size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-        className={className}
+        {...commonProps}
       />
     </>
   );

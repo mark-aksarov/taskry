@@ -10,7 +10,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateUserAddressProvider } from "../UpdateUserAddressProvider/__stories__";
 
 const meta = {
-  title: "components/users/UpdateUserAddressModal",
+  title: "dashboard/users/UpdateUserAddressModal",
   component: UpdateUserAddressModal,
   decorators: [
     withOpenModal,

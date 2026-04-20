@@ -3,7 +3,7 @@ import { CustomerListItemSkeleton } from "../CustomerListItemSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/customers/CustomerListItemSkeleton",
+  title: "dashboard/customers/CustomerListItemSkeleton",
   component: CustomerListItemSkeleton,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof CustomerListItemSkeleton>;

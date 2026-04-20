@@ -24,7 +24,7 @@ import { withUpdateProjectDescriptionProvider } from "@/dashboard/projects/Updat
 import { withUpdateProjectCategoryRelProvider } from "@/dashboard/projects/UpdateProjectCategoryRelProvider/__stories__";
 
 const meta = {
-  title: "components/projects/ProjectDetailCard",
+  title: "dashboard/projects/ProjectDetailCard",
   component: ProjectDetailCard,
   decorators: [
     withDeleteProjectProvider,

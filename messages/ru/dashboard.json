@@ -31,14 +31,6 @@
     }
   },
   "common": {
-    "LangMenuTrigger": {
-      "dialogHeading": "Язык",
-      "label": "Русский",
-      "items": {
-        "english": "Английский",
-        "russian": "Русский"
-      }
-    },
     "GridItemPhoneNumber": {
       "noPhoneNumber": "Нет номера телефона"
     },
@@ -412,10 +404,6 @@
     }
   },
   "layout": {
-    "ThemeToggleButton": {
-      "darkLabel": "Темная тема",
-      "lightLabel": "Светлая тема"
-    },
     "AppNavigation": {
       "dashboard": "Панель",
       "projects": "Проекты",

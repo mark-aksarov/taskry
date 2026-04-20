@@ -3,7 +3,7 @@ import { TaskGridItemLargeSkeleton } from "../TaskGridItemSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/tasks/TaskGridItemLargeSkeleton",
+  title: "dashboard/tasks/TaskGridItemLargeSkeleton",
   component: TaskGridItemLargeSkeleton,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof TaskGridItemLargeSkeleton>;

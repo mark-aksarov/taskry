@@ -11,7 +11,7 @@ import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionCon
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusesProvider/__stories__";
 
 const meta = {
-  title: "components/projects/ProjectsContainer",
+  title: "dashboard/projects/ProjectsContainer",
   component: ProjectsContainerPresentationExample,
   decorators: [
     withUpdateProjectStatusesProvider,

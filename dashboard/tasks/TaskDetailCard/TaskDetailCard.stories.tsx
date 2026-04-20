@@ -22,7 +22,7 @@ import { withUpdateTaskDescriptionProvider } from "@/dashboard/tasks/UpdateTaskD
 import { withUpdateTaskCategoryRelProvider } from "@/dashboard/tasks/UpdateTaskCategoryRelProvider/__stories__";
 
 const meta = {
-  title: "components/tasks/TaskDetailCard",
+  title: "dashboard/tasks/TaskDetailCard",
   component: TaskDetailCard,
   decorators: [
     withDeleteTaskProvider,

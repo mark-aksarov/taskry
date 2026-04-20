@@ -16,7 +16,7 @@ import { UpdateTaskCategoryRelModal } from "./UpdateTaskCategoryRelModal";
 import { withUpdateTaskCategoryRelProvider } from "../UpdateTaskCategoryRelProvider/__stories__";
 
 const meta = {
-  title: "components/tasks/UpdateTaskCategoryRelModal",
+  title: "dashboard/tasks/UpdateTaskCategoryRelModal",
   component: UpdateTaskCategoryRelModal,
   decorators: [
     withOpenModal,

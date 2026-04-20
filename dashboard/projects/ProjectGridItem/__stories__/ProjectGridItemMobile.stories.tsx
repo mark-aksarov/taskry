@@ -17,7 +17,7 @@ import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionCon
 const mockedProject = mockedProjectList[0];
 
 const meta = {
-  title: "components/projects/ProjectGridItemMobile",
+  title: "dashboard/projects/ProjectGridItemMobile",
   component: ProjectGridItemMobile,
   decorators: [
     withUpdateProjectStatusProvider,

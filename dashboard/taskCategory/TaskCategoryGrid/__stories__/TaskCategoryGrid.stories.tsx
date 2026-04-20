@@ -8,7 +8,7 @@ import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsConte
 import { withDeleteTaskCategoriesProvider } from "../../DeleteTaskCategoriesProvider/__stories__";
 
 const meta = {
-  title: "components/task-categories/TaskCategoryGrid",
+  title: "dashboard/task-categories/TaskCategoryGrid",
   component: TaskCategoryGrid,
   decorators: [
     withDeleteTaskCategoriesProvider,

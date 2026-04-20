@@ -26,7 +26,7 @@ import { withUpdateUserPublicLinkProvider } from "@/dashboard/users/UpdateUserPu
 import { withUpdateUserPhoneNumberProvider } from "@/dashboard/users/UpdateUserPhoneNumberProvider/__stories__";
 
 const meta = {
-  title: "components/users/UserDetailCard",
+  title: "dashboard/users/UserDetailCard",
   component: UserDetailCard,
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/team/user-1");

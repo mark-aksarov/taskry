@@ -11,7 +11,7 @@ import { withModalManagerProvider } from "@/dashboard/common/ModalManagerContext
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
 
 const meta = {
-  title: "components/tasks/TasksContainer",
+  title: "dashboard/tasks/TasksContainer",
   component: TasksContainerPresentationExample,
   decorators: [
     withUpdateTaskStatusesProvider,

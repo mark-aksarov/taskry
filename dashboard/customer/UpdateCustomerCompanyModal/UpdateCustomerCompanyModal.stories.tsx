@@ -16,7 +16,7 @@ import { UpdateCustomerCompanyModal } from "./UpdateCustomerCompanyModal";
 import { withUpdateCustomerCompanyProvider } from "../UpdateCustomerCompanyProvider/__stories__";
 
 const meta = {
-  title: "components/customers/UpdateCustomerCompanyModal",
+  title: "dashboard/customers/UpdateCustomerCompanyModal",
   component: UpdateCustomerCompanyModal,
   decorators: [
     withOpenModal,

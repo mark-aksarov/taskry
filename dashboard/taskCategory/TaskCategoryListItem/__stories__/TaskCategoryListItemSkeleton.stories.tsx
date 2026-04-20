@@ -3,7 +3,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskCategoryListItemSkeleton } from "../TaskCategoryListItemSkeleton";
 
 const meta = {
-  title: "components/task-categories/TaskCategoryListItemSkeleton",
+  title: "dashboard/task-categories/TaskCategoryListItemSkeleton",
   component: TaskCategoryListItemSkeleton,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof TaskCategoryListItemSkeleton>;

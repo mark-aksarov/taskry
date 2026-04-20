@@ -3,7 +3,7 @@ import { UserTaskListItemSkeleton } from "../UserTaskListItemSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/users/UserTaskListItemSkeleton",
+  title: "dashboard/users/UserTaskListItemSkeleton",
   component: UserTaskListItemSkeleton,
   decorators: [withThemedBackground],
   parameters: {

@@ -6,7 +6,7 @@ import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/_
 import { withModalManagerProvider } from "@/dashboard/common/ModalManagerContext/__stories__";
 
 const meta = {
-  title: "components/tasks/TasksEmptySection",
+  title: "dashboard/tasks/TasksEmptySection",
   component: TasksEmptySection,
   decorators: [
     withCreateTaskProvider,

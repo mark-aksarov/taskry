@@ -10,7 +10,7 @@ import { withDeleteTaskProvider } from "../DeleteTaskProvider/__stories__";
 import { withSelectedTasksProvider } from "../SelectedTasksContext/__stories__";
 
 const meta = {
-  title: "components/tasks/DeleteTaskModal",
+  title: "dashboard/tasks/DeleteTaskModal",
   component: DeleteTaskModal,
   decorators: [
     withOpenModal,

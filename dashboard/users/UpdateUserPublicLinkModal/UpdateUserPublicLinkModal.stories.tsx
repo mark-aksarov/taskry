@@ -10,7 +10,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateUserPublicLinkProvider } from "../UpdateUserPublicLinkProvider/__stories__";
 
 const meta = {
-  title: "components/users/UpdateUserPublicLinkModal",
+  title: "dashboard/users/UpdateUserPublicLinkModal",
   component: UpdateUserPublicLinkModal,
   decorators: [
     withOpenModal,

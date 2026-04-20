@@ -9,7 +9,7 @@ import { withDeleteProjectCategoryProvider } from "../../DeleteProjectCategoryPr
 import { withDeleteProjectCategoriesProvider } from "../../DeleteProjectCategoriesProvider/__stories__";
 
 const meta = {
-  title: "components/project-categories/ProjectCategoryListItem",
+  title: "dashboard/project-categories/ProjectCategoryListItem",
   component: ProjectCategoryListItem,
   decorators: [
     withUpdateProjectCategoryProvider,

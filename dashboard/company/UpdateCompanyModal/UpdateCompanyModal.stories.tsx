@@ -9,7 +9,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateCompanyProvider } from "../UpdateCompanyProvider/__stories__";
 
 const meta = {
-  title: "components/companies/UpdateCompanyModal",
+  title: "dashboard/companies/UpdateCompanyModal",
   component: UpdateCompanyModal,
   decorators: [
     withOpenModal,

@@ -3,7 +3,7 @@ import { NavigationButton } from "./NavigationButton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/common/NavigationButton",
+  title: "dashboard/common/NavigationButton",
   component: NavigationButton,
   decorators: [withThemedBackground],
   parameters: {

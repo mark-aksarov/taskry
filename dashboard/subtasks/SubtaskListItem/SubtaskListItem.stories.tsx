@@ -9,7 +9,7 @@ import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/_
 import { withModalManagerProvider } from "@/dashboard/common/ModalManagerContext/__stories__";
 
 const meta = {
-  title: "components/subtasks/SubtaskListItem",
+  title: "dashboard/subtasks/SubtaskListItem",
   component: SubtaskListItem,
   decorators: [
     withDeleteTaskProvider,

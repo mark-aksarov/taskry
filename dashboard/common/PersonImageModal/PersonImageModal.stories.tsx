@@ -14,7 +14,7 @@ import { Dialog, DialogFooter } from "@/ui/Dialog";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/common/PersonImageModal",
+  title: "dashboard/common/PersonImageModal",
   component: PersonImageModal,
   decorators: [withThemedBackground],
   render: () => {

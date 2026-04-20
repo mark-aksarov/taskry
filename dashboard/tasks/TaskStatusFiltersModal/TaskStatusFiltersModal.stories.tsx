@@ -12,7 +12,7 @@ import { withSelectedTasksProvider } from "../SelectedTasksContext/__stories__";
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
 
 const meta = {
-  title: "components/tasks/TaskStatusFiltersModal",
+  title: "dashboard/tasks/TaskStatusFiltersModal",
   component: TaskStatusFiltersModal,
   decorators: [
     withOpenModal,

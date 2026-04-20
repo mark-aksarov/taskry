@@ -5,7 +5,7 @@ import { DetailStat, DetailStatSkeleton } from "./DetailStat";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/common/DetailStat",
+  title: "dashboard/common/DetailStat",
   component: DetailStat,
   decorators: [withThemedBackground],
   args: {

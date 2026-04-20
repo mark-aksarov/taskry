@@ -25,7 +25,7 @@ import { withUpdateCustomerPublicLinkProvider } from "@/dashboard/customer/Updat
 import { withUpdateCustomerPhoneNumberProvider } from "@/dashboard/customer/UpdateCustomerPhoneNumberProvider/__stories__";
 
 const meta = {
-  title: "components/customers/CustomerDetailCard",
+  title: "dashboard/customers/CustomerDetailCard",
   component: CustomerDetailCard,
   decorators: [
     withUpdateCustomerCompanyProvider,

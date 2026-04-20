@@ -3,7 +3,7 @@ import { ProjectGridItemLargeSkeleton } from "../ProjectGridItemSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/projects/ProjectGridItemLargeSkeleton",
+  title: "dashboard/projects/ProjectGridItemLargeSkeleton",
   component: ProjectGridItemLargeSkeleton,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof ProjectGridItemLargeSkeleton>;

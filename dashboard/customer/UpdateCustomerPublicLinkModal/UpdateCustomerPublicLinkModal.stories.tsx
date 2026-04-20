@@ -10,7 +10,7 @@ import { UpdateCustomerPublicLinkModal } from "./UpdateCustomerPublicLinkModal";
 import { withUpdateCustomerPublicLinkProvider } from "../UpdateCustomerPublicLinkProvider/__stories__";
 
 const meta = {
-  title: "components/customers/UpdateCustomerPublicLinkModal",
+  title: "dashboard/customers/UpdateCustomerPublicLinkModal",
   component: UpdateCustomerPublicLinkModal,
   decorators: [
     withOpenModal,

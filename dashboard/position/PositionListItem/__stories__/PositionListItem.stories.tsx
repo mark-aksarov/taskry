@@ -9,7 +9,7 @@ import { withModalManagerProvider } from "@/dashboard/common/ModalManagerContext
 import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
 
 const meta = {
-  title: "components/positions/PositionListItem",
+  title: "dashboard/positions/PositionListItem",
   component: PositionListItem,
   decorators: [
     withUpdatePositionProvider,

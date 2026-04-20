@@ -3,7 +3,7 @@ import { TotalTasksCardSkeleton } from "./TotalTasksCardSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/tasks/TotalTasksCardSkeleton",
+  title: "dashboard/tasks/TotalTasksCardSkeleton",
   component: TotalTasksCardSkeleton,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof TotalTasksCardSkeleton>;

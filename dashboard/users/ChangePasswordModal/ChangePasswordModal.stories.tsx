@@ -9,7 +9,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withChangePasswordProvider } from "../ChangePasswordProvider/__stories__";
 
 const meta = {
-  title: "components/users/ChangePasswordModal",
+  title: "dashboard/users/ChangePasswordModal",
   component: ChangePasswordModal,
   decorators: [
     withOpenModal,

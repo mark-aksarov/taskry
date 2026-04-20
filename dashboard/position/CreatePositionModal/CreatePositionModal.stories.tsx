@@ -9,7 +9,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCreatePositionProvider } from "../CreatePositionProvider/__stories__";
 
 const meta = {
-  title: "components/positions/CreatePositionModal",
+  title: "dashboard/positions/CreatePositionModal",
   component: CreatePositionModal,
   decorators: [
     withOpenModal,

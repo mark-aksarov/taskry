@@ -10,7 +10,7 @@ import { UpdateTaskDescriptionModal } from "./UpdateTaskDescriptionModal";
 import { withUpdateTaskDescriptionProvider } from "../UpdateTaskDescriptionProvider/__stories__";
 
 const meta = {
-  title: "components/tasks/UpdateTaskDescriptionModal",
+  title: "dashboard/tasks/UpdateTaskDescriptionModal",
   component: UpdateTaskDescriptionModal,
   decorators: [
     withOpenModal,

@@ -3,7 +3,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectCompletedTasksDetailStat } from "./ProjectCompletedTasksDetailStat";
 
 const meta = {
-  title: "components/projects/ProjectCompletedTasksDetailStat",
+  title: "dashboard/projects/ProjectCompletedTasksDetailStat",
   component: ProjectCompletedTasksDetailStat,
   decorators: [withThemedBackground],
   args: {

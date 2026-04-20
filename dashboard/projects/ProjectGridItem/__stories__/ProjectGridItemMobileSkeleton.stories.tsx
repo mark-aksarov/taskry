@@ -3,7 +3,7 @@ import { ProjectGridItemMobileSkeleton } from "../ProjectGridItemSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "components/projects/ProjectGridItemMobileSkeleton",
+  title: "dashboard/projects/ProjectGridItemMobileSkeleton",
   component: ProjectGridItemMobileSkeleton,
   decorators: [withThemedBackground],
   globals: {

@@ -11,7 +11,7 @@ import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsConte
 import { withDeleteProjectCategoriesProvider } from "../DeleteProjectCategoriesProvider/__stories__";
 
 const meta = {
-  title: "components/project-categories/DeleteProjectCategoriesModal",
+  title: "dashboard/project-categories/DeleteProjectCategoriesModal",
   component: DeleteProjectCategoriesModal,
   decorators: [
     withOpenModal,

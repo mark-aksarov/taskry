@@ -11,7 +11,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteCommentProvider } from "../DeleteCommentProvider/__stories__";
 
 const meta = {
-  title: "components/comments/DeleteCommentModal",
+  title: "dashboard/comments/DeleteCommentModal",
   component: DeleteCommentModal,
   decorators: [
     withOpenModal,

@@ -12,7 +12,7 @@ import { UserFiltersForm, UserFiltersFormSkeleton } from "../UserFiltersForm";
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
 
 const meta = {
-  title: "components/users/UserFiltersModal",
+  title: "dashboard/users/UserFiltersModal",
   component: UserFiltersModal,
   decorators: [
     withOpenModal,

@@ -9,7 +9,7 @@ import { UpdateProjectCategoryModal } from "./UpdateProjectCategoryModal";
 import { withUpdateProjectCategoryProvider } from "../UpdateProjectCategoryProvider/__stories__";
 
 const meta = {
-  title: "components/project-categories/UpdateProjectCategoryModal",
+  title: "dashboard/project-categories/UpdateProjectCategoryModal",
   component: UpdateProjectCategoryModal,
   decorators: [
     withOpenModal,

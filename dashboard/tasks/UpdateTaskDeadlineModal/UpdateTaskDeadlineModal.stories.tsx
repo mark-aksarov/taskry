@@ -10,7 +10,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateTaskDeadlineProvider } from "../UpdateTaskDeadlineProvider/__stories__";
 
 const meta = {
-  title: "components/tasks/UpdateTaskDeadlineModal",
+  title: "dashboard/tasks/UpdateTaskDeadlineModal",
   component: UpdateTaskDeadlineModal,
   decorators: [
     withOpenModal,

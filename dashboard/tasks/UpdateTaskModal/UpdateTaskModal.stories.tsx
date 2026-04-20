@@ -15,7 +15,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withUpdateTaskProvider } from "../UpdateTaskProvider/__stories__";
 
 const meta = {
-  title: "components/tasks/UpdateTaskModal",
+  title: "dashboard/tasks/UpdateTaskModal",
   component: UpdateTaskModal,
   decorators: [
     withOpenModal,

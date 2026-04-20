@@ -14,7 +14,7 @@ import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
 import { withUpdateProjectProvider } from "../UpdateProjectProvider/__stories__";
 
 const meta = {
-  title: "components/projects/UpdateProjectModal",
+  title: "dashboard/projects/UpdateProjectModal",
   component: UpdateProjectModal,
   decorators: [
     withOpenModal,

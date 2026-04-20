@@ -10,7 +10,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteSubtaskProvider } from "../DeleteSubtaskProvider/__stories__";
 
 const meta = {
-  title: "components/subtasks/DeleteSubtaskModal",
+  title: "dashboard/subtasks/DeleteSubtaskModal",
   component: DeleteSubtaskModal,
   decorators: [
     withOpenModal,

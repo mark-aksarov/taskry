@@ -1,12 +1,12 @@
 "use client";
 
+import { Button } from "@/ui/Button";
 import { Languages } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Button } from "@/ui/Button";
-import { LangMenuTrigger } from "@/dashboard/common/LangMenuTrigger";
+import { LangMenuTrigger } from "@/common/LangMenuTrigger";
 
 export const AppHeaderLangMenuTrigger = () => {
-  const t = useTranslations("dashboard.common.LangMenuTrigger");
+  const t = useTranslations("common.LangMenuTrigger");
 
   return (
     <LangMenuTrigger

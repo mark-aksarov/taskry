@@ -13,7 +13,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailSkeleton } from "../CustomerDetail/CustomerDetailSkeleton";
 
 const meta = {
-  title: "components/customers/CustomerDetailSideSheet",
+  title: "dashboard/customers/CustomerDetailSideSheet",
   component: CustomerDetailSideSheet,
   decorators: [withOpenModal, withModalManagerProvider, withThemedBackground],
   parameters: {

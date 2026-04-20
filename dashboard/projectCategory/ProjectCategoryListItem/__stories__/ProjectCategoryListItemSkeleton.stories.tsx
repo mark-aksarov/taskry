@@ -3,7 +3,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectCategoryListItemSkeleton } from "../ProjectCategoryListItemSkeleton";
 
 const meta = {
-  title: "components/project-categories/ProjectCategoryListItemSkeleton",
+  title: "dashboard/project-categories/ProjectCategoryListItemSkeleton",
   component: ProjectCategoryListItemSkeleton,
   decorators: [withThemedBackground],
 } satisfies Meta<typeof ProjectCategoryListItemSkeleton>;
