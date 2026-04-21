@@ -209,12 +209,12 @@ Cypress.Commands.add("changePassword", (newPassword: string) => {
 
 Cypress.Commands.add(
   "signInViaUI",
-  (email: string, password: string, callbackUrl: string = "/") => {
+  (email: string, password: string, callbackUrl: string = "/dashboard") => {
     cy.visit(`/en/sign-in?callbackUrl=${callbackUrl}`);
     cy.get("input[name=email]").type(email);
     cy.get("input[name=password]").type(password);
     cy.get('button[type="submit"]').click();
-    cy.url().should("include", "/");
+    cy.url().should("include", "/dashboard");
   },
 );
 

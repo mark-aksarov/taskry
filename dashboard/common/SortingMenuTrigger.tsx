@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { usePageTransition } from "./PageTransitionContext";
-import { ResponsiveMenuTrigger } from "@/common/ResponsiveMenuTrigger";
+import { ResponsiveMenuTrigger } from "@/dashboard/common/ResponsiveMenuTrigger";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 interface SortingMenuTriggerProps<T extends object = any>

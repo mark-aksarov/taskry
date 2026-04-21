@@ -1,14 +1,13 @@
 "use client";
 
-import { Item, Key } from "react-stately";
+import { Item } from "react-stately";
 import { Placement } from "@/ui/Popover";
 import { RussiaFlag } from "@/icons/RussiaFlag";
-import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { useToggleLang } from "@/lib/hooks/useToggleLang";
 import { UnitedKingdomFlag } from "@/icons/UnitedKingdomFlag";
-import { ResponsiveMenuTrigger } from "./ResponsiveMenuTrigger";
-import { DialogHeaderWithClose } from "./DialogHeaderWithClose";
+import { ResponsiveMenuTrigger } from "../common/ResponsiveMenuTrigger";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 interface LangMenuTriggerProps {
   renderButton: () => React.ReactNode;
@@ -20,18 +19,8 @@ export const LangMenuTrigger = ({
   placement = "bottom right",
 }: LangMenuTriggerProps) => {
   const t = useTranslations("common.LangMenuTrigger");
-  const router = useRouter();
-  const pathname = usePathname();
   const locale = useLocale();
-  const searchParams = useSearchParams();
-
-  function toggleLang(key: Key) {
-    const nextLocale = key as "en" | "ru";
-
-    router.push(`${pathname}?${searchParams.toString()}`, {
-      locale: nextLocale,
-    });
-  }
+  const toggleLang = useToggleLang();
 
   return (
     <ResponsiveMenuTrigger

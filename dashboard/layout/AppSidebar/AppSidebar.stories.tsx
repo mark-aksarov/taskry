@@ -18,7 +18,7 @@ const meta = {
   component: AppSidebar,
   decorators: [withThemedBackground],
   beforeEach: () => {
-    mocked(usePathname).mockReturnValue("/");
+    mocked(usePathname).mockReturnValue("/dashboard");
   },
 } satisfies Meta<typeof AppSidebar>;
 

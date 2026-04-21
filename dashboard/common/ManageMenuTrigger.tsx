@@ -3,7 +3,7 @@
 import {
   ResponsiveMenuTrigger,
   ResponsiveMenuTriggerProps,
-} from "@/common/ResponsiveMenuTrigger";
+} from "@/dashboard/common/ResponsiveMenuTrigger";
 
 import { useTranslations } from "next-intl";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";

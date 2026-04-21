@@ -2,15 +2,16 @@ import {
   AppHeaderBase,
   AppHeaderLayout,
   AppHeaderHeading,
-  AppHeaderLangMenuTrigger,
   AppHeaderThemeToggleButton,
+  AppHeaderLangButton,
 } from "@/common/AppHeaderBase";
 
 import { AppNavigation } from "../AppNavigation";
+import { LangMenuTrigger } from "../LangMenuTrigger";
 import { BackButton } from "@/dashboard/common/BackButton";
 import { AppSidebarSheetTrigger } from "../AppSidebarSheetTrigger";
-import { AppBottomSheetTrigger } from "@/dashboard/layout/AppBottomSheetTrigger";
 import { SearchModalTrigger } from "@/dashboard/search/SearchModalTrigger";
+import { AppBottomSheetTrigger } from "@/dashboard/layout/AppBottomSheetTrigger";
 
 export interface AppHeaderProps {
   heading: string;
@@ -24,7 +25,7 @@ export const AppHeader = ({
   profileLinkContainer,
 }: AppHeaderProps) => {
   return (
-    <AppHeaderBase>
+    <AppHeaderBase className="bg-gray-100 dark:bg-gray-900">
       <div className="px-4 md:hidden">
         <AppHeaderLayout
           left={<>{profileLinkContainer}</>}
@@ -43,7 +44,7 @@ export const AppHeader = ({
             <>
               <SearchModalTrigger />
               <AppHeaderThemeToggleButton />
-              <AppHeaderLangMenuTrigger />
+              <LangMenuTrigger renderButton={() => <AppHeaderLangButton />} />
               {profileLinkContainer}
               <AppSidebarSheetTrigger appNavigation={<AppNavigation />} />
             </>

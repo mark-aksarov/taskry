@@ -1,7 +1,7 @@
 "use client";
 
 import { useModal } from "@/dashboard/common/ModalManagerContext";
-import { ResponsiveModal } from "@/common/ResponsiveModal";
+import { ResponsiveModal } from "@/dashboard/common/ResponsiveModal";
 
 interface SearchModalProps {
   children: React.ReactNode;

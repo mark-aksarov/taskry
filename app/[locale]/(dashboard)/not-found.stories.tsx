@@ -18,7 +18,7 @@ const meta = {
     withThemedBackground,
   ],
   beforeEach: () => {
-    mocked(usePathname).mockReturnValue("/");
+    mocked(usePathname).mockReturnValue("/dashboard");
   },
   args: {
     reset: () => {},

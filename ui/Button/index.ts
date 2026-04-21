@@ -1,6 +1,7 @@
 export type {
   ButtonSize,
   ButtonProps,
+  ElementType,
   ButtonVariant,
   ButtonOwnProps,
 } from "./Button";

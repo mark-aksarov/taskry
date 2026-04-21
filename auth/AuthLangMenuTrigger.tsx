@@ -6,7 +6,7 @@ import { Button } from "react-aria-components";
 import { RussiaFlag } from "@/icons/RussiaFlag";
 import { useLocale, useTranslations } from "next-intl";
 import { UnitedKingdomFlag } from "@/icons/UnitedKingdomFlag";
-import { LangMenuTrigger } from "@/common/LangMenuTrigger";
+import { LangMenuTrigger } from "@/dashboard/layout/LangMenuTrigger";
 
 const styles = tv({
   extend: focusRing,

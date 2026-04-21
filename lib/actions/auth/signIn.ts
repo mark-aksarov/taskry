@@ -26,7 +26,7 @@ export async function signIn(
   const session = await auth.api.getSession({ headers: await headers() });
 
   if (session) {
-    redirect({ href: "/", locale });
+    redirect({ href: "/dashboard", locale });
 
     return {
       status: "success",
@@ -62,7 +62,7 @@ export async function signIn(
 
   //we cannot call redirect in try/catch block
   if (signedInUser.emailVerified) {
-    redirect({ href: "/", locale });
+    redirect({ href: "/dashboard", locale });
   }
 
   redirect({ href: "/verify-email", locale });

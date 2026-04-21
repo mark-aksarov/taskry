@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 import { Camera, Trash } from "lucide-react";
 import { Button } from "react-aria-components";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { ResponsiveMenuTrigger } from "@/common/ResponsiveMenuTrigger";
+import { ResponsiveMenuTrigger } from "@/dashboard/common/ResponsiveMenuTrigger";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 const styles = tv({

@@ -1,5 +1,148 @@
 {
-  "CtaButton": {
-    "label": "Get started"
+  "layout": {
+    "AppHeader": {
+      "GetStartedButton": {
+        "label": "Get started"
+      }
+    },
+    "AppFooter": {
+      "text": {
+        "line1": "A modern task manager with a",
+        "line2": "simple interface"
+      },
+      "sections": {
+        "product": {
+          "title": "Product",
+          "links": {
+            "features": "Features",
+            "docs": "Documentation",
+            "github": "GitHub"
+          }
+        },
+        "app": {
+          "title": "App",
+          "links": {
+            "open": "Open Taskry",
+            "email": "Email"
+          }
+        },
+        "legal": {
+          "title": "Legal",
+          "links": {
+            "privacy": "Privacy policy",
+            "terms": "Terms of use"
+          }
+        }
+      },
+      "copyright": "© Taskry. All rights reserved."
+    }
+  },
+  "sections": {
+    "IntroSection": {
+      "heading": {
+        "line1": "Task",
+        "line2": "management",
+        "line3": "in a simple",
+        "line4": "interface"
+      },
+      "description": {
+        "line1": "A simple task manager to organize your work.",
+        "line2": "You can add tasks, assign them, and track their progress."
+      }
+    },
+    "FeaturesSection": {
+      "heading": "All tools for working with tasks",
+      "description": {
+        "line1": "Create tasks, manage subtasks, assign performers,",
+        "line2": "track deadlines, and collaborate in discussions"
+      }
+    },
+    "DocsSection": {
+      "heading": "Short guides help you quickly understand the system",
+      "description": {
+        "line1": "The documentation includes brief instructions and extended sections that",
+        "line2": "will help you get up to speed quickly."
+      },
+      "CtaButton": {
+        "label": "View all documentation"
+      }
+    },
+    "FinalCtaSection": {
+      "heading": "Manage tasks and workflows with ease",
+      "description": {
+        "line1": "Create tasks, assign people, and track progress.",
+        "line2": "A simple tool for everyday work."
+      }
+    }
+  },
+  "blocks": {
+    "CtaActions": {
+      "GetStartedButton": {
+        "label": "Get started"
+      },
+      "DemoButton": {
+        "label": "Open demo"
+      }
+    },
+    "FeatureGrid": {
+      "tasks": {
+        "title": "Task management",
+        "description": "Create tasks, assign performers, add subtasks, categories, and deadlines"
+      },
+      "projects": {
+        "title": "Project management",
+        "description": "Manage projects with tasks, comments, statuses, and client linking"
+      },
+      "customers": {
+        "title": "Customers and companies",
+        "description": "Store customers, their companies, contacts, notes, public links, and related projects"
+      },
+      "discussion": {
+        "title": "Task and project discussions",
+        "description": "Discuss tasks and projects together right in the comments"
+      },
+      "categories": {
+        "title": "Categories and structure",
+        "description": "Create categories for tasks and projects to keep your workspace organized"
+      },
+      "calendar": {
+        "description": "Plan work by task and project deadlines and monitor team workload",
+        "title": "Calendar and deadlines"
+      }
+    },
+    "DocsGrid": {
+      "quickGuide": {
+        "heading": "Quick User Guide",
+        "subtext": "5 min read"
+      },
+      "comments": {
+        "heading": "Comments on Tasks and Projects",
+        "subtext": "5 min read"
+      },
+      "projectManagement": {
+        "heading": "Project Management",
+        "subtext": "3 min read"
+      },
+      "usersRoles": {
+        "heading": "Users, Roles, and Permissions",
+        "subtext": "3 min read"
+      },
+      "tasks": {
+        "heading": "Tasks and Subtasks",
+        "subtext": "7 min read"
+      },
+      "searchFilter": {
+        "heading": "Search and Filtering",
+        "subtext": "7 min read"
+      },
+      "categories": {
+        "heading": "Project and Task Categories",
+        "subtext": "12 min read"
+      },
+      "clientsCompanies": {
+        "heading": "Clients and Companies",
+        "subtext": "12 min read"
+      }
+    }
   }
 }

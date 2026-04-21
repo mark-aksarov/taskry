@@ -20,7 +20,7 @@ const meta = {
     withThemedBackground,
   ],
   beforeEach: () => {
-    mocked(usePathname).mockReturnValue("/");
+    mocked(usePathname).mockReturnValue("/dashboard");
   },
   parameters: {
     layout: "fullscreen",

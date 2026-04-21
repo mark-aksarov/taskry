@@ -12,7 +12,7 @@ export async function requireAuthPage() {
 
   if (session) {
     redirect({
-      href: session.user.emailVerified ? "/" : "/verify-email",
+      href: session.user.emailVerified ? "/dashboard" : "/verify-email",
       locale,
     });
   }

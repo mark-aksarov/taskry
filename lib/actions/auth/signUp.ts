@@ -33,7 +33,7 @@ export async function signUp(
   // Redirect if already signed in
   const session = await auth.api.getSession({ headers: await headers() });
   if (session) {
-    redirect({ href: "/", locale });
+    redirect({ href: "/dashboard", locale });
 
     return {
       status: "success",

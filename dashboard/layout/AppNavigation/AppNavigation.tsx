@@ -24,8 +24,8 @@ export const AppNavigation = () => {
   return (
     <nav className="flex flex-col gap-2.5">
       <NavigationButton
-        href="/"
-        isActive={pathname === "/"}
+        href="/dashboard"
+        isActive={pathname === "/dashboard"}
         iconLeft={
           <LayoutDashboard size={18} strokeWidth={1.5} absoluteStrokeWidth />
         }

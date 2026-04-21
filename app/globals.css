@@ -27,6 +27,12 @@
   --text-4xl--line-height: calc(2.75 / 2.125);
   --text-5xl: 2.625rem;
   --text-5xl--line-height: calc(3.5 / 2.625);
+  --text-6xl: 3rem;
+  --text-6xl--line-height: calc(4 / 3);
+  --text-7xl: 3.25rem;
+  --text-7xl--line-height: calc(4.35 / 3.25);
+  --text-8xl: 3.75rem;
+  --text-8xl--line-height: calc(5 / 3.75);
 }
 
 @keyframes slide-out {

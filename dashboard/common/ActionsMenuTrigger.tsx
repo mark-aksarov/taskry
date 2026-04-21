@@ -1,7 +1,7 @@
 import {
   ResponsiveMenuTrigger,
   ResponsiveMenuTriggerProps,
-} from "@/common/ResponsiveMenuTrigger";
+} from "@/dashboard/common/ResponsiveMenuTrigger";
 
 export function ActionsMenuTrigger(props: ResponsiveMenuTriggerProps) {
   return (

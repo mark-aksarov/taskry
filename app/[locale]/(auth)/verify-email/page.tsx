@@ -12,7 +12,7 @@ export default async function AppVerifyEmailPage() {
   });
 
   if (session && session.user.emailVerified) {
-    redirect({ href: "/", locale });
+    redirect({ href: "/dashboard", locale });
   } else if (!session) {
     redirect({ href: "/sign-in", locale });
   }

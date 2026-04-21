@@ -24,7 +24,7 @@ export const Primary = {
 
 export const PrimaryActive = {
   args: {
-    href: "/",
+    href: "/dashboard",
     variant: "primary",
     label: "Navigation Item",
     isActive: true,
@@ -50,7 +50,7 @@ export const Secondary = {
 
 export const SecondaryActive = {
   args: {
-    href: "/",
+    href: "/dashboard",
     variant: "secondary",
     label: "Navigation Item",
     isActive: true,
