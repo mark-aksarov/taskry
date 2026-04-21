@@ -8,7 +8,7 @@ import { useModal } from "../common/ModalManagerContext";
 import { ActionsMenuTrigger } from "../common/ActionsMenuTrigger";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useSelectedItems } from "@/dashboard/common/SelectedItemsContext";
-import { DialogHeaderWithClose } from "@/dashboard/common/DialogHeaderWithClose";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 export const TaskCategoryActionsMenuTrigger = () => {
   const t = useTranslations(

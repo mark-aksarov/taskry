@@ -1,5 +1,5 @@
 import { ModalProps } from "@/ui/Modal";
-import { ResponsiveModal } from "@/dashboard/common/ResponsiveModal";
+import { ResponsiveModal } from "@/common/ResponsiveModal";
 
 export interface FormBaseModalProps extends ModalProps {
   "data-test"?: string;

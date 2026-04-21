@@ -1,7 +1,7 @@
 "use client";
 
 import { Item } from "react-stately";
-import { ResponsiveSelect } from "@/dashboard/common/ResponsiveSelect";
+import { ResponsiveSelect } from "@/common/ResponsiveSelect";
 import { useTranslations } from "next-intl";
 
 interface UserSelectProps {

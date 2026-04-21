@@ -11,7 +11,7 @@ import { ActionsMenuTrigger } from "../common/ActionsMenuTrigger";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { useUpdateTaskStatuses } from "./UpdateTaskStatusesContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { DialogHeaderWithClose } from "@/dashboard/common/DialogHeaderWithClose";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 interface TaskActionsMenuTriggerProps {
   // Extra flag to hide the label on User/Profile Tasks pages

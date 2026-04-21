@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
 import { DialogBody, DialogFooter } from "@/ui/Dialog";
 import { useModal } from "@/dashboard/common/ModalManagerContext";
 import { UpdateTaskAssigneeFormSubmitButton } from "../UpdateTaskAssigneeForm";
-import { DialogHeaderWithClose } from "@/dashboard/common/DialogHeaderWithClose";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 interface UpdateTaskModalProps {
   updateTaskAssigneeFormContainer: React.ReactNode;

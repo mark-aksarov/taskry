@@ -10,7 +10,7 @@ import { useSelectedProjects } from "./SelectedProjectsContext";
 import { ActionsMenuTrigger } from "../common/ActionsMenuTrigger";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { DialogHeaderWithClose } from "../common/DialogHeaderWithClose";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 import { useUpdateProjectStatuses } from "./UpdateProjectStatusesContext";
 
 export const ProjectActionsMenuTrigger = () => {

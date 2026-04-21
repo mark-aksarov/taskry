@@ -1,6 +1,6 @@
 "use client";
 
-import { Repeat } from "@/dashboard/common/Repeat";
+import { Repeat } from "@/common/Repeat";
 import { SearchListItemSkeleton } from "../SearchListItem";
 
 const styles = "flex flex-col";

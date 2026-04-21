@@ -1,13 +1,13 @@
 "use client";
 
 import { Key } from "react-aria";
+import { MenuTriggerProps } from "@/ui/Menu";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { MenuTriggerProps } from "@/ui/Menu";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { usePageTransition } from "./PageTransitionContext";
-import { ResponsiveMenuTrigger } from "./ResponsiveMenuTrigger";
-import { DialogHeaderWithClose } from "./DialogHeaderWithClose";
+import { ResponsiveMenuTrigger } from "@/common/ResponsiveMenuTrigger";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 interface SortingMenuTriggerProps<T extends object = any>
   extends MenuTriggerProps<T> {

@@ -1,8 +1,8 @@
 "use client";
 
 import { tv } from "tailwind-variants";
-import { useSearchBar } from "../SearchBar";
 import { focusRing } from "@/ui/styles";
+import { useSearchBar } from "../SearchBar";
 import { mergeProps, useFocusRing, usePress } from "react-aria";
 import { SearchModalTriggerIcon } from "./SearchModalTriggerIcon";
 import { SearchModalTriggerText } from "./SearchModalTriggerText";
@@ -13,7 +13,7 @@ import { SearchModalTriggerClearButton } from "./SearchModalTriggerClearButton";
 
 export const styles = tv({
   extend: focusRing,
-  base: "flex flex-auto cursor-text items-center justify-between gap-2 rounded-full border-white bg-white p-2 pl-4 md:max-w-[360px] dark:border-gray-900 dark:bg-gray-800",
+  base: "flex flex-auto cursor-text items-center justify-between gap-2 rounded-full bg-white p-2 pl-4 md:max-w-[360px] dark:bg-gray-800",
   variants: {
     isDisabled: {
       true: "text-gray-500 dark:text-gray-400",

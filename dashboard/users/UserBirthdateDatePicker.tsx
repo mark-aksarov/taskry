@@ -1,6 +1,6 @@
 import { DateValue } from "react-aria";
 import { useTranslations } from "next-intl";
-import { ResponsiveDatePicker } from "@/dashboard/common/ResponsiveDatePicker";
+import { ResponsiveDatePicker } from "@/common/ResponsiveDatePicker";
 
 interface UserBirthdateDatePickerProps {
   defaultValue?: DateValue;

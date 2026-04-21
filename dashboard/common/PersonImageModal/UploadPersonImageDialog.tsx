@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { ErrorBanner } from "../ErrorBanner";
-import { DialogHeaderWithClose } from "../DialogHeaderWithClose";
+import { ErrorBanner } from "@/common/ErrorBanner";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 import { PersonImageFileTrigger } from "../PersonImageFileTrigger";
 import { Dialog, DialogBody, DialogFooter } from "@/ui/Dialog";
 

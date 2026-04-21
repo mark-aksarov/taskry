@@ -6,9 +6,9 @@ import { RussiaFlag } from "@/icons/RussiaFlag";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { ResponsiveMenuTrigger } from "../dashboard/common/ResponsiveMenuTrigger";
-import { DialogHeaderWithClose } from "../dashboard/common/DialogHeaderWithClose";
 import { UnitedKingdomFlag } from "@/icons/UnitedKingdomFlag";
+import { ResponsiveMenuTrigger } from "./ResponsiveMenuTrigger";
+import { DialogHeaderWithClose } from "./DialogHeaderWithClose";
 
 interface LangMenuTriggerProps {
   renderButton: () => React.ReactNode;

@@ -6,7 +6,7 @@ import {
 } from "@/dashboard/comments/CommentItem";
 
 import useSWR from "swr";
-import { Repeat } from "@/dashboard/common/Repeat";
+import { Repeat } from "@/common/Repeat";
 import { CommentList } from "../comments/CommentList";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { CommentItemWrapper } from "../comments/CommentItemWrapper";

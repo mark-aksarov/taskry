@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
 import { DialogBody, DialogFooter } from "@/ui/Dialog";
 import { useModal } from "@/dashboard/common/ModalManagerContext";
 import { UpdateProjectFormSubmitButton } from "../UpdateProjectForm";
-import { DialogHeaderWithClose } from "@/dashboard/common/DialogHeaderWithClose";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 interface UpdateProjectModalProps {
   updateProjectFormContainer: React.ReactNode;

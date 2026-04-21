@@ -6,8 +6,8 @@ import { useTranslations } from "next-intl";
 import { Building2, Contact } from "lucide-react";
 import { useModal } from "@/dashboard/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 import { CreateNewMenuTrigger } from "@/dashboard/common/CreateNewMenuTrigger";
-import { DialogHeaderWithClose } from "@/dashboard/common/DialogHeaderWithClose";
 
 interface CreateCustomerMenuTriggerProps {
   renderButton: () => React.ReactNode;

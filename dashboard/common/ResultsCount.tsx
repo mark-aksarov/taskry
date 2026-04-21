@@ -3,5 +3,9 @@ interface ResultsCountProps {
 }
 
 export function ResultsCount({ children }: ResultsCountProps) {
-  return <div className="text-xs font-bold">{children}</div>;
+  return (
+    <div className="text-xs font-bold text-black dark:text-white">
+      {children}
+    </div>
+  );
 }

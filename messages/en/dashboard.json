@@ -416,7 +416,7 @@
       "logout": "Logout"
     },
     "AppBottomSheetTrigger": {
-      "triggerAriaLabel": "language",
+      "triggerAriaLabel": "Menu",
       "dialogAriaLabel": "App navigation"
     },
     "AppSidebarSheetTrigger": {

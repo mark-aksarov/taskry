@@ -6,10 +6,10 @@ import {
 } from "@/dashboard/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { UpdateUserFormSubmitButton } from "../UpdateUserForm";
 import { DialogBody, DialogFooter } from "@/ui/Dialog";
+import { UpdateUserFormSubmitButton } from "../UpdateUserForm";
 import { useModal } from "@/dashboard/common/ModalManagerContext";
-import { DialogHeaderWithClose } from "@/dashboard/common/DialogHeaderWithClose";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 interface UpdateUserModalProps {
   updateUserFormContainer: React.ReactNode;

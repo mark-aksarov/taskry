@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
 import { DialogBody, DialogFooter } from "@/ui/Dialog";
 import { useModal } from "@/dashboard/common/ModalManagerContext";
 import { UpdateUserPositionFormSubmitButton } from "../UpdateUserPositionForm";
-import { DialogHeaderWithClose } from "@/dashboard/common/DialogHeaderWithClose";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 interface UpdateUserPositionModalProps {
   updateUserPositionFormContainer: React.ReactNode;

@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
 import { DialogBody, DialogFooter } from "@/ui/Dialog";
 import { useModal } from "@/dashboard/common/ModalManagerContext";
 import { UpdateCustomerFullNameForm } from "../UpdateCustomerFullNameForm";
-import { DialogHeaderWithClose } from "@/dashboard/common/DialogHeaderWithClose";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 import { UpdateCustomerFullNameFormSubmitButton } from "../UpdateCustomerFullNameForm";
 
 interface UpdateCustomerFullNameModalProps {

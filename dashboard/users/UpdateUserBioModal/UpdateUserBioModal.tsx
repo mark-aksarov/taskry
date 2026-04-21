@@ -7,10 +7,10 @@ import {
 
 import { useTranslations } from "next-intl";
 import { DialogBody, DialogFooter } from "@/ui/Dialog";
+import { UpdateUserBioForm } from "../UpdateUserBioForm";
 import { useModal } from "@/dashboard/common/ModalManagerContext";
 import { UpdateUserBioFormSubmitButton } from "../UpdateUserBioForm";
-import { UpdateUserBioForm } from "../UpdateUserBioForm/UpdateUserBioForm";
-import { DialogHeaderWithClose } from "@/dashboard/common/DialogHeaderWithClose";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 interface UpdateUserBioModalProps {
   userId: string;

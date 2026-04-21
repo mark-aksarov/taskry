@@ -3,10 +3,10 @@
 import {
   ResponsiveMenuTrigger,
   ResponsiveMenuTriggerProps,
-} from "./ResponsiveMenuTrigger";
+} from "@/common/ResponsiveMenuTrigger";
 
 import { useTranslations } from "next-intl";
-import { DialogHeaderWithClose } from "./DialogHeaderWithClose";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 export function ManageMenuTrigger(props: ResponsiveMenuTriggerProps) {
   const t = useTranslations("dashboard.common.ManageMenuTrigger");

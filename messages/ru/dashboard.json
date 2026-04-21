@@ -416,7 +416,7 @@
       "logout": "Выйти"
     },
     "AppBottomSheetTrigger": {
-      "triggerAriaLabel": "язык",
+      "triggerAriaLabel": "Меню",
       "dialogAriaLabel": "Навигация по приложению"
     },
     "AppSidebarSheetTrigger": {

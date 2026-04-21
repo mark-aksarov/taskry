@@ -6,10 +6,10 @@ import {
 } from "@/dashboard/common/FormBaseModal";
 
 import { useTranslations } from "next-intl";
-import { UpdateTaskFormSubmitButton } from "../UpdateTaskForm";
 import { DialogBody, DialogFooter } from "@/ui/Dialog";
+import { UpdateTaskFormSubmitButton } from "../UpdateTaskForm";
 import { useModal } from "@/dashboard/common/ModalManagerContext";
-import { DialogHeaderWithClose } from "@/dashboard/common/DialogHeaderWithClose";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 interface UpdateTaskModalProps {
   updateTaskFormContainer: React.ReactNode;

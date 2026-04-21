@@ -2,12 +2,12 @@
 
 import { useRef } from "react";
 import { Menu } from "lucide-react";
+import { Button } from "@/ui/Button";
 import { useTranslations } from "next-intl";
 import { useOverlayTrigger } from "react-aria";
-import { Button } from "@/ui/Button";
-import { useOverlayTriggerState } from "react-stately";
 import { BottomSheet } from "@/ui/BottomSheet";
 import { Dialog, DialogBody } from "@/ui/Dialog";
+import { useOverlayTriggerState } from "react-stately";
 
 export function AppBottomSheetTrigger({
   appNavigation,

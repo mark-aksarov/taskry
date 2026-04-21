@@ -8,8 +8,8 @@ import {
 import { useTranslations } from "next-intl";
 import { DialogBody, DialogFooter } from "@/ui/Dialog";
 import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 import { FormBaseModal, FormBaseModalDialog } from "../../common/FormBaseModal";
-import { DialogHeaderWithClose } from "@/dashboard/common/DialogHeaderWithClose";
 
 interface UpdateSubtaskModalProps {
   taskId: number;

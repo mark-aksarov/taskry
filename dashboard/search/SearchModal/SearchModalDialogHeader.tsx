@@ -1,4 +1,4 @@
-import { DialogHeaderWithClose } from "@/dashboard/common/DialogHeaderWithClose";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 export function SearchModalDialogHeader({
   children,

@@ -6,7 +6,7 @@ import {
 } from "@/dashboard/comments/CommentItem";
 
 import useSWR from "swr";
-import { Repeat } from "../common/Repeat";
+import { Repeat } from "@/common/Repeat";
 import { usePathname } from "@/i18n/navigation";
 import { notFound, useParams } from "next/navigation";
 import { CommentList } from "../comments/CommentList";

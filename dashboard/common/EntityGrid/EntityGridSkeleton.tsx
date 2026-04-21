@@ -1,5 +1,5 @@
 import { EntityGrid } from "./EntityGrid";
-import { Repeat } from "../Repeat";
+import { Repeat } from "@/common/Repeat";
 import { ViewMode } from "../ViewMode";
 
 interface EntityGridSkeletonProps {

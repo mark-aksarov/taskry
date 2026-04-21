@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { ErrorBanner } from "./ErrorBanner";
+import { ErrorBanner } from "@/common/ErrorBanner";
 import { ActionStatus } from "@/lib/actions/types";
 
 interface FormErrorBannerProps {

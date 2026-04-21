@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { CalendarDate } from "@internationalized/date";
-import { ResponsiveDatePicker } from "./ResponsiveDatePicker";
+import { ResponsiveDatePicker } from "@/common/ResponsiveDatePicker";
 
 interface DeadlineToDatePickerProps {
   value: CalendarDate | null;

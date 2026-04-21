@@ -11,7 +11,7 @@ import { useSendComment } from "../SendCommentContext";
 import { useUpdateComment } from "../UpdateCommentContext";
 import { useCommentFormContext } from "../CommentFormContext";
 import { CommentForm } from "@/dashboard/comments/CommentForm";
-import { DialogHeaderWithClose } from "@/dashboard/common/DialogHeaderWithClose";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 interface EntityCommentsModalProps {
   title: string;

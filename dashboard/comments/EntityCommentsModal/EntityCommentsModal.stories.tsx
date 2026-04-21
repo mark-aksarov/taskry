@@ -4,7 +4,7 @@ import {
 } from "@/dashboard/common/ModalManagerContext/__stories__";
 
 import { CommentList } from "../CommentList";
-import { Repeat } from "@/dashboard/common/Repeat";
+import { Repeat } from "@/common/Repeat";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CommentItemSkeleton } from "../CommentItem";
 import { EntityCommentsModal } from "./EntityCommentsModal";

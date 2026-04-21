@@ -1,15 +1,15 @@
 "use client";
 
 import { tv } from "tailwind-variants";
+import { focusRing } from "@/ui/styles";
+import { ButtonProps } from "@/ui/Button";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Camera, Trash } from "lucide-react";
 import { Button } from "react-aria-components";
-import { focusRing } from "@/ui/styles";
-import { ButtonProps } from "@/ui/Button";
-import { ResponsiveMenuTrigger } from "./ResponsiveMenuTrigger";
-import { DialogHeaderWithClose } from "./DialogHeaderWithClose";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
+import { ResponsiveMenuTrigger } from "@/common/ResponsiveMenuTrigger";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 const styles = tv({
   extend: focusRing,

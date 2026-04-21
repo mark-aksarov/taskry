@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { ErrorBanner } from "../ErrorBanner";
+import { ErrorBanner } from "@/common/ErrorBanner";
 import { ActionState } from "@/lib/actions/types";
 
 interface UpdatePersonImageErrorBannerProps {

@@ -1,5 +1,5 @@
+import { Repeat } from "@/common/Repeat";
 import { UserTaskList } from "./UserTaskList";
-import { Repeat } from "@/dashboard/common/Repeat";
 import { UserTaskListItemSkeleton } from "../UserTaskListItem";
 import { TaskGridItemMobileSkeleton } from "@/dashboard/tasks/TaskGridItem";
 

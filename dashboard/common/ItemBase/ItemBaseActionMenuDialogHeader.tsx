@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { DialogHeaderWithClose } from "../DialogHeaderWithClose";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 export function ItemBaseActionMenuDialogHeader() {
   const t = useTranslations("dashboard.common.ItemBaseActionMenuDialogHeader");

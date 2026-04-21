@@ -2,7 +2,7 @@
 
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
-import { ResponsiveSelect } from "@/dashboard/common/ResponsiveSelect";
+import { ResponsiveSelect } from "@/common/ResponsiveSelect";
 
 interface PositionSelectProps {
   defaultSelectedKey?: string;

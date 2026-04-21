@@ -8,7 +8,7 @@ import { useModal } from "@/dashboard/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
 import { CreateNewMenuTrigger } from "@/dashboard/common/CreateNewMenuTrigger";
-import { DialogHeaderWithClose } from "@/dashboard/common/DialogHeaderWithClose";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 interface CreateUserMenuTriggerProps {
   renderButton: () => React.ReactNode;

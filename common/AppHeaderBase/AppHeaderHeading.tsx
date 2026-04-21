@@ -3,5 +3,9 @@ interface AppHeaderHeadingProps {
 }
 
 export function AppHeaderHeading({ children }: AppHeaderHeadingProps) {
-  return <h2 className="text-xl font-extrabold">{children}</h2>;
+  return (
+    <h2 className="text-xl font-extrabold text-black dark:text-white">
+      {children}
+    </h2>
+  );
 }

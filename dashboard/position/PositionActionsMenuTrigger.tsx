@@ -7,7 +7,7 @@ import { ActionsButton } from "../common/ActionsButton";
 import { useModal } from "../common/ModalManagerContext";
 import { ActionsMenuTrigger } from "../common/ActionsMenuTrigger";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { DialogHeaderWithClose } from "../common/DialogHeaderWithClose";
+import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 import { useSelectedItems } from "@/dashboard/common/SelectedItemsContext";
 
 export const PositionActionsMenuTrigger = () => {
