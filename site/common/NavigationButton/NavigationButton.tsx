@@ -13,7 +13,6 @@ const styles = tv({
     "rounded-2xl border p-6",
     "border-slate-200 bg-white hover:bg-slate-50",
     "dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700",
-    "transition-colors",
   ],
 
   slots: {

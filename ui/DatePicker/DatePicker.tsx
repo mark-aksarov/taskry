@@ -1,31 +1,33 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
-import {
-  AriaDatePickerProps,
-  DateValue,
-  useDatePicker,
-  useFocusRing,
-} from "react-aria";
-import { Button, DateFieldContext, DateInput } from "react-aria-components";
-import { useDatePickerState } from "react-stately";
 import {
   fieldStyles,
   fieldGroupStyles,
   fieldLabelStyles,
   fieldErrorStyles,
 } from "../Field";
+
+import {
+  DateValue,
+  useDatePicker,
+  useFocusRing,
+  AriaDatePickerProps,
+} from "react-aria";
+
+import { Dialog } from "../Dialog";
 import { Popover } from "../Popover";
+import { focusRing } from "../styles";
 import { Calendar } from "./Calendar";
 import { tv } from "tailwind-variants";
+import { twMerge } from "tailwind-merge";
 import { CalendarIcon } from "lucide-react";
-import { focusRing } from "../styles";
 import { BottomSheet } from "../BottomSheet";
+import { useDatePickerState } from "react-stately";
+import { DateSegment } from "react-aria-components";
+import React, { useCallback, useState } from "react";
 import { buttonStyles } from "../Select/SelectButton";
 import { mergeProps, useResizeObserver } from "@react-aria/utils";
-import { DateSegment } from "react-aria-components";
-import { Dialog } from "../Dialog";
-import { twMerge } from "tailwind-merge";
+import { Button, DateFieldContext, DateInput } from "react-aria-components";
 
 export interface DatePickerOwnProps {
   overlayType?: "popover" | "bottomsheet";
@@ -33,12 +35,6 @@ export interface DatePickerOwnProps {
   overlayClassName?: string;
   inputClassName?: string;
 }
-
-/**
- * Combined props for the Select component:
- * `AriaDatePickerProps<T>`: accessibility, DOM, form props
- * `DatePickerOwnProps`: Select-specific props
- */
 
 export type DatePickerProps<T extends DateValue> = AriaDatePickerProps<T> &
   React.RefAttributes<HTMLDivElement> &

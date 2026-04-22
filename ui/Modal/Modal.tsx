@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react";
 import {
+  ModalOverlay,
   Modal as RACModal,
   ModalOverlayProps,
-  ModalOverlay,
   composeRenderProps,
 } from "react-aria-components";
+
+import React from "react";
 import { tv } from "tailwind-variants";
 import { overlayStyles } from "../styles";
 
@@ -19,7 +20,13 @@ export type ModalProps = ModalOwnProps &
   React.RefAttributes<HTMLDivElement>;
 
 const modalStyles = tv({
-  base: "w-[490px] overflow-hidden rounded-xl border border-gray-300 bg-white transition duration-150 dark:border-gray-600 dark:bg-gray-800",
+  base: [
+    "w-[490px]",
+    "overflow-hidden",
+    "rounded-xl border border-gray-300 dark:border-gray-600",
+    "bg-white dark:bg-gray-800",
+    "transition duration-150",
+  ],
   variants: {
     isEntering: {
       true: "scale-95 opacity-0",

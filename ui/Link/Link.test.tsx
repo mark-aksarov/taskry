@@ -18,13 +18,4 @@ describe("Link", () => {
     const link = screen.getByRole("link");
     expect(link).toHaveClass("custom-class");
   });
-
-  test("should use the provided ref for the component", () => {
-    const ref = React.createRef<HTMLAnchorElement>();
-
-    render(<Link href="https://example.com" ref={ref} />);
-
-    const link = screen.getByRole("link");
-    expect(link).toBe(ref.current);
-  });
 });

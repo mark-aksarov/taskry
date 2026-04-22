@@ -46,12 +46,14 @@ const boxStyles = tv({
       className: "bg-blue-600 dark:bg-blue-700",
     },
   ],
+  slots: {
+    icon: "text-white group-disabled:text-gray-400 dark:group-disabled:text-gray-500",
+  },
 });
 
-const iconStyles =
-  "text-white group-disabled:text-gray-400 dark:group-disabled:text-gray-500";
-
 export const Checkbox = ({ children, ...props }: CheckboxProps) => {
+  const { base: boxBase, icon: boxIcon } = boxStyles();
+
   return (
     <RACCheckbox
       {...props}
@@ -62,7 +64,7 @@ export const Checkbox = ({ children, ...props }: CheckboxProps) => {
       {({ isSelected, ...renderProps }) => (
         <>
           <div
-            className={boxStyles({
+            className={boxBase({
               isSelected,
               ...renderProps,
             })}
@@ -72,7 +74,7 @@ export const Checkbox = ({ children, ...props }: CheckboxProps) => {
                 size={14}
                 strokeWidth={2}
                 absoluteStrokeWidth
-                className={iconStyles}
+                className={boxIcon()}
               />
             ) : null}
           </div>

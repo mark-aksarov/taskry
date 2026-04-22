@@ -22,12 +22,6 @@ export const NoVariant = {
   },
 } satisfies Story;
 
-export const Primary = {
-  args: {
-    variant: "primary",
-  },
-} satisfies Story;
-
 export const CustomClasses = {
   args: {
     className:

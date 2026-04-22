@@ -1,22 +1,38 @@
 "use client";
 
-import { tv } from "tailwind-variants";
-import { focusRing } from "../styles";
 import {
   composeRenderProps,
   Switch as RACSwitch,
   type SwitchProps as RACSwitchProps,
 } from "react-aria-components";
-import { twMerge } from "tailwind-merge";
+
+import { focusRing } from "../styles";
+import { tv } from "tailwind-variants";
 
 type SwitchProps = Omit<RACSwitchProps, "children"> &
   React.RefAttributes<HTMLLabelElement> & {
     children?: React.ReactNode;
   };
 
+const styles = tv({
+  base: [
+    "flex items-center gap-2",
+    "text-sm font-semibold",
+    "text-black dark:text-white",
+    "disabled:text-gray-400 dark:disabled:text-gray-500",
+    "transition",
+  ],
+});
+
 const track = tv({
   extend: focusRing,
-  base: "flex h-[1.5rem] w-[2.75rem] shrink-0 cursor-default items-center rounded-full px-[3px] transition duration-200 ease-in-out",
+  base: [
+    "flex shrink-0 items-center",
+    "h-[1.5rem] w-[2.75rem] px-[3px]",
+    "rounded-full",
+    "cursor-default",
+    "transition duration-200 ease-in-out",
+  ],
   variants: {
     isSelected: {
       false: "bg-gray-300 dark:bg-gray-500",
@@ -29,7 +45,12 @@ const track = tv({
 });
 
 const handle = tv({
-  base: "h-[1.125rem] w-[1.125rem] transform rounded-full bg-white transition duration-200 ease-in-out",
+  base: [
+    "h-[1.125rem] w-[1.125rem]",
+    "rounded-full",
+    "bg-white",
+    "transform transition duration-200 ease-in-out",
+  ],
   variants: {
     isSelected: {
       false: "translate-x-0",
@@ -46,10 +67,7 @@ export function Switch({ children, ...props }: SwitchProps) {
     <RACSwitch
       {...props}
       className={composeRenderProps(props.className, (className) =>
-        twMerge(
-          "flex items-center gap-2 text-sm font-semibold text-black transition disabled:text-gray-400 dark:text-white dark:disabled:text-gray-500",
-          className,
-        ),
+        styles({ className }),
       )}
     >
       {(renderProps) => (

@@ -12,9 +12,9 @@ import {
 import { X } from "lucide-react";
 import { Button } from "../Button";
 import { tv } from "tailwind-variants";
+import { twMerge } from "tailwind-merge";
 import { ToastContext } from "./ToastContext";
 import React, { CSSProperties, useContext } from "react";
-import { twMerge } from "tailwind-merge";
 
 export type ToastColor = "red" | "green";
 
@@ -33,23 +33,26 @@ const styles = tv({
         "bg-green-100 text-green-700 dark:bg-green-800 dark:text-green-300",
     },
   },
+  slots: {
+    region: "fixed bottom-4 left-4 z-3 flex flex-col-reverse gap-2",
+    text: "text-xs font-bold",
+    button: "ml-auto flex items-start bg-transparent! p-0 text-inherit!",
+  },
 });
 
 export function ToastRegion() {
   const toastQueue = useContext(ToastContext);
+  const { region, base, text, button } = styles();
 
   return (
-    <RACToastRegion
-      queue={toastQueue}
-      className="fixed bottom-4 left-4 z-3 flex flex-col-reverse gap-2"
-    >
+    <RACToastRegion queue={toastQueue} className={region()}>
       {({ toast }) => (
         <Toast toast={toast}>
           <RACToastContent
-            className={styles({ color: toast.content.color || "red" })}
+            className={base({ color: toast.content.color || "red" })}
           >
             <div className="shrink-0">{toast.content.iconLeft}</div>
-            <Text slot="title" className="text-xs font-bold">
+            <Text slot="title" className={text()}>
               {toast.content.title}
             </Text>
 
@@ -57,7 +60,7 @@ export function ToastRegion() {
               slot="close"
               variant="ghost"
               iconLeft={<X size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-              className="ml-auto flex items-start bg-transparent! p-0 text-inherit!"
+              className={button()}
               aria-label="Close"
             />
           </RACToastContent>

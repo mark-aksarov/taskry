@@ -69,8 +69,14 @@ const ToastTemplate = (props: ToastStoryArgs) => {
   );
 };
 
-export const Default = {
+export const Red = {
   render: (args) => {
     return <ToastTemplate {...args} />;
+  },
+} satisfies Story;
+
+export const Green = {
+  render: (args) => {
+    return <ToastTemplate {...args} color="green" />;
   },
 } satisfies Story;

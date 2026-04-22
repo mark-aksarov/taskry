@@ -1,6 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Button } from "react-aria-components";
-import { linkStyles } from "@/ui/Link";
+import { TextButton } from "@/common/TextButton";
 import { ChevronDown, ChevronUp, Plus } from "lucide-react";
 
 interface FilterCheckboxGroupExpandButtonProps {
@@ -57,14 +56,11 @@ export function FilterCheckboxGroupExpandButton({
   }
 
   return (
-    <Button
+    <TextButton
       onPress={() => setIsExpanded(!isExpanded)}
-      className={linkStyles({
-        variant: "primary",
-        className: "max-w-full text-sm",
-      })}
+      className="font-medium"
     >
       {content}
-    </Button>
+    </TextButton>
   );
 }

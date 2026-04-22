@@ -26,7 +26,7 @@ export function CheckboxGroup({
       className={composeRenderProps(className, (className, renderProps) =>
         fieldStyles({
           ...renderProps,
-          className: twMerge(className, "relative"),
+          className: twMerge(className, "relative items-start"),
         }),
       )}
     >

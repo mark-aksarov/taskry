@@ -1,5 +1,6 @@
-import { Link, LinkProps } from "@/ui/Link";
+import { TextLink } from "@/common/TextLink";
+import { LinkProps } from "react-aria-components";
 
 export function AuthLink(props: LinkProps) {
-  return <Link {...props} className="text-sm font-bold" variant="primary" />;
+  return <TextLink {...props} className="font-bold" />;
 }

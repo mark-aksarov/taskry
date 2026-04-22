@@ -1,19 +1,9 @@
 "use client";
 
-import {
-  SearchField as BaseSearchField,
-  searchInputStyles as baseSearchInputStyles,
-} from "@/ui/SearchField";
-
-import { tv } from "tailwind-variants";
+import { useSearchBar } from "./SearchBar";
 import { useTranslations } from "next-intl";
 import { useDebouncedCallback } from "use-debounce";
-import { useSearchBar } from "./SearchBar";
-
-const searchInputStyles = tv({
-  extend: baseSearchInputStyles,
-  base: "rounded-full bg-white py-3 dark:bg-gray-800",
-});
+import { SearchField as BaseSearchField } from "@/ui/SearchField";
 
 export const SearchField = () => {
   const t = useTranslations("dashboard.search.SearchField");
@@ -32,7 +22,7 @@ export const SearchField = () => {
       defaultValue={value}
       onChange={debouncedSetQuery}
       className="flex-auto"
-      inputClassName={searchInputStyles}
+      inputClassName="rounded-full bg-white py-3 dark:bg-gray-800"
       maxLength={255}
     />
   );

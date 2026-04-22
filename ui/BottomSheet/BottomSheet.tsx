@@ -1,12 +1,26 @@
 "use client";
 
+import { tv } from "tailwind-variants";
 import React, { useMemo } from "react";
 import { mergeRefs } from "@react-aria/utils";
 import { OverlayTriggerState } from "react-stately";
 import { AnimatePresence, motion } from "motion/react";
 import { OverlayTriggerStateContext } from "react-aria-components";
 import { AriaModalOverlayProps, Overlay, useModalOverlay } from "react-aria";
-import { twMerge } from "tailwind-merge";
+
+const styles = tv({
+  slots: {
+    overlay: "fixed inset-0 z-4 bg-black/20 dark:bg-black/50",
+    modal: "absolute bottom-0 left-0 w-full will-change-transform",
+    content: [
+      "h-full",
+      "overflow-hidden",
+      "rounded-t-2xl",
+      "border-gray-300 dark:border-gray-600",
+      "bg-white dark:bg-gray-800",
+    ],
+  },
+});
 
 export type BottomSheetOwnProps = {
   state: OverlayTriggerState;
@@ -51,29 +65,19 @@ const BottomSheetInner = ({
   const innerRef = React.useRef(null);
   const { modalProps, underlayProps } = useModalOverlay(props, state, innerRef);
   const mergedRefs = useMemo(() => mergeRefs(ref, innerRef), [ref, innerRef]);
+  const { overlay, modal, content } = styles();
 
   return (
     <OverlayTriggerStateContext.Provider value={state}>
       <Overlay>
-        <div
-          data-testid="overlay"
-          {...underlayProps}
-          className="fixed inset-0 z-4 bg-black/20 dark:bg-black/50"
-        >
+        <div data-testid="overlay" {...underlayProps} className={overlay()}>
           <div
             {...modalProps}
             ref={mergedRefs}
-            className="absolute bottom-0 left-0 w-full will-change-transform"
+            className={modal()}
             data-testid="bottom-sheet"
           >
-            <div
-              className={twMerge(
-                "h-full overflow-hidden rounded-t-2xl border-gray-300 bg-white shadow-lg dark:border-gray-600 dark:bg-gray-800",
-                className,
-              )}
-            >
-              {children}
-            </div>
+            <div className={content({ className })}>{children}</div>
           </div>
         </div>
       </Overlay>

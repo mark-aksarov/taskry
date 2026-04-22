@@ -1,18 +1,20 @@
 "use client";
 
-import type {
-  SearchFieldProps as RACSearchFieldProps,
-  ValidationResult,
-} from "react-aria-components";
 import {
-  composeRenderProps,
   Input,
+  composeRenderProps,
   SearchField as RACSearchField,
 } from "react-aria-components";
-import { FieldError, fieldStyles, Label } from "../Field";
+
+import type {
+  ValidationResult,
+  SearchFieldProps as RACSearchFieldProps,
+} from "react-aria-components";
+
 import { Search } from "lucide-react";
-import { fieldInputStyles } from "../TextField";
 import { tv } from "tailwind-variants";
+import { fieldInputStyles } from "../TextField";
+import { FieldError, fieldStyles, Label } from "../Field";
 
 type SearchFieldProps = RACSearchFieldProps &
   React.RefAttributes<HTMLDivElement> & {
@@ -25,6 +27,15 @@ type SearchFieldProps = RACSearchFieldProps &
 export const searchInputStyles = tv({
   extend: fieldInputStyles,
   base: "peer pr-[calc(var(--spacing)*5+18px)] [&::-webkit-search-cancel-button]:hidden",
+
+  slots: {
+    icon: [
+      "pointer-events-none",
+      "absolute top-1/2 right-5 -translate-y-1/2",
+      "text-black dark:text-white",
+      "peer-disabled:text-gray-400 dark:peer-disabled:text-gray-500",
+    ],
+  },
 });
 
 export const SearchField = ({
@@ -35,6 +46,8 @@ export const SearchField = ({
   inputClassName,
   ...props
 }: SearchFieldProps) => {
+  const { base, icon } = searchInputStyles();
+
   return (
     <RACSearchField
       {...props}
@@ -48,15 +61,14 @@ export const SearchField = ({
           placeholder={placeholder}
           className={composeRenderProps(
             inputClassName,
-            (className, renderProps) =>
-              searchInputStyles({ ...renderProps, className }),
+            (className, renderProps) => base({ ...renderProps, className }),
           )}
         />
         <Search
           size={18}
           strokeWidth={1.5}
           absoluteStrokeWidth
-          className="pointer-events-none absolute top-1/2 right-5 -translate-y-1/2 text-black peer-disabled:text-gray-400 dark:text-white dark:peer-disabled:text-gray-500"
+          className={icon()}
         />
       </div>
       <FieldError>{errorMessage}</FieldError>

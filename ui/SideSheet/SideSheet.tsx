@@ -18,7 +18,13 @@ export type SideSheetProps = ModalOverlayProps &
   };
 
 const sideSheetStyles = tv({
-  base: "h-full overflow-hidden border-gray-300 bg-white transition duration-150 dark:border-gray-600 dark:bg-gray-800",
+  base: [
+    "h-full",
+    "overflow-hidden",
+    "border-gray-300 dark:border-gray-600",
+    "bg-white dark:bg-gray-800",
+    "transition duration-150",
+  ],
   variants: {
     side: {
       left: "",

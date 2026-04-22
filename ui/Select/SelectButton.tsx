@@ -25,7 +25,13 @@ export const buttonStyles = tv({
       true: "",
     },
     isDisabled: {
-      true: "pointer-events-none cursor-default border-gray-100 bg-gray-100 text-gray-400 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-500",
+      true: [
+        "pointer-events-none",
+        "cursor-default",
+        "border-gray-100 dark:border-gray-800",
+        "bg-gray-100 dark:bg-gray-800",
+        "text-gray-400 dark:text-gray-500",
+      ].join(" "),
     },
   },
   compoundVariants: [

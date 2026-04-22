@@ -1,18 +1,20 @@
 "use client";
 
-import { tv } from "tailwind-variants";
-import type {
-  TextFieldProps as RACTextFieldProps,
-  ValidationResult,
-} from "react-aria-components";
 import {
   Input,
-  TextField as RACTextField,
   TextArea,
   composeRenderProps,
+  TextField as RACTextField,
 } from "react-aria-components";
-import { fieldGroupStyles, fieldStyles, Label } from "../Field";
+
+import type {
+  ValidationResult,
+  TextFieldProps as RACTextFieldProps,
+} from "react-aria-components";
+
 import { FieldError } from "../Field";
+import { tv } from "tailwind-variants";
+import { fieldGroupStyles, fieldStyles, Label } from "../Field";
 
 export type TextFieldProps = RACTextFieldProps &
   React.RefAttributes<HTMLDivElement> & {
@@ -36,9 +38,17 @@ export const fieldInputStyles = tv({
       true: "border-red-300 dark:border-red-800",
     },
     isDisabled: {
-      false:
-        "text-black placeholder:text-gray-500 dark:text-white dark:placeholder:text-gray-400",
-      true: "border-gray-100 bg-gray-100 text-gray-400 placeholder:text-gray-400 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-500 dark:placeholder:text-gray-500",
+      false: [
+        "text-black dark:text-white",
+        "placeholder:text-gray-500 dark:placeholder:text-gray-400",
+      ].join(" "),
+
+      true: [
+        "border-gray-100 dark:border-gray-800",
+        "bg-gray-100 dark:bg-gray-800",
+        "text-gray-400 dark:text-gray-500",
+        "placeholder:text-gray-400 dark:placeholder:text-gray-500",
+      ].join(" "),
     },
   },
   compoundVariants: [

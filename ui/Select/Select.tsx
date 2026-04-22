@@ -1,16 +1,16 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import { Dialog } from "../Dialog";
 import { Popover } from "../Popover";
-import { SelectListBox } from "./SelectListBox";
-import { useSelectState } from "react-stately";
-import { HiddenSelect, useSelect, type AriaSelectProps } from "react-aria";
-import { fieldStyles, fieldLabelStyles, fieldErrorStyles } from "../Field";
+import { twMerge } from "tailwind-merge";
 import { BottomSheet } from "../BottomSheet";
 import { SelectButton } from "./SelectButton";
+import { useSelectState } from "react-stately";
+import { SelectListBox } from "./SelectListBox";
+import React, { useCallback, useState } from "react";
 import { useResizeObserver } from "@react-aria/utils";
-import { Dialog } from "../Dialog";
-import { twMerge } from "tailwind-merge";
+import { HiddenSelect, useSelect, type AriaSelectProps } from "react-aria";
+import { fieldStyles, fieldLabelStyles, fieldErrorStyles } from "../Field";
 
 interface SelectOwnProps {
   "data-test"?: string;
@@ -91,7 +91,9 @@ export const Select = <T extends object = any>({
       >
         {props.label}
       </div>
+
       <HiddenSelect {...hiddenSelectProps} />
+
       <SelectButton
         {...triggerProps}
         ref={triggerRef}
@@ -101,6 +103,7 @@ export const Select = <T extends object = any>({
         state={state}
         validation={validation}
       />
+
       {validation.isInvalid && props.errorMessage && (
         <div className={fieldErrorStyles()}>
           {typeof props.errorMessage === "function"
@@ -108,6 +111,7 @@ export const Select = <T extends object = any>({
             : props.errorMessage}
         </div>
       )}
+
       {overlayType === "bottomsheet" ? (
         <BottomSheet
           isDismissable={true}

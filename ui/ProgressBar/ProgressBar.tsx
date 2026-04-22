@@ -1,12 +1,45 @@
 "use client";
 
-import type { ProgressBarProps as RACProgressBarProps } from "react-aria-components";
 import {
-  ProgressBar as RACProgressBar,
   Label,
   composeRenderProps,
+  ProgressBar as RACProgressBar,
 } from "react-aria-components";
-import { twMerge } from "tailwind-merge";
+
+import { tv } from "tailwind-variants";
+import type { ProgressBarProps as RACProgressBarProps } from "react-aria-components";
+
+export const progressBarStyles = tv({
+  slots: {
+    root: "flex flex-col gap-1",
+    header: "flex justify-between gap-2",
+    label: "text-xs font-medium text-gray-500 dark:text-gray-400",
+    valueText: "text-xs font-medium text-gray-500 dark:text-gray-400",
+    track: "h-1.5 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700",
+    fill: "h-full rounded-full transition-all",
+  },
+
+  variants: {
+    color: {
+      default: {
+        fill: "",
+      },
+      low: {
+        fill: "bg-red-500 dark:bg-red-700",
+      },
+      medium: {
+        fill: "bg-orange-400 dark:bg-orange-600",
+      },
+      high: {
+        fill: "bg-green-600 dark:bg-green-700",
+      },
+    },
+  },
+
+  defaultVariants: {
+    color: "default",
+  },
+});
 
 export interface ProgressBarProps extends RACProgressBarProps {
   label?: React.ReactNode;
@@ -21,41 +54,47 @@ export const ProgressBar = ({
   showValueText = true,
   ...props
 }: ProgressBarProps) => {
+  const styles = progressBarStyles();
+
   const classes = composeRenderProps(className, (className) =>
-    twMerge("flex flex-col gap-1", className),
-  );
-  const textClasses = twMerge(
-    "text-xs font-medium text-gray-500 dark:text-gray-400",
-    textClassName,
+    styles.root({ class: className }),
   );
 
   return (
     <RACProgressBar {...props} className={classes}>
-      {({ percentage, valueText }) => (
-        <>
-          {(label || showValueText) && (
-            <div className="flex justify-between gap-2">
-              {label && <Label className={textClasses}>{label}</Label>}
-              {showValueText && <div className={textClasses}>{valueText}</div>}
+      {({ percentage, valueText }) => {
+        const safePercentage = percentage ?? 0;
+
+        const color =
+          safePercentage < 33 ? "low" : safePercentage < 66 ? "medium" : "high";
+
+        return (
+          <>
+            {(label || showValueText) && (
+              <div className={styles.header()}>
+                {label && (
+                  <Label className={styles.label({ class: textClassName })}>
+                    {label}
+                  </Label>
+                )}
+                {showValueText && (
+                  <div className={styles.valueText({ class: textClassName })}>
+                    {valueText}
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className={styles.track()}>
+              <div
+                data-testid="progressbar-fill"
+                className={styles.fill({ color })}
+                style={{ width: `${percentage}%` }}
+              />
             </div>
-          )}
-          <div className="h-1.5 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
-            <div
-              data-testid="progressbar-fill"
-              className={twMerge(
-                "h-full rounded-full",
-                percentage &&
-                  (percentage < 33
-                    ? "bg-red-500 dark:bg-red-700"
-                    : percentage < 66
-                      ? "bg-orange-400 dark:bg-orange-600"
-                      : "bg-green-600 dark:bg-green-700"),
-              )}
-              style={{ width: percentage + "%" }}
-            />
-          </div>
-        </>
-      )}
+          </>
+        );
+      }}
     </RACProgressBar>
   );
 };
