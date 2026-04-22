@@ -5,5 +5,9 @@ interface FeatureItemProps {
 }
 
 export function FeatureItem({ children }: FeatureItemProps) {
-  return <Card className="flex flex-col items-start gap-6">{children}</Card>;
+  return (
+    <Card className="group flex flex-col items-start gap-6 transition-all hover:-translate-y-1 hover:shadow-lg">
+      {children}
+    </Card>
+  );
 }

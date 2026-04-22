@@ -1,36 +1,63 @@
-import { Button, ButtonProps } from "@/ui/Button";
-import { ChevronRight } from "lucide-react";
+"use client";
 
-interface NavigationButtonProps extends Omit<ButtonProps<"a">, "label"> {
+import { tv } from "tailwind-variants";
+import { focusRing } from "@/ui/styles";
+import { ChevronRight } from "lucide-react";
+import { Link } from "react-aria-components";
+
+const styles = tv({
+  extend: focusRing,
+
+  base: [
+    "group flex w-full items-center justify-start gap-6",
+    "rounded-2xl border p-6",
+    "border-slate-200 bg-white hover:bg-slate-50",
+    "dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700",
+    "transition-colors",
+  ],
+
+  slots: {
+    content: "flex flex-col items-start gap-1",
+    heading: "text-lg font-bold text-black dark:text-white",
+    subtext: "text-sm font-medium text-slate-600 dark:text-slate-300",
+    icon: [
+      "ml-auto text-slate-600 dark:text-slate-300",
+      "transition-transform group-hover:translate-x-1",
+    ],
+  },
+});
+
+interface NavigationButtonProps {
+  href: string;
+  iconLeft?: React.ReactNode;
   heading: string;
   subtext: string;
 }
 
 export function NavigationButton({
+  href,
   heading,
   subtext,
-  ...props
+  iconLeft,
 }: NavigationButtonProps) {
+  const {
+    base,
+    content,
+    heading: headingStyles,
+    subtext: subtextStyles,
+    icon,
+  } = styles();
+
   return (
-    <Button
-      as="a"
-      size="medium"
-      variant="outlined"
-      label={
-        <div className="flex flex-col items-start gap-1">
-          <div className="text-base font-semibold text-black dark:text-white">
-            {heading}
-          </div>
-          <div className="text-sm font-medium text-gray-600 dark:text-gray-300">
-            {subtext}
-          </div>
-        </div>
-      }
-      iconRight={
-        <ChevronRight size={18} strokeWidth={1.5} absoluteStrokeWidth />
-      }
-      className="dark:pressed:bg-gray-700 pressed:bg-gray-200 w-full justify-between border-none bg-white px-4 py-3 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
-      {...props}
-    />
+    <Link href={href} className={base}>
+      {iconLeft}
+
+      <div className={content()}>
+        <div className={headingStyles()}>{heading}</div>
+        <div className={subtextStyles()}>{subtext}</div>
+      </div>
+
+      <ChevronRight size={22} strokeWidth={1.5} className={icon()} />
+    </Link>
   );
 }

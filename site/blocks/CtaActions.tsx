@@ -9,6 +9,7 @@ export function CtaActions() {
       <PageSectionAction
         as="a"
         href="/dashboard"
+        variant="primary"
         label={t("GetStartedButton.label")}
       />
       <PageSectionAction

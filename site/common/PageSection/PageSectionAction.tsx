@@ -6,7 +6,7 @@ export function PageSectionAction<T extends ElementType>(
   return (
     <Button
       size="large"
-      className="justify-center py-3 max-sm:w-full"
+      className="justify-center rounded-xl py-3 max-sm:w-full"
       {...props}
     />
   );

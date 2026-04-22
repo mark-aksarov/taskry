@@ -9,7 +9,10 @@ export function AppFooter() {
 
   return (
     <footer>
-      <PageSection as="div">
+      <PageSection
+        as="div"
+        className="border-y-1 border-slate-300 dark:border-slate-600"
+      >
         <PageContainer>
           <div className="flex justify-between max-md:flex-col max-md:gap-8">
             <div className="grow-3">

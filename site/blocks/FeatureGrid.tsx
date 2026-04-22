@@ -1,11 +1,4 @@
 import {
-  FeatureItem,
-  FeatureItemHeading,
-  FeatureItemDescription,
-  FeatureItemIconWrapper,
-} from "@/site/blocks/FeatureItem";
-
-import {
   Layers2,
   Folder,
   Calendar,
@@ -14,7 +7,14 @@ import {
   MessageSquare,
 } from "lucide-react";
 
+import {
+  FeatureItem,
+  FeatureItemHeading,
+  FeatureItemDescription,
+} from "@/site/blocks/FeatureItem";
+
 import { useTranslations } from "next-intl";
+import { IconWrapper } from "../common/IconWrapper";
 
 export function FeatureGrid() {
   const t = useTranslations("site.blocks.FeatureGrid");
@@ -22,9 +22,9 @@ export function FeatureGrid() {
   return (
     <div className="grid max-lg:grid-cols-2 max-md:grid-cols-1 max-md:gap-4 md:gap-6 lg:grid-cols-3">
       <FeatureItem>
-        <FeatureItemIconWrapper>
+        <IconWrapper color="blue">
           <CheckSquare size={24} />
-        </FeatureItemIconWrapper>
+        </IconWrapper>
 
         <FeatureItemHeading>{t("tasks.title")}</FeatureItemHeading>
 
@@ -34,9 +34,9 @@ export function FeatureGrid() {
       </FeatureItem>
 
       <FeatureItem>
-        <FeatureItemIconWrapper>
+        <IconWrapper color="orange">
           <Folder size={24} />
-        </FeatureItemIconWrapper>
+        </IconWrapper>
 
         <FeatureItemHeading>{t("projects.title")}</FeatureItemHeading>
 
@@ -46,9 +46,9 @@ export function FeatureGrid() {
       </FeatureItem>
 
       <FeatureItem>
-        <FeatureItemIconWrapper>
+        <IconWrapper color="cyan">
           <Building2 size={24} />
-        </FeatureItemIconWrapper>
+        </IconWrapper>
 
         <FeatureItemHeading>{t("customers.title")}</FeatureItemHeading>
 
@@ -58,9 +58,9 @@ export function FeatureGrid() {
       </FeatureItem>
 
       <FeatureItem>
-        <FeatureItemIconWrapper>
+        <IconWrapper color="indigo">
           <MessageSquare size={24} />
-        </FeatureItemIconWrapper>
+        </IconWrapper>
 
         <FeatureItemHeading>{t("discussion.title")}</FeatureItemHeading>
 
@@ -70,9 +70,9 @@ export function FeatureGrid() {
       </FeatureItem>
 
       <FeatureItem>
-        <FeatureItemIconWrapper>
+        <IconWrapper color="pink">
           <Layers2 size={24} />
-        </FeatureItemIconWrapper>
+        </IconWrapper>
 
         <FeatureItemHeading>{t("categories.title")}</FeatureItemHeading>
 
@@ -82,9 +82,9 @@ export function FeatureGrid() {
       </FeatureItem>
 
       <FeatureItem>
-        <FeatureItemIconWrapper>
+        <IconWrapper color="teal">
           <Calendar size={24} />
-        </FeatureItemIconWrapper>
+        </IconWrapper>
 
         <FeatureItemHeading>{t("calendar.title")}</FeatureItemHeading>
 

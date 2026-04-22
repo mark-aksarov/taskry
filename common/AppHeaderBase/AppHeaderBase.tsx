@@ -7,12 +7,7 @@ interface AppHeaderBaseProps {
 
 export const AppHeaderBase = ({ className, children }: AppHeaderBaseProps) => {
   return (
-    <header
-      className={twMerge(
-        "sticky top-0 z-2 border-b border-gray-300 py-4 dark:border-gray-600",
-        className,
-      )}
-    >
+    <header className={twMerge("sticky top-0 z-2 border-b py-4", className)}>
       {children}
     </header>
   );

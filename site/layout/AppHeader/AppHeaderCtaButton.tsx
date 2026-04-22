@@ -8,7 +8,7 @@ export function AppHeaderCtaButton() {
     <Button
       size="medium"
       label={t("GetStartedButton.label")}
-      className="py-2"
+      className="rounded-xl py-2"
     />
   );
 }

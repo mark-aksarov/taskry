@@ -25,7 +25,7 @@ export const AppHeader = ({
   profileLinkContainer,
 }: AppHeaderProps) => {
   return (
-    <AppHeaderBase className="bg-gray-100 dark:bg-gray-900">
+    <AppHeaderBase className="border-gray-300 bg-gray-100 dark:border-gray-600 dark:bg-gray-900">
       <div className="px-4 md:hidden">
         <AppHeaderLayout
           left={<>{profileLinkContainer}</>}

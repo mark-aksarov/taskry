@@ -4,6 +4,8 @@ import {
   PageSectionContent,
 } from "@/site/common/PageSection";
 
+import { IntroBadge } from "./IntroBadge";
+import { IntroDecorative } from "./IntroDecorative";
 import { CtaActions } from "@/site/blocks/CtaActions";
 import { PageContainer } from "@/site/common/PageContainer";
 import { IntroSectionHeading } from "./IntroSectionHeading";
@@ -11,9 +13,11 @@ import { IntroSectionDescription } from "./IntroSectionDescription";
 
 export function IntroSection() {
   return (
-    <PageSection className="max-md:py-15 md:py-32">
+    <PageSection className="relative max-md:pt-15 max-md:pb-8 md:pt-30 md:pb-15">
+      <IntroDecorative />
       <PageContainer>
         <PageSectionContent>
+          <IntroBadge />
           <PageSectionHeader>
             <IntroSectionHeading />
             <IntroSectionDescription />

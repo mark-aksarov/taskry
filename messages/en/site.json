@@ -68,7 +68,10 @@
       }
     },
     "FinalCtaSection": {
-      "heading": "Manage tasks and workflows with ease",
+      "heading": {
+        "line1": "Manage tasks and",
+        "line2": "workflows with ease"
+      },
       "description": {
         "line1": "Create tasks, assign people, and track progress.",
         "line2": "A simple tool for everyday work."
