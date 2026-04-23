@@ -14,7 +14,7 @@ import {
 import { memo } from "react";
 import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
-import { Link } from "@/ui/Link";
+import { BaseLink } from "@/ui/BaseLink";
 import { Separator } from "@/ui/Separator";
 import { CustomerItemActionMenuTrigger } from "../CustomerItem";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
@@ -66,7 +66,7 @@ export const CustomerGridItemMobileInner = memo(
           isPending && "pointer-events-none",
         )}
       >
-        <Link
+        <BaseLink
           href={`/customers/${id}`}
           className="absolute inset-0 z-0"
           aria-label={fullName}

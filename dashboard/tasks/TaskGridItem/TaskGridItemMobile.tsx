@@ -14,7 +14,7 @@ import {
 
 import { memo } from "react";
 import { twMerge } from "tailwind-merge";
-import { Link } from "@/ui/Link";
+import { BaseLink } from "@/ui/BaseLink";
 import { TaskItemActionMenuTrigger } from "../TaskItem";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { TaskItemStatusBadge } from "../TaskItemStatusBadge";
@@ -68,7 +68,7 @@ export const TaskGridItemMobileInner = memo(function TaskGridItemMobileInner({
     <div
       className={twMerge("relative block", isPending && "pointer-events-none")}
     >
-      <Link
+      <BaseLink
         aria-label={title}
         href={`/tasks/${id}`}
         className="absolute inset-0 z-0"
@@ -93,9 +93,12 @@ export const TaskGridItemMobileInner = memo(function TaskGridItemMobileInner({
         }
         assigneeImageSlot={
           assignee ? (
-            <Link aria-label={assignee.fullName} href={`/team/${assignee.id}`}>
+            <BaseLink
+              aria-label={assignee.fullName}
+              href={`/team/${assignee.id}`}
+            >
               {assigneeImg}
-            </Link>
+            </BaseLink>
           ) : (
             assigneeImg
           )

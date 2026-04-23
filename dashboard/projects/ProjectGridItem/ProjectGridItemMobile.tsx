@@ -20,7 +20,7 @@ import {
 
 import { memo } from "react";
 import { twMerge } from "tailwind-merge";
-import { Link } from "@/ui/Link";
+import { BaseLink } from "@/ui/BaseLink";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
 import { useModal } from "@/dashboard/common/ModalManagerContext";
@@ -76,7 +76,7 @@ export const ProjectGridItemMobileInner = memo(
           isPending && "pointer-events-none",
         )}
       >
-        <Link
+        <BaseLink
           aria-label={title}
           href={`/projects/${id}`}
           className="absolute inset-0 z-0"
@@ -100,9 +100,12 @@ export const ProjectGridItemMobileInner = memo(
           }
           creatorImageSlot={
             creator ? (
-              <Link aria-label={creator.fullName} href={`/team/${creator.id}`}>
+              <BaseLink
+                aria-label={creator.fullName}
+                href={`/team/${creator.id}`}
+              >
                 {creatorImg}
-              </Link>
+              </BaseLink>
             ) : (
               creatorImg
             )

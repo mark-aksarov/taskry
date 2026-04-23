@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "./Link";
+import { BaseLink } from "./BaseLink";
 import { describe, expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
 
-describe("Link", () => {
+describe("BaseLink", () => {
   test("renders with default props", () => {
-    render(<Link href="https://example.com">Link</Link>);
+    render(<BaseLink href="https://example.com">BaseLink</BaseLink>);
 
     const link = screen.getByRole("link");
     expect(link).toBeInTheDocument();
@@ -13,7 +13,7 @@ describe("Link", () => {
   });
 
   test("applies className", () => {
-    render(<Link href="https://example.com" className="custom-class" />);
+    render(<BaseLink href="https://example.com" className="custom-class" />);
 
     const link = screen.getByRole("link");
     expect(link).toHaveClass("custom-class");

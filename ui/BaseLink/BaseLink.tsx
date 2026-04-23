@@ -11,10 +11,10 @@ import { tv } from "tailwind-variants";
 
 export const linkStyles = tv({
   extend: focusRing,
-  base: "flex cursor-pointer items-center gap-1",
+  base: "cursor-pointer",
 });
 
-export const Link = ({ className, ...props }: ReactAriaLinkProps) => {
+export const BaseLink = ({ className, ...props }: ReactAriaLinkProps) => {
   return (
     <ReactAriaLink
       className={composeRenderProps(className, (className, renderProps) =>

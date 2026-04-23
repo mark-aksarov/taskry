@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import { Link } from "@/ui/Link";
+import { BaseLink } from "@/ui/BaseLink";
 import { Skeleton } from "@/ui/Skeleton";
 import { ItemBaseDetailButton, ItemBaseDetailButtonProps } from "../ItemBase";
 
@@ -32,9 +32,9 @@ export function ListItemTitleLink({
   // Link uses display: flex by default.
   // To make text truncation work, set display: block.
   return (
-    <Link className={twMerge(titleStyles, "block", className)} href={href}>
+    <BaseLink className={twMerge(titleStyles, "block", className)} href={href}>
       {children}
-    </Link>
+    </BaseLink>
   );
 }
 

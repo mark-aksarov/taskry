@@ -1,4 +1,4 @@
-import { Link } from "@/ui/Link";
+import { BaseLink } from "@/ui/BaseLink";
 
 const styles = "max-w-full flex items-center gap-2.5";
 
@@ -21,8 +21,8 @@ export function GridItemContactLink({
   children,
 }: GridItemContactLinkProps) {
   return (
-    <Link className={styles} href={href}>
+    <BaseLink className={styles} href={href}>
       {children}
-    </Link>
+    </BaseLink>
   );
 }

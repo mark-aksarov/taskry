@@ -1,16 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { tv } from "tailwind-variants";
-import { Link } from "react-aria-components";
-import { focusRing } from "@/ui/styles";
+import { BaseLink } from "@/ui/BaseLink";
 import { UnknownUser } from "@/dashboard/common/UnknownUser";
 import { ImageContainer } from "@/dashboard/common/ImageContainer";
-
-const styles = tv({
-  extend: focusRing,
-  base: "flex items-center gap-2.5",
-});
 
 interface ProfileLinkProps {
   fullName: string;
@@ -27,13 +20,13 @@ export const ProfileLink = ({ fullName, imageUrl }: ProfileLinkProps) => {
   );
 
   return (
-    <Link href="/profile" className={styles}>
+    <BaseLink href="/profile" className="flex items-center gap-2.5">
       <div className="h-8 w-8 overflow-hidden rounded-full bg-gray-300">
         {profileImg}
       </div>
       <div className="text-sm font-bold text-black dark:text-white">
         {fullName}
       </div>
-    </Link>
+    </BaseLink>
   );
 };

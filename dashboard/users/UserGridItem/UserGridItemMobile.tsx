@@ -18,7 +18,7 @@ import {
 
 import { memo } from "react";
 import { twMerge } from "tailwind-merge";
-import { Link } from "@/ui/Link";
+import { BaseLink } from "@/ui/BaseLink";
 import { useTranslations } from "next-intl";
 import { Separator } from "@/ui/Separator";
 import { UserGridItemLayout } from "./UserGridItemLayout";
@@ -70,7 +70,7 @@ export const UserGridItemMobileInner = memo(function UserGridItemMobileInner({
     <div
       className={twMerge("relative block", isPending && "pointer-events-none")}
     >
-      <Link
+      <BaseLink
         aria-label={fullName}
         href={`/team/${id}`}
         className="absolute inset-0 z-0"

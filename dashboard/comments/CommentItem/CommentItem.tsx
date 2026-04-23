@@ -1,6 +1,6 @@
 import { memo } from "react";
 import Image from "next/image";
-import { Link } from "@/ui/Link";
+import { BaseLink } from "@/ui/BaseLink";
 import { CommentItemDate } from "./CommentItemDate";
 import { CommentItemText } from "./CommentItemText";
 import { CommentItemInfo } from "./CommentItemInfo";
@@ -67,7 +67,7 @@ const CommentItemInner = memo(function CommentItemInner({
       senderImageSlot={
         <>
           {sender?.imageUrl ? (
-            <Link href={`/team/${sender.id}`}>
+            <BaseLink href={`/team/${sender.id}`}>
               <ImageContainer className="h-9 w-9">
                 <Image
                   src={sender.imageUrl}
@@ -76,7 +76,7 @@ const CommentItemInner = memo(function CommentItemInner({
                   height={36}
                 />
               </ImageContainer>
-            </Link>
+            </BaseLink>
           ) : (
             <UnknownUser className="h-9 w-9" />
           )}
@@ -88,7 +88,7 @@ const CommentItemInner = memo(function CommentItemInner({
             {!sender ? (
               t("unknownUser")
             ) : (
-              <Link href={`/team/${sender.id}`}>{sender.fullName}</Link>
+              <BaseLink href={`/team/${sender.id}`}>{sender.fullName}</BaseLink>
             )}
           </CommentItemTitle>
           <CommentItemDate>{formattedDate}</CommentItemDate>
