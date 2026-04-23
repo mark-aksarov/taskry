@@ -1,15 +1,15 @@
-import { FinalCtaSection } from "./FinalCtaSection";
+import { IntroSection } from "./IntroSection";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "site/sections/FinalCtaSection",
-  component: FinalCtaSection,
+  title: "site/home/IntroSection",
+  component: IntroSection,
   decorators: [withThemedBackground],
   parameters: {
     layout: "fullscreen",
   },
-} satisfies Meta<typeof FinalCtaSection>;
+} satisfies Meta<typeof IntroSection>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

@@ -11,7 +11,7 @@ import {
   FeatureItem,
   FeatureItemHeading,
   FeatureItemDescription,
-} from "@/site/blocks/FeatureItem";
+} from "@/site/home/FeatureItem";
 
 import { useTranslations } from "next-intl";
 import { IconWrapper } from "../common/IconWrapper";

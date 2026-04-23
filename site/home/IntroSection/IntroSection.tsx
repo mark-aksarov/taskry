@@ -6,7 +6,7 @@ import {
 
 import { IntroBadge } from "./IntroBadge";
 import { IntroDecorative } from "./IntroDecorative";
-import { CtaActions } from "@/site/blocks/CtaActions";
+import { CtaActions } from "@/site/home/CtaActions";
 import { PageContainer } from "@/site/common/PageContainer";
 import { IntroSectionHeading } from "./IntroSectionHeading";
 import { IntroSectionDescription } from "./IntroSectionDescription";

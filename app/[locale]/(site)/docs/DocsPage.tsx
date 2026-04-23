@@ -3,13 +3,6 @@ import { IntroSection } from "@/site/home/IntroSection";
 import { FeatureSection } from "@/site/home/FeatureSection";
 import { FinalCtaSection } from "@/site/home/FinalCtaSection";
 
-export function HomePage() {
-  return (
-    <main>
-      <IntroSection />
-      <FeatureSection />
-      <DocsSection />
-      <FinalCtaSection />
-    </main>
-  );
+export function DocsPage() {
+  return <main></main>;
 }

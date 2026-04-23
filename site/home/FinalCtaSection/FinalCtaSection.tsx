@@ -7,8 +7,8 @@ import {
 } from "@/site/common/PageSection";
 
 import { useTranslations } from "next-intl";
-import { CtaCard } from "@/site/blocks/CtaCard";
-import { CtaActions } from "@/site/blocks/CtaActions";
+import { CtaCard } from "@/site/home/CtaCard";
+import { CtaActions } from "@/site/home/CtaActions";
 import { PageContainer } from "@/site/common/PageContainer";
 
 export function FinalCtaSection() {

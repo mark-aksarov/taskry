@@ -1,4 +1,5 @@
 import { Heart } from "lucide-react";
+import { IconWrapper } from "../IconWrapper";
 import { NavigationLink } from "./NavigationLink";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -14,7 +15,11 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    iconLeft: <Heart size={24} />,
+    iconLeft: (
+      <IconWrapper color="pink">
+        <Heart size={24} />
+      </IconWrapper>
+    ),
     href: "#",
     heading: "Heading",
     subtext: "Subtext",

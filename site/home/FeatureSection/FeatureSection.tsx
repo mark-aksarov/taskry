@@ -1,20 +1,17 @@
 import {
   PageSection,
   PageSectionHeader,
-  PageSectionAction,
   PageSectionContent,
   PageSectionHeading,
-  PageSectionActions,
   PageSectionDescription,
 } from "@/site/common/PageSection";
 
 import { useTranslations } from "next-intl";
-import { DocsGrid } from "@/site/blocks/DocsGrid";
+import { FeatureGrid } from "@/site/home/FeatureGrid";
 import { PageContainer } from "@/site/common/PageContainer";
-import { FileText } from "lucide-react";
 
-export function DocsSection() {
-  const t = useTranslations("site.sections.DocsSection");
+export function FeatureSection() {
+  const t = useTranslations("site.sections.FeaturesSection");
 
   return (
     <PageSection>
@@ -27,16 +24,7 @@ export function DocsSection() {
               {t("description.line2")}
             </PageSectionDescription>
           </PageSectionHeader>
-          <DocsGrid />
-
-          <PageSectionActions>
-            <PageSectionAction
-              as="a"
-              href="/docs"
-              iconLeft={<FileText size={20} />}
-              label={t("CtaButton.label")}
-            />
-          </PageSectionActions>
+          <FeatureGrid />
         </PageSectionContent>
       </PageContainer>
     </PageSection>
