@@ -1,4 +1,5 @@
 import { NextConfig } from "next";
+import createMDX from "@next/mdx";
 import createNextIntlPlugin from "next-intl/plugin";
 
 if (!process.env.S3_ENDPOINT) {
@@ -8,6 +9,7 @@ if (!process.env.S3_ENDPOINT) {
 const endpointUrl = new URL(process.env.S3_ENDPOINT);
 
 const nextConfig: NextConfig = {
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   images: {
     contentDispositionType: "inline",
     remotePatterns: [
@@ -21,5 +23,9 @@ const nextConfig: NextConfig = {
   },
 };
 
+const withMDX = createMDX({
+  extension: /\.(md|mdx)$/,
+});
+
 const withNextIntl = createNextIntlPlugin();
-export default withNextIntl(nextConfig);
+export default withNextIntl(withMDX(nextConfig));

@@ -1,5 +1,12 @@
 import { DocsPage } from "./DocsPage";
 
-export default function AppDocsPage() {
+interface Props {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}
+
+export default async function AppDocsPage({ children, params }: Props) {
+  const { locale } = await params;
+
   return <DocsPage />;
 }
