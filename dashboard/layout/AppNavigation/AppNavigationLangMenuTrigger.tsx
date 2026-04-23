@@ -3,7 +3,7 @@
 import { Languages } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { LangMenuTrigger } from "@/dashboard/layout/LangMenuTrigger";
-import { NavigationButton } from "@/dashboard/common/NavigationButton";
+import { NavigationButton } from "@/dashboard/common/NavigationItem";
 
 export const AppNavigationLangMenuTrigger = () => {
   const t = useTranslations("common.LangMenuTrigger");

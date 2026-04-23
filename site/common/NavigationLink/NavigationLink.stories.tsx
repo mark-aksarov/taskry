@@ -1,13 +1,13 @@
-import { NavigationButton } from "./NavigationButton";
+import { Heart } from "lucide-react";
+import { NavigationLink } from "./NavigationLink";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { Heart } from "lucide-react";
 
 const meta = {
-  title: "site/common/NavigationButton",
-  component: NavigationButton,
+  title: "site/common/NavigationLink",
+  component: NavigationLink,
   decorators: [withThemedBackground],
-} satisfies Meta<typeof NavigationButton>;
+} satisfies Meta<typeof NavigationLink>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

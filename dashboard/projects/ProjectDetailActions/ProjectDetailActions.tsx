@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useDeleteProject } from "../DeleteProjectContext";
 import { useModal } from "@/dashboard/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { NavigationButton } from "@/dashboard/common/NavigationButton";
+import { NavigationButton } from "@/dashboard/common/NavigationItem";
 
 export function ProjectDetailActions() {
   const t = useTranslations("dashboard.projects.ProjectDetailActions");

@@ -4,7 +4,7 @@ import { LogOut } from "lucide-react";
 import { useRouter } from "@/i18n/navigation";
 import { authClient } from "@/lib/auth-client";
 import { useLocale, useTranslations } from "next-intl";
-import { NavigationButton } from "@/dashboard/common/NavigationButton";
+import { NavigationButton } from "@/dashboard/common/NavigationItem";
 
 export function AppNavigationLogoutButton() {
   const t = useTranslations("dashboard.layout.AppNavigationLogoutButton");

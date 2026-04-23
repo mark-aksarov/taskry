@@ -5,7 +5,7 @@ import { Moon, Sun } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { ButtonSkeleton } from "@/ui/Skeleton";
-import { NavigationButton } from "@/dashboard/common/NavigationButton";
+import { NavigationButton } from "@/dashboard/common/NavigationItem";
 
 export function AppNavigationThemeToggleButton() {
   const t = useTranslations("common.ThemeToggleButton");

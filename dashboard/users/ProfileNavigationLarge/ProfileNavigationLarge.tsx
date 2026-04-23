@@ -1,10 +1,10 @@
 "use client";
 
+import { Separator } from "@/ui/Separator";
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import { CalendarCheck, Info } from "lucide-react";
-import { Separator } from "@/ui/Separator";
-import { NavigationButton } from "@/dashboard/common/NavigationButton";
+import { NavigationLink } from "@/dashboard/common/NavigationItem";
 
 interface ProfileNavigationLargeProps {
   profileActions: React.ReactNode;
@@ -18,7 +18,7 @@ export function ProfileNavigationLarge({
 
   return (
     <nav className="flex flex-col gap-2.5">
-      <NavigationButton
+      <NavigationLink
         href="/profile"
         isActive={pathname === "/profile"}
         variant="secondary"
@@ -26,7 +26,7 @@ export function ProfileNavigationLarge({
         label={t("userInformation")}
       />
 
-      <NavigationButton
+      <NavigationLink
         href="/profile/tasks"
         isActive={pathname === "/profile/tasks"}
         variant="secondary"

@@ -7,7 +7,7 @@ import { useChangePassword } from "../ChangePasswordContext";
 import { useModal } from "@/dashboard/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
-import { NavigationButton } from "@/dashboard/common/NavigationButton";
+import { NavigationButton } from "@/dashboard/common/NavigationItem";
 
 interface ProfileActionsProps {
   userId: string;

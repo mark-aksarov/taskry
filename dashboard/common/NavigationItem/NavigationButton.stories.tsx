@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { NavigationButton } from "./NavigationButton";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
@@ -16,7 +16,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary = {
   args: {
-    href: "/projects",
     variant: "primary",
     label: "Navigation Item",
   },
@@ -24,7 +23,6 @@ export const Primary = {
 
 export const PrimaryActive = {
   args: {
-    href: "/dashboard",
     variant: "primary",
     label: "Navigation Item",
     isActive: true,
@@ -33,7 +31,6 @@ export const PrimaryActive = {
 
 export const PrimaryPending = {
   args: {
-    href: "/projects",
     variant: "primary",
     label: "Navigation Item",
     isPending: true,
@@ -42,7 +39,6 @@ export const PrimaryPending = {
 
 export const Secondary = {
   args: {
-    href: "/projects",
     variant: "secondary",
     label: "Navigation Item",
   },
@@ -50,7 +46,6 @@ export const Secondary = {
 
 export const SecondaryActive = {
   args: {
-    href: "/dashboard",
     variant: "secondary",
     label: "Navigation Item",
     isActive: true,
@@ -59,7 +54,6 @@ export const SecondaryActive = {
 
 export const SecondaryPending = {
   args: {
-    href: "/projects",
     variant: "secondary",
     label: "Navigation Item",
     isPending: true,

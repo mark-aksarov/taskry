@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useDeleteCustomer } from "../DeleteCustomerContext";
 import { useModal } from "@/dashboard/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { NavigationButton } from "@/dashboard/common/NavigationButton";
+import { NavigationButton } from "@/dashboard/common/NavigationItem";
 
 export function CustomerDetailActions() {
   const t = useTranslations("dashboard.customers.CustomerDetailActions");

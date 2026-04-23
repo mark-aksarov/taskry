@@ -12,7 +12,7 @@ import {
 import { Separator } from "@/ui/Separator";
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
-import { NavigationButton } from "@/dashboard/common/NavigationButton";
+import { NavigationLink } from "@/dashboard/common/NavigationItem";
 import { AppNavigationLogoutButton } from "./AppNavigationLogoutButton";
 import { AppNavigationLangMenuTrigger } from "./AppNavigationLangMenuTrigger";
 import { AppNavigationThemeToggleButton } from "./AppNavigationThemeToggleButton";
@@ -23,7 +23,7 @@ export const AppNavigation = () => {
 
   return (
     <nav className="flex flex-col gap-2.5">
-      <NavigationButton
+      <NavigationLink
         href="/dashboard"
         isActive={pathname === "/dashboard"}
         iconLeft={
@@ -32,7 +32,7 @@ export const AppNavigation = () => {
         label={t("dashboard")}
       />
 
-      <NavigationButton
+      <NavigationLink
         href="/projects"
         isActive={
           pathname.startsWith("/projects") || pathname === "/project-categories"
@@ -43,7 +43,7 @@ export const AppNavigation = () => {
         label={t("projects")}
       />
 
-      <NavigationButton
+      <NavigationLink
         href="/tasks"
         isActive={
           pathname.startsWith("/tasks") || pathname === "/task-categories"
@@ -54,14 +54,14 @@ export const AppNavigation = () => {
         label={t("tasks")}
       />
 
-      <NavigationButton
+      <NavigationLink
         href="/team"
         isActive={pathname.startsWith("/team") || pathname === "/positions"}
         iconLeft={<Users size={18} strokeWidth={1.5} absoluteStrokeWidth />}
         label={t("team")}
       />
 
-      <NavigationButton
+      <NavigationLink
         href="/customers"
         isActive={
           pathname.startsWith("/customers") || pathname === "/companies"
@@ -70,7 +70,7 @@ export const AppNavigation = () => {
         label={t("customers")}
       />
 
-      <NavigationButton
+      <NavigationLink
         href="/profile"
         isActive={pathname.startsWith("/profile")}
         iconLeft={<UserRound size={18} strokeWidth={1.5} absoluteStrokeWidth />}

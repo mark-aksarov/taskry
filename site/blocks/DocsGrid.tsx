@@ -11,14 +11,14 @@ import {
 
 import { useTranslations } from "next-intl";
 import { IconWrapper } from "../common/IconWrapper";
-import { NavigationButton } from "../common/NavigationButton";
+import { NavigationLink } from "../common/NavigationLink";
 
 export function DocsGrid() {
   const t = useTranslations("site.blocks.DocsGrid");
 
   return (
     <div className="grid gap-4 max-md:grid-cols-1 md:grid-cols-2">
-      <NavigationButton
+      <NavigationLink
         iconLeft={
           <IconWrapper color="blue">
             <BookOpen size={24} />
@@ -28,7 +28,7 @@ export function DocsGrid() {
         heading={t("quickGuide.heading")}
         subtext={t("quickGuide.subtext")}
       />
-      <NavigationButton
+      <NavigationLink
         iconLeft={
           <IconWrapper color="indigo">
             <MessageSquare size={24} />
@@ -38,7 +38,7 @@ export function DocsGrid() {
         heading={t("comments.heading")}
         subtext={t("comments.subtext")}
       />
-      <NavigationButton
+      <NavigationLink
         iconLeft={
           <IconWrapper color="purple">
             <FolderKanban size={24} />
@@ -48,7 +48,7 @@ export function DocsGrid() {
         heading={t("projectManagement.heading")}
         subtext={t("projectManagement.subtext")}
       />
-      <NavigationButton
+      <NavigationLink
         iconLeft={
           <IconWrapper color="pink">
             <UserCog size={24} />
@@ -58,7 +58,7 @@ export function DocsGrid() {
         heading={t("usersRoles.heading")}
         subtext={t("usersRoles.subtext")}
       />
-      <NavigationButton
+      <NavigationLink
         iconLeft={
           <IconWrapper color="orange">
             <CheckSquare size={24} />
@@ -68,7 +68,7 @@ export function DocsGrid() {
         heading={t("tasks.heading")}
         subtext={t("tasks.subtext")}
       />
-      <NavigationButton
+      <NavigationLink
         iconLeft={
           <IconWrapper color="teal">
             <Search size={24} />
@@ -78,7 +78,7 @@ export function DocsGrid() {
         heading={t("searchFilter.heading")}
         subtext={t("searchFilter.subtext")}
       />
-      <NavigationButton
+      <NavigationLink
         iconLeft={
           <IconWrapper color="cyan">
             <Layers size={24} />
@@ -88,7 +88,7 @@ export function DocsGrid() {
         heading={t("categories.heading")}
         subtext={t("categories.subtext")}
       />
-      <NavigationButton
+      <NavigationLink
         iconLeft={
           <IconWrapper color="emerald">
             <Building2 size={24} />

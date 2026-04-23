@@ -26,19 +26,19 @@ const styles = tv({
   },
 });
 
-interface NavigationButtonProps {
+interface NavigationLinkProps {
   href: string;
   iconLeft?: React.ReactNode;
   heading: string;
   subtext: string;
 }
 
-export function NavigationButton({
+export function NavigationLink({
   href,
   heading,
   subtext,
   iconLeft,
-}: NavigationButtonProps) {
+}: NavigationLinkProps) {
   const {
     base,
     content,

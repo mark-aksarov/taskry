@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import { CalendarCheck, Info } from "lucide-react";
 import { Separator } from "@/ui/Separator";
-import { NavigationButton } from "@/dashboard/common/NavigationButton";
+import { NavigationLink } from "@/dashboard/common/NavigationItem";
 
 interface UserNavigationLargeProps {
   userActions: React.ReactNode;
@@ -19,7 +19,7 @@ export function UserNavigationLarge({ userActions }: UserNavigationLargeProps) {
 
   return (
     <nav className="flex flex-col gap-2.5">
-      <NavigationButton
+      <NavigationLink
         href={`/team/${id}`}
         isActive={pathname === `/team/${id}`}
         variant="secondary"
@@ -27,7 +27,7 @@ export function UserNavigationLarge({ userActions }: UserNavigationLargeProps) {
         label={t("userInformation")}
       />
 
-      <NavigationButton
+      <NavigationLink
         href={`/team/${id}/tasks`}
         isActive={pathname === `/team/${id}/tasks`}
         variant="secondary"
