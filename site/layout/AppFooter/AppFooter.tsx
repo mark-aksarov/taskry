@@ -3,6 +3,7 @@ import { AppFooterLink } from "./AppFooterLink";
 import { AppFooterHeading } from "./AppFooterHeading";
 import { PageSection } from "@/site/common/PageSection";
 import { PageContainer } from "@/site/common/PageContainer";
+import { Logo } from "../Logo";
 
 export function AppFooter() {
   const t = useTranslations("site.layout.AppFooter");
@@ -16,9 +17,7 @@ export function AppFooter() {
         <PageContainer>
           <div className="flex justify-between max-md:flex-col max-md:gap-8">
             <div className="grow-3">
-              <h4 className="mb-4 text-3xl font-bold text-black dark:text-white">
-                Taskry
-              </h4>
+              <Logo className="mb-4" />
               <p className="text-base font-normal text-gray-600 dark:text-gray-300">
                 {t("text.line1")} <br />
                 {t("text.line2")}
