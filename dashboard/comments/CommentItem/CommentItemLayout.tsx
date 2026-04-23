@@ -1,5 +1,17 @@
-import { twMerge } from "tailwind-merge";
+import { tv } from "tailwind-variants";
 import { CommentItemContent } from "./CommentItemContent";
+
+const styles = tv({
+  slots: {
+    root: [
+      "flex flex-col gap-4",
+      "not-last:border-b-1 not-last:pb-4",
+      "border-gray-300 dark:border-gray-600",
+    ],
+    header: "flex items-start justify-between",
+    sender: "flex items-center gap-3",
+  },
+});
 
 interface CommentItemLayoutProps {
   className?: string;
@@ -16,16 +28,12 @@ export function CommentItemLayout({
   contentSlot,
   menuTriggerSlot,
 }: CommentItemLayoutProps) {
+  const { root, header, sender } = styles();
+
   return (
-    <div
-      data-test="comment-item"
-      className={twMerge(
-        "flex flex-col gap-4 border-gray-300 not-last:border-b-1 not-last:pb-4 dark:border-gray-600",
-        className,
-      )}
-    >
-      <div className="flex items-start justify-between">
-        <div className="flex items-center gap-3">
+    <div data-test="comment-item" className={root({ className })}>
+      <div className={header()}>
+        <div className={sender()}>
           {senderImageSlot}
           {senderNameAndDateSlot}
         </div>

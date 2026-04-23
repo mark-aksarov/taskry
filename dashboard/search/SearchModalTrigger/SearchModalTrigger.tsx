@@ -13,7 +13,14 @@ import { SearchModalTriggerClearButton } from "./SearchModalTriggerClearButton";
 
 export const styles = tv({
   extend: focusRing,
-  base: "flex flex-auto cursor-text items-center justify-between gap-2 rounded-full bg-white p-2 pl-4 md:max-w-[360px] dark:bg-gray-800",
+  base: [
+    "flex flex-auto items-center justify-between",
+    "cursor-text",
+    "gap-2 p-2 pl-4",
+    "rounded-full",
+    "md:max-w-[360px]",
+    "bg-white dark:bg-gray-800",
+  ],
   variants: {
     isDisabled: {
       true: "text-gray-500 dark:text-gray-400",

@@ -2,7 +2,8 @@
 
 import { CirclePlus } from "lucide-react";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { Button, ButtonProps, PressEvent } from "react-aria-components";
+import { ButtonProps, PressEvent } from "react-aria-components";
+import { TextButton } from "@/common/TextButton";
 
 interface EmptySectionButtonProps extends ButtonProps {
   children: React.ReactNode;
@@ -24,9 +25,9 @@ export function EmptySectionButton({
   }
 
   return (
-    <Button {...props} onPress={handlePress} className="font-bold">
+    <TextButton {...props} onPress={handlePress} className="font-bold">
       <CirclePlus size={16} strokeWidth={1.5} absoluteStrokeWidth />
       {children}
-    </Button>
+    </TextButton>
   );
 }
