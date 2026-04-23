@@ -18,7 +18,7 @@ export const styles = tv({
     },
     isActive: {
       false:
-        "pressed:bg-gray-300 dark:pressed:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600",
+        "pressed:bg-gray-200 dark:pressed:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700",
       true: "bg-blue-600 text-white dark:bg-blue-700",
     },
     isPending: {
@@ -35,11 +35,6 @@ export const styles = tv({
       variant: "secondary",
       isActive: true,
       class: "bg-gray-100 text-blue-600 dark:bg-gray-700 dark:text-blue-300",
-    },
-    {
-      isActive: false,
-      class:
-        "pressed:bg-gray-300 dark:pressed:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600",
     },
   ],
 });
