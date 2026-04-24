@@ -14,7 +14,7 @@ import {
 
 import { memo } from "react";
 import { twMerge } from "tailwind-merge";
-import { BaseLink } from "@/ui/BaseLink";
+import { BaseLink } from "@/ui/Link";
 import { TaskItemActionMenuTrigger } from "../TaskItem";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { TaskItemStatusBadge } from "../TaskItemStatusBadge";

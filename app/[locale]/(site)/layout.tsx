@@ -1,9 +1,9 @@
-import { HomeLayout } from "./HomeLayout";
+import { SiteLayout } from "./SiteLayout";
 
 export default async function AppSiteLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <HomeLayout>{children}</HomeLayout>;
+  return <SiteLayout>{children}</SiteLayout>;
 }

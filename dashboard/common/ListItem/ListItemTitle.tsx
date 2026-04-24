@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import { BaseLink } from "@/ui/BaseLink";
+import { BaseLink } from "@/ui/Link";
 import { Skeleton } from "@/ui/Skeleton";
 import { ItemBaseDetailButton, ItemBaseDetailButtonProps } from "../ItemBase";
 

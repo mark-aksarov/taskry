@@ -13,6 +13,20 @@ import { AppSidebarSheetTrigger } from "../AppSidebarSheetTrigger";
 import { SearchModalTrigger } from "@/dashboard/search/SearchModalTrigger";
 import { AppBottomSheetTrigger } from "@/dashboard/layout/AppBottomSheetTrigger";
 
+import { tv } from "tailwind-variants";
+
+const styles = tv({
+  slots: {
+    base: [
+      "border-gray-300 dark:border-gray-600",
+      "bg-gray-100 dark:bg-gray-900",
+    ],
+
+    mobileWrapper: "px-4 md:hidden",
+    desktopWrapper: "px-6 max-md:hidden",
+  },
+});
+
 export interface AppHeaderProps {
   heading: string;
   backButtonHref?: string;
@@ -24,15 +38,18 @@ export const AppHeader = ({
   backButtonHref,
   profileLinkContainer,
 }: AppHeaderProps) => {
+  const { base, mobileWrapper, desktopWrapper } = styles();
+
   return (
-    <AppHeaderBase className="border-gray-300 bg-gray-100 dark:border-gray-600 dark:bg-gray-900">
-      <div className="px-4 md:hidden">
+    <AppHeaderBase className={base()}>
+      <div className={mobileWrapper()}>
         <AppHeaderLayout
           left={<>{profileLinkContainer}</>}
           right={<AppBottomSheetTrigger appNavigation={<AppNavigation />} />}
         />
       </div>
-      <div className="px-6 max-md:hidden">
+
+      <div className={desktopWrapper()}>
         <AppHeaderLayout
           left={
             <>

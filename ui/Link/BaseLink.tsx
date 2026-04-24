@@ -9,9 +9,14 @@ import {
 import { focusRing } from "../styles";
 import { tv } from "tailwind-variants";
 
-export const linkStyles = tv({
+const linkStyles = tv({
   extend: focusRing,
-  base: "cursor-pointer",
+
+  variants: {
+    isDisabled: {
+      false: "cursor-pointer",
+    },
+  },
 });
 
 export const BaseLink = ({ className, ...props }: ReactAriaLinkProps) => {

@@ -12,9 +12,9 @@ import {
 } from "@/dashboard/common/GridItem";
 
 import { memo } from "react";
+import { BaseLink } from "@/ui/Link";
 import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
-import { BaseLink } from "@/ui/BaseLink";
 import { Separator } from "@/ui/Separator";
 import { CustomerItemActionMenuTrigger } from "../CustomerItem";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";

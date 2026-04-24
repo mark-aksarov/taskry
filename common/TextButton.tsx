@@ -1,6 +1,6 @@
 "use client";
 
-import { textButtonStyles } from "./styles";
+import { linkStyles } from "@/ui/Link";
 import { Button, ButtonProps, composeRenderProps } from "react-aria-components";
 
 export function TextButton({ children, className, ...props }: ButtonProps) {
@@ -8,7 +8,7 @@ export function TextButton({ children, className, ...props }: ButtonProps) {
     <Button
       {...props}
       className={composeRenderProps(className, (className, renderProps) =>
-        textButtonStyles({ ...renderProps, className }),
+        linkStyles({ ...renderProps, variant: "primary", className }),
       )}
     >
       {children}

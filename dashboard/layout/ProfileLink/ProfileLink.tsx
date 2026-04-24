@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { BaseLink } from "@/ui/BaseLink";
+import { BaseLink } from "@/ui/Link";
 import { UnknownUser } from "@/dashboard/common/UnknownUser";
 import { ImageContainer } from "@/dashboard/common/ImageContainer";
 

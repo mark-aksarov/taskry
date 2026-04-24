@@ -1,3 +1,4 @@
+import { BaseLink } from "@/ui/Link";
 import { tv } from "tailwind-variants";
 import { CheckCircle2 } from "lucide-react";
 
@@ -19,11 +20,11 @@ export function Logo({ className }: LogoProps) {
   const styles = logoStyles();
 
   return (
-    <div className={styles.root({ className })}>
+    <BaseLink href="/" className={styles.root({ className })}>
       <div className={styles.iconWrap()}>
         <CheckCircle2 className={styles.icon()} />
       </div>
       <div className={styles.text()}>Taskry</div>
-    </div>
+    </BaseLink>
   );
 }

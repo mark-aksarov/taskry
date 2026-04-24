@@ -1,20 +1,23 @@
 "use client";
 
 import { tv } from "tailwind-variants";
-import { focusRing } from "@/ui/styles";
+import { linkStyles } from "@/ui/Link";
 import { Link } from "react-aria-components";
 
 const styles = tv({
-  extend: focusRing,
+  extend: linkStyles,
   base: [
-    "mb-3 block w-fit cursor-pointer",
-    "text-sm font-normal",
     "text-gray-600 dark:text-gray-300",
-    "hover:text-black dark:hover:text-white",
-    "pressed:text-black dark:pressed:text-white",
+    "hover:text-blue-600 dark:hover:text-blue-400",
+    "pressed:text-blue-600 dark:pressed:text-blue-400",
   ],
 });
 
-export function AppFooterLink({ children }: { children: React.ReactNode }) {
-  return <Link className={styles}>{children}</Link>;
+interface AppFooterLinkProps {
+  className?: string;
+  children: React.ReactNode;
+}
+
+export function AppFooterLink({ className, children }: AppFooterLinkProps) {
+  return <Link className={styles({ className })}>{children}</Link>;
 }

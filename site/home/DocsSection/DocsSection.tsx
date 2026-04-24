@@ -32,7 +32,7 @@ export function DocsSection() {
           <PageSectionActions>
             <PageSectionAction
               as="a"
-              href="/docs"
+              href="/docs/getting-started"
               iconLeft={<FileText size={20} />}
               label={t("CtaButton.label")}
             />

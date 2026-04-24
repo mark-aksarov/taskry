@@ -43,7 +43,7 @@
         "line1": "Task",
         "line2": "management",
         "line3": "in a simple",
-        "line4": "interface"
+        "line4": "solution"
       },
       "description": {
         "line1": "A simple task manager to organize your work.",
@@ -146,6 +146,32 @@
         "heading": "Clients and Companies",
         "subtext": "12 min read"
       }
+    }
+  },
+  "docs": {
+    "DocsSidebarSheetTrigger": {
+      "triggerAriaLabel": "Docs navigation"
+    },
+    "DocsNavigation": {
+      "gettingStarted": "Quick start guide",
+      "projects": "Project management",
+      "tasks": "Tasks and subtasks",
+      "categories": "Project and task categories",
+      "comments": "Comments on tasks and projects",
+      "users": "Users, roles and permissions",
+      "search": "Search and filtering",
+      "clients": "Clients and companies"
+    },
+    "DocsBreadcrumbs": {
+      "docs": "Documentation",
+      "gettingStarted": "Getting Started",
+      "projects": "Projects",
+      "tasks": "Tasks",
+      "categories": "Categories",
+      "comments": "Comments",
+      "users": "Users",
+      "search": "Search",
+      "clients": "Clients"
     }
   }
 }

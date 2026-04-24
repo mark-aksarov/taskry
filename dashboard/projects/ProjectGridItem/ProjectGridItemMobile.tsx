@@ -19,8 +19,8 @@ import {
 } from "../ProjectItem";
 
 import { memo } from "react";
+import { BaseLink } from "@/ui/Link";
 import { twMerge } from "tailwind-merge";
-import { BaseLink } from "@/ui/BaseLink";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
 import { useModal } from "@/dashboard/common/ModalManagerContext";

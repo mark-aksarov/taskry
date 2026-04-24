@@ -18,7 +18,7 @@ import {
 
 import { memo } from "react";
 import { twMerge } from "tailwind-merge";
-import { BaseLink } from "@/ui/BaseLink";
+import { BaseLink } from "@/ui/Link";
 import { useTranslations } from "next-intl";
 import { Separator } from "@/ui/Separator";
 import { UserGridItemLayout } from "./UserGridItemLayout";

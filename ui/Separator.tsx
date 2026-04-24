@@ -6,12 +6,16 @@ import {
 } from "react-aria-components";
 
 import React from "react";
+import { twMerge } from "tailwind-merge";
 
-export function Separator(props: SeparatorProps) {
+export function Separator({ className, ...props }: SeparatorProps) {
   return (
     <RACSeparator
       {...props}
-      className="h-px w-full border-none bg-gray-300 dark:bg-gray-600"
+      className={twMerge(
+        "h-px w-full border-none bg-gray-300 dark:bg-gray-600",
+        className,
+      )}
     />
   );
 }

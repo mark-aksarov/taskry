@@ -1,6 +1,6 @@
 import { HomePage } from "./HomePage";
 import { mocked } from "storybook/test";
-import { HomeLayout } from "./HomeLayout";
+import { SiteLayout } from "./SiteLayout";
 import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -11,9 +11,9 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     (Story) => (
-      <HomeLayout>
+      <SiteLayout>
         <Story />
-      </HomeLayout>
+      </SiteLayout>
     ),
     withThemedBackground,
   ],

@@ -1,4 +1,4 @@
-import { BaseLink } from "@/ui/BaseLink";
+import { BaseLink } from "@/ui/Link";
 
 const styles = "max-w-full flex items-center gap-2.5";
 

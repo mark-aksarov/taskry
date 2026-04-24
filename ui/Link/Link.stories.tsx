@@ -1,24 +1,28 @@
-import { BaseLink } from "./BaseLink";
+import { Link } from "./Link";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "UI/BaseLink",
-  component: BaseLink,
+  title: "UI/Link",
+  component: Link,
   args: {
     href: "#",
-    children: "BaseLink",
+    children: "Link",
   },
   decorators: [withThemedBackground],
-} satisfies Meta<typeof BaseLink>;
+} satisfies Meta<typeof Link>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
+  args: {},
+} satisfies Story;
+
+export const Primary = {
   args: {
-    className: "text-black dark:text-white",
+    variant: "primary",
   },
 } satisfies Story;
 
