@@ -2,20 +2,46 @@ import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
 
-const publicRoutes = [
-  "/sign-in",
-  "/sign-up",
-  "/forget-password",
-  "/forget-password/check-email",
-  "/reset-password",
-  "/verify-email",
-];
+const locales = ["en", "ru"] as const;
+const defaultLocale = "ru";
 
-function isPublicRoute(pathname: string) {
-  return publicRoutes.some((route) => pathname.endsWith(route));
+function normalizePath(pathname: string) {
+  const segments = pathname.split("/");
+
+  if (locales.includes(segments[1] as any)) {
+    return "/" + segments.slice(2).join("/");
+  }
+
+  return pathname;
 }
 
-const defaultLocale = "ru";
+const publicRoutes = [
+  { type: "exact", path: "/" },
+  { type: "exact", path: "/sign-in" },
+  { type: "exact", path: "/sign-up" },
+  { type: "exact", path: "/forget-password" },
+  { type: "exact", path: "/forget-password/check-email" },
+  { type: "exact", path: "/reset-password" },
+  { type: "exact", path: "/accept-invite" },
+  { type: "exact", path: "/verify-email" },
+  { type: "prefix", path: "/docs" },
+] as const;
+
+function isPublicRoute(pathname: string) {
+  const path = normalizePath(pathname);
+
+  return publicRoutes.some((route) => {
+    if (route.type === "exact") {
+      return path === route.path;
+    }
+
+    if (route.type === "prefix") {
+      return path === route.path || path.startsWith(route.path + "/");
+    }
+
+    return false;
+  });
+}
 
 const handleI18nRouting = createMiddleware({
   locales: ["en", "ru"],
@@ -24,8 +50,10 @@ const handleI18nRouting = createMiddleware({
 });
 
 export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
   // https://better-auth.com/docs/integrations/next#cookie-based-checks-recommended-for-all-versions
-  if (!isPublicRoute(request.nextUrl.pathname)) {
+  if (!isPublicRoute(pathname)) {
     const sessionCookie = getSessionCookie(request);
 
     if (!sessionCookie) {
@@ -33,9 +61,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  const response = handleI18nRouting(request);
-
-  return response;
+  return handleI18nRouting(request);
 }
 
 export const config = {

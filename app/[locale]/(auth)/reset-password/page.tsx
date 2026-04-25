@@ -8,6 +8,8 @@ export default async function AppResetPasswordPage({
 }: {
   searchParams: Promise<{ token: string }>;
 }) {
+  console.log("Reset Password Page");
+
   await requireAuthPage();
 
   const { token } = await searchParams;
