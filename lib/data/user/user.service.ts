@@ -50,7 +50,7 @@ export const createUser = async (input: CreateUserInputDTO) => {
   await auth.api.requestPasswordReset({
     body: {
       email: input.email,
-      redirectTo: "/reset-password?mode=invite",
+      redirectTo: `/accept-invite?email=${input.email}`,
     },
   });
 

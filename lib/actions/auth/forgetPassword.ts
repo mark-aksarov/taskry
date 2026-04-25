@@ -26,7 +26,7 @@ export async function forgetPassword(
     await auth.api.requestPasswordReset({
       body: {
         email: parsedData.email,
-        redirectTo: "/reset-password?mode=reset",
+        redirectTo: "/reset-password",
       },
     });
   } catch (error: unknown) {

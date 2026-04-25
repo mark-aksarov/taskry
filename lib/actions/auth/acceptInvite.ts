@@ -5,14 +5,15 @@ import { auth } from "@/lib/auth";
 import { ActionState } from "../types";
 import { APIError } from "better-auth";
 import { redirect } from "@/i18n/navigation";
-import { userPassword } from "@/lib/schemas/user";
+import { userEmail, userPassword } from "@/lib/schemas/user";
 import { getLocale, getTranslations } from "next-intl/server";
 
 const schema = z.object({
+  email: userEmail,
   password: userPassword,
 });
 
-export async function resetPassword(
+export async function acceptInvite(
   token: string,
   _prevState: ActionState,
   formData: FormData,
@@ -31,6 +32,14 @@ export async function resetPassword(
         token,
       },
     });
+
+    // Sign in
+    await auth.api.signInEmail({
+      body: {
+        email: parsedData.email,
+        password: parsedData.password,
+      },
+    });
   } catch (error: unknown) {
     console.error("Reset Password Error:", error);
 
@@ -44,18 +53,11 @@ export async function resetPassword(
 
     return {
       status: "error",
-      message: t("resetPassword.error.internalServerError"),
+      message: t("acceptInvite.error.internalServerError"),
     };
   }
 
-  // Redirect to sign-in with success query
-  redirect({
-    href: {
-      pathname: "/sign-in",
-      query: { status: "reset-password-success" },
-    },
-    locale,
-  });
+  redirect({ href: "/dashboard", locale });
 
   return {
     status: "success",

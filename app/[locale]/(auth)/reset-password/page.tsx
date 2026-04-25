@@ -1,17 +1,16 @@
 import { notFound } from "next/navigation";
-import { ResetPasswordMode } from "@/lib/types";
 import { ResetPasswordPage } from "./ResetPasswordPage";
-import { requireAuthPage } from "@/lib/utils/requireAuthPage";
 import { resetPassword } from "@/lib/actions/auth/resetPassword";
+import { requireAuthPage } from "@/lib/utils/requireAuthPage";
 
-export default async function AppResetPassword({
+export default async function AppResetPasswordPage({
   searchParams,
 }: {
-  searchParams: Promise<{ token?: string; mode?: ResetPasswordMode }>;
+  searchParams: Promise<{ token: string }>;
 }) {
   await requireAuthPage();
 
-  const { token, mode } = await searchParams;
+  const { token } = await searchParams;
 
   if (!token) {
     notFound();
@@ -19,10 +18,5 @@ export default async function AppResetPassword({
 
   const resetPasswordWithToken = resetPassword.bind(null, token);
 
-  return (
-    <ResetPasswordPage
-      mode={mode ?? "reset"}
-      resetPassword={resetPasswordWithToken}
-    />
-  );
+  return <ResetPasswordPage resetPassword={resetPasswordWithToken} />;
 }

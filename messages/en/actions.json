@@ -20,6 +20,11 @@
       "internalServerError": "Something went wrong. Failed to reset the password. Refresh the page or try again later."
     }
   },
+  "acceptInvite": {
+    "error": {
+      "internalServerError": "Something went wrong. We couldn't complete the invitation. Refresh the page or try again later."
+    }
+  },
   "signIn": {
     "error": {
       "internalServerError": "Something went wrong. Failed to sign in. Refresh the page or try again later."

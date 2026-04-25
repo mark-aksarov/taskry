@@ -6,17 +6,21 @@ import {
   AuthCardSubtitle,
 } from "@/auth/AuthCard";
 import { useTranslations } from "next-intl";
+import { AcceptInviteForm } from "@/auth/AcceptInviteForm";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { ResetPasswordForm } from "@/auth/ResetPasswordForm";
 import { AuthLangMenuTrigger } from "@/auth/AuthLangMenuTrigger";
 import { AuthCardSignInFooter } from "@/auth/AuthCardSignInFooter";
 
-interface ResetPasswordPageProps {
-  resetPassword: ActionFn<ActionState, FormData>;
+interface AcceptInvitePageProps {
+  email: string;
+  acceptInvite: ActionFn<ActionState, FormData>;
 }
 
-export function ResetPasswordPage({ resetPassword }: ResetPasswordPageProps) {
-  const t = useTranslations("app.ResetPasswordPage");
+export function AcceptInvitePage({
+  email,
+  acceptInvite,
+}: AcceptInvitePageProps) {
+  const t = useTranslations("app.AcceptInvitePage");
 
   return (
     <AuthCard>
@@ -26,7 +30,7 @@ export function ResetPasswordPage({ resetPassword }: ResetPasswordPageProps) {
         <AuthCardSubtitle>{t("subtitle")}</AuthCardSubtitle>
       </AuthCardHeader>
       <AuthCardBody>
-        <ResetPasswordForm resetPassword={resetPassword} />
+        <AcceptInviteForm email={email} acceptInvite={acceptInvite} />
       </AuthCardBody>
       <AuthCardSignInFooter />
     </AuthCard>

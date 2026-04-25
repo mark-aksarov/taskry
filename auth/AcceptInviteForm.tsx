@@ -11,20 +11,25 @@ const initialState: ActionState = {
   status: null,
 };
 
-interface ResetPasswordFormProps {
-  resetPassword: ActionFn<ActionState, FormData>;
+interface AcceptInviteFormProps {
+  email: string;
+  acceptInvite: ActionFn<ActionState, FormData>;
 }
 
-export function ResetPasswordForm({ resetPassword }: ResetPasswordFormProps) {
-  const t = useTranslations("auth.ResetPasswordForm");
+export function AcceptInviteForm({
+  email,
+  acceptInvite,
+}: AcceptInviteFormProps) {
+  const t = useTranslations("auth.AcceptInviteForm");
 
   const [state, formAction, isPending] = useActionState(
-    resetPassword,
+    acceptInvite,
     initialState,
   );
 
   return (
     <AuthForm action={formAction}>
+      <input type="hidden" name="email" value={email} />
       <PasswordField minLength={8} maxLength={128} />
 
       <FormErrorBanner status={state.status} isPending={isPending}>
