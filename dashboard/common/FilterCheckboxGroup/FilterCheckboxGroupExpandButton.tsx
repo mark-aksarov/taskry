@@ -58,7 +58,7 @@ export function FilterCheckboxGroupExpandButton({
   return (
     <TextButton
       onPress={() => setIsExpanded(!isExpanded)}
-      className="font-medium"
+      className="max-w-full font-medium"
     >
       {content}
     </TextButton>
