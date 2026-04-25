@@ -4,7 +4,7 @@ import { CheckCircle2 } from "lucide-react";
 
 const logoStyles = tv({
   slots: {
-    root: "flex items-center gap-3",
+    root: "flex w-fit items-center gap-3",
     iconWrap:
       "flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600",
     icon: "h-5 w-5 text-white",
