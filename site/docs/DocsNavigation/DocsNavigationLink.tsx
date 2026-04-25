@@ -2,7 +2,7 @@
 
 import { tv } from "tailwind-variants";
 import { linkStyles } from "@/ui/Link";
-import { Link } from "react-aria-components";
+import { composeRenderProps, Link } from "react-aria-components";
 
 const styles = tv({
   extend: linkStyles,
@@ -32,7 +32,12 @@ export function DocsNavigationLink({
   children,
 }: DocsNavigationLinkProps) {
   return (
-    <Link href={href} className={styles({ isActive, className })}>
+    <Link
+      href={href}
+      className={composeRenderProps(className, (className, renderProps) =>
+        styles({ ...renderProps, isActive, className }),
+      )}
+    >
       {children}
     </Link>
   );

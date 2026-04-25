@@ -2,7 +2,7 @@
 
 import { tv } from "tailwind-variants";
 import { linkStyles } from "@/ui/Link";
-import { Link } from "react-aria-components";
+import { composeRenderProps, Link } from "react-aria-components";
 
 const styles = tv({
   extend: linkStyles,
@@ -19,5 +19,13 @@ interface AppFooterLinkProps {
 }
 
 export function AppFooterLink({ className, children }: AppFooterLinkProps) {
-  return <Link className={styles({ className })}>{children}</Link>;
+  return (
+    <Link
+      className={composeRenderProps(className, (className, renderProps) =>
+        styles({ ...renderProps, className }),
+      )}
+    >
+      {children}
+    </Link>
+  );
 }
