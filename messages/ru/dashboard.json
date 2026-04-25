@@ -241,13 +241,13 @@
       "byCompany": "По компании"
     },
     "CustomerDetail": {
-      "bio": "Биография",
+      "bio": "О себе",
       "fullName": "Полное имя",
       "email": "Электронная почта",
       "phoneNumber": "Номер телефона",
       "publicLink": "Публичная ссылка",
       "company": "Компания",
-      "noBio": "Клиент ещё не написал биографию.",
+      "noBio": "Клиент ещё не написал о себе.",
       "noFullName": "Имя не указано",
       "noEmail": "Электронная почта не указана",
       "noPhoneNumber": "Номер телефона не указан",
@@ -367,7 +367,7 @@
       "imageAlt": "Изображение профиля"
     },
     "UpdateCustomerBioModal": {
-      "title": "Изменить биографию"
+      "title": "Изменить о себе"
     },
     "UpdateCustomerFullNameModal": {
       "title": "Изменить полное имя"
@@ -382,7 +382,7 @@
       "submitButtonLabel": "Обновить номер телефона"
     },
     "UpdateCustomerBioForm": {
-      "submitButtonLabel": "Обновить биографию"
+      "submitButtonLabel": "Обновить о себе"
     },
     "UpdateCustomerPublicLinkForm": {
       "submitButtonLabel": "Обновить публичную ссылку"
@@ -994,7 +994,7 @@
       "text": "Назначенные задачи"
     },
     "TasksEmptySection": {
-      "heading": "Нет задач",
+      "heading": "Нет назначенных задач",
       "description": "Создайте новую задачу, чтобы отслеживать свою работу",
       "button": "Новая задача"
     },
@@ -1330,8 +1330,8 @@
       "assignedTasks": "Задачи"
     },
     "UserDetail": {
-      "bio": "Биография",
-      "noBio": "Этот пользователь еще не написал биографию.",
+      "bio": "О себе",
+      "noBio": "Этот пользователь еще не написал о себе.",
       "fullName": "Полное имя",
       "noFullName": "Имя не указано",
       "email": "Адрес электронной почты",
@@ -1452,7 +1452,7 @@
       "label": "Меню изображения профиля"
     },
     "UpdateUserBioModal": {
-      "title": "Изменить биографию"
+      "title": "Изменить о себе"
     },
     "UpdateUserFullNameModal": {
       "title": "Изменить полное имя"
@@ -1485,7 +1485,7 @@
       "submitButtonLabel": "Обновить адрес"
     },
     "UpdateUserBioForm": {
-      "submitButtonLabel": "Обновить биографию"
+      "submitButtonLabel": "Обновить о себе"
     },
     "UpdateUserBirthdateForm": {
       "submitButtonLabel": "Обновить дату рождения"

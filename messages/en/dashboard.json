@@ -241,13 +241,13 @@
       "byCompany": "By company"
     },
     "CustomerDetail": {
-      "bio": "Bio",
+      "bio": "About me",
       "fullName": "Full name",
       "email": "Email address",
       "phoneNumber": "Phone number",
       "publicLink": "Public link",
       "company": "Company",
-      "noBio": "This customer hasn’t written a bio yet.",
+      "noBio": "This customer hasn’t written a about themselves.",
       "noFullName": "No name provided",
       "noEmail": "No email provided",
       "noPhoneNumber": "No phone number provided",
@@ -272,7 +272,7 @@
     },
     "CustomerBioTextField": {
       "label": "Bio",
-      "placeholder": "Enter bio"
+      "placeholder": "Enter about me"
     },
     "CustomerEmailTextField": {
       "label": "Email",
@@ -382,7 +382,7 @@
       "submitButtonLabel": "Update phone number"
     },
     "UpdateCustomerBioForm": {
-      "submitButtonLabel": "Update bio"
+      "submitButtonLabel": "Update about me"
     },
     "UpdateCustomerPublicLinkForm": {
       "submitButtonLabel": "Update public link"
@@ -994,7 +994,7 @@
       "text": "Assigned tasks"
     },
     "TasksEmptySection": {
-      "heading": "No tasks",
+      "heading": "No assigned tasks",
       "description": "Create a new task to keep track of your work",
       "button": "New task"
     },
@@ -1268,8 +1268,8 @@
       }
     },
     "UserBioTextField": {
-      "label": "Bio",
-      "placeholder": "Enter bio"
+      "label": "About me",
+      "placeholder": "Enter about me"
     },
     "UserBirthdateDatePicker": {
       "label": "Birthdate"
@@ -1330,8 +1330,8 @@
       "assignedTasks": "Assigned tasks"
     },
     "UserDetail": {
-      "bio": "Bio",
-      "noBio": "This user hasn’t written a bio yet.",
+      "bio": "About me",
+      "noBio": "This user hasn’t written a about themself.",
       "fullName": "Full name",
       "noFullName": "No name provided",
       "email": "Email address",
@@ -1455,7 +1455,7 @@
       "label": "Profile image menu"
     },
     "UpdateUserBioModal": {
-      "title": "Edit bio"
+      "title": "Edit about me"
     },
     "UpdateUserFullNameModal": {
       "title": "Edit full name"
@@ -1488,7 +1488,7 @@
       "submitButtonLabel": "Update address"
     },
     "UpdateUserBioForm": {
-      "submitButtonLabel": "Update bio"
+      "submitButtonLabel": "Update about me"
     },
     "UpdateUserBirthdateForm": {
       "submitButtonLabel": "Update birthdate"
