@@ -5,10 +5,11 @@ import { auth } from "@/lib/auth";
 import { ActionState } from "../types";
 import { APIError } from "better-auth";
 import { redirect } from "@/i18n/navigation";
-import { userPassword } from "@/lib/schemas/user";
+import { resetPasswordMode, userPassword } from "@/lib/schemas/user";
 import { getLocale, getTranslations } from "next-intl/server";
 
 const schema = z.object({
+  mode: resetPasswordMode.catch(() => "reset" as const),
   password: userPassword,
 });
 
@@ -20,9 +21,10 @@ export async function resetPassword(
   const locale = await getLocale();
   const t = await getTranslations("actions");
 
+  let parsedData;
   try {
     const input = Object.fromEntries(formData.entries());
-    const parsedData = schema.parse(input);
+    parsedData = schema.parse(input);
 
     // Request password reset
     await auth.api.resetPassword({
@@ -52,7 +54,7 @@ export async function resetPassword(
   redirect({
     href: {
       pathname: "/sign-in",
-      query: { status: "reset-password-success" },
+      query: { mode: parsedData.mode },
     },
     locale,
   });

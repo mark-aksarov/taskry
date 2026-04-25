@@ -14,13 +14,21 @@ const meta = {
 export default meta;
 export type Story = StoryObj<typeof meta>;
 
-export const Default = {
+export const Reset = {
   args: {
+    mode: "reset",
+    resetPassword: () => ({ status: "success" }),
+  },
+} satisfies Story;
+
+export const Invite = {
+  args: {
+    mode: "invite",
     resetPassword: () => ({ status: "success" }),
   },
 } satisfies Story;
 
 export const NotFound = {
-  ...Default,
+  ...Reset,
   render: () => <ResetPasswordNotFound />,
 } satisfies Story;

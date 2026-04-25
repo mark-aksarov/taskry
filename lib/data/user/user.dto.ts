@@ -63,7 +63,6 @@ export interface UserSearchItemDTO {
 
 export interface CreateUserInputDTO {
   email: string;
-  password: string;
   fullName: string;
 }
 

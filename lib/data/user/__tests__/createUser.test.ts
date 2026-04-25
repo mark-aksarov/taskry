@@ -33,7 +33,6 @@ describe("createUser", () => {
   it("should successfully create a user", async () => {
     const user = await createUser({
       email: "test@test.com",
-      password: "12345678",
       fullName: "test",
     });
 
@@ -51,7 +50,6 @@ describe("createUser", () => {
 
       const createInput = {
         email: "test@test.com",
-        password: "12345678",
         fullName: "test",
       };
 

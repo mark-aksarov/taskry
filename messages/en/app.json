@@ -106,8 +106,14 @@
     "subtitle": "Enter your email address to receive a link to reset your password."
   },
   "ResetPasswordPage": {
-    "heading": "Reset password",
-    "subtitle": "Provide a new password for your account."
+    "reset": {
+      "heading": "Reset password",
+      "subtitle": "Provide a new password for your account."
+    },
+    "invite": {
+      "heading": "Set your password",
+      "subtitle": "Create a password for your account"
+    }
   },
   "ResetPasswordNotFound": {
     "heading": "Invalid link",
@@ -117,7 +123,8 @@
   "SignInPage": {
     "heading": "Sign in",
     "subtitle": "Please sign in to your account.",
-    "resetPasswordSubtitle": "Your password has been reset successfully. You can now sign in with your new password."
+    "resetPasswordSubtitle": "Your password has been reset successfully. You can now sign in with your new password.",
+    "setPasswordSubtitle": "Your password has been set successfully. You can now sign in with your new password."
   },
   "SignUpPage": {
     "heading": "Sign up",

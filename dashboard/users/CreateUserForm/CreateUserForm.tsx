@@ -5,7 +5,6 @@ import { useCreateUser } from "../CreateUserContext";
 import { FormBase } from "@/dashboard/common/FormBase";
 import { UserEmailTextField } from "../UserEmailTextField";
 import { UserFullNameTextField } from "../UserFullNameTextField";
-import { UserPasswordTextField } from "../UserPasswordTextField";
 import { FormErrorBanner } from "@/dashboard/common/FormErrorBanner";
 
 export function CreateUserForm() {
@@ -24,7 +23,6 @@ export function CreateUserForm() {
     <FormBase id="create-user-form" onSubmit={handleSubmit} autoComplete="off">
       <UserFullNameTextField />
       <UserEmailTextField />
-      <UserPasswordTextField />
 
       <FormErrorBanner status={state.status} isPending={isPending}>
         {state.message}

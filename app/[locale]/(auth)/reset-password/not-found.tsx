@@ -10,7 +10,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/ui/Button";
 import { AuthLangMenuTrigger } from "@/auth/AuthLangMenuTrigger";
 
-export default function ResetPasswordNotFound() {
+export default function PasswordNotFound() {
   const t = useTranslations("app.ResetPasswordNotFound");
 
   return (

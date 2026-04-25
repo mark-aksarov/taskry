@@ -1,20 +1,22 @@
+import z from "zod";
 import { SignInPage } from "./SignInPage";
 import { signIn } from "@/lib/actions/auth/signIn";
+import { resetPasswordMode } from "@/lib/schemas/user";
 import { requireAuthPage } from "@/lib/utils/requireAuthPage";
+
+const searchParamsSchema = z.object({
+  mode: resetPasswordMode.optional(),
+});
 
 export default async function AppSignInPage({
   searchParams,
 }: {
-  searchParams: Promise<{ status: string }>;
+  searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   await requireAuthPage();
 
-  const { status } = await searchParams;
+  const rawParams = await searchParams;
+  const { mode } = searchParamsSchema.parse(rawParams);
 
-  return (
-    <SignInPage
-      signIn={signIn}
-      resetPasswordSuccess={status === "reset-password-success"}
-    />
-  );
+  return <SignInPage signIn={signIn} mode={mode} />;
 }

@@ -4,13 +4,12 @@ import z from "zod";
 import { ActionState } from "../types";
 import { APIError } from "better-auth";
 import { getTranslations } from "next-intl/server";
-import { userEmail, userFullName, userPassword } from "@/lib/schemas/user";
+import { userEmail, userFullName } from "@/lib/schemas/user";
 import { createUser as createUserService } from "@/lib/data/user/user.service";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 
 const schema = z.object({
   email: userEmail,
-  password: userPassword,
   fullName: userFullName,
 });
 

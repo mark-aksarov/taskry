@@ -21,6 +21,7 @@ export function CreateUserModal() {
       data-test="create-user-modal"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
+      className="md:w-[450px]"
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>

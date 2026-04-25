@@ -12,21 +12,25 @@ import { AuthLangMenuTrigger } from "@/auth/AuthLangMenuTrigger";
 import { AuthCardSignUpFooter } from "@/auth/AuthCardSignUpFooter";
 
 interface SignInPageProps {
-  resetPasswordSuccess?: boolean;
+  mode?: "reset" | "invite";
   signIn: ActionFn<ActionState, FormData>;
 }
 
-export function SignInPage({ resetPasswordSuccess, signIn }: SignInPageProps) {
+export function SignInPage({ mode, signIn }: SignInPageProps) {
   const t = useTranslations("app.SignInPage");
+
+  const subtitleMap = {
+    reset: t("resetPasswordSubtitle"),
+    invite: t("setPasswordSubtitle"),
+    default: t("subtitle"),
+  };
 
   return (
     <AuthCard>
       <AuthLangMenuTrigger />
       <AuthCardHeader>
         <AuthCardHeading>{t("heading")}</AuthCardHeading>
-        <AuthCardSubtitle>
-          {resetPasswordSuccess ? t("resetPasswordSubtitle") : t("subtitle")}
-        </AuthCardSubtitle>
+        <AuthCardSubtitle>{subtitleMap[mode || "default"]}</AuthCardSubtitle>
       </AuthCardHeader>
       <AuthCardBody>
         <SignInForm signIn={signIn} />

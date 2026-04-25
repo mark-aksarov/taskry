@@ -5,6 +5,7 @@ import {
   UpdateUserImageUrlInputDTO,
 } from "./user.dto";
 
+import crypto from "crypto";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { headers } from "next/headers";
@@ -35,18 +36,23 @@ export const createUser = async (input: CreateUserInputDTO) => {
   const { user } = await auth.api.createUser({
     body: {
       email: input.email,
-      password: input.password,
+      password: crypto.randomBytes(12).toString("base64"),
       name: input.fullName,
       role: "user",
 
       data: {
         workspaceId,
+        emailVerified: true,
       },
     },
   });
 
-  // Send verification email in the background
-  auth.api.sendVerificationEmail({ body: { email: user.email } });
+  await auth.api.requestPasswordReset({
+    body: {
+      email: input.email,
+      redirectTo: "/reset-password?mode=invite",
+    },
+  });
 
   return user;
 };

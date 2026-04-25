@@ -14,3 +14,4 @@ export const rememberMe = z.preprocess(
   z.stringbool(),
 );
 export const userImageUrl = z.url();
+export const resetPasswordMode = z.enum(["reset", "invite"]);
