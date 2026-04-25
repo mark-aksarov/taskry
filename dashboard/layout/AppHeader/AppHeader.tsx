@@ -2,18 +2,18 @@ import {
   AppHeaderBase,
   AppHeaderLayout,
   AppHeaderHeading,
-  AppHeaderThemeToggleButton,
   AppHeaderLangButton,
+  AppHeaderThemeToggleButton,
 } from "@/common/AppHeaderBase";
 
+import { Logo } from "../Logo";
+import { tv } from "tailwind-variants";
 import { AppNavigation } from "../AppNavigation";
 import { LangMenuTrigger } from "../LangMenuTrigger";
 import { BackButton } from "@/dashboard/common/BackButton";
 import { AppSidebarSheetTrigger } from "../AppSidebarSheetTrigger";
 import { SearchModalTrigger } from "@/dashboard/search/SearchModalTrigger";
 import { AppBottomSheetTrigger } from "@/dashboard/layout/AppBottomSheetTrigger";
-
-import { tv } from "tailwind-variants";
 
 const styles = tv({
   slots: {
@@ -44,7 +44,7 @@ export const AppHeader = ({
     <AppHeaderBase className={base()}>
       <div className={mobileWrapper()}>
         <AppHeaderLayout
-          left={<>{profileLinkContainer}</>}
+          left={<Logo />}
           right={<AppBottomSheetTrigger appNavigation={<AppNavigation />} />}
         />
       </div>

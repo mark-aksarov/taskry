@@ -2,9 +2,9 @@ import {
   AppSidebar,
   AppSidebarBody,
   AppSidebarHeader,
-  AppSidebarHeading,
 } from "@/dashboard/layout/AppSidebar";
 
+import { Logo } from "@/dashboard/layout/Logo";
 import { AppNavigation } from "@/dashboard/layout/AppNavigation";
 
 interface DashboardLayoutProps {
@@ -16,7 +16,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     <div className="flex">
       <AppSidebar className="sticky top-0 z-2 h-dvh flex-none shadow-sm max-xl:hidden">
         <AppSidebarHeader>
-          <AppSidebarHeading />
+          <Logo />
         </AppSidebarHeader>
         <AppSidebarBody>
           <AppNavigation />

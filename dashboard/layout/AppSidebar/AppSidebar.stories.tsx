@@ -1,14 +1,14 @@
+import { Logo } from "../Logo";
 import { useState } from "react";
+import { Button } from "@/ui/Button";
 import { mocked } from "storybook/test";
 import { AppSidebar } from "./AppSidebar";
+import { SideSheet } from "@/ui/SideSheet";
 import { usePathname } from "next/navigation";
-import { Button } from "@/ui/Button";
 import { AppNavigation } from "../AppNavigation";
 import { AppSidebarBody } from "./AppSidebarBody";
 import { DialogTrigger } from "react-aria-components";
-import { SideSheet } from "@/ui/SideSheet";
 import { AppSidebarHeader } from "./AppSidebarHeader";
-import { AppSidebarHeading } from "./AppSidebarHeading";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Dialog, DialogCloseButton } from "@/ui/Dialog";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -34,7 +34,7 @@ export const Default = {
     children: (
       <>
         <AppSidebarHeader>
-          <AppSidebarHeading />
+          <Logo />
         </AppSidebarHeader>
         <AppSidebarBody>
           <AppNavigation />
@@ -66,7 +66,7 @@ export const WrapWithSheet = {
       <>
         <AppSidebarHeader>
           <div className="flex items-center justify-between">
-            <AppSidebarHeading />
+            <Logo />
             <DialogCloseButton iconSize={20} />
           </div>
         </AppSidebarHeader>
