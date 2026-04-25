@@ -32,7 +32,7 @@
     "@aws-sdk/s3-presigned-post": "^3.1007.0",
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
-    "@next/mdx": "15.3.5",
+    "@next/mdx": "15.3.6",
     "@prisma/adapter-pg": "^7.1.0",
     "@prisma/client": "^7.1.0",
     "@types/mdx": "^2.0.13",
