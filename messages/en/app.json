@@ -115,7 +115,7 @@
   },
   "ResetPasswordNotFound": {
     "heading": "Invalid link",
-    "body": "The password reset link has expired or is invalid. Please request a password reset again.",
+    "body": "The link is invalid or has expired. Please try again or request a new one.",
     "signInButtonLabel": "Sign in with email"
   },
   "SignInPage": {
