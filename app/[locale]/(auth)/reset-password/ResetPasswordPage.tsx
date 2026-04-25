@@ -8,7 +8,6 @@ import {
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ResetPasswordForm } from "@/auth/ResetPasswordForm";
-import { AuthLangMenuTrigger } from "@/auth/AuthLangMenuTrigger";
 import { AuthCardSignInFooter } from "@/auth/AuthCardSignInFooter";
 
 interface ResetPasswordPageProps {
@@ -20,7 +19,6 @@ export function ResetPasswordPage({ resetPassword }: ResetPasswordPageProps) {
 
   return (
     <AuthCard>
-      <AuthLangMenuTrigger />
       <AuthCardHeader>
         <AuthCardHeading>{t("heading")}</AuthCardHeading>
         <AuthCardSubtitle>{t("subtitle")}</AuthCardSubtitle>

@@ -8,7 +8,6 @@ import {
 import { useTranslations } from "next-intl";
 import { SignUpForm } from "@/auth/SignUpForm";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { AuthLangMenuTrigger } from "@/auth/AuthLangMenuTrigger";
 import { AuthCardSignInFooter } from "@/auth/AuthCardSignInFooter";
 
 export function SignUpPage({
@@ -20,7 +19,6 @@ export function SignUpPage({
 
   return (
     <AuthCard>
-      <AuthLangMenuTrigger />
       <AuthCardHeader>
         <AuthCardHeading>{t("heading")}</AuthCardHeading>
         <AuthCardSubtitle>{t("subtitle")}</AuthCardSubtitle>

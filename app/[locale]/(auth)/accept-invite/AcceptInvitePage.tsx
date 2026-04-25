@@ -8,7 +8,6 @@ import {
 import { useTranslations } from "next-intl";
 import { AcceptInviteForm } from "@/auth/AcceptInviteForm";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { AuthLangMenuTrigger } from "@/auth/AuthLangMenuTrigger";
 import { AuthCardSignInFooter } from "@/auth/AuthCardSignInFooter";
 
 interface AcceptInvitePageProps {
@@ -24,7 +23,6 @@ export function AcceptInvitePage({
 
   return (
     <AuthCard>
-      <AuthLangMenuTrigger />
       <AuthCardHeader>
         <AuthCardHeading>{t("heading")}</AuthCardHeading>
         <AuthCardSubtitle>{t("subtitle")}</AuthCardSubtitle>

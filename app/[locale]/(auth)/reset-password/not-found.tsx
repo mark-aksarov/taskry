@@ -6,16 +6,14 @@ import {
   AuthCardSubtitle,
 } from "@/auth/AuthCard";
 import { LogIn } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { Button } from "@/ui/Button";
-import { AuthLangMenuTrigger } from "@/auth/AuthLangMenuTrigger";
+import { useTranslations } from "next-intl";
 
 export default function PasswordNotFound() {
   const t = useTranslations("app.ResetPasswordNotFound");
 
   return (
     <AuthCard>
-      <AuthLangMenuTrigger />
       <AuthCardHeader>
         <AuthCardHeading>{t("heading")}</AuthCardHeading>
         <AuthCardSubtitle>{t("body")}</AuthCardSubtitle>

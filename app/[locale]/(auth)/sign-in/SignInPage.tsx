@@ -8,7 +8,6 @@ import {
 import { useTranslations } from "next-intl";
 import { SignInForm } from "@/auth/SignInForm";
 import { ActionFn, ActionState } from "@/lib/actions/types";
-import { AuthLangMenuTrigger } from "@/auth/AuthLangMenuTrigger";
 import { AuthCardSignUpFooter } from "@/auth/AuthCardSignUpFooter";
 
 interface SignInPageProps {
@@ -21,7 +20,6 @@ export function SignInPage({ resetPasswordSuccess, signIn }: SignInPageProps) {
 
   return (
     <AuthCard>
-      <AuthLangMenuTrigger />
       <AuthCardHeader>
         <AuthCardHeading>{t("heading")}</AuthCardHeading>
         <AuthCardSubtitle>

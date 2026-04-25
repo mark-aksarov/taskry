@@ -7,7 +7,6 @@ import {
 } from "@/auth/AuthCard";
 import { useTranslations } from "next-intl";
 import { VerifyEmailContent } from "@/auth/VerifyEmailContent";
-import { AuthLangMenuTrigger } from "@/auth/AuthLangMenuTrigger";
 
 interface VerifyEmailPageProps {
   email: string;
@@ -18,7 +17,6 @@ export function VerifyEmailPage({ email }: VerifyEmailPageProps) {
 
   return (
     <AuthCard data-test="verify-email-card">
-      <AuthLangMenuTrigger />
       <AuthCardHeader>
         <AuthCardHeading>{t("heading")}</AuthCardHeading>
         <AuthCardSubtitle>{t("subtitle", { email })}</AuthCardSubtitle>

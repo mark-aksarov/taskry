@@ -10,7 +10,6 @@ import {
 import { useTranslations } from "next-intl";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ForgetPasswordForm } from "@/auth/ForgetPasswordForm";
-import { AuthLangMenuTrigger } from "@/auth/AuthLangMenuTrigger";
 import { AuthCardSignInFooter } from "@/auth/AuthCardSignInFooter";
 
 export function ForgetPasswordPage({
@@ -22,7 +21,6 @@ export function ForgetPasswordPage({
 
   return (
     <AuthCard>
-      <AuthLangMenuTrigger />
       <AuthCardHeader>
         <AuthCardHeading>{t("heading")}</AuthCardHeading>
         <AuthCardSubtitle>{t("subtitle")}</AuthCardSubtitle>

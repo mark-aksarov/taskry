@@ -5,9 +5,8 @@ import {
   AuthCardHeading,
   AuthCardSubtitle,
 } from "@/auth/AuthCard";
-import { useTranslations } from "next-intl";
 import { Button } from "@/ui/Button";
-import { AuthLangMenuTrigger } from "@/auth/AuthLangMenuTrigger";
+import { useTranslations } from "next-intl";
 import { AuthCardSignInFooter } from "@/auth/AuthCardSignInFooter";
 
 export function CheckEmailPage() {
@@ -15,7 +14,6 @@ export function CheckEmailPage() {
 
   return (
     <AuthCard>
-      <AuthLangMenuTrigger />
       <AuthCardHeader>
         <AuthCardHeading>{t("heading")}</AuthCardHeading>
         <AuthCardSubtitle>{t("subtitle")}</AuthCardSubtitle>
