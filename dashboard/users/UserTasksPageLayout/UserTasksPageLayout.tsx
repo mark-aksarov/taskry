@@ -16,6 +16,7 @@ import { TaskSortField } from "@/lib/types";
 import { PageGrid } from "@/dashboard/common/PageGrid";
 import { ToolbarMobile } from "@/dashboard/common/Toolbar";
 import { BackButton } from "@/dashboard/common/BackButton";
+import { ViewModeProvider } from "@/dashboard/common/ViewMode";
 import { PageContainer } from "@/dashboard/common/PageContainer";
 import { UserTasksPageEmptyLayout } from "./UserTasksPageEmptyLayout";
 import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
@@ -56,7 +57,7 @@ export function UserTasksPageLayout({
   }
 
   return (
-    <>
+    <ViewModeProvider>
       <PageContainer className="max-md:hidden">
         <DetailCard>
           <DetailCardLeft>
@@ -100,10 +101,9 @@ export function UserTasksPageLayout({
               />
             }
           />
-
           {userTasksContainer}
         </PageGrid>
       </PageContainer>
-    </>
+    </ViewModeProvider>
   );
 }
