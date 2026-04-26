@@ -1,6 +1,6 @@
 import { Button, ButtonProps, ElementType } from "@/ui/Button";
 
-export function PageSectionAction<T extends ElementType>(
+export function PageSectionAction<T extends ElementType = "button">(
   props: ButtonProps<T>,
 ) {
   return (
