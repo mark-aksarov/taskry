@@ -29,15 +29,16 @@ export function NavigationButton({
         styles({ ...renderProps, variant, isActive, isPending, className }),
       )}
     >
-      {isPending && (
+      {isPending ? (
         <Loader2
           data-testid="loader-icon"
           size={18}
           strokeWidth={1.75}
           className="animate-spin"
         />
+      ) : (
+        iconLeft
       )}
-      {iconLeft}
       {label}
     </ReactAriaButton>
   );
