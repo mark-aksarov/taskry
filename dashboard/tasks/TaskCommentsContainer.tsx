@@ -8,7 +8,6 @@ import {
 import useSWR from "swr";
 import { Repeat } from "@/common/Repeat";
 import { CommentList } from "../comments/CommentList";
-import { useHasGuestRole } from "@/lib/hooks/useHasGuestRole";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { CommentItemWrapper } from "../comments/CommentItemWrapper";
 import { CommentsEmptySection } from "@/dashboard/comments/CommentsEmptySection";
@@ -18,7 +17,7 @@ interface TaskCommentsContainerProps {
 }
 
 export function TaskCommentsContainer({ taskId }: TaskCommentsContainerProps) {
-  const { data: comments, error: commentsError } = useSWR<CommentListItemDTO[]>(
+  const { data: comments, error } = useSWR<CommentListItemDTO[]>(
     `/api/tasks/${taskId}/comments`,
     {
       refreshInterval: 5000,
@@ -26,14 +25,12 @@ export function TaskCommentsContainer({ taskId }: TaskCommentsContainerProps) {
     },
   );
 
-  if (commentsError) {
+  if (error) {
     throw new Error();
   }
 
-  const { isGuest, isPending } = useHasGuestRole();
-
   // Show skeleton while loading
-  if (!comments || isPending) {
+  if (!comments) {
     return (
       <CommentList>
         <Repeat items={5} renderItem={() => <CommentItemSkeleton />} />
@@ -57,7 +54,6 @@ export function TaskCommentsContainer({ taskId }: TaskCommentsContainerProps) {
               createdAt={comment.createdAt}
               sender={comment.sender}
               canEdit={comment.canEdit}
-              isGuest={isGuest}
             />
           </CommentItemWrapper>
         );

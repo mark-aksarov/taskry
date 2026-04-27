@@ -10,6 +10,7 @@ import { UnknownUser } from "@/dashboard/common/UnknownUser";
 import { useCommentItemPending } from "./useCommentItemPending";
 import { ImageContainer } from "@/dashboard/common/ImageContainer";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
+import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
 import { CommentItemActionMenuTrigger } from "./CommentItemActionMenuTrigger";
 
 interface CommentItemProps {
@@ -23,7 +24,6 @@ interface CommentItemProps {
     imageUrl?: string;
   };
   menuTrigger?: React.ReactNode;
-  isGuest: boolean;
 }
 
 export function CommentItem(props: CommentItemProps) {
@@ -43,7 +43,6 @@ const CommentItemInner = memo(function CommentItemInner({
   createdAt,
   canEdit,
   sender,
-  isGuest,
 }: InnerProps) {
   const t = useTranslations("dashboard.comments.CommentItem");
   const locale = useLocale();
@@ -59,6 +58,8 @@ const CommentItemInner = memo(function CommentItemInner({
     minute: "2-digit",
     hour12: locale === "en" ? true : false,
   });
+
+  const { isGuest } = useCurrentUser();
 
   return (
     <CommentItemLayout
