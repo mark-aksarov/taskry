@@ -7,7 +7,7 @@ import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsConte
 import {
   withModalManagerProvider,
   withOpenModal,
-} from "@/dashboard/common/ModalManagerContext/__stories__";
+} from "@/common/ModalManagerContext/__stories__";
 
 const meta = {
   title: "dashboard/companies/DeleteCompaniesModal",

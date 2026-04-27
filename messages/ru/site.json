@@ -78,14 +78,38 @@
       }
     }
   },
-  "blocks": {
-    "CtaActions": {
-      "GetStartedButton": {
-        "label": "Начать"
-      },
-      "DemoButton": {
-        "label": "Открыть демо"
-      }
+  "docs": {
+    "DocsSidebarSheetTrigger": {
+      "triggerAriaLabel": "Навигация по документации"
+    },
+    "DocsNavigation": {
+      "gettingStarted": "Краткое руководство пользователя",
+      "projects": "Управление проектами",
+      "tasks": "Задачи и подзадачи",
+      "categories": "Категории проектов и задач",
+      "comments": "Комментарии к задачам и проектам",
+      "users": "Пользователи, роли и разрешения",
+      "search": "Поиск и фильтрация",
+      "clients": "Клиенты и компании"
+    },
+    "DocsBreadcrumbs": {
+      "docs": "Документация",
+      "gettingStarted": "Начало работы",
+      "projects": "Проекты",
+      "tasks": "Задачи",
+      "categories": "Категории",
+      "comments": "Комментарии",
+      "users": "Пользователи",
+      "search": "Поиск",
+      "clients": "Клиенты"
+    }
+  },
+  "home": {
+    "GetStartedAction": {
+      "label": "Начать"
+    },
+    "DemoAction": {
+      "label": "Открыть демо"
     },
     "FeatureGrid": {
       "tasks": {
@@ -146,32 +170,12 @@
         "heading": "Клиенты и компании",
         "subtext": "12 мин чтения"
       }
-    }
-  },
-  "docs": {
-    "DocsSidebarSheetTrigger": {
-      "triggerAriaLabel": "Навигация по документации"
     },
-    "DocsNavigation": {
-      "gettingStarted": "Краткое руководство пользователя",
-      "projects": "Управление проектами",
-      "tasks": "Задачи и подзадачи",
-      "categories": "Категории проектов и задач",
-      "comments": "Комментарии к задачам и проектам",
-      "users": "Пользователи, роли и разрешения",
-      "search": "Поиск и фильтрация",
-      "clients": "Клиенты и компании"
-    },
-    "DocsBreadcrumbs": {
-      "docs": "Документация",
-      "gettingStarted": "Начало работы",
-      "projects": "Проекты",
-      "tasks": "Задачи",
-      "categories": "Категории",
-      "comments": "Комментарии",
-      "users": "Пользователи",
-      "search": "Поиск",
-      "clients": "Клиенты"
+    "SwitchToDemoModal": {
+      "heading": "Вы уже вошли в систему",
+      "text": "Сейчас вы используете свой аккаунт. При переходе в демо вы выйдете из системы.",
+      "cancelButton": "Отмена",
+      "confirmButton": "Выйти и перейти в демо"
     }
   }
 }

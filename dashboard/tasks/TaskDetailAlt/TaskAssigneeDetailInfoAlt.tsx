@@ -7,7 +7,7 @@ import {
   DetailEditButton,
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { useUpdateTaskAssignee } from "../UpdateTaskAssigneeContext";
 import { useDeleteTask } from "../DeleteTaskContext";
 

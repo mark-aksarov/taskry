@@ -17,7 +17,7 @@ import { useTranslations } from "next-intl";
 import { IconWrapper } from "../common/IconWrapper";
 
 export function FeatureGrid() {
-  const t = useTranslations("site.blocks.FeatureGrid");
+  const t = useTranslations("site.home.FeatureGrid");
 
   return (
     <div className="grid max-lg:grid-cols-2 max-md:grid-cols-1 max-md:gap-4 md:gap-6 lg:grid-cols-3">

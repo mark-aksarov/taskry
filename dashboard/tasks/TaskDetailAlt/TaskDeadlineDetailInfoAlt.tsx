@@ -8,7 +8,7 @@ import {
 } from "@/dashboard/common/Detail";
 import { useDeleteTask } from "../DeleteTaskContext";
 import { useFormatter, useTranslations } from "next-intl";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { useUpdateTaskDeadline } from "../UpdateTaskDeadlineContext";
 
 interface TaskDeadlineDetailInfoAltProps {

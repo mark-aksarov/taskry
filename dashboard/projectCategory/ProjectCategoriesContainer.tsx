@@ -2,7 +2,7 @@ import "server-only";
 
 import { ProjectCategoryGrid } from "./ProjectCategoryGrid";
 import { ProjectCategoryListItem } from "./ProjectCategoryListItem";
-import { ModalManagerProvider } from "../common/ModalManagerContext";
+import { ModalManagerProvider } from "../../common/ModalManagerContext";
 import { UpdateProjectCategoryModal } from "./UpdateProjectCategoryModal";
 import { DeleteProjectCategoryModal } from "./DeleteProjectCategoryModal";
 import { UpdateProjectCategoryProvider } from "./UpdateProjectCategoryProvider";

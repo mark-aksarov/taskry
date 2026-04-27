@@ -8,7 +8,7 @@ import {
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
 import { useDeleteTask } from "../DeleteTaskContext";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { useUpdateTaskCategoryRel } from "../UpdateTaskCategoryRelContext";
 
 interface TaskCategoryDetailInfoAltProps {

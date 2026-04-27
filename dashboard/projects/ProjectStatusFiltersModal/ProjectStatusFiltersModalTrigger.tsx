@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useProjectFilters } from "../ProjectFiltersContext";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { FilterButtonMobile } from "@/dashboard/common/FilterButton";
 
 export function ProjectStatusFiltersModalTrigger() {

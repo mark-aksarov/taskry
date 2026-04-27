@@ -1,20 +1,19 @@
-import { ActionState } from "@/lib/actions/types";
 import { DocsSection } from "@/site/home/DocsSection";
 import { IntroSection } from "@/site/home/IntroSection";
 import { FeatureSection } from "@/site/home/FeatureSection";
 import { FinalCtaSection } from "@/site/home/FinalCtaSection";
 
 interface HomePageProps {
-  signInAsDemoUser: () => Promise<ActionState>;
+  ctaActionsContainer: React.ReactNode;
 }
 
-export function HomePage({ signInAsDemoUser }: HomePageProps) {
+export function HomePage({ ctaActionsContainer }: HomePageProps) {
   return (
     <main>
-      <IntroSection signInAsDemoUser={signInAsDemoUser} />
+      <IntroSection ctaActionsContainer={ctaActionsContainer} />
       <FeatureSection />
       <DocsSection />
-      <FinalCtaSection signInAsDemoUser={signInAsDemoUser} />
+      <FinalCtaSection ctaActionsContainer={ctaActionsContainer} />
     </main>
   );
 }

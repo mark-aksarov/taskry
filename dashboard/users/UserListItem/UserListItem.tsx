@@ -21,7 +21,7 @@ import { useTranslations } from "next-intl";
 import { UserListItemLayout } from "./UserListItemLayout";
 import { UserListItemSkeleton } from "./UserListItemSkeleton";
 import { ListItemGate } from "@/dashboard/common/ListItemGate";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { useUserItemPending } from "../UserItem/useUserItemPending";
 import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
 import { BaseUserItemProps, UserItemActionMenuTrigger } from "../UserItem";

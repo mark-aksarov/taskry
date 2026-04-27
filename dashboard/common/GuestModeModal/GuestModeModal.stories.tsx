@@ -1,7 +1,7 @@
 import {
   withOpenModal,
   withModalManagerProvider,
-} from "../ModalManagerContext/__stories__";
+} from "@/common/ModalManagerContext/__stories__";
 
 import { GuestModeModal } from "../GuestModeModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";

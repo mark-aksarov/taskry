@@ -2,7 +2,7 @@ import { TaskCategoryGrid } from "./TaskCategoryGrid";
 import { TaskCategoryListItem } from "./TaskCategoryListItem";
 import { UpdateTaskCategoryModal } from "./UpdateTaskCategoryModal";
 import { DeleteTaskCategoryModal } from "./DeleteTaskCategoryModal";
-import { ModalManagerProvider } from "../common/ModalManagerContext";
+import { ModalManagerProvider } from "../../common/ModalManagerContext";
 import { UpdateTaskCategoryProvider } from "./UpdateTaskCategoryProvider";
 import { DeleteTaskCategoryProvider } from "./DeleteTaskCategoryProvider";
 import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";

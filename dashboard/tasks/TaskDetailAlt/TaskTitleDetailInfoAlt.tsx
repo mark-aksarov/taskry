@@ -9,7 +9,7 @@ import {
 import { useTranslations } from "next-intl";
 import { useDeleteTask } from "../DeleteTaskContext";
 import { useUpdateTaskTitle } from "../UpdateTaskTitleContext";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 
 interface TaskTitleDetailInfoAltProps {
   title: string;

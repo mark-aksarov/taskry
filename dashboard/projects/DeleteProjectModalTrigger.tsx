@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useDeleteProject } from "./DeleteProjectContext";
-import { useModal } from "../common/ModalManagerContext";
+import { useModal } from "../../common/ModalManagerContext";
 import { DetailsDeleteButton } from "../common/DetailsDeleteButton";
 
 export function DeleteProjectModalTrigger() {

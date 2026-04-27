@@ -3,7 +3,7 @@
 import { startTransition } from "react";
 import { useDeleteCustomer } from "./DeleteCustomerContext";
 import { BaseDeleteCustomerModal } from "./BaseDeleteCustomerModal";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 
 interface DeleteCustomerModalProps {
   customerId: number;

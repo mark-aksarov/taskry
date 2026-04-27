@@ -12,7 +12,7 @@ import { UserDetailSideSheet } from "../UserDetailSideSheet";
 import { UserDetailContainer } from "../UserDetailContainer";
 import { UserGridItemMobileSkeleton } from "../UserGridItem";
 import { UpdateUserFormContainer } from "../UpdateUserFormContainer";
-import { ModalManagerProvider } from "../../common/ModalManagerContext";
+import { ModalManagerProvider } from "@/common/ModalManagerContext";
 import { UserDetailHeaderContainer } from "../UserDetailHeaderContainer";
 import { EntityContainerPresentation } from "../../common/EntityContainerPresentation";
 

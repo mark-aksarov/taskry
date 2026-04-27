@@ -2,7 +2,7 @@
 
 import { UpdateUserImageDialog } from "./UpdateUserImageDialog";
 import { PersonImageModal } from "../../common/PersonImageModal";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { useUpdateUserImageFile } from "../UpdateUserImageFileContext";
 
 export function UpdateUserImageModal({ userId }: { userId: string }) {

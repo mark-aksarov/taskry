@@ -7,7 +7,7 @@ import {
 
 import { useTranslations } from "next-intl";
 import { DialogBody, DialogFooter } from "@/ui/Dialog";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { UpdateTaskAssigneeFormSubmitButton } from "../UpdateTaskAssigneeForm";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 

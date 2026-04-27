@@ -1,7 +1,7 @@
 "use client";
 
 import { FilterButtonMobile } from "@/dashboard/common/FilterButton";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { useProjectFilters } from "../ProjectFiltersContext";
 
 export function ProjectFiltersModalTriggerMobile() {

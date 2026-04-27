@@ -9,7 +9,7 @@ import {
 import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useDeleteProject } from "../DeleteProjectContext";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { useUpdateProjectStatusAlt } from "../UpdateProjectStatusAltContext";
 
 interface ProjectStatusDetailInfoAltProps {

@@ -1,7 +1,7 @@
 "use client";
 
 import { PersonImageModal } from "../../common/PersonImageModal";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { UpdateCustomerImageDialog } from "./UpdateCustomerImageDialog";
 import { useUpdateCustomerImageFile } from "../UpdateCustomerImageFileContext";
 

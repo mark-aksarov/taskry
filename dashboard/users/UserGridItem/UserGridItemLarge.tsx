@@ -25,7 +25,7 @@ import { memo } from "react";
 import { useTranslations } from "next-intl";
 import { Separator } from "@/ui/Separator";
 import { UserGridItemLayout } from "./UserGridItemLayout";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { UserGridItemLargeSkeleton } from "./UserGridItemSkeleton";
 import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
 import { GridItemLargeGate } from "@/dashboard/common/GridItemLargeGate";

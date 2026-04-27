@@ -1,7 +1,7 @@
 import { DeleteCommentModal } from "../DeleteCommentModal";
 import { DeleteCommentProvider } from "../DeleteCommentProvider";
 import { GuestModeModal } from "@/dashboard/common/GuestModeModal";
-import { ModalManagerProvider } from "@/dashboard/common/ModalManagerContext";
+import { ModalManagerProvider } from "@/common/ModalManagerContext";
 
 interface CommentItemWrapperProps {
   commentId: number;

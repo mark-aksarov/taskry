@@ -5,11 +5,11 @@ import {
   ConfirmModalText,
   ConfirmModalActions,
   ConfirmModalCancelButton,
-} from "../ConfirmModal";
+} from "@/common/ConfirmModal";
 
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/ui/Dialog";
-import { useModal } from "../ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 
 export function GuestModeModal() {
   const t = useTranslations("dashboard.common.GuestModeModal");

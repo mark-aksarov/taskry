@@ -6,7 +6,7 @@ import { AppHeader } from "@/dashboard/layout/AppHeader";
 import { useParams, useSearchParams } from "next/navigation";
 import { GuestModeModal } from "@/dashboard/common/GuestModeModal";
 import { SearchBarProvider } from "@/dashboard/search/SearchBar/index";
-import { ModalManagerProvider } from "@/dashboard/common/ModalManagerContext";
+import { ModalManagerProvider } from "@/common/ModalManagerContext";
 import { PageTransitionProvider } from "@/dashboard/common/PageTransitionContext";
 
 interface SharedLayoutProps {

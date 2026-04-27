@@ -6,7 +6,7 @@ import {
   ConfirmModalActions,
   ConfirmModalCancelButton,
   ConfirmModalConfirmButton,
-} from "@/dashboard/common/ConfirmModal";
+} from "@/common/ConfirmModal";
 
 import { startTransition } from "react";
 import { useTranslations } from "next-intl";
@@ -14,7 +14,7 @@ import { DialogHeading } from "@/ui/Dialog";
 import { useDeleteCustomers } from "../DeleteCustomersContext";
 import { overlayTransitionDuration } from "@/ui/styles";
 import { useSelectedItems } from "@/dashboard/common/SelectedItemsContext";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 
 export function DeleteCustomersModal() {
   const t = useTranslations("dashboard.customers.DeleteCustomersModal");

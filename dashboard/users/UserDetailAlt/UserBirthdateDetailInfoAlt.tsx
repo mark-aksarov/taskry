@@ -8,7 +8,7 @@ import {
 } from "@/dashboard/common/Detail";
 import { useFormatter, useTranslations } from "next-intl";
 import { useUpdateUserBirthdate } from "../UpdateUserBirthdateContext";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 
 interface UserBirthdateDetailInfoAltProps {
   birthdate?: string;

@@ -8,7 +8,7 @@ import {
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
 import { useUpdateCustomerEmail } from "../UpdateCustomerEmailContext";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 
 interface CustomerEmailDetailInfoAltProps {
   email: string;

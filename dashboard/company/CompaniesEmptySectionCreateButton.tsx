@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useModal } from "../common/ModalManagerContext";
+import { useModal } from "../../common/ModalManagerContext";
 import { EmptySectionButton } from "@/dashboard/common/EmptySection";
 
 export function CompaniesEmptySectionCreateButton() {

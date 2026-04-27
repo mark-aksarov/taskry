@@ -3,7 +3,7 @@
 import { startTransition } from "react";
 import { useDeleteTask } from "./DeleteTaskContext";
 import { BaseDeleteTaskModal } from "./BaseDeleteTaskModal";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 
 interface DeleteTaskModalProps {
   taskId: number;

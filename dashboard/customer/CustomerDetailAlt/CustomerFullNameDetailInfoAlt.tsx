@@ -8,7 +8,7 @@ import {
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
 import { useUpdateCustomerFullName } from "../UpdateCustomerFullNameContext";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 
 interface CustomerFullNameDetailInfoAltProps {
   fullName: string;

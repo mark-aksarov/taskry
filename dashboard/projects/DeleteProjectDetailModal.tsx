@@ -3,7 +3,7 @@
 import { startTransition } from "react";
 import { useDeleteProject } from "./DeleteProjectContext";
 import { BaseDeleteProjectModal } from "./BaseDeleteProjectModal";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 
 interface DeleteProjectModalProps {
   projectId: number;

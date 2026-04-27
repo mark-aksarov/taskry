@@ -8,7 +8,7 @@ import {
 } from "@/dashboard/common/Detail";
 import { useFormatter, useTranslations } from "next-intl";
 import { useDeleteProject } from "../DeleteProjectContext";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { useUpdateProjectDeadline } from "../UpdateProjectDeadlineContext";
 
 interface ProjectDeadlineDetailInfoAltProps {

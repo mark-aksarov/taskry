@@ -13,7 +13,7 @@ import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionCon
 import {
   withModalManagerProvider,
   withOpenModal,
-} from "@/dashboard/common/ModalManagerContext/__stories__";
+} from "@/common/ModalManagerContext/__stories__";
 
 const meta = {
   title: "dashboard/projects/ProjectCategoryFiltersModal",

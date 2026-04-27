@@ -4,7 +4,7 @@ import { Trash } from "lucide-react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ActionsButton } from "../common/ActionsButton";
-import { useModal } from "../common/ModalManagerContext";
+import { useModal } from "../../common/ModalManagerContext";
 import { ActionsMenuTrigger } from "../common/ActionsMenuTrigger";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useSelectedItems } from "@/dashboard/common/SelectedItemsContext";

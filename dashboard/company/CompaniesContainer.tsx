@@ -7,7 +7,7 @@ import { DeleteCompanyModal } from "./DeleteCompanyModal";
 import { UpdateCompanyProvider } from "./UpdateCompanyProvider";
 import { DeleteCompanyProvider } from "./DeleteCompanyProvider";
 import { getCompanySummaries } from "@/lib/data/company/company.dal";
-import { ModalManagerProvider } from "../common/ModalManagerContext";
+import { ModalManagerProvider } from "../../common/ModalManagerContext";
 
 export async function CompaniesContainer() {
   const companies = await getCompanySummaries();

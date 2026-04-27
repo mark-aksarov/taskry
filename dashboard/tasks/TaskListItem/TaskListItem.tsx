@@ -22,7 +22,7 @@ import { TaskItemStatusBadge } from "../TaskItemStatusBadge";
 import { TaskListItemSkeleton } from "./TaskListItemSkeleton";
 import { TaskItemCheckbox } from "../TaskItem/TaskItemCheckbox";
 import { ListItemGate } from "@/dashboard/common/ListItemGate";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { BaseTaskItemProps, useTaskItemPending } from "../TaskItem";
 
 export interface Props extends BaseTaskItemProps {

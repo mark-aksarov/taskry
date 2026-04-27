@@ -11,7 +11,7 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useProjectItemPending } from "./useProjectItemPending";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateProjectStatus } from "../UpdateProjectStatusContext";
 import { Trash, Check, Clock, Pencil, CircleEllipsis } from "lucide-react";

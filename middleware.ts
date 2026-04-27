@@ -18,6 +18,7 @@ function normalizePath(pathname: string) {
 const publicRoutes = [
   { type: "exact", path: "/" },
   { type: "exact", path: "/sign-in" },
+  { type: "exact", path: "/guest-sign-in" },
   { type: "exact", path: "/sign-up" },
   { type: "exact", path: "/forget-password" },
   { type: "exact", path: "/forget-password/check-email" },

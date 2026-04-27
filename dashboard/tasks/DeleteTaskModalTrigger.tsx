@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useDeleteTask } from "./DeleteTaskContext";
-import { useModal } from "../common/ModalManagerContext";
+import { useModal } from "../../common/ModalManagerContext";
 import { DetailsDeleteButton } from "../common/DetailsDeleteButton";
 
 export function DeleteTaskModalTrigger() {

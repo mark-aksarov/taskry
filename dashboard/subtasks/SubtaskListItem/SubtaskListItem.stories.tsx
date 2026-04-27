@@ -6,7 +6,7 @@ import { withUpdateSubtaskProvider } from "../UpdateSubtaskProvider/__stories__"
 import { withToggleSubtaskProvider } from "../ToggleSubtaskProvider/__stories__";
 import { withDeleteTaskProvider } from "@/dashboard/tasks/DeleteTaskProvider/__stories__";
 import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
-import { withModalManagerProvider } from "@/dashboard/common/ModalManagerContext/__stories__";
+import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 
 const meta = {
   title: "dashboard/subtasks/SubtaskListItem",

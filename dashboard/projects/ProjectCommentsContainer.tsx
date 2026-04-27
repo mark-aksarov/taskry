@@ -7,9 +7,8 @@ import {
 
 import useSWR from "swr";
 import { Repeat } from "@/common/Repeat";
-import { usePathname } from "@/i18n/navigation";
-import { notFound, useParams } from "next/navigation";
 import { CommentList } from "../comments/CommentList";
+import { useHasGuestRole } from "@/lib/hooks/useHasGuestRole";
 import { CommentListItemDTO } from "@/lib/data/comment/comment.dto";
 import { CommentItemWrapper } from "../comments/CommentItemWrapper";
 import { CommentsEmptySection } from "@/dashboard/comments/CommentsEmptySection";
@@ -21,9 +20,6 @@ interface ProjectCommentsContainerProps {
 export function ProjectCommentsContainer({
   projectId,
 }: ProjectCommentsContainerProps) {
-  const pathname = usePathname();
-  const params = useParams();
-
   const { data: comments, error: commentsError } = useSWR<CommentListItemDTO[]>(
     `/api/projects/${projectId}/comments`,
     {
@@ -33,19 +29,13 @@ export function ProjectCommentsContainer({
   );
 
   if (commentsError) {
-    if (commentsError.status === 404) {
-      if (pathname.startsWith("/projects") && params.id) {
-        notFound();
-      }
-
-      throw new Error(undefined, { cause: "projectNotFound" });
-    }
-
     throw new Error();
   }
 
+  const { isGuest, isPending } = useHasGuestRole();
+
   // Show skeleton while loading
-  if (!comments) {
+  if (!comments || isPending) {
     return (
       <CommentList>
         <Repeat items={5} renderItem={() => <CommentItemSkeleton />} />
@@ -69,6 +59,7 @@ export function ProjectCommentsContainer({
               createdAt={comment.createdAt}
               sender={comment.sender}
               canEdit={comment.canEdit}
+              isGuest={isGuest}
             />
           </CommentItemWrapper>
         );

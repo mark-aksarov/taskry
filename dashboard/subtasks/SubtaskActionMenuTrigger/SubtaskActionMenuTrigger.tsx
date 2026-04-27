@@ -12,7 +12,7 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { CheckCheck, Pencil, Trash } from "lucide-react";
 import { useToggleSubtask } from "../ToggleSubtaskContext";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useDeleteTask } from "@/dashboard/tasks/DeleteTaskContext";
 import { useSubtaskListItemPending } from "../SubtaskListItem/useSubtaskListItemPending";

@@ -1,6 +1,6 @@
 "use client";
 
-import { useModal } from "./ModalManagerContext";
+import { useModal } from "../../common/ModalManagerContext";
 import { useSearchParams } from "next/navigation";
 import { useSearchBar } from "../search/SearchBar";
 import { SearchListItem } from "../search/SearchListItem";

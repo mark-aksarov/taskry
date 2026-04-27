@@ -6,13 +6,13 @@ import {
   ConfirmModalActions,
   ConfirmModalCancelButton,
   ConfirmModalConfirmButton,
-} from "@/dashboard/common/ConfirmModal";
+} from "@/common/ConfirmModal";
 
 import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { DialogHeading } from "@/ui/Dialog";
 import { useDeletePosition } from "../DeletePositionContext";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { useSelectedItems } from "@/dashboard/common/SelectedItemsContext";
 
 interface DeletePositionModalProps {

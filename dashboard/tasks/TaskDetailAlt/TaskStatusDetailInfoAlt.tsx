@@ -9,7 +9,7 @@ import {
 import { useTranslations } from "next-intl";
 import { useDeleteTask } from "../DeleteTaskContext";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { useUpdateTaskStatusAlt } from "../UpdateTaskStatusAltContext";
 
 interface TaskStatusDetailInfoAltProps {

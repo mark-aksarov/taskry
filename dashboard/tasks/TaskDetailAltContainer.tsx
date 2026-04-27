@@ -9,7 +9,7 @@ import { SubtaskListItem } from "../subtasks/SubtaskListItem";
 import { TaskDetailAlt } from "./TaskDetailAlt/TaskDetailAlt";
 import { UpdateSubtaskModal } from "../subtasks/UpdateSubtaskModal";
 import { DeleteSubtaskModal } from "../subtasks/DeleteSubtaskModal";
-import { ModalManagerProvider } from "../common/ModalManagerContext";
+import { ModalManagerProvider } from "../../common/ModalManagerContext";
 import { DeleteSubtaskProvider } from "../subtasks/DeleteSubtaskProvider";
 import { UpdateSubtaskProvider } from "../subtasks/UpdateSubtaskProvider";
 import { ToggleSubtaskProvider } from "../subtasks/ToggleSubtaskProvider";

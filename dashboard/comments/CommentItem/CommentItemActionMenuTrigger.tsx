@@ -14,7 +14,7 @@ import { useUpdateComment } from "../UpdateCommentContext";
 import { useCommentFormContext } from "../CommentFormContext";
 import { useCommentItemPending } from "./useCommentItemPending";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 
 export type CommentItemActionMenuTriggerProps = {
   commentId: number;

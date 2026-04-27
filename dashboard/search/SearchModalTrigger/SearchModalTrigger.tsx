@@ -6,7 +6,7 @@ import { useSearchBar } from "../SearchBar";
 import { mergeProps, useFocusRing, usePress } from "react-aria";
 import { SearchModalTriggerIcon } from "./SearchModalTriggerIcon";
 import { SearchModalTriggerText } from "./SearchModalTriggerText";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { usePageTransition } from "@/dashboard/common/PageTransitionContext";
 import { SearchModalTriggerPlaceholder } from "./SearchModalTriggerPlaceholder";
 import { SearchModalTriggerClearButton } from "./SearchModalTriggerClearButton";

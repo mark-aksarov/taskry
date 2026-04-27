@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
 import { useProjectFilters } from "../ProjectFiltersContext";
 import { DialogBody, DialogFooter } from "@/ui/Dialog";
 import { FormBaseModal } from "@/dashboard/common/FormBaseModal";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { FiltersFormSubmitButton } from "@/dashboard/common/FiltersForm";
 import { FilterModalDialog } from "@/dashboard/common/FilterModalDialog";
 import { FilterModalDialogHeader } from "@/dashboard/common/FilterModalDialogHeader";

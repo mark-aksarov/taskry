@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { KeyRound, Trash } from "lucide-react";
 import { useDeleteUser } from "../DeleteUserContext";
 import { useChangePassword } from "../ChangePasswordContext";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
 import { NavigationButton } from "@/dashboard/common/NavigationItem";

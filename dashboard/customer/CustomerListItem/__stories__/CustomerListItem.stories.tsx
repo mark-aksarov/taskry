@@ -7,7 +7,7 @@ import { withUpdateCustomerProvider } from "../../UpdateCustomerProvider/__stori
 import { withDeleteCustomerProvider } from "../../DeleteCustomerProvider/__stories__";
 import { withDeleteCustomersProvider } from "../../DeleteCustomersProvider/__stories__";
 import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
-import { withModalManagerProvider } from "@/dashboard/common/ModalManagerContext/__stories__";
+import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
 

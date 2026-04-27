@@ -6,7 +6,7 @@ import {
   ConfirmModalActions,
   ConfirmModalCancelButton,
   ConfirmModalConfirmButton,
-} from "@/dashboard/common/ConfirmModal";
+} from "@/common/ConfirmModal";
 
 import { useTranslations } from "next-intl";
 import { ModalProps } from "@/ui/Modal";

@@ -21,7 +21,7 @@ import { useTranslations } from "next-intl";
 import { Separator } from "@/ui/Separator";
 import { CustomerItemActionMenuTrigger } from "../CustomerItem";
 import { CustomerGridItemLayout } from "./CustomerGridItemLayout";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { SelectableCustomerItem } from "../SelectableCustomerItem";
 import { GridItemLargeGate } from "@/dashboard/common/GridItemLargeGate";
 import { CustomerGridItemLargeSkeleton } from "./CustomerGridItemSkeleton";

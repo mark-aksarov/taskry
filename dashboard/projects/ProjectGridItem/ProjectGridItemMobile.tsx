@@ -23,7 +23,7 @@ import { BaseLink } from "@/ui/Link";
 import { twMerge } from "tailwind-merge";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { ProjectGridItemProgress } from "./ProjectGridItemProgress";
 import { ProjectGridItemMobileSkeleton } from "./ProjectGridItemSkeleton";
 import { GridItemMobileGate } from "@/dashboard/common/GridItemMobileGate";

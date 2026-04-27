@@ -25,7 +25,7 @@ import { ListItemGate } from "@/dashboard/common/ListItemGate";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { SelectableProjectItem } from "../SelectableProjectItem";
 import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { ProjectListItemSkeleton } from "./ProjectListItemSkeleton";
 import { ProjectItemCheckbox } from "../ProjectItem/ProjectItemCheckbox";
 

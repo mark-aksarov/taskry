@@ -1,6 +1,6 @@
 "use client";
 
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { ResponsiveModal } from "@/dashboard/common/ResponsiveModal";
 
 interface SearchModalProps {

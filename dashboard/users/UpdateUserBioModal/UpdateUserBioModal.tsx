@@ -8,7 +8,7 @@ import {
 import { useTranslations } from "next-intl";
 import { DialogBody, DialogFooter } from "@/ui/Dialog";
 import { UpdateUserBioForm } from "../UpdateUserBioForm";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { UpdateUserBioFormSubmitButton } from "../UpdateUserBioForm";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 

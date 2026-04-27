@@ -8,15 +8,13 @@ import {
 
 import { useTranslations } from "next-intl";
 import { CtaCard } from "@/site/home/CtaCard";
-import { ActionState } from "@/lib/actions/types";
-import { CtaActions } from "@/site/home/CtaActions";
 import { PageContainer } from "@/site/common/PageContainer";
 
 interface FinalCtaSectionProps {
-  signInAsDemoUser: () => Promise<ActionState>;
+  ctaActionsContainer: React.ReactNode;
 }
 
-export function FinalCtaSection({ signInAsDemoUser }: FinalCtaSectionProps) {
+export function FinalCtaSection({ ctaActionsContainer }: FinalCtaSectionProps) {
   const t = useTranslations("site.sections.FinalCtaSection");
 
   return (
@@ -34,7 +32,7 @@ export function FinalCtaSection({ signInAsDemoUser }: FinalCtaSectionProps) {
                 {t("description.line2")}
               </PageSectionDescription>
             </PageSectionHeader>
-            <CtaActions signInAsDemoUser={signInAsDemoUser} />
+            {ctaActionsContainer}
           </CtaCard>
         </PageSectionContent>
       </PageContainer>

@@ -7,7 +7,7 @@ import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories_
 import { TasksContainerPresentationExample } from "./TasksContainerPresentationExample";
 import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusesProvider/__stories__";
-import { withModalManagerProvider } from "@/dashboard/common/ModalManagerContext/__stories__";
+import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
 
 const meta = {

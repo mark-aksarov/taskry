@@ -1,7 +1,7 @@
 import {
   withOpenModal,
   withModalManagerProvider,
-} from "@/dashboard/common/ModalManagerContext/__stories__";
+} from "@/common/ModalManagerContext/__stories__";
 
 import { CommentList } from "../CommentList";
 import { Repeat } from "@/common/Repeat";
@@ -9,7 +9,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CommentItemSkeleton } from "../CommentItem";
 import { EntityCommentsModal } from "./EntityCommentsModal";
 import { CommentsEmptySection } from "../CommentsEmptySection";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { CommentListExample } from "../CommentList/__stories__";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withSendCommentProvider } from "../SendCommentProvider/__stories__";

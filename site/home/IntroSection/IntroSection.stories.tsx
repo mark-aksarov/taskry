@@ -1,3 +1,4 @@
+import { CtaSection } from "../CtaSection";
 import { IntroSection } from "./IntroSection";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -15,5 +16,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
-  args: {},
+  args: {
+    ctaActionsContainer: (
+      <CtaSection
+        isGuest={false}
+        signOut={async () => ({ status: "success" })}
+        hasSession={true}
+      />
+    ),
+  },
 } satisfies Story;

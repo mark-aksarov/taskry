@@ -1,7 +1,7 @@
 import {
   withOpenModal,
   withModalManagerProvider,
-} from "@/dashboard/common/ModalManagerContext/__stories__";
+} from "@/common/ModalManagerContext/__stories__";
 
 import { CreateUserModal } from "../CreateUserModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";

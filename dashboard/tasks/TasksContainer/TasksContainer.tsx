@@ -16,7 +16,7 @@ import { TaskCommentsContainer } from "../TaskCommentsContainer";
 import { UserDetailSideSheet } from "../../users/UserDetailSideSheet";
 import { UserDetailContainer } from "../../users/UserDetailContainer";
 import { UpdateTaskFormContainer } from "../UpdateTaskFormContainer";
-import { ModalManagerProvider } from "../../common/ModalManagerContext";
+import { ModalManagerProvider } from "@/common/ModalManagerContext";
 import { CommentFormProvider } from "../../comments/CommentFormContext";
 import { UpdateTaskStatusProvider } from "../UpdateTaskStatusProvider";
 import { SendCommentProvider } from "../../comments/SendCommentProvider";

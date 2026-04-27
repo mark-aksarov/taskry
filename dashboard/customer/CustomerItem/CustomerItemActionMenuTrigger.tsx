@@ -11,7 +11,7 @@ import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { useCustomerItemPending } from "./useCustomerItemPending";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 
 export type CustomerItemActionMenuTriggerProps = {
   customerId: number;

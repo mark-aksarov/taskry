@@ -14,7 +14,7 @@ import { ProjectDetailContainer } from "../ProjectDetailContainer";
 import { UserDetailSideSheet } from "../../users/UserDetailSideSheet";
 import { UserDetailContainer } from "../../users/UserDetailContainer";
 import { ProjectListItemDTO } from "@/lib/data/project/project.dto";
-import { ModalManagerProvider } from "../../common/ModalManagerContext";
+import { ModalManagerProvider } from "@/common/ModalManagerContext";
 import { CommentFormProvider } from "../../comments/CommentFormContext";
 import { SendCommentProvider } from "../../comments/SendCommentProvider";
 import { ProjectCommentsContainer } from "../ProjectCommentsContainer";

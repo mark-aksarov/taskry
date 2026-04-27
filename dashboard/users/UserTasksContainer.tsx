@@ -13,7 +13,7 @@ import { DeleteTaskProvider } from "../tasks/DeleteTaskProvider";
 import { TaskGridItemMobileSkeleton } from "../tasks/TaskGridItem";
 import { TaskDetailSideSheet } from "../tasks/TaskDetailSideSheet";
 import { TaskDetailContainer } from "../tasks/TaskDetailContainer";
-import { ModalManagerProvider } from "../common/ModalManagerContext";
+import { ModalManagerProvider } from "../../common/ModalManagerContext";
 import { CommentFormProvider } from "../comments/CommentFormContext";
 import { SendCommentProvider } from "../comments/SendCommentProvider";
 import { TaskCommentsContainer } from "../tasks/TaskCommentsContainer";

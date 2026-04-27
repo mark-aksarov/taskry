@@ -9,7 +9,7 @@ import {
 import { tv } from "tailwind-variants";
 
 /**
- * Shared form field building blocks.
+ * Shared form field building home.
  * These styles and components are used to reuse across multiple form-related components.
  */
 

@@ -22,7 +22,7 @@ import { CustomerItemCheckbox } from "../CustomerItem";
 import { ListItemGate } from "@/dashboard/common/ListItemGate";
 import { CustomerItemActionMenuTrigger } from "../CustomerItem";
 import { CustomerListItemLayout } from "./CustomerListItemLayout";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { SelectableCustomerItem } from "../SelectableCustomerItem";
 import { CustomerListItemSkeleton } from "./CustomerListItemSkeleton";
 import { BaseCustomerItemProps, useCustomerItemPending } from "../CustomerItem";

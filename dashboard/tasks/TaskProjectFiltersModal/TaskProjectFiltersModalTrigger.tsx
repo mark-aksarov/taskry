@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { FilterButtonMobile } from "@/dashboard/common/FilterButton";
 import { useTaskFilters } from "../TaskFiltersContext";
 

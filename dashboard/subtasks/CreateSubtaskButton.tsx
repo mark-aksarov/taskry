@@ -3,7 +3,7 @@
 import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button, ButtonProps } from "@/ui/Button";
-import { useModal } from "../common/ModalManagerContext";
+import { useModal } from "../../common/ModalManagerContext";
 import { useDeleteTask } from "../tasks/DeleteTaskContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 

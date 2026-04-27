@@ -10,7 +10,7 @@ import { UpdateCustomerProvider } from "../UpdateCustomerProvider";
 import { CustomerDetailSideSheet } from "../CustomerDetailSideSheet";
 import { CustomerDetailContainer } from "../CustomerDetailContainer";
 import { CustomerGridItemMobileSkeleton } from "../CustomerGridItem";
-import { ModalManagerProvider } from "../../common/ModalManagerContext";
+import { ModalManagerProvider } from "@/common/ModalManagerContext";
 import { CustomerListItemDTO } from "@/lib/data/customer/customer.dto";
 import { UpdateCustomerFormContainer } from "../UpdateCustomerFormContainer";
 import { CustomerDetailHeaderContainer } from "../CustomerDetailHeaderContainer";

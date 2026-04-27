@@ -4,7 +4,7 @@ import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withCommentFormProvider } from "./withCommentFormProvider";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
-import { withModalManagerProvider } from "@/dashboard/common/ModalManagerContext/__stories__";
+import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 
 const meta = {
   title: "dashboard/comments/CommentForm",

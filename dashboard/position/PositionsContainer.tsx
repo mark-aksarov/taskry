@@ -6,7 +6,7 @@ import { UpdatePositionModal } from "./UpdatePositionModal";
 import { DeletePositionModal } from "./DeletePositionModal";
 import { UpdatePositionProvider } from "./UpdatePositionProvider";
 import { DeletePositionProvider } from "./DeletePositionProvider";
-import { ModalManagerProvider } from "../common/ModalManagerContext";
+import { ModalManagerProvider } from "../../common/ModalManagerContext";
 import { getPositionSummaries } from "@/lib/data/position/position.dal";
 
 export async function PositionsContainer() {

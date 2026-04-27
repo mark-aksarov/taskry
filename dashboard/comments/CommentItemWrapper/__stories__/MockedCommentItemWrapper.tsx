@@ -1,4 +1,4 @@
-import { ModalManagerProvider } from "@/dashboard/common/ModalManagerContext";
+import { ModalManagerProvider } from "@/common/ModalManagerContext";
 import { MockedDeleteCommentProvider } from "../../DeleteCommentProvider/__stories__";
 
 export function MockedCommentItemWrapper({

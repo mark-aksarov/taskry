@@ -1,6 +1,6 @@
 "use client";
 
-import { useModal } from "../common/ModalManagerContext";
+import { useModal } from "../../common/ModalManagerContext";
 import { useUpdateCustomerImage } from "./UpdateCustomerImageContext";
 import { PersonImageMenuTrigger } from "../common/PersonImageMenuTrigger";
 import { useClearCustomerImageUrl } from "./ClearCustomerImageUrlContext";

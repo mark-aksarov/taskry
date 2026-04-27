@@ -2,8 +2,11 @@ import { HomePage } from "./HomePage";
 import { mocked } from "storybook/test";
 import { SiteLayout } from "./SiteLayout";
 import { usePathname } from "next/navigation";
+import { CtaSection } from "@/site/home/CtaSection";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
+import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "pages/HomePage",
@@ -15,13 +18,21 @@ const meta = {
         <Story />
       </SiteLayout>
     ),
+    withModalManagerProvider,
+    withCurrentUserProvider,
     withThemedBackground,
   ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/");
   },
   args: {
-    reset: () => {},
+    ctaActionsContainer: (
+      <CtaSection
+        isGuest={false}
+        signOut={async () => ({ status: "success" })}
+        hasSession={true}
+      />
+    ),
   },
 } satisfies Meta<typeof HomePage>;
 

@@ -14,7 +14,7 @@ import { IconWrapper } from "../common/IconWrapper";
 import { NavigationLink } from "../common/NavigationLink";
 
 export function DocsGrid() {
-  const t = useTranslations("site.blocks.DocsGrid");
+  const t = useTranslations("site.home.DocsGrid");
 
   return (
     <div className="grid gap-4 max-md:grid-cols-1 md:grid-cols-2">

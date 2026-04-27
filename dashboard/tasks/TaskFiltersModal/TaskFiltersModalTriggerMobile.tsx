@@ -1,7 +1,7 @@
 "use client";
 
 import { useTaskFilters } from "../TaskFiltersContext";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { FilterButtonMobile } from "@/dashboard/common/FilterButton";
 
 export function TaskFiltersModalTriggerMobile() {

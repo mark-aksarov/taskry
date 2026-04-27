@@ -3,7 +3,7 @@
 import { Trash } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useDeleteTask } from "../DeleteTaskContext";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { NavigationButton } from "@/dashboard/common/NavigationItem";
 

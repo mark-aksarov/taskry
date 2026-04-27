@@ -2,7 +2,7 @@
 
 import { startTransition } from "react";
 import { useDeleteCustomer } from "../DeleteCustomerContext";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { BaseDeleteCustomerModal } from "../BaseDeleteCustomerModal";
 import { useSelectedItems } from "@/dashboard/common/SelectedItemsContext";
 

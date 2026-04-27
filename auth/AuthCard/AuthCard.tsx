@@ -1,8 +1,8 @@
 import { tv } from "tailwind-variants";
-import { AuthLink } from "../AuthLink";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { Card } from "@/dashboard/common/Card";
 import { AuthLangMenuTrigger } from "../AuthLangMenuTrigger";
-import { useTranslations } from "next-intl";
 
 interface AuthCardProps {
   "data-test"?: string;
@@ -35,7 +35,9 @@ export function AuthCard({ "data-test": dataTest, children }: AuthCardProps) {
   return (
     <Card data-test={dataTest} className={s.base()}>
       <div className={s.header()}>
-        <AuthLink href="/">{t("homeLabel")}</AuthLink>
+        <Link className="text-sm font-bold" href="/">
+          {t("homeLabel")}
+        </Link>
         <AuthLangMenuTrigger />
       </div>
 

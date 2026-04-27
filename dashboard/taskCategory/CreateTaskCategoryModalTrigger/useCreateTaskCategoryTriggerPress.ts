@@ -1,4 +1,4 @@
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
 export function useCreateTaskCategoryTriggerPress() {

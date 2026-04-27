@@ -3,7 +3,7 @@
 import { startTransition } from "react";
 import { useDeleteUser } from "../DeleteUserContext";
 import { BaseDeleteUserModal } from "../BaseDeleteUserModal";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 
 interface DeleteUserModalProps {
   userId: string;

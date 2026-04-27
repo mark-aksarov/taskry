@@ -5,7 +5,7 @@ import { createContext, useContext } from "react";
 interface CurrentUserContextType {
   isGuest: boolean;
   isOwner: boolean;
-  userId: string;
+  userId: string | null;
 }
 
 export const CurrentUserContext = createContext<CurrentUserContextType | null>(

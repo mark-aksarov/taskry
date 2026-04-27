@@ -1,6 +1,6 @@
 "use client";
 
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { FilterButtonMobile } from "@/dashboard/common/FilterButton";
 import { useCustomerFilters } from "../CustomerFiltersContext";
 

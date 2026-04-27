@@ -6,7 +6,7 @@ import { withDeleteProjectsProvider } from "../../DeleteProjectsProvider/__stori
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
 import { ProjectsContainerPresentationExample } from "./ProjectsContainerPresentationExample";
-import { withModalManagerProvider } from "@/dashboard/common/ModalManagerContext/__stories__";
+import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusesProvider/__stories__";
 

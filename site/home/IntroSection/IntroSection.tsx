@@ -5,18 +5,16 @@ import {
 } from "@/site/common/PageSection";
 
 import { IntroBadge } from "./IntroBadge";
-import { ActionState } from "@/lib/actions/types";
 import { IntroDecorative } from "./IntroDecorative";
-import { CtaActions } from "@/site/home/CtaActions";
 import { PageContainer } from "@/site/common/PageContainer";
 import { IntroSectionHeading } from "./IntroSectionHeading";
 import { IntroSectionDescription } from "./IntroSectionDescription";
 
 interface IntroSectionProps {
-  signInAsDemoUser: () => Promise<ActionState>;
+  ctaActionsContainer: React.ReactNode;
 }
 
-export function IntroSection({ signInAsDemoUser }: IntroSectionProps) {
+export function IntroSection({ ctaActionsContainer }: IntroSectionProps) {
   return (
     <PageSection className="relative max-md:pt-15 max-md:pb-8 md:pt-30 md:pb-15">
       <IntroDecorative />
@@ -27,7 +25,7 @@ export function IntroSection({ signInAsDemoUser }: IntroSectionProps) {
             <IntroSectionHeading />
             <IntroSectionDescription />
           </PageSectionHeader>
-          <CtaActions signInAsDemoUser={signInAsDemoUser} />
+          {ctaActionsContainer}
         </PageSectionContent>
       </PageContainer>
     </PageSection>

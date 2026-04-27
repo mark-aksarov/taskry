@@ -15,7 +15,7 @@ import { TaskGridItemProgress } from "./TaskGridItemProgress";
 import { ListItemTitleButton } from "@/dashboard/common/ListItem";
 import { ItemBaseDeadline } from "@/dashboard/common/ItemBase";
 import { TaskItemCheckbox } from "../TaskItem/TaskItemCheckbox";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { TaskGridItemLargeSkeleton } from "./TaskGridItemSkeleton";
 import { BaseTaskItemProps, useTaskItemPending } from "../TaskItem";
 import { GridItemInfo, GridItemText } from "@/dashboard/common/GridItem";

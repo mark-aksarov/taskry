@@ -23,7 +23,7 @@ import { memo } from "react";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { SelectableProjectItem } from "../SelectableProjectItem";
 import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { ProjectGridItemProgress } from "./ProjectGridItemProgress";
 import { ProjectItemCheckbox } from "../ProjectItem/ProjectItemCheckbox";
 import { ProjectGridItemLargeSkeleton } from "./ProjectGridItemSkeleton";

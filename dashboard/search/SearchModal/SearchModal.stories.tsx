@@ -8,10 +8,10 @@ import { SearchModalDialog } from "./SearchModalDialog";
 import { SearchListExample } from "../SearchList/__stories__";
 import { SearchModalDialogBody } from "./SearchModalDialogBody";
 import { withSearchBarProvider } from "../SearchBar/__stories__";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { SearchModalDialogHeader } from "./SearchModalDialogHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withModalManagerProvider } from "@/dashboard/common/ModalManagerContext/__stories__";
+import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 
 const meta = {
   title: "dashboard/search/SearchModal",

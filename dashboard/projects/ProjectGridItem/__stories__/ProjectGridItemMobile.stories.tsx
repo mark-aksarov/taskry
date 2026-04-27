@@ -9,7 +9,7 @@ import { withDeleteProjectProvider } from "../../DeleteProjectProvider/__stories
 import { withDeleteProjectsProvider } from "../../DeleteProjectsProvider/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
 import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
-import { withModalManagerProvider } from "@/dashboard/common/ModalManagerContext/__stories__";
+import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withUpdateProjectStatusProvider } from "../../UpdateProjectStatusProvider/__stories__";
 import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusesProvider/__stories__";
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";

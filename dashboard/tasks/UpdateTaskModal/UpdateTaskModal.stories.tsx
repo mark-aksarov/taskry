@@ -1,7 +1,7 @@
 import {
   withOpenModal,
   withModalManagerProvider,
-} from "@/dashboard/common/ModalManagerContext/__stories__";
+} from "@/common/ModalManagerContext/__stories__";
 
 import { UpdateTaskForm } from "../UpdateTaskForm";
 import { UpdateTaskModal } from "./UpdateTaskModal";

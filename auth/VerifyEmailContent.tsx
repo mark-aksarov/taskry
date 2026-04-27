@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { ErrorBanner } from "@/common/ErrorBanner";
 import { AuthSignOutButton } from "./AuthSignOutButton";
 import { SendVerificationEmailButton } from "./SendVerificationEmailButton";
 
@@ -11,10 +12,8 @@ export function VerifyEmailContent({ email }: { email: string }) {
 
   return (
     <div className="flex flex-col gap-4">
-      {hasError && (
-        <p className="text-sm text-red-600 dark:text-red-400">{t("error")}</p>
-      )}
       <SendVerificationEmailButton email={email} setHasError={setHasError} />
+      {hasError && <ErrorBanner>{t("error")}</ErrorBanner>}
       <AuthSignOutButton />
     </div>
   );

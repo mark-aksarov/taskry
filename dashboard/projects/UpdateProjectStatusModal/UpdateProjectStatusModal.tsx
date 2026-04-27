@@ -13,7 +13,7 @@ import {
 import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { DialogBody, DialogFooter } from "@/ui/Dialog";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 interface UpdateProjectStatusModalProps {

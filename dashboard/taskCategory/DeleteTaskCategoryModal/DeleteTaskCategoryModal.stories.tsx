@@ -4,7 +4,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import {
   withModalManagerProvider,
   withOpenModal,
-} from "@/dashboard/common/ModalManagerContext/__stories__";
+} from "@/common/ModalManagerContext/__stories__";
 import { withDeleteTaskCategoryProvider } from "../DeleteTaskCategoryProvider/__stories__";
 import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
 

@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { FilterButtonMobile } from "@/dashboard/common/FilterButton";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { useCustomerFilters } from "../CustomerFiltersContext";
 
 export function CustomerCompanyFiltersModalTrigger() {

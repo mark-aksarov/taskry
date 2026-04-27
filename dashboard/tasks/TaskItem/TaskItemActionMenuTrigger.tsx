@@ -12,7 +12,7 @@ import { useTranslations } from "next-intl";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useTaskItemPending } from "./useTaskItemPending";
 import { useUpdateTaskStatus } from "../UpdateTaskStatusContext";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { Check, Clock, Trash, Pencil, CircleEllipsis } from "lucide-react";
 

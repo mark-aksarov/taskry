@@ -1,5 +1,5 @@
 import { SubtaskList } from "../SubtaskList";
-import { ModalManagerProvider } from "@/dashboard/common/ModalManagerContext";
+import { ModalManagerProvider } from "@/common/ModalManagerContext";
 import { SubtaskListItem, SubtaskListItemVariant } from "../../SubtaskListItem";
 import { MockedDeleteSubtaskProvider } from "../../DeleteSubtaskProvider/__stories__";
 import { MockedUpdateSubtaskProvider } from "../../UpdateSubtaskProvider/__stories__";

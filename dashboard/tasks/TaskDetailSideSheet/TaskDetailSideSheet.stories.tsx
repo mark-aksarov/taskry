@@ -1,7 +1,7 @@
 import {
   withOpenModal,
   withModalManagerProvider,
-} from "@/dashboard/common/ModalManagerContext/__stories__";
+} from "@/common/ModalManagerContext/__stories__";
 
 import { mockedTaskDetail } from "@/mocks/tasks";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";

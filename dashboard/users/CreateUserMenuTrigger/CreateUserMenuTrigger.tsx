@@ -4,7 +4,7 @@ import { Key } from "react-aria";
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { BriefcaseBusiness, Users } from "lucide-react";
-import { useModal } from "@/dashboard/common/ModalManagerContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
 import { CreateNewMenuTrigger } from "@/dashboard/common/CreateNewMenuTrigger";

@@ -133,5 +133,9 @@
   },
   "DashboardPage": {
     "heading": "Dashboard"
+  },
+  "GuestSignInPage": {
+    "heading": "Sign in as guest",
+    "subtitle": "Click the button to open the demo version with data in the selected language."
   }
 }
