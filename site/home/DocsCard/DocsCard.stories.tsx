@@ -1,14 +1,14 @@
 import { Heart } from "lucide-react";
-import { IconWrapper } from "../IconWrapper";
-import { NavigationLink } from "./NavigationLink";
+import { DocsCard } from "./DocsCard";
+import { IconWrapper } from "@/site/common/IconWrapper";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
-  title: "site/common/NavigationLink",
-  component: NavigationLink,
+  title: "site/common/DocsCard",
+  component: DocsCard,
   decorators: [withThemedBackground],
-} satisfies Meta<typeof NavigationLink>;
+} satisfies Meta<typeof DocsCard>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

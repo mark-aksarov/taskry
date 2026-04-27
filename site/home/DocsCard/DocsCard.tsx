@@ -17,28 +17,24 @@ const styles = tv({
 
   slots: {
     content: "flex flex-col items-start gap-1",
-    heading: "text-lg font-bold text-black dark:text-white",
+    heading: "line-clamp-2 text-lg font-bold text-black dark:text-white",
     subtext: "text-sm font-medium text-slate-600 dark:text-slate-300",
     icon: [
-      "ml-auto text-slate-600 dark:text-slate-300",
+      "ml-auto shrink-0",
+      "text-slate-600 dark:text-slate-300",
       "group-pressed:translate-x-1 transition-transform group-hover:translate-x-1",
     ],
   },
 });
 
-interface NavigationLinkProps {
+interface DocsCardProps {
   href: string;
   iconLeft?: React.ReactNode;
   heading: string;
   subtext: string;
 }
 
-export function NavigationLink({
-  href,
-  heading,
-  subtext,
-  iconLeft,
-}: NavigationLinkProps) {
+export function DocsCard({ href, heading, subtext, iconLeft }: DocsCardProps) {
   const {
     base,
     content,
