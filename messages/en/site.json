@@ -83,25 +83,46 @@
       "triggerAriaLabel": "Docs navigation"
     },
     "DocsNavigation": {
-      "gettingStarted": "Quick start guide",
-      "projects": "Project management",
-      "tasks": "Tasks and subtasks",
-      "categories": "Project and task categories",
-      "comments": "Comments on tasks and projects",
-      "users": "Users, roles and permissions",
-      "search": "Search and filtering",
-      "clients": "Clients and companies"
-    },
-    "DocsBreadcrumbs": {
-      "docs": "Documentation",
-      "gettingStarted": "Getting Started",
-      "projects": "Projects",
-      "tasks": "Tasks",
-      "categories": "Categories",
-      "comments": "Comments",
-      "users": "Users",
-      "search": "Search",
-      "clients": "Clients"
+      "breadcrumbs": "Documentation",
+      "projects": {
+        "heading": "Projects",
+        "viewMode": "Project display",
+        "creation": "Project creation",
+        "editing": "Project editing",
+        "deletion": "Project deletion",
+        "changeStatus": "Status change",
+        "filters": "Project filters",
+        "sorting": "Project sorting",
+        "categories": "Project categories"
+      },
+      "tasks": {
+        "heading": "Tasks",
+        "viewMode": "Task display",
+        "creation": "Task creation",
+        "editing": "Task editing",
+        "deletion": "Task deletion",
+        "changeStatus": "Status change",
+        "filters": "Task filters",
+        "sorting": "Task sorting",
+        "categories": "Task categories"
+      },
+      "teams": {
+        "heading": "Teams",
+        "roles": "Users, roles and permissions",
+        "view": "User display",
+        "add": "Add user",
+        "edit": "Edit user",
+        "delete": "Delete user",
+        "positions": "Positions"
+      },
+      "clients": {
+        "heading": "Clients",
+        "view": "Client display",
+        "creation": "Client creation",
+        "editing": "Edit client",
+        "deletion": "Client deletion",
+        "companies": "Companies"
+      }
     }
   },
   "home": {

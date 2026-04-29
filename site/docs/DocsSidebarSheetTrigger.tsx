@@ -32,7 +32,7 @@ export function DocsSidebarSheetTrigger() {
         onOpenChange={setOpen}
       >
         <Dialog className="bg-slate-50 dark:bg-slate-900">
-          <DialogHeaderWithClose className="h-[73px]">
+          <DialogHeaderWithClose className="h-[73px] shrink-0">
             <Logo />
           </DialogHeaderWithClose>
           <DialogBody>
