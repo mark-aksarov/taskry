@@ -1,0 +1,67 @@
+import { DocsCardLink } from "@/site/docs/DocsCardLink";
+import { DocsCardGrid } from "@/site/docs/DocsCardGrid";
+
+## Tasks
+
+A task is a unit of work that contains the data required to complete a specific action within a workflow:
+
+- Title — <span className="font-normal">a short name of the task</span>
+- Description — <span className="font-normal">detailed information about the task</span>
+- Deadline — <span className="font-normal">the date by which the task should be completed</span>
+- Project — <span className="font-normal">the project the task belongs to</span>
+- Assignee — <span className="font-normal">the user responsible for completing the task</span>
+- Author — <span className="font-normal">the user who created the task</span>
+- Category — <span className="font-normal">a logical grouping of the task</span>
+- Status — <span className="font-normal">the current state of the task</span>
+
+Additionally, a task may include:
+
+- Subtasks — <span className="font-normal">breaking the task into smaller steps</span>
+- Comments — <span className="font-normal">discussions and notes related to the task</span>
+
+---
+
+### Next steps
+
+<DocsCardGrid>
+  <DocsCardLink
+    heading="View mode"
+    subtext="Switch between different task views, such as list and cards"
+    href="/docs/tasks/view-mode"
+  />
+  <DocsCardLink
+    heading="Create task"
+    subtext="How to create a new task and fill in the basic fields"
+    href="/docs/tasks/create"
+  />
+  <DocsCardLink
+    heading="Edit task"
+    subtext="Modify an existing task"
+    href="/docs/tasks/edit"
+  />
+  <DocsCardLink
+    heading="Delete task"
+    subtext="Single and bulk deletion of tasks"
+    href="/docs/tasks/delete"
+  />
+  <DocsCardLink
+    heading="Change status"
+    subtext="Single and bulk status updates for tasks"
+    href="/docs/tasks/status-change"
+  />
+  <DocsCardLink
+    heading="Filters"
+    subtext="Filter tasks by various parameters"
+    href="/docs/tasks/filters"
+  />
+  <DocsCardLink
+    heading="Sorting"
+    subtext="Sort tasks by fields and priority"
+    href="/docs/tasks/sorting"
+  />
+  <DocsCardLink
+    heading="Subtasks"
+    subtext="Break tasks into smaller steps and manage them"
+    href="/docs/tasks/subtasks"
+  />
+</DocsCardGrid>

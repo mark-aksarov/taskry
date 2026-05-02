@@ -5,7 +5,6 @@ import {
 } from "@/site/common/PageSection";
 
 import { IntroBadge } from "./IntroBadge";
-import { IntroDecorative } from "./IntroDecorative";
 import { PageContainer } from "@/site/common/PageContainer";
 import { IntroSectionHeading } from "./IntroSectionHeading";
 import { IntroSectionDescription } from "./IntroSectionDescription";
@@ -16,8 +15,7 @@ interface IntroSectionProps {
 
 export function IntroSection({ ctaActionsContainer }: IntroSectionProps) {
   return (
-    <PageSection className="relative max-md:pt-15 max-md:pb-8 md:pt-30 md:pb-15">
-      <IntroDecorative />
+    <PageSection className="relative max-md:pt-10 max-md:pb-8 md:pt-20 md:pb-15">
       <PageContainer>
         <PageSectionContent>
           <IntroBadge />

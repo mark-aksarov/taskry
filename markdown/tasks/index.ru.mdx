@@ -1,0 +1,67 @@
+import { DocsCardLink } from "@/site/docs/DocsCardLink";
+import { DocsCardGrid } from "@/site/docs/DocsCardGrid";
+
+## Задачи
+
+Задача — это единица работы, которая содержит данные, необходимые для выполнения конкретного действия в рамках рабочего процесса:
+
+- Заголовок — <span className="font-normal">краткое название задачи</span>
+- Описание — <span className="font-normal">подробная информация о задаче</span>
+- Дедлайн — <span className="font-normal">срок, к которому задача должна быть выполнена</span>
+- Проект — <span className="font-normal">проект, к которому относится задача</span>
+- Исполнитель — <span className="font-normal">пользователь, ответственный за выполнение задачи</span>
+- Автор — <span className="font-normal">пользователь, создавший задачу</span>
+- Категория — <span className="font-normal">логическая группировка задачи</span>
+- Статус — <span className="font-normal">текущее состояние задачи</span>
+
+Дополнительно задача может включать:
+
+- Подзадачи — <span className="font-normal">декомпозиция задачи на более мелкие шаги</span>
+- Комментарии — <span className="font-normal">обсуждения и заметки по задаче</span>
+
+---
+
+### Следующие шаги
+
+<DocsCardGrid>
+  <DocsCardLink
+    heading="Режим отображения"
+    subtext="Переключение между различными видами отображения, элементы списка и карточки"
+    href="/docs/tasks/view-mode"
+  />
+  <DocsCardLink
+    heading="Создание задачи"
+    subtext="Как создать новую задачу и заполнить основные поля"
+    href="/docs/tasks/create"
+  />
+  <DocsCardLink
+    heading="Редактирование задачи"
+    subtext="Изменение данных существующей задачи"
+    href="/docs/tasks/edit"
+  />
+  <DocsCardLink
+    heading="Удаление задачи"
+    subtext="Одиночное и массовое удаление задач"
+    href="/docs/tasks/delete"
+  />
+  <DocsCardLink
+    heading="Изменение статуса"
+    subtext="Одиночное и массовое изменение статуса задач"
+    href="/docs/tasks/status-change"
+  />
+  <DocsCardLink
+    heading="Фильтры"
+    subtext="Фильтрация задач по различным параметрам"
+    href="/docs/tasks/filters"
+  />
+  <DocsCardLink
+    heading="Сортировка"
+    subtext="Сортировка задач по полям и приоритету"
+    href="/docs/tasks/sorting"
+  />
+  <DocsCardLink
+    heading="Подзадачи"
+    subtext="Разбиение задачи на более мелкие шаги и управление ими"
+    href="/docs/tasks/subtasks"
+  />
+</DocsCardGrid>

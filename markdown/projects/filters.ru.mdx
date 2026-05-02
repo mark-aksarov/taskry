@@ -1,0 +1,33 @@
+import { DocsImage } from "@/site/docs/DocsImage";
+import { DocsPagination, DocsPaginationLink } from "@/site/docs/DocsPagination";
+
+## Фильтры проектов
+
+Чтобы отфильтровать проекты, нажмите кнопку <b>«Фильтры»</b> в верхней части страницы. Откроется модальное окно фильтрации, где доступны следующие фильтры:
+
+- Нет активных задач — <span className="font-normal">отображает только проекты без активных задач.</span>
+- Дедлайн с / по — <span className="font-normal">позволяет выбрать диапазон дат.</span>
+- Статус — <span className="font-normal">«В ожидании», «Активный», «Завершён».</span>
+- Категория — <span className="font-normal">например: «Дизайн», «Внутренние системы», «Веб‑разработка».</span>
+- Клиент — <span className="font-normal">список всех клиентов, связанных с проектами.</span>
+- Создатель — <span className="font-normal">список пользователей, создавших проекты</span>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/project-filters-modal-light-ru.jpg"
+  theme="light"
+  width={498}
+  height={761}
+  containerClassName="max-md:w-[250px] md:w-[400px]"
+/>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/project-filters-modal-dark-ru.jpg"
+  theme="dark"
+  width={498}
+  height={761}
+  containerClassName="max-md:w-[250px] md:w-[400px]"
+/>
+
+После выбора нужных параметров нажмите <b>«Применить фильтры»</b>, и список проектов обновится в соответствии с выбранными фильтрами.
+
+---

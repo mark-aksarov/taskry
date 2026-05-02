@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import { Breadcrumb, Breadcrumbs } from "@/ui/Breadcrumbs";
@@ -8,75 +9,97 @@ export function DocsBreadcrumbs() {
   const pathname = usePathname();
   const t = useTranslations("site.docs.DocsNavigation");
 
-  let second: string | null = null;
+  const items = useMemo(() => {
+    const parts = pathname.split("/").filter(Boolean);
 
-  // Projects
-  if (pathname === "/docs/projects-view-mode") {
-    second = t("projects.viewMode");
-  } else if (pathname === "/docs/projects-creation") {
-    second = t("projects.creation");
-  } else if (pathname === "/docs/projects-editing") {
-    second = t("projects.editing");
-  } else if (pathname === "/docs/projects-deletion") {
-    second = t("projects.deletion");
-  } else if (pathname === "/docs/projects-status-change") {
-    second = t("projects.changeStatus");
-  } else if (pathname === "/docs/projects-filters") {
-    second = t("projects.filters");
-  } else if (pathname === "/docs/projects-sorting") {
-    second = t("projects.sorting");
-  } else if (pathname === "/docs/projects-categories") {
-    second = t("projects.categories");
+    if (parts[0] !== "docs") return [];
 
-    // Tasks
-  } else if (pathname === "/docs/tasks-view-mode") {
-    second = t("tasks.viewMode");
-  } else if (pathname === "/docs/tasks-creation") {
-    second = t("tasks.creation");
-  } else if (pathname === "/docs/tasks-editing") {
-    second = t("tasks.editing");
-  } else if (pathname === "/docs/tasks-deletion") {
-    second = t("tasks.deletion");
-  } else if (pathname === "/docs/tasks-change-status") {
-    second = t("tasks.changeStatus");
-  } else if (pathname === "/docs/tasks-filters") {
-    second = t("tasks.filters");
-  } else if (pathname === "/docs/tasks-sorting") {
-    second = t("tasks.sorting");
-  } else if (pathname === "/docs/tasks-categories") {
-    second = t("tasks.categories");
+    const [, section, page] = parts;
 
-    // Teams
-  } else if (pathname === "/docs/teams-roles") {
-    second = t("teams.roles");
-  } else if (pathname === "/docs/teams-users-view") {
-    second = t("teams.view");
-  } else if (pathname === "/docs/teams-user-add") {
-    second = t("teams.add");
-  } else if (pathname === "/docs/teams-user-edit") {
-    second = t("teams.edit");
-  } else if (pathname === "/docs/teams-user-delete") {
-    second = t("teams.delete");
-  } else if (pathname === "/docs/teams-positions") {
-    second = t("teams.positions");
+    const result: { label: string; href: string }[] = [];
 
-    // Clients
-  } else if (pathname === "/docs/clients-view") {
-    second = t("clients.view");
-  } else if (pathname === "/docs/clients-creation") {
-    second = t("clients.creation");
-  } else if (pathname === "/docs/clients-editing") {
-    second = t("clients.editing");
-  } else if (pathname === "/docs/clients-deletion") {
-    second = t("clients.deletion");
-  } else if (pathname === "/docs/clients-companies") {
-    second = t("clients.companies");
-  }
+    result.push({
+      label: t("breadcrumbs"),
+      href: "/docs",
+    });
+
+    const sectionMap: Record<string, string> = {
+      "getting-started": t("gettingStarted.heading"),
+      projects: t("projects.heading"),
+      tasks: t("tasks.heading"),
+      team: t("team.heading"),
+      customers: t("customers.heading"),
+    };
+
+    if (section) {
+      result.push({
+        label: sectionMap[section] ?? section,
+        href: `/docs/${section}`,
+      });
+    }
+
+    const pageMap: Record<string, Record<string, string>> = {
+      "getting-started": {
+        overview: t("gettingStarted.overview"),
+      },
+      projects: {
+        "view-mode": t("projects.viewMode"),
+        create: t("projects.create"),
+        edit: t("projects.edit"),
+        delete: t("projects.delete"),
+        "status-change": t("projects.statusChange"),
+        filters: t("projects.filters"),
+        sorting: t("projects.sorting"),
+        categories: t("projects.categories"),
+      },
+      tasks: {
+        "view-mode": t("tasks.viewMode"),
+        create: t("tasks.create"),
+        edit: t("tasks.edit"),
+        delete: t("tasks.delete"),
+        "status-change": t("tasks.statusChange"),
+        filters: t("tasks.filters"),
+        sorting: t("tasks.sorting"),
+        categories: t("tasks.categories"),
+      },
+      team: {
+        roles: t("team.roles"),
+        "view-mode": t("team.viewMode"),
+        create: t("team.create"),
+        edit: t("team.edit"),
+        "avatar-change": t("team.avatarChange"),
+        delete: t("team.delete"),
+        positions: t("team.positions"),
+      },
+      customers: {
+        "view-mode": t("customers.viewMode"),
+        create: t("customers.create"),
+        edit: t("customers.edit"),
+        delete: t("customers.delete"),
+        companies: t("customers.companies"),
+      },
+    };
+
+    if (section && page) {
+      result.push({
+        label: pageMap[section]?.[page] ?? page,
+        href: `/docs/${section}/${page}`,
+      });
+    }
+
+    return result;
+  }, [pathname, t]);
 
   return (
-    <Breadcrumbs className="max-md:mb-6 md:mb-8">
-      <Breadcrumb>{t("breadcrumbs")}</Breadcrumb>
-      {second && <Breadcrumb>{second}</Breadcrumb>}
+    <Breadcrumbs className="max-w-[calc(100vw-2rem)] max-md:mb-6 md:mb-8">
+      {items.map((item, i) => (
+        <Breadcrumb
+          key={item.href}
+          href={i === items.length - 1 ? undefined : item.href}
+        >
+          {item.label}
+        </Breadcrumb>
+      ))}
     </Breadcrumbs>
   );
 }

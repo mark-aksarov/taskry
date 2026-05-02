@@ -8,10 +8,10 @@ import {
   PageSectionDescription,
 } from "@/site/common/PageSection";
 
-import { useTranslations } from "next-intl";
-import { DocsGrid } from "@/site/home/DocsGrid";
-import { PageContainer } from "@/site/common/PageContainer";
 import { FileText } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { DocsSectionGrid } from "./DocsSectionGrid";
+import { PageContainer } from "@/site/common/PageContainer";
 
 export function DocsSection() {
   const t = useTranslations("site.sections.DocsSection");
@@ -27,12 +27,12 @@ export function DocsSection() {
               {t("description.line2")}
             </PageSectionDescription>
           </PageSectionHeader>
-          <DocsGrid />
+          <DocsSectionGrid />
 
           <PageSectionActions>
             <PageSectionAction
               as="a"
-              href="/docs/projects-view-mode"
+              href="/docs"
               iconLeft={<FileText size={20} />}
               label={t("CtaButton.label")}
             />

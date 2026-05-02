@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useModal } from "../useModal";
 import { Button } from "@/ui/Button";
-import { type Decorator } from "@storybook/react";
+import { type Decorator } from "@storybook/nextjs-vite";
 
 interface OpenModalDecoratorProps {
   modalId: string;

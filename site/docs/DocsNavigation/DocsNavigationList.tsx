@@ -3,5 +3,9 @@ interface DocsNavigationListProps {
 }
 
 export function DocsNavigationList({ children }: DocsNavigationListProps) {
-  return <ul className="flex flex-col gap-3">{children}</ul>;
+  return (
+    <ul className="flex flex-col gap-1 border-l-1 border-gray-300 dark:border-gray-600">
+      {children}
+    </ul>
+  );
 }

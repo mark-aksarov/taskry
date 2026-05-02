@@ -12,7 +12,7 @@ export function PageSectionDescription({
   return (
     <p
       className={twMerge(
-        "mx-auto font-normal text-slate-600 max-md:text-base/7 md:text-lg/8 dark:text-slate-300",
+        "mx-auto font-normal text-gray-600 max-md:text-base/7 max-sm:text-start md:text-lg/8 dark:text-gray-300",
         className,
       )}
     >

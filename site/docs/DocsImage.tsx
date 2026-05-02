@@ -1,26 +1,29 @@
 "use client";
 
-import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 import Image, { ImageProps } from "next/image";
 
-export function DocsImage(props: ImageProps) {
-  const [isLoading, setIsLoading] = useState(true);
+interface DocsImageProps extends ImageProps {
+  containerClassName?: string;
+  theme?: "light" | "dark";
+}
 
+export function DocsImage({
+  containerClassName,
+  theme,
+  alt = "",
+  ...props
+}: DocsImageProps) {
   return (
     <span
       className={twMerge(
-        "block w-fit overflow-hidden rounded-lg rounded-md max-md:mb-6 md:mb-8",
-        !isLoading && "border-1 border-gray-200 shadow-lg dark:border-gray-800",
+        "block w-fit overflow-hidden rounded-lg rounded-md border-1 border-gray-300 max-md:mb-6 md:mb-8 dark:border-gray-600",
+        theme === "dark" && "not-dark:hidden",
+        theme === "light" && "dark:hidden",
+        containerClassName,
       )}
     >
-      <Image
-        width={1240}
-        height={825}
-        className="w-[800px] max-w-full"
-        onLoadingComplete={() => setIsLoading(false)}
-        {...(props as ImageProps)}
-      />
+      <Image alt={alt} quality={100} {...props} />
     </span>
   );
 }

@@ -84,45 +84,55 @@
     },
     "DocsNavigation": {
       "breadcrumbs": "Documentation",
+      "gettingStarted": {
+        "heading": "Getting Started",
+        "overview": "Overview"
+      },
       "projects": {
         "heading": "Projects",
-        "viewMode": "Project display",
-        "creation": "Project creation",
-        "editing": "Project editing",
-        "deletion": "Project deletion",
-        "changeStatus": "Status change",
-        "filters": "Project filters",
-        "sorting": "Project sorting",
-        "categories": "Project categories"
+        "viewMode": "Project view",
+        "create": "Create project",
+        "edit": "Edit project",
+        "delete": "Delete project",
+        "statusChange": "Change status",
+        "filters": "Filters",
+        "sorting": "Sorting",
+        "categories": "Categories"
       },
       "tasks": {
         "heading": "Tasks",
-        "viewMode": "Task display",
-        "creation": "Task creation",
-        "editing": "Task editing",
-        "deletion": "Task deletion",
-        "changeStatus": "Status change",
-        "filters": "Task filters",
-        "sorting": "Task sorting",
-        "categories": "Task categories"
+        "viewMode": "View mode",
+        "create": "Create task",
+        "edit": "Edit task",
+        "delete": "Delete task",
+        "statusChange": "Change status",
+        "filters": "Filters",
+        "sorting": "Sorting",
+        "subTasks": "Subtasks",
+        "categories": "Categories"
       },
-      "teams": {
-        "heading": "Teams",
-        "roles": "Users, roles and permissions",
-        "view": "User display",
-        "add": "Add user",
-        "edit": "Edit user",
-        "delete": "Delete user",
+      "team": {
+        "heading": "Team",
+        "roles": "Roles and permissions",
+        "viewMode": "View mode",
+        "create": "Create team",
+        "edit": "Edit team",
+        "avatarChange": "Change avatar",
+        "delete": "Delete team",
         "positions": "Positions"
       },
-      "clients": {
-        "heading": "Clients",
-        "view": "Client display",
-        "creation": "Client creation",
-        "editing": "Edit client",
-        "deletion": "Client deletion",
+      "customers": {
+        "heading": "Customers",
+        "viewMode": "View mode",
+        "create": "Create customer",
+        "edit": "Edit customer",
+        "delete": "Delete customer",
         "companies": "Companies"
       }
+    },
+    "DocsPaginationLink": {
+      "prev": "Prev",
+      "next": "Next"
     }
   },
   "home": {
@@ -158,45 +168,37 @@
         "title": "Calendar and deadlines"
       }
     },
-    "DocsGrid": {
-      "quickGuide": {
-        "heading": "Quick User Guide",
-        "subtext": "5 min read"
+    "DocsSectionGrid": {
+      "gettingStarted": {
+        "heading": "Getting started",
+        "subtext": "Quick start and basic steps"
       },
-      "comments": {
-        "heading": "Comments on Tasks and Projects",
-        "subtext": "5 min read"
+      "Overview": {
+        "heading": "Overview",
+        "subtext": "General system information"
       },
-      "projectManagement": {
-        "heading": "Project Management",
-        "subtext": "3 min read"
+      "projects": {
+        "heading": "Projects",
+        "subtext": "Create and manage projects"
       },
-      "usersRoles": {
-        "heading": "Users, Roles, and Permissions",
-        "subtext": "3 min read"
+      "users": {
+        "heading": "Team",
+        "subtext": "Roles, permissions and user management"
       },
       "tasks": {
-        "heading": "Tasks and Subtasks",
-        "subtext": "7 min read"
+        "heading": "Tasks",
+        "subtext": "Working with tasks and their structure"
       },
-      "searchFilter": {
-        "heading": "Search and Filtering",
-        "subtext": "7 min read"
-      },
-      "categories": {
-        "heading": "Project and Task Categories",
-        "subtext": "12 min read"
-      },
-      "clientsCompanies": {
-        "heading": "Clients and Companies",
-        "subtext": "12 min read"
+      "customers": {
+        "heading": "Customers",
+        "subtext": "Customer base management"
       }
     },
     "SwitchToDemoModal": {
       "heading": "You are currently signed in",
       "text": "You’re currently using your account. Switching to demo will sign you out.",
       "cancelButton": "Cancel",
-      "confirmButton": "Switch and sign out"
+      "confirmButton": "Continue"
     }
   }
 }

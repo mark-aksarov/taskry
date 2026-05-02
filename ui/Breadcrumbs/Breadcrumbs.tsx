@@ -24,11 +24,11 @@ export function Breadcrumbs<T extends object>(props: BreadcrumbsProps<T>) {
 }
 
 const breadcrumbStyle = tv({
-  base: "flex items-center gap-2 text-sm font-normal",
+  base: "text-sm font-normal last:truncate",
 
   variants: {
     isCurrent: {
-      false: "text-slate-600 dark:text-slate-300",
+      false: "text-gray-600 dark:text-gray-300",
     },
     isDisabled: {
       true: "text-black dark:text-white",
@@ -48,7 +48,7 @@ export function Breadcrumb(
     >
       {({ isCurrent }) => (
         <>
-          <BaseLink {...props} />
+          <BaseLink {...props} className={!isCurrent ? "mr-2" : ""} />
           {!isCurrent && "/"}
         </>
       )}

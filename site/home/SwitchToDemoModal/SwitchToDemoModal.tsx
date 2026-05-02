@@ -46,7 +46,6 @@ export function SwitchToDemoModal({ signOut }: SwitchToDemoModalProps) {
       data-test="switch-to-demo-modal"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
-      className="dark:border-slate-700 dark:bg-slate-900"
     >
       <DialogHeading>{t("heading")}</DialogHeading>
       <ConfirmModalText>{t("text")}</ConfirmModalText>

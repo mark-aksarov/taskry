@@ -1,256 +1,341 @@
 "use client";
 
+import {
+  Disclosure,
+  DisclosureGroup,
+  DisclosureHeader,
+  DisclosurePanel,
+} from "@/ui/Disclosure";
+
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import { DocsNavigationList } from "./DocsNavigationList";
 import { DocsNavigationLink } from "./DocsNavigationLink";
-import { DocsNavigationHeading } from "./DocsNavigationHeading";
 
 export function DocsNavigation() {
   const pathname = usePathname();
   const t = useTranslations("site.docs.DocsNavigation");
 
+  const defaultExpandedKeys = [
+    pathname.startsWith("/docs/getting-started") && "getting-started",
+    pathname.startsWith("/docs/projects") && "projects",
+    pathname.startsWith("/docs/tasks") && "tasks",
+    pathname.startsWith("/docs/team") && "team",
+    pathname.startsWith("/docs/customers") && "customers",
+  ].filter(Boolean) as string[];
+
   return (
-    <nav className="flex flex-col gap-4">
-      {/* Projects */}
-      <DocsNavigationHeading>{t("projects.heading")}</DocsNavigationHeading>
+    <nav className="flex w-[220px] flex-col gap-4">
+      <DisclosureGroup defaultExpandedKeys={defaultExpandedKeys}>
+        {/* Getting Started */}
+        <Disclosure id="getting-started">
+          <DisclosureHeader>{t("gettingStarted.heading")}</DisclosureHeader>
+          <DisclosurePanel>
+            <DocsNavigationList>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/getting-started"
+                  isActive={pathname === "/docs/getting-started"}
+                >
+                  {t("gettingStarted.heading")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/getting-started/overview"
+                  isActive={pathname === "/docs/getting-started/overview"}
+                >
+                  {t("gettingStarted.overview")}
+                </DocsNavigationLink>
+              </li>
+            </DocsNavigationList>
+          </DisclosurePanel>
+        </Disclosure>
 
-      <DocsNavigationList>
-        <li>
-          <DocsNavigationLink
-            href="/docs/projects-view-mode"
-            isActive={pathname === "/docs/projects-view-mode"}
-          >
-            {t("projects.viewMode")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/projects-creation"
-            isActive={pathname === "/docs/projects-creation"}
-          >
-            {t("projects.creation")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/projects-editing"
-            isActive={pathname === "/docs/projects-editing"}
-          >
-            {t("projects.editing")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/projects-deletion"
-            isActive={pathname === "/docs/projects-deletion"}
-          >
-            {t("projects.deletion")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/projects-status-change"
-            isActive={pathname === "/docs/projects-status-change"}
-          >
-            {t("projects.changeStatus")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/projects-filters"
-            isActive={pathname === "/docs/projects-filters"}
-          >
-            {t("projects.filters")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/projects-sorting"
-            isActive={pathname === "/docs/projects-sorting"}
-          >
-            {t("projects.sorting")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/projects-categories"
-            isActive={pathname === "/docs/projects-categories"}
-          >
-            {t("projects.categories")}
-          </DocsNavigationLink>
-        </li>
-      </DocsNavigationList>
+        {/* Projects */}
+        <Disclosure id="projects">
+          <DisclosureHeader>{t("projects.heading")}</DisclosureHeader>
+          <DisclosurePanel>
+            <DocsNavigationList>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/projects"
+                  isActive={pathname === "/docs/projects"}
+                >
+                  {t("projects.heading")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/projects/view-mode"
+                  isActive={pathname === "/docs/projects/view-mode"}
+                >
+                  {t("projects.viewMode")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/projects/create"
+                  isActive={pathname === "/docs/projects/create"}
+                >
+                  {t("projects.create")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/projects/edit"
+                  isActive={pathname === "/docs/projects/edit"}
+                >
+                  {t("projects.edit")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/projects/delete"
+                  isActive={pathname === "/docs/projects/delete"}
+                >
+                  {t("projects.delete")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/projects/status-change"
+                  isActive={pathname === "/docs/projects/status-change"}
+                >
+                  {t("projects.statusChange")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/projects/filters"
+                  isActive={pathname === "/docs/projects/filters"}
+                >
+                  {t("projects.filters")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/projects/sorting"
+                  isActive={pathname === "/docs/projects/sorting"}
+                >
+                  {t("projects.sorting")}
+                </DocsNavigationLink>
+              </li>
+            </DocsNavigationList>
+          </DisclosurePanel>
+        </Disclosure>
 
-      {/* Tasks */}
-      <DocsNavigationHeading>{t("tasks.heading")}</DocsNavigationHeading>
+        {/* Tasks */}
+        <Disclosure id="tasks">
+          <DisclosureHeader>{t("tasks.heading")}</DisclosureHeader>
+          <DisclosurePanel>
+            <DocsNavigationList>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/tasks"
+                  isActive={pathname === "/docs/tasks"}
+                >
+                  {t("tasks.heading")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/tasks/view-mode"
+                  isActive={pathname === "/docs/tasks/view-mode"}
+                >
+                  {t("tasks.viewMode")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/tasks/create"
+                  isActive={pathname === "/docs/tasks/create"}
+                >
+                  {t("tasks.create")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/tasks/edit"
+                  isActive={pathname === "/docs/tasks/edit"}
+                >
+                  {t("tasks.edit")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/tasks/delete"
+                  isActive={pathname === "/docs/tasks/delete"}
+                >
+                  {t("tasks.delete")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/tasks/status-change"
+                  isActive={pathname === "/docs/tasks/status-change"}
+                >
+                  {t("tasks.statusChange")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/tasks/filters"
+                  isActive={pathname === "/docs/tasks/filters"}
+                >
+                  {t("tasks.filters")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/tasks/sorting"
+                  isActive={pathname === "/docs/tasks/sorting"}
+                >
+                  {t("tasks.sorting")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/tasks/sub-tasks"
+                  isActive={pathname === "/docs/tasks/sub-tasks"}
+                >
+                  {t("tasks.subTasks")}
+                </DocsNavigationLink>
+              </li>
+            </DocsNavigationList>
+          </DisclosurePanel>
+        </Disclosure>
 
-      <DocsNavigationList>
-        <li>
-          <DocsNavigationLink
-            href="/docs/tasks-view-mode"
-            isActive={pathname === "/docs/tasks-view-mode"}
-          >
-            {t("tasks.viewMode")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/tasks-creation"
-            isActive={pathname === "/docs/tasks-creation"}
-          >
-            {t("tasks.creation")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/tasks-editing"
-            isActive={pathname === "/docs/tasks-editing"}
-          >
-            {t("tasks.editing")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/tasks-deletion"
-            isActive={pathname === "/docs/tasks-deletion"}
-          >
-            {t("tasks.deletion")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/tasks-change-status"
-            isActive={pathname === "/docs/tasks-change-status"}
-          >
-            {t("tasks.changeStatus")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/tasks-filters"
-            isActive={pathname === "/docs/tasks-filters"}
-          >
-            {t("tasks.filters")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/tasks-sorting"
-            isActive={pathname === "/docs/tasks-sorting"}
-          >
-            {t("tasks.sorting")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/tasks-categories"
-            isActive={pathname === "/docs/tasks-categories"}
-          >
-            {t("tasks.categories")}
-          </DocsNavigationLink>
-        </li>
-      </DocsNavigationList>
+        {/* Teams */}
+        <Disclosure id="team">
+          <DisclosureHeader>{t("team.heading")}</DisclosureHeader>
+          <DisclosurePanel>
+            <DocsNavigationList>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/team"
+                  isActive={pathname === "/docs/team"}
+                >
+                  {t("team.heading")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/team/roles"
+                  isActive={pathname === "/docs/team/roles"}
+                >
+                  {t("team.roles")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/team/view-mode"
+                  isActive={pathname === "/docs/team/view-mode"}
+                >
+                  {t("team.viewMode")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/team/create"
+                  isActive={pathname === "/docs/team/create"}
+                >
+                  {t("team.create")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/team/edit"
+                  isActive={pathname === "/docs/team/edit"}
+                >
+                  {t("team.edit")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/team/avatar-change"
+                  isActive={pathname === "/docs/team/avatar-change"}
+                >
+                  {t("team.avatarChange")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/team/delete"
+                  isActive={pathname === "/docs/team/delete"}
+                >
+                  {t("team.delete")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/team/positions"
+                  isActive={pathname === "/docs/team/positions"}
+                >
+                  {t("team.positions")}
+                </DocsNavigationLink>
+              </li>
+            </DocsNavigationList>
+          </DisclosurePanel>
+        </Disclosure>
 
-      {/* Teams */}
-      <DocsNavigationHeading>{t("teams.heading")}</DocsNavigationHeading>
-
-      <DocsNavigationList>
-        <li>
-          <DocsNavigationLink
-            href="/docs/teams-roles"
-            isActive={pathname === "/docs/teams-roles"}
-          >
-            {t("teams.roles")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/teams-users-view"
-            isActive={pathname === "/docs/teams-users-view"}
-          >
-            {t("teams.view")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/teams-user-add"
-            isActive={pathname === "/docs/teams-user-add"}
-          >
-            {t("teams.add")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/teams-user-edit"
-            isActive={pathname === "/docs/teams-user-edit"}
-          >
-            {t("teams.edit")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/teams-user-delete"
-            isActive={pathname === "/docs/teams-user-delete"}
-          >
-            {t("teams.delete")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/teams-positions"
-            isActive={pathname === "/docs/teams-positions"}
-          >
-            {t("teams.positions")}
-          </DocsNavigationLink>
-        </li>
-      </DocsNavigationList>
-
-      {/* Clients */}
-      <DocsNavigationHeading>{t("clients.heading")}</DocsNavigationHeading>
-
-      <DocsNavigationList>
-        <li>
-          <DocsNavigationLink
-            href="/docs/clients-view"
-            isActive={pathname === "/docs/clients-view"}
-          >
-            {t("clients.view")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/clients-creation"
-            isActive={pathname === "/docs/clients-creation"}
-          >
-            {t("clients.creation")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/clients-editing"
-            isActive={pathname === "/docs/clients-editing"}
-          >
-            {t("clients.editing")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/clients-deletion"
-            isActive={pathname === "/docs/clients-deletion"}
-          >
-            {t("clients.deletion")}
-          </DocsNavigationLink>
-        </li>
-        <li>
-          <DocsNavigationLink
-            href="/docs/clients-companies"
-            isActive={pathname === "/docs/clients-companies"}
-          >
-            {t("clients.companies")}
-          </DocsNavigationLink>
-        </li>
-      </DocsNavigationList>
+        {/* Customers */}
+        <Disclosure id="customers">
+          <DisclosureHeader>{t("customers.heading")}</DisclosureHeader>
+          <DisclosurePanel>
+            <DocsNavigationList>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/customers"
+                  isActive={pathname === "/docs/customers"}
+                >
+                  {t("customers.heading")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/customers/view-mode"
+                  isActive={pathname === "/docs/customers/view-mode"}
+                >
+                  {t("customers.viewMode")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/customers/create"
+                  isActive={pathname === "/docs/customers/create"}
+                >
+                  {t("customers.create")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/customers/edit"
+                  isActive={pathname === "/docs/customers/edit"}
+                >
+                  {t("customers.edit")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/customers/delete"
+                  isActive={pathname === "/docs/customers/delete"}
+                >
+                  {t("customers.delete")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/customers/companies"
+                  isActive={pathname === "/docs/customers/companies"}
+                >
+                  {t("customers.companies")}
+                </DocsNavigationLink>
+              </li>
+            </DocsNavigationList>
+          </DisclosurePanel>
+        </Disclosure>
+      </DisclosureGroup>
     </nav>
   );
 }

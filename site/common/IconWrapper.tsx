@@ -19,7 +19,7 @@ export function IconWrapper({ color = "blue", children }: IconWrapperProps) {
   return (
     <div
       className={twMerge(
-        "group-pressed:scale-105 rounded-xl bg-gradient-to-br p-3 text-white transition-transform group-hover:scale-105",
+        "rounded-xl bg-gradient-to-br p-3 text-white transition-transform group-hover:scale-105",
         color === "blue" && "from-blue-500 to-blue-600",
         color === "indigo" && "from-indigo-500 to-indigo-600",
         color === "purple" && "from-purple-500 to-purple-600",

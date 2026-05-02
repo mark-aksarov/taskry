@@ -1,0 +1,77 @@
+import { DocsCardLink } from "@/site/docs/DocsCardLink";
+import { DocsCardGrid } from "@/site/docs/DocsCardGrid";
+
+## Projects
+
+Project is an entity that stores basic information about a piece of work and groups all related data:
+
+- Basic information — <span className="font-normal">title, description, deadline</span>
+- Tasks — <span className="font-normal">units of work within the project</span>
+- Comments — <span className="font-normal">discussions related to the project</span>
+- Customer — <span className="font-normal">information about the customer or organization</span>
+- Category — <span className="font-normal">grouping of the project by type or direction</span>
+- Status — <span className="font-normal">current state of the project</span>
+- Author — <span className="font-normal">the user who created the project</span>
+
+---
+
+### Viewing and navigation
+
+Projects are displayed as a list or grid on the “Projects” page. To access this section, select <b>“Projects”</b> from the application sidebar.
+
+Also, viewing and editing a project are available on the project details page. To do this, click on the project title and click <b>“Open project”</b> button in the side panel. On this page, each field can be edited in a separate modal window.
+
+---
+
+### Actions
+
+The following main actions are available for projects:
+
+- Create project — <span className="font-normal">add a new project with basic details such as name, deadline, client, category, and other related fields</span>
+- Edit project — <span className="font-normal">update data of an existing project</span>
+- Delete project — <span className="font-normal">remove one or multiple projects from the system</span>
+- Change status — <span className="font-normal">update the current status of a project</span>
+
+---
+
+### Next steps
+
+<DocsCardGrid>
+  <DocsCardLink
+    heading="Project view"
+    subtext="Switch between different project views, including list and card layouts"
+    href="/docs/projects/view-mode"
+  />
+  <DocsCardLink
+    heading="Create project"
+    subtext="How to create a new project and fill in basic data"
+    href="/docs/projects/create"
+  />
+  <DocsCardLink
+    heading="Edit project"
+    subtext="How to update existing project data"
+    href="/docs/projects/edit"
+  />
+  <DocsCardLink
+    heading="Delete project"
+    subtext="Single and bulk deletion of projects and related data"
+    href="/docs/projects/delete"
+  />
+  <DocsCardLink
+    heading="Status change"
+    subtext="Single and bulk updates of project status"
+    href="/docs/projects/status-change"
+  />
+  <DocsCardLink
+    heading="Filters"
+    subtext="Filter projects by related parameters"
+    href="/docs/projects/filters"
+  />
+  <DocsCardLink
+    heading="Sorting"
+    subtext="Sort project list by different fields"
+    href="/docs/projects/sorting"
+  />
+</DocsCardGrid>
+
+---

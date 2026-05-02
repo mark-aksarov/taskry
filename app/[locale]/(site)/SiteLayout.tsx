@@ -7,7 +7,7 @@ interface SiteLayoutProps {
 
 export function SiteLayout({ children }: SiteLayoutProps) {
   return (
-    <div className="min-h-dvh bg-gradient-to-br from-slate-50 via-blue-50 to-gray-50 dark:from-slate-950 dark:via-slate-900 dark:to-gray-950">
+    <div className="min-h-dvh">
       <AppHeader />
       {children}
       <AppFooter />

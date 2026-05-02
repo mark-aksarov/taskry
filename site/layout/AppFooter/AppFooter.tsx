@@ -8,7 +8,7 @@ import { PageContainer } from "@/site/common/PageContainer";
 
 const footerStyles = tv({
   slots: {
-    section: "border-y-1 border-slate-300 dark:border-slate-600",
+    section: "border-y-1 border-gray-300 dark:border-gray-600",
     inner: "flex justify-between max-md:flex-col max-md:gap-8",
     brand: "mr-auto",
     column: "not-last:mr-20",

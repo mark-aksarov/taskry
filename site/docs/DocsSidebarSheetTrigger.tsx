@@ -31,11 +31,11 @@ export function DocsSidebarSheetTrigger() {
         isOpen={isOpen}
         onOpenChange={setOpen}
       >
-        <Dialog className="bg-slate-50 dark:bg-slate-900">
+        <Dialog>
           <DialogHeaderWithClose className="h-[73px] shrink-0">
             <Logo />
           </DialogHeaderWithClose>
-          <DialogBody>
+          <DialogBody className="max-md:pt-1 md:pt-3">
             <DocsNavigation />
           </DialogBody>
         </Dialog>

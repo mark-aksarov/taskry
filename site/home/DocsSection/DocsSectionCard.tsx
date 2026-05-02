@@ -1,0 +1,64 @@
+"use client";
+
+import { tv } from "tailwind-variants";
+import { focusRing } from "@/ui/styles";
+import { ChevronRight } from "lucide-react";
+import { Link } from "react-aria-components";
+
+const styles = tv({
+  extend: focusRing,
+
+  base: [
+    "group flex w-full items-center justify-start gap-6",
+    "rounded-2xl border p-6",
+    "border-gray-200 dark:border-gray-700",
+    "bg-white hover:border-gray-300 dark:bg-gray-800 dark:hover:border-gray-600",
+  ],
+
+  slots: {
+    content: "flex flex-1 flex-col items-start gap-1 overflow-hidden",
+    heading: "max-w-full truncate text-lg font-bold text-black dark:text-white",
+    subtext:
+      "max-w-full truncate text-sm font-medium text-gray-600 dark:text-gray-300",
+    icon: [
+      "ml-auto shrink-0",
+      "text-gray-600 dark:text-gray-300",
+      "transition-transform group-hover:translate-x-1",
+    ],
+  },
+});
+
+interface DocsSectionCardProps {
+  href: string;
+  iconLeft?: React.ReactNode;
+  heading: string;
+  subtext: string;
+}
+
+export function DocsSectionCard({
+  href,
+  heading,
+  subtext,
+  iconLeft,
+}: DocsSectionCardProps) {
+  const {
+    base,
+    content,
+    heading: headingStyles,
+    subtext: subtextStyles,
+    icon,
+  } = styles();
+
+  return (
+    <Link href={href} className={base}>
+      {iconLeft}
+
+      <div className={content()}>
+        <div className={headingStyles()}>{heading}</div>
+        <div className={subtextStyles()}>{subtext}</div>
+      </div>
+
+      <ChevronRight size={22} strokeWidth={1.5} className={icon()} />
+    </Link>
+  );
+}

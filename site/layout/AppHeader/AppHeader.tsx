@@ -16,8 +16,8 @@ import { DocsSidebarSheetTrigger } from "@/site/docs/DocsSidebarSheetTrigger";
 
 const styles = tv({
   base: [
-    "border-b border-slate-300 dark:border-slate-600",
-    "bg-slate-50/70 dark:bg-slate-900/70",
+    "border-b border-gray-300 dark:border-gray-600",
+    "bg-gray-100/70 dark:bg-gray-900/70",
     "backdrop-blur-md",
   ],
 });
@@ -29,7 +29,7 @@ export function AppHeader() {
 
   return (
     <AppHeaderBase className={styles()}>
-      <PageContainer className={isDocsPage ? "max-w-auto" : ""}>
+      <PageContainer>
         <AppHeaderLayout
           className="max-md:gap-2!"
           leftClassName="gap-2"
