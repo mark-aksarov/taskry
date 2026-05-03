@@ -60,7 +60,8 @@ export function DocsBreadcrumbs() {
         "status-change": t("tasks.statusChange"),
         filters: t("tasks.filters"),
         sorting: t("tasks.sorting"),
-        categories: t("tasks.categories"),
+        subtasks: t("tasks.subtasks"),
+        "subtasks-actions": t("tasks.subtasksActions"),
       },
       team: {
         roles: t("team.roles"),

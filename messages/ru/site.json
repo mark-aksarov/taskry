@@ -101,15 +101,16 @@
       },
       "tasks": {
         "heading": "Задачи",
-        "viewMode": "Режим отображения",
+        "viewMode": "Просмотр задач",
         "create": "Создание задачи",
         "edit": "Редактирование задачи",
         "delete": "Удаление задачи",
         "statusChange": "Изменение статуса",
         "filters": "Фильтры",
         "sorting": "Сортировка",
-        "subTasks": "Подзадачи",
-        "categories": "Категории"
+        "categories": "Категории",
+        "subtasks": "Подзадачи",
+        "subtasksActions": "Действия с подзадачами"
       },
       "team": {
         "heading": "Команда",

@@ -1,0 +1,105 @@
+import { DocsImage } from "@/site/docs/DocsImage";
+
+## Subtask actions
+
+The system provides basic actions that help you work with subtasks:
+
+- Add subtask — <span className="font-normal">create a new subtask inside the main task.</span>
+- Edit subtask — <span className="font-normal">modify the subtask text.</span>
+- Delete subtask — <span className="font-normal">remove a subtask from the list.</span>
+- Change status — <span className="font-normal">update the subtask state (done / undone).</span>
+
+---
+
+### Adding a subtask
+
+To add a subtask, go to the task details page, then scroll to the subtasks list and click the <b>“Add”</b> button (plus icon). A modal window will open where you need to enter the subtask text.
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/subtask-create-new-modal-light-en.jpg"
+  theme="light"
+  width={348}
+  height={262}
+  containerClassName="max-md:w-[250px]"
+/>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/subtask-create-new-modal-dark-en.jpg"
+  theme="dark"
+  width={348}
+  height={262}
+  containerClassName="max-md:w-[250px]"
+/>
+
+After saving, the new subtask will appear at the end of the list.
+
+---
+
+### Subtask management
+
+To perform actions on a subtask, click the <b>“Actions menu”</b> button (three dots icon) on the right side of the list item.
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/subtask-item-action-menu-light-en.jpg"
+  theme="light"
+  width={185}
+  height={201}
+  containerClassName="max-md:w-[140px]"
+/>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/subtask-item-action-menu-dark-en.jpg"
+  theme="dark"
+  width={185}
+  height={201}
+  containerClassName="max-md:w-[140px]"
+/>
+
+#### Editing a subtask
+
+To edit a subtask, select <b>“Edit”</b> from the <b>“Actions menu”</b>. A modal window will open where you can change the subtask text. The subtask text cannot be empty.
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/subtask-edit-modal-light-en.jpg"
+  theme="light"
+  width={348}
+  height={262}
+  containerClassName="max-md:w-[250px]"
+/>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/subtask-edit-modal-dark-en.jpg"
+  theme="dark"
+  width={348}
+  height={262}
+  containerClassName="max-md:w-[250px]"
+/>
+
+#### Deleting a subtask
+
+To delete a subtask, select <b>“Delete”</b> from the <b>“Actions menu”</b>. In the confirmation modal, click the <b>“Delete”</b> button.
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/subtask-delete-modal-light-en.jpg"
+  theme="light"
+  width={418}
+  height={205}
+/>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/subtask-delete-modal-dark-en.jpg"
+  theme="dark"
+  width={418}
+  height={205}
+/>
+
+#### Changing status
+
+To change the status of a subtask, select one of the options in the <b>“Actions menu”</b>:
+
+- “Mark as done”
+- “Mark as undone”
+
+After selection, the subtask status will be updated.
+
+---

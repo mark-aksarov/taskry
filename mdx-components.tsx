@@ -21,7 +21,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
 
     h4: ({ className, ...props }) => (
-      <h4 className={twMerge("mb-6 text-lg font-bold", className)} {...props} />
+      <h4 className={twMerge("mb-6 text-xl font-bold", className)} {...props} />
     ),
 
     p: ({ className, ...props }) => (

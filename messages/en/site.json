@@ -101,7 +101,7 @@
       },
       "tasks": {
         "heading": "Tasks",
-        "viewMode": "View mode",
+        "viewMode": "Task view",
         "create": "Create task",
         "edit": "Edit task",
         "delete": "Delete task",
@@ -109,7 +109,9 @@
         "filters": "Filters",
         "sorting": "Sorting",
         "subTasks": "Subtasks",
-        "categories": "Categories"
+        "categories": "Categories",
+        "subtasks": "Subtasks",
+        "subtasksActions": "Subtasks actions"
       },
       "team": {
         "heading": "Team",

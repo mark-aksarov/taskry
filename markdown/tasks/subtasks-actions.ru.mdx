@@ -1,0 +1,105 @@
+import { DocsImage } from "@/site/docs/DocsImage";
+
+## Действия с подзадачами
+
+В системе доступны основные действия, которые помогают работать с подзадачами:
+
+- Добавление подзадачи — <span className="font-normal">создание новой подзадачи внутри основной задачи.</span>
+- Редактирование подзадачи — <span className="font-normal">изменение текста подзадачи.</span>
+- Удаление подзадачи — <span className="font-normal">удаление подзадачи из списка.</span>
+- Изменение статуса — <span className="font-normal">обновление состояния подзадачи (выполнено / невыполнено).</span>
+
+---
+
+### Добавление подзадачи
+
+Чтобы добавить подзадачу, перейдите на страницу детализации задачи, затем к списку подзадач и нажмите кнопку <b>«Добавить»</b> (иконка плюс). Откроется модальное окно, в котором необходимо ввести текст подзадачи.
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/subtask-create-new-modal-light-ru.jpg"
+  theme="light"
+  width={348}
+  height={262}
+  containerClassName="max-md:w-[250px]"
+/>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/subtask-create-new-modal-dark-ru.jpg"
+  theme="dark"
+  width={348}
+  height={262}
+  containerClassName="max-md:w-[250px]"
+/>
+
+После сохранения новая подзадача появится в конце списка.
+
+---
+
+### Управление подзадачей
+
+Чтобы выполнить действия с подзадачей, нажмите кнопку <b>«Меню действий»</b> (иконка с тремя точками) справа в элементе списка.
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/subtask-item-action-menu-light-ru.jpg"
+  theme="light"
+  width={292}
+  height={207}
+  containerClassName="max-md:w-[220px]"
+/>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/subtask-item-action-menu-dark-ru.jpg"
+  theme="dark"
+  width={292}
+  height={207}
+  containerClassName="max-md:w-[220px]"
+/>
+
+#### Редактирование подзадачи
+
+Чтобы редактировать подзадачу в <b>«Меню действий»</b> выберите пункт <b>«Редактировать»</b>. После этого откроется окно редактирования, в котором можно изменить текст подзадачи. Текст подзадачи не может быть пустыми.
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/subtask-edit-modal-light-ru.jpg"
+  theme="light"
+  width={348}
+  height={262}
+  containerClassName="max-md:w-[250px]"
+/>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/subtask-edit-modal-dark-ru.jpg"
+  theme="dark"
+  width={348}
+  height={262}
+  containerClassName="max-md:w-[250px]"
+/>
+
+#### Удаление подзадачи
+
+Чтобы удалить подзадачу в <b>«Меню действий»</b> выберите пункт <b>«Удалить»</b>. В появившемся модальном окне нажмите кнопку <b>«Удалить»</b>.
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/subtask-delete-modal-light-ru.jpg"
+  theme="light"
+  width={418}
+  height={205}
+/>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/subtask-delete-modal-dark-ru.jpg"
+  theme="dark"
+  width={418}
+  height={205}
+/>
+
+#### Изменение статуса
+
+Чтобы изменить статус подзадачи в <b>«Меню действий»</b> выберите пункт:
+
+- «Отметить как выполнено»
+- «Отметить как невыполнено»
+
+После выбора статус подзадачи обновится.
+
+---

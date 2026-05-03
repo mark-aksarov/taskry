@@ -7,46 +7,66 @@ A task is a unit of work that contains the data required to complete a specific 
 
 - Title — <span className="font-normal">a short name of the task</span>
 - Description — <span className="font-normal">detailed information about the task</span>
-- Deadline — <span className="font-normal">the date by which the task should be completed</span>
+- Deadline — <span className="font-normal">the date by which the task must be completed</span>
 - Project — <span className="font-normal">the project the task belongs to</span>
 - Assignee — <span className="font-normal">the user responsible for completing the task</span>
 - Author — <span className="font-normal">the user who created the task</span>
 - Category — <span className="font-normal">a logical grouping of the task</span>
 - Status — <span className="font-normal">the current state of the task</span>
-
-Additionally, a task may include:
-
-- Subtasks — <span className="font-normal">breaking the task into smaller steps</span>
+- Subtasks — <span className="font-normal">breaking the task into smaller parts</span>
 - Comments — <span className="font-normal">discussions and notes related to the task</span>
 
 ---
 
-### Next steps
+### Viewing and Navigation
+
+Tasks are displayed as a list or grid on the <b>“Tasks”</b> page. To navigate to this section, select <b>“Tasks”</b> in the application's sidebar.
+
+You can also view and edit a task on the task details page. To do this, click on the task title and then click the <b>“Open Task”</b> button in the side panel. On this page, each field can be edited in a separate modal window.
+
+---
+
+### Actions
+
+The following main actions are available for tasks:
+
+- Create task — <span className="font-normal">add a new task by filling in basic information such as title, deadline, assignee, status, category, and other parameters</span>
+- Edit task — <span className="font-normal">update the data of an existing task</span>
+- Delete task — <span className="font-normal">remove one or multiple tasks from the system</span>
+- Change status — <span className="font-normal">update the current state of a task</span>
+- Add subtask — <span className="font-normal">create a new subtask within a task</span>
+- Edit subtask — <span className="font-normal">update the data of an existing subtask</span>
+- Toggle subtask status — <span className="font-normal">change the state of a subtask (completed / not completed)</span>
+- Delete subtask — <span className="font-normal">remove a subtask from a task</span>
+
+---
+
+### Next Steps
 
 <DocsCardGrid>
   <DocsCardLink
-    heading="View mode"
-    subtext="Switch between different task views, such as list and cards"
+    heading="View Tasks"
+    subtext="Switch between different display modes, list items and cards"
     href="/docs/tasks/view-mode"
   />
   <DocsCardLink
-    heading="Create task"
-    subtext="How to create a new task and fill in the basic fields"
+    heading="Create Task"
+    subtext="How to create a new task and fill in the main fields"
     href="/docs/tasks/create"
   />
   <DocsCardLink
-    heading="Edit task"
-    subtext="Modify an existing task"
+    heading="Edit Task"
+    subtext="Modify the data of an existing task"
     href="/docs/tasks/edit"
   />
   <DocsCardLink
-    heading="Delete task"
-    subtext="Single and bulk deletion of tasks"
+    heading="Delete Task"
+    subtext="Single and bulk task deletion"
     href="/docs/tasks/delete"
   />
   <DocsCardLink
-    heading="Change status"
-    subtext="Single and bulk status updates for tasks"
+    heading="Change Status"
+    subtext="Single and bulk task status updates"
     href="/docs/tasks/status-change"
   />
   <DocsCardLink
@@ -56,12 +76,14 @@ Additionally, a task may include:
   />
   <DocsCardLink
     heading="Sorting"
-    subtext="Sort tasks by fields and priority"
+    subtext="Sort tasks by fields"
     href="/docs/tasks/sorting"
   />
   <DocsCardLink
     heading="Subtasks"
-    subtext="Break tasks into smaller steps and manage them"
+    subtext="Break a task into smaller parts and manage them"
     href="/docs/tasks/subtasks"
   />
 </DocsCardGrid>
+
+---

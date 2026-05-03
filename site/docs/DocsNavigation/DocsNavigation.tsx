@@ -196,10 +196,18 @@ export function DocsNavigation() {
               </li>
               <li>
                 <DocsNavigationLink
-                  href="/docs/tasks/sub-tasks"
-                  isActive={pathname === "/docs/tasks/sub-tasks"}
+                  href="/docs/tasks/subtasks"
+                  isActive={pathname === "/docs/tasks/subtasks"}
                 >
-                  {t("tasks.subTasks")}
+                  {t("tasks.subtasks")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/tasks/subtasks-actions"
+                  isActive={pathname === "/docs/tasks/subtasks-actions"}
+                >
+                  {t("tasks.subtasksActions")}
                 </DocsNavigationLink>
               </li>
             </DocsNavigationList>

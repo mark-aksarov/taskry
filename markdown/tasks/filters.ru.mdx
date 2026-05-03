@@ -1,0 +1,33 @@
+import { DocsImage } from "@/site/docs/DocsImage";
+import { DocsPagination, DocsPaginationLink } from "@/site/docs/DocsPagination";
+
+## Фильтры задач
+
+Чтобы отфильтровать задачи, перейдите на страницу <b>«Задачи»</b>, нажмите кнопку <b>«Фильтры»</b> в верхней части страницы. Откроется модальное окно фильтрации, где доступны следующие фильтры:
+
+- Только мои задачи — <span className="font-normal">отображение задач, назначенных текущему пользователю.</span>
+- Дедлайн с / по — <span className="font-normal">позволяет выбрать диапазон дат.</span>
+- Статус — <span className="font-normal">«В ожидании», «Активный», «Завершён».</span>
+- Категория — <span className="font-normal">например: «Дизайн», «Внутренние системы», «Веб-разработка».</span>
+- Проект — <span className="font-normal">фильтрация задач по выбранному проекту.</span>
+- Исполнитель — <span className="font-normal">фильтрация задач по назначенному пользователю.</span>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/task-filters-modal-light-ru.jpg"
+  theme="light"
+  width={498}
+  height={761}
+  containerClassName="max-md:w-[250px] md:w-[400px]"
+/>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/task-filters-modal-dark-ru.jpg"
+  theme="dark"
+  width={498}
+  height={761}
+  containerClassName="max-md:w-[250px] md:w-[400px]"
+/>
+
+После выбора нужных параметров нажмите <b>«Применить фильтры»</b>, и список задач обновится в соответствии с выбранными фильтрами.
+
+---

@@ -43,7 +43,8 @@ export function DocsPagination() {
         { slug: "status-change", label: t("tasks.statusChange") },
         { slug: "filters", label: t("tasks.filters") },
         { slug: "sorting", label: t("tasks.sorting") },
-        { slug: "categories", label: t("tasks.categories") },
+        { slug: "subtasks", label: t("tasks.subtasks") },
+        { slug: "subtasks-actions", label: t("tasks.subtasksActions") },
       ],
 
       team: [
