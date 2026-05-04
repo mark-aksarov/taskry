@@ -124,7 +124,7 @@
       },
       "customers": {
         "heading": "Customers",
-        "viewMode": "View mode",
+        "viewMode": "Customer view",
         "create": "Create customer",
         "edit": "Edit customer",
         "delete": "Delete customer",

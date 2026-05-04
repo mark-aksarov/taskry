@@ -1,0 +1,62 @@
+import { DocsCardLink } from "@/site/docs/DocsCardLink";
+import { DocsCardGrid } from "@/site/docs/DocsCardGrid";
+
+## Clients
+
+A client is an entity that represents a contact in projects within the system. It is used to store contact information and to establish relationships with projects and the company.
+
+Stores the following data:
+
+- Full name — <span className="font-normal">the display name of the client.</span>
+- About — <span className="font-normal">a short description of the client shown in the profile.</span>
+- Email — <span className="font-normal">email address used to contact the client.</span>
+- Phone number — <span className="font-normal">client’s phone number.</span>
+- Public link — <span className="font-normal">a link to the client’s profile.</span>
+- Company — <span className="font-normal">the company associated with the client.</span>
+
+---
+
+### Viewing and navigation
+
+Clients are displayed either as a list or a grid on the <b>“Clients”</b> page. To access this section, select <b>“Clients”</b> from the application’s sidebar navigation.
+
+Viewing and editing a client is also available on the client profile page. To open it, click on the client’s name and select <b>“Open client”</b> in the side panel. On this page, each field can be edited through separate modal windows.
+
+---
+
+### Actions
+
+The following main actions are available for clients:
+
+- Create client — <span className="font-normal">add a new client record by filling in basic details: full name, email, phone, about, company</span>
+- Edit client — <span className="font-normal">modify existing client data</span>
+- Delete client — <span className="font-normal">remove one or multiple clients along with their related data</span>
+
+---
+
+### Next steps
+
+<DocsCardGrid>
+  <DocsCardLink
+    heading="View clients"
+    subtext="Switch between different display modes, list items and cards"
+    href="/docs/projects/view-mode"
+  />
+  <DocsCardLink
+    heading="Create client"
+    subtext="How to add a new client to the system"
+    href="/docs/projects/create"
+  />
+  <DocsCardLink
+    heading="Edit client"
+    subtext="Update client information"
+    href="/docs/projects/edit"
+  />
+  <DocsCardLink
+    heading="Delete client"
+    subtext="Remove a client and related data"
+    href="/docs/projects/delete"
+  />
+</DocsCardGrid>
+
+---

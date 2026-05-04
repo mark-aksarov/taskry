@@ -1,0 +1,109 @@
+import { DocsImage } from "@/site/docs/DocsImage";
+
+## Client view
+
+The system supports two display modes for clients. In <b>“List”</b> mode, data is shown as list items. In <b>“Cards”</b> mode, clients are displayed in a grid, where each client is represented as a separate card. Both modes use the same dataset but differ in visual presentation.
+
+---
+
+### List
+
+To switch to list mode, go to the <b>“Clients”</b> page and click the <b>“List”</b> button in the view toggle panel at the top of the page.
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/view-mode-list-light-en.jpg"
+  theme="light"
+  width={117}
+  height={44}
+  containerClassName="max-md:max-w-[90px]"
+/>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/view-mode-list-dark-en.jpg"
+  theme="dark"
+  width={117}
+  height={44}
+  containerClassName="max-md:max-w-[90px]"
+/>
+
+After switching, the main area of the page will display a list of clients. Each client contains the following data:
+
+- Full name — <span className="font-normal">display name of the client.</span>
+- Avatar — <span className="font-normal">client image.</span>
+- Email — <span className="font-normal">email address for contacting the client.</span>
+- Phone number — <span className="font-normal">client’s phone number.</span>
+- Public link — <span className="font-normal">link to the client’s profile.</span>
+- Company — <span className="font-normal">company associated with the client.</span>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/customers-list-items-light-en.jpg"
+  theme="light"
+  width={1068}
+  height={304}
+  containerClassName="max-w-[800px]"
+/>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/customers-list-items-dark-en.jpg"
+  theme="dark"
+  width={1068}
+  height={304}
+  containerClassName="max-w-[800px]"
+/>
+
+---
+
+### Cards
+
+To switch to card mode, click the <b>“Cards”</b> button in the view toggle panel at the top of the page.
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/view-mode-cards-light-en.jpg"
+  theme="light"
+  width={117}
+  height={44}
+  containerClassName="max-md:max-w-[90px]"
+/>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/view-mode-cards-dark-en.jpg"
+  theme="dark"
+  width={117}
+  height={44}
+  containerClassName="max-md:max-w-[90px]"
+/>
+
+Each project card contains the following data:
+
+- Full name — <span className="font-normal">display name of the client.</span>
+- Avatar — <span className="font-normal">client image.</span>
+- Email — <span className="font-normal">email address for contacting the client.</span>
+- Phone number — <span className="font-normal">client’s phone number.</span>
+- Public link — <span className="font-normal">link to the client’s profile.</span>
+- Company — <span className="font-normal">company associated with the client.</span>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/customers-grid-items-light-en.jpg"
+  theme="light"
+  width={534}
+  height={235}
+/>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/customers-grid-items-dark-en.jpg"
+  theme="dark"
+  width={534}
+  height={235}
+/>
+
+---
+
+### Actions
+
+- Clicking on a client’s name or image <span className="font-normal">opens a side panel with client details: contact information, company, short description, and other data. It allows viewing client information and navigating to their profile if needed.</span>
+- Clicking on email <span className="font-normal">opens the email client via a mailto link to send an email.</span>
+- Clicking on the phone number <span className="font-normal">initiates a call via a tel link on supported devices.</span>
+- Clicking on the public link <span className="font-normal">opens the client profile page in a new tab.</span>
+- Clicking on “Actions menu” <span className="font-normal">opens a list of available actions.</span>
+
+---
