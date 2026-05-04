@@ -116,11 +116,10 @@
       "team": {
         "heading": "Team",
         "roles": "Roles and permissions",
-        "viewMode": "View mode",
-        "create": "Create team",
-        "edit": "Edit team",
-        "avatarChange": "Change avatar",
-        "delete": "Delete team",
+        "viewMode": "Team view",
+        "create": "Create user",
+        "edit": "Edit user",
+        "delete": "Delete user",
         "positions": "Positions"
       },
       "customers": {

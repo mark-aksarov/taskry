@@ -1,0 +1,109 @@
+import { DocsImage } from "@/site/docs/DocsImage";
+
+## Просмотр команды
+
+Система поддерживает два режима отображения команды. В режиме <b>«Список»</b> данные выводятся в виде элементов списка. В режиме <b>«Карточки»</b> задачи представлены в виде сетки, где каждый пользователь отображается как отдельная карточка. Оба режима используют один и тот же набор данных, но различаются способом визуализации.
+
+---
+
+### Список
+
+Чтобы переключиться в режим списка, перейдите на страницу <b>«Команда»</b>, нажмите кнопку <b>«Список»</b> в панели переключения вида в верхней части страницы.
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/view-mode-list-light-ru.jpg"
+  theme="light"
+  width={163}
+  height={45}
+  containerClassName="max-md:max-w-[122px]"
+/>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/view-mode-list-dark-ru.jpg"
+  theme="dark"
+  width={163}
+  height={45}
+  containerClassName="max-md:max-w-[122px]"
+/>
+
+После переключения в основной области страницы будет отображена команда, каждый пользователь содержит следующие данные:
+
+- Полное имя — <span className="font-normal">отображаемое имя пользователя.</span>
+- Аватар — <span className="font-normal">изображение пользователя.</span>
+- Email — <span className="font-normal">используется для связи и перехода к отправке письма.</span>
+- Номер телефона — <span className="font-normal">контактный номер пользователя.</span>
+- Публичная ссылка — <span className="font-normal">ссылка на публичный профиль пользователя.</span>
+- Должность — <span className="font-normal">роль или позиция пользователя в команде.</span>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/team-list-items-light-ru.jpg"
+  theme="light"
+  width={1066}
+  height={304}
+  containerClassName="max-w-[800px]"
+/>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/team-list-items-dark-ru.jpg"
+  theme="dark"
+  width={1066}
+  height={304}
+  containerClassName="max-w-[800px]"
+/>
+
+---
+
+### Карточки
+
+Чтобы переключиться в режим карточек, нажмите кнопку <b>«Карточки»</b> в панели переключения вида в верхней части страницы.
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/view-mode-cards-light-ru.jpg"
+  theme="light"
+  width={164}
+  height={45}
+  containerClassName="max-md:max-w-[122px]"
+/>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/view-mode-cards-dark-ru.jpg"
+  theme="dark"
+  width={164}
+  height={45}
+  containerClassName="max-md:max-w-[122px]"
+/>
+
+Каждая карточка задачи содержит следующие данные:
+
+- Полное имя — <span className="font-normal">отображаемое имя пользователя.</span>
+- Аватар — <span className="font-normal">изображение пользователя.</span>
+- Email — <span className="font-normal">используется для связи и перехода к отправке письма.</span>
+- Номер телефона — <span className="font-normal">контактный номер пользователя.</span>
+- Публичная ссылка — <span className="font-normal">ссылка на публичный профиль пользователя.</span>
+- Должность — <span className="font-normal">роль или позиция пользователя в команде.</span>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/team-grid-items-light-ru.jpg"
+  theme="light"
+  width={536}
+  height={237}
+/>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/team-grid-items-dark-ru.jpg"
+  theme="dark"
+  width={536}
+  height={237}
+/>
+
+---
+
+### Действия
+
+- Нажатие на имя пользователя или аватар <span className="font-normal">открывает боковую панель пользователя: должность, контакты, краткое описание и другие сведения. Помогает быстро понять роль сотрудника и при необходимости перейти к его профилю.</span>
+- Нажатие на email <span className="font-normal">открывает почтовый клиент через mailto-ссылку для отправки письма.</span>
+- Нажатие на номер телефона <span className="font-normal">инициирует звонок через tel-ссылку на поддерживаемых устройствах.</span>
+- Нажатие на публичную ссылку <span className="font-normal">открывает страницу профиля пользователя в новой вкладке.</span>
+- Нажатие на «Меню действий» <span className="font-normal">открывает список доступных действий.</span>
+
+---

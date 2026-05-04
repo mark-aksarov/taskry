@@ -53,9 +53,7 @@ export function DocsPagination() {
         { slug: "view-mode", label: t("team.viewMode") },
         { slug: "create", label: t("team.create") },
         { slug: "edit", label: t("team.edit") },
-        { slug: "avatar-change", label: t("team.avatarChange") },
         { slug: "delete", label: t("team.delete") },
-        { slug: "positions", label: t("team.positions") },
       ],
 
       customers: [
@@ -64,7 +62,6 @@ export function DocsPagination() {
         { slug: "create", label: t("customers.create") },
         { slug: "edit", label: t("customers.edit") },
         { slug: "delete", label: t("customers.delete") },
-        { slug: "companies", label: t("customers.companies") },
       ],
     };
 

@@ -1,0 +1,65 @@
+## Roles and permissions
+
+The system provides 3 roles: <b>“Owner”</b>, <b>“User”</b>, and <b>“Guest”</b>.
+
+- Owner — <span className="font-normal">a user who registered an account via the form on the <b>“SignUp”</b> page.</span>
+- User — <span className="font-normal">an account created by the owner.</span>
+- Guest — <span className="font-normal">a demo access mode intended only for viewing the interface and system capabilities.</span>
+
+Permissions depend on the user role and define the available actions in the system.
+
+---
+
+### Owner and user
+
+The owner and user have extended permissions and work with the main system entities: projects, tasks, clients, and related data.
+
+Both roles have the same permissions for working with business entities:
+
+- create, edit, change status, and delete projects
+- create, edit, change status, and delete tasks
+- manage clients and related system entities
+
+General limitations
+
+- deleting your own account <span className="font-normal">is currently unavailable (this feature will be added in the future)</span>.
+
+---
+
+### Owner
+
+The owner has full permissions for user and comment management within the system.
+
+- add users
+- edit users
+- delete users <span className="font-normal">(except their own account)</span>
+- change user profile image
+- change user password
+- edit any comments
+- delete any comments
+
+---
+
+### User
+
+The user has limited permissions compared to the owner.
+
+- edit profile
+- change profile image
+- change password
+- edit their own comments
+- delete their own comments
+
+---
+
+### Guest
+
+The guest has read-only access to the system.
+
+- view pages
+- use search
+- filter and sort data
+
+Any attempt to perform a data-modifying action <span className="font-normal">will result in displaying a modal window indicating restricted access</span>.
+
+---

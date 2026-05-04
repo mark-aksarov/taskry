@@ -68,16 +68,13 @@ export function DocsBreadcrumbs() {
         "view-mode": t("team.viewMode"),
         create: t("team.create"),
         edit: t("team.edit"),
-        "avatar-change": t("team.avatarChange"),
         delete: t("team.delete"),
-        positions: t("team.positions"),
       },
       customers: {
         "view-mode": t("customers.viewMode"),
         create: t("customers.create"),
         edit: t("customers.edit"),
         delete: t("customers.delete"),
-        companies: t("customers.companies"),
       },
     };
 

@@ -25,7 +25,7 @@ export function DocsNavigation() {
   ].filter(Boolean) as string[];
 
   return (
-    <nav className="flex w-[220px] flex-col gap-4">
+    <nav className="flex w-[250px] flex-col gap-4">
       <DisclosureGroup defaultExpandedKeys={defaultExpandedKeys}>
         {/* Getting Started */}
         <Disclosure id="getting-started">
@@ -261,26 +261,10 @@ export function DocsNavigation() {
               </li>
               <li>
                 <DocsNavigationLink
-                  href="/docs/team/avatar-change"
-                  isActive={pathname === "/docs/team/avatar-change"}
-                >
-                  {t("team.avatarChange")}
-                </DocsNavigationLink>
-              </li>
-              <li>
-                <DocsNavigationLink
                   href="/docs/team/delete"
                   isActive={pathname === "/docs/team/delete"}
                 >
                   {t("team.delete")}
-                </DocsNavigationLink>
-              </li>
-              <li>
-                <DocsNavigationLink
-                  href="/docs/team/positions"
-                  isActive={pathname === "/docs/team/positions"}
-                >
-                  {t("team.positions")}
                 </DocsNavigationLink>
               </li>
             </DocsNavigationList>
@@ -330,14 +314,6 @@ export function DocsNavigation() {
                   isActive={pathname === "/docs/customers/delete"}
                 >
                   {t("customers.delete")}
-                </DocsNavigationLink>
-              </li>
-              <li>
-                <DocsNavigationLink
-                  href="/docs/customers/companies"
-                  isActive={pathname === "/docs/customers/companies"}
-                >
-                  {t("customers.companies")}
                 </DocsNavigationLink>
               </li>
             </DocsNavigationList>
