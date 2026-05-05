@@ -88,6 +88,13 @@
         "heading": "Краткое руководство",
         "overview": "Обзор"
       },
+      "general": {
+        "heading": "Общие",
+        "signUp": "Регистрация",
+        "signIn": "Вход",
+        "search": "Поиск",
+        "langTheme": "Язык и тема"
+      },
       "projects": {
         "heading": "Проекты",
         "viewMode": "Просмотр проектов",
@@ -97,7 +104,8 @@
         "statusChange": "Изменение статуса",
         "filters": "Фильтры",
         "sorting": "Сортировка",
-        "categories": "Категории"
+        "categories": "Категории",
+        "categoryActions": "Действия с категориями"
       },
       "tasks": {
         "heading": "Задачи",
@@ -108,9 +116,10 @@
         "statusChange": "Изменение статуса",
         "filters": "Фильтры",
         "sorting": "Сортировка",
-        "categories": "Категории",
         "subtasks": "Подзадачи",
-        "subtasksActions": "Действия с подзадачами"
+        "subtaskActions": "Действия с подзадачами",
+        "categories": "Категории",
+        "categoryActions": "Действия с категориями"
       },
       "team": {
         "heading": "Команда",
@@ -119,7 +128,10 @@
         "create": "Создание пользователя",
         "edit": "Редактирование пользователя",
         "delete": "Удаление пользователя",
-        "positions": "Должности"
+        "filters": "Фильтры",
+        "sorting": "Сортировка",
+        "positions": "Должности",
+        "positionActions": "Действия с должностями"
       },
       "customers": {
         "heading": "Клиенты",
@@ -127,7 +139,10 @@
         "create": "Создание клиента",
         "edit": "Редактирование клиента",
         "delete": "Удаление клиента",
-        "companies": "Компании"
+        "filters": "Фильтры",
+        "sorting": "Сортировка",
+        "companies": "Компании",
+        "companyActions": "Действия с компаниями"
       }
     },
     "DocsPaginationLink": {

@@ -18,7 +18,7 @@ A task is a unit of work that contains the data required to complete a specific 
 
 ---
 
-### Viewing and Navigation
+### Viewing and navigation
 
 Tasks are displayed as a list or grid on the <b>“Tasks”</b> page. To navigate to this section, select <b>“Tasks”</b> in the application's sidebar.
 
@@ -34,10 +34,19 @@ The following main actions are available for tasks:
 - Edit task — <span className="font-normal">update the data of an existing task</span>
 - Delete task — <span className="font-normal">remove one or multiple tasks from the system</span>
 - Change status — <span className="font-normal">update the current state of a task</span>
+
+Working with subtasks includes the following actions:
+
 - Add subtask — <span className="font-normal">create a new subtask within a task</span>
 - Edit subtask — <span className="font-normal">update the data of an existing subtask</span>
-- Toggle subtask status — <span className="font-normal">change the state of a subtask (completed / not completed)</span>
+- Toggle subtask status — <span className="font-normal">change the state of a subtask (done / undone)</span>
 - Delete subtask — <span className="font-normal">remove a subtask from a task</span>
+
+Working with task categories includes the following actions:
+
+- Create task category — <span className="font-normal">add a new task category</span>
+- Edit task category — <span className="font-normal">change the name of an existing category</span>
+- Delete task category — <span className="font-normal">delete a category from the system</span>
 
 ---
 
@@ -45,7 +54,7 @@ The following main actions are available for tasks:
 
 <DocsCardGrid>
   <DocsCardLink
-    heading="View Tasks"
+    heading="Task view"
     subtext="Switch between different display modes, list items and cards"
     href="/docs/tasks/view-mode"
   />
@@ -83,6 +92,21 @@ The following main actions are available for tasks:
     heading="Subtasks"
     subtext="Break a task into smaller parts and manage them"
     href="/docs/tasks/subtasks"
+  />
+  <DocsCardLink
+    heading="Subtask actions"
+    subtext="Adding, editing, deleting, and changing subtask status"
+    href="/docs/tasks/subtask-actions"
+  />
+  <DocsCardLink
+    heading="Categories"
+    subtext="Grouping tasks by categories"
+    href="/docs/tasks/categories"
+  />
+  <DocsCardLink
+    heading="Category actions"
+    subtext="Creating, editing, and deleting task categories"
+    href="/docs/tasks/category-actions"
   />
 </DocsCardGrid>
 

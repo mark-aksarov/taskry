@@ -23,6 +23,14 @@ export function DocsPagination() {
         { slug: "overview", label: t("gettingStarted.overview") },
       ],
 
+      general: [
+        { slug: "", label: t("general.heading") },
+        { slug: "sign-up", label: t("general.signUp") },
+        { slug: "sign-in", label: t("general.signIn") },
+        { slug: "search", label: t("general.search") },
+        { slug: "lang-theme", label: t("general.langTheme") },
+      ],
+
       projects: [
         { slug: "", label: t("projects.heading") },
         { slug: "view-mode", label: t("projects.viewMode") },
@@ -32,6 +40,8 @@ export function DocsPagination() {
         { slug: "status-change", label: t("projects.statusChange") },
         { slug: "filters", label: t("projects.filters") },
         { slug: "sorting", label: t("projects.sorting") },
+        { slug: "categories", label: t("projects.categories") },
+        { slug: "category-actions", label: t("projects.categoryActions") },
       ],
 
       tasks: [
@@ -44,7 +54,9 @@ export function DocsPagination() {
         { slug: "filters", label: t("tasks.filters") },
         { slug: "sorting", label: t("tasks.sorting") },
         { slug: "subtasks", label: t("tasks.subtasks") },
-        { slug: "subtasks-actions", label: t("tasks.subtasksActions") },
+        { slug: "subtask-actions", label: t("tasks.subtaskActions") },
+        { slug: "categories", label: t("tasks.categories") },
+        { slug: "category-actions", label: t("tasks.categoryActions") },
       ],
 
       team: [
@@ -54,6 +66,10 @@ export function DocsPagination() {
         { slug: "create", label: t("team.create") },
         { slug: "edit", label: t("team.edit") },
         { slug: "delete", label: t("team.delete") },
+        { slug: "filters", label: t("tasks.filters") },
+        { slug: "sorting", label: t("tasks.sorting") },
+        { slug: "positions", label: t("team.positions") },
+        { slug: "position-actions", label: t("team.positionActions") },
       ],
 
       customers: [
@@ -62,6 +78,10 @@ export function DocsPagination() {
         { slug: "create", label: t("customers.create") },
         { slug: "edit", label: t("customers.edit") },
         { slug: "delete", label: t("customers.delete") },
+        { slug: "filters", label: t("tasks.filters") },
+        { slug: "sorting", label: t("tasks.sorting") },
+        { slug: "companies", label: t("customers.companies") },
+        { slug: "company-actions", label: t("customers.companyActions") },
       ],
     };
 

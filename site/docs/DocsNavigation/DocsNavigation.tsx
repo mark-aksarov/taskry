@@ -17,6 +17,7 @@ export function DocsNavigation() {
   const t = useTranslations("site.docs.DocsNavigation");
 
   const defaultExpandedKeys = [
+    pathname.startsWith("/docs/general") && "general",
     pathname.startsWith("/docs/getting-started") && "getting-started",
     pathname.startsWith("/docs/projects") && "projects",
     pathname.startsWith("/docs/tasks") && "tasks",
@@ -46,6 +47,55 @@ export function DocsNavigation() {
                   isActive={pathname === "/docs/getting-started/overview"}
                 >
                   {t("gettingStarted.overview")}
+                </DocsNavigationLink>
+              </li>
+            </DocsNavigationList>
+          </DisclosurePanel>
+        </Disclosure>
+
+        {/* General*/}
+        <Disclosure id="general">
+          <DisclosureHeader>{t("general.heading")}</DisclosureHeader>
+          <DisclosurePanel>
+            <DocsNavigationList>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/general"
+                  isActive={pathname === "/docs/general"}
+                >
+                  {t("general.heading")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/general/sign-up"
+                  isActive={pathname === "/docs/general/sign-up"}
+                >
+                  {t("general.signUp")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/general/sign-in"
+                  isActive={pathname === "/docs/general/sign-in"}
+                >
+                  {t("general.signIn")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/general/search"
+                  isActive={pathname === "/docs/general/search"}
+                >
+                  {t("general.search")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/general/lang-theme"
+                  isActive={pathname === "/docs/general/lang-theme"}
+                >
+                  {t("general.langTheme")}
                 </DocsNavigationLink>
               </li>
             </DocsNavigationList>
@@ -119,6 +169,22 @@ export function DocsNavigation() {
                   isActive={pathname === "/docs/projects/sorting"}
                 >
                   {t("projects.sorting")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/projects/categories"
+                  isActive={pathname === "/docs/projects/categories"}
+                >
+                  {t("projects.categories")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/projects/category-actions"
+                  isActive={pathname === "/docs/projects/category-actions"}
+                >
+                  {t("projects.categoryActions")}
                 </DocsNavigationLink>
               </li>
             </DocsNavigationList>
@@ -204,10 +270,26 @@ export function DocsNavigation() {
               </li>
               <li>
                 <DocsNavigationLink
-                  href="/docs/tasks/subtasks-actions"
-                  isActive={pathname === "/docs/tasks/subtasks-actions"}
+                  href="/docs/tasks/subtask-actions"
+                  isActive={pathname === "/docs/tasks/subtask-actions"}
                 >
-                  {t("tasks.subtasksActions")}
+                  {t("tasks.subtaskActions")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/tasks/categories"
+                  isActive={pathname === "/docs/tasks/categories"}
+                >
+                  {t("tasks.categories")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/tasks/category-actions"
+                  isActive={pathname === "/docs/tasks/category-actions"}
+                >
+                  {t("tasks.categoryActions")}
                 </DocsNavigationLink>
               </li>
             </DocsNavigationList>
@@ -267,6 +349,38 @@ export function DocsNavigation() {
                   {t("team.delete")}
                 </DocsNavigationLink>
               </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/team/filters"
+                  isActive={pathname === "/docs/team/filters"}
+                >
+                  {t("team.filters")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/team/sorting"
+                  isActive={pathname === "/docs/team/sorting"}
+                >
+                  {t("team.sorting")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/team/positions"
+                  isActive={pathname === "/docs/team/positions"}
+                >
+                  {t("team.positions")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/team/position-actions"
+                  isActive={pathname === "/docs/team/position-actions"}
+                >
+                  {t("team.positionActions")}
+                </DocsNavigationLink>
+              </li>
             </DocsNavigationList>
           </DisclosurePanel>
         </Disclosure>
@@ -314,6 +428,38 @@ export function DocsNavigation() {
                   isActive={pathname === "/docs/customers/delete"}
                 >
                   {t("customers.delete")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/customers/filters"
+                  isActive={pathname === "/docs/customers/filters"}
+                >
+                  {t("customers.filters")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/customers/sorting"
+                  isActive={pathname === "/docs/customers/sorting"}
+                >
+                  {t("customers.sorting")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/customers/companies"
+                  isActive={pathname === "/docs/customers/companies"}
+                >
+                  {t("customers.companies")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/customers/company-actions"
+                  isActive={pathname === "/docs/customers/company-actions"}
+                >
+                  {t("customers.companyActions")}
                 </DocsNavigationLink>
               </li>
             </DocsNavigationList>

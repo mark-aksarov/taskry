@@ -88,6 +88,13 @@
         "heading": "Getting started",
         "overview": "Overview"
       },
+      "general": {
+        "heading": "General",
+        "signUp": "Sign up",
+        "signIn": "Sign in",
+        "search": "Search",
+        "langTheme": "Language and theme"
+      },
       "projects": {
         "heading": "Projects",
         "viewMode": "Project view",
@@ -97,7 +104,8 @@
         "statusChange": "Change status",
         "filters": "Filters",
         "sorting": "Sorting",
-        "categories": "Categories"
+        "categories": "Categories",
+        "categoryActions": "Category actions"
       },
       "tasks": {
         "heading": "Tasks",
@@ -108,10 +116,10 @@
         "statusChange": "Change status",
         "filters": "Filters",
         "sorting": "Sorting",
-        "subTasks": "Subtasks",
-        "categories": "Categories",
         "subtasks": "Subtasks",
-        "subtasksActions": "Subtasks actions"
+        "subtaskActions": "Subtask actions",
+        "categories": "Categories",
+        "categoryActions": "Category actions"
       },
       "team": {
         "heading": "Team",
@@ -120,7 +128,10 @@
         "create": "Create user",
         "edit": "Edit user",
         "delete": "Delete user",
-        "positions": "Positions"
+        "filters": "Filters",
+        "sorting": "Sorting",
+        "positions": "Positions",
+        "positionActions": "Position actions"
       },
       "customers": {
         "heading": "Customers",
@@ -128,7 +139,10 @@
         "create": "Create customer",
         "edit": "Edit customer",
         "delete": "Delete customer",
-        "companies": "Companies"
+        "filters": "Filters",
+        "sorting": "Sorting",
+        "companies": "Companies",
+        "companyActions": "Company actions"
       }
     },
     "DocsPaginationLink": {

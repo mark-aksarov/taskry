@@ -34,10 +34,19 @@ import { DocsCardGrid } from "@/site/docs/DocsCardGrid";
 - Редактирование задачи — <span className="font-normal">изменение данных существующей задачи</span>
 - Удаление задачи — <span className="font-normal">удаление одной или нескольких задач из системы</span>
 - Изменение статуса — <span className="font-normal">обновление текущего состояния задачи</span>
+
+Работа с подзадачами включает следующие действия:
+
 - Добавление подзадачи — <span className="font-normal">создание новой подзадачи внутри задачи</span>
 - Редактирование подзадачи — <span className="font-normal">изменение данных существующей подзадачи</span>
 - Переключение статуса подзадачи — <span className="font-normal">изменение состояния подзадачи (выполнено / невыполнено)</span>
 - Удаление подзадачи — <span className="font-normal">удаление подзадачи из задачи</span>
+
+Работа с категориями задач включает следующие действия:
+
+- Создание категории задач — <span className="font-normal">добавление новой категории задач</span>
+- Редактирование категории задач — <span className="font-normal">изменение названия существующей категории</span>
+- Удаление категории задач — <span className="font-normal">удаление категории из системы</span>
 
 ---
 
@@ -87,7 +96,17 @@ import { DocsCardGrid } from "@/site/docs/DocsCardGrid";
   <DocsCardLink
     heading="Действия с подзадачами"
     subtext="Добавление, редактирование, удаление, изменение статуса подзадач"
-    href="/docs/tasks/subtasks-actions"
+    href="/docs/tasks/subtask-actions"
+  />
+  <DocsCardLink
+    heading="Категории"
+    subtext="Группировка задач по категориям"
+    href="/docs/tasks/categories"
+  />
+  <DocsCardLink
+    heading="Действия с категориями"
+    subtext="Создание, редактирование и удаление категорий задач"
+    href="/docs/tasks/category-actions"
   />
 </DocsCardGrid>
 

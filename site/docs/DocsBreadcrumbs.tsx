@@ -25,6 +25,7 @@ export function DocsBreadcrumbs() {
 
     const sectionMap: Record<string, string> = {
       "getting-started": t("gettingStarted.heading"),
+      general: t("general.heading"),
       projects: t("projects.heading"),
       tasks: t("tasks.heading"),
       team: t("team.heading"),
@@ -42,6 +43,12 @@ export function DocsBreadcrumbs() {
       "getting-started": {
         overview: t("gettingStarted.overview"),
       },
+      general: {
+        "sign-up": t("general.signUp"),
+        "sign-in": t("general.signIn"),
+        search: t("general.search"),
+        "lang-theme": t("general.langTheme"),
+      },
       projects: {
         "view-mode": t("projects.viewMode"),
         create: t("projects.create"),
@@ -51,6 +58,7 @@ export function DocsBreadcrumbs() {
         filters: t("projects.filters"),
         sorting: t("projects.sorting"),
         categories: t("projects.categories"),
+        "category-actions": t("projects.categoryActions"),
       },
       tasks: {
         "view-mode": t("tasks.viewMode"),
@@ -61,7 +69,9 @@ export function DocsBreadcrumbs() {
         filters: t("tasks.filters"),
         sorting: t("tasks.sorting"),
         subtasks: t("tasks.subtasks"),
-        "subtasks-actions": t("tasks.subtasksActions"),
+        "subtask-actions": t("tasks.subtaskActions"),
+        categories: t("tasks.categories"),
+        "category-actions": t("tasks.categoryActions"),
       },
       team: {
         roles: t("team.roles"),
@@ -69,12 +79,20 @@ export function DocsBreadcrumbs() {
         create: t("team.create"),
         edit: t("team.edit"),
         delete: t("team.delete"),
+        filters: t("team.filters"),
+        sorting: t("team.sorting"),
+        positions: t("team.positions"),
+        "position-actions": t("team.positionActions"),
       },
       customers: {
         "view-mode": t("customers.viewMode"),
         create: t("customers.create"),
         edit: t("customers.edit"),
         delete: t("customers.delete"),
+        filters: t("team.filters"),
+        sorting: t("team.sorting"),
+        companies: t("customers.companies"),
+        "company-actions": t("customers.companyActions"),
       },
     };
 
