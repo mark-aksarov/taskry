@@ -1,0 +1,31 @@
+import { DocsImage } from "@/site/docs/DocsImage";
+import { DocsPagination, DocsPaginationLink } from "@/site/docs/DocsPagination";
+
+## User filters
+
+To filter users, go to the <b>"Team"</b> page and click the <b>"Filters"</b> button at the top of the page. A filter modal will open with the following options:
+
+- No active tasks — <span className="font-normal">shows only users without active tasks.</span>
+- Has active tasks — <span className="font-normal">shows only users who have active tasks.</span>
+- Has overdue tasks — <span className="font-normal">shows only users with overdue tasks.</span>
+- Position — <span className="font-normal">filter users by their position.</span>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/team-filters-modal-light-en.jpg"
+  theme="light"
+  width={498}
+  height={761}
+  containerClassName="max-md:w-[250px] md:w-[400px]"
+/>
+
+<DocsImage
+  src="https://storage.yandexcloud.net/task-manager-docs/team-filters-modal-dark-en.jpg"
+  theme="dark"
+  width={498}
+  height={761}
+  containerClassName="max-md:w-[250px] md:w-[400px]"
+/>
+
+After selecting the needed filters, click <b>"Apply filters"</b>. The user list will update based on the selected filters.
+
+---
