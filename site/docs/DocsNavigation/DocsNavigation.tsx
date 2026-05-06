@@ -17,7 +17,6 @@ export function DocsNavigation() {
   const t = useTranslations("site.docs.DocsNavigation");
 
   const defaultExpandedKeys = [
-    pathname.startsWith("/docs/general") && "general",
     pathname.startsWith("/docs/getting-started") && "getting-started",
     pathname.startsWith("/docs/projects") && "projects",
     pathname.startsWith("/docs/tasks") && "tasks",
@@ -47,55 +46,6 @@ export function DocsNavigation() {
                   isActive={pathname === "/docs/getting-started/overview"}
                 >
                   {t("gettingStarted.overview")}
-                </DocsNavigationLink>
-              </li>
-            </DocsNavigationList>
-          </DisclosurePanel>
-        </Disclosure>
-
-        {/* General*/}
-        <Disclosure id="general">
-          <DisclosureHeader>{t("general.heading")}</DisclosureHeader>
-          <DisclosurePanel>
-            <DocsNavigationList>
-              <li>
-                <DocsNavigationLink
-                  href="/docs/general"
-                  isActive={pathname === "/docs/general"}
-                >
-                  {t("general.heading")}
-                </DocsNavigationLink>
-              </li>
-              <li>
-                <DocsNavigationLink
-                  href="/docs/general/sign-up"
-                  isActive={pathname === "/docs/general/sign-up"}
-                >
-                  {t("general.signUp")}
-                </DocsNavigationLink>
-              </li>
-              <li>
-                <DocsNavigationLink
-                  href="/docs/general/sign-in"
-                  isActive={pathname === "/docs/general/sign-in"}
-                >
-                  {t("general.signIn")}
-                </DocsNavigationLink>
-              </li>
-              <li>
-                <DocsNavigationLink
-                  href="/docs/general/search"
-                  isActive={pathname === "/docs/general/search"}
-                >
-                  {t("general.search")}
-                </DocsNavigationLink>
-              </li>
-              <li>
-                <DocsNavigationLink
-                  href="/docs/general/lang-theme"
-                  isActive={pathname === "/docs/general/lang-theme"}
-                >
-                  {t("general.langTheme")}
                 </DocsNavigationLink>
               </li>
             </DocsNavigationList>

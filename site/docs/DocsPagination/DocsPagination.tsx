@@ -23,14 +23,6 @@ export function DocsPagination() {
         { slug: "overview", label: t("gettingStarted.overview") },
       ],
 
-      general: [
-        { slug: "", label: t("general.heading") },
-        { slug: "sign-up", label: t("general.signUp") },
-        { slug: "sign-in", label: t("general.signIn") },
-        { slug: "search", label: t("general.search") },
-        { slug: "lang-theme", label: t("general.langTheme") },
-      ],
-
       projects: [
         { slug: "", label: t("projects.heading") },
         { slug: "view-mode", label: t("projects.viewMode") },

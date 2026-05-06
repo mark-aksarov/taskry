@@ -25,7 +25,6 @@ export function DocsBreadcrumbs() {
 
     const sectionMap: Record<string, string> = {
       "getting-started": t("gettingStarted.heading"),
-      general: t("general.heading"),
       projects: t("projects.heading"),
       tasks: t("tasks.heading"),
       team: t("team.heading"),
@@ -42,12 +41,6 @@ export function DocsBreadcrumbs() {
     const pageMap: Record<string, Record<string, string>> = {
       "getting-started": {
         overview: t("gettingStarted.overview"),
-      },
-      general: {
-        "sign-up": t("general.signUp"),
-        "sign-in": t("general.signIn"),
-        search: t("general.search"),
-        "lang-theme": t("general.langTheme"),
       },
       projects: {
         "view-mode": t("projects.viewMode"),
