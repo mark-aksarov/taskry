@@ -52,7 +52,7 @@ export function TaskCategoryFiltersForm({
         items={categoryCheckboxGroupItems}
         value={categoryIds}
         onChange={(value) =>
-          dispatch({ type: "setAssigneeIds", payload: value })
+          dispatch({ type: "setCategoryIds", payload: value })
         }
       />
     </FormBase>
