@@ -15,15 +15,15 @@ export function DocsImage({
   ...props
 }: DocsImageProps) {
   return (
-    <span
+    <div
       className={twMerge(
-        "block w-fit overflow-hidden rounded-lg rounded-md border-1 border-gray-300 max-md:mb-6 md:mb-8 dark:border-gray-600",
+        "w-fit overflow-hidden rounded-lg border-1 border-gray-300 max-md:mb-6 md:mb-8 dark:border-gray-600",
         theme === "dark" && "not-dark:hidden",
         theme === "light" && "dark:hidden",
         containerClassName,
       )}
     >
       <Image alt={alt} quality={100} {...props} />
-    </span>
+    </div>
   );
 }

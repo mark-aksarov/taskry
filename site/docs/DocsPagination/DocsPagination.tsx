@@ -125,7 +125,7 @@ export function DocsPagination() {
   if (!pagination) return null;
 
   return (
-    <div className="my-10 flex justify-between gap-4">
+    <div className="flex justify-between gap-4 max-md:my-8 md:my-10">
       {pagination.prev ? (
         <DocsPaginationLink
           href={pagination.prev.href}

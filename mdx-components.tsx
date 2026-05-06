@@ -8,14 +8,20 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     h2: ({ className, ...props }) => (
       <h2
-        className={twMerge("mb-8 text-4xl font-bold", className)}
+        className={twMerge(
+          "font-bold max-md:mb-6 max-md:text-3xl md:mb-8 md:text-4xl",
+          className,
+        )}
         {...props}
       />
     ),
 
     h3: ({ className, ...props }) => (
       <h3
-        className={twMerge("mb-8 text-3xl font-bold", className)}
+        className={twMerge(
+          "font-bold max-md:mb-6 max-md:text-2xl md:mb-8 md:text-3xl",
+          className,
+        )}
         {...props}
       />
     ),
@@ -33,7 +39,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
     hr: ({ className }) => (
       <Separator
-        className={twMerge("my-10 bg-gray-300 dark:bg-gray-600", className)}
+        className={twMerge(
+          "bg-gray-300 max-md:my-8 md:my-10 dark:bg-gray-600",
+          className,
+        )}
       />
     ),
 
