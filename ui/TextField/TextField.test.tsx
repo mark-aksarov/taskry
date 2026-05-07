@@ -49,7 +49,7 @@ describe("TextField", () => {
     await user.tab();
 
     const input = screen.getByRole("textbox");
-    expect(input).toHaveClass("border-blue-500 dark:border-blue-700");
+    expect(input).toHaveClass("bborder-(--border-info)");
   });
 
   test("renders with placeholder", () => {

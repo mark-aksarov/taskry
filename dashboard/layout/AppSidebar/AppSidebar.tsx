@@ -8,7 +8,7 @@ export const AppSidebar = ({
   children?: React.ReactNode;
 }) => {
   return (
-    <div className={twMerge("w-[260px] bg-white dark:bg-gray-800", className)}>
+    <div className={twMerge("w-[260px] bg-(--surface-1)", className)}>
       {children}
     </div>
   );

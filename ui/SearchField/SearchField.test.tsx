@@ -49,7 +49,7 @@ describe("SearchField", () => {
     await user.tab();
 
     const input = screen.getByRole("searchbox");
-    expect(input).toHaveClass("border-blue-500 dark:border-blue-700");
+    expect(input).toHaveClass("border-(--border-info)");
   });
 
   test("renders with placeholder", () => {

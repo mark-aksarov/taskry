@@ -19,7 +19,7 @@ export function ErrorBanner({
       role="alert"
       aria-live="assertive"
       className={twMerge(
-        "items-center bg-red-100 p-3 text-xs font-bold text-red-700 dark:bg-red-900 dark:text-red-100",
+        "items-center bg-(--bg-danger-1) p-3 text-xs font-bold text-(--text-danger)",
         className,
       )}
     >

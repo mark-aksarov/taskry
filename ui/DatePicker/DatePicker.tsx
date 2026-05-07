@@ -82,7 +82,7 @@ const segmentStyles = tv({
       true: "text-(--text-disabled)",
     },
     isFocused: {
-      true: "bg-(--bg-accent) text-white!",
+      true: "bg-(--accent) text-white!",
     },
     isEditable: {
       false: "",

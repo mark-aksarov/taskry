@@ -37,7 +37,7 @@ describe("Switch", () => {
 
     expect(switchEl).toBeChecked();
 
-    expect(trackDiv).toHaveClass("bg-(--bg-accent)");
+    expect(trackDiv).toHaveClass("bg-(--accent)");
   });
 
   test("should apply the given className to the label", () => {

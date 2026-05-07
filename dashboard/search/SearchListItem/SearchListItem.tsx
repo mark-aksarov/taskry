@@ -18,7 +18,7 @@ const styles = tv({
     isFocusVisible: itemStyles.variants.isFocused,
     isDisabled: itemStyles.variants.isDisabled,
     isPressed: {
-      true: "bg-gray-200 dark:bg-gray-700",
+      true: "bg-(--surface-1-pressed)",
     },
   },
 });

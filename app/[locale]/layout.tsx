@@ -42,9 +42,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${nunitoSans.className} bg-gray-100 antialiased dark:bg-gray-900`}
-      >
+      <body className={`${nunitoSans.className} bg-(--surface-2) antialiased`}>
         <ThemeProvider
           attribute="data-theme"
           defaultTheme="light"

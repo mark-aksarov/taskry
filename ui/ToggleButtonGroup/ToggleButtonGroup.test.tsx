@@ -24,7 +24,7 @@ describe("ToggleButtonGroup", () => {
     render(<TestToggleButtonGroup selectedKeys={["apple"]} />);
 
     const button = screen.getByRole("radio", { name: "Apple" });
-    expect(button).toHaveClass("bg-(--bg-accent)");
+    expect(button).toHaveClass("bg-(--accent)");
   });
 
   test("applies non-selected styles", () => {
@@ -38,6 +38,6 @@ describe("ToggleButtonGroup", () => {
     render(<TestToggleButtonGroup isDisabled />);
 
     const button = screen.getByRole("radio", { name: "Apple" });
-    expect(button).toHaveClass("bg-gray-100 dark:bg-gray-800");
+    expect(button).toHaveClass("bg-(--bg-input-disabled)");
   });
 });

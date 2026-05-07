@@ -7,7 +7,7 @@ export function StatusLoader() {
       size={16}
       strokeWidth={1.5}
       absoluteStrokeWidth
-      className="animate-spin text-gray-400 dark:text-gray-900"
+      className="animate-spin text-(--text-disabled)"
     />
   );
 }

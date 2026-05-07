@@ -17,9 +17,8 @@ export const styles = tv({
       secondary: "",
     },
     isActive: {
-      false:
-        "pressed:bg-gray-200 dark:pressed:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700",
-      true: "bg-(--bg-accent) text-white",
+      false: "pressed:bg-(--surface-1-pressed) hover:bg-(--surface-1-hover)",
+      true: "bg-(--accent) text-white",
     },
     isPending: {
       true: "pointer-events-none text-(--text-secondary)",
@@ -29,12 +28,12 @@ export const styles = tv({
     {
       variant: "primary",
       isActive: true,
-      class: "bg-(--bg-accent) text-white",
+      class: "bg-(--accent) text-white",
     },
     {
       variant: "secondary",
       isActive: true,
-      class: "bg-gray-100 text-blue-600 dark:bg-gray-700 dark:text-blue-300",
+      class: "bg-(--surface-1-hover) text-(--text-info)",
     },
   ],
 });

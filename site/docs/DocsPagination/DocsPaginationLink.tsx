@@ -15,8 +15,7 @@ const styles = tv({
   extend: focusRing,
   base: [
     "text-base font-semibold text-(--text-primary)",
-    "hover:text-blue-600 dark:hover:text-blue-400",
-    "pressed:text-blue-600 dark:pressed:text-blue-400",
+    "pressed:text-(--text-tertiary) hover:text-(--text-tertiary)",
   ],
 });
 

@@ -35,11 +35,11 @@ const track = tv({
   ],
   variants: {
     isSelected: {
-      false: "bg-gray-300 dark:bg-gray-500",
-      true: "bg-(--bg-accent)",
+      false: "bg-gray-200 dark:bg-gray-700",
+      true: "bg-(--accent)",
     },
     isDisabled: {
-      true: "bg-gray-200 dark:bg-gray-700",
+      true: "bg-(--bg-input-disabled)",
     },
   },
 });
@@ -57,7 +57,7 @@ const handle = tv({
       true: "translate-x-[1.25rem]",
     },
     isDisabled: {
-      true: "bg-gray-100 dark:bg-gray-600",
+      true: "bg-gray-50 dark:bg-gray-600",
     },
   },
 });

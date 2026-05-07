@@ -31,11 +31,11 @@ const boxStyles = tv({
   base: "flex h-5 w-5 shrink-0 items-center justify-center self-start rounded-sm",
   variants: {
     isSelected: {
-      false: "bg-gray-100 dark:bg-gray-700",
+      false: "bg-(--surface-3)",
       true: "",
     },
     isDisabled: {
-      true: "bg-gray-100 dark:bg-gray-700",
+      true: "bg-(--bg-input-disabled)",
     },
   },
   compoundVariants: [
@@ -43,7 +43,7 @@ const boxStyles = tv({
       isSelected: true,
       isDisabled: false,
       isInvalid: false,
-      className: "bg-(--bg-accent)",
+      className: "bg-(--accent)",
     },
   ],
   slots: {

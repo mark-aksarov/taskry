@@ -42,8 +42,7 @@ const styles = tv({
     {
       variant: "rich",
       isDone: true,
-      class:
-        "bg-green-50 text-green-700 dark:bg-green-600/20 dark:text-green-300",
+      class: "bg-green-50 text-(--text-success) dark:bg-green-600/20",
     },
     {
       variant: "rich",
@@ -69,12 +68,12 @@ const iconStyles = tv({
     {
       isDone: true,
       variant: "plain",
-      class: "text-blue-600 dark:text-blue-400",
+      class: "text-(--text-tertiary)",
     },
     {
       isDone: true,
       variant: "rich",
-      class: "text-green-700 dark:text-green-300",
+      class: "text-(--text-success)",
     },
   ],
 });

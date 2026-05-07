@@ -13,7 +13,7 @@ export function Separator({ className, ...props }: SeparatorProps) {
     <RACSeparator
       {...props}
       className={twMerge(
-        "h-px w-full border-none bg-gray-300 dark:bg-gray-600",
+        "h-px w-full border-none bg-(--border-primary)",
         className,
       )}
     />

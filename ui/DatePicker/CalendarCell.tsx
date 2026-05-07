@@ -27,20 +27,20 @@ const calendarCell = tv({
   ],
   variants: {
     isSelected: {
-      true: "bg-(--bg-accent) text-white",
+      true: "bg-(--accent) text-white",
     },
     isDisabled: {
       true: "text-(--text-disabled)",
     },
     isUnavailable: {
-      true: "text-red-600 dark:text-red-700",
+      true: "text-(--text-danger-alt)",
     },
   },
   compoundVariants: [
     {
       isSelected: false,
       isDisabled: false,
-      className: "hover:bg-(--bg-accent-hover) hover:text-white",
+      className: "hover:bg-(--accent-hover) hover:text-white",
     },
   ],
 });

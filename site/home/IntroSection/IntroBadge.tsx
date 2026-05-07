@@ -5,7 +5,7 @@ const introBadgeStyles = tv({
   slots: {
     badge:
       "gap-2 px-4 py-2 text-sm font-semibold max-sm:self-start sm:self-center",
-    dot: "h-2 w-2 shrink-0 rounded-full bg-blue-500 dark:bg-blue-300",
+    dot: "h-2 w-2 shrink-0 rounded-full bg-(--icon-info)",
   },
 });
 

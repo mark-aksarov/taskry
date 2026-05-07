@@ -11,8 +11,8 @@ const styles = tv({
   base: [
     "group flex w-full items-center justify-start gap-6",
     "rounded-2xl border p-6",
-    "border-gray-200 dark:border-gray-700",
-    "bg-white hover:border-(--border-primary) dark:bg-gray-800",
+    "border-(--border-secondary) hover:border-(--border-primary)",
+    "pressed:bg-(--surface-1-pressed) bg-(--surface-1) hover:bg-(--surface-1-hover)",
   ],
 
   slots: {

@@ -13,13 +13,13 @@ export const buttonStyles = tv({
   base: "flex cursor-pointer items-center justify-between",
   variants: {
     isFocusVisible: {
-      true: "border-blue-500 dark:border-blue-700",
+      true: "border-(--border-info)",
     },
     isInvalid: {
       true: "border-(--border-danger)",
     },
     isPressed: {
-      true: "border-blue-500 dark:border-blue-700",
+      true: "border-(--border-info)",
     },
     isPlaceholder: {
       true: "",
@@ -28,8 +28,8 @@ export const buttonStyles = tv({
       true: [
         "pointer-events-none",
         "cursor-default",
-        "border-gray-100 dark:border-gray-800",
-        "bg-gray-100 dark:bg-gray-800",
+        "border-(--border-disabled)",
+        "bg-(--bg-input-disabled)",
         "text-(--text-disabled)",
       ].join(" "),
     },

@@ -46,7 +46,7 @@ export const baseButtonStyles = tv({
   base: "flex cursor-pointer items-center gap-x-1.5 rounded-lg font-bold whitespace-nowrap",
   variants: {
     variant: {
-      primary: "pressed:bg-(--bg-accent-pressed) hover:bg-(--bg-accent-hover)",
+      primary: "pressed:bg-(--accent-pressed) hover:bg-(--accent-hover)",
       secondary:
         "pressed:bg-gray-300 dark:pressed:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-700",
       ghost:
@@ -82,7 +82,7 @@ export const baseButtonStyles = tv({
     {
       variant: "primary",
       isDisabled: false,
-      class: "bg-(--bg-accent) text-white",
+      class: "bg-(--accent) text-white",
     },
     {
       variant: "secondary",

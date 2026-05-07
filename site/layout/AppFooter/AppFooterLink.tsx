@@ -6,11 +6,7 @@ import { composeRenderProps, Link } from "react-aria-components";
 
 const styles = tv({
   extend: linkStyles,
-  base: [
-    "text-(--text-tertiary)",
-    "hover:text-blue-600 dark:hover:text-blue-400",
-    "pressed:text-blue-600 dark:pressed:text-blue-400",
-  ],
+  base: "pressed:text-(--text-info) text-(--text-tertiary) hover:text-(--text-info)",
 });
 
 interface AppFooterLinkProps {

@@ -28,9 +28,8 @@ const styles = tv({
   base: "flex w-full gap-3 p-4",
   variants: {
     color: {
-      red: "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-100",
-      green:
-        "bg-green-100 text-green-700 dark:bg-green-800 dark:text-green-300",
+      red: "bg-(--bg-danger-1) text-(--text-danger)",
+      green: "bg-(--bg-success-1) text-(--text-success)",
     },
   },
   slots: {

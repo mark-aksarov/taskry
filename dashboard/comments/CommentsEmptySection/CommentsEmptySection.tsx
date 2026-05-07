@@ -1,10 +1,10 @@
-import { AbsoluteCenter } from "@/dashboard/common/AbsoluteCenter";
 import {
   EmptySection,
   EmptySectionHeading,
   EmptySectionDescription,
 } from "@/dashboard/common/EmptySection";
 import { useTranslations } from "next-intl";
+import { AbsoluteCenter } from "@/dashboard/common/AbsoluteCenter";
 
 export function CommentsEmptySection() {
   const t = useTranslations("dashboard.comments.CommentsEmptySection");

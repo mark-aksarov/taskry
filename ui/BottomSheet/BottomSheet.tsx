@@ -10,14 +10,14 @@ import { AriaModalOverlayProps, Overlay, useModalOverlay } from "react-aria";
 
 const styles = tv({
   slots: {
-    overlay: "fixed inset-0 z-4 bg-black/20 dark:bg-black/50",
+    overlay: "fixed inset-0 z-4 bg-(--bg-overlay)",
     modal: "absolute bottom-0 left-0 w-full will-change-transform",
     content: [
       "h-full",
       "overflow-hidden",
       "rounded-t-2xl",
       "border-(--border-primary)",
-      "bg-white dark:bg-gray-800",
+      "bg-(--surface-1)",
     ],
   },
 });

@@ -17,16 +17,11 @@ export const Badge = ({
       role="presentation"
       className={twMerge(
         "flex items-center justify-center gap-1 rounded-full px-5 py-1.5 text-center text-xs font-bold",
-        color === "blue" &&
-          "bg-blue-100 text-blue-700 dark:bg-blue-800 dark:text-blue-300",
-        color === "green" &&
-          "bg-green-100 text-green-700 dark:bg-green-800 dark:text-green-300",
-        color === "orange" &&
-          "bg-orange-100 text-orange-700 dark:bg-orange-700 dark:text-orange-100",
-        color === "red" &&
-          "bg-red-100 text-red-700 dark:bg-red-700 dark:text-red-100",
-        color === "gray" &&
-          "bg-gray-100 text-(--text-tertiary) dark:bg-gray-700",
+        color === "blue" && "bg-(--bg-info-1) text-(--text-info)",
+        color === "green" && "bg-(--bg-success-1) text-(--text-success)",
+        color === "orange" && "bg-(--bg-warning-1) text-(--text-warning)",
+        color === "red" && "bg-(--bg-danger-2) text-(--text-danger)",
+        color === "gray" && "bg-(--surface-3) text-(--text-tertiary)",
         className,
       )}
       {...props}

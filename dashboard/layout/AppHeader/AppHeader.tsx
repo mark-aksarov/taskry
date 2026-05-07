@@ -17,7 +17,7 @@ import { AppBottomSheetTrigger } from "@/dashboard/layout/AppBottomSheetTrigger"
 
 const styles = tv({
   slots: {
-    base: "border-(--border-primary) bg-gray-100 dark:bg-gray-900",
+    base: "border-(--border-primary) bg-(--surface-2)",
 
     mobileWrapper: "px-4 md:hidden",
     desktopWrapper: "px-6 max-md:hidden",

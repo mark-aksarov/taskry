@@ -19,7 +19,7 @@ export const styles = tv({
     "gap-2 p-2 pl-4",
     "rounded-full",
     "md:max-w-[360px]",
-    "bg-white dark:bg-gray-800",
+    "bg-(--surface-1)",
   ],
   variants: {
     isDisabled: {
