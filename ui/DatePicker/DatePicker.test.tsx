@@ -28,7 +28,7 @@ describe("DatePicker", () => {
 
     const segments = screen.getAllByRole("spinbutton");
     const monthSegment = segments[0];
-    expect(monthSegment).toHaveClass("text-black dark:text-white");
+    expect(monthSegment).toHaveClass("text-(--text-primary)");
   });
 
   test("applies focus-visible styles", async () => {
@@ -46,18 +46,18 @@ describe("DatePicker", () => {
     render(<DatePicker label="Label" isInvalid />);
 
     const group = screen.getByRole("group");
-    expect(group).toHaveClass("border-red-300 dark:border-red-800");
+    expect(group).toHaveClass("border-(--border-danger)");
   });
 
   test("applies disabled styles", async () => {
     render(<DatePicker label="Label" isDisabled />);
 
     const group = screen.getByRole("group");
-    expect(group).toHaveClass("text-gray-400 dark:text-gray-500");
+    expect(group).toHaveClass("text-(--text-disabled)");
 
     const segments = screen.getAllByRole("spinbutton");
     const monthSegment = segments[0];
-    expect(monthSegment).toHaveClass("text-gray-400 dark:text-gray-500");
+    expect(monthSegment).toHaveClass("text-(--text-disabled)");
   });
 
   test("applies placeholder styles", async () => {
@@ -65,7 +65,7 @@ describe("DatePicker", () => {
 
     const segments = screen.getAllByRole("spinbutton");
     const monthSegment = segments[0];
-    expect(monthSegment).toHaveClass("text-gray-500 dark:text-gray-400");
+    expect(monthSegment).toHaveClass("text-(--text-secondary)");
   });
 
   test("applies custom className", () => {

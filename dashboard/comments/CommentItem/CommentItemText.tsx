@@ -10,7 +10,7 @@ export function CommentItemText({ className, children }: CommentItemTextProps) {
   return (
     <div
       className={twMerge(
-        "text-sm font-normal text-black dark:text-white",
+        "text-sm font-normal text-(--text-primary)",
         className,
       )}
     >

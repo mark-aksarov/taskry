@@ -7,7 +7,7 @@ import { composeRenderProps, Link } from "react-aria-components";
 const styles = tv({
   extend: linkStyles,
   base: [
-    "text-gray-600 dark:text-gray-300",
+    "text-(--text-tertiary)",
     "hover:text-blue-600 dark:hover:text-blue-400",
     "pressed:text-blue-600 dark:pressed:text-blue-400",
   ],

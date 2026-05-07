@@ -25,7 +25,7 @@ export const Default = {
         <Disclosure>
           <DisclosureHeader>Personal Information</DisclosureHeader>
           <DisclosurePanel>
-            <div className="space-y-2 pl-4 text-black dark:text-white">
+            <div className="space-y-2 pl-4 text-(--text-primary)">
               <p>Name: John Doe</p>
               <p>Email: john.doe@example.com</p>
               <p>Phone: +1 234 567 890</p>
@@ -37,7 +37,7 @@ export const Default = {
         <Disclosure>
           <DisclosureHeader>Billing Address</DisclosureHeader>
           <DisclosurePanel>
-            <div className="space-y-2 pl-4 text-black dark:text-white">
+            <div className="space-y-2 pl-4 text-(--text-primary)">
               <p>Street: 123 Main St</p>
               <p>City: New York</p>
               <p>State: NY</p>

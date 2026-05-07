@@ -4,6 +4,6 @@ interface FeatureItemHeadingProps {
 
 export function FeatureItemHeading({ children }: FeatureItemHeadingProps) {
   return (
-    <h3 className="text-xl font-bold text-black dark:text-white">{children}</h3>
+    <h3 className="text-xl font-bold text-(--text-primary)">{children}</h3>
   );
 }

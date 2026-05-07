@@ -26,9 +26,7 @@ describe("Switch", () => {
 
     expect(switchEl).toBeDisabled();
 
-    expect(label).toHaveClass(
-      "disabled:text-gray-400 dark:disabled:text-gray-500",
-    );
+    expect(label).toHaveClass("disabled:text-(--text-disabled)");
   });
 
   test("applies selected styles when checked prop is true", () => {
@@ -39,7 +37,7 @@ describe("Switch", () => {
 
     expect(switchEl).toBeChecked();
 
-    expect(trackDiv).toHaveClass("bg-blue-600 dark:bg-blue-700");
+    expect(trackDiv).toHaveClass("bg-(--bg-accent)");
   });
 
   test("should apply the given className to the label", () => {

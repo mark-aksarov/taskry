@@ -38,21 +38,21 @@ describe("Select", () => {
     render(<TestSelect isInvalid />);
 
     const button = screen.getByRole("button");
-    expect(button).toHaveClass("border-red-300 dark:border-red-800");
+    expect(button).toHaveClass("border-(--border-danger)");
   });
 
   test("applies disabled styles", async () => {
     render(<TestSelect isDisabled />);
 
     const button = screen.getByRole("button");
-    expect(button).toHaveClass("text-gray-400 dark:text-gray-500");
+    expect(button).toHaveClass("text-(--text-disabled)");
   });
 
   test("applies placeholder styles", async () => {
     render(<TestSelect />);
 
     const button = screen.getByRole("button");
-    expect(button).toHaveClass("text-gray-500 dark:text-gray-400");
+    expect(button).toHaveClass("text-(--text-secondary)");
   });
 
   test("renders with label", () => {

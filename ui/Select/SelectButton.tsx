@@ -16,7 +16,7 @@ export const buttonStyles = tv({
       true: "border-blue-500 dark:border-blue-700",
     },
     isInvalid: {
-      true: "border-red-300 dark:border-red-800",
+      true: "border-(--border-danger)",
     },
     isPressed: {
       true: "border-blue-500 dark:border-blue-700",
@@ -30,7 +30,7 @@ export const buttonStyles = tv({
         "cursor-default",
         "border-gray-100 dark:border-gray-800",
         "bg-gray-100 dark:bg-gray-800",
-        "text-gray-400 dark:text-gray-500",
+        "text-(--text-disabled)",
       ].join(" "),
     },
   },
@@ -40,17 +40,17 @@ export const buttonStyles = tv({
       isFocusVisible: false,
       isPressed: false,
       isInvalid: false,
-      className: "border-gray-300 dark:border-gray-600",
+      className: "border-(--border-primary)",
     },
     {
       isDisabled: false,
       isPlaceholder: true,
-      className: "text-gray-500 dark:text-gray-400",
+      className: "text-(--text-secondary)",
     },
     {
       isDisabled: false,
       isPlaceholder: false,
-      className: "text-black dark:text-white",
+      className: "text-(--text-primary)",
     },
   ],
 });
@@ -101,7 +101,7 @@ export const SelectButton = ({
         size={16}
         strokeWidth={1.5}
         absoluteStrokeWidth
-        className={!buttonProps.disabled ? "text-black dark:text-white" : ""}
+        className={!buttonProps.disabled ? "text-(--text-primary)" : ""}
       />
     </button>
   );

@@ -1,7 +1,7 @@
 import { twMerge } from "tailwind-merge";
 
 export const titleStyles =
-  "text-lg font-extrabold text-black dark:text-white text-center";
+  "text-lg font-extrabold text-(--text-primary) text-center";
 
 interface DetailHeaderTitleProps {
   className?: string;

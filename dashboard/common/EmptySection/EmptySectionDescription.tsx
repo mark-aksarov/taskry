@@ -12,7 +12,7 @@ export function EmptySectionDescription({
   return (
     <p
       className={twMerge(
-        "text-center text-sm text-gray-600 dark:text-gray-400",
+        "text-center text-sm text-(--text-tertiary)",
         className,
       )}
     >

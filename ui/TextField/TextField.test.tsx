@@ -31,14 +31,14 @@ describe("TextField", () => {
     render(<TextField label="Label" isInvalid />);
 
     const input = screen.getByRole("textbox");
-    expect(input).toHaveClass("border-red-300 dark:border-red-800");
+    expect(input).toHaveClass("border-(--border-danger)");
   });
 
   test("applies disabled styles", async () => {
     render(<TextField label="Label" isDisabled />);
 
     const input = screen.getByRole("textbox");
-    expect(input).toHaveClass("text-gray-400 dark:text-gray-500");
+    expect(input).toHaveClass("text-(--text-disabled)");
   });
 
   test("applies focus styles", async () => {

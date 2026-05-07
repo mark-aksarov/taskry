@@ -26,7 +26,7 @@ export const Badge = ({
         color === "red" &&
           "bg-red-100 text-red-700 dark:bg-red-700 dark:text-red-100",
         color === "gray" &&
-          "bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300",
+          "bg-gray-100 text-(--text-tertiary) dark:bg-gray-700",
         className,
       )}
       {...props}

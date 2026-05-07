@@ -1,7 +1,7 @@
 import { twMerge } from "tailwind-merge";
 
 const styles =
-  "max-w-full truncate text-xs font-medium text-gray-500 dark:text-gray-400";
+  "max-w-full truncate text-xs font-medium text-(--text-secondary)";
 
 interface GridItemTextProps {
   className?: string;

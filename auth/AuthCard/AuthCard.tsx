@@ -35,7 +35,7 @@ export function AuthCard({ "data-test": dataTest, children }: AuthCardProps) {
   return (
     <Card data-test={dataTest} className={s.base()}>
       <div className={s.header()}>
-        <Link className="text-sm font-bold text-black dark:text-white" href="/">
+        <Link className="text-sm font-bold text-(--text-primary)" href="/">
           {t("homeLabel")}
         </Link>
         <AuthLangMenuTrigger />

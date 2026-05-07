@@ -18,8 +18,8 @@ const styles = tv({
   base: [
     "flex items-center gap-2",
     "text-sm font-semibold",
-    "text-black dark:text-white",
-    "disabled:text-gray-400 dark:disabled:text-gray-500",
+    "text-(--text-primary)",
+    "disabled:text-(--text-disabled)",
     "transition",
   ],
 });
@@ -36,7 +36,7 @@ const track = tv({
   variants: {
     isSelected: {
       false: "bg-gray-300 dark:bg-gray-500",
-      true: "bg-blue-600 dark:bg-blue-700",
+      true: "bg-(--bg-accent)",
     },
     isDisabled: {
       true: "bg-gray-200 dark:bg-gray-700",

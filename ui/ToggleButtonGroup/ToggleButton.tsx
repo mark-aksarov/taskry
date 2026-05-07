@@ -14,7 +14,7 @@ import type { ToggleButtonProps as RACToggleButtonProps } from "react-aria-compo
 
 export const toggleButtonStyles = tv({
   extend: focusRing,
-  base: [baseButtonStyles.base, "px-3 py-2 text-xs text-black dark:text-white"],
+  base: [baseButtonStyles.base, "px-3 py-2 text-xs text-(--text-primary)"],
   variants: {
     variant: {
       primary: "",
@@ -26,7 +26,7 @@ export const toggleButtonStyles = tv({
     },
 
     isDisabled: {
-      true: "pointer-events-none bg-gray-100 text-gray-400 dark:bg-gray-800 dark:text-gray-500",
+      true: "pointer-events-none bg-gray-100 text-(--text-disabled) dark:bg-gray-800",
     },
   },
   compoundVariants: [
@@ -34,7 +34,7 @@ export const toggleButtonStyles = tv({
       variant: "primary",
       isSelected: true,
       isDisabled: false,
-      className: "bg-blue-600 text-white dark:bg-blue-700",
+      className: "bg-(--bg-accent) text-white",
     },
     {
       variant: "contrast",

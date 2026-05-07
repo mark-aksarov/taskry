@@ -12,7 +12,7 @@ export function PageSectionHeading({
   return (
     <h2
       className={twMerge(
-        "mb-4 font-extrabold text-black max-md:text-3xl max-sm:text-start md:text-4xl dark:text-white",
+        "mb-4 font-extrabold text-(--text-primary) max-md:text-3xl max-sm:text-start md:text-4xl",
         className,
       )}
     >

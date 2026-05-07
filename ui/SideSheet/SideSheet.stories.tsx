@@ -39,9 +39,7 @@ export const Right = {
             <DialogHeading>Side sheet title</DialogHeading>
             <DialogCloseButton />
           </DialogHeader>
-          <DialogBody className="text-black dark:text-white">
-            content
-          </DialogBody>
+          <DialogBody className="text-(--text-primary)">content</DialogBody>
         </Dialog>
       </SideSheetTemplate>
     );
@@ -60,9 +58,7 @@ export const Left = {
             <DialogHeading>Side sheet title</DialogHeading>
             <DialogCloseButton />
           </DialogHeader>
-          <DialogBody className="text-black dark:text-white">
-            content
-          </DialogBody>
+          <DialogBody className="text-(--text-primary)">content</DialogBody>
         </Dialog>
       </SideSheetTemplate>
     );
@@ -78,7 +74,7 @@ export const WithLongContent = {
             <DialogHeading>Side sheet title</DialogHeading>
             <DialogCloseButton />
           </DialogHeader>
-          <DialogBody className="text-black dark:text-white">
+          <DialogBody className="text-(--text-primary)">
             <h3>The standard Lorem Ipsum passage, used since the 1500s</h3>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

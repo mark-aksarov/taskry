@@ -46,14 +46,13 @@ export const baseButtonStyles = tv({
   base: "flex cursor-pointer items-center gap-x-1.5 rounded-lg font-bold whitespace-nowrap",
   variants: {
     variant: {
-      primary:
-        "pressed:bg-blue-700 dark:pressed:bg-blue-800 hover:bg-blue-500 dark:hover:bg-blue-600",
+      primary: "pressed:bg-(--bg-accent-pressed) hover:bg-(--bg-accent-hover)",
       secondary:
         "pressed:bg-gray-300 dark:pressed:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-700",
       ghost:
         "pressed:bg-gray-300 dark:pressed:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700",
       outlined:
-        "pressed:bg-gray-300 dark:pressed:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700",
+        "pressed:bg-gray-300 dark:pressed:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700",
       contrast:
         "pressed:bg-gray-800 dark:pressed:bg-gray-300 hover:bg-gray-900 dark:hover:bg-gray-200",
     },
@@ -73,28 +72,27 @@ export const baseButtonStyles = tv({
     {
       variant: ["primary", "secondary", "outlined", "contrast"],
       isDisabled: true,
-      class: "bg-gray-200 text-gray-400 dark:bg-gray-800 dark:text-gray-500",
+      class: "bg-gray-200 text-(--text-disabled) dark:bg-gray-800",
     },
     {
       variant: "ghost",
       isDisabled: true,
-      class: "text-gray-400 dark:text-gray-500",
+      class: "text-(--text-disabled)",
     },
     {
       variant: "primary",
       isDisabled: false,
-      class: "bg-blue-600 text-white dark:bg-blue-700",
+      class: "bg-(--bg-accent) text-white",
     },
     {
       variant: "secondary",
       isDisabled: false,
-      class: "bg-gray-200 text-black dark:bg-gray-800 dark:text-white",
+      class: "bg-gray-200 text-(--text-primary) dark:bg-gray-800",
     },
     {
       variant: "outlined",
       isDisabled: false,
-      class:
-        "border border-gray-300 text-black dark:border-gray-600 dark:text-white",
+      class: "border border-(--border-primary) text-(--text-primary)",
     },
     {
       variant: "contrast",
@@ -104,7 +102,7 @@ export const baseButtonStyles = tv({
     {
       variant: "ghost",
       isDisabled: false,
-      class: "text-black dark:text-white",
+      class: "text-(--text-primary)",
     },
   ],
 });

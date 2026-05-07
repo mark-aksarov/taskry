@@ -6,7 +6,7 @@ const styles = tv({
     root: [
       "flex flex-col gap-4",
       "not-last:border-b-1 not-last:pb-4",
-      "border-gray-300 dark:border-gray-600",
+      "border-(--border-primary)",
     ],
     header: "flex items-start justify-between",
     sender: "flex items-center gap-3",

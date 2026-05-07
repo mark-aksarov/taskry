@@ -1,5 +1,5 @@
 const styles =
-  "overflow-hidden text-nowrap overflow-ellipsis text-xs font-medium text-gray-500 dark:text-gray-400";
+  "overflow-hidden text-nowrap overflow-ellipsis text-xs font-medium text-(--text-secondary)";
 
 interface CommentItemDateProps {
   children: React.ReactNode;

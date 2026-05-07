@@ -16,7 +16,7 @@ const styles = tv({
       "h-full",
       "overflow-hidden",
       "rounded-t-2xl",
-      "border-gray-300 dark:border-gray-600",
+      "border-(--border-primary)",
       "bg-white dark:bg-gray-800",
     ],
   },

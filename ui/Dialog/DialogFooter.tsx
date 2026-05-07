@@ -8,7 +8,7 @@ export const DialogFooter = ({
   ...props
 }: React.ComponentPropsWithRef<"div">) => {
   const classes = twMerge(
-    "flex items-center justify-between border-t-1 border-gray-300 dark:border-gray-600 md:px-5 max-md:px-4 py-3",
+    "flex items-center justify-between border-t-1 border-(--border-primary) md:px-5 max-md:px-4 py-3",
     className,
   );
 

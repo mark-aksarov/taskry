@@ -8,7 +8,7 @@ import { Button, DisclosureStateContext, Heading } from "react-aria-components";
 
 const button = tv({
   extend: focusRing,
-  base: "flex w-full cursor-pointer items-center justify-between py-2 text-base font-semibold text-black dark:text-white",
+  base: "flex w-full cursor-pointer items-center justify-between py-2 text-base font-semibold text-(--text-primary)",
 });
 
 export interface DisclosureHeaderProps {

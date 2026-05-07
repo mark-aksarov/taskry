@@ -16,7 +16,7 @@ export function ProgressDetailInfoAlt({ progress }: { progress: number }) {
         />
       }
       rightSlot={
-        <div className="text-xs font-medium text-gray-500 dark:text-gray-400">
+        <div className="text-xs font-medium text-(--text-secondary)">
           {progress.toFixed(0)}%
         </div>
       }

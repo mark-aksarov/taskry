@@ -9,7 +9,7 @@ export function DetailCardTitle({ className, children }: DetailCardTitleProps) {
   return (
     <h2
       className={twMerge(
-        "text-lg font-extrabold text-black dark:text-white",
+        "text-lg font-extrabold text-(--text-primary)",
         className,
       )}
     >

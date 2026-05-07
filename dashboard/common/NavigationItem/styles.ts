@@ -9,7 +9,7 @@ export const styles = tv({
     "rounded-lg",
     "cursor-pointer",
     "text-sm font-bold",
-    "text-black dark:text-white",
+    "text-(--text-primary)",
   ],
   variants: {
     variant: {
@@ -19,17 +19,17 @@ export const styles = tv({
     isActive: {
       false:
         "pressed:bg-gray-200 dark:pressed:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700",
-      true: "bg-blue-600 text-white dark:bg-blue-700",
+      true: "bg-(--bg-accent) text-white",
     },
     isPending: {
-      true: "pointer-events-none text-gray-500 dark:text-gray-400",
+      true: "pointer-events-none text-(--text-secondary)",
     },
   },
   compoundVariants: [
     {
       variant: "primary",
       isActive: true,
-      class: "bg-blue-600 text-white dark:bg-blue-700",
+      class: "bg-(--bg-accent) text-white",
     },
     {
       variant: "secondary",

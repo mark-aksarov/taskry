@@ -9,7 +9,7 @@ import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 const styles = tv({
   slots: {
     body: "flex flex-col items-center gap-4",
-    text: "text-center text-sm text-black dark:text-white",
+    text: "text-center text-sm text-(--text-primary)",
     footer: "flex justify-end gap-4",
   },
 });

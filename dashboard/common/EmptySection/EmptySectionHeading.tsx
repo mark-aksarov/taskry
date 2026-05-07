@@ -14,7 +14,7 @@ export function EmptySectionHeading({
   return (
     <Tag
       className={twMerge(
-        "text-center font-extrabold text-black max-md:text-3xl md:text-4xl dark:text-white",
+        "text-center font-extrabold text-(--text-primary) max-md:text-3xl md:text-4xl",
         className,
       )}
     >

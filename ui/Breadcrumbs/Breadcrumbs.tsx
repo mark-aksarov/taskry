@@ -28,10 +28,10 @@ const breadcrumbStyle = tv({
 
   variants: {
     isCurrent: {
-      false: "text-gray-600 dark:text-gray-300",
+      false: "text-(--text-tertiary)",
     },
     isDisabled: {
-      true: "text-black dark:text-white",
+      true: "text-(--text-primary)",
     },
   },
 });

@@ -32,12 +32,12 @@ const styles = tv({
     {
       variant: "plain",
       isDone: true,
-      class: "text-black dark:text-white",
+      class: "text-(--text-primary)",
     },
     {
       variant: "plain",
       isDone: false,
-      class: "text-gray-500 dark:text-gray-400",
+      class: "text-(--text-secondary)",
     },
     {
       variant: "rich",
@@ -48,7 +48,7 @@ const styles = tv({
     {
       variant: "rich",
       isDone: false,
-      class: "bg-gray-50 text-black dark:bg-gray-700/30 dark:text-white",
+      class: "bg-gray-50 text-(--text-primary) dark:bg-gray-700/30",
     },
   ],
 });
@@ -57,7 +57,7 @@ const iconStyles = tv({
   base: "mt-0.5 shrink-0",
   variants: {
     isDone: {
-      false: "text-gray-500 dark:text-gray-400",
+      false: "text-(--text-secondary)",
       true: "",
     },
     variant: {

@@ -1,4 +1,4 @@
-const styles = "text-sm font-normal text-black dark:text-white";
+const styles = "text-sm font-normal text-(--text-primary)";
 
 interface DetailTextProps {
   children: React.ReactNode;

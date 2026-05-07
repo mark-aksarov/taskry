@@ -35,19 +35,19 @@ export const fieldInputStyles = tv({
       true: "border-blue-500 dark:border-blue-700",
     },
     isInvalid: {
-      true: "border-red-300 dark:border-red-800",
+      true: "border-(--border-danger)",
     },
     isDisabled: {
       false: [
-        "text-black dark:text-white",
-        "placeholder:text-gray-500 dark:placeholder:text-gray-400",
+        "text-(--text-primary)",
+        "placeholder:text-(--text-secondary)",
       ].join(" "),
 
       true: [
         "border-gray-100 dark:border-gray-800",
         "bg-gray-100 dark:bg-gray-800",
-        "text-gray-400 dark:text-gray-500",
-        "placeholder:text-gray-400 dark:placeholder:text-gray-500",
+        "text-(--text-disabled)",
+        "placeholder:text-(--text-disabled)",
       ].join(" "),
     },
   },
@@ -56,7 +56,7 @@ export const fieldInputStyles = tv({
       isDisabled: false,
       isFocused: false,
       isInvalid: false,
-      className: "border-gray-300 dark:border-gray-600",
+      className: "border-(--border-primary)",
     },
   ],
 });

@@ -20,8 +20,8 @@ const checkboxStyles = tv({
   base: "group flex items-center gap-2 text-sm font-bold",
   variants: {
     isDisabled: {
-      false: "text-black dark:text-white",
-      true: "text-gray-400 dark:text-gray-500",
+      false: "text-(--text-primary)",
+      true: "text-(--text-disabled)",
     },
   },
 });
@@ -43,11 +43,11 @@ const boxStyles = tv({
       isSelected: true,
       isDisabled: false,
       isInvalid: false,
-      className: "bg-blue-600 dark:bg-blue-700",
+      className: "bg-(--bg-accent)",
     },
   ],
   slots: {
-    icon: "text-white group-disabled:text-gray-400 dark:group-disabled:text-gray-500",
+    icon: "text-white group-disabled:text-(--text-disabled)",
   },
 });
 

@@ -22,7 +22,7 @@ describe("Checkbox", () => {
     const label = screen.getByTestId("label");
     const checkbox = screen.getByRole("checkbox");
     expect(checkbox).toBeDisabled();
-    expect(label).toHaveClass("text-gray-400 dark:text-gray-500");
+    expect(label).toHaveClass("text-(--text-disabled)");
   });
 
   test("applies selected styles", () => {
@@ -35,7 +35,7 @@ describe("Checkbox", () => {
     const box = screen.getByTestId("label").querySelector("div");
     const checkbox = screen.getByRole("checkbox");
     expect(checkbox).toBeChecked();
-    expect(box).toHaveClass("bg-blue-600 dark:bg-blue-700");
+    expect(box).toHaveClass("bg-(--bg-accent)");
   });
 
   test("should apply the given className", () => {

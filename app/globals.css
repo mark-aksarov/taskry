@@ -4,6 +4,35 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
+:root {
+  /*border*/
+  --border-primary: var(--color-gray-300);
+  --border-danger: var(--color-red-300);
+  /*text*/
+  --text-primary: var(--color-black);
+  --text-secondary: var(--color-gray-500);
+  --text-tertiary: var(--color-gray-600);
+  --text-disabled: var(--color-gray-400);
+  /*background*/
+  --bg-accent: var(--color-blue-600);
+  --bg-accent-hover: var(--color-blue-500);
+  --bg-accent-pressed: var(--color-blue-700);
+}
+[data-theme="dark"] {
+  /*border*/
+  --border-primary: var(--color-gray-600);
+  --border-danger: var(--color-red-800);
+  /*text*/
+  --text-primary: var(--color-white);
+  --text-secondary: var(--color-gray-400);
+  --text-tertiary: var(--color-gray-400);
+  --text-disabled: var(--color-gray-500);
+  /*background*/
+  --bg-accent: var(--color-blue-700);
+  --bg-accent-hover: var(--color-blue-600);
+  --bg-accent-pressed: var(--color-blue-800);
+}
+
 @theme {
   --font-sans: "Nunito Sans", sans-serif;
 
@@ -35,29 +64,14 @@
   --text-8xl--line-height: calc(5 / 3.75);
 }
 
-@keyframes slide-out {
-  to {
-    translate: -100% 0;
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-@keyframes slide-in {
-  from {
-    translate: -100% 0;
-    opacity: 0;
-  }
-}
-
 @layer utilities {
   .no-scrollbar {
     scrollbar-width: none;
     -ms-overflow-style: none;
-  }
 
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .animate-slide-in {

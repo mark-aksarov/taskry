@@ -12,7 +12,7 @@ export function DetailCardHeader({
   return (
     <div
       className={twMerge(
-        "flex items-center justify-between border-b-1 border-gray-300 p-6 dark:border-gray-600",
+        "flex items-center justify-between border-b-1 border-(--border-primary) p-6",
         className,
       )}
     >

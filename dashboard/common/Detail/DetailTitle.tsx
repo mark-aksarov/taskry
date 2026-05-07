@@ -1,4 +1,4 @@
-export const titleStyles = "text-sm font-bold text-black dark:text-white";
+export const titleStyles = "text-sm font-bold text-(--text-primary)";
 
 interface DetailTitleProps {
   children: React.ReactNode;

@@ -7,7 +7,7 @@ import { ItemBaseDetailButton, ItemBaseDetailButtonProps } from "../ItemBase";
 // See: https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow#formal_definition
 
 export const titleStyles =
-  "truncate max-w-full text-sm font-bold text-black dark:text-white";
+  "truncate max-w-full text-sm font-bold text-(--text-primary)";
 
 // Text only title
 interface ListItemTitleProps {

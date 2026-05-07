@@ -8,14 +8,13 @@ import { PageContainer } from "@/site/common/PageContainer";
 
 const footerStyles = tv({
   slots: {
-    section: "border-y-1 border-gray-300 dark:border-gray-600",
+    section: "border-y-1 border-(--border-primary)",
     inner: "flex justify-between max-md:flex-col max-md:gap-8",
     brand: "mr-auto",
     column: "not-last:mr-20",
-    description: "text-base font-normal text-gray-600 dark:text-gray-300",
+    description: "text-base font-normal text-(--text-tertiary)",
     copyrightWrap: "py-8",
-    copyright:
-      "text-center text-sm font-normal text-gray-600 dark:text-gray-400",
+    copyright: "text-center text-sm font-normal text-(--text-tertiary)",
   },
 });
 

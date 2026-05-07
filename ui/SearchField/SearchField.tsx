@@ -32,8 +32,8 @@ export const searchInputStyles = tv({
     icon: [
       "pointer-events-none",
       "absolute top-1/2 right-5 -translate-y-1/2",
-      "text-black dark:text-white",
-      "peer-disabled:text-gray-400 dark:peer-disabled:text-gray-500",
+      "text-(--text-primary)",
+      "peer-disabled:text-(--text-disabled)",
     ],
   },
 });

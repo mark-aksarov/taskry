@@ -13,7 +13,7 @@ type LinkVariant = "primary";
 
 export const styles = tv({
   extend: focusRing,
-  base: "flex w-fit items-center gap-2 text-sm font-normal text-black dark:text-white",
+  base: "flex w-fit items-center gap-2 text-sm font-normal text-(--text-primary)",
   variants: {
     variant: {
       primary:

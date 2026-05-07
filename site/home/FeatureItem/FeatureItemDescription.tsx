@@ -6,8 +6,6 @@ export function FeatureItemDescription({
   children,
 }: FeatureItemDescriptionProps) {
   return (
-    <p className="text-base font-normal text-gray-600 dark:text-gray-300">
-      {children}
-    </p>
+    <p className="text-base font-normal text-(--text-tertiary)">{children}</p>
   );
 }

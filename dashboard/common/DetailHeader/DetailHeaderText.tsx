@@ -1,4 +1,4 @@
-const styles = "text-sm font-medium text-gray-500 dark:text-gray-400";
+const styles = "text-sm font-medium text-(--text-secondary)";
 
 interface DetailHeaderTextProps {
   children: React.ReactNode;

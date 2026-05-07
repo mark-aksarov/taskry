@@ -62,9 +62,7 @@ export function ProjectDetail({
   return (
     <ProjectDetailLayout
       titleSlot={
-        <h2 className="text-base font-bold text-black dark:text-white">
-          {title}
-        </h2>
+        <h2 className="text-base font-bold text-(--text-primary)">{title}</h2>
       }
       creatorSlot={
         <DetailInfo>

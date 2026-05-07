@@ -4,8 +4,6 @@ interface ResultsCountProps {
 
 export function ResultsCount({ children }: ResultsCountProps) {
   return (
-    <div className="text-xs font-bold text-black dark:text-white">
-      {children}
-    </div>
+    <div className="text-xs font-bold text-(--text-primary)">{children}</div>
   );
 }

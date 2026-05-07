@@ -1,6 +1,6 @@
 import { BaseLink } from "@/ui/Link";
 
-export const headingStyles = "text-xl font-bold text-black dark:text-white";
+export const headingStyles = "text-xl font-bold text-(--text-primary)";
 
 export const Logo = () => {
   return (

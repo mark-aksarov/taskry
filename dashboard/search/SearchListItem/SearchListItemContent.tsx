@@ -9,14 +9,14 @@ export function SearchListItemContent({
 }: SearchListItemContentProps) {
   return (
     <>
-      <div className="text-sm font-semibold text-black dark:text-white">
+      <div className="text-sm font-semibold text-(--text-primary)">
         {children}
       </div>
       <ChevronRight
         size={16}
         strokeWidth={1.5}
         absoluteStrokeWidth
-        className="text-black dark:text-white"
+        className="text-(--text-primary)"
       />
     </>
   );

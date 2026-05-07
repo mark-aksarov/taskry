@@ -3,7 +3,7 @@ import { BaseLink } from "@/ui/Link";
 import { Skeleton } from "@/ui/Skeleton";
 
 const styles =
-  "max-w-full truncate text-xs font-medium text-gray-500 dark:text-gray-400";
+  "max-w-full truncate text-xs font-medium text-(--text-secondary)";
 
 // Text only
 interface ListItemTextProps {

@@ -55,7 +55,7 @@ export const groupStyles = tv({
       isFocused: false,
       isPressed: false,
       isInvalid: false,
-      className: "border-gray-300 dark:border-gray-600",
+      className: "border-(--border-primary)",
     },
   ],
 });
@@ -66,7 +66,7 @@ const button = tv({
   compoundVariants: [
     {
       isDisabled: false,
-      className: "text-black dark:text-white",
+      className: "text-(--text-primary)",
     },
   ],
 });
@@ -75,14 +75,14 @@ const segmentStyles = tv({
   base: "rounded-sm px-0.5 outline-none",
   variants: {
     isPlaceholder: {
-      false: "text-black dark:text-white",
-      true: "text-gray-500 dark:text-gray-400",
+      false: "text-(--text-primary)",
+      true: "text-(--text-secondary)",
     },
     isDisabled: {
-      true: "text-gray-400 dark:text-gray-500",
+      true: "text-(--text-disabled)",
     },
     isFocused: {
-      true: "bg-blue-600 text-white! dark:bg-blue-800",
+      true: "bg-(--bg-accent) text-white!",
     },
     isEditable: {
       false: "",
@@ -92,7 +92,7 @@ const segmentStyles = tv({
     {
       isEditable: false,
       isDisabled: false,
-      className: "text-gray-500 dark:text-gray-400",
+      className: "text-(--text-secondary)",
     },
   ],
 });

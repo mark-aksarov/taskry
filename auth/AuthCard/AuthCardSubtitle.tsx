@@ -12,7 +12,7 @@ export function AuthCardSubtitle({
   return (
     <p
       className={twMerge(
-        "text-center text-sm text-gray-500 dark:text-gray-400",
+        "text-center text-sm text-(--text-secondary)",
         className,
       )}
     >

@@ -6,7 +6,7 @@ const introHeadingStyles = tv({
     root: [
       "mb-6",
       "font-extrabold",
-      "text-black dark:text-white",
+      "text-(--text-primary)",
       "max-lg:text-7xl max-md:text-6xl lg:text-8xl",
       "max-sm:text-start",
     ],

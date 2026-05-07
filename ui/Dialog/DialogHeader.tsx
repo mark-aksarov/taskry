@@ -8,7 +8,7 @@ export const DialogHeader = ({
   ...props
 }: React.ComponentPropsWithRef<"div">) => {
   const classes = twMerge(
-    "flex items-center justify-between border-b-1 border-gray-300 dark:border-gray-600 md:px-5 md:py-4 max-md:px-4 max-md:py-3",
+    "flex items-center justify-between border-b-1 border-(--border-primary) md:px-5 md:py-4 max-md:px-4 max-md:py-3",
     className,
   );
 

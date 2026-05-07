@@ -13,7 +13,7 @@ const styles = tv({
   ],
   variants: {
     isActive: {
-      false: "text-gray-600 dark:text-gray-300",
+      false: "text-(--text-tertiary)",
       true: "font-semibold text-blue-600 dark:text-blue-400",
     },
   },

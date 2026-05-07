@@ -82,9 +82,7 @@ export const Fullscreen = {
             <DialogHeading>Modal title</DialogHeading>
             <DialogCloseButton />
           </DialogHeader>
-          <DialogBody className="text-black dark:text-white">
-            Content
-          </DialogBody>
+          <DialogBody className="text-(--text-primary)">Content</DialogBody>
         </Dialog>
       </ModalTemplate>
     );
@@ -100,7 +98,7 @@ export const WithLongContent = {
             <DialogHeading>Modal title</DialogHeading>
             <DialogCloseButton />
           </DialogHeader>
-          <DialogBody className="text-black dark:text-white">
+          <DialogBody className="text-(--text-primary)">
             <h3>The standard Lorem Ipsum passage, used since the 1500s</h3>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

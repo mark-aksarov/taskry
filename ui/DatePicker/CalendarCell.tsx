@@ -23,14 +23,14 @@ const calendarCell = tv({
     "flex items-center justify-center",
     "cursor-default",
     "rounded-lg",
-    "text-sm font-normal text-black dark:text-white",
+    "text-sm font-normal text-(--text-primary)",
   ],
   variants: {
     isSelected: {
-      true: "bg-blue-600 text-white dark:bg-blue-700",
+      true: "bg-(--bg-accent) text-white",
     },
     isDisabled: {
-      true: "text-gray-400 dark:text-gray-500",
+      true: "text-(--text-disabled)",
     },
     isUnavailable: {
       true: "text-red-600 dark:text-red-700",
@@ -40,7 +40,7 @@ const calendarCell = tv({
     {
       isSelected: false,
       isDisabled: false,
-      className: "hover:bg-blue-500 hover:text-white dark:hover:bg-blue-600",
+      className: "hover:bg-(--bg-accent-hover) hover:text-white",
     },
   ],
 });

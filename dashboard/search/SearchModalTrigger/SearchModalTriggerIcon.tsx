@@ -7,7 +7,7 @@ export function SearchModalTriggerIcon() {
         size={18}
         strokeWidth={1.5}
         absoluteStrokeWidth
-        className="text-black dark:text-white"
+        className="text-(--text-primary)"
       />
     </div>
   );

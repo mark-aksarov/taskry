@@ -23,7 +23,7 @@ export const styles = tv({
   ],
   variants: {
     isDisabled: {
-      true: "text-gray-500 dark:text-gray-400",
+      true: "text-(--text-secondary)",
     },
   },
 });

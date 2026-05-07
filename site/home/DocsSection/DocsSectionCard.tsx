@@ -12,17 +12,16 @@ const styles = tv({
     "group flex w-full items-center justify-start gap-6",
     "rounded-2xl border p-6",
     "border-gray-200 dark:border-gray-700",
-    "bg-white hover:border-gray-300 dark:bg-gray-800 dark:hover:border-gray-600",
+    "bg-white hover:border-(--border-primary) dark:bg-gray-800",
   ],
 
   slots: {
     content: "flex flex-1 flex-col items-start gap-1 overflow-hidden",
-    heading: "max-w-full truncate text-lg font-bold text-black dark:text-white",
-    subtext:
-      "max-w-full truncate text-sm font-medium text-gray-600 dark:text-gray-300",
+    heading: "max-w-full truncate text-lg font-bold text-(--text-primary)",
+    subtext: "max-w-full truncate text-sm font-medium text-(--text-tertiary)",
     icon: [
       "ml-auto shrink-0",
-      "text-gray-600 dark:text-gray-300",
+      "text-(--text-tertiary)",
       "transition-transform group-hover:translate-x-1",
     ],
   },

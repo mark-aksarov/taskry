@@ -14,7 +14,7 @@ interface DocsPaginationLinkProps {
 const styles = tv({
   extend: focusRing,
   base: [
-    "text-base font-semibold text-black dark:text-white",
+    "text-base font-semibold text-(--text-primary)",
     "hover:text-blue-600 dark:hover:text-blue-400",
     "pressed:text-blue-600 dark:pressed:text-blue-400",
   ],
