@@ -4,7 +4,7 @@ import { Button, ButtonProps } from "@/ui/Button";
 
 export type PaginationButtonProps = {
   size?: PaginationSize;
-} & Omit<ButtonProps<"button">, "size">;
+} & Omit<ButtonProps, "size">;
 
 export function PaginationButton({ size, ...props }: PaginationButtonProps) {
   return (

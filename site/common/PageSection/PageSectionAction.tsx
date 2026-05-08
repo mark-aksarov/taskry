@@ -1,13 +1,11 @@
-import { Button, ButtonProps, ElementType } from "@/ui/Button";
+import { Button, ButtonProps, ButtonLink, ButtonLinkProps } from "@/ui/Button";
 
-export function PageSectionAction<T extends ElementType = "button">(
-  props: ButtonProps<T>,
-) {
-  return (
-    <Button
-      size="large"
-      className="justify-center rounded-xl py-3 max-sm:w-full"
-      {...props}
-    />
-  );
+export const styles = "justify-center rounded-xl py-3 max-sm:w-full";
+
+export function PageSectionActionButton(props: ButtonProps) {
+  return <Button size="large" className={styles} {...props} />;
+}
+
+export function PageSectionActionLink(props: ButtonLinkProps) {
+  return <ButtonLink size="large" className={styles} {...props} />;
 }

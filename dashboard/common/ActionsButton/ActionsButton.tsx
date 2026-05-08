@@ -4,7 +4,6 @@ import { Button, ButtonProps } from "@/ui/Button";
 import { useActionsButtonDisabled } from "./useActionsButtonDisabled";
 
 interface ActionsButtonProps extends ButtonProps {
-  "data-test"?: string;
   selectedIds: number[];
   // Extra flag to hide the label on User/Profile Tasks pages
   showLabel?: boolean;

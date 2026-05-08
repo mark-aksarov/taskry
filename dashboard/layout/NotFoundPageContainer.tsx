@@ -2,7 +2,7 @@ import {
   PageStateContainer,
   PageStateContainerProps,
 } from "./PageStateContainer";
-import { Button } from "@/ui/Button";
+import { ButtonLink } from "@/ui/Button";
 
 interface NotFoundPageContainerProps
   extends Omit<PageStateContainerProps, "button"> {
@@ -18,8 +18,7 @@ export default function NotFoundPageContainer({
   return (
     <PageStateContainer
       button={
-        <Button
-          as="a"
+        <ButtonLink
           size="medium"
           href={linkHref}
           variant="secondary"

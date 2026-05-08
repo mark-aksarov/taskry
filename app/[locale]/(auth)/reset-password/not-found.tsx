@@ -6,7 +6,7 @@ import {
   AuthCardSubtitle,
 } from "@/auth/AuthCard";
 import { LogIn } from "lucide-react";
-import { Button } from "@/ui/Button";
+import { ButtonLink } from "@/ui/Button";
 import { useTranslations } from "next-intl";
 
 export default function PasswordNotFound() {
@@ -19,8 +19,7 @@ export default function PasswordNotFound() {
         <AuthCardSubtitle>{t("body")}</AuthCardSubtitle>
       </AuthCardHeader>
       <AuthCardBody>
-        <Button
-          as="a"
+        <ButtonLink
           href="/signIn"
           outlined
           variant="primary"

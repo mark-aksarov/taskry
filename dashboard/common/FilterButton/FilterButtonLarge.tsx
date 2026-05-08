@@ -3,11 +3,7 @@ import { SlidersHorizontal } from "lucide-react";
 import { Button, ButtonProps } from "@/ui/Button";
 import { useFilterButtonDisabled } from "./useFilterButtonDisabled";
 
-interface FilterButtonLargeProps extends ButtonProps {
-  "data-test"?: string;
-}
-
-export function FilterButtonLarge(props: FilterButtonLargeProps) {
+export function FilterButtonLarge(props: ButtonProps) {
   const t = useTranslations("dashboard.common.FilterButtonLarge");
 
   const isDisabled = useFilterButtonDisabled();

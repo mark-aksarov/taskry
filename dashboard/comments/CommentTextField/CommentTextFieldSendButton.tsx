@@ -1,9 +1,9 @@
 "use client";
 
+import { Button } from "@/ui/Button";
 import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
 import { SendHorizonal } from "lucide-react";
-import { Button } from "@/ui/Button";
 import { useModal } from "@/common/ModalManagerContext";
 import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
 

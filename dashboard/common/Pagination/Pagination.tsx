@@ -2,10 +2,10 @@
 
 import { Fragment } from "react";
 import { twMerge } from "tailwind-merge";
+import { ButtonVariant } from "@/ui/Button";
 import { useTranslations } from "next-intl";
 import { PaginationButton } from "./PaginationButton";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { ButtonVariant } from "@/ui/Button/Button";
 
 export type PaginationSize = "small" | "large";
 

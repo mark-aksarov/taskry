@@ -1,8 +1,9 @@
 import React from "react";
+import { Button } from "./Button";
+import { ButtonSize, ButtonVariant } from "./types";
 import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
-import { Button, ButtonSize, ButtonVariant } from "./Button";
 
 describe("Button", () => {
   test("renders with default props", () => {
@@ -14,7 +15,7 @@ describe("Button", () => {
   });
 
   test("renders as an <a> element when 'as' is 'a'", () => {
-    render(<Button as="a" href="https://example.com" />);
+    render(<Button href="https://example.com" />);
 
     expect(screen.getByRole("link")).toBeInTheDocument();
   });

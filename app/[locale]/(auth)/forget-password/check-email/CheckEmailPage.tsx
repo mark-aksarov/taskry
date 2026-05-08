@@ -5,7 +5,7 @@ import {
   AuthCardHeading,
   AuthCardSubtitle,
 } from "@/auth/AuthCard";
-import { Button } from "@/ui/Button";
+import { ButtonLink } from "@/ui/Button";
 import { useTranslations } from "next-intl";
 import { AuthCardSignInFooter } from "@/auth/AuthCardSignInFooter";
 
@@ -19,8 +19,7 @@ export function CheckEmailPage() {
         <AuthCardSubtitle>{t("subtitle")}</AuthCardSubtitle>
       </AuthCardHeader>
       <AuthCardBody>
-        <Button
-          as="a"
+        <ButtonLink
           href="/forget-password"
           outlined
           variant="primary"

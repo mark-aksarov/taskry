@@ -2,18 +2,18 @@
 
 import {
   composeRenderProps,
-  Button as ReactAriaButton,
-  ButtonProps as ReactAriaButtonProps,
+  Link as ReactAriaLink,
+  LinkProps as ReactAriaLinkProps,
 } from "react-aria-components";
-import { Loader2 } from "lucide-react";
+
 import { ButtonOwnProps } from "./types";
 import { buttonStyles, iconButtonStyles } from "./styles";
 
-export type ButtonProps = ButtonOwnProps &
-  ReactAriaButtonProps &
-  React.RefAttributes<HTMLButtonElement>;
+export type ButtonLinkProps = ButtonOwnProps &
+  ReactAriaLinkProps &
+  React.RefAttributes<HTMLAnchorElement>;
 
-export const Button = ({
+export const ButtonLink = ({
   variant,
   size = "small",
   outlined,
@@ -22,11 +22,11 @@ export const Button = ({
   label,
   className,
   ...props
-}: ButtonProps) => {
+}: ButtonLinkProps) => {
   const styles = label ? buttonStyles : iconButtonStyles;
 
   return (
-    <ReactAriaButton
+    <ReactAriaLink
       className={composeRenderProps(className, (className, renderProps) =>
         styles({
           ...renderProps,
@@ -38,18 +38,9 @@ export const Button = ({
       )}
       {...props}
     >
-      {props.isPending && (
-        <Loader2
-          data-testid="loader-icon"
-          size={size === "small" ? 16 : size === "medium" ? 18 : 20}
-          strokeWidth={size === "small" ? 1.5 : size === "medium" ? 1.75 : 2}
-          absoluteStrokeWidth
-          className="animate-spin"
-        />
-      )}
       {iconLeft}
       {label && <span>{label}</span>}
       {iconRight}
-    </ReactAriaButton>
+    </ReactAriaLink>
   );
 };

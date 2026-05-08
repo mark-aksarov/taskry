@@ -1,11 +1,11 @@
 import {
   PageSection,
   PageSectionHeader,
-  PageSectionAction,
   PageSectionContent,
   PageSectionHeading,
   PageSectionActions,
   PageSectionDescription,
+  PageSectionActionLink,
 } from "@/site/common/PageSection";
 
 import { FileText } from "lucide-react";
@@ -30,9 +30,9 @@ export function DocsSection() {
           <DocsSectionGrid />
 
           <PageSectionActions>
-            <PageSectionAction
-              as="a"
+            <PageSectionActionLink
               href="/docs"
+              variant="accent"
               iconLeft={<FileText size={20} />}
               label={t("CtaButton.label")}
             />

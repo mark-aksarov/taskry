@@ -7,9 +7,7 @@ import { useModal } from "../../common/ModalManagerContext";
 import { useDeleteTask } from "../tasks/DeleteTaskContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
-export function CreateSubtasksButton(
-  props: ButtonProps & React.RefAttributes<HTMLButtonElement>,
-) {
+export function CreateSubtasksButton(props: ButtonProps) {
   const t = useTranslations("dashboard.subtasks.CreateSubtasksButton");
 
   // Show guest modal for guests

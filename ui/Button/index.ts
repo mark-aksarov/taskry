@@ -1,10 +1,4 @@
-export type {
-  ButtonSize,
-  ButtonProps,
-  ElementType,
-  ButtonVariant,
-  ButtonOwnProps,
-} from "./Button";
-
-export { Button } from "./Button";
-export { baseButtonStyles, buttonStyles, iconButtonStyles } from "./Button";
+export { Button, type ButtonProps } from "./Button";
+export { ButtonLink, type ButtonLinkProps } from "./ButtonLink";
+export type { ButtonSize, ButtonVariant, ButtonOwnProps } from "./types";
+export { baseButtonStyles, buttonStyles, iconButtonStyles } from "./styles";

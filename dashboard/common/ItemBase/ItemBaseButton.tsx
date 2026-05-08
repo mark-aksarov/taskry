@@ -1,11 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import { Button, ButtonProps } from "@/ui/Button";
 
-export interface ItemBaseButtonProps extends ButtonProps {
-  "data-test"?: string;
-}
-
-export function ItemBaseButton({ className, ...props }: ItemBaseButtonProps) {
+export function ItemBaseButton({ className, ...props }: ButtonProps) {
   return (
     <Button
       {...props}

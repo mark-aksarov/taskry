@@ -1,8 +1,12 @@
 "use client";
 
+import {
+  PageSectionActionLink,
+  PageSectionActionButton,
+} from "../common/PageSection";
+
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
-import { PageSectionAction } from "../common/PageSection";
 
 interface DemoActionProps {
   isGuest: boolean;
@@ -13,22 +17,23 @@ export function DemoAction({ isGuest, hasSession }: DemoActionProps) {
   const t = useTranslations("site.home.DemoAction");
   const { onOpenChange } = useModal("switch-to-demo-modal");
 
-  const demoProps =
-    isGuest || !hasSession
-      ? {
-          as: "a" as const,
-          href: isGuest ? "/dashboard" : "/guest-sign-in",
-        }
-      : {
-          onPress: () => onOpenChange(true),
-        };
+  if (isGuest || !hasSession) {
+    return (
+      <PageSectionActionLink
+        href={isGuest ? "/dashboard" : "/guest-sign-in"}
+        variant="secondary"
+        outlined
+        label={t("label")}
+      />
+    );
+  }
 
   return (
-    <PageSectionAction
+    <PageSectionActionButton
+      onPress={() => onOpenChange(true)}
       variant="secondary"
       outlined
       label={t("label")}
-      {...demoProps}
     />
   );
 }

@@ -1,7 +1,6 @@
 export { ItemBaseBadge } from "./ItemBaseBadge";
 export { ItemBaseButton } from "./ItemBaseButton";
 export { ItemBaseDeadline } from "./ItemBaseDeadline";
-export { type ItemBaseButtonProps } from "./ItemBaseButton";
 export { ItemBaseDetailButton } from "./ItemBaseDetailButton";
 export { ItemBaseBadgeSkeleton } from "./ItemBaseBadgeSkeleton";
 export { ItemBaseButtonSkeleton } from "./ItemBaseButtonSkeleton";

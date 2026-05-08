@@ -1,13 +1,8 @@
-import { Button, ButtonProps } from "@/ui/Button";
+import { ButtonLink, ButtonLinkProps } from "@/ui/Button";
 
-interface DetailSideSheetLinkProps extends ButtonProps<"a"> {
-  "data-test"?: string;
-}
-
-export function DetailSideSheetLink(props: DetailSideSheetLinkProps) {
+export function DetailSideSheetLink(props: ButtonLinkProps) {
   return (
-    <Button
-      as="a"
+    <ButtonLink
       variant="accent"
       size="medium"
       className="w-full justify-center"

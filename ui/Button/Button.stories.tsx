@@ -19,12 +19,6 @@ const meta = {
   title: "UI/Button",
   component: Button,
   argTypes: {
-    as: {
-      control: {
-        type: "select",
-      },
-      options: ["button", "a"],
-    },
     className: {
       control: {
         type: "text",

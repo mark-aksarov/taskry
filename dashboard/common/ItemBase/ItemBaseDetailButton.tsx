@@ -6,7 +6,6 @@ import { Button, ButtonProps } from "react-aria-components";
 
 export interface ItemBaseDetailButtonProps extends ButtonProps {
   children: React.ReactNode;
-  "data-test"?: string;
   className?: string;
 }
 

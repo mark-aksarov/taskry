@@ -1,10 +1,14 @@
 "use client";
 
+import {
+  PageSectionActionLink,
+  PageSectionActionButton,
+} from "../common/PageSection";
+
 import { useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { ActionState } from "@/lib/actions/types";
-import { PageSectionAction } from "../common/PageSection";
 import { useAddErrorToast } from "@/lib/hooks/useAddErrorToast";
 
 interface GetStartedActionProps {
@@ -33,7 +37,7 @@ export function GetStartedAction({ isGuest, signOut }: GetStartedActionProps) {
 
   if (isGuest) {
     return (
-      <PageSectionAction
+      <PageSectionActionButton
         variant="accent"
         isPending={isPending}
         label={t("label")}
@@ -43,8 +47,7 @@ export function GetStartedAction({ isGuest, signOut }: GetStartedActionProps) {
   }
 
   return (
-    <PageSectionAction
-      as="a"
+    <PageSectionActionLink
       variant="accent"
       href="/dashboard"
       label={t("label")}
