@@ -23,7 +23,7 @@ describe("TextField", () => {
     const input = screen.getByRole("textbox");
     expect(input).toBeInTheDocument();
     expect(input).toHaveClass(
-      "group placeholder:text-gray-500 border-gray-300",
+      "group placeholder:text-(--text-secondary) border-(--border-primary)",
     );
   });
 
@@ -49,7 +49,7 @@ describe("TextField", () => {
     await user.tab();
 
     const input = screen.getByRole("textbox");
-    expect(input).toHaveClass("bborder-(--control-border-focused)");
+    expect(input).toHaveClass("border-(--control-border-focused)");
   });
 
   test("renders with placeholder", () => {

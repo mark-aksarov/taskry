@@ -11,45 +11,25 @@ describe("Button", () => {
 
     const button = screen.getByRole("button");
     expect(button).toBeInTheDocument();
-    expect(button).toHaveClass("bg-blue-600 px-3 py-2");
-  });
-
-  test("renders as an <a> element when 'as' is 'a'", () => {
-    render(<Button href="https://example.com" />);
-
-    expect(screen.getByRole("link")).toBeInTheDocument();
   });
 
   test.each<[ButtonVariant, string]>([
-    ["primary", "hover:bg-blue-500"],
-    ["secondary", "hover:bg-gray-300"],
-    ["ghost", "hover:bg-gray-200"],
-    ["outlined", "hover:bg-gray-200"],
-    ["contrast", "hover:bg-gray-900"],
+    ["accent", "hover:bg-(--accent-hover)"],
+    ["primary", "hover:bg-(--surface-primary-hover)"],
+    ["secondary", "hover:bg-(--surface-secondary-hover)"],
+    ["tertiary", "pressed:bg-(--surface-tertiary-pressed)"],
+    ["contrast", "hover:bg-(--button-surface-contrast-hover)"],
   ])("applies '%s' variant styles", (variant, expectedClass) => {
     render(<Button label="Button" variant={variant} />);
     const button = screen.getByRole("button");
     expect(button).toHaveClass(expectedClass);
   });
 
-  test.each<[ButtonVariant, boolean, string]>([
-    ["primary", true, "bg-gray-200"],
-    ["ghost", true, "text-gray-400"],
-    ["primary", false, "bg-blue-600"],
-    ["secondary", false, "bg-gray-200"],
-    ["outlined", false, "border border-gray-300"],
-    ["contrast", false, "bg-black"],
-    ["ghost", false, "text-black"],
-  ])(
-    "applies compound styles for variant=%s disabled=%s",
-    (variant, isDisabled, expectedClass) => {
-      render(
-        <Button label="Button" variant={variant} isDisabled={isDisabled} />,
-      );
-      const button = screen.getByRole("button");
-      expect(button).toHaveClass(expectedClass);
-    },
-  );
+  test("applies disabled styles", () => {
+    render(<Button label="Button" isDisabled={true} />);
+    const button = screen.getByRole("button");
+    expect(button).toHaveClass("text-(--text-disabled)");
+  });
 
   test.each<[ButtonSize, boolean, string]>([
     ["small", true, "p-2"],
@@ -71,48 +51,48 @@ describe("Button", () => {
     expect(button).toHaveClass(expectedClass);
   });
 
-  test.each<[ButtonVariant, ButtonSize, boolean, boolean, string]>([
-    ["outlined", "small", true, true, "p-2"],
-    ["outlined", "medium", true, true, "p-3"],
-    ["outlined", "large", true, true, "p-4"],
+  test.each<[boolean, ButtonSize, boolean, boolean, string]>([
+    [true, "small", true, true, "p-2"],
+    [true, "medium", true, true, "p-3"],
+    [true, "large", true, true, "p-4"],
 
-    ["outlined", "small", true, false, "px-3 py-2"],
-    ["outlined", "medium", true, false, "px-5 py-3"],
-    ["outlined", "large", true, false, "px-6 py-4"],
+    [true, "small", true, false, "px-3 py-2"],
+    [true, "medium", true, false, "px-5 py-3"],
+    [true, "large", true, false, "px-6 py-4"],
 
-    ["outlined", "small", false, true, "p-[calc(var(--spacing)*2-1px)]"],
-    ["outlined", "medium", false, true, "p-[calc(var(--spacing)*3-1px)]"],
-    ["outlined", "large", false, true, "p-[calc(var(--spacing)*4-1px)]"],
+    [true, "small", false, true, "p-[calc(var(--spacing)*2-1px)]"],
+    [true, "medium", false, true, "p-[calc(var(--spacing)*3-1px)]"],
+    [true, "large", false, true, "p-[calc(var(--spacing)*4-1px)]"],
 
     [
-      "outlined",
+      true,
       "small",
       false,
       false,
       "px-[calc(var(--spacing)*3-1px)] py-[calc(var(--spacing)*2-1px)]",
     ],
     [
-      "outlined",
+      true,
       "medium",
       false,
       false,
       "px-[calc(var(--spacing)*5-1px)] py-[calc(var(--spacing)*3-1px)]",
     ],
     [
-      "outlined",
+      true,
       "large",
       false,
       false,
       "px-[calc(var(--spacing)*6-1px)] py-[calc(var(--spacing)*4-1px)]",
     ],
   ])(
-    "applies compound styles for variant=%s size=%s disabled=%s iconButton=%s",
-    (variant, size, isDisabled, iconButton, expectedClass) => {
+    "applies compound styles for outlined=%s size=%s disabled=%s iconButton=%s",
+    (outlined, size, isDisabled, iconButton, expectedClass) => {
       render(
         <Button
           label={iconButton ? undefined : "Button"}
           iconLeft={iconButton ? <svg /> : undefined}
-          variant={variant}
+          outlined={outlined}
           size={size}
           isDisabled={isDisabled}
         />,

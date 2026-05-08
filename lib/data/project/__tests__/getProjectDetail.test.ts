@@ -63,6 +63,13 @@ describe("getProjectDetail", () => {
         id: 1,
         name: "Project Category 1",
       },
+
+      tasks: {
+        active: 0,
+        completed: 0,
+        pending: 0,
+        total: 0,
+      },
     });
   });
 

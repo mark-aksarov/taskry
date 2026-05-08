@@ -5,7 +5,6 @@ Cypress.Commands.add(
     const fields = {
       "user-full-name-field": data.fullName,
       "user-email-field": data.email,
-      "user-password-field": data.password,
     };
 
     // We clear each field and print only if there is text.

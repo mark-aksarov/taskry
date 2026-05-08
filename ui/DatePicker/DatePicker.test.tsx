@@ -24,7 +24,7 @@ describe("DatePicker", () => {
     render(<DatePicker label="Label" value={new CalendarDate(1980, 1, 1)} />);
 
     const group = screen.getByRole("group");
-    expect(group).toHaveClass("group border-gray-300 dark:border-gray-600");
+    expect(group).toHaveClass("group border-(--border-primary)");
 
     const segments = screen.getAllByRole("spinbutton");
     const monthSegment = segments[0];

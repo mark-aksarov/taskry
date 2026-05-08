@@ -31,7 +31,7 @@ describe("dashboard cards", () => {
     cy.task("db:reset");
     cy.task("db:seed", payload);
     cy.signIn("user-1@test.com", "12345abc");
-    cy.visit("/en");
+    cy.visit("/en/dashboard");
   });
 
   it("Displays correct dashboard cards", () => {

@@ -20,7 +20,7 @@ describe("Select", () => {
     render(<TestSelect />);
 
     const button = screen.getByRole("button");
-    expect(button).toHaveClass("group border-gray-300 dark:border-gray-600");
+    expect(button).toHaveClass("group border-(--border-primary)");
   });
 
   test("applies focus-visible styles", async () => {

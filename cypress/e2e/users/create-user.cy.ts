@@ -28,7 +28,6 @@ describe("creates a new project", () => {
     cy.fillCreateUserForm({
       fullName: "Created User Name",
       email: "created-user@test.com",
-      password: "12345abc",
     });
 
     // submit
@@ -39,14 +38,6 @@ describe("creates a new project", () => {
       cy.contains("Created User Name");
       cy.contains("created-user@test.com");
     });
-
-    // sign in as Created User
-    cy.signIn("created-user@test.com", "12345abc");
-    cy.visit("/en");
-    cy.getByData("verify-email-card").should(
-      "contain",
-      "created-user@test.com",
-    );
   });
 
   it("shows validation errors and prevents submission with invalid data", () => {
@@ -57,7 +48,6 @@ describe("creates a new project", () => {
 
     cy.contains(/full name is required/i);
     cy.contains(/email is required/i);
-    cy.contains(/password is required/i);
 
     cy.getByData("user-email-field").type("invalid email");
     cy.get('button[type="submit"]').click();
@@ -73,7 +63,6 @@ describe("creates a new project", () => {
     cy.fillCreateUserForm({
       fullName: "Created User Name",
       email: "user-1@test.com",
-      password: "12345abc",
     });
 
     // submit

@@ -23,7 +23,7 @@ describe("SearchField", () => {
     const input = screen.getByRole("searchbox");
     expect(input).toBeInTheDocument();
     expect(input).toHaveClass(
-      "group peer placeholder:text-gray-500 border-gray-300",
+      "group peer placeholder:text-(--text-secondary) border-(--border-primary)",
     );
   });
 
