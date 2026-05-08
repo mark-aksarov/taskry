@@ -40,7 +40,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     hr: ({ className }) => (
       <Separator
         className={twMerge(
-          "bg-gray-300 max-md:my-8 md:my-10 dark:bg-gray-600",
+          "bg-(--border-primary) max-md:my-8 md:my-10",
           className,
         )}
       />

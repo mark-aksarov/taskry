@@ -38,6 +38,6 @@ describe("ToggleButtonGroup", () => {
     render(<TestToggleButtonGroup isDisabled />);
 
     const button = screen.getByRole("radio", { name: "Apple" });
-    expect(button).toHaveClass("bg-(--bg-input-disabled)");
+    expect(button).toHaveClass("bg-(--button-surface-disabled)");
   });
 });

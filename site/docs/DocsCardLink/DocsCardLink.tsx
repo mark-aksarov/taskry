@@ -12,7 +12,7 @@ const styles = tv({
     "group flex w-full flex-col gap-4",
     "rounded-lg border p-6",
     "border-(--border-primary)",
-    "pressed:bg-(--surface-2-pressed)/50 bg-(--surface-2) hover:bg-(--surface-2-hover)/50",
+    "pressed:bg-(--surface-secondary-pressed)/50 bg-(--surface-secondary) hover:bg-(--surface-secondary-hover)/50",
   ],
 
   slots: {

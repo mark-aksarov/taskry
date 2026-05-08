@@ -31,7 +31,7 @@ describe("TextField", () => {
     render(<TextField label="Label" isInvalid />);
 
     const input = screen.getByRole("textbox");
-    expect(input).toHaveClass("border-(--border-danger)");
+    expect(input).toHaveClass("border-(--control-border-error)");
   });
 
   test("applies disabled styles", async () => {
@@ -49,7 +49,7 @@ describe("TextField", () => {
     await user.tab();
 
     const input = screen.getByRole("textbox");
-    expect(input).toHaveClass("bborder-(--border-info)");
+    expect(input).toHaveClass("bborder-(--control-border-focused)");
   });
 
   test("renders with placeholder", () => {

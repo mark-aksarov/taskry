@@ -15,10 +15,10 @@ export const DashboardCardIcon = ({
     <div
       className={twMerge(
         "rounded-full p-4.5",
-        color === "blue" && "bg-(--bg-info-1) text-(--icon-info)",
-        color === "orange" && "bg-(--bg-warning-1) text-(--icon-warning)",
-        color === "red" && "bg-(--bg-danger-2) text-(--icon-danger)",
-        color === "green" && "bg-(--bg-success-1) text-(--icon-success)",
+        color === "blue" && "bg-(--surface-info) text-(--icon-info)",
+        color === "orange" && "bg-(--surface-warning) text-(--icon-warning)",
+        color === "red" && "bg-(--surface-danger) text-(--icon-danger)",
+        color === "green" && "bg-(--surface-success) text-(--icon-success)",
       )}
     >
       {children}

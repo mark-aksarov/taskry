@@ -39,7 +39,7 @@ export const fieldLabelStyles = tv({
 
 export const fieldErrorStyles = tv({
   extend: fieldLabelStyles,
-  base: "text-(--text-danger-alt)",
+  base: "text-(--control-text-error)",
 });
 
 export const fieldGroupStyles = tv({

@@ -31,11 +31,11 @@ const boxStyles = tv({
   base: "flex h-5 w-5 shrink-0 items-center justify-center self-start rounded-sm",
   variants: {
     isSelected: {
-      false: "bg-(--surface-3)",
+      false: "bg-(--control-toggle-surface)",
       true: "",
     },
     isDisabled: {
-      true: "bg-(--bg-input-disabled)",
+      true: "bg-(--control-surface-disabled)",
     },
   },
   compoundVariants: [

@@ -10,7 +10,7 @@ export function IconContainer({ className, children }: IconContainerProps) {
   return (
     <ImageContainer
       className={twMerge(
-        "flex items-center justify-center text-(--icon-primary)",
+        "flex items-center justify-center text-(--icon-neutral)",
         className,
       )}
     >

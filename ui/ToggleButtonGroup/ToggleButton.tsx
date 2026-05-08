@@ -21,11 +21,12 @@ export const toggleButtonStyles = tv({
       contrast: "",
     },
     isSelected: {
-      false: "pressed:bg-(--surface-2-pressed) hover:bg-(--surface-2-hover)",
+      false:
+        "pressed:bg-(--surface-secondary-pressed) hover:bg-(--surface-secondary-hover)",
     },
 
     isDisabled: {
-      true: "pointer-events-none bg-(--bg-input-disabled) text-(--text-disabled)",
+      true: "pointer-events-none bg-(--button-surface-disabled) text-(--text-disabled)",
     },
   },
   compoundVariants: [
@@ -39,7 +40,7 @@ export const toggleButtonStyles = tv({
       variant: "contrast",
       isSelected: true,
       isDisabled: false,
-      className: "bg-(--surface-contrast) text-(--text-contrast)",
+      className: "bg-(--button-surface-contrast) text-(--text-contrast)",
     },
   ],
 });

@@ -31,7 +31,7 @@ describe("SearchField", () => {
     render(<SearchField label="Label" isInvalid />);
 
     const input = screen.getByRole("searchbox");
-    expect(input).toHaveClass("border-(--border-danger)");
+    expect(input).toHaveClass("border-(--control-border-error)");
   });
 
   test("applies disabled styles", async () => {
@@ -49,7 +49,7 @@ describe("SearchField", () => {
     await user.tab();
 
     const input = screen.getByRole("searchbox");
-    expect(input).toHaveClass("border-(--border-info)");
+    expect(input).toHaveClass("border-(--control-border-focused)");
   });
 
   test("renders with placeholder", () => {

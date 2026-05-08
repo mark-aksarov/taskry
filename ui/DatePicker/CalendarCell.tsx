@@ -33,7 +33,7 @@ const calendarCell = tv({
       true: "text-(--text-disabled)",
     },
     isUnavailable: {
-      true: "text-(--text-danger-alt)",
+      true: "text-(--control-text-error)",
     },
   },
   compoundVariants: [

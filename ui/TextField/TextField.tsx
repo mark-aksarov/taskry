@@ -32,10 +32,10 @@ export const fieldInputStyles = tv({
       true: "resize-none",
     },
     isFocused: {
-      true: "border-(--border-info)",
+      true: "border-(--control-border-focused)",
     },
     isInvalid: {
-      true: "border-(--border-danger)",
+      true: "border-(--control-border-error)",
     },
     isDisabled: {
       false: [
@@ -44,8 +44,8 @@ export const fieldInputStyles = tv({
       ].join(" "),
 
       true: [
-        "border-(--border-disabled)",
-        "bg-(--bg-input-disabled)",
+        "border-(--control-border-disabled)",
+        "bg-(--control-surface-disabled)",
         "text-(--text-disabled)",
         "placeholder:text-(--text-disabled)",
       ].join(" "),

@@ -17,7 +17,7 @@ export const cardStyles = tv({
     "overflow-hidden",
     "rounded-2xl",
     "p-4",
-    "bg-(--surface-1)",
+    "bg-(--surface-primary)",
     "shadow-[0_1px_3px_rgba(0,0,0,0.1)] dark:shadow-[0_1px_3px_rgba(0,0,0,0.2)]",
   ],
 });

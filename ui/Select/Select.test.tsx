@@ -31,14 +31,14 @@ describe("Select", () => {
     await user.tab();
 
     const button = screen.getByRole("button");
-    expect(button).toHaveClass("border-(--border-info)");
+    expect(button).toHaveClass("border-(--control-border-focused)");
   });
 
   test("applies invalid styles", async () => {
     render(<TestSelect isInvalid />);
 
     const button = screen.getByRole("button");
-    expect(button).toHaveClass("border-(--border-danger)");
+    expect(button).toHaveClass("border-(--control-border-error)");
   });
 
   test("applies disabled styles", async () => {

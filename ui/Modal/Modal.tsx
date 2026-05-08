@@ -24,7 +24,7 @@ const modalStyles = tv({
     "w-[490px]",
     "overflow-hidden",
     "rounded-xl border border-(--border-primary)",
-    "bg-(--surface-1)",
+    "bg-(--surface-primary)",
     "transition duration-150",
   ],
   variants: {

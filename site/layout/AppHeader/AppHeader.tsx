@@ -17,7 +17,7 @@ import { DocsSidebarSheetTrigger } from "@/site/docs/DocsSidebarSheetTrigger";
 const styles = tv({
   base: [
     "border-b border-(--border-primary)",
-    "bg-(--surface-2)/70",
+    "bg-(--surface-secondary)/70",
     "backdrop-blur-md",
   ],
 });

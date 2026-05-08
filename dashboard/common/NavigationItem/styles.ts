@@ -17,7 +17,8 @@ export const styles = tv({
       secondary: "",
     },
     isActive: {
-      false: "pressed:bg-(--surface-1-pressed) hover:bg-(--surface-1-hover)",
+      false:
+        "pressed:bg-(--surface-primary-pressed) hover:bg-(--surface-primary-hover)",
       true: "bg-(--accent) text-white",
     },
     isPending: {
@@ -33,7 +34,7 @@ export const styles = tv({
     {
       variant: "secondary",
       isActive: true,
-      class: "bg-(--surface-1-hover) text-(--text-info)",
+      class: "bg-(--surface-primary-hover) text-(--text-info)",
     },
   ],
 });

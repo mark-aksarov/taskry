@@ -31,7 +31,7 @@ export function CommentForm({ action, isPending }: CommentFormProps) {
     <Form onSubmit={handleSubmit} className="flex w-full flex-col">
       <CommentTextField
         isPending={isPending}
-        textAreaClassName="bg-(--surface-1) outline-hidden"
+        textAreaClassName="bg-(--surface-primary) outline-hidden"
       />
       <input type="hidden" name={hiddenName} value={hiddenValue} />
     </Form>

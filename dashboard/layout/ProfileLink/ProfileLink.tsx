@@ -21,7 +21,7 @@ export const ProfileLink = ({ fullName, imageUrl }: ProfileLinkProps) => {
 
   return (
     <BaseLink href="/profile" className="flex items-center gap-2.5">
-      <div className="h-8 w-8 overflow-hidden rounded-full bg-gray-300">
+      <div className="h-8 w-8 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
         {profileImg}
       </div>
       <div className="text-sm font-bold text-(--text-primary)">{fullName}</div>

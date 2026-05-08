@@ -105,7 +105,7 @@ const PopoverInner = ({
           ...style,
         }}
         className={twMerge(
-          "overflow-hidden rounded-xl border border-(--border-primary) bg-(--surface-1) shadow-lg will-change-transform",
+          "overflow-hidden rounded-xl border border-(--border-primary) bg-(--surface-primary) shadow-lg will-change-transform",
           className,
         )}
         data-testid="popover"

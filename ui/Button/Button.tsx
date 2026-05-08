@@ -34,6 +34,8 @@ export type ButtonOwnProps<T extends ElementType> = {
   className?: string;
 };
 
+//РАЗДЕЛИТЬ BUTTON_LINK ОТ BUTTON
+
 export type ButtonBaseProps<T extends ElementType> = T extends "a"
   ? ReactAriaLinkProps & React.RefAttributes<HTMLAnchorElement>
   : ReactAriaButtonProps & React.RefAttributes<HTMLButtonElement>;

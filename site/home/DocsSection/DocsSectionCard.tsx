@@ -12,7 +12,7 @@ const styles = tv({
     "group flex w-full items-center justify-start gap-6",
     "rounded-2xl border p-6",
     "border-(--border-secondary) hover:border-(--border-primary)",
-    "pressed:bg-(--surface-1-pressed) bg-(--surface-1) hover:bg-(--surface-1-hover)",
+    "pressed:bg-(--surface-primary-pressed) bg-(--surface-primary) hover:bg-(--surface-primary-hover)",
   ],
 
   slots: {

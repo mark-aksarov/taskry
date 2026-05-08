@@ -3,7 +3,7 @@ import { tv } from "tailwind-variants";
 export const overlayTransitionDuration = 150;
 
 export const focusRing = tv({
-  base: "outline outline-offset-2 outline-(--border-outline)",
+  base: "outline outline-offset-2 outline-blue-600 dark:outline-blue-700",
   variants: {
     isFocusVisible: {
       false: "outline-0",
@@ -18,15 +18,15 @@ export const itemStyles = tv({
     "px-4 py-3",
     "cursor-pointer outline-none",
     "text-sm text-(--text-primary)",
-    "active:bg-(--surface-1-pressed)",
+    "active:bg-(--surface-primary-pressed)",
   ],
   variants: {
     isHovered: {
-      false: "bg-(--surface-1)",
-      true: "bg-(--surface-1-hover)",
+      false: "bg-(--surface-primary)",
+      true: "bg-(--surface-primary-hover)",
     },
     isFocused: {
-      true: "bg-(--surface-1-hover)",
+      true: "bg-(--surface-primary-hover)",
     },
     isDisabled: {
       true: "pointer-events-none text-(--text-disabled)",
@@ -38,7 +38,7 @@ export const overlayStyles = tv({
   base: [
     "fixed top-0 left-0 z-4",
     "flex h-(--visual-viewport-height) w-full items-center justify-center",
-    "bg-(--bg-overlay)",
+    "bg-(--overlay-surface)",
     "transition duration-150",
   ],
   variants: {

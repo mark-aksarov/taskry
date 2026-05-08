@@ -39,14 +39,14 @@ describe("DatePicker", () => {
     await user.tab();
 
     const group = screen.getByRole("group");
-    expect(group).toHaveClass("border-(--border-info)");
+    expect(group).toHaveClass("border-(--control-border-focused)");
   });
 
   test("applies invalid styles", async () => {
     render(<DatePicker label="Label" isInvalid />);
 
     const group = screen.getByRole("group");
-    expect(group).toHaveClass("border-(--border-danger)");
+    expect(group).toHaveClass("border-(--control-border-error)");
   });
 
   test("applies disabled styles", async () => {

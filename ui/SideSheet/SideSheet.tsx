@@ -22,7 +22,7 @@ const sideSheetStyles = tv({
     "h-full",
     "overflow-hidden",
     "border-(--border-primary)",
-    "bg-(--surface-1)",
+    "bg-(--surface-primary)",
     "transition duration-150",
   ],
   variants: {

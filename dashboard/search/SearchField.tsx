@@ -22,7 +22,7 @@ export const SearchField = () => {
       defaultValue={value}
       onChange={debouncedSetQuery}
       className="flex-auto"
-      inputClassName="rounded-full py-3 bg-(--surface-1)"
+      inputClassName="rounded-full py-3 bg-(--surface-primary)"
       maxLength={255}
     />
   );
