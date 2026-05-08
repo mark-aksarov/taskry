@@ -40,7 +40,7 @@ export const toggleButtonStyles = tv({
       variant: "contrast",
       isSelected: true,
       isDisabled: false,
-      className: "bg-(--button-surface-contrast) text-(--text-contrast)",
+      className: "bg-(--button-surface-contrast) text-(--button-text-contrast)",
     },
   ],
 });

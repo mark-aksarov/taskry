@@ -8,12 +8,12 @@ const styles = tv({
   extend: linkStyles,
   base: [
     "relative py-1 pl-4",
-    "pressed:text-(--text-info) hover:text-(--text-info)",
+    "pressed:text-(--text-link) hover:text-(--text-link)",
   ],
   variants: {
     isActive: {
       false: "text-(--text-tertiary)",
-      true: "font-semibold text-(--text-info)",
+      true: "font-semibold text-(--text-link)",
     },
   },
 });
@@ -42,7 +42,7 @@ export function DocsNavigationLink({
       {isActive && (
         <span
           aria-hidden="true"
-          className="absolute top-0 bottom-0 -left-px block w-px bg-(--text-info)"
+          className="absolute top-0 bottom-0 -left-px block w-px bg-(--text-link)"
         />
       )}
     </Link>

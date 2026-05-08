@@ -34,7 +34,7 @@ export const styles = tv({
     {
       variant: "secondary",
       isActive: true,
-      class: "bg-(--surface-primary-hover) text-(--text-info)",
+      class: "bg-(--surface-primary-hover) text-(--text-link)",
     },
   ],
 });

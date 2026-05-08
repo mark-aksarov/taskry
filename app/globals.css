@@ -13,20 +13,9 @@
   --text-primary: var(--color-black);
   --text-secondary: var(--color-gray-500);
   --text-tertiary: var(--color-gray-600);
-  --text-contrast: var(--color-white);
-  --text-info: var(--color-blue-700);
-  --text-info-hover: var(--color-blue-500);
-  --text-success: var(--color-green-700);
-  --text-warning: var(--color-orange-700);
-  --text-danger: var(--color-red-700);
+  --text-link: var(--color-blue-600);
+  --text-link-hover: var(--color-blue-500);
   --text-disabled: var(--color-gray-400);
-
-  /* Icon */
-  --icon-neutral: var(--color-gray-400);
-  --icon-info: var(--color-blue-500);
-  --icon-warning: var(--color-orange-400);
-  --icon-danger: var(--color-red-600);
-  --icon-success: var(--color-green-600);
 
   /* Surface */
   --surface-primary: var(--color-white);
@@ -40,13 +29,6 @@
   --surface-tertiary: var(--color-gray-200);
   --surface-tertiary-pressed: var(--color-gray-300);
 
-  --surface-info: var(--color-blue-100);
-  --surface-warning: var(--color-orange-100);
-  --surface-danger: var(--color-red-100);
-  --surface-success: var(--color-green-100);
-  --surface-success-hover: var(--color-green-200);
-  --surface-success-pressed: var(--color-green-300);
-
   /* Accent */
   --accent: var(--color-blue-600);
   --accent-hover: var(--color-blue-500);
@@ -56,6 +38,7 @@
   --overlay-surface: rgb(0 0 0 / 20%);
 
   /* Button */
+  --button-text-contrast: var(--color-white);
   --button-surface-disabled: var(--color-gray-200);
   --button-surface-contrast: var(--color-black);
   --button-surface-contrast-hover: var(--color-gray-900);
@@ -79,20 +62,9 @@
   --text-primary: var(--color-white);
   --text-secondary: var(--color-gray-400);
   --text-tertiary: var(--color-gray-300);
-  --text-contrast: var(--color-black);
-  --text-info: var(--color-blue-300);
-  --text-info-hover: var(--color-blue-400);
-  --text-success: var(--color-green-300);
-  --text-warning: var(--color-orange-100);
-  --text-danger: var(--color-red-100);
+  --text-link: var(--color-blue-400);
+  --text-link-hover: var(--color-blue-300);
   --text-disabled: var(--color-gray-500);
-
-  /* Icon */
-  --icon-neutral: var(--color-gray-500);
-  --icon-info: var(--color-blue-300);
-  --icon-warning: var(--color-orange-200);
-  --icon-danger: var(--color-red-200);
-  --icon-success: var(--color-green-200);
 
   /* Surface */
   --surface-primary: var(--color-gray-800);
@@ -106,13 +78,6 @@
   --surface-tertiary: var(--color-gray-700);
   --surface-tertiary-pressed: var(--color-gray-800);
 
-  --surface-info: var(--color-blue-800);
-  --surface-warning: var(--color-orange-700);
-  --surface-danger: var(--color-red-700);
-  --surface-success: var(--color-green-800);
-  --surface-success-hover: var(--color-green-700);
-  --surface-success-pressed: var(--color-green-600);
-
   /* Accent */
   --accent: var(--color-blue-700);
   --accent-hover: var(--color-blue-600);
@@ -122,6 +87,7 @@
   --overlay-surface: rgb(0 0 0 / 50%);
 
   /* Button */
+  --button-text-contrast: var(--color-black);
   --button-surface-disabled: var(--color-gray-800);
   --button-surface-contrast: var(--color-white);
   --button-surface-contrast-hover: var(--color-gray-200);

@@ -59,7 +59,7 @@ export const baseButtonStyles = tv({
     {
       variant: "contrast",
       isDisabled: false,
-      class: "bg-(--button-surface-contrast) text-(--text-contrast)",
+      class: "bg-(--button-surface-contrast) text-(--button-text-contrast)",
     },
     {
       outlined: true,

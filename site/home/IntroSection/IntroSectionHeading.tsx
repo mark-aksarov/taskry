@@ -10,7 +10,7 @@ const introHeadingStyles = tv({
       "max-lg:text-7xl max-md:text-6xl lg:text-8xl",
       "max-sm:text-start",
     ],
-    highlight: "text-(--text-info)",
+    highlight: "text-blue-600 dark:text-blue-400",
     breakSm: "sm:hidden",
   },
 });
