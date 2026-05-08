@@ -13,7 +13,7 @@ export const baseButtonStyles = tv({
         "pressed:bg-(--surface-secondary-pressed) hover:bg-(--surface-secondary-hover)",
       tertiary: "pressed:bg-(--surface-tertiary-pressed)",
       contrast:
-        "pressed:bg-(--button-surface-contrast-pressed) hover:bg-(--button-surface-contrast-hover)",
+        "pressed:bg-gray-800 dark:pressed:bg-gray-300 hover:bg-gray-900 dark:hover:bg-gray-200",
     },
     size: {
       small: "text-xs",
@@ -34,7 +34,7 @@ export const baseButtonStyles = tv({
   compoundVariants: [
     {
       isDisabled: true,
-      class: "bg-(--button-surface-disabled) text-(--text-disabled)",
+      class: "bg-gray-200 text-(--text-disabled) dark:bg-gray-800",
     },
     {
       variant: "accent",
@@ -59,7 +59,7 @@ export const baseButtonStyles = tv({
     {
       variant: "contrast",
       isDisabled: false,
-      class: "bg-(--button-surface-contrast) text-(--button-text-contrast)",
+      class: "bg-black text-white dark:bg-white dark:text-black",
     },
     {
       outlined: true,

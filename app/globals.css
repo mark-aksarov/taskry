@@ -37,13 +37,6 @@
   /* Overlay */
   --overlay-surface: rgb(0 0 0 / 20%);
 
-  /* Button */
-  --button-text-contrast: var(--color-white);
-  --button-surface-disabled: var(--color-gray-200);
-  --button-surface-contrast: var(--color-black);
-  --button-surface-contrast-hover: var(--color-gray-900);
-  --button-surface-contrast-pressed: var(--color-gray-800);
-
   /* Control */
   --control-text-error: var(--color-red-600);
   --control-surface-disabled: var(--color-gray-100);
@@ -85,13 +78,6 @@
 
   /* Overlay */
   --overlay-surface: rgb(0 0 0 / 50%);
-
-  /* Button */
-  --button-text-contrast: var(--color-black);
-  --button-surface-disabled: var(--color-gray-800);
-  --button-surface-contrast: var(--color-white);
-  --button-surface-contrast-hover: var(--color-gray-200);
-  --button-surface-contrast-pressed: var(--color-gray-300);
 
   /* Control */
   --control-text-error: var(--color-red-500);

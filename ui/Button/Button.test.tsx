@@ -18,7 +18,7 @@ describe("Button", () => {
     ["primary", "hover:bg-(--surface-primary-hover)"],
     ["secondary", "hover:bg-(--surface-secondary-hover)"],
     ["tertiary", "pressed:bg-(--surface-tertiary-pressed)"],
-    ["contrast", "hover:bg-(--button-surface-contrast-hover)"],
+    ["contrast", "hover:bg-gray-900 dark:hover:bg-gray-200"],
   ])("applies '%s' variant styles", (variant, expectedClass) => {
     render(<Button label="Button" variant={variant} />);
     const button = screen.getByRole("button");

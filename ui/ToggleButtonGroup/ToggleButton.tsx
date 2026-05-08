@@ -26,7 +26,7 @@ export const toggleButtonStyles = tv({
     },
 
     isDisabled: {
-      true: "pointer-events-none bg-(--button-surface-disabled) text-(--text-disabled)",
+      true: "pointer-events-none bg-gray-200 text-(--text-disabled) dark:bg-gray-800",
     },
   },
   compoundVariants: [
@@ -40,7 +40,7 @@ export const toggleButtonStyles = tv({
       variant: "contrast",
       isSelected: true,
       isDisabled: false,
-      className: "bg-(--button-surface-contrast) text-(--button-text-contrast)",
+      className: "bg-black text-white dark:bg-white dark:text-black",
     },
   ],
 });
