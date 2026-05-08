@@ -30,6 +30,7 @@ export function CommentTextFieldSendButton({
 
   return (
     <Button
+      variant="accent"
       type={isGuest ? "button" : "submit"}
       data-test="comment-text-field-send-button"
       iconLeft={

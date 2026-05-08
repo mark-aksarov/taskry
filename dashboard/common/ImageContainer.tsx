@@ -10,7 +10,7 @@ interface ImageContainerProps {
 
 export function ImageContainer({ className, children }: ImageContainerProps) {
   return (
-    <div className={twMerge(styles, "bg-gray-200 dark:bg-gray-700", className)}>
+    <div className={twMerge(styles, "bg-(--surface-tertiary)", className)}>
       {children}
     </div>
   );

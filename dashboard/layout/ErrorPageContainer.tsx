@@ -22,7 +22,8 @@ export default function ErrorPageContainer({
     <PageStateContainer
       button={
         <Button
-          variant="outlined"
+          variant="secondary"
+          outlined
           label={resetButtonLabel}
           size="medium"
           onPress={reset}

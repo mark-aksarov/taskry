@@ -20,7 +20,8 @@ export function ActionsButton({
 
   return (
     <Button
-      variant="outlined"
+      variant="secondary"
+      outlined
       label={showLabel ? t("label") : undefined}
       aria-label={!showLabel ? t("label") : undefined}
       iconLeft={<Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />}

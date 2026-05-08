@@ -22,7 +22,8 @@ export default function NotFoundPageContainer({
           as="a"
           size="medium"
           href={linkHref}
-          variant="outlined"
+          variant="secondary"
+          outlined
           label={linkLabel}
         />
       }

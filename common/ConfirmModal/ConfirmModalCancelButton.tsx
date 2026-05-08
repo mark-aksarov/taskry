@@ -22,7 +22,8 @@ export function ConfirmModalCancelButton({
 
   return (
     <Button
-      variant="outlined"
+      variant="primary"
+      outlined
       label={label}
       onPress={handlePress}
       size="medium"

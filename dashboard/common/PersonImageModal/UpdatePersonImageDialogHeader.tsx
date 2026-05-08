@@ -17,7 +17,8 @@ export function UpdatePersonImageDialogHeader({
       <div className="flex items-center gap-4">
         <Button
           onPress={() => setImageFile(null)}
-          variant="outlined"
+          variant="primary"
+          outlined
           iconLeft={
             <ChevronLeft size={16} absoluteStrokeWidth strokeWidth={1.5} />
           }

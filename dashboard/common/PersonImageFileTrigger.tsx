@@ -62,6 +62,7 @@ export function PersonImageFileTrigger({
       }}
     >
       <Button
+        variant="accent"
         size="medium"
         label={t("label")}
         className="w-full justify-center"

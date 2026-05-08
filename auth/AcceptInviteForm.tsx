@@ -37,6 +37,7 @@ export function AcceptInviteForm({
       </FormErrorBanner>
 
       <AuthFormSubmitButton
+        variant="accent"
         isPending={isPending}
         label={t("submitButtonLabel")}
       />

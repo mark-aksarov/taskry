@@ -26,7 +26,7 @@ export function AppBottomSheetTrigger({
         {...triggerProps}
         ref={triggerRef}
         aria-label={t("triggerAriaLabel")}
-        variant="ghost"
+        variant="primary"
         iconLeft={<Menu size={16} strokeWidth={1.5} absoluteStrokeWidth />}
         className="-mr-2 rounded-full p-3"
       />

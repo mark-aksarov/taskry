@@ -22,6 +22,7 @@ export function AuthSignOutButton() {
 
   return (
     <Button
+      variant="accent"
       className="justify-center py-4"
       size="medium"
       onPress={handlePress}

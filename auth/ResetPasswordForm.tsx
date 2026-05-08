@@ -32,6 +32,7 @@ export function ResetPasswordForm({ resetPassword }: ResetPasswordFormProps) {
       </FormErrorBanner>
 
       <AuthFormSubmitButton
+        variant="accent"
         isPending={isPending}
         label={t("submitButtonLabel")}
       />

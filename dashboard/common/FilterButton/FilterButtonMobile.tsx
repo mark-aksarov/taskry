@@ -30,7 +30,7 @@ export function FilterButtonMobile({
 
   return (
     <Button
-      variant={selectedCount > 0 ? "contrast" : "secondary"}
+      variant={selectedCount > 0 ? "contrast" : "tertiary"}
       className={twMerge("rounded-full px-3", className)}
       iconLeft={icon}
       isDisabled={isDisabled}

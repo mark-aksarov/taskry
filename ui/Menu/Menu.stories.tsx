@@ -46,7 +46,10 @@ function getItems() {
 const MenuTemplate = {
   render: (args) => {
     return (
-      <MenuTrigger renderButton={() => <Button label="Actions" />} {...args}>
+      <MenuTrigger
+        renderButton={() => <Button variant="accent" label="Actions" />}
+        {...args}
+      >
         {getItems()}
       </MenuTrigger>
     );
@@ -126,7 +129,7 @@ export const WithSheetAndHeader = {
             <DialogCloseButton />
           </DialogHeader>
         )}
-        renderButton={() => <Button label="Actions" />}
+        renderButton={() => <Button variant="accent" label="Actions" />}
         {...args}
       >
         {getItems()}

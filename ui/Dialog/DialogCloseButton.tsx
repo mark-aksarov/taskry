@@ -26,7 +26,7 @@ export const DialogCloseButton = ({
 
   return (
     <Button
-      variant="ghost"
+      variant="primary"
       iconLeft={<X size={iconSize} strokeWidth={1.5} absoluteStrokeWidth />}
       onPress={handlePress}
       className={twMerge("-mr-2 rounded-full", className)}

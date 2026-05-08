@@ -34,7 +34,7 @@ export function SearchModalTriggerClearButton() {
 
   return (
     <Button
-      variant="ghost"
+      variant="primary"
       className="rounded-full text-inherit"
       onPress={handlePress}
       aria-label={t("clearButtonLabel")}

@@ -118,11 +118,7 @@ export const SubtaskListItemInner = memo(function SubtaskListItemInner({
       {icon}
       <div className="mr-auto text-sm">{text}</div>
       {showActionMenu && (
-        <SubtaskActionMenuTrigger
-          subtaskId={id}
-          isDone={isDone}
-          buttonClassName="bg-transparent!"
-        />
+        <SubtaskActionMenuTrigger subtaskId={id} isDone={isDone} />
       )}
     </div>
   );

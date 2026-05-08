@@ -15,7 +15,8 @@ export function FilterButtonLarge(props: FilterButtonLargeProps) {
   return (
     <Button
       label={t("label")}
-      variant="outlined"
+      variant="secondary"
+      outlined
       isDisabled={isDisabled}
       iconLeft={
         <SlidersHorizontal size={16} strokeWidth={1.5} absoluteStrokeWidth />

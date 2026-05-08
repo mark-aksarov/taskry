@@ -31,7 +31,8 @@ export function SendVerificationEmailButton({
 
   return (
     <Button
-      variant="outlined"
+      outlined
+      variant="primary"
       className="justify-center py-4"
       onPress={handlePress}
       iconLeft={<Mail size={18} strokeWidth={1.5} absoluteStrokeWidth />}

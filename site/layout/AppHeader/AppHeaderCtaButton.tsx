@@ -7,6 +7,7 @@ export function AppHeaderCtaButton() {
   return (
     <Button
       size="medium"
+      variant="accent"
       label={t("GetStartedButton.label")}
       className="rounded-xl py-2 max-md:hidden"
     />

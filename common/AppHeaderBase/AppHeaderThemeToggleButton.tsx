@@ -21,7 +21,7 @@ export function AppHeaderThemeToggleButton() {
   }
 
   const commonProps = {
-    variant: "ghost" as ButtonVariant,
+    variant: "secondary" as ButtonVariant,
     className: "rounded-full p-3",
   };
 

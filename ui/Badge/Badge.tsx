@@ -21,8 +21,7 @@ export const Badge = ({
         color === "green" && "bg-(--surface-success) text-(--text-success)",
         color === "orange" && "bg-(--surface-warning) text-(--text-warning)",
         color === "red" && "bg-(--surface-danger) text-(--text-danger)",
-        color === "gray" &&
-          "bg-gray-100 text-(--text-tertiary) dark:bg-gray-700",
+        color === "gray" && "bg-(--surface-tertiary) text-(--text-tertiary)",
         className,
       )}
       {...props}

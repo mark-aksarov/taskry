@@ -66,6 +66,7 @@ export const Validation = {
       <Form className="flex flex-col items-start gap-4">
         <Story />
         <Button
+          variant="accent"
           type="submit"
           label="Submit"
           className="w-full justify-center"

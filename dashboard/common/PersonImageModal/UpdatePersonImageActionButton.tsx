@@ -39,7 +39,7 @@ export function UpdatePersonImageActionButton({
 
   return (
     <Button
-      variant="primary"
+      variant="accent"
       size="medium"
       isPending={isPending}
       label={t("save")}

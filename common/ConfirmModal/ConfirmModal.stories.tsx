@@ -18,7 +18,7 @@ const meta = {
 
     return (
       <>
-        <Button onPress={() => setIsOpen(true)} label="Open" />
+        <Button variant="accent" onPress={() => setIsOpen(true)} label="Open" />
         <ConfirmModal {...args} isOpen={isOpen} onOpenChange={setIsOpen} />
       </>
     );

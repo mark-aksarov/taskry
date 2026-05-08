@@ -9,7 +9,7 @@ export function ItemBaseActionMenuButton({ className, ...props }: ButtonProps) {
   return (
     <Button
       aria-label={t("ariaLabel")}
-      variant="ghost"
+      variant="primary"
       iconLeft={
         props.isPending ? undefined : (
           <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />

@@ -20,7 +20,7 @@ export const Skeleton = ({ className, size, ...props }: SkeletonProps) => {
   return (
     <div
       className={twMerge(
-        "w-full animate-pulse rounded-full bg-gray-200 text-base dark:bg-gray-700",
+        "w-full animate-pulse rounded-full bg-(--surface-tertiary) text-base",
         size === "xs" && "my-[0.125rem] h-[0.75rem]",
         size === "sm" && "my-[0.25rem] h-[0.875rem]",
         size === "base" && "my-[0.25rem] h-[1rem]",

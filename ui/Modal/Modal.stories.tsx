@@ -29,7 +29,7 @@ type Story = StoryObj<typeof meta>;
 const ModalTemplate = ({ children, ...props }: ModalProps) => {
   return (
     <DialogTrigger>
-      <Button label="Open modal" />
+      <Button variant="accent" label="Open modal" />
       <Modal {...props}>{children}</Modal>
     </DialogTrigger>
   );

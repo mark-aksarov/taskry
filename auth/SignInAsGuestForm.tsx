@@ -36,7 +36,8 @@ export function SignInAsGuestForm({ signIn }: SignInAsGuestFormProps) {
           ) : undefined
         }
         isPending={isPending}
-        variant="outlined"
+        outlined
+        variant="primary"
         label={t("submitButtonLabel")}
       />
       <FormErrorBanner status={state.status} isPending={isPending}>

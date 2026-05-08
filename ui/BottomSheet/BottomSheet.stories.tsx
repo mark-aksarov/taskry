@@ -38,7 +38,7 @@ const BottomSheetTemplate = ({
 
   return (
     <>
-      <Button {...triggerProps} label="Open Bottom Sheet" />
+      <Button {...triggerProps} variant="accent" label="Open Bottom Sheet" />
       <BottomSheet {...props} state={state}>
         {children}
       </BottomSheet>

@@ -87,8 +87,8 @@ export function Pagination({
       label: !isPrev && !isNext && targetPage,
       "aria-label": label,
       variant: (isPrev || isNext || page !== targetPage
-        ? "ghost"
-        : "primary") as ButtonVariant,
+        ? "secondary"
+        : "accent") as ButtonVariant,
     };
 
     return (

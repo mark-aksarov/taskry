@@ -24,7 +24,7 @@ type Story = StoryObj<typeof meta>;
 const SideSheetTemplate = ({ children, ...props }: SideSheetProps) => {
   return (
     <DialogTrigger>
-      <Button label="Open sheet" />
+      <Button variant="accent" label="Open sheet" />
       <SideSheet {...props}>{children}</SideSheet>
     </DialogTrigger>
   );

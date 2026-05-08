@@ -37,10 +37,15 @@
   --surface-secondary-hover: var(--color-gray-200);
   --surface-secondary-pressed: var(--color-gray-300);
 
+  --surface-tertiary: var(--color-gray-200);
+  --surface-tertiary-pressed: var(--color-gray-300);
+
   --surface-info: var(--color-blue-100);
   --surface-warning: var(--color-orange-100);
   --surface-danger: var(--color-red-100);
   --surface-success: var(--color-green-100);
+  --surface-success-hover: var(--color-green-200);
+  --surface-success-pressed: var(--color-green-300);
 
   /* Accent */
   --accent: var(--color-blue-600);
@@ -51,10 +56,12 @@
   --overlay-surface: rgb(0 0 0 / 20%);
 
   /* Button */
-  --button-surface-disabled: var(--color-gray-100);
+  --button-surface-disabled: var(--color-gray-200);
   --button-surface-contrast: var(--color-black);
+  --button-surface-contrast-hover: var(--color-gray-900);
+  --button-surface-contrast-pressed: var(--color-gray-800);
 
-  /* Input */
+  /* Control */
   --control-text-error: var(--color-red-600);
   --control-surface-disabled: var(--color-gray-100);
   --control-border-error: var(--color-red-300);
@@ -96,10 +103,15 @@
   --surface-secondary-hover: var(--color-gray-800);
   --surface-secondary-pressed: var(--color-gray-700);
 
+  --surface-tertiary: var(--color-gray-700);
+  --surface-tertiary-pressed: var(--color-gray-800);
+
   --surface-info: var(--color-blue-800);
   --surface-warning: var(--color-orange-700);
   --surface-danger: var(--color-red-700);
   --surface-success: var(--color-green-800);
+  --surface-success-hover: var(--color-green-700);
+  --surface-success-pressed: var(--color-green-600);
 
   /* Accent */
   --accent: var(--color-blue-700);
@@ -110,10 +122,12 @@
   --overlay-surface: rgb(0 0 0 / 50%);
 
   /* Button */
-  --button-surface-disabled: var(--color-gray-700);
+  --button-surface-disabled: var(--color-gray-800);
   --button-surface-contrast: var(--color-white);
+  --button-surface-contrast-hover: var(--color-gray-200);
+  --button-surface-contrast-pressed: var(--color-gray-300);
 
-  /* Input */
+  /* Control */
   --control-text-error: var(--color-red-500);
   --control-surface-disabled: var(--color-gray-700);
   --control-border-disabled: var(--color-gray-800);

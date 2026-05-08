@@ -44,6 +44,7 @@ const ToastTemplate = (props: ToastStoryArgs) => {
     <>
       <ToastRegion />
       <Button
+        variant="accent"
         onPress={() =>
           toastQueue.add(
             {

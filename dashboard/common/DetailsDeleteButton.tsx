@@ -9,7 +9,8 @@ export function DetailsDeleteButton(props: ButtonProps) {
           <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
         )
       }
-      variant="outlined"
+      variant="primary"
+      outlined
       {...props}
     />
   );

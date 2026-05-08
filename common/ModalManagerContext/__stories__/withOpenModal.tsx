@@ -17,7 +17,11 @@ function OpenModalDecorator({ modalId, Story }: OpenModalDecoratorProps) {
 
   return (
     <>
-      <Button label="Open modal" onClick={() => onOpenChange(true)} />
+      <Button
+        variant="accent"
+        label="Open modal"
+        onClick={() => onOpenChange(true)}
+      />
       <Story />
     </>
   );

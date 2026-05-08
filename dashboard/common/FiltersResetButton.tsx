@@ -34,7 +34,8 @@ export function FiltersResetButton() {
 
   return (
     <Button
-      variant="outlined"
+      variant="primary"
+      outlined
       label={t("label")}
       size="medium"
       onPress={handlePress}

@@ -24,7 +24,11 @@ const meta = {
 
     return (
       <>
-        <Button onPress={() => setIsOpen(true)} label="Change image" />
+        <Button
+          variant="accent"
+          onPress={() => setIsOpen(true)}
+          label="Change image"
+        />
         <PersonImageModal
           isOpen={isOpen}
           onOpenChange={setIsOpen}

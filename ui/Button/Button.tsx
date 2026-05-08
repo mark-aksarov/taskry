@@ -16,10 +16,10 @@ import { Loader2 } from "lucide-react";
 export type ElementType = "button" | "a";
 
 export type ButtonVariant =
+  | "accent"
   | "primary"
   | "secondary"
-  | "ghost"
-  | "outlined"
+  | "tertiary"
   | "contrast";
 
 export type ButtonSize = "small" | "medium" | "large";
@@ -32,9 +32,8 @@ export type ButtonOwnProps<T extends ElementType> = {
   variant?: ButtonVariant;
   size?: ButtonSize;
   className?: string;
+  outlined?: boolean;
 };
-
-//РАЗДЕЛИТЬ BUTTON_LINK ОТ BUTTON
 
 export type ButtonBaseProps<T extends ElementType> = T extends "a"
   ? ReactAriaLinkProps & React.RefAttributes<HTMLAnchorElement>
@@ -48,15 +47,14 @@ export const baseButtonStyles = tv({
   base: "flex cursor-pointer items-center gap-x-1.5 rounded-lg font-bold whitespace-nowrap",
   variants: {
     variant: {
-      primary: "pressed:bg-(--accent-pressed) hover:bg-(--accent-hover)",
+      accent: "pressed:bg-(--accent-pressed) hover:bg-(--accent-hover)",
+      primary:
+        "pressed:bg-(--surface-primary-pressed) hover:bg-(--surface-primary-hover)",
       secondary:
-        "pressed:bg-gray-300 dark:pressed:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-700",
-      ghost:
-        "pressed:bg-gray-300 dark:pressed:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700",
-      outlined:
-        "pressed:bg-gray-300 dark:pressed:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700",
+        "pressed:bg-(--surface-secondary-pressed) hover:bg-(--surface-secondary-hover)",
+      tertiary: "pressed:bg-(--surface-tertiary-pressed)",
       contrast:
-        "pressed:bg-gray-800 dark:pressed:bg-gray-300 hover:bg-gray-900 dark:hover:bg-gray-200",
+        "pressed:bg-(--button-surface-contrast-pressed) hover:bg-(--button-surface-contrast-hover)",
     },
     size: {
       small: "text-xs",
@@ -69,42 +67,45 @@ export const baseButtonStyles = tv({
     isPending: {
       true: "pointer-events-none opacity-50",
     },
+    outlined: {
+      true: "",
+      false: "",
+    },
   },
   compoundVariants: [
     {
-      variant: ["primary", "secondary", "outlined", "contrast"],
       isDisabled: true,
-      class: "bg-gray-200 text-(--text-disabled) dark:bg-gray-800",
+      class: "bg-(--button-surface-disabled) text-(--text-disabled)",
     },
     {
-      variant: "ghost",
-      isDisabled: true,
-      class: "text-(--text-disabled)",
-    },
-    {
-      variant: "primary",
+      variant: "accent",
       isDisabled: false,
       class: "bg-(--accent) text-white",
     },
     {
-      variant: "secondary",
+      variant: "primary",
       isDisabled: false,
-      class: "bg-gray-200 text-(--text-primary) dark:bg-gray-800",
+      class: "bg-(--surface-primary) text-(--text-primary)",
     },
     {
-      variant: "outlined",
+      variant: "secondary",
       isDisabled: false,
-      class: "border border-(--border-primary) text-(--text-primary)",
+      class: "bg-(--surface-secondary) text-(--text-primary)",
+    },
+    {
+      variant: "tertiary",
+      isDisabled: false,
+      class: "bg-(--surface-tertiary) text-(--text-primary)",
     },
     {
       variant: "contrast",
       isDisabled: false,
-      class: "bg-black text-white dark:bg-white dark:text-black",
+      class: "bg-(--button-surface-contrast) text-(--text-contrast)",
     },
     {
-      variant: "ghost",
+      outlined: true,
       isDisabled: false,
-      class: "text-(--text-primary)",
+      class: "border border-(--border-primary) text-(--text-primary)",
     },
   ],
 });
@@ -121,19 +122,19 @@ export const buttonStyles = tv({
   compoundVariants: [
     {
       size: "small",
-      variant: "outlined",
+      outlined: true,
       isDisabled: false,
       class: "px-[calc(var(--spacing)*3-1px)] py-[calc(var(--spacing)*2-1px)]",
     },
     {
       size: "medium",
-      variant: "outlined",
+      outlined: true,
       isDisabled: false,
       class: "px-[calc(var(--spacing)*5-1px)] py-[calc(var(--spacing)*3-1px)]",
     },
     {
       size: "large",
-      variant: "outlined",
+      outlined: true,
       isDisabled: false,
       class: "px-[calc(var(--spacing)*6-1px)] py-[calc(var(--spacing)*4-1px)]",
     },
@@ -154,19 +155,19 @@ export const iconButtonStyles = tv({
   compoundVariants: [
     {
       size: "small",
-      variant: "outlined",
+      outlined: true,
       isDisabled: false,
       class: "p-[calc(var(--spacing)*2-1px)]",
     },
     {
       size: "medium",
-      variant: "outlined",
+      outlined: true,
       isDisabled: false,
       class: "p-[calc(var(--spacing)*3-1px)]",
     },
     {
       size: "large",
-      variant: "outlined",
+      outlined: true,
       isDisabled: false,
       class: "p-[calc(var(--spacing)*4-1px)]",
     },
@@ -175,8 +176,9 @@ export const iconButtonStyles = tv({
 
 export const Button = <T extends ElementType = "button">({
   as,
-  variant = "primary",
+  variant,
   size = "small",
+  outlined,
   iconLeft,
   iconRight,
   label,
@@ -189,8 +191,14 @@ export const Button = <T extends ElementType = "button">({
     string
   >(className, (className, renderProps) =>
     label
-      ? buttonStyles({ ...renderProps, variant, size, className })
-      : iconButtonStyles({ ...renderProps, variant, size, className }),
+      ? buttonStyles({ ...renderProps, variant, size, outlined, className })
+      : iconButtonStyles({
+          ...renderProps,
+          variant,
+          size,
+          outlined,
+          className,
+        }),
   );
 
   if (as === "a") {

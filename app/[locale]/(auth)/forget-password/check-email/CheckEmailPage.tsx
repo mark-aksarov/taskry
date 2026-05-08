@@ -22,7 +22,8 @@ export function CheckEmailPage() {
         <Button
           as="a"
           href="/forget-password"
-          variant="outlined"
+          outlined
+          variant="primary"
           className="justify-center py-4"
           label={t("backButtonLabel")}
           size="medium"

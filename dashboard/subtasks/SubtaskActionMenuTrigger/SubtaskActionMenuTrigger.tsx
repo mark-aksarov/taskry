@@ -72,6 +72,7 @@ export function SubtaskActionMenuTrigger({
           isPending={isPending}
           data-test="subtask-item-action-menu-trigger"
           data-id={subtaskId}
+          variant={undefined}
           className={twMerge(
             "-mx-2 -my-1.25 shrink-0 self-start",
             buttonClassName,

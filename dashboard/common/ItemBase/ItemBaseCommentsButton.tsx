@@ -19,6 +19,7 @@ export function ItemBaseCommentsButton({
 }: ItemBaseCommentsButtonProps) {
   return (
     <CommentButton
+      variant="accent"
       data-test={dataTest}
       data-id={dataId}
       label={commentsCount}

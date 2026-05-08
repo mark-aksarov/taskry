@@ -26,7 +26,8 @@ export function BackButton({ fallbackHref }: BackButtonProps) {
     <Button
       aria-label={t("label")}
       onClick={handleClick}
-      variant="outlined"
+      variant="secondary"
+      outlined
       iconLeft={<ChevronLeft size={16} absoluteStrokeWidth strokeWidth={1.5} />}
     />
   );

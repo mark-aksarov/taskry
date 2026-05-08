@@ -28,7 +28,8 @@ export function CreateSubtasksButton(
     <Button
       {...props}
       data-test="create-subtask-button"
-      variant="outlined"
+      variant="primary"
+      outlined
       iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
       aria-label={t("label")}
       onPress={handlePress}

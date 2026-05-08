@@ -19,7 +19,8 @@ export function SortingButtonLarge({
   return (
     <Button
       isDisabled={isDisabled}
-      variant="outlined"
+      variant="secondary"
+      outlined
       label={showLabel ? t("label") : undefined}
       aria-label={!showLabel ? t("label") : undefined}
       iconLeft={<ArrowDownUp size={16} strokeWidth={1.5} absoluteStrokeWidth />}

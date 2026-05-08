@@ -8,12 +8,13 @@ export interface ItemBaseButtonProps extends ButtonProps {
 export function ItemBaseButton({ className, ...props }: ItemBaseButtonProps) {
   return (
     <Button
-      variant="outlined"
+      {...props}
+      variant="primary"
+      outlined
       className={twMerge(
         "h-[1.75rem] w-[3.75rem] justify-center rounded-full",
         className,
       )}
-      {...props}
     />
   );
 }

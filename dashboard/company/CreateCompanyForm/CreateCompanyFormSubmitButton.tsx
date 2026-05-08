@@ -9,6 +9,7 @@ export function CreateCompanyFormSubmitButton() {
 
   return (
     <FormBaseSubmitButton
+      variant="accent"
       form="create-company-form"
       isPending={isPending}
       label={t("submitButtonLabel")}

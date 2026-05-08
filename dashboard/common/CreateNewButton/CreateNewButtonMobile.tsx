@@ -5,7 +5,8 @@ export function CreateNewButtonMobile(props: ButtonProps) {
   return (
     <Button
       iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
-      variant="outlined"
+      variant="secondary"
+      outlined
       {...props}
     />
   );

@@ -13,6 +13,7 @@ export function CreateCompanyModalTriggerLarge() {
 
   return (
     <CreateNewButtonLarge
+      variant="accent"
       data-test="create-company-modal-trigger-large"
       label={t("label")}
       onPress={handlePress}

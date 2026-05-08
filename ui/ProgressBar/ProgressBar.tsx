@@ -15,7 +15,7 @@ export const progressBarStyles = tv({
     header: "flex justify-between gap-2",
     label: "text-xs font-medium text-(--text-secondary)",
     valueText: "text-xs font-medium text-(--text-secondary)",
-    track: "h-1.5 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700",
+    track: "h-1.5 overflow-hidden rounded-full bg-(--surface-tertiary)",
     fill: "h-full rounded-full transition-all",
   },
 

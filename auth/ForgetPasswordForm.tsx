@@ -29,6 +29,7 @@ export function ForgetPasswordForm({ action }: ForgetPasswordFormProps) {
       </FormErrorBanner>
 
       <AuthFormSubmitButton
+        variant="accent"
         isPending={isPending}
         label={t("submitButtonLabel")}
       />

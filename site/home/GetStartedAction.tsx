@@ -34,7 +34,7 @@ export function GetStartedAction({ isGuest, signOut }: GetStartedActionProps) {
   if (isGuest) {
     return (
       <PageSectionAction
-        variant="primary"
+        variant="accent"
         isPending={isPending}
         label={t("label")}
         onPress={handlePress}
@@ -45,7 +45,7 @@ export function GetStartedAction({ isGuest, signOut }: GetStartedActionProps) {
   return (
     <PageSectionAction
       as="a"
-      variant="primary"
+      variant="accent"
       href="/dashboard"
       label={t("label")}
     />

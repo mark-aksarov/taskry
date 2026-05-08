@@ -8,7 +8,7 @@ export function DetailSideSheetLink(props: DetailSideSheetLinkProps) {
   return (
     <Button
       as="a"
-      variant="primary"
+      variant="accent"
       size="medium"
       className="w-full justify-center"
       {...props}

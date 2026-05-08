@@ -17,7 +17,8 @@ export function CalendarHeader({
     <div className="flex items-center justify-between">
       <Button
         {...prevButtonProps}
-        variant="outlined"
+        variant="primary"
+        outlined
         iconLeft={
           <ChevronLeft size={16} strokeWidth={1.5} absoluteStrokeWidth />
         }
@@ -25,7 +26,8 @@ export function CalendarHeader({
       <h2 className="text-base font-bold text-(--text-primary)">{title}</h2>
       <Button
         {...nextButtonProps}
-        variant="outlined"
+        variant="primary"
+        outlined
         iconLeft={
           <ChevronRight size={16} strokeWidth={1.5} absoluteStrokeWidth />
         }

@@ -35,6 +35,7 @@ export function SignUpForm({ action }: SignUpFormProps) {
       </FormErrorBanner>
 
       <AuthFormSubmitButton
+        variant="accent"
         isPending={isPending}
         label={t("submitButtonLabel")}
       />

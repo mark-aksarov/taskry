@@ -71,6 +71,7 @@ export function CommentItemActionMenuTrigger({
       renderDialogHeader={() => <ItemBaseActionMenuDialogHeader />}
       renderButton={() => (
         <ItemBaseActionMenuButton
+          variant="primary"
           className={className}
           isPending={isPending}
           isDisabled={

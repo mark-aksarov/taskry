@@ -24,6 +24,11 @@ export function DemoAction({ isGuest, hasSession }: DemoActionProps) {
         };
 
   return (
-    <PageSectionAction variant="outlined" label={t("label")} {...demoProps} />
+    <PageSectionAction
+      variant="secondary"
+      outlined
+      label={t("label")}
+      {...demoProps}
+    />
   );
 }

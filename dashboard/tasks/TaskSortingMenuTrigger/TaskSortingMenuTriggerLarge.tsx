@@ -22,6 +22,7 @@ export function TaskSortingMenuTriggerLarge({
       renderButton={() => (
         <SortingButtonLarge
           showLabel={showLabel}
+          variant="primary"
           data-test="task-sorting-menu-trigger-large"
         />
       )}
