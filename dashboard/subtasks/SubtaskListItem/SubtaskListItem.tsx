@@ -69,7 +69,7 @@ const iconStyles = tv({
     {
       isDone: true,
       variant: "plain",
-      class: "text-(--text-tertiary)",
+      class: "text-(--text-link)",
     },
     {
       isDone: true,
