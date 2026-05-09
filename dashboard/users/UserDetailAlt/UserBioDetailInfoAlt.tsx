@@ -7,8 +7,9 @@ import {
   DetailEditButton,
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
-import { useUpdateUserBio } from "../UpdateUserBioContext";
+import { useDeleteUser } from "../DeleteUserContext";
 import { useModal } from "@/common/ModalManagerContext";
+import { useUpdateUserBio } from "../UpdateUserBioContext";
 
 interface UserBioDetailInfoAltProps {
   bio?: string;
@@ -20,6 +21,10 @@ export function UserBioDetailInfoAlt({ bio }: UserBioDetailInfoAltProps) {
   const { onOpenChange: onUpdateBioModalOpenChange } =
     useModal("updateUserBio");
 
+  //Disable edit button while the user is being deleted
+  const { isPending: isDeleteUserPending } = useDeleteUser();
+
+  //Pending state while updating user bio
   const { isPending: isUpdateUserBioPending } = useUpdateUserBio();
 
   return (
@@ -31,6 +36,7 @@ export function UserBioDetailInfoAlt({ bio }: UserBioDetailInfoAltProps) {
         <DetailEditButton
           data-test="update-user-bio-edit-button"
           isPending={isUpdateUserBioPending}
+          isDisabled={isDeleteUserPending}
           onPress={() => onUpdateBioModalOpenChange(true)}
         />
       }

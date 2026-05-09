@@ -7,8 +7,9 @@ import {
   DetailEditButton,
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
-import { useUpdateUserAddress } from "../UpdateUserAddressContext";
+import { useDeleteUser } from "../DeleteUserContext";
 import { useModal } from "@/common/ModalManagerContext";
+import { useUpdateUserAddress } from "../UpdateUserAddressContext";
 
 interface UserAddressDetailInfoAltProps {
   address?: string;
@@ -22,6 +23,10 @@ export function UserAddressDetailInfoAlt({
   const { onOpenChange: onUpdateAddressModalOpenChange } =
     useModal("updateUserAddress");
 
+  //Disable edit button while the user is being deleted
+  const { isPending: isDeleteUserPending } = useDeleteUser();
+
+  //Pending state while updating user address
   const { isPending: isUpdateUserAddressPending } = useUpdateUserAddress();
 
   return (
@@ -33,6 +38,7 @@ export function UserAddressDetailInfoAlt({
         <DetailEditButton
           data-test="update-user-address-edit-button"
           isPending={isUpdateUserAddressPending}
+          isDisabled={isDeleteUserPending}
           onPress={() => onUpdateAddressModalOpenChange(true)}
         />
       }

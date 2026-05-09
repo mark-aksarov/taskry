@@ -7,6 +7,7 @@ import {
   DetailEditButton,
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
+import { useDeleteUser } from "../DeleteUserContext";
 import { useModal } from "@/common/ModalManagerContext";
 import { useUpdateUserPhoneNumber } from "../UpdateUserPhoneNumberContext";
 
@@ -23,6 +24,10 @@ export function UserPhoneNumberDetailInfoAlt({
     "updateUserPhoneNumber",
   );
 
+  //Disable edit button while the user is being deleted
+  const { isPending: isDeleteUserPending } = useDeleteUser();
+
+  //Pending state while updating user phone number
   const { isPending: isUpdateUserPhoneNumberPending } =
     useUpdateUserPhoneNumber();
 
@@ -35,6 +40,7 @@ export function UserPhoneNumberDetailInfoAlt({
         <DetailEditButton
           data-test="update-user-phone-number-edit-button"
           isPending={isUpdateUserPhoneNumberPending}
+          isDisabled={isDeleteUserPending}
           onPress={() => onUpdatePhoneNumberModalOpenChange(true)}
         />
       }

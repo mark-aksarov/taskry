@@ -7,6 +7,7 @@ import {
   DetailEditButton,
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
+import { useDeleteUser } from "../DeleteUserContext";
 import { useModal } from "@/common/ModalManagerContext";
 import { useUpdateUserPosition } from "../UpdateUserPositionContext";
 
@@ -24,6 +25,10 @@ export function UserPositionDetailInfoAlt({
   const { onOpenChange: onUpdatePositionModalOpenChange } =
     useModal("updateUserPosition");
 
+  //Disable edit button while the user is being deleted
+  const { isPending: isDeleteUserPending } = useDeleteUser();
+
+  //Pending state while updating user position
   const { isPending: isUpdateUserPositionPending } = useUpdateUserPosition();
 
   return (
@@ -35,6 +40,7 @@ export function UserPositionDetailInfoAlt({
         <DetailEditButton
           data-test="update-user-position-edit-button"
           isPending={isUpdateUserPositionPending}
+          isDisabled={isDeleteUserPending}
           onPress={() => onUpdatePositionModalOpenChange(true)}
         />
       }

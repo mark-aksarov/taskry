@@ -7,6 +7,7 @@ import {
   DetailEditButton,
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
+import { useDeleteUser } from "../DeleteUserContext";
 import { useModal } from "@/common/ModalManagerContext";
 import { useUpdateUserPublicLink } from "../UpdateUserPublicLinkContext";
 
@@ -23,6 +24,10 @@ export function UserPublicLinkDetailInfoAlt({
     "updateUserPublicLink",
   );
 
+  //Disable edit button while the user is being deleted
+  const { isPending: isDeleteUserPending } = useDeleteUser();
+
+  //Pending state while updating user public link
   const { isPending: isUpdateUserPublicLinkPending } =
     useUpdateUserPublicLink();
 
@@ -35,6 +40,7 @@ export function UserPublicLinkDetailInfoAlt({
         <DetailEditButton
           data-test="update-user-public-link-edit-button"
           isPending={isUpdateUserPublicLinkPending}
+          isDisabled={isDeleteUserPending}
           onPress={() => onUpdatePublicLinkModalOpenChange(true)}
         />
       }

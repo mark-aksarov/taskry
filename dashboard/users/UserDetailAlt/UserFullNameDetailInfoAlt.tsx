@@ -7,6 +7,7 @@ import {
   DetailEditButton,
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
+import { useDeleteUser } from "../DeleteUserContext";
 import { useModal } from "@/common/ModalManagerContext";
 import { useUpdateUserFullName } from "../UpdateUserFullNameContext";
 
@@ -22,6 +23,10 @@ export function UserFullNameDetailInfoAlt({
   const { onOpenChange: onUpdateFullNameModalOpenChange } =
     useModal("updateUserFullName");
 
+  //Disable edit button while the user is being deleted
+  const { isPending: isDeleteUserPending } = useDeleteUser();
+
+  //Pending state while updating user full name
   const { isPending: isUpdateUserFullNamePending } = useUpdateUserFullName();
 
   return (
@@ -33,6 +38,7 @@ export function UserFullNameDetailInfoAlt({
         <DetailEditButton
           data-test="update-user-full-name-edit-button"
           isPending={isUpdateUserFullNamePending}
+          isDisabled={isDeleteUserPending}
           onPress={() => onUpdateFullNameModalOpenChange(true)}
         />
       }

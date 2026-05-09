@@ -32,6 +32,14 @@ export const PrimaryActive = {
   },
 } satisfies Story;
 
+export const PrimaryDisabled = {
+  args: {
+    variant: "primary",
+    label: "Navigation Item",
+    isDisabled: true,
+  },
+} satisfies Story;
+
 export const Secondary = {
   args: {
     variant: "secondary",
@@ -44,5 +52,13 @@ export const SecondaryActive = {
     variant: "secondary",
     label: "Navigation Item",
     isActive: true,
+  },
+} satisfies Story;
+
+export const SecondaryDisabled = {
+  args: {
+    variant: "secondary",
+    label: "Navigation Item",
+    isDisabled: true,
   },
 } satisfies Story;

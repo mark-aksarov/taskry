@@ -6,9 +6,10 @@ import {
   DetailInfoAlt,
   DetailEditButton,
 } from "@/dashboard/common/Detail";
+import { useDeleteUser } from "../DeleteUserContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { useFormatter, useTranslations } from "next-intl";
 import { useUpdateUserBirthdate } from "../UpdateUserBirthdateContext";
-import { useModal } from "@/common/ModalManagerContext";
 
 interface UserBirthdateDetailInfoAltProps {
   birthdate?: string;
@@ -23,6 +24,10 @@ export function UserBirthdateDetailInfoAlt({
     "updateUserBirthdate",
   );
 
+  //Disable edit button while the user is being deleted
+  const { isPending: isDeleteUserPending } = useDeleteUser();
+
+  //Pending state while updating user birthdate
   const { isPending: isUpdateUserBirthdatePending } = useUpdateUserBirthdate();
 
   const format = useFormatter();
@@ -45,6 +50,7 @@ export function UserBirthdateDetailInfoAlt({
         <DetailEditButton
           data-test="update-user-birthdate-edit-button"
           isPending={isUpdateUserBirthdatePending}
+          isDisabled={isDeleteUserPending}
           onPress={() => onUpdateBirthdateModalOpenChange(true)}
         />
       }

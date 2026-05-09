@@ -37,6 +37,14 @@ export const PrimaryPending = {
   },
 } satisfies Story;
 
+export const PrimaryDisabled = {
+  args: {
+    variant: "primary",
+    label: "Navigation Item",
+    isDisabled: true,
+  },
+} satisfies Story;
+
 export const Secondary = {
   args: {
     variant: "secondary",
@@ -57,5 +65,13 @@ export const SecondaryPending = {
     variant: "secondary",
     label: "Navigation Item",
     isPending: true,
+  },
+} satisfies Story;
+
+export const SecondaryDisabled = {
+  args: {
+    variant: "secondary",
+    label: "Navigation Item",
+    isDisabled: true,
   },
 } satisfies Story;

@@ -19,21 +19,26 @@ export const styles = tv({
     isActive: {
       false:
         "pressed:bg-(--surface-primary-pressed) hover:bg-(--surface-primary-hover)",
-      true: "bg-(--accent) text-white",
+      true: "",
     },
     isPending: {
       true: "pointer-events-none text-(--text-secondary)",
+    },
+    isDisabled: {
+      true: "pointer-events-none text-(--text-disabled)",
     },
   },
   compoundVariants: [
     {
       variant: "primary",
       isActive: true,
+      isDisabled: false,
       class: "bg-(--accent) text-white",
     },
     {
       variant: "secondary",
       isActive: true,
+      isDisabled: false,
       class: "bg-(--surface-primary-hover) text-(--text-link)",
     },
   ],

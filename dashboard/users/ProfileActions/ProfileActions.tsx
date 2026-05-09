@@ -61,6 +61,7 @@ export function ProfileActions({ userId }: ProfileActionsProps) {
           onPress={handlePasswordChangePress}
           variant="secondary"
           isPending={isChangePasswordPending}
+          isDisabled={isDeletePending}
           iconLeft={
             <KeyRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
           }
