@@ -103,11 +103,11 @@ export function ProjectItemActionMenuTrigger({
       <Item textValue={t("markPending")} key="pending">
         <CircleEllipsis size={16} /> {t("markPending")}
       </Item>
-      <Item textValue={t("markCompleted")} key="completed">
-        <Check size={16} /> {t("markCompleted")}
-      </Item>
       <Item textValue={t("markActive")} key="active">
         <Clock size={16} /> {t("markActive")}
+      </Item>
+      <Item textValue={t("markCompleted")} key="completed">
+        <Check size={16} /> {t("markCompleted")}
       </Item>
     </ItemBaseActionMenuTrigger>
   );

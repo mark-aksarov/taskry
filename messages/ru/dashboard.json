@@ -680,7 +680,7 @@
       "edit": "Редактировать",
       "delete": "Удалить",
       "markPending": "Отметить как «В ожидании»",
-      "markCompleted": "Отметить как «Готово»",
+      "markCompleted": "Отметить как «Завершено»",
       "markActive": "Отметить как «Активно»",
       "details": "Открыть детали"
     },
@@ -1032,9 +1032,9 @@
     "TaskItemActionMenuTrigger": {
       "edit": "Редактировать",
       "delete": "Удалить",
-      "markPending": "Пометить как ожидающую",
-      "markCompleted": "Пометить как выполненную",
-      "markActive": "Пометить как активную",
+      "markPending": "Отметить как «В ожидании»",
+      "markCompleted": "Отметить как «Завершено»",
+      "markActive": "Отметить как «Активно»",
       "details": "Открыть детали"
     },
     "CreateTaskMenuTrigger": {
