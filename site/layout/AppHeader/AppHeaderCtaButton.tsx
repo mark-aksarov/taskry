@@ -1,15 +1,38 @@
-import { Button } from "@/ui/Button";
-import { useTranslations } from "next-intl";
+import { Button, ButtonLink } from "@/ui/Button";
+import { ActionState } from "@/lib/actions/types";
+import { GetStartedAction } from "@/site/common/GetStartedAction";
 
-export function AppHeaderCtaButton() {
-  const t = useTranslations("site.layout.AppHeader");
+interface AppHeaderCtaButtonProps {
+  isGuest: boolean;
+  signOut: () => Promise<ActionState>;
+}
 
+export function AppHeaderCtaButton({
+  isGuest,
+  signOut,
+}: AppHeaderCtaButtonProps) {
   return (
-    <Button
-      size="medium"
-      variant="accent"
-      label={t("GetStartedButton.label")}
-      className="rounded-xl py-2 max-md:hidden"
+    <GetStartedAction
+      isGuest={isGuest}
+      signOut={signOut}
+      renderButton={({ isPending, handlePress, label }) => (
+        <Button
+          size="medium"
+          variant="accent"
+          isPending={isPending}
+          label={label}
+          onPress={handlePress}
+          className="rounded-lg py-2 max-md:hidden"
+        />
+      )}
+      renderLink={({ href, label }) => (
+        <ButtonLink
+          href={href}
+          variant="accent"
+          label={label}
+          className="rounded-lg py-2 max-md:hidden"
+        />
+      )}
     />
   );
 }

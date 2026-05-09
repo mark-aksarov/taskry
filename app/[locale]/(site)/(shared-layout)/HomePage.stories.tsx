@@ -14,7 +14,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     (Story) => (
-      <SiteLayout>
+      <SiteLayout isGuest={false} signOut={async () => ({ status: "success" })}>
         <Story />
       </SiteLayout>
     ),

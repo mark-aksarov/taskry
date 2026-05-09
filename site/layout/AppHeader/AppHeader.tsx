@@ -9,6 +9,7 @@ import {
 import { Logo } from "../Logo";
 import { tv } from "tailwind-variants";
 import { usePathname } from "@/i18n/navigation";
+import { ActionState } from "@/lib/actions/types";
 import { AppHeaderCtaButton } from "./AppHeaderCtaButton";
 import { PageContainer } from "../../common/PageContainer";
 import { AppHeaderLangMenuTrigger } from "./AppHeaderLangMenuTrigger";
@@ -22,7 +23,12 @@ const styles = tv({
   ],
 });
 
-export function AppHeader() {
+interface AppHeaderCtaButtonProps {
+  isGuest: boolean;
+  signOut: () => Promise<ActionState>;
+}
+
+export function AppHeader({ isGuest, signOut }: AppHeaderCtaButtonProps) {
   const pathname = usePathname();
 
   const isDocsPage = pathname?.startsWith("/docs");
@@ -44,7 +50,7 @@ export function AppHeader() {
             <>
               <AppHeaderThemeToggleButton />
               <AppHeaderLangMenuTrigger />
-              <AppHeaderCtaButton />
+              <AppHeaderCtaButton isGuest={isGuest} signOut={signOut} />
             </>
           }
         />

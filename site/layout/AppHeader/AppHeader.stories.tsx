@@ -15,5 +15,8 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
-  args: {},
+  args: {
+    isGuest: false,
+    signOut: async () => ({ status: "success" }),
+  },
 } satisfies Story;
