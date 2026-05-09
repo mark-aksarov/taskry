@@ -22,7 +22,7 @@ export function AppHeaderThemeToggleButton() {
 
   const commonProps = {
     variant: "secondary" as ButtonVariant,
-    className: "rounded-full p-3",
+    className: "rounded-full p-3 bg-transparent",
   };
 
   if (theme === "dark") {
