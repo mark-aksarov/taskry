@@ -651,7 +651,7 @@
       "label": "Статус"
     },
     "ProjectCreatorCheckboxGroup": {
-      "label": "Создатель"
+      "label": "Кем создан"
     },
     "CreateProjectMenuTrigger": {
       "dialogHeading": "Создать новый",
@@ -668,7 +668,7 @@
       "noDeadline": "Без срока",
       "deadlineOn": "Срок до {date}",
       "noCreator": "Нет создателя",
-      "creator": "Создатель",
+      "creator": "Кем создан",
       "noCustomer": "Нет клиента",
       "customer": "Клиент",
       "category": "Категория",
@@ -708,7 +708,7 @@
       "title": "Комментарии проекта"
     },
     "ProjectDetail": {
-      "creator": "Создатель",
+      "creator": "Кем создан",
       "noCreator": "Нет создателя",
       "deadline": "Дедлайн",
       "noDeadline": "Без дедлайна",
@@ -738,10 +738,10 @@
       "buttonLabel": "Категория"
     },
     "ProjectCreatorFiltersModal": {
-      "heading": "Создатель"
+      "heading": "Кем создан"
     },
     "ProjectCreatorFiltersModalTrigger": {
-      "buttonLabel": "Создатель"
+      "buttonLabel": "Кем создан"
     },
     "ProjectCustomerFiltersModal": {
       "heading": "Клиент"
@@ -1118,7 +1118,7 @@
       "deadline": "Срок",
       "description": "Описание",
       "noDescription": "Нет описания",
-      "creator": "Создатель",
+      "creator": "Кем создана",
       "noCreator": "Нет создателя",
       "category": "Категория",
       "project": "Проект",
