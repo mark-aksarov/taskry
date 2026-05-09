@@ -34,7 +34,7 @@ export function FiltersResetButton() {
 
   return (
     <Button
-      variant="primary"
+      variant="secondary"
       outlined
       label={t("label")}
       size="medium"
