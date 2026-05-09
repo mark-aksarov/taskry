@@ -410,7 +410,8 @@
       "tasks": "Задачи",
       "team": "Команда",
       "customers": "Клиенты",
-      "profile": "Профиль"
+      "profile": "Профиль",
+      "home": "На главную"
     },
     "AppNavigationLogoutButton": {
       "logout": "Выйти"

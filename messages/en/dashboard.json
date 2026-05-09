@@ -410,7 +410,8 @@
       "tasks": "Tasks",
       "team": "Team",
       "customers": "Customers",
-      "profile": "Profile"
+      "profile": "Profile",
+      "home": "To home"
     },
     "AppNavigationLogoutButton": {
       "logout": "Logout"

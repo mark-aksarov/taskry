@@ -7,6 +7,7 @@ import {
   FolderClosed,
   CalendarCheck2,
   LayoutDashboard,
+  Home,
 } from "lucide-react";
 
 import { Separator } from "@/ui/Separator";
@@ -23,6 +24,12 @@ export const AppNavigation = () => {
 
   return (
     <nav className="flex flex-col gap-2.5">
+      <NavigationLink
+        href="/"
+        iconLeft={<Home size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+        label={t("home")}
+      />
+
       <NavigationLink
         href="/dashboard"
         isActive={pathname === "/dashboard"}
