@@ -44,6 +44,7 @@ export interface PaginationProps {
   baseUrl?: string;
   size?: PaginationSize;
   className?: string;
+  buttonVariant?: ButtonVariant;
 }
 
 export function Pagination({
@@ -53,6 +54,7 @@ export function Pagination({
   onChange,
   size = "small",
   className,
+  buttonVariant = "secondary",
 }: PaginationProps) {
   const t = useTranslations("dashboard.common.Pagination");
   const pages = createPageArray(page, totalPages);
@@ -67,28 +69,37 @@ export function Pagination({
         ? t("nextPage")
         : t("page", { pageNumber: targetPage });
 
+    const isEdgeButton = isPrev || isNext;
+    const isActivePage = page === targetPage;
+    const iconSize = size === "small" ? 16 : 18;
+    const isDisabled =
+      (isPrev && page === 1) || (isNext && page === totalPages);
+
+    const icon = isPrev ? (
+      <ChevronLeft
+        size={iconSize}
+        strokeWidth={1.5}
+        absoluteStrokeWidth
+        className="shrink-0"
+      />
+    ) : isNext ? (
+      <ChevronRight
+        size={iconSize}
+        strokeWidth={1.5}
+        absoluteStrokeWidth
+        className="shrink-0"
+      />
+    ) : undefined;
+
+    const variant: ButtonVariant =
+      isEdgeButton || !isActivePage ? buttonVariant : "accent";
+
     const commonProps = {
-      iconLeft: isPrev ? (
-        <ChevronLeft
-          size={size === "small" ? 16 : 18}
-          strokeWidth={1.5}
-          absoluteStrokeWidth
-          className="shrink-0"
-        />
-      ) : isNext ? (
-        <ChevronRight
-          size={size === "small" ? 16 : 18}
-          strokeWidth={1.5}
-          absoluteStrokeWidth
-          className="shrink-0"
-        />
-      ) : undefined,
-      isDisabled: (isPrev && page === 1) || (isNext && page === totalPages),
-      label: !isPrev && !isNext && targetPage,
+      iconLeft: icon,
+      isDisabled,
+      label: !isEdgeButton && targetPage,
       "aria-label": label,
-      variant: (isPrev || isNext || page !== targetPage
-        ? "secondary"
-        : "accent") as ButtonVariant,
+      variant,
     };
 
     return (

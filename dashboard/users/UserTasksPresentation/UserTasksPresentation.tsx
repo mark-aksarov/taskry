@@ -24,7 +24,15 @@ export function UserTasksPresentation({
         page={page}
         totalPages={totalPages}
         pageSize={pageSize}
-        className="md:py-4"
+        className="md:hidden"
+      />
+
+      <EntityContainerPagination
+        page={page}
+        totalPages={totalPages}
+        pageSize={pageSize}
+        buttonVariant="primary"
+        className="py-4 max-md:hidden"
       />
     </>
   );

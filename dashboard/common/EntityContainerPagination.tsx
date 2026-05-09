@@ -3,6 +3,7 @@
 import { useOptimistic } from "react";
 import { useLocale } from "next-intl";
 import { twMerge } from "tailwind-merge";
+import { ButtonVariant } from "@/ui/Button";
 import { useSearchParams } from "next/navigation";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { usePageTransition } from "../common/PageTransitionContext";
@@ -13,6 +14,7 @@ interface EntityContainerPaginationProps {
   pageSize: number;
   totalPages: number;
   className?: string;
+  buttonVariant?: ButtonVariant;
 }
 
 export function EntityContainerPagination(
@@ -32,6 +34,7 @@ export function EntityContainerPaginationInner({
   pageSize,
   totalPages,
   className,
+  buttonVariant,
 }: EntityContainerPaginationProps) {
   const locale = useLocale();
   const router = useRouter();
@@ -62,6 +65,7 @@ export function EntityContainerPaginationInner({
     page: optimisticPage,
     totalPages,
     onChange: handleChange,
+    buttonVariant,
   };
 
   return (
