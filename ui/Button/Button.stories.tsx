@@ -48,9 +48,6 @@ const meta = {
     onPress: fn(),
   },
   decorators: [withThemedBackground],
-  parameters: {
-    backgroundVariant: "alt",
-  },
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -75,13 +72,12 @@ export const Variant = {
             <th className="px-2"></th>
             <th className={textClasses}>default</th>
             <th className={textClasses}>disabled</th>
-            <th className={textClasses}>outlined</th>
           </tr>
         </thead>
 
         <tbody>
           {/* Accent */}
-          <tr className="bg-(--surface-secondary)">
+          <tr>
             <td className={twMerge("px-2 py-2", textClasses)}>accent</td>
             <td className="py-2">
               <Button variant="accent" label="Button" {...args} />
@@ -89,11 +85,10 @@ export const Variant = {
             <td className="py-2">
               <Button variant="accent" label="Button" isDisabled {...args} />
             </td>
-            <td className="py-2"></td>
           </tr>
 
           {/* Primary */}
-          <tr className="bg-(--surface-primary)">
+          <tr>
             <td className={twMerge("px-2 py-2", textClasses)}>primary</td>
             <td className="py-2">
               <Button variant="primary" label="Button" {...args} />
@@ -101,13 +96,10 @@ export const Variant = {
             <td className="py-2">
               <Button variant="primary" label="Button" isDisabled {...args} />
             </td>
-            <td className="py-2">
-              <Button variant="primary" label="Button" outlined {...args} />
-            </td>
           </tr>
 
           {/* Secondary */}
-          <tr className="bg-(--surface-secondary)">
+          <tr>
             <td className={twMerge("px-2 py-2", textClasses)}>secondary</td>
             <td className="py-2">
               <Button variant="secondary" label="Button" {...args} />
@@ -115,13 +107,10 @@ export const Variant = {
             <td className="py-2">
               <Button variant="secondary" label="Button" isDisabled {...args} />
             </td>
-            <td className="py-2">
-              <Button variant="secondary" label="Button" outlined {...args} />
-            </td>
           </tr>
 
           {/* Secondary */}
-          <tr className="bg-(--surface-secondary)">
+          <tr>
             <td className={twMerge("px-2 py-2", textClasses)}>tertiary</td>
             <td className="py-2">
               <Button variant="tertiary" label="Button" {...args} />
@@ -129,7 +118,6 @@ export const Variant = {
             <td className="py-2">
               <Button variant="tertiary" label="Button" isDisabled {...args} />
             </td>
-            <td className="py-2"></td>
           </tr>
 
           {/* Contrast */}
@@ -141,7 +129,6 @@ export const Variant = {
             <td className="py-2">
               <Button variant="contrast" label="Button" isDisabled {...args} />
             </td>
-            <td className="py-2"></td>
           </tr>
         </tbody>
       </table>
@@ -188,27 +175,24 @@ export const Icon = {
 export const IsPending = {
   render: (args) => (
     <div className="flex items-start gap-4">
-      <Button
-        variant="accent"
-        size="small"
-        label="Small"
-        isPending
-        {...(args as any)}
-      />
+      <Button variant="accent" size="small" label="Small" isPending {...args} />
       <Button
         variant="accent"
         size="medium"
         label="Medium"
         isPending
-        {...(args as any)}
+        {...args}
       />
-      <Button
-        variant="accent"
-        size="large"
-        label="Large"
-        isPending
-        {...(args as any)}
-      />
+      <Button variant="accent" size="large" label="Large" isPending {...args} />
+    </div>
+  ),
+} satisfies Story;
+
+export const Outlined = {
+  render: (args) => (
+    <div className="flex items-start gap-4">
+      <Button variant="primary" outlined label="Button" {...args} />
+      <Button variant="secondary" outlined label="Button" {...args} />
     </div>
   ),
 } satisfies Story;

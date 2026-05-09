@@ -64,7 +64,7 @@ export const baseButtonStyles = tv({
     {
       outlined: true,
       isDisabled: false,
-      class: "border border-(--border-primary) text-(--text-primary)",
+      class: "border border-(--border-primary)",
     },
   ],
 });
