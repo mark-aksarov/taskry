@@ -8,6 +8,7 @@ import {
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
+import { useDeleteCustomer } from "../DeleteCustomerContext";
 import { useUpdateCustomerPublicLink } from "../UpdateCustomerPublicLinkContext";
 
 interface CustomerPublicLinkDetailInfoAltProps {
@@ -23,6 +24,10 @@ export function CustomerPublicLinkDetailInfoAlt({
     "updateCustomerPublicLink",
   );
 
+  //Disable edit button while the customer is being deleted
+  const { isPending: isDeleteCustomerPending } = useDeleteCustomer();
+
+  //Pending state while updating customer public link
   const { isPending: isUpdateCustomerPublicLinkPending } =
     useUpdateCustomerPublicLink();
 
@@ -36,6 +41,7 @@ export function CustomerPublicLinkDetailInfoAlt({
         <DetailEditButton
           data-test="update-customer-public-link-edit-button"
           isPending={isUpdateCustomerPublicLinkPending}
+          isDisabled={isDeleteCustomerPending}
           onPress={() => onUpdatePublicLinkModalOpenChange(true)}
         />
       }

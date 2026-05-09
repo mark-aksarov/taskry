@@ -7,8 +7,9 @@ import {
   DetailEditButton,
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
-import { useUpdateCustomerEmail } from "../UpdateCustomerEmailContext";
 import { useModal } from "@/common/ModalManagerContext";
+import { useDeleteCustomer } from "../DeleteCustomerContext";
+import { useUpdateCustomerEmail } from "../UpdateCustomerEmailContext";
 
 interface CustomerEmailDetailInfoAltProps {
   email: string;
@@ -23,6 +24,10 @@ export function CustomerEmailDetailInfoAlt({
     "updateCustomerEmail",
   );
 
+  //Disable edit button while the customer is being deleted
+  const { isPending: isDeleteCustomerPending } = useDeleteCustomer();
+
+  //Pending state while updating customer email
   const { isPending: isUpdateCustomerEmailPending } = useUpdateCustomerEmail();
 
   return (
@@ -34,6 +39,7 @@ export function CustomerEmailDetailInfoAlt({
         <DetailEditButton
           data-test="update-customer-email-edit-button"
           isPending={isUpdateCustomerEmailPending}
+          isDisabled={isDeleteCustomerPending}
           onPress={() => onUpdateEmailModalOpenChange(true)}
         />
       }

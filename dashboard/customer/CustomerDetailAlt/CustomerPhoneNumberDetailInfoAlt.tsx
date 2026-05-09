@@ -8,6 +8,7 @@ import {
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
+import { useDeleteCustomer } from "../DeleteCustomerContext";
 import { useUpdateCustomerPhoneNumber } from "../UpdateCustomerPhoneNumberContext";
 
 interface CustomerPhoneNumberDetailInfoAltProps {
@@ -23,6 +24,10 @@ export function CustomerPhoneNumberDetailInfoAlt({
     "updateCustomerPhoneNumber",
   );
 
+  //Disable edit button while the customer is being deleted
+  const { isPending: isDeleteCustomerPending } = useDeleteCustomer();
+
+  //Pending state while updating customer phone number
   const { isPending: isUpdateCustomerPhoneNumberPending } =
     useUpdateCustomerPhoneNumber();
 
@@ -35,6 +40,7 @@ export function CustomerPhoneNumberDetailInfoAlt({
         <DetailEditButton
           data-test="update-customer-phone-number-edit-button"
           isPending={isUpdateCustomerPhoneNumberPending}
+          isDisabled={isDeleteCustomerPending}
           onPress={() => onUpdatePhoneNumberModalOpenChange(true)}
         />
       }

@@ -8,6 +8,7 @@ import {
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
+import { useDeleteCustomer } from "../DeleteCustomerContext";
 import { useUpdateCustomerCompany } from "../UpdateCustomerCompanyContext";
 
 interface CustomerCompanyDetailInfoAltProps {
@@ -25,6 +26,10 @@ export function CustomerCompanyDetailInfoAlt({
     "updateCustomerCompany",
   );
 
+  //Disable edit button while the customer is being deleted
+  const { isPending: isDeleteCustomerPending } = useDeleteCustomer();
+
+  //Pending state while updating customer company
   const { isPending: isUpdateCustomerCompanyPending } =
     useUpdateCustomerCompany();
 
@@ -37,6 +42,7 @@ export function CustomerCompanyDetailInfoAlt({
         <DetailEditButton
           data-test="update-customer-company-edit-button"
           isPending={isUpdateCustomerCompanyPending}
+          isDisabled={isDeleteCustomerPending}
           onPress={() => onUpdatePositionModalOpenChange(true)}
         />
       }
