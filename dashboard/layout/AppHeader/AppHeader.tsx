@@ -6,7 +6,6 @@ import {
   AppHeaderThemeToggleButton,
 } from "@/common/AppHeaderBase";
 
-import { Logo } from "../Logo";
 import { tv } from "tailwind-variants";
 import { AppNavigation } from "../AppNavigation";
 import { LangMenuTrigger } from "../LangMenuTrigger";
@@ -41,7 +40,7 @@ export const AppHeader = ({
     <AppHeaderBase className={base()}>
       <div className={mobileWrapper()}>
         <AppHeaderLayout
-          left={<Logo />}
+          left={profileLinkContainer}
           right={<AppBottomSheetTrigger appNavigation={<AppNavigation />} />}
         />
       </div>
