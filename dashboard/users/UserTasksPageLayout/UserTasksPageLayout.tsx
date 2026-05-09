@@ -67,6 +67,7 @@ export function UserTasksPageLayout({
                 <CreateTaskModalTriggerLarge />
                 <TaskSortingMenuTriggerLarge
                   showLabel={false}
+                  buttonVariant="primary"
                   selectedSortField={selectedSortField}
                 />
                 <TaskActionsMenuTrigger showLabel={false} />
