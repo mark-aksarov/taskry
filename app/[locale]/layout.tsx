@@ -6,8 +6,8 @@ import { SWRProvider } from "./SWRProvider";
 import type { Metadata, Viewport } from "next";
 import { Nunito_Sans } from "next/font/google";
 import { I18nProvider } from "@/ui/I18nProvider";
-import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { RouterProvider } from "@/ui/RouterProvider";
+import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { ThemeProvider } from "@/dashboard/layout/ThemeProvider";
 import { ToastRegionWrapper } from "@/dashboard/layout/ToastRegionWrapper";
 

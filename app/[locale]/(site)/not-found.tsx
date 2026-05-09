@@ -10,7 +10,7 @@ export default function NotFound() {
     <NotFoundPageContainer
       heading={t("heading")}
       description={t("description")}
-      linkHref="/dashboard"
+      linkHref="/"
       linkLabel={t("toHome")}
     />
   );

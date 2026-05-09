@@ -15,23 +15,23 @@ function normalizePath(pathname: string) {
   return pathname;
 }
 
-const publicRoutes = [
-  { type: "exact", path: "/" },
-  { type: "exact", path: "/sign-in" },
-  { type: "exact", path: "/guest-sign-in" },
-  { type: "exact", path: "/sign-up" },
-  { type: "exact", path: "/forget-password" },
-  { type: "exact", path: "/forget-password/check-email" },
-  { type: "exact", path: "/reset-password" },
-  { type: "exact", path: "/accept-invite" },
-  { type: "exact", path: "/verify-email" },
-  { type: "prefix", path: "/docs" },
+const protectedRoutes = [
+  { type: "exact", path: "/dashboard" },
+  { type: "prefix", path: "/companies" },
+  { type: "prefix", path: "/customers" },
+  { type: "prefix", path: "/positions" },
+  { type: "prefix", path: "/profile" },
+  { type: "prefix", path: "/project-categories" },
+  { type: "prefix", path: "/projects" },
+  { type: "prefix", path: "/task-categories" },
+  { type: "prefix", path: "/tasks" },
+  { type: "prefix", path: "/team" },
 ] as const;
 
-function isPublicRoute(pathname: string) {
+function isProtectedRoute(pathname: string) {
   const path = normalizePath(pathname);
 
-  return publicRoutes.some((route) => {
+  return protectedRoutes.some((route) => {
     if (route.type === "exact") {
       return path === route.path;
     }
@@ -53,8 +53,10 @@ const handleI18nRouting = createMiddleware({
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  console.log("pathname", pathname, isProtectedRoute(pathname));
+
   // https://better-auth.com/docs/integrations/next#cookie-based-checks-recommended-for-all-versions
-  if (!isPublicRoute(pathname)) {
+  if (isProtectedRoute(pathname)) {
     const sessionCookie = getSessionCookie(request);
 
     if (!sessionCookie) {

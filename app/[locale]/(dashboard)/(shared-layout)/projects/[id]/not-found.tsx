@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import NotFoundPageContainer from "@/dashboard/layout/NotFoundPageContainer";
+import NotFoundPageContainer from "@/common/NotFoundPageContainer";
 
 export default function AppProjectDetailNotFound() {
   const t = useTranslations("app.ProjectDetailPage");

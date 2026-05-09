@@ -1,7 +1,7 @@
 import {
   PageStateContainer,
   PageStateContainerProps,
-} from "./PageStateContainer";
+} from "../dashboard/layout/PageStateContainer";
 import { ButtonLink } from "@/ui/Button";
 
 interface NotFoundPageContainerProps
