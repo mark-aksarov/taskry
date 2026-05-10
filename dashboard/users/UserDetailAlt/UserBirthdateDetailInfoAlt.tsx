@@ -9,6 +9,7 @@ import {
 import { useDeleteUser } from "../DeleteUserContext";
 import { useModal } from "@/common/ModalManagerContext";
 import { useFormatter, useTranslations } from "next-intl";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateUserBirthdate } from "../UpdateUserBirthdateContext";
 
 interface UserBirthdateDetailInfoAltProps {
@@ -19,6 +20,8 @@ export function UserBirthdateDetailInfoAlt({
   birthdate,
 }: UserBirthdateDetailInfoAltProps) {
   const t = useTranslations("dashboard.users.UserDetail");
+
+  const guestGuard = useGuestModalGuard();
 
   const { onOpenChange: onUpdateBirthdateModalOpenChange } = useModal(
     "updateUserBirthdate",
@@ -40,6 +43,10 @@ export function UserBirthdateDetailInfoAlt({
       })
     : t("noBirthdate");
 
+  const handlePress = () => {
+    guestGuard(() => onUpdateBirthdateModalOpenChange(true));
+  };
+
   return (
     <DetailInfoAlt
       className="border-none pb-0"
@@ -51,7 +58,7 @@ export function UserBirthdateDetailInfoAlt({
           data-test="update-user-birthdate-edit-button"
           isPending={isUpdateUserBirthdatePending}
           isDisabled={isDeleteUserPending}
-          onPress={() => onUpdateBirthdateModalOpenChange(true)}
+          onPress={handlePress}
         />
       }
       surface

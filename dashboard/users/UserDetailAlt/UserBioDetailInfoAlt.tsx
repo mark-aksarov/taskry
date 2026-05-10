@@ -10,6 +10,7 @@ import { useTranslations } from "next-intl";
 import { useDeleteUser } from "../DeleteUserContext";
 import { useModal } from "@/common/ModalManagerContext";
 import { useUpdateUserBio } from "../UpdateUserBioContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
 interface UserBioDetailInfoAltProps {
   bio?: string;
@@ -17,6 +18,8 @@ interface UserBioDetailInfoAltProps {
 
 export function UserBioDetailInfoAlt({ bio }: UserBioDetailInfoAltProps) {
   const t = useTranslations("dashboard.users.UserDetail");
+
+  const guestGuard = useGuestModalGuard();
 
   const { onOpenChange: onUpdateBioModalOpenChange } =
     useModal("updateUserBio");
@@ -26,6 +29,10 @@ export function UserBioDetailInfoAlt({ bio }: UserBioDetailInfoAltProps) {
 
   //Pending state while updating user bio
   const { isPending: isUpdateUserBioPending } = useUpdateUserBio();
+
+  const handlePress = () => {
+    guestGuard(() => onUpdateBioModalOpenChange(true));
+  };
 
   return (
     <DetailInfoAlt
@@ -37,7 +44,7 @@ export function UserBioDetailInfoAlt({ bio }: UserBioDetailInfoAltProps) {
           data-test="update-user-bio-edit-button"
           isPending={isUpdateUserBioPending}
           isDisabled={isDeleteUserPending}
-          onPress={() => onUpdateBioModalOpenChange(true)}
+          onPress={handlePress}
         />
       }
       surface

@@ -9,6 +9,7 @@ import {
 import { useTranslations } from "next-intl";
 import { useDeleteUser } from "../DeleteUserContext";
 import { useModal } from "@/common/ModalManagerContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateUserPhoneNumber } from "../UpdateUserPhoneNumberContext";
 
 interface UserPhoneNumberDetailInfoAltProps {
@@ -19,6 +20,8 @@ export function UserPhoneNumberDetailInfoAlt({
   phoneNumber,
 }: UserPhoneNumberDetailInfoAltProps) {
   const t = useTranslations("dashboard.users.UserDetail");
+
+  const guestGuard = useGuestModalGuard();
 
   const { onOpenChange: onUpdatePhoneNumberModalOpenChange } = useModal(
     "updateUserPhoneNumber",
@@ -31,6 +34,10 @@ export function UserPhoneNumberDetailInfoAlt({
   const { isPending: isUpdateUserPhoneNumberPending } =
     useUpdateUserPhoneNumber();
 
+  const handlePress = () => {
+    guestGuard(() => onUpdatePhoneNumberModalOpenChange(true));
+  };
+
   return (
     <DetailInfoAlt
       data-test="user-phone-number-detail-info"
@@ -41,7 +48,7 @@ export function UserPhoneNumberDetailInfoAlt({
           data-test="update-user-phone-number-edit-button"
           isPending={isUpdateUserPhoneNumberPending}
           isDisabled={isDeleteUserPending}
-          onPress={() => onUpdatePhoneNumberModalOpenChange(true)}
+          onPress={handlePress}
         />
       }
       surface

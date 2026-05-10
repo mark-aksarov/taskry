@@ -9,6 +9,7 @@ import {
 import { useTranslations } from "next-intl";
 import { useDeleteUser } from "../DeleteUserContext";
 import { useModal } from "@/common/ModalManagerContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateUserFullName } from "../UpdateUserFullNameContext";
 
 interface UserFullNameDetailInfoAltProps {
@@ -20,6 +21,8 @@ export function UserFullNameDetailInfoAlt({
 }: UserFullNameDetailInfoAltProps) {
   const t = useTranslations("dashboard.users.UserDetail");
 
+  const guestGuard = useGuestModalGuard();
+
   const { onOpenChange: onUpdateFullNameModalOpenChange } =
     useModal("updateUserFullName");
 
@@ -28,6 +31,10 @@ export function UserFullNameDetailInfoAlt({
 
   //Pending state while updating user full name
   const { isPending: isUpdateUserFullNamePending } = useUpdateUserFullName();
+
+  const handlePress = () => {
+    guestGuard(() => onUpdateFullNameModalOpenChange(true));
+  };
 
   return (
     <DetailInfoAlt
@@ -39,7 +46,7 @@ export function UserFullNameDetailInfoAlt({
           data-test="update-user-full-name-edit-button"
           isPending={isUpdateUserFullNamePending}
           isDisabled={isDeleteUserPending}
-          onPress={() => onUpdateFullNameModalOpenChange(true)}
+          onPress={handlePress}
         />
       }
       surface
