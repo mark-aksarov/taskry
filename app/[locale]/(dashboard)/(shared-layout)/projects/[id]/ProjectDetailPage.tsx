@@ -28,7 +28,7 @@ export function ProjectDetailPage({
               <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
             </>
           }
-          secondSlot={<DeleteProjectModalTrigger />}
+          secondSlot={<DeleteProjectModalTrigger buttonVariant="secondary" />}
         />
 
         <ProjectDetailCard

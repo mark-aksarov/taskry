@@ -28,7 +28,7 @@ export function TaskDetailPage({
               <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
             </>
           }
-          secondSlot={<DeleteTaskModalTrigger />}
+          secondSlot={<DeleteTaskModalTrigger buttonVariant="secondary" />}
         />
 
         <TaskDetailCard

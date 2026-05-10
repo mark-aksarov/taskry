@@ -26,7 +26,7 @@ export function TaskDetailCardHeader({
         <TaskStatusBadge status={taskStatus} deadline={taskDeadline} />
       }
       deadline={taskDeadline}
-      deleteButtonSlot={<DeleteTaskModalTrigger />}
+      deleteButtonSlot={<DeleteTaskModalTrigger buttonVariant="primary" />}
     />
   );
 }

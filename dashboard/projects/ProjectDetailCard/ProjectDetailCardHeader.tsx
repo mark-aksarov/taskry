@@ -30,7 +30,7 @@ export function ProjectDetailCardHeader({
         />
       }
       deadline={projectDeadline}
-      deleteButtonSlot={<DeleteProjectModalTrigger />}
+      deleteButtonSlot={<DeleteProjectModalTrigger buttonVariant="primary" />}
     />
   );
 }
