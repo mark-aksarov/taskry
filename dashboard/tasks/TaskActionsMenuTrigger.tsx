@@ -79,7 +79,7 @@ export const TaskActionsMenuTrigger = ({
           showLabel={showLabel}
           data-test="task-actions-menu-trigger"
           selectedIds={selected.ids}
-          variant="primary"
+          variant="secondary"
         />
       )}
     >
