@@ -9,6 +9,7 @@ import {
 import { useTranslations } from "next-intl";
 import { useDeleteTask } from "../DeleteTaskContext";
 import { useModal } from "@/common/ModalManagerContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateTaskCategoryRel } from "../UpdateTaskCategoryRelContext";
 
 interface TaskCategoryDetailInfoAltProps {
@@ -23,6 +24,8 @@ export function TaskCategoryDetailInfoAlt({
 }: TaskCategoryDetailInfoAltProps) {
   const t = useTranslations("dashboard.tasks.TaskDetail");
 
+  const guestGuard = useGuestModalGuard();
+
   const { onOpenChange: onUpdateCategoryModalOpenChange } = useModal(
     "updateTaskCategoryRel",
   );
@@ -32,6 +35,10 @@ export function TaskCategoryDetailInfoAlt({
 
   //Pending state while updating task category
   const { isPending: isUpdateTaskCategoryPending } = useUpdateTaskCategoryRel();
+
+  const handlePress = () => {
+    guestGuard(() => onUpdateCategoryModalOpenChange(true));
+  };
 
   return (
     <DetailInfoAlt
@@ -45,7 +52,7 @@ export function TaskCategoryDetailInfoAlt({
           data-test="update-task-category-edit-button"
           isPending={isUpdateTaskCategoryPending}
           isDisabled={isDeleteTaskPending}
-          onPress={() => onUpdateCategoryModalOpenChange(true)}
+          onPress={handlePress}
         />
       }
       surface

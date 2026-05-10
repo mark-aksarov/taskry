@@ -10,6 +10,7 @@ import { useTranslations } from "next-intl";
 import { useDeleteTask } from "../DeleteTaskContext";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useModal } from "@/common/ModalManagerContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateTaskStatusAlt } from "../UpdateTaskStatusAltContext";
 
 interface TaskStatusDetailInfoAltProps {
@@ -22,6 +23,8 @@ export function TaskStatusDetailInfoAlt({
   const tStatus = useTranslations("dashboard.tasks.TaskStatus");
   const t = useTranslations("dashboard.tasks.TaskDetail");
 
+  const guestGuard = useGuestModalGuard();
+
   const { onOpenChange: onUpdateStatusModalOpenChange } =
     useModal("updateTaskStatus");
 
@@ -30,6 +33,10 @@ export function TaskStatusDetailInfoAlt({
 
   //Pending state while updating task status
   const { isPending: isUpdateTaskStatusPending } = useUpdateTaskStatusAlt();
+
+  const handlePress = () => {
+    guestGuard(() => onUpdateStatusModalOpenChange(true));
+  };
 
   return (
     <DetailInfoAlt
@@ -41,7 +48,7 @@ export function TaskStatusDetailInfoAlt({
           data-test="update-task-status-edit-button"
           isPending={isUpdateTaskStatusPending}
           isDisabled={isDeleteTaskPending}
-          onPress={() => onUpdateStatusModalOpenChange(true)}
+          onPress={handlePress}
         />
       }
       surface

@@ -7,9 +7,10 @@ import {
   DetailEditButton,
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
+import { useDeleteTask } from "../DeleteTaskContext";
 import { useModal } from "@/common/ModalManagerContext";
 import { useUpdateTaskProject } from "../UpdateTaskProjectContext";
-import { useDeleteTask } from "../DeleteTaskContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
 interface TaskProjectDetailInfoAltProps {
   project?: {
@@ -23,6 +24,8 @@ export function TaskProjectDetailInfoAlt({
 }: TaskProjectDetailInfoAltProps) {
   const t = useTranslations("dashboard.tasks.TaskDetail");
 
+  const guestGuard = useGuestModalGuard();
+
   const { onOpenChange: onUpdateProjectModalOpenChange } =
     useModal("updateTaskProject");
 
@@ -31,6 +34,10 @@ export function TaskProjectDetailInfoAlt({
 
   //Pending state while updating task project
   const { isPending: isUpdateTaskProjectPending } = useUpdateTaskProject();
+
+  const handlePress = () => {
+    guestGuard(() => onUpdateProjectModalOpenChange(true));
+  };
 
   return (
     <DetailInfoAlt
@@ -44,7 +51,7 @@ export function TaskProjectDetailInfoAlt({
           data-test="update-task-project-edit-button"
           isPending={isUpdateTaskProjectPending}
           isDisabled={isDeleteTaskPending}
-          onPress={() => onUpdateProjectModalOpenChange(true)}
+          onPress={handlePress}
         />
       }
       surface

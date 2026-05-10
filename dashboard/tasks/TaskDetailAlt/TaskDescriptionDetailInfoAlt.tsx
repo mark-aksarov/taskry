@@ -9,6 +9,7 @@ import {
 import { useTranslations } from "next-intl";
 import { useDeleteTask } from "../DeleteTaskContext";
 import { useModal } from "@/common/ModalManagerContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateTaskDescription } from "../UpdateTaskDescriptionContext";
 
 interface TaskDescriptionDetailInfoAltProps {
@@ -20,6 +21,8 @@ export function TaskDescriptionDetailInfoAlt({
 }: TaskDescriptionDetailInfoAltProps) {
   const t = useTranslations("dashboard.tasks.TaskDetail");
 
+  const guestGuard = useGuestModalGuard();
+
   const { onOpenChange: onUpdateDescriptionModalOpenChange } = useModal(
     "updateTaskDescription",
   );
@@ -30,6 +33,10 @@ export function TaskDescriptionDetailInfoAlt({
   //Pending state while updating task description
   const { isPending: isUpdateTaskDescriptionPending } =
     useUpdateTaskDescription();
+
+  const handlePress = () => {
+    guestGuard(() => onUpdateDescriptionModalOpenChange(true));
+  };
 
   return (
     <DetailInfoAlt
@@ -45,7 +52,7 @@ export function TaskDescriptionDetailInfoAlt({
           data-test="update-task-description-edit-button"
           isPending={isUpdateTaskDescriptionPending}
           isDisabled={isDeleteTaskPending}
-          onPress={() => onUpdateDescriptionModalOpenChange(true)}
+          onPress={handlePress}
         />
       }
       surface

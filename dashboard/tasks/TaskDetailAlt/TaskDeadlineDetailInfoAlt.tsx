@@ -7,8 +7,9 @@ import {
   DetailEditButton,
 } from "@/dashboard/common/Detail";
 import { useDeleteTask } from "../DeleteTaskContext";
-import { useFormatter, useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
+import { useFormatter, useTranslations } from "next-intl";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateTaskDeadline } from "../UpdateTaskDeadlineContext";
 
 interface TaskDeadlineDetailInfoAltProps {
@@ -19,6 +20,8 @@ export function TaskDeadlineDetailInfoAlt({
   deadline,
 }: TaskDeadlineDetailInfoAltProps) {
   const t = useTranslations("dashboard.tasks.TaskDetail");
+
+  const guestGuard = useGuestModalGuard();
 
   const { onOpenChange: onUpdateBirthdateModalOpenChange } =
     useModal("updateTaskDeadline");
@@ -37,6 +40,10 @@ export function TaskDeadlineDetailInfoAlt({
     year: "numeric",
   });
 
+  const handlePress = () => {
+    guestGuard(() => onUpdateBirthdateModalOpenChange(true));
+  };
+
   return (
     <DetailInfoAlt
       data-test="task-deadline-detail-info"
@@ -47,7 +54,7 @@ export function TaskDeadlineDetailInfoAlt({
           data-test="update-task-deadline-edit-button"
           isPending={isUpdateTaskDeadlinePending}
           isDisabled={isDeleteTaskPending}
-          onPress={() => onUpdateBirthdateModalOpenChange(true)}
+          onPress={handlePress}
         />
       }
       surface

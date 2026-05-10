@@ -13,6 +13,7 @@ import { ModalManagerProvider } from "../../common/ModalManagerContext";
 import { DeleteSubtaskProvider } from "../subtasks/DeleteSubtaskProvider";
 import { UpdateSubtaskProvider } from "../subtasks/UpdateSubtaskProvider";
 import { ToggleSubtaskProvider } from "../subtasks/ToggleSubtaskProvider";
+import { GuestModeModal } from "../common/GuestModeModal";
 
 interface TaskDetailAltContainerProps {
   taskId: number;
@@ -74,6 +75,8 @@ async function TaskDetailAltContainerInner({
                         subtaskId={subtask.id}
                         subtaskText={subtask.text}
                       />
+
+                      <GuestModeModal />
                     </ToggleSubtaskProvider>
                   </UpdateSubtaskProvider>
                 </DeleteSubtaskProvider>

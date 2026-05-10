@@ -7,9 +7,10 @@ import {
   DetailEditButton,
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
-import { useModal } from "@/common/ModalManagerContext";
-import { useUpdateTaskAssignee } from "../UpdateTaskAssigneeContext";
 import { useDeleteTask } from "../DeleteTaskContext";
+import { useModal } from "@/common/ModalManagerContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
+import { useUpdateTaskAssignee } from "../UpdateTaskAssigneeContext";
 
 interface TaskAssigneeDetailInfoAltProps {
   assignee?: {
@@ -23,6 +24,8 @@ export function TaskAssigneeDetailInfoAlt({
 }: TaskAssigneeDetailInfoAltProps) {
   const t = useTranslations("dashboard.tasks.TaskDetail");
 
+  const guestGuard = useGuestModalGuard();
+
   const { onOpenChange: onUpdateAssigneeModalOpenChange } =
     useModal("updateTaskAssignee");
 
@@ -31,6 +34,10 @@ export function TaskAssigneeDetailInfoAlt({
 
   //Pending state while updating task assignee
   const { isPending: isUpdateTaskAssigneePending } = useUpdateTaskAssignee();
+
+  const handlePress = () => {
+    guestGuard(() => onUpdateAssigneeModalOpenChange(true));
+  };
 
   return (
     <DetailInfoAlt
@@ -46,7 +53,7 @@ export function TaskAssigneeDetailInfoAlt({
           data-test="update-task-assignee-edit-button"
           isPending={isUpdateTaskAssigneePending}
           isDisabled={isDeleteTaskPending}
-          onPress={() => onUpdateAssigneeModalOpenChange(true)}
+          onPress={handlePress}
         />
       }
       surface
