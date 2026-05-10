@@ -25,6 +25,7 @@ export interface UserDetailAltProps {
   position?: {
     name: string;
   };
+  canEdit?: boolean;
 }
 
 export function UserDetailAlt({
@@ -36,14 +37,19 @@ export function UserDetailAlt({
   publicLink,
   birthdate,
   position,
+  canEdit,
 }: UserDetailAltProps) {
   const t = useTranslations("dashboard.users.UserDetail");
 
   return (
     <UserDetailAltLayout
-      bioSlot={<UserBioDetailInfoAlt bio={bio} />}
-      fullNameSlot={<UserFullNameDetailInfoAlt fullName={fullName} />}
-      positionSlot={<UserPositionDetailInfoAlt position={position} />}
+      bioSlot={<UserBioDetailInfoAlt bio={bio} canEdit={canEdit} />}
+      fullNameSlot={
+        <UserFullNameDetailInfoAlt fullName={fullName} canEdit={canEdit} />
+      }
+      positionSlot={
+        <UserPositionDetailInfoAlt position={position} canEdit={canEdit} />
+      }
       emailSlot={
         <DetailInfoAlt
           title={<DetailTitle>{t("email")}</DetailTitle>}
@@ -52,11 +58,23 @@ export function UserDetailAlt({
         />
       }
       phoneNumberSlot={
-        <UserPhoneNumberDetailInfoAlt phoneNumber={phoneNumber} />
+        <UserPhoneNumberDetailInfoAlt
+          phoneNumber={phoneNumber}
+          canEdit={canEdit}
+        />
       }
-      addressSlot={<UserAddressDetailInfoAlt address={address} />}
-      publicLinkSlot={<UserPublicLinkDetailInfoAlt publicLink={publicLink} />}
-      birthdateSlot={<UserBirthdateDetailInfoAlt birthdate={birthdate} />}
+      addressSlot={
+        <UserAddressDetailInfoAlt address={address} canEdit={canEdit} />
+      }
+      publicLinkSlot={
+        <UserPublicLinkDetailInfoAlt
+          publicLink={publicLink}
+          canEdit={canEdit}
+        />
+      }
+      birthdateSlot={
+        <UserBirthdateDetailInfoAlt birthdate={birthdate} canEdit={canEdit} />
+      }
     />
   );
 }

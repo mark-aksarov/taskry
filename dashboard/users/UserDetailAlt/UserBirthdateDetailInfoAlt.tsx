@@ -14,10 +14,12 @@ import { useUpdateUserBirthdate } from "../UpdateUserBirthdateContext";
 
 interface UserBirthdateDetailInfoAltProps {
   birthdate?: string;
+  canEdit?: boolean;
 }
 
 export function UserBirthdateDetailInfoAlt({
   birthdate,
+  canEdit,
 }: UserBirthdateDetailInfoAltProps) {
   const t = useTranslations("dashboard.users.UserDetail");
 
@@ -54,12 +56,14 @@ export function UserBirthdateDetailInfoAlt({
       title={<DetailTitle>{t("birthdate")}</DetailTitle>}
       content={<DetailText>{formattedBirthdate}</DetailText>}
       rightSlot={
-        <DetailEditButton
-          data-test="update-user-birthdate-edit-button"
-          isPending={isUpdateUserBirthdatePending}
-          isDisabled={isDeleteUserPending}
-          onPress={handlePress}
-        />
+        canEdit && (
+          <DetailEditButton
+            data-test="update-user-birthdate-edit-button"
+            isPending={isUpdateUserBirthdatePending}
+            isDisabled={isDeleteUserPending}
+            onPress={handlePress}
+          />
+        )
       }
       surface
     />

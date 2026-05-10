@@ -14,9 +14,11 @@ import { useUpdateUserFullName } from "../UpdateUserFullNameContext";
 
 interface UserFullNameDetailInfoAltProps {
   fullName?: string;
+  canEdit?: boolean;
 }
 
 export function UserFullNameDetailInfoAlt({
+  canEdit,
   fullName,
 }: UserFullNameDetailInfoAltProps) {
   const t = useTranslations("dashboard.users.UserDetail");
@@ -42,12 +44,14 @@ export function UserFullNameDetailInfoAlt({
       title={<DetailTitle>{t("fullName")}</DetailTitle>}
       content={<DetailText>{fullName || t("noFullName")}</DetailText>}
       rightSlot={
-        <DetailEditButton
-          data-test="update-user-full-name-edit-button"
-          isPending={isUpdateUserFullNamePending}
-          isDisabled={isDeleteUserPending}
-          onPress={handlePress}
-        />
+        canEdit && (
+          <DetailEditButton
+            data-test="update-user-full-name-edit-button"
+            isPending={isUpdateUserFullNamePending}
+            isDisabled={isDeleteUserPending}
+            onPress={handlePress}
+          />
+        )
       }
       surface
     />

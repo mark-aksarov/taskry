@@ -16,9 +16,11 @@ interface UserPositionDetailInfoAltProps {
   position?: {
     name: string;
   };
+  canEdit?: boolean;
 }
 
 export function UserPositionDetailInfoAlt({
+  canEdit,
   position,
 }: UserPositionDetailInfoAltProps) {
   const t = useTranslations("dashboard.users.UserDetail");
@@ -44,12 +46,14 @@ export function UserPositionDetailInfoAlt({
       title={<DetailTitle>{t("position")}</DetailTitle>}
       content={<DetailText>{position?.name || t("noPosition")}</DetailText>}
       rightSlot={
-        <DetailEditButton
-          data-test="update-user-position-edit-button"
-          isPending={isUpdateUserPositionPending}
-          isDisabled={isDeleteUserPending}
-          onPress={handlePress}
-        />
+        canEdit && (
+          <DetailEditButton
+            data-test="update-user-position-edit-button"
+            isPending={isUpdateUserPositionPending}
+            isDisabled={isDeleteUserPending}
+            onPress={handlePress}
+          />
+        )
       }
       surface
     />

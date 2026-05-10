@@ -14,10 +14,12 @@ import { useUpdateUserPhoneNumber } from "../UpdateUserPhoneNumberContext";
 
 interface UserPhoneNumberDetailInfoAltProps {
   phoneNumber?: string;
+  canEdit?: boolean;
 }
 
 export function UserPhoneNumberDetailInfoAlt({
   phoneNumber,
+  canEdit,
 }: UserPhoneNumberDetailInfoAltProps) {
   const t = useTranslations("dashboard.users.UserDetail");
 
@@ -44,12 +46,14 @@ export function UserPhoneNumberDetailInfoAlt({
       title={<DetailTitle>{t("phoneNumber")}</DetailTitle>}
       content={<DetailText>{phoneNumber || t("noPhoneNumber")}</DetailText>}
       rightSlot={
-        <DetailEditButton
-          data-test="update-user-phone-number-edit-button"
-          isPending={isUpdateUserPhoneNumberPending}
-          isDisabled={isDeleteUserPending}
-          onPress={handlePress}
-        />
+        canEdit && (
+          <DetailEditButton
+            data-test="update-user-phone-number-edit-button"
+            isPending={isUpdateUserPhoneNumberPending}
+            isDisabled={isDeleteUserPending}
+            onPress={handlePress}
+          />
+        )
       }
       surface
     />

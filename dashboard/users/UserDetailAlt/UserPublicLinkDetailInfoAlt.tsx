@@ -14,10 +14,12 @@ import { useUpdateUserPublicLink } from "../UpdateUserPublicLinkContext";
 
 interface UserPublicLinkDetailInfoAltProps {
   publicLink?: string;
+  canEdit?: boolean;
 }
 
 export function UserPublicLinkDetailInfoAlt({
   publicLink,
+  canEdit,
 }: UserPublicLinkDetailInfoAltProps) {
   const t = useTranslations("dashboard.users.UserDetail");
 
@@ -44,12 +46,14 @@ export function UserPublicLinkDetailInfoAlt({
       title={<DetailTitle>{t("publicLink")}</DetailTitle>}
       content={<DetailText>{publicLink || t("noPublicLink")}</DetailText>}
       rightSlot={
-        <DetailEditButton
-          data-test="update-user-public-link-edit-button"
-          isPending={isUpdateUserPublicLinkPending}
-          isDisabled={isDeleteUserPending}
-          onPress={handlePress}
-        />
+        canEdit && (
+          <DetailEditButton
+            data-test="update-user-public-link-edit-button"
+            isPending={isUpdateUserPublicLinkPending}
+            isDisabled={isDeleteUserPending}
+            onPress={handlePress}
+          />
+        )
       }
       surface
     />

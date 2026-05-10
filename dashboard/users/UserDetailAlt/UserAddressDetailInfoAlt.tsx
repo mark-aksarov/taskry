@@ -14,10 +14,12 @@ import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
 interface UserAddressDetailInfoAltProps {
   address?: string;
+  canEdit?: boolean;
 }
 
 export function UserAddressDetailInfoAlt({
   address,
+  canEdit,
 }: UserAddressDetailInfoAltProps) {
   const t = useTranslations("dashboard.users.UserDetail");
 
@@ -42,12 +44,14 @@ export function UserAddressDetailInfoAlt({
       title={<DetailTitle>{t("address")}</DetailTitle>}
       content={<DetailText>{address || t("noAddress")}</DetailText>}
       rightSlot={
-        <DetailEditButton
-          data-test="update-user-address-edit-button"
-          isPending={isUpdateUserAddressPending}
-          isDisabled={isDeleteUserPending}
-          onPress={handlePress}
-        />
+        canEdit && (
+          <DetailEditButton
+            data-test="update-user-address-edit-button"
+            isPending={isUpdateUserAddressPending}
+            isDisabled={isDeleteUserPending}
+            onPress={handlePress}
+          />
+        )
       }
       surface
     />

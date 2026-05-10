@@ -14,9 +14,13 @@ import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
 interface UserBioDetailInfoAltProps {
   bio?: string;
+  canEdit?: boolean;
 }
 
-export function UserBioDetailInfoAlt({ bio }: UserBioDetailInfoAltProps) {
+export function UserBioDetailInfoAlt({
+  canEdit,
+  bio,
+}: UserBioDetailInfoAltProps) {
   const t = useTranslations("dashboard.users.UserDetail");
 
   const guestGuard = useGuestModalGuard();
@@ -40,12 +44,14 @@ export function UserBioDetailInfoAlt({ bio }: UserBioDetailInfoAltProps) {
       title={<DetailTitle>{t("bio")}</DetailTitle>}
       content={<DetailText>{bio || t("noBio")}</DetailText>}
       rightSlot={
-        <DetailEditButton
-          data-test="update-user-bio-edit-button"
-          isPending={isUpdateUserBioPending}
-          isDisabled={isDeleteUserPending}
-          onPress={handlePress}
-        />
+        canEdit && (
+          <DetailEditButton
+            data-test="update-user-bio-edit-button"
+            isPending={isUpdateUserBioPending}
+            isDisabled={isDeleteUserPending}
+            onPress={handlePress}
+          />
+        )
       }
       surface
     />
