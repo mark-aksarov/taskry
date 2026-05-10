@@ -18,13 +18,14 @@ import { ToolbarMobile } from "@/dashboard/common/Toolbar";
 import { BackButton } from "@/dashboard/common/BackButton";
 import { ViewModeProvider } from "@/dashboard/common/ViewMode";
 import { PageContainer } from "@/dashboard/common/PageContainer";
-import { UserTasksPageEmptyLayout } from "./UserTasksPageEmptyLayout";
+import { AbsoluteCenter } from "@/dashboard/common/AbsoluteCenter";
+import { TasksEmptySection } from "@/dashboard/tasks/TasksEmptySection";
 import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
 import { TaskActionsMenuTrigger } from "@/dashboard/tasks/TaskActionsMenuTrigger";
 import { TaskSortingMenuTriggerLarge } from "@/dashboard/tasks/TaskSortingMenuTrigger";
 import { TaskSortingMenuTriggerMobile } from "@/dashboard/tasks/TaskSortingMenuTrigger";
 
-interface UserTasksPageLayoutProps {
+interface TeamProfileTasksPageProps {
   totalTasksCount: number;
   selectedSortField: TaskSortField;
   backButton?: boolean;
@@ -34,7 +35,7 @@ interface UserTasksPageLayoutProps {
   userDetailHeaderContainer: React.ReactNode;
 }
 
-export function UserTasksPageLayout({
+export function TeamProfileTasksPage({
   totalTasksCount,
   selectedSortField,
   backButton,
@@ -42,18 +43,48 @@ export function UserTasksPageLayout({
   navigationMobile,
   userTasksContainer,
   userDetailHeaderContainer,
-}: UserTasksPageLayoutProps) {
-  const t = useTranslations("dashboard.users.UserTasksPageLayout");
+}: TeamProfileTasksPageProps) {
+  const t = useTranslations("app.TeamProfileTaskPage");
 
   if (totalTasksCount === 0) {
-    return (
-      <UserTasksPageEmptyLayout
-        userDetailHeaderContainer={userDetailHeaderContainer}
-        navigationLarge={navigationLarge}
-        navigationMobile={navigationMobile}
-        backButton={backButton}
-      />
-    );
+    <>
+      <PageContainer className="max-md:hidden">
+        <DetailCard>
+          <DetailCardLeft>
+            <DetailCardHeader>
+              <DetailCardTitle>{t("heading")}</DetailCardTitle>
+            </DetailCardHeader>
+
+            <div className="flex flex-auto items-center justify-center px-6">
+              <TasksEmptySection headingClassName="md:text-3xl" />
+            </div>
+          </DetailCardLeft>
+
+          <DetailCardRight>
+            {userDetailHeaderContainer}
+            {navigationLarge}
+          </DetailCardRight>
+        </DetailCard>
+      </PageContainer>
+
+      <PageContainer fullscreen headerOffset className="md:hidden">
+        <PageGrid className="relative flex-auto">
+          <ToolbarMobile
+            firstSlot={
+              <>
+                {backButton && <BackButton fallbackHref="/team" />}
+                <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
+              </>
+            }
+          />
+          <ToolbarMobile firstSlot={navigationMobile} />
+
+          <AbsoluteCenter className="w-full">
+            <TasksEmptySection />
+          </AbsoluteCenter>
+        </PageGrid>
+      </PageContainer>
+    </>;
   }
 
   return (
@@ -62,7 +93,7 @@ export function UserTasksPageLayout({
         <DetailCard>
           <DetailCardLeft>
             <DetailCardHeader>
-              <DetailCardTitle>{t("title")}</DetailCardTitle>
+              <DetailCardTitle>{t("heading")}</DetailCardTitle>
               <div className="flex gap-4">
                 <CreateTaskModalTriggerLarge />
                 <TaskSortingMenuTriggerLarge
@@ -89,7 +120,7 @@ export function UserTasksPageLayout({
             firstSlot={
               <>
                 {backButton && <BackButton fallbackHref="/team" />}
-                <PageHeadingMobile>{t("title")}</PageHeadingMobile>
+                <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
               </>
             }
             secondSlot={<CreateTaskModalTriggerMobile />}

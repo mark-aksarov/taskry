@@ -7,14 +7,14 @@ import {
 
 import { useTranslations } from "next-intl";
 import { PageGrid } from "@/dashboard/common/PageGrid";
-import { PageContainer } from "@/dashboard/common/PageContainer";
 import { ButtonSkeleton, Skeleton } from "@/ui/Skeleton";
+import { PageContainer } from "@/dashboard/common/PageContainer";
 import { UserGridSkeleton } from "@/dashboard/users/UserGridSkeleton";
 import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
 import { SearchModalTriggerSkeleton } from "@/dashboard/search/SearchModalTrigger";
 
-export default function AppUsersPageLoading() {
-  const t = useTranslations("app.UsersPage");
+export default function AppTeamPageLoading() {
+  const t = useTranslations("app.TeamPage");
 
   return (
     <PageContainer>

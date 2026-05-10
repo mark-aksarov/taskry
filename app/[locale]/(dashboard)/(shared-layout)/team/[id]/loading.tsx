@@ -8,8 +8,8 @@ import { DetailHeaderSkeleton } from "@/dashboard/common/DetailHeader";
 import { UserDetailAltSkeleton } from "@/dashboard/users/UserDetailAlt";
 import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
 import { ProfileActionsSkeleton } from "@/dashboard/users/ProfileActions";
-import { UserNavigationLarge } from "@/dashboard/users/UserNavigationLarge";
-import { ProfileNavigationMobile } from "@/dashboard/users/ProfileNavigationMobile";
+import { UserNavigationLargeSkeleton } from "@/dashboard/users/UserNavigationLarge";
+import { UserNavigationMobileSkeleton } from "@/dashboard/users/UserNavigationMobile";
 
 export default function AppTeamProfileLoading() {
   const t = useTranslations("app.TeamProfilePage");
@@ -19,9 +19,7 @@ export default function AppTeamProfileLoading() {
       <UserDetailCard
         userDetailContainer={<UserDetailAltSkeleton />}
         userDetailHeaderContainer={<DetailHeaderSkeleton />}
-        navigationLarge={
-          <UserNavigationLarge userActions={<ProfileActionsSkeleton />} />
-        }
+        navigationLarge={<UserNavigationLargeSkeleton />}
       />
 
       <PageGrid className="md:hidden">
@@ -29,7 +27,7 @@ export default function AppTeamProfileLoading() {
           firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
         />
 
-        <ToolbarMobile firstSlot={<ProfileNavigationMobile />} />
+        <ToolbarMobile firstSlot={<UserNavigationMobileSkeleton />} />
 
         <div>
           <DetailHeaderSkeleton />

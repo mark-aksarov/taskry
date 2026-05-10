@@ -37,18 +37,18 @@ import { SearchModalTrigger } from "@/dashboard/search/SearchModalTrigger";
 import { UsersFilteredEmptySection } from "@/dashboard/users/UsersFilteredEmptySection";
 import { UserPositionFiltersModalTrigger } from "@/dashboard/users/UserPositionFiltersModal";
 
-interface UsersPageProps {
+interface TeamPageProps {
   totalFilteredUsers: number;
   selectedSortField: UserSortField;
   usersContainer: React.ReactNode;
 }
 
-export function UsersPage({
+export function TeamPage({
   totalFilteredUsers,
   selectedSortField,
   usersContainer,
-}: UsersPageProps) {
-  const t = useTranslations("app.UsersPage");
+}: TeamPageProps) {
+  const t = useTranslations("app.TeamPage");
 
   const isFilteredEmpty = totalFilteredUsers === 0;
 

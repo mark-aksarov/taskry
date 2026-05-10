@@ -3,7 +3,9 @@
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
+import { useDeleteUser } from "../DeleteUserContext";
 import { UserNavigationMobileLink } from "./UserNavigationMobileLink";
+import { UserNavigationMobileLayout } from "./UserNavigationMobileLayout";
 
 export function UserNavigationMobile() {
   const t = useTranslations("dashboard.users.UserNavigationMobile");
@@ -11,21 +13,28 @@ export function UserNavigationMobile() {
   const pathname = usePathname();
   const { id } = useParams<{ id: string }>();
 
-  return (
-    <nav className="flex gap-2 md:hidden">
-      <UserNavigationMobileLink
-        href={`/team/${id}`}
-        isSelected={pathname === `/team/${id}`}
-      >
-        {t("info")}
-      </UserNavigationMobileLink>
+  const { isPending: isDeleteUserPending } = useDeleteUser();
 
-      <UserNavigationMobileLink
-        href={`/team/${id}/tasks`}
-        isSelected={pathname === `/team/${id}/tasks`}
-      >
-        {t("assignedTasks")}
-      </UserNavigationMobileLink>
-    </nav>
+  return (
+    <UserNavigationMobileLayout
+      userInformationLink={
+        <UserNavigationMobileLink
+          href={`/team/${id}`}
+          isSelected={pathname === `/team/${id}`}
+          isDisabled={isDeleteUserPending}
+        >
+          {t("info")}
+        </UserNavigationMobileLink>
+      }
+      assignedTasksLink={
+        <UserNavigationMobileLink
+          href={`/team/${id}/tasks`}
+          isSelected={pathname === `/team/${id}/tasks`}
+          isDisabled={isDeleteUserPending}
+        >
+          {t("assignedTasks")}
+        </UserNavigationMobileLink>
+      }
+    />
   );
 }

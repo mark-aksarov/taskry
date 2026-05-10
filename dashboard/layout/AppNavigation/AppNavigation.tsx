@@ -17,10 +17,13 @@ import { NavigationLink } from "@/dashboard/common/NavigationItem";
 import { AppNavigationLogoutButton } from "./AppNavigationLogoutButton";
 import { AppNavigationLangMenuTrigger } from "./AppNavigationLangMenuTrigger";
 import { AppNavigationThemeToggleButton } from "./AppNavigationThemeToggleButton";
+import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
 
 export const AppNavigation = () => {
   const pathname = usePathname();
   const t = useTranslations("dashboard.layout.AppNavigation");
+
+  const { userId } = useCurrentUser();
 
   return (
     <nav className="flex flex-col gap-2.5">
@@ -63,7 +66,10 @@ export const AppNavigation = () => {
 
       <NavigationLink
         href="/team"
-        isActive={pathname.startsWith("/team") || pathname === "/positions"}
+        isActive={
+          (pathname.startsWith("/team") || pathname === "/positions") &&
+          !pathname.startsWith(`/team/${userId}`)
+        }
         iconLeft={<Users size={18} strokeWidth={1.5} absoluteStrokeWidth />}
         label={t("team")}
       />
@@ -78,8 +84,8 @@ export const AppNavigation = () => {
       />
 
       <NavigationLink
-        href="/profile"
-        isActive={pathname.startsWith("/profile")}
+        href={`/team/${userId}`}
+        isActive={pathname.startsWith(`/team/${userId}`)}
         iconLeft={<UserRound size={18} strokeWidth={1.5} absoluteStrokeWidth />}
         label={t("profile")}
       />

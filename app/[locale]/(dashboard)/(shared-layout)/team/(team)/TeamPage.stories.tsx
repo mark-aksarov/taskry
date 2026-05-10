@@ -1,6 +1,6 @@
-import { UsersPage } from "./UsersPage";
+import { TeamPage } from "./TeamPage";
 import { mocked } from "storybook/test";
-import UsersPageLoading from "./loading";
+import TeamPageLoading from "./loading";
 import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
@@ -12,8 +12,8 @@ import { UsersContainerPresentationExample } from "@/dashboard/users/UsersContai
 import { withCreatePositionProvider } from "@/dashboard/position/CreatePositionProvider/__stories__";
 
 const meta = {
-  title: "pages/UsersPage",
-  component: UsersPage,
+  title: "pages/TeamPage",
+  component: TeamPage,
   parameters: { layout: "fullscreen" },
   decorators: [
     withUserSearchModal,
@@ -26,7 +26,7 @@ const meta = {
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/team");
   },
-} satisfies Meta<typeof UsersPage>;
+} satisfies Meta<typeof TeamPage>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -41,7 +41,7 @@ export const Default = {
 
 export const Loading = {
   args: { ...Default.args },
-  render: () => <UsersPageLoading />,
+  render: () => <TeamPageLoading />,
 } satisfies Story;
 
 export const WithEmptyFilterResult = {

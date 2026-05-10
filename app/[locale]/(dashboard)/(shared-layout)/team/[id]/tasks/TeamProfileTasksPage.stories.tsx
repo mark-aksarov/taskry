@@ -4,13 +4,13 @@ import { mockedUserDetail } from "@/mocks/users";
 import AppProfileTasksPageLoading from "./loading";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
+import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
 import { ProfileActions } from "@/dashboard/users/ProfileActions";
 import { TaskGridItemMobile } from "@/dashboard/tasks/TaskGridItem";
 import { UserTaskListItem } from "@/dashboard/users/UserTaskListItem";
 import { SharedPageDecorator } from "@/.storybook/SharedPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserNavigationLarge } from "@/dashboard/users/UserNavigationLarge";
-import { UserTasksPageLayout } from "@/dashboard/users/UserTasksPageLayout";
 import { UserNavigationMobile } from "@/dashboard/users/UserNavigationMobile";
 import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
 import { UserTasksPresentation } from "@/dashboard/users/UserTasksPresentation";
@@ -31,7 +31,7 @@ import { withUpdateUserImageFileProvider } from "@/dashboard/users/UpdateUserIma
 
 const meta = {
   title: "pages/TeamProfileTasksPage",
-  component: UserTasksPageLayout,
+  component: TeamProfileTasksPage,
   parameters: { layout: "fullscreen" },
   decorators: [
     withCreateTaskProvider,
@@ -52,7 +52,7 @@ const meta = {
     mocked(usePathname).mockReturnValue(`/team/user-1/tasks`);
     mocked(useParams).mockReturnValue({ id: "user-1" });
   },
-} satisfies Meta<typeof UserTasksPageLayout>;
+} satisfies Meta<typeof TeamProfileTasksPage>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

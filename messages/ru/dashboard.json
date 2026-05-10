@@ -1418,12 +1418,6 @@
       "noDeadline": "Без дедлайна",
       "deadlineOn": "Срок до {date}"
     },
-    "UserTasksPageEmptyLayout": {
-      "title": "Задачи"
-    },
-    "UserTasksPageLayout": {
-      "title": "Задачи"
-    },
     "UserFiltersModal": {
       "heading": "Фильтры пользователей"
     },

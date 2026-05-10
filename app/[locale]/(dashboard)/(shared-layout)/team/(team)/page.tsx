@@ -7,20 +7,20 @@ import {
 } from "@/lib/schemas/base";
 
 import { z } from "zod";
-import { UsersPage } from "./UsersPage";
+import { TeamPage } from "./TeamPage";
 import { userSortFields } from "@/lib/types";
 import { positionId } from "@/lib/schemas/position";
 import { getUserList } from "@/lib/data/user/user.dal";
 import { UsersContainer } from "@/dashboard/users/UsersContainer";
-import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { CreateUserProvider } from "@/dashboard/users/CreateUserProvider";
-import { CreatePositionProvider } from "@/dashboard/position/CreatePositionProvider";
-import { UserFiltersProvider } from "@/dashboard/users/UserFiltersContext";
 import { UserSearchModal } from "@/dashboard/users/UserSearchModal";
 import { CreateUserModal } from "@/dashboard/users/CreateUserModal";
-import { RouterSearchContainer } from "@/dashboard/common/RouterSearchContainer";
-import { CreatePositionModal } from "@/dashboard/position/CreatePositionModal";
 import { UserFiltersModal } from "@/dashboard/users/UserFiltersModal";
+import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { CreateUserProvider } from "@/dashboard/users/CreateUserProvider";
+import { UserFiltersProvider } from "@/dashboard/users/UserFiltersContext";
+import { CreatePositionModal } from "@/dashboard/position/CreatePositionModal";
+import { RouterSearchContainer } from "@/dashboard/common/RouterSearchContainer";
+import { CreatePositionProvider } from "@/dashboard/position/CreatePositionProvider";
 import { UserPositionFiltersModal } from "@/dashboard/users/UserPositionFiltersModal";
 import { UserFiltersFormContainer } from "@/dashboard/users/UserFiltersFormContainer";
 import { UserPositionFiltersFormContainer } from "@/dashboard/users/UserPositionFiltersFormContainer";
@@ -39,7 +39,7 @@ const searchParamsSchema = z.object({
   ),
 });
 
-export default async function AppUsersPage({
+export default async function AppTeamPage({
   searchParams,
 }: {
   searchParams: Promise<{ [key: string]: string | undefined }>;
@@ -64,7 +64,7 @@ export default async function AppUsersPage({
     <CreateUserProvider>
       <CreatePositionProvider>
         <UserFiltersProvider filters={filters}>
-          <UsersPage
+          <TeamPage
             totalFilteredUsers={totalFilteredUsers}
             selectedSortField={sort}
             usersContainer={

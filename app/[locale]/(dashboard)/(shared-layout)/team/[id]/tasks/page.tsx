@@ -5,6 +5,7 @@ import { getTaskList } from "@/lib/data/task/task.dal";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { getUserSummary } from "@/lib/data/user/user.dal";
+import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
 import { ProfileActions } from "@/dashboard/users/ProfileActions";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
 import { CreateTaskModal } from "@/dashboard/tasks/CreateTaskModal";
@@ -18,7 +19,6 @@ import { DeleteUserProvider } from "@/dashboard/users/DeleteUserProvider";
 import { UserTasksContainer } from "@/dashboard/users/UserTasksContainer";
 import { ChangePasswordModal } from "@/dashboard/users/ChangePasswordModal";
 import { DeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider";
-import { UserTasksPageLayout } from "@/dashboard/users/UserTasksPageLayout";
 import { UserNavigationLarge } from "@/dashboard/users/UserNavigationLarge";
 import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
 import { UserNavigationMobile } from "@/dashboard/users/UserNavigationMobile";
@@ -93,7 +93,7 @@ export default async function AppProfileTasksPage({
                   <UpdateTaskStatusesProvider>
                     <DeleteTasksProvider>
                       <CreateTaskProvider>
-                        <UserTasksPageLayout
+                        <TeamProfileTasksPage
                           totalTasksCount={totalTasksCount}
                           selectedSortField={sort}
                           backButton

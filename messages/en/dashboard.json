@@ -1418,12 +1418,6 @@
       "noDeadline": "No deadline",
       "deadlineOn": "Deadline on {date}"
     },
-    "UserTasksPageEmptyLayout": {
-      "title": "Tasks"
-    },
-    "UserTasksPageLayout": {
-      "title": "Tasks"
-    },
     "UserFiltersModal": {
       "heading": "User filters"
     },

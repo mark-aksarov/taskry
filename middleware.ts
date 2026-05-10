@@ -20,7 +20,6 @@ const protectedRoutes = [
   { type: "prefix", path: "/companies" },
   { type: "prefix", path: "/customers" },
   { type: "prefix", path: "/positions" },
-  { type: "prefix", path: "/profile" },
   { type: "prefix", path: "/project-categories" },
   { type: "prefix", path: "/projects" },
   { type: "prefix", path: "/task-categories" },

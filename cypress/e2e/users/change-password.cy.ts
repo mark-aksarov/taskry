@@ -19,14 +19,14 @@ describe("change password of user", () => {
 
   it("updates password and sign-in with new password", () => {
     cy.signIn("user-1@test.com", "12345abc");
-    cy.visit("/en/profile");
+    cy.visit("/en/team/user-1");
 
     cy.changePassword("new-password");
 
     // sign in with new password
     cy.signOutViaUI();
     cy.signIn("user-1@test.com", "new-password");
-    cy.visit("/en/profile");
+    cy.visit("/en/team/user-1");
     cy.getByData("user-card").should("contain", "User 1");
   });
 });

@@ -70,7 +70,7 @@ export default function SharedLayout({
     },
     {
       match: pathname === "/team",
-      namespace: "app.UsersPage",
+      namespace: "app.TeamPage",
     },
     {
       match: pathname.startsWith("/team") && params.id,
@@ -81,10 +81,6 @@ export default function SharedLayout({
       match: pathname === "/positions",
       namespace: "app.PositionsPage",
       backButtonHref: "/team",
-    },
-    {
-      match: pathname.startsWith("/profile"),
-      namespace: "app.ProfilePage",
     },
   ];
 

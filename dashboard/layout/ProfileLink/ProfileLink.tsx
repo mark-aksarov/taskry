@@ -6,11 +6,16 @@ import { UnknownUser } from "@/dashboard/common/UnknownUser";
 import { ImageContainer } from "@/dashboard/common/ImageContainer";
 
 interface ProfileLinkProps {
+  userId: string;
   fullName: string;
   imageUrl?: string;
 }
 
-export const ProfileLink = ({ fullName, imageUrl }: ProfileLinkProps) => {
+export const ProfileLink = ({
+  userId,
+  fullName,
+  imageUrl,
+}: ProfileLinkProps) => {
   const profileImg = imageUrl ? (
     <ImageContainer className="h-8 w-8">
       <Image src={imageUrl} alt="profile image" width={32} height={32} />
@@ -20,7 +25,7 @@ export const ProfileLink = ({ fullName, imageUrl }: ProfileLinkProps) => {
   );
 
   return (
-    <BaseLink href="/profile" className="flex items-center gap-2.5">
+    <BaseLink href={`/team/${userId}`} className="flex items-center gap-2.5">
       <div className="h-8 w-8 overflow-hidden rounded-full bg-(--surface-tertiary)">
         {profileImg}
       </div>

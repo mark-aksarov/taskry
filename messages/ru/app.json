@@ -30,7 +30,7 @@
       "description": "Добавьте клиента, чтобы начать работу и организовать проекты"
     }
   },
-  "UsersPage": {
+  "TeamPage": {
     "heading": "Команда"
   },
   "ProjectCategoriesPage": {
@@ -69,8 +69,8 @@
       "buttonLabel": "К команде"
     }
   },
-  "ProfilePage": {
-    "heading": "Профиль"
+  "TeamProfileTaskPage": {
+    "heading": "Задачи"
   },
   "ProjectDetailPage": {
     "heading": "Проект",

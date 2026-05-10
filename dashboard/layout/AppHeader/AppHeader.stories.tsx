@@ -33,6 +33,8 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     heading: "Dashboard",
-    profileLinkContainer: <ProfileLink fullName="User 1" imageUrl="/man.jpg" />,
+    profileLinkContainer: (
+      <ProfileLink userId="user-1" fullName="User 1" imageUrl="/man.jpg" />
+    ),
   },
 } satisfies Story;

@@ -30,7 +30,7 @@
       "description": "Add a customer to get started and organize your projects"
     }
   },
-  "UsersPage": {
+  "TeamPage": {
     "heading": "Team"
   },
   "ProjectCategoriesPage": {
@@ -69,8 +69,8 @@
       "buttonLabel": "Back to team"
     }
   },
-  "ProfilePage": {
-    "heading": "Profile"
+  "TeamProfileTaskPage": {
+    "heading": "Tasks"
   },
   "ProjectDetailPage": {
     "heading": "Project",

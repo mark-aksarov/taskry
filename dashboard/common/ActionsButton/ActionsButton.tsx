@@ -5,7 +5,7 @@ import { useActionsButtonDisabled } from "./useActionsButtonDisabled";
 
 interface ActionsButtonProps extends ButtonProps {
   selectedIds: number[];
-  // Extra flag to hide the label on User/Profile Tasks pages
+  // Extra flag to hide the label on TeamProfileTasks page
   showLabel?: boolean;
 }
 export function ActionsButton({

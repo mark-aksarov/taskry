@@ -1,2 +1,2 @@
 export { UserNavigationMobile } from "./UserNavigationMobile";
-export { UserNavigationMobileLink } from "./UserNavigationMobileLink";
+export { UserNavigationMobileSkeleton } from "./UserNavigationMobileSkeleton";

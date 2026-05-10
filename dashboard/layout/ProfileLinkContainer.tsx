@@ -1,25 +1,23 @@
 import "server-only";
 
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { ProfileLink } from "./ProfileLink/ProfileLink";
-import { getUserDetail } from "@/lib/data/user/user.dal";
+import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 
 export async function ProfileLinkContainer() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  const session = await requireProtectedPage();
 
-  const user = await getUserDetail(session!.user.id);
-
-  if (!user) {
+  if (!session) {
     notFound();
   }
 
   return (
     <div className="flex items-center gap-2">
-      <ProfileLink fullName={user.fullName} imageUrl={user.imageUrl} />
+      <ProfileLink
+        userId={session.user.id}
+        fullName={session.user.name}
+        imageUrl={session.user.imageUrl}
+      />
     </div>
   );
 }
