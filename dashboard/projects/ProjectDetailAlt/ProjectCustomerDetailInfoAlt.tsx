@@ -7,8 +7,9 @@ import {
   DetailEditButton,
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
-import { useDeleteProject } from "../DeleteProjectContext";
 import { useModal } from "@/common/ModalManagerContext";
+import { useDeleteProject } from "../DeleteProjectContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateProjectCustomer } from "../UpdateProjectCustomerContext";
 
 interface ProjectCustomerDetailInfoAltProps {
@@ -23,6 +24,8 @@ export function ProjectCustomerDetailInfoAlt({
 }: ProjectCustomerDetailInfoAltProps) {
   const t = useTranslations("dashboard.projects.ProjectDetail");
 
+  const guestGuard = useGuestModalGuard();
+
   const { onOpenChange: onUpdateCustomerModalOpenChange } = useModal(
     "updateProjectCustomer",
   );
@@ -33,6 +36,10 @@ export function ProjectCustomerDetailInfoAlt({
   //Pending state while updating project customer
   const { isPending: isUpdateProjectCustomerPending } =
     useUpdateProjectCustomer();
+
+  const handlePress = () => {
+    guestGuard(() => onUpdateCustomerModalOpenChange(true));
+  };
 
   return (
     <DetailInfoAlt
@@ -48,7 +55,7 @@ export function ProjectCustomerDetailInfoAlt({
           data-test="update-project-customer-edit-button"
           isPending={isUpdateProjectCustomerPending}
           isDisabled={isDeleteProjectPending}
-          onPress={() => onUpdateCustomerModalOpenChange(true)}
+          onPress={handlePress}
         />
       }
       surface

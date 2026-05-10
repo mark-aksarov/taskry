@@ -7,8 +7,9 @@ import {
   DetailEditButton,
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
-import { useDeleteProject } from "../DeleteProjectContext";
 import { useModal } from "@/common/ModalManagerContext";
+import { useDeleteProject } from "../DeleteProjectContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateProjectDescription } from "../UpdateProjectDescriptionContext";
 
 interface ProjectDescriptionDetailInfoAltProps {
@@ -20,6 +21,8 @@ export function ProjectDescriptionDetailInfoAlt({
 }: ProjectDescriptionDetailInfoAltProps) {
   const t = useTranslations("dashboard.projects.ProjectDetail");
 
+  const guestGuard = useGuestModalGuard();
+
   //Disable edit button while the project is being deleted
   const { isPending: isDeleteProjectPending } = useDeleteProject();
 
@@ -30,6 +33,10 @@ export function ProjectDescriptionDetailInfoAlt({
 
   const { isPending: isUpdateProjectDescriptionPending } =
     useUpdateProjectDescription();
+
+  const handlePress = () => {
+    guestGuard(() => onUpdateDescriptionModalOpenChange(true));
+  };
 
   return (
     <DetailInfoAlt
@@ -45,7 +52,7 @@ export function ProjectDescriptionDetailInfoAlt({
           data-test="update-project-description-edit-button"
           isPending={isUpdateProjectDescriptionPending}
           isDisabled={isDeleteProjectPending}
-          onPress={() => onUpdateDescriptionModalOpenChange(true)}
+          onPress={handlePress}
         />
       }
       surface

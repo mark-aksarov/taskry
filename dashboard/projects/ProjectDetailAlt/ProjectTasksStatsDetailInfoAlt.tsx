@@ -1,7 +1,7 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { Skeleton } from "@/ui/Skeleton";
+import { useTranslations } from "next-intl";
 import { DetailStatSkeleton } from "@/dashboard/common/DetailStat";
 import { DetailTitle, DetailInfoAlt } from "@/dashboard/common/Detail";
 import { ProjectActiveTasksDetailStat } from "../ProjectActiveTasksDetailStat";

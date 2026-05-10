@@ -7,8 +7,9 @@ import {
   DetailEditButton,
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
-import { useDeleteProject } from "../DeleteProjectContext";
 import { useModal } from "@/common/ModalManagerContext";
+import { useDeleteProject } from "../DeleteProjectContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateProjectCategoryRel } from "../UpdateProjectCategoryRelContext";
 
 interface ProjectCategoryDetailInfoAltProps {
@@ -23,6 +24,8 @@ export function ProjectCategoryDetailInfoAlt({
 }: ProjectCategoryDetailInfoAltProps) {
   const t = useTranslations("dashboard.projects.ProjectDetail");
 
+  const guestGuard = useGuestModalGuard();
+
   const { onOpenChange: onUpdateCategoryModalOpenChange } = useModal(
     "updateProjectCategoryRel",
   );
@@ -33,6 +36,10 @@ export function ProjectCategoryDetailInfoAlt({
   //Pending state while updating project category
   const { isPending: isUpdateProjectCategoryPending } =
     useUpdateProjectCategoryRel();
+
+  const handlePress = () => {
+    guestGuard(() => onUpdateCategoryModalOpenChange(true));
+  };
 
   return (
     <DetailInfoAlt
@@ -46,7 +53,7 @@ export function ProjectCategoryDetailInfoAlt({
           data-test="update-project-category-edit-button"
           isPending={isUpdateProjectCategoryPending}
           isDisabled={isDeleteProjectPending}
-          onPress={() => onUpdateCategoryModalOpenChange(true)}
+          onPress={handlePress}
         />
       }
       surface

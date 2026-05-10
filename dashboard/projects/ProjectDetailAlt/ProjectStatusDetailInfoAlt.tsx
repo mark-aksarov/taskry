@@ -7,9 +7,10 @@ import {
   DetailEditButton,
 } from "@/dashboard/common/Detail";
 import { useTranslations } from "next-intl";
+import { useModal } from "@/common/ModalManagerContext";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useDeleteProject } from "../DeleteProjectContext";
-import { useModal } from "@/common/ModalManagerContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateProjectStatusAlt } from "../UpdateProjectStatusAltContext";
 
 interface ProjectStatusDetailInfoAltProps {
@@ -22,6 +23,8 @@ export function ProjectStatusDetailInfoAlt({
   const tStatus = useTranslations("dashboard.projects.ProjectStatus");
   const t = useTranslations("dashboard.projects.ProjectDetail");
 
+  const guestGuard = useGuestModalGuard();
+
   //Disable edit button while the project is being deleted
   const { isPending: isDeleteProjectPending } = useDeleteProject();
 
@@ -33,6 +36,10 @@ export function ProjectStatusDetailInfoAlt({
   const { isPending: isUpdateProjectStatusPending } =
     useUpdateProjectStatusAlt();
 
+  const handlePress = () => {
+    guestGuard(() => onUpdateStatusModalOpenChange(true));
+  };
+
   return (
     <DetailInfoAlt
       data-test="project-status-detail-info"
@@ -43,7 +50,7 @@ export function ProjectStatusDetailInfoAlt({
           data-test="update-project-status-edit-button"
           isPending={isUpdateProjectStatusPending}
           isDisabled={isDeleteProjectPending}
-          onPress={() => onUpdateStatusModalOpenChange(true)}
+          onPress={handlePress}
         />
       }
       surface

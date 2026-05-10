@@ -6,9 +6,10 @@ import {
   DetailInfoAlt,
   DetailEditButton,
 } from "@/dashboard/common/Detail";
+import { useModal } from "@/common/ModalManagerContext";
 import { useFormatter, useTranslations } from "next-intl";
 import { useDeleteProject } from "../DeleteProjectContext";
-import { useModal } from "@/common/ModalManagerContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateProjectDeadline } from "../UpdateProjectDeadlineContext";
 
 interface ProjectDeadlineDetailInfoAltProps {
@@ -19,6 +20,8 @@ export function ProjectDeadlineDetailInfoAlt({
   deadline,
 }: ProjectDeadlineDetailInfoAltProps) {
   const t = useTranslations("dashboard.projects.ProjectDetail");
+
+  const guestGuard = useGuestModalGuard();
 
   const { onOpenChange: onUpdateBirthdateModalOpenChange } = useModal(
     "updateProjectDeadline",
@@ -39,6 +42,10 @@ export function ProjectDeadlineDetailInfoAlt({
     year: "numeric",
   });
 
+  const handlePress = () => {
+    guestGuard(() => onUpdateBirthdateModalOpenChange(true));
+  };
+
   return (
     <DetailInfoAlt
       data-test="project-deadline-detail-info"
@@ -49,7 +56,7 @@ export function ProjectDeadlineDetailInfoAlt({
           data-test="update-project-deadline-edit-button"
           isPending={isUpdateProjectDeadlinePending}
           isDisabled={isDeleteProjectPending}
-          onPress={() => onUpdateBirthdateModalOpenChange(true)}
+          onPress={handlePress}
         />
       }
       surface
