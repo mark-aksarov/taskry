@@ -46,13 +46,10 @@ function isProtectedRoute(pathname: string) {
 const handleI18nRouting = createMiddleware({
   locales: ["en", "ru"],
   defaultLocale,
-  localeDetection: false,
 });
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-
-  console.log("pathname", pathname, isProtectedRoute(pathname));
 
   // https://better-auth.com/docs/integrations/next#cookie-based-checks-recommended-for-all-versions
   if (isProtectedRoute(pathname)) {
