@@ -9,6 +9,7 @@ import {
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
 import { useDeleteCustomer } from "../DeleteCustomerContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateCustomerCompany } from "../UpdateCustomerCompanyContext";
 
 interface CustomerCompanyDetailInfoAltProps {
@@ -22,6 +23,8 @@ export function CustomerCompanyDetailInfoAlt({
 }: CustomerCompanyDetailInfoAltProps) {
   const t = useTranslations("dashboard.customers.CustomerDetail");
 
+  const guestGuard = useGuestModalGuard();
+
   const { onOpenChange: onUpdatePositionModalOpenChange } = useModal(
     "updateCustomerCompany",
   );
@@ -33,6 +36,10 @@ export function CustomerCompanyDetailInfoAlt({
   const { isPending: isUpdateCustomerCompanyPending } =
     useUpdateCustomerCompany();
 
+  const handlePress = () => {
+    guestGuard(() => onUpdatePositionModalOpenChange(true));
+  };
+
   return (
     <DetailInfoAlt
       data-test="customer-company-detail-info"
@@ -43,7 +50,7 @@ export function CustomerCompanyDetailInfoAlt({
           data-test="update-customer-company-edit-button"
           isPending={isUpdateCustomerCompanyPending}
           isDisabled={isDeleteCustomerPending}
-          onPress={() => onUpdatePositionModalOpenChange(true)}
+          onPress={handlePress}
         />
       }
       surface

@@ -9,6 +9,7 @@ import {
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
 import { useDeleteCustomer } from "../DeleteCustomerContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateCustomerEmail } from "../UpdateCustomerEmailContext";
 
 interface CustomerEmailDetailInfoAltProps {
@@ -20,6 +21,8 @@ export function CustomerEmailDetailInfoAlt({
 }: CustomerEmailDetailInfoAltProps) {
   const t = useTranslations("dashboard.customers.CustomerDetail");
 
+  const guestGuard = useGuestModalGuard();
+
   const { onOpenChange: onUpdateEmailModalOpenChange } = useModal(
     "updateCustomerEmail",
   );
@@ -29,6 +32,10 @@ export function CustomerEmailDetailInfoAlt({
 
   //Pending state while updating customer email
   const { isPending: isUpdateCustomerEmailPending } = useUpdateCustomerEmail();
+
+  const handlePress = () => {
+    guestGuard(() => onUpdateEmailModalOpenChange(true));
+  };
 
   return (
     <DetailInfoAlt
@@ -40,7 +47,7 @@ export function CustomerEmailDetailInfoAlt({
           data-test="update-customer-email-edit-button"
           isPending={isUpdateCustomerEmailPending}
           isDisabled={isDeleteCustomerPending}
-          onPress={() => onUpdateEmailModalOpenChange(true)}
+          onPress={handlePress}
         />
       }
       surface

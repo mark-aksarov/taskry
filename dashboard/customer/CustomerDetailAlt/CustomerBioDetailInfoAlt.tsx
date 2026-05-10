@@ -10,6 +10,7 @@ import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
 import { useDeleteCustomer } from "../DeleteCustomerContext";
 import { useUpdateCustomerBio } from "../UpdateCustomerBioContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
 interface CustomerBioDetailInfoAltProps {
   bio?: string;
@@ -20,6 +21,8 @@ export function CustomerBioDetailInfoAlt({
 }: CustomerBioDetailInfoAltProps) {
   const t = useTranslations("dashboard.customers.CustomerDetail");
 
+  const guestGuard = useGuestModalGuard();
+
   const { onOpenChange: onUpdateBioModalOpenChange } =
     useModal("updateCustomerBio");
 
@@ -28,6 +31,10 @@ export function CustomerBioDetailInfoAlt({
 
   //Pending state while updating customer bio
   const { isPending: isUpdateCustomerBioPending } = useUpdateCustomerBio();
+
+  const handlePress = () => {
+    guestGuard(() => onUpdateBioModalOpenChange(true));
+  };
 
   return (
     <DetailInfoAlt
@@ -39,7 +46,7 @@ export function CustomerBioDetailInfoAlt({
           data-test="update-customer-bio-edit-button"
           isPending={isUpdateCustomerBioPending}
           isDisabled={isDeleteCustomerPending}
-          onPress={() => onUpdateBioModalOpenChange(true)}
+          onPress={handlePress}
         />
       }
       surface

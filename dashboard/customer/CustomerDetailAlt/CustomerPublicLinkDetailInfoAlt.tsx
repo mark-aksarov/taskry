@@ -9,6 +9,7 @@ import {
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
 import { useDeleteCustomer } from "../DeleteCustomerContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateCustomerPublicLink } from "../UpdateCustomerPublicLinkContext";
 
 interface CustomerPublicLinkDetailInfoAltProps {
@@ -19,6 +20,8 @@ export function CustomerPublicLinkDetailInfoAlt({
   publicLink,
 }: CustomerPublicLinkDetailInfoAltProps) {
   const t = useTranslations("dashboard.customers.CustomerDetail");
+
+  const guestGuard = useGuestModalGuard();
 
   const { onOpenChange: onUpdatePublicLinkModalOpenChange } = useModal(
     "updateCustomerPublicLink",
@@ -31,6 +34,10 @@ export function CustomerPublicLinkDetailInfoAlt({
   const { isPending: isUpdateCustomerPublicLinkPending } =
     useUpdateCustomerPublicLink();
 
+  const handlePress = () => {
+    guestGuard(() => onUpdatePublicLinkModalOpenChange(true));
+  };
+
   return (
     <DetailInfoAlt
       data-test="customer-public-link-detail-info"
@@ -42,7 +49,7 @@ export function CustomerPublicLinkDetailInfoAlt({
           data-test="update-customer-public-link-edit-button"
           isPending={isUpdateCustomerPublicLinkPending}
           isDisabled={isDeleteCustomerPending}
-          onPress={() => onUpdatePublicLinkModalOpenChange(true)}
+          onPress={handlePress}
         />
       }
       surface
