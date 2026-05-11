@@ -49,7 +49,7 @@ const PositionListItemInner = memo(function PositionListItemInner({
         isPending && "*:opacity-50",
       )}
     >
-      <PositionItemCheckbox id={id} />
+      <PositionItemCheckbox id={id} name={name} />
       <ListItemInfo>
         <ListItemTitle>{name}</ListItemTitle>
         <ListItemText>{t("name")}</ListItemText>

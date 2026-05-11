@@ -44,7 +44,8 @@ export function CustomerEmailDetailInfoAlt({
       content={<DetailText>{email}</DetailText>}
       rightSlot={
         <DetailEditButton
-          data-test="update-customer-email-edit-button"
+          aria-label={t("editEmailButtonLabel")}
+          data-test="edit-email-button"
           isPending={isUpdateCustomerEmailPending}
           isDisabled={isDeleteCustomerPending}
           onPress={handlePress}

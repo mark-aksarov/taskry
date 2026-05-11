@@ -51,7 +51,8 @@ export function TaskDeadlineDetailInfoAlt({
       content={<DetailText>{formattedBirthdate}</DetailText>}
       rightSlot={
         <DetailEditButton
-          data-test="update-task-deadline-edit-button"
+          aria-label={t("editDeadlineButtonLabel")}
+          data-test="edit-deadline-button"
           isPending={isUpdateTaskDeadlinePending}
           isDisabled={isDeleteTaskPending}
           onPress={handlePress}

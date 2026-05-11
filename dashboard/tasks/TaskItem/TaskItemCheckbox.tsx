@@ -6,10 +6,11 @@ import { useSelectedTasks } from "../SelectedTasksContext/SelectedTasksContext";
 
 interface TaskItemCheckboxProps {
   id: number;
+  title: string;
   status: TaskStatus;
 }
 
-export function TaskItemCheckbox({ id, status }: TaskItemCheckboxProps) {
+export function TaskItemCheckbox({ id, title, status }: TaskItemCheckboxProps) {
   const selected = useSelectedTasks();
 
   function handleChange(isSelected: boolean) {
@@ -26,7 +27,7 @@ export function TaskItemCheckbox({ id, status }: TaskItemCheckboxProps) {
     <Checkbox
       data-test="task-checkbox"
       data-id={id}
-      aria-label="task checkbox"
+      aria-label={title}
       isSelected={isSelected}
       onChange={handleChange}
       className="items-start"

@@ -49,7 +49,7 @@ const TaskCategoryListItemInner = memo(function TaskCategoryListItemInner({
         isPending && "*:opacity-50",
       )}
     >
-      <TaskCategoryItemCheckbox id={id} />
+      <TaskCategoryItemCheckbox id={id} name={name} />
       <ListItemInfo>
         <ListItemTitle>{name}</ListItemTitle>
         <ListItemText>{t("name")}</ListItemText>

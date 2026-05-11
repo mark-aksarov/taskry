@@ -6,7 +6,6 @@ import { CtaSection } from "@/site/home/CtaSection";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "pages/HomePage",
@@ -19,7 +18,6 @@ const meta = {
       </SiteLayout>
     ),
     withModalManagerProvider,
-    withCurrentUserProvider,
     withThemedBackground,
   ],
   beforeEach: () => {

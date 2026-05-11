@@ -2,7 +2,15 @@ import { useTranslations } from "next-intl";
 import { ProgressBar } from "@/ui/ProgressBar";
 import { DetailInfoAlt, DetailTitle } from "./Detail";
 
-export function ProgressDetailInfoAlt({ progress }: { progress: number }) {
+interface ProgressDetailInfoAltProps {
+  progress: number;
+  "aria-label": string;
+}
+
+export function ProgressDetailInfoAlt({
+  progress,
+  "aria-label": ariaLabel,
+}: ProgressDetailInfoAltProps) {
   const t = useTranslations("dashboard.common.ProgressDetailInfoAlt");
 
   return (
@@ -10,6 +18,7 @@ export function ProgressDetailInfoAlt({ progress }: { progress: number }) {
       title={<DetailTitle>{t("progress")}</DetailTitle>}
       content={
         <ProgressBar
+          aria-label={ariaLabel}
           className="w-full"
           showValueText={false}
           value={progress}

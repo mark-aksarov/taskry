@@ -74,7 +74,7 @@ export const CustomerGridItemLargeInner = memo(
         className={isPending ? "*:opacity-50" : undefined}
         topRowSlot={
           <GridItemRow>
-            <CustomerItemCheckbox id={id} />
+            <CustomerItemCheckbox id={id} fullName={fullName} />
             <CustomerItemActionMenuTrigger customerId={id} className="-mr-2" />
           </GridItemRow>
         }

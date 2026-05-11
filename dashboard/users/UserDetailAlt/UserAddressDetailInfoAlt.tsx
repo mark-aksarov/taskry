@@ -46,7 +46,8 @@ export function UserAddressDetailInfoAlt({
       rightSlot={
         canEdit && (
           <DetailEditButton
-            data-test="update-user-address-edit-button"
+            aria-label={t("editAddressButtonLabel")}
+            data-test="edit-address-button"
             isPending={isUpdateUserAddressPending}
             isDisabled={isDeleteUserPending}
             onPress={handlePress}

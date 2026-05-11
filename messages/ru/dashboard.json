@@ -252,7 +252,13 @@
       "noEmail": "Электронная почта не указана",
       "noPhoneNumber": "Номер телефона не указан",
       "noPublicLink": "Публичная ссылка отсутствует",
-      "noCompany": "Компания не указана"
+      "noCompany": "Компания не указана",
+      "editBioButtonLabel": "Изменить о себе",
+      "editCompanyButtonLabel": "Изменить компанию",
+      "editEmailButtonLabel": "Изменить почту",
+      "editFullNameButtonLabel": "Изменить полное имя",
+      "editPhoneNumberButtonLabel": "Изменить номер телефона",
+      "editPublicLinkButtonLabel": "Изменить публичную ссылку"
     },
     "CreateCustomerModal": {
       "title": "Новый клиент"
@@ -720,7 +726,14 @@
       "noCategory": "Нет категории",
       "status": "Статус",
       "title": "Заголовок",
-      "tasksStats": "Статистика задач"
+      "tasksStats": "Статистика задач",
+      "editProjectCategoryButtonLabel": "Изменить категорию",
+      "editCustomerButtonLabel": "Изменить клиента",
+      "editDeadlineButtonLabel": "Изменить дедлайн",
+      "editDescriptionButtonLabel": "Изменить описание",
+      "editStatusButtonLabel": "Изменить статус",
+      "editTitleButtonLabel": "Изменить заголовок",
+      "progress": "Прогресс выполнения проекта"
     },
     "ProjectDetailHeader": {
       "noCategory": "Нет категории"
@@ -1129,8 +1142,15 @@
       "subtasks": "Подзадачи",
       "noCategory": "Нет категории",
       "title": "Заголовок",
-      "progress": "Прогресс",
-      "noSubtasks": "Пока нет ни одной подзадачи"
+      "progress": "Прогресс выполнения задачи",
+      "noSubtasks": "Пока нет ни одной подзадачи",
+      "editAssigneeButtonLabel": "Изменить исполнителя",
+      "editTaskCategoryButtonLabel": "Изменить категорию",
+      "editDeadlineButtonLabel": "Изменить дедлайн",
+      "editDescriptionButtonLabel": "Изменить описание",
+      "editProjectButtonLabel": "Изменить проект",
+      "editStatusButtonLabel": "Изменить статус",
+      "editTitleButtonLabel": "Изменить заголовок"
     },
     "TaskDetailHeader": {
       "noCategory": "Нет категории"
@@ -1346,7 +1366,13 @@
       "position": "Должность",
       "noPosition": "Должность не указана",
       "birthdate": "Дата рождения",
-      "noBirthdate": "Дата рождения не указана"
+      "noBirthdate": "Дата рождения не указана",
+      "editAddressButtonLabel": "Изменить адрес",
+      "editBioButtonLabel": "Изменить дату рождения",
+      "editFullNameButtonLabel": "Изменить полное имя",
+      "editPhoneNumberButtonLabel": "Изменить номер телефона",
+      "editPositionButtonLabel": "Изменить должность",
+      "editPublicLinkButtonLabel": "Изменить публичную ссылку"
     },
     "UserDetailCard": {
       "title": "Детали пользователя"

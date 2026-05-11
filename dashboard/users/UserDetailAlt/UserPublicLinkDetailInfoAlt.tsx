@@ -48,7 +48,8 @@ export function UserPublicLinkDetailInfoAlt({
       rightSlot={
         canEdit && (
           <DetailEditButton
-            data-test="update-user-public-link-edit-button"
+            aria-label={t("editPublicLinkButtonLabel")}
+            data-test="edit-public-link-button"
             isPending={isUpdateUserPublicLinkPending}
             isDisabled={isDeleteUserPending}
             onPress={handlePress}

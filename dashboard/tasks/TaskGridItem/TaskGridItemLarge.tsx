@@ -68,7 +68,7 @@ export const TaskGridItemLargeInner = memo(function TaskGridItemLargeInner({
   return (
     <TaskGridItemLayout
       className={isPending ? "*:opacity-50" : undefined}
-      checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
+      checkboxSlot={<TaskItemCheckbox id={id} title={title} status={status} />}
       menuTriggerSlot={
         <TaskItemActionMenuTrigger
           taskId={id}

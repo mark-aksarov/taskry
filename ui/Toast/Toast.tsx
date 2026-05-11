@@ -13,6 +13,7 @@ import { X } from "lucide-react";
 import { Button } from "../Button";
 import { tv } from "tailwind-variants";
 import { twMerge } from "tailwind-merge";
+import { useTranslations } from "next-intl";
 import { ToastContext } from "./ToastContext";
 import React, { CSSProperties, useContext } from "react";
 
@@ -41,6 +42,7 @@ const styles = tv({
 });
 
 export function ToastRegion() {
+  const t = useTranslations("ui.ToastRegion");
   const toastQueue = useContext(ToastContext);
   const { region, base, text, button } = styles();
 
@@ -61,7 +63,7 @@ export function ToastRegion() {
               variant="primary"
               iconLeft={<X size={16} strokeWidth={1.5} absoluteStrokeWidth />}
               className={button()}
-              aria-label="Close"
+              aria-label={t("close")}
             />
           </RACToastContent>
         </Toast>

@@ -45,7 +45,8 @@ export function TaskStatusDetailInfoAlt({
       content={<DetailText>{tStatus(status)}</DetailText>}
       rightSlot={
         <DetailEditButton
-          data-test="update-task-status-edit-button"
+          aria-label={t("editStatusButtonLabel")}
+          data-test="edit-status-button"
           isPending={isUpdateTaskStatusPending}
           isDisabled={isDeleteTaskPending}
           onPress={handlePress}

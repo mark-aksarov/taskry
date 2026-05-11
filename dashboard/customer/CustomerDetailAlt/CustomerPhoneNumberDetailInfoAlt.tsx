@@ -45,7 +45,8 @@ export function CustomerPhoneNumberDetailInfoAlt({
       content={<DetailText>{phoneNumber || t("noPhoneNumber")}</DetailText>}
       rightSlot={
         <DetailEditButton
-          data-test="update-customer-phone-number-edit-button"
+          aria-label={t("editPhoneNumberButtonLabel")}
+          data-test="edit-phone-number-button"
           isPending={isUpdateCustomerPhoneNumberPending}
           isDisabled={isDeleteCustomerPending}
           onPress={handlePress}

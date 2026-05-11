@@ -81,7 +81,9 @@ export const ProjectGridItemLargeInner = memo(
     return (
       <ProjectGridItemLayout
         className={isPending ? "*:opacity-50" : undefined}
-        checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
+        checkboxSlot={
+          <ProjectItemCheckbox id={id} title={title} status={status} />
+        }
         menuTriggerSlot={
           <ProjectItemActionMenuTrigger
             projectId={id}

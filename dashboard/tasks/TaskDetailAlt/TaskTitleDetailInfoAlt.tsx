@@ -41,7 +41,8 @@ export function TaskTitleDetailInfoAlt({ title }: TaskTitleDetailInfoAltProps) {
       content={<DetailText>{title}</DetailText>}
       rightSlot={
         <DetailEditButton
-          data-test="update-task-title-edit-button"
+          aria-label={t("editTitleButtonLabel")}
+          data-test="edit-title-button"
           isPending={isUpdateTaskTitlePending}
           isDisabled={isDeleteTaskPending}
           onPress={handlePress}

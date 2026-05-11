@@ -47,7 +47,8 @@ export function CustomerCompanyDetailInfoAlt({
       content={<DetailText>{company?.name || t("noCompany")}</DetailText>}
       rightSlot={
         <DetailEditButton
-          data-test="update-customer-company-edit-button"
+          aria-label={t("editCompanyButtonLabel")}
+          data-test="edit-company-button"
           isPending={isUpdateCustomerCompanyPending}
           isDisabled={isDeleteCustomerPending}
           onPress={handlePress}

@@ -43,7 +43,8 @@ export function CustomerBioDetailInfoAlt({
       content={<DetailText>{bio || t("noBio")}</DetailText>}
       rightSlot={
         <DetailEditButton
-          data-test="update-customer-bio-edit-button"
+          aria-label={t("editBioButtonLabel")}
+          data-test="edit-bio-button"
           isPending={isUpdateCustomerBioPending}
           isDisabled={isDeleteCustomerPending}
           onPress={handlePress}

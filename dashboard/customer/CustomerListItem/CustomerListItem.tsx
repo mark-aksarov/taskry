@@ -71,7 +71,7 @@ export const CustomerListItemInner = memo(function CustomerListItemInner({
     <CustomerListItemLayout
       data-id={id}
       className={isPending ? "*:opacity-50" : undefined}
-      checkboxSlot={<CustomerItemCheckbox id={id} />}
+      checkboxSlot={<CustomerItemCheckbox id={id} fullName={fullName} />}
       imgSlot={
         <ItemBaseDetailButton
           aria-label={fullName}

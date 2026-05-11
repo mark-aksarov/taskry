@@ -43,7 +43,8 @@ export function ProjectTitleDetailInfoAlt({
       content={<DetailText>{title}</DetailText>}
       rightSlot={
         <DetailEditButton
-          data-test="update-project-title-edit-button"
+          aria-label={t("editTitleButtonLabel")}
+          data-test="edit-title-button"
           isPending={isUpdateProjectTitlePending}
           isDisabled={isDeleteProjectPending}
           onPress={handlePress}

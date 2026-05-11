@@ -106,7 +106,9 @@ export const ProjectListItemInner = memo(function ProjectListItemInner({
     <ProjectListItemLayout
       data-id={id}
       className={isPending ? "*:opacity-50" : undefined}
-      checkboxSlot={<ProjectItemCheckbox id={id} status={status} />}
+      checkboxSlot={
+        <ProjectItemCheckbox id={id} title={title} status={status} />
+      }
       mainSlot={
         <>
           <ListItemTitleButton

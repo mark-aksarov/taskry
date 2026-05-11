@@ -46,7 +46,8 @@ export function UserFullNameDetailInfoAlt({
       rightSlot={
         canEdit && (
           <DetailEditButton
-            data-test="update-user-full-name-edit-button"
+            aria-label={t("editFullNameButtonLabel")}
+            data-test="edit-full-name-button"
             isPending={isUpdateUserFullNamePending}
             isDisabled={isDeleteUserPending}
             onPress={handlePress}

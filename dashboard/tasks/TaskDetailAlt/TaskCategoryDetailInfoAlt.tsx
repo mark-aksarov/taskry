@@ -49,7 +49,8 @@ export function TaskCategoryDetailInfoAlt({
       }
       rightSlot={
         <DetailEditButton
-          data-test="update-task-category-edit-button"
+          aria-label={t("editTaskCategoryButtonLabel")}
+          data-test="edit-task-category-button"
           isPending={isUpdateTaskCategoryPending}
           isDisabled={isDeleteTaskPending}
           onPress={handlePress}

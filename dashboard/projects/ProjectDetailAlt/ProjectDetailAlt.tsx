@@ -81,6 +81,7 @@ export function ProjectDetailAlt({
       }
       progressSlot={
         <ProgressDetailInfoAlt
+          aria-label={t("progress")}
           progress={tasks.total ? (tasks.completed / tasks.total) * 100 : 0}
         />
       }

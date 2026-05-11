@@ -79,7 +79,9 @@ export function TaskDetailAlt({
           surface
         />
       }
-      progressSlot={<ProgressDetailInfoAlt progress={progress} />}
+      progressSlot={
+        <ProgressDetailInfoAlt aria-label={t("progress")} progress={progress} />
+      }
       subtasksSlot={
         <DetailInfoAlt
           title={<DetailTitle>{t("subtasks")}</DetailTitle>}

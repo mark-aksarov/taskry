@@ -5,6 +5,7 @@ import { Button } from "../Button";
 import { twMerge } from "tailwind-merge";
 import React, { useContext } from "react";
 import { PressEvent, OverlayTriggerStateContext } from "react-aria-components";
+import { useTranslations } from "next-intl";
 
 interface DialogCloseButtonProps {
   iconSize?: number;
@@ -17,6 +18,7 @@ export const DialogCloseButton = ({
   onPress,
   className,
 }: DialogCloseButtonProps) => {
+  const t = useTranslations("ui.DialogCloseButton");
   const state = useContext(OverlayTriggerStateContext);
 
   function handlePress(e: PressEvent) {
@@ -30,7 +32,7 @@ export const DialogCloseButton = ({
       iconLeft={<X size={iconSize} strokeWidth={1.5} absoluteStrokeWidth />}
       onPress={handlePress}
       className={twMerge("-mr-2 rounded-full", className)}
-      aria-label="Close"
+      aria-label={t("close")}
     />
   );
 };

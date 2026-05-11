@@ -5,9 +5,10 @@ import { useSelectedItems } from "@/dashboard/common/SelectedItemsContext";
 
 interface PositionItemCheckboxProps {
   id: number;
+  name: string;
 }
 
-export function PositionItemCheckbox({ id }: PositionItemCheckboxProps) {
+export function PositionItemCheckbox({ id, name }: PositionItemCheckboxProps) {
   const selected = useSelectedItems();
 
   function handleChange(isSelected: boolean) {
@@ -24,7 +25,7 @@ export function PositionItemCheckbox({ id }: PositionItemCheckboxProps) {
     <Checkbox
       data-test="position-checkbox"
       data-id={id}
-      aria-label="position checkbox"
+      aria-label={name}
       isSelected={isSelected}
       onChange={handleChange}
       className="max-md:hidden"

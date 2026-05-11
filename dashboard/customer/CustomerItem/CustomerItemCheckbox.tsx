@@ -5,9 +5,13 @@ import { useSelectedItems } from "@/dashboard/common/SelectedItemsContext";
 
 interface CustomerItemCheckboxProps {
   id: number;
+  fullName: string;
 }
 
-export function CustomerItemCheckbox({ id }: CustomerItemCheckboxProps) {
+export function CustomerItemCheckbox({
+  id,
+  fullName,
+}: CustomerItemCheckboxProps) {
   const selected = useSelectedItems();
 
   function handleChange(isSelected: boolean) {
@@ -24,7 +28,7 @@ export function CustomerItemCheckbox({ id }: CustomerItemCheckboxProps) {
     <Checkbox
       data-test="customer-checkbox"
       data-id={id}
-      aria-label="customer checkbox"
+      aria-label={fullName}
       isSelected={isSelected}
       onChange={handleChange}
     />

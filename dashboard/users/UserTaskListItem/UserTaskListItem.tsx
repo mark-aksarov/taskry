@@ -50,7 +50,7 @@ export const UserTaskListItemInner = memo(function UserTaskListItemInner({
   return (
     <UserTaskListItemLayout
       className={isPending ? "*:opacity-50" : undefined}
-      checkboxSlot={<TaskItemCheckbox id={id} status={status} />}
+      checkboxSlot={<TaskItemCheckbox id={id} title={title} status={status} />}
       mainSlot={
         <>
           <ListItemTitleButton

@@ -48,7 +48,8 @@ export function UserPositionDetailInfoAlt({
       rightSlot={
         canEdit && (
           <DetailEditButton
-            data-test="update-user-position-edit-button"
+            aria-label={t("editPositionButtonLabel")}
+            data-test="edit-position-button"
             isPending={isUpdateUserPositionPending}
             isDisabled={isDeleteUserPending}
             onPress={handlePress}

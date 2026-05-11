@@ -47,7 +47,8 @@ export function ProjectStatusDetailInfoAlt({
       content={<DetailText>{tStatus(status)}</DetailText>}
       rightSlot={
         <DetailEditButton
-          data-test="update-project-status-edit-button"
+          aria-label={t("editStatusButtonLabel")}
+          data-test="edit-status-button"
           isPending={isUpdateProjectStatusPending}
           isDisabled={isDeleteProjectPending}
           onPress={handlePress}

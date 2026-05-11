@@ -50,7 +50,8 @@ export function TaskAssigneeDetailInfoAlt({
       }
       rightSlot={
         <DetailEditButton
-          data-test="update-task-assignee-edit-button"
+          aria-label={t("editAssigneeButtonLabel")}
+          data-test="edit-assignee-button"
           isPending={isUpdateTaskAssigneePending}
           isDisabled={isDeleteTaskPending}
           onPress={handlePress}

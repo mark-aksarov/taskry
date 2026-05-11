@@ -88,7 +88,9 @@ export const TaskListItemInner = memo(function TaskListItemInner({
       data-id={id}
       className={isPending ? "*:opacity-50" : undefined}
       checkboxSlot={
-        showCheckbox ? <TaskItemCheckbox id={id} status={status} /> : undefined
+        showCheckbox ? (
+          <TaskItemCheckbox id={id} title={title} status={status} />
+        ) : undefined
       }
       mainSlot={
         <>

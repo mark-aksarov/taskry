@@ -50,7 +50,8 @@ export function ProjectCategoryDetailInfoAlt({
       }
       rightSlot={
         <DetailEditButton
-          data-test="update-project-category-edit-button"
+          aria-label={t("editProjectCategoryButtonLabel")}
+          data-test="edit-project-category-button"
           isPending={isUpdateProjectCategoryPending}
           isDisabled={isDeleteProjectPending}
           onPress={handlePress}

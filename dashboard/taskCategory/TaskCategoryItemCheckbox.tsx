@@ -5,10 +5,12 @@ import { useSelectedItems } from "@/dashboard/common/SelectedItemsContext";
 
 interface TaskCategoryItemCheckboxProps {
   id: number;
+  name: string;
 }
 
 export function TaskCategoryItemCheckbox({
   id,
+  name,
 }: TaskCategoryItemCheckboxProps) {
   const selected = useSelectedItems();
 
@@ -26,7 +28,7 @@ export function TaskCategoryItemCheckbox({
     <Checkbox
       data-test="task-category-checkbox"
       data-id={id}
-      aria-label="task category checkbox"
+      aria-label={name}
       isSelected={isSelected}
       onChange={handleChange}
       className="max-md:hidden"

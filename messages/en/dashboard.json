@@ -252,7 +252,13 @@
       "noEmail": "No email provided",
       "noPhoneNumber": "No phone number provided",
       "noPublicLink": "No public link",
-      "noCompany": "Company not specified"
+      "noCompany": "Company not specified",
+      "editBioButtonLabel": "Edit about me",
+      "editCompanyButtonLabel": "Edit company",
+      "editEmailButtonLabel": "Edit email",
+      "editFullNameButtonLabel": "Edit full name",
+      "editPhoneNumberButtonLabel": "Edit phone number",
+      "editPublicLinkButtonLabel": "Edit public link"
     },
     "CreateCustomerModal": {
       "title": "New customer"
@@ -720,7 +726,14 @@
       "noCategory": "No category",
       "status": "Status",
       "title": "Title",
-      "tasksStats": "Tasks stats"
+      "tasksStats": "Tasks stats",
+      "editProjectCategoryButtonLabel": "Edit category",
+      "editCustomerButtonLabel": "Edit customer",
+      "editDeadlineButtonLabel": "Edit deadline",
+      "editDescriptionButtonLabel": "Edit description",
+      "editStatusButtonLabel": "Edit status",
+      "editTitleButtonLabel": "Edit title",
+      "progress": "Project progress"
     },
     "ProjectDetailHeader": {
       "noCategory": "No category"
@@ -1129,8 +1142,15 @@
       "status": "Status",
       "subtasks": "Subtasks",
       "title": "Title",
-      "progress": "Progress",
-      "noSubtasks": "No one subtask yet"
+      "progress": "Task progress",
+      "noSubtasks": "No one subtask yet",
+      "editAssigneeButtonLabel": "Edit assignee",
+      "editTaskCategoryButtonLabel": "Edit category",
+      "editDeadlineButtonLabel": "Edit deadline",
+      "editDescriptionButtonLabel": "Edit description",
+      "editProjectButtonLabel": "Edit project",
+      "editStatusButtonLabel": "Edit status",
+      "editTitleButtonLabel": "Edit title"
     },
     "TaskDetailHeader": {
       "noCategory": "No category"
@@ -1346,7 +1366,13 @@
       "position": "Position",
       "noPosition": "Position not specified",
       "birthdate": "Birthdate",
-      "noBirthdate": "No birthdate"
+      "noBirthdate": "No birthdate",
+      "editAddressButtonLabel": "Edit address",
+      "editBioButtonLabel": "Edit birthdate",
+      "editFullNameButtonLabel": "Edit full name",
+      "editPhoneNumberButtonLabel": "Edit phone number",
+      "editPositionButtonLabel": "Edit position",
+      "editPublicLinkButtonLabel": "Edit public link"
     },
     "UserDetailCard": {
       "title": "User details"

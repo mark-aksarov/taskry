@@ -48,7 +48,8 @@ export function TaskProjectDetailInfoAlt({
       }
       rightSlot={
         <DetailEditButton
-          data-test="update-task-project-edit-button"
+          aria-label={t("editProjectButtonLabel")}
+          data-test="edit-project-button"
           isPending={isUpdateTaskProjectPending}
           isDisabled={isDeleteTaskPending}
           onPress={handlePress}

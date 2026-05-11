@@ -6,10 +6,15 @@ import { useSelectedProjects } from "../SelectedProjectsContext";
 
 interface ProjectItemCheckboxProps {
   id: number;
+  title: string;
   status: ProjectStatus;
 }
 
-export function ProjectItemCheckbox({ id, status }: ProjectItemCheckboxProps) {
+export function ProjectItemCheckbox({
+  id,
+  title,
+  status,
+}: ProjectItemCheckboxProps) {
   const selected = useSelectedProjects();
 
   function handleChange(isSelected: boolean) {
@@ -24,7 +29,7 @@ export function ProjectItemCheckbox({ id, status }: ProjectItemCheckboxProps) {
     <Checkbox
       data-test="project-checkbox"
       data-id={id}
-      aria-label="project checkbox"
+      aria-label={title}
       isSelected={selected.items.some((item) => item.id === id)}
       onChange={handleChange}
     />

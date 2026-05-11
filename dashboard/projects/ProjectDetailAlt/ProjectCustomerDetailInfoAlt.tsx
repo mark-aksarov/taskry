@@ -52,7 +52,8 @@ export function ProjectCustomerDetailInfoAlt({
       }
       rightSlot={
         <DetailEditButton
-          data-test="update-project-customer-edit-button"
+          aria-label={t("editCustomerButtonLabel")}
+          data-test="edit-customer-edit-button"
           isPending={isUpdateProjectCustomerPending}
           isDisabled={isDeleteProjectPending}
           onPress={handlePress}

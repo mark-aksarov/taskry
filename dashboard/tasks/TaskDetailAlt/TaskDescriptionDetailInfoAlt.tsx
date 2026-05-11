@@ -49,7 +49,8 @@ export function TaskDescriptionDetailInfoAlt({
       }
       rightSlot={
         <DetailEditButton
-          data-test="update-task-description-edit-button"
+          aria-label={t("editDescriptionButtonLabel")}
+          data-test="edit-description-button"
           isPending={isUpdateTaskDescriptionPending}
           isDisabled={isDeleteTaskPending}
           onPress={handlePress}

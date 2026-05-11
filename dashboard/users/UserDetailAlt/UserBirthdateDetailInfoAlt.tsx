@@ -58,7 +58,8 @@ export function UserBirthdateDetailInfoAlt({
       rightSlot={
         canEdit && (
           <DetailEditButton
-            data-test="update-user-birthdate-edit-button"
+            aria-label={t("editBioButtonLabel")}
+            data-test="edit-birthdate-button"
             isPending={isUpdateUserBirthdatePending}
             isDisabled={isDeleteUserPending}
             onPress={handlePress}

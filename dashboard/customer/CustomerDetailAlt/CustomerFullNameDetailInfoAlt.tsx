@@ -45,7 +45,8 @@ export function CustomerFullNameDetailInfoAlt({
       content={<DetailText>{fullName}</DetailText>}
       rightSlot={
         <DetailEditButton
-          data-test="update-customer-full-name-edit-button"
+          aria-label={t("editFullNameButtonLabel")}
+          data-test="edit-full-name-button"
           isPending={isUpdateCustomerFullNamePending}
           isDisabled={isDeleteCustomerPending}
           onPress={handlePress}

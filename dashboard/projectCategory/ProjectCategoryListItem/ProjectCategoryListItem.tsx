@@ -48,7 +48,7 @@ const ProjectCategoryListItemInner = memo(
           isPending && "*:opacity-50",
         )}
       >
-        <ProjectCategoryListItemCheckbox id={id} />
+        <ProjectCategoryListItemCheckbox id={id} name={name} />
         <ListItemInfo>
           <ListItemTitle>{name}</ListItemTitle>
           <ListItemText>{t("name")}</ListItemText>

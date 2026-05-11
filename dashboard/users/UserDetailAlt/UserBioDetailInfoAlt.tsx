@@ -46,7 +46,8 @@ export function UserBioDetailInfoAlt({
       rightSlot={
         canEdit && (
           <DetailEditButton
-            data-test="update-user-bio-edit-button"
+            aria-label={t("editBioButtonLabel")}
+            data-test="edit-bio-button"
             isPending={isUpdateUserBioPending}
             isDisabled={isDeleteUserPending}
             onPress={handlePress}

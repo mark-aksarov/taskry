@@ -49,7 +49,7 @@ const CompanyListItemInner = memo(function CompanyListItemInner({
         isPending && "*:opacity-50",
       )}
     >
-      <CompanyListItemCheckbox id={id} />
+      <CompanyListItemCheckbox id={id} name={name} />
       <ListItemInfo>
         <ListItemTitle>{name}</ListItemTitle>
         <ListItemText>{t("name")}</ListItemText>

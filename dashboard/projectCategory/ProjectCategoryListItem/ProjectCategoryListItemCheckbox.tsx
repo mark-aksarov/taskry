@@ -5,10 +5,12 @@ import { useSelectedItems } from "@/dashboard/common/SelectedItemsContext";
 
 interface ProjectCategoryListItemCheckboxProps {
   id: number;
+  name: string;
 }
 
 export function ProjectCategoryListItemCheckbox({
   id,
+  name,
 }: ProjectCategoryListItemCheckboxProps) {
   const selected = useSelectedItems();
 
@@ -26,7 +28,7 @@ export function ProjectCategoryListItemCheckbox({
     <Checkbox
       data-test="project-category-checkbox"
       data-id={id}
-      aria-label="project category checkbox"
+      aria-label={name}
       isSelected={isSelected}
       onChange={handleChange}
       className="max-md:hidden"

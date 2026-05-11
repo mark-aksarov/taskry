@@ -46,7 +46,8 @@ export function CustomerPublicLinkDetailInfoAlt({
       content={<DetailText>{publicLink || t("noPublicLink")}</DetailText>}
       rightSlot={
         <DetailEditButton
-          data-test="update-customer-public-link-edit-button"
+          aria-label={t("editPublicLinkButtonLabel")}
+          data-test="edit-public-link-button"
           isPending={isUpdateCustomerPublicLinkPending}
           isDisabled={isDeleteCustomerPending}
           onPress={handlePress}
