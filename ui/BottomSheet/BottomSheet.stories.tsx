@@ -67,6 +67,7 @@ export const WithForm = {
               </div>
               <Button
                 type="submit"
+                variant="accent"
                 label="Submit"
                 size="medium"
                 className="h-[52px] justify-center"

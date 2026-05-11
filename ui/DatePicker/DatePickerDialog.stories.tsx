@@ -110,6 +110,7 @@ export const Validation = {
         <Button
           type="submit"
           label="Submit"
+          variant="accent"
           className="w-full justify-center"
         />
       </Form>

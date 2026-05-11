@@ -2,11 +2,12 @@ import { CtaSection } from "../CtaSection";
 import { IntroSection } from "./IntroSection";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 
 const meta = {
   title: "site/home/IntroSection",
   component: IntroSection,
-  decorators: [withThemedBackground],
+  decorators: [withModalManagerProvider, withThemedBackground],
   parameters: {
     layout: "fullscreen",
   },

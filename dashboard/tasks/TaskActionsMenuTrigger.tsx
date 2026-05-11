@@ -2,6 +2,7 @@
 
 import { startTransition } from "react";
 import { Item, Key } from "react-stately";
+import { ButtonVariant } from "@/ui/Button";
 import { useTranslations } from "next-intl";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { ActionsButton } from "../common/ActionsButton";
@@ -16,10 +17,12 @@ import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 interface TaskActionsMenuTriggerProps {
   // Extra flag to hide the label on User/Profile Tasks pages
   showLabel?: boolean;
+  buttonVariant?: ButtonVariant;
 }
 
 export const TaskActionsMenuTrigger = ({
   showLabel,
+  buttonVariant,
 }: TaskActionsMenuTriggerProps) => {
   const t = useTranslations("dashboard.tasks.TaskActionsMenuTrigger");
 
@@ -79,7 +82,7 @@ export const TaskActionsMenuTrigger = ({
           showLabel={showLabel}
           data-test="task-actions-menu-trigger"
           selectedIds={selected.ids}
-          variant="secondary"
+          variant={buttonVariant}
         />
       )}
     >

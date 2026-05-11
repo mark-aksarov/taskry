@@ -71,7 +71,12 @@ export const WithoutOptionalProjectData = {
         title={mockedProjectDetail.title}
         deadline={mockedProjectDetail.deadline}
         status={mockedProjectDetail.status}
-        tasks={mockedProjectDetail.tasks}
+        tasks={{
+          total: 0,
+          active: 0,
+          pending: 0,
+          completed: 0,
+        }}
       />
     ),
   },

@@ -12,11 +12,12 @@ import { AppSidebarHeader } from "./AppSidebarHeader";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Dialog, DialogCloseButton } from "@/ui/Dialog";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "dashboard/layout/AppSidebar",
   component: AppSidebar,
-  decorators: [withThemedBackground],
+  decorators: [withCurrentUserProvider, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/dashboard");
   },
@@ -51,7 +52,7 @@ export const WrapWithSheet = {
 
       return (
         <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
-          <Button label="Open sheet" />
+          <Button label="Open sheet" variant="accent" />
           <SideSheet side="left" isDismissable>
             <Dialog>
               <Story />

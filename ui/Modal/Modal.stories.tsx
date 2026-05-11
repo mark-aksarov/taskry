@@ -59,6 +59,7 @@ export const Default = {
                   type="submit"
                   label="Submit"
                   size="medium"
+                  variant="accent"
                   className="h-[52px] justify-center"
                 />
               </div>

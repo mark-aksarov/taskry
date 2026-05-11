@@ -1,22 +1,26 @@
+import {
+  UserNavigationLarge,
+  UserNavigationLargeSkeleton,
+} from "../UserNavigationLarge";
+
 import { mocked } from "storybook/test";
 import { UserDetailAlt } from "../UserDetailAlt";
 import { mockedUserDetail } from "@/mocks/users";
 import { UserDetailCard } from "./UserDetailCard";
+import { ProfileActions } from "../ProfileActions";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserDetailAltSkeleton } from "../UserDetailAlt";
 import { useParams, usePathname } from "next/navigation";
-import { UserNavigationLarge } from "../UserNavigationLarge";
 import { UserDetailHeaderInteractive } from "../UserDetailHeader";
 import { DetailHeaderSkeleton } from "@/dashboard/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteUserProvider } from "../DeleteUserProvider/__stories__";
-import { ProfileActions, ProfileActionsSkeleton } from "../ProfileActions";
 import { withChangePasswordProvider } from "../ChangePasswordProvider/__stories__";
+import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withUpdateUserImageProvider } from "../UpdateUserImageProvider/__stories__";
 import { withClearUserImageUrlProvider } from "../ClearUserImageUrlProvider/__stories__";
 import { withUpdateUserImageFileProvider } from "../UpdateUserImageFileContext/__stories__";
 import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withUpdateUserBioProvider } from "@/dashboard/users/UpdateUserBioProvider/__stories__";
 import { withUpdateUserAddressProvider } from "@/dashboard/users/UpdateUserAddressProvider/__stories__";
 import { withUpdateUserPositionProvider } from "@/dashboard/users/UpdateUserPositionProvider/__stories__";
@@ -78,9 +82,7 @@ export const Loading = {
   args: {
     userDetailContainer: <UserDetailAltSkeleton />,
     userDetailHeaderContainer: <DetailHeaderSkeleton />,
-    navigationLarge: (
-      <UserNavigationLarge userActions={<ProfileActionsSkeleton />} />
-    ),
+    navigationLarge: <UserNavigationLargeSkeleton />,
   },
 } satisfies Story;
 

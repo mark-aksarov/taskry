@@ -85,10 +85,11 @@ export function TasksPage({
               <>
                 <TaskManageMenuTriggerLarge />
                 <TaskSortingMenuTriggerLarge
+                  buttonVariant="secondary"
                   selectedSortField={selectedSortField}
                 />
                 <TaskFiltersModalTriggerLarge />
-                <TaskActionsMenuTrigger />
+                <TaskActionsMenuTrigger buttonVariant="secondary" />
               </>
             }
             secondSlot={

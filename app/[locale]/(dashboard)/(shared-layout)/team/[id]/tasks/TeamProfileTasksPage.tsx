@@ -101,7 +101,10 @@ export function TeamProfileTasksPage({
                   buttonVariant="primary"
                   selectedSortField={selectedSortField}
                 />
-                <TaskActionsMenuTrigger showLabel={false} />
+                <TaskActionsMenuTrigger
+                  showLabel={false}
+                  buttonVariant="primary"
+                />
               </div>
             </DetailCardHeader>
             {userTasksContainer}
