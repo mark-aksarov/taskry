@@ -11,7 +11,7 @@ const footerStyles = tv({
     section: "border-y-1 border-(--border-primary)",
     inner: "flex justify-between max-md:flex-col max-md:gap-8",
     brand: "mr-auto",
-    column: "not-last:mr-20",
+    column: "md:ml-20",
     description: "text-base font-normal text-(--text-tertiary)",
     copyrightWrap: "py-8",
     copyright: "text-center text-sm font-normal text-(--text-tertiary)",
