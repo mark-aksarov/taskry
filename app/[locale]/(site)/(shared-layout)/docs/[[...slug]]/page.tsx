@@ -12,15 +12,16 @@ export default async function AppDocsPage({ params }: Props) {
 
   try {
     if (!slug) {
-      Content = (await import(`@/markdown/index.${locale}.mdx`)).default;
+      Content = (await import(`@/markdown/docs/index.${locale}.mdx`)).default;
     } else if (slug.length === 1) {
       const [section] = slug;
-      Content = (await import(`@/markdown/${section}/index.${locale}.mdx`))
+      Content = (await import(`@/markdown/docs/${section}/index.${locale}.mdx`))
         .default;
     } else if (slug.length === 2) {
       const [section, page] = slug;
-      Content = (await import(`@/markdown/${section}/${page}.${locale}.mdx`))
-        .default;
+      Content = (
+        await import(`@/markdown/docs/${section}/${page}.${locale}.mdx`)
+      ).default;
     } else {
       notFound();
     }
