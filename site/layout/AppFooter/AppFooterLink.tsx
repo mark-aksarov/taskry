@@ -10,13 +10,19 @@ const styles = tv({
 });
 
 interface AppFooterLinkProps {
+  href: string;
   className?: string;
   children: React.ReactNode;
 }
 
-export function AppFooterLink({ className, children }: AppFooterLinkProps) {
+export function AppFooterLink({
+  href,
+  className,
+  children,
+}: AppFooterLinkProps) {
   return (
     <Link
+      href={href}
       className={composeRenderProps(className, (className, renderProps) =>
         styles({ ...renderProps, className }),
       )}

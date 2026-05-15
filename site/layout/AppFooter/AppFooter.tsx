@@ -48,13 +48,10 @@ export function AppFooter() {
             {/* Product */}
             <div className={column()}>
               <AppFooterHeading>{t("sections.product.title")}</AppFooterHeading>
-              <AppFooterLink className="mb-3">
-                {t("sections.product.links.features")}
-              </AppFooterLink>
-              <AppFooterLink className="mb-3">
+              <AppFooterLink href="/docs" className="mb-3">
                 {t("sections.product.links.docs")}
               </AppFooterLink>
-              <AppFooterLink>
+              <AppFooterLink href="https://github.com/mark-aksarov/taskry">
                 {t("sections.product.links.github")}
               </AppFooterLink>
             </div>
@@ -62,19 +59,23 @@ export function AppFooter() {
             {/* App */}
             <div className={column()}>
               <AppFooterHeading>{t("sections.app.title")}</AppFooterHeading>
-              <AppFooterLink className="mb-3">
+              <AppFooterLink href="/dashboard" className="mb-3">
                 {t("sections.app.links.open")}
               </AppFooterLink>
-              <AppFooterLink>{t("sections.app.links.email")}</AppFooterLink>
+              <AppFooterLink href="mailto:aksarov91@gmail.com">
+                {t("sections.app.links.email")}
+              </AppFooterLink>
             </div>
 
             {/* Legal */}
             <div className={column()}>
               <AppFooterHeading>{t("sections.legal.title")}</AppFooterHeading>
-              <AppFooterLink className="mb-3">
+              <AppFooterLink href="/privacy-policy" className="mb-3">
                 {t("sections.legal.links.privacy")}
               </AppFooterLink>
-              <AppFooterLink>{t("sections.legal.links.terms")}</AppFooterLink>
+              <AppFooterLink href="/privacy-policy">
+                {t("sections.legal.links.terms")}
+              </AppFooterLink>
             </div>
           </div>
         </PageContainer>
