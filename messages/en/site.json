@@ -48,7 +48,8 @@
       "description": {
         "line1": "A simple task manager to organize your work.",
         "line2": "You can add tasks, assign them, and track their progress."
-      }
+      },
+      "badgeText": "Task manager"
     },
     "FeaturesSection": {
       "heading": "All tools for working with tasks",

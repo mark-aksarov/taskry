@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+>
+  <!-- 1. Home root page (x-default) -->
+  <url>
+    <loc>https://taskry.ru/</loc>
+    <lastmod>2026-05-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taskry.ru/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://taskry.ru/ru/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://taskry.ru/en/" />
+  </url>
+
+  <!-- 2. Home page (Russian) -->
+  <url>
+    <loc>https://taskry.ru/ru/</loc>
+    <lastmod>2026-05-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taskry.ru/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://taskry.ru/ru/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://taskry.ru/en/" />
+  </url>
+
+  <!-- 3. Home page (English) -->
+  <url>
+    <loc>https://taskry.ru/en/</loc>
+    <lastmod>2026-05-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taskry.ru/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://taskry.ru/ru/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://taskry.ru/en/" />
+  </url>
+
+  <!-- 4. Privacy Policy (Root/Default) -->
+  <url>
+    <loc>https://taskry.ru/privacy-policy</loc>
+    <lastmod>2026-05-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taskry.ru/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://taskry.ru/ru/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://taskry.ru/en/privacy-policy" />
+  </url>
+
+  <!-- 5. Privacy Policy (Russian) -->
+  <url>
+    <loc>https://taskry.ru/ru/privacy-policy</loc>
+    <lastmod>2026-05-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taskry.ru/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://taskry.ru/ru/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://taskry.ru/en/privacy-policy" />
+  </url>
+
+  <!-- 6. Privacy Policy (English) -->
+  <url>
+    <loc>https://taskry.ru/en/privacy-policy</loc>
+    <lastmod>2026-05-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taskry.ru/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://taskry.ru/ru/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://taskry.ru/en/privacy-policy" />
+  </url>
+
+  <!-- 7. Documentation (Root/Default) -->
+  <url>
+    <loc>https://taskry.ru/docs</loc>
+    <lastmod>2026-05-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taskry.ru/docs" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://taskry.ru/ru/docs" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://taskry.ru/en/docs" />
+  </url>
+
+  <!-- 8. Documentation (Russian) -->
+  <url>
+    <loc>https://taskry.ru/ru/docs</loc>
+    <lastmod>2026-05-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taskry.ru/docs" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://taskry.ru/ru/docs" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://taskry.ru/en/docs" />
+  </url>
+
+  <!-- 9. Documentation (English) -->
+  <url>
+    <loc>https://taskry.ru/en/docs</loc>
+    <lastmod>2026-05-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taskry.ru/docs" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://taskry.ru/ru/docs" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://taskry.ru/en/docs" />
+  </url>
+</urlset>

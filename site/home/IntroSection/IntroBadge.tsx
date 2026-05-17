@@ -1,4 +1,5 @@
 import { Badge } from "@/ui/Badge";
+import { useTranslations } from "next-intl";
 import { tv } from "tailwind-variants";
 
 const introBadgeStyles = tv({
@@ -10,12 +11,13 @@ const introBadgeStyles = tv({
 });
 
 export function IntroBadge() {
+  const t = useTranslations("site.sections.IntroSection");
   const s = introBadgeStyles();
 
   return (
     <Badge color="blue" className={s.badge()}>
       <span className={s.dot()} />
-      Менеджер управления задачами
+      {t("badgeText")}
     </Badge>
   );
 }

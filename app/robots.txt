@@ -1,0 +1,46 @@
+User-agent: *
+
+# Public pages
+Allow: /$
+Allow: /ru/$
+Allow: /en/$
+Allow: /privacy-policy
+Allow: /ru/privacy-policy
+Allow: /en/privacy-policy
+Allow: /docs
+Allow: /docs/*
+Allow: /ru/docs
+Allow: /ru/docs/*
+Allow: /en/docs
+Allow: /en/docs/*
+
+# Protected routes
+Disallow: /dashboard
+Disallow: /*/dashboard
+
+Disallow: /companies
+Disallow: /*/companies
+
+Disallow: /customers
+Disallow: /*/customers
+
+Disallow: /positions
+Disallow: /*/positions
+
+Disallow: /project-categories
+Disallow: /*/project-categories
+
+Disallow: /projects
+Disallow: /*/projects
+
+Disallow: /task-categories
+Disallow: /*/task-categories
+
+Disallow: /tasks
+Disallow: /*/tasks
+
+Disallow: /team
+Disallow: /*/team
+
+# Sitemap
+Sitemap: https://taskry.ru/sitemap.xml
