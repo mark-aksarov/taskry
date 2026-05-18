@@ -1,6 +1,7 @@
-import { describe, expect, test } from "vitest";
 import { ProgressBar } from "./ProgressBar";
-import { render, screen } from "@testing-library/react";
+import { render } from "@/lib/utils/test-utils";
+import { describe, expect, test } from "vitest";
+import { screen } from "@testing-library/react";
 
 describe("ProgressBar", () => {
   test("renders only label when showValueText is false", () => {

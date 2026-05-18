@@ -11,10 +11,11 @@ import { Button } from "../Button";
 import { TextField } from "../TextField";
 import { useOverlayTrigger } from "react-aria";
 import { describe, expect, test } from "vitest";
+import { render } from "@/lib/utils/test-utils";
 import userEvent from "@testing-library/user-event";
 import { useOverlayTriggerState } from "react-stately";
+import { screen, waitFor } from "@testing-library/react";
 import { BottomSheet, BottomSheetProps } from "./BottomSheet";
-import { render, screen, waitFor } from "@testing-library/react";
 
 const TestBottomSheet = (
   props: Omit<BottomSheetProps, "state" | "children">,

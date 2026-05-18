@@ -1,8 +1,9 @@
 import React from "react";
 import { Checkbox } from "./Checkbox";
+import { render } from "@/lib/utils/test-utils";
+import { screen } from "@testing-library/react";
 import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
-import { render, screen } from "@testing-library/react";
 
 describe("Checkbox", () => {
   test("renders with default props", () => {

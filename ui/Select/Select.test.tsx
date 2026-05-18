@@ -2,10 +2,11 @@ import React from "react";
 import { Item } from "react-stately";
 import { User } from "@react-aria/test-utils";
 import { Select, SelectProps } from "./Select";
+import { screen } from "@testing-library/react";
+import { render } from "@/lib/utils/test-utils";
 import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { Button, Form } from "react-aria-components";
-import { render, screen } from "@testing-library/react";
 
 const TestSelect = (props: Partial<SelectProps>) => (
   <Select name="select" label="Label" placeholder="Select an option" {...props}>

@@ -1,9 +1,10 @@
 import React from "react";
 import { Button } from "./Button";
+import { render } from "@/lib/utils/test-utils";
+import { screen } from "@testing-library/react";
 import { ButtonSize, ButtonVariant } from "./types";
 import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
-import { render, screen } from "@testing-library/react";
 
 describe("Button", () => {
   test("renders with default props", () => {

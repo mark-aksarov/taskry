@@ -2,9 +2,10 @@ import React from "react";
 import { Button } from "../Button";
 import { SearchField } from "./SearchField";
 import { Form } from "react-aria-components";
+import { render } from "@/lib/utils/test-utils";
+import { screen } from "@testing-library/react";
 import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
-import { render, screen } from "@testing-library/react";
 
 describe("SearchField", () => {
   test("renders with label", () => {

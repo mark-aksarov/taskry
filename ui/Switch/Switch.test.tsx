@@ -1,8 +1,9 @@
 import React from "react";
 import { Switch } from "./Switch";
+import { render } from "@/lib/utils/test-utils";
+import { screen } from "@testing-library/react";
 import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
-import { render, screen } from "@testing-library/react";
 
 describe("Switch", () => {
   const defaultProps = {

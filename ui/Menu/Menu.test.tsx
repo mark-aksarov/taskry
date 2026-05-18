@@ -2,9 +2,10 @@ import React from "react";
 import { Button } from "../Button";
 import { Item } from "react-stately";
 import { User } from "@react-aria/test-utils";
+import { render } from "@/lib/utils/test-utils";
+import { screen } from "@testing-library/react";
 import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
-import { render, screen } from "@testing-library/react";
 import { MenuTrigger, MenuTriggerProps } from "./MenuTrigger";
 import { DialogCloseButton, DialogHeader, DialogHeading } from "../Dialog";
 

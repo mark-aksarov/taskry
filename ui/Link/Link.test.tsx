@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "../Link";
+import { render } from "@/lib/utils/test-utils";
 import { describe, expect, test } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 
 describe("Link", () => {
   test("renders with default props", () => {

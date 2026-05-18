@@ -2,9 +2,10 @@ import React from "react";
 import { Button } from "../Button";
 import { TextField } from "./TextField";
 import { Form } from "react-aria-components";
+import { screen } from "@testing-library/react";
+import { render } from "@/lib/utils/test-utils";
 import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
-import { render, screen } from "@testing-library/react";
 
 describe("TextField", () => {
   test("renders with label", () => {
