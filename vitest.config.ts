@@ -51,9 +51,9 @@ export default defineConfig({
         plugins: [tsconfigPaths()],
 
         test: {
-          name: "database",
+          name: "integration",
           environment: "node",
-          setupFiles: "./vitest.setup.database.ts",
+          setupFiles: "./vitest.setup.integration.ts",
           include: ["lib/data/**/*.test.ts"],
         },
       },

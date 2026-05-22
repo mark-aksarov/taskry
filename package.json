@@ -16,16 +16,11 @@
     "migrate:prod": "dotenv -e .env.production -- prisma migrate deploy",
     "seed:dev": "dotenv -e .env.development -- tsx prisma/seed.ts",
     "build-storybook": "storybook build",
-    "docker:up": "docker compose up -d",
-    "docker:down": "docker compose down",
-    "db:push:test": "npx dotenv -e .env.test -- npx prisma db push",
     "storybook": "storybook dev -p 6006",
-    "test:smoke": "npm run test:prepare && npx dotenv -e .env.test -- start-server-and-test dev http://localhost:3000 \"cypress run --spec cypress/e2e/smoke/*.cy.ts\"",
     "test:ui": "vitest --project ui run",
-    "test:prepare": "npm run docker:up && npm run db:push:test",
-    "test:e2e": "npm run test:prepare && npx dotenv -e .env.test -- start-server-and-test dev http://localhost:3000 'cypress open'",
-    "test:e2e:headless": "npm run test:prepare && npx dotenv -e .env.test -- start-server-and-test dev http://localhost:3000 'cypress run'",
-    "test:db": "npm run test:prepare && npx dotenv -e .env.test -- vitest --pool=forks --poolOptions.forks.singleFork --project database run"
+    "test:e2e": "docker compose -f docker-compose.e2e.yml up -d --build && dotenv -e .env.test -- start-server-and-test dev http://localhost:3000 \"cypress open\"",
+    "test:e2e:headless": "docker compose -f docker-compose.e2e.yml up -d --build && dotenv -e .env.test -- start-server-and-test dev http://localhost:3000 \"cypress run\"",
+    "test:integration": "docker compose -f docker-compose.integration.yml up -d --build && dotenv -e .env.test -- \"vitest --pool=forks --poolOptions.forks.singleFork --project integration run\""
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.844.0",

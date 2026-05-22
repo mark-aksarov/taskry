@@ -1,5 +1,5 @@
 services:
-  test-db:
+  e2e:
     image: postgres:16
     environment:
       POSTGRES_USER: postgres
