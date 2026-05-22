@@ -18,9 +18,9 @@
     "build-storybook": "storybook build",
     "storybook": "storybook dev -p 6006",
     "test:ui": "vitest --project ui run",
-    "test:e2e": "docker compose -f docker-compose.e2e.yml up -d --build && dotenv -e .env.test -- start-server-and-test dev http://localhost:3000 \"cypress open\"",
-    "test:e2e:headless": "docker compose -f docker-compose.e2e.yml up -d --build && dotenv -e .env.test -- start-server-and-test dev http://localhost:3000 \"cypress run\"",
-    "test:integration": "docker compose -f docker-compose.integration.yml up -d --build && dotenv -e .env.test -- \"vitest --pool=forks --poolOptions.forks.singleFork --project integration run\""
+    "test:e2e": "docker compose -f docker-compose.e2e.yml up -d --build && npx dotenv -e .env.e2e -- npx prisma db push && dotenv -e .env.e2e -- start-server-and-test dev http://localhost:3000 \"cypress open\"",
+    "test:e2e:headless": "docker compose -f docker-compose.e2e.yml up -d --build && npx dotenv -e .env.e2e -- npx prisma db push && dotenv -e .env.e2e -- start-server-and-test dev http://localhost:3000 \"cypress run\"",
+    "test:integration": "docker compose -f docker-compose.integration.yml up -d --build && npx dotenv -e .env.integration -- npx prisma db push && dotenv -e .env.integration -- vitest --pool=forks --poolOptions.forks.singleFork --project integration run"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.844.0",

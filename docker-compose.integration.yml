@@ -4,6 +4,6 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 12345
-      POSTGRES_DB: test_db
+      POSTGRES_DB: integration-db
     ports:
       - "5434:5432"
