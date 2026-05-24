@@ -1,9 +1,9 @@
 services:
-  integration:
+  integration_db:
     image: postgres:16
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 12345
-      POSTGRES_DB: integration-db
+    restart: always
+    container_name: integration_db
+    env_file:
+      - .env.integration
     ports:
       - "5434:5432"

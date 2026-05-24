@@ -17,14 +17,11 @@ build/
 
 coverage/
 .nyc_output/
-**tests**/
-**mocks**/
 jest/
 cypress/
 playwright-report/
 test-results/
 .vitest/
-.storybook
 
 # Environment files (avoid leaking secrets into the build context)
 
@@ -32,7 +29,8 @@ test-results/
 .env\*
 .env.local
 .env.development.local
-.env.test.local
+.env.e2e.local
+.env.integration.local
 .env.production.local
 
 # Debug and log files
@@ -107,8 +105,7 @@ Jenkinsfile
 
 # OS-specific files
 
-.DS*Store
-.*\*
+.DS\*Store
 .Spotlight-V100
 .Trashes
 ehthumbs.db

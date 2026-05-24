@@ -1,0 +1,50 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    env_file:
+      - .env.production
+    networks:
+      - taskry-network
+
+  postgres_db:
+    image: postgres:15
+    hostname: postgres_db
+    container_name: postgres_db
+    restart: always
+
+    env_file:
+      - .env.production
+
+    ports:
+      - "5432:5432"
+
+    networks:
+      - taskry-network
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d task-manager"]
+      interval: 5s
+      timeout: 2s
+      retries: 20
+
+  db_init:
+    build:
+      context: .
+      dockerfile: Dockerfile.dbinit
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+    env_file:
+      - .env.production
+    networks:
+      - taskry-network
+
+networks:
+  taskry-network:
+    name: taskry-network
