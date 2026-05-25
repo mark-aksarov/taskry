@@ -5,8 +5,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    stdin_open: true
-    tty: true
     env_file:
       - .env.production
     networks:
@@ -15,9 +13,6 @@ services:
   postgres_db:
     image: postgres:15
     hostname: postgres_db
-    container_name: postgres_db
-    restart: always
-
     env_file:
       - .env.production
 
@@ -26,6 +21,9 @@ services:
 
     networks:
       - taskry-network
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d task-manager"]
@@ -44,6 +42,9 @@ services:
       - .env.production
     networks:
       - taskry-network
+
+volumes:
+  postgres_data:
 
 networks:
   taskry-network:
