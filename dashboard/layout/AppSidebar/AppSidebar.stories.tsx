@@ -38,7 +38,7 @@ export const Default = {
           <Logo />
         </AppSidebarHeader>
         <AppSidebarBody>
-          <AppNavigation />
+          <AppNavigation signOut={async () => ({ status: "success" })} />
         </AppSidebarBody>
       </>
     ),
@@ -72,7 +72,7 @@ export const WrapWithSheet = {
           </div>
         </AppSidebarHeader>
         <AppSidebarBody>
-          <AppNavigation />
+          <AppNavigation signOut={async () => ({ status: "success" })} />
         </AppSidebarBody>
       </>
     ),

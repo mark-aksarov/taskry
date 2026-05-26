@@ -7,6 +7,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withSearchBarProvider } from "@/dashboard/search/SearchBar/__stories__";
 import { withTaskSearchModal } from "@/dashboard/tasks/TaskSearchModal/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
+import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
 
 const meta = {
@@ -17,6 +18,7 @@ const meta = {
     withSearchBarProvider,
     withPageTransitionProvider,
     withModalManagerProvider,
+    withCurrentUserProvider,
     withThemedBackground,
   ],
   beforeEach: () => {
@@ -32,6 +34,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    signOut: async () => ({ status: "success" }),
     heading: "Dashboard",
     profileLinkContainer: (
       <ProfileLink userId="user-1" fullName="User 1" imageUrl="/man.jpg" />

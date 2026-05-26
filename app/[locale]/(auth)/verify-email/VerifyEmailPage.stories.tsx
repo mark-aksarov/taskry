@@ -16,5 +16,7 @@ export type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     email: "a@b.c",
+    signOut: async () => ({ status: "success" }),
+    sendVerificationEmail: async () => ({ status: "success" }),
   },
 } satisfies Story;

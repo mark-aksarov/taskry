@@ -7,19 +7,23 @@ import {
   FolderClosed,
   CalendarCheck2,
   LayoutDashboard,
-  Home,
 } from "lucide-react";
 
 import { Separator } from "@/ui/Separator";
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
+import { ActionState } from "@/lib/actions/types";
 import { NavigationLink } from "@/dashboard/common/NavigationItem";
+import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
 import { AppNavigationLogoutButton } from "./AppNavigationLogoutButton";
 import { AppNavigationLangMenuTrigger } from "./AppNavigationLangMenuTrigger";
 import { AppNavigationThemeToggleButton } from "./AppNavigationThemeToggleButton";
-import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
 
-export const AppNavigation = () => {
+interface AppNavigationProps {
+  signOut: () => Promise<ActionState>;
+}
+
+export const AppNavigation = ({ signOut }: AppNavigationProps) => {
   const pathname = usePathname();
   const t = useTranslations("dashboard.layout.AppNavigation");
 
@@ -91,7 +95,7 @@ export const AppNavigation = () => {
         <AppNavigationThemeToggleButton />
       </div>
 
-      <AppNavigationLogoutButton />
+      <AppNavigationLogoutButton signOut={signOut} />
     </nav>
   );
 };

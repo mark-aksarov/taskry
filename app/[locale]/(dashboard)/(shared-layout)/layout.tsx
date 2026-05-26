@@ -1,4 +1,5 @@
 import SharedLayout from "./SharedLayout";
+import { signOut } from "@/lib/actions/auth/signOut";
 import { ProfileLinkContainer } from "@/dashboard/layout/ProfileLinkContainer";
 
 interface AppSharedLayoutProps {
@@ -7,7 +8,10 @@ interface AppSharedLayoutProps {
 
 export default function AppSharedLayout({ children }: AppSharedLayoutProps) {
   return (
-    <SharedLayout profileLinkContainer={<ProfileLinkContainer />}>
+    <SharedLayout
+      signOut={signOut}
+      profileLinkContainer={<ProfileLinkContainer />}
+    >
       {children}
     </SharedLayout>
   );

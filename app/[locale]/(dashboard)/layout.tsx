@@ -1,4 +1,5 @@
 import { DashboardLayout } from "./DashboardLayout";
+import { signOut } from "@/lib/actions/auth/signOut";
 import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
@@ -22,7 +23,7 @@ export default async function AppDashboardLayout({
 
   return (
     <CurrentUserProvider value={currentUserContextValue}>
-      <DashboardLayout>{children}</DashboardLayout>
+      <DashboardLayout signOut={signOut}>{children}</DashboardLayout>
     </CurrentUserProvider>
   );
 }

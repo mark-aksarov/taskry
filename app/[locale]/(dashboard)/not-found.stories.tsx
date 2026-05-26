@@ -12,7 +12,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     (Story) => (
-      <DashboardLayout>
+      <DashboardLayout signOut={async () => ({ status: "success" })}>
         <Story />
       </DashboardLayout>
     ),

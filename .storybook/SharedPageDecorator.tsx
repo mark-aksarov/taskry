@@ -15,8 +15,9 @@ export const SharedPageDecorator: Decorator = (Story, context) => {
   return (
     <ModalManagerProvider>
       <MockedCurrentUserProvider isGuest={isGuest}>
-        <DashboardLayout>
+        <DashboardLayout signOut={async () => ({ status: "success" })}>
           <SharedLayout
+            signOut={async () => ({ status: "success" })}
             profileLinkContainer={
               <ProfileLink
                 userId="user-1"

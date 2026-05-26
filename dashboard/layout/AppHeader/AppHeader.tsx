@@ -8,6 +8,7 @@ import {
 
 import { tv } from "tailwind-variants";
 import { AppNavigation } from "../AppNavigation";
+import { ActionState } from "@/lib/actions/types";
 import { LangMenuTrigger } from "../LangMenuTrigger";
 import { BackButton } from "@/dashboard/common/BackButton";
 import { AppSidebarSheetTrigger } from "../AppSidebarSheetTrigger";
@@ -27,12 +28,14 @@ export interface AppHeaderProps {
   heading: string;
   backButtonHref?: string;
   profileLinkContainer: React.ReactNode;
+  signOut: () => Promise<ActionState>;
 }
 
 export const AppHeader = ({
   heading,
   backButtonHref,
   profileLinkContainer,
+  signOut,
 }: AppHeaderProps) => {
   const { base, mobileWrapper, desktopWrapper } = styles();
 
@@ -41,7 +44,11 @@ export const AppHeader = ({
       <div className={mobileWrapper()}>
         <AppHeaderLayout
           left={profileLinkContainer}
-          right={<AppBottomSheetTrigger appNavigation={<AppNavigation />} />}
+          right={
+            <AppBottomSheetTrigger
+              appNavigation={<AppNavigation signOut={signOut} />}
+            />
+          }
         />
       </div>
 
@@ -59,7 +66,9 @@ export const AppHeader = ({
               <AppHeaderThemeToggleButton />
               <LangMenuTrigger renderButton={() => <AppHeaderLangButton />} />
               {profileLinkContainer}
-              <AppSidebarSheetTrigger appNavigation={<AppNavigation />} />
+              <AppSidebarSheetTrigger
+                appNavigation={<AppNavigation signOut={signOut} />}
+              />
             </>
           }
         />

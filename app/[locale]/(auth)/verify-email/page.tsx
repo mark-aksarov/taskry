@@ -3,6 +3,8 @@ import { headers } from "next/headers";
 import { getLocale } from "next-intl/server";
 import { redirect } from "@/i18n/navigation";
 import { VerifyEmailPage } from "./VerifyEmailPage";
+import { signOut } from "@/lib/actions/auth/signOut";
+import { sendVerificationEmail } from "@/lib/actions/auth/sendVerificationEmail";
 
 export default async function AppVerifyEmailPage() {
   const locale = await getLocale();
@@ -17,5 +19,11 @@ export default async function AppVerifyEmailPage() {
     redirect({ href: "/sign-in", locale });
   }
 
-  return <VerifyEmailPage email={session!.user.email} />;
+  return (
+    <VerifyEmailPage
+      email={session!.user.email}
+      signOut={signOut}
+      sendVerificationEmail={sendVerificationEmail}
+    />
+  );
 }

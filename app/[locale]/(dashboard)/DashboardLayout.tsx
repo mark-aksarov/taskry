@@ -5,13 +5,15 @@ import {
 } from "@/dashboard/layout/AppSidebar";
 
 import { Logo } from "@/dashboard/layout/Logo";
+import { ActionState } from "@/lib/actions/types";
 import { AppNavigation } from "@/dashboard/layout/AppNavigation";
 
 interface DashboardLayoutProps {
+  signOut: () => Promise<ActionState>;
   children: React.ReactNode;
 }
 
-export function DashboardLayout({ children }: DashboardLayoutProps) {
+export function DashboardLayout({ signOut, children }: DashboardLayoutProps) {
   return (
     <div className="flex">
       <AppSidebar className="sticky top-0 z-2 h-dvh flex-none shadow-sm max-xl:hidden">
@@ -19,7 +21,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           <Logo />
         </AppSidebarHeader>
         <AppSidebarBody>
-          <AppNavigation />
+          <AppNavigation signOut={signOut} />
         </AppSidebarBody>
       </AppSidebar>
 

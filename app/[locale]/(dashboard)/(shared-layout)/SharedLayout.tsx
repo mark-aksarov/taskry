@@ -2,22 +2,25 @@
 
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
+import { ActionState } from "@/lib/actions/types";
 import { AppHeader } from "@/dashboard/layout/AppHeader";
 import { useParams, useSearchParams } from "next/navigation";
 import { GuestModeModal } from "@/dashboard/common/GuestModeModal";
-import { SearchBarProvider } from "@/dashboard/search/SearchBar/index";
 import { ModalManagerProvider } from "@/common/ModalManagerContext";
+import { SearchBarProvider } from "@/dashboard/search/SearchBar/index";
 import { PageTransitionProvider } from "@/dashboard/common/PageTransitionContext";
 
 interface SharedLayoutProps {
   profileLinkContainer: React.ReactNode;
   children: React.ReactNode;
+  signOut: () => Promise<ActionState>;
 }
 
 // The shared layout is a client component, but the layout itself is a server component that passes the page as a slot.
 export default function SharedLayout({
   profileLinkContainer,
   children,
+  signOut,
 }: SharedLayoutProps) {
   const pathname = usePathname();
   const params = useParams();
@@ -101,6 +104,7 @@ export default function SharedLayout({
       <PageTransitionProvider>
         <SearchBarProvider key={pathname} initialValue={query ?? ""}>
           <AppHeader
+            signOut={signOut}
             profileLinkContainer={profileLinkContainer}
             heading={t("heading" as never)}
             backButtonHref={activeRoute?.backButtonHref}

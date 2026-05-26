@@ -1,22 +1,32 @@
 "use client";
 
 import { Button } from "@/ui/Button";
+import { useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
-import { authClient } from "@/lib/auth-client";
+import { ActionState } from "@/lib/actions/types";
+import { useAddErrorToast } from "@/lib/hooks/useAddErrorToast";
 
-export function AuthSignOutButton() {
+interface AuthSignOutButtonProps {
+  signOut: () => Promise<ActionState>;
+}
+
+export function AuthSignOutButton({ signOut }: AuthSignOutButtonProps) {
   const t = useTranslations("auth.AuthSignOutButton");
-
+  const [isPending, startTransition] = useTransition();
+  const addErrorToast = useAddErrorToast();
   const router = useRouter();
 
   function handlePress() {
-    authClient.signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          router.push("/sign-in");
-        },
-      },
+    startTransition(async () => {
+      const result = await signOut();
+
+      if (result.status === "error") {
+        addErrorToast(result.message!);
+        return;
+      }
+
+      router.push("/dashboard");
     });
   }
 
@@ -26,6 +36,7 @@ export function AuthSignOutButton() {
       className="justify-center py-4"
       size="medium"
       onPress={handlePress}
+      isPending={isPending}
       label={t("label")}
     />
   );
