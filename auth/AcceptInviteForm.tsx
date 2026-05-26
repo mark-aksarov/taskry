@@ -1,8 +1,9 @@
 "use client";
 
-import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { PasswordField } from "./PasswordField";
+import { TermsCheckbox } from "./TermsCheckbox";
+import { useActionState, useState } from "react";
 import { ActionFn, ActionState } from "@/lib/actions/types";
 import { AuthForm, AuthFormSubmitButton } from "./AuthForm";
 import { FormErrorBanner } from "@/dashboard/common/FormErrorBanner";
@@ -27,10 +28,19 @@ export function AcceptInviteForm({
     initialState,
   );
 
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+
   return (
     <AuthForm action={formAction}>
       <input type="hidden" name="email" value={email} />
+
       <PasswordField minLength={8} maxLength={128} />
+
+      <TermsCheckbox
+        isSelected={acceptedTerms}
+        onChange={setAcceptedTerms}
+        isDisabled={isPending}
+      />
 
       <FormErrorBanner status={state.status} isPending={isPending}>
         {state.message}
@@ -39,6 +49,7 @@ export function AcceptInviteForm({
       <AuthFormSubmitButton
         variant="accent"
         isPending={isPending}
+        isDisabled={!acceptedTerms}
         label={t("submitButtonLabel")}
       />
     </AuthForm>
