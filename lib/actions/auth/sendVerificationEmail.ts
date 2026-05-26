@@ -23,6 +23,7 @@ export async function sendVerificationEmail(
     await auth.api.sendVerificationEmail({
       body: {
         email: parsedData.email,
+        callbackURL: "/dashboard",
       },
       headers: await headers(),
     });

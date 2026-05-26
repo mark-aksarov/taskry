@@ -49,7 +49,11 @@ export async function signUp(
 
     // Create user
     await auth.api.signUpEmail({
-      body: { ...parsedData, workspaceId: workspace.id },
+      body: {
+        ...parsedData,
+        workspaceId: workspace.id,
+        callbackURL: "/dashboard",
+      },
     });
   } catch (error: unknown) {
     console.error("Sign-up Error:", error);
