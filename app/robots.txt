@@ -7,6 +7,9 @@ Allow: /en/$
 Allow: /privacy-policy
 Allow: /ru/privacy-policy
 Allow: /en/privacy-policy
+Allow: /terms
+Allow: /ru/terms
+Allow: /en/terms
 Allow: /docs
 Allow: /docs/*
 Allow: /ru/docs

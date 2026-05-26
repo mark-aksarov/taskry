@@ -57,7 +57,34 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://taskry.ru/en/privacy-policy" />
   </url>
 
-  <!-- 7. Documentation (Root/Default) -->
+  <!-- 7. Terms (Root/Default) -->
+  <url>
+    <loc>https://taskry.ru/terms</loc>
+    <lastmod>2026-05-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taskry.ru/terms" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://taskry.ru/ru/terms" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://taskry.ru/en/terms" />
+  </url>
+
+  <!-- 8. Terms (Russian) -->
+  <url>
+    <loc>https://taskry.ru/ru/terms</loc>
+    <lastmod>2026-05-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taskry.ru/terms" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://taskry.ru/ru/terms" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://taskry.ru/en/terms" />
+  </url>
+
+  <!-- 9. Terms (English) -->
+  <url>
+    <loc>https://taskry.ru/en/terms</loc>
+    <lastmod>2026-05-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taskry.ru/terms" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://taskry.ru/ru/terms" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://taskry.ru/en/terms" />
+  </url>
+
+  <!-- 10. Documentation (Root/Default) -->
   <url>
     <loc>https://taskry.ru/docs</loc>
     <lastmod>2026-05-17</lastmod>
@@ -66,7 +93,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://taskry.ru/en/docs" />
   </url>
 
-  <!-- 8. Documentation (Russian) -->
+  <!-- 11. Documentation (Russian) -->
   <url>
     <loc>https://taskry.ru/ru/docs</loc>
     <lastmod>2026-05-17</lastmod>
@@ -75,7 +102,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://taskry.ru/en/docs" />
   </url>
 
-  <!-- 9. Documentation (English) -->
+  <!-- 12. Documentation (English) -->
   <url>
     <loc>https://taskry.ru/en/docs</loc>
     <lastmod>2026-05-17</lastmod>

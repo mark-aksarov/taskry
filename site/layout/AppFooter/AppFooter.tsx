@@ -73,7 +73,7 @@ export function AppFooter() {
               <AppFooterLink href="/privacy-policy" className="mb-3">
                 {t("sections.legal.links.privacy")}
               </AppFooterLink>
-              <AppFooterLink href="/privacy-policy">
+              <AppFooterLink href="/terms">
                 {t("sections.legal.links.terms")}
               </AppFooterLink>
             </div>
