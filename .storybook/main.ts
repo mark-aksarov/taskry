@@ -1,3 +1,4 @@
+import { mergeConfig } from "vite";
 import type { StorybookConfig } from "@storybook/nextjs-vite";
 
 const config: StorybookConfig = {
@@ -23,6 +24,11 @@ const config: StorybookConfig = {
   staticDirs: ["../public"],
   features: {
     experimentalRSC: true,
+  },
+  viteFinal: async (config) => {
+    return mergeConfig(config, {
+      logLevel: "silent",
+    });
   },
 };
 export default config;
