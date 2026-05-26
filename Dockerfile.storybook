@@ -7,7 +7,7 @@ COPY . .
 RUN --mount=type=cache,target=/root/.npm npm ci --no-audit --no-fund
 
 RUN npx prisma generate
-RUN npm run build-storybook
+RUN NODE_OPTIONS="--max-old-space-size=2048" npm run build-storybook
 
 # runtime stage
 FROM nginx:alpine
