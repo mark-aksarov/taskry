@@ -43,6 +43,15 @@ services:
     networks:
       - taskry-network
 
+  storybook:
+    build:
+      context: .
+      dockerfile: Dockerfile.storybook
+    expose:
+      - "80"
+    ports:
+      - "6006:80"
+
 volumes:
   postgres_data:
 
