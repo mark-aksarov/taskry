@@ -26,7 +26,12 @@ export function TermsCheckbox({
     >
       <div className="w-full">
         {t("prefix")}{" "}
-        <AuthLink target="_blank" href="/terms" className="inline-block">
+        <AuthLink
+          target="_blank"
+          href="/terms"
+          className="inline-block"
+          isDisabled={isDisabled}
+        >
           {t("terms")}
         </AuthLink>{" "}
         {t("and")}{" "}
@@ -34,6 +39,7 @@ export function TermsCheckbox({
           target="_blank"
           href="/privacy-policy"
           className="inline-block"
+          isDisabled={isDisabled}
         >
           {t("privacy")}
         </AuthLink>

@@ -16,7 +16,8 @@ export const styles = tv({
   base: "flex w-fit items-center gap-2 text-sm font-normal text-(--text-primary)",
   variants: {
     variant: {
-      primary: "text-(--text-link) hover:text-(--text-link-hover)",
+      primary:
+        "text-(--text-link) hover:text-(--text-link-hover) disabled:text-(--text-disabled)",
     },
     isDisabled: {
       false: "cursor-pointer",
