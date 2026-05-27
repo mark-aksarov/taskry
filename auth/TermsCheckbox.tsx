@@ -29,7 +29,7 @@ export function TermsCheckbox({
         <AuthLink
           target="_blank"
           href="/terms"
-          className="inline-block"
+          className="inline"
           isDisabled={isDisabled}
         >
           {t("terms")}
@@ -38,7 +38,7 @@ export function TermsCheckbox({
         <AuthLink
           target="_blank"
           href="/privacy-policy"
-          className="inline-block"
+          className="inline"
           isDisabled={isDisabled}
         >
           {t("privacy")}
