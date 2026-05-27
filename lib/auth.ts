@@ -12,7 +12,7 @@ export const auth = betterAuth({
   }),
   emailVerification: {
     sendVerificationEmail: async ({ user, url }) => {
-      await transporter.sendMail({
+      transporter.sendMail({
         from: `"Taskry" <${process.env.SMTP_USER}>`,
         to: user.email,
         subject: "Подтверждение электронной почты",
@@ -98,7 +98,7 @@ export const auth = betterAuth({
       const isInvite = callbackURL?.includes("/accept-invite");
 
       if (isInvite) {
-        await transporter.sendMail({
+        transporter.sendMail({
           from: `"Taskry" <${process.env.SMTP_USER}>`,
           to: user.email,
           subject: "Приглашение в систему",
@@ -161,7 +161,7 @@ export const auth = betterAuth({
         return;
       }
 
-      await transporter.sendMail({
+      transporter.sendMail({
         from: `"Taskry" <${process.env.SMTP_USER}>`,
         to: user.email,
         subject: "Сброс пароля",
