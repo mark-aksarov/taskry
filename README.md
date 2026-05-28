@@ -37,7 +37,7 @@ In the following videos, a demonstration of the application is shown in both des
 
 ### Development
 
-Copy the `.env.example` to `.env.development` (which will be ignored by Git) and configure the required environment variables.
+Copy the `.env.development.example` to `.env.development` (which will be ignored by Git) and configure the required environment variables.
 
 Run the following commands to install packages, apply the migrations and seed the database.
 
@@ -63,6 +63,8 @@ npm run storybook
 Open http://localhost:3000 with your browser to see the result.
 
 ### Production
+
+Copy the `.env.production.example` to `.env.production` (which will be ignored by Git) and configure the required environment variables.
 
 To deploy the app in production, you need to build the database and application images, start the required containers, and initialize the database with migrations and seed data.
 
@@ -109,6 +111,8 @@ npm run test:ui
 
 ### End-to-end tests
 
+Copy the `.env.e2e.example` to `.env.e2e` (which will be ignored by Git) and configure the required environment variables.
+
 Starts required docker services, prepares the database, runs the dev server, and opens Cypress UI.
 
 ```
@@ -123,6 +127,8 @@ npm run test:e2e:headless
 
 ### Integration tests
 
+Copy the `.env.integration.example` to `.env.integration` (which will be ignored by Git) and configure the required environment variables.
+
 Runs integration tests using a separate environment and database setup.
 
 ```
@@ -131,7 +137,7 @@ npm run test:integration
 
 ## Environment Variables
 
-Your `.env.development` or `.env.production` file should look like this:
+Your `.env.development`, `.env.production`, `.env.e2e`, or `.env.integration` file should look like this:
 
 | Variable             | Description                                                                                                 |
 | -------------------- | ----------------------------------------------------------------------------------------------------------- |
