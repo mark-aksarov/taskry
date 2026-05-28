@@ -8,4 +8,4 @@ RUN --mount=type=cache,target=/root/.npm npm ci --no-audit --no-fund
 ENV NODE_ENV=production
 
 # 3. run migrations + seed
-CMD ["sh", "-c", "npm run prisma:prod:generate && npm run migrate:prod && npm run seed:prod"]
+CMD ["sh", "-c", "npm run prisma-generate:prod && npm run migrate:prod && npm run seed:prod"]
