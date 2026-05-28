@@ -2,6 +2,10 @@
   "name": "taskry",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Mark Aksarov",
+    "email": "aksarov91@gmail.com"
+  },
   "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
