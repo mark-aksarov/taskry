@@ -17,6 +17,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     isGuest: false,
+    isEmailVerified: true,
     signOut: async () => ({ status: "success" }),
   },
 } satisfies Story;

@@ -19,6 +19,7 @@ interface LinkProps {
 
 interface GetStartedActionProps {
   isGuest: boolean;
+  isEmailVerified: boolean;
   signOut: () => Promise<ActionState>;
   renderButton: (props: ButtonProps) => React.ReactNode;
   renderLink: (props: LinkProps) => React.ReactNode;
@@ -26,6 +27,7 @@ interface GetStartedActionProps {
 
 export function GetStartedAction({
   isGuest,
+  isEmailVerified,
   signOut,
   renderButton,
   renderLink,
@@ -57,7 +59,7 @@ export function GetStartedAction({
   }
 
   return renderLink({
-    href: "/dashboard",
+    href: isEmailVerified ? "/dashboard" : "/verify-email",
     label: t("label"),
   });
 }

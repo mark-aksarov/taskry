@@ -15,6 +15,7 @@ export async function CtaActionsContainer() {
     <CtaSection
       isGuest={isGuest}
       signOut={signOut}
+      isEmailVerified={session ? session.user.emailVerified : false}
       hasSession={session !== null}
     />
   );

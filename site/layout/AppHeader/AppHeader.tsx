@@ -25,10 +25,15 @@ const styles = tv({
 
 interface AppHeaderCtaButtonProps {
   isGuest: boolean;
+  isEmailVerified: boolean;
   signOut: () => Promise<ActionState>;
 }
 
-export function AppHeader({ isGuest, signOut }: AppHeaderCtaButtonProps) {
+export function AppHeader({
+  isGuest,
+  isEmailVerified,
+  signOut,
+}: AppHeaderCtaButtonProps) {
   const pathname = usePathname();
 
   const isDocsPage = pathname?.startsWith("/docs");
@@ -50,7 +55,11 @@ export function AppHeader({ isGuest, signOut }: AppHeaderCtaButtonProps) {
             <>
               <AppHeaderThemeToggleButton />
               <AppHeaderLangMenuTrigger />
-              <AppHeaderCtaButton isGuest={isGuest} signOut={signOut} />
+              <AppHeaderCtaButton
+                isGuest={isGuest}
+                isEmailVerified={isEmailVerified}
+                signOut={signOut}
+              />
             </>
           }
         />

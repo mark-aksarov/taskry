@@ -13,7 +13,11 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     (Story) => (
-      <SiteLayout isGuest={false} signOut={async () => ({ status: "success" })}>
+      <SiteLayout
+        isGuest={false}
+        isEmailVerified={true}
+        signOut={async () => ({ status: "success" })}
+      >
         <Story />
       </SiteLayout>
     ),
@@ -27,6 +31,7 @@ const meta = {
     ctaActionsContainer: (
       <CtaSection
         isGuest={false}
+        isEmailVerified={true}
         signOut={async () => ({ status: "success" })}
         hasSession={true}
       />

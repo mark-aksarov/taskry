@@ -12,15 +12,22 @@ import { GetStartedAction } from "../common/GetStartedAction";
 
 interface CtaSectionProps {
   isGuest: boolean;
+  isEmailVerified: boolean;
   signOut: () => Promise<ActionState>;
   hasSession: boolean;
 }
 
-export function CtaSection({ isGuest, signOut, hasSession }: CtaSectionProps) {
+export function CtaSection({
+  isGuest,
+  isEmailVerified,
+  signOut,
+  hasSession,
+}: CtaSectionProps) {
   return (
     <PageSectionActions>
       <GetStartedAction
         isGuest={isGuest}
+        isEmailVerified={isEmailVerified}
         signOut={signOut}
         renderButton={({ isPending, handlePress, label }) => (
           <PageSectionActionButton

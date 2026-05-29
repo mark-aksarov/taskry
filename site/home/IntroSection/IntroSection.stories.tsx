@@ -21,6 +21,7 @@ export const Default = {
     ctaActionsContainer: (
       <CtaSection
         isGuest={false}
+        isEmailVerified={true}
         signOut={async () => ({ status: "success" })}
         hasSession={true}
       />
