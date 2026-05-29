@@ -74,7 +74,7 @@ export function SubtaskActionMenuTrigger({
           data-id={subtaskId}
           variant={undefined}
           className={twMerge(
-            "-mx-2 -my-1.25 shrink-0 self-start",
+            "-mx-2 -my-1.25 shrink-0 self-start disabled:bg-transparent!",
             buttonClassName,
           )}
         />

@@ -15,6 +15,7 @@ import { useCommentFormContext } from "../CommentFormContext";
 import { useCommentItemPending } from "./useCommentItemPending";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useModal } from "@/common/ModalManagerContext";
+import { twMerge } from "tailwind-merge";
 
 export type CommentItemActionMenuTriggerProps = {
   commentId: number;
@@ -72,7 +73,7 @@ export function CommentItemActionMenuTrigger({
       renderButton={() => (
         <ItemBaseActionMenuButton
           variant="primary"
-          className={className}
+          className={twMerge("disabled:bg-transparent!", className)}
           isPending={isPending}
           isDisabled={
             (isSendCommentPending || isUpdateCommentPending) && !isPending
