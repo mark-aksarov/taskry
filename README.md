@@ -1,6 +1,15 @@
 # Taskry
 
-Taskry is a simple task management system. It helps you manage projects, tasks, clients, and team members with ease. You can create and organize projects with tasks, break work into subtasks. The system also includes search, filtering, and sorting to quickly find what you need.
+Taskry is a simple task management system. It helps you manage projects, tasks, clients, and team members with ease. You can create and organize projects with tasks, and break work into subtasks. The system also includes search, filtering, and sorting to quickly find what you need.
+
+## Links
+
+Taskry and its storybook are available at the links below.
+
+- [Taskry](https://taskry.ru)
+- [Storybook](https://storybook.taskry.ru)
+
+## Demos
 
 In the following videos, a demonstration of the application is shown in both desktop and mobile versions.
 
