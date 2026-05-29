@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Card } from "@/dashboard/common/Card";
 import { PageGrid } from "@/dashboard/common/PageGrid";
+import { BackButton } from "@/dashboard/common/BackButton";
 import { ToolbarMobile } from "@/dashboard/common/Toolbar";
 import { PageContainer } from "@/dashboard/common/PageContainer";
 import { UserDetailCard } from "@/dashboard/users/UserDetailCard";
@@ -24,7 +25,12 @@ export default function AppTeamProfileLoading() {
 
       <PageGrid className="md:hidden">
         <ToolbarMobile
-          firstSlot={<PageHeadingMobile>{t("heading")}</PageHeadingMobile>}
+          firstSlot={
+            <>
+              <BackButton fallbackHref="/team" />
+              <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
+            </>
+          }
         />
 
         <ToolbarMobile firstSlot={<UserNavigationMobileSkeleton />} />
