@@ -34,8 +34,8 @@ export function TaskStatusFiltersForm() {
     const newSearchParams = new URLSearchParams(searchParams);
 
     // Replace status: remove old ones and add the new values
-    newSearchParams.delete("status");
-    statuses.forEach((status) => newSearchParams.append("status", status));
+    newSearchParams.delete("statuses");
+    statuses.forEach((status) => newSearchParams.append("statuses", status));
 
     applyFilterURL(newSearchParams);
   };
