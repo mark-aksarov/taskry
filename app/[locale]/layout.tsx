@@ -11,6 +11,7 @@ import { RouterProvider } from "@/ui/RouterProvider";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { ThemeProvider } from "@/dashboard/layout/ThemeProvider";
 import { ToastRegionWrapper } from "@/dashboard/layout/ToastRegionWrapper";
+import { ScrollRestoration } from "@/common/ScrollRestoration";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",
@@ -62,6 +63,7 @@ export default async function RootLayout({
             <NextIntlClientProvider>
               <I18nProvider locale={locale}>
                 <RouterProvider>
+                  <ScrollRestoration />
                   <ToastRegionWrapper />
                   {children}
                 </RouterProvider>
