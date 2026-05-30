@@ -2,8 +2,6 @@ import { z } from "zod";
 import { notFound } from "next/navigation";
 import { taskSortFields } from "@/lib/types";
 import { getTaskList } from "@/lib/data/task/task.dal";
-import { hasGuestRole } from "@/lib/utils/hasGuestRole";
-import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
 import { getUserSummary } from "@/lib/data/user/user.dal";
 import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
 import { ProfileActions } from "@/dashboard/users/ProfileActions";
@@ -73,8 +71,8 @@ export default async function AppProfileTasksPage({
   });
 
   // Show user actions if the user is the owner, guest, or the current user
-  const isOwner = await hasOwnerRole();
-  const isGuest = await hasGuestRole();
+  const isOwner = session.user.role === "owner";
+  const isGuest = session.user.role === "guest";
   const showUserActions = isOwner || isGuest || session.user.id === userId;
 
   return (

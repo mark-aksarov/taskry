@@ -16,7 +16,7 @@ import { withSendCommentProvider } from "../SendCommentProvider/__stories__";
 import { withUpdateCommentProvider } from "../UpdateCommentProvider/__stories__";
 import { withDeleteCommentProvider } from "../DeleteCommentProvider/__stories__";
 import { withCommentFormProvider } from "@/dashboard/comments/CommentForm/__stories__";
-import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
+import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "dashboard/comments/EntityCommentsModal",

@@ -5,6 +5,7 @@ import React, { useTransition } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { ActionState } from "@/lib/actions/types";
 import { useAddErrorToast } from "@/lib/hooks/useAddErrorToast";
+import { useCurrentUser } from "@/common/CurrentUserContext";
 
 interface ButtonProps {
   isPending: boolean;
@@ -18,16 +19,12 @@ interface LinkProps {
 }
 
 interface GetStartedActionProps {
-  isGuest: boolean;
-  isEmailVerified: boolean;
   signOut: () => Promise<ActionState>;
   renderButton: (props: ButtonProps) => React.ReactNode;
   renderLink: (props: LinkProps) => React.ReactNode;
 }
 
 export function GetStartedAction({
-  isGuest,
-  isEmailVerified,
   signOut,
   renderButton,
   renderLink,
@@ -36,6 +33,7 @@ export function GetStartedAction({
   const [isPending, startTransition] = useTransition();
   const addErrorToast = useAddErrorToast();
   const router = useRouter();
+  const { isGuest, isEmailVerified, userId } = useCurrentUser();
 
   function handlePress() {
     startTransition(async () => {
@@ -46,10 +44,11 @@ export function GetStartedAction({
         return;
       }
 
-      router.push("/dashboard");
+      router.push("/sign-in");
     });
   }
 
+  // If the user is not a guest, we redirect to sign-in page
   if (isGuest) {
     return renderButton({
       isPending,
@@ -58,8 +57,17 @@ export function GetStartedAction({
     });
   }
 
+  // If user is not signed in, we redirect to sign-in page
+  // If user is signed in and email is not verified, we redirect to verify-email page
+  // If user is signed in and email is verified, we redirect to dashboard
+  const href = !userId
+    ? "/sign-in"
+    : isEmailVerified
+      ? "/dashboard"
+      : "/verify-email";
+
   return renderLink({
-    href: isEmailVerified ? "/dashboard" : "/verify-email",
+    href,
     label: t("label"),
   });
 }

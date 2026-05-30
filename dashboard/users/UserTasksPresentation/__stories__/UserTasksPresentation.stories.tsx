@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserTasksPresentationExample } from "./UserTasksPresentationExample";
 import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
-import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
+import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
 import { withDeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withSelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext/__stories__";

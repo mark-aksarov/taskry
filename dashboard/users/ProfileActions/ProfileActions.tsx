@@ -6,7 +6,7 @@ import { useDeleteUser } from "../DeleteUserContext";
 import { useChangePassword } from "../ChangePasswordContext";
 import { useModal } from "@/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
+import { useCurrentUser } from "@/common/CurrentUserContext";
 import { NavigationButton } from "@/dashboard/common/NavigationItem";
 
 interface ProfileActionsProps {

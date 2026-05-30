@@ -2,10 +2,10 @@ import { HomePage } from "./HomePage";
 import { mocked } from "storybook/test";
 import { SiteLayout } from "./SiteLayout";
 import { usePathname } from "next/navigation";
-import { CtaSection } from "@/site/home/CtaSection";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
+import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "pages/HomePage",
@@ -13,29 +13,19 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     (Story) => (
-      <SiteLayout
-        isGuest={false}
-        isEmailVerified={true}
-        signOut={async () => ({ status: "success" })}
-      >
+      <SiteLayout signOut={async () => ({ status: "success" })}>
         <Story />
       </SiteLayout>
     ),
     withModalManagerProvider,
+    withCurrentUserProvider,
     withThemedBackground,
   ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/");
   },
   args: {
-    ctaActionsContainer: (
-      <CtaSection
-        isGuest={false}
-        isEmailVerified={true}
-        signOut={async () => ({ status: "success" })}
-        hasSession={true}
-      />
-    ),
+    signOut: async () => ({ status: "success" }),
   },
 } satisfies Meta<typeof HomePage>;
 

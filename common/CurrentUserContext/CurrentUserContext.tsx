@@ -5,6 +5,7 @@ import { createContext, useContext } from "react";
 interface CurrentUserContextType {
   isGuest: boolean;
   isOwner: boolean;
+  isEmailVerified: boolean;
   userId: string | null;
 }
 

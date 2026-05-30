@@ -23,7 +23,7 @@ import { UserListItemSkeleton } from "./UserListItemSkeleton";
 import { ListItemGate } from "@/dashboard/common/ListItemGate";
 import { useModal } from "@/common/ModalManagerContext";
 import { useUserItemPending } from "../UserItem/useUserItemPending";
-import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
+import { useCurrentUser } from "@/common/CurrentUserContext";
 import { BaseUserItemProps, UserItemActionMenuTrigger } from "../UserItem";
 
 export function UserListItem(props: BaseUserItemProps) {

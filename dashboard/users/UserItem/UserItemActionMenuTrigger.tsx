@@ -12,7 +12,7 @@ import { Pencil, Trash } from "lucide-react";
 import { useUserItemPending } from "./useUserItemPending";
 import { useModal } from "@/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
+import { useCurrentUser } from "@/common/CurrentUserContext";
 
 interface UserItemActionMenuTriggerProps {
   userId: string;

@@ -6,7 +6,7 @@ import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
 import { withDeleteTaskProvider } from "@/dashboard/tasks/DeleteTaskProvider/__stories__";
 import { withUpdateTaskProvider } from "@/dashboard/tasks/UpdateTaskProvider/__stories__";
 import { withDeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider/__stories__";
-import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
+import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withSelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext/__stories__";
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";

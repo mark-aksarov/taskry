@@ -11,7 +11,7 @@ import { CustomerDetailAltSkeleton } from "../CustomerDetailAlt";
 import { DetailHeaderSkeleton } from "@/dashboard/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CustomerDetailHeaderInteractive } from "../CustomerDetailHeader";
-import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
+import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withDeleteCustomerProvider } from "@/dashboard/customer/DeleteCustomerProvider/__stories__";
 import { withUpdateCustomerBioProvider } from "@/dashboard/customer/UpdateCustomerBioProvider/__stories__";

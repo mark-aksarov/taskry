@@ -3,20 +3,12 @@ import { ActionState } from "@/lib/actions/types";
 import { GetStartedAction } from "@/site/common/GetStartedAction";
 
 interface AppHeaderCtaButtonProps {
-  isGuest: boolean;
-  isEmailVerified: boolean;
   signOut: () => Promise<ActionState>;
 }
 
-export function AppHeaderCtaButton({
-  isGuest,
-  isEmailVerified,
-  signOut,
-}: AppHeaderCtaButtonProps) {
+export function AppHeaderCtaButton({ signOut }: AppHeaderCtaButtonProps) {
   return (
     <GetStartedAction
-      isGuest={isGuest}
-      isEmailVerified={isEmailVerified}
       signOut={signOut}
       renderButton={({ isPending, handlePress, label }) => (
         <Button

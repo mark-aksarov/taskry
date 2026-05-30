@@ -13,7 +13,7 @@ import { ProjectDetailCard } from "./ProjectDetailCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteProjectProvider } from "../DeleteProjectProvider/__stories__";
-import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
+import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withUpdateProjectTitleProvider } from "@/dashboard/projects/UpdateProjectTitleProvider/__stories__";
 import { withUpdateProjectStatusProvider } from "@/dashboard/projects/UpdateProjectStatusProvider/__stories__";

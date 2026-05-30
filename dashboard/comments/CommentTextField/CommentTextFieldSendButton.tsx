@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
 import { SendHorizonal } from "lucide-react";
 import { useModal } from "@/common/ModalManagerContext";
-import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
+import { useCurrentUser } from "@/common/CurrentUserContext";
 
 interface CommentTextFieldSendButtonProps {
   buttonClasses?: string;

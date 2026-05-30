@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { DashboardLayout } from "./DashboardLayout";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
+import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "pages/ErrorPage",

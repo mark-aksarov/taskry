@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { BriefcaseBusiness, Users } from "lucide-react";
 import { useModal } from "@/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
+import { useCurrentUser } from "@/common/CurrentUserContext";
 import { CreateNewMenuTrigger } from "@/dashboard/common/CreateNewMenuTrigger";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 

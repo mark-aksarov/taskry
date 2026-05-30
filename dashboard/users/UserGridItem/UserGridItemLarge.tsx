@@ -27,7 +27,7 @@ import { Separator } from "@/ui/Separator";
 import { UserGridItemLayout } from "./UserGridItemLayout";
 import { useModal } from "@/common/ModalManagerContext";
 import { UserGridItemLargeSkeleton } from "./UserGridItemSkeleton";
-import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
+import { useCurrentUser } from "@/common/CurrentUserContext";
 import { GridItemLargeGate } from "@/dashboard/common/GridItemLargeGate";
 
 export function UserGridItemLarge(props: BaseUserItemProps) {

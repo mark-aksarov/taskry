@@ -12,6 +12,7 @@ export const MockedCurrentUserProvider = ({
       value={{
         userId: "user-1",
         isGuest,
+        isEmailVerified: true,
         isOwner: true,
       }}
     >

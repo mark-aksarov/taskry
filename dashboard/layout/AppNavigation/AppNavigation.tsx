@@ -14,7 +14,7 @@ import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import { ActionState } from "@/lib/actions/types";
 import { NavigationLink } from "@/dashboard/common/NavigationItem";
-import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
+import { useCurrentUser } from "@/common/CurrentUserContext";
 import { AppNavigationLogoutButton } from "./AppNavigationLogoutButton";
 import { AppNavigationLangMenuTrigger } from "./AppNavigationLangMenuTrigger";
 import { AppNavigationThemeToggleButton } from "./AppNavigationThemeToggleButton";

@@ -2,7 +2,7 @@ import { TaskCategoryGrid } from "../TaskCategoryGrid";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskCategoryGridExample } from "./TaskCategoryGridExample";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
+import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
 import { withDeleteTaskCategoriesProvider } from "../../DeleteTaskCategoriesProvider/__stories__";

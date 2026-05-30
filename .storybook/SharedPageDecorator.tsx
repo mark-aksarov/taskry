@@ -3,7 +3,7 @@ import { ProfileLink } from "@/dashboard/layout/ProfileLink";
 import { ModalManagerProvider } from "@/common/ModalManagerContext";
 import { DashboardLayout } from "../app/[locale]/(dashboard)/DashboardLayout";
 import SharedLayout from "@/app/[locale]/(dashboard)/(shared-layout)/SharedLayout";
-import { MockedCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
+import { MockedCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
 
 /**
  * The page decorator is used to wrap the story in the page layout

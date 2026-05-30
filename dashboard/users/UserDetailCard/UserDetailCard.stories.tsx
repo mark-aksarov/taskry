@@ -20,7 +20,7 @@ import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories
 import { withUpdateUserImageProvider } from "../UpdateUserImageProvider/__stories__";
 import { withClearUserImageUrlProvider } from "../ClearUserImageUrlProvider/__stories__";
 import { withUpdateUserImageFileProvider } from "../UpdateUserImageFileContext/__stories__";
-import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
+import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
 import { withUpdateUserBioProvider } from "@/dashboard/users/UpdateUserBioProvider/__stories__";
 import { withUpdateUserAddressProvider } from "@/dashboard/users/UpdateUserAddressProvider/__stories__";
 import { withUpdateUserPositionProvider } from "@/dashboard/users/UpdateUserPositionProvider/__stories__";

@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskCategoryListItem } from "../TaskCategoryListItem";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withTaskCategoryProviders } from "../../TaskCategoryProviders/__stories__";
-import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
+import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
 import { withDeleteTaskCategoryProvider } from "../../DeleteTaskCategoryProvider/__stories__";
 import { withUpdateTaskCategoryProvider } from "../../UpdateTaskCategoryProvider/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";

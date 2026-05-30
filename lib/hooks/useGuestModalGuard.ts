@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useModal } from "@/common/ModalManagerContext";
-import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
+import { useCurrentUser } from "@/common/CurrentUserContext";
 
 // If the user is a guest, show the guest mode modal instead of allowing action
 export function useGuestModalGuard() {

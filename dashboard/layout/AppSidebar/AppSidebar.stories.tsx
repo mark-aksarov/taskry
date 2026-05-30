@@ -12,7 +12,7 @@ import { AppSidebarHeader } from "./AppSidebarHeader";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Dialog, DialogCloseButton } from "@/ui/Dialog";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
+import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "dashboard/layout/AppSidebar",

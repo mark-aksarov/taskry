@@ -5,15 +5,17 @@ import {
 } from "@/site/common/PageSection";
 
 import { IntroBadge } from "./IntroBadge";
+import { CtaSection } from "../CtaSection";
+import { ActionState } from "@/lib/actions/types";
 import { PageContainer } from "@/site/common/PageContainer";
 import { IntroSectionHeading } from "./IntroSectionHeading";
 import { IntroSectionDescription } from "./IntroSectionDescription";
 
 interface IntroSectionProps {
-  ctaActionsContainer: React.ReactNode;
+  signOut: () => Promise<ActionState>;
 }
 
-export function IntroSection({ ctaActionsContainer }: IntroSectionProps) {
+export function IntroSection({ signOut }: IntroSectionProps) {
   return (
     <PageSection className="relative max-md:pt-10 max-md:pb-8 md:pt-20 md:pb-15">
       <PageContainer>
@@ -23,7 +25,7 @@ export function IntroSection({ ctaActionsContainer }: IntroSectionProps) {
             <IntroSectionHeading />
             <IntroSectionDescription />
           </PageSectionHeader>
-          {ctaActionsContainer}
+          <CtaSection signOut={signOut} />
         </PageSectionContent>
       </PageContainer>
     </PageSection>

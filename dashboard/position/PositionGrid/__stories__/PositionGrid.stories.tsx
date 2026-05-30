@@ -3,7 +3,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PositionGridExample } from "./PositionGridExample";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeletePositionsProvider } from "../../DeletePositionsProvider/__stories__";
-import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
+import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
 

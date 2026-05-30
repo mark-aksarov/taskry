@@ -11,23 +11,13 @@ import { ActionState } from "@/lib/actions/types";
 import { GetStartedAction } from "../common/GetStartedAction";
 
 interface CtaSectionProps {
-  isGuest: boolean;
-  isEmailVerified: boolean;
   signOut: () => Promise<ActionState>;
-  hasSession: boolean;
 }
 
-export function CtaSection({
-  isGuest,
-  isEmailVerified,
-  signOut,
-  hasSession,
-}: CtaSectionProps) {
+export function CtaSection({ signOut }: CtaSectionProps) {
   return (
     <PageSectionActions>
       <GetStartedAction
-        isGuest={isGuest}
-        isEmailVerified={isEmailVerified}
         signOut={signOut}
         renderButton={({ isPending, handlePress, label }) => (
           <PageSectionActionButton
@@ -41,7 +31,7 @@ export function CtaSection({
           <PageSectionActionLink href={href} variant="accent" label={label} />
         )}
       />
-      <DemoAction isGuest={isGuest} hasSession={hasSession} />
+      <DemoAction />
     </PageSectionActions>
   );
 }

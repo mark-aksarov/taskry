@@ -7,8 +7,6 @@ import {
 
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
-import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { getUserDetail } from "@/lib/data/user/user.dal";
 import { DetailHeaderSkeleton } from "@/dashboard/common/DetailHeader";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
@@ -37,8 +35,8 @@ async function UserDetailHeaderAltContainerInner({
   }
 
   const session = await requireProtectedPage();
-  const isOwner = await hasOwnerRole();
-  const isGuest = await hasGuestRole();
+  const isOwner = session.user.role === "owner";
+  const isGuest = session.user.role === "guest";
 
   const currentUserId = session.user.id;
   const canUpdateImage = isOwner || isGuest || userId === currentUserId;

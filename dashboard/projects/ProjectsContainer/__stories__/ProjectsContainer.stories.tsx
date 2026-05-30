@@ -4,7 +4,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
 import { withDeleteProjectsProvider } from "../../DeleteProjectsProvider/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
-import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
+import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
 import { ProjectsContainerPresentationExample } from "./ProjectsContainerPresentationExample";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";

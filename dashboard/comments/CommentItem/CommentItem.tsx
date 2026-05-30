@@ -10,7 +10,7 @@ import { UnknownUser } from "@/dashboard/common/UnknownUser";
 import { useCommentItemPending } from "./useCommentItemPending";
 import { ImageContainer } from "@/dashboard/common/ImageContainer";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
-import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
+import { useCurrentUser } from "@/common/CurrentUserContext";
 import { CommentItemActionMenuTrigger } from "./CommentItemActionMenuTrigger";
 
 interface CommentItemProps {

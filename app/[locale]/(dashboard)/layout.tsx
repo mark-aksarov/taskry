@@ -1,9 +1,7 @@
 import { DashboardLayout } from "./DashboardLayout";
 import { signOut } from "@/lib/actions/auth/signOut";
-import { hasGuestRole } from "@/lib/utils/hasGuestRole";
-import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
+import { CurrentUserProvider } from "@/common/CurrentUserContext";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { CurrentUserProvider } from "@/dashboard/common/CurrentUserContext";
 
 export default async function AppDashboardLayout({
   children,
@@ -16,8 +14,9 @@ export default async function AppDashboardLayout({
   // This data is required to determine the user's role
   // and render the UI accordingly on the client side.
   const currentUserContextValue = {
-    isGuest: await hasGuestRole(),
-    isOwner: await hasOwnerRole(),
+    isGuest: session.user.role === "guest",
+    isOwner: session.user.role === "owner",
+    isEmailVerified: session.user.emailVerified,
     userId: session.user.id,
   };
 

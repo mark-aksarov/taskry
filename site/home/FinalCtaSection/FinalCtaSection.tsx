@@ -6,14 +6,16 @@ import {
   PageSectionDescription,
 } from "@/site/common/PageSection";
 
+import { CtaSection } from "../CtaSection";
 import { useTranslations } from "next-intl";
+import { ActionState } from "@/lib/actions/types";
 import { PageContainer } from "@/site/common/PageContainer";
 
 interface FinalCtaSectionProps {
-  ctaActionsContainer: React.ReactNode;
+  signOut: () => Promise<ActionState>;
 }
 
-export function FinalCtaSection({ ctaActionsContainer }: FinalCtaSectionProps) {
+export function FinalCtaSection({ signOut }: FinalCtaSectionProps) {
   const t = useTranslations("site.sections.FinalCtaSection");
 
   return (
@@ -30,7 +32,7 @@ export function FinalCtaSection({ ctaActionsContainer }: FinalCtaSectionProps) {
               {t("description.line2")}
             </PageSectionDescription>
           </PageSectionHeader>
-          {ctaActionsContainer}
+          <CtaSection signOut={signOut} />
         </PageSectionContent>
       </PageContainer>
     </PageSection>

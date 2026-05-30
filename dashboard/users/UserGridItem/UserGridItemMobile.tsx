@@ -23,7 +23,7 @@ import { useTranslations } from "next-intl";
 import { Separator } from "@/ui/Separator";
 import { UserGridItemLayout } from "./UserGridItemLayout";
 import { UserGridItemMobileSkeleton } from "./UserGridItemSkeleton";
-import { useCurrentUser } from "@/dashboard/common/CurrentUserContext";
+import { useCurrentUser } from "@/common/CurrentUserContext";
 import { ItemBaseUserImageContainer } from "@/dashboard/common/ItemBase";
 import { GridItemMobileGate } from "@/dashboard/common/GridItemMobileGate";
 

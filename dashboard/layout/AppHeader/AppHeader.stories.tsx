@@ -7,7 +7,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withSearchBarProvider } from "@/dashboard/search/SearchBar/__stories__";
 import { withTaskSearchModal } from "@/dashboard/tasks/TaskSearchModal/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withCurrentUserProvider } from "@/dashboard/common/CurrentUserContext/__stories__";
+import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
 
 const meta = {

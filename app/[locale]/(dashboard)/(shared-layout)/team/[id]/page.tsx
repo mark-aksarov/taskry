@@ -1,7 +1,5 @@
 import { notFound } from "next/navigation";
 import { TeamProfilePage } from "./TeamProfilePage";
-import { hasOwnerRole } from "@/lib/utils/hasOwnerRole";
-import { hasGuestRole } from "@/lib/utils/hasGuestRole";
 import { getUserFormData } from "@/lib/data/user/user.dal";
 import { userId as userIdSchema } from "@/lib/schemas/user";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
@@ -58,8 +56,8 @@ export default async function AppTeamProfilePage({
   }
 
   // Show user actions if the user is the owner, guest, or the current user
-  const isOwner = await hasOwnerRole();
-  const isGuest = await hasGuestRole();
+  const isOwner = session.user.role === "owner";
+  const isGuest = session.user.role === "guest";
   const showUserActions = isOwner || isGuest || session.user.id === userId;
 
   return (
