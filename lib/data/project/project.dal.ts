@@ -578,7 +578,6 @@ export function buildProjectWhereClause(
       title: { contains: filters.query, mode: "insensitive" as const },
     }),
     ...(filters.noActiveTasks && {
-      status: ProjectStatus.active,
       tasks: { none: { status: TaskStatus.active } },
     }),
     ...(filters.statuses?.length && { status: { in: filters.statuses } }),
