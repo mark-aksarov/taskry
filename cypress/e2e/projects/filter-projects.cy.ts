@@ -119,9 +119,9 @@ describe("filter projects", () => {
     cy.getByData("has-no-active-tasks-switch").click();
     cy.get('button[type="submit"]').click();
 
-    cy.getByData("project-list-item")
-      .should("have.length", 1)
-      .should("contain", "Project B");
+    cy.getByData("project-list-item").should("have.length", 2);
+    cy.getByData("project-list-item", "2").should("contain", "Project B");
+    cy.getByData("project-list-item", "3").should("contain", "Project C");
 
     cy.location("search").should("include", "noActiveTasks=true");
   });
