@@ -32,6 +32,7 @@ export async function generateMetadata({ params }: RootLayoutProps) {
   const t = await getTranslations({ locale, namespace: "metadata" });
 
   return {
+    metadataBase: new URL("https://taskry.ru"),
     title: t("title"),
     description: t("description"),
     author: t("author"),
