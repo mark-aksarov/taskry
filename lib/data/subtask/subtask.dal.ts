@@ -150,16 +150,16 @@ export const deleteSubtask = async (id: number) => {
 
 // Validate that task exists and belongs to the workspace
 async function validateTask(workspaceId: number, taskId: number) {
-  const project = await prisma.task.findUnique({
+  const task = await prisma.task.findUnique({
     where: { id: taskId },
     select: { workspaceId: true },
   });
 
-  if (!project) {
+  if (!task) {
     throw new NotFoundError("Task not found");
   }
 
-  if (project.workspaceId !== workspaceId) {
+  if (task.workspaceId !== workspaceId) {
     throw new AccessDeniedError("Task access denied");
   }
 }
