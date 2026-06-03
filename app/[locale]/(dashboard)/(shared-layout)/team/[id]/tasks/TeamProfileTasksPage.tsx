@@ -47,44 +47,46 @@ export function TeamProfileTasksPage({
   const t = useTranslations("app.TeamProfileTaskPage");
 
   if (totalTasksCount === 0) {
-    <>
-      <PageContainer className="max-md:hidden">
-        <DetailCard>
-          <DetailCardLeft>
-            <DetailCardHeader>
-              <DetailCardTitle>{t("heading")}</DetailCardTitle>
-            </DetailCardHeader>
+    return (
+      <>
+        <PageContainer className="max-md:hidden">
+          <DetailCard>
+            <DetailCardLeft>
+              <DetailCardHeader>
+                <DetailCardTitle>{t("heading")}</DetailCardTitle>
+              </DetailCardHeader>
 
-            <div className="flex flex-auto items-center justify-center px-6">
-              <TasksEmptySection headingClassName="md:text-3xl" />
-            </div>
-          </DetailCardLeft>
+              <div className="flex flex-auto items-center justify-center px-6">
+                <TasksEmptySection headingClassName="md:text-3xl" />
+              </div>
+            </DetailCardLeft>
 
-          <DetailCardRight>
-            {userDetailHeaderContainer}
-            {navigationLarge}
-          </DetailCardRight>
-        </DetailCard>
-      </PageContainer>
+            <DetailCardRight>
+              {userDetailHeaderContainer}
+              {navigationLarge}
+            </DetailCardRight>
+          </DetailCard>
+        </PageContainer>
 
-      <PageContainer fullscreen headerOffset className="md:hidden">
-        <PageGrid className="relative flex-auto">
-          <ToolbarMobile
-            firstSlot={
-              <>
-                {backButton && <BackButton fallbackHref="/team" />}
-                <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
-              </>
-            }
-          />
-          <ToolbarMobile firstSlot={navigationMobile} />
+        <PageContainer fullscreen headerOffset className="md:hidden">
+          <PageGrid className="relative flex-auto">
+            <ToolbarMobile
+              firstSlot={
+                <>
+                  {backButton && <BackButton fallbackHref="/team" />}
+                  <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
+                </>
+              }
+            />
+            <ToolbarMobile firstSlot={navigationMobile} />
 
-          <AbsoluteCenter className="w-full">
-            <TasksEmptySection />
-          </AbsoluteCenter>
-        </PageGrid>
-      </PageContainer>
-    </>;
+            <AbsoluteCenter className="w-full">
+              <TasksEmptySection />
+            </AbsoluteCenter>
+          </PageGrid>
+        </PageContainer>
+      </>
+    );
   }
 
   return (
