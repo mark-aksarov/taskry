@@ -11,15 +11,7 @@ Taskry and its storybook are available at the links below.
 
 ## Demo videos
 
-In the following videos, a demonstration of the application is shown in both desktop and mobile versions for Russian and English languages with light and dark themes.
-
-### Russian version
-
-- [Desktop (Light Theme)](https://youtu.be/Rri_Kz-X1rM)
-- [Desktop (Dark Theme)](https://youtu.be/gBMgHQV32_o)
-- [Mobile (Light Theme)](https://youtu.be/zA_3-Rakd5A)
-
-### English version
+In the following videos, a demonstration of the application is shown in both desktop and mobile versions with light and dark themes.
 
 - [Desktop (Light Theme)](https://youtu.be/8nDvyUagTw0)
 - [Desktop (Dark Theme)](https://youtu.be/F5QXiqQ25Ek)
