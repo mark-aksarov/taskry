@@ -42,6 +42,8 @@ import { CreateProjectCategoryProvider } from "@/dashboard/projectCategory/Creat
 import { ProjectCreatorFiltersFormContainer } from "@/dashboard/projects/ProjectCreatorFiltersFormContainer";
 import { ProjectCustomerFiltersFormContainer } from "@/dashboard/projects/ProjectCustomerFiltersFormContainer";
 import { ProjectCategoryFiltersFormContainer } from "@/dashboard/projects/ProjectCategoryFiltersFormContainer";
+import { getProjectCategoryCount } from "@/lib/data/projectCategory/projectCategory.dal";
+import { getCustomerCount } from "@/lib/data/customer/customer.dal";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -94,6 +96,12 @@ export default async function AppProjectsPage({
       filters,
     });
 
+  // Show category filters only when categories exist
+  const categoryCount = await getProjectCategoryCount();
+
+  // Show customer filters only when customers exist
+  const customerCount = await getCustomerCount();
+
   return (
     <SelectedProjectsProvider pageItems={projects}>
       <UpdateProjectStatusesProvider>
@@ -103,6 +111,8 @@ export default async function AppProjectsPage({
               <ProjectFiltersProvider filters={filters}>
                 <ProjectsPage
                   totalCount={totalCount}
+                  categoryCount={categoryCount}
+                  customerCount={customerCount}
                   totalFilteredProjects={totalFilteredProjects}
                   selectedSortField={sort}
                   projectsContainer={

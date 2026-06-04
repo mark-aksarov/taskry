@@ -33,6 +33,7 @@ import { CreateCustomerFormContainer } from "@/dashboard/customer/CreateCustomer
 import { CustomerFiltersFormContainer } from "@/dashboard/customer/CustomerFiltersFormContainer";
 import { CustomerRouterSearchContainer } from "@/dashboard/customer/CustomerRouterSearchContainer";
 import { CustomerCompanyFiltersFormContainer } from "@/dashboard/customer/CustomerCompanyFiltersFormContainer";
+import { getCompanyCount } from "@/lib/data/company/company.dal";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -75,6 +76,9 @@ export default async function AppCustomersPage({
       filters,
     });
 
+  // Show company filters only when companies exist
+  const companyCount = await getCompanyCount();
+
   return (
     <SelectedItemsProvider pageItems={customers.map((c) => ({ id: c.id }))}>
       <DeleteCustomersProvider>
@@ -83,6 +87,7 @@ export default async function AppCustomersPage({
             <CustomerFiltersProvider filters={filters}>
               <CustomersPage
                 totalCount={totalCount}
+                companyCount={companyCount}
                 totalFilteredCustomers={totalFilteredCustomers}
                 selectedSortField={sort}
                 customersContainer={

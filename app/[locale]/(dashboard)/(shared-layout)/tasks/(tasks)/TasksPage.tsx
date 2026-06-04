@@ -42,6 +42,8 @@ import { TaskCategoryFiltersModalTrigger } from "@/dashboard/tasks/TaskCategoryF
 
 interface TasksPageProps {
   totalCount: number;
+  categoryCount: number;
+  projectCount: number;
   selectedSortField: TaskSortField;
   totalFilteredTasks: number;
   tasksContainer: React.ReactNode;
@@ -49,6 +51,8 @@ interface TasksPageProps {
 
 export function TasksPage({
   totalCount,
+  categoryCount,
+  projectCount,
   selectedSortField,
   totalFilteredTasks,
   tasksContainer,
@@ -118,8 +122,8 @@ export function TasksPage({
           <ToolbarFiltersMobile>
             <TaskFiltersModalTriggerMobile />
             <TaskStatusFiltersModalTrigger />
-            <TaskCategoryFiltersModalTrigger />
-            <TaskProjectFiltersModalTrigger />
+            {categoryCount > 0 && <TaskCategoryFiltersModalTrigger />}
+            {projectCount > 0 && <TaskProjectFiltersModalTrigger />}
             <AssigneeFiltersModalTrigger />
           </ToolbarFiltersMobile>
 

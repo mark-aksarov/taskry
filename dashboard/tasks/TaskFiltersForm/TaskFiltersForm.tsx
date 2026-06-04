@@ -120,24 +120,34 @@ export function TaskFiltersForm({
           dispatch({ type: "setStatuses", payload: value as TaskStatus[] })
         }
       />
-      <Separator />
+      {categoryCheckboxGroupItems.length > 0 && (
+        <>
+          <Separator />
 
-      <TaskCategoryCheckboxGroup
-        items={categoryCheckboxGroupItems}
-        value={categoryIds}
-        onChange={(value) =>
-          dispatch({ type: "setCategoryIds", payload: value })
-        }
-      />
-      <Separator />
+          <TaskCategoryCheckboxGroup
+            items={categoryCheckboxGroupItems}
+            value={categoryIds}
+            onChange={(value) =>
+              dispatch({ type: "setCategoryIds", payload: value })
+            }
+          />
+        </>
+      )}
 
-      <ProjectCheckboxGroup
-        items={projectCheckboxGroupItems}
-        value={projectIds}
-        onChange={(value) =>
-          dispatch({ type: "setProjectIds", payload: value })
-        }
-      />
+      {projectCheckboxGroupItems.length > 0 && (
+        <>
+          <Separator />
+
+          <ProjectCheckboxGroup
+            items={projectCheckboxGroupItems}
+            value={projectIds}
+            onChange={(value) =>
+              dispatch({ type: "setProjectIds", payload: value })
+            }
+          />
+        </>
+      )}
+
       <Separator />
 
       <AssigneeCheckboxGroup

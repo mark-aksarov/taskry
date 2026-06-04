@@ -96,13 +96,19 @@ export function CustomerFiltersForm({
           dispatch({ type: "changeHasOverdueProjects", payload: value })
         }
       />
-      <Separator />
+      {companyCheckboxGroupItems.length > 0 && (
+        <>
+          <Separator />
 
-      <CompanyCheckboxGroup
-        items={companyCheckboxGroupItems}
-        value={companyIds}
-        onChange={(ids) => dispatch({ type: "setCompanyIds", payload: ids })}
-      />
+          <CompanyCheckboxGroup
+            items={companyCheckboxGroupItems}
+            value={companyIds}
+            onChange={(ids) =>
+              dispatch({ type: "setCompanyIds", payload: ids })
+            }
+          />
+        </>
+      )}
     </FormBase>
   );
 }

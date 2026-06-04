@@ -40,6 +40,8 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     totalCount: 10,
+    categoryCount: 2,
+    customerCount: 3,
     totalFilteredProjects: 10,
     selectedSortField: "createdAt",
     projectsContainer: <ProjectsContainerPresentationExample />,

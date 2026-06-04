@@ -38,12 +38,14 @@ import { UsersFilteredEmptySection } from "@/dashboard/users/UsersFilteredEmptyS
 import { UserPositionFiltersModalTrigger } from "@/dashboard/users/UserPositionFiltersModal";
 
 interface TeamPageProps {
+  positionCount: number;
   totalFilteredUsers: number;
   selectedSortField: UserSortField;
   usersContainer: React.ReactNode;
 }
 
 export function TeamPage({
+  positionCount,
   totalFilteredUsers,
   selectedSortField,
   usersContainer,
@@ -91,7 +93,7 @@ export function TeamPage({
 
           <ToolbarFiltersMobile>
             <UserFiltersModalTriggerMobile />
-            <UserPositionFiltersModalTrigger />
+            {positionCount > 0 && <UserPositionFiltersModalTrigger />}
           </ToolbarFiltersMobile>
 
           {!isFilteredEmpty && (

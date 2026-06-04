@@ -26,6 +26,7 @@ import { TaskFiltersProvider } from "@/dashboard/tasks/TaskFiltersContext";
 import { DeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider";
 import { AssigneeFiltersModal } from "@/dashboard/tasks/AssigneeFiltersModal";
 import { SelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext";
+import { getTaskCategoryCount } from "@/lib/data/taskCategory/taskCategory.dal";
 import { TaskStatusFiltersModal } from "@/dashboard/tasks/TaskStatusFiltersModal";
 import { TaskProjectFiltersModal } from "@/dashboard/tasks/TaskProjectFiltersModal";
 import { CreateTaskFormContainer } from "@/dashboard/tasks/CreateTaskFormContainer";
@@ -38,6 +39,7 @@ import { AssigneeFiltersFormContainer } from "@/dashboard/tasks/AssigneeFiltersF
 import { CreateTaskCategoryProvider } from "@/dashboard/taskCategory/CreateTaskCategoryProvider";
 import { TaskProjectFiltersFormContainer } from "@/dashboard/tasks/TaskProjectFiltersFormContainer";
 import { TaskCategoryFiltersFormContainer } from "@/dashboard/tasks/TaskCategoryFiltersFormContainer";
+import { getProjectCount } from "@/lib/data/project/project.dal";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -88,6 +90,12 @@ export default async function AppTasksPage({
     filters,
   });
 
+  // Show category filters only when categories exist
+  const categoryCount = await getTaskCategoryCount();
+
+  // Show project filters only when projects exist
+  const projectCount = await getProjectCount();
+
   return (
     <SelectedTasksProvider pageItems={tasks}>
       <UpdateTaskStatusesProvider>
@@ -97,6 +105,8 @@ export default async function AppTasksPage({
               <TaskFiltersProvider filters={filters}>
                 <TasksPage
                   totalCount={totalCount}
+                  categoryCount={categoryCount}
+                  projectCount={projectCount}
                   totalFilteredTasks={totalFilteredTasks}
                   selectedSortField={sort}
                   tasksContainer={

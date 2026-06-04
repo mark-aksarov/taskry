@@ -42,6 +42,7 @@ import { CustomerCompanyFiltersModalTrigger } from "@/dashboard/customer/Custome
 
 interface CustomersPageProps {
   totalCount: number;
+  companyCount: number;
   totalFilteredCustomers: number;
   selectedSortField: CustomerSortField;
   customersContainer: React.ReactNode;
@@ -49,6 +50,7 @@ interface CustomersPageProps {
 
 export function CustomersPage({
   totalCount,
+  companyCount,
   totalFilteredCustomers,
   selectedSortField,
   customersContainer,
@@ -118,7 +120,7 @@ export function CustomersPage({
 
           <ToolbarFiltersMobile>
             <CustomerFiltersModalTriggerMobile />
-            <CustomerCompanyFiltersModalTrigger />
+            {companyCount > 0 && <CustomerCompanyFiltersModalTrigger />}
           </ToolbarFiltersMobile>
 
           {!isFilteredEmpty && (

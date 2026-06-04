@@ -33,6 +33,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    positionCount: 3,
     totalFilteredUsers: 3,
     selectedSortField: "fullName",
     usersContainer: <UsersContainerPresentationExample />,

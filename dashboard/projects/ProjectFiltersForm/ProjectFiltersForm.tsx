@@ -118,24 +118,35 @@ export function ProjectFiltersForm({
           dispatch({ type: "setStatuses", payload: value as ProjectStatus[] })
         }
       />
-      <Separator />
 
-      <ProjectCategoryCheckboxGroup
-        items={categoryCheckboxGroupItems}
-        value={categoryIds}
-        onChange={(value) =>
-          dispatch({ type: "setCategoryIds", payload: value })
-        }
-      />
-      <Separator />
+      {categoryCheckboxGroupItems.length > 0 && (
+        <>
+          <Separator />
 
-      <CustomerCheckboxGroup
-        items={customerCheckboxGroupItems}
-        value={customerIds}
-        onChange={(value) =>
-          dispatch({ type: "setCustomerIds", payload: value })
-        }
-      />
+          <ProjectCategoryCheckboxGroup
+            items={categoryCheckboxGroupItems}
+            value={categoryIds}
+            onChange={(value) =>
+              dispatch({ type: "setCategoryIds", payload: value })
+            }
+          />
+        </>
+      )}
+
+      {customerCheckboxGroupItems.length > 0 && (
+        <>
+          <Separator />
+
+          <CustomerCheckboxGroup
+            items={customerCheckboxGroupItems}
+            value={customerIds}
+            onChange={(value) =>
+              dispatch({ type: "setCustomerIds", payload: value })
+            }
+          />
+        </>
+      )}
+
       <Separator />
 
       <ProjectCreatorCheckboxGroup

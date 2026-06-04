@@ -12,6 +12,7 @@ import { userSortFields } from "@/lib/types";
 import { positionId } from "@/lib/schemas/position";
 import { getUserList } from "@/lib/data/user/user.dal";
 import { UsersContainer } from "@/dashboard/users/UsersContainer";
+import { getPositionCount } from "@/lib/data/position/position.dal";
 import { UserSearchModal } from "@/dashboard/users/UserSearchModal";
 import { CreateUserModal } from "@/dashboard/users/CreateUserModal";
 import { UserFiltersModal } from "@/dashboard/users/UserFiltersModal";
@@ -60,11 +61,15 @@ export default async function AppTeamPage({
     filters,
   });
 
+  // Show position filters only when positions exist
+  const positionCount = await getPositionCount();
+
   return (
     <CreateUserProvider>
       <CreatePositionProvider>
         <UserFiltersProvider filters={filters}>
           <TeamPage
+            positionCount={positionCount}
             totalFilteredUsers={totalFilteredUsers}
             selectedSortField={sort}
             usersContainer={

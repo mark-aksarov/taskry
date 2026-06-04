@@ -43,6 +43,8 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     totalCount: 3,
+    categoryCount: 2,
+    projectCount: 3,
     totalFilteredTasks: 3,
     selectedSortField: "title",
     tasksContainer: <TasksContainerPresentationExample />,

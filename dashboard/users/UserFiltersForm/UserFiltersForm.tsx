@@ -86,15 +86,19 @@ export function UserFiltersForm({ positionCheckboxGroupItems }: Props) {
           dispatch({ type: "changeHasOverdueTasks", payload: value })
         }
       />
-      <Separator />
+      {positionCheckboxGroupItems.length > 0 && (
+        <>
+          <Separator />
 
-      <PositionCheckboxGroup
-        items={positionCheckboxGroupItems}
-        value={positionIds}
-        onChange={(value) =>
-          dispatch({ type: "setPositionIds", payload: value })
-        }
-      />
+          <PositionCheckboxGroup
+            items={positionCheckboxGroupItems}
+            value={positionIds}
+            onChange={(value) =>
+              dispatch({ type: "setPositionIds", payload: value })
+            }
+          />
+        </>
+      )}
     </FormBase>
   );
 }

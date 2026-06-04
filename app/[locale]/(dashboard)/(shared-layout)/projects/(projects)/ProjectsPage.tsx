@@ -45,6 +45,8 @@ import { ProjectsEmptySectionCreateButton } from "@/dashboard/projects/ProjectsE
 
 interface ProjectsPageProps {
   totalCount: number;
+  categoryCount: number;
+  customerCount: number;
   totalFilteredProjects: number;
   selectedSortField: ProjectSortField;
   projectsContainer: React.ReactNode;
@@ -52,6 +54,8 @@ interface ProjectsPageProps {
 
 export function ProjectsPage({
   totalCount,
+  categoryCount,
+  customerCount,
   totalFilteredProjects,
   selectedSortField,
   projectsContainer,
@@ -122,9 +126,9 @@ export function ProjectsPage({
           <ToolbarFiltersMobile>
             <ProjectFiltersModalTriggerMobile />
             <ProjectStatusFiltersModalTrigger />
-            <ProjectCategoryFiltersModalTrigger />
+            {categoryCount > 0 && <ProjectCategoryFiltersModalTrigger />}
             <ProjectCreatorFiltersModalTrigger />
-            <ProjectCustomerFiltersModalTrigger />
+            {customerCount > 0 && <ProjectCustomerFiltersModalTrigger />}
           </ToolbarFiltersMobile>
 
           {!isFilteredEmpty && (
