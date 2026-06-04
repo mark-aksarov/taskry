@@ -4,6 +4,7 @@ import { CompanyGrid } from "./CompanyGrid";
 import { CompanyListItem } from "./CompanyListItem";
 import { UpdateCompanyModal } from "./UpdateCompanyModal";
 import { DeleteCompanyModal } from "./DeleteCompanyModal";
+import { GuestModeModal } from "../common/GuestModeModal";
 import { UpdateCompanyProvider } from "./UpdateCompanyProvider";
 import { DeleteCompanyProvider } from "./DeleteCompanyProvider";
 import { getCompanySummaries } from "@/lib/data/company/company.dal";
@@ -29,6 +30,8 @@ export async function CompaniesContainer() {
                 companyId={company.id}
                 companyName={company.name}
               />
+
+              <GuestModeModal />
             </DeleteCompanyProvider>
           </UpdateCompanyProvider>
         </ModalManagerProvider>

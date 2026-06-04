@@ -1,4 +1,5 @@
 import { TaskCategoryGrid } from "./TaskCategoryGrid";
+import { GuestModeModal } from "../common/GuestModeModal";
 import { TaskCategoryListItem } from "./TaskCategoryListItem";
 import { UpdateTaskCategoryModal } from "./UpdateTaskCategoryModal";
 import { DeleteTaskCategoryModal } from "./DeleteTaskCategoryModal";
@@ -30,6 +31,8 @@ export async function TaskCategoriesContainer() {
                 taskCategoryId={taskCategory.id}
                 taskCategoryName={taskCategory.name}
               />
+
+              <GuestModeModal />
             </DeleteTaskCategoryProvider>
           </UpdateTaskCategoryProvider>
         </ModalManagerProvider>

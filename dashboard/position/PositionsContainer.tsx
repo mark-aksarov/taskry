@@ -2,6 +2,7 @@ import "server-only";
 
 import { PositionGrid } from "./PositionGrid";
 import { PositionListItem } from "./PositionListItem";
+import { GuestModeModal } from "../common/GuestModeModal";
 import { UpdatePositionModal } from "./UpdatePositionModal";
 import { DeletePositionModal } from "./DeletePositionModal";
 import { UpdatePositionProvider } from "./UpdatePositionProvider";
@@ -29,6 +30,8 @@ export async function PositionsContainer() {
                 positionId={position.id}
                 positionName={position.name}
               />
+
+              <GuestModeModal />
             </DeletePositionProvider>
           </UpdatePositionProvider>
         </ModalManagerProvider>
