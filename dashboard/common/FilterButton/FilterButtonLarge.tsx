@@ -3,15 +3,24 @@ import { SlidersHorizontal } from "lucide-react";
 import { Button, ButtonProps } from "@/ui/Button";
 import { useFilterButtonDisabled } from "./useFilterButtonDisabled";
 
-export function FilterButtonLarge(props: ButtonProps) {
+interface FilterButtonLargeProps extends ButtonProps {
+  selectedCount?: number;
+}
+
+export function FilterButtonLarge({
+  selectedCount = 0,
+  ...props
+}: FilterButtonLargeProps) {
   const t = useTranslations("dashboard.common.FilterButtonLarge");
 
   const isDisabled = useFilterButtonDisabled();
 
+  const label = t("label");
+
   return (
     <Button
-      label={t("label")}
-      variant="secondary"
+      variant={selectedCount > 0 ? "contrast" : "secondary"}
+      label={selectedCount > 0 ? `${label || ""} ${selectedCount}` : label}
       outlined
       isDisabled={isDisabled}
       iconLeft={

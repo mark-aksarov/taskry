@@ -2,17 +2,11 @@
 
 import { useModal } from "@/common/ModalManagerContext";
 import { FilterButtonMobile } from "@/dashboard/common/FilterButton";
-import { useUserFilters } from "../UserFiltersContext";
+import { useSelectedUserFiltersCount } from "./useSelectedUserFiltersCount";
 
 export function UserFiltersModalTriggerMobile() {
   const { onOpenChange } = useModal("userFilters");
-  const initialFilters = useUserFilters();
-
-  const selectedCount =
-    (initialFilters.positionIds?.length ?? 0) +
-    (initialFilters.hasNoActiveTasks ? 1 : 0) +
-    (initialFilters.hasActiveTasks ? 1 : 0) +
-    (initialFilters.hasOverdueTasks ? 1 : 0);
+  const selectedCount = useSelectedUserFiltersCount();
 
   return (
     <FilterButtonMobile
