@@ -1,3 +1,5 @@
+"use client";
+
 import { Plus } from "lucide-react";
 import { DisclosureHeader } from "@/ui/Disclosure";
 import { twMerge } from "tailwind-merge";
