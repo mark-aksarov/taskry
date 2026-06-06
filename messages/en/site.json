@@ -37,48 +37,6 @@
       "copyright": "© Taskry. All rights reserved."
     }
   },
-  "sections": {
-    "IntroSection": {
-      "heading": {
-        "line1": "Task",
-        "line2": "management",
-        "line3": "in a simple",
-        "line4": "solution"
-      },
-      "description": {
-        "line1": "A simple task manager to organize your work.",
-        "line2": "You can add tasks, assign them, and track their progress."
-      },
-      "badgeText": "Task manager"
-    },
-    "FeaturesSection": {
-      "heading": "All tools for working with tasks",
-      "description": {
-        "line1": "Create tasks, manage subtasks, assign performers,",
-        "line2": "track deadlines, and collaborate in discussions"
-      }
-    },
-    "DocsSection": {
-      "heading": "Short guides help you quickly understand the system",
-      "description": {
-        "line1": "The documentation includes brief instructions and extended sections that",
-        "line2": "will help you get up to speed quickly."
-      },
-      "CtaButton": {
-        "label": "View all documentation"
-      }
-    },
-    "FinalCtaSection": {
-      "heading": {
-        "line1": "Manage tasks and",
-        "line2": "workflows with ease"
-      },
-      "description": {
-        "line1": "Create tasks, assign people, and track progress.",
-        "line2": "A simple tool for everyday work."
-      }
-    }
-  },
   "docs": {
     "DocsSidebarSheetTrigger": {
       "triggerAriaLabel": "Docs navigation"
@@ -158,6 +116,46 @@
     "DemoAction": {
       "label": "Open demo"
     },
+    "IntroSection": {
+      "heading": {
+        "line1": "Task",
+        "line2": "management",
+        "line3": "in a simple",
+        "line4": "solution"
+      },
+      "description": {
+        "line1": "A simple task manager to organize your work.",
+        "line2": "You can add tasks, assign them, and track their progress."
+      },
+      "badgeText": "Task manager"
+    },
+    "FeaturesSection": {
+      "heading": "All tools for working with tasks",
+      "description": {
+        "line1": "Create tasks, manage subtasks, assign performers,",
+        "line2": "track deadlines, and collaborate in discussions"
+      }
+    },
+    "DocsSection": {
+      "heading": "Short guides help you quickly understand the system",
+      "description": {
+        "line1": "The documentation includes brief instructions and extended sections that",
+        "line2": "will help you get up to speed quickly."
+      },
+      "CtaButton": {
+        "label": "View all documentation"
+      }
+    },
+    "FinalCtaSection": {
+      "heading": {
+        "line1": "Manage tasks and",
+        "line2": "workflows with ease"
+      },
+      "description": {
+        "line1": "Create tasks, assign people, and track progress.",
+        "line2": "A simple tool for everyday work."
+      }
+    },
     "FeatureGrid": {
       "tasks": {
         "title": "Task management",
@@ -215,6 +213,128 @@
       "text": "You’re currently using your account. Switching to demo will sign you out.",
       "cancelButton": "Cancel",
       "confirmButton": "Continue"
+    },
+    "FaqSection": {
+      "heading": "Frequently asked questions",
+      "description": {
+        "line1": "We've collected answers to the most common questions",
+        "line2": "about Taskry's features and usage."
+      },
+      "accordion": {
+        "whatIsTaskry": {
+          "title": "What is Taskry?",
+          "content": "Taskry is a task and project management platform that helps teams and individuals track progress and organize their work in one place."
+        },
+        "whoIsTaskryFor": {
+          "title": "Who is Taskry for?",
+          "content": "Taskry is suitable for small teams, freelancers, startups, and agencies. It can also be used for personal task and project organization."
+        },
+        "teamCollaboration": {
+          "title": "Does Taskry support team collaboration?",
+          "content": "Yes, you can invite team members, assign tasks, leave comments, and track task progress."
+        },
+        "dataSecurity": {
+          "title": "How secure is my data?",
+          "content": "Taskry uses modern security measures, including HTTPS, DDoS protection, regular backups, and secure authentication to help keep your data safe."
+        },
+        "mobileSupport": {
+          "title": "Does Taskry work on mobile devices?",
+          "content": "Yes, Taskry is mobile-friendly and fully accessible through a web browser. The interface is optimized for smartphones."
+        },
+        "freeToUse": {
+          "title": "Is Taskry free to use?",
+          "content": "Yes, Taskry is completely free to use."
+        },
+        "integrations": {
+          "title": "Does Taskry support integrations with other services?",
+          "content": "Support for integrations with popular development, communication, and workflow automation services is planned for the future."
+        }
+      }
+    },
+    "SecuritySection": {
+      "heading": "Reliable data storage and protection",
+      "description": {
+        "line1": "We ensure the security of your data during system operation",
+        "line2": "and maintain stable service performance."
+      }
+    },
+    "SecurityGrid": {
+      "access": {
+        "title": "Secure access",
+        "description": "Secure access via HTTPS and reliable authentication mechanisms protect user connections and data."
+      },
+      "ddos": {
+        "title": "DDoS protection",
+        "description": "DDoS protection is enabled to ensure stable service performance even under high load."
+      },
+      "backup": {
+        "title": "Backups",
+        "description": "Regular data backups ensure data safety and allow quick recovery when needed."
+      }
+    },
+    "RoadmapSection": {
+      "heading": "What's been built and what's planned",
+      "description": {
+        "line1": "We're just launching — here's an honest list of what's ready",
+        "line2": "and what's coming in the near future."
+      }
+    },
+    "RoadmapGrid": {
+      "basic": {
+        "badge": "Done",
+        "title": "Core Functionality",
+        "description": "Task, project, team, and client management with built‑in collaboration support."
+      },
+      "analytics": {
+        "badge": "In Progress",
+        "title": "Analytics & Reports",
+        "description": "Productivity dashboard with visual analytics, task statistics, and data export."
+      },
+      "auth": {
+        "badge": "In Progress",
+        "title": "Sign‑in Methods",
+        "description": "Authentication via social networks and local services: VK, Yandex, Google, and more."
+      },
+      "settings": {
+        "badge": "Planned",
+        "title": "Settings & Notifications",
+        "description": "Profile personalization, notification management, and user preferences."
+      },
+      "integrations": {
+        "badge": "Planned",
+        "title": "Integrations",
+        "description": "Connect via API and webhooks to popular services and automation tools."
+      },
+      "advanced": {
+        "badge": "Planned",
+        "title": "Enhanced Functionality",
+        "description": "Upcoming features that will make working with the system even smoother and more efficient."
+      }
+    },
+    "AdvantagesSection": {
+      "heading": "Platform advantages",
+      "description": {
+        "line1": "Create tasks, assign assignees, and track progress.",
+        "line2": "A simple tool for daily work."
+      }
+    },
+    "AdvantagesGrid": {
+      "fast": {
+        "title": "Fast performance",
+        "description": "Tasks and projects open instantly. The interface is optimized for high speed even with large amounts of data."
+      },
+      "simple": {
+        "title": "Simple to use",
+        "description": "A clean and intuitive interface with no unnecessary complexity. You can start using it right away without any learning curve."
+      },
+      "free": {
+        "title": "No subscription",
+        "description": "The platform is fully free to use, with no paid plans or hidden limitations."
+      },
+      "openSource": {
+        "title": "Open source",
+        "description": "The project is open source — you can study it, use it, and contribute to its development."
+      }
     }
   }
 }

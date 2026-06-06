@@ -3,23 +3,20 @@ import {
   PageSectionHeader,
   PageSectionContent,
   PageSectionHeading,
-  PageSectionActions,
   PageSectionDescription,
-  PageSectionActionLink,
 } from "@/site/common/PageSection";
 
-import { FileText } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { DocsSectionGrid } from "./DocsSectionGrid";
+import { AdvantagesGrid } from "../AdvantagesGrid";
 import { PageContainer } from "@/site/common/PageContainer";
 
-export function DocsSection() {
-  const t = useTranslations("site.home.DocsSection");
+export function AdvantagesSection() {
+  const t = useTranslations("site.home.AdvantagesSection");
 
   return (
     <PageSection>
       <PageContainer>
-        <PageSectionContent>
+        <PageSectionContent className="items-center">
           <PageSectionHeader>
             <PageSectionHeading>{t("heading")}</PageSectionHeading>
             <PageSectionDescription>
@@ -27,16 +24,7 @@ export function DocsSection() {
               {t("description.line2")}
             </PageSectionDescription>
           </PageSectionHeader>
-          <DocsSectionGrid />
-
-          <PageSectionActions>
-            <PageSectionActionLink
-              href="/docs"
-              variant="accent"
-              iconLeft={<FileText size={20} />}
-              label={t("CtaButton.label")}
-            />
-          </PageSectionActions>
+          <AdvantagesGrid />
         </PageSectionContent>
       </PageContainer>
     </PageSection>

@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { PageSectionDescription } from "@/site/common/PageSection";
 
 export function IntroSectionDescription() {
-  const t = useTranslations("site.sections.IntroSection");
+  const t = useTranslations("site.home.IntroSection");
 
   return (
     <PageSectionDescription className="max-md:text-lg/8 md:text-xl/9">

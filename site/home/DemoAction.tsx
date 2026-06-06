@@ -20,6 +20,7 @@ export function DemoAction() {
     return (
       <PageSectionActionLink
         href={isGuest ? "/dashboard" : "/guest-sign-in"}
+        className="bg-transparent"
         variant="secondary"
         outlined
         label={t("label")}
@@ -31,6 +32,7 @@ export function DemoAction() {
   return (
     <PageSectionActionButton
       onPress={() => onOpenChange(true)}
+      className="bg-transparent"
       variant="secondary"
       outlined
       label={t("label")}

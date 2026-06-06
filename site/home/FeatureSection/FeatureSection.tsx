@@ -11,10 +11,10 @@ import { FeatureGrid } from "@/site/home/FeatureGrid";
 import { PageContainer } from "@/site/common/PageContainer";
 
 export function FeatureSection() {
-  const t = useTranslations("site.sections.FeaturesSection");
+  const t = useTranslations("site.home.FeaturesSection");
 
   return (
-    <PageSection>
+    <PageSection className="bg-(--surface-quanteriary)">
       <PageContainer>
         <PageSectionContent>
           <PageSectionHeader>

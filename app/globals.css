@@ -29,6 +29,8 @@
   --surface-tertiary: var(--color-gray-200);
   --surface-tertiary-pressed: var(--color-gray-300);
 
+  --surface-quanteriary: var(--color-gray-50);
+
   /* Accent */
   --accent: var(--color-blue-600);
   --accent-hover: var(--color-blue-500);
@@ -70,6 +72,8 @@
 
   --surface-tertiary: var(--color-gray-700);
   --surface-tertiary-pressed: var(--color-gray-800);
+
+  --surface-quanteriary: --alpha(var(--color-gray-800) / 50%);
 
   /* Accent */
   --accent: var(--color-blue-700);

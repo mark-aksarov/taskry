@@ -16,10 +16,10 @@ interface FinalCtaSectionProps {
 }
 
 export function FinalCtaSection({ signOut }: FinalCtaSectionProps) {
-  const t = useTranslations("site.sections.FinalCtaSection");
+  const t = useTranslations("site.home.FinalCtaSection");
 
   return (
-    <PageSection className="pb-30 max-md:pb-16">
+    <PageSection className="bg-(--surface-quanteriary) max-md:pb-16">
       <PageContainer>
         <PageSectionContent>
           <PageSectionHeader>

@@ -1,0 +1,26 @@
+import { Plus } from "lucide-react";
+import { DisclosureHeader } from "@/ui/Disclosure";
+import { twMerge } from "tailwind-merge";
+
+export function AccordionHeader({ children }: { children: React.ReactNode }) {
+  return (
+    <DisclosureHeader
+      className="px-6 py-4 text-lg font-bold"
+      renderIcon={(isExpanded) => (
+        <div className="flex items-center justify-center rounded-lg bg-(--accent) p-1.5 text-white">
+          <Plus
+            size={22}
+            absoluteStrokeWidth
+            strokeWidth={1.5}
+            className={twMerge(
+              "transform transition-transform",
+              isExpanded ? "rotate-45" : "",
+            )}
+          />
+        </div>
+      )}
+    >
+      {children}
+    </DisclosureHeader>
+  );
+}

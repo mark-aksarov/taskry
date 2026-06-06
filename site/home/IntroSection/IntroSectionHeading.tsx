@@ -16,7 +16,7 @@ const introHeadingStyles = tv({
 });
 
 export function IntroSectionHeading() {
-  const t = useTranslations("site.sections.IntroSection");
+  const t = useTranslations("site.home.IntroSection");
   const s = introHeadingStyles();
 
   return (

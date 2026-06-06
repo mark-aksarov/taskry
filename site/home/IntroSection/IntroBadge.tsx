@@ -11,7 +11,7 @@ const introBadgeStyles = tv({
 });
 
 export function IntroBadge() {
-  const t = useTranslations("site.sections.IntroSection");
+  const t = useTranslations("site.home.IntroSection");
   const s = introBadgeStyles();
 
   return (

@@ -3,21 +3,18 @@ import {
   PageSectionHeader,
   PageSectionContent,
   PageSectionHeading,
-  PageSectionActions,
   PageSectionDescription,
-  PageSectionActionLink,
 } from "@/site/common/PageSection";
 
-import { FileText } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { DocsSectionGrid } from "./DocsSectionGrid";
+import { SecurityGrid } from "../SecurityGrid";
 import { PageContainer } from "@/site/common/PageContainer";
 
-export function DocsSection() {
-  const t = useTranslations("site.home.DocsSection");
+export function SecuritySection() {
+  const t = useTranslations("site.home.SecuritySection");
 
   return (
-    <PageSection>
+    <PageSection className="bg-(--surface-quanteriary)">
       <PageContainer>
         <PageSectionContent>
           <PageSectionHeader>
@@ -27,16 +24,7 @@ export function DocsSection() {
               {t("description.line2")}
             </PageSectionDescription>
           </PageSectionHeader>
-          <DocsSectionGrid />
-
-          <PageSectionActions>
-            <PageSectionActionLink
-              href="/docs"
-              variant="accent"
-              iconLeft={<FileText size={20} />}
-              label={t("CtaButton.label")}
-            />
-          </PageSectionActions>
+          <SecurityGrid />
         </PageSectionContent>
       </PageContainer>
     </PageSection>
