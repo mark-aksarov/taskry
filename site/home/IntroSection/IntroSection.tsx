@@ -7,6 +7,7 @@ import {
 import { IntroBadge } from "./IntroBadge";
 import { CtaSection } from "../CtaSection";
 import { ActionState } from "@/lib/actions/types";
+import { IntroBackground } from "./IntroBackground";
 import { PageContainer } from "@/site/common/PageContainer";
 import { IntroSectionHeading } from "./IntroSectionHeading";
 import { IntroSectionDescription } from "./IntroSectionDescription";
@@ -17,15 +18,16 @@ interface IntroSectionProps {
 
 export function IntroSection({ signOut }: IntroSectionProps) {
   return (
-    <PageSection className="relative max-md:pt-10 max-md:pb-8 md:pt-20 md:pb-15">
+    <PageSection className="relative max-md:pt-10 max-md:pb-8 md:pt-20 md:pb-0">
       <PageContainer>
-        <PageSectionContent>
+        <PageSectionContent className="items-center">
           <IntroBadge />
           <PageSectionHeader>
             <IntroSectionHeading />
             <IntroSectionDescription />
           </PageSectionHeader>
           <CtaSection signOut={signOut} />
+          <IntroBackground />
         </PageSectionContent>
       </PageContainer>
     </PageSection>
