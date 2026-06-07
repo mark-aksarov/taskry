@@ -9,6 +9,7 @@ interface DocsPaginationLinkProps {
   href: string;
   description: string;
   variant: "prev" | "next";
+  className?: string;
 }
 
 const styles = tv({
@@ -23,9 +24,10 @@ export function DocsPaginationLink({
   href,
   description,
   variant,
+  className,
 }: DocsPaginationLinkProps) {
   return (
-    <Link href={href} className={styles()}>
+    <Link href={href} className={styles({ className })}>
       {variant === "prev" && (
         <ChevronLeft size={18} strokeWidth={1.5} className="shrink-0" />
       )}

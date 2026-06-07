@@ -1,8 +1,8 @@
 import {
-  FeatureItem,
-  FeatureItemHeading,
-  FeatureItemDescription,
-} from "@/site/home/FeatureItem";
+  SiteCard,
+  SiteCardHeading,
+  SiteCardDescription,
+} from "@/site/common/SiteCard";
 
 import { Badge } from "@/ui/Badge";
 import { useTranslations } from "next-intl";
@@ -12,63 +12,55 @@ export function RoadmapGrid() {
 
   return (
     <div className="grid max-lg:grid-cols-2 max-md:grid-cols-1 max-md:gap-4 md:gap-6 lg:grid-cols-3">
-      <FeatureItem>
+      <SiteCard>
         <Badge color="green" className="text-sm">
           {t("basic.badge")}
         </Badge>
-        <FeatureItemHeading>{t("basic.title")}</FeatureItemHeading>
-        <FeatureItemDescription>
-          {t("basic.description")}
-        </FeatureItemDescription>
-      </FeatureItem>
+        <SiteCardHeading>{t("basic.title")}</SiteCardHeading>
+        <SiteCardDescription>{t("basic.description")}</SiteCardDescription>
+      </SiteCard>
 
-      <FeatureItem>
+      <SiteCard>
         <Badge color="orange" className="text-sm">
           {t("analytics.badge")}
         </Badge>
-        <FeatureItemHeading>{t("analytics.title")}</FeatureItemHeading>
-        <FeatureItemDescription>
-          {t("analytics.description")}
-        </FeatureItemDescription>
-      </FeatureItem>
+        <SiteCardHeading>{t("analytics.title")}</SiteCardHeading>
+        <SiteCardDescription>{t("analytics.description")}</SiteCardDescription>
+      </SiteCard>
 
-      <FeatureItem>
+      <SiteCard>
         <Badge color="orange" className="text-sm">
           {t("auth.badge")}
         </Badge>
-        <FeatureItemHeading>{t("auth.title")}</FeatureItemHeading>
-        <FeatureItemDescription>{t("auth.description")}</FeatureItemDescription>
-      </FeatureItem>
+        <SiteCardHeading>{t("auth.title")}</SiteCardHeading>
+        <SiteCardDescription>{t("auth.description")}</SiteCardDescription>
+      </SiteCard>
 
-      <FeatureItem>
+      <SiteCard>
         <Badge color="gray" className="text-sm">
           {t("settings.badge")}
         </Badge>
-        <FeatureItemHeading>{t("settings.title")}</FeatureItemHeading>
-        <FeatureItemDescription>
-          {t("settings.description")}
-        </FeatureItemDescription>
-      </FeatureItem>
+        <SiteCardHeading>{t("settings.title")}</SiteCardHeading>
+        <SiteCardDescription>{t("settings.description")}</SiteCardDescription>
+      </SiteCard>
 
-      <FeatureItem>
+      <SiteCard>
         <Badge color="gray" className="text-sm">
           {t("integrations.badge")}
         </Badge>
-        <FeatureItemHeading>{t("integrations.title")}</FeatureItemHeading>
-        <FeatureItemDescription>
+        <SiteCardHeading>{t("integrations.title")}</SiteCardHeading>
+        <SiteCardDescription>
           {t("integrations.description")}
-        </FeatureItemDescription>
-      </FeatureItem>
+        </SiteCardDescription>
+      </SiteCard>
 
-      <FeatureItem>
+      <SiteCard>
         <Badge color="gray" className="text-sm">
           {t("advanced.badge")}
         </Badge>
-        <FeatureItemHeading>{t("advanced.title")}</FeatureItemHeading>
-        <FeatureItemDescription>
-          {t("advanced.description")}
-        </FeatureItemDescription>
-      </FeatureItem>
+        <SiteCardHeading>{t("advanced.title")}</SiteCardHeading>
+        <SiteCardDescription>{t("advanced.description")}</SiteCardDescription>
+      </SiteCard>
     </div>
   );
 }

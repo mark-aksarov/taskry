@@ -19,7 +19,7 @@ export function FinalCtaSection({ signOut }: FinalCtaSectionProps) {
   const t = useTranslations("site.home.FinalCtaSection");
 
   return (
-    <PageSection className="bg-(--surface-quanteriary) max-md:pb-16">
+    <PageSection className="bg-(--surface-quanteriary)">
       <PageContainer>
         <PageSectionContent>
           <PageSectionHeader>

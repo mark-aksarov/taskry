@@ -1,10 +1,8 @@
-interface FeatureItemDescriptionProps {
+interface SiteCardDescriptionProps {
   children: React.ReactNode;
 }
 
-export function FeatureItemDescription({
-  children,
-}: FeatureItemDescriptionProps) {
+export function SiteCardDescription({ children }: SiteCardDescriptionProps) {
   return (
     <p className="text-base font-normal text-(--text-tertiary)">{children}</p>
   );

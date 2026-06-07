@@ -1,10 +1,18 @@
 import Image from "next/image";
-import IntroBgDark from "@/public/intro-bg-dark.jpg";
-import IntroBgLight from "@/public/intro-bg-light.jpg";
+import { useLocale } from "next-intl";
+import IntroBgDarkRu from "@/public/intro-bg-dark-ru.jpg";
+import IntroBgDarkEn from "@/public/intro-bg-dark-en.jpg";
+import IntroBgLightRu from "@/public/intro-bg-light-ru.jpg";
+import IntroBgLightEn from "@/public/intro-bg-light-en.jpg";
 
 export function IntroBackground() {
+  const locale = useLocale();
+
+  const IntroBgDark = locale === "ru" ? IntroBgDarkRu : IntroBgDarkEn;
+  const IntroBgLight = locale === "ru" ? IntroBgLightRu : IntroBgLightEn;
+
   return (
-    <div className="rounded-2xl rounded-b-none bg-(--surface-quanteriary) p-4 pb-0 max-md:hidden">
+    <div className="rounded-2xl rounded-b-none bg-(--surface-quanteriary) p-4 pb-0 max-sm:hidden">
       <Image
         src={IntroBgLight}
         alt=""

@@ -1,3 +1,5 @@
+"use client";
+
 import { Logo } from "../Logo";
 import { tv } from "tailwind-variants";
 import { useTranslations } from "next-intl";
@@ -5,6 +7,7 @@ import { AppFooterLink } from "./AppFooterLink";
 import { AppFooterHeading } from "./AppFooterHeading";
 import { PageSection } from "@/site/common/PageSection";
 import { PageContainer } from "@/site/common/PageContainer";
+import { usePathname } from "@/i18n/navigation";
 
 const footerStyles = tv({
   slots: {
@@ -20,6 +23,9 @@ const footerStyles = tv({
 
 export function AppFooter() {
   const t = useTranslations("site.layout.AppFooter");
+  const pathname = usePathname();
+
+  const isDocsPage = pathname?.startsWith("/docs");
 
   const {
     section,
@@ -33,7 +39,10 @@ export function AppFooter() {
 
   return (
     <footer>
-      <PageSection as="div" className={section()}>
+      <PageSection
+        as="div"
+        className={section({ className: isDocsPage ? "border-t-1" : "" })}
+      >
         <PageContainer>
           <div className={inner()}>
             {/* Brand */}

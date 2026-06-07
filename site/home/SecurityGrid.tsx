@@ -1,8 +1,8 @@
 import {
-  FeatureItem,
-  FeatureItemHeading,
-  FeatureItemDescription,
-} from "@/site/home/FeatureItem";
+  SiteCard,
+  SiteCardHeading,
+  SiteCardDescription,
+} from "@/site/common/SiteCard";
 
 import { useTranslations } from "next-intl";
 import { Copy, LockKeyhole, ShieldCheck } from "lucide-react";
@@ -12,7 +12,7 @@ export function SecurityGrid() {
 
   return (
     <div className="flex max-md:flex-col max-md:gap-4 md:gap-6">
-      <FeatureItem>
+      <SiteCard className="bg-(--surface-secondary)">
         <LockKeyhole
           size={32}
           absoluteStrokeWidth
@@ -20,14 +20,12 @@ export function SecurityGrid() {
           className="text-blue-500"
         />
 
-        <FeatureItemHeading>{t("access.title")}</FeatureItemHeading>
+        <SiteCardHeading>{t("access.title")}</SiteCardHeading>
 
-        <FeatureItemDescription>
-          {t("access.description")}
-        </FeatureItemDescription>
-      </FeatureItem>
+        <SiteCardDescription>{t("access.description")}</SiteCardDescription>
+      </SiteCard>
 
-      <FeatureItem>
+      <SiteCard className="bg-(--surface-secondary)">
         <ShieldCheck
           size={32}
           absoluteStrokeWidth
@@ -35,12 +33,12 @@ export function SecurityGrid() {
           className="text-blue-500"
         />
 
-        <FeatureItemHeading>{t("ddos.title")}</FeatureItemHeading>
+        <SiteCardHeading>{t("ddos.title")}</SiteCardHeading>
 
-        <FeatureItemDescription>{t("ddos.description")}</FeatureItemDescription>
-      </FeatureItem>
+        <SiteCardDescription>{t("ddos.description")}</SiteCardDescription>
+      </SiteCard>
 
-      <FeatureItem>
+      <SiteCard className="bg-(--surface-secondary)">
         <Copy
           size={32}
           absoluteStrokeWidth
@@ -48,12 +46,10 @@ export function SecurityGrid() {
           className="text-blue-500"
         />
 
-        <FeatureItemHeading>{t("backup.title")}</FeatureItemHeading>
+        <SiteCardHeading>{t("backup.title")}</SiteCardHeading>
 
-        <FeatureItemDescription>
-          {t("backup.description")}
-        </FeatureItemDescription>
-      </FeatureItem>
+        <SiteCardDescription>{t("backup.description")}</SiteCardDescription>
+      </SiteCard>
     </div>
   );
 }

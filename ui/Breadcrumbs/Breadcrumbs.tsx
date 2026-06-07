@@ -48,7 +48,14 @@ export function Breadcrumb(
     >
       {({ isCurrent }) => (
         <>
-          <BaseLink {...props} className={!isCurrent ? "mr-2" : ""} />
+          <BaseLink
+            {...props}
+            className={
+              !isCurrent
+                ? "pressed:text-(--text-link) mr-2 hover:text-(--text-link)"
+                : ""
+            }
+          />
           {!isCurrent && "/"}
         </>
       )}

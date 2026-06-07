@@ -1,8 +1,8 @@
-interface FeatureItemHeadingProps {
+interface SiteCardHeadingProps {
   children: React.ReactNode;
 }
 
-export function FeatureItemHeading({ children }: FeatureItemHeadingProps) {
+export function SiteCardHeading({ children }: SiteCardHeadingProps) {
   return (
     <h3 className="text-xl font-bold text-(--text-primary)">{children}</h3>
   );

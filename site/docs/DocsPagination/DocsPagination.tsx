@@ -133,6 +133,7 @@ export function DocsPagination() {
           href={pagination.next.href}
           variant="next"
           description={pagination.next.description}
+          className="text-right"
         />
       ) : (
         <div />

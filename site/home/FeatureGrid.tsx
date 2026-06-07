@@ -8,10 +8,10 @@ import {
 } from "lucide-react";
 
 import {
-  FeatureItem,
-  FeatureItemHeading,
-  FeatureItemDescription,
-} from "@/site/home/FeatureItem";
+  SiteCard,
+  SiteCardHeading,
+  SiteCardDescription,
+} from "@/site/common/SiteCard";
 
 import { useTranslations } from "next-intl";
 import { IconWrapper } from "../common/IconWrapper";
@@ -21,77 +21,65 @@ export function FeatureGrid() {
 
   return (
     <div className="grid max-lg:grid-cols-2 max-md:grid-cols-1 max-md:gap-4 md:gap-6 lg:grid-cols-3">
-      <FeatureItem>
+      <SiteCard>
         <IconWrapper color="blue">
           <CheckSquare size={24} />
         </IconWrapper>
 
-        <FeatureItemHeading>{t("tasks.title")}</FeatureItemHeading>
+        <SiteCardHeading>{t("tasks.title")}</SiteCardHeading>
 
-        <FeatureItemDescription>
-          {t("tasks.description")}
-        </FeatureItemDescription>
-      </FeatureItem>
+        <SiteCardDescription>{t("tasks.description")}</SiteCardDescription>
+      </SiteCard>
 
-      <FeatureItem>
+      <SiteCard>
         <IconWrapper color="orange">
           <Folder size={24} />
         </IconWrapper>
 
-        <FeatureItemHeading>{t("projects.title")}</FeatureItemHeading>
+        <SiteCardHeading>{t("projects.title")}</SiteCardHeading>
 
-        <FeatureItemDescription>
-          {t("projects.description")}
-        </FeatureItemDescription>
-      </FeatureItem>
+        <SiteCardDescription>{t("projects.description")}</SiteCardDescription>
+      </SiteCard>
 
-      <FeatureItem>
+      <SiteCard>
         <IconWrapper color="cyan">
           <Building2 size={24} />
         </IconWrapper>
 
-        <FeatureItemHeading>{t("customers.title")}</FeatureItemHeading>
+        <SiteCardHeading>{t("customers.title")}</SiteCardHeading>
 
-        <FeatureItemDescription>
-          {t("customers.description")}
-        </FeatureItemDescription>
-      </FeatureItem>
+        <SiteCardDescription>{t("customers.description")}</SiteCardDescription>
+      </SiteCard>
 
-      <FeatureItem>
+      <SiteCard>
         <IconWrapper color="indigo">
           <MessageSquare size={24} />
         </IconWrapper>
 
-        <FeatureItemHeading>{t("discussion.title")}</FeatureItemHeading>
+        <SiteCardHeading>{t("discussion.title")}</SiteCardHeading>
 
-        <FeatureItemDescription>
-          {t("discussion.description")}
-        </FeatureItemDescription>
-      </FeatureItem>
+        <SiteCardDescription>{t("discussion.description")}</SiteCardDescription>
+      </SiteCard>
 
-      <FeatureItem>
+      <SiteCard>
         <IconWrapper color="pink">
           <Layers2 size={24} />
         </IconWrapper>
 
-        <FeatureItemHeading>{t("categories.title")}</FeatureItemHeading>
+        <SiteCardHeading>{t("categories.title")}</SiteCardHeading>
 
-        <FeatureItemDescription>
-          {t("categories.description")}
-        </FeatureItemDescription>
-      </FeatureItem>
+        <SiteCardDescription>{t("categories.description")}</SiteCardDescription>
+      </SiteCard>
 
-      <FeatureItem>
+      <SiteCard>
         <IconWrapper color="teal">
           <Calendar size={24} />
         </IconWrapper>
 
-        <FeatureItemHeading>{t("calendar.title")}</FeatureItemHeading>
+        <SiteCardHeading>{t("calendar.title")}</SiteCardHeading>
 
-        <FeatureItemDescription>
-          {t("calendar.description")}
-        </FeatureItemDescription>
-      </FeatureItem>
+        <SiteCardDescription>{t("calendar.description")}</SiteCardDescription>
+      </SiteCard>
     </div>
   );
 }
