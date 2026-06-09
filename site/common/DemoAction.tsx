@@ -1,13 +1,9 @@
 "use client";
 
-import {
-  PageSectionActionLink,
-  PageSectionActionButton,
-} from "../common/PageSection";
-
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
 import { useCurrentUser } from "@/common/CurrentUserContext";
+import { PageSectionActionLink, PageSectionActionButton } from "./PageSection";
 
 export function DemoAction() {
   const t = useTranslations("site.home.DemoAction");

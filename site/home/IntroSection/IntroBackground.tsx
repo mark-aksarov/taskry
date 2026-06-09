@@ -1,30 +1,28 @@
 import Image from "next/image";
 import { useLocale } from "next-intl";
-import IntroBgDarkRu from "@/public/intro-bg-dark-ru.jpg";
-import IntroBgDarkEn from "@/public/intro-bg-dark-en.jpg";
-import IntroBgLightRu from "@/public/intro-bg-light-ru.jpg";
-import IntroBgLightEn from "@/public/intro-bg-light-en.jpg";
+import IntroDarkRu from "@/public/intro-dark-ru.jpg";
+import IntroDarkEn from "@/public/intro-dark-en.jpg";
+import IntroLightRu from "@/public/intro-light-ru.jpg";
+import IntroLightEn from "@/public/intro-light-en.jpg";
 
 export function IntroBackground() {
   const locale = useLocale();
 
-  const IntroBgDark = locale === "ru" ? IntroBgDarkRu : IntroBgDarkEn;
-  const IntroBgLight = locale === "ru" ? IntroBgLightRu : IntroBgLightEn;
-
   return (
-    <div className="rounded-2xl rounded-b-none bg-(--surface-quanteriary) p-4 pb-0 max-sm:hidden">
+    <div className="max-w-[960px] overflow-hidden rounded-2xl rounded-b-none border border-b-0 border-(--border-primary) max-sm:hidden">
       <Image
-        src={IntroBgLight}
+        src={locale === "en" ? IntroDarkEn : IntroDarkRu}
         alt=""
-        className="block rounded-lg rounded-b-none dark:hidden"
+        quality={100}
         priority
+        className="not-dark:hidden"
       />
-
       <Image
-        src={IntroBgDark}
+        src={locale === "en" ? IntroLightEn : IntroLightRu}
         alt=""
-        className="hidden rounded-lg rounded-b-none dark:block"
+        quality={100}
         priority
+        className="dark:hidden"
       />
     </div>
   );

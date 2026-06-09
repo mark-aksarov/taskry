@@ -6,7 +6,7 @@ import {
   PageSectionDescription,
 } from "@/site/common/PageSection";
 
-import { CtaSection } from "../CtaSection";
+import { CtaActions } from "../../common/CtaActions";
 import { useTranslations } from "next-intl";
 import { ActionState } from "@/lib/actions/types";
 import { PageContainer } from "@/site/common/PageContainer";
@@ -32,7 +32,7 @@ export function FinalCtaSection({ signOut }: FinalCtaSectionProps) {
               {t("description.line2")}
             </PageSectionDescription>
           </PageSectionHeader>
-          <CtaSection signOut={signOut} />
+          <CtaActions signOut={signOut} />
         </PageSectionContent>
       </PageContainer>
     </PageSection>

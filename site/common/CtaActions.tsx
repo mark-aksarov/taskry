@@ -4,17 +4,17 @@ import {
   PageSectionActions,
   PageSectionActionLink,
   PageSectionActionButton,
-} from "../common/PageSection";
+} from "./PageSection";
 
 import { DemoAction } from "./DemoAction";
 import { ActionState } from "@/lib/actions/types";
-import { GetStartedAction } from "../common/GetStartedAction";
+import { GetStartedAction } from "./GetStartedAction";
 
 interface CtaSectionProps {
   signOut: () => Promise<ActionState>;
 }
 
-export function CtaSection({ signOut }: CtaSectionProps) {
+export function CtaActions({ signOut }: CtaSectionProps) {
   return (
     <PageSectionActions>
       <GetStartedAction

@@ -12,7 +12,7 @@ export function SecurityGrid() {
 
   return (
     <div className="flex max-md:flex-col max-md:gap-4 md:gap-6">
-      <SiteCard className="bg-(--surface-secondary)">
+      <SiteCard>
         <LockKeyhole
           size={32}
           absoluteStrokeWidth
@@ -25,7 +25,7 @@ export function SecurityGrid() {
         <SiteCardDescription>{t("access.description")}</SiteCardDescription>
       </SiteCard>
 
-      <SiteCard className="bg-(--surface-secondary)">
+      <SiteCard>
         <ShieldCheck
           size={32}
           absoluteStrokeWidth
@@ -38,7 +38,7 @@ export function SecurityGrid() {
         <SiteCardDescription>{t("ddos.description")}</SiteCardDescription>
       </SiteCard>
 
-      <SiteCard className="bg-(--surface-secondary)">
+      <SiteCard>
         <Copy
           size={32}
           absoluteStrokeWidth

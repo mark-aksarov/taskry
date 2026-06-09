@@ -5,9 +5,9 @@ import {
 } from "@/site/common/PageSection";
 
 import { IntroBadge } from "./IntroBadge";
-import { CtaSection } from "../CtaSection";
 import { ActionState } from "@/lib/actions/types";
 import { IntroBackground } from "./IntroBackground";
+import { CtaActions } from "@/site/common/CtaActions";
 import { PageContainer } from "@/site/common/PageContainer";
 import { IntroSectionHeading } from "./IntroSectionHeading";
 import { IntroSectionDescription } from "./IntroSectionDescription";
@@ -26,7 +26,7 @@ export function IntroSection({ signOut }: IntroSectionProps) {
             <IntroSectionHeading />
             <IntroSectionDescription />
           </PageSectionHeader>
-          <CtaSection signOut={signOut} />
+          <CtaActions signOut={signOut} />
           <IntroBackground />
         </PageSectionContent>
       </PageContainer>
