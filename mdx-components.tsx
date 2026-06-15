@@ -6,8 +6,8 @@ import { DocsImage } from "@/site/docs/DocsImage";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    h2: ({ className, ...props }) => (
-      <h2
+    h1: ({ className, ...props }) => (
+      <h1
         className={twMerge(
           "font-bold max-md:mb-6 max-md:text-3xl md:mb-8 md:text-4xl",
           className,
@@ -16,8 +16,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       />
     ),
 
-    h3: ({ className, ...props }) => (
-      <h3
+    h2: ({ className, ...props }) => (
+      <h2
         className={twMerge(
           "font-bold max-md:mb-6 max-md:text-2xl md:mb-8 md:text-3xl",
           className,
@@ -26,8 +26,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       />
     ),
 
-    h4: ({ className, ...props }) => (
-      <h4 className={twMerge("mb-6 text-xl font-bold", className)} {...props} />
+    h3: ({ className, ...props }) => (
+      <h3 className={twMerge("my-6 text-xl font-bold", className)} {...props} />
     ),
 
     p: ({ className, ...props }) => (

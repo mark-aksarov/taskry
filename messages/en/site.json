@@ -56,14 +56,11 @@
       },
       "projects": {
         "heading": "Projects",
-        "viewMode": "Project view",
-        "create": "Create project",
-        "edit": "Edit project",
-        "delete": "Delete project",
-        "statusChange": "Change status",
-        "filters": "Filters",
+        "view": "Project view",
+        "actions": "Project actions",
+        "search": "Search and filtering",
         "sorting": "Sorting",
-        "categories": "Categories",
+        "categories": "Project categories",
         "categoryActions": "Category actions"
       },
       "tasks": {

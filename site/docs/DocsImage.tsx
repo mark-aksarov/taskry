@@ -17,9 +17,7 @@ export function DocsImage({
   return (
     <div
       className={twMerge(
-        "w-fit overflow-hidden rounded-lg border-1 border-(--border-primary) max-md:mb-6 md:mb-8",
-        theme === "dark" && "not-dark:hidden",
-        theme === "light" && "dark:hidden",
+        "mb-6 w-fit overflow-hidden rounded-lg border-1 border-(--border-primary)",
         containerClassName,
       )}
     >

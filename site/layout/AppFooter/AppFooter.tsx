@@ -26,6 +26,8 @@ export function AppFooter() {
   const pathname = usePathname();
 
   const isDocsPage = pathname?.startsWith("/docs");
+  const isTermsPage = pathname?.startsWith("/terms");
+  const isPrivacyPolicyPage = pathname?.startsWith("/privacy-policy");
 
   const {
     section,
@@ -41,7 +43,12 @@ export function AppFooter() {
     <footer>
       <PageSection
         as="div"
-        className={section({ className: isDocsPage ? "border-t-1" : "" })}
+        className={section({
+          className:
+            isDocsPage || isTermsPage || isPrivacyPolicyPage
+              ? "border-t-1"
+              : "",
+        })}
       >
         <PageContainer>
           <div className={inner()}>

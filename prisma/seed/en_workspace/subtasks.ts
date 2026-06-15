@@ -3752,7 +3752,7 @@ export const subtasks = [
   },
   {
     id: 2222,
-    text: "Prepare a final summary slide with the recommended next steps and resource needs",
+    text: "Prepare a final summary slide with the recommended Next steps and resource needs",
     isDone: false,
     taskId: 669,
     createdAt: new Date("2026-04-19T10:14:00Z"),

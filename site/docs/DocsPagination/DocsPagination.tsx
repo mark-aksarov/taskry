@@ -18,22 +18,12 @@ export function DocsPagination() {
     if (!section) return null;
 
     const pagesMap: Record<string, { slug: string; label: string }[]> = {
-      "getting-started": [
-        { slug: "", label: t("gettingStarted.heading") },
-        { slug: "overview", label: t("gettingStarted.overview") },
-      ],
-
       projects: [
         { slug: "", label: t("projects.heading") },
-        { slug: "view-mode", label: t("projects.viewMode") },
-        { slug: "create", label: t("projects.create") },
-        { slug: "edit", label: t("projects.edit") },
-        { slug: "delete", label: t("projects.delete") },
-        { slug: "status-change", label: t("projects.statusChange") },
-        { slug: "filters", label: t("projects.filters") },
-        { slug: "sorting", label: t("projects.sorting") },
+        { slug: "view", label: t("projects.view") },
+        { slug: "actions", label: t("projects.actions") },
+        { slug: "search", label: t("projects.search") },
         { slug: "categories", label: t("projects.categories") },
-        { slug: "category-actions", label: t("projects.categoryActions") },
       ],
 
       tasks: [

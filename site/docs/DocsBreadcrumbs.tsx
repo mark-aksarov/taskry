@@ -24,7 +24,6 @@ export function DocsBreadcrumbs() {
     });
 
     const sectionMap: Record<string, string> = {
-      "getting-started": t("gettingStarted.heading"),
       projects: t("projects.heading"),
       tasks: t("tasks.heading"),
       team: t("team.heading"),
@@ -39,22 +38,14 @@ export function DocsBreadcrumbs() {
     }
 
     const pageMap: Record<string, Record<string, string>> = {
-      "getting-started": {
-        overview: t("gettingStarted.overview"),
-      },
       projects: {
-        "view-mode": t("projects.viewMode"),
-        create: t("projects.create"),
-        edit: t("projects.edit"),
-        delete: t("projects.delete"),
-        "status-change": t("projects.statusChange"),
-        filters: t("projects.filters"),
-        sorting: t("projects.sorting"),
+        view: t("projects.view"),
+        actions: t("projects.actions"),
+        search: t("projects.search"),
         categories: t("projects.categories"),
-        "category-actions": t("projects.categoryActions"),
       },
       tasks: {
-        "view-mode": t("tasks.viewMode"),
+        view: t("tasks.viewMode"),
         create: t("tasks.create"),
         edit: t("tasks.edit"),
         delete: t("tasks.delete"),

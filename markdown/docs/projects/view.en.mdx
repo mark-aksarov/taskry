@@ -1,0 +1,88 @@
+import { DocsImage } from "@/site/docs/DocsImage";
+
+# Viewing projects
+
+Projects are displayed on the <b>Projects</b> page as a list or cards. On mobile devices, only the card view is available.
+
+A project in the list or card view can contain the following information (depending on the display type):
+
+- Title — <span className="font-normal">short project name</span>
+- Deadline — <span className="font-normal">project completion date</span>
+- Status — <span className="font-normal">current project state</span>
+- Created by — <span className="font-normal">image or full name of the user who created the project</span>
+- Customer — <span className="font-normal">image or full name of the customer</span>
+- Category — <span className="font-normal">group used to organize projects</span>
+- Company — <span className="font-normal">name of the customer's company</span>
+- Progress — <span className="font-normal">visual progress bar showing task completion</span>
+
+<DocsImage
+  src="/docs/projects/en/light/large/project-list.jpg"
+  width={940}
+  height={320}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/projects/en/dark/large/project-list.jpg"
+  width={940}
+  height={320}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/projects/en/light/small/project-grid.jpg"
+  width={380}
+  height={419}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/projects/en/dark/small/project-grid.jpg"
+  width={380}
+  height={419}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+On desktop devices, clicking the <b>project title</b>, <b>author name</b>, or <b>customer name</b> opens a side panel with the related information (project, user, or customer).
+
+On mobile devices, the behavior is simplified: tapping a card opens the project details page directly.
+
+A separate <b>Comments</b> button opens the project comments modal, while the <b>Actions menu</b> provides access to additional operations.
+
+---
+
+## Project details
+
+The project details page allows users to view full project information and a summary of related tasks.
+
+<DocsImage
+  src="/docs/projects/en/light/large/project-detail.jpg"
+  width={692}
+  height={530}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/projects/en/dark/large/project-detail.jpg"
+  width={692}
+  height={530}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/projects/en/light/small/project-detail.jpg"
+  width={390}
+  height={413}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/projects/en/dark/small/project-detail.jpg"
+  width={390}
+  height={413}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+In addition to viewing data, users can edit individual project fields and delete the project from this page.
+
+---

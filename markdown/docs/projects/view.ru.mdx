@@ -1,0 +1,88 @@
+import { DocsImage } from "@/site/docs/DocsImage";
+
+# Просмотр проектов
+
+Проекты отображаются на странице <b>Проекты</b> в виде списка или карточек. На мобильных устройствах доступен только режим карточек.
+
+Проект в списке и карточке может содержать следующие данные (в зависимости от типа отображения):
+
+- Заголовок — <span className="font-normal">краткое название проекта</span>
+- Срок выполнения — <span className="font-normal">срок завершения проекта</span>
+- Статус — <span className="font-normal">текущее состояние проекта</span>
+- Кем создан — <span className="font-normal">изображение или полное имя пользователя, создавшего проект</span>
+- Клиент — <span className="font-normal">изображение или полное имя клиента</span>
+- Категория — <span className="font-normal">группа для организации проектов</span>
+- Компания — <span className="font-normal">название организации клиента</span>
+- Прогресс — <span className="font-normal">отображение выполнения задач проекта в визуальной шкале</span>
+
+<DocsImage
+  src="/docs/projects/ru/light/large/project-list.jpg"
+  width={940}
+  height={320}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/projects/ru/dark/large/project-list.jpg"
+  width={940}
+  height={320}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/projects/ru/light/small/project-grid.jpg"
+  width={380}
+  height={419}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/projects/ru/dark/small/project-grid.jpg"
+  width={380}
+  height={419}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+На десктопных устройствах при нажатии на <b>заголовок проекта</b>, <b>имя автора</b> или <b>имя клиента</b> открывается боковая панель с соответствующей информацией (о проекте, пользователе или клиенте). 
+
+На мобильных устройствах поведение упрощено: нажатие на карточку сразу выполняет переход на страницу детализации проекта.
+
+Отдельная кнопка <b>комментарии</b> открывает окно с комментариями проекта, а <b>меню действий</b> предоставляет доступ к дополнительным операциям.
+
+---
+
+## Детализация проекта
+
+На странице детализации проекта можно просматривать подробную информацию о проекте, а также краткую сводку по связанным с ним задачам.
+
+<DocsImage
+  src="/docs/projects/ru/light/large/project-detail.jpg"
+  width={692}
+  height={530}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/projects/ru/dark/large/project-detail.jpg"
+  width={692}
+  height={530}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/projects/ru/light/small/project-detail.jpg"
+  width={390}
+  height={413}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/projects/ru/dark/small/project-detail.jpg"
+  width={390}
+  height={413}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+Кроме просмотра данных, на странице доступны редактирование отдельных полей проекта и его удаление.
+
+---

@@ -7,7 +7,7 @@ import { twMerge } from "tailwind-merge";
 export function AccordionHeader({ children }: { children: React.ReactNode }) {
   return (
     <DisclosureHeader
-      className="px-6 py-4 text-lg font-bold"
+      className="gap-4 px-6 py-4 text-lg font-bold"
       renderIcon={(isExpanded) => (
         <div className="flex items-center justify-center rounded-lg bg-(--accent) p-1.5 text-white">
           <Plus
