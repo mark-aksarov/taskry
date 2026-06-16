@@ -90,58 +90,26 @@ export function DocsNavigation() {
               </li>
               <li>
                 <DocsNavigationLink
-                  href="/docs/tasks/view-mode"
-                  isActive={pathname === "/docs/tasks/view-mode"}
+                  href="/docs/tasks/view"
+                  isActive={pathname === "/docs/tasks/view"}
                 >
-                  {t("tasks.viewMode")}
+                  {t("tasks.view")}
                 </DocsNavigationLink>
               </li>
               <li>
                 <DocsNavigationLink
-                  href="/docs/tasks/create"
-                  isActive={pathname === "/docs/tasks/create"}
+                  href="/docs/tasks/actions"
+                  isActive={pathname === "/docs/tasks/actions"}
                 >
-                  {t("tasks.create")}
+                  {t("tasks.actions")}
                 </DocsNavigationLink>
               </li>
               <li>
                 <DocsNavigationLink
-                  href="/docs/tasks/edit"
-                  isActive={pathname === "/docs/tasks/edit"}
+                  href="/docs/tasks/search"
+                  isActive={pathname === "/docs/tasks/search"}
                 >
-                  {t("tasks.edit")}
-                </DocsNavigationLink>
-              </li>
-              <li>
-                <DocsNavigationLink
-                  href="/docs/tasks/delete"
-                  isActive={pathname === "/docs/tasks/delete"}
-                >
-                  {t("tasks.delete")}
-                </DocsNavigationLink>
-              </li>
-              <li>
-                <DocsNavigationLink
-                  href="/docs/tasks/status-change"
-                  isActive={pathname === "/docs/tasks/status-change"}
-                >
-                  {t("tasks.statusChange")}
-                </DocsNavigationLink>
-              </li>
-              <li>
-                <DocsNavigationLink
-                  href="/docs/tasks/filters"
-                  isActive={pathname === "/docs/tasks/filters"}
-                >
-                  {t("tasks.filters")}
-                </DocsNavigationLink>
-              </li>
-              <li>
-                <DocsNavigationLink
-                  href="/docs/tasks/sorting"
-                  isActive={pathname === "/docs/tasks/sorting"}
-                >
-                  {t("tasks.sorting")}
+                  {t("tasks.search")}
                 </DocsNavigationLink>
               </li>
               <li>
@@ -154,26 +122,10 @@ export function DocsNavigation() {
               </li>
               <li>
                 <DocsNavigationLink
-                  href="/docs/tasks/subtask-actions"
-                  isActive={pathname === "/docs/tasks/subtask-actions"}
-                >
-                  {t("tasks.subtaskActions")}
-                </DocsNavigationLink>
-              </li>
-              <li>
-                <DocsNavigationLink
                   href="/docs/tasks/categories"
                   isActive={pathname === "/docs/tasks/categories"}
                 >
                   {t("tasks.categories")}
-                </DocsNavigationLink>
-              </li>
-              <li>
-                <DocsNavigationLink
-                  href="/docs/tasks/category-actions"
-                  isActive={pathname === "/docs/tasks/category-actions"}
-                >
-                  {t("tasks.categoryActions")}
                 </DocsNavigationLink>
               </li>
             </DocsNavigationList>

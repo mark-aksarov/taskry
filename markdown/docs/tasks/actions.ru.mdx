@@ -1,0 +1,293 @@
+import { DocsImage } from "@/site/docs/DocsImage";
+
+# Действия с задачами
+
+В этом разделе описаны основные действия с задачами: создание, редактирование, изменение статуса и удаление.
+
+---
+
+## Создание задачи
+
+Для создания задачи на странице <b>Задачи</b> нужно нажать кнопку <b>Создать новую</b>, выбрать пункт <b>Задача</b>, заполнить необходимые поля в форме и подтвердить создание задачи.
+
+<DocsImage
+  src="/docs/tasks/ru/light/large/create-task-modal.jpg"
+  width={493}
+  height={634}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/large/create-task-modal.jpg"
+  width={493}
+  height={634}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/light/small/create-task-modal.jpg"
+  width={390}
+  height={462}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/small/create-task-modal.jpg"
+  width={390}
+  height={462}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+Создание задачи включает заполнение следующих данных:
+
+
+- Заголовок — <span className="font-normal">краткое название задачи</span>
+- Срок выполнения — <span className="font-normal">срок завершения задачи</span>
+- Статус — <span className="font-normal">текущее состояние задачи</span>
+- Описание — <span className="font-normal">дополнительная информация о задаче</span>
+- Категория — <span className="font-normal">группа для организации задачи</span>
+- Проект — <span className="font-normal">проект, к которому относится задача</span>
+- Исполнитель — <span className="font-normal">пользователь, ответственный за выполнение задачи</span>
+
+Поля <b>Заголовок</b> и <b>Срок выполнения</b> являются обязательными для заполнения. 
+
+После сохранения задача будет успешно создана.
+
+---
+
+## Редактирование задачи
+
+Для редактирования задачи на странице <b>Задачи</b> нажмите кнопку <b>Меню действий</b> (иконка с тремя точками) в карточке или списке задачи и выберите пункт <b>Редактировать</b>.
+
+<DocsImage
+  src="/docs/tasks/ru/light/large/task-actions-menu-edit.jpg"
+  width={344}
+  height={327}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/large/task-actions-menu-edit.jpg"
+  width={344}
+  height={327}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/light/small/task-actions-menu-edit.jpg"
+  width={390}
+  height={339}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/small/task-actions-menu-edit.jpg"
+  width={390}
+  height={339}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+После этого откроется окно редактирования, в котором можно изменить данные задачи.
+
+<DocsImage
+  src="/docs/tasks/ru/light/large/edit-task-modal.jpg"
+  width={492}
+  height={636}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/large/edit-task-modal.jpg"
+  width={492}
+  height={636}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/light/small/edit-task-modal.jpg"
+  width={390}
+  height={462}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/small/edit-task-modal.jpg"
+  width={390}
+  height={462}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+Редактирование задачи включает заполнение тех же данных, что и создание задачи.
+
+---
+
+## Удаление задачи
+
+В системе предусмотрено два типа удаления: <b>одиночное</b> и <b>массовое</b>. На мобильных устройствах доступно только <b>одиночное</b> удаление. Оба варианта позволяют безвозвратно удалить задачи из системы.
+Удаление задачи является необратимым действием, поэтому перед удалением рекомендуется убедиться, что задача больше не нужна и все важные данные сохранены.
+
+### Одиночное удаление
+
+Чтобы удалить задачу на странице <b>Задачи</b> нажмите кнопку <b>Меню действий</b> (иконка с тремя точками) в карточке или списке задач и выберите пункт <b>Удалить</b>.
+
+<DocsImage
+  src="/docs/tasks/ru/light/large/task-actions-menu-delete.jpg"
+  width={344}
+  height={326}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/large/task-actions-menu-delete.jpg"
+  width={344}
+  height={326}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/light/small/task-actions-menu-delete.jpg"
+  width={390}
+  height={462}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/small/task-actions-menu-delete.jpg"
+  width={390}
+  height={462}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+В появившемся модальном окне нажмите кнопку <b>Удалить</b>. Задача, а также связанные подзадачи и комментарии, будут удалены.
+
+<DocsImage
+  src="/docs/tasks/ru/light/large/delete-task-modal.jpg"
+  width={412}
+  height={198}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/large/delete-task-modal.jpg"
+  width={412}
+  height={198}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/light/small/delete-task-modal.jpg"
+  width={350}
+  height={191}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/small/delete-task-modal.jpg"
+  width={350}
+  height={191}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+После подтверждения задача будет безвозвратно удалена и исчезнет из списка.
+
+<div className="max-md:hidden">
+### Массовое удаление
+
+  Чтобы удалить несколько задач одновременно, отметьте нужные задачи с помощью чекбоксов. Затем нажмите <b>Действия</b> в верхней части страницы и выберите пункт <b>Удалить</b>.
+
+  <DocsImage
+    src="/docs/tasks/ru/light/large/tasks-actions-menu-delete.jpg"
+    width={344}
+    height={281}
+    containerClassName="dark:hidden max-md:hidden"
+  />
+
+  <DocsImage
+    src="/docs/tasks/ru/dark/large/tasks-actions-menu-delete.jpg"
+    width={344}
+    height={281}
+    containerClassName="not-dark:hidden max-md:hidden"
+  />
+
+  В появившемся модальном окне нажмите кнопку <b>Удалить</b>. Задачи, а также связанные подзадачи и комментарии, будут удалены.
+
+  <DocsImage
+    src="/docs/tasks/ru/light/large/delete-tasks-modal.jpg"
+    width={412}
+    height={177}
+    containerClassName="dark:hidden max-md:hidden"
+  />
+
+  <DocsImage
+    src="/docs/tasks/ru/dark/large/delete-tasks-modal.jpg"
+    width={412}
+    height={177}
+    containerClassName="not-dark:hidden max-md:hidden"
+  />
+
+  После подтверждения все выбранные задачи будут удалены и исчезнут из списка.
+</div>
+
+---
+
+## Изменение статуса
+
+В системе предусмотрено два типа изменения статуса: <b>одиночное</b> и <b>массовое</b>. На мобильных устройствах доступно только <b>одиночное</b> изменения статуса.
+
+### Одиночное изменение статуса
+
+Для изменения статуса задачи на странице <b>Задачи</b> нажмите кнопку <b>Меню действий</b> (иконка с тремя точками) в карточке или списке задачи и выберите новый статус задачи.
+
+<DocsImage
+  src="/docs/tasks/ru/light/large/task-actions-menu-status.jpg"
+  width={344}
+  height={325}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/large/task-actions-menu-status.jpg"
+  width={344}
+  height={325}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/light/small/task-actions-menu-status.jpg"
+  width={390}
+  height={339}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/small/task-actions-menu-status.jpg"
+  width={390}
+  height={339}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+После выбора статус обновится для выбранной задачи.
+
+<div className="max-md:hidden">
+### Массовое изменение статуса
+
+  Чтобы изменить статус нескольких задач одновременно, отметьте нужные задачи с помощью чекбоксов. Затем нажмите кнопку <b>Действия</b> и выберите новый статус задач.
+
+  <DocsImage
+    src="/docs/tasks/ru/light/large/tasks-actions-menu-status.jpg"
+    width={344}
+    height={281}
+    containerClassName="dark:hidden max-md:hidden"
+  />
+
+  <DocsImage
+    src="/docs/tasks/ru/dark/large/tasks-actions-menu-status.jpg"
+    width={344}
+    height={281}
+    containerClassName="not-dark:hidden max-md:hidden"
+  />
+
+  После выбора статус обновится для выбранных задач.
+</div>
+
+---

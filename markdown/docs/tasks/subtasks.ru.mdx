@@ -1,8 +1,8 @@
 import { DocsImage } from "@/site/docs/DocsImage";
 
-## Подзадачи
+# Подзадачи
 
-Подзадачи позволяют разбить основную задачу на более мелкие шаги для удобного управления и отслеживания выполнения.
+Подзадачи позволяют разбить основную задачу на более мелкие части для удобного управления и отслеживания выполнения.
 
 Каждая подзадача содержит следующие данные:
 
@@ -11,62 +11,277 @@ import { DocsImage } from "@/site/docs/DocsImage";
 
 ---
 
-### Просмотр и редактирование
+## Просмотр и редактирование
 
-Подзадачи отображаются в виде списка в боковой панели задачи. Чтобы открыть боковую панель, перейдите на страницу <b>«Задачи»</b> и нажмите на заголовок нужной задачи:
+Просмотр и редактирование подзадач доступны на странице <b>детализации задачи</b>. В нижней части страницы отображается список подзадач:
 
 <DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/task-title-light-ru.jpg"
-  theme="light"
-  width={233}
-  height={81}
-  containerClassName="max-md:w-[175px]"
+  src="/docs/tasks/ru/light/large/subtasks.jpg"
+  width={691}
+  height={342}
+  containerClassName="dark:hidden max-md:hidden"
 />
 
 <DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/task-title-dark-ru.jpg"
-  theme="dark"
-  width={233}
-  height={81}
-  containerClassName="max-md:w-[175px]"
-/>
-
-Откроется боковая панель с деталями задачи, в нижней части которой расположен список подзадач.
-
-<DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/task-details-side-sheet-light-ru.jpg"
-  theme="light"
-  width={397}
-  height={632}
-  containerClassName="max-md:w-[250px]"
+  src="/docs/tasks/ru/dark/large/subtasks.jpg"
+  width={691}
+  height={342}
+  containerClassName="not-dark:hidden max-md:hidden"
 />
 
 <DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/task-details-side-sheet-dark-ru.jpg"
-  theme="dark"
-  width={397}
-  height={632}
-  containerClassName="max-md:w-[250px]"
-/>
-
-Просмотр и редактирование подзадач также доступны на странице детализации задачи. Для перехода нажмите кнопку <b>«Открыть задачу»</b> в боковой панели.
-
-В нижней части страницы отображается список подзадач:
-
-<DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/subtasks-light-ru.jpg"
-  theme="light"
-  width={672}
-  height={249}
+  src="/docs/tasks/ru/light/small/subtasks.jpg"
+  width={350}
+  height={466}
+  containerClassName="dark:hidden md:hidden"
 />
 
 <DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/subtasks-dark-ru.jpg"
-  theme="dark"
-  width={672}
-  height={249}
+  src="/docs/tasks/ru/dark/small/subtasks.jpg"
+  width={350}
+  height={466}
+  containerClassName="not-dark:hidden md:hidden"
 />
 
-В следующем разделе будут рассмотрены основные действия с подзадачами: добавление, редактирование, удаление и изменение статуса подзадач.
+---
+
+## Действия с подзадачами
+
+В системе доступны основные действия, которые помогают работать с подзадачами:
+
+- Добавление подзадачи — <span className="font-normal">создание новой подзадачи внутри основной задачи.</span>
+- Редактирование подзадачи — <span className="font-normal">изменение текста подзадачи.</span>
+- Удаление подзадачи — <span className="font-normal">удаление подзадачи из списка.</span>
+- Изменение статуса — <span className="font-normal">обновление состояния подзадачи (выполнено / невыполнено).</span>
+
+---
+
+### Добавление подзадачи
+
+Чтобы добавить подзадачу на странице <b>Детализация задачи</b>, нажмите кнопку <b>Добавить</b> (иконка плюс).
+
+<DocsImage
+  src="/docs/tasks/ru/light/large/create-subtask-button.jpg"
+  width={700}
+  height={54}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/large/create-subtask-button.jpg"
+  width={700}
+  height={54}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/light/small/create-subtask-button.jpg"
+  width={358}
+  height={56}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/small/create-subtask-button.jpg"
+  width={358}
+  height={56}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+Откроется модальное окно, в котором необходимо ввести текст подзадачи.
+
+<DocsImage
+  src="/docs/tasks/ru/light/large/create-subtask-modal.jpg"
+  width={342}
+  height={256}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/large/create-subtask-modal.jpg"
+  width={342}
+  height={256}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/light/small/create-subtask-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/small/create-subtask-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+После сохранения новая подзадача появится в списке подзадач.
+
+---
+
+### Редактирование подзадачи
+
+Для редактирования подзадачи нажмите кнопку <b>Меню действий</b> (иконка с тремя точками) в списке подзадач и выберите пункт <b>Редактировать</b>.
+
+<DocsImage
+  src="/docs/tasks/ru/light/large/subtask-actions-menu-edit.jpg"
+  width={393}
+  height={228}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/large/subtask-actions-menu-edit.jpg"
+  width={393}
+  height={228}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/light/small/subtask-actions-menu-edit.jpg"
+  width={390}
+  height={246}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/small/subtask-actions-menu-edit.jpg"
+  width={390}
+  height={246}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+После этого откроется окно редактирования, в котором можно изменить название подзадачи. Название подзадачи не может быть пустыми.
+
+<DocsImage
+  src="/docs/tasks/ru/light/large/edit-subtask-modal.jpg"
+  width={342}
+  height={256}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/large/edit-subtask-modal.jpg"
+  width={342}
+  height={256}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/light/small/edit-subtask-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/small/edit-subtask-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+---
+
+### Удаление подзадачи
+
+Чтобы удалить подзадачу в <b>Меню действий</b> выберите пункт <b>Удалить</b>.
+
+<DocsImage
+  src="/docs/tasks/ru/light/large/subtask-actions-menu-delete.jpg"
+  width={393}
+  height={228}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/large/subtask-actions-menu-delete.jpg"
+  width={393}
+  height={228}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/light/small/subtask-actions-menu-delete.jpg"
+  width={390}
+  height={242}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/small/subtask-actions-menu-delete.jpg"
+  width={390}
+  height={242}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+В появившемся модальном окне нажмите кнопку <b>Удалить</b>.
+
+<DocsImage
+  src="/docs/tasks/ru/light/large/delete-subtask-modal.jpg"
+  width={412}
+  height={199}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/large/delete-subtask-modal.jpg"
+  width={412}
+  height={199}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/light/small/delete-subtask-modal.jpg"
+  width={350}
+  height={191}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/small/delete-subtask-modal.jpg"
+  width={350}
+  height={191}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+---
+
+### Изменение статуса
+
+Чтобы изменить статус подзадачи, в <b>Меню действий</b> выберите пункт <b>Отметить как выполнено</b> или <b>Отметить как невыполнено</b>.
+
+<DocsImage
+  src="/docs/tasks/ru/light/large/subtask-actions-menu-status.jpg"
+  width={393}
+  height={228}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/large/subtask-actions-menu-status.jpg"
+  width={393}
+  height={228}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/light/small/subtask-actions-menu-status.jpg"
+  width={390}
+  height={246}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/small/subtask-actions-menu-status.jpg"
+  width={390}
+  height={246}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+После выбора статус подзадачи обновится.
 
 ---

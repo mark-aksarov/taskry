@@ -1,0 +1,295 @@
+import { DocsImage } from "@/site/docs/DocsImage";
+
+# Task actions
+
+This section describes the main task actions: creating, editing, changing status, and deleting tasks.
+
+---
+
+## Creating a task
+
+To create a task on the <b>Tasks</b> page, click the <b>Create new</b> button, select <b>Task</b>, fill in the required fields in the form, and confirm task creation.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/create-task-modal.jpg"
+  width={493}
+  height={634}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/create-task-modal.jpg"
+  width={493}
+  height={634}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/create-task-modal.jpg"
+  width={390}
+  height={462}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/create-task-modal.jpg"
+  width={390}
+  height={462}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+Creating a task includes filling in the following information:
+
+- Title — <span className="font-normal">a short name of the task</span>
+- Deadline — <span className="font-normal">the task completion deadline</span>
+- Status — <span className="font-normal">the current state of the task</span>
+- Description — <span className="font-normal">additional information about the task</span>
+- Category — <span className="font-normal">a group used to organize the task</span>
+- Project — <span className="font-normal">the project the task belongs to</span>
+- Assignee — <span className="font-normal">the user responsible for completing the task</span>
+
+The <b>Title</b> and <b>Deadline</b> fields are required.
+
+After saving, the task will be created successfully.
+
+---
+
+## Editing a task
+
+To edit a task on the <b>Tasks</b> page, click the <b>Actions menu</b> button (the three-dot icon) in the task card or task list and select <b>Edit</b>.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/task-actions-menu-edit.jpg"
+  width={344}
+  height={327}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/task-actions-menu-edit.jpg"
+  width={344}
+  height={327}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/task-actions-menu-edit.jpg"
+  width={390}
+  height={339}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/task-actions-menu-edit.jpg"
+  width={390}
+  height={339}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After that, an edit modal will open where you can update the task information.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/edit-task-modal.jpg"
+  width={492}
+  height={636}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/edit-task-modal.jpg"
+  width={492}
+  height={636}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/edit-task-modal.jpg"
+  width={390}
+  height={462}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/edit-task-modal.jpg"
+  width={390}
+  height={462}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+Editing a task uses the same fields as creating a task.
+
+---
+
+## Deleting a task
+
+The system supports two types of deletion: <b>single deletion</b> and <b>bulk deletion</b>. On mobile devices, only <b>single deletion</b> is available. Both options permanently remove tasks from the system.
+
+Deleting a task cannot be undone. Before deleting a task, make sure it is no longer needed and that any important information has been saved.
+
+### Single deletion
+
+To delete a task on the <b>Tasks</b> page, click the <b>Actions menu</b> button (the three-dot icon) in the task card or task list and select <b>Delete</b>.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/task-actions-menu-delete.jpg"
+  width={344}
+  height={326}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/task-actions-menu-delete.jpg"
+  width={344}
+  height={326}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/task-actions-menu-delete.jpg"
+  width={390}
+  height={339}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/task-actions-menu-delete.jpg"
+  width={390}
+  height={339}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+In the confirmation dialog, click <b>Delete</b>. The task and all related subtasks and comments will be deleted.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/delete-task-modal.jpg"
+  width={412}
+  height={177}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/delete-task-modal.jpg"
+  width={412}
+  height={177}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/delete-task-modal.jpg"
+  width={350}
+  height={191}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/delete-task-modal.jpg"
+  width={350}
+  height={191}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After confirmation, the task will be permanently deleted and removed from the list.
+
+<div className="max-md:hidden">
+### Bulk deletion
+
+To delete multiple tasks at once, select the required tasks using the checkboxes. Then click <b>Actions</b> at the top of the page and select <b>Delete</b>.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/tasks-actions-menu-delete.jpg"
+  width={344}
+  height={281}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/tasks-actions-menu-delete.jpg"
+  width={344}
+  height={281}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+In the confirmation dialog, click <b>Delete</b>. The selected tasks and all related subtasks and comments will be deleted.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/delete-tasks-modal.jpg"
+  width={412}
+  height={177}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/delete-tasks-modal.jpg"
+  width={412}
+  height={177}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+After confirmation, all selected tasks will be permanently deleted and removed from the list.
+
+</div>
+
+---
+
+## Changing status
+
+The system supports two ways to change status: <b>single status change</b> and <b>bulk status change</b>. On mobile devices, only <b>single status change</b> is available.
+
+### Single status change
+
+To change the status of a task on the <b>Tasks</b> page, click the <b>Actions Menu</b> button (the three-dot icon) in the task card or task list and select a new status.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/task-actions-menu-status.jpg"
+  width={344}
+  height={325}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/task-actions-menu-status.jpg"
+  width={344}
+  height={325}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/task-actions-menu-status.jpg"
+  width={390}
+  height={339}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/task-actions-menu-status.jpg"
+  width={390}
+  height={339}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After selecting a status, it will be updated for the chosen task.
+
+<div className="max-md:hidden">
+### Bulk status change
+
+To change the status of multiple tasks at once, select the required tasks using the checkboxes. Then click <b>Actions</b> and choose a new status.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/tasks-actions-menu-status.jpg"
+  width={344}
+  height={281}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/tasks-actions-menu-status.jpg"
+  width={344}
+  height={281}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+After selecting a status, it will be updated for all selected tasks.
+
+</div>
+
+---

@@ -1,112 +1,76 @@
 import { DocsCardLink } from "@/site/docs/DocsCardLink";
 import { DocsCardGrid } from "@/site/docs/DocsCardGrid";
 
-## Tasks
+# Tasks
 
-A task is a unit of work that contains the data required to complete a specific action within a workflow:
+A task is a unit of work that contains the information needed to complete a specific action:
 
 - Title — <span className="font-normal">a short name of the task</span>
 - Description — <span className="font-normal">detailed information about the task</span>
-- Deadline — <span className="font-normal">the date by which the task must be completed</span>
+- Deadline — <span className="font-normal">the date by which the task should be completed</span>
 - Project — <span className="font-normal">the project the task belongs to</span>
 - Assignee — <span className="font-normal">the user responsible for completing the task</span>
 - Author — <span className="font-normal">the user who created the task</span>
-- Category — <span className="font-normal">a logical grouping of the task</span>
+- Category — <span className="font-normal">a logical group for the task</span>
 - Status — <span className="font-normal">the current state of the task</span>
-- Subtasks — <span className="font-normal">breaking the task into smaller parts</span>
+- Subtasks — <span className="font-normal">smaller parts of the task</span>
 - Comments — <span className="font-normal">discussions and notes related to the task</span>
 
 ---
 
-### Viewing and navigation
+## Overview
 
-Tasks are displayed as a list or grid on the <b>“Tasks”</b> page. To navigate to this section, select <b>“Tasks”</b> in the application's sidebar.
+This section explains how to work with tasks and the main features available to users in the system.
 
-You can also view and edit a task on the task details page. To do this, click on the task title and then click the <b>“Open Task”</b> button in the side panel. On this page, each field can be edited in a separate modal window.
+### Viewing tasks
 
----
+This page explains how tasks are displayed in the system interface. It covers two view modes — list and cards — and shows what basic information users can see about a task.
 
-### Actions
+### Task actions
 
-The following main actions are available for tasks:
+This page covers the main task actions: creating tasks, editing tasks, changing task status, and deleting tasks.
 
-- Create task — <span className="font-normal">add a new task by filling in basic information such as title, deadline, assignee, status, category, and other parameters</span>
-- Edit task — <span className="font-normal">update the data of an existing task</span>
-- Delete task — <span className="font-normal">remove one or multiple tasks from the system</span>
-- Change status — <span className="font-normal">update the current state of a task</span>
+### Search and filtering
 
-Working with subtasks includes the following actions:
+This page explains how users can find tasks among many records. It also covers filtering and sorting that help narrow down the results.
 
-- Add subtask — <span className="font-normal">create a new subtask within a task</span>
-- Edit subtask — <span className="font-normal">update the data of an existing subtask</span>
-- Toggle subtask status — <span className="font-normal">change the state of a subtask (done / undone)</span>
-- Delete subtask — <span className="font-normal">remove a subtask from a task</span>
+### Subtasks
 
-Working with task categories includes the following actions:
+This page covers the main subtask actions: creating subtasks, editing subtasks, changing subtask status, and deleting subtasks.
 
-- Create task category — <span className="font-normal">add a new task category</span>
-- Edit task category — <span className="font-normal">change the name of an existing category</span>
-- Delete task category — <span className="font-normal">delete a category from the system</span>
+### Task categories
+
+This page explains task categories and the actions available to users: viewing categories, creating categories, editing categories, and deleting categories. Categories help organize tasks and make it easier to find the needed tasks in the system.
 
 ---
 
-### Next steps
+## Next steps
 
 <DocsCardGrid>
   <DocsCardLink
-    heading="Task view"
-    subtext="Switch between different display modes, list items and cards"
-    href="/docs/tasks/view-mode"
+    heading="View tasks"
+    subtext="View the task list and task details"
+    href="/docs/tasks/view"
   />
   <DocsCardLink
-    heading="Create Task"
-    subtext="How to create a new task and fill in the main fields"
-    href="/docs/tasks/create"
+    heading="Task actions"
+    subtext="Create, edit, change status, and delete tasks"
+    href="/docs/tasks/actions"
   />
   <DocsCardLink
-    heading="Edit Task"
-    subtext="Modify the data of an existing task"
-    href="/docs/tasks/edit"
-  />
-  <DocsCardLink
-    heading="Delete Task"
-    subtext="Single and bulk task deletion"
-    href="/docs/tasks/delete"
-  />
-  <DocsCardLink
-    heading="Change Status"
-    subtext="Single and bulk task status updates"
-    href="/docs/tasks/status-change"
-  />
-  <DocsCardLink
-    heading="Filters"
-    subtext="Filter tasks by various parameters"
-    href="/docs/tasks/filters"
-  />
-  <DocsCardLink
-    heading="Sorting"
-    subtext="Sort tasks by fields"
-    href="/docs/tasks/sorting"
+    heading="Search and filtering"
+    subtext="Search, filter, and sort tasks by different parameters"
+    href="/docs/tasks/search"
   />
   <DocsCardLink
     heading="Subtasks"
-    subtext="Break a task into smaller parts and manage them"
-    href="/docs/tasks/subtasks"
-  />
-  <DocsCardLink
-    heading="Subtask actions"
-    subtext="Adding, editing, deleting, and changing subtask status"
-    href="/docs/tasks/subtask-actions"
-  />
-  <DocsCardLink
-    heading="Categories"
-    subtext="Grouping tasks by categories"
+    subtext="View, create, edit, change status, and delete subtasks"
     href="/docs/tasks/categories"
   />
   <DocsCardLink
-    heading="Category actions"
-    subtext="Creating, editing, and deleting task categories"
-    href="/docs/tasks/category-actions"
+    heading="Task categories"
+    subtext="View, create, edit, and delete task categories"
+    href="/docs/tasks/categories"
   />
 </DocsCardGrid>
 

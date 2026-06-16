@@ -1,72 +1,287 @@
 import { DocsImage } from "@/site/docs/DocsImage";
 
-## Subtasks
+# Subtasks
 
-Subtasks allow you to break a main task into smaller steps for easier management and progress tracking.
+Subtasks allow you to split a main task into smaller parts for easier management and progress tracking.
 
-Each subtask contains the following data:
+Each subtask contains the following information:
 
 - Text — <span className="font-normal">a short description of the subtask.</span>
-- Status — <span className="font-normal">indicates whether the subtask is done or undone.</span>
+- Status — <span className="font-normal">shows whether the subtask is completed or not.</span>
 
 ---
 
-### Viewing and editing
+## Viewing and editing
 
-Subtasks are displayed as a list in the task side panel. To open the side panel, go to the <b>“Tasks”</b> page and click on the title of the required task:
+Viewing and editing subtasks is available on the <b>Task details</b> page. The list of subtasks is displayed at the bottom of the page:
 
 <DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/task-title-light-en.jpg"
-  theme="light"
-  width={276}
-  height={78}
-  containerClassName="max-md:w-[208px]"
+  src="/docs/tasks/en/light/large/subtasks.jpg"
+  width={691}
+  height={355}
+  containerClassName="dark:hidden max-md:hidden"
 />
 
 <DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/task-title-dark-en.jpg"
-  theme="dark"
-  width={276}
-  height={78}
-  containerClassName="max-md:w-[208px]"
-/>
-
-A side panel with task details will open, and the list of subtasks is located at the bottom.
-
-<DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/task-details-side-sheet-light-en.jpg"
-  theme="light"
-  width={400}
-  height={640}
-  containerClassName="max-md:w-[250px]"
+  src="/docs/tasks/en/dark/large/subtasks.jpg"
+  width={691}
+  height={355}
+  containerClassName="not-dark:hidden max-md:hidden"
 />
 
 <DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/task-details-side-sheet-dark-en.jpg"
-  theme="dark"
-  width={400}
-  height={640}
-  containerClassName="max-md:w-[250px]"
-/>
-
-Viewing and editing subtasks are also available on the task details page. To navigate there, click the <b>“Open task”</b> button in the side panel.
-
-The subtasks list is displayed at the bottom of the page:
-
-<DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/subtasks-light-en.jpg"
-  theme="light"
-  width={669}
-  height={324}
+  src="/docs/tasks/en/light/small/subtasks.jpg"
+  width={350}
+  height={525}
+  containerClassName="dark:hidden md:hidden"
 />
 
 <DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/subtasks-dark-en.jpg"
-  theme="dark"
-  width={669}
-  height={324}
+  src="/docs/tasks/en/dark/small/subtasks.jpg"
+  width={350}
+  height={525}
+  containerClassName="not-dark:hidden md:hidden"
 />
 
-The next section will cover the main subtask actions: adding, editing, deleting, and changing subtask status.
+---
+
+## Subtask actions
+
+The system provides the following actions for working with subtasks:
+
+- Add subtask — <span className="font-normal">create a new subtask inside the main task.</span>
+- Edit subtask — <span className="font-normal">change the subtask text.</span>
+- Delete subtask — <span className="font-normal">remove a subtask from the list.</span>
+- Change status — <span className="font-normal">update the subtask status (completed / not completed).</span>
+
+---
+
+### Adding a subtask
+
+To add a subtask on the <b>Task details</b> page, click the <b>Add</b> button (plus icon).
+
+<DocsImage
+  src="/docs/tasks/en/light/large/create-subtask-button.jpg"
+  width={700}
+  height={54}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/create-subtask-button.jpg"
+  width={700}
+  height={54}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/create-subtask-button.jpg"
+  width={358}
+  height={56}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/create-subtask-button.jpg"
+  width={358}
+  height={56}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+A dialog will open where you need to enter the subtask text.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/create-subtask-modal.jpg"
+  width={342}
+  height={256}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/create-subtask-modal.jpg"
+  width={342}
+  height={256}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/create-subtask-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/create-subtask-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After saving, the new subtask will appear in the subtask list.
+
+---
+
+### Editing a subtask
+
+To edit a subtask, click the <b>Actions menu</b> button (three-dot icon) in the subtask list and select <b>Edit</b>.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/subtask-actions-menu-edit.jpg"
+  width={393}
+  height={228}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/subtask-actions-menu-edit.jpg"
+  width={393}
+  height={228}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/subtask-actions-menu-edit.jpg"
+  width={390}
+  height={246}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/subtask-actions-menu-edit.jpg"
+  width={390}
+  height={246}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+An edit dialog will open where you can change the subtask text. The subtask text cannot be empty.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/edit-subtask-modal.jpg"
+  width={342}
+  height={256}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/edit-subtask-modal.jpg"
+  width={342}
+  height={256}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/edit-subtask-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/edit-subtask-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+---
+
+### Deleting a subtask
+
+To delete a subtask, open the <b>Actions menu</b> and select <b>Delete</b>.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/subtask-actions-menu-delete.jpg"
+  width={393}
+  height={228}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/subtask-actions-menu-delete.jpg"
+  width={393}
+  height={228}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/subtask-actions-menu-delete.jpg"
+  width={390}
+  height={246}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/subtask-actions-menu-delete.jpg"
+  width={390}
+  height={246}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+In the confirmation dialog, click <b>Delete</b>.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/delete-subtask-modal.jpg"
+  width={412}
+  height={177}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/delete-subtask-modal.jpg"
+  width={412}
+  height={177}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/delete-subtask-modal.jpg"
+  width={350}
+  height={191}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/delete-subtask-modal.jpg"
+  width={350}
+  height={191}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+---
+
+### Changing status
+
+To change a subtask status, open the <b>Actions menu</b> and select <b>Mark as done</b> or <b>Mark as undone</b>.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/subtask-actions-menu-status.jpg"
+  width={393}
+  height={228}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/subtask-actions-menu-status.jpg"
+  width={393}
+  height={228}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/subtask-actions-menu-status.jpg"
+  width={390}
+  height={246}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/subtask-actions-menu-status.jpg"
+  width={390}
+  height={246}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After selection, the subtask status will be updated.
 
 ---

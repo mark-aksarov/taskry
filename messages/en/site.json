@@ -59,23 +59,15 @@
         "view": "Project view",
         "actions": "Project actions",
         "search": "Search and filtering",
-        "sorting": "Sorting",
-        "categories": "Project categories",
-        "categoryActions": "Category actions"
+        "categories": "Project categories"
       },
       "tasks": {
         "heading": "Tasks",
-        "viewMode": "Task view",
-        "create": "Create task",
-        "edit": "Edit task",
-        "delete": "Delete task",
-        "statusChange": "Change status",
-        "filters": "Filters",
-        "sorting": "Sorting",
+        "view": "Task view",
+        "actions": "Task actions",
+        "search": "Search and filtering",
         "subtasks": "Subtasks",
-        "subtaskActions": "Subtask actions",
-        "categories": "Categories",
-        "categoryActions": "Category actions"
+        "categories": "Task categories"
       },
       "team": {
         "heading": "Team",

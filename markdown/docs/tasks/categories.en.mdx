@@ -1,49 +1,249 @@
 import { DocsImage } from "@/site/docs/DocsImage";
 
-## Task categories
+# Task categories
 
-A task category is a way to group tasks by type or topic. Each category has a unique name. A task can only be assigned to one category.
+A task category is a way to group tasks by type or topic. Each category has a unique name. A task can belong to only one category.
 
 ---
 
-### Viewing categories
+## Viewing categories
 
-Task categories are shown in dropdown lists when you create or edit a task. They are also available on the categories page and used for filtering.
+Task categories are displayed in dropdown lists when creating or editing a task. They are also used for filtering.
 
-To view all categories, go to the <b>“Tasks”</b> page, click the <b>“Manage”</b> button at the top of the page, and select <b>“Categories”</b> from the menu to open the <b>“Task categories”</b> page.
+To view all categories, go to the <b>Tasks</b> page, click the <b>Manage</b> button at the top of the page, and select <b>Categories</b> to open the <b>Task categories</b> page.
 
 <DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/tasks-manage-menu-light-en.jpg"
-  theme="light"
-  width={164}
-  height={115}
-  containerClassName="max-md:w-[123px]"
+  src="/docs/tasks/en/light/large/task-manage.jpg"
+  width={216}
+  height={147}
+  containerClassName="dark:hidden max-md:hidden"
 />
 
 <DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/tasks-manage-menu-dark-en.jpg"
-  theme="dark"
-  width={164}
-  height={115}
-  containerClassName="max-md:w-[123px]"
-/>
-
-After that, a list of categories will appear in the main area of the page. Each item in the list shows the category name and an actions menu.
-
-<DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/task-category-items-light-en.jpg"
-  theme="light"
-  width={540}
-  height={309}
+  src="/docs/tasks/en/dark/large/task-manage.jpg"
+  width={216}
+  height={147}
+  containerClassName="not-dark:hidden max-md:hidden"
 />
 
 <DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/task-category-items-dark-en.jpg"
-  theme="dark"
-  width={540}
-  height={309}
+  src="/docs/tasks/en/light/small/task-manage.jpg"
+  width={390}
+  height={147}
+  containerClassName="dark:hidden md:hidden"
 />
 
-The next section explains the main actions with task categories: adding, editing, and deleting.
+<DocsImage
+  src="/docs/tasks/en/dark/small/task-manage.jpg"
+  width={390}
+  height={147}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After that, the list of categories will be displayed in the main area of the page. Each item contains a category name and an actions menu.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/task-category-list.jpg"
+  width={935}
+  height={387}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/task-category-list.jpg"
+  width={935}
+  height={387}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/task-category-list.jpg"
+  width={390}
+  height={454}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/task-category-list.jpg"
+  width={390}
+  height={454}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+---
+
+## Category actions
+
+Working with task categories includes the following actions:
+
+- Create category — <span className="font-normal">add a new task category.</span>
+- Edit category — <span className="font-normal">change the name of an existing category.</span>
+- Delete category — <span className="font-normal">remove a category from the system.</span>
+
+---
+
+### Adding a category
+
+To add a category on the <b>Task categories</b> page, click the <b>Create new</b> button at the top of the page. In the dialog that appears, enter the category name and confirm creation.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/create-task-category-modal.jpg"
+  width={342}
+  height={256}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/create-task-category-modal.jpg"
+  width={342}
+  height={256}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/create-task-category-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/create-task-category-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After saving, the new category will appear in the list.
+
+---
+
+### Editing a category
+
+To edit a category, click the <b>Actions menu</b> button (three-dot icon) in the category list and select <b>Edit</b>.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/task-category-actions-menu-edit.jpg"
+  width={265}
+  height={178}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/task-category-actions-menu-edit.jpg"
+  width={265}
+  height={178}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/task-category-actions-menu-edit.jpg"
+  width={390}
+  height={195}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/task-category-actions-menu-edit.jpg"
+  width={390}
+  height={195}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+An edit dialog will open where you can change the category name. The category name cannot be empty.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/edit-task-category-modal.jpg"
+  width={342}
+  height={255}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/edit-task-category-modal.jpg"
+  width={342}
+  height={255}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/edit-task-category-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/edit-task-category-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+---
+
+### Deleting a category
+
+To delete a category, open the <b>Actions menu</b> and select <b>Delete</b>. All tasks linked to this category will also be deleted. Deleting a category cannot be undone, so make sure the category is no longer needed and that any important information has been saved.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/task-category-actions-menu-delete.jpg"
+  width={265}
+  height={178}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/task-category-actions-menu-delete.jpg"
+  width={265}
+  height={178}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/task-category-actions-menu-delete.jpg"
+  width={390}
+  height={195}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/task-category-actions-menu-delete.jpg"
+  width={390}
+  height={195}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+In the confirmation dialog, click <b>Delete</b>.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/delete-task-category-modal.jpg"
+  width={412}
+  height={177}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/delete-task-category-modal.jpg"
+  width={412}
+  height={177}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/delete-task-category-modal.jpg"
+  width={350}
+  height={192}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/delete-task-category-modal.jpg"
+  width={350}
+  height={192}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After confirmation, the category will be permanently deleted and removed from the list.
 
 ---

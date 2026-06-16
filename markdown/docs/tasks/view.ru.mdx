@@ -1,0 +1,87 @@
+import { DocsImage } from "@/site/docs/DocsImage";
+
+# Просмотр задач
+
+Задачи отображаются на странице <b>Задачи</b> в виде списка или карточек. На мобильных устройствах доступен только режим карточек.
+
+Задача в списке и карточке может содержать следующие данные (в зависимости от типа отображения):
+
+- Заголовок — <span className="font-normal">краткое название задачи</span>
+- Срок выполнения — <span className="font-normal">срок завершения задачи</span>
+- Статус — <span className="font-normal">текущее состояние задачи</span>
+- Исполнитель — <span className="font-normal">изображение или полное имя пользователя, ответственного за выполнение задачи</span>
+- Категория — <span className="font-normal">группа для организации задачи</span>
+- Проект — <span className="font-normal">проект, к которому относится задача</span>
+- Прогресс — <span className="font-normal">отображение выполнения подзадач задачи в визуальной шкале</span>
+
+<DocsImage
+  src="/docs/tasks/ru/light/large/task-list.jpg"
+  width={944}
+  height={323}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/large/task-list.jpg"
+  width={944}
+  height={323}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/light/small/task-grid.jpg"
+  width={380}
+  height={419}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/small/task-grid.jpg"
+  width={380}
+  height={419}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+На десктопных устройствах при нажатии на <b>заголовок задачи</b>, <b>заголовок проекта</b>, <b>имя автора</b> или <b>имя клиента</b> открывается боковая панель с соответствующей информацией (о задаче, проекте, пользователе или клиенте). 
+
+На мобильных устройствах поведение упрощено: нажатие на карточку сразу выполняет переход на страницу детализации задачи.
+
+Отдельная кнопка <b>комментарии</b> открывает окно с комментариями задачи, а <b>меню действий</b> предоставляет доступ к дополнительным операциям.
+
+---
+
+## Детализация задачи
+
+На странице детализации задачи можно просматривать подробную информацию о задаче, а также связанные с ней подзадачи.
+
+<DocsImage
+  src="/docs/tasks/ru/light/large/task-detail.jpg"
+  width={692}
+  height={490}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/large/task-detail.jpg"
+  width={692}
+  height={490}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/light/small/task-detail.jpg"
+  width={390}
+  height={379}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/ru/dark/small/task-detail.jpg"
+  width={390}
+  height={379}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+Кроме просмотра данных, на странице доступны редактирование отдельных полей задачи, его удаление, а также действия с подзадачами.
+
+---

@@ -18,28 +18,6 @@ export function DocsSectionGrid() {
     <div className="grid gap-4 max-md:grid-cols-1 md:grid-cols-2">
       <DocsSectionCard
         iconLeft={
-          <IconWrapper color="blue">
-            <BookOpen size={24} />
-          </IconWrapper>
-        }
-        href="/docs/getting-started"
-        heading={t("gettingStarted.heading")}
-        subtext={t("gettingStarted.subtext")}
-      />
-
-      <DocsSectionCard
-        iconLeft={
-          <IconWrapper color="cyan">
-            <Layers size={24} />
-          </IconWrapper>
-        }
-        href="/docs/getting-started/overview"
-        heading={t("Overview.heading")}
-        subtext={t("Overview.subtext")}
-      />
-
-      <DocsSectionCard
-        iconLeft={
           <IconWrapper color="purple">
             <FolderKanban size={24} />
           </IconWrapper>
