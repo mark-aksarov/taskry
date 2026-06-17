@@ -1,65 +1,65 @@
-## Roles and permissions
+# Roles and permissions
 
-The system provides 3 roles: <b>“Owner”</b>, <b>“User”</b>, and <b>“Guest”</b>.
+The system provides 3 roles: <b>Owner</b>, <b>User</b>, and <b>Guest</b>.
 
-- Owner — <span className="font-normal">a user who registered an account via the form on the <b>“SignUp”</b> page.</span>
+- Owner — <span className="font-normal">a user who registered an account through the <b>Sign Up</b> page.</span>
 - User — <span className="font-normal">an account created by the owner.</span>
-- Guest — <span className="font-normal">a demo access mode intended only for viewing the interface and system capabilities.</span>
+- Guest — <span className="font-normal">a demo access mode intended only for viewing the interface and system features.</span>
 
-Permissions depend on the user role and define the available actions in the system.
-
----
-
-### Owner and user
-
-The owner and user have extended permissions and work with the main system entities: projects, tasks, clients, and related data.
-
-Both roles have the same permissions for working with business entities:
-
-- create, edit, change status, and delete projects
-- create, edit, change status, and delete tasks
-- manage clients and related system entities
-
-General limitations
-
-- deleting your own account <span className="font-normal">is currently unavailable (this feature will be added in the future)</span>.
+Permissions depend on the user's role and determine which actions are available in the system.
 
 ---
 
-### Owner
+## Owner and user
 
-The owner has full permissions for user and comment management within the system.
+The <b>Owner</b> and <b>User</b> roles have extended permissions and work with the main system entities: projects, tasks, clients, and related data.
+
+Both roles have the same permissions for working with these entities:
+
+- Projects — <span className="font-normal">create, edit, change status, and delete projects and related entities.</span>
+- Tasks — <span className="font-normal">create, edit, change status, and delete tasks, subtasks, and task categories.</span>
+- Clients — <span className="font-normal">create, edit, and manage clients, companies, and positions.</span>
+
+### General limitations
+
+- <span className="font-normal">Deleting your own account is currently unavailable (this feature will be added in the future).</span>
+
+---
+
+## Owner
+
+The Owner has full access to managing users and comments in the system.
 
 - add users
 - edit users
 - delete users <span className="font-normal">(except their own account)</span>
-- change user profile image
-- change user password
+- change user profile images
+- change user passwords
 - edit any comments
 - delete any comments
 
 ---
 
-### User
+## User
 
-The user has limited permissions compared to the owner.
+The User has more limited permissions than the Owner.
 
-- edit profile
-- change profile image
-- change password
+- edit their profile
+- change their profile image
+- change their password
 - edit their own comments
 - delete their own comments
 
 ---
 
-### Guest
+## Guest
 
-The guest has read-only access to the system.
+The Guest has view-only access to the system.
 
 - view pages
 - use search
 - filter and sort data
 
-Any attempt to perform a data-modifying action <span className="font-normal">will result in displaying a modal window indicating restricted access</span>.
+Any attempt to modify data will display an access restriction dialog.
 
 ---

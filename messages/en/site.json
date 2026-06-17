@@ -71,26 +71,18 @@
       },
       "team": {
         "heading": "Team",
+        "view": "Team view",
         "roles": "Roles and permissions",
-        "viewMode": "Team view",
-        "create": "Create user",
-        "edit": "Edit user",
-        "delete": "Delete user",
-        "filters": "Filters",
-        "sorting": "Sorting",
-        "positions": "Positions",
-        "positionActions": "Position actions"
+        "actions": "User actions",
+        "search": "Search and filtering",
+        "positions": "Positions"
       },
       "customers": {
         "heading": "Customers",
-        "viewMode": "Customer view",
-        "create": "Create customer",
-        "edit": "Edit customer",
-        "delete": "Delete customer",
-        "filters": "Filters",
-        "sorting": "Sorting",
-        "companies": "Companies",
-        "companyActions": "Company actions"
+        "view": "Customer view",
+        "actions": "Customer actions",
+        "search": "Search and filtering",
+        "companies": "Companies"
       }
     },
     "DocsPaginationLink": {

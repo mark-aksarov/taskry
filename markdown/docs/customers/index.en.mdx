@@ -1,71 +1,63 @@
 import { DocsCardLink } from "@/site/docs/DocsCardLink";
 import { DocsCardGrid } from "@/site/docs/DocsCardGrid";
 
-## Clients
+# Customers
 
-A client is an entity that represents a contact in projects within the system. It is used to store contact information and to establish relationships with projects and the company.
+A customer is an entity that contains information about a customer:
 
-Stores the following data:
-
-- Full name — <span className="font-normal">the display name of the client.</span>
-- About — <span className="font-normal">a short description of the client shown in the profile.</span>
-- Email — <span className="font-normal">email address used to contact the client.</span>
-- Phone number — <span className="font-normal">client’s phone number.</span>
-- Public link — <span className="font-normal">a link to the client’s profile.</span>
-- Company — <span className="font-normal">the company associated with the client.</span>
+- Full Name — <span className="font-normal">the customer's display name.</span>
+- About Me — <span className="font-normal">short information about the customer shown on the profile page.</span>
+- Email — <span className="font-normal">email address used to contact the customer.</span>
+- Phone Number — <span className="font-normal">the customer's phone number.</span>
+- Public Link — <span className="font-normal">a link to the customer's profile.</span>
+- Company — <span className="font-normal">the company associated with the customer.</span>
 
 ---
 
-### Viewing and navigation
+## Overview
 
-Clients are displayed either as a list or a grid on the <b>“Clients”</b> page. To access this section, select <b>“Clients”</b> from the application’s sidebar navigation.
+This section explains how to work with customers and the main features available to users in the system.
 
-Viewing and editing a client is also available on the client profile page. To open it, click on the client’s name and select <b>“Open client”</b> in the side panel. On this page, each field can be edited through separate modal windows.
+### Viewing customers
+
+This section describes how customers are displayed in the system interface. It covers two view modes—list and cards—and the summary information available for each customer.
+
+### Customer actions
+
+This section covers the main customer actions: creating, editing, and deleting customers.
+
+### Search and filtering
+
+This section explains how users can find customers, as well as filtering and sorting options that help narrow the results.
+
+### Companies
+
+This section describes companies and the actions available to users, including viewing the company list, creating companies, editing companies, and deleting companies. A company represents an organization associated with a customer and is used to group customers.
 
 ---
 
-### Actions
-
-The following main actions are available for clients:
-
-- Create client — <span className="font-normal">add a new client record by filling in basic details: full name, email, phone, about, company</span>
-- Edit client — <span className="font-normal">modify existing client data</span>
-- Delete client — <span className="font-normal">remove one or multiple clients along with their related data</span>
-
----
-
-### Next steps
+## Next steps
 
 <DocsCardGrid>
   <DocsCardLink
-    heading="View clients"
-    subtext="Switch between different display modes, list items and cards"
-    href="/docs/customers/view-mode"
+    heading="Viewing customers"
+    subtext="View the customer list and customer details"
+    href="/docs/customers/view"
   />
   <DocsCardLink
-    heading="Create client"
-    subtext="How to add a new client to the system"
-    href="/docs/customers/create"
+    heading="Customer actions"
+    subtext="Creating, editing, and deleting customers"
+    href="/docs/customers/actions"
   />
   <DocsCardLink
-    heading="Edit client"
-    subtext="Update client information"
-    href="/docs/customers/edit"
-  />
-  <DocsCardLink
-    heading="Delete client"
-    subtext="Remove a client and related data"
-    href="/docs/customers/delete"
+    heading="Search and filtering"
+    subtext="Searching, filtering, and sorting customers by different parameters"
+    href="/docs/customers/search"
   />
   <DocsCardLink
     heading="Companies"
-    subtext="Manage the list of companies"
-    href="/docs/customers/companies"
-  />
-  <DocsCardLink
-    heading="Company actions"
-    subtext="Creating, editing, and deleting companies"
-    href="/docs/customers/company-actions"
+    subtext="Viewing, creating, editing, and deleting companies"
+    href="/docs/customers/categories"
   />
 </DocsCardGrid>
 

@@ -38,26 +38,18 @@ export function DocsPagination() {
       team: [
         { slug: "", label: t("team.heading") },
         { slug: "roles", label: t("team.roles") },
-        { slug: "view-mode", label: t("team.viewMode") },
-        { slug: "create", label: t("team.create") },
-        { slug: "edit", label: t("team.edit") },
-        { slug: "delete", label: t("team.delete") },
-        { slug: "filters", label: t("team.filters") },
-        { slug: "sorting", label: t("team.sorting") },
+        { slug: "view", label: t("team.view") },
+        { slug: "actions", label: t("team.actions") },
+        { slug: "search", label: t("team.search") },
         { slug: "positions", label: t("team.positions") },
-        { slug: "position-actions", label: t("team.positionActions") },
       ],
 
       customers: [
         { slug: "", label: t("customers.heading") },
-        { slug: "view-mode", label: t("customers.viewMode") },
-        { slug: "create", label: t("customers.create") },
-        { slug: "edit", label: t("customers.edit") },
-        { slug: "delete", label: t("customers.delete") },
-        { slug: "filters", label: t("customers.filters") },
-        { slug: "sorting", label: t("customers.sorting") },
+        { slug: "view", label: t("customers.view") },
+        { slug: "actions", label: t("customers.actions") },
+        { slug: "search", label: t("customers.search") },
         { slug: "companies", label: t("customers.companies") },
-        { slug: "company-actions", label: t("customers.companyActions") },
       ],
     };
 

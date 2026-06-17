@@ -1,0 +1,86 @@
+import { DocsImage } from "@/site/docs/DocsImage";
+
+# Просмотр клиентов
+
+Клиенты отображаются на странице <b>Клиенты</b> в виде списка или карточек. На мобильных устройствах доступен только режим карточек.
+
+Клиент в списке и карточке может содержать следующие данные (в зависимости от типа отображения):
+
+- Полное имя — <span className="font-normal">отображаемое имя клиента.</span>
+- Аватар — <span className="font-normal">изображение клиента.</span>
+- Email — <span className="font-normal">электронная почта для связи с клиентом.</span>
+- Номер телефона — <span className="font-normal">номер телефона клиента.</span>
+- Публичная ссылка — <span className="font-normal">ссылка на профиль клиента.</span>
+- Компания — <span className="font-normal">компания, с которой связан клиент.</span>
+
+<DocsImage
+  src="/docs/customers/ru/light/large/customer-list.jpg"
+  width={944}
+  height={324}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/dark/large/customer-list.jpg"
+  width={944}
+  height={324}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/light/small/customer-grid.jpg"
+  width={380}
+  height={482}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/dark/small/customer-grid.jpg"
+  width={380}
+  height={482}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+На десктопных устройствах при нажатии на <b>имя клиента</b> открывается боковая панель с соответствующей информацией о клиенте. 
+
+На мобильных устройствах поведение упрощено: нажатие на карточку сразу выполняет переход на страницу профиля клиента.
+
+Отдельная кнопка <b>меню действий</b> предоставляет доступ к дополнительным операциям.
+
+---
+
+## Детализация клиента
+
+На странице детализации клиента можно просматривать подробную информацию о клиенте.
+
+<DocsImage
+  src="/docs/customers/ru/light/large/customer-detail.jpg"
+  width={724}
+  height={424}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/dark/large/customer-detail.jpg"
+  width={724}
+  height={424}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/light/small/customer-detail.jpg"
+  width={390}
+  height={470}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/dark/small/customer-detail.jpg"
+  width={390}
+  height={470}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+Кроме просмотра данных, на странице доступны редактирование отдельных полей клиента, а также его удаление.
+
+---

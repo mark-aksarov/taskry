@@ -2,48 +2,250 @@ import { DocsImage } from "@/site/docs/DocsImage";
 
 ## Companies
 
-A company is an entity that represents an organization linked to a customer and is used to group customers.
+A company is an entity that represents an organization associated with a customer and is used for grouping customers.
 
 ---
 
 ### Viewing companies
 
-Companies are shown in dropdown lists when you create or edit a customer. They are also available on the companies page and used for filtering.
+Companies are displayed in dropdown lists when creating or editing a customer. They are also available on the Companies page and used for filtering.
 
-To view all companies, go to the <b>“Customers”</b> page, click the <b>“Manage”</b> button at the top of the page, and select <b>“Companies”</b> from the menu to open the <b>“Companies”</b> page.
+To view all companies, go to the <b>Customers</b> page, click the <b>Management</b> button at the top of the page, and select <b>Companies</b> from the menu to navigate to the <b>Companies</b> page.
 
 <DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/customers-manage-menu-light-en.jpg"
-  theme="light"
-  width={164}
-  height={116}
-  containerClassName="max-md:w-[123px]"
+  src="/docs/customers/ru/light/large/customer-manage.jpg"
+  width={216}
+  height={147}
+  containerClassName="dark:hidden max-md:hidden"
 />
 
 <DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/customers-manage-menu-dark-en.jpg"
-  theme="dark"
-  width={164}
-  height={116}
-  containerClassName="max-md:w-[123px]"
-/>
-
-After that, a list of companies will appear in the main area of the page. Each item in the list shows the company name and an actions menu.
-
-<DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/company-items-light-en.jpg"
-  theme="light"
-  width={540}
-  height={309}
+  src="/docs/customers/ru/dark/large/customer-manage.jpg"
+  width={216}
+  height={147}
+  containerClassName="not-dark:hidden max-md:hidden"
 />
 
 <DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/company-items-dark-en.jpg"
-  theme="dark"
-  width={540}
-  height={309}
+  src="/docs/customers/ru/light/small/customer-manage.jpg"
+  width={390}
+  height={152}
+  containerClassName="dark:hidden md:hidden"
 />
 
-The next section explains the main actions with companies: adding, editing, and deleting.
+<DocsImage
+  src="/docs/customers/ru/dark/small/customer-manage.jpg"
+  width={390}
+  height={152}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After that, the list of companies will be displayed in the main page area. Each list item contains a name and an actions menu.
+
+<DocsImage
+  src="/docs/customers/ru/light/large/company-list.jpg"
+  width={935}
+  height={387}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/dark/large/company-list.jpg"
+  width={935}
+  height={387}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/light/small/company-list.jpg"
+  width={390}
+  height={452}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/dark/small/company-list.jpg"
+  width={390}
+  height={452}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+The next section describes the main actions available for companies: creating, editing, and deleting.
+
+---
+
+## Company actions
+
+Working with companies includes the following actions:
+
+- Create company — <span className="font-normal">adding a new company</span>
+- Edit company — <span className="font-normal">modifying the name of an existing company</span>
+- Delete company — <span className="font-normal">removing a company from the system</span>
+
+---
+
+### Adding a company
+
+To add a company, go to the <b>Companies</b> page, click the <b>Create new</b> button at the top of the page, and enter the company name in the modal window.
+
+<DocsImage
+  src="/docs/customers/ru/light/large/create-company-modal.jpg"
+  width={342}
+  height={256}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/dark/large/create-company-modal.jpg"
+  width={342}
+  height={256}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/light/small/create-company-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/dark/small/create-company-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After saving, the new company will appear in the list.
+
+---
+
+### Editing a company
+
+To edit a company, click the <b>Actions menu</b> (three-dot icon) in the company list and select <b>Edit</b>.
+
+<DocsImage
+  src="/docs/customers/ru/light/large/company-actions-menu-edit.jpg"
+  width={265}
+  height={178}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/dark/large/company-actions-menu-edit.jpg"
+  width={265}
+  height={178}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/light/small/company-actions-menu-edit.jpg"
+  width={390}
+  height={200}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/dark/small/company-actions-menu-edit.jpg"
+  width={390}
+  height={200}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After that, an edit modal will open where you can change the company name. The company name cannot be empty.
+
+<DocsImage
+  src="/docs/customers/ru/light/large/edit-company-modal.jpg"
+  width={342}
+  height={255}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/dark/large/edit-company-modal.jpg"
+  width={342}
+  height={255}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/light/small/edit-company-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/dark/small/edit-company-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+---
+
+### Deleting a company
+
+To delete a company, open the <b>Actions menu</b> and select <b>Delete</b>.
+
+<DocsImage
+  src="/docs/customers/ru/light/large/company-actions-menu-delete.jpg"
+  width={265}
+  height={178}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/dark/large/company-actions-menu-delete.jpg"
+  width={265}
+  height={178}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/light/small/company-actions-menu-delete.jpg"
+  width={390}
+  height={200}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/dark/small/company-actions-menu-delete.jpg"
+  width={390}
+  height={200}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+In the confirmation modal, click <b>Delete</b>.
+
+<DocsImage
+  src="/docs/customers/ru/light/large/delete-company-modal.jpg"
+  width={412}
+  height={199}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/dark/large/delete-company-modal.jpg"
+  width={412}
+  height={199}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/light/small/delete-company-modal.jpg"
+  width={350}
+  height={192}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/customers/ru/dark/small/delete-company-modal.jpg"
+  width={350}
+  height={192}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After confirmation, the company will be permanently deleted and removed from the list.
 
 ---

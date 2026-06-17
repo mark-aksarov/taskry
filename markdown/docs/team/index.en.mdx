@@ -1,88 +1,82 @@
 import { DocsCardLink } from "@/site/docs/DocsCardLink";
 import { DocsCardGrid } from "@/site/docs/DocsCardGrid";
 
-## Team
+# Team
 
-The team is a list of users within a workspace who participate in tasks and projects.
+The team is a list of users within a workspace who work on tasks and projects.
 
-Users are not grouped into separate groups — all interaction happens through system entities:
+Users are not organized into separate groups. All collaboration happens through system entities:
 
 - Tasks — <span className="font-normal">a user can be an assignee or a creator.</span>
-- Projects — <span className="font-normal">a user can be the project creator.</span>
-- Comments — <span className="font-normal">a user acts as the author.</span>
+- Projects — <span className="font-normal">a user can be the creator of a project.</span>
+- Comments — <span className="font-normal">a user acts as the author of a comment.</span>
 
-Each task can have only one assignee.
+A task can have only one assignee.
 
-Each user contains the following data:
+Each user contains the following information:
 
-- Full name — <span className="font-normal">the user’s display name.</span>
-- Email — <span className="font-normal">used for login and communication.</span>
-- Role — <span className="font-normal">defines access level (owner, user, guest).</span>
-- Position — <span className="font-normal">the user’s position within the team.</span>
-- Contact details — <span className="font-normal">phone, address, and other fields.</span>
-- Email verified — <span className="font-normal">whether the user confirmed their email via a link.</span>
-
----
-
-### Viewing and navigation
-
-Users are displayed as a list or grid on the <b>“Team”</b> page. To open this section, select <b>“Team”</b> in the application sidebar.
-
-You can also view and edit a user on their profile page. To do this, click on the user’s name to open their card. On this page, you can update user data.
+- Full Name — <span className="font-normal">the user's display name.</span>
+- Email — <span className="font-normal">used for sign-in and communication.</span>
+- Role — <span className="font-normal">defines the access level (owner, user, guest).</span>
+- Position — <span className="font-normal">the user's position in the team.</span>
+- Contact Information — <span className="font-normal">phone number, address, and other fields.</span>
+- Email Verified — <span className="font-normal">whether the user has confirmed their email through the verification link.</span>
 
 ---
 
-### Actions
+## Overview
 
-The following main actions are available for users:
+This section explains how to work with the team and the main features available to users in the system.
 
-- Create user — <span className="font-normal">add a new team member.</span>
-- Edit user — <span className="font-normal">update user data.</span>
-- Delete user — <span className="font-normal">remove a user.</span>
-- Change password — <span className="font-normal">update the login password.</span>
-- Change user image — <span className="font-normal">upload or update the user avatar.</span>
+### Roles and permissions
 
-Depending on the role (owner, user, guest), these actions may be restricted and are described in the next section (Roles and permissions).
+This section describes user roles and their permissions in the system. There are three roles: owner, user, and guest, each with its own access restrictions.
+
+### Viewing team
+
+This section explains how users are displayed on the <b>Team</b> page, including different view modes, cards, and user details.
+
+### User actions
+
+This section covers the main user actions: creating, editing, and deleting users.
+
+### Search and filtering
+
+This section explains how to find users, as well as filtering and sorting that help narrow the results.
+
+### Positions
+
+This section describes how to work with positions, including viewing the list, adding new positions, editing existing positions, and deleting positions.
 
 ---
 
-### Next steps
+## Next steps
 
 <DocsCardGrid>
   <DocsCardLink
     heading="Roles and permissions"
-    subtext="User roles and their access levels"
+    subtext="User roles and their access permissions"
     href="/docs/team/roles"
   />
   <DocsCardLink
-    heading="Team view"
-    subtext="Switch between different display modes, list items and cards"
+    heading="Viewing team"
+    subtext="Switching between different view modes, list and card elements"
     href="/docs/team/view-mode"
   />
   <DocsCardLink
-    heading="Create user"
-    subtext="Add a new user to the system"
-    href="/docs/team/create"
+    heading="User actions"
+    subtext="Creating, editing, and deleting users"
+    href="/docs/team/actions"
   />
   <DocsCardLink
-    heading="Edit user"
-    subtext="Update an existing user’s data"
-    href="/docs/team/edit"
-  />
-  <DocsCardLink
-    heading="Delete user"
-    subtext="Remove a user from the system"
-    href="/docs/team/delete"
+    heading="Search and filtering"
+    subtext="Searching, filtering, and sorting users by different parameters"
+    href="/docs/team/search"
   />
   <DocsCardLink
     heading="Positions"
-    subtext="Manage the list of user positions"
+    subtext="Viewing, creating, editing, and deleting positions"
     href="/docs/team/positions"
-  />
-  <DocsCardLink
-    heading="Position actions"
-    subtext="Creating, editing, and deleting positions"
-    href="/docs/team/position-actions"
   />
 </DocsCardGrid>
 

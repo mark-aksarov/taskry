@@ -1,49 +1,249 @@
 import { DocsImage } from "@/site/docs/DocsImage";
 
-## Position
+# Position
 
-A position is an entity that defines a user’s position and is used to describe the user.
+A position is an entity that defines a user's job role and is used to describe the user.
 
 ---
 
-### Viewing positions
+## Viewing positions
 
-Positions are shown in a dropdown list when you edit a user. They are also available on the positions page and used for filtering.
+Positions are shown in dropdown lists when editing a user. They are also available on the Positions page and used for filtering.
 
-To view all positions, go to the <b>“Positions”</b> page, click the <b>“Manage”</b> button at the top of the page, and select <b>“Positions”</b> from the menu to open the <b>“Positions”</b> page.
+To view all positions, go to the <b>Positions</b> page, click <b>Manage</b> at the top of the page, and select <b>Positions</b> from the menu to open the <b>Positions</b> page.
 
 <DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/team-manage-menu-light-en.jpg"
-  theme="light"
-  width={166}
-  height={116}
-  containerClassName="max-md:w-[123px]"
+  src="/docs/team/en/light/large/user-manage.jpg"
+  width={250}
+  height={147}
+  containerClassName="dark:hidden max-md:hidden"
 />
 
 <DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/team-manage-menu-dark-en.jpg"
-  theme="dark"
-  width={166}
-  height={116}
-  containerClassName="max-md:w-[123px]"
-/>
-
-After that, a list of positions will appear in the main area of the page. Each item in the list shows the position name and an actions menu.
-
-<DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/position-items-light-en.jpg"
-  theme="light"
-  width={540}
-  height={309}
+  src="/docs/team/en/dark/large/user-manage.jpg"
+  width={250}
+  height={147}
+  containerClassName="not-dark:hidden max-md:hidden"
 />
 
 <DocsImage
-  src="https://storage.yandexcloud.net/task-manager-docs/position-items-dark-en.jpg"
-  theme="dark"
-  width={540}
-  height={309}
+  src="/docs/team/en/light/small/user-manage.jpg"
+  width={390}
+  height={151}
+  containerClassName="dark:hidden md:hidden"
 />
 
-The next section explains the main actions with positions: creating, editing, and deleting.
+<DocsImage
+  src="/docs/team/en/dark/small/user-manage.jpg"
+  width={390}
+  height={151}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After that, the list of positions will appear in the main area of the page. Each item in the list contains a name and an actions menu.
+
+<DocsImage
+  src="/docs/team/en/light/large/position-list.jpg"
+  width={943}
+  height={397}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/dark/large/position-list.jpg"
+  width={943}
+  height={397}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/light/small/position-list.jpg"
+  width={390}
+  height={454}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/dark/small/position-list.jpg"
+  width={390}
+  height={454}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+---
+
+## Position actions
+
+Working with positions includes the following actions:
+
+- Create position — <span className="font-normal">add a new position</span>
+- Edit position — <span className="font-normal">change the name of an existing position</span>
+- Delete position — <span className="font-normal">remove a position from the system</span>
+
+---
+
+### Adding a position
+
+To add a position, go to the <b>Positions</b> page, click <b>Create New</b> at the top of the page, and enter the position name in the modal window.
+
+<DocsImage
+  src="/docs/team/en/light/large/create-position-modal.jpg"
+  width={342}
+  height={256}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/dark/large/create-position-modal.jpg"
+  width={342}
+  height={256}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/light/small/create-position-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/dark/small/create-position-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After saving, the new position will appear in the list.
+
+---
+
+### Editing a position
+
+To edit a position, click the <b>Action menu</b> (three dots icon) in the list and select <b>Edit</b>.
+
+<DocsImage
+  src="/docs/team/en/light/large/position-actions-menu-edit.jpg"
+  width={270}
+  height={190}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/dark/large/position-actions-menu-edit.jpg"
+  width={270}
+  height={190}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/light/small/position-actions-menu-edit.jpg"
+  width={390}
+  height={195}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/dark/small/position-actions-menu-edit.jpg"
+  width={390}
+  height={195}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+An edit window will open where you can change the position name. The position name cannot be empty.
+
+<DocsImage
+  src="/docs/team/en/light/large/edit-position-modal.jpg"
+  width={342}
+  height={256}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/dark/large/edit-position-modal.jpg"
+  width={342}
+  height={256}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/light/small/edit-position-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/dark/small/edit-position-modal.jpg"
+  width={390}
+  height={200}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+---
+
+### Deleting a position
+
+To delete a position, click <b>Delete</b> in the <b>Action menu</b>. In the modal window, click <b>Delete</b>.
+
+<DocsImage
+  src="/docs/team/en/light/large/position-actions-menu-delete.jpg"
+  width={270}
+  height={190}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/dark/large/position-actions-menu-delete.jpg"
+  width={270}
+  height={190}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/light/small/position-actions-menu-delete.jpg"
+  width={390}
+  height={195}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/dark/small/position-actions-menu-delete.jpg"
+  width={390}
+  height={195}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+In the modal window, click <b>Delete</b> again to confirm.
+
+<DocsImage
+  src="/docs/team/en/light/large/delete-position-modal.jpg"
+  width={412}
+  height={177}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/dark/large/delete-position-modal.jpg"
+  width={412}
+  height={177}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/light/small/delete-position-modal.jpg"
+  width={350}
+  height={192}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/dark/small/delete-position-modal.jpg"
+  width={350}
+  height={192}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After confirmation, the position will be permanently deleted and removed from the list.
 
 ---
