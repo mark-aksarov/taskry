@@ -46,6 +46,7 @@ const track = tv({
 
 const handle = tv({
   base: [
+    "block",
     "h-[1.125rem] w-[1.125rem]",
     "rounded-full",
     "bg-white",
@@ -73,9 +74,9 @@ export function Switch({ children, ...props }: SwitchProps) {
       {(renderProps) => (
         <>
           {children}
-          <div className={track(renderProps)}>
-            <div className={handle(renderProps)} />
-          </div>
+          <span className={track(renderProps)}>
+            <span className={handle(renderProps)} />
+          </span>
         </>
       )}
     </RACSwitch>

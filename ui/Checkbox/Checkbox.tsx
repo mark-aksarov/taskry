@@ -63,7 +63,7 @@ export const Checkbox = ({ children, ...props }: CheckboxProps) => {
     >
       {({ isSelected, ...renderProps }) => (
         <>
-          <div
+          <span
             className={boxBase({
               isSelected,
               ...renderProps,
@@ -77,7 +77,7 @@ export const Checkbox = ({ children, ...props }: CheckboxProps) => {
                 className={boxIcon()}
               />
             ) : null}
-          </div>
+          </span>
           {children}
         </>
       )}

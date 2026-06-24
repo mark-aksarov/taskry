@@ -17,15 +17,8 @@ export const IconlyCalendar = ({
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
       <title>Iconly/Bold/Calendar</title>
-      <g
-        id="Iconly/Bold/Calendar"
-        stroke="none"
-        strokeWidth="1.5"
-        fill="none"
-        fillRule="evenodd"
-      >
+      <g stroke="none" strokeWidth="1.5" fill="none" fillRule="evenodd">
         <g
-          id="Calendar"
           transform="translate(3.000000, 2.000000)"
           fill={color}
           fillRule="nonzero"

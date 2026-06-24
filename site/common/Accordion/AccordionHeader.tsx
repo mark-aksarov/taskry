@@ -9,7 +9,7 @@ export function AccordionHeader({ children }: { children: React.ReactNode }) {
     <DisclosureHeader
       className="gap-4 px-6 py-4 text-lg font-bold"
       renderIcon={(isExpanded) => (
-        <div className="flex items-center justify-center rounded-lg bg-(--accent) p-1.5 text-white">
+        <span className="flex items-center justify-center rounded-lg bg-(--accent) p-1.5 text-white">
           <Plus
             size={22}
             absoluteStrokeWidth
@@ -18,8 +18,9 @@ export function AccordionHeader({ children }: { children: React.ReactNode }) {
               "transform transition-transform",
               isExpanded ? "rotate-45" : "",
             )}
+            aria-hidden={false}
           />
-        </div>
+        </span>
       )}
     >
       {children}

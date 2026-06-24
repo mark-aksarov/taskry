@@ -1,7 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import { Skeleton } from "@/ui/Skeleton";
 
-const styles = "rounded-full overflow-hidden relative flex-none";
+const styles = "rounded-full block overflow-hidden relative flex-none";
 
 interface ImageContainerProps {
   className?: string;
@@ -10,9 +10,9 @@ interface ImageContainerProps {
 
 export function ImageContainer({ className, children }: ImageContainerProps) {
   return (
-    <div className={twMerge(styles, "bg-(--surface-tertiary)", className)}>
+    <span className={twMerge(styles, "bg-(--surface-tertiary)", className)}>
       {children}
-    </div>
+    </span>
   );
 }
 
