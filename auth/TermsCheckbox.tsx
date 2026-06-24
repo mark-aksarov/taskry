@@ -24,7 +24,7 @@ export function TermsCheckbox({
       className="font-normal"
       isDisabled={isDisabled}
     >
-      <div className="w-full">
+      <span className="w-full">
         {t("prefix")}{" "}
         <AuthLink
           target="_blank"
@@ -43,7 +43,7 @@ export function TermsCheckbox({
         >
           {t("privacy")}
         </AuthLink>
-      </div>
+      </span>
     </Checkbox>
   );
 }
