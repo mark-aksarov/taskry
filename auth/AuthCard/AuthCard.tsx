@@ -13,8 +13,8 @@ const styles = tv({
   slots: {
     base: [
       "flex flex-col",
-      "p-6",
-      "max-md:min-h-full",
+      "p-6 md:my-8",
+      "max-md:min-h-[100dvh]",
       "max-md:w-full",
       "max-md:rounded-none",
       "max-md:shadow-none",
