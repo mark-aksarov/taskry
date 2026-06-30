@@ -168,6 +168,62 @@ Your `.env.development`, `.env.production`, `.env.e2e`, or `.env.integration` fi
 | `S3_REGION`          | AWS S3 region.                                                                                              |
 | `S3_ENDPOINT`        | Full URL of a custom S3-compatible endpoint                                                                 |
 
+## Project Structure
+
+```
+├── app/                                 # Locale-based routing
+│   ├── [locale]/
+│   │   ├── (auth)/                      # Authentication routes
+│   │   ├── (dashboard)/                 # Dashboard routes
+│   │   ├── (site)/                      # Landing page and documentation routes
+│   │   └── layout.tsx
+│   ├── api/                             # Route Handlers
+│   └── globals.css
+├── auth/                                # Auth components
+├── common/                              # Shared components
+├── cypress/                             # e2e tests
+├── dashboard/                           # Dashboard components
+├── i18n/                                # next-intl configuration files
+├── icons/                               # Icon components
+├── markdown/                            # Markdown content for documentation, privacy policy, and terms of service
+├── messages/                            # JSON translation files for all locales (en, ru)
+├── mocks/                               # Mock data for Storybook
+├── lib/
+│   ├── actions/                         # Server Actions
+│   ├── data/                            # Data Access Layer (DAL) and DTO models
+│   ├── hooks/                           # Custom hooks
+│   ├── schemas/                         # Validation schemas (Zod)
+│   ├── swr/                             # SWR hooks for data fetching
+│   ├── utils/                           # Util functions
+│   ├── auth-client.ts                   # Better Auth client instance
+│   ├── auth.ts                          # Better Auth server configuration
+│   ├── mail.ts                          # Nodemailer configuration for sending emails
+│   ├── permissions.ts                   # Roles and permissions
+│   ├── prisma.ts                        # Prisma Client initialization
+│   └── types.ts                         # Types for filtering, sorting, and contexts
+├── prisma/                              # Prisma schema, migrations, and seed data
+├── site/                                # Landing page and documentation components
+├── ui/                                  # UI kit components
+├── public/                              # Static assets
+├── .env.development.example             # Env variables for development
+├── .env.e2e.example                     # Env variables for e2e tests
+├── .env.integration.example             # Env variables for integration tests
+├── .env.production.example              # Env variables for production
+├── cypress.config.ts
+├── docker-compose.e2e.yml               # Docker Compose for e2e tests
+├── docker-compose.integration.yml       # Docker Compose for integration tests
+├── docker-compose.production.yml        # Docker Compose for production
+├── Dockerfile                           # Dockerfile for app
+├── Dockerfile.dbinit                    # Dockerfile for database initialization
+├── Dockerfile.storybook                 # Dockerfile for Storybook
+├── middleware.ts
+├── next.config.ts
+├── prisma.config.ts
+├── vitest.config.ts
+├── vitest.setup.integration.ts          # Vitest setup for integration tests
+└── vitest.setup.ui.ts                   # Vitest setup for UI tests
+```
+
 ## License
 
 This project is licensed under the **MIT License**. See [LICENSE](LICENSE).
