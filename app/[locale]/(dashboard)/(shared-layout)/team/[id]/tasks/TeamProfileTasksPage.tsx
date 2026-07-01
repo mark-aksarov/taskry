@@ -19,8 +19,8 @@ import { BackButton } from "@/dashboard/common/BackButton";
 import { ViewModeProvider } from "@/dashboard/common/ViewMode";
 import { PageContainer } from "@/dashboard/common/PageContainer";
 import { AbsoluteCenter } from "@/dashboard/common/AbsoluteCenter";
-import { TasksEmptySection } from "@/dashboard/tasks/TasksEmptySection";
 import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
+import { AssignedTasksEmptySection } from "@/dashboard/tasks/TasksEmptySection";
 import { TaskActionsMenuTrigger } from "@/dashboard/tasks/TaskActionsMenuTrigger";
 import { TaskSortingMenuTriggerLarge } from "@/dashboard/tasks/TaskSortingMenuTrigger";
 import { TaskSortingMenuTriggerMobile } from "@/dashboard/tasks/TaskSortingMenuTrigger";
@@ -57,7 +57,7 @@ export function TeamProfileTasksPage({
               </DetailCardHeader>
 
               <div className="flex flex-auto items-center justify-center px-6">
-                <TasksEmptySection headingClassName="md:text-3xl" />
+                <AssignedTasksEmptySection headingClassName="md:text-3xl" />
               </div>
             </DetailCardLeft>
 
@@ -81,7 +81,7 @@ export function TeamProfileTasksPage({
             <ToolbarMobile firstSlot={navigationMobile} />
 
             <AbsoluteCenter className="w-full">
-              <TasksEmptySection />
+              <AssignedTasksEmptySection />
             </AbsoluteCenter>
           </PageGrid>
         </PageContainer>

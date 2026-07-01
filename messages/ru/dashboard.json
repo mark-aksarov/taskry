@@ -1007,10 +1007,15 @@
     "AssignedTasksSectionHeading": {
       "text": "Назначенные задачи"
     },
-    "TasksEmptySection": {
-      "heading": "Нет назначенных задач",
+    "TasksEmptySectionBase": {
       "description": "Создайте новую задачу, чтобы отслеживать свою работу",
       "button": "Новая задача"
+    },
+    "AssignedTasksEmptySection": {
+      "heading": "Нет назначенных задач"
+    },
+    "TasksEmptySection": {
+      "heading": "Нет задач"
     },
     "TotalTasksCard": {
       "text": "Всего задач"

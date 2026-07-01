@@ -11,7 +11,7 @@ import { PageContainer } from "@/dashboard/common/PageContainer";
 import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
 import { DashboardCardsGrid } from "@/dashboard/common/DashboardCardsGrid";
 import { AssignedTasksSection } from "@/dashboard/tasks/AssignedTasksSection";
-import { AssignedTasksEmptySection } from "@/dashboard/tasks/AssignedTasksEmptySection";
+import { AssignedTasksEmptySection } from "@/dashboard/tasks/TasksEmptySection";
 
 interface DashboardPageProps {
   totalTaskCount: React.ReactNode;
@@ -56,7 +56,13 @@ export function DashboardPage({
               ) : undefined
             }
             tasksContainer={
-              totalTaskCount ? tasksContainer : <AssignedTasksEmptySection />
+              totalTaskCount ? (
+                tasksContainer
+              ) : (
+                <div className="flex h-[25rem] items-center justify-center">
+                  <AssignedTasksEmptySection headingClassName="max-md:text-3xl md:text-4xl" />
+                </div>
+              )
             }
           />
         </ViewModeProvider>

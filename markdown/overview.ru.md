@@ -144,7 +144,11 @@ async function DataContainer() {
 
 ```tsx
 function PageContainer() {
-  return <PagePresentational dataContainer={<DataContainer />} />;
+  return (
+    <PagePresentational 
+      dataContainer={<DataContainer />} 
+    />
+  )
 }
 ```
 
@@ -201,8 +205,17 @@ function UIComponent() {
 Чтобы такой компонент работал корректно, ему нужен соответствующий `Provider`:
 
 ```tsx
-function DataProvider({ value, children }: CreateTaskProviderProps) {
-  return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
+type Props = {
+  value: any;
+  children: React.ReactNode;
+};
+
+function DataProvider({ value, children }: Props) {
+  return (
+    <DataContext.Provider value={value}>
+      {children}
+    </DataContext.Provider>
+  )
 }
 ```
 

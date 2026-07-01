@@ -5,7 +5,7 @@ import { useModal } from "@/common/ModalManagerContext";
 import { EmptySectionButton } from "@/dashboard/common/EmptySection";
 
 export function TasksEmptySectionCreateButton() {
-  const t = useTranslations("dashboard.tasks.TasksEmptySection");
+  const t = useTranslations("dashboard.tasks.TasksEmptySectionBase");
 
   const { onOpenChange: onModalOpenChange } = useModal("createTask");
 

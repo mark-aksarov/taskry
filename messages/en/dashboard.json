@@ -1007,10 +1007,15 @@
     "AssignedTasksSectionHeading": {
       "text": "Assigned tasks"
     },
-    "TasksEmptySection": {
-      "heading": "No assigned tasks",
+    "TasksEmptySectionBase": {
       "description": "Create a new task to keep track of your work",
       "button": "New task"
+    },
+    "AssignedTasksEmptySection": {
+      "heading": "No assigned tasks"
+    },
+    "TasksEmptySection": {
+      "heading": "No tasks"
     },
     "TotalTasksCard": {
       "text": "Total tasks"

@@ -11,19 +11,38 @@ interface TasksEmptySectionProps {
   headingClassName?: string;
 }
 
-export function TasksEmptySection({
+type TasksEmptySectionBaseProps = TasksEmptySectionProps & {
+  heading: React.ReactNode;
+};
+
+function TasksEmptySectionBase({
   className,
   headingClassName,
-}: TasksEmptySectionProps) {
-  const t = useTranslations("dashboard.tasks.TasksEmptySection");
+  heading,
+}: TasksEmptySectionBaseProps) {
+  const t = useTranslations("dashboard.tasks.TasksEmptySectionBase");
 
   return (
     <EmptySection className={className}>
       <EmptySectionHeading className={headingClassName}>
-        {t("heading")}
+        {heading}
       </EmptySectionHeading>
+
       <EmptySectionDescription>{t("description")}</EmptySectionDescription>
+
       <TasksEmptySectionCreateButton />
     </EmptySection>
   );
+}
+
+export function TasksEmptySection(props: TasksEmptySectionProps) {
+  const t = useTranslations("dashboard.tasks.TasksEmptySection");
+
+  return <TasksEmptySectionBase {...props} heading={t("heading")} />;
+}
+
+export function AssignedTasksEmptySection(props: TasksEmptySectionProps) {
+  const t = useTranslations("dashboard.tasks.AssignedTasksEmptySection");
+
+  return <TasksEmptySectionBase {...props} heading={t("heading")} />;
 }
