@@ -64,6 +64,7 @@ export const Checkbox = ({ children, ...props }: CheckboxProps) => {
       {({ isSelected, ...renderProps }) => (
         <>
           <span
+            data-testid="checkbox-box"
             className={boxBase({
               isSelected,
               ...renderProps,

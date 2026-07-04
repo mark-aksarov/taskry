@@ -33,7 +33,7 @@ describe("Checkbox", () => {
       </Checkbox>,
     );
 
-    const box = screen.getByTestId("label").querySelector("div");
+    const box = screen.getByTestId("checkbox-box");
     const checkbox = screen.getByRole("checkbox");
     expect(checkbox).toBeChecked();
     expect(box).toHaveClass("bg-(--accent)");

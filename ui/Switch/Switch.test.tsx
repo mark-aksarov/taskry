@@ -30,15 +30,15 @@ describe("Switch", () => {
     expect(label).toHaveClass("disabled:text-(--text-disabled)");
   });
 
-  test("applies selected styles when checked prop is true", () => {
+  test("applies selected styles when isSelected prop is true", () => {
     render(<Switch {...defaultProps} isSelected />);
 
     const switchEl = screen.getByRole("switch", { name: "Switch Label" });
-    const trackDiv = screen.getByTestId("label").querySelector("div");
+    const trackSpan = screen.getByTestId("switch-track");
 
     expect(switchEl).toBeChecked();
 
-    expect(trackDiv).toHaveClass("bg-(--accent)");
+    expect(trackSpan).toHaveClass("bg-(--accent)");
   });
 
   test("should apply the given className to the label", () => {

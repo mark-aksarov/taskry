@@ -74,7 +74,7 @@ export function Switch({ children, ...props }: SwitchProps) {
       {(renderProps) => (
         <>
           {children}
-          <span className={track(renderProps)}>
+          <span data-testid="switch-track" className={track(renderProps)}>
             <span className={handle(renderProps)} />
           </span>
         </>
