@@ -2,6 +2,7 @@ import { DashboardLayout } from "./DashboardLayout";
 import { signOut } from "@/lib/actions/auth/signOut";
 import { CurrentUserProvider } from "@/common/CurrentUserContext";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { ProfileLinkContainer } from "@/dashboard/layout/ProfileLinkContainer";
 
 export default async function AppDashboardLayout({
   children,
@@ -22,7 +23,12 @@ export default async function AppDashboardLayout({
 
   return (
     <CurrentUserProvider value={currentUserContextValue}>
-      <DashboardLayout signOut={signOut}>{children}</DashboardLayout>
+      <DashboardLayout
+        signOut={signOut}
+        profileLinkContainer={<ProfileLinkContainer />}
+      >
+        {children}
+      </DashboardLayout>
     </CurrentUserProvider>
   );
 }

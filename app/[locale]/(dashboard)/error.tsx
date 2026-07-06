@@ -2,7 +2,8 @@
 
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
-import ErrorPageContainer from "@/dashboard/layout/ErrorPageContainer";
+import ErrorSection from "@/common/ErrorSection";
+import ErrorDashboardContainer from "@/dashboard/layout/ErrorDashboardContainer";
 
 export default function Error({
   error,
@@ -18,11 +19,13 @@ export default function Error({
   }, [error]);
 
   return (
-    <ErrorPageContainer
-      reset={reset}
-      heading={t("heading")}
-      description={t("description")}
-      resetButtonLabel={t("buttonLabel")}
-    />
+    <ErrorDashboardContainer headerOffset>
+      <ErrorSection
+        reset={reset}
+        heading={t("heading")}
+        description={t("description")}
+        resetButtonLabel={t("buttonLabel")}
+      />
+    </ErrorDashboardContainer>
   );
 }

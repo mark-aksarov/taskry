@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { PageGrid } from "@/dashboard/common/PageGrid";
+import { DashboardGrid } from "@/dashboard/common/DashboardGrid";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
 import { withDeleteCustomersProvider } from "../../DeleteCustomersProvider/__stories__";
@@ -28,8 +28,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   render: () => (
-    <PageGrid>
+    <DashboardGrid>
       <CustomersContainerPresentationExample />
-    </PageGrid>
+    </DashboardGrid>
   ),
 } satisfies Story;

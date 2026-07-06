@@ -1,8 +1,8 @@
 import {
-  EmptySection,
-  EmptySectionHeading,
-  EmptySectionDescription,
-} from "./EmptySection";
+  FallbackSection,
+  FallbackSectionHeading,
+  FallbackSectionDescription,
+} from "../../common/FallbackSection";
 
 import { AbsoluteCenter } from "./AbsoluteCenter";
 
@@ -19,14 +19,14 @@ export function PageEmptySection({
 }: PageEmptySectionProps) {
   return (
     <AbsoluteCenter className="w-full">
-      <EmptySection>
-        <EmptySectionHeading>{heading}</EmptySectionHeading>
-        <EmptySectionDescription className="max-w-[500px]">
+      <FallbackSection>
+        <FallbackSectionHeading>{heading}</FallbackSectionHeading>
+        <FallbackSectionDescription className="max-w-[500px]">
           {description}
-        </EmptySectionDescription>
+        </FallbackSectionDescription>
 
         {createButton}
-      </EmptySection>
+      </FallbackSection>
     </AbsoluteCenter>
   );
 }

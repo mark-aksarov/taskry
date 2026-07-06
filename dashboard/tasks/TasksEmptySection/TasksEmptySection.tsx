@@ -1,8 +1,8 @@
 import {
-  EmptySection,
-  EmptySectionHeading,
-  EmptySectionDescription,
-} from "@/dashboard/common/EmptySection";
+  FallbackSection,
+  FallbackSectionHeading,
+  FallbackSectionDescription,
+} from "@/common/FallbackSection";
 import { useTranslations } from "next-intl";
 import { TasksEmptySectionCreateButton } from "./TasksEmptySectionCreateButton";
 
@@ -23,15 +23,17 @@ function TasksEmptySectionBase({
   const t = useTranslations("dashboard.tasks.TasksEmptySectionBase");
 
   return (
-    <EmptySection className={className}>
-      <EmptySectionHeading className={headingClassName}>
+    <FallbackSection className={className}>
+      <FallbackSectionHeading className={headingClassName}>
         {heading}
-      </EmptySectionHeading>
+      </FallbackSectionHeading>
 
-      <EmptySectionDescription>{t("description")}</EmptySectionDescription>
+      <FallbackSectionDescription>
+        {t("description")}
+      </FallbackSectionDescription>
 
       <TasksEmptySectionCreateButton />
-    </EmptySection>
+    </FallbackSection>
   );
 }
 

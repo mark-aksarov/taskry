@@ -9,9 +9,9 @@ import { I18nProvider } from "@/ui/I18nProvider";
 import { getTranslations } from "next-intl/server";
 import { RouterProvider } from "@/ui/RouterProvider";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { ScrollRestoration } from "@/common/ScrollRestoration";
 import { ThemeProvider } from "@/dashboard/layout/ThemeProvider";
 import { ToastRegionWrapper } from "@/dashboard/layout/ToastRegionWrapper";
-import { ScrollRestoration } from "@/common/ScrollRestoration";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",

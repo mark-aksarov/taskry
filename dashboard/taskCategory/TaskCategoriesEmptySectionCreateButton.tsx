@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useModal } from "../../common/ModalManagerContext";
-import { EmptySectionButton } from "@/dashboard/common/EmptySection";
+import { FallbackSectionButton } from "@/common/FallbackSection";
 
 export function TaskCategoriesEmptySectionCreateButton() {
   const t = useTranslations(
@@ -12,11 +12,11 @@ export function TaskCategoriesEmptySectionCreateButton() {
   const { onOpenChange: onModalOpenChange } = useModal("createTaskCategory");
 
   return (
-    <EmptySectionButton
+    <FallbackSectionButton
       data-test="task-categories-empty-section-create-button"
       onPress={() => onModalOpenChange(true)}
     >
       {t("label")}
-    </EmptySectionButton>
+    </FallbackSectionButton>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useModal } from "../../common/ModalManagerContext";
-import { EmptySectionButton } from "@/dashboard/common/EmptySection";
+import { FallbackSectionButton } from "@/common/FallbackSection";
 
 export function ProjectCategoriesEmptySectionCreateButton() {
   const t = useTranslations(
@@ -12,11 +12,11 @@ export function ProjectCategoriesEmptySectionCreateButton() {
   const { onOpenChange: onModalOpenChange } = useModal("createProjectCategory");
 
   return (
-    <EmptySectionButton
+    <FallbackSectionButton
       data-test="project-categories-empty-section-create-button"
       onPress={() => onModalOpenChange(true)}
     >
       {t("label")}
-    </EmptySectionButton>
+    </FallbackSectionButton>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useModal } from "../../common/ModalManagerContext";
-import { EmptySectionButton } from "@/dashboard/common/EmptySection";
+import { FallbackSectionButton } from "@/common/FallbackSection";
 
 export function CustomersEmptySectionCreateButton() {
   const t = useTranslations(
@@ -13,11 +13,11 @@ export function CustomersEmptySectionCreateButton() {
     useModal("createCustomer");
 
   return (
-    <EmptySectionButton
+    <FallbackSectionButton
       data-test="customers-empty-section-create-button"
       onPress={() => onCreateCustomerModalOpenChange(true)}
     >
       {t("label")}
-    </EmptySectionButton>
+    </FallbackSectionButton>
   );
 }

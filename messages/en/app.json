@@ -4,7 +4,7 @@
     "description": "We encountered an unexpected error. Please try refreshing the page or contact support if the issue persists.",
     "buttonLabel": "Try again"
   },
-  "NotFoundPage": {
+  "NotFound": {
     "heading": "Page not found",
     "description": "The page you are looking for doesn’t exist or has been moved. Please check the URL or return to the homepage.",
     "toHome": "Back to home"

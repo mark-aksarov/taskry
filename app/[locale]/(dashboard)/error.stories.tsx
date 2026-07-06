@@ -1,21 +1,17 @@
 import error from "./error";
 import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
-import { DashboardLayout } from "./DashboardLayout";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { DashboardPageDecorator } from "@/.storybook/DashboardPageDecorator";
 import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
 
 const meta = {
-  title: "pages/ErrorPage",
+  title: "pages/DashboardErrorPage",
   component: error,
   parameters: { layout: "fullscreen" },
   decorators: [
-    (Story) => (
-      <DashboardLayout signOut={async () => ({ status: "success" })}>
-        <Story />
-      </DashboardLayout>
-    ),
+    DashboardPageDecorator,
     withCurrentUserProvider,
     withThemedBackground,
   ],

@@ -1,8 +1,8 @@
 import {
-  EmptySection,
-  EmptySectionHeading,
-  EmptySectionDescription,
-} from "@/dashboard/common/EmptySection";
+  FallbackSection,
+  FallbackSectionHeading,
+  FallbackSectionDescription,
+} from "@/common/FallbackSection";
 import { useTranslations } from "next-intl";
 import { AbsoluteCenter } from "@/dashboard/common/AbsoluteCenter";
 
@@ -11,12 +11,14 @@ export function CommentsEmptySection() {
 
   return (
     <AbsoluteCenter className="w-full p-5">
-      <EmptySection data-test="comments-empty-section">
-        <EmptySectionHeading tag="h3" className="text-3xl!">
+      <FallbackSection data-test="comments-empty-section">
+        <FallbackSectionHeading tag="h3" className="text-3xl!">
           {t("heading")}
-        </EmptySectionHeading>
-        <EmptySectionDescription>{t("description")}</EmptySectionDescription>
-      </EmptySection>
+        </FallbackSectionHeading>
+        <FallbackSectionDescription>
+          {t("description")}
+        </FallbackSectionDescription>
+      </FallbackSection>
     </AbsoluteCenter>
   );
 }

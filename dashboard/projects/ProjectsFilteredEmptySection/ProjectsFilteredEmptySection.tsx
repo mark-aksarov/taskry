@@ -1,10 +1,10 @@
 "use client";
 
 import {
-  EmptySection,
-  EmptySectionHeading,
-  EmptySectionDescription,
-} from "@/dashboard/common/EmptySection";
+  FallbackSection,
+  FallbackSectionHeading,
+  FallbackSectionDescription,
+} from "@/common/FallbackSection";
 
 import { useTranslations } from "next-intl";
 import { useViewMode } from "@/dashboard/common/ViewMode";
@@ -24,13 +24,13 @@ export function ProjectsFilteredEmptySection() {
 
   return (
     <AbsoluteCenter className="w-full">
-      <EmptySection>
-        <EmptySectionHeading>{t("heading")}</EmptySectionHeading>
-        <EmptySectionDescription className="max-w-[500px]">
+      <FallbackSection>
+        <FallbackSectionHeading>{t("heading")}</FallbackSectionHeading>
+        <FallbackSectionDescription className="max-w-[500px]">
           {t("description")}
-        </EmptySectionDescription>
+        </FallbackSectionDescription>
         <FiltersResetButton />
-      </EmptySection>
+      </FallbackSection>
     </AbsoluteCenter>
   );
 }

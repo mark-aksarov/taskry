@@ -1,15 +1,5 @@
-import { getTranslations } from "next-intl/server";
-import NotFoundPageContainer from "@/common/NotFoundPageContainer";
+import { notFound } from "next/navigation";
 
-export default async function NotFound() {
-  const t = await getTranslations("app.NotFoundPage");
-
-  return (
-    <NotFoundPageContainer
-      heading={t("heading")}
-      description={t("description")}
-      linkHref="/"
-      linkLabel={t("toHome")}
-    />
-  );
+export default function CatchAllPage() {
+  notFound();
 }
