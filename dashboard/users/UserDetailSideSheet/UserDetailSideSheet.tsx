@@ -1,11 +1,12 @@
 import {
   DetailSideSheet,
   DetailSideSheetDialog,
+  DetailSideSheetDialogBody,
   DetailSideSheetLink,
 } from "@/dashboard/common/DetailSideSheet";
 
+import { DialogFooter } from "@/ui/Dialog";
 import { useTranslations } from "next-intl";
-import { DialogBody, DialogFooter } from "@/ui/Dialog";
 import { useModal } from "@/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
@@ -28,10 +29,10 @@ export function UserDetailSideSheet({
     <DetailSideSheet isOpen={isOpen} onOpenChange={onOpenChange}>
       <DetailSideSheetDialog>
         <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
-        <DialogBody className="flex flex-col gap-6">
+        <DetailSideSheetDialogBody className="flex flex-col gap-6">
           {userDetailHeaderContainer}
           {userDetailContainer}
-        </DialogBody>
+        </DetailSideSheetDialogBody>
         <DialogFooter>
           <DetailSideSheetLink
             href={`/team/${userId}`}

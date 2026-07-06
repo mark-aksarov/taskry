@@ -1,11 +1,12 @@
 import {
   DetailSideSheet,
   DetailSideSheetDialog,
+  DetailSideSheetDialogBody,
   DetailSideSheetLink,
 } from "@/dashboard/common/DetailSideSheet";
 
+import { DialogFooter } from "@/ui/Dialog";
 import { useTranslations } from "next-intl";
-import { DialogBody, DialogFooter } from "@/ui/Dialog";
 import { useModal } from "@/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
@@ -30,7 +31,9 @@ export function ProjectDetailSideSheet({
     >
       <DetailSideSheetDialog>
         <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
-        <DialogBody>{projectDetailContainer}</DialogBody>
+        <DetailSideSheetDialogBody>
+          {projectDetailContainer}
+        </DetailSideSheetDialogBody>
         <DialogFooter>
           <DetailSideSheetLink
             href={`/projects/${projectId}`}

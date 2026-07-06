@@ -1,11 +1,12 @@
 import {
   DetailSideSheet,
-  DetailSideSheetDialog,
   DetailSideSheetLink,
+  DetailSideSheetDialog,
+  DetailSideSheetDialogBody,
 } from "@/dashboard/common/DetailSideSheet";
 
+import { DialogFooter } from "@/ui/Dialog";
 import { useTranslations } from "next-intl";
-import { DialogBody, DialogFooter } from "@/ui/Dialog";
 import { useModal } from "@/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
@@ -29,7 +30,9 @@ export function TaskDetailSideSheet({
     >
       <DetailSideSheetDialog>
         <DialogHeaderWithClose>{t("dialogHeading")}</DialogHeaderWithClose>
-        <DialogBody>{taskDetailContainer}</DialogBody>
+        <DetailSideSheetDialogBody>
+          {taskDetailContainer}
+        </DetailSideSheetDialogBody>
         <DialogFooter>
           <DetailSideSheetLink
             href={`/tasks/${taskId}`}
