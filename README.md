@@ -176,6 +176,7 @@ Your `.env.development`, `.env.production`, `.env.e2e`, or `.env.integration` fi
 │   │   ├── (auth)/                      # Authentication routes
 │   │   ├── (dashboard)/                 # Dashboard routes
 │   │   ├── (site)/                      # Landing page and documentation routes
+│   │   ├── [...rest]                    # Catch-all route for unknown routes within [locale]
 │   │   └── layout.tsx
 │   ├── api/                             # Route Handlers
 │   └── globals.css
