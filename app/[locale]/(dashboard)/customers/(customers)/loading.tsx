@@ -9,8 +9,8 @@ import { useTranslations } from "next-intl";
 import { ButtonSkeleton, Skeleton } from "@/ui/Skeleton";
 import { DashboardGrid } from "@/dashboard/common/DashboardGrid";
 import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
+import { CustomerGridSkeleton } from "@/dashboard/customer/CustomerGrid";
 import { DashboardContainer } from "@/dashboard/common/DashboardContainer";
-import { CustomerGridSkeleton } from "@/dashboard/customer/CustomerGridSkeleton";
 import { SearchModalTriggerSkeleton } from "@/dashboard/search/SearchModalTrigger";
 
 export default function AppCustomersPageLoading() {

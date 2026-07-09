@@ -2,12 +2,12 @@ import { AssignedTasksSectionHeading } from "./AssignedTasksSectionHeading";
 
 interface AssignedTasksSectionProps {
   createTaskButton: React.ReactNode;
-  tasksContainer: React.ReactNode;
+  taskGrid: React.ReactNode;
 }
 
 export function AssignedTasksSection({
   createTaskButton,
-  tasksContainer,
+  taskGrid,
 }: AssignedTasksSectionProps) {
   return (
     <section className="flex flex-col gap-4">
@@ -15,7 +15,7 @@ export function AssignedTasksSection({
         <AssignedTasksSectionHeading />
         {createTaskButton}
       </div>
-      {tasksContainer}
+      {taskGrid}
     </section>
   );
 }

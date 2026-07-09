@@ -3,15 +3,15 @@ import CustomersPageLoading from "./loading";
 import { usePathname } from "next/navigation";
 import { CustomersPage } from "./CustomersPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { DashboardPageDecorator } from "@/.storybook/DashboardPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { DashboardPageDecorator } from "@/.storybook/DashboardPageDecorator";
+import { CustomerGridExample } from "@/dashboard/customer/CustomerGrid/__stories__";
 import { withCustomerSearchModal } from "@/dashboard/customer/CustomerSearchModal/__stories__";
 import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
 import { withCreateCompanyProvider } from "@/dashboard/company/CreateCompanyProvider/__stories__";
 import { withCreateCustomerProvider } from "@/dashboard/customer/CreateCustomerProvider/__stories__";
 import { withCustomerFiltersProvider } from "@/dashboard/customer/CustomerFiltersContext/__stories__";
 import { withDeleteCustomersProvider } from "@/dashboard/customer/DeleteCustomersProvider/__stories__";
-import { CustomersContainerPresentationExample } from "@/dashboard/customer/CustomersContainer/__stories__";
 
 const meta = {
   title: "pages/CustomersPage",
@@ -37,11 +37,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    page: 1,
+    pageSize: 1,
     totalCount: 10,
     companyCount: 5,
-    totalFilteredCustomers: 10,
+    totalFilteredCustomers: 3,
     selectedSortField: "fullName",
-    customersContainer: <CustomersContainerPresentationExample />,
+    customerGrid: <CustomerGridExample />,
   },
 } satisfies Story;
 

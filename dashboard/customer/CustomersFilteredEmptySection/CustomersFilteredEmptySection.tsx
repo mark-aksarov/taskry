@@ -7,8 +7,8 @@ import {
 } from "@/common/FallbackSection";
 
 import { useTranslations } from "next-intl";
+import { CustomerGridSkeleton } from "../CustomerGrid";
 import { useViewMode } from "@/dashboard/common/ViewMode";
-import { CustomerGridSkeleton } from "../CustomerGridSkeleton";
 import { AbsoluteCenter } from "@/dashboard/common/AbsoluteCenter";
 import { FiltersResetButton } from "@/dashboard/common/FiltersResetButton";
 import { usePageTransition } from "@/dashboard/common/PageTransitionContext";

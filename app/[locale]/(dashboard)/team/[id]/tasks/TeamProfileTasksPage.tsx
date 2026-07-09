@@ -24,27 +24,51 @@ import { AssignedTasksEmptySection } from "@/dashboard/tasks/TasksEmptySection";
 import { TaskActionsMenuTrigger } from "@/dashboard/tasks/TaskActionsMenuTrigger";
 import { TaskSortingMenuTriggerLarge } from "@/dashboard/tasks/TaskSortingMenuTrigger";
 import { TaskSortingMenuTriggerMobile } from "@/dashboard/tasks/TaskSortingMenuTrigger";
+import { EntityPagination } from "@/dashboard/common/EntityPagination";
 
 interface TeamProfileTasksPageProps {
+  page: number;
+  pageSize: number;
   totalTasksCount: number;
   selectedSortField: TaskSortField;
   backButton?: boolean;
   navigationLarge: React.ReactNode;
   navigationMobile: React.ReactNode;
-  userTasksContainer: React.ReactNode;
+  userTaskList: React.ReactNode;
   userDetailHeaderContainer: React.ReactNode;
 }
 
 export function TeamProfileTasksPage({
+  page,
+  pageSize,
   totalTasksCount,
   selectedSortField,
   backButton,
   navigationLarge,
   navigationMobile,
-  userTasksContainer,
+  userTaskList,
   userDetailHeaderContainer,
 }: TeamProfileTasksPageProps) {
   const t = useTranslations("app.TeamProfileTaskPage");
+
+  const totalPages = Math.ceil(totalTasksCount / pageSize);
+
+  const paginationProps = {
+    page,
+    totalPages,
+    pageSize,
+  };
+
+  const pagination = (
+    <>
+      <EntityPagination {...paginationProps} className="md:hidden" />
+      <EntityPagination
+        {...paginationProps}
+        buttonVariant="primary"
+        className="py-4 max-md:hidden"
+      />
+    </>
+  );
 
   if (totalTasksCount === 0) {
     return (
@@ -109,7 +133,12 @@ export function TeamProfileTasksPage({
                 />
               </div>
             </DetailCardHeader>
-            {userTasksContainer}
+            {
+              <>
+                {userTaskList}
+                {pagination}
+              </>
+            }
           </DetailCardLeft>
 
           <DetailCardRight>
@@ -138,7 +167,12 @@ export function TeamProfileTasksPage({
               />
             }
           />
-          {userTasksContainer}
+          {
+            <>
+              {userTaskList}
+              {pagination}
+            </>
+          }
         </DashboardGrid>
       </DashboardContainer>
     </ViewModeProvider>

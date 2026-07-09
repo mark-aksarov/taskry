@@ -7,8 +7,8 @@ import {
 } from "@/common/FallbackSection";
 
 import { useTranslations } from "next-intl";
+import { ProjectGridSkeleton } from "../ProjectGrid";
 import { useViewMode } from "@/dashboard/common/ViewMode";
-import { ProjectGridSkeleton } from "../ProjectGridSkeleton";
 import { AbsoluteCenter } from "@/dashboard/common/AbsoluteCenter";
 import { FiltersResetButton } from "@/dashboard/common/FiltersResetButton";
 import { usePageTransition } from "@/dashboard/common/PageTransitionContext";

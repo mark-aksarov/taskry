@@ -11,11 +11,11 @@ import { TeamPage } from "./TeamPage";
 import { userSortFields } from "@/lib/types";
 import { positionId } from "@/lib/schemas/position";
 import { getUserList } from "@/lib/data/user/user.dal";
-import { UsersContainer } from "@/dashboard/users/UsersContainer";
 import { getPositionCount } from "@/lib/data/position/position.dal";
 import { UserSearchModal } from "@/dashboard/users/UserSearchModal";
 import { CreateUserModal } from "@/dashboard/users/CreateUserModal";
 import { UserFiltersModal } from "@/dashboard/users/UserFiltersModal";
+import { UserGridContainer } from "@/dashboard/users/UserGridContainer";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CreateUserProvider } from "@/dashboard/users/CreateUserProvider";
 import { UserFiltersProvider } from "@/dashboard/users/UserFiltersContext";
@@ -69,17 +69,12 @@ export default async function AppTeamPage({
       <CreatePositionProvider>
         <UserFiltersProvider filters={filters}>
           <TeamPage
+            page={page}
+            pageSize={pageSize}
             positionCount={positionCount}
             totalFilteredUsers={totalFilteredUsers}
             selectedSortField={sort}
-            usersContainer={
-              <UsersContainer
-                users={users}
-                totalCount={totalFilteredUsers}
-                page={page}
-                pageSize={pageSize}
-              />
-            }
+            userGrid={<UserGridContainer users={users} />}
           />
 
           <UserSearchModal searchContainer={<RouterSearchContainer />} />

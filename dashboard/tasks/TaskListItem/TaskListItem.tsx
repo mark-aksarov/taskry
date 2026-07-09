@@ -15,14 +15,14 @@ import {
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
+import { useModal } from "@/common/ModalManagerContext";
 import { TaskItemActionMenuTrigger } from "../TaskItem";
 import { TaskListItemLayout } from "./TaskListItemLayout";
 import { SelectableTaskItem } from "../SelectableTaskItem";
 import { TaskItemStatusBadge } from "../TaskItemStatusBadge";
 import { TaskListItemSkeleton } from "./TaskListItemSkeleton";
-import { TaskItemCheckbox } from "../TaskItem/TaskItemCheckbox";
 import { ListItemGate } from "@/dashboard/common/ListItemGate";
-import { useModal } from "@/common/ModalManagerContext";
+import { TaskItemCheckbox } from "../TaskItem/TaskItemCheckbox";
 import { BaseTaskItemProps, useTaskItemPending } from "../TaskItem";
 
 export interface Props extends BaseTaskItemProps {

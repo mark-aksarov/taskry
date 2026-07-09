@@ -8,9 +8,9 @@ import {
 import { useTranslations } from "next-intl";
 import { ButtonSkeleton, Skeleton } from "@/ui/Skeleton";
 import { DashboardGrid } from "@/dashboard/common/DashboardGrid";
+import { ProjectGridSkeleton } from "@/dashboard/projects/ProjectGrid";
 import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
 import { DashboardContainer } from "@/dashboard/common/DashboardContainer";
-import { ProjectGridSkeleton } from "@/dashboard/projects/ProjectGridSkeleton";
 import { SearchModalTriggerSkeleton } from "@/dashboard/search/SearchModalTrigger";
 
 export default function AppProjectsPageLoading() {

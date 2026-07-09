@@ -16,15 +16,16 @@ import { z } from "zod";
 import { CustomersPage } from "./CustomersPage";
 import { customerSortFields } from "@/lib/types";
 import { companyId } from "@/lib/schemas/company";
+import { getCompanyCount } from "@/lib/data/company/company.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { CreateCompanyModal } from "@/dashboard/company/CreateCompanyModal";
-import { CustomersContainer } from "@/dashboard/customer/CustomersContainer";
 import { CreateCustomerModal } from "@/dashboard/customer/CreateCustomerModal";
 import { CustomerSearchModal } from "@/dashboard/customer/CustomerSearchModal";
 import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
 import { DeleteCustomersModal } from "@/dashboard/customer/DeleteCustomersModal";
 import { CustomerFiltersModal } from "@/dashboard/customer/CustomerFiltersModal";
 import { CreateCompanyProvider } from "@/dashboard/company/CreateCompanyProvider";
+import { CustomerGridContainer } from "@/dashboard/customer/CustomerGridContainer";
 import { CreateCustomerProvider } from "@/dashboard/customer/CreateCustomerProvider";
 import { CustomerFiltersProvider } from "@/dashboard/customer/CustomerFiltersContext";
 import { DeleteCustomersProvider } from "@/dashboard/customer/DeleteCustomersProvider";
@@ -33,7 +34,6 @@ import { CreateCustomerFormContainer } from "@/dashboard/customer/CreateCustomer
 import { CustomerFiltersFormContainer } from "@/dashboard/customer/CustomerFiltersFormContainer";
 import { CustomerRouterSearchContainer } from "@/dashboard/customer/CustomerRouterSearchContainer";
 import { CustomerCompanyFiltersFormContainer } from "@/dashboard/customer/CustomerCompanyFiltersFormContainer";
-import { getCompanyCount } from "@/lib/data/company/company.dal";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -86,18 +86,14 @@ export default async function AppCustomersPage({
           <CreateCustomerProvider>
             <CustomerFiltersProvider filters={filters}>
               <CustomersPage
+                page={page}
+                pageSize={pageSize}
                 totalCount={totalCount}
                 companyCount={companyCount}
                 totalFilteredCustomers={totalFilteredCustomers}
                 selectedSortField={sort}
-                customersContainer={
-                  <CustomersContainer
-                    customers={customers}
-                    totalCount={totalFilteredCustomers}
-                    page={page}
-                    pageSize={pageSize}
-                  />
-                }
+                // CustomerGrid is passed via props to allow mocking in Storybook stories
+                customerGrid={<CustomerGridContainer customers={customers} />}
               />
 
               <CustomerSearchModal

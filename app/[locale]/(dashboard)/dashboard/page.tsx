@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { DashboardPage } from "./DashboardPage";
 import { getTaskList } from "@/lib/data/task/task.dal";
-import { TasksContainer } from "@/dashboard/tasks/TasksContainer";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
 import { CreateTaskModal } from "@/dashboard/tasks/CreateTaskModal";
+import { TaskGridContainer } from "@/dashboard/tasks/TaskGridContainer";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { CreateTaskProvider } from "@/dashboard/tasks/CreateTaskProvider";
@@ -52,19 +52,15 @@ export default async function AppDashboardPage({
             pageItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
           >
             <DashboardPage
+              taskPage={page}
+              taskPageSize={pageSize}
               totalTaskCount={totalCount}
               totalProjectsCardContainer={<TotalProjectsCardContainer />}
               totalTasksCardContainer={<TotalTasksCardContainer />}
               totalUsersCardContainer={<TotalUsersCardContainer />}
               totalCustomersCardContainer={<TotalCustomersCardContainer />}
-              tasksContainer={
-                <TasksContainer
-                  tasks={tasks}
-                  totalCount={totalCount}
-                  page={page}
-                  pageSize={pageSize}
-                  showCheckbox={false}
-                />
+              taskGrid={
+                <TaskGridContainer tasks={tasks} showCheckbox={false} />
               }
             />
 

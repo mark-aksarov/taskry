@@ -35,25 +35,30 @@ import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
 import { SearchModalTrigger } from "@/dashboard/search/SearchModalTrigger";
 import { DashboardContainer } from "@/dashboard/common/DashboardContainer";
 import { CustomerResultsCount } from "@/dashboard/customer/CustomerResultsCount";
+import { EntityPagination } from "@/dashboard/common/EntityPagination";
 import { CustomerActionsMenuTrigger } from "@/dashboard/customer/CustomerActionsMenuTrigger";
 import { CustomersFilteredEmptySection } from "@/dashboard/customer/CustomersFilteredEmptySection";
 import { CustomersEmptySectionCreateButton } from "@/dashboard/customer/CustomersEmptySectionCreateButton";
 import { CustomerCompanyFiltersModalTrigger } from "@/dashboard/customer/CustomerCompanyFiltersModalTrigger";
 
 interface CustomersPageProps {
+  page: number;
+  pageSize: number;
   totalCount: number;
   companyCount: number;
   totalFilteredCustomers: number;
   selectedSortField: CustomerSortField;
-  customersContainer: React.ReactNode;
+  customerGrid: React.ReactNode;
 }
 
 export function CustomersPage({
+  page,
+  pageSize,
   totalCount,
   companyCount,
   totalFilteredCustomers,
   selectedSortField,
-  customersContainer,
+  customerGrid,
 }: CustomersPageProps) {
   const t = useTranslations("app.CustomersPage");
 
@@ -139,7 +144,14 @@ export function CustomersPage({
           {isFilteredEmpty ? (
             <CustomersFilteredEmptySection />
           ) : (
-            customersContainer
+            <>
+              <>{customerGrid}</>
+              <EntityPagination
+                page={page}
+                pageSize={pageSize}
+                totalPages={Math.ceil(totalFilteredCustomers / pageSize)}
+              />
+            </>
           )}
         </ViewModeProvider>
       </DashboardGrid>

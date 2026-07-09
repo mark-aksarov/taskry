@@ -7,8 +7,8 @@ import {
 
 import { useTranslations } from "next-intl";
 import { ButtonSkeleton, Skeleton } from "@/ui/Skeleton";
+import { UserGridSkeleton } from "@/dashboard/users/UserGrid";
 import { DashboardGrid } from "@/dashboard/common/DashboardGrid";
-import { UserGridSkeleton } from "@/dashboard/users/UserGridSkeleton";
 import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
 import { DashboardContainer } from "@/dashboard/common/DashboardContainer";
 import { SearchModalTriggerSkeleton } from "@/dashboard/search/SearchModalTrigger";

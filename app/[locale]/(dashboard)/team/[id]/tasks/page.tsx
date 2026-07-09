@@ -14,7 +14,6 @@ import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { CreateTaskProvider } from "@/dashboard/tasks/CreateTaskProvider";
 import { UpdateUserProvider } from "@/dashboard/users/UpdateUserProvider";
 import { DeleteUserProvider } from "@/dashboard/users/DeleteUserProvider";
-import { UserTasksContainer } from "@/dashboard/users/UserTasksContainer";
 import { ChangePasswordModal } from "@/dashboard/users/ChangePasswordModal";
 import { DeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider";
 import { UserNavigationLarge } from "@/dashboard/users/UserNavigationLarge";
@@ -23,6 +22,7 @@ import { UserNavigationMobile } from "@/dashboard/users/UserNavigationMobile";
 import { UpdateUserImageModal } from "@/dashboard/users/UpdateUserImageModal";
 import { DeleteUserImageModal } from "@/dashboard/users/DeleteUserImageModal";
 import { SelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext";
+import { UserTaskListContainer } from "@/dashboard/users/UserTaskListContainer";
 import { ChangePasswordProvider } from "@/dashboard/users/ChangePasswordProvider";
 import { CreateTaskFormContainer } from "@/dashboard/tasks/CreateTaskFormContainer";
 import { UpdateUserFormContainer } from "@/dashboard/users/UpdateUserFormContainer";
@@ -92,6 +92,8 @@ export default async function AppProfileTasksPage({
                     <DeleteTasksProvider>
                       <CreateTaskProvider>
                         <TeamProfileTasksPage
+                          page={page}
+                          pageSize={pageSize}
                           totalTasksCount={totalTasksCount}
                           selectedSortField={sort}
                           backButton
@@ -105,14 +107,7 @@ export default async function AppProfileTasksPage({
                             />
                           }
                           navigationMobile={<UserNavigationMobile />}
-                          userTasksContainer={
-                            <UserTasksContainer
-                              tasks={tasks}
-                              totalCount={totalTasksCount}
-                              page={page}
-                              pageSize={pageSize}
-                            />
-                          }
+                          userTaskList={<UserTaskListContainer tasks={tasks} />}
                           userDetailHeaderContainer={
                             <UserDetailHeaderAltContainer userId={userId} />
                           }

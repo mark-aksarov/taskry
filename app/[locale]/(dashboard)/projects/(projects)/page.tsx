@@ -19,16 +19,18 @@ import { projectSortFields } from "@/lib/types";
 import { customerId } from "@/lib/schemas/customer";
 import { projectStatus } from "@/lib/schemas/project";
 import { projectCategoryId } from "@/lib/schemas/projectCategory";
+import { getCustomerCount } from "@/lib/data/customer/customer.dal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
-import { ProjectsContainer } from "@/dashboard/projects/ProjectsContainer";
 import { CreateProjectModal } from "@/dashboard/projects/CreateProjectModal";
 import { ProjectSearchModal } from "@/dashboard/projects/ProjectSearchModal";
 import { ProjectFiltersModal } from "@/dashboard/projects/ProjectFiltersModal";
 import { DeleteProjectsModal } from "@/dashboard/projects/DeleteProjectsModal";
+import { ProjectGridContainer } from "@/dashboard/projects/ProjectGridContainer";
 import { CreateProjectProvider } from "@/dashboard/projects/CreateProjectProvider";
 import { ProjectFiltersProvider } from "@/dashboard/projects/ProjectFiltersContext";
 import { DeleteProjectsProvider } from "@/dashboard/projects/DeleteProjectsProvider";
 import { SelectedProjectsProvider } from "@/dashboard/projects/SelectedProjectsContext";
+import { getProjectCategoryCount } from "@/lib/data/projectCategory/projectCategory.dal";
 import { ProjectStatusFiltersModal } from "@/dashboard/projects/ProjectStatusFiltersModal";
 import { ProjectCreatorFiltersModal } from "@/dashboard/projects/ProjectCreatorFiltersModal";
 import { CreateProjectFormContainer } from "@/dashboard/projects/CreateProjectFormContainer";
@@ -42,8 +44,6 @@ import { CreateProjectCategoryProvider } from "@/dashboard/projectCategory/Creat
 import { ProjectCreatorFiltersFormContainer } from "@/dashboard/projects/ProjectCreatorFiltersFormContainer";
 import { ProjectCustomerFiltersFormContainer } from "@/dashboard/projects/ProjectCustomerFiltersFormContainer";
 import { ProjectCategoryFiltersFormContainer } from "@/dashboard/projects/ProjectCategoryFiltersFormContainer";
-import { getProjectCategoryCount } from "@/lib/data/projectCategory/projectCategory.dal";
-import { getCustomerCount } from "@/lib/data/customer/customer.dal";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -110,19 +110,14 @@ export default async function AppProjectsPage({
             <CreateProjectCategoryProvider>
               <ProjectFiltersProvider filters={filters}>
                 <ProjectsPage
+                  page={page}
+                  pageSize={pageSize}
                   totalCount={totalCount}
                   categoryCount={categoryCount}
                   customerCount={customerCount}
                   totalFilteredProjects={totalFilteredProjects}
                   selectedSortField={sort}
-                  projectsContainer={
-                    <ProjectsContainer
-                      projects={projects}
-                      totalCount={totalFilteredProjects}
-                      page={page}
-                      pageSize={pageSize}
-                    />
-                  }
+                  projectGrid={<ProjectGridContainer projects={projects} />}
                 />
 
                 <ProjectSearchModal

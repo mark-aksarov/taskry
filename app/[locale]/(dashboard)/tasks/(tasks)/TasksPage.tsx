@@ -39,23 +39,28 @@ import { TasksFilteredEmptySection } from "@/dashboard/tasks/TasksFilteredEmptyS
 import { TaskStatusFiltersModalTrigger } from "@/dashboard/tasks/TaskStatusFiltersModal";
 import { TaskProjectFiltersModalTrigger } from "@/dashboard/tasks/TaskProjectFiltersModal";
 import { TaskCategoryFiltersModalTrigger } from "@/dashboard/tasks/TaskCategoryFiltersModal";
+import { EntityPagination } from "@/dashboard/common/EntityPagination";
 
 interface TasksPageProps {
+  page: number;
+  pageSize: number;
   totalCount: number;
   categoryCount: number;
   projectCount: number;
   selectedSortField: TaskSortField;
   totalFilteredTasks: number;
-  tasksContainer: React.ReactNode;
+  taskGrid: React.ReactNode;
 }
 
 export function TasksPage({
+  page,
+  pageSize,
   totalCount,
   categoryCount,
   projectCount,
   selectedSortField,
   totalFilteredTasks,
-  tasksContainer,
+  taskGrid,
 }: TasksPageProps) {
   const t = useTranslations("app.TasksPage");
 
@@ -138,7 +143,18 @@ export function TasksPage({
             />
           )}
 
-          {isFilteredEmpty ? <TasksFilteredEmptySection /> : tasksContainer}
+          {isFilteredEmpty ? (
+            <TasksFilteredEmptySection />
+          ) : (
+            <>
+              <>{taskGrid}</>
+              <EntityPagination
+                page={page}
+                pageSize={pageSize}
+                totalPages={Math.ceil(totalFilteredTasks / pageSize)}
+              />
+            </>
+          )}
         </ViewModeProvider>
       </DashboardGrid>
     </DashboardContainer>

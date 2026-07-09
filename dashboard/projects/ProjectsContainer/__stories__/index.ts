@@ -1,1 +1,0 @@
-export { ProjectsContainerPresentationExample } from "./ProjectsContainerPresentationExample";

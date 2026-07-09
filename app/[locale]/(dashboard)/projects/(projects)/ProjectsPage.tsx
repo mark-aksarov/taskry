@@ -35,6 +35,7 @@ import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
 import { DashboardContainer } from "@/dashboard/common/DashboardContainer";
 import { SearchModalTrigger } from "@/dashboard/search/SearchModalTrigger";
 import { ProjectResultsCount } from "@/dashboard/projects/ProjectResultsCount";
+import { EntityPagination } from "@/dashboard/common/EntityPagination";
 import { ProjectActionsMenuTrigger } from "@/dashboard/projects/ProjectActionsMenuTrigger";
 import { ProjectsFilteredEmptySection } from "@/dashboard/projects/ProjectsFilteredEmptySection";
 import { ProjectStatusFiltersModalTrigger } from "@/dashboard/projects/ProjectStatusFiltersModal";
@@ -44,21 +45,25 @@ import { ProjectCustomerFiltersModalTrigger } from "@/dashboard/projects/Project
 import { ProjectsEmptySectionCreateButton } from "@/dashboard/projects/ProjectsEmptySectionCreateButton";
 
 interface ProjectsPageProps {
+  page: number;
+  pageSize: number;
   totalCount: number;
   categoryCount: number;
   customerCount: number;
   totalFilteredProjects: number;
   selectedSortField: ProjectSortField;
-  projectsContainer: React.ReactNode;
+  projectGrid: React.ReactNode;
 }
 
 export function ProjectsPage({
+  page,
+  pageSize,
   totalCount,
   categoryCount,
   customerCount,
   totalFilteredProjects,
   selectedSortField,
-  projectsContainer,
+  projectGrid,
 }: ProjectsPageProps) {
   const t = useTranslations("app.ProjectsPage");
 
@@ -145,7 +150,14 @@ export function ProjectsPage({
           {isFilteredEmpty ? (
             <ProjectsFilteredEmptySection />
           ) : (
-            projectsContainer
+            <>
+              <>{projectGrid}</>
+              <EntityPagination
+                page={page}
+                pageSize={pageSize}
+                totalPages={Math.ceil(totalFilteredProjects / pageSize)}
+              />
+            </>
           )}
         </ViewModeProvider>
       </DashboardGrid>

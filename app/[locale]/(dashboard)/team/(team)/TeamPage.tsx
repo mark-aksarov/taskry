@@ -35,20 +35,25 @@ import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
 import { SearchModalTrigger } from "@/dashboard/search/SearchModalTrigger";
 import { DashboardContainer } from "@/dashboard/common/DashboardContainer";
 import { UsersFilteredEmptySection } from "@/dashboard/users/UsersFilteredEmptySection";
+import { EntityPagination } from "@/dashboard/common/EntityPagination";
 import { UserPositionFiltersModalTrigger } from "@/dashboard/users/UserPositionFiltersModal";
 
 interface TeamPageProps {
+  page: number;
+  pageSize: number;
   positionCount: number;
   totalFilteredUsers: number;
   selectedSortField: UserSortField;
-  usersContainer: React.ReactNode;
+  userGrid: React.ReactNode;
 }
 
 export function TeamPage({
+  page,
+  pageSize,
   positionCount,
   totalFilteredUsers,
   selectedSortField,
-  usersContainer,
+  userGrid,
 }: TeamPageProps) {
   const t = useTranslations("app.TeamPage");
 
@@ -107,7 +112,18 @@ export function TeamPage({
             />
           )}
 
-          {isFilteredEmpty ? <UsersFilteredEmptySection /> : usersContainer}
+          {isFilteredEmpty ? (
+            <UsersFilteredEmptySection />
+          ) : (
+            <>
+              <>{userGrid}</>
+              <EntityPagination
+                page={page}
+                pageSize={pageSize}
+                totalPages={Math.ceil(totalFilteredUsers / pageSize)}
+              />
+            </>
+          )}
         </ViewModeProvider>
       </DashboardGrid>
     </DashboardContainer>

@@ -14,13 +14,14 @@ import { taskSortFields } from "@/lib/types";
 import { taskStatus } from "@/lib/schemas/task";
 import { projectId } from "@/lib/schemas/project";
 import { taskCategoryId } from "@/lib/schemas/taskCategory";
-import { TasksContainer } from "@/dashboard/tasks/TasksContainer";
+import { getProjectCount } from "@/lib/data/project/project.dal";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
 import { CreateTaskModal } from "@/dashboard/tasks/CreateTaskModal";
 import { getTaskCount, getTaskList } from "@/lib/data/task/task.dal";
 import { TaskFiltersModal } from "@/dashboard/tasks/TaskFiltersModal";
 import { DeleteTasksModal } from "@/dashboard/tasks/DeleteTasksModal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { TaskGridContainer } from "@/dashboard/tasks/TaskGridContainer";
 import { CreateTaskProvider } from "@/dashboard/tasks/CreateTaskProvider";
 import { TaskFiltersProvider } from "@/dashboard/tasks/TaskFiltersContext";
 import { DeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider";
@@ -39,7 +40,6 @@ import { AssigneeFiltersFormContainer } from "@/dashboard/tasks/AssigneeFiltersF
 import { CreateTaskCategoryProvider } from "@/dashboard/taskCategory/CreateTaskCategoryProvider";
 import { TaskProjectFiltersFormContainer } from "@/dashboard/tasks/TaskProjectFiltersFormContainer";
 import { TaskCategoryFiltersFormContainer } from "@/dashboard/tasks/TaskCategoryFiltersFormContainer";
-import { getProjectCount } from "@/lib/data/project/project.dal";
 
 const searchParamsSchema = z.object({
   query: searchQueryParam,
@@ -104,19 +104,15 @@ export default async function AppTasksPage({
             <CreateTaskCategoryProvider>
               <TaskFiltersProvider filters={filters}>
                 <TasksPage
+                  page={page}
+                  pageSize={pageSize}
                   totalCount={totalCount}
                   categoryCount={categoryCount}
                   projectCount={projectCount}
                   totalFilteredTasks={totalFilteredTasks}
                   selectedSortField={sort}
-                  tasksContainer={
-                    <TasksContainer
-                      tasks={tasks}
-                      totalCount={totalFilteredTasks}
-                      page={page}
-                      pageSize={pageSize}
-                      showCheckbox={true}
-                    />
+                  taskGrid={
+                    <TaskGridContainer tasks={tasks} showCheckbox={true} />
                   }
                 />
 

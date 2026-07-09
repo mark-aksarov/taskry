@@ -7,7 +7,7 @@ import {
 } from "@/common/FallbackSection";
 
 import { useTranslations } from "next-intl";
-import { UserGridSkeleton } from "../UserGridSkeleton";
+import { UserGridSkeleton } from "../UserGrid";
 import { useViewMode } from "@/dashboard/common/ViewMode";
 import { AbsoluteCenter } from "@/dashboard/common/AbsoluteCenter";
 import { FiltersResetButton } from "@/dashboard/common/FiltersResetButton";

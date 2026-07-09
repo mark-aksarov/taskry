@@ -3,14 +3,14 @@ import TasksPageLoading from "./loading";
 import { mocked } from "storybook/test";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
-import { DashboardPageDecorator } from "@/.storybook/DashboardPageDecorator";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { TaskGridExample } from "@/dashboard/tasks/TaskGrid/__stories__";
+import { DashboardPageDecorator } from "@/.storybook/DashboardPageDecorator";
 import { withTaskSearchModal } from "@/dashboard/tasks/TaskSearchModal/__stories__";
 import { withCreateTaskProvider } from "@/dashboard/tasks/CreateTaskProvider/__stories__";
 import { withTaskFiltersProvider } from "@/dashboard/tasks/TaskFiltersContext/__stories__";
 import { withDeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider/__stories__";
 import { withSelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext/__stories__";
-import { TasksContainerPresentationExample } from "@/dashboard/tasks/TasksContainer/__stories__";
 import { withUpdateTaskStatusesProvider } from "@/dashboard/tasks/UpdateTaskStatusesProvider/__stories__";
 import { withCreateTaskCategoryProvider } from "@/dashboard/taskCategory/CreateTaskCategoryProvider/__stories__";
 
@@ -42,12 +42,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    totalCount: 3,
+    page: 1,
+    pageSize: 1,
+    totalCount: 10,
     categoryCount: 2,
     projectCount: 3,
     totalFilteredTasks: 3,
     selectedSortField: "title",
-    tasksContainer: <TasksContainerPresentationExample />,
+    taskGrid: <TaskGridExample showCheckbox={true} />,
   },
 } satisfies Story;
 
