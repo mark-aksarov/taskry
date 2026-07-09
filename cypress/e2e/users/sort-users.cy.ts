@@ -1,11 +1,11 @@
-import { accounts, workspaces } from "@/prisma/test-utils/data";
-import { E2ESeedPayload } from "@/prisma/test-utils/types";
+import { TestSeedPayload } from "@/prisma/test-seed";
+import { accounts, workspaces } from "@/prisma/seed/test-data";
 
 describe("sort users", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
-    const payload: E2ESeedPayload = {
+    const payload: TestSeedPayload = {
       workspaces,
       accounts: [accounts[0]],
       positions: [

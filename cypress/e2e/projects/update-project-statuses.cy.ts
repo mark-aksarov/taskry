@@ -7,7 +7,7 @@ import {
   workspaces,
   projectCategories,
   taskCategories,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
 
 import { ProjectStatus } from "@/generated/prisma/enums";
 

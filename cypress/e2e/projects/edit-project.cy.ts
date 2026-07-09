@@ -6,7 +6,7 @@ import {
   companies,
   customers,
   workspaces,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
 import { ProjectStatus } from "@/generated/prisma/enums";
 
 describe("Project editing", () => {

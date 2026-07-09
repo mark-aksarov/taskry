@@ -11,7 +11,7 @@ import { Button } from "../Button";
 import { TextField } from "../TextField";
 import { useOverlayTrigger } from "react-aria";
 import { describe, expect, test } from "vitest";
-import { render } from "@/lib/utils/test-utils";
+import { render } from "@/lib/test-utils/customRender";
 import userEvent from "@testing-library/user-event";
 import { useOverlayTriggerState } from "react-stately";
 import { screen, waitFor } from "@testing-library/react";

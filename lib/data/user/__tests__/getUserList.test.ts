@@ -1,10 +1,10 @@
 import prisma from "@/lib/prisma";
 import { getUserList } from "../user.dal";
-import { seed } from "@/prisma/test-utils/seed";
+import { seed } from "@/prisma/test-seed";
 import { dates } from "@/lib/data/utils/test-utils";
 import { requireSession } from "@/lib/data/utils/requireSession";
-import { positions, workspaces } from "@/prisma/test-utils/data";
-import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
+import { positions, workspaces } from "@/prisma/seed/test-data";
+import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterAll } from "vitest";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 

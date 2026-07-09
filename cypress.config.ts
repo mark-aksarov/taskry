@@ -1,6 +1,6 @@
 import { defineConfig } from "cypress";
-import { seed } from "./prisma/test-utils/seed";
-import { resetDatabase } from "./prisma/test-utils/resetDatabase";
+import { seed } from "./prisma/test-seed";
+import { resetDatabase } from "./lib/test-utils/resetDatabase";
 
 export default defineConfig({
   e2e: {

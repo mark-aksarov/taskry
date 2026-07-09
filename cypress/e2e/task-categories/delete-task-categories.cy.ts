@@ -3,7 +3,7 @@ import {
   accounts,
   positions,
   workspaces,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
 
 describe("delete task categories", () => {
   beforeEach(() => {

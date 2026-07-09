@@ -1,10 +1,10 @@
 import { createPosition } from "../position.dal";
-import { seed } from "@/prisma/test-utils/seed";
+import { seed } from "@/prisma/test-seed";
 import { AccessDeniedError } from "../../utils/error";
 import { it, expect, describe, beforeAll } from "vitest";
 import { requireSession } from "@/lib/data/utils/requireSession";
-import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
-import { users, positions, workspaces } from "@/prisma/test-utils/data";
+import { resetDatabase } from "@/lib/test-utils/resetDatabase";
+import { users, positions, workspaces } from "@/prisma/seed/test-data";
 
 describe("createPosition", () => {
   beforeAll(async () => {

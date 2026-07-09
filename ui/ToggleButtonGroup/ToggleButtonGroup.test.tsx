@@ -1,6 +1,6 @@
 import { ToggleButton } from "./ToggleButton";
 import { describe, expect, test } from "vitest";
-import { render } from "@/lib/utils/test-utils";
+import { render } from "@/lib/test-utils/customRender";
 import { screen } from "@testing-library/react";
 import { ToggleButtonGroup } from "./ToggleButtonGroup";
 import { ToggleButtonGroupProps } from "react-aria-components";

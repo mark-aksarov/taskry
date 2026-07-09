@@ -8,7 +8,7 @@ import {
   customers,
   workspaces,
   projectCategories,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
 import { TaskStatus } from "@/generated/prisma/enums";
 
 describe("Task updating", () => {

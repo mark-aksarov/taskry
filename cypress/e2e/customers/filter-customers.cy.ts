@@ -3,15 +3,15 @@ import {
   accounts,
   positions,
   workspaces,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
+import { TestSeedPayload } from "@/prisma/test-seed";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { E2ESeedPayload } from "@/prisma/test-utils/types";
 
 describe("filter customers", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
-    const payload: E2ESeedPayload = {
+    const payload: TestSeedPayload = {
       users,
       accounts,
       positions,

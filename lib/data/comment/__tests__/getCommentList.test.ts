@@ -9,13 +9,13 @@ import {
   workspaces,
   taskCategories,
   projectCategories,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
 
 import { getCommentList } from "../comment.dal";
 import { describe, beforeAll, it, expect } from "vitest";
-import { seed } from "@/prisma/test-utils/seed";
+import { seed } from "@/prisma/test-seed";
 import { requireSession } from "@/lib/data/utils/requireSession";
-import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
+import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 
 describe("getCommentList", () => {
   beforeAll(async () => {

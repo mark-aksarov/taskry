@@ -1,4 +1,4 @@
-import { users, accounts, workspaces } from "@/prisma/test-utils/data";
+import { users, accounts, workspaces } from "@/prisma/seed/test-data";
 
 describe("User updating", () => {
   beforeEach(() => {

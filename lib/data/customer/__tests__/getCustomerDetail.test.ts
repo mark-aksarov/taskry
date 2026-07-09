@@ -6,13 +6,13 @@ import {
   taskCategories,
   customers,
   projectCategories,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
 
+import { seed } from "@/prisma/test-seed";
 import { getCustomerDetail } from "../customer.dal";
 import { it, expect, describe, beforeAll } from "vitest";
-import { seed } from "@/prisma/test-utils/seed";
+import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { requireSession } from "@/lib/data/utils/requireSession";
-import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
 
 describe("getCustomerDetail", () => {
   beforeAll(async () => {

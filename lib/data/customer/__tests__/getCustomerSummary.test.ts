@@ -4,13 +4,13 @@ import {
   companies,
   workspaces,
   customers,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
 
-import { seed } from "@/prisma/test-utils/seed";
+import { seed } from "@/prisma/test-seed";
 import { getCustomerSummary } from "../customer.dal";
 import { it, expect, describe, beforeAll } from "vitest";
 import { requireSession } from "@/lib/data/utils/requireSession";
-import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
+import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 
 describe("getCustomerSummary", () => {
   beforeAll(async () => {

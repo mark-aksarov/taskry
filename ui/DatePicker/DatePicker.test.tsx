@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "../Button";
 import { DatePicker } from "./DatePicker";
 import { Form } from "react-aria-components";
-import { render } from "@/lib/utils/test-utils";
+import { render } from "@/lib/test-utils/customRender";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 import { CalendarDate } from "@internationalized/date";

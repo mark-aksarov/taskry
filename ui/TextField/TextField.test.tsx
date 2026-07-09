@@ -3,7 +3,7 @@ import { Button } from "../Button";
 import { TextField } from "./TextField";
 import { Form } from "react-aria-components";
 import { screen } from "@testing-library/react";
-import { render } from "@/lib/utils/test-utils";
+import { render } from "@/lib/test-utils/customRender";
 import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 

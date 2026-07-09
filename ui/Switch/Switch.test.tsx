@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch } from "./Switch";
-import { render } from "@/lib/utils/test-utils";
+import { render } from "@/lib/test-utils/customRender";
 import { screen } from "@testing-library/react";
 import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";

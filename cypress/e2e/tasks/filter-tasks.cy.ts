@@ -5,14 +5,14 @@ import {
   companies,
   customers,
   workspaces,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
 
 import { dates } from "@/lib/data/utils/test-utils";
-import { E2ESeedPayload } from "@/prisma/test-utils/types";
+import { TestSeedPayload } from "@/prisma/test-seed";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
-const createPayload = (payload: E2ESeedPayload): E2ESeedPayload => {
-  const basePayload: E2ESeedPayload = {
+const createPayload = (payload: TestSeedPayload): TestSeedPayload => {
+  const basePayload: TestSeedPayload = {
     workspaces,
     users,
     accounts,
@@ -51,7 +51,7 @@ const createPayload = (payload: E2ESeedPayload): E2ESeedPayload => {
   return { ...basePayload, ...payload };
 };
 
-const setup = (payload: E2ESeedPayload) => {
+const setup = (payload: TestSeedPayload) => {
   cy.task("db:reset");
   cy.task("db:seed", payload);
   cy.signIn("user-1@test.com", "12345abc");

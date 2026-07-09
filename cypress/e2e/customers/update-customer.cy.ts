@@ -5,7 +5,7 @@ import {
   companies,
   customers,
   workspaces,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
 
 describe("Customer updating", () => {
   beforeEach(() => {

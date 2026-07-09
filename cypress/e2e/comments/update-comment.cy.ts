@@ -10,7 +10,7 @@ import {
   workspaces,
   taskCategories,
   projectCategories,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
 
 describe("update a comment", () => {
   beforeEach(() => {

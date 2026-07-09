@@ -4,7 +4,7 @@ import {
   positions,
   workspaces,
   taskCategories,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
 
 describe("Task category updating", () => {
   beforeEach(() => {

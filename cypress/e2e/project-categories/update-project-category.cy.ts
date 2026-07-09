@@ -4,7 +4,7 @@ import {
   positions,
   workspaces,
   projectCategories,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
 
 describe("Project category updating", () => {
   beforeEach(() => {

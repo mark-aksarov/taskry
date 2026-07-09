@@ -7,14 +7,14 @@ import {
   taskCategories,
   projectCategories,
   projects,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
 
 import { createTask } from "../task.dal";
-import { seed } from "@/prisma/test-utils/seed";
+import { seed } from "@/prisma/test-seed";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { it, expect, describe, beforeAll } from "vitest";
 import { requireSession } from "@/lib/data/utils/requireSession";
-import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
+import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { AccessDeniedError, NotFoundError } from "@/lib/data/utils/error";
 
 describe("createTask", () => {

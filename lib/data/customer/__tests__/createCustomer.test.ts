@@ -5,13 +5,13 @@ import {
   workspaces,
   taskCategories,
   projectCategories,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
 
 import { createCustomer } from "../customer.dal";
 import { it, expect, describe, beforeAll } from "vitest";
-import { seed } from "@/prisma/test-utils/seed";
+import { seed } from "@/prisma/test-seed";
 import { requireSession } from "@/lib/data/utils/requireSession";
-import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
+import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { AccessDeniedError, NotFoundError } from "../../utils/error";
 
 describe("createCustomer", () => {

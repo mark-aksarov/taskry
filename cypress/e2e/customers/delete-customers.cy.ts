@@ -5,7 +5,7 @@ import {
   positions,
   companies,
   workspaces,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
 
 describe("delete customers", () => {
   beforeEach(() => {

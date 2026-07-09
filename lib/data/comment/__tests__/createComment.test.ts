@@ -8,7 +8,7 @@ import {
   workspaces,
   taskCategories,
   projectCategories,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
 
 import {
   NotFoundError,
@@ -18,9 +18,9 @@ import {
 
 import prisma from "@/lib/prisma";
 import { createComment } from "../comment.dal";
-import { seed } from "@/prisma/test-utils/seed";
+import { seed } from "@/prisma/test-seed";
 import { requireSession } from "@/lib/data/utils/requireSession";
-import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
+import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { describe, beforeAll, it, expect, beforeEach } from "vitest";
 
 describe("createComment", () => {

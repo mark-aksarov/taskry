@@ -1,7 +1,23 @@
 import prisma from "@/lib/prisma";
-import { E2ESeedPayload } from "./types";
+import { Prisma } from "@/generated/prisma/client";
 
-export async function seed(payload: E2ESeedPayload) {
+export interface TestSeedPayload {
+  workspaces?: Prisma.WorkspaceCreateManyInput[];
+  companies?: Prisma.CompanyCreateManyInput[];
+  customers?: Prisma.CustomerCreateManyInput[];
+  projectCategories?: Prisma.ProjectCategoryCreateManyInput[];
+  projects?: Prisma.ProjectCreateManyInput[];
+  taskCategories?: Prisma.TaskCategoryCreateManyInput[];
+  tasks?: Prisma.TaskCreateManyInput[];
+  subtasks?: Prisma.SubtaskCreateManyInput[];
+  users?: Prisma.UserCreateManyInput[];
+  accounts?: Prisma.AccountCreateManyInput[];
+  positions?: Prisma.PositionCreateManyInput[];
+  comments?: Prisma.CommentCreateManyInput[];
+  searchKeywords?: Prisma.SearchKeywordCreateManyInput[];
+}
+
+export async function seed(payload: TestSeedPayload) {
   if (payload.workspaces) {
     await prisma.workspace.createMany({
       data: payload.workspaces,

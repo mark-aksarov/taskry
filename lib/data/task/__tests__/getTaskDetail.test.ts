@@ -8,14 +8,14 @@ import {
   projectCategories,
   projects,
   tasks,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
 
 import prisma from "@/lib/prisma";
 import { getTaskDetail } from "../task.dal";
-import { seed } from "@/prisma/test-utils/seed";
+import { seed } from "@/prisma/test-seed";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { requireSession } from "@/lib/data/utils/requireSession";
-import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
+import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterAll } from "vitest";
 
 describe("getTaskDetail", () => {

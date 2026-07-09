@@ -9,7 +9,7 @@ import {
   workspaces,
   taskCategories,
   projectCategories,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
 
 describe("Subtask creation", () => {
   beforeEach(() => {

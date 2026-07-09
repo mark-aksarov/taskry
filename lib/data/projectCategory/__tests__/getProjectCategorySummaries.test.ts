@@ -1,10 +1,10 @@
 import prisma from "@/lib/prisma";
-import { seed } from "@/prisma/test-utils/seed";
+import { seed } from "@/prisma/test-seed";
 import { requireSession } from "@/lib/data/utils/requireSession";
-import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
+import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
 import { getProjectCategorySummaries } from "../projectCategory.dal";
-import { users, positions, workspaces } from "@/prisma/test-utils/data";
+import { users, positions, workspaces } from "@/prisma/seed/test-data";
 
 describe("getProjectCategorySummaries", () => {
   beforeAll(async () => {

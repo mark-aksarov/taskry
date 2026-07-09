@@ -10,7 +10,7 @@ import React from "react";
 import { Button } from "../Button";
 import { TextField } from "../TextField";
 import { Modal, ModalProps } from "./Modal";
-import { render } from "@/lib/utils/test-utils";
+import { render } from "@/lib/test-utils/customRender";
 import { describe, expect, test } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { DialogTrigger } from "react-aria-components";

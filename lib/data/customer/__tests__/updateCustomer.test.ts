@@ -5,13 +5,13 @@ import {
   workspaces,
   taskCategories,
   projectCategories,
-} from "@/prisma/test-utils/data";
+} from "@/prisma/seed/test-data";
 
 import prisma from "@/lib/prisma";
-import { seed } from "@/prisma/test-utils/seed";
+import { seed } from "@/prisma/test-seed";
 import { updateCustomer } from "../customer.dal";
 import { requireSession } from "@/lib/data/utils/requireSession";
-import { resetDatabase } from "@/prisma/test-utils/resetDatabase";
+import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
 import { AccessDeniedError, NotFoundError } from "../../utils/error";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";

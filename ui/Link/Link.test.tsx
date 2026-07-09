@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "../Link";
-import { render } from "@/lib/utils/test-utils";
+import { render } from "@/lib/test-utils/customRender";
 import { describe, expect, test } from "vitest";
 import { screen } from "@testing-library/react";
 
