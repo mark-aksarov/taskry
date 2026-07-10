@@ -17,6 +17,7 @@ import { GuestModeModal } from "@/dashboard/common/GuestModeModal";
 import { ModalManagerProvider } from "@/common/ModalManagerContext";
 import { SearchBarProvider } from "@/dashboard/search/SearchBar/index";
 import { PageTransitionProvider } from "@/dashboard/common/PageTransitionContext";
+import { searchQueryParam } from "@/lib/schemas/base";
 
 interface DashboardLayoutProps {
   profileLinkContainer: React.ReactNode;
@@ -33,6 +34,7 @@ export function DashboardLayout({
   const params = useParams();
   const searchParams = useSearchParams();
   const query = searchParams.get("query");
+  const validQuery = searchQueryParam.parse(query);
 
   /** Route configuration */
   const routeConfig = [
@@ -121,7 +123,7 @@ export function DashboardLayout({
          */}
         <ModalManagerProvider key={pathname}>
           <PageTransitionProvider>
-            <SearchBarProvider key={pathname} initialValue={query ?? ""}>
+            <SearchBarProvider key={pathname} initialValue={validQuery ?? ""}>
               <AppHeader
                 signOut={signOut}
                 profileLinkContainer={profileLinkContainer}
