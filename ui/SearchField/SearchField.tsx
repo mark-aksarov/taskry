@@ -26,7 +26,7 @@ type SearchFieldProps = RACSearchFieldProps &
 
 export const searchInputStyles = tv({
   extend: fieldInputStyles,
-  base: "peer pr-[calc(var(--spacing)*5+18px)] [&::-webkit-search-cancel-button]:hidden",
+  base: "peer pr-[calc(var(--spacing)*8+18px)]! [&::-webkit-search-cancel-button]:hidden",
 
   slots: {
     icon: [

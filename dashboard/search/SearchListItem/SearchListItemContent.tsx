@@ -9,14 +9,14 @@ export function SearchListItemContent({
 }: SearchListItemContentProps) {
   return (
     <>
-      <div className="text-sm font-semibold text-(--text-primary)">
+      <div className="truncate text-sm font-semibold text-(--text-primary)">
         {children}
       </div>
       <ChevronRight
         size={16}
         strokeWidth={1.5}
         absoluteStrokeWidth
-        className="text-(--text-primary)"
+        className="shrink-0 text-(--text-primary)"
       />
     </>
   );
