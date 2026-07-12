@@ -1,6 +1,6 @@
 import { mocked } from "storybook/test";
 import AppTeamProfileLoading from "./loading";
-import AppTeamProfileNotFound from "./not-found";
+import AppTeamProfileNotFound from "../not-found";
 import { mockedUserDetail } from "@/mocks/users";
 import { TeamProfilePage } from "./TeamProfilePage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
