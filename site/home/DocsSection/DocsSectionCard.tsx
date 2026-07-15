@@ -18,7 +18,7 @@ const styles = tv({
   slots: {
     content: "flex flex-1 flex-col items-start gap-1 overflow-hidden",
     heading: "max-w-full truncate text-lg font-bold text-(--text-primary)",
-    subtext: "max-w-full truncate text-sm font-medium text-(--text-tertiary)",
+    subtext: "max-w-full truncate text-base font-medium text-(--text-tertiary)",
     icon: [
       "ml-auto shrink-0",
       "text-(--text-tertiary)",

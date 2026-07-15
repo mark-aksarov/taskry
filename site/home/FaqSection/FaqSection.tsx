@@ -45,17 +45,6 @@ export function FaqSection() {
 
             <AccordionItem>
               <AccordionHeader>
-                {t("accordion.whoIsTaskryFor.title")}
-              </AccordionHeader>
-              <AccordionPanel>
-                <AccordionContent>
-                  {t("accordion.whoIsTaskryFor.content")}
-                </AccordionContent>
-              </AccordionPanel>
-            </AccordionItem>
-
-            <AccordionItem>
-              <AccordionHeader>
                 {t("accordion.teamCollaboration.title")}
               </AccordionHeader>
               <AccordionPanel>

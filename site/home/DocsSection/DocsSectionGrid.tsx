@@ -1,15 +1,7 @@
-import {
-  Layers,
-  UserCog,
-  BookOpen,
-  Building2,
-  CheckSquare,
-  FolderKanban,
-} from "lucide-react";
-
 import { useTranslations } from "next-intl";
 import { DocsSectionCard } from "./DocsSectionCard";
 import { IconWrapper } from "@/site/common/IconWrapper";
+import { UserCog, Building2, CheckSquare, FolderKanban } from "lucide-react";
 
 export function DocsSectionGrid() {
   const t = useTranslations("site.home.DocsSectionGrid");

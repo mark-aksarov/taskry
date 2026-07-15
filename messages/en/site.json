@@ -235,8 +235,8 @@
     "SecuritySection": {
       "heading": "Reliable data storage and protection",
       "description": {
-        "line1": "We ensure the security of your data during system operation",
-        "line2": "and maintain stable service performance."
+        "line1": "Data security and stable service operation are ensured",
+        "line2": "during system operation."
       }
     },
     "SecurityGrid": {
@@ -256,8 +256,8 @@
     "RoadmapSection": {
       "heading": "What's been built and what's planned",
       "description": {
-        "line1": "We're just launching — here's an honest list of what's ready",
-        "line2": "and what's coming in the near future."
+        "line1": "Features available in the current version",
+        "line2": "and planned improvements."
       }
     },
     "RoadmapGrid": {
@@ -310,7 +310,7 @@
       },
       "free": {
         "title": "No subscription",
-        "description": "The platform is fully free to use, with no paid plans or hidden limitations."
+        "description": "The service is fully free to use, with no paid plans or hidden limitations."
       },
       "openSource": {
         "title": "Open source",
