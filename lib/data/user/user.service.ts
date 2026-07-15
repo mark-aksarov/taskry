@@ -146,7 +146,7 @@ export const updateUserImageUrl = async (input: UpdateUserImageUrlInputDTO) => {
 export const resetPassword = async (input: ResetPasswordInputDTO) => {
   // Authorization
   const {
-    user: { id: userId, role, workspaceId },
+    user: { id: userId, workspaceId },
   } = await requireSession();
 
   // Check permission
@@ -159,7 +159,7 @@ export const resetPassword = async (input: ResetPasswordInputDTO) => {
     },
   });
 
-  if (!permission.success || (role === "user" && userId !== input.id)) {
+  if (!permission.success) {
     throw new AccessDeniedError(
       "You do not have permission to reset password.",
     );
