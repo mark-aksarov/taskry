@@ -161,7 +161,7 @@ export const resetPassword = async (input: ResetPasswordInputDTO) => {
 
   if (!permission.success || (role === "user" && userId !== input.id)) {
     throw new AccessDeniedError(
-      "You do not have permission to change password.",
+      "You do not have permission to reset password.",
     );
   }
 
