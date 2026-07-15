@@ -21,7 +21,7 @@ describe("change password of user", () => {
     cy.signIn("user-1@test.com", "12345abc");
     cy.visit("/en/team/user-1");
 
-    cy.changePassword("new-password");
+    cy.changePassword("12345abc", "new-password");
 
     // sign in with new password
     cy.signOutViaUI();
