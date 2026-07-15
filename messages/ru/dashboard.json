@@ -1268,7 +1268,26 @@
     "ChangePasswordModal": {
       "title": "Изменить пароль"
     },
+    "ResetPasswordModal": {
+      "title": "Сбросить пароль"
+    },
+    "ResetPasswordForm": {
+      "newPassword": {
+        "label": "Новый пароль",
+        "placeholder": "Введите новый пароль"
+      },
+      "submitButtonLabel": "Сбросить пароль",
+      "successMessage": "Пароль успешно сброшен"
+    },
     "ChangePasswordForm": {
+      "currentPassword": {
+        "label": "Текущий пароль",
+        "placeholder": "Введите текущий пароль"
+      },
+      "newPassword": {
+        "label": "Новый пароль",
+        "placeholder": "Введите новый пароль"
+      },
       "submitButtonLabel": "Изменить пароль",
       "successMessage": "Пароль успешно изменен"
     },
@@ -1324,10 +1343,6 @@
       }
     },
     "UserPasswordTextField": {
-      "password": {
-        "label": "Пароль",
-        "placeholder": "Введите ваш пароль"
-      },
       "validation": {
         "required": "Требуется пароль",
         "tooShort": "Пароль слишком короткий. Он должен содержать не менее {minLength} символов."
@@ -1342,6 +1357,7 @@
     },
     "ProfileActions": {
       "deleteAccount": "Удалить аккаунт",
+      "resetPassword": "Сбросить пароль",
       "changePassword": "Сменить пароль",
       "editAccount": "Редактировать аккаунт",
       "delete": "Удалить пользователя",

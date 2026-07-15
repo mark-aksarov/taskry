@@ -3,6 +3,7 @@ import {
   CreateUserInputDTO,
   ChangePasswordInputDTO,
   UpdateUserImageUrlInputDTO,
+  ResetPasswordInputDTO,
 } from "./user.dto";
 
 import crypto from "crypto";
@@ -142,7 +143,7 @@ export const updateUserImageUrl = async (input: UpdateUserImageUrlInputDTO) => {
   return updatedUser;
 };
 
-export const changePassword = async (input: ChangePasswordInputDTO) => {
+export const resetPassword = async (input: ResetPasswordInputDTO) => {
   // Authorization
   const {
     user: { id: userId, role, workspaceId },
@@ -153,7 +154,7 @@ export const changePassword = async (input: ChangePasswordInputDTO) => {
     body: {
       userId,
       permission: {
-        user: ["set-password"],
+        user: ["reset-password"],
       },
     },
   });
@@ -171,6 +172,40 @@ export const changePassword = async (input: ChangePasswordInputDTO) => {
   const updatedUser = await auth.api.setUserPassword({
     body: {
       userId: input.id,
+      newPassword: input.newPassword,
+    },
+    headers: await headers(),
+  });
+
+  return updatedUser;
+};
+
+export const changePassword = async (input: ChangePasswordInputDTO) => {
+  // Authorization
+  const {
+    user: { id: userId },
+  } = await requireSession();
+
+  // Check permission
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId,
+      permission: {
+        user: ["change-password"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to change password.",
+    );
+  }
+
+  // Use better auth admin api to update user
+  const updatedUser = await auth.api.changePassword({
+    body: {
+      currentPassword: input.currentPassword,
       newPassword: input.newPassword,
     },
     headers: await headers(),

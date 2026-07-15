@@ -1,9 +1,9 @@
 "use client";
 
 import {
-  ChangePasswordForm,
-  ChangePasswordFormSubmitButton,
-} from "../ChangePasswordForm";
+  ResetPasswordForm,
+  ResetPasswordFormSubmitButton,
+} from "../ResetPasswordForm";
 
 import {
   FormBaseModal,
@@ -15,14 +15,18 @@ import { DialogBody, DialogFooter } from "@/ui/Dialog";
 import { useModal } from "@/common/ModalManagerContext";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
-export function ChangePasswordModal() {
-  const t = useTranslations("dashboard.users.ChangePasswordModal");
+interface ResetPasswordModalProps {
+  userId: string;
+}
 
-  const { isOpen, onOpenChange } = useModal("changePassword");
+export function ResetPasswordModal({ userId }: ResetPasswordModalProps) {
+  const t = useTranslations("dashboard.users.ResetPasswordModal");
+
+  const { isOpen, onOpenChange } = useModal("resetPassword");
 
   return (
     <FormBaseModal
-      data-test="change-password-modal"
+      data-test="reset-password-modal"
       className="md:w-[350px]"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
@@ -30,10 +34,10 @@ export function ChangePasswordModal() {
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>
         <DialogBody>
-          <ChangePasswordForm />
+          <ResetPasswordForm userId={userId} />
         </DialogBody>
         <DialogFooter>
-          <ChangePasswordFormSubmitButton />
+          <ResetPasswordFormSubmitButton />
         </DialogFooter>
       </FormBaseModalDialog>
     </FormBaseModal>

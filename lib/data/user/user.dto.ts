@@ -82,7 +82,12 @@ export interface UpdateUserImageUrlInputDTO {
   imageUrl: string | null;
 }
 
-export interface ChangePasswordInputDTO {
+export interface ResetPasswordInputDTO {
   id: string;
+  newPassword: string;
+}
+
+export interface ChangePasswordInputDTO {
+  currentPassword: string;
   newPassword: string;
 }

@@ -3,14 +3,18 @@
 import { startTransition } from "react";
 import { useTranslations } from "next-intl";
 import { FormBase } from "@/dashboard/common/FormBase";
-import { useChangePassword } from "../ChangePasswordContext";
+import { useResetPassword } from "../ResetPasswordContext";
 import { UserPasswordTextField } from "../UserPasswordTextField";
 import { FormErrorBanner } from "@/dashboard/common/FormErrorBanner";
 
-export function ChangePasswordForm() {
-  const t = useTranslations("dashboard.users.ChangePasswordForm");
+interface ResetPasswordFormProps {
+  userId: string;
+}
 
-  const { state, isPending, action } = useChangePassword();
+export function ResetPasswordForm({ userId }: ResetPasswordFormProps) {
+  const t = useTranslations("dashboard.users.ResetPasswordForm");
+
+  const { state, isPending, action } = useResetPassword();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -22,13 +26,8 @@ export function ChangePasswordForm() {
   }
 
   return (
-    <FormBase id="change-password-form" onSubmit={handleSubmit}>
-      <UserPasswordTextField
-        name="currentPassword"
-        label={t("currentPassword.label")}
-        placeholder={t("currentPassword.placeholder")}
-      />
-
+    <FormBase id="reset-password-form" onSubmit={handleSubmit}>
+      {userId && <input type="hidden" name="id" value={userId} />}
       <UserPasswordTextField
         name="newPassword"
         label={t("newPassword.label")}

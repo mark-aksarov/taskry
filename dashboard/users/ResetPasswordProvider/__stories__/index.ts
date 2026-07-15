@@ -1,0 +1,1 @@
+export { withResetPasswordProvider } from "./withResetPasswordProvider";

@@ -15,6 +15,7 @@ import { UserDetailHeaderInteractive } from "../UserDetailHeader";
 import { DetailHeaderSkeleton } from "@/dashboard/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteUserProvider } from "../DeleteUserProvider/__stories__";
+import { withResetPasswordProvider } from "../ResetPasswordProvider/__stories__";
 import { withChangePasswordProvider } from "../ChangePasswordProvider/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withUpdateUserImageProvider } from "../UpdateUserImageProvider/__stories__";
@@ -33,7 +34,7 @@ const meta = {
   title: "dashboard/users/UserDetailCard",
   component: UserDetailCard,
   beforeEach: () => {
-    mocked(usePathname).mockReturnValue("/team/user-1");
+    mocked(usePathname).mockReturnValue(`/team/${mockedUserDetail.id}`);
     mocked(useParams).mockReturnValue({
       id: mockedUserDetail.id,
     });
@@ -50,6 +51,7 @@ const meta = {
     withUpdateUserImageProvider,
     withClearUserImageUrlProvider,
     withUpdateUserImageFileProvider,
+    withResetPasswordProvider,
     withChangePasswordProvider,
     withCurrentUserProvider,
     withModalManagerProvider,

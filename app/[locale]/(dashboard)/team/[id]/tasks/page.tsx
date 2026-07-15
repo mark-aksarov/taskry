@@ -10,6 +10,7 @@ import { CreateTaskModal } from "@/dashboard/tasks/CreateTaskModal";
 import { UpdateUserModal } from "@/dashboard/users/UpdateUserModal";
 import { DeleteTasksModal } from "@/dashboard/tasks/DeleteTasksModal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { ResetPasswordModal } from "@/dashboard/users/ResetPasswordModal";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { CreateTaskProvider } from "@/dashboard/tasks/CreateTaskProvider";
 import { UpdateUserProvider } from "@/dashboard/users/UpdateUserProvider";
@@ -22,6 +23,7 @@ import { UserNavigationMobile } from "@/dashboard/users/UserNavigationMobile";
 import { UpdateUserImageModal } from "@/dashboard/users/UpdateUserImageModal";
 import { DeleteUserImageModal } from "@/dashboard/users/DeleteUserImageModal";
 import { SelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext";
+import { ResetPasswordProvider } from "@/dashboard/users/ResetPasswordProvider";
 import { UserTaskListContainer } from "@/dashboard/users/UserTaskListContainer";
 import { ChangePasswordProvider } from "@/dashboard/users/ChangePasswordProvider";
 import { CreateTaskFormContainer } from "@/dashboard/tasks/CreateTaskFormContainer";
@@ -81,67 +83,72 @@ export default async function AppProfileTasksPage({
         <ClearUserImageUrlProvider>
           <DeleteUserProvider>
             <UpdateUserProvider>
-              <ChangePasswordProvider>
-                <SelectedTasksProvider
-                  pageItems={tasks.map((task) => ({
-                    id: task.id,
-                    status: task.status,
-                  }))}
-                >
-                  <UpdateTaskStatusesProvider>
-                    <DeleteTasksProvider>
-                      <CreateTaskProvider>
-                        <TeamProfileTasksPage
-                          page={page}
-                          pageSize={pageSize}
-                          totalTasksCount={totalTasksCount}
-                          selectedSortField={sort}
-                          backButton
-                          navigationLarge={
-                            <UserNavigationLarge
-                              userActions={
-                                showUserActions && (
-                                  <ProfileActions userId={userId} />
-                                )
-                              }
-                            />
-                          }
-                          navigationMobile={<UserNavigationMobile />}
-                          userTaskList={<UserTaskListContainer tasks={tasks} />}
-                          userDetailHeaderContainer={
-                            <UserDetailHeaderAltContainer userId={userId} />
-                          }
-                        />
+              <ResetPasswordProvider>
+                <ChangePasswordProvider>
+                  <SelectedTasksProvider
+                    pageItems={tasks.map((task) => ({
+                      id: task.id,
+                      status: task.status,
+                    }))}
+                  >
+                    <UpdateTaskStatusesProvider>
+                      <DeleteTasksProvider>
+                        <CreateTaskProvider>
+                          <TeamProfileTasksPage
+                            page={page}
+                            pageSize={pageSize}
+                            totalTasksCount={totalTasksCount}
+                            selectedSortField={sort}
+                            backButton
+                            navigationLarge={
+                              <UserNavigationLarge
+                                userActions={
+                                  showUserActions && (
+                                    <ProfileActions userId={userId} />
+                                  )
+                                }
+                              />
+                            }
+                            navigationMobile={<UserNavigationMobile />}
+                            userTaskList={
+                              <UserTaskListContainer tasks={tasks} />
+                            }
+                            userDetailHeaderContainer={
+                              <UserDetailHeaderAltContainer userId={userId} />
+                            }
+                          />
 
-                        <TaskSearchModal
-                          searchContainer={
-                            <LinkSearchContainer pathname="/tasks" />
-                          }
-                        />
-                        <DeleteTasksModal />
-                        <ChangePasswordModal userId={userId} />
-                        <CreateTaskModal
-                          createTaskFormContainer={
-                            <CreateTaskFormContainer
-                              forcedAssigneeId={userId}
-                            />
-                          }
-                        />
-                        <UpdateUserModal
-                          updateUserFormContainer={
-                            <UpdateUserFormContainer userId={userId} />
-                          }
-                        />
-                        <UpdateUserImageModal userId={userId} />
-                        <DeleteUserImageModal
-                          userId={userId}
-                          userFullName={userSummary.fullName}
-                        />
-                      </CreateTaskProvider>
-                    </DeleteTasksProvider>
-                  </UpdateTaskStatusesProvider>
-                </SelectedTasksProvider>
-              </ChangePasswordProvider>
+                          <TaskSearchModal
+                            searchContainer={
+                              <LinkSearchContainer pathname="/tasks" />
+                            }
+                          />
+                          <DeleteTasksModal />
+                          <ChangePasswordModal />
+                          <ResetPasswordModal userId={userId} />
+                          <CreateTaskModal
+                            createTaskFormContainer={
+                              <CreateTaskFormContainer
+                                forcedAssigneeId={userId}
+                              />
+                            }
+                          />
+                          <UpdateUserModal
+                            updateUserFormContainer={
+                              <UpdateUserFormContainer userId={userId} />
+                            }
+                          />
+                          <UpdateUserImageModal userId={userId} />
+                          <DeleteUserImageModal
+                            userId={userId}
+                            userFullName={userSummary.fullName}
+                          />
+                        </CreateTaskProvider>
+                      </DeleteTasksProvider>
+                    </UpdateTaskStatusesProvider>
+                  </SelectedTasksProvider>
+                </ChangePasswordProvider>
+              </ResetPasswordProvider>
             </UpdateUserProvider>
           </DeleteUserProvider>
         </ClearUserImageUrlProvider>

@@ -329,6 +329,12 @@
       "error": {
         "internalServerError": "Something went wrong. Failed to change the password. Refresh the page or try again later."
       }
+    },
+    "resetPassword": {
+      "success": "Password successfully reset",
+      "error": {
+        "internalServerError": "Something went wrong. Failed to reset password. Refresh the page or try again later."
+      }
     }
   }
 }

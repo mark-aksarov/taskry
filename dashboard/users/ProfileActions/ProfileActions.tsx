@@ -3,10 +3,11 @@
 import { useTranslations } from "next-intl";
 import { KeyRound, Trash } from "lucide-react";
 import { useDeleteUser } from "../DeleteUserContext";
-import { useChangePassword } from "../ChangePasswordContext";
 import { useModal } from "@/common/ModalManagerContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
+import { useResetPassword } from "../ResetPasswordContext";
+import { useChangePassword } from "../ChangePasswordContext";
 import { useCurrentUser } from "@/common/CurrentUserContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { NavigationButton } from "@/dashboard/common/NavigationItem";
 
 interface ProfileActionsProps {
@@ -26,6 +27,15 @@ export function ProfileActions({ userId }: ProfileActionsProps) {
   // Current user
   const { isGuest, isOwner, userId: currentUserId } = useCurrentUser();
 
+  // reset password action and modal states
+  const { isPending: isResetPasswordPending } = useResetPassword();
+  const { onOpenChange: onResetPasswordModalOpenChange } =
+    useModal("resetPassword");
+
+  function handlePasswordResetPress() {
+    guestGuard(() => onResetPasswordModalOpenChange(true));
+  }
+
   // Change password action and modal states
   const { isPending: isChangePasswordPending } = useChangePassword();
   const { onOpenChange: onChangePasswordModalOpenChange } =
@@ -40,8 +50,16 @@ export function ProfileActions({ userId }: ProfileActionsProps) {
   }
 
   // Only owners can delete the user, and user cannot delete his own account
-  // Guest users can interact with any UI
+  // Guest users can interact with any UI.
   const showDeleteButton = (isOwner && currentUserId !== userId) || isGuest;
+
+  // Only owners can reset passwords and cannot reset their own passwords.
+  // Guest users can interact with any UI.
+  const showResetPasswordButton =
+    (isOwner || isGuest) && currentUserId !== userId;
+
+  // Users can change their own passwords.
+  const showChangePasswordButton = currentUserId === userId;
 
   return (
     <>
@@ -56,17 +74,32 @@ export function ProfileActions({ userId }: ProfileActionsProps) {
             label={t("delete")}
           />
         )}
-        <NavigationButton
-          data-test="change-password-button"
-          onPress={handlePasswordChangePress}
-          variant="secondary"
-          isPending={isChangePasswordPending}
-          isDisabled={isDeletePending}
-          iconLeft={
-            <KeyRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
-          }
-          label={t("changePassword")}
-        />
+        {showResetPasswordButton && (
+          <NavigationButton
+            data-test="reset-password-button"
+            onPress={handlePasswordResetPress}
+            variant="secondary"
+            isPending={isResetPasswordPending}
+            isDisabled={isDeletePending}
+            iconLeft={
+              <KeyRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
+            }
+            label={t("resetPassword")}
+          />
+        )}
+        {showChangePasswordButton && (
+          <NavigationButton
+            data-test="change-password-button"
+            onPress={handlePasswordChangePress}
+            variant="secondary"
+            isPending={isChangePasswordPending}
+            isDisabled={isDeletePending}
+            iconLeft={
+              <KeyRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
+            }
+            label={t("changePassword")}
+          />
+        )}
       </div>
     </>
   );

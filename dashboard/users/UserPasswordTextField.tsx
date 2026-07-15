@@ -1,18 +1,27 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { TextField } from "@/ui/TextField";
+import { TextField, TextFieldProps } from "@/ui/TextField";
 
-export function UserPasswordTextField() {
+type UserPasswordTextFieldProps = Pick<
+  TextFieldProps,
+  "name" | "label" | "placeholder"
+>;
+
+export function UserPasswordTextField({
+  name,
+  label,
+  placeholder,
+}: UserPasswordTextFieldProps) {
   const t = useTranslations("dashboard.users.UserPasswordTextField");
 
   return (
     <TextField
       data-test="user-password-field"
-      name="password"
+      name={name}
       type="password"
-      label={t("password.label")}
-      placeholder={t("password.placeholder")}
+      label={label}
+      placeholder={placeholder}
       isRequired
       minLength={8}
       maxLength={128}

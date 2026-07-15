@@ -1268,7 +1268,26 @@
     "ChangePasswordModal": {
       "title": "Change password"
     },
+    "ResetPasswordModal": {
+      "title": "Reset password"
+    },
+    "ResetPasswordForm": {
+      "newPassword": {
+        "label": "New password",
+        "placeholder": "Enter new password"
+      },
+      "submitButtonLabel": "Reset password",
+      "successMessage": "Password reset successfully"
+    },
     "ChangePasswordForm": {
+      "currentPassword": {
+        "label": "Current password",
+        "placeholder": "Enter current password"
+      },
+      "newPassword": {
+        "label": "New password",
+        "placeholder": "Enter new password"
+      },
       "submitButtonLabel": "Change password",
       "successMessage": "Password changed successfully"
     },
@@ -1324,10 +1343,6 @@
       }
     },
     "UserPasswordTextField": {
-      "password": {
-        "label": "Password",
-        "placeholder": "Enter your password"
-      },
       "validation": {
         "required": "Password is required",
         "tooShort": "The password is too short. It must contain at least {minLength} characters."
@@ -1342,6 +1357,7 @@
     },
     "ProfileActions": {
       "deleteAccount": "Delete account",
+      "resetPassword": "Reset password",
       "changePassword": "Change password",
       "editAccount": "Edit account",
       "delete": "Delete user",

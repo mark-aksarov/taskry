@@ -3,17 +3,17 @@
 import z from "zod";
 import { ActionState } from "../types";
 import { APIError } from "better-auth";
-import { userPassword } from "@/lib/schemas/user";
 import { getTranslations } from "next-intl/server";
+import { userId, userPassword } from "@/lib/schemas/user";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
-import { changePassword as changePasswordService } from "@/lib/data/user/user.service";
+import { resetPassword as resetPasswordService } from "@/lib/data/user/user.service";
 
 const schema = z.object({
-  currentPassword: userPassword,
+  id: userId,
   newPassword: userPassword,
 });
 
-export async function changePassword(formData: FormData): Promise<ActionState> {
+export async function resetPassword(formData: FormData): Promise<ActionState> {
   // Authorization
   await requireSessionOrRedirect();
 
@@ -22,11 +22,11 @@ export async function changePassword(formData: FormData): Promise<ActionState> {
   try {
     const input = Object.fromEntries(formData.entries());
     const parsedData = schema.parse(input);
-    await changePasswordService(parsedData);
+    await resetPasswordService(parsedData);
 
     return {
       status: "success",
-      message: t("user.changePassword.success"),
+      message: t("user.resetPassword.success"),
     };
   } catch (error) {
     console.error("Server Action Error:", error);
@@ -40,7 +40,7 @@ export async function changePassword(formData: FormData): Promise<ActionState> {
 
     return {
       status: "error",
-      message: t("user.changePassword.error.internalServerError"),
+      message: t("user.resetPassword.error.internalServerError"),
     };
   }
 }
