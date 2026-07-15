@@ -60,7 +60,10 @@ declare namespace Cypress {
       companyKey?: string;
     }): Chainable<JQuery<HTMLElement>>;
 
-    changePassword(newPassword: string): Chainable<JQuery<HTMLElement>>;
+    changePassword(
+      currentPassword: string,
+      newPassword: string,
+    ): Chainable<JQuery<HTMLElement>>;
     signInViaUI(
       email: string,
       password: string,

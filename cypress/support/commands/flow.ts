@@ -200,11 +200,15 @@ Cypress.Commands.add(
   },
 );
 
-Cypress.Commands.add("changePassword", (newPassword: string) => {
-  cy.getByData("change-password-button").filter(":visible").click();
-  cy.get('input[name="password"]').clear().type(newPassword);
-  cy.get('button[type="submit"]').click();
-});
+Cypress.Commands.add(
+  "changePassword",
+  (currentPassword: string, newPassword: string) => {
+    cy.getByData("change-password-button").filter(":visible").click();
+    cy.get('input[name="currentPassword"]').clear().type(currentPassword);
+    cy.get('input[name="newPassword"]').clear().type(newPassword);
+    cy.get('button[type="submit"]').click();
+  },
+);
 
 Cypress.Commands.add(
   "signInViaUI",
