@@ -201,6 +201,7 @@
     "create": {
       "success": "Task created successfully",
       "error": {
+        "limitExceededError": "The maximum number of tasks would be exceeded. Maximum: {count}.",
         "internalServerError": "Something went wrong. Failed to create the task. Refresh the page or try again later."
       }
     },
@@ -232,6 +233,13 @@
       "success": "Tasks deleted successfully",
       "error": {
         "internalServerError": "Something went wrong. Failed to delete the tasks. Refresh the page or try again later."
+      }
+    },
+    "import": {
+      "success": "Task categories imported successfully",
+      "error": {
+        "limitExceededError": "The maximum number of tasks would be exceeded. Maximum: {count}.",
+        "internalServerError": "Something went wrong. Failed to import task categories. Make sure the CSV file is filled out correctly and try again."
       }
     }
   },
@@ -273,6 +281,7 @@
     "create": {
       "success": "Task category created successfully",
       "error": {
+        "limitExceededError": "The maximum number of task categories would be exceeded. Maximum: {count}.",
         "internalServerError": "Something went wrong. Failed to create the task category. Refresh the page or try again later."
       }
     },
@@ -292,6 +301,13 @@
       "success": "Task categories deleted successfully",
       "error": {
         "internalServerError": "Something went wrong. Failed to delete the task categories. Refresh the page or try again later."
+      }
+    },
+    "import": {
+      "success": "Task categories imported successfully",
+      "error": {
+        "limitExceededError": "The maximum number of task categories would be exceeded. Maximum: {count}.",
+        "internalServerError": "Something went wrong. Failed to import task categories. Make sure the CSV file is filled out correctly and try again."
       }
     }
   },

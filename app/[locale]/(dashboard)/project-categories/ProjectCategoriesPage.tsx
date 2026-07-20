@@ -34,10 +34,7 @@ export function ProjectCategoriesPage({
     return (
       <DashboardContainer fullscreen headerOffset>
         <DashboardGrid className="relative flex-auto">
-          <ToolbarLarge
-            firstSlot={<ProjectCategoryManageMenuTriggerLarge />}
-            twoRowsOnLg
-          />
+          <ToolbarLarge firstSlot={<ProjectCategoryManageMenuTriggerLarge />} />
 
           <ToolbarMobile
             firstSlot={

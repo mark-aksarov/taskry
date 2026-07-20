@@ -6,6 +6,8 @@ import { getTranslations } from "next-intl/server";
 import { taskCategoryName } from "@/lib/schemas/taskCategory";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { createTaskCategory as createTaskCategoryQuery } from "@/lib/data/taskCategory/taskCategory.dal";
+import { LimitExceededError } from "@/lib/data/utils/error";
+import { TASK_CATEGORY_MAX_COUNT } from "@/lib/data/constants";
 
 const schema = z.object({ name: taskCategoryName });
 
@@ -30,6 +32,15 @@ export async function createTaskCategory(
     };
   } catch (error) {
     console.error("Server Action Error:", error);
+
+    if (error instanceof LimitExceededError) {
+      return {
+        status: "error",
+        message: t("taskCategory.create.error.limitExceededError", {
+          count: TASK_CATEGORY_MAX_COUNT,
+        }),
+      };
+    }
 
     return {
       status: "error",

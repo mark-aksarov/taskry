@@ -997,6 +997,12 @@
       "cancelButton": "Cancel",
       "deleteButton": "Delete",
       "successMessage": "Task category deleted successfully"
+    },
+    "ImportTaskCategoriesModal": {
+      "heading": "Import categories"
+    },
+    "TaskCategoryManageMenuTrigger": {
+      "importCSV": "Import categories (CSV)"
     }
   },
   "tasks": {

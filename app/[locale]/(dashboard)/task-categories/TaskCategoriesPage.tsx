@@ -3,6 +3,11 @@ import {
   CreateTaskCategoryModalTriggerMobile,
 } from "@/dashboard/taskCategory/CreateTaskCategoryModalTrigger";
 
+import {
+  TaskCategoryManageMenuTriggerLarge,
+  TaskCategoryManageMenuTriggerMobile,
+} from "@/dashboard/taskCategory/TaskCategoryManageMenuTrigger";
+
 import { useTranslations } from "next-intl";
 import { BackButton } from "@/dashboard/common/BackButton";
 import { ViewModeProvider } from "@/dashboard/common/ViewMode";
@@ -29,6 +34,8 @@ export function TaskCategoriesPage({
     return (
       <DashboardContainer fullscreen headerOffset>
         <DashboardGrid className="relative flex-auto">
+          <ToolbarLarge firstSlot={<TaskCategoryManageMenuTriggerLarge />} />
+
           <ToolbarMobile
             firstSlot={
               <>
@@ -36,6 +43,7 @@ export function TaskCategoriesPage({
                 <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
               </>
             }
+            secondSlot={<TaskCategoryManageMenuTriggerMobile />}
           />
 
           <PageEmptySection
@@ -53,7 +61,12 @@ export function TaskCategoriesPage({
       <DashboardGrid>
         <ViewModeProvider>
           <ToolbarLarge
-            firstSlot={<TaskCategoryActionsMenuTrigger />}
+            firstSlot={
+              <>
+                <TaskCategoryManageMenuTriggerLarge />
+                <TaskCategoryActionsMenuTrigger />
+              </>
+            }
             secondSlot={<CreateTaskCategoryModalTriggerLarge />}
           />
 
@@ -64,8 +77,14 @@ export function TaskCategoriesPage({
                 <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
               </>
             }
-            secondSlot={<CreateTaskCategoryModalTriggerMobile />}
+            secondSlot={
+              <>
+                <TaskCategoryManageMenuTriggerMobile />
+                <CreateTaskCategoryModalTriggerMobile />
+              </>
+            }
           />
+
           {taskCategoriesContainer}
         </ViewModeProvider>
       </DashboardGrid>

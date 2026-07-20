@@ -6,9 +6,11 @@ import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
 import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
 import { CreateTaskCategoryModal } from "@/dashboard/taskCategory/CreateTaskCategoryModal";
 import { TaskCategoriesContainer } from "@/dashboard/taskCategory/TaskCategoriesContainer";
+import { ImportTaskCategoriesModal } from "@/dashboard/taskCategory/ImportTaskCategoriesModal";
 import { DeleteTaskCategoriesModal } from "@/dashboard/taskCategory/DeleteTaskCategoriesModal";
 import { CreateTaskCategoryProvider } from "@/dashboard/taskCategory/CreateTaskCategoryProvider";
 import { DeleteTaskCategoriesProvider } from "@/dashboard/taskCategory/DeleteTaskCategoriesProvider";
+import { ImportTaskCategoriesProvider } from "@/dashboard/taskCategory/ImportTaskCategoriesProvider";
 
 export default async function AppTaskCategoriesPage() {
   // Authorization
@@ -22,16 +24,19 @@ export default async function AppTaskCategoriesPage() {
     >
       <DeleteTaskCategoriesProvider>
         <CreateTaskCategoryProvider>
-          <TaskCategoriesPage
-            totalCount={taskCategories.length}
-            taskCategoriesContainer={<TaskCategoriesContainer />}
-          />
+          <ImportTaskCategoriesProvider>
+            <TaskCategoriesPage
+              totalCount={taskCategories.length}
+              taskCategoriesContainer={<TaskCategoriesContainer />}
+            />
 
-          <TaskSearchModal
-            searchContainer={<LinkSearchContainer pathname="/tasks" />}
-          />
-          <CreateTaskCategoryModal />
-          <DeleteTaskCategoriesModal />
+            <TaskSearchModal
+              searchContainer={<LinkSearchContainer pathname="/tasks" />}
+            />
+            <CreateTaskCategoryModal />
+            <DeleteTaskCategoriesModal />
+            <ImportTaskCategoriesModal />
+          </ImportTaskCategoriesProvider>
         </CreateTaskCategoryProvider>
       </DeleteTaskCategoriesProvider>
     </SelectedItemsProvider>

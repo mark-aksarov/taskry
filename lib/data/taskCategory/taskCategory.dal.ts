@@ -9,8 +9,9 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import { AccessDeniedError } from "../utils/error";
+import { AccessDeniedError, LimitExceededError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
+import { TASK_CATEGORY_MAX_COUNT } from "../constants";
 
 export const getTaskCategoryCount = cache(async () => {
   // Authorization
@@ -60,6 +61,9 @@ export const createTaskCategory = async (input: CreateTaskCategoryInputDTO) => {
     );
   }
 
+  // Validate limit
+  await validateTaskCategoryLimit(workspaceId);
+
   // Create task category
   const taskCategory = await prisma.taskCategory.create({
     data: {
@@ -69,6 +73,44 @@ export const createTaskCategory = async (input: CreateTaskCategoryInputDTO) => {
   });
 
   return taskCategory;
+};
+
+export const createTaskCategories = async (
+  input: CreateTaskCategoryInputDTO[],
+) => {
+  // Authorization
+  const {
+    user: { id: userId, workspaceId },
+  } = await requireSession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId,
+      permission: {
+        taskCategory: ["create"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to create task categories.",
+    );
+  }
+
+  // Validate limit
+  await validateTaskCategoryLimit(workspaceId, input.length);
+
+  // Create task categories
+  const taskCategories = await prisma.taskCategory.createMany({
+    data: input.map((category) => ({
+      name: category.name,
+      workspaceId,
+    })),
+  });
+
+  return taskCategories;
 };
 
 export const updateTaskCategory = async (input: UpdateTaskCategoryInputDTO) => {
@@ -139,3 +181,25 @@ export const deleteTaskCategories = async (ids: number[]) => {
 
   return deletedTaskCategories;
 };
+
+/**
+ * HELPERS
+ */
+
+// Validate that task category limit has not been reached
+async function validateTaskCategoryLimit(
+  workspaceId: number,
+  newCategoriesCount = 1,
+) {
+  const existingCount = await prisma.taskCategory.count({
+    where: {
+      workspaceId,
+    },
+  });
+
+  if (existingCount + newCategoriesCount > TASK_CATEGORY_MAX_COUNT) {
+    throw new LimitExceededError(
+      `You cannot create more than ${TASK_CATEGORY_MAX_COUNT} task categories.`,
+    );
+  }
+}

@@ -40,7 +40,7 @@ export async function importProjectCategories(
     if (error instanceof LimitExceededError) {
       return {
         status: "error",
-        message: t("projectCategory.create.error.limitExceededError", {
+        message: t("projectCategory.import.error.limitExceededError", {
           count: PROJECT_CATEGORY_MAX_COUNT,
         }),
       };
