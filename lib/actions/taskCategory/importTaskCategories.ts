@@ -7,7 +7,7 @@ import { parseCsvFile } from "@/lib/utils/parseCsvFile";
 import { LimitExceededError } from "@/lib/data/utils/error";
 import { taskCategoryName } from "@/lib/schemas/taskCategory";
 import { TASK_CATEGORY_MAX_COUNT } from "@/lib/data/constants";
-import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { requireActionSession } from "@/lib/utils/requireActionSession";
 import { createTaskCategories as createTaskCategoriesQuery } from "@/lib/data/taskCategory/taskCategory.dal";
 
 const schema = z.array(z.object({ name: taskCategoryName }).strict()).min(1);
@@ -16,7 +16,7 @@ export async function importTaskCategories(
   formData: FormData,
 ): Promise<ActionState> {
   // Authorization
-  await requireSessionOrRedirect();
+  await requireActionSession();
 
   const t = await getTranslations("actions");
 

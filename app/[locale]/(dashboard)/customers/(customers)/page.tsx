@@ -17,7 +17,7 @@ import { CustomersPage } from "./CustomersPage";
 import { customerSortFields } from "@/lib/types";
 import { companyId } from "@/lib/schemas/company";
 import { getCompanyCount } from "@/lib/data/company/company.dal";
-import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { CreateCompanyModal } from "@/dashboard/company/CreateCompanyModal";
 import { CreateCustomerModal } from "@/dashboard/customer/CreateCustomerModal";
 import { CustomerSearchModal } from "@/dashboard/customer/CustomerSearchModal";
@@ -57,7 +57,7 @@ export default async function AppCustomersPage({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   // Authorization
-  await requireProtectedPage();
+  await requireProtectedPageSession();
 
   // Validation
   const rawParams = await searchParams;

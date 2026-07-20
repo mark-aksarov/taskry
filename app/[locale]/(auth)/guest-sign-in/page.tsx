@@ -1,8 +1,8 @@
 import { signIn } from "@/lib/actions/auth/signIn";
 import { GuestSignInPage } from "./GuestSignInPage";
-import { requireAuthPage } from "@/lib/utils/requireAuthPage";
+import { requireAuthPageSession } from "@/lib/utils/requireAuthPageSession";
 
 export default async function AppSignInPage() {
-  await requireAuthPage();
+  await requireAuthPageSession();
   return <GuestSignInPage signIn={signIn} />;
 }

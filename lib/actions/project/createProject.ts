@@ -4,13 +4,13 @@ import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
 import { createProjectSchema } from "@/lib/schemas/project";
 import { createProject as createProjectQuery } from "@/lib/data/project/project.dal";
-import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { requireActionSession } from "@/lib/utils/requireActionSession";
 import { LimitExceededError } from "@/lib/data/utils/error";
 import { PROJECT_MAX_COUNT } from "@/lib/data/constants";
 
 export async function createProject(formData: FormData): Promise<ActionState> {
   // Authorization
-  await requireSessionOrRedirect();
+  await requireActionSession();
 
   const t = await getTranslations("actions");
 

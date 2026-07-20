@@ -4,11 +4,11 @@ import { ActionState } from "../types";
 import { commentId } from "@/lib/schemas/comment";
 import { getTranslations } from "next-intl/server";
 import { deleteComment as deleteCommentQuery } from "@/lib/data/comment/comment.dal";
-import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { requireActionSession } from "@/lib/utils/requireActionSession";
 
 export async function deleteComment(id: number): Promise<ActionState> {
   // Authorization
-  await requireSessionOrRedirect();
+  await requireActionSession();
 
   const t = await getTranslations("actions");
 

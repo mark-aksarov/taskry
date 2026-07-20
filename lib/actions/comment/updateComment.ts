@@ -5,7 +5,7 @@ import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
 import { commentId, commentContent } from "@/lib/schemas/comment";
 import { updateComment as updateCommentQuery } from "@/lib/data/comment/comment.dal";
-import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { requireActionSession } from "@/lib/utils/requireActionSession";
 
 const schema = z.object({
   id: commentId,
@@ -14,7 +14,7 @@ const schema = z.object({
 
 export async function updateComment(formData: FormData): Promise<ActionState> {
   // Authorization
-  await requireSessionOrRedirect();
+  await requireActionSession();
 
   const t = await getTranslations("actions");
 

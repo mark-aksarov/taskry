@@ -15,7 +15,7 @@ import { customerId } from "@/lib/schemas/customer";
 import { emptyStringToNull } from "@/lib/schemas/base";
 import { projectCategoryId } from "@/lib/schemas/projectCategory";
 import { updateProject as updateProjectQuery } from "@/lib/data/project/project.dal";
-import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { requireActionSession } from "@/lib/utils/requireActionSession";
 
 const schema = z.object({
   id: projectId,
@@ -33,7 +33,7 @@ const schema = z.object({
 
 export async function updateProject(formData: FormData): Promise<ActionState> {
   // Authorization
-  await requireSessionOrRedirect();
+  await requireActionSession();
 
   const t = await getTranslations("actions");
 

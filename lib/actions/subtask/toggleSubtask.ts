@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server";
 import { ActionState, ToggleSubtaskPayload } from "../types";
 import { subtaskId, subtaskIsDone } from "@/lib/schemas/subtask";
 import { updateSubtask as updateSubtaskQuery } from "@/lib/data/subtask/subtask.dal";
-import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { requireActionSession } from "@/lib/utils/requireActionSession";
 
 const schema = z.object({
   id: subtaskId,
@@ -16,7 +16,7 @@ export async function toggleSubtask(
   data: ToggleSubtaskPayload,
 ): Promise<ActionState> {
   // Authorization
-  await requireSessionOrRedirect();
+  await requireActionSession();
 
   const t = await getTranslations("actions");
 

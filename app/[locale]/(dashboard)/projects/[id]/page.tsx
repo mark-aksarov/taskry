@@ -3,7 +3,7 @@ import { projectId } from "@/lib/schemas/project";
 import { ProjectDetailPage } from "./ProjectDetailPage";
 import { getProjectFormData } from "@/lib/data/project/project.dal";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
-import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
 import { DeleteProjectProvider } from "@/dashboard/projects/DeleteProjectProvider";
 import { UpdateProjectTitleModal } from "@/dashboard/projects/UpdateProjectTitleModal";
@@ -30,7 +30,7 @@ export default async function AppProjectDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  await requireProtectedPage();
+  await requireProtectedPageSession();
 
   // Validation
   const { id: rawProjectId } = await params;

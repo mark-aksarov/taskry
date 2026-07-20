@@ -6,11 +6,11 @@ import { createTaskSchema } from "@/lib/schemas/task";
 import { TASK_MAX_COUNT } from "@/lib/data/constants";
 import { LimitExceededError } from "@/lib/data/utils/error";
 import { createTask as createTaskQuery } from "@/lib/data/task/task.dal";
-import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { requireActionSession } from "@/lib/utils/requireActionSession";
 
 export async function createTask(formData: FormData): Promise<ActionState> {
   // Authorization
-  await requireSessionOrRedirect();
+  await requireActionSession();
 
   const t = await getTranslations("actions");
 

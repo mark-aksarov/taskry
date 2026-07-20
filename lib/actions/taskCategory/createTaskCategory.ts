@@ -4,7 +4,7 @@ import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
 import { taskCategoryName } from "@/lib/schemas/taskCategory";
-import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { requireActionSession } from "@/lib/utils/requireActionSession";
 import { createTaskCategory as createTaskCategoryQuery } from "@/lib/data/taskCategory/taskCategory.dal";
 import { LimitExceededError } from "@/lib/data/utils/error";
 import { TASK_CATEGORY_MAX_COUNT } from "@/lib/data/constants";
@@ -15,7 +15,7 @@ export async function createTaskCategory(
   formData: FormData,
 ): Promise<ActionState> {
   // Authorization
-  await requireSessionOrRedirect();
+  await requireActionSession();
 
   const t = await getTranslations("actions");
 

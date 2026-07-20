@@ -2,8 +2,9 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { getLocale } from "next-intl/server";
 import { redirect } from "@/i18n/navigation";
+import { cache } from "react";
 
-export async function requireProtectedPage() {
+export const requireProtectedPageSession = cache(async () => {
   const locale = await getLocale();
 
   const session = await auth.api.getSession({
@@ -17,4 +18,4 @@ export async function requireProtectedPage() {
   }
 
   return session!;
-}
+});

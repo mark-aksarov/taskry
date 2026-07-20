@@ -3,7 +3,7 @@ import { TeamProfilePage } from "./TeamProfilePage";
 import { getUserFormData } from "@/lib/data/user/user.dal";
 import { userId as userIdSchema } from "@/lib/schemas/user";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
-import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { ResetPasswordModal } from "@/dashboard/users/ResetPasswordModal";
 import { UpdateUserBioModal } from "@/dashboard/users/UpdateUserBioModal";
 import { DeleteUserProvider } from "@/dashboard/users/DeleteUserProvider";
@@ -39,7 +39,7 @@ export default async function AppTeamProfilePage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const session = await requireProtectedPage();
+  const session = await requireProtectedPageSession();
 
   // Validation
   const { id: rawUserId } = await params;

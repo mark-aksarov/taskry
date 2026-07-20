@@ -1,7 +1,7 @@
 import { PositionsPage } from "./PositionsPage";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
 import { getPositionSummaries } from "@/lib/data/position/position.dal";
-import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { PositionsContainer } from "@/dashboard/position/PositionsContainer";
 import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
 import { CreatePositionModal } from "@/dashboard/position/CreatePositionModal";
@@ -12,7 +12,7 @@ import { DeletePositionsModal } from "@/dashboard/position/DeletePositionsModal"
 
 export default async function AppPositionsPage() {
   // Authorization
-  await requireProtectedPage();
+  await requireProtectedPageSession();
 
   const positions = await getPositionSummaries();
 

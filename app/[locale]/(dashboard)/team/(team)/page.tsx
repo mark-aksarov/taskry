@@ -16,7 +16,7 @@ import { UserSearchModal } from "@/dashboard/users/UserSearchModal";
 import { CreateUserModal } from "@/dashboard/users/CreateUserModal";
 import { UserFiltersModal } from "@/dashboard/users/UserFiltersModal";
 import { UserGridContainer } from "@/dashboard/users/UserGridContainer";
-import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { CreateUserProvider } from "@/dashboard/users/CreateUserProvider";
 import { UserFiltersProvider } from "@/dashboard/users/UserFiltersContext";
 import { CreatePositionModal } from "@/dashboard/position/CreatePositionModal";
@@ -46,7 +46,7 @@ export default async function AppTeamPage({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   // Authorization
-  await requireProtectedPage();
+  await requireProtectedPageSession();
 
   // Validation
   const rawParams = await searchParams;

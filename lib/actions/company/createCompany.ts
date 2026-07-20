@@ -7,7 +7,7 @@ import { companyName } from "@/lib/schemas/company";
 import { COMPANY_MAX_COUNT } from "@/lib/data/constants";
 import { LimitExceededError } from "@/lib/data/utils/error";
 import { createCompany as createCompanyQuery } from "@/lib/data/company/company.dal";
-import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { requireActionSession } from "@/lib/utils/requireActionSession";
 
 const schema = z.object({
   name: companyName,
@@ -15,7 +15,7 @@ const schema = z.object({
 
 export async function createCompany(formData: FormData): Promise<ActionState> {
   // Authorization
-  await requireSessionOrRedirect();
+  await requireActionSession();
 
   const t = await getTranslations("actions");
 

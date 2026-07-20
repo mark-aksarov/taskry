@@ -1,7 +1,7 @@
 import { DashboardLayout } from "./DashboardLayout";
 import { signOut } from "@/lib/actions/auth/signOut";
 import { CurrentUserProvider } from "@/common/CurrentUserContext";
-import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { ProfileLinkContainer } from "@/dashboard/layout/ProfileLinkContainer";
 
 export default async function AppDashboardLayout({
@@ -10,7 +10,7 @@ export default async function AppDashboardLayout({
   children: React.ReactNode;
 }>) {
   // Authorization
-  const session = await requireProtectedPage();
+  const session = await requireProtectedPageSession();
 
   // This data is required to determine the user's role
   // and render the UI accordingly on the client side.

@@ -4,14 +4,14 @@ import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
 import { companyId } from "@/lib/schemas/company";
-import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { requireActionSession } from "@/lib/utils/requireActionSession";
 import { deleteCompanies as deleteCompaniesQuery } from "@/lib/data/company/company.dal";
 
 const companyIds = z.array(companyId).min(1);
 
 export async function deleteCompanies(ids: number[]): Promise<ActionState> {
   // Authorization
-  await requireSessionOrRedirect();
+  await requireActionSession();
 
   const t = await getTranslations("actions");
 

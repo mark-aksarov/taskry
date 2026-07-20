@@ -4,7 +4,7 @@ import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
 import { taskCategoryId, taskCategoryName } from "@/lib/schemas/taskCategory";
-import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { requireActionSession } from "@/lib/utils/requireActionSession";
 import { updateTaskCategory as updateTaskCategoryQuery } from "@/lib/data/taskCategory/taskCategory.dal";
 
 const schema = z.object({
@@ -16,7 +16,7 @@ export async function updateTaskCategory(
   formData: FormData,
 ): Promise<ActionState> {
   // Authorization
-  await requireSessionOrRedirect();
+  await requireActionSession();
 
   const t = await getTranslations("actions");
 

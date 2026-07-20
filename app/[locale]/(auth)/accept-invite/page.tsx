@@ -2,7 +2,7 @@ import z from "zod";
 import { notFound } from "next/navigation";
 import { userEmail } from "@/lib/schemas/user";
 import { AcceptInvitePage } from "./AcceptInvitePage";
-import { requireAuthPage } from "@/lib/utils/requireAuthPage";
+import { requireAuthPageSession } from "@/lib/utils/requireAuthPageSession";
 import { acceptInvite } from "@/lib/actions/auth/acceptInvite";
 
 const searchParamsSchema = z.object({
@@ -15,7 +15,7 @@ export default async function AppAcceptInvitePage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  await requireAuthPage();
+  await requireAuthPageSession();
 
   // Validation
   const rawParams = await searchParams;

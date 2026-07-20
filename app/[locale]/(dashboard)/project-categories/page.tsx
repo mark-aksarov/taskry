@@ -1,6 +1,6 @@
 import { ProjectCategoriesPage } from "./ProjectCategoriesPage";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
-import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
 import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
 import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
@@ -14,7 +14,7 @@ import { ImportProjectCategoriesProvider } from "@/dashboard/projectCategory/Imp
 
 export default async function AppProjectCategoriesPage() {
   // Authorization
-  await requireProtectedPage();
+  await requireProtectedPageSession();
 
   const projectCategories = await getProjectCategorySummaries();
 

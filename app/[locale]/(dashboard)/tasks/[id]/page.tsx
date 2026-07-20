@@ -3,7 +3,7 @@ import { taskId } from "@/lib/schemas/task";
 import { TaskDetailPage } from "./TaskDetailPage";
 import { getTaskFormData } from "@/lib/data/task/task.dal";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
-import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { DeleteTaskProvider } from "@/dashboard/tasks/DeleteTaskProvider";
 import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
 import { CreateSubtaskModal } from "@/dashboard/subtasks/CreateSubtaskModal";
@@ -35,7 +35,7 @@ export default async function AppTaskDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  await requireProtectedPage();
+  await requireProtectedPageSession();
 
   // Validation
   const { id: rawTaskId } = await params;

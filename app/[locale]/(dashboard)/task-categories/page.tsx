@@ -1,6 +1,6 @@
 import { TaskCategoriesPage } from "./TaskCategoriesPage";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
-import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
 import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
 import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
@@ -14,7 +14,7 @@ import { ImportTaskCategoriesProvider } from "@/dashboard/taskCategory/ImportTas
 
 export default async function AppTaskCategoriesPage() {
   // Authorization
-  await requireProtectedPage();
+  await requireProtectedPageSession();
 
   const taskCategories = await getTaskCategorySummaries();
 

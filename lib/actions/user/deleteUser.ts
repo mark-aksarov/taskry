@@ -6,13 +6,13 @@ import { redirect } from "@/i18n/navigation";
 import { ActionState, DeleteUserPayload } from "../types";
 import { getLocale, getTranslations } from "next-intl/server";
 import { deleteUser as deleteUserService } from "@/lib/data/user/user.service";
-import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { requireActionSession } from "@/lib/utils/requireActionSession";
 
 export async function deleteUser(
   payload: DeleteUserPayload,
 ): Promise<ActionState> {
   // Authorization
-  await requireSessionOrRedirect();
+  await requireActionSession();
 
   const t = await getTranslations("actions");
 

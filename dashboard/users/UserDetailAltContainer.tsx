@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getUserDetail } from "@/lib/data/user/user.dal";
 import { UserDetailAlt, UserDetailAltSkeleton } from "./UserDetailAlt";
-import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 
 interface UserDetailAltContainerProps {
   userId: string;
@@ -27,7 +27,7 @@ async function UserDetailAltContainerInner({
     notFound();
   }
 
-  const session = await requireProtectedPage();
+  const session = await requireProtectedPageSession();
   const isOwner = session.user.role === "owner";
   const isGuest = session.user.role === "guest";
 

@@ -3,7 +3,7 @@ import { customerId } from "@/lib/schemas/customer";
 import { CustomerDetailPage } from "./CustomerDetailPage";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
 import { getCustomerFormData } from "@/lib/data/customer/customer.dal";
-import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
 import { CustomerDetailActions } from "@/dashboard/customer/CustomerDetailActions";
 import { UpdateCustomerBioModal } from "@/dashboard/customer/UpdateCustomerBioModal";
@@ -34,7 +34,7 @@ export default async function AppCustomerDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  await requireProtectedPage();
+  await requireProtectedPageSession();
 
   // Parse and validate
   const { id: rawCustomerId } = await params;

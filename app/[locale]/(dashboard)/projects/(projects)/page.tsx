@@ -20,7 +20,7 @@ import { customerId } from "@/lib/schemas/customer";
 import { projectStatus } from "@/lib/schemas/project";
 import { projectCategoryId } from "@/lib/schemas/projectCategory";
 import { getCustomerCount } from "@/lib/data/customer/customer.dal";
-import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { CreateProjectModal } from "@/dashboard/projects/CreateProjectModal";
 import { ProjectSearchModal } from "@/dashboard/projects/ProjectSearchModal";
 import { ProjectFiltersModal } from "@/dashboard/projects/ProjectFiltersModal";
@@ -79,7 +79,7 @@ export default async function AppProjectsPage({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   // Authorization
-  await requireProtectedPage();
+  await requireProtectedPageSession();
 
   // Validation
   const rawParams = await searchParams;

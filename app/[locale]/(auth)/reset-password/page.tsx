@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { ResetPasswordPage } from "./ResetPasswordPage";
 import { resetPassword } from "@/lib/actions/auth/resetPassword";
-import { requireAuthPage } from "@/lib/utils/requireAuthPage";
+import { requireAuthPageSession } from "@/lib/utils/requireAuthPageSession";
 
 export default async function AppResetPasswordPage({
   searchParams,
@@ -10,7 +10,7 @@ export default async function AppResetPasswordPage({
 }) {
   console.log("Reset Password Page");
 
-  await requireAuthPage();
+  await requireAuthPageSession();
 
   const { token } = await searchParams;
 

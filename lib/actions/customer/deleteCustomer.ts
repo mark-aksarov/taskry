@@ -4,14 +4,14 @@ import { redirect } from "@/i18n/navigation";
 import { customerId } from "@/lib/schemas/customer";
 import { getLocale, getTranslations } from "next-intl/server";
 import { ActionState, DeleteCustomerPayload } from "../types";
-import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { requireActionSession } from "@/lib/utils/requireActionSession";
 import { deleteCustomers as deleteCustomersQuery } from "@/lib/data/customer/customer.dal";
 
 export async function deleteCustomer(
   payload: DeleteCustomerPayload,
 ): Promise<ActionState> {
   // Authorization
-  await requireSessionOrRedirect();
+  await requireActionSession();
 
   const t = await getTranslations("actions");
 

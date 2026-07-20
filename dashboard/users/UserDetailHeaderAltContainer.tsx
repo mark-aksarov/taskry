@@ -9,7 +9,7 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getUserDetail } from "@/lib/data/user/user.dal";
 import { DetailHeaderSkeleton } from "@/dashboard/common/DetailHeader";
-import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 
 interface UserDetailHeaderAltContainerProps {
   userId: string;
@@ -34,7 +34,7 @@ async function UserDetailHeaderAltContainerInner({
     notFound();
   }
 
-  const session = await requireProtectedPage();
+  const session = await requireProtectedPageSession();
   const isOwner = session.user.role === "owner";
   const isGuest = session.user.role === "guest";
 

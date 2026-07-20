@@ -21,7 +21,7 @@ import { getTaskCount, getTaskList } from "@/lib/data/task/task.dal";
 import { TaskFiltersModal } from "@/dashboard/tasks/TaskFiltersModal";
 import { DeleteTasksModal } from "@/dashboard/tasks/DeleteTasksModal";
 import { ImportTasksModal } from "@/dashboard/tasks/ImportTasksModal";
-import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { TaskGridContainer } from "@/dashboard/tasks/TaskGridContainer";
 import { CreateTaskProvider } from "@/dashboard/tasks/CreateTaskProvider";
 import { TaskFiltersProvider } from "@/dashboard/tasks/TaskFiltersContext";
@@ -74,7 +74,7 @@ export default async function AppTasksPage({
 }: {
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
-  await requireProtectedPage();
+  await requireProtectedPageSession();
 
   // Validation
   const rawParams = await searchParams;

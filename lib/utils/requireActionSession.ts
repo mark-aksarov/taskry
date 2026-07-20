@@ -1,9 +1,10 @@
+import { cache } from "react";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
 import { getLocale } from "next-intl/server";
 
-export async function requireSessionOrRedirect() {
+export const requireActionSession = cache(async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -14,4 +15,4 @@ export async function requireSessionOrRedirect() {
   }
 
   return session;
-}
+});

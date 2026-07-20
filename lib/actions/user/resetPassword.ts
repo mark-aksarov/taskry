@@ -5,7 +5,7 @@ import { ActionState } from "../types";
 import { APIError } from "better-auth";
 import { getTranslations } from "next-intl/server";
 import { userId, userPassword } from "@/lib/schemas/user";
-import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { requireActionSession } from "@/lib/utils/requireActionSession";
 import { resetPassword as resetPasswordService } from "@/lib/data/user/user.service";
 
 const schema = z.object({
@@ -15,7 +15,7 @@ const schema = z.object({
 
 export async function resetPassword(formData: FormData): Promise<ActionState> {
   // Authorization
-  await requireSessionOrRedirect();
+  await requireActionSession();
 
   const t = await getTranslations("actions");
 

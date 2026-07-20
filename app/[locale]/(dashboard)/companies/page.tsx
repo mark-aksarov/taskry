@@ -1,7 +1,7 @@
 import { CompaniesPage } from "./CompaniesPage";
 import { getCompanySummaries } from "@/lib/data/company/company.dal";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
-import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { CreateCompanyModal } from "@/dashboard/company/CreateCompanyModal";
 import { CompaniesContainer } from "@/dashboard/company/CompaniesContainer";
 import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
@@ -13,7 +13,7 @@ import { DeleteCompaniesProvider } from "@/dashboard/company/DeleteCompaniesProv
 import { ImportCompaniesProvider } from "@/dashboard/company/ImportCompaniesProvider";
 
 export default async function AppCompaniesPage() {
-  await requireProtectedPage();
+  await requireProtectedPageSession();
 
   const companies = await getCompanySummaries();
 

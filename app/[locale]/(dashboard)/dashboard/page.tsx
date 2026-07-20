@@ -4,7 +4,7 @@ import { getTaskList } from "@/lib/data/task/task.dal";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
 import { CreateTaskModal } from "@/dashboard/tasks/CreateTaskModal";
 import { TaskGridContainer } from "@/dashboard/tasks/TaskGridContainer";
-import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { CreateTaskProvider } from "@/dashboard/tasks/CreateTaskProvider";
 import { DeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider";
@@ -28,7 +28,7 @@ export default async function AppDashboardPage({
   searchParams: Promise<{ page?: string; pageSize?: string }>;
 }) {
   // Authorization
-  const session = await requireProtectedPage();
+  const session = await requireProtectedPageSession();
 
   // Validation
   const rawParams = await searchParams;

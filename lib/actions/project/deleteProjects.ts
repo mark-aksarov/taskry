@@ -4,14 +4,14 @@ import z from "zod";
 import { ActionState } from "../types";
 import { projectId } from "@/lib/schemas/project";
 import { getTranslations } from "next-intl/server";
-import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { requireActionSession } from "@/lib/utils/requireActionSession";
 import { deleteProjects as deleteProjectQuery } from "@/lib/data/project/project.dal";
 
 const projectIds = z.array(projectId).min(1);
 
 export async function deleteProjects(ids: number[]): Promise<ActionState> {
   // Authorization
-  await requireSessionOrRedirect();
+  await requireActionSession();
 
   const t = await getTranslations("actions");
 

@@ -2,10 +2,10 @@ import "server-only";
 
 import { notFound } from "next/navigation";
 import { ProfileLink } from "./ProfileLink/ProfileLink";
-import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 
 export async function ProfileLinkContainer() {
-  const session = await requireProtectedPage();
+  const session = await requireProtectedPageSession();
 
   if (!session) {
     notFound();

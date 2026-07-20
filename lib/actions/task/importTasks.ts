@@ -8,13 +8,13 @@ import { parseCsvFile } from "@/lib/utils/parseCsvFile";
 import { LimitExceededError } from "@/lib/data/utils/error";
 import { PROJECT_MAX_COUNT, TASK_MAX_COUNT } from "@/lib/data/constants";
 import { createTasks as createTasksQuery } from "@/lib/data/task/task.dal";
-import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { requireActionSession } from "@/lib/utils/requireActionSession";
 
 const schema = z.array(createTaskSchema.strict()).min(1);
 
 export async function importTasks(formData: FormData): Promise<ActionState> {
   // Authorization
-  await requireSessionOrRedirect();
+  await requireActionSession();
 
   const t = await getTranslations("actions");
 

@@ -9,7 +9,7 @@ import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
 import { CreateTaskModal } from "@/dashboard/tasks/CreateTaskModal";
 import { UpdateUserModal } from "@/dashboard/users/UpdateUserModal";
 import { DeleteTasksModal } from "@/dashboard/tasks/DeleteTasksModal";
-import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { ResetPasswordModal } from "@/dashboard/users/ResetPasswordModal";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { CreateTaskProvider } from "@/dashboard/tasks/CreateTaskProvider";
@@ -48,7 +48,7 @@ export default async function AppProfileTasksPage({
   searchParams: Promise<{ page?: string; pageSize?: string; sort?: string }>;
 }) {
   // Authorization
-  const session = await requireProtectedPage();
+  const session = await requireProtectedPageSession();
 
   // Validation
   const { id: userId } = await params;

@@ -6,7 +6,7 @@ import { APIError } from "better-auth";
 import { getTranslations } from "next-intl/server";
 import { userEmail, userFullName } from "@/lib/schemas/user";
 import { createUser as createUserService } from "@/lib/data/user/user.service";
-import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { requireActionSession } from "@/lib/utils/requireActionSession";
 
 const schema = z.object({
   email: userEmail,
@@ -15,7 +15,7 @@ const schema = z.object({
 
 export async function createUser(formData: FormData): Promise<ActionState> {
   // Authorization
-  await requireSessionOrRedirect();
+  await requireActionSession();
 
   const t = await getTranslations("actions");
 
