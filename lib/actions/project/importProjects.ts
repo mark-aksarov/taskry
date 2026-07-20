@@ -8,7 +8,7 @@ import { PROJECT_MAX_COUNT } from "@/lib/data/constants";
 import { createProjectSchema } from "@/lib/schemas/project";
 import { LimitExceededError } from "@/lib/data/utils/error";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
-import { createProjects as createProjectQueries } from "@/lib/data/project/project.dal";
+import { createProjects as createProjectsQuery } from "@/lib/data/project/project.dal";
 
 const schema = z.array(createProjectSchema.strict()).min(1);
 
@@ -26,7 +26,7 @@ export async function importProjects(formData: FormData): Promise<ActionState> {
     }
 
     const parsedData = await parseCsvFile(file, schema);
-    await createProjectQueries(parsedData);
+    await createProjectsQuery(parsedData);
 
     return {
       status: "success",

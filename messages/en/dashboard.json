@@ -1575,5 +1575,13 @@
     "UpdateUserPositionForm": {
       "submitButtonLabel": "Update position"
     }
+  },
+  "companies": {
+    "ImportCompaniesModal": {
+      "heading": "Import companies"
+    },
+    "CompanyManageMenuTrigger": {
+      "importCSV": "Import companies (CSV)"
+    }
   }
 }

@@ -3,12 +3,12 @@
 import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
-import { parseCsvFile } from "@/lib/utils/parseCsvFile";
-import { PROJECT_MAX_COUNT, TASK_MAX_COUNT } from "@/lib/data/constants";
 import { createTaskSchema } from "@/lib/schemas/task";
+import { parseCsvFile } from "@/lib/utils/parseCsvFile";
 import { LimitExceededError } from "@/lib/data/utils/error";
+import { PROJECT_MAX_COUNT, TASK_MAX_COUNT } from "@/lib/data/constants";
+import { createTasks as createTasksQuery } from "@/lib/data/task/task.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
-import { createTasks as createTaskQueries } from "@/lib/data/task/task.dal";
 
 const schema = z.array(createTaskSchema.strict()).min(1);
 
@@ -26,7 +26,7 @@ export async function importTasks(formData: FormData): Promise<ActionState> {
     }
 
     const parsedData = await parseCsvFile(file, schema);
-    await createTaskQueries(parsedData);
+    await createTasksQuery(parsedData);
 
     return {
       status: "success",

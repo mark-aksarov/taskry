@@ -8,7 +8,7 @@ import { LimitExceededError } from "@/lib/data/utils/error";
 import { taskCategoryName } from "@/lib/schemas/taskCategory";
 import { TASK_CATEGORY_MAX_COUNT } from "@/lib/data/constants";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
-import { createTaskCategories as createTaskCategoryQueries } from "@/lib/data/taskCategory/taskCategory.dal";
+import { createTaskCategories as createTaskCategoriesQuery } from "@/lib/data/taskCategory/taskCategory.dal";
 
 const schema = z.array(z.object({ name: taskCategoryName }).strict()).min(1);
 
@@ -28,7 +28,7 @@ export async function importTaskCategories(
     }
 
     const parsedData = await parseCsvFile(file, schema);
-    await createTaskCategoryQueries(parsedData);
+    await createTaskCategoriesQuery(parsedData);
 
     return {
       status: "success",

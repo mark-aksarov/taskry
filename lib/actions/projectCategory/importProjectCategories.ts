@@ -8,7 +8,7 @@ import { LimitExceededError } from "@/lib/data/utils/error";
 import { PROJECT_CATEGORY_MAX_COUNT } from "@/lib/data/constants";
 import { projectCategoryName } from "@/lib/schemas/projectCategory";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
-import { createProjectCategories as createProjectCategoryQueries } from "@/lib/data/projectCategory/projectCategory.dal";
+import { createProjectCategories as createProjectCategoriesQuery } from "@/lib/data/projectCategory/projectCategory.dal";
 
 const schema = z.array(z.object({ name: projectCategoryName }).strict()).min(1);
 
@@ -28,7 +28,7 @@ export async function importProjectCategories(
     }
 
     const parsedData = await parseCsvFile(file, schema);
-    await createProjectCategoryQueries(parsedData);
+    await createProjectCategoriesQuery(parsedData);
 
     return {
       status: "success",

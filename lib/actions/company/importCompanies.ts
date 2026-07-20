@@ -1,8 +1,16 @@
 "use server";
 
+import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
+import { companyName } from "@/lib/schemas/company";
+import { parseCsvFile } from "@/lib/utils/parseCsvFile";
+import { COMPANY_MAX_COUNT } from "@/lib/data/constants";
+import { LimitExceededError } from "@/lib/data/utils/error";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { createCompanies as createCompanyQueries } from "@/lib/data/company/company.dal";
+
+const schema = z.array(z.object({ name: companyName }).strict()).min(1);
 
 export async function importCompanies(
   formData: FormData,
@@ -13,10 +21,14 @@ export async function importCompanies(
   const t = await getTranslations("actions");
 
   try {
-    //parse csv file
-    //validate file
-    //validate companies
-    //create companies
+    const file = formData.get("file");
+
+    if (!(file instanceof File)) {
+      throw new Error("File is required");
+    }
+
+    const parsedData = await parseCsvFile(file, schema);
+    await createCompanyQueries(parsedData);
 
     return {
       status: "success",
@@ -24,6 +36,15 @@ export async function importCompanies(
     };
   } catch (error) {
     console.error("Server Action Error:", error);
+
+    if (error instanceof LimitExceededError) {
+      return {
+        status: "error",
+        message: t("company.import.error.limitExceededError", {
+          count: COMPANY_MAX_COUNT,
+        }),
+      };
+    }
 
     return {
       status: "error",

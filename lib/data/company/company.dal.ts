@@ -9,8 +9,9 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import { AccessDeniedError } from "../utils/error";
+import { AccessDeniedError, LimitExceededError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
+import { COMPANY_MAX_COUNT } from "../constants";
 
 export const getCompanyCount = cache(async () => {
   // Authorization
@@ -104,6 +105,9 @@ export const createCompany = async (input: CreateCompanyInputDTO) => {
     );
   }
 
+  // Validate limit
+  await validateCompanyLimit(workspaceId);
+
   // Create company
   const company = await prisma.company.create({
     data: {
@@ -113,6 +117,42 @@ export const createCompany = async (input: CreateCompanyInputDTO) => {
   });
 
   return company;
+};
+
+export const createCompanies = async (input: CreateCompanyInputDTO[]) => {
+  // Authorization
+  const {
+    user: { id: userId, workspaceId },
+  } = await requireSession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId,
+      permission: {
+        company: ["create"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to create companies.",
+    );
+  }
+
+  // Validate limit
+  await validateCompanyLimit(workspaceId, input.length);
+
+  // Create companies
+  const companies = await prisma.company.createMany({
+    data: input.map((company) => ({
+      name: company.name,
+      workspaceId,
+    })),
+  });
+
+  return companies;
 };
 
 export const deleteCompanies = async (ids: number[]) => {
@@ -147,3 +187,25 @@ export const deleteCompanies = async (ids: number[]) => {
 
   return deletedCompanies;
 };
+
+/**
+ * HELPERS
+ */
+
+// Validate that company limit has not been reached
+async function validateCompanyLimit(
+  workspaceId: number,
+  newCompaniesCount = 1,
+) {
+  const existingCount = await prisma.company.count({
+    where: {
+      workspaceId,
+    },
+  });
+
+  if (existingCount + newCompaniesCount > COMPANY_MAX_COUNT) {
+    throw new LimitExceededError(
+      `You cannot create more than ${COMPANY_MAX_COUNT} companies.`,
+    );
+  }
+}

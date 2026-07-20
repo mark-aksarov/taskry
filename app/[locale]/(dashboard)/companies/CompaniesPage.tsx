@@ -3,6 +3,11 @@ import {
   CreateCompanyModalTriggerMobile,
 } from "@/dashboard/company/CreateCompanyModalTrigger";
 
+import {
+  CompanyManageMenuTriggerLarge,
+  CompanyManageMenuTriggerMobile,
+} from "@/dashboard/company/CompanyManageMenuTrigger";
+
 import { useTranslations } from "next-intl";
 import { BackButton } from "@/dashboard/common/BackButton";
 import { ViewModeProvider } from "@/dashboard/common/ViewMode";
@@ -29,6 +34,8 @@ export function CompaniesPage({
     return (
       <DashboardContainer fullscreen headerOffset>
         <DashboardGrid className="relative flex-auto">
+          <ToolbarLarge firstSlot={<CompanyManageMenuTriggerLarge />} />
+
           <ToolbarMobile
             firstSlot={
               <>
@@ -36,6 +43,7 @@ export function CompaniesPage({
                 <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
               </>
             }
+            secondSlot={<CompanyManageMenuTriggerMobile />}
           />
 
           <PageEmptySection
@@ -53,7 +61,12 @@ export function CompaniesPage({
       <DashboardGrid>
         <ViewModeProvider>
           <ToolbarLarge
-            firstSlot={<CompanyActionsMenuTrigger />}
+            firstSlot={
+              <>
+                <CompanyManageMenuTriggerLarge />
+                <CompanyActionsMenuTrigger />
+              </>
+            }
             secondSlot={<CreateCompanyModalTriggerLarge />}
           />
 
@@ -64,8 +77,14 @@ export function CompaniesPage({
                 <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
               </>
             }
-            secondSlot={<CreateCompanyModalTriggerMobile />}
+            secondSlot={
+              <>
+                <CompanyManageMenuTriggerMobile />
+                <CreateCompanyModalTriggerMobile />
+              </>
+            }
           />
+
           {companiesContainer}
         </ViewModeProvider>
       </DashboardGrid>

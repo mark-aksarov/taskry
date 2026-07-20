@@ -91,6 +91,7 @@
     "create": {
       "success": "Company created successfully",
       "error": {
+        "limitExceededError": "The maximum number of companies would be exceeded. Maximum: {count}.",
         "internalServerError": "Something went wrong. Failed to create the company. Refresh the page or try again later."
       }
     },
@@ -115,6 +116,7 @@
     "import": {
       "success": "Companies imported successfully",
       "error": {
+        "limitExceededError": "The maximum number of companies would be exceeded. Maximum: {count}.",
         "internalServerError": "Something went wrong. Failed to import companies. Refresh the page or try again later."
       }
     }

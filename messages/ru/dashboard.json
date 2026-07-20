@@ -1572,5 +1572,13 @@
     "UpdateUserPositionForm": {
       "submitButtonLabel": "Обновить должность"
     }
+  },
+  "companies": {
+    "ImportCompaniesModal": {
+      "heading": "Импортировать компании"
+    },
+    "CompanyManageMenuTrigger": {
+      "importCSV": "Импорт компаний (CSV)"
+    }
   }
 }
