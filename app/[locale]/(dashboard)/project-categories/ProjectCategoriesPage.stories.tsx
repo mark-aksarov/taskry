@@ -10,6 +10,7 @@ import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsConte
 import { ProjectCategoryGridExample } from "@/dashboard/projectCategory/ProjectCategoryGrid/__stories__";
 import { withCreateProjectCategoryProvider } from "@/dashboard/projectCategory/CreateProjectCategoryProvider/__stories__";
 import { withDeleteProjectCategoriesProvider } from "@/dashboard/projectCategory/DeleteProjectCategoriesProvider/__stories__";
+import { withImportProjectCategoriesProvider } from "@/dashboard/projectCategory/ImportProjectCategoriesProvider/__stories__";
 
 const meta = {
   title: "pages/ProjectCategoriesPage",
@@ -19,6 +20,7 @@ const meta = {
     withTaskSearchModal,
     withCreateProjectCategoryProvider,
     withDeleteProjectCategoriesProvider,
+    withImportProjectCategoriesProvider,
     withSelectedItemsProvider,
     DashboardPageDecorator,
     withThemedBackground,
