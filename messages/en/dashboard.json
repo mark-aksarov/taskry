@@ -134,6 +134,20 @@
     },
     "DeadlineBadge": {
       "noDeadline": "No deadline"
+    },
+    "ImportModalErrorBanner": {
+      "error": {
+        "fileSize": "File size is too big. The maximum file size is 512 KB."
+      }
+    },
+    "ImportModalUploadTrigger": {
+      "label": "Upload CSV"
+    },
+    "ImportModalCancelButton": {
+      "label": "Отменить"
+    },
+    "ImportModalText": {
+      "text": "Upload a CSV file. Maximum file size: 512 KB. Instructions for preparing the file are available in the documentation."
     }
   },
   "company": {
@@ -194,6 +208,9 @@
       "cancelButton": "Cancel",
       "deleteButton": "Delete",
       "successMessage": "Company deleted successfully"
+    },
+    "ImportCompaniesModal": {
+      "heading": "Import companies"
     }
   },
   "customers": {
@@ -547,6 +564,12 @@
       "cancelButton": "Cancel",
       "deleteButton": "Delete",
       "successMessage": "Project categories deleted successfully"
+    },
+    "ImportProjectCategoriesModal": {
+      "heading": "Import categories"
+    },
+    "ProjectCategoryManageMenuTrigger": {
+      "importCSV": "Import categories from CSV"
     }
   },
   "projects": {
@@ -621,7 +644,8 @@
       "completed": "Mark as completed"
     },
     "ProjectManageMenuTrigger": {
-      "categories": "Categories"
+      "categories": "Categories",
+      "importCSV": "Import projects from CSV"
     },
     "ProjectTitleTextField": {
       "label": "Title",

@@ -81,6 +81,41 @@ export const createProjectCategory = async (
   return projectCategory;
 };
 
+export const createProjectCategories = async (
+  input: CreateProjectCategoryInputDTO[],
+) => {
+  // Authorization
+  const {
+    user: { id: userId, workspaceId },
+  } = await requireSession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId,
+      permission: {
+        projectCategory: ["create"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to create project categories.",
+    );
+  }
+
+  // Create project categories
+  const projectCategories = await prisma.projectCategory.createMany({
+    data: input.map((category) => ({
+      name: category.name,
+      workspaceId,
+    })),
+  });
+
+  return projectCategories;
+};
+
 export const updateProjectCategory = async (
   input: UpdateProjectCategoryInputDTO,
 ) => {

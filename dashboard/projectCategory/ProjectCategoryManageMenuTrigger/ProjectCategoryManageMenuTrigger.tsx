@@ -7,14 +7,16 @@ import { useModal } from "@/common/ModalManagerContext";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { ManageMenuTrigger } from "@/dashboard/common/ManageMenuTrigger";
 
-interface ProjectManageMenuTriggerProps {
+interface ProjectCategoryManageMenuTriggerProps {
   renderButton: () => React.ReactNode;
 }
 
-export function ProjectManageMenuTrigger({
+export function ProjectCategoryManageMenuTrigger({
   renderButton,
-}: ProjectManageMenuTriggerProps) {
-  const t = useTranslations("dashboard.projects.ProjectManageMenuTrigger");
+}: ProjectCategoryManageMenuTriggerProps) {
+  const t = useTranslations(
+    "dashboard.projectCategories.ProjectCategoryManageMenuTrigger",
+  );
 
   const guestGuard = useGuestModalGuard();
 
@@ -25,6 +27,8 @@ export function ProjectManageMenuTrigger({
   function handleAction(key: Key) {
     guestGuard(() => {
       if (key === "import-csv") {
+        onImportCompaniesOpenChange(true);
+      } else if (key === "import-project-csv") {
       }
     });
   }
@@ -34,14 +38,6 @@ export function ProjectManageMenuTrigger({
       <Item textValue={t("importCSV")} key="import-csv">
         <FileUp size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {t("importCSV")}
-      </Item>
-      <Item
-        textValue={t("categories")}
-        href="/project-categories"
-        key="categories"
-      >
-        <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth />
-        {t("categories")}
       </Item>
     </ManageMenuTrigger>
   );

@@ -111,6 +111,12 @@
       "error": {
         "internalServerError": "Something went wrong. Failed to delete the companies. Refresh the page or try again later."
       }
+    },
+    "import": {
+      "success": "Companies imported successfully",
+      "error": {
+        "internalServerError": "Something went wrong. Failed to import companies. Refresh the page or try again later."
+      }
     }
   },
   "customer": {
@@ -244,6 +250,12 @@
       "success": "Project categories deleted successfully",
       "error": {
         "internalServerError": "Something went wrong. Failed to delete the project categories. Refresh the page or try again later."
+      }
+    },
+    "import": {
+      "success": "Project categories imported successfully",
+      "error": {
+        "internalServerError": "Something went wrong. Failed to import project categories. Make sure the CSV file is filled out correctly and try again."
       }
     }
   },

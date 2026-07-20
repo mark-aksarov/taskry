@@ -7,8 +7,10 @@ import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectC
 import { ProjectCategoriesContainer } from "@/dashboard/projectCategory/ProjectCategoriesContainer";
 import { CreateProjectCategoryModal } from "@/dashboard/projectCategory/CreateProjectCategoryModal";
 import { DeleteProjectCategoriesModal } from "@/dashboard/projectCategory/DeleteProjectCategoriesModal";
+import { ImportProjectCategoriesModal } from "@/dashboard/projectCategory/ImportProjectCategoriesModal";
 import { CreateProjectCategoryProvider } from "@/dashboard/projectCategory/CreateProjectCategoryProvider";
 import { DeleteProjectCategoriesProvider } from "@/dashboard/projectCategory/DeleteProjectCategoriesProvider";
+import { ImportProjectCategoriesProvider } from "@/dashboard/projectCategory/ImportProjectCategoriesProvider";
 
 export default async function AppProjectCategoriesPage() {
   // Authorization
@@ -22,16 +24,19 @@ export default async function AppProjectCategoriesPage() {
     >
       <DeleteProjectCategoriesProvider>
         <CreateProjectCategoryProvider>
-          <ProjectCategoriesPage
-            totalCount={projectCategories.length}
-            projectCategoriesContainer={<ProjectCategoriesContainer />}
-          />
+          <ImportProjectCategoriesProvider>
+            <ProjectCategoriesPage
+              totalCount={projectCategories.length}
+              projectCategoriesContainer={<ProjectCategoriesContainer />}
+            />
 
-          <TaskSearchModal
-            searchContainer={<LinkSearchContainer pathname="/tasks" />}
-          />
-          <CreateProjectCategoryModal />
-          <DeleteProjectCategoriesModal />
+            <TaskSearchModal
+              searchContainer={<LinkSearchContainer pathname="/tasks" />}
+            />
+            <CreateProjectCategoryModal />
+            <DeleteProjectCategoriesModal />
+            <ImportProjectCategoriesModal />
+          </ImportProjectCategoriesProvider>
         </CreateProjectCategoryProvider>
       </DeleteProjectCategoriesProvider>
     </SelectedItemsProvider>

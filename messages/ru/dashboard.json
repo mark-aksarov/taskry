@@ -134,6 +134,20 @@
     },
     "DeadlineBadge": {
       "noDeadline": "Без срока"
+    },
+    "ImportModalErrorBanner": {
+      "error": {
+        "fileSize": "Размер файла слишком большой. Максимальный размер файла 512 КБ."
+      }
+    },
+    "ImportModalUploadTrigger": {
+      "label": "Загрузить CSV"
+    },
+    "ImportModalCancelButton": {
+      "label": "Отменить"
+    },
+    "ImportModalText": {
+      "text": "Загрузите CSV-файл. Максимальный размер — 512 KB. Инструкции по подготовке файла доступны в документации."
     }
   },
   "company": {
@@ -194,6 +208,9 @@
       "cancelButton": "Отменить",
       "deleteButton": "Удалить",
       "successMessage": "Компания успешно удалена"
+    },
+    "ImportCompaniesModal": {
+      "heading": "Импортировать компании"
     }
   },
   "customers": {
@@ -547,6 +564,12 @@
       "cancelButton": "Отменить",
       "deleteButton": "Удалить",
       "successMessage": "Категории проектов успешно удалена"
+    },
+    "ImportProjectCategoriesModal": {
+      "heading": "Импортировать категории"
+    },
+    "ProjectCategoryManageMenuTrigger": {
+      "importCSV": "Импорт категорий из CSV"
     }
   },
   "projects": {
@@ -621,7 +644,8 @@
       "completed": "Отметить как «Завершено»"
     },
     "ProjectManageMenuTrigger": {
-      "categories": "Категории"
+      "categories": "Категории",
+      "importCSV": "Импорт проектов из CSV"
     },
     "ProjectTitleTextField": {
       "label": "Заголовок",

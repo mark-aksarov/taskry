@@ -3,6 +3,11 @@ import {
   CreateProjectCategoryModalTriggerMobile,
 } from "@/dashboard/projectCategory/CreateProjectCategoryModalTrigger";
 
+import {
+  ProjectCategoryManageMenuTriggerLarge,
+  ProjectCategoryManageMenuTriggerMobile,
+} from "@/dashboard/projectCategory/ProjectCategoryManageMenuTrigger";
+
 import { useTranslations } from "next-intl";
 import { BackButton } from "@/dashboard/common/BackButton";
 import { ViewModeProvider } from "@/dashboard/common/ViewMode";
@@ -29,6 +34,11 @@ export function ProjectCategoriesPage({
     return (
       <DashboardContainer fullscreen headerOffset>
         <DashboardGrid className="relative flex-auto">
+          <ToolbarLarge
+            firstSlot={<ProjectCategoryManageMenuTriggerLarge />}
+            twoRowsOnLg
+          />
+
           <ToolbarMobile
             firstSlot={
               <>
@@ -36,6 +46,7 @@ export function ProjectCategoriesPage({
                 <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
               </>
             }
+            secondSlot={<ProjectCategoryManageMenuTriggerMobile />}
           />
 
           <PageEmptySection
@@ -53,7 +64,12 @@ export function ProjectCategoriesPage({
       <DashboardGrid>
         <ViewModeProvider>
           <ToolbarLarge
-            firstSlot={<ProjectCategoryActionsMenuTrigger />}
+            firstSlot={
+              <>
+                <ProjectCategoryManageMenuTriggerLarge />
+                <ProjectCategoryActionsMenuTrigger />
+              </>
+            }
             secondSlot={<CreateProjectCategoryModalTriggerLarge />}
           />
 
@@ -64,7 +80,12 @@ export function ProjectCategoriesPage({
                 <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
               </>
             }
-            secondSlot={<CreateProjectCategoryModalTriggerMobile />}
+            secondSlot={
+              <>
+                <ProjectCategoryManageMenuTriggerMobile />
+                <CreateProjectCategoryModalTriggerMobile />
+              </>
+            }
           />
 
           {projectCategoriesContainer}

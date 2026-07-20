@@ -14,7 +14,12 @@ export default function AppProjectCategoriesPageLoading() {
     <DashboardContainer>
       <DashboardGrid>
         <ToolbarLarge
-          firstSlot={<ButtonSkeleton className="w-[5rem]" />}
+          firstSlot={
+            <>
+              <ButtonSkeleton className="w-[5rem]" />
+              <ButtonSkeleton className="w-[5rem]" />
+            </>
+          }
           secondSlot={<ButtonSkeleton className="w-[5rem]" />}
         />
 
@@ -25,7 +30,12 @@ export default function AppProjectCategoriesPageLoading() {
               <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
             </>
           }
-          secondSlot={<ButtonSkeleton className="w-8" />}
+          secondSlot={
+            <>
+              <ButtonSkeleton className="w-8" />
+              <ButtonSkeleton className="w-8" />
+            </>
+          }
         />
 
         <ProjectCategoryGridSkeleton />
