@@ -569,7 +569,7 @@
       "heading": "Import categories"
     },
     "ProjectCategoryManageMenuTrigger": {
-      "importCSV": "Import categories from CSV"
+      "importCSV": "Import categories (CSV)"
     }
   },
   "projects": {
@@ -645,7 +645,7 @@
     },
     "ProjectManageMenuTrigger": {
       "categories": "Categories",
-      "importCSV": "Import projects from CSV"
+      "importCSV": "Import projects (CSV)"
     },
     "ProjectTitleTextField": {
       "label": "Title",
@@ -848,6 +848,9 @@
     },
     "DeleteProjectModalTrigger": {
       "label": "Delete project"
+    },
+    "ImportProjectsModal": {
+      "heading": "Import projects"
     }
   },
   "search": {

@@ -18,13 +18,13 @@ export function ProjectManageMenuTrigger({
 
   const guestGuard = useGuestModalGuard();
 
-  const { onOpenChange: onImportCompaniesOpenChange } = useModal(
-    "importProjectCategories",
-  );
+  const { onOpenChange: onImportProjectsOpenChange } =
+    useModal("importProjects");
 
   function handleAction(key: Key) {
     guestGuard(() => {
       if (key === "import-csv") {
+        onImportProjectsOpenChange(true);
       }
     });
   }

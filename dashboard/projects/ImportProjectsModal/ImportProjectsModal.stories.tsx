@@ -4,26 +4,26 @@ import {
 } from "@/common/ModalManagerContext/__stories__";
 
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { ImportProjectsModal } from "./ImportProjectsModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ImportProjectCategoriesModal } from "./ImportProjectCategoriesModal";
+import { withImportProjectsProvider } from "../ImportProjectsProvider/__stories__";
 import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
-import { withImportProjectCategoriesProvider } from "../ImportProjectCategoriesProvider/__stories__";
 
 const meta = {
-  title: "dashboard/project-categories/ImportProjectCategoriesModal",
-  component: ImportProjectCategoriesModal,
+  title: "dashboard/projects/ImportProjectsModal",
+  component: ImportProjectsModal,
   decorators: [
     withOpenModal,
-    withImportProjectCategoriesProvider,
+    withImportProjectsProvider,
     withSelectedItemsProvider,
     withModalManagerProvider,
     withThemedBackground,
   ],
 
   parameters: {
-    modalId: "importProjectCategories",
+    modalId: "importProjects",
   },
-} satisfies Meta<typeof ImportProjectCategoriesModal>;
+} satisfies Meta<typeof ImportProjectsModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

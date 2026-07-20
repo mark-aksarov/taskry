@@ -187,6 +187,12 @@
       "error": {
         "internalServerError": "Something went wrong. Failed to delete the projects. Refresh the page or try again later."
       }
+    },
+    "import": {
+      "success": "Project categories imported successfully",
+      "error": {
+        "internalServerError": "Something went wrong. Failed to import project categories. Make sure the CSV file is filled out correctly and try again."
+      }
     }
   },
   "task": {

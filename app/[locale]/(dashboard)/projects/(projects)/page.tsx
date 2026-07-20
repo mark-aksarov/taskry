@@ -25,9 +25,11 @@ import { CreateProjectModal } from "@/dashboard/projects/CreateProjectModal";
 import { ProjectSearchModal } from "@/dashboard/projects/ProjectSearchModal";
 import { ProjectFiltersModal } from "@/dashboard/projects/ProjectFiltersModal";
 import { DeleteProjectsModal } from "@/dashboard/projects/DeleteProjectsModal";
+import { ImportProjectsModal } from "@/dashboard/projects/ImportProjectsModal";
 import { ProjectGridContainer } from "@/dashboard/projects/ProjectGridContainer";
 import { CreateProjectProvider } from "@/dashboard/projects/CreateProjectProvider";
 import { ProjectFiltersProvider } from "@/dashboard/projects/ProjectFiltersContext";
+import { ImportProjectsProvider } from "@/dashboard/projects/ImportProjectsProvider";
 import { DeleteProjectsProvider } from "@/dashboard/projects/DeleteProjectsProvider";
 import { SelectedProjectsProvider } from "@/dashboard/projects/SelectedProjectsContext";
 import { getProjectCategoryCount } from "@/lib/data/projectCategory/projectCategory.dal";
@@ -109,38 +111,47 @@ export default async function AppProjectsPage({
           <CreateProjectProvider>
             <CreateProjectCategoryProvider>
               <ProjectFiltersProvider filters={filters}>
-                <ProjectsPage
-                  page={page}
-                  pageSize={pageSize}
-                  totalCount={totalCount}
-                  categoryCount={categoryCount}
-                  customerCount={customerCount}
-                  totalFilteredProjects={totalFilteredProjects}
-                  selectedSortField={sort}
-                  projectGrid={<ProjectGridContainer projects={projects} />}
-                />
+                <ImportProjectsProvider>
+                  <ProjectsPage
+                    page={page}
+                    pageSize={pageSize}
+                    totalCount={totalCount}
+                    categoryCount={categoryCount}
+                    customerCount={customerCount}
+                    totalFilteredProjects={totalFilteredProjects}
+                    selectedSortField={sort}
+                    projectGrid={<ProjectGridContainer projects={projects} />}
+                  />
 
-                <ProjectSearchModal
-                  searchContainer={<ProjectRouterSearchContainer />}
-                />
-                <CreateProjectModal
-                  createProjectFormContainer={<CreateProjectFormContainer />}
-                />
-                <CreateProjectCategoryModal />
-                <ProjectFiltersModal
-                  filtersFormContainer={<ProjectFiltersFormContainer />}
-                />
-                <ProjectCustomerFiltersModal
-                  filtersFormContainer={<ProjectCustomerFiltersFormContainer />}
-                />
-                <ProjectCategoryFiltersModal
-                  filtersFormContainer={<ProjectCategoryFiltersFormContainer />}
-                />
-                <ProjectCreatorFiltersModal
-                  filtersFormContainer={<ProjectCreatorFiltersFormContainer />}
-                />
-                <DeleteProjectsModal />
-                <ProjectStatusFiltersModal />
+                  <ProjectSearchModal
+                    searchContainer={<ProjectRouterSearchContainer />}
+                  />
+                  <CreateProjectModal
+                    createProjectFormContainer={<CreateProjectFormContainer />}
+                  />
+                  <CreateProjectCategoryModal />
+                  <ProjectFiltersModal
+                    filtersFormContainer={<ProjectFiltersFormContainer />}
+                  />
+                  <ProjectCustomerFiltersModal
+                    filtersFormContainer={
+                      <ProjectCustomerFiltersFormContainer />
+                    }
+                  />
+                  <ProjectCategoryFiltersModal
+                    filtersFormContainer={
+                      <ProjectCategoryFiltersFormContainer />
+                    }
+                  />
+                  <ProjectCreatorFiltersModal
+                    filtersFormContainer={
+                      <ProjectCreatorFiltersFormContainer />
+                    }
+                  />
+                  <DeleteProjectsModal />
+                  <ProjectStatusFiltersModal />
+                  <ImportProjectsModal />
+                </ImportProjectsProvider>
               </ProjectFiltersProvider>
             </CreateProjectCategoryProvider>
           </CreateProjectProvider>

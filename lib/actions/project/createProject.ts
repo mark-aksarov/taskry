@@ -1,35 +1,10 @@
 "use server";
 
-import {
-  projectTitle,
-  projectStatus,
-  projectDeadline,
-  projectDescription,
-} from "@/lib/schemas/project";
-
-import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
-import { customerId } from "@/lib/schemas/customer";
-import { emptyStringToUndefined } from "@/lib/schemas/base";
-import { projectCategoryId } from "@/lib/schemas/projectCategory";
+import { createProjectSchema } from "@/lib/schemas/project";
 import { createProject as createProjectQuery } from "@/lib/data/project/project.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
-
-const schema = z.object({
-  title: projectTitle,
-  description: z.preprocess(
-    emptyStringToUndefined,
-    projectDescription.optional(),
-  ),
-  deadline: projectDeadline,
-  status: projectStatus,
-  categoryId: z.preprocess(
-    emptyStringToUndefined,
-    projectCategoryId.optional(),
-  ),
-  customerId: z.preprocess(emptyStringToUndefined, customerId.optional()),
-});
 
 export async function createProject(formData: FormData): Promise<ActionState> {
   // Authorization
@@ -39,7 +14,7 @@ export async function createProject(formData: FormData): Promise<ActionState> {
 
   try {
     const input = Object.fromEntries(formData.entries());
-    const parsedData = schema.parse(input);
+    const parsedData = createProjectSchema.parse(input);
 
     await createProjectQuery(parsedData);
 

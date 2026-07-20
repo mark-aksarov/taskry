@@ -401,6 +401,62 @@ export const createProject = async (input: CreateProjectInputDTO) => {
   return project;
 };
 
+export const createProjects = async (input: CreateProjectInputDTO[]) => {
+  // Authorization
+  const {
+    user: { id: userId, workspaceId },
+  } = await requireSession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId,
+      permission: {
+        project: ["create"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to create projects.",
+    );
+  }
+
+  // Validate categories
+  const categoryIds = input
+    .map((project) => project.categoryId)
+    .filter((id): id is number => id !== undefined);
+
+  if (categoryIds.length > 0) {
+    await validateProjectCategories(workspaceId, categoryIds);
+  }
+
+  // Validate customers
+  const customerIds = input
+    .map((project) => project.customerId)
+    .filter((id): id is number => id !== undefined);
+
+  if (customerIds.length > 0) {
+    await validateCustomers(workspaceId, customerIds);
+  }
+
+  const projects = await prisma.project.createManyAndReturn({
+    data: input.map((project) => ({
+      title: project.title,
+      description: project.description,
+      deadline: new Date(project.deadline),
+      customerId: project.customerId,
+      categoryId: project.categoryId,
+      status: project.status,
+      creatorId: userId,
+      workspaceId,
+    })),
+  });
+
+  return projects;
+};
+
 export const updateProject = async (input: UpdateProjectInputDTO) => {
   // Authorization
   const {
@@ -538,14 +594,40 @@ async function validateProjectCategory(
   });
 
   if (!category) {
-    throw new NotFoundError(
-      "Project category not found",
-      "projectCategoryNotFound",
-    );
+    throw new NotFoundError("Project category not found");
   }
 
   if (category.workspaceId !== workspaceId) {
     throw new AccessDeniedError("Project category access denied");
+  }
+}
+
+async function validateProjectCategories(
+  workspaceId: number,
+  categoryIds: number[],
+) {
+  const categories = await prisma.projectCategory.findMany({
+    where: {
+      id: {
+        in: categoryIds,
+      },
+    },
+    select: {
+      id: true,
+      workspaceId: true,
+    },
+  });
+
+  for (const categoryId of categoryIds) {
+    const category = categories.find((item) => item.id === categoryId);
+
+    if (!category) {
+      throw new NotFoundError("Project category not found");
+    }
+
+    if (category.workspaceId !== workspaceId) {
+      throw new AccessDeniedError("Project category access denied");
+    }
   }
 }
 
@@ -557,11 +639,37 @@ async function validateCustomer(workspaceId: number, customerId: number) {
   });
 
   if (!customer) {
-    throw new NotFoundError("Customer not found", "customerNotFound");
+    throw new NotFoundError("Customer not found");
   }
 
   if (customer.workspaceId !== workspaceId) {
     throw new AccessDeniedError("Customer access denied");
+  }
+}
+
+async function validateCustomers(workspaceId: number, customerIds: number[]) {
+  const customers = await prisma.customer.findMany({
+    where: {
+      id: {
+        in: customerIds,
+      },
+    },
+    select: {
+      id: true,
+      workspaceId: true,
+    },
+  });
+
+  for (const customerId of customerIds) {
+    const customer = customers.find((item) => item.id === customerId);
+
+    if (!customer) {
+      throw new NotFoundError("Customer not found");
+    }
+
+    if (customer.workspaceId !== workspaceId) {
+      throw new AccessDeniedError("Customer access denied");
+    }
   }
 }
 

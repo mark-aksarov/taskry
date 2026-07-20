@@ -569,7 +569,7 @@
       "heading": "Импортировать категории"
     },
     "ProjectCategoryManageMenuTrigger": {
-      "importCSV": "Импорт категорий из CSV"
+      "importCSV": "Импорт категорий (CSV)"
     }
   },
   "projects": {
@@ -645,7 +645,7 @@
     },
     "ProjectManageMenuTrigger": {
       "categories": "Категории",
-      "importCSV": "Импорт проектов из CSV"
+      "importCSV": "Импорт проектов (CSV)"
     },
     "ProjectTitleTextField": {
       "label": "Заголовок",
@@ -848,6 +848,9 @@
     },
     "DeleteProjectModalTrigger": {
       "label": "Удалить проект"
+    },
+    "ImportProjectsModal": {
+      "heading": "Импорт проектов"
     }
   },
   "search": {
