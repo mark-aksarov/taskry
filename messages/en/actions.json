@@ -155,6 +155,7 @@
     "create": {
       "success": "Project created successfully",
       "error": {
+        "limitExceededError": "The maximum number of projects would be exceeded. Maximum: {count}.",
         "internalServerError": "Something went wrong. Failed to create the project. Refresh the page or try again later."
       }
     },
@@ -191,6 +192,7 @@
     "import": {
       "success": "Project categories imported successfully",
       "error": {
+        "limitExceededError": "The maximum number of projects would be exceeded. Maximum: {count}.",
         "internalServerError": "Something went wrong. Failed to import project categories. Make sure the CSV file is filled out correctly and try again."
       }
     }
@@ -237,6 +239,7 @@
     "create": {
       "success": "Project category created successfully",
       "error": {
+        "limitExceededError": "The maximum number of project categories would be exceeded. Maximum: {count}.",
         "internalServerError": "Something went wrong. Failed to create the project category. Refresh the page or try again later."
       }
     },
@@ -261,6 +264,7 @@
     "import": {
       "success": "Project categories imported successfully",
       "error": {
+        "limitExceededError": "The maximum number of project categories would be exceeded. Maximum: {count}.",
         "internalServerError": "Something went wrong. Failed to import project categories. Make sure the CSV file is filled out correctly and try again."
       }
     }

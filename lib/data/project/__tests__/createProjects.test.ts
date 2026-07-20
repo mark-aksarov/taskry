@@ -8,13 +8,20 @@ import {
   projectCategories,
 } from "@/prisma/seed/test-data";
 
-import { createProjects } from "../project.dal";
+import {
+  NotFoundError,
+  AccessDeniedError,
+  LimitExceededError,
+} from "../../utils/error";
+
+import prisma from "@/lib/prisma";
 import { seed } from "@/prisma/test-seed";
+import { createProjects } from "../project.dal";
+import { PROJECT_MAX_COUNT } from "../../constants";
 import { it, expect, describe, beforeAll } from "vitest";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { requireSession } from "@/lib/data/utils/requireSession";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
-import { AccessDeniedError, NotFoundError } from "../../utils/error";
 
 describe("createProjects", () => {
   beforeAll(async () => {
@@ -139,6 +146,42 @@ describe("createProjects", () => {
     expect(result).toHaveLength(1);
     expect(result[0].id).toBeDefined();
     expect(result[0].customerId).toBeNull();
+  });
+
+  it("should fail when creating projects exceeds the limit", async () => {
+    for (let i = 1; i < PROJECT_MAX_COUNT; i++) {
+      await prisma.project.create({
+        data: {
+          title: `Project ${i}`,
+          deadline: new Date("2025-12-31"),
+          status: ProjectStatus.active,
+          workspaceId: 1,
+          creatorId: "user-1",
+          categoryId: 1,
+        },
+      });
+    }
+
+    await expect(
+      createProjects([
+        {
+          title: "Project 1",
+          deadline: "2025-12-31",
+          status: ProjectStatus.active,
+          categoryId: 1,
+          customerId: 1,
+        },
+        {
+          title: "Project 2",
+          deadline: "2025-12-31",
+          status: ProjectStatus.active,
+          categoryId: 1,
+          customerId: 1,
+        },
+      ]),
+    ).rejects.toThrow(LimitExceededError);
+
+    await prisma.project.deleteMany();
   });
 
   describe("RBAC: create projects", () => {

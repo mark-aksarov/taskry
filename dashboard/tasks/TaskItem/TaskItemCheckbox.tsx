@@ -3,7 +3,7 @@
 import { Checkbox } from "@/ui/Checkbox";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { useDeleteTasks } from "../DeleteTasksContext";
-import { useSelectedTasks } from "../SelectedTasksContext/SelectedTasksContext";
+import { useSelectedTasks } from "../SelectedTasksContext";
 
 interface TaskItemCheckboxProps {
   id: number;

@@ -14,8 +14,13 @@ import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { requireSession } from "../utils/requireSession";
 import { ProjectFilters, ProjectSortField } from "@/lib/types";
-import { AccessDeniedError, NotFoundError } from "../utils/error";
+import {
+  AccessDeniedError,
+  LimitExceededError,
+  NotFoundError,
+} from "../utils/error";
 import { Prisma, TaskStatus, ProjectStatus } from "@/generated/prisma/client";
+import { PROJECT_MAX_COUNT } from "../constants";
 
 export const getProjectDetail = cache(
   async (id: number): Promise<ProjectDetailDTO | null> => {
@@ -375,6 +380,9 @@ export const createProject = async (input: CreateProjectInputDTO) => {
     );
   }
 
+  // Validate limit
+  await validateProjectLimit(workspaceId);
+
   // Validate category
   if (input.categoryId) {
     await validateProjectCategory(workspaceId, input.categoryId);
@@ -422,6 +430,9 @@ export const createProjects = async (input: CreateProjectInputDTO[]) => {
       "You do not have permission to create projects.",
     );
   }
+
+  // Validate limit
+  await validateProjectLimit(workspaceId, input.length);
 
   // Validate categories
   const categoryIds = input
@@ -670,6 +681,21 @@ async function validateCustomers(workspaceId: number, customerIds: number[]) {
     if (customer.workspaceId !== workspaceId) {
       throw new AccessDeniedError("Customer access denied");
     }
+  }
+}
+
+// Validate that project limit has not been reached
+async function validateProjectLimit(workspaceId: number, newProjectsCount = 1) {
+  const existingCount = await prisma.project.count({
+    where: {
+      workspaceId,
+    },
+  });
+
+  if (existingCount + newProjectsCount > PROJECT_MAX_COUNT) {
+    throw new LimitExceededError(
+      `You cannot create more than ${PROJECT_MAX_COUNT} projects.`,
+    );
   }
 }
 

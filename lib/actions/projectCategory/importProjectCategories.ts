@@ -4,6 +4,8 @@ import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
 import { parseCsvFile } from "@/lib/utils/parseCsvFile";
+import { LimitExceededError } from "@/lib/data/utils/error";
+import { PROJECT_CATEGORY_MAX_COUNT } from "@/lib/data/constants";
 import { projectCategoryName } from "@/lib/schemas/projectCategory";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { createProjectCategories as createProjectCategoryQueries } from "@/lib/data/projectCategory/projectCategory.dal";
@@ -34,6 +36,15 @@ export async function importProjectCategories(
     };
   } catch (error) {
     console.error("Server Action Error:", error);
+
+    if (error instanceof LimitExceededError) {
+      return {
+        status: "error",
+        message: t("projectCategory.create.error.limitExceededError", {
+          count: PROJECT_CATEGORY_MAX_COUNT,
+        }),
+      };
+    }
 
     return {
       status: "error",

@@ -1,10 +1,12 @@
+import prisma from "@/lib/prisma";
 import { seed } from "@/prisma/test-seed";
-import { AccessDeniedError } from "../../utils/error";
 import { it, expect, describe, beforeAll } from "vitest";
+import { PROJECT_CATEGORY_MAX_COUNT } from "../../constants";
 import { createProjectCategory } from "../projectCategory.dal";
-import { requireSession } from "@/lib/data/utils/requireSession";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
+import { requireSession } from "@/lib/data/utils/requireSession";
 import { users, positions, workspaces } from "@/prisma/seed/test-data";
+import { AccessDeniedError, LimitExceededError } from "../../utils/error";
 
 describe("createProjectCategory", () => {
   beforeAll(async () => {
@@ -32,6 +34,29 @@ describe("createProjectCategory", () => {
     expect(result).toBeDefined();
     expect(result.name).toBe("Project Category 1");
     expect(result.workspaceId).toBe(1);
+  });
+
+  it("should fail when project category limit is reached", async () => {
+    const categories = [];
+
+    for (let i = 1; i <= PROJECT_CATEGORY_MAX_COUNT; i++) {
+      categories.push({
+        workspaceId: 1,
+        name: `Project Category ${i}`,
+      });
+    }
+
+    await prisma.projectCategory.createMany({
+      data: categories,
+    });
+
+    await expect(
+      createProjectCategory({
+        name: "New Project Category",
+      }),
+    ).rejects.toThrow(LimitExceededError);
+
+    await prisma.projectCategory.deleteMany();
   });
 
   describe("RBAC: create project category", () => {

@@ -5,6 +5,8 @@ import { getTranslations } from "next-intl/server";
 import { createProjectSchema } from "@/lib/schemas/project";
 import { createProject as createProjectQuery } from "@/lib/data/project/project.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
+import { LimitExceededError } from "@/lib/data/utils/error";
+import { PROJECT_MAX_COUNT } from "@/lib/data/constants";
 
 export async function createProject(formData: FormData): Promise<ActionState> {
   // Authorization
@@ -24,6 +26,15 @@ export async function createProject(formData: FormData): Promise<ActionState> {
     };
   } catch (error) {
     console.error("Server Action Error:", error);
+
+    if (error instanceof LimitExceededError) {
+      return {
+        status: "error",
+        message: t("project.create.error.limitExceededError", {
+          count: PROJECT_MAX_COUNT,
+        }),
+      };
+    }
 
     return {
       status: "error",

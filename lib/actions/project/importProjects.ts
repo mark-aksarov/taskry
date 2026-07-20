@@ -1,17 +1,12 @@
 "use server";
 
-import {
-  projectTitle,
-  projectStatus,
-  projectDeadline,
-  projectDescription,
-  createProjectSchema,
-} from "@/lib/schemas/project";
-
 import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
 import { parseCsvFile } from "@/lib/utils/parseCsvFile";
+import { PROJECT_MAX_COUNT } from "@/lib/data/constants";
+import { createProjectSchema } from "@/lib/schemas/project";
+import { LimitExceededError } from "@/lib/data/utils/error";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
 import { createProjects as createProjectQueries } from "@/lib/data/project/project.dal";
 
@@ -39,6 +34,15 @@ export async function importProjects(formData: FormData): Promise<ActionState> {
     };
   } catch (error) {
     console.error("Server Action Error:", error);
+
+    if (error instanceof LimitExceededError) {
+      return {
+        status: "error",
+        message: t("project.create.error.limitExceededError", {
+          count: PROJECT_MAX_COUNT,
+        }),
+      };
+    }
 
     return {
       status: "error",

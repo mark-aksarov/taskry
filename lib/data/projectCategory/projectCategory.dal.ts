@@ -9,8 +9,9 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
+import { PROJECT_CATEGORY_MAX_COUNT } from "../constants";
+import { AccessDeniedError, LimitExceededError } from "../utils/error";
 
 export const getProjectCategoryCount = cache(async () => {
   // Authorization
@@ -70,6 +71,9 @@ export const createProjectCategory = async (
     );
   }
 
+  // Validate limit
+  await validateProjectCategoryLimit(workspaceId);
+
   // Create project category
   const projectCategory = await prisma.projectCategory.create({
     data: {
@@ -104,6 +108,9 @@ export const createProjectCategories = async (
       "You do not have permission to create project categories.",
     );
   }
+
+  // Validate limit
+  await validateProjectCategoryLimit(workspaceId, input.length);
 
   // Create project categories
   const projectCategories = await prisma.projectCategory.createMany({
@@ -186,3 +193,25 @@ export const deleteProjectCategories = async (ids: number[]) => {
 
   return deletedProjectCategories;
 };
+
+/**
+ * HELPERS
+ */
+
+// Validate that project category limit has not been reached
+async function validateProjectCategoryLimit(
+  workspaceId: number,
+  newCategoriesCount = 1,
+) {
+  const existingCount = await prisma.projectCategory.count({
+    where: {
+      workspaceId,
+    },
+  });
+
+  if (existingCount + newCategoriesCount > PROJECT_CATEGORY_MAX_COUNT) {
+    throw new LimitExceededError(
+      `You cannot create more than ${PROJECT_CATEGORY_MAX_COUNT} project categories.`,
+    );
+  }
+}

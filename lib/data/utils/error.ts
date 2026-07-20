@@ -28,3 +28,10 @@ export class ValidationError extends Error {
     this.name = "ValidationError";
   }
 }
+
+export class LimitExceededError extends Error {
+  constructor(message?: string) {
+    super(message || "Limit exceeded");
+    this.name = "LimitExceededError";
+  }
+}
