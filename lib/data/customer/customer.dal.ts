@@ -1,22 +1,28 @@
 import "server-only";
 
 import {
+  NotFoundError,
+  AccessDeniedError,
+  LimitExceededError,
+} from "../utils/error";
+
+import {
+  CustomerListDTO,
   CustomerDetailDTO,
+  CustomerSearchDTO,
+  CustomerSummaryDTO,
+  CustomerFormDataDTO,
   CreateCustomerInputDTO,
   UpdateCustomerInputDTO,
-  CustomerFormDataDTO,
-  CustomerSummaryDTO,
-  CustomerSearchDTO,
-  CustomerListDTO,
   UpdateCustomerImageUrlInputDTO,
 } from "./customer.dto";
 
 import { cache } from "react";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
+import { CUSTOMER_MAX_COUNT } from "../constants";
 import { requireSession } from "../utils/requireSession";
 import { CustomerFilters, CustomerSortField } from "@/lib/types";
-import { AccessDeniedError, NotFoundError } from "../utils/error";
 import { Prisma, ProjectStatus } from "@/generated/prisma/client";
 
 export const getCustomerDetail = cache(
@@ -333,7 +339,7 @@ export const deleteCustomers = async (ids: number[]) => {
   return deletedCustomers;
 };
 
-export const createCustomer = async (input: CreateCustomerInputDTO) => {
+export const createCustomers = async (input: CreateCustomerInputDTO[]) => {
   // Authorization
   const {
     user: { id: userId, workspaceId },
@@ -355,22 +361,29 @@ export const createCustomer = async (input: CreateCustomerInputDTO) => {
     );
   }
 
-  // Validate company
-  if (input.companyId) {
-    await validateCompany(workspaceId, input.companyId);
+  // Validate limit
+  await validateCustomerLimit(workspaceId, input.length);
+
+  // Validate companies
+  const companyIds = input
+    .map((company) => company.companyId)
+    .filter((id): id is number => id !== undefined);
+
+  if (companyIds.length > 0) {
+    await validateCompanies(workspaceId, companyIds);
   }
 
   // Create customer
-  const customer = await prisma.customer.create({
-    data: {
-      fullName: input.fullName,
-      bio: input.bio,
-      companyId: input.companyId,
-      email: input.email,
-      phoneNumber: input.phoneNumber,
-      publicLink: input.publicLink,
+  const customer = await prisma.customer.createManyAndReturn({
+    data: input.map((customer) => ({
+      fullName: customer.fullName,
+      bio: customer.bio,
+      companyId: customer.companyId,
+      email: customer.email,
+      phoneNumber: customer.phoneNumber,
+      publicLink: customer.publicLink,
       workspaceId,
-    },
+    })),
   });
 
   return customer;
@@ -400,7 +413,7 @@ export const updateCustomer = async (input: UpdateCustomerInputDTO) => {
 
   // Validate company
   if (input.companyId) {
-    await validateCompany(workspaceId, input.companyId);
+    await validateCompanies(workspaceId, [input.companyId]);
   }
 
   // Update customer
@@ -465,18 +478,47 @@ export const updateCustomerImageUrl = async (
  */
 
 // Validate that company exists and belongs to the workspace
-async function validateCompany(workspaceId: number, companyId: number) {
-  const company = await prisma.company.findUnique({
-    where: { id: companyId },
-    select: { workspaceId: true },
+async function validateCompanies(workspaceId: number, companyIds: number[]) {
+  const companies = await prisma.company.findMany({
+    where: {
+      id: {
+        in: companyIds,
+      },
+    },
+    select: {
+      id: true,
+      workspaceId: true,
+    },
   });
 
-  if (!company) {
-    throw new NotFoundError("Company not found", "companyNotFound");
+  if (companies.length !== companyIds.length) {
+    throw new NotFoundError("Company not found");
   }
 
-  if (company.workspaceId !== workspaceId) {
+  const hasAccessDenied = companies.some(
+    (category) => category.workspaceId !== workspaceId,
+  );
+
+  if (hasAccessDenied) {
     throw new AccessDeniedError("Company access denied");
+  }
+}
+
+// Validate that customer limit has not been reached
+async function validateCustomerLimit(
+  workspaceId: number,
+  newCustomersCount: number,
+) {
+  const existingCount = await prisma.customer.count({
+    where: {
+      workspaceId,
+    },
+  });
+
+  if (existingCount + newCustomersCount > CUSTOMER_MAX_COUNT) {
+    throw new LimitExceededError(
+      `You cannot create more than ${CUSTOMER_MAX_COUNT} customers.`,
+    );
   }
 }
 

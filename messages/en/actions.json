@@ -125,6 +125,7 @@
     "create": {
       "success": "Customer created successfully",
       "error": {
+        "limitExceededError": "The maximum number of customers would be exceeded. Maximum: {count}.",
         "internalServerError": "Something went wrong. Failed to create the customer. Refresh the page or try again later."
       }
     },
@@ -150,6 +151,13 @@
       "success": "Customers deleted successfully",
       "error": {
         "internalServerError": "Something went wrong. Failed to delete the customers. Refresh the page or try again later."
+      }
+    },
+    "import": {
+      "success": "Customers imported successfully",
+      "error": {
+        "limitExceededError": "The maximum number of customers would be exceeded. Maximum: {count}.",
+        "internalServerError": "Something went wrong. Failed to import customers. Refresh the page or try again later."
       }
     }
   },

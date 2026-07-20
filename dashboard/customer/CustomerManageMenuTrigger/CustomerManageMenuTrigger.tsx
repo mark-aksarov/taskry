@@ -1,8 +1,10 @@
 "use client";
 
-import { Item } from "react-stately";
-import { Building2 } from "lucide-react";
+import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
+import { Building2, FileUp } from "lucide-react";
+import { useModal } from "@/common/ModalManagerContext";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { ManageMenuTrigger } from "@/dashboard/common/ManageMenuTrigger";
 
 interface CustomerManageMenuTriggerProps {
@@ -14,8 +16,25 @@ export function CustomerManageMenuTrigger({
 }: CustomerManageMenuTriggerProps) {
   const t = useTranslations("dashboard.customers.CustomerManageMenuTrigger");
 
+  const guestGuard = useGuestModalGuard();
+
+  const { onOpenChange: onImportProjectsOpenChange } =
+    useModal("importCustomers");
+
+  function handleAction(key: Key) {
+    guestGuard(() => {
+      if (key === "import-csv") {
+        onImportProjectsOpenChange(true);
+      }
+    });
+  }
+
   return (
-    <ManageMenuTrigger renderButton={renderButton}>
+    <ManageMenuTrigger renderButton={renderButton} onAction={handleAction}>
+      <Item textValue={t("importCSV")} key="import-csv">
+        <FileUp size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        {t("importCSV")}
+      </Item>
       <Item textValue={t("companies")} href="/companies">
         <Building2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {t("companies")}

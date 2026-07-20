@@ -381,7 +381,8 @@
       "description": "No customers match the selected filters. Try changing or resetting the filters."
     },
     "CustomerManageMenuTrigger": {
-      "companies": "Companies"
+      "companies": "Companies",
+      "importCSV": "Import customers (CSV)"
     },
     "CustomerImageMenuTrigger": {
       "label": "Profile image menu"
@@ -424,6 +425,9 @@
     },
     "UpdateCustomerCompanyModal": {
       "title": "Edit company"
+    },
+    "ImportCustomersModal": {
+      "heading": "Import customers"
     }
   },
   "layout": {

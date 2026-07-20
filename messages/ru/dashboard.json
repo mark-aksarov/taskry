@@ -381,7 +381,8 @@
       "description": "По выбранным фильтрам клиенты отсутствуют. Попробуйте изменить или сбросить фильтры"
     },
     "CustomerManageMenuTrigger": {
-      "companies": "Компании"
+      "companies": "Компании",
+      "importCSV": "Импорт клиентов (CSV)"
     },
     "CustomerImageMenuTrigger": {
       "label": "Меню изображения профиля"
@@ -424,6 +425,9 @@
     },
     "UpdateCustomerCompanyModal": {
       "title": "Изменить компанию"
+    },
+    "ImportCustomersModal": {
+      "heading": "Импортирование клиентов"
     }
   },
   "layout": {

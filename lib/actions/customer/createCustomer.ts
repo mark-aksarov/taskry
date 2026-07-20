@@ -1,35 +1,10 @@
 "use server";
 
-import {
-  customerBio,
-  customerEmail,
-  customerFullName,
-  customerPublicLink,
-  customerPhoneNumber,
-} from "@/lib/schemas/customer";
-
-import z from "zod";
 import { ActionState } from "../types";
-import { companyId } from "@/lib/schemas/company";
 import { getTranslations } from "next-intl/server";
-import { emptyStringToUndefined } from "@/lib/schemas/base";
+import { createCustomerSchema } from "@/lib/schemas/customer";
 import { requireActionSession } from "@/lib/utils/requireActionSession";
-import { createCustomer as createCustomerQuery } from "@/lib/data/customer/customer.dal";
-
-const schema = z.object({
-  fullName: customerFullName,
-  bio: z.preprocess(emptyStringToUndefined, customerBio.optional()),
-  email: customerEmail,
-  phoneNumber: z.preprocess(
-    emptyStringToUndefined,
-    customerPhoneNumber.optional(),
-  ),
-  publicLink: z.preprocess(
-    emptyStringToUndefined,
-    customerPublicLink.optional(),
-  ),
-  companyId: z.preprocess(emptyStringToUndefined, companyId.optional()),
-});
+import { createCustomers as createCustomersQuery } from "@/lib/data/customer/customer.dal";
 
 export async function createCustomer(formData: FormData): Promise<ActionState> {
   // Authorization
@@ -39,9 +14,9 @@ export async function createCustomer(formData: FormData): Promise<ActionState> {
 
   try {
     const input = Object.fromEntries(formData.entries());
-    const parsedData = schema.parse(input);
+    const parsedData = createCustomerSchema.parse(input);
 
-    await createCustomerQuery(parsedData);
+    await createCustomersQuery([parsedData]);
 
     return {
       status: "success",
