@@ -20,6 +20,7 @@ export function DeleteTasksProvider({ children }: DeleteTasksProviderProps) {
     deleteTasks,
     {
       onSuccess: () => router.refresh(),
+      onError: () => setIds([]),
     },
   );
 

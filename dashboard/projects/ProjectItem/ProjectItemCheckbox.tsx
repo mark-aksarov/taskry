@@ -3,6 +3,7 @@
 import { Checkbox } from "@/ui/Checkbox";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useSelectedProjects } from "../SelectedProjectsContext";
+import { useDeleteProjects } from "../DeleteProjectsContext";
 
 interface ProjectItemCheckboxProps {
   id: number;
@@ -16,6 +17,7 @@ export function ProjectItemCheckbox({
   status,
 }: ProjectItemCheckboxProps) {
   const selected = useSelectedProjects();
+  const { ids } = useDeleteProjects();
 
   function handleChange(isSelected: boolean) {
     if (isSelected) {
@@ -25,12 +27,14 @@ export function ProjectItemCheckbox({
     }
   }
 
+  const isSelected = !!selected.get(id) || ids.includes(id);
+
   return (
     <Checkbox
       data-test="project-checkbox"
       data-id={id}
       aria-label={title}
-      isSelected={selected.items.some((item) => item.id === id)}
+      isSelected={isSelected}
       onChange={handleChange}
     />
   );

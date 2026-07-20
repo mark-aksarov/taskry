@@ -22,6 +22,7 @@ export function DeleteCompaniesProvider({
     deleteCompanies,
     {
       onSuccess: () => router.refresh(),
+      onError: () => setIds([]),
     },
   );
 

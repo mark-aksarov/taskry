@@ -21,6 +21,7 @@ export function UpdateTaskStatusesProvider({
     updateTaskStatuses,
     {
       onSuccess: () => router.refresh(),
+      onError: () => setIds([]),
     },
   );
 

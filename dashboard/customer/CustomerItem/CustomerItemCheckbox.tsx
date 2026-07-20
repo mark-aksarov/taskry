@@ -1,6 +1,7 @@
 "use client";
 
 import { Checkbox } from "@/ui/Checkbox";
+import { useDeleteCustomers } from "../DeleteCustomersContext";
 import { useSelectedItems } from "@/dashboard/common/SelectedItemsContext";
 
 interface CustomerItemCheckboxProps {
@@ -13,6 +14,7 @@ export function CustomerItemCheckbox({
   fullName,
 }: CustomerItemCheckboxProps) {
   const selected = useSelectedItems();
+  const { ids } = useDeleteCustomers();
 
   function handleChange(isSelected: boolean) {
     if (isSelected) {
@@ -22,7 +24,7 @@ export function CustomerItemCheckbox({
     }
   }
 
-  const isSelected = !!selected.get(id);
+  const isSelected = !!selected.get(id) || ids.includes(id);
 
   return (
     <Checkbox

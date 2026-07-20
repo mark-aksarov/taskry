@@ -22,6 +22,7 @@ export function DeleteProjectCategoriesProvider({
     deleteProjectCategories,
     {
       onSuccess: () => router.refresh(),
+      onError: () => setIds([]),
     },
   );
 

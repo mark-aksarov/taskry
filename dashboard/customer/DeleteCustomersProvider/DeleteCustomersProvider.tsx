@@ -22,6 +22,7 @@ export function DeleteCustomersProvider({
     deleteCustomers,
     {
       onSuccess: () => router.refresh(),
+      onError: () => setIds([]),
     },
   );
   useShowToastOnActionError(state);

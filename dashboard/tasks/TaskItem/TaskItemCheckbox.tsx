@@ -2,6 +2,7 @@
 
 import { Checkbox } from "@/ui/Checkbox";
 import { TaskStatus } from "@/generated/prisma/enums";
+import { useDeleteTasks } from "../DeleteTasksContext";
 import { useSelectedTasks } from "../SelectedTasksContext/SelectedTasksContext";
 
 interface TaskItemCheckboxProps {
@@ -12,6 +13,7 @@ interface TaskItemCheckboxProps {
 
 export function TaskItemCheckbox({ id, title, status }: TaskItemCheckboxProps) {
   const selected = useSelectedTasks();
+  const { ids } = useDeleteTasks();
 
   function handleChange(isSelected: boolean) {
     if (isSelected) {
@@ -21,7 +23,7 @@ export function TaskItemCheckbox({ id, title, status }: TaskItemCheckboxProps) {
     }
   }
 
-  const isSelected = !!selected.get(id);
+  const isSelected = !!selected.get(id) || ids.includes(id);
 
   return (
     <Checkbox

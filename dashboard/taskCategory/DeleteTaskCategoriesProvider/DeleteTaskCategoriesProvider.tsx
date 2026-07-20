@@ -22,6 +22,7 @@ export function DeleteTaskCategoriesProvider({
     deleteTaskCategories,
     {
       onSuccess: () => router.refresh(),
+      onError: () => setIds([]),
     },
   );
 

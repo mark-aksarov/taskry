@@ -2,6 +2,7 @@
 
 import { Checkbox } from "@/ui/Checkbox";
 import { useSelectedItems } from "@/dashboard/common/SelectedItemsContext";
+import { useDeleteTaskCategories } from "./DeleteTaskCategoriesContext";
 
 interface TaskCategoryItemCheckboxProps {
   id: number;
@@ -13,6 +14,7 @@ export function TaskCategoryItemCheckbox({
   name,
 }: TaskCategoryItemCheckboxProps) {
   const selected = useSelectedItems();
+  const { ids } = useDeleteTaskCategories();
 
   function handleChange(isSelected: boolean) {
     if (isSelected) {
@@ -22,7 +24,7 @@ export function TaskCategoryItemCheckbox({
     }
   }
 
-  const isSelected = !!selected.get(id);
+  const isSelected = !!selected.get(id) || ids.includes(id);
 
   return (
     <Checkbox

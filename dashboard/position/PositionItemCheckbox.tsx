@@ -1,6 +1,7 @@
 "use client";
 
 import { Checkbox } from "@/ui/Checkbox";
+import { useDeletePositions } from "./DeletePositionsContext";
 import { useSelectedItems } from "@/dashboard/common/SelectedItemsContext";
 
 interface PositionItemCheckboxProps {
@@ -10,6 +11,7 @@ interface PositionItemCheckboxProps {
 
 export function PositionItemCheckbox({ id, name }: PositionItemCheckboxProps) {
   const selected = useSelectedItems();
+  const { ids } = useDeletePositions();
 
   function handleChange(isSelected: boolean) {
     if (isSelected) {
@@ -19,7 +21,7 @@ export function PositionItemCheckbox({ id, name }: PositionItemCheckboxProps) {
     }
   }
 
-  const isSelected = !!selected.get(id);
+  const isSelected = !!selected.get(id) || ids.includes(id);
 
   return (
     <Checkbox

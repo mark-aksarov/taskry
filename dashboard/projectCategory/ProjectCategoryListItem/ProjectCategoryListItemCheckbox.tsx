@@ -2,6 +2,7 @@
 
 import { Checkbox } from "@/ui/Checkbox";
 import { useSelectedItems } from "@/dashboard/common/SelectedItemsContext";
+import { useDeleteProjectCategories } from "../DeleteProjectCategoriesContext";
 
 interface ProjectCategoryListItemCheckboxProps {
   id: number;
@@ -13,6 +14,7 @@ export function ProjectCategoryListItemCheckbox({
   name,
 }: ProjectCategoryListItemCheckboxProps) {
   const selected = useSelectedItems();
+  const { ids } = useDeleteProjectCategories();
 
   function handleChange(isSelected: boolean) {
     if (isSelected) {
@@ -22,7 +24,7 @@ export function ProjectCategoryListItemCheckbox({
     }
   }
 
-  const isSelected = !!selected.get(id);
+  const isSelected = !!selected.get(id) || ids.includes(id);
 
   return (
     <Checkbox

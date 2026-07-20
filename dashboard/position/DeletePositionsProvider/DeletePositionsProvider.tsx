@@ -22,6 +22,7 @@ export function DeletePositionsProvider({
     deletePositions,
     {
       onSuccess: () => router.refresh(),
+      onError: () => setIds([]),
     },
   );
   useShowToastOnActionError(state);

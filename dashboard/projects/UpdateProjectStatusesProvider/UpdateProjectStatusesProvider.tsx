@@ -21,6 +21,7 @@ export function UpdateProjectStatusesProvider({
     updateProjectStatuses,
     {
       onSuccess: () => router.refresh(),
+      onError: () => setIds([]),
     },
   );
 

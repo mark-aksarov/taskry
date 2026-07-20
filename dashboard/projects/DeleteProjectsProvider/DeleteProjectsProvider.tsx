@@ -22,6 +22,7 @@ export function DeleteProjectsProvider({
     deleteProjects,
     {
       onSuccess: () => router.refresh(),
+      onError: () => setIds([]),
     },
   );
   useShowToastOnActionError(state);
