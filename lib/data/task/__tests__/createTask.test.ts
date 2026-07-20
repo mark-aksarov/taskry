@@ -1,21 +1,28 @@
 import {
   users,
+  projects,
   positions,
   companies,
   customers,
   workspaces,
   taskCategories,
   projectCategories,
-  projects,
 } from "@/prisma/seed/test-data";
 
+import {
+  NotFoundError,
+  AccessDeniedError,
+  LimitExceededError,
+} from "@/lib/data/utils/error";
+
+import prisma from "@/lib/prisma";
 import { createTask } from "../task.dal";
 import { seed } from "@/prisma/test-seed";
+import { TASK_MAX_COUNT } from "../../constants";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { it, expect, describe, beforeAll } from "vitest";
 import { requireSession } from "@/lib/data/utils/requireSession";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
-import { AccessDeniedError, NotFoundError } from "@/lib/data/utils/error";
 
 describe("createTask", () => {
   beforeAll(async () => {
@@ -153,6 +160,39 @@ describe("createTask", () => {
     expect(result.id).toBeDefined();
     expect(result.assigneeId).toBeNull();
   });
+
+  it("should fail if task limit has been reached", async () => {
+    const tasks = [];
+
+    for (let i = 0; i < TASK_MAX_COUNT; i++) {
+      tasks.push({
+        title: `Task ${i}`,
+        status: TaskStatus.active,
+        projectId: 1,
+        categoryId: 1,
+        assigneeId: "user-2",
+        deadline: new Date("2025-12-31"),
+        workspaceId: 1,
+      });
+    }
+
+    await prisma.task.createMany({
+      data: tasks,
+    });
+
+    const createTaskPromise = createTask({
+      title: "Limit exceeded task",
+      status: TaskStatus.active,
+      projectId: 1,
+      categoryId: 1,
+      assigneeId: "user-2",
+      deadline: "2025-12-31",
+    });
+
+    await expect(createTaskPromise).rejects.toThrow(LimitExceededError);
+
+    await prisma.task.deleteMany();
+  }, 30000);
 
   describe("RBAC: create task", () => {
     const setup = async (userId: string, role: string) => {

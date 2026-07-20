@@ -40,7 +40,7 @@ export function ImportProjectsModal() {
         <ImportModalUploadTrigger
           action={action}
           isPending={isPending}
-          setFileError={setFileSizeError}
+          setFileSizeError={setFileSizeError}
         />
       </ConfirmModalActions>
     </ConfirmModal>

@@ -13,7 +13,12 @@ import { auth } from "@/lib/auth";
 import { TaskFilters, TaskSortField } from "@/lib/types";
 import { requireSession } from "../utils/requireSession";
 import { Prisma, TaskStatus } from "@/generated/prisma/client";
-import { AccessDeniedError, NotFoundError } from "../utils/error";
+import {
+  AccessDeniedError,
+  LimitExceededError,
+  NotFoundError,
+} from "../utils/error";
+import { TASK_MAX_COUNT } from "../constants";
 
 export const getTaskDetail = cache(
   async (id: number): Promise<TaskDetailDTO | null> => {
@@ -314,6 +319,9 @@ export const createTask = async (input: CreateTaskInputDTO) => {
     throw new AccessDeniedError("You do not have permission to create task.");
   }
 
+  // Validate limit
+  await validateTaskLimit(workspaceId);
+
   // Validate category
   if (input.categoryId) {
     await validateTaskCategory(workspaceId, input.categoryId);
@@ -345,6 +353,73 @@ export const createTask = async (input: CreateTaskInputDTO) => {
   });
 
   return task;
+};
+
+export const createTasks = async (input: CreateTaskInputDTO[]) => {
+  // Authorization
+  const {
+    user: { id: userId, workspaceId },
+  } = await requireSession();
+
+  // ACL
+  const permission = await auth.api.userHasPermission({
+    body: {
+      userId,
+      permission: {
+        task: ["create"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError("You do not have permission to create tasks.");
+  }
+
+  // Validate limit
+  await validateTaskLimit(workspaceId, input.length);
+
+  // Validate categories
+  const categoryIds = input
+    .map((task) => task.categoryId)
+    .filter((id): id is number => id !== undefined);
+
+  if (categoryIds.length > 0) {
+    await validateTaskCategories(workspaceId, categoryIds);
+  }
+
+  // Validate projects
+  const projectIds = input
+    .map((task) => task.projectId)
+    .filter((id): id is number => id !== undefined);
+
+  if (projectIds.length > 0) {
+    await validateProjects(workspaceId, projectIds);
+  }
+
+  // Validate assignees
+  const assigneeIds = input
+    .map((task) => task.assigneeId)
+    .filter((id): id is string => id !== undefined);
+
+  if (assigneeIds) {
+    await validateAssignees(workspaceId, assigneeIds);
+  }
+
+  const tasks = await prisma.task.createManyAndReturn({
+    data: input.map((task) => ({
+      title: task.title,
+      description: task.description,
+      deadline: new Date(task.deadline),
+      status: task.status,
+      projectId: task.projectId,
+      categoryId: task.categoryId,
+      assigneeId: task.assigneeId,
+      creatorId: userId,
+      workspaceId,
+    })),
+  });
+
+  return tasks;
 };
 
 export const updateTask = async (input: UpdateTaskInputDTO) => {
@@ -499,6 +574,35 @@ async function validateTaskCategory(workspaceId: number, categoryId: number) {
   }
 }
 
+async function validateTaskCategories(
+  workspaceId: number,
+  categoryIds: number[],
+) {
+  const categories = await prisma.taskCategory.findMany({
+    where: {
+      id: {
+        in: categoryIds,
+      },
+    },
+    select: {
+      id: true,
+      workspaceId: true,
+    },
+  });
+
+  for (const categoryId of categoryIds) {
+    const category = categories.find((item) => item.id === categoryId);
+
+    if (!category) {
+      throw new NotFoundError("Task category not found");
+    }
+
+    if (category.workspaceId !== workspaceId) {
+      throw new AccessDeniedError("Task category access denied");
+    }
+  }
+}
+
 // Validate that project exists and belongs to the workspace
 async function validateProject(workspaceId: number, projectId: number) {
   const project = await prisma.project.findUnique({
@@ -515,6 +619,32 @@ async function validateProject(workspaceId: number, projectId: number) {
   }
 }
 
+async function validateProjects(workspaceId: number, projectIds: number[]) {
+  const projects = await prisma.project.findMany({
+    where: {
+      id: {
+        in: projectIds,
+      },
+    },
+    select: {
+      id: true,
+      workspaceId: true,
+    },
+  });
+
+  for (const projectId of projectIds) {
+    const project = projects.find((item) => item.id === projectId);
+
+    if (!project) {
+      throw new NotFoundError("Project not found");
+    }
+
+    if (project.workspaceId !== workspaceId) {
+      throw new AccessDeniedError("Project access denied");
+    }
+  }
+}
+
 // Validate that assignee exists and belongs to the workspace
 async function validateAssignee(workspaceId: number, assigneeId: string) {
   const assignee = await prisma.user.findFirst({
@@ -528,6 +658,47 @@ async function validateAssignee(workspaceId: number, assigneeId: string) {
 
   if (assignee.workspaceId !== workspaceId) {
     throw new AccessDeniedError("Assignee access denied");
+  }
+}
+
+async function validateAssignees(workspaceId: number, assigneeIds: string[]) {
+  const assignees = await prisma.user.findMany({
+    where: {
+      id: {
+        in: assigneeIds,
+      },
+    },
+    select: {
+      id: true,
+      workspaceId: true,
+    },
+  });
+
+  for (const assigneeId of assigneeIds) {
+    const assignee = assignees.find((item) => item.id === assigneeId);
+
+    if (!assignee) {
+      throw new NotFoundError("Assignee not found");
+    }
+
+    if (assignee.workspaceId !== workspaceId) {
+      throw new AccessDeniedError("Assignee access denied");
+    }
+  }
+}
+
+// Validate that task limit has not been reached
+async function validateTaskLimit(workspaceId: number, newTasksCount = 1) {
+  const existingCount = await prisma.task.count({
+    where: {
+      workspaceId,
+    },
+  });
+
+  if (existingCount + newTasksCount > TASK_MAX_COUNT) {
+    throw new LimitExceededError(
+      `You cannot create more than ${TASK_MAX_COUNT} tasks.`,
+    );
   }
 }
 

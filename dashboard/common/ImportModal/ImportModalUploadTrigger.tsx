@@ -8,24 +8,27 @@ import { ConfirmModalConfirmButton } from "@/common/ConfirmModal";
 interface ImportModalUploadTriggerProps {
   action: (payload: FormData) => void;
   isPending: boolean;
-  setFileError: (value: boolean) => void;
+  setFileSizeError: (value: boolean) => void;
 }
 
 export function ImportModalUploadTrigger({
   action,
   isPending,
-  setFileError,
+  setFileSizeError,
 }: ImportModalUploadTriggerProps) {
   const t = useTranslations("dashboard.common.ImportModalUploadTrigger");
 
   const handleSelect = (e: FileList | null) => {
+    //reset file error
+    setFileSizeError(false);
+
     const file = e?.[0];
     if (!file) return;
 
     // Check file size
     const maxSize = 512 * 1024;
     if (file.size > maxSize) {
-      setFileError(true);
+      setFileSizeError(true);
       return;
     }
 

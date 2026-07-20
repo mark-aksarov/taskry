@@ -42,7 +42,7 @@ export function ImportTaskCategoriesModal() {
         <ImportModalUploadTrigger
           action={action}
           isPending={isPending}
-          setFileError={setFileSizeError}
+          setFileSizeError={setFileSizeError}
         />
       </ConfirmModalActions>
     </ConfirmModal>

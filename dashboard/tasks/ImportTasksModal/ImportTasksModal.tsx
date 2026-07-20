@@ -8,24 +8,22 @@ import {
 import { useState } from "react";
 import { DialogHeading } from "@/ui/Dialog";
 import { useTranslations } from "next-intl";
+import { useImportTasks } from "../ImportTasksContext";
 import { useModal } from "@/common/ModalManagerContext";
 import { ImportModalText } from "@/dashboard/common/ImportModal";
 import { ConfirmModal, ConfirmModalActions } from "@/common/ConfirmModal";
 import { ImportModalUploadTrigger } from "@/dashboard/common/ImportModal";
-import { useImportProjectCategories } from "../ImportProjectCategoriesContext";
 
-export function ImportProjectCategoriesModal() {
-  const t = useTranslations(
-    "dashboard.projectCategories.ImportProjectCategoriesModal",
-  );
+export function ImportTasksModal() {
+  const t = useTranslations("dashboard.tasks.ImportTasksModal");
 
   const [fileSizeError, setFileSizeError] = useState(false);
-  const { state, action, isPending } = useImportProjectCategories();
-  const { isOpen, onOpenChange } = useModal("importProjectCategories");
+  const { state, action, isPending } = useImportTasks();
+  const { isOpen, onOpenChange } = useModal("importTasks");
 
   return (
     <ConfirmModal
-      data-test="import-project-categories-modal"
+      data-test="import-tasks-modal"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
     >

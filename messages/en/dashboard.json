@@ -1208,7 +1208,8 @@
       "overdue": "Overdue"
     },
     "TaskManageMenuTrigger": {
-      "categories": "Categories"
+      "categories": "Categories",
+      "importCSV": "Import tasks (CSV)"
     },
     "TasksFilteredEmptySection": {
       "heading": "No tasks found",
@@ -1285,6 +1286,9 @@
     },
     "DeleteTaskModalTrigger": {
       "label": "Delete task"
+    },
+    "ImportTasksModal": {
+      "heading": "Import tasks"
     }
   },
   "users": {

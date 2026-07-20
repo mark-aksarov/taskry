@@ -999,7 +999,7 @@
       "successMessage": "Категория задач успешно удалена"
     },
     "ImportTaskCategoriesModal": {
-      "heading": "Импортировать категории"
+      "heading": "Импортировать категорий"
     },
     "TaskCategoryManageMenuTrigger": {
       "importCSV": "Импорт категорий (CSV)"
@@ -1208,7 +1208,8 @@
       "overdue": "Просрочена"
     },
     "TaskManageMenuTrigger": {
-      "categories": "Категории"
+      "categories": "Категории",
+      "importCSV": "Импорт задач (CSV) "
     },
     "TasksFilteredEmptySection": {
       "heading": "Задачи не найдены",
@@ -1285,6 +1286,9 @@
     },
     "DeleteTaskModalTrigger": {
       "label": "Удалить задачу"
+    },
+    "ImportTasksModal": {
+      "heading": "Импортирование задач"
     }
   },
   "users": {

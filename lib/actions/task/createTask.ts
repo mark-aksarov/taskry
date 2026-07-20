@@ -1,31 +1,12 @@
 "use server";
 
-import {
-  taskTitle,
-  taskStatus,
-  taskDeadline,
-  taskDescription,
-} from "@/lib/schemas/task";
-
-import z from "zod";
 import { ActionState } from "../types";
-import { userId } from "@/lib/schemas/user";
-import { projectId } from "@/lib/schemas/project";
 import { getTranslations } from "next-intl/server";
-import { emptyStringToUndefined } from "@/lib/schemas/base";
-import { taskCategoryId } from "@/lib/schemas/taskCategory";
+import { createTaskSchema } from "@/lib/schemas/task";
+import { TASK_MAX_COUNT } from "@/lib/data/constants";
+import { LimitExceededError } from "@/lib/data/utils/error";
 import { createTask as createTaskQuery } from "@/lib/data/task/task.dal";
 import { requireSessionOrRedirect } from "@/lib/data/utils/requireSessionOrRedirect";
-
-const schema = z.object({
-  title: taskTitle,
-  description: z.preprocess(emptyStringToUndefined, taskDescription.optional()),
-  deadline: taskDeadline,
-  status: taskStatus,
-  projectId: z.preprocess(emptyStringToUndefined, projectId.optional()),
-  categoryId: z.preprocess(emptyStringToUndefined, taskCategoryId.optional()),
-  assigneeId: z.preprocess(emptyStringToUndefined, userId.optional()),
-});
 
 export async function createTask(formData: FormData): Promise<ActionState> {
   // Authorization
@@ -35,7 +16,7 @@ export async function createTask(formData: FormData): Promise<ActionState> {
 
   try {
     const input = Object.fromEntries(formData.entries());
-    const parsedData = schema.parse(input);
+    const parsedData = createTaskSchema.parse(input);
     await createTaskQuery(parsedData);
 
     return {
@@ -44,6 +25,15 @@ export async function createTask(formData: FormData): Promise<ActionState> {
     };
   } catch (error) {
     console.error("Server Action Error:", error);
+
+    if (error instanceof LimitExceededError) {
+      return {
+        status: "error",
+        message: t("task.create.error.limitExceededError", {
+          count: TASK_MAX_COUNT,
+        }),
+      };
+    }
 
     return {
       status: "error",

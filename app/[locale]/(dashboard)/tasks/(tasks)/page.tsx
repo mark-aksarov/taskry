@@ -20,11 +20,13 @@ import { CreateTaskModal } from "@/dashboard/tasks/CreateTaskModal";
 import { getTaskCount, getTaskList } from "@/lib/data/task/task.dal";
 import { TaskFiltersModal } from "@/dashboard/tasks/TaskFiltersModal";
 import { DeleteTasksModal } from "@/dashboard/tasks/DeleteTasksModal";
+import { ImportTasksModal } from "@/dashboard/tasks/ImportTasksModal";
 import { requireProtectedPage } from "@/lib/utils/requireProtectedPage";
 import { TaskGridContainer } from "@/dashboard/tasks/TaskGridContainer";
 import { CreateTaskProvider } from "@/dashboard/tasks/CreateTaskProvider";
 import { TaskFiltersProvider } from "@/dashboard/tasks/TaskFiltersContext";
 import { DeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider";
+import { ImportTasksProvider } from "@/dashboard/tasks/ImportTasksProvider";
 import { AssigneeFiltersModal } from "@/dashboard/tasks/AssigneeFiltersModal";
 import { SelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext";
 import { getTaskCategoryCount } from "@/lib/data/taskCategory/taskCategory.dal";
@@ -103,41 +105,44 @@ export default async function AppTasksPage({
           <CreateTaskProvider>
             <CreateTaskCategoryProvider>
               <TaskFiltersProvider filters={filters}>
-                <TasksPage
-                  page={page}
-                  pageSize={pageSize}
-                  totalCount={totalCount}
-                  categoryCount={categoryCount}
-                  projectCount={projectCount}
-                  totalFilteredTasks={totalFilteredTasks}
-                  selectedSortField={sort}
-                  taskGrid={
-                    <TaskGridContainer tasks={tasks} showCheckbox={true} />
-                  }
-                />
+                <ImportTasksProvider>
+                  <TasksPage
+                    page={page}
+                    pageSize={pageSize}
+                    totalCount={totalCount}
+                    categoryCount={categoryCount}
+                    projectCount={projectCount}
+                    totalFilteredTasks={totalFilteredTasks}
+                    selectedSortField={sort}
+                    taskGrid={
+                      <TaskGridContainer tasks={tasks} showCheckbox={true} />
+                    }
+                  />
 
-                <TaskSearchModal
-                  searchContainer={<TaskRouterSearchContainer />}
-                />
-                <CreateTaskModal
-                  createTaskFormContainer={<CreateTaskFormContainer />}
-                />
-                <CreateTaskCategoryModal />
-                <DeleteTasksModal />
+                  <TaskSearchModal
+                    searchContainer={<TaskRouterSearchContainer />}
+                  />
+                  <CreateTaskModal
+                    createTaskFormContainer={<CreateTaskFormContainer />}
+                  />
+                  <CreateTaskCategoryModal />
+                  <DeleteTasksModal />
 
-                <TaskFiltersModal
-                  filtersFormContainer={<TaskFiltersFormContainer />}
-                />
-                <TaskStatusFiltersModal />
-                <TaskCategoryFiltersModal
-                  filtersFormContainer={<TaskCategoryFiltersFormContainer />}
-                />
-                <TaskProjectFiltersModal
-                  filtersFormContainer={<TaskProjectFiltersFormContainer />}
-                />
-                <AssigneeFiltersModal
-                  filtersFormContainer={<AssigneeFiltersFormContainer />}
-                />
+                  <TaskFiltersModal
+                    filtersFormContainer={<TaskFiltersFormContainer />}
+                  />
+                  <TaskStatusFiltersModal />
+                  <TaskCategoryFiltersModal
+                    filtersFormContainer={<TaskCategoryFiltersFormContainer />}
+                  />
+                  <TaskProjectFiltersModal
+                    filtersFormContainer={<TaskProjectFiltersFormContainer />}
+                  />
+                  <AssigneeFiltersModal
+                    filtersFormContainer={<AssigneeFiltersFormContainer />}
+                  />
+                  <ImportTasksModal />
+                </ImportTasksProvider>
               </TaskFiltersProvider>
             </CreateTaskCategoryProvider>
           </CreateTaskProvider>
