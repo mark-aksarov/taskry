@@ -20,10 +20,6 @@ export async function parseCsvFile<T>(
     skipEmptyLines: true,
   });
 
-  if (result.errors.length > 0) {
-    throw new Error("Invalid CSV file");
-  }
-
   const data = schema.parse(result.data);
 
   return data;
