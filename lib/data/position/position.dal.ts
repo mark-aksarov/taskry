@@ -1,7 +1,7 @@
 import "server-only";
 
 import {
-  PositionDTO,
+  mapToPositionDTO,
   CreatePositionInputDTO,
   UpdatePositionInputDTO,
 } from "./position.dto";
@@ -9,9 +9,9 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import { POSITION_MAX_COUNT } from "../constants";
+import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
-import { AccessDeniedError, LimitExceededError } from "../utils/error";
+import { validatePositionLimit } from "../utils/validation";
 
 export const getPositionCount = cache(async () => {
   // Authorization
@@ -22,7 +22,7 @@ export const getPositionCount = cache(async () => {
   return prisma.position.count({ where: { workspaceId } });
 });
 
-export const getPositions = cache(async (): Promise<PositionDTO[]> => {
+export const getPositions = cache(async () => {
   // Authorization
   const {
     user: { workspaceId },
@@ -39,7 +39,7 @@ export const getPositions = cache(async (): Promise<PositionDTO[]> => {
     },
   });
 
-  return positions;
+  return positions.map(mapToPositionDTO);
 });
 
 export const createPositions = async (input: CreatePositionInputDTO[]) => {
@@ -75,7 +75,7 @@ export const createPositions = async (input: CreatePositionInputDTO[]) => {
     })),
   });
 
-  return positions;
+  return positions.map(mapToPositionDTO);
 };
 
 export const updatePosition = async (input: UpdatePositionInputDTO) => {
@@ -111,7 +111,7 @@ export const updatePosition = async (input: UpdatePositionInputDTO) => {
     },
   });
 
-  return updatedPosition;
+  return mapToPositionDTO(updatedPosition);
 };
 
 export const deletePositions = async (ids: number[]) => {
@@ -137,34 +137,12 @@ export const deletePositions = async (ids: number[]) => {
   }
 
   // Bulk delete positions within the workspace
-  const deletedPositions = await prisma.position.deleteMany({
+  const result = await prisma.position.deleteMany({
     where: {
       workspaceId,
       id: { in: ids },
     },
   });
 
-  return deletedPositions;
+  return result;
 };
-
-/**
- * HELPERS
- */
-
-// Validate that position limit has not been reached
-async function validatePositionLimit(
-  workspaceId: number,
-  newPositionsCount: number,
-) {
-  const existingCount = await prisma.position.count({
-    where: {
-      workspaceId,
-    },
-  });
-
-  if (existingCount + newPositionsCount > POSITION_MAX_COUNT) {
-    throw new LimitExceededError(
-      `You cannot create more than ${POSITION_MAX_COUNT} positions.`,
-    );
-  }
-}

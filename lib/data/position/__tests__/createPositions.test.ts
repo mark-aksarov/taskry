@@ -37,15 +37,14 @@ describe("createPositions", () => {
 
     expect(result).toHaveLength(2);
 
-    expect(result[0]).toMatchObject({
-      name: "Position 3",
-      workspaceId: 1,
-    });
-
-    expect(result[1]).toMatchObject({
-      name: "Position 4",
-      workspaceId: 1,
-    });
+    expect(result).toMatchObject([
+      {
+        name: "Position 3",
+      },
+      {
+        name: "Position 4",
+      },
+    ]);
   });
 
   it("should fail when position limit is reached", async () => {

@@ -63,8 +63,24 @@ describe("createProjects", () => {
     ]);
 
     expect(result).toHaveLength(2);
-    expect(result[0].workspaceId).toBe(1);
-    expect(result[0].creatorId).toBe("user-1");
+    expect(result).toMatchObject([
+      {
+        title: "Project 1",
+        description: "Description 1",
+        deadline: new Date("2025-12-31").toISOString(),
+        status: ProjectStatus.active,
+        categoryId: 1,
+        customerId: 1,
+      },
+      {
+        title: "Project 2",
+        description: "Description 2",
+        deadline: new Date("2025-12-31").toISOString(),
+        status: ProjectStatus.active,
+        categoryId: 1,
+        customerId: 1,
+      },
+    ]);
   });
 
   it("should throw error if project category does not found", async () => {
@@ -145,7 +161,7 @@ describe("createProjects", () => {
 
     expect(result).toHaveLength(1);
     expect(result[0].id).toBeDefined();
-    expect(result[0].customerId).toBeNull();
+    expect(result[0].customerId).toBeUndefined();
   });
 
   it("should fail when creating projects exceeds the limit", async () => {

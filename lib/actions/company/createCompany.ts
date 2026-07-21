@@ -6,8 +6,8 @@ import { getTranslations } from "next-intl/server";
 import { companyName } from "@/lib/schemas/company";
 import { COMPANY_MAX_COUNT } from "@/lib/data/constants";
 import { LimitExceededError } from "@/lib/data/utils/error";
-import { createCompany as createCompanyQuery } from "@/lib/data/company/company.dal";
 import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { createCompanies as createCompaniesQuery } from "@/lib/data/company/company.dal";
 
 const schema = z.object({
   name: companyName,
@@ -24,7 +24,7 @@ export async function createCompany(formData: FormData): Promise<ActionState> {
       name: formData.get("name"),
     });
 
-    await createCompanyQuery(parsedDate);
+    await createCompaniesQuery([parsedDate]);
 
     return {
       status: "success",

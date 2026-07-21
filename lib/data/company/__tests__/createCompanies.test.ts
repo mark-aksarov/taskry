@@ -24,7 +24,7 @@ describe("createCompanies", () => {
   });
 
   it("should successfully create companies", async () => {
-    const input = [
+    const inputData = [
       {
         name: "Company 1",
       },
@@ -33,23 +33,17 @@ describe("createCompanies", () => {
       },
     ];
 
-    const result = await createCompanies(input);
+    const result = await createCompanies(inputData);
 
-    expect(result).toBeDefined();
-    expect(result.count).toBe(2);
-
-    const companies = await prisma.company.findMany({
-      where: {
-        workspaceId: 1,
+    expect(result.length).toBe(2);
+    expect(result).toMatchObject([
+      {
+        name: "Company 1",
       },
-      orderBy: {
-        name: "asc",
+      {
+        name: "Company 2",
       },
-    });
-
-    expect(companies).toHaveLength(2);
-    expect(companies[0].name).toBe("Company 1");
-    expect(companies[1].name).toBe("Company 2");
+    ]);
   });
 
   it("should fail when creating companies exceeds the limit", async () => {
@@ -102,8 +96,7 @@ describe("createCompanies", () => {
 
       const result = await createCompanies(createInput);
 
-      expect(result).toBeDefined();
-      expect(result.count).toBe(2);
+      expect(result.length).toBe(2);
     });
 
     it("should succeed for user", async () => {
@@ -111,8 +104,7 @@ describe("createCompanies", () => {
 
       const result = await createCompanies(createInput);
 
-      expect(result).toBeDefined();
-      expect(result.count).toBe(2);
+      expect(result.length).toBe(2);
     });
 
     it("should fail for guest", async () => {

@@ -1,3 +1,5 @@
+import { Customer } from "@/generated/prisma/browser";
+
 export type CustomerSummaryDTO = {
   id: number;
   fullName: string;
@@ -83,4 +85,29 @@ export interface CustomerSearchItemDTO {
   fullName: string;
   email: string;
   imageUrl?: string;
+}
+
+export function mapToCustomerDTO(
+  customer: Pick<
+    Customer,
+    | "id"
+    | "imageUrl"
+    | "bio"
+    | "fullName"
+    | "email"
+    | "phoneNumber"
+    | "publicLink"
+    | "companyId"
+  >,
+): CustomerDTO {
+  return {
+    id: customer.id,
+    imageUrl: customer.imageUrl ?? undefined,
+    bio: customer.bio ?? undefined,
+    fullName: customer.fullName,
+    email: customer.email,
+    phoneNumber: customer.phoneNumber ?? undefined,
+    publicLink: customer.publicLink ?? undefined,
+    companyId: customer.companyId ?? undefined,
+  };
 }

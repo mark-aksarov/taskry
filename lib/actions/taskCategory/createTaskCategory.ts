@@ -3,11 +3,11 @@
 import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
-import { taskCategoryName } from "@/lib/schemas/taskCategory";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
-import { createTaskCategory as createTaskCategoryQuery } from "@/lib/data/taskCategory/taskCategory.dal";
 import { LimitExceededError } from "@/lib/data/utils/error";
+import { taskCategoryName } from "@/lib/schemas/taskCategory";
 import { TASK_CATEGORY_MAX_COUNT } from "@/lib/data/constants";
+import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { createTaskCategories as createTaskCategoriesQuery } from "@/lib/data/taskCategory/taskCategory.dal";
 
 const schema = z.object({ name: taskCategoryName });
 
@@ -24,7 +24,7 @@ export async function createTaskCategory(
       name: formData.get("name"),
     });
 
-    await createTaskCategoryQuery(parsedData);
+    await createTaskCategoriesQuery([parsedData]);
 
     return {
       status: "success",

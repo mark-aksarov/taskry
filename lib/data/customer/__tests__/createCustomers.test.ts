@@ -54,10 +54,7 @@ describe("createCustomers", () => {
     const result = await createCustomers(inputData);
 
     expect(result).toHaveLength(1);
-    expect(result[0]).toMatchObject({
-      ...inputData[0],
-      workspaceId: 1,
-    });
+    expect(result[0]).toMatchObject(inputData[0]);
   });
 
   it("should throw NotFoundError if company does not found", async () => {

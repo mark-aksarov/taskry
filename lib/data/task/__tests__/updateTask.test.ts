@@ -18,7 +18,7 @@ import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
 import { AccessDeniedError, NotFoundError } from "../../utils/error";
 
-describe("updateProject", () => {
+describe("updateTask", () => {
   beforeAll(async () => {
     (requireSession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
@@ -168,7 +168,7 @@ describe("updateProject", () => {
     });
 
     await expect(updateTaskPromise).rejects.toThrow(NotFoundError);
-    await expect(updateTaskPromise).rejects.toThrow(/Assignee not found/i);
+    await expect(updateTaskPromise).rejects.toThrow(/User not found/i);
   });
 
   it("should fail if the task category not found", async () => {
@@ -264,7 +264,7 @@ describe("updateProject", () => {
     });
 
     await expect(updateTaskPromise).rejects.toThrow(AccessDeniedError);
-    await expect(updateTaskPromise).rejects.toThrow(/Assignee access denied/i);
+    await expect(updateTaskPromise).rejects.toThrow(/User access denied/i);
   });
 
   it("should fail if the task category belongs to a different workspace", async () => {

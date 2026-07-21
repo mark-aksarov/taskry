@@ -1,3 +1,4 @@
+import { Project } from "@/generated/prisma/browser";
 import { ProjectStatus } from "@/generated/prisma/enums";
 
 export interface ProjectSummaryDTO {
@@ -105,5 +106,28 @@ export interface ProjectListItemDTO {
   tasks: {
     total: number;
     completed: number;
+  };
+}
+
+export function mapToProjectDTO(
+  position: Pick<
+    Project,
+    | "id"
+    | "title"
+    | "description"
+    | "deadline"
+    | "status"
+    | "categoryId"
+    | "customerId"
+  >,
+): ProjectDTO {
+  return {
+    id: position.id,
+    title: position.title,
+    description: position.description ?? undefined,
+    deadline: position.deadline.toISOString(),
+    status: position.status,
+    categoryId: position.categoryId ?? undefined,
+    customerId: position.customerId ?? undefined,
   };
 }

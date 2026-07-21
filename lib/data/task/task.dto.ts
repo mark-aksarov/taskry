@@ -1,3 +1,4 @@
+import { Task } from "@/generated/prisma/browser";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
 export type TaskSummaryDTO = {
@@ -100,4 +101,29 @@ export interface TaskListItemDTO {
     done: number;
   };
   commentsCount: number;
+}
+
+export function mapToTaskDTO(
+  task: Pick<
+    Task,
+    | "id"
+    | "title"
+    | "description"
+    | "deadline"
+    | "status"
+    | "projectId"
+    | "categoryId"
+    | "assigneeId"
+  >,
+): TaskDTO {
+  return {
+    id: task.id,
+    title: task.title,
+    description: task.description ?? undefined,
+    deadline: task.deadline.toISOString(),
+    status: task.status,
+    projectId: task.projectId ?? undefined,
+    categoryId: task.categoryId ?? undefined,
+    assigneeId: task.assigneeId ?? undefined,
+  };
 }

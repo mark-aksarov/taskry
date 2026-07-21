@@ -1,7 +1,7 @@
 import "server-only";
 
 import {
-  ProjectCategoryDTO,
+  mapToProjectCategoryDTO,
   CreateProjectCategoryInputDTO,
   UpdateProjectCategoryInputDTO,
 } from "./projectCategory.dto";
@@ -9,9 +9,9 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
+import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
-import { PROJECT_CATEGORY_MAX_COUNT } from "../constants";
-import { AccessDeniedError, LimitExceededError } from "../utils/error";
+import { validateProjectCategoryLimit } from "../utils/validation";
 
 export const getProjectCategoryCount = cache(async () => {
   // Authorization
@@ -22,68 +22,23 @@ export const getProjectCategoryCount = cache(async () => {
   return prisma.projectCategory.count({ where: { workspaceId } });
 });
 
-export const getProjectCategories = cache(
-  async (): Promise<ProjectCategoryDTO[]> => {
-    // Authorization
-    const {
-      user: { workspaceId },
-    } = await requireSession();
-
-    // Get project categories
-    const projectCategories = await prisma.projectCategory.findMany({
-      where: { workspaceId },
-      select: { id: true, name: true },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-
-    return projectCategories.map((p) => {
-      return {
-        id: p.id,
-        name: p.name,
-      };
-    });
-  },
-);
-
-export const createProjectCategory = async (
-  input: CreateProjectCategoryInputDTO,
-) => {
+export const getProjectCategories = cache(async () => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
+    user: { workspaceId },
   } = await requireSession();
 
-  // ACL
-  const permission = await auth.api.userHasPermission({
-    body: {
-      userId: userId,
-      permission: {
-        projectCategory: ["create"],
-      },
+  // Get project categories
+  const projectCategories = await prisma.projectCategory.findMany({
+    where: { workspaceId },
+    select: { id: true, name: true },
+    orderBy: {
+      createdAt: "desc",
     },
   });
 
-  if (!permission.success) {
-    throw new AccessDeniedError(
-      "You do not have permission to create project categories.",
-    );
-  }
-
-  // Validate limit
-  await validateProjectCategoryLimit(workspaceId);
-
-  // Create project category
-  const projectCategory = await prisma.projectCategory.create({
-    data: {
-      name: input.name,
-      workspaceId,
-    },
-  });
-
-  return projectCategory;
-};
+  return projectCategories.map(mapToProjectCategoryDTO);
+});
 
 export const createProjectCategories = async (
   input: CreateProjectCategoryInputDTO[],
@@ -93,7 +48,7 @@ export const createProjectCategories = async (
     user: { id: userId, workspaceId },
   } = await requireSession();
 
-  // ACL
+  // Check permission
   const permission = await auth.api.userHasPermission({
     body: {
       userId,
@@ -113,14 +68,14 @@ export const createProjectCategories = async (
   await validateProjectCategoryLimit(workspaceId, input.length);
 
   // Create project categories
-  const projectCategories = await prisma.projectCategory.createMany({
+  const projectCategories = await prisma.projectCategory.createManyAndReturn({
     data: input.map((category) => ({
       name: category.name,
       workspaceId,
     })),
   });
 
-  return projectCategories;
+  return projectCategories.map(mapToProjectCategoryDTO);
 };
 
 export const updateProjectCategory = async (
@@ -131,7 +86,7 @@ export const updateProjectCategory = async (
     user: { id: userId, workspaceId },
   } = await requireSession();
 
-  // ACL
+  // Check permission
   const permission = await auth.api.userHasPermission({
     body: {
       userId: userId,
@@ -158,7 +113,7 @@ export const updateProjectCategory = async (
     },
   });
 
-  return updatedProjectCategory;
+  return mapToProjectCategoryDTO(updatedProjectCategory);
 };
 
 export const deleteProjectCategories = async (ids: number[]) => {
@@ -167,7 +122,7 @@ export const deleteProjectCategories = async (ids: number[]) => {
     user: { id: userId, workspaceId },
   } = await requireSession();
 
-  // ACL
+  // Check permission
   const permission = await auth.api.userHasPermission({
     body: {
       userId: userId,
@@ -184,34 +139,12 @@ export const deleteProjectCategories = async (ids: number[]) => {
   }
 
   // Bulk delete project categories within the workspace
-  const deletedProjectCategories = await prisma.projectCategory.deleteMany({
+  const result = await prisma.projectCategory.deleteMany({
     where: {
       workspaceId,
       id: { in: ids },
     },
   });
 
-  return deletedProjectCategories;
+  return result;
 };
-
-/**
- * HELPERS
- */
-
-// Validate that project category limit has not been reached
-async function validateProjectCategoryLimit(
-  workspaceId: number,
-  newCategoriesCount = 1,
-) {
-  const existingCount = await prisma.projectCategory.count({
-    where: {
-      workspaceId,
-    },
-  });
-
-  if (existingCount + newCategoriesCount > PROJECT_CATEGORY_MAX_COUNT) {
-    throw new LimitExceededError(
-      `You cannot create more than ${PROJECT_CATEGORY_MAX_COUNT} project categories.`,
-    );
-  }
-}

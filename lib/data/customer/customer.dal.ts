@@ -1,14 +1,9 @@
 import "server-only";
 
 import {
-  NotFoundError,
-  AccessDeniedError,
-  LimitExceededError,
-} from "../utils/error";
-
-import {
   CustomerDTO,
   CustomerListDTO,
+  mapToCustomerDTO,
   CustomerDetailDTO,
   CustomerSearchDTO,
   CustomerSummaryDTO,
@@ -20,10 +15,12 @@ import {
 import { cache } from "react";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
-import { CUSTOMER_MAX_COUNT } from "../constants";
+import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
+import { uniqueDefinedIds } from "../utils/uniqueDefinedIds";
 import { CustomerFilters, CustomerSortField } from "@/lib/types";
 import { Prisma, ProjectStatus } from "@/generated/prisma/client";
+import { validateCompanies, validateCustomerLimit } from "../utils/validation";
 
 export const getCustomerDetail = cache(
   async (id: number): Promise<CustomerDetailDTO | null> => {
@@ -57,7 +54,7 @@ export const getCustomerDetail = cache(
       return null;
     }
 
-    //Map to DTO
+    //Map to CustomerDetailDTO
     return {
       id: customer.id,
       fullName: customer.fullName,
@@ -98,17 +95,7 @@ export const getCustomer = cache(
       return null;
     }
 
-    //Map to DTO
-    return {
-      id: customer.id,
-      fullName: customer.fullName,
-      email: customer.email,
-      phoneNumber: customer.phoneNumber ?? undefined,
-      imageUrl: customer.imageUrl ?? undefined,
-      publicLink: customer.publicLink ?? undefined,
-      bio: customer.bio ?? undefined,
-      companyId: customer.companyId ?? undefined,
-    };
+    return mapToCustomerDTO(customer);
   },
 );
 
@@ -131,6 +118,7 @@ export const getCustomerSummary = cache(
       return null;
     }
 
+    //Map to CustomerSummaryDTO
     return {
       id: customer.id,
       fullName: customer.fullName,
@@ -156,7 +144,7 @@ export const getCustomerSummaries = cache(
       },
     });
 
-    //Map to DTO
+    //Map to CustomerSummaryDTOs
     return customers.map((customer) => ({
       id: customer.id,
       fullName: customer.fullName,
@@ -187,16 +175,7 @@ export const getCustomers = cache(async (): Promise<CustomerDTO[]> => {
     },
   });
 
-  return customers.map((customer) => ({
-    id: customer.id,
-    fullName: customer.fullName,
-    email: customer.email,
-    phoneNumber: customer.phoneNumber ?? undefined,
-    imageUrl: customer.imageUrl ?? undefined,
-    publicLink: customer.publicLink ?? undefined,
-    bio: customer.bio ?? undefined,
-    companyId: customer.companyId ?? undefined,
-  }));
+  return customers.map(mapToCustomerDTO);
 });
 
 export const searchCustomers = cache(
@@ -236,7 +215,7 @@ export const searchCustomers = cache(
       prisma.customer.count({ where }),
     ]);
 
-    //Map to DTO
+    //Map to CustomerSearchDTO
     return {
       items: items.map((c) => ({
         id: c.id,
@@ -314,7 +293,7 @@ export const getCustomerList = cache(
       prisma.customer.count({ where }),
     ]);
 
-    //Map to DTO
+    //Map to CustomerListDTO
     return {
       items: items.map((customer) => ({
         id: customer.id,
@@ -347,7 +326,7 @@ export const deleteCustomers = async (ids: number[]) => {
     user: { id: userId, workspaceId },
   } = await requireSession();
 
-  // ACL
+  // Check permissions
   const permission = await auth.api.userHasPermission({
     body: {
       userId: userId,
@@ -364,14 +343,14 @@ export const deleteCustomers = async (ids: number[]) => {
   }
 
   // Bulk delete customers within the workspace
-  const deletedCustomers = await prisma.customer.deleteMany({
+  const result = await prisma.customer.deleteMany({
     where: {
       workspaceId,
       id: { in: ids },
     },
   });
 
-  return deletedCustomers;
+  return result;
 };
 
 export const createCustomers = async (input: CreateCustomerInputDTO[]) => {
@@ -380,7 +359,7 @@ export const createCustomers = async (input: CreateCustomerInputDTO[]) => {
     user: { id: userId, workspaceId },
   } = await requireSession();
 
-  // ACL
+  // Check permissions
   const permission = await auth.api.userHasPermission({
     body: {
       userId: userId,
@@ -400,16 +379,16 @@ export const createCustomers = async (input: CreateCustomerInputDTO[]) => {
   await validateCustomerLimit(workspaceId, input.length);
 
   // Validate companies
-  const companyIds = input
-    .map((company) => company.companyId)
-    .filter((id): id is number => id !== undefined);
+  const companyIds = uniqueDefinedIds(
+    input.map((customer) => customer.companyId),
+  );
 
   if (companyIds.length > 0) {
     await validateCompanies(workspaceId, companyIds);
   }
 
-  // Create customer
-  const customer = await prisma.customer.createManyAndReturn({
+  // Create customers
+  const customers = await prisma.customer.createManyAndReturn({
     data: input.map((customer) => ({
       fullName: customer.fullName,
       bio: customer.bio,
@@ -422,7 +401,7 @@ export const createCustomers = async (input: CreateCustomerInputDTO[]) => {
     })),
   });
 
-  return customer;
+  return customers.map(mapToCustomerDTO);
 };
 
 export const updateCustomer = async (input: UpdateCustomerInputDTO) => {
@@ -431,7 +410,7 @@ export const updateCustomer = async (input: UpdateCustomerInputDTO) => {
     user: { id: userId, workspaceId },
   } = await requireSession();
 
-  // ACL
+  // Check permissions
   const permission = await auth.api.userHasPermission({
     body: {
       userId: userId,
@@ -468,7 +447,7 @@ export const updateCustomer = async (input: UpdateCustomerInputDTO) => {
     },
   });
 
-  return updatedCustomer;
+  return mapToCustomerDTO(updatedCustomer);
 };
 
 export const updateCustomerImageUrl = async (
@@ -479,7 +458,7 @@ export const updateCustomerImageUrl = async (
     user: { id: userId, workspaceId },
   } = await requireSession();
 
-  // ACL
+  // Check permissions
   const permission = await auth.api.userHasPermission({
     body: {
       userId: userId,
@@ -506,57 +485,12 @@ export const updateCustomerImageUrl = async (
     },
   });
 
-  return updatedCustomer;
+  return mapToCustomerDTO(updatedCustomer);
 };
 
 /**
  * HELPERS
  */
-
-// Validate that company exists and belongs to the workspace
-async function validateCompanies(workspaceId: number, companyIds: number[]) {
-  const companies = await prisma.company.findMany({
-    where: {
-      id: {
-        in: companyIds,
-      },
-    },
-    select: {
-      id: true,
-      workspaceId: true,
-    },
-  });
-
-  if (companies.length !== companyIds.length) {
-    throw new NotFoundError("Company not found");
-  }
-
-  const hasAccessDenied = companies.some(
-    (category) => category.workspaceId !== workspaceId,
-  );
-
-  if (hasAccessDenied) {
-    throw new AccessDeniedError("Company access denied");
-  }
-}
-
-// Validate that customer limit has not been reached
-async function validateCustomerLimit(
-  workspaceId: number,
-  newCustomersCount: number,
-) {
-  const existingCount = await prisma.customer.count({
-    where: {
-      workspaceId,
-    },
-  });
-
-  if (existingCount + newCustomersCount > CUSTOMER_MAX_COUNT) {
-    throw new LimitExceededError(
-      `You cannot create more than ${CUSTOMER_MAX_COUNT} customers.`,
-    );
-  }
-}
 
 export function buildCustomerWhereClause(
   workspaceId: number,

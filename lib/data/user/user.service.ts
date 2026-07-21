@@ -1,17 +1,17 @@
 import {
   UpdateUserInputDTO,
   CreateUserInputDTO,
+  ResetPasswordInputDTO,
   ChangePasswordInputDTO,
   UpdateUserImageUrlInputDTO,
-  ResetPasswordInputDTO,
 } from "./user.dto";
 
 import crypto from "crypto";
 import { auth } from "@/lib/auth";
-import prisma from "@/lib/prisma";
 import { headers } from "next/headers";
+import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
-import { AccessDeniedError, NotFoundError } from "../utils/error";
+import { validatePositions, validateUsers } from "../utils/validation";
 
 export const createUser = async (input: CreateUserInputDTO) => {
   // Authorization
@@ -79,11 +79,11 @@ export const updateUser = async (input: UpdateUserInputDTO) => {
   }
 
   // Validate updated user. Since we use the better-auth API, we must check workspace here.
-  await validateUser(workspaceId, input.id);
+  await validateUsers(workspaceId, [input.id]);
 
   // Validate position
   if (input.positionId) {
-    await validatePosition(workspaceId, input.positionId);
+    await validatePositions(workspaceId, [input.positionId]);
   }
 
   // Use better auth admin api to update user
@@ -127,7 +127,7 @@ export const updateUserImageUrl = async (input: UpdateUserImageUrlInputDTO) => {
   }
 
   // Validate updated user. Since we use the better-auth API, we must check workspace here.
-  await validateUser(workspaceId, input.id);
+  await validateUsers(workspaceId, [input.id]);
 
   // Use better auth admin api to update user
   const updatedUser = await auth.api.adminUpdateUser({
@@ -166,7 +166,7 @@ export const resetPassword = async (input: ResetPasswordInputDTO) => {
   }
 
   // Validate updated user. Since we use the better-auth API, we need to check users in the database directly.
-  await validateUser(workspaceId, input.id);
+  await validateUsers(workspaceId, [input.id]);
 
   // Use better auth admin api to update user
   const updatedUser = await auth.api.setUserPassword({
@@ -235,7 +235,7 @@ export const deleteUser = async (deletedUserId: string) => {
   }
 
   // Validate deleted user. Since we use the better-auth API, we need to check users in the database directly.
-  await validateUser(workspaceId, deletedUserId);
+  await validateUsers(workspaceId, [deletedUserId]);
 
   // Use better auth admin api to delete user
   const deletedUser = await auth.api.removeUser({
@@ -247,41 +247,3 @@ export const deleteUser = async (deletedUserId: string) => {
 
   return deletedUser;
 };
-
-/**
- * HELPERS
- */
-
-// Validate that position exists and belongs to the workspace
-async function validatePosition(workspaceId: number, positionId: number) {
-  const position = await prisma.position.findUnique({
-    where: { id: positionId },
-    select: { workspaceId: true },
-  });
-
-  if (!position) {
-    throw new NotFoundError("Position not found", "positionNotFound");
-  }
-
-  if (position.workspaceId !== workspaceId) {
-    throw new AccessDeniedError("Position access denied");
-  }
-}
-
-// Validate that user exists and belongs to the workspace
-async function validateUser(workspaceId: number, userId: string) {
-  const user = await prisma.user.findFirst({
-    where: { id: userId },
-    select: {
-      workspaceId: true,
-    },
-  });
-
-  if (!user) {
-    throw new NotFoundError("User not found", "userNotFound");
-  }
-
-  if (user.workspaceId !== workspaceId) {
-    throw new AccessDeniedError("User access denied");
-  }
-}

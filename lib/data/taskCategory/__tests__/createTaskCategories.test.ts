@@ -38,20 +38,14 @@ describe("createTaskCategories", () => {
     const result = await createTaskCategories(input);
 
     expect(result).toBeDefined();
-    expect(result.count).toBe(2);
-
-    const taskCategories = await prisma.taskCategory.findMany({
-      where: {
-        workspaceId: 1,
+    expect(result).toMatchObject([
+      {
+        name: "Task Category 1",
       },
-      orderBy: {
-        id: "asc",
+      {
+        name: "Task Category 2",
       },
-    });
-
-    expect(taskCategories).toHaveLength(2);
-    expect(taskCategories[0].name).toBe("Task Category 1");
-    expect(taskCategories[1].name).toBe("Task Category 2");
+    ]);
   });
 
   it("should fail when creating task categories exceeds the limit", async () => {
@@ -109,8 +103,7 @@ describe("createTaskCategories", () => {
 
       const result = await createTaskCategories(createInput);
 
-      expect(result).toBeDefined();
-      expect(result.count).toBe(2);
+      expect(result.length).toBe(2);
     });
 
     it("should succeed for user", async () => {
@@ -118,8 +111,7 @@ describe("createTaskCategories", () => {
 
       const result = await createTaskCategories(createInput);
 
-      expect(result).toBeDefined();
-      expect(result.count).toBe(2);
+      expect(result.length).toBe(2);
     });
 
     it("should fail for guest", async () => {

@@ -65,9 +65,24 @@ describe("createTasks", () => {
     ]);
 
     expect(result).toHaveLength(2);
-    expect(result[0].workspaceId).toBe(1);
-    expect(result[0].creatorId).toBe("user-1");
-    expect(result[0].projectId).toBe(1);
+    expect(result).toMatchObject([
+      {
+        title: "Task 1",
+        status: TaskStatus.active,
+        projectId: 1,
+        categoryId: 1,
+        assigneeId: "user-2",
+        deadline: new Date("2025-12-31").toISOString(),
+      },
+      {
+        title: "Task 2",
+        status: TaskStatus.active,
+        projectId: 1,
+        categoryId: 1,
+        assigneeId: "user-2",
+        deadline: new Date("2025-12-31").toISOString(),
+      },
+    ]);
   });
 
   it("should fail if project not found", async () => {
@@ -99,7 +114,7 @@ describe("createTasks", () => {
     ]);
 
     await expect(createTasksPromise).rejects.toThrow(NotFoundError);
-    await expect(createTasksPromise).rejects.toThrow(/Assignee not found/i);
+    await expect(createTasksPromise).rejects.toThrow(/User not found/i);
   });
 
   it("should fail if task category not found", async () => {
@@ -149,7 +164,7 @@ describe("createTasks", () => {
     ]);
 
     await expect(createTasksPromise).rejects.toThrow(AccessDeniedError);
-    await expect(createTasksPromise).rejects.toThrow(/Assignee access denied/i);
+    await expect(createTasksPromise).rejects.toThrow(/User access denied/i);
   });
 
   it("should fail if task category belongs to another workspace", async () => {
@@ -181,8 +196,8 @@ describe("createTasks", () => {
     ]);
 
     expect(result[0].id).toBeDefined();
-    expect(result[0].assigneeId).toBeNull();
-    expect(result[0].categoryId).toBeNull();
+    expect(result[0].assigneeId).toBeUndefined();
+    expect(result[0].categoryId).toBeUndefined();
   });
 
   it("should fail if task limit has been reached", async () => {

@@ -1,14 +1,10 @@
 import "server-only";
 
 import {
-  NotFoundError,
-  ValidationError,
-  AccessDeniedError,
-} from "../utils/error";
-
-import {
+  CommentDTO,
   CommentListItemDTO,
   CreateCommentInputDTO,
+  toCommentDTO,
   UpdateCommentInputDTO,
 } from "./comment.dto";
 
@@ -16,6 +12,8 @@ import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { requireSession } from "../utils/requireSession";
+import { ValidationError, AccessDeniedError } from "../utils/error";
+import { validateProjects, validateTasks } from "../utils/validation";
 
 export const getCommentList = cache(
   async ({
@@ -32,12 +30,12 @@ export const getCommentList = cache(
 
     // Validate task
     if (taskId) {
-      await validateTask(workspaceId, taskId);
+      await validateTasks(workspaceId, [taskId]);
     }
 
     // Validate project
     if (projectId) {
-      await validateProject(workspaceId, projectId);
+      await validateProjects(workspaceId, [projectId]);
     }
 
     // Get comments
@@ -90,7 +88,7 @@ export const createComment = async (input: CreateCommentInputDTO) => {
     user: { id: senderId, workspaceId },
   } = await requireSession();
 
-  // ACL
+  // Check permission
   const permission = await auth.api.userHasPermission({
     body: {
       userId: senderId,
@@ -115,12 +113,12 @@ export const createComment = async (input: CreateCommentInputDTO) => {
 
   // Validate task
   if (input.taskId) {
-    await validateTask(workspaceId, input.taskId);
+    await validateTasks(workspaceId, [input.taskId]);
   }
 
   // Validate project
   if (input.projectId) {
-    await validateProject(workspaceId, input.projectId);
+    await validateProjects(workspaceId, [input.projectId]);
   }
 
   // Create comment
@@ -134,7 +132,7 @@ export const createComment = async (input: CreateCommentInputDTO) => {
     },
   });
 
-  return newComment;
+  return toCommentDTO(newComment);
 };
 
 export const deleteComment = async (commentId: number) => {
@@ -143,7 +141,7 @@ export const deleteComment = async (commentId: number) => {
     user: { id: senderId, role, workspaceId },
   } = await requireSession();
 
-  // ACL
+  // Check permission
   const permission = await auth.api.userHasPermission({
     body: {
       userId: senderId,
@@ -177,10 +175,11 @@ export const deleteComment = async (commentId: number) => {
       task: {
         select: { title: true },
       },
+      senderId: true,
     },
   });
 
-  return deletedComment;
+  return toCommentDTO(deletedComment);
 };
 
 export const updateComment = async (input: UpdateCommentInputDTO) => {
@@ -189,7 +188,7 @@ export const updateComment = async (input: UpdateCommentInputDTO) => {
     user: { id: senderId, role, workspaceId },
   } = await requireSession();
 
-  // ACL
+  // Check permission
   const permission = await auth.api.userHasPermission({
     body: {
       userId: senderId,
@@ -206,7 +205,7 @@ export const updateComment = async (input: UpdateCommentInputDTO) => {
   }
 
   // Update comment
-  const comment = await prisma.comment.update({
+  const updatedComment = await prisma.comment.update({
     where: {
       workspaceId,
       ...(role === "user" ? { senderId } : {}),
@@ -225,45 +224,5 @@ export const updateComment = async (input: UpdateCommentInputDTO) => {
     },
   });
 
-  return comment;
+  return toCommentDTO(updatedComment);
 };
-
-/**
- * HELPERS
- */
-
-// Validate that task exists and belongs to the workspace
-async function validateTask(workspaceId: number, taskId: number) {
-  const task = await prisma.task.findUnique({
-    where: {
-      id: taskId,
-    },
-    select: { title: true, workspaceId: true },
-  });
-
-  if (!task) {
-    throw new NotFoundError("Task not found", "taskNotFound");
-  }
-
-  if (task.workspaceId !== workspaceId) {
-    throw new AccessDeniedError("Task access denied");
-  }
-}
-
-// Validate that project exists and belongs to the workspace
-async function validateProject(workspaceId: number, projectId: number) {
-  const project = await prisma.project.findUnique({
-    where: {
-      id: projectId,
-    },
-    select: { title: true, workspaceId: true },
-  });
-
-  if (!project) {
-    throw new NotFoundError("Project not found", "projectNotFound");
-  }
-
-  if (project.workspaceId !== workspaceId) {
-    throw new AccessDeniedError("Project access denied");
-  }
-}

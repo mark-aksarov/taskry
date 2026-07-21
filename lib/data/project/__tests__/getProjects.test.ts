@@ -9,7 +9,6 @@ import {
   projectCategories,
 } from "@/prisma/seed/test-data";
 
-import prisma from "@/lib/prisma";
 import { seed } from "@/prisma/test-seed";
 import { getProjects } from "../project.dal";
 import { it, expect, describe, beforeAll } from "vitest";

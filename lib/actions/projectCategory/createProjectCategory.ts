@@ -7,7 +7,7 @@ import { LimitExceededError } from "@/lib/data/utils/error";
 import { PROJECT_CATEGORY_MAX_COUNT } from "@/lib/data/constants";
 import { projectCategoryName } from "@/lib/schemas/projectCategory";
 import { requireActionSession } from "@/lib/utils/requireActionSession";
-import { createProjectCategory as createProjectCategoryQuery } from "@/lib/data/projectCategory/projectCategory.dal";
+import { createProjectCategories as createProjectCategoriesQuery } from "@/lib/data/projectCategory/projectCategory.dal";
 
 const schema = z.object({ name: projectCategoryName });
 
@@ -24,7 +24,7 @@ export async function createProjectCategory(
       name: formData.get("name"),
     });
 
-    await createProjectCategoryQuery(parsedData);
+    await createProjectCategoriesQuery([parsedData]);
 
     return {
       status: "success",

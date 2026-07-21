@@ -2,16 +2,17 @@ import "server-only";
 
 import {
   CompanyDTO,
-  CreateCompanyInputDTO,
+  mapToCompanyDTO,
   UpdateCompanyInputDTO,
+  CreateCompanyInputDTO,
 } from "./company.dto";
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import { COMPANY_MAX_COUNT } from "../constants";
+import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
-import { AccessDeniedError, LimitExceededError } from "../utils/error";
+import { validateCompanyLimit } from "../utils/validation";
 
 export const getCompanyCount = cache(async () => {
   // Authorization
@@ -22,7 +23,7 @@ export const getCompanyCount = cache(async () => {
   return prisma.company.count({ where: { workspaceId } });
 });
 
-export const getCompanies = cache(async (): Promise<CompanyDTO[]> => {
+export const getCompanies = cache(async () => {
   // Authorization
   const {
     user: { workspaceId },
@@ -42,10 +43,12 @@ export const getCompanies = cache(async (): Promise<CompanyDTO[]> => {
     },
   });
 
-  return companies;
+  return companies.map(mapToCompanyDTO);
 });
 
-export const updateCompany = async (input: UpdateCompanyInputDTO) => {
+export const updateCompany = async (
+  input: UpdateCompanyInputDTO,
+): Promise<CompanyDTO> => {
   // Authorization
   const {
     user: { id: userId, workspaceId },
@@ -78,43 +81,7 @@ export const updateCompany = async (input: UpdateCompanyInputDTO) => {
     },
   });
 
-  return updatedCompany;
-};
-
-export const createCompany = async (input: CreateCompanyInputDTO) => {
-  // Authorization
-  const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
-
-  // ACL
-  const permission = await auth.api.userHasPermission({
-    body: {
-      userId: userId,
-      permission: {
-        company: ["create"],
-      },
-    },
-  });
-
-  if (!permission.success) {
-    throw new AccessDeniedError(
-      "You do not have permission to create companies.",
-    );
-  }
-
-  // Validate limit
-  await validateCompanyLimit(workspaceId);
-
-  // Create company
-  const company = await prisma.company.create({
-    data: {
-      name: input.name,
-      workspaceId,
-    },
-  });
-
-  return company;
+  return mapToCompanyDTO(updatedCompany);
 };
 
 export const createCompanies = async (input: CreateCompanyInputDTO[]) => {
@@ -143,14 +110,14 @@ export const createCompanies = async (input: CreateCompanyInputDTO[]) => {
   await validateCompanyLimit(workspaceId, input.length);
 
   // Create companies
-  const companies = await prisma.company.createMany({
+  const companies = await prisma.company.createManyAndReturn({
     data: input.map((company) => ({
       name: company.name,
       workspaceId,
     })),
   });
 
-  return companies;
+  return companies.map(mapToCompanyDTO);
 };
 
 export const deleteCompanies = async (ids: number[]) => {
@@ -176,34 +143,12 @@ export const deleteCompanies = async (ids: number[]) => {
   }
 
   // Bulk delete companies within the workspace
-  const deletedCompanies = await prisma.company.deleteMany({
+  const result = await prisma.company.deleteMany({
     where: {
       workspaceId,
       id: { in: ids },
     },
   });
 
-  return deletedCompanies;
+  return result;
 };
-
-/**
- * HELPERS
- */
-
-// Validate that company limit has not been reached
-async function validateCompanyLimit(
-  workspaceId: number,
-  newCompaniesCount = 1,
-) {
-  const existingCount = await prisma.company.count({
-    where: {
-      workspaceId,
-    },
-  });
-
-  if (existingCount + newCompaniesCount > COMPANY_MAX_COUNT) {
-    throw new LimitExceededError(
-      `You cannot create more than ${COMPANY_MAX_COUNT} companies.`,
-    );
-  }
-}

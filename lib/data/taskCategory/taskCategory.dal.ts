@@ -4,14 +4,15 @@ import {
   TaskCategoryDTO,
   CreateTaskCategoryInputDTO,
   UpdateTaskCategoryInputDTO,
+  mapToTaskCategoryDTO,
 } from "./taskCategory.dto";
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import { AccessDeniedError, LimitExceededError } from "../utils/error";
+import { AccessDeniedError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
-import { TASK_CATEGORY_MAX_COUNT } from "../constants";
+import { validateTaskCategoryLimit } from "../utils/validation";
 
 export const getTaskCategoryCount = cache(async () => {
   // Authorization
@@ -37,42 +38,6 @@ export const getTaskCategories = cache(async (): Promise<TaskCategoryDTO[]> => {
   });
 });
 
-export const createTaskCategory = async (input: CreateTaskCategoryInputDTO) => {
-  // Authorization
-  const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
-
-  // ACL
-  const permission = await auth.api.userHasPermission({
-    body: {
-      userId: userId,
-      permission: {
-        taskCategory: ["create"],
-      },
-    },
-  });
-
-  if (!permission.success) {
-    throw new AccessDeniedError(
-      "You do not have permission to create task categories.",
-    );
-  }
-
-  // Validate limit
-  await validateTaskCategoryLimit(workspaceId);
-
-  // Create task category
-  const taskCategory = await prisma.taskCategory.create({
-    data: {
-      name: input.name,
-      workspaceId,
-    },
-  });
-
-  return taskCategory;
-};
-
 export const createTaskCategories = async (
   input: CreateTaskCategoryInputDTO[],
 ) => {
@@ -81,7 +46,7 @@ export const createTaskCategories = async (
     user: { id: userId, workspaceId },
   } = await requireSession();
 
-  // ACL
+  // Check permission
   const permission = await auth.api.userHasPermission({
     body: {
       userId,
@@ -101,14 +66,14 @@ export const createTaskCategories = async (
   await validateTaskCategoryLimit(workspaceId, input.length);
 
   // Create task categories
-  const taskCategories = await prisma.taskCategory.createMany({
+  const taskCategories = await prisma.taskCategory.createManyAndReturn({
     data: input.map((category) => ({
       name: category.name,
       workspaceId,
     })),
   });
 
-  return taskCategories;
+  return taskCategories.map(mapToTaskCategoryDTO);
 };
 
 export const updateTaskCategory = async (input: UpdateTaskCategoryInputDTO) => {
@@ -117,7 +82,7 @@ export const updateTaskCategory = async (input: UpdateTaskCategoryInputDTO) => {
     user: { id: userId, workspaceId },
   } = await requireSession();
 
-  // ACL
+  // Check permission
   const permission = await auth.api.userHasPermission({
     body: {
       userId: userId,
@@ -144,7 +109,7 @@ export const updateTaskCategory = async (input: UpdateTaskCategoryInputDTO) => {
     },
   });
 
-  return updatedTaskCategory;
+  return mapToTaskCategoryDTO(updatedTaskCategory);
 };
 
 export const deleteTaskCategories = async (ids: number[]) => {
@@ -153,7 +118,7 @@ export const deleteTaskCategories = async (ids: number[]) => {
     user: { id: userId, workspaceId },
   } = await requireSession();
 
-  // ACL
+  // Check permission
   const permission = await auth.api.userHasPermission({
     body: {
       userId: userId,
@@ -170,34 +135,12 @@ export const deleteTaskCategories = async (ids: number[]) => {
   }
 
   // Bulk delete task categories within the workspace
-  const deletedTaskCategories = await prisma.taskCategory.deleteMany({
+  const result = await prisma.taskCategory.deleteMany({
     where: {
       workspaceId,
       id: { in: ids },
     },
   });
 
-  return deletedTaskCategories;
+  return result;
 };
-
-/**
- * HELPERS
- */
-
-// Validate that task category limit has not been reached
-async function validateTaskCategoryLimit(
-  workspaceId: number,
-  newCategoriesCount = 1,
-) {
-  const existingCount = await prisma.taskCategory.count({
-    where: {
-      workspaceId,
-    },
-  });
-
-  if (existingCount + newCategoriesCount > TASK_CATEGORY_MAX_COUNT) {
-    throw new LimitExceededError(
-      `You cannot create more than ${TASK_CATEGORY_MAX_COUNT} task categories.`,
-    );
-  }
-}

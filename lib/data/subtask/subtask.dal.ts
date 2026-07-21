@@ -1,8 +1,14 @@
+import {
+  mapToSubtaskDTO,
+  CreateSubtaskInputDTO,
+  UpdateSubtaskInputDTO,
+} from "./subtask.dto";
+
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
+import { AccessDeniedError } from "../utils/error";
+import { validateTasks } from "../utils/validation";
 import { requireSession } from "../utils/requireSession";
-import { AccessDeniedError, NotFoundError } from "../utils/error";
-import { CreateSubtaskInputDTO, UpdateSubtaskInputDTO } from "./subtask.dto";
 
 export const createSubtask = async (input: CreateSubtaskInputDTO) => {
   // Authorization
@@ -10,7 +16,7 @@ export const createSubtask = async (input: CreateSubtaskInputDTO) => {
     user: { id: userId, workspaceId },
   } = await requireSession();
 
-  // ACL
+  // Check permission
   const permission = await auth.api.userHasPermission({
     body: {
       userId,
@@ -27,7 +33,7 @@ export const createSubtask = async (input: CreateSubtaskInputDTO) => {
   }
 
   // Validate task
-  await validateTask(workspaceId, input.taskId);
+  await validateTasks(workspaceId, [input.taskId]);
 
   // Create subtask
   const subtask = await prisma.subtask.create({
@@ -50,7 +56,7 @@ export const createSubtask = async (input: CreateSubtaskInputDTO) => {
     },
   });
 
-  return subtask;
+  return mapToSubtaskDTO(subtask);
 };
 
 export const updateSubtask = async (input: UpdateSubtaskInputDTO) => {
@@ -98,7 +104,8 @@ export const updateSubtask = async (input: UpdateSubtaskInputDTO) => {
       },
     },
   });
-  return updatedSubtask;
+
+  return mapToSubtaskDTO(updatedSubtask);
 };
 
 export const deleteSubtask = async (id: number) => {
@@ -107,7 +114,7 @@ export const deleteSubtask = async (id: number) => {
     user: { id: userId, workspaceId },
   } = await requireSession();
 
-  // ACL
+  // Check permission
   const permission = await auth.api.userHasPermission({
     body: {
       userId,
@@ -129,6 +136,7 @@ export const deleteSubtask = async (id: number) => {
       task: { workspaceId },
     },
     select: {
+      id: true,
       text: true,
       isDone: true,
       taskId: true,
@@ -141,25 +149,5 @@ export const deleteSubtask = async (id: number) => {
     },
   });
 
-  return deletedSubtask;
+  return mapToSubtaskDTO(deletedSubtask);
 };
-
-/**
- * HELPERS
- */
-
-// Validate that task exists and belongs to the workspace
-async function validateTask(workspaceId: number, taskId: number) {
-  const task = await prisma.task.findUnique({
-    where: { id: taskId },
-    select: { workspaceId: true },
-  });
-
-  if (!task) {
-    throw new NotFoundError("Task not found");
-  }
-
-  if (task.workspaceId !== workspaceId) {
-    throw new AccessDeniedError("Task access denied");
-  }
-}

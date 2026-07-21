@@ -19,7 +19,7 @@ import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
-describe("deleteCustomers", () => {
+describe("deleteSubtask", () => {
   beforeAll(async () => {
     (requireSession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },

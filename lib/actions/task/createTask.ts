@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server";
 import { createTaskSchema } from "@/lib/schemas/task";
 import { TASK_MAX_COUNT } from "@/lib/data/constants";
 import { LimitExceededError } from "@/lib/data/utils/error";
-import { createTask as createTaskQuery } from "@/lib/data/task/task.dal";
+import { createTasks as createTasksQuery } from "@/lib/data/task/task.dal";
 import { requireActionSession } from "@/lib/utils/requireActionSession";
 
 export async function createTask(formData: FormData): Promise<ActionState> {
@@ -17,7 +17,7 @@ export async function createTask(formData: FormData): Promise<ActionState> {
   try {
     const input = Object.fromEntries(formData.entries());
     const parsedData = createTaskSchema.parse(input);
-    await createTaskQuery(parsedData);
+    await createTasksQuery([parsedData]);
 
     return {
       status: "success",
