@@ -15,7 +15,7 @@ export function GridItemPhoneNumber({ phoneNumber }: GridItemPhoneNumberProps) {
     return (
       <GridItemContact>
         <GridItemContactIconWrapper>
-          <Phone size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          <Phone    />
         </GridItemContactIconWrapper>
         <GridItemContactText>{t("noPhoneNumber")}</GridItemContactText>
       </GridItemContact>
@@ -25,7 +25,7 @@ export function GridItemPhoneNumber({ phoneNumber }: GridItemPhoneNumberProps) {
   return (
     <GridItemContactLink href={`tel:${phoneNumber}`}>
       <GridItemContactIconWrapper>
-        <Phone size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <Phone    />
       </GridItemContactIconWrapper>
       <GridItemContactText>{phoneNumber}</GridItemContactText>
     </GridItemContactLink>

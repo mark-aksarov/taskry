@@ -66,8 +66,8 @@ export const SearchField = ({
         />
         <Search
           size={18}
-          strokeWidth={1.5}
-          absoluteStrokeWidth
+          
+          
           className={icon()}
         />
       </div>

@@ -26,11 +26,11 @@ export function CustomerSortingMenuTrigger({
       renderButton={renderButton}
     >
       <Item textValue={t("byFullName")} key="fullName">
-        <ALargeSmall size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <ALargeSmall    />
         {t("byFullName")}
       </Item>
       <Item textValue={t("byCompany")} key="company">
-        <Building2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <Building2    />
         {t("byCompany")}
       </Item>
     </SortingMenuTrigger>

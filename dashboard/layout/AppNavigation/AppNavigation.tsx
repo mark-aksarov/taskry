@@ -35,7 +35,7 @@ export const AppNavigation = ({ signOut }: AppNavigationProps) => {
         href="/dashboard"
         isActive={pathname === "/dashboard"}
         iconLeft={
-          <LayoutDashboard size={18} strokeWidth={1.5} absoluteStrokeWidth />
+          <LayoutDashboard size={18}   />
         }
         label={t("dashboard")}
       />
@@ -46,7 +46,7 @@ export const AppNavigation = ({ signOut }: AppNavigationProps) => {
           pathname.startsWith("/projects") || pathname === "/project-categories"
         }
         iconLeft={
-          <FolderClosed size={18} strokeWidth={1.5} absoluteStrokeWidth />
+          <FolderClosed size={18}   />
         }
         label={t("projects")}
       />
@@ -57,7 +57,7 @@ export const AppNavigation = ({ signOut }: AppNavigationProps) => {
           pathname.startsWith("/tasks") || pathname === "/task-categories"
         }
         iconLeft={
-          <CalendarCheck2 size={18} strokeWidth={1.5} absoluteStrokeWidth />
+          <CalendarCheck2 size={18}   />
         }
         label={t("tasks")}
       />
@@ -68,7 +68,7 @@ export const AppNavigation = ({ signOut }: AppNavigationProps) => {
           (pathname.startsWith("/team") || pathname === "/positions") &&
           !pathname.startsWith(`/team/${userId}`)
         }
-        iconLeft={<Users size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+        iconLeft={<Users size={18}   />}
         label={t("team")}
       />
 
@@ -77,14 +77,14 @@ export const AppNavigation = ({ signOut }: AppNavigationProps) => {
         isActive={
           pathname.startsWith("/customers") || pathname === "/companies"
         }
-        iconLeft={<Contact size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+        iconLeft={<Contact size={18}   />}
         label={t("customers")}
       />
 
       <NavigationLink
         href={`/team/${userId}`}
         isActive={pathname.startsWith(`/team/${userId}`)}
-        iconLeft={<UserRound size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+        iconLeft={<UserRound size={18}   />}
         label={t("profile")}
       />
 

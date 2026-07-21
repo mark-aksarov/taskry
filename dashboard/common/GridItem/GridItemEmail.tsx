@@ -11,7 +11,7 @@ export function GridItemEmail({ email }: GridItemEmailProps) {
   return (
     <GridItemContactLink href={`mailto:${email}`}>
       <GridItemContactIconWrapper>
-        <Mail size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <Mail    />
       </GridItemContactIconWrapper>
       <GridItemContactText>{email}</GridItemContactText>
     </GridItemContactLink>

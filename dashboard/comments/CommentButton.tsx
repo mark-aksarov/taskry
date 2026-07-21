@@ -6,7 +6,7 @@ export function CommentButton(props: ButtonProps) {
   return (
     <ItemBaseButton
       iconLeft={
-        <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <MessageSquare    />
       }
       {...props}
     />

@@ -98,12 +98,12 @@ export const SubtaskListItemInner = memo(function SubtaskListItemInner({
 
   if (variant === "rich") {
     icon = isDone ? (
-      <CircleCheck size={16} className={iconStyles({ isDone, variant })} />
+      <CircleCheck  className={iconStyles({ isDone, variant })} />
     ) : (
-      <Circle size={16} className={iconStyles({ isDone, variant })} />
+      <Circle  className={iconStyles({ isDone, variant })} />
     );
   } else {
-    icon = <Check size={16} className={iconStyles({ isDone, variant })} />;
+    icon = <Check  className={iconStyles({ isDone, variant })} />;
   }
 
   return (

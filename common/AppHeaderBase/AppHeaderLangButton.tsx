@@ -11,7 +11,7 @@ export const AppHeaderLangButton = () => {
     <Button
       aria-label={t("label")}
       variant="secondary"
-      iconLeft={<Languages size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+      iconLeft={<Languages    />}
       className="rounded-full bg-transparent p-3"
     />
   );

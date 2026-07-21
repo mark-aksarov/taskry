@@ -24,7 +24,7 @@ export function FilterButtonLarge({
       outlined
       isDisabled={isDisabled}
       iconLeft={
-        <SlidersHorizontal size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <SlidersHorizontal    />
       }
       {...props}
     />

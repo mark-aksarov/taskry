@@ -4,6 +4,7 @@ import type { Viewport } from "next";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { SWRProvider } from "./SWRProvider";
+import { LucideProvider } from "lucide-react";
 import { Nunito_Sans } from "next/font/google";
 import { I18nProvider } from "@/ui/I18nProvider";
 import { getTranslations } from "next-intl/server";
@@ -64,9 +65,15 @@ export default async function RootLayout({
             <NextIntlClientProvider>
               <I18nProvider locale={locale}>
                 <RouterProvider>
-                  <ScrollRestoration />
-                  <ToastRegionWrapper />
-                  {children}
+                  <LucideProvider
+                    size={16}
+                    strokeWidth={1.5}
+                    absoluteStrokeWidth
+                  >
+                    <ScrollRestoration />
+                    <ToastRegionWrapper />
+                    {children}
+                  </LucideProvider>
                 </RouterProvider>
               </I18nProvider>
             </NextIntlClientProvider>

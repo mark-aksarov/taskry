@@ -26,19 +26,19 @@ export function ProjectSortingMenuTrigger({
       renderButton={renderButton}
     >
       <Item textValue={t("byCreatedAt")} key="createdAt">
-        <Calendar size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <Calendar    />
         {t("byCreatedAt")}
       </Item>
       <Item textValue={t("byTitle")} key="title">
-        <ALargeSmall size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <ALargeSmall    />
         {t("byTitle")}
       </Item>
       <Item textValue={t("byDeadline")} key="deadline">
-        <Calendar size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <Calendar    />
         {t("byDeadline")}
       </Item>
       <Item textValue={t("byStatus")} key="status">
-        <CircleCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <CircleCheck    />
         {t("byStatus")}
       </Item>
     </SortingMenuTrigger>

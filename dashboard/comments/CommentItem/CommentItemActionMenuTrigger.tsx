@@ -84,10 +84,10 @@ export function CommentItemActionMenuTrigger({
       )}
     >
       <Item textValue={t("edit")} key="edit">
-        <Pencil size={16} /> {t("edit")}
+        <Pencil  /> {t("edit")}
       </Item>
       <Item textValue={t("delete")} key="delete">
-        <Trash size={16} /> {t("delete")}
+        <Trash  /> {t("delete")}
       </Item>
     </ItemBaseActionMenuTrigger>
   );

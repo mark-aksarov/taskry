@@ -25,17 +25,17 @@ type Story = StoryObj<typeof meta>;
 function getItems() {
   const items = [
     <Item textValue="Delete" key="delete">
-      <Trash size={16} /> Delete
+      <Trash  /> Delete
     </Item>,
     <Item textValue="Mark as Pending" key="pending">
-      <CircleEllipsis size={16} /> Mark as Pending
+      <CircleEllipsis  /> Mark as Pending
     </Item>,
     <Item textValue="Mark as Done" key="done">
-      <Check size={16} />
+      <Check  />
       Mark as Done
     </Item>,
     <Item textValue="Mark as In Progress" key="progress">
-      <Clock size={16} />
+      <Clock  />
       Mark as In Progress
     </Item>,
   ];

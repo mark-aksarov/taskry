@@ -42,19 +42,19 @@ export function ProjectManageMenuTrigger({
   return (
     <ManageMenuTrigger renderButton={renderButton} onAction={handleAction}>
       <Item textValue={t("importCSV")} key="import-csv">
-        <FileUp size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <FileUp    />
         {t("importCSV")}
       </Item>
       <Item textValue={t("exportCSV")} key="export-csv">
         {isPending ? (
           <Loader2
-            size={16}
-            strokeWidth={1.5}
-            absoluteStrokeWidth
+            
+            
+            
             className="animate-spin"
           />
         ) : (
-          <Download size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          <Download    />
         )}
         {t("exportCSV")}
       </Item>
@@ -63,7 +63,7 @@ export function ProjectManageMenuTrigger({
         href="/project-categories"
         key="categories"
       >
-        <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <Blocks    />
         {t("categories")}
       </Item>
     </ManageMenuTrigger>

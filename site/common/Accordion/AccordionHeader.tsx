@@ -12,8 +12,8 @@ export function AccordionHeader({ children }: { children: React.ReactNode }) {
         <span className="flex items-center justify-center rounded-lg bg-(--accent) p-1.5 text-white">
           <Plus
             size={22}
-            absoluteStrokeWidth
-            strokeWidth={1.5}
+            
+            
             className={twMerge(
               "transform transition-transform",
               isExpanded ? "rotate-45" : "",

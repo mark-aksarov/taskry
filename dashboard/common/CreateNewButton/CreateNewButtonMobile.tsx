@@ -4,7 +4,7 @@ import { Button, ButtonProps } from "@/ui/Button";
 export function CreateNewButtonMobile(props: ButtonProps) {
   return (
     <Button
-      iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+      iconLeft={<Plus    />}
       variant="secondary"
       outlined
       {...props}

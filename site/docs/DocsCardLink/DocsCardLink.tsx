@@ -41,7 +41,7 @@ export function DocsCardLink({ href, heading, subtext }: DocsCardLinkProps) {
     <Link href={href} className={base}>
       <div className={headerStyles()}>
         <div className={headingStyles()}>{heading}</div>
-        <ArrowRight size={20} absoluteStrokeWidth strokeWidth={1.5} />
+        <ArrowRight size={20}   />
       </div>
       <div className={subtextStyles()}>{subtext}</div>
     </Link>

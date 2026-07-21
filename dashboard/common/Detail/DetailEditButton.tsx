@@ -8,7 +8,9 @@ export function DetailEditButton(props: ButtonProps) {
       className="-my-2 rounded-full disabled:bg-transparent"
       variant="primary"
       size="small"
-      iconLeft={props.isPending ? undefined : <Pencil size={14} />}
+      iconLeft={
+        props.isPending ? undefined : <Pencil size={14} strokeWidth={1.25} />
+      }
     />
   );
 }

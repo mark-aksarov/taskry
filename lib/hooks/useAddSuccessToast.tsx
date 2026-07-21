@@ -12,7 +12,7 @@ export function useAddSuccessToast() {
           color: "green",
           title: message,
           iconLeft: (
-            <CheckCircle2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            <CheckCircle2    />
           ),
         },
         { timeout: 5000 },

@@ -60,12 +60,12 @@ export function CreateUserMenuTrigger({
       >
         {showCreateCreateUserMenuItem ? (
           <Item textValue={t("items.user")} key="user">
-            <Users size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            <Users    />
             {t("items.user")}
           </Item>
         ) : null}
         <Item textValue={t("items.position")} key="position">
-          <BriefcaseBusiness size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          <BriefcaseBusiness    />
           {t("items.position")}
         </Item>
       </CreateNewMenuTrigger>

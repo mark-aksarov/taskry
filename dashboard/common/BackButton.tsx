@@ -28,7 +28,7 @@ export function BackButton({ fallbackHref }: BackButtonProps) {
       onClick={handleClick}
       variant="secondary"
       outlined
-      iconLeft={<ChevronLeft size={16} absoluteStrokeWidth strokeWidth={1.5} />}
+      iconLeft={<ChevronLeft    />}
     />
   );
 }

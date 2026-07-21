@@ -29,11 +29,11 @@ export function DocsPaginationLink({
   return (
     <Link href={href} className={styles({ className })}>
       {variant === "prev" && (
-        <ChevronLeft size={18} strokeWidth={1.5} className="shrink-0" />
+        <ChevronLeft size={18}  className="shrink-0" />
       )}
       {description}
       {variant === "next" && (
-        <ChevronRight size={18} strokeWidth={1.5} className="shrink-0" />
+        <ChevronRight size={18}  className="shrink-0" />
       )}
     </Link>
   );

@@ -31,7 +31,7 @@ export function TaskDetailActions() {
           onPress={handleDeletePress}
           variant="secondary"
           isPending={isDeletePending}
-          iconLeft={<Trash size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+          iconLeft={<Trash size={18}   />}
           label={t("delete")}
         />
       </div>

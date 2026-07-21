@@ -26,7 +26,7 @@ export function FallbackSectionButton({
 
   return (
     <TextButton {...props} onPress={handlePress} className="font-bold">
-      <CirclePlus size={16} strokeWidth={1.5} absoluteStrokeWidth />
+      <CirclePlus    />
       {children}
     </TextButton>
   );

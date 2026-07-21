@@ -28,7 +28,7 @@ export function UserNavigationLarge({ userActions }: UserNavigationLargeProps) {
           isActive={pathname === `/team/${id}`}
           variant="secondary"
           isDisabled={isDeleteUserPending}
-          iconLeft={<Info size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+          iconLeft={<Info size={18}   />}
           label={t("userInformation")}
         />
       }
@@ -39,7 +39,7 @@ export function UserNavigationLarge({ userActions }: UserNavigationLargeProps) {
           variant="secondary"
           isDisabled={isDeleteUserPending}
           iconLeft={
-            <CalendarCheck size={18} strokeWidth={1.5} absoluteStrokeWidth />
+            <CalendarCheck size={18}   />
           }
           label={t("assignedTasks")}
         />

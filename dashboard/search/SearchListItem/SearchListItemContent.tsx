@@ -13,9 +13,9 @@ export function SearchListItemContent({
         {children}
       </div>
       <ChevronRight
-        size={16}
-        strokeWidth={1.5}
-        absoluteStrokeWidth
+        
+        
+        
         className="shrink-0 text-(--text-primary)"
       />
     </>

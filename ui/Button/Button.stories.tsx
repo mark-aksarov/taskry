@@ -10,9 +10,9 @@ import { twMerge } from "tailwind-merge";
 const iconOptions = ["None", "Clock", "Heart", "Download"];
 const icons = {
   None: null,
-  Clock: <Clock size={16} strokeWidth={1.5} absoluteStrokeWidth />,
-  Heart: <Heart size={16} strokeWidth={1.5} absoluteStrokeWidth />,
-  Download: <Download size={16} strokeWidth={1.5} absoluteStrokeWidth />,
+  Clock: <Clock    />,
+  Heart: <Heart    />,
+  Download: <Download    />,
 };
 
 const meta = {
@@ -152,19 +152,19 @@ export const Icon = {
       <Button variant="accent" label="No icon" {...args} />
       <Button
         variant="accent"
-        iconLeft={<Clock size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+        iconLeft={<Clock    />}
         label="Icon left"
         {...args}
       />
       <Button
         variant="accent"
-        iconRight={<Heart size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+        iconRight={<Heart    />}
         label="Icon right"
         {...args}
       />
       <Button
         variant="accent"
-        iconRight={<Download size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+        iconRight={<Download    />}
         aria-label="Button"
         {...args}
       />

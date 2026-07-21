@@ -61,7 +61,7 @@ export function ToastRegion() {
             <Button
               slot="close"
               variant="primary"
-              iconLeft={<X size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+              iconLeft={<X    />}
               className={button()}
               aria-label={t("close")}
             />

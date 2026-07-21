@@ -29,7 +29,7 @@ export const DialogCloseButton = ({
   return (
     <Button
       variant="primary"
-      iconLeft={<X size={iconSize} strokeWidth={1.5} absoluteStrokeWidth />}
+      iconLeft={<X size={iconSize}   />}
       onPress={handlePress}
       className={twMerge("-mr-2 rounded-full", className)}
       aria-label={t("close")}

@@ -57,7 +57,7 @@ export function DocsSectionCard({
         <div className={subtextStyles()}>{subtext}</div>
       </div>
 
-      <ChevronRight size={22} strokeWidth={1.5} className={icon()} />
+      <ChevronRight size={22}  className={icon()} />
     </Link>
   );
 }

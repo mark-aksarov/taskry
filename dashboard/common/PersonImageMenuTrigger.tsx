@@ -66,12 +66,12 @@ export function PersonImageMenuTrigger({
     >
       {showDeleteMenuItem ? (
         <Item textValue={t("items.delete")} key="delete">
-          <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          <Trash    />
           {t("items.delete")}
         </Item>
       ) : null}
       <Item textValue={t("items.update")} key="update">
-        <Camera size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <Camera    />
         {t("items.update")}
       </Item>
     </ResponsiveMenuTrigger>

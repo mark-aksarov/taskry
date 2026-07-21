@@ -12,7 +12,7 @@ export function ItemBaseActionMenuButton({ className, ...props }: ButtonProps) {
       variant="primary"
       iconLeft={
         props.isPending ? undefined : (
-          <Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          <Ellipsis    />
         )
       }
       className={twMerge("rounded-full", className)}

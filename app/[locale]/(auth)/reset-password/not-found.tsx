@@ -24,7 +24,7 @@ export default function PasswordNotFound() {
           outlined
           variant="primary"
           className="justify-center py-4"
-          iconLeft={<LogIn size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+          iconLeft={<LogIn size={18}   />}
           label={t("signInButtonLabel")}
           size="medium"
         />

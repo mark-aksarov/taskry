@@ -98,9 +98,9 @@ export const SelectButton = ({
         {state.selectedItem ? state.selectedItem.rendered : placeholder}
       </span>
       <ChevronDown
-        size={16}
-        strokeWidth={1.5}
-        absoluteStrokeWidth
+        
+        
+        
         className={!buttonProps.disabled ? "text-(--text-primary)" : ""}
       />
     </button>

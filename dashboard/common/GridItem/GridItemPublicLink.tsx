@@ -15,7 +15,7 @@ export function GridItemPublicLink({ publicLink }: GridItemPublicLinkProps) {
     return (
       <GridItemContact>
         <GridItemContactIconWrapper>
-          <Link2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          <Link2    />
         </GridItemContactIconWrapper>
         <GridItemContactText>{t("noPublicLink")}</GridItemContactText>
       </GridItemContact>
@@ -25,7 +25,7 @@ export function GridItemPublicLink({ publicLink }: GridItemPublicLinkProps) {
   return (
     <GridItemContactLink href={publicLink}>
       <GridItemContactIconWrapper>
-        <Link2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <Link2    />
       </GridItemContactIconWrapper>
       <GridItemContactText>{publicLink}</GridItemContactText>
     </GridItemContactLink>

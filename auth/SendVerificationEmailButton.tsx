@@ -38,7 +38,7 @@ export function SendVerificationEmailButton({
       isPending={isPending}
       className="justify-center py-4"
       onPress={handlePress}
-      iconLeft={<Mail size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+      iconLeft={<Mail size={18}   />}
       label={t("label")}
       size="medium"
     />

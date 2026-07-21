@@ -3,6 +3,7 @@ import "../app/globals.css";
 import en from "../messages/en";
 import ru from "../messages/ru";
 import { I18nProvider } from "react-aria";
+import { LucideProvider } from "lucide-react";
 import { mocked } from "storybook/internal/test";
 import { NextIntlClientProvider } from "next-intl";
 import type { Preview } from "@storybook/nextjs-vite";
@@ -35,7 +36,9 @@ const preview: Preview = {
           timeZone="UTC"
         >
           <I18nProvider locale={globals.locale}>
-            <Story />
+            <LucideProvider size={16} strokeWidth={1.5} absoluteStrokeWidth>
+              <Story />
+            </LucideProvider>
           </I18nProvider>
         </NextIntlClientProvider>
       );

@@ -23,11 +23,11 @@ export function UserSortingMenuTrigger({
       renderButton={renderButton}
     >
       <Item textValue={t("byFullName")} key="fullName">
-        <ALargeSmall size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <ALargeSmall    />
         {t("byFullName")}
       </Item>
       <Item textValue={t("byPosition")} key="position">
-        <BriefcaseBusiness size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <BriefcaseBusiness    />
         {t("byPosition")}
       </Item>
     </SortingMenuTrigger>

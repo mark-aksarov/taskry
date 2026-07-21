@@ -31,7 +31,7 @@ export function AppHeaderThemeToggleButton() {
         <Button
           onPress={() => setTheme("light")}
           aria-label={t("darkLabel")}
-          iconLeft={<Moon size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+          iconLeft={<Moon    />}
           {...commonProps}
         />
       </>
@@ -43,7 +43,7 @@ export function AppHeaderThemeToggleButton() {
       <Button
         onPress={() => setTheme("dark")}
         aria-label={t("lightLabel")}
-        iconLeft={<Sun size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+        iconLeft={<Sun    />}
         {...commonProps}
       />
     </>

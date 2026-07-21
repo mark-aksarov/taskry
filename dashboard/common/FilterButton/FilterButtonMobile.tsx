@@ -23,9 +23,9 @@ export function FilterButtonMobile({
 
   const icon =
     mode === "multiple" ? (
-      <SlidersHorizontal size={16} absoluteStrokeWidth strokeWidth={1.5} />
+      <SlidersHorizontal    />
     ) : (
-      <Plus size={16} absoluteStrokeWidth strokeWidth={1.5} />
+      <Plus    />
     );
 
   return (

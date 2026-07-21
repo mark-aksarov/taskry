@@ -42,24 +42,24 @@ export function CustomerManageMenuTrigger({
   return (
     <ManageMenuTrigger renderButton={renderButton} onAction={handleAction}>
       <Item textValue={t("importCSV")} key="import-csv">
-        <FileUp size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <FileUp    />
         {t("importCSV")}
       </Item>
       <Item textValue={t("exportCSV")} key="export-csv">
         {isPending ? (
           <Loader2
-            size={16}
-            strokeWidth={1.5}
-            absoluteStrokeWidth
+            
+            
+            
             className="animate-spin"
           />
         ) : (
-          <Download size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          <Download    />
         )}
         {t("exportCSV")}
       </Item>
       <Item textValue={t("companies")} href="/companies">
-        <Building2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <Building2    />
         {t("companies")}
       </Item>
     </ManageMenuTrigger>

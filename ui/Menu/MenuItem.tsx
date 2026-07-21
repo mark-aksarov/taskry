@@ -57,9 +57,9 @@ export const MenuItem = ({
       {state.selectionManager.selectionMode !== "none" ? (
         states.isSelected ? (
           <Check
-            size={16}
-            strokeWidth={1.5}
-            absoluteStrokeWidth
+            
+            
+            
             className="ml-auto"
           />
         ) : (

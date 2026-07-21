@@ -17,7 +17,7 @@ export function AdvantagesGrid() {
         <div className={headerClassName}>
           <Zap
             size={24}
-            absoluteStrokeWidth
+            
             strokeWidth={2}
             className="text-amber-500"
           />
@@ -31,7 +31,7 @@ export function AdvantagesGrid() {
         <div className={headerClassName}>
           <Sparkles
             size={24}
-            absoluteStrokeWidth
+            
             strokeWidth={2}
             className="text-sky-500"
           />
@@ -45,7 +45,7 @@ export function AdvantagesGrid() {
         <div className={headerClassName}>
           <Gift
             size={24}
-            absoluteStrokeWidth
+            
             strokeWidth={2}
             className="text-emerald-500"
           />
@@ -59,7 +59,7 @@ export function AdvantagesGrid() {
         <div className={headerClassName}>
           <CodeXml
             size={24}
-            absoluteStrokeWidth
+            
             strokeWidth={2}
             className="text-violet-500"
           />

@@ -20,7 +20,7 @@ export function DocsSidebarSheetTrigger() {
       <Button
         aria-label={t("triggerAriaLabel")}
         variant="secondary"
-        iconLeft={<Menu size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+        iconLeft={<Menu    />}
         className="-ml-3 rounded-full bg-transparent p-3 xl:hidden"
         onPress={() => setOpen(true)}
       />

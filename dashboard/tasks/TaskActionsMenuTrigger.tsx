@@ -87,19 +87,19 @@ export const TaskActionsMenuTrigger = ({
       )}
     >
       <Item textValue={t("delete")} key="delete">
-        <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <Trash    />
         {t("delete")}
       </Item>
       <Item textValue={t("pending")} key="pending">
-        <CircleEllipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <CircleEllipsis    />
         {t("pending")}
       </Item>
       <Item textValue={t("active")} key="active">
-        <Check size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <Check    />
         {t("active")}
       </Item>
       <Item textValue={t("completed")} key="completed">
-        <Clock size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <Clock    />
         {t("completed")}
       </Item>
     </ActionsMenuTrigger>

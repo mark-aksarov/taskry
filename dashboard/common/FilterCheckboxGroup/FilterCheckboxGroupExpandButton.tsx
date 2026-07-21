@@ -24,7 +24,7 @@ export function FilterCheckboxGroupExpandButton({
     content = (
       <>
         {t("collapse")}
-        <ChevronUp size={16} absoluteStrokeWidth strokeWidth={1.5} />
+        <ChevronUp    />
       </>
     );
   } else {
@@ -32,9 +32,9 @@ export function FilterCheckboxGroupExpandButton({
       content = (
         <>
           <Plus
-            size={16}
-            absoluteStrokeWidth
-            strokeWidth={1.5}
+            
+            
+            
             className="shrink-0"
           />
           <div className="shrink-0">
@@ -49,7 +49,7 @@ export function FilterCheckboxGroupExpandButton({
       content = (
         <>
           {t("expand")}
-          <ChevronDown size={16} absoluteStrokeWidth strokeWidth={1.5} />
+          <ChevronDown    />
         </>
       );
     }

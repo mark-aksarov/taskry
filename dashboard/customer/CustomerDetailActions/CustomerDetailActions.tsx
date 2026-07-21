@@ -28,7 +28,7 @@ export function CustomerDetailActions() {
         isPending={isDeletePending}
         onPress={handleDeletePress}
         variant="secondary"
-        iconLeft={<Trash size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+        iconLeft={<Trash size={18}   />}
         label={t("delete")}
       />
     </div>

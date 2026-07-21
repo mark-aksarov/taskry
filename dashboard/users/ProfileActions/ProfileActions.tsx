@@ -70,7 +70,7 @@ export function ProfileActions({ userId }: ProfileActionsProps) {
             onPress={handleDeletePress}
             variant="secondary"
             isPending={isDeletePending}
-            iconLeft={<Trash size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+            iconLeft={<Trash size={18}   />}
             label={t("delete")}
           />
         )}
@@ -82,7 +82,7 @@ export function ProfileActions({ userId }: ProfileActionsProps) {
             isPending={isResetPasswordPending}
             isDisabled={isDeletePending}
             iconLeft={
-              <KeyRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
+              <KeyRound size={18}   />
             }
             label={t("resetPassword")}
           />
@@ -95,7 +95,7 @@ export function ProfileActions({ userId }: ProfileActionsProps) {
             isPending={isChangePasswordPending}
             isDisabled={isDeletePending}
             iconLeft={
-              <KeyRound size={18} strokeWidth={1.5} absoluteStrokeWidth />
+              <KeyRound size={18}   />
             }
             label={t("changePassword")}
           />

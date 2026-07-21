@@ -12,7 +12,7 @@ export const AppNavigationLangMenuTrigger = () => {
       renderButton={() => (
         <NavigationButton
           iconLeft={
-            <Languages size={18} strokeWidth={1.5} absoluteStrokeWidth />
+            <Languages size={18}   />
           }
           label={t("label")}
         />

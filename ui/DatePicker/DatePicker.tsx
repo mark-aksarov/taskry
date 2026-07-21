@@ -189,7 +189,7 @@ export const DatePicker = <T extends DateValue>({
           </DateInput>
 
           <Button {...buttonProps} className={button}>
-            <CalendarIcon size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            <CalendarIcon    />
           </Button>
         </div>
 

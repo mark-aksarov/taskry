@@ -14,7 +14,7 @@ const meta = {
     text: <DashboardCardText>Dashboard card text</DashboardCardText>,
     icon: (
       <DashboardCardIcon color="blue">
-        <Heart size={24} strokeWidth={2} absoluteStrokeWidth />
+        <Heart size={24} strokeWidth={2}  />
       </DashboardCardIcon>
     ),
     value: <DashboardCardValue>20</DashboardCardValue>,

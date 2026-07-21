@@ -28,7 +28,7 @@ export function CreateSubtasksButton(props: ButtonProps) {
       data-test="create-subtask-button"
       variant="primary"
       outlined
-      iconLeft={<Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+      iconLeft={<Plus    />}
       aria-label={t("label")}
       onPress={handlePress}
       isDisabled={isDeleteTaskPending}

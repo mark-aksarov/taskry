@@ -32,7 +32,7 @@ export function SignInAsGuestForm({ signIn }: SignInAsGuestFormProps) {
       <AuthFormSubmitButton
         iconLeft={
           !isPending ? (
-            <LogIn size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            <LogIn    />
           ) : undefined
         }
         isPending={isPending}

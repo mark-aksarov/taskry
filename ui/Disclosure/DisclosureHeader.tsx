@@ -41,9 +41,9 @@ export function DisclosureHeader({
           renderIcon(isExpanded)
         ) : (
           <ChevronRight
-            size={16}
-            absoluteStrokeWidth
-            strokeWidth={1.5}
+            
+            
+            
             className={twMerge(
               "transform transition-transform",
               isExpanded ? "rotate-90" : "",

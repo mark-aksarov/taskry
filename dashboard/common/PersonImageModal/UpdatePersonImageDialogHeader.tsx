@@ -20,7 +20,7 @@ export function UpdatePersonImageDialogHeader({
           variant="primary"
           outlined
           iconLeft={
-            <ChevronLeft size={16} absoluteStrokeWidth strokeWidth={1.5} />
+            <ChevronLeft    />
           }
         />
         <DialogHeading>{t("heading")}</DialogHeading>

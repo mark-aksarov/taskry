@@ -6,7 +6,7 @@ export function DetailsDeleteButton(props: ButtonProps) {
     <Button
       iconLeft={
         props.isPending ? undefined : (
-          <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          <Trash    />
         )
       }
       outlined

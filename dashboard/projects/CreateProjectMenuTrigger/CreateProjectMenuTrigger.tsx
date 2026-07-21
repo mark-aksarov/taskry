@@ -55,11 +55,11 @@ export function CreateProjectMenuTrigger({
         renderButton={renderButton}
       >
         <Item textValue={t("items.project")} key="project">
-          <FolderClosed size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          <FolderClosed    />
           {t("items.project")}
         </Item>
         <Item textValue={t("items.category")} key="category">
-          <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          <Blocks    />
           {t("items.category")}
         </Item>
       </CreateNewMenuTrigger>

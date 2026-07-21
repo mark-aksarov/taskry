@@ -10,7 +10,7 @@ export function useAddErrorToast() {
       toastQueue.add(
         {
           title: message,
-          iconLeft: <CircleX size={16} strokeWidth={1.5} absoluteStrokeWidth />,
+          iconLeft: <CircleX    />,
         },
         { timeout: 5000 },
       ),

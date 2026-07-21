@@ -51,12 +51,12 @@ const ToastTemplate = (props: ToastStoryArgs) => {
               title: "A server error occurred. ",
               iconLeft:
                 props.color === "red" ? (
-                  <CircleX size={16} strokeWidth={1.5} absoluteStrokeWidth />
+                  <CircleX    />
                 ) : (
                   <CheckCircle2
-                    size={16}
-                    strokeWidth={1.5}
-                    absoluteStrokeWidth
+                    
+                    
+                    
                   />
                 ),
               color: props.color,

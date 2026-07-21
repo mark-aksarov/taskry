@@ -81,13 +81,13 @@ export function SubtaskActionMenuTrigger({
       )}
     >
       <Item textValue={t("edit")} key="edit">
-        <Pencil size={16} /> {t("edit")}
+        <Pencil  /> {t("edit")}
       </Item>
       <Item textValue={isDone ? t("undone") : t("done")} key="toggle">
-        <CheckCheck size={16} /> {isDone ? t("undone") : t("done")}
+        <CheckCheck  /> {isDone ? t("undone") : t("done")}
       </Item>
       <Item textValue={t("delete")} key="delete">
-        <Trash size={16} /> {t("delete")}
+        <Trash  /> {t("delete")}
       </Item>
     </ItemBaseActionMenuTrigger>
   );

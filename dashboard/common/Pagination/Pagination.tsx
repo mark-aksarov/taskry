@@ -78,15 +78,15 @@ export function Pagination({
     const icon = isPrev ? (
       <ChevronLeft
         size={iconSize}
-        strokeWidth={1.5}
-        absoluteStrokeWidth
+        
+        
         className="shrink-0"
       />
     ) : isNext ? (
       <ChevronRight
         size={iconSize}
-        strokeWidth={1.5}
-        absoluteStrokeWidth
+        
+        
         className="shrink-0"
       />
     ) : undefined;

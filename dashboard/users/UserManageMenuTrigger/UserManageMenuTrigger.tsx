@@ -38,18 +38,18 @@ export function UserManageMenuTrigger({
       <Item textValue={t("exportCSV")} key="export-csv">
         {isPending ? (
           <Loader2
-            size={16}
-            strokeWidth={1.5}
-            absoluteStrokeWidth
+            
+            
+            
             className="animate-spin"
           />
         ) : (
-          <Download size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          <Download    />
         )}
         {t("exportCSV")}
       </Item>
       <Item textValue={t("positions")} href="/positions">
-        <BriefcaseBusiness size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        <BriefcaseBusiness    />
         {t("positions")}
       </Item>
     </ManageMenuTrigger>

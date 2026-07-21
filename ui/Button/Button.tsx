@@ -43,7 +43,7 @@ export const Button = ({
           data-testid="loader-icon"
           size={size === "small" ? 16 : size === "medium" ? 18 : 20}
           strokeWidth={size === "small" ? 1.5 : size === "medium" ? 1.75 : 2}
-          absoluteStrokeWidth
+          
           className="animate-spin"
         />
       )}

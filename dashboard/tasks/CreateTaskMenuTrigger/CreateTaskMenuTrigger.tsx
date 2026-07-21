@@ -53,11 +53,11 @@ export function CreateTaskMenuTrigger({
         renderButton={renderButton}
       >
         <Item textValue={t("items.task")} key="task">
-          <CalendarCheck size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          <CalendarCheck    />
           {t("items.task")}
         </Item>
         <Item textValue={t("items.category")} key="category">
-          <Blocks size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          <Blocks    />
           {t("items.category")}
         </Item>
       </CreateNewMenuTrigger>

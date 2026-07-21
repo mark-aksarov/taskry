@@ -33,13 +33,13 @@ const SelectTemplate: Story = {
     return (
       <Select {...args}>
         <Item textValue="Apple" key="apple">
-          <Apple size={16} /> Apple
+          <Apple  /> Apple
         </Item>
         <Item textValue="Banana" key="banana">
-          <Banana size={16} /> Banana
+          <Banana  /> Banana
         </Item>
         <Item textValue="Orange" key="orange">
-          <Citrus size={16} />
+          <Citrus  />
           Orange
         </Item>
       </Select>

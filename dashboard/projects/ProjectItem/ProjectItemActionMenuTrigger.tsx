@@ -95,19 +95,19 @@ export function ProjectItemActionMenuTrigger({
       )}
     >
       <Item textValue={t("edit")} key="edit">
-        <Pencil size={16} /> {t("edit")}
+        <Pencil  /> {t("edit")}
       </Item>
       <Item textValue={t("delete")} key="delete">
-        <Trash size={16} /> {t("delete")}
+        <Trash  /> {t("delete")}
       </Item>
       <Item textValue={t("markPending")} key="pending">
-        <CircleEllipsis size={16} /> {t("markPending")}
+        <CircleEllipsis  /> {t("markPending")}
       </Item>
       <Item textValue={t("markActive")} key="active">
-        <Clock size={16} /> {t("markActive")}
+        <Clock  /> {t("markActive")}
       </Item>
       <Item textValue={t("markCompleted")} key="completed">
-        <Check size={16} /> {t("markCompleted")}
+        <Check  /> {t("markCompleted")}
       </Item>
     </ItemBaseActionMenuTrigger>
   );

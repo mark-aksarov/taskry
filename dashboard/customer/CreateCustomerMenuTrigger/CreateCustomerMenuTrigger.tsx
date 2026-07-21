@@ -54,11 +54,11 @@ export function CreateCustomerMenuTrigger({
         renderButton={renderButton}
       >
         <Item textValue={t("items.customer")} key="customer">
-          <Contact size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          <Contact    />
           {t("items.customer")}
         </Item>
         <Item textValue={t("items.company")} key="company">
-          <Building2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          <Building2    />
           {t("items.company")}
         </Item>
       </CreateNewMenuTrigger>

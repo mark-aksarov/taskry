@@ -7,7 +7,7 @@ export function ManageButtonMobile(props: ButtonProps) {
 
   return (
     <Button
-      iconLeft={<Settings size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+      iconLeft={<Settings    />}
       variant="secondary"
       outlined
       aria-label={t("ariaLabel")}

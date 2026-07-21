@@ -15,7 +15,7 @@ export function SecurityGrid() {
       <SiteCard>
         <LockKeyhole
           size={32}
-          absoluteStrokeWidth
+          
           strokeWidth={2}
           className="text-blue-500"
         />
@@ -28,7 +28,7 @@ export function SecurityGrid() {
       <SiteCard>
         <ShieldCheck
           size={32}
-          absoluteStrokeWidth
+          
           strokeWidth={2}
           className="text-blue-500"
         />
@@ -41,7 +41,7 @@ export function SecurityGrid() {
       <SiteCard>
         <Copy
           size={32}
-          absoluteStrokeWidth
+          
           strokeWidth={2}
           className="text-blue-500"
         />

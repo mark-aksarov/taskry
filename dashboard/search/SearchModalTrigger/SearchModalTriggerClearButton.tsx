@@ -38,7 +38,7 @@ export function SearchModalTriggerClearButton() {
       className="rounded-full text-inherit"
       onPress={handlePress}
       aria-label={t("clearButtonLabel")}
-      iconLeft={<X size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+      iconLeft={<X size={18}   />}
       // Disable clear button while filtering
       isDisabled={isFilteringPending}
     />

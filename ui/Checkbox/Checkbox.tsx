@@ -74,7 +74,7 @@ export const Checkbox = ({ children, ...props }: CheckboxProps) => {
               <Check
                 size={14}
                 strokeWidth={2}
-                absoluteStrokeWidth
+                
                 className={boxIcon()}
               />
             ) : null}

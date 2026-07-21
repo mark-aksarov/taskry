@@ -13,7 +13,7 @@ export function SortingButtonMobile(props: ButtonProps) {
       isDisabled={isDisabled}
       label={t("ariaLabel")}
       variant="secondary"
-      iconLeft={<ArrowDownUp size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+      iconLeft={<ArrowDownUp    />}
       {...props}
     />
   );

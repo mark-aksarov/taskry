@@ -23,7 +23,7 @@ export function ActionsButton({
       outlined
       label={showLabel ? t("label") : undefined}
       aria-label={!showLabel ? t("label") : undefined}
-      iconLeft={<Ellipsis size={16} strokeWidth={1.5} absoluteStrokeWidth />}
+      iconLeft={<Ellipsis    />}
       isDisabled={isDisabled}
       {...props}
     />

@@ -39,7 +39,7 @@ export function AppNavigationLogoutButton({
         data-test="sign-out-btn"
         onPress={logout}
         isPending={isPending}
-        iconLeft={<LogOut size={18} strokeWidth={1.5} absoluteStrokeWidth />}
+        iconLeft={<LogOut size={18}   />}
         label={t("logout")}
       />
     </>

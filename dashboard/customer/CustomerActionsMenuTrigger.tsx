@@ -46,7 +46,7 @@ export const CustomerActionsMenuTrigger = () => {
         )}
       >
         <Item textValue={t("delete")} key="delete">
-          <Trash size={16} strokeWidth={1.5} absoluteStrokeWidth />
+          <Trash    />
           {t("delete")}
         </Item>
       </ActionsMenuTrigger>
