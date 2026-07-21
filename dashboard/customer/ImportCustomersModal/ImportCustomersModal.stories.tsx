@@ -10,7 +10,7 @@ import { withImportCustomersProvider } from "../ImportCustomersProvider/__storie
 import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
 
 const meta = {
-  title: "dashboard/projects/ImportCustomersModal",
+  title: "dashboard/customers/ImportCustomersModal",
   component: ImportCustomersModal,
   decorators: [
     withOpenModal,

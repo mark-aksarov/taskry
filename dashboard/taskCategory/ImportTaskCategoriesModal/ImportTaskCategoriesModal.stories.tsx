@@ -10,7 +10,7 @@ import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsConte
 import { withImportTaskCategoriesProvider } from "../ImportTaskCategoriesProvider/__stories__";
 
 const meta = {
-  title: "dashboard/project-categories/ImportTaskCategoriesModal",
+  title: "dashboard/task-categories/ImportTaskCategoriesModal",
   component: ImportTaskCategoriesModal,
   decorators: [
     withOpenModal,

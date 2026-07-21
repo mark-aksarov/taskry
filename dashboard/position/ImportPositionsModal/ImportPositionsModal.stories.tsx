@@ -10,7 +10,7 @@ import { withImportPositionsProvider } from "../ImportPositionsProvider/__storie
 import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
 
 const meta = {
-  title: "dashboard/projects/ImportPositionsModal",
+  title: "dashboard/positions/ImportPositionsModal",
   component: ImportPositionsModal,
   decorators: [
     withOpenModal,
