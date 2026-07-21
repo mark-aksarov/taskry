@@ -1542,7 +1542,10 @@
       }
     },
     "UserManageMenuTrigger": {
-      "positions": "Positions"
+      "positions": "Positions",
+      "exportCSV": "Export users (CSV)",
+      "successMessage": "Users exported successfully",
+      "errorMessage": "Users export failed"
     },
     "UsersFilteredEmptySection": {
       "heading": "No users found",

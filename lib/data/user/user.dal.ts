@@ -95,6 +95,42 @@ export const getUser = cache(async (id: string): Promise<UserDTO | null> => {
   };
 });
 
+export const getUsers = cache(async (): Promise<UserDTO[]> => {
+  const {
+    user: { workspaceId },
+  } = await requireSession();
+
+  const users = await prisma.user.findMany({
+    where: { workspaceId },
+    orderBy: {
+      createdAt: "desc",
+    },
+    select: {
+      id: true,
+      fullName: true,
+      phoneNumber: true,
+      imageUrl: true,
+      publicLink: true,
+      birthdate: true,
+      bio: true,
+      address: true,
+      positionId: true,
+    },
+  });
+
+  return users.map((user) => ({
+    id: user.id,
+    fullName: user.fullName,
+    phoneNumber: user.phoneNumber ?? undefined,
+    imageUrl: user.imageUrl ?? undefined,
+    publicLink: user.publicLink ?? undefined,
+    birthdate: user.birthdate?.toISOString() ?? undefined,
+    bio: user.bio ?? undefined,
+    address: user.address ?? undefined,
+    positionId: user.positionId ?? undefined,
+  }));
+});
+
 export const getUserSummary = cache(
   async (id: string): Promise<UserSummaryDTO | null> => {
     // Authorization

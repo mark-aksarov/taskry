@@ -1542,7 +1542,10 @@
       }
     },
     "UserManageMenuTrigger": {
-      "positions": "Должности"
+      "positions": "Должности",
+      "exportCSV": "Экспорт пользователей (CSV)",
+      "successMessage": "Пользователи успешно экспортированы",
+      "errorMessage": "Не удалось экспортировать пользователей"
     },
     "UsersFilteredEmptySection": {
       "heading": "Пользователи не найдены",

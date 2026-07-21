@@ -1,8 +1,10 @@
 "use client";
 
-import { Item } from "react-stately";
+import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
-import { BriefcaseBusiness } from "lucide-react";
+import { useDownloadFile } from "@/lib/hooks/useDownloadFile";
+import { BriefcaseBusiness, Download, Loader2 } from "lucide-react";
+import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { ManageMenuTrigger } from "@/dashboard/common/ManageMenuTrigger";
 
 interface UserManageMenuTriggerProps {
@@ -14,8 +16,38 @@ export function UserManageMenuTrigger({
 }: UserManageMenuTriggerProps) {
   const t = useTranslations("dashboard.users.UserManageMenuTrigger");
 
+  const [isPending, downloadFile] = useDownloadFile(
+    "/api/users/export",
+    "users.csv",
+    t("successMessage"),
+    t("errorMessage"),
+  );
+
+  const guestGuard = useGuestModalGuard();
+
+  function handleAction(key: Key) {
+    guestGuard(() => {
+      if (key === "export-csv") {
+        downloadFile();
+      }
+    });
+  }
+
   return (
-    <ManageMenuTrigger renderButton={renderButton}>
+    <ManageMenuTrigger renderButton={renderButton} onAction={handleAction}>
+      <Item textValue={t("exportCSV")} key="export-csv">
+        {isPending ? (
+          <Loader2
+            size={16}
+            strokeWidth={1.5}
+            absoluteStrokeWidth
+            className="animate-spin"
+          />
+        ) : (
+          <Download size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        )}
+        {t("exportCSV")}
+      </Item>
       <Item textValue={t("positions")} href="/positions">
         <BriefcaseBusiness size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {t("positions")}
