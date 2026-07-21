@@ -4,8 +4,10 @@ import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
 import { positionName } from "@/lib/schemas/position";
+import { POSITION_MAX_COUNT } from "@/lib/data/constants";
+import { LimitExceededError } from "@/lib/data/utils/error";
 import { requireActionSession } from "@/lib/utils/requireActionSession";
-import { createPosition as createPositionQuery } from "@/lib/data/position/position.dal";
+import { createPositions as createPositionsQuery } from "@/lib/data/position/position.dal";
 
 const schema = z.object({
   name: positionName,
@@ -19,7 +21,7 @@ export async function createPosition(formData: FormData): Promise<ActionState> {
 
   try {
     const data = schema.parse({ name: formData.get("name") });
-    await createPositionQuery(data);
+    await createPositionsQuery([data]);
 
     return {
       status: "success",
@@ -27,6 +29,15 @@ export async function createPosition(formData: FormData): Promise<ActionState> {
     };
   } catch (error) {
     console.error("Server Action Error:", error);
+
+    if (error instanceof LimitExceededError) {
+      return {
+        status: "error",
+        message: t("position.create.error.limitExceededError", {
+          count: POSITION_MAX_COUNT,
+        }),
+      };
+    }
 
     return {
       status: "error",

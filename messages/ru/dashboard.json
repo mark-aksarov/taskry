@@ -428,6 +428,9 @@
     },
     "ImportCustomersModal": {
       "heading": "Импортирование клиентов"
+    },
+    "ImportPositionsModal": {
+      "heading": "Импортировать должности"
     }
   },
   "layout": {
@@ -507,6 +510,9 @@
       "cancelButton": "Отменить",
       "deleteButton": "Удалить",
       "successMessage": "Должность успешно удалена"
+    },
+    "PositionManageMenuTrigger": {
+      "importCSV": "Импорт должностей (CSV)"
     }
   },
   "projectCategories": {

@@ -428,6 +428,9 @@
     },
     "ImportCustomersModal": {
       "heading": "Import customers"
+    },
+    "ImportPositionsModal": {
+      "heading": "Import positions"
     }
   },
   "layout": {
@@ -507,6 +510,9 @@
       "cancelButton": "Cancel",
       "deleteButton": "Delete",
       "successMessage": "Position deleted successfully"
+    },
+    "PositionManageMenuTrigger": {
+      "importCSV": "Import positions (CSV)"
     }
   },
   "projectCategories": {

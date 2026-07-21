@@ -3,6 +3,11 @@ import {
   CreatePositionModalTriggerMobile,
 } from "@/dashboard/position/CreatePositionModalTrigger";
 
+import {
+  PositionManageMenuTriggerLarge,
+  PositionManageMenuTriggerMobile,
+} from "@/dashboard/position/PositionManageMenuTrigger";
+
 import { useTranslations } from "next-intl";
 import { BackButton } from "@/dashboard/common/BackButton";
 import { ViewModeProvider } from "@/dashboard/common/ViewMode";
@@ -29,6 +34,8 @@ export function PositionsPage({
     return (
       <DashboardContainer fullscreen headerOffset>
         <DashboardGrid className="relative flex-auto">
+          <ToolbarLarge firstSlot={<PositionManageMenuTriggerLarge />} />
+
           <ToolbarMobile
             firstSlot={
               <>
@@ -36,6 +43,7 @@ export function PositionsPage({
                 <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
               </>
             }
+            secondSlot={<PositionManageMenuTriggerMobile />}
           />
 
           <PageEmptySection
@@ -53,7 +61,12 @@ export function PositionsPage({
       <DashboardGrid>
         <ViewModeProvider>
           <ToolbarLarge
-            firstSlot={<PositionActionsMenuTrigger />}
+            firstSlot={
+              <>
+                <PositionManageMenuTriggerLarge />
+                <PositionActionsMenuTrigger />
+              </>
+            }
             secondSlot={<CreatePositionModalTriggerLarge />}
           />
 
@@ -64,7 +77,12 @@ export function PositionsPage({
                 <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
               </>
             }
-            secondSlot={<CreatePositionModalTriggerMobile />}
+            secondSlot={
+              <>
+                <PositionManageMenuTriggerMobile />
+                <CreatePositionModalTriggerMobile />
+              </>
+            }
           />
 
           {positionsContainer}

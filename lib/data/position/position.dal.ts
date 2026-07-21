@@ -9,8 +9,9 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import { AccessDeniedError } from "../utils/error";
+import { AccessDeniedError, LimitExceededError } from "../utils/error";
 import { requireSession } from "../utils/requireSession";
+import { POSITION_MAX_COUNT } from "../constants";
 
 export const getPositionCount = cache(async () => {
   // Authorization
@@ -43,7 +44,7 @@ export const getPositionSummaries = cache(
   },
 );
 
-export const createPosition = async (input: CreatePositionInputDTO) => {
+export const createPositions = async (input: CreatePositionInputDTO[]) => {
   // Authorization
   const {
     user: { id: userId, workspaceId },
@@ -65,15 +66,18 @@ export const createPosition = async (input: CreatePositionInputDTO) => {
     );
   }
 
-  // Create position
-  const position = await prisma.position.create({
-    data: {
-      name: input.name,
+  // Validate limit
+  await validatePositionLimit(workspaceId, input.length);
+
+  // Create positions
+  const positions = await prisma.position.createManyAndReturn({
+    data: input.map((position) => ({
+      name: position.name,
       workspaceId,
-    },
+    })),
   });
 
-  return position;
+  return positions;
 };
 
 export const updatePosition = async (input: UpdatePositionInputDTO) => {
@@ -144,3 +148,25 @@ export const deletePositions = async (ids: number[]) => {
 
   return deletedPositions;
 };
+
+/**
+ * HELPERS
+ */
+
+// Validate that position limit has not been reached
+async function validatePositionLimit(
+  workspaceId: number,
+  newPositionsCount: number,
+) {
+  const existingCount = await prisma.position.count({
+    where: {
+      workspaceId,
+    },
+  });
+
+  if (existingCount + newPositionsCount > POSITION_MAX_COUNT) {
+    throw new LimitExceededError(
+      `You cannot create more than ${POSITION_MAX_COUNT} positions.`,
+    );
+  }
+}

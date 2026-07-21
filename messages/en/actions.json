@@ -39,6 +39,7 @@
     "create": {
       "success": "Position created successfully",
       "error": {
+        "limitExceededError": "The maximum number of positions would be exceeded. Maximum: {count}.",
         "internalServerError": "Something went wrong. Failed to create the position. Refresh the page or try again later."
       }
     },
@@ -58,6 +59,13 @@
       "success": "Positions deleted successfully",
       "error": {
         "internalServerError": "Something went wrong. Failed to delete the positions. Refresh the page or try again later."
+      }
+    },
+    "import": {
+      "success": "Positions imported successfully",
+      "error": {
+        "limitExceededError": "The maximum number of positions would be exceeded. Maximum: {count}.",
+        "internalServerError": "Something went wrong. Failed to import positions. Refresh the page or try again later."
       }
     }
   },
