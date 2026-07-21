@@ -1,9 +1,9 @@
 "use client";
 
 import useSWR from "swr";
-import { UserFormDataDTO } from "@/lib/data/user/user.dto";
+import { UserDTO } from "@/lib/data/user/user.dto";
+import { PositionDTO } from "@/lib/data/position/position.dto";
 import { UpdateUserForm, UpdateUserFormSkeleton } from "./UpdateUserForm";
-import { PositionSummaryDTO } from "@/lib/data/position/position.dto";
 
 interface UpdateUserFormContainerProps {
   userId: string;
@@ -12,13 +12,13 @@ interface UpdateUserFormContainerProps {
 export function UpdateUserFormContainer({
   userId,
 }: UpdateUserFormContainerProps) {
-  const { data: positions } = useSWR<PositionSummaryDTO[]>(`/api/positions`);
+  const { data: positions } = useSWR<PositionDTO[]>(`/api/positions`);
 
   const {
     data: user,
     error: userError,
     isValidating,
-  } = useSWR<UserFormDataDTO>(`/api/users/${userId}?view=edit`, {
+  } = useSWR<UserDTO>(`/api/users/${userId}?view=edit`, {
     // disable revalidation on focus to prevent UI flicker caused by isValidating
     revalidateOnFocus: false,
   });

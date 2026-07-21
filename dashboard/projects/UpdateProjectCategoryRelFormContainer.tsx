@@ -6,7 +6,7 @@ import {
 } from "./UpdateProjectCategoryRelForm";
 
 import useSWR from "swr";
-import { ProjectCategorySummaryDTO } from "@/lib/data/projectCategory/projectCategory.dto";
+import { ProjectCategoryDTO } from "@/lib/data/projectCategory/projectCategory.dto";
 
 interface UpdateProjectCategoryRelFormContainerProps {
   projectId: number;
@@ -17,7 +17,7 @@ export function UpdateProjectCategoryRelFormContainer({
   projectId,
   categoryId,
 }: UpdateProjectCategoryRelFormContainerProps) {
-  const { data: categories } = useSWR<ProjectCategorySummaryDTO[]>(
+  const { data: categories } = useSWR<ProjectCategoryDTO[]>(
     "/api/project-categories",
   );
 

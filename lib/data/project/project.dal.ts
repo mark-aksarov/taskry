@@ -1,12 +1,12 @@
 import "server-only";
 
 import {
+  ProjectDTO,
+  ProjectListDTO,
   ProjectDetailDTO,
   ProjectSummaryDTO,
-  ProjectFormDataDTO,
   UpdateProjectInputDTO,
   CreateProjectInputDTO,
-  ProjectListDTO,
 } from "./project.dto";
 
 import { cache } from "react";
@@ -117,8 +117,8 @@ export const getProjectDetail = cache(
   },
 );
 
-export const getProjectFormData = cache(
-  async (id: number): Promise<ProjectFormDataDTO | null> => {
+export const getProject = cache(
+  async (id: number): Promise<ProjectDTO | null> => {
     // Authorization
     const {
       user: { workspaceId },
@@ -154,6 +154,39 @@ export const getProjectFormData = cache(
     };
   },
 );
+
+export const getProjects = cache(async (): Promise<ProjectDTO[]> => {
+  // Authorization
+  const {
+    user: { workspaceId },
+  } = await requireSession();
+
+  const projects = await prisma.project.findMany({
+    where: { workspaceId },
+    orderBy: {
+      createdAt: "desc",
+    },
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      deadline: true,
+      status: true,
+      categoryId: true,
+      customerId: true,
+    },
+  });
+
+  return projects.map((project) => ({
+    id: project.id,
+    title: project.title,
+    description: project.description ?? undefined,
+    deadline: project.deadline.toISOString(),
+    status: project.status,
+    categoryId: project.categoryId ?? undefined,
+    customerId: project.customerId ?? undefined,
+  }));
+});
 
 export const getProjectSummary = cache(
   async (id: number): Promise<ProjectSummaryDTO | null> => {

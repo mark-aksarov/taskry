@@ -1,4 +1,4 @@
-export interface TaskCategorySummaryDTO {
+export interface TaskCategoryDTO {
   id: number;
   name: string;
 }

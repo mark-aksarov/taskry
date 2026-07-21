@@ -5,13 +5,13 @@ import { PositionListItem } from "./PositionListItem";
 import { GuestModeModal } from "../common/GuestModeModal";
 import { UpdatePositionModal } from "./UpdatePositionModal";
 import { DeletePositionModal } from "./DeletePositionModal";
+import { getPositions } from "@/lib/data/position/position.dal";
 import { UpdatePositionProvider } from "./UpdatePositionProvider";
 import { DeletePositionProvider } from "./DeletePositionProvider";
 import { ModalManagerProvider } from "../../common/ModalManagerContext";
-import { getPositionSummaries } from "@/lib/data/position/position.dal";
 
 export async function PositionsContainer() {
-  const positions = await getPositionSummaries();
+  const positions = await getPositions();
 
   return (
     <PositionGrid>

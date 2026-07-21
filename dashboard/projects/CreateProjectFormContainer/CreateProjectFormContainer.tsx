@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { CreateProjectForm } from "../CreateProjectForm";
 import { ProjectFormSkeleton } from "../ProjectFormSkeleton";
 import { getCustomerSummaries } from "@/lib/data/customer/customer.dal";
-import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
+import { getProjectCategories } from "@/lib/data/projectCategory/projectCategory.dal";
 
 export function CreateProjectFormContainer() {
   return (
@@ -15,7 +15,7 @@ export function CreateProjectFormContainer() {
 }
 
 async function CreateProjectFormContainerInner() {
-  const categories = await getProjectCategorySummaries();
+  const categories = await getProjectCategories();
   const customers = await getCustomerSummaries();
 
   return (

@@ -1,6 +1,6 @@
 import { PositionsPage } from "./PositionsPage";
+import { getPositions } from "@/lib/data/position/position.dal";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
-import { getPositionSummaries } from "@/lib/data/position/position.dal";
 import { PositionsContainer } from "@/dashboard/position/PositionsContainer";
 import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
 import { CreatePositionModal } from "@/dashboard/position/CreatePositionModal";
@@ -16,7 +16,7 @@ export default async function AppPositionsPage() {
   // Authorization
   await requireProtectedPageSession();
 
-  const positions = await getPositionSummaries();
+  const positions = await getPositions();
 
   return (
     <SelectedItemsProvider pageItems={positions.map((p) => ({ id: p.id }))}>

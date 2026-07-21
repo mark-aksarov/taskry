@@ -1,9 +1,9 @@
 import { ProjectCategoriesPage } from "./ProjectCategoriesPage";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
 import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
-import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
+import { getProjectCategories } from "@/lib/data/projectCategory/projectCategory.dal";
 import { ProjectCategoriesContainer } from "@/dashboard/projectCategory/ProjectCategoriesContainer";
 import { CreateProjectCategoryModal } from "@/dashboard/projectCategory/CreateProjectCategoryModal";
 import { DeleteProjectCategoriesModal } from "@/dashboard/projectCategory/DeleteProjectCategoriesModal";
@@ -16,7 +16,7 @@ export default async function AppProjectCategoriesPage() {
   // Authorization
   await requireProtectedPageSession();
 
-  const projectCategories = await getProjectCategorySummaries();
+  const projectCategories = await getProjectCategories();
 
   return (
     <SelectedItemsProvider

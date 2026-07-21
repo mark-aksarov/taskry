@@ -1,9 +1,8 @@
 import { notFound } from "next/navigation";
+import { getUser } from "@/lib/data/user/user.dal";
 import { TeamProfilePage } from "./TeamProfilePage";
-import { getUserFormData } from "@/lib/data/user/user.dal";
 import { userId as userIdSchema } from "@/lib/schemas/user";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { ResetPasswordModal } from "@/dashboard/users/ResetPasswordModal";
 import { UpdateUserBioModal } from "@/dashboard/users/UpdateUserBioModal";
 import { DeleteUserProvider } from "@/dashboard/users/DeleteUserProvider";
@@ -20,6 +19,7 @@ import { UpdateUserFullNameModal } from "@/dashboard/users/UpdateUserFullNameMod
 import { UpdateUserPositionModal } from "@/dashboard/users/UpdateUserPositionModal";
 import { UpdateUserImageProvider } from "@/dashboard/users/UpdateUserImageProvider";
 import { UpdateUserBirthdateModal } from "@/dashboard/users/UpdateUserBirthdateModal";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { UpdateUserPublicLinkModal } from "@/dashboard/users/UpdateUserPublicLinkModal";
 import { ClearUserImageUrlProvider } from "@/dashboard/users/ClearUserImageUrlProvider";
 import { UpdateUserAddressProvider } from "@/dashboard/users/UpdateUserAddressProvider";
@@ -50,10 +50,10 @@ export default async function AppTeamProfilePage({
   }
   const userId = parsed.data;
 
-  // Get user form data
-  const userFormData = await getUserFormData(userId);
+  // Get user  data
+  const user = await getUser(userId);
 
-  if (!userFormData) {
+  if (!user) {
     notFound();
   }
 
@@ -100,44 +100,44 @@ export default async function AppTeamProfilePage({
 
                               <DeleteUserDetailModal
                                 userId={userId}
-                                userFullName={userFormData.fullName}
+                                userFullName={user.fullName}
                               />
 
                               <UpdateUserBioModal
                                 userId={userId}
-                                userBio={userFormData.bio}
+                                userBio={user.bio}
                               />
 
                               <UpdateUserFullNameModal
                                 userId={userId}
-                                userFullName={userFormData.fullName}
+                                userFullName={user.fullName}
                               />
 
                               <UpdateUserPhoneNumberModal
                                 userId={userId}
-                                userPhoneNumber={userFormData.phoneNumber}
+                                userPhoneNumber={user.phoneNumber}
                               />
 
                               <UpdateUserBirthdateModal
                                 userId={userId}
-                                userBirthdate={userFormData.birthdate}
+                                userBirthdate={user.birthdate}
                               />
 
                               <UpdateUserAddressModal
                                 userId={userId}
-                                userAddress={userFormData.address}
+                                userAddress={user.address}
                               />
 
                               <UpdateUserPublicLinkModal
                                 userId={userId}
-                                userPublicLink={userFormData.publicLink}
+                                userPublicLink={user.publicLink}
                               />
 
                               <UpdateUserPositionModal
                                 updateUserPositionFormContainer={
                                   <UpdateUserPositionFormContainer
                                     userId={userId}
-                                    positionId={userFormData.positionId}
+                                    positionId={user.positionId}
                                   />
                                 }
                               />
@@ -146,7 +146,7 @@ export default async function AppTeamProfilePage({
 
                               <DeleteUserImageModal
                                 userId={userId}
-                                userFullName={userFormData.fullName}
+                                userFullName={user.fullName}
                               />
                             </ChangePasswordProvider>
                           </ResetPasswordProvider>

@@ -5,7 +5,7 @@ import { CreateTaskForm } from "./CreateTaskForm";
 import { TaskFormSkeleton } from "./TaskFormSkeleton";
 import { getUserSummaries } from "@/lib/data/user/user.dal";
 import { getProjectSummaries } from "@/lib/data/project/project.dal";
-import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
+import { getTaskCategories } from "@/lib/data/taskCategory/taskCategory.dal";
 
 interface CreateTaskFormContainerProps {
   forcedAssigneeId?: string;
@@ -22,7 +22,7 @@ export function CreateTaskFormContainer(props: CreateTaskFormContainerProps) {
 async function CreateTaskFormContainerInner({
   forcedAssigneeId,
 }: CreateTaskFormContainerProps) {
-  const categories = await getTaskCategorySummaries();
+  const categories = await getTaskCategories();
   const projects = await getProjectSummaries();
   const users = await getUserSummaries();
 

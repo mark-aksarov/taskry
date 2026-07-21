@@ -1,24 +1,25 @@
 import {
+  TaskDTO,
   TaskListDTO,
   TaskDetailDTO,
   TaskSummaryDTO,
-  TaskFormDataDTO,
   UpdateTaskInputDTO,
   CreateTaskInputDTO,
 } from "./task.dto";
 
+import {
+  NotFoundError,
+  AccessDeniedError,
+  LimitExceededError,
+} from "../utils/error";
+
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
+import { TASK_MAX_COUNT } from "../constants";
 import { TaskFilters, TaskSortField } from "@/lib/types";
 import { requireSession } from "../utils/requireSession";
 import { Prisma, TaskStatus } from "@/generated/prisma/client";
-import {
-  AccessDeniedError,
-  LimitExceededError,
-  NotFoundError,
-} from "../utils/error";
-import { TASK_MAX_COUNT } from "../constants";
 
 export const getTaskDetail = cache(
   async (id: number): Promise<TaskDetailDTO | null> => {
@@ -110,48 +111,46 @@ export const getTaskDetail = cache(
   },
 );
 
-export const getTaskFormData = cache(
-  async (id: number): Promise<TaskFormDataDTO | null> => {
-    // Authorization
-    const {
-      user: { workspaceId },
-    } = await requireSession();
+export const getTask = cache(async (id: number): Promise<TaskDTO | null> => {
+  // Authorization
+  const {
+    user: { workspaceId },
+  } = await requireSession();
 
-    const task = await prisma.task.findFirst({
-      where: { id, workspaceId },
-      select: {
-        id: true,
-        title: true,
-        description: true,
-        deadline: true,
-        status: true,
-        categoryId: true,
-        projectId: true,
-        project: {
-          select: {
-            status: true,
-          },
+  const task = await prisma.task.findFirst({
+    where: { id, workspaceId },
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      deadline: true,
+      status: true,
+      categoryId: true,
+      projectId: true,
+      project: {
+        select: {
+          status: true,
         },
-        assigneeId: true,
       },
-    });
+      assigneeId: true,
+    },
+  });
 
-    if (!task) {
-      return null;
-    }
+  if (!task) {
+    return null;
+  }
 
-    return {
-      id: task.id,
-      title: task.title,
-      description: task.description ?? undefined,
-      deadline: task.deadline.toISOString(),
-      status: task.status,
-      categoryId: task.categoryId ?? undefined,
-      projectId: task.projectId ?? undefined,
-      assigneeId: task.assigneeId ?? undefined,
-    };
-  },
-);
+  return {
+    id: task.id,
+    title: task.title,
+    description: task.description ?? undefined,
+    deadline: task.deadline.toISOString(),
+    status: task.status,
+    categoryId: task.categoryId ?? undefined,
+    projectId: task.projectId ?? undefined,
+    assigneeId: task.assigneeId ?? undefined,
+  };
+});
 
 export const getTaskSummary = cache(
   async (id: number): Promise<TaskSummaryDTO | null> => {
@@ -178,6 +177,41 @@ export const getTaskSummary = cache(
     };
   },
 );
+
+export const getTasks = cache(async (): Promise<TaskDTO[]> => {
+  // Authorization
+  const {
+    user: { workspaceId },
+  } = await requireSession();
+
+  const tasks = await prisma.task.findMany({
+    where: { workspaceId },
+    orderBy: {
+      createdAt: "desc",
+    },
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      deadline: true,
+      status: true,
+      projectId: true,
+      categoryId: true,
+      assigneeId: true,
+    },
+  });
+
+  return tasks.map((task) => ({
+    id: task.id,
+    title: task.title,
+    description: task.description ?? undefined,
+    deadline: task.deadline.toISOString(),
+    status: task.status,
+    projectId: task.projectId ?? undefined,
+    categoryId: task.categoryId ?? undefined,
+    assigneeId: task.assigneeId ?? undefined,
+  }));
+});
 
 export const getTaskList = cache(
   async ({
@@ -266,7 +300,7 @@ export const getTaskList = cache(
         id: task.id,
         title: task.title,
         status: task.status,
-        deadline: task.deadline.toISOString() ?? undefined,
+        deadline: task.deadline.toISOString(),
         assignee: task.assignee
           ? {
               id: task.assignee.id,

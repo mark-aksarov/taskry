@@ -5,13 +5,13 @@ import { CompanyListItem } from "./CompanyListItem";
 import { UpdateCompanyModal } from "./UpdateCompanyModal";
 import { DeleteCompanyModal } from "./DeleteCompanyModal";
 import { GuestModeModal } from "../common/GuestModeModal";
+import { getCompanies } from "@/lib/data/company/company.dal";
 import { UpdateCompanyProvider } from "./UpdateCompanyProvider";
 import { DeleteCompanyProvider } from "./DeleteCompanyProvider";
-import { getCompanySummaries } from "@/lib/data/company/company.dal";
 import { ModalManagerProvider } from "../../common/ModalManagerContext";
 
 export async function CompaniesContainer() {
-  const companies = await getCompanySummaries();
+  const companies = await getCompanies();
 
   return (
     <CompanyGrid>

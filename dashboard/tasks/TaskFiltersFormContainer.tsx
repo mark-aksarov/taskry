@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { getUserSummaries } from "@/lib/data/user/user.dal";
 import { getProjectSummaries } from "@/lib/data/project/project.dal";
 import { TaskFiltersForm, TaskFiltersFormSkeleton } from "./TaskFiltersForm";
-import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
+import { getTaskCategories } from "@/lib/data/taskCategory/taskCategory.dal";
 
 export function TaskFiltersFormContainer() {
   return (
@@ -15,7 +15,7 @@ export function TaskFiltersFormContainer() {
 }
 
 async function TaskFiltersFormContainerInner() {
-  const categories = await getTaskCategorySummaries();
+  const categories = await getTaskCategories();
   const projects = await getProjectSummaries();
   const users = await getUserSummaries();
 

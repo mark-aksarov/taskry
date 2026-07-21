@@ -1,7 +1,7 @@
 import "server-only";
 
 import {
-  PositionSummaryDTO,
+  PositionDTO,
   CreatePositionInputDTO,
   UpdatePositionInputDTO,
 } from "./position.dto";
@@ -9,9 +9,9 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import { AccessDeniedError, LimitExceededError } from "../utils/error";
-import { requireSession } from "../utils/requireSession";
 import { POSITION_MAX_COUNT } from "../constants";
+import { requireSession } from "../utils/requireSession";
+import { AccessDeniedError, LimitExceededError } from "../utils/error";
 
 export const getPositionCount = cache(async () => {
   // Authorization
@@ -22,27 +22,25 @@ export const getPositionCount = cache(async () => {
   return prisma.position.count({ where: { workspaceId } });
 });
 
-export const getPositionSummaries = cache(
-  async (): Promise<PositionSummaryDTO[]> => {
-    // Authorization
-    const {
-      user: { workspaceId },
-    } = await requireSession();
+export const getPositions = cache(async (): Promise<PositionDTO[]> => {
+  // Authorization
+  const {
+    user: { workspaceId },
+  } = await requireSession();
 
-    const positions = await prisma.position.findMany({
-      where: { workspaceId },
-      select: {
-        id: true,
-        name: true,
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
+  const positions = await prisma.position.findMany({
+    where: { workspaceId },
+    select: {
+      id: true,
+      name: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
-    return positions;
-  },
-);
+  return positions;
+});
 
 export const createPositions = async (input: CreatePositionInputDTO[]) => {
   // Authorization

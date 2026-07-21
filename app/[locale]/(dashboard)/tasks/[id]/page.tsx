@@ -1,9 +1,8 @@
 import { notFound } from "next/navigation";
 import { taskId } from "@/lib/schemas/task";
 import { TaskDetailPage } from "./TaskDetailPage";
-import { getTaskFormData } from "@/lib/data/task/task.dal";
+import { getTask } from "@/lib/data/task/task.dal";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { DeleteTaskProvider } from "@/dashboard/tasks/DeleteTaskProvider";
 import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
 import { CreateSubtaskModal } from "@/dashboard/subtasks/CreateSubtaskModal";
@@ -12,10 +11,11 @@ import { DeleteTaskDetailModal } from "@/dashboard/tasks/DeleteTaskDetailModal";
 import { UpdateTaskStatusModal } from "@/dashboard/tasks/UpdateTaskStatusModal";
 import { TaskDetailAltContainer } from "@/dashboard/tasks/TaskDetailAltContainer";
 import { UpdateTaskProjectModal } from "@/dashboard/tasks/UpdateTaskProjectModal";
+import { CreateSubtaskProvider } from "@/dashboard/subtasks/CreateSubtaskProvider";
 import { UpdateTaskTitleProvider } from "@/dashboard/tasks/UpdateTaskTitleProvider";
 import { UpdateTaskAssigneeModal } from "@/dashboard/tasks/UpdateTaskAssigneeModal";
 import { UpdateTaskDeadlineModal } from "@/dashboard/tasks/UpdateTaskDeadlineModal";
-import { CreateSubtaskProvider } from "@/dashboard/subtasks/CreateSubtaskProvider";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { UpdateTaskStatusProvider } from "@/dashboard/tasks/UpdateTaskStatusProvider";
 import { UpdateTaskProjectProvider } from "@/dashboard/tasks/UpdateTaskProjectProvider";
 import { UpdateTaskDescriptionModal } from "@/dashboard/tasks/UpdateTaskDescriptionModal";
@@ -46,10 +46,10 @@ export default async function AppTaskDetailPage({
   }
   const id = parsed.data;
 
-  // Get task summary
-  const taskFormData = await getTaskFormData(id);
+  // Get task data
+  const task = await getTask(id);
 
-  if (!taskFormData) {
+  if (!task) {
     notFound();
   }
 
@@ -74,35 +74,35 @@ export default async function AppTaskDetailPage({
                         />
 
                         <DeleteTaskDetailModal
-                          taskId={taskFormData.id}
-                          taskTitle={taskFormData.title}
+                          taskId={task.id}
+                          taskTitle={task.title}
                         />
 
                         <UpdateTaskTitleModal
-                          taskId={taskFormData.id}
-                          taskTitle={taskFormData.title}
+                          taskId={task.id}
+                          taskTitle={task.title}
                         />
 
                         <UpdateTaskDescriptionModal
-                          taskId={taskFormData.id}
-                          taskDescription={taskFormData.description}
+                          taskId={task.id}
+                          taskDescription={task.description}
                         />
 
                         <UpdateTaskDeadlineModal
-                          taskId={taskFormData.id}
-                          taskDeadline={taskFormData.deadline}
+                          taskId={task.id}
+                          taskDeadline={task.deadline}
                         />
 
                         <UpdateTaskStatusModal
-                          taskId={taskFormData.id}
-                          taskStatus={taskFormData.status}
+                          taskId={task.id}
+                          taskStatus={task.status}
                         />
 
                         <UpdateTaskCategoryRelModal
                           updateTaskCategoryRelFormContainer={
                             <UpdateTaskCategoryRelFormContainer
-                              taskId={taskFormData.id}
-                              categoryId={taskFormData.categoryId}
+                              taskId={task.id}
+                              categoryId={task.categoryId}
                             />
                           }
                         />
@@ -110,8 +110,8 @@ export default async function AppTaskDetailPage({
                         <UpdateTaskProjectModal
                           updateTaskProjectFormContainer={
                             <UpdateTaskProjectFormContainer
-                              taskId={taskFormData.id}
-                              projectId={taskFormData.projectId}
+                              taskId={task.id}
+                              projectId={task.projectId}
                             />
                           }
                         />
@@ -119,8 +119,8 @@ export default async function AppTaskDetailPage({
                         <UpdateTaskAssigneeModal
                           updateTaskAssigneeFormContainer={
                             <UpdateTaskAssigneeFormContainer
-                              taskId={taskFormData.id}
-                              assigneeId={taskFormData.assigneeId}
+                              taskId={task.id}
+                              assigneeId={task.assigneeId}
                             />
                           }
                         />
@@ -131,7 +131,7 @@ export default async function AppTaskDetailPage({
                           }
                         />
 
-                        <CreateSubtaskModal taskId={taskFormData.id} />
+                        <CreateSubtaskModal taskId={task.id} />
                       </UpdateTaskProjectProvider>
                     </UpdateTaskCategoryRelProvider>
                   </UpdateTaskAssigneeProvider>

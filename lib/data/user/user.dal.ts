@@ -1,9 +1,9 @@
 import {
+  UserDTO,
+  UserListDTO,
   UserDetailDTO,
   UserSearchDTO,
   UserSummaryDTO,
-  UserFormDataDTO,
-  UserListDTO,
 } from "./user.dto";
 
 import { cache } from "react";
@@ -58,44 +58,42 @@ export const getUserDetail = cache(
   },
 );
 
-export const getUserFormData = cache(
-  async (id: string): Promise<UserFormDataDTO | null> => {
-    const {
-      user: { workspaceId },
-    } = await requireSession();
+export const getUser = cache(async (id: string): Promise<UserDTO | null> => {
+  const {
+    user: { workspaceId },
+  } = await requireSession();
 
-    const user = await prisma.user.findFirst({
-      where: { id, workspaceId },
-      select: {
-        id: true,
-        fullName: true,
-        phoneNumber: true,
-        imageUrl: true,
-        publicLink: true,
-        birthdate: true,
-        bio: true,
-        address: true,
-        positionId: true,
-      },
-    });
+  const user = await prisma.user.findFirst({
+    where: { id, workspaceId },
+    select: {
+      id: true,
+      fullName: true,
+      phoneNumber: true,
+      imageUrl: true,
+      publicLink: true,
+      birthdate: true,
+      bio: true,
+      address: true,
+      positionId: true,
+    },
+  });
 
-    if (!user) {
-      return null;
-    }
+  if (!user) {
+    return null;
+  }
 
-    return {
-      id: user.id,
-      fullName: user.fullName,
-      phoneNumber: user.phoneNumber ?? undefined,
-      imageUrl: user.imageUrl ?? undefined,
-      publicLink: user.publicLink ?? undefined,
-      birthdate: user.birthdate?.toISOString() ?? undefined,
-      bio: user.bio ?? undefined,
-      address: user.address ?? undefined,
-      positionId: user.positionId ?? undefined,
-    };
-  },
-);
+  return {
+    id: user.id,
+    fullName: user.fullName,
+    phoneNumber: user.phoneNumber ?? undefined,
+    imageUrl: user.imageUrl ?? undefined,
+    publicLink: user.publicLink ?? undefined,
+    birthdate: user.birthdate?.toISOString() ?? undefined,
+    bio: user.bio ?? undefined,
+    address: user.address ?? undefined,
+    positionId: user.positionId ?? undefined,
+  };
+});
 
 export const getUserSummary = cache(
   async (id: string): Promise<UserSummaryDTO | null> => {

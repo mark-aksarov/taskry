@@ -6,7 +6,7 @@ import {
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
-import { getCompanySummaries } from "@/lib/data/company/company.dal";
+import { getCompanies } from "@/lib/data/company/company.dal";
 
 export async function GET() {
   // Authorization
@@ -20,7 +20,7 @@ export async function GET() {
 
   try {
     // Fetch companies
-    const companies = await getCompanySummaries();
+    const companies = await getCompanies();
     return NextResponse.json(companies);
   } catch (error) {
     console.error("API Error:", error);

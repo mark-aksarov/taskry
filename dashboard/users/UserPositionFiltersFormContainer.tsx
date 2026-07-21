@@ -6,7 +6,7 @@ import {
 } from "./UserPositionFiltersForm";
 
 import { Suspense } from "react";
-import { getPositionSummaries } from "@/lib/data/position/position.dal";
+import { getPositions } from "@/lib/data/position/position.dal";
 
 export function UserPositionFiltersFormContainer() {
   return (
@@ -17,7 +17,7 @@ export function UserPositionFiltersFormContainer() {
 }
 
 async function UserPositionFiltersFormContainerInner() {
-  const positions = await getPositionSummaries();
+  const positions = await getPositions();
 
   return <UserPositionFiltersForm positionCheckboxGroupItems={positions} />;
 }

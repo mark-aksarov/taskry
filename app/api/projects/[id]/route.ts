@@ -10,8 +10,8 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { projectId } from "@/lib/schemas/project";
 import { NextResponse, NextRequest } from "next/server";
+import { getProject } from "@/lib/data/project/project.dal";
 import { getProjectDetail } from "@/lib/data/project/project.dal";
-import { getProjectFormData } from "@/lib/data/project/project.dal";
 
 export async function GET(
   req: NextRequest,
@@ -46,7 +46,7 @@ export async function GET(
     const view = searchParams.get("view");
 
     if (view === "edit") {
-      const project = await getProjectFormData(id);
+      const project = await getProject(id);
 
       if (!project) {
         return notFound("Project not found");

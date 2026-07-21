@@ -3,7 +3,7 @@ export type UserSummaryDTO = {
   fullName: string;
 };
 
-export interface UserFormDataDTO {
+export interface UserDTO {
   id: string;
   fullName: string;
   bio?: string;

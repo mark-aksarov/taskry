@@ -6,10 +6,10 @@ import { DeleteTaskCategoryModal } from "./DeleteTaskCategoryModal";
 import { ModalManagerProvider } from "../../common/ModalManagerContext";
 import { UpdateTaskCategoryProvider } from "./UpdateTaskCategoryProvider";
 import { DeleteTaskCategoryProvider } from "./DeleteTaskCategoryProvider";
-import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
+import { getTaskCategories } from "@/lib/data/taskCategory/taskCategory.dal";
 
 export async function TaskCategoriesContainer() {
-  const taskCategories = await getTaskCategorySummaries();
+  const taskCategories = await getTaskCategories();
 
   return (
     <TaskCategoryGrid>

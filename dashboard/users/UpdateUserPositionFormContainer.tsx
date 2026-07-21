@@ -6,7 +6,7 @@ import {
 } from "./UpdateUserPositionForm";
 
 import useSWR from "swr";
-import { PositionSummaryDTO } from "@/lib/data/position/position.dto";
+import { PositionDTO } from "@/lib/data/position/position.dto";
 
 interface UpdateUserPositionFormContainerProps {
   userId: string;
@@ -17,7 +17,7 @@ export function UpdateUserPositionFormContainer({
   userId,
   positionId,
 }: UpdateUserPositionFormContainerProps) {
-  const { data: positions } = useSWR<PositionSummaryDTO[]>(`/api/positions`);
+  const { data: positions } = useSWR<PositionDTO[]>(`/api/positions`);
 
   // Show skeleton while loading
   if (!positions) {

@@ -1,4 +1,4 @@
-export interface ProjectCategorySummaryDTO {
+export interface ProjectCategoryDTO {
   id: number;
   name: string;
 }

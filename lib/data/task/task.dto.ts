@@ -5,7 +5,7 @@ export type TaskSummaryDTO = {
   title: string;
 };
 
-export interface TaskFormDataDTO {
+export interface TaskDTO {
   id: number;
   title: string;
   description?: string;

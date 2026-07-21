@@ -6,7 +6,7 @@ import {
 } from "./UpdateTaskCategoryRelForm";
 
 import useSWR from "swr";
-import { TaskCategorySummaryDTO } from "@/lib/data/taskCategory/taskCategory.dto";
+import { TaskCategoryDTO } from "@/lib/data/taskCategory/taskCategory.dto";
 
 interface UpdateTaskCategoryRelFormContainerProps {
   taskId: number;
@@ -17,7 +17,7 @@ export function UpdateTaskCategoryRelFormContainer({
   taskId,
   categoryId,
 }: UpdateTaskCategoryRelFormContainerProps) {
-  const { data: categories } = useSWR<TaskCategorySummaryDTO[]>(
+  const { data: categories } = useSWR<TaskCategoryDTO[]>(
     "/api/task-categories",
   );
 

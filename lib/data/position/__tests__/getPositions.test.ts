@@ -1,12 +1,12 @@
 import prisma from "@/lib/prisma";
 import { seed } from "@/prisma/test-seed";
-import { getPositionSummaries } from "../position.dal";
+import { getPositions } from "../position.dal";
 import { users, workspaces } from "@/prisma/seed/test-data";
 import { requireSession } from "@/lib/data/utils/requireSession";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
 
-describe("getPositionSummaries", () => {
+describe("getPositions", () => {
   beforeAll(async () => {
     (requireSession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
@@ -29,8 +29,8 @@ describe("getPositionSummaries", () => {
     await prisma.position.deleteMany();
   });
 
-  it("should return all position summaries as a list of valid PositionSummaryDTOs", async () => {
-    const result = await getPositionSummaries();
+  it("should return all positions as a list of valid PositionDTOs", async () => {
+    const result = await getPositions();
 
     expect(result).toHaveLength(2);
     expect(result).toEqual(
@@ -48,7 +48,7 @@ describe("getPositionSummaries", () => {
   });
 
   it("should return empty array", async () => {
-    const result = await getPositionSummaries();
+    const result = await getPositions();
     expect(result).toHaveLength(0);
   });
 });

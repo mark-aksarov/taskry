@@ -2,11 +2,11 @@
 
 import useSWR from "swr";
 import { UpdateTaskForm } from "./UpdateTaskForm";
+import { TaskDTO } from "@/lib/data/task/task.dto";
 import { TaskFormSkeleton } from "./TaskFormSkeleton";
 import { UserSummaryDTO } from "@/lib/data/user/user.dto";
-import { TaskFormDataDTO } from "@/lib/data/task/task.dto";
 import { ProjectSummaryDTO } from "@/lib/data/project/project.dto";
-import { TaskCategorySummaryDTO } from "@/lib/data/taskCategory/taskCategory.dto";
+import { TaskCategoryDTO } from "@/lib/data/taskCategory/taskCategory.dto";
 
 interface UpdateTaskFormContainerProps {
   taskId: number;
@@ -15,7 +15,7 @@ interface UpdateTaskFormContainerProps {
 export function UpdateTaskFormContainer({
   taskId,
 }: UpdateTaskFormContainerProps) {
-  const { data: categories } = useSWR<TaskCategorySummaryDTO[]>(
+  const { data: categories } = useSWR<TaskCategoryDTO[]>(
     "/api/task-categories",
   );
   const { data: projects } = useSWR<ProjectSummaryDTO[]>("/api/projects");
@@ -26,7 +26,7 @@ export function UpdateTaskFormContainer({
     data: task,
     error: taskError,
     isValidating,
-  } = useSWR<TaskFormDataDTO | null>(`/api/tasks/${taskId}?view=edit`, {
+  } = useSWR<TaskDTO | null>(`/api/tasks/${taskId}?view=edit`, {
     // disable revalidation on focus to prevent UI flicker caused by isValidating
     revalidateOnFocus: false,
   });

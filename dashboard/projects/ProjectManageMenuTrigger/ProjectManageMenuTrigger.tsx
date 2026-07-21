@@ -2,10 +2,11 @@
 
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
-import { Blocks, FileUp } from "lucide-react";
 import { useModal } from "@/common/ModalManagerContext";
+import { Blocks, Download, FileUp, Loader2 } from "lucide-react";
 import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { ManageMenuTrigger } from "@/dashboard/common/ManageMenuTrigger";
+import { useDownloadFile } from "@/lib/hooks/useDownloadFile";
 
 interface ProjectManageMenuTriggerProps {
   renderButton: () => React.ReactNode;
@@ -16,6 +17,13 @@ export function ProjectManageMenuTrigger({
 }: ProjectManageMenuTriggerProps) {
   const t = useTranslations("dashboard.projects.ProjectManageMenuTrigger");
 
+  const [isPending, downloadFile] = useDownloadFile(
+    "/api/projects/export",
+    "projects.csv",
+    t("successMessage"),
+    t("errorMessage"),
+  );
+
   const guestGuard = useGuestModalGuard();
 
   const { onOpenChange: onImportProjectsOpenChange } =
@@ -25,6 +33,8 @@ export function ProjectManageMenuTrigger({
     guestGuard(() => {
       if (key === "import-csv") {
         onImportProjectsOpenChange(true);
+      } else if (key === "export-csv") {
+        downloadFile();
       }
     });
   }
@@ -34,6 +44,19 @@ export function ProjectManageMenuTrigger({
       <Item textValue={t("importCSV")} key="import-csv">
         <FileUp size={16} strokeWidth={1.5} absoluteStrokeWidth />
         {t("importCSV")}
+      </Item>
+      <Item textValue={t("exportCSV")} key="export-csv">
+        {isPending ? (
+          <Loader2
+            size={16}
+            strokeWidth={1.5}
+            absoluteStrokeWidth
+            className="animate-spin"
+          />
+        ) : (
+          <Download size={16} strokeWidth={1.5} absoluteStrokeWidth />
+        )}
+        {t("exportCSV")}
       </Item>
       <Item
         textValue={t("categories")}

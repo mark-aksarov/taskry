@@ -3,7 +3,7 @@ export type CustomerSummaryDTO = {
   fullName: string;
 };
 
-export interface CustomerFormDataDTO {
+export interface CustomerDTO {
   id: number;
   imageUrl?: string;
   bio?: string;
@@ -15,6 +15,7 @@ export interface CustomerFormDataDTO {
 }
 
 export interface CreateCustomerInputDTO {
+  imageUrl?: string;
   bio?: string;
   fullName: string;
   email: string;

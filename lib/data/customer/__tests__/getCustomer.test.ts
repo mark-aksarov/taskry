@@ -2,22 +2,19 @@ import {
   users,
   positions,
   companies,
-  customers,
   workspaces,
   taskCategories,
+  customers,
   projectCategories,
-  projects,
-  tasks,
 } from "@/prisma/seed/test-data";
 
-import { getTaskFormData } from "../task.dal";
 import { seed } from "@/prisma/test-seed";
-import { TaskStatus } from "@/generated/prisma/enums";
+import { getCustomer } from "../customer.dal";
 import { it, expect, describe, beforeAll } from "vitest";
 import { requireSession } from "@/lib/data/utils/requireSession";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 
-describe("getTaskFormData", () => {
+describe("getCustomer", () => {
   beforeAll(async () => {
     (requireSession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
@@ -30,32 +27,30 @@ describe("getTaskFormData", () => {
       positions,
       users,
       companies,
-      customers,
       taskCategories,
       projectCategories,
-      projects,
-      tasks,
+      customers,
     });
   });
 
-  it("should return a valid TaskFormDataDTO", async () => {
-    const result = await getTaskFormData(1);
+  it("should return a valid CustomerDTO", async () => {
+    const result = await getCustomer(1);
 
     expect(result).toBeDefined();
     expect(result).toStrictEqual({
       id: 1,
-      title: "Task 1",
-      description: "Description 1",
-      deadline: new Date("2030-12-31").toISOString(),
-      status: TaskStatus.active,
-      projectId: 1,
-      categoryId: 1,
-      assigneeId: "user-1",
+      fullName: "Customer 1",
+      email: "customer-1@test.com",
+      phoneNumber: "123-456-7890",
+      imageUrl: "/man.jpg",
+      publicLink: "https://example.com/customer-1",
+      bio: "Customer 1 bio",
+      companyId: 1,
     });
   });
 
   it("should return null", async () => {
-    const failure = await getTaskFormData(999);
+    const failure = await getCustomer(999);
     expect(failure).toBeNull();
   });
 });

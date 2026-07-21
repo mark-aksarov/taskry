@@ -24,5 +24,6 @@ export const createCustomerSchema = z.object({
     emptyStringToUndefined,
     customerPublicLink.optional(),
   ),
+  imageUrl: z.preprocess(emptyStringToUndefined, customerImageUrl.optional()),
   companyId: z.preprocess(emptyStringToUndefined, companyId.optional()),
 });

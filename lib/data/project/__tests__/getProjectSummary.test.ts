@@ -35,7 +35,7 @@ describe("getProjectSummary", () => {
     });
   });
 
-  it("should return a valid ProjectFormDataDTO", async () => {
+  it("should return a valid ProjectSummaryDTO", async () => {
     const result = await getProjectSummary(1);
     expect(result).toStrictEqual({ id: 1, title: "Project 1" });
   });

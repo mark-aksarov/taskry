@@ -1,7 +1,7 @@
 import "server-only";
 
 import {
-  CompanySummaryDTO,
+  CompanyDTO,
   CreateCompanyInputDTO,
   UpdateCompanyInputDTO,
 } from "./company.dto";
@@ -9,9 +9,9 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import { AccessDeniedError, LimitExceededError } from "../utils/error";
-import { requireSession } from "../utils/requireSession";
 import { COMPANY_MAX_COUNT } from "../constants";
+import { requireSession } from "../utils/requireSession";
+import { AccessDeniedError, LimitExceededError } from "../utils/error";
 
 export const getCompanyCount = cache(async () => {
   // Authorization
@@ -22,30 +22,28 @@ export const getCompanyCount = cache(async () => {
   return prisma.company.count({ where: { workspaceId } });
 });
 
-export const getCompanySummaries = cache(
-  async (): Promise<CompanySummaryDTO[]> => {
-    // Authorization
-    const {
-      user: { workspaceId },
-    } = await requireSession();
+export const getCompanies = cache(async (): Promise<CompanyDTO[]> => {
+  // Authorization
+  const {
+    user: { workspaceId },
+  } = await requireSession();
 
-    // Get companies
-    const companies = await prisma.company.findMany({
-      where: {
-        workspaceId,
-      },
-      select: {
-        id: true,
-        name: true,
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
+  // Get companies
+  const companies = await prisma.company.findMany({
+    where: {
+      workspaceId,
+    },
+    select: {
+      id: true,
+      name: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
-    return companies;
-  },
-);
+  return companies;
+});
 
 export const updateCompany = async (input: UpdateCompanyInputDTO) => {
   // Authorization

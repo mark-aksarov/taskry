@@ -9,7 +9,7 @@ import z from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { getUserDetail, getUserFormData } from "@/lib/data/user/user.dal";
+import { getUserDetail, getUser } from "@/lib/data/user/user.dal";
 
 export async function GET(
   req: NextRequest,
@@ -44,7 +44,7 @@ export async function GET(
     const view = searchParams.get("view");
 
     if (view === "edit") {
-      const user = await getUserFormData(id);
+      const user = await getUser(id);
 
       if (!user) {
         return notFound("User not found");

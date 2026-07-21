@@ -8,7 +8,7 @@ import {
 import { Suspense } from "react";
 import { getUserSummaries } from "@/lib/data/user/user.dal";
 import { getCustomerSummaries } from "@/lib/data/customer/customer.dal";
-import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
+import { getProjectCategories } from "@/lib/data/projectCategory/projectCategory.dal";
 
 export function ProjectFiltersFormContainer() {
   return (
@@ -19,7 +19,7 @@ export function ProjectFiltersFormContainer() {
 }
 
 async function ProjectFiltersFormContainerInner() {
-  const categories = await getProjectCategorySummaries();
+  const categories = await getProjectCategories();
   const customers = await getCustomerSummaries();
   const users = await getUserSummaries();
 

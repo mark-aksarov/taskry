@@ -6,7 +6,7 @@ import {
 } from "./CustomerFiltersForm";
 
 import { Suspense } from "react";
-import { getCompanySummaries } from "@/lib/data/company/company.dal";
+import { getCompanies } from "@/lib/data/company/company.dal";
 
 export function CustomerFiltersFormContainer() {
   return (
@@ -17,7 +17,7 @@ export function CustomerFiltersFormContainer() {
 }
 
 async function CustomerFiltersFormContainerInner() {
-  const companies = await getCompanySummaries();
+  const companies = await getCompanies();
 
   return <CustomerFiltersForm companyCheckboxGroupItems={companies} />;
 }

@@ -7,11 +7,11 @@ import {
 } from "../utils/error";
 
 import {
+  CustomerDTO,
   CustomerListDTO,
   CustomerDetailDTO,
   CustomerSearchDTO,
   CustomerSummaryDTO,
-  CustomerFormDataDTO,
   CreateCustomerInputDTO,
   UpdateCustomerInputDTO,
   UpdateCustomerImageUrlInputDTO,
@@ -72,8 +72,8 @@ export const getCustomerDetail = cache(
   },
 );
 
-export const getCustomerFormData = cache(
-  async (id: number): Promise<CustomerFormDataDTO | null> => {
+export const getCustomer = cache(
+  async (id: number): Promise<CustomerDTO | null> => {
     // Authorization
     const {
       user: { workspaceId },
@@ -163,6 +163,41 @@ export const getCustomerSummaries = cache(
     }));
   },
 );
+
+export const getCustomers = cache(async (): Promise<CustomerDTO[]> => {
+  // Authorization
+  const {
+    user: { workspaceId },
+  } = await requireSession();
+
+  const customers = await prisma.customer.findMany({
+    where: { workspaceId },
+    orderBy: {
+      createdAt: "desc",
+    },
+    select: {
+      id: true,
+      fullName: true,
+      email: true,
+      phoneNumber: true,
+      imageUrl: true,
+      publicLink: true,
+      bio: true,
+      companyId: true,
+    },
+  });
+
+  return customers.map((customer) => ({
+    id: customer.id,
+    fullName: customer.fullName,
+    email: customer.email,
+    phoneNumber: customer.phoneNumber ?? undefined,
+    imageUrl: customer.imageUrl ?? undefined,
+    publicLink: customer.publicLink ?? undefined,
+    bio: customer.bio ?? undefined,
+    companyId: customer.companyId ?? undefined,
+  }));
+});
 
 export const searchCustomers = cache(
   async ({
@@ -382,6 +417,7 @@ export const createCustomers = async (input: CreateCustomerInputDTO[]) => {
       email: customer.email,
       phoneNumber: customer.phoneNumber,
       publicLink: customer.publicLink,
+      imageUrl: customer.imageUrl,
       workspaceId,
     })),
   });

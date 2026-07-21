@@ -6,7 +6,7 @@ import {
 } from "./TaskCategoryFiltersForm";
 
 import { Suspense } from "react";
-import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
+import { getTaskCategories } from "@/lib/data/taskCategory/taskCategory.dal";
 
 export function TaskCategoryFiltersFormContainer() {
   return (
@@ -17,7 +17,7 @@ export function TaskCategoryFiltersFormContainer() {
 }
 
 async function TaskFiltersFormContainerInner() {
-  const categories = await getTaskCategorySummaries();
+  const categories = await getTaskCategories();
 
   return <TaskCategoryFiltersForm categoryCheckboxGroupItems={categories} />;
 }

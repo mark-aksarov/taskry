@@ -1,12 +1,12 @@
 import prisma from "@/lib/prisma";
-import { getCompanySummaries } from "../company.dal";
 import { seed } from "@/prisma/test-seed";
-import { requireSession } from "@/lib/data/utils/requireSession";
+import { getProjectCategories } from "../projectCategory.dal";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
+import { requireSession } from "@/lib/data/utils/requireSession";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
 import { users, positions, workspaces } from "@/prisma/seed/test-data";
 
-describe("getCompanySummaries", () => {
+describe("getProjectCategories", () => {
   beforeAll(async () => {
     (requireSession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
@@ -22,36 +22,36 @@ describe("getCompanySummaries", () => {
   });
 
   afterEach(async () => {
-    await prisma.company.deleteMany();
+    await prisma.projectCategory.deleteMany();
   });
 
-  it("should return all companies", async () => {
-    await prisma.company.createMany({
+  it("should return all project categories as a list of valid ProjectCategoryDTOs", async () => {
+    await prisma.projectCategory.createMany({
       data: [
-        { id: 1, name: "Company 1", workspaceId: 1 },
-        { id: 2, name: "Company 2", workspaceId: 1 },
+        { id: 1, name: "Project Category 1", workspaceId: 1 },
+        { id: 2, name: "Project Category 2", workspaceId: 1 },
       ],
     });
 
-    const result = await getCompanySummaries();
+    const result = await getProjectCategories();
 
     expect(result).toHaveLength(2);
     expect(result).toEqual(
       expect.arrayContaining([
         {
           id: 1,
-          name: "Company 1",
+          name: "Project Category 1",
         },
         {
           id: 2,
-          name: "Company 2",
+          name: "Project Category 2",
         },
       ]),
     );
   });
 
   it("should return empty array", async () => {
-    const result = await getCompanySummaries();
+    const result = await getProjectCategories();
     expect(result).toHaveLength(0);
   });
 });

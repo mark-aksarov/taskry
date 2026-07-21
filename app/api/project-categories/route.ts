@@ -6,7 +6,7 @@ import {
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
-import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
+import { getProjectCategories } from "@/lib/data/projectCategory/projectCategory.dal";
 
 export async function GET() {
   // Authorization
@@ -20,7 +20,7 @@ export async function GET() {
 
   try {
     // Fetch projects
-    const projects = await getProjectCategorySummaries();
+    const projects = await getProjectCategories();
     return NextResponse.json(projects);
   } catch (error) {
     console.error("API Error:", error);

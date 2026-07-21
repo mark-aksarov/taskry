@@ -1,7 +1,7 @@
 import "server-only";
 
 import {
-  ProjectCategorySummaryDTO,
+  ProjectCategoryDTO,
   CreateProjectCategoryInputDTO,
   UpdateProjectCategoryInputDTO,
 } from "./projectCategory.dto";
@@ -22,8 +22,8 @@ export const getProjectCategoryCount = cache(async () => {
   return prisma.projectCategory.count({ where: { workspaceId } });
 });
 
-export const getProjectCategorySummaries = cache(
-  async (): Promise<ProjectCategorySummaryDTO[]> => {
+export const getProjectCategories = cache(
+  async (): Promise<ProjectCategoryDTO[]> => {
     // Authorization
     const {
       user: { workspaceId },

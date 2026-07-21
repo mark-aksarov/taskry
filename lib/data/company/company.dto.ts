@@ -1,7 +1,7 @@
-export type CompanySummaryDTO = {
+export interface CompanyDTO {
   id: number;
   name: string;
-};
+}
 
 export interface CreateCompanyInputDTO {
   name: string;

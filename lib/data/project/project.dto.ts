@@ -24,7 +24,7 @@ export interface UpdateProjectInputDTO {
   status?: ProjectStatus;
 }
 
-export interface ProjectFormDataDTO {
+export interface ProjectDTO {
   id: number;
   title: string;
   description?: string;

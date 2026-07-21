@@ -3,9 +3,9 @@
 import useSWR from "swr";
 import { UpdateProjectForm } from "./UpdateProjectForm";
 import { ProjectFormSkeleton } from "./ProjectFormSkeleton";
-import { ProjectFormDataDTO } from "@/lib/data/project/project.dto";
+import { ProjectDTO } from "@/lib/data/project/project.dto";
 import { CustomerSummaryDTO } from "@/lib/data/customer/customer.dto";
-import { ProjectCategorySummaryDTO } from "@/lib/data/projectCategory/projectCategory.dto";
+import { ProjectCategoryDTO } from "@/lib/data/projectCategory/projectCategory.dto";
 
 interface UpdateProjectFormContainerProps {
   projectId: number;
@@ -14,7 +14,7 @@ interface UpdateProjectFormContainerProps {
 export function UpdateProjectFormContainer({
   projectId,
 }: UpdateProjectFormContainerProps) {
-  const { data: categories } = useSWR<ProjectCategorySummaryDTO[]>(
+  const { data: categories } = useSWR<ProjectCategoryDTO[]>(
     `/api/project-categories`,
   );
 
@@ -24,7 +24,7 @@ export function UpdateProjectFormContainer({
     data: project,
     error: projectError,
     isValidating,
-  } = useSWR<ProjectFormDataDTO>(`/api/projects/${projectId}?view=edit`, {
+  } = useSWR<ProjectDTO>(`/api/projects/${projectId}?view=edit`, {
     // disable revalidation on focus to prevent UI flicker caused by isValidating
     revalidateOnFocus: false,
   });

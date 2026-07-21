@@ -4,9 +4,9 @@ import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
 import { createTaskSchema } from "@/lib/schemas/task";
+import { TASK_MAX_COUNT } from "@/lib/data/constants";
 import { parseCsvFile } from "@/lib/utils/parseCsvFile";
 import { LimitExceededError } from "@/lib/data/utils/error";
-import { PROJECT_MAX_COUNT, TASK_MAX_COUNT } from "@/lib/data/constants";
 import { createTasks as createTasksQuery } from "@/lib/data/task/task.dal";
 import { requireActionSession } from "@/lib/utils/requireActionSession";
 

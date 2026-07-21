@@ -6,7 +6,7 @@ import {
 } from "./ProjectCategoryFiltersForm";
 
 import { Suspense } from "react";
-import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
+import { getProjectCategories } from "@/lib/data/projectCategory/projectCategory.dal";
 
 export function ProjectCategoryFiltersFormContainer() {
   return (
@@ -17,7 +17,7 @@ export function ProjectCategoryFiltersFormContainer() {
 }
 
 async function ProjectFiltersFormContainerInner() {
-  const categories = await getProjectCategorySummaries();
+  const categories = await getProjectCategories();
 
   return <ProjectCategoryFiltersForm categoryCheckboxGroupItems={categories} />;
 }

@@ -9,9 +9,9 @@ import z from "zod";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { taskId } from "@/lib/schemas/task";
+import { getTask } from "@/lib/data/task/task.dal";
 import { NextResponse, NextRequest } from "next/server";
 import { getTaskDetail } from "@/lib/data/task/task.dal";
-import { getTaskFormData } from "@/lib/data/task/task.dal";
 
 export async function GET(
   req: NextRequest,
@@ -45,13 +45,13 @@ export async function GET(
     const view = searchParams.get("view");
 
     if (view === "edit") {
-      const formData = await getTaskFormData(id);
+      const task = await getTask(id);
 
-      if (!formData) {
+      if (!task) {
         return notFound("Task not found");
       }
 
-      return NextResponse.json(formData);
+      return NextResponse.json(task);
     }
 
     const task = await getTaskDetail(id);

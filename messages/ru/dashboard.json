@@ -382,7 +382,10 @@
     },
     "CustomerManageMenuTrigger": {
       "companies": "Компании",
-      "importCSV": "Импорт клиентов (CSV)"
+      "importCSV": "Импорт клиентов (CSV)",
+      "exportCSV": "Экспорт клиентов (CSV)",
+      "successMessage": "Клиенты успешно экспортированы",
+      "errorMessage": "Не удалось экспортировать клиентов"
     },
     "CustomerImageMenuTrigger": {
       "label": "Меню изображения профиля"
@@ -512,7 +515,10 @@
       "successMessage": "Должность успешно удалена"
     },
     "PositionManageMenuTrigger": {
-      "importCSV": "Импорт должностей (CSV)"
+      "importCSV": "Импорт должностей (CSV)",
+      "exportCSV": "Экспорт должностей (CSV)",
+      "successMessage": "Должности успешно экспортированы",
+      "errorMessage": "Не удалось экспортировать должности"
     }
   },
   "projectCategories": {
@@ -579,7 +585,10 @@
       "heading": "Импортировать категории"
     },
     "ProjectCategoryManageMenuTrigger": {
-      "importCSV": "Импорт категорий (CSV)"
+      "importCSV": "Импорт категорий (CSV)",
+      "exportCSV": "Экспорт категорий (CSV)",
+      "successMessage": "Категории проектов успешно экспортированы",
+      "errorMessage": "Не удалось экспортировать категории проектов"
     }
   },
   "projects": {
@@ -655,7 +664,10 @@
     },
     "ProjectManageMenuTrigger": {
       "categories": "Категории",
-      "importCSV": "Импорт проектов (CSV)"
+      "importCSV": "Импорт проектов (CSV)",
+      "exportCSV": "Экспорт проектов (CSV)",
+      "successMessage": "Проекты успешно экспортированы",
+      "errorMessage": "Не удалось экспортировать проекты"
     },
     "ProjectTitleTextField": {
       "label": "Заголовок",
@@ -1012,7 +1024,10 @@
       "heading": "Импортировать категорий"
     },
     "TaskCategoryManageMenuTrigger": {
-      "importCSV": "Импорт категорий (CSV)"
+      "importCSV": "Импорт категорий (CSV)",
+      "exportCSV": "Экспорт категорий (CSV)",
+      "successMessage": "Категории задач успешно экспортированы",
+      "errorMessage": "Не удалось экспортировать категории задач"
     }
   },
   "tasks": {
@@ -1219,7 +1234,10 @@
     },
     "TaskManageMenuTrigger": {
       "categories": "Категории",
-      "importCSV": "Импорт задач (CSV) "
+      "importCSV": "Импорт задач (CSV) ",
+      "exportCSV": "Экспорт задач (CSV)",
+      "successMessage": "Задачи успешно экспортированы",
+      "errorMessage": "Не удалось экспортировать задачи"
     },
     "TasksFilteredEmptySection": {
       "heading": "Задачи не найдены",
@@ -1588,7 +1606,10 @@
       "heading": "Импортировать компании"
     },
     "CompanyManageMenuTrigger": {
-      "importCSV": "Импорт компаний (CSV)"
+      "importCSV": "Импорт компаний (CSV)",
+      "exportCSV": "Экспорт компаний (CSV)",
+      "successMessage": "Компании успешно экспортированы",
+      "errorMessage": "Не удалось экспортировать компании"
     }
   }
 }

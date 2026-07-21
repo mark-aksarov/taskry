@@ -382,7 +382,10 @@
     },
     "CustomerManageMenuTrigger": {
       "companies": "Companies",
-      "importCSV": "Import customers (CSV)"
+      "importCSV": "Import customers (CSV)",
+      "exportCSV": "Export customers (CSV)",
+      "successMessage": "Customers exported successfully",
+      "errorMessage": "Customers export failed"
     },
     "CustomerImageMenuTrigger": {
       "label": "Profile image menu"
@@ -512,7 +515,10 @@
       "successMessage": "Position deleted successfully"
     },
     "PositionManageMenuTrigger": {
-      "importCSV": "Import positions (CSV)"
+      "importCSV": "Import positions (CSV)",
+      "exportCSV": "Export positions (CSV)",
+      "successMessage": "Positions exported successfully",
+      "errorMessage": "Positions export failed"
     }
   },
   "projectCategories": {
@@ -579,7 +585,10 @@
       "heading": "Import categories"
     },
     "ProjectCategoryManageMenuTrigger": {
-      "importCSV": "Import categories (CSV)"
+      "importCSV": "Import categories (CSV)",
+      "exportCSV": "Export categories (CSV)",
+      "successMessage": "Project categories exported successfully",
+      "errorMessage": "Project categories export failed"
     }
   },
   "projects": {
@@ -655,7 +664,10 @@
     },
     "ProjectManageMenuTrigger": {
       "categories": "Categories",
-      "importCSV": "Import projects (CSV)"
+      "importCSV": "Import projects (CSV)",
+      "exportCSV": "Export projects (CSV)",
+      "successMessage": "Projects exported successfully",
+      "errorMessage": "Projects export failed"
     },
     "ProjectTitleTextField": {
       "label": "Title",
@@ -1012,7 +1024,10 @@
       "heading": "Import categories"
     },
     "TaskCategoryManageMenuTrigger": {
-      "importCSV": "Import categories (CSV)"
+      "importCSV": "Import categories (CSV)",
+      "exportCSV": "Export categories (CSV)",
+      "successMessage": "Task categories exported successfully",
+      "errorMessage": "Task categories export failed"
     }
   },
   "tasks": {
@@ -1219,7 +1234,10 @@
     },
     "TaskManageMenuTrigger": {
       "categories": "Categories",
-      "importCSV": "Import tasks (CSV)"
+      "importCSV": "Import tasks (CSV)",
+      "exportCSV": "Export tasks (CSV)",
+      "successMessage": "Tasks exported successfully",
+      "errorMessage": "Tasks export failed"
     },
     "TasksFilteredEmptySection": {
       "heading": "No tasks found",
@@ -1591,7 +1609,10 @@
       "heading": "Import companies"
     },
     "CompanyManageMenuTrigger": {
-      "importCSV": "Import companies (CSV)"
+      "importCSV": "Import companies (CSV)",
+      "exportCSV": "Export companies (CSV)",
+      "successMessage": "Companies exported successfully",
+      "errorMessage": "Companies export failed"
     }
   }
 }

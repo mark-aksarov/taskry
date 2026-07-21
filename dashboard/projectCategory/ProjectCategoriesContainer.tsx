@@ -8,10 +8,10 @@ import { UpdateProjectCategoryModal } from "./UpdateProjectCategoryModal";
 import { DeleteProjectCategoryModal } from "./DeleteProjectCategoryModal";
 import { UpdateProjectCategoryProvider } from "./UpdateProjectCategoryProvider";
 import { DeleteProjectCategoryProvider } from "./DeleteProjectCategoryProvider";
-import { getProjectCategorySummaries } from "@/lib/data/projectCategory/projectCategory.dal";
+import { getProjectCategories } from "@/lib/data/projectCategory/projectCategory.dal";
 
 export async function ProjectCategoriesContainer() {
-  const projectCategories = await getProjectCategorySummaries();
+  const projectCategories = await getProjectCategories();
 
   return (
     <ProjectCategoryGrid>

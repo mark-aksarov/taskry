@@ -1,4 +1,4 @@
-export type PositionSummaryDTO = {
+export type PositionDTO = {
   id: number;
   name: string;
 };

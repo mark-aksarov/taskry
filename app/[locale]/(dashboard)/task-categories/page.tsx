@@ -1,9 +1,9 @@
 import { TaskCategoriesPage } from "./TaskCategoriesPage";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
+import { getTaskCategories } from "@/lib/data/taskCategory/taskCategory.dal";
 import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
-import { getTaskCategorySummaries } from "@/lib/data/taskCategory/taskCategory.dal";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { CreateTaskCategoryModal } from "@/dashboard/taskCategory/CreateTaskCategoryModal";
 import { TaskCategoriesContainer } from "@/dashboard/taskCategory/TaskCategoriesContainer";
 import { ImportTaskCategoriesModal } from "@/dashboard/taskCategory/ImportTaskCategoriesModal";
@@ -16,7 +16,7 @@ export default async function AppTaskCategoriesPage() {
   // Authorization
   await requireProtectedPageSession();
 
-  const taskCategories = await getTaskCategorySummaries();
+  const taskCategories = await getTaskCategories();
 
   return (
     <SelectedItemsProvider

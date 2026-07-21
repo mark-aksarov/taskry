@@ -1,13 +1,13 @@
 import { notFound } from "next/navigation";
 import { customerId } from "@/lib/schemas/customer";
 import { CustomerDetailPage } from "./CustomerDetailPage";
+import { getCustomer } from "@/lib/data/customer/customer.dal";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
-import { getCustomerFormData } from "@/lib/data/customer/customer.dal";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
 import { CustomerDetailActions } from "@/dashboard/customer/CustomerDetailActions";
 import { UpdateCustomerBioModal } from "@/dashboard/customer/UpdateCustomerBioModal";
 import { DeleteCustomerProvider } from "@/dashboard/customer/DeleteCustomerProvider";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { UpdateCustomerImageModal } from "@/dashboard/customer/UpdateCustomerImageModal";
 import { UpdateCustomerEmailModal } from "@/dashboard/customer/UpdateCustomerEmailModal";
 import { DeleteCustomerImageModal } from "@/dashboard/customer/DeleteCustomerImageModal";
@@ -45,10 +45,10 @@ export default async function AppCustomerDetailPage({
   }
   const id = parsed.data;
 
-  // Get customer summary
-  const customerFormData = await getCustomerFormData(id);
+  // Get customer data
+  const customer = await getCustomer(id);
 
-  if (!customerFormData) {
+  if (!customer) {
     notFound();
   }
 
@@ -74,51 +74,49 @@ export default async function AppCustomerDetailPage({
                         />
 
                         <UpdateCustomerBioModal
-                          customerId={customerFormData.id}
-                          customerBio={customerFormData.bio}
+                          customerId={customer.id}
+                          customerBio={customer.bio}
                         />
 
                         <UpdateCustomerFullNameModal
-                          customerId={customerFormData.id}
-                          customerFullName={customerFormData.fullName}
+                          customerId={customer.id}
+                          customerFullName={customer.fullName}
                         />
 
                         <UpdateCustomerPhoneNumberModal
-                          customerId={customerFormData.id}
-                          customerPhoneNumber={customerFormData.phoneNumber}
+                          customerId={customer.id}
+                          customerPhoneNumber={customer.phoneNumber}
                         />
 
                         <UpdateCustomerPublicLinkModal
-                          customerId={customerFormData.id}
-                          customerPublicLink={customerFormData.publicLink}
+                          customerId={customer.id}
+                          customerPublicLink={customer.publicLink}
                         />
 
                         <UpdateCustomerEmailModal
-                          customerId={customerFormData.id}
-                          customerEmail={customerFormData.email}
+                          customerId={customer.id}
+                          customerEmail={customer.email}
                         />
 
                         <UpdateCustomerCompanyModal
                           updateCustomerCompanyFormContainer={
                             <UpdateCustomerCompanyFormContainer
-                              customerId={customerFormData.id}
-                              companyId={customerFormData.companyId}
+                              customerId={customer.id}
+                              companyId={customer.companyId}
                             />
                           }
                         />
 
                         <DeleteCustomerDetailModal
-                          customerId={customerFormData.id}
-                          customerFullName={customerFormData.fullName}
+                          customerId={customer.id}
+                          customerFullName={customer.fullName}
                         />
 
-                        <UpdateCustomerImageModal
-                          customerId={customerFormData.id}
-                        />
+                        <UpdateCustomerImageModal customerId={customer.id} />
 
                         <DeleteCustomerImageModal
-                          customerId={customerFormData.id}
-                          customerFullName={customerFormData.fullName}
+                          customerId={customer.id}
+                          customerFullName={customer.fullName}
                         />
 
                         <TaskSearchModal

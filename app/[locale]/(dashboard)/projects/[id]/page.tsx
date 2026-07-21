@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 import { projectId } from "@/lib/schemas/project";
 import { ProjectDetailPage } from "./ProjectDetailPage";
-import { getProjectFormData } from "@/lib/data/project/project.dal";
+import { getProject } from "@/lib/data/project/project.dal";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
 import { DeleteProjectProvider } from "@/dashboard/projects/DeleteProjectProvider";
+import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { UpdateProjectTitleModal } from "@/dashboard/projects/UpdateProjectTitleModal";
 import { DeleteProjectDetailModal } from "@/dashboard/projects/DeleteProjectDetailModal";
 import { UpdateProjectStatusModal } from "@/dashboard/projects/UpdateProjectStatusModal";
@@ -42,9 +42,9 @@ export default async function AppProjectDetailPage({
   const id = parsed.data;
 
   // Get project
-  const projectFormData = await getProjectFormData(id);
+  const project = await getProject(id);
 
-  if (!projectFormData) {
+  if (!project) {
     notFound();
   }
 
@@ -67,30 +67,30 @@ export default async function AppProjectDetailPage({
                     />
 
                     <DeleteProjectDetailModal
-                      projectId={projectFormData.id}
-                      projectTitle={projectFormData.title}
+                      projectId={project.id}
+                      projectTitle={project.title}
                     />
 
                     <UpdateProjectDescriptionModal
-                      projectId={projectFormData.id}
-                      description={projectFormData.description}
+                      projectId={project.id}
+                      description={project.description}
                     />
 
                     <UpdateProjectTitleModal
-                      projectId={projectFormData.id}
-                      title={projectFormData.title}
+                      projectId={project.id}
+                      title={project.title}
                     />
 
                     <UpdateProjectDeadlineModal
-                      projectId={projectFormData.id}
-                      projectDeadline={projectFormData.deadline}
+                      projectId={project.id}
+                      projectDeadline={project.deadline}
                     />
 
                     <UpdateProjectCategoryRelModal
                       updateProjectCategoryRelFormContainer={
                         <UpdateProjectCategoryRelFormContainer
-                          projectId={projectFormData.id}
-                          categoryId={projectFormData.categoryId}
+                          projectId={project.id}
+                          categoryId={project.categoryId}
                         />
                       }
                     />
@@ -98,15 +98,15 @@ export default async function AppProjectDetailPage({
                     <UpdateProjectCustomerModal
                       updateProjectCustomerFormContainer={
                         <UpdateProjectCustomerFormContainer
-                          projectId={projectFormData.id}
-                          customerId={projectFormData.customerId}
+                          projectId={project.id}
+                          customerId={project.customerId}
                         />
                       }
                     />
 
                     <UpdateProjectStatusModal
-                      projectId={projectFormData.id}
-                      projectStatus={projectFormData.status}
+                      projectId={project.id}
+                      projectStatus={project.status}
                     />
 
                     <TaskSearchModal

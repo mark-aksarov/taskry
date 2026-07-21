@@ -10,8 +10,8 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { customerId } from "@/lib/schemas/customer";
 import { NextRequest, NextResponse } from "next/server";
+import { getCustomer } from "@/lib/data/customer/customer.dal";
 import { getCustomerDetail } from "@/lib/data/customer/customer.dal";
-import { getCustomerFormData } from "@/lib/data/customer/customer.dal";
 
 const schema = z.object({ id: customerId });
 
@@ -44,7 +44,7 @@ export async function GET(
     const view = searchParams.get("view");
 
     if (view === "edit") {
-      const customer = await getCustomerFormData(id);
+      const customer = await getCustomer(id);
 
       if (!customer) {
         return notFound("Customer not found");

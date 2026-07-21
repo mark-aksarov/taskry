@@ -6,7 +6,7 @@ import {
 } from "./UpdateCustomerCompanyForm";
 
 import useSWR from "swr";
-import { CompanySummaryDTO } from "@/lib/data/company/company.dto";
+import { CompanyDTO } from "@/lib/data/company/company.dto";
 
 interface UpdateCustomerCompanyFormContainerProps {
   customerId: number;
@@ -17,7 +17,7 @@ export function UpdateCustomerCompanyFormContainer({
   customerId,
   companyId,
 }: UpdateCustomerCompanyFormContainerProps) {
-  const { data: companies } = useSWR<CompanySummaryDTO[]>(`/api/companies`);
+  const { data: companies } = useSWR<CompanyDTO[]>(`/api/companies`);
 
   // Show skeleton while loading
   if (!companies) {

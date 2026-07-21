@@ -1,7 +1,7 @@
 import "server-only";
 
 import {
-  TaskCategorySummaryDTO,
+  TaskCategoryDTO,
   CreateTaskCategoryInputDTO,
   UpdateTaskCategoryInputDTO,
 } from "./taskCategory.dto";
@@ -22,22 +22,20 @@ export const getTaskCategoryCount = cache(async () => {
   return prisma.taskCategory.count({ where: { workspaceId } });
 });
 
-export const getTaskCategorySummaries = cache(
-  async (): Promise<TaskCategorySummaryDTO[]> => {
-    // Authorization
-    const {
-      user: { workspaceId },
-    } = await requireSession();
+export const getTaskCategories = cache(async (): Promise<TaskCategoryDTO[]> => {
+  // Authorization
+  const {
+    user: { workspaceId },
+  } = await requireSession();
 
-    return await prisma.taskCategory.findMany({
-      where: { workspaceId },
-      select: { id: true, name: true },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-  },
-);
+  return await prisma.taskCategory.findMany({
+    where: { workspaceId },
+    select: { id: true, name: true },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+});
 
 export const createTaskCategory = async (input: CreateTaskCategoryInputDTO) => {
   // Authorization
