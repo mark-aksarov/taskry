@@ -15,15 +15,15 @@
       "unknownUser": "Unknown user"
     },
     "CommentsEmptySection": {
-      "heading": "No comments?",
-      "description": "No comments yet. Add the first one to share updates, ask a question, or start a discussion about this task."
+      "heading": "No comments yet",
+      "description": "Add the first comment to share updates, ask a question, or start a discussion about this task."
     },
     "CommentTextField": {
-      "placeholder": "Type a comment...",
-      "ariaLabel": "Type a comment"
+      "placeholder": "Enter a comment...",
+      "ariaLabel": "Comment input field"
     },
     "CommentTextFieldSendButton": {
-      "ariaLabel": "Send message"
+      "ariaLabel": "Send comment"
     },
     "ReplyButton": "Reply",
     "CommentCancelEditingButton": {
@@ -49,7 +49,7 @@
     },
     "UploadPersonImageDialog": {
       "heading": "Upload image",
-      "text": "Upload the profile image. Allowed file types: JPG, PNG, WEBP. Maximum file size is 200 KB. Minimum image size is 300x300 pixels."
+      "text": "Upload a profile image. Allowed file types: JPG, PNG, WEBP. Maximum file size is 200 KB. Minimum image size is 300x300 pixels."
     },
     "UpdatePersonImageDialog": {
       "heading": "Change image",
@@ -62,7 +62,7 @@
         "fileSize": "The file is too large. Maximum size is 200 KB.",
         "imageSize": "The image is too small. Minimum size is 300x300 pixels.",
         "aspectRatio": "The image should not be too wide or too tall.",
-        "unknown": "Unknown error loading image"
+        "unknown": "Unknown error while loading image"
       }
     },
     "GuestModeModal": {
@@ -137,14 +137,14 @@
     },
     "ImportModalErrorBanner": {
       "error": {
-        "fileSize": "File size is too big. The maximum file size is 512 KB."
+        "fileSize": "File size is too large. Maximum file size is 512 KB."
       }
     },
     "ImportModalUploadTrigger": {
       "label": "Upload CSV"
     },
     "ImportModalCancelButton": {
-      "label": "Отменить"
+      "label": "Cancel"
     },
     "ImportModalText": {
       "text": "Upload a CSV file. Maximum file size: 512 KB. Instructions for preparing the file are available in the documentation."
@@ -197,14 +197,14 @@
     },
     "DeleteCompaniesModal": {
       "heading": "Delete companies",
-      "text": "Are you sure you want to delete <strong>{count} companies</strong>? All contents will be permanently removed.",
+      "text": "Are you sure you want to delete <strong>{count} companies</strong>? All content will be permanently removed.",
       "cancelButton": "Cancel",
       "deleteButton": "Delete",
       "successMessage": "Companies deleted successfully"
     },
     "DeleteCompanyModal": {
       "heading": "Delete company",
-      "text": "Are you sure you want to delete company <strong>«{name}»</strong>? All contents will be permanently removed.",
+      "text": "Are you sure you want to delete company <strong>«{name}»</strong>? All content will be permanently removed.",
       "cancelButton": "Cancel",
       "deleteButton": "Delete",
       "successMessage": "Company deleted successfully"
@@ -234,7 +234,7 @@
       "label": "New customer"
     },
     "CustomerContainer": {
-      "notFound": "Сustomer not found. It may have been deleted by another user."
+      "notFound": "Customer not found. It may have been deleted by another user."
     },
     "UpdateCustomerForm": {
       "submitButtonLabel": "Update customer",
@@ -264,12 +264,12 @@
       "phoneNumber": "Phone number",
       "publicLink": "Public link",
       "company": "Company",
-      "noBio": "This customer hasn’t written a about themselves.",
+      "noBio": "This customer hasn't written anything about themselves yet.",
       "noFullName": "No name provided",
       "noEmail": "No email provided",
       "noPhoneNumber": "No phone number provided",
       "noPublicLink": "No public link",
-      "noCompany": "Company not specified",
+      "noCompany": "No company specified",
       "editBioButtonLabel": "Edit about me",
       "editCompanyButtonLabel": "Edit company",
       "editEmailButtonLabel": "Edit email",
@@ -327,21 +327,21 @@
     },
     "DeleteCustomerModal": {
       "heading": "Delete customer",
-      "text": "Are you sure you want to delete customer <strong>«{name}»</strong>? All contents will be permanently removed.",
+      "text": "Are you sure you want to delete customer <strong>«{name}»</strong>? All content will be permanently removed.",
       "deleteButton": "Delete",
       "cancelButton": "Cancel",
       "successMessage": "Customer deleted successfully"
     },
     "DeleteCustomerImageModal": {
       "heading": "Delete image",
-      "text": "Are you sure you want to delete image of customer <strong>«{name}»</strong>?",
+      "text": "Are you sure you want to delete customer <strong>«{name}»</strong>'s image?",
       "deleteButton": "Delete",
       "cancelButton": "Cancel",
       "successMessage": "Image deleted successfully"
     },
     "DeleteCustomersModal": {
       "heading": "Delete customers",
-      "text": "Are you sure you want to delete <strong>{count} customers</strong>? All contents will be permanently removed.",
+      "text": "Are you sure you want to delete <strong>{count} customers</strong>? All content will be permanently removed.",
       "deleteButton": "Delete",
       "cancelButton": "Cancel",
       "successMessage": "Customers deleted successfully"
@@ -350,7 +350,7 @@
       "noCompany": "No company"
     },
     "CustomerListItem": {
-      "checkboxAriaLabel": "customer checkbox",
+      "checkboxAriaLabel": "Customer checkbox",
       "phoneNumber": "Phone number",
       "publicLink": "Public link",
       "noPhoneNumber": "No phone number",
@@ -385,7 +385,7 @@
       "importCSV": "Import customers (CSV)",
       "exportCSV": "Export customers (CSV)",
       "successMessage": "Customers exported successfully",
-      "errorMessage": "Customers export failed"
+      "errorMessage": "Failed to export customers"
     },
     "CustomerImageMenuTrigger": {
       "label": "Profile image menu"
@@ -394,7 +394,7 @@
       "imageAlt": "Profile image"
     },
     "UpdateCustomerBioModal": {
-      "title": "Edit customer"
+      "title": "Edit about me"
     },
     "UpdateCustomerFullNameModal": {
       "title": "Edit full name"
@@ -444,17 +444,17 @@
       "team": "Team",
       "customers": "Customers",
       "profile": "Profile",
-      "home": "To home"
+      "home": "Home"
     },
     "AppNavigationLogoutButton": {
-      "logout": "Logout"
+      "logout": "Log out"
     },
     "AppBottomSheetTrigger": {
       "triggerAriaLabel": "Menu",
       "dialogAriaLabel": "App navigation"
     },
     "AppSidebarSheetTrigger": {
-      "triggerAriaLabel": "menu"
+      "triggerAriaLabel": "Menu"
     }
   },
   "positions": {
@@ -502,14 +502,14 @@
     },
     "DeletePositionsModal": {
       "heading": "Delete positions",
-      "text": "Are you sure you want to delete <strong>{count} positions</strong>? All contents will be permanently removed.",
+      "text": "Are you sure you want to delete <strong>{count} positions</strong>? All content will be permanently removed.",
       "cancelButton": "Cancel",
       "deleteButton": "Delete",
       "successMessage": "Positions deleted successfully"
     },
     "DeletePositionModal": {
       "heading": "Delete position",
-      "text": "Are you sure you want to delete position <strong>«{name}»</strong>? All contents will be permanently removed.",
+      "text": "Are you sure you want to delete position <strong>«{name}»</strong>? All content will be permanently removed.",
       "cancelButton": "Cancel",
       "deleteButton": "Delete",
       "successMessage": "Position deleted successfully"
@@ -518,7 +518,7 @@
       "importCSV": "Import positions (CSV)",
       "exportCSV": "Export positions (CSV)",
       "successMessage": "Positions exported successfully",
-      "errorMessage": "Positions export failed"
+      "errorMessage": "Failed to export positions"
     }
   },
   "projectCategories": {
@@ -527,14 +527,14 @@
     },
     "ProjectCategorySelect": {
       "label": "Category",
-      "noProjectCategory": "No project category"
+      "noProjectCategory": "No category"
     },
     "ProjectCategoriesEmptySectionCreateButton": {
       "label": "New project category"
     },
     "CreateProjectCategoryForm": {
       "submitButtonLabel": "Create category",
-      "successMessage": "Project category created successfully."
+      "successMessage": "Project category created successfully"
     },
     "CreateProjectCategoryModal": {
       "title": "New project category"
@@ -569,14 +569,14 @@
     },
     "DeleteProjectCategoryModal": {
       "heading": "Delete project category",
-      "text": "Are you sure you want to delete project category <strong>«{name}»</strong>? All contents will be permanently removed.",
+      "text": "Are you sure you want to delete project category <strong>«{name}»</strong>? All content will be permanently removed.",
       "cancelButton": "Cancel",
       "deleteButton": "Delete",
       "successMessage": "Project category deleted successfully"
     },
     "DeleteProjectCategoriesModal": {
       "heading": "Delete project categories",
-      "text": "Are you sure you want to delete <strong>{count} project categories</strong>? All contents will be permanently removed.",
+      "text": "Are you sure you want to delete <strong>{count} project categories</strong>? All content will be permanently removed.",
       "cancelButton": "Cancel",
       "deleteButton": "Delete",
       "successMessage": "Project categories deleted successfully"
@@ -588,7 +588,7 @@
       "importCSV": "Import categories (CSV)",
       "exportCSV": "Export categories (CSV)",
       "successMessage": "Project categories exported successfully",
-      "errorMessage": "Project categories export failed"
+      "errorMessage": "Failed to export project categories"
     }
   },
   "projects": {
@@ -623,11 +623,11 @@
     },
     "UpdateProjectForm": {
       "submitButtonLabel": "Update project",
-      "successMessage": "Project updated successfully."
+      "successMessage": "Project updated successfully"
     },
     "CreateProjectForm": {
       "submitButtonLabel": "Create project",
-      "successMessage": "Project created successfully."
+      "successMessage": "Project created successfully"
     },
     "ProjectDetailCard": {
       "title": "Project details"
@@ -667,7 +667,7 @@
       "importCSV": "Import projects (CSV)",
       "exportCSV": "Export projects (CSV)",
       "successMessage": "Projects exported successfully",
-      "errorMessage": "Projects export failed"
+      "errorMessage": "Failed to export projects"
     },
     "ProjectTitleTextField": {
       "label": "Title",
@@ -714,7 +714,7 @@
       }
     },
     "ProjectGridItemProgress": {
-      "progressAriaLabel": "project progress"
+      "progressAriaLabel": "Project progress"
     },
     "ProjectListItem": {
       "noDeadline": "No deadline",
@@ -772,7 +772,7 @@
       "noCategory": "No category",
       "status": "Status",
       "title": "Title",
-      "tasksStats": "Tasks stats",
+      "tasksStats": "Task statistics",
       "editProjectCategoryButtonLabel": "Edit category",
       "editCustomerButtonLabel": "Edit customer",
       "editDeadlineButtonLabel": "Edit deadline",
@@ -895,7 +895,7 @@
     },
     "SearchModal": {
       "dialogHeading": "Search",
-      "closeButtonLabel": "close"
+      "closeButtonLabel": "Close"
     },
     "SearchField": {
       "ariaLabel": "Search",
@@ -909,7 +909,7 @@
   },
   "subtasks": {
     "UpdateSubtaskForm": {
-      "submitButtonLabel": "Edit subtask",
+      "submitButtonLabel": "Update subtask",
       "successMessage": "Subtask updated successfully"
     },
     "CreateSubtaskForm": {
@@ -926,7 +926,7 @@
     "SubtaskActionMenuTrigger": {
       "edit": "Edit",
       "done": "Mark as done",
-      "undone": "Mark as undone",
+      "undone": "Mark as not done",
       "delete": "Delete",
       "toggleSuccess": "Subtask updated successfully"
     },
@@ -935,7 +935,7 @@
     },
     "SubtaskTextField": {
       "label": "Text",
-      "placeholder": "Typing a subtask text...",
+      "placeholder": "Enter subtask text...",
       "validation": {
         "required": "Subtask text is required",
         "tooLong": "Subtask text is too long"
@@ -966,14 +966,14 @@
     },
     "TaskCategorySelect": {
       "label": "Category",
-      "noTaskCategory": "No task category"
+      "noTaskCategory": "No category"
     },
     "TaskCategoriesEmptySectionCreateButton": {
       "label": "New task category"
     },
     "CreateTaskCategoryForm": {
       "submitButtonLabel": "Create category",
-      "successMessage": "Task category created successfully."
+      "successMessage": "Task category created successfully"
     },
     "CreateTaskCategoryModal": {
       "title": "New task category"
@@ -1009,8 +1009,8 @@
     "DeleteTaskCategoriesModal": {
       "heading": "Delete task categories",
       "text": "Are you sure you want to delete <strong>{count} task categories</strong>? All contents will be permanently removed.",
-      "deleteButton": "Delete",
       "cancelButton": "Cancel",
+      "deleteButton": "Delete",
       "successMessage": "Task categories deleted successfully"
     },
     "DeleteTaskCategoryModal": {
@@ -1048,11 +1048,11 @@
     },
     "UpdateTaskForm": {
       "submitButtonLabel": "Update task",
-      "successMessage": "Task updated successfully."
+      "successMessage": "Task updated successfully"
     },
     "CreateTaskForm": {
       "submitButtonLabel": "Create task",
-      "successMessage": "Task created successfully."
+      "successMessage": "Task created successfully"
     },
     "TaskDetailCard": {
       "title": "Task details"
@@ -1079,7 +1079,7 @@
       "text": "Total tasks"
     },
     "TaskGridItemProgress": {
-      "ariaLabel": "task progress"
+      "ariaLabel": "Task progress"
     },
     "TaskListItem": {
       "assignee": "Assignee",
@@ -1123,14 +1123,14 @@
     },
     "DeleteTaskModal": {
       "heading": "Delete task",
-      "text": "Are you sure you want to delete <strong>«{name}»</strong>? All contents will be permanently removed.",
+      "text": "Are you sure you want to delete <strong>«{name}»</strong>? All data will be permanently removed.",
       "deleteButton": "Delete",
       "cancelButton": "Cancel",
       "successMessage": "Task deleted successfully"
     },
     "DeleteTasksModal": {
       "heading": "Delete tasks",
-      "text": "Are you sure you want to delete <strong>{count} tasks</strong>? All contents will be permanently removed.",
+      "text": "Are you sure you want to delete <strong>{count} tasks</strong>? All data will be permanently removed.",
       "deleteButton": "Delete",
       "cancelButton": "Cancel",
       "successMessage": "Tasks deleted successfully"
@@ -1206,7 +1206,7 @@
       "subtasks": "Subtasks",
       "title": "Title",
       "progress": "Task progress",
-      "noSubtasks": "No one subtask yet",
+      "noSubtasks": "No subtasks yet",
       "editAssigneeButtonLabel": "Edit assignee",
       "editTaskCategoryButtonLabel": "Edit category",
       "editDeadlineButtonLabel": "Edit deadline",
@@ -1219,7 +1219,7 @@
       "noCategory": "No category"
     },
     "TaskDetailStatusMenuTrigger": {
-      "dialogHeading": "Task Status",
+      "dialogHeading": "Task status",
       "items": {
         "pending": "Pending",
         "active": "Active",
@@ -1237,7 +1237,7 @@
       "importCSV": "Import tasks (CSV)",
       "exportCSV": "Export tasks (CSV)",
       "successMessage": "Tasks exported successfully",
-      "errorMessage": "Tasks export failed"
+      "errorMessage": "Failed to export tasks"
     },
     "TasksFilteredEmptySection": {
       "heading": "No tasks found",
@@ -1379,10 +1379,10 @@
     },
     "UserBioTextField": {
       "label": "About me",
-      "placeholder": "Enter about me"
+      "placeholder": "Enter information about yourself"
     },
     "UserBirthdateDatePicker": {
-      "label": "Birthdate"
+      "label": "Birth date"
     },
     "UserPhoneNumberTextField": {
       "label": "Phone number",
@@ -1438,7 +1438,7 @@
     },
     "UserDetail": {
       "bio": "About me",
-      "noBio": "This user hasn’t written a about themself.",
+      "noBio": "This user hasn't written anything about themselves.",
       "fullName": "Full name",
       "noFullName": "No name provided",
       "email": "Email address",
@@ -1451,10 +1451,10 @@
       "company": "Company",
       "position": "Position",
       "noPosition": "Position not specified",
-      "birthdate": "Birthdate",
-      "noBirthdate": "No birthdate",
+      "birthdate": "Birth date",
+      "noBirthdate": "No birth date",
       "editAddressButtonLabel": "Edit address",
-      "editBioButtonLabel": "Edit birthdate",
+      "editBioButtonLabel": "Edit bio",
       "editFullNameButtonLabel": "Edit full name",
       "editPhoneNumberButtonLabel": "Edit phone number",
       "editPositionButtonLabel": "Edit position",
@@ -1488,14 +1488,14 @@
     },
     "DeleteUserModal": {
       "heading": "Delete user",
-      "text": "Are you sure you want to delete user <strong>«{name}»</strong>? All contents will be permanently removed.",
+      "text": "Are you sure you want to delete user <strong>«{name}»</strong>? All data will be permanently removed.",
       "deleteButton": "Delete",
       "cancelButton": "Cancel",
       "successMessage": "User deleted successfully"
     },
     "DeleteUserImageModal": {
       "heading": "Delete image",
-      "text": "Are you sure you want to delete image of user <strong>«{name}»</strong>?",
+      "text": "Are you sure you want to delete the image of user <strong>«{name}»</strong>?",
       "deleteButton": "Delete",
       "cancelButton": "Cancel",
       "successMessage": "Image deleted successfully"
@@ -1509,7 +1509,7 @@
       "noPosition": "No position"
     },
     "UserListItem": {
-      "checkboxAriaLabel": "user checkbox",
+      "checkboxAriaLabel": "User checkbox",
       "phoneNumber": "Phone number",
       "noPhoneNumber": "No phone number",
       "publicLink": "Public link",
@@ -1526,7 +1526,7 @@
       "assignedTasks": "Assigned tasks"
     },
     "UserTaskListItem": {
-      "checkboxAriaLabel": "task checkbox",
+      "checkboxAriaLabel": "Task checkbox",
       "noDeadline": "No deadline",
       "deadlineOn": "Deadline on {date}"
     },
@@ -1545,14 +1545,14 @@
       "positions": "Positions",
       "exportCSV": "Export users (CSV)",
       "successMessage": "Users exported successfully",
-      "errorMessage": "Users export failed"
+      "errorMessage": "Failed to export users"
     },
     "UsersFilteredEmptySection": {
       "heading": "No users found",
       "description": "No users match the selected filters. Try changing or resetting the filters."
     },
     "DeleteUserProvider": {
-      "successMessage": "User created successfully"
+      "successMessage": "User deleted successfully"
     },
     "UserResultsCount": {
       "usersFound": "{count, plural, one {# user found} other {# users found}}"
@@ -1565,7 +1565,7 @@
       "label": "Profile image menu"
     },
     "UpdateUserBioModal": {
-      "title": "Edit about me"
+      "title": "Edit bio"
     },
     "UpdateUserFullNameModal": {
       "title": "Edit full name"
@@ -1574,7 +1574,7 @@
       "title": "Edit phone number"
     },
     "UpdateUserBirthdateModal": {
-      "title": "Edit birthdate"
+      "title": "Edit birth date"
     },
     "UpdateUserAddressModal": {
       "title": "Edit address"
@@ -1598,10 +1598,10 @@
       "submitButtonLabel": "Update address"
     },
     "UpdateUserBioForm": {
-      "submitButtonLabel": "Update about me"
+      "submitButtonLabel": "Update bio"
     },
     "UpdateUserBirthdateForm": {
-      "submitButtonLabel": "Update birthdate"
+      "submitButtonLabel": "Update birth date"
     },
     "UpdateUserPositionForm": {
       "submitButtonLabel": "Update position"

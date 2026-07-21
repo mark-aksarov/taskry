@@ -15,15 +15,15 @@
       "unknownUser": "Неизвестный пользователь"
     },
     "CommentsEmptySection": {
-      "heading": "Пока нет комментариев",
-      "description": "Комментариев пока нет. Добавьте первый, чтобы поделиться обновлениями, задать вопрос или начать обсуждение по этой задаче."
+      "heading": "Комментариев пока нет",
+      "description": "Добавьте первый комментарий, чтобы поделиться обновлениями, задать вопрос или начать обсуждение этой задачи."
     },
     "CommentTextField": {
-      "placeholder": "Напишите комментарий...",
-      "ariaLabel": "Написать комментарий"
+      "placeholder": "Введите комментарий...",
+      "ariaLabel": "Поле ввода комментария"
     },
     "CommentTextFieldSendButton": {
-      "ariaLabel": "Отправить сообщение"
+      "ariaLabel": "Отправить комментарий"
     },
     "ReplyButton": "Ответить",
     "CommentCancelEditingButton": {
@@ -49,7 +49,7 @@
     },
     "UploadPersonImageDialog": {
       "heading": "Загрузить изображение",
-      "text": "Загрузите изображение профиля. Допустимые типы файлов: JPG, PNG, WEBP. Максимальный размер — 200 KB. Минимальный размер изображения — 300x300 пикселей."
+      "text": "Загрузите изображение профиля. Допустимые типы файлов: JPG, PNG, WEBP. Максимальный размер файла — 200 КБ. Минимальный размер изображения — 300×300 пикселей."
     },
     "UpdatePersonImageDialog": {
       "heading": "Изменить изображение",
@@ -59,15 +59,15 @@
     "PersonImageFileTrigger": {
       "label": "Загрузить",
       "error": {
-        "fileSize": "Файл слишком большой. Максимальный размер — 200 KB.",
-        "imageSize": "Изображение слишком маленькое. Минимальный размер — 300x300 пикселей.",
+        "fileSize": "Файл слишком большой. Максимальный размер — 200 КБ.",
+        "imageSize": "Изображение слишком маленькое. Минимальный размер — 300×300 пикселей.",
         "aspectRatio": "Изображение не должно быть слишком широким или высоким.",
-        "unknown": "Неизвестная ошибка загрузки изображения"
+        "unknown": "Неизвестная ошибка при загрузке изображения"
       }
     },
     "GuestModeModal": {
       "heading": "Гостевой режим",
-      "text": "<strong>Действие ограничено в гостевом режиме.</strong> Для доступа ко всем функциям требуется аккаунт. Пожалуйста, войдите в систему или создайте новый аккаунт, чтобы снять ограничения гостевого режима.",
+      "text": "<strong>Действие ограничено в гостевом режиме.</strong> Для доступа ко всем функциям требуется аккаунт. Войдите в систему или создайте новый аккаунт, чтобы снять ограничения гостевого режима.",
       "cancelButton": "Отмена"
     },
     "SortingMenuTrigger": {
@@ -80,7 +80,7 @@
       "ariaLabel": "Сортировка"
     },
     "SortingButtonLarge": {
-      "label": "Сортировка"
+      "label": "Сортировать"
     },
     "FilterButtonLarge": {
       "label": "Фильтры"
@@ -115,7 +115,7 @@
     "FilterCheckboxGroupExpandButton": {
       "collapse": "Свернуть",
       "expand": "Развернуть",
-      "more": "Еще"
+      "more": "Ещё"
     },
     "FilterButtonMobile": {
       "ariaLabel": "Открыть фильтры"
@@ -137,7 +137,7 @@
     },
     "ImportModalErrorBanner": {
       "error": {
-        "fileSize": "Размер файла слишком большой. Максимальный размер файла 512 КБ."
+        "fileSize": "Размер файла слишком большой. Максимальный размер — 512 КБ."
       }
     },
     "ImportModalUploadTrigger": {
@@ -171,7 +171,7 @@
       "label": "Название",
       "placeholder": "Введите название",
       "validation": {
-        "required": "Требуется название"
+        "required": "Название обязательно"
       }
     },
     "CompanyListItem": {
@@ -193,24 +193,24 @@
       "successMessage": "Компания успешно обновлена"
     },
     "UpdateCompanyModal": {
-      "title": "Изменить компанию"
+      "title": "Редактировать компанию"
     },
     "DeleteCompaniesModal": {
       "heading": "Удалить компании",
-      "text": "Вы уверены, что хотите удалить <strong>{count} выбранные компании</strong>? Все содержимое будет безвозвратно удалено.",
+      "text": "Вы уверены, что хотите удалить <strong>{count} компаний</strong>? Всё содержимое будет безвозвратно удалено.",
       "cancelButton": "Отменить",
       "deleteButton": "Удалить",
       "successMessage": "Компании успешно удалены"
     },
     "DeleteCompanyModal": {
       "heading": "Удалить компанию",
-      "text": "Вы уверены, что хотите удалить компанию <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
+      "text": "Вы уверены, что хотите удалить компанию <strong>«{name}»</strong>? Всё содержимое будет безвозвратно удалено.",
       "cancelButton": "Отменить",
       "deleteButton": "Удалить",
       "successMessage": "Компания успешно удалена"
     },
     "ImportCompaniesModal": {
-      "heading": "Импортировать компании"
+      "heading": "Импорт компаний"
     }
   },
   "customers": {
@@ -234,11 +234,11 @@
       "label": "Новый клиент"
     },
     "CustomerContainer": {
-      "notFound": "Клиент не найден. Возможно, он был удален другим пользователем."
+      "notFound": "Клиент не найден. Возможно, он был удалён другим пользователем."
     },
     "UpdateCustomerForm": {
       "submitButtonLabel": "Обновить клиента",
-      "successMessage": "Клиент успешно обновлен"
+      "successMessage": "Клиент успешно обновлён"
     },
     "CreateCustomerForm": {
       "submitButtonLabel": "Создать клиента",
@@ -264,15 +264,15 @@
       "phoneNumber": "Номер телефона",
       "publicLink": "Публичная ссылка",
       "company": "Компания",
-      "noBio": "Клиент ещё не написал о себе.",
+      "noBio": "Клиент ещё не добавил информацию о себе.",
       "noFullName": "Имя не указано",
       "noEmail": "Электронная почта не указана",
       "noPhoneNumber": "Номер телефона не указан",
       "noPublicLink": "Публичная ссылка отсутствует",
       "noCompany": "Компания не указана",
-      "editBioButtonLabel": "Изменить о себе",
+      "editBioButtonLabel": "Изменить информацию о себе",
       "editCompanyButtonLabel": "Изменить компанию",
-      "editEmailButtonLabel": "Изменить почту",
+      "editEmailButtonLabel": "Изменить email",
       "editFullNameButtonLabel": "Изменить полное имя",
       "editPhoneNumberButtonLabel": "Изменить номер телефона",
       "editPublicLinkButtonLabel": "Изменить публичную ссылку"
@@ -281,7 +281,7 @@
       "title": "Новый клиент"
     },
     "UpdateCustomerModal": {
-      "title": "Изменить клиента"
+      "title": "Редактировать клиента"
     },
     "CustomerDetailCard": {
       "title": "Детали клиента"
@@ -290,7 +290,7 @@
       "label": "Полное имя",
       "placeholder": "Введите полное имя",
       "validation": {
-        "required": "«Полное имя» обязательно для заполнения"
+        "required": "Полное имя обязательно для заполнения"
       }
     },
     "CustomerBioTextField": {
@@ -301,7 +301,7 @@
       "label": "Email",
       "placeholder": "Введите email",
       "validation": {
-        "required": "Требуется электронная почта",
+        "required": "Email обязателен для заполнения",
         "format": "Введите корректный адрес электронной почты, например user@example.com"
       }
     },
@@ -327,10 +327,10 @@
     },
     "DeleteCustomerModal": {
       "heading": "Удалить клиента",
-      "text": "Вы уверены, что хотите удалить клиента <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
+      "text": "Вы уверены, что хотите удалить клиента <strong>«{name}»</strong>? Всё содержимое будет безвозвратно удалено.",
       "deleteButton": "Удалить",
       "cancelButton": "Отменить",
-      "successMessage": "Клиент успешно удален"
+      "successMessage": "Клиент успешно удалён"
     },
     "DeleteCustomerImageModal": {
       "heading": "Удалить изображение",
@@ -341,7 +341,7 @@
     },
     "DeleteCustomersModal": {
       "heading": "Удалить клиентов",
-      "text": "Вы уверены, что хотите удалить <strong>{count} выбранных клиентов </strong>? Все содержимое будет безвозвратно удалено.",
+      "text": "Вы уверены, что хотите удалить <strong>{count} выбранных клиентов</strong>? Всё содержимое будет безвозвратно удалено.",
       "deleteButton": "Удалить",
       "cancelButton": "Отменить",
       "successMessage": "Клиенты успешно удалены"
@@ -350,7 +350,7 @@
       "noCompany": "Нет компании"
     },
     "CustomerListItem": {
-      "checkboxAriaLabel": "чекбокс клиента",
+      "checkboxAriaLabel": "Чекбокс клиента",
       "phoneNumber": "Номер телефона",
       "publicLink": "Публичная ссылка",
       "noPhoneNumber": "Нет номера телефона",
@@ -365,12 +365,12 @@
       "heading": "Фильтры клиентов"
     },
     "CustomerActionsMenuTrigger": {
-      "dialogHeading": "Действия",
+      "dialogHeading": "Действия",
       "delete": "Удалить"
     },
     "CreateCustomerMenuTrigger": {
-      "dialogHeading": "Создать нового",
-      "label": "Создать нового",
+      "dialogHeading": "Создать новое",
+      "label": "Создать новое",
       "items": {
         "customer": "Клиент",
         "company": "Компания"
@@ -378,7 +378,7 @@
     },
     "CustomersFilteredEmptySection": {
       "heading": "Клиенты не найдены",
-      "description": "По выбранным фильтрам клиенты отсутствуют. Попробуйте изменить или сбросить фильтры"
+      "description": "По выбранным фильтрам клиенты не найдены. Попробуйте изменить или сбросить фильтры."
     },
     "CustomerManageMenuTrigger": {
       "companies": "Компании",
@@ -394,13 +394,13 @@
       "imageAlt": "Изображение профиля"
     },
     "UpdateCustomerBioModal": {
-      "title": "Изменить о себе"
+      "title": "Редактировать информацию о себе"
     },
     "UpdateCustomerFullNameModal": {
-      "title": "Изменить полное имя"
+      "title": "Редактировать полное имя"
     },
     "UpdateCustomerPhoneNumberModal": {
-      "title": "Изменить номер телефона"
+      "title": "Редактировать номер телефона"
     },
     "UpdateCustomerFullNameForm": {
       "submitButtonLabel": "Обновить полное имя"
@@ -409,36 +409,36 @@
       "submitButtonLabel": "Обновить номер телефона"
     },
     "UpdateCustomerBioForm": {
-      "submitButtonLabel": "Обновить о себе"
+      "submitButtonLabel": "Обновить информацию о себе"
     },
     "UpdateCustomerPublicLinkForm": {
       "submitButtonLabel": "Обновить публичную ссылку"
     },
     "UpdateCustomerPublicLinkModal": {
-      "title": "Изменить публичную ссылку"
+      "title": "Редактировать публичную ссылку"
     },
     "UpdateCustomerEmailForm": {
-      "submitButtonLabel": "Обновить почту"
+      "submitButtonLabel": "Обновить email"
     },
     "UpdateCustomerEmailModal": {
-      "title": "Изменить почту"
+      "title": "Редактировать email"
     },
     "UpdateCustomerCompanyForm": {
       "submitButtonLabel": "Обновить компанию"
     },
     "UpdateCustomerCompanyModal": {
-      "title": "Изменить компанию"
+      "title": "Редактировать компанию"
     },
     "ImportCustomersModal": {
-      "heading": "Импортирование клиентов"
+      "heading": "Импорт клиентов"
     },
     "ImportPositionsModal": {
-      "heading": "Импортировать должности"
+      "heading": "Импорт должностей"
     }
   },
   "layout": {
     "AppNavigation": {
-      "dashboard": "Панель",
+      "dashboard": "Панель управления",
       "projects": "Проекты",
       "tasks": "Задачи",
       "team": "Команда",
@@ -451,10 +451,10 @@
     },
     "AppBottomSheetTrigger": {
       "triggerAriaLabel": "Меню",
-      "dialogAriaLabel": "Навигация по приложению"
+      "dialogAriaLabel": "Навигация приложения"
     },
     "AppSidebarSheetTrigger": {
-      "triggerAriaLabel": "меню"
+      "triggerAriaLabel": "Меню"
     }
   },
   "positions": {
@@ -476,7 +476,7 @@
       "label": "Название",
       "placeholder": "Введите название",
       "validation": {
-        "required": "Требуется название"
+        "required": "Название обязательно для заполнения"
       }
     },
     "PositionListItem": {
@@ -498,18 +498,18 @@
       "successMessage": "Должность успешно обновлена"
     },
     "UpdatePositionModal": {
-      "title": "Изменить должность"
+      "title": "Редактировать должность"
     },
     "DeletePositionsModal": {
       "heading": "Удалить должности",
-      "text": "Вы уверены, что хотите удалить <strong>{count} выбранные должности</strong>? Все содержимое будет безвозвратно удалено.",
+      "text": "Вы уверены, что хотите удалить <strong>{count} выбранных должностей</strong>? Всё содержимое будет безвозвратно удалено.",
       "cancelButton": "Отменить",
       "deleteButton": "Удалить",
       "successMessage": "Должности успешно удалены"
     },
     "DeletePositionModal": {
       "heading": "Удалить должность",
-      "text": "Вы уверены, что хотите удалить должность <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
+      "text": "Вы уверены, что хотите удалить должность <strong>«{name}»</strong>? Всё содержимое будет безвозвратно удалено.",
       "cancelButton": "Отменить",
       "deleteButton": "Удалить",
       "successMessage": "Должность успешно удалена"
@@ -543,7 +543,7 @@
       "label": "Название",
       "placeholder": "Введите название",
       "validation": {
-        "required": "Требуется название"
+        "required": "Название обязательно для заполнения"
       }
     },
     "ProjectCategoryListItem": {
@@ -557,7 +557,7 @@
       "label": "Создать новую"
     },
     "ProjectCategoryActionsMenuTrigger": {
-      "dialogHeading": "Действия",
+      "dialogHeading": "Действия",
       "delete": "Удалить"
     },
     "UpdateProjectCategoryForm": {
@@ -565,24 +565,24 @@
       "successMessage": "Категория проекта успешно обновлена"
     },
     "UpdateProjectCategoryModal": {
-      "title": "Изменить категорию проекта"
+      "title": "Редактировать категорию проекта"
     },
     "DeleteProjectCategoryModal": {
       "heading": "Удалить категорию проекта",
-      "text": "Вы уверены, что хотите удалить категорию проекта <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
+      "text": "Вы уверены, что хотите удалить категорию проекта <strong>«{name}»</strong>? Всё содержимое будет безвозвратно удалено.",
       "cancelButton": "Отменить",
       "deleteButton": "Удалить",
       "successMessage": "Категория проекта успешно удалена"
     },
     "DeleteProjectCategoriesModal": {
       "heading": "Удалить категории проектов",
-      "text": "Вы уверены, что хотите удалить <strong>{count} выбранные категории проектов</strong>? Все содержимое будет безвозвратно удалено.",
+      "text": "Вы уверены, что хотите удалить <strong>{count} выбранных категорий проектов</strong>? Всё содержимое будет безвозвратно удалено.",
       "cancelButton": "Отменить",
       "deleteButton": "Удалить",
-      "successMessage": "Категории проектов успешно удалена"
+      "successMessage": "Категории проектов успешно удалены"
     },
     "ImportProjectCategoriesModal": {
-      "heading": "Импортировать категории"
+      "heading": "Импорт категорий"
     },
     "ProjectCategoryManageMenuTrigger": {
       "importCSV": "Импорт категорий (CSV)",
@@ -615,15 +615,15 @@
       "label": "Новый проект"
     },
     "ProjectContainer": {
-      "notFound": "Проект не найден. Возможно, он был удален другим пользователем."
+      "notFound": "Проект не найден. Возможно, он был удалён другим пользователем."
     },
     "ProjectsFilteredEmptySection": {
       "heading": "Проекты не найдены",
-      "description": "По выбранным фильтрам проекты отсутствуют. Попробуйте изменить или сбросить фильтры"
+      "description": "По выбранным фильтрам проекты не найдены. Попробуйте изменить или сбросить фильтры."
     },
     "UpdateProjectForm": {
       "submitButtonLabel": "Обновить проект",
-      "successMessage": "Проект успешно обновлен"
+      "successMessage": "Проект успешно обновлён"
     },
     "CreateProjectForm": {
       "submitButtonLabel": "Создать проект",
@@ -650,17 +650,17 @@
       "title": "Новый проект"
     },
     "UpdateProjectModal": {
-      "title": "Изменить проект"
+      "title": "Редактировать проект"
     },
     "ProjectFiltersModal": {
       "title": "Фильтры проектов"
     },
     "ProjectActionsMenuTrigger": {
-      "dialogHeading": "Действия",
+      "dialogHeading": "Действия",
       "delete": "Удалить",
-      "pending": "Отметить как «В ожидании»",
-      "active": "Отметить как «Активно»",
-      "completed": "Отметить как «Завершено»"
+      "pending": "Отметить как «Ожидает»",
+      "active": "Отметить как «Активный»",
+      "completed": "Отметить как «Завершённый»"
     },
     "ProjectManageMenuTrigger": {
       "categories": "Категории",
@@ -673,7 +673,7 @@
       "label": "Заголовок",
       "placeholder": "Введите заголовок",
       "validation": {
-        "required": "«Заголовок» обязателен для заполнения"
+        "required": "Заголовок обязателен для заполнения"
       }
     },
     "ProjectDescriptionTextField": {
@@ -694,10 +694,10 @@
       }
     },
     "ProjectFiltersFormDeadlineFromDatePicker": {
-      "label": "Дедлайн с"
+      "label": "Дедлайн от"
     },
     "ProjectFiltersFormDeadlineToDatePicker": {
-      "label": "Дедлайн по"
+      "label": "Дедлайн до"
     },
     "ProjectStatusCheckboxGroup": {
       "label": "Статус"
@@ -706,11 +706,11 @@
       "label": "Кем создан"
     },
     "CreateProjectMenuTrigger": {
-      "dialogHeading": "Создать новый",
-      "label": "Создать новый",
+      "dialogHeading": "Создать новое",
+      "label": "Создать новое",
       "items": {
         "project": "Проект",
-        "category": "Категорию"
+        "category": "Категория"
       }
     },
     "ProjectGridItemProgress": {
@@ -732,20 +732,20 @@
       "edit": "Редактировать",
       "delete": "Удалить",
       "markPending": "Отметить как «В ожидании»",
-      "markCompleted": "Отметить как «Завершено»",
-      "markActive": "Отметить как «Активно»",
+      "markCompleted": "Отметить как «Завершён»",
+      "markActive": "Отметить как «Активный»",
       "details": "Открыть детали"
     },
     "DeleteProjectModal": {
       "heading": "Удалить проект",
-      "text": "Вы уверены, что хотите удалить <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено. Связанные задачи также будут удалены.",
+      "text": "Вы уверены, что хотите удалить <strong>«{name}»</strong>? Всё содержимое будет безвозвратно удалено, а связанные задачи также будут удалены.",
       "deleteButton": "Удалить",
       "cancelButton": "Отменить",
       "successMessage": "Проект успешно удалён"
     },
     "DeleteProjectsModal": {
       "heading": "Удалить проекты",
-      "text": "Вы уверены, что хотите удалить <strong>{count} выбранных проектов </strong>? Все содержимое будет безвозвратно удалено. Связанные задачи также будут удалены.",
+      "text": "Вы уверены, что хотите удалить <strong>{count} проектов</strong>? Всё содержимое будет безвозвратно удалено, а связанные задачи также будут удалены.",
       "deleteButton": "Удалить",
       "cancelButton": "Отменить",
       "successMessage": "Проекты успешно удалены"
@@ -815,8 +815,8 @@
       "dialogHeading": "Статус проекта",
       "items": {
         "pending": "В ожидании",
-        "active": "Активен",
-        "completed": "Завершен"
+        "active": "Активный",
+        "completed": "Завершён"
       }
     },
     "ProjectDetailSideSheet": {
@@ -836,7 +836,7 @@
       "title": "Изменить заголовок"
     },
     "UpdateProjectStatusForm": {
-      "submitButtonLabel": "Обновить cтатус"
+      "submitButtonLabel": "Обновить статус"
     },
     "UpdateProjectStatusModal": {
       "title": "Изменить статус"
@@ -848,7 +848,7 @@
       "title": "Изменить категорию"
     },
     "UpdateProjectDeadlineForm": {
-      "submitButtonLabel": "Обновить срок выполнения"
+      "submitButtonLabel": "Обновить срок"
     },
     "UpdateProjectDeadlineModal": {
       "title": "Изменить срок выполнения"
@@ -863,10 +863,10 @@
       "text": "Активные задачи"
     },
     "ProjectPendingTasksDetailStat": {
-      "text": "Ожидающие задачи"
+      "text": "Задачи в ожидании"
     },
     "ProjectCompletedTasksDetailStat": {
-      "text": "Завершенные задачи"
+      "text": "Завершённые задачи"
     },
     "DeleteProjectModalTrigger": {
       "label": "Удалить проект"
@@ -891,7 +891,7 @@
     },
     "SearchEmptySection": {
       "heading": "Ничего не найдено",
-      "description": "По вашему запросу нет результатов. Попробуйте изменить формулировку или проверить орфографию."
+      "description": "По вашему запросу ничего не найдено. Попробуйте изменить запрос или проверить написание."
     },
     "SearchModal": {
       "dialogHeading": "Поиск",
@@ -914,7 +914,7 @@
     },
     "CreateSubtaskForm": {
       "submitButtonLabel": "Добавить подзадачу",
-      "successMessage": "Подзадача успешно добавлена"
+      "successMessage": "Подзадача успешно создана"
     },
     "DeleteSubtaskModal": {
       "heading": "Удалить подзадачу",
@@ -937,8 +937,8 @@
       "label": "Текст",
       "placeholder": "Введите текст подзадачи...",
       "validation": {
-        "required": "Текст подзадачи обязателен",
-        "tooLong": "Текст подзадачи слишком длинный"
+        "required": "Текст обязателен для заполнения",
+        "tooLong": "Текст слишком длинный"
       }
     },
     "SubtaskFormDialogHeader": {
@@ -966,7 +966,7 @@
     },
     "TaskCategorySelect": {
       "label": "Категория",
-      "noTaskCategory": "Нет категории"
+      "noTaskCategory": "Без категории"
     },
     "TaskCategoriesEmptySectionCreateButton": {
       "label": "Новая категория задач"
@@ -982,7 +982,7 @@
       "label": "Название",
       "placeholder": "Введите название",
       "validation": {
-        "required": "Требуется название"
+        "required": "Название обязательно для заполнения"
       }
     },
     "TaskCategoryListItem": {
@@ -1000,7 +1000,7 @@
       "delete": "Удалить"
     },
     "UpdateTaskCategoryForm": {
-      "submitButtonLabel": "Обновить категорию задачи",
+      "submitButtonLabel": "Обновить категорию",
       "successMessage": "Категория задач успешно обновлена"
     },
     "UpdateTaskCategoryModal": {
@@ -1008,20 +1008,20 @@
     },
     "DeleteTaskCategoriesModal": {
       "heading": "Удалить категории задач",
-      "text": "Вы уверены, что хотите удалить <strong>{count} выбранные категории задач</strong>? Все содержимое будет безвозвратно удалено.",
+      "text": "Вы уверены, что хотите удалить <strong>{count} категорий задач</strong>? Всё содержимое будет безвозвратно удалено.",
       "cancelButton": "Отменить",
       "deleteButton": "Удалить",
       "successMessage": "Категории задач успешно удалены"
     },
     "DeleteTaskCategoryModal": {
       "heading": "Удалить категорию задач",
-      "text": "Вы уверены, что хотите удалить категорию задач <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
+      "text": "Вы уверены, что хотите удалить категорию задач <strong>«{name}»</strong>? Всё содержимое будет безвозвратно удалено.",
       "cancelButton": "Отменить",
       "deleteButton": "Удалить",
       "successMessage": "Категория задач успешно удалена"
     },
     "ImportTaskCategoriesModal": {
-      "heading": "Импортировать категорий"
+      "heading": "Импорт категории"
     },
     "TaskCategoryManageMenuTrigger": {
       "importCSV": "Импорт категорий (CSV)",
@@ -1044,7 +1044,7 @@
       "heading": "Поиск задач"
     },
     "TaskContainer": {
-      "notFound": "Задача не найдена. Возможно, она была удалена другим пользователем."
+      "notFound": "Задача не найдена. Возможно, она была удалена другим пользователем."
     },
     "UpdateTaskForm": {
       "submitButtonLabel": "Обновить задачу",
@@ -1117,8 +1117,8 @@
       "label": "Создать новую",
       "dialogHeading": "Создать новую",
       "items": {
-        "task": "Задачу",
-        "category": "Категорию"
+        "task": "Задача",
+        "category": "Категория"
       }
     },
     "CreateTaskModalTrigger": {
@@ -1126,14 +1126,14 @@
     },
     "DeleteTaskModal": {
       "heading": "Удалить задачу",
-      "text": "Вы уверены, что хотите удалить <strong>«{name}»</strong>? Всё содержимое будет безвозвратно удалено.",
+      "text": "Вы уверены, что хотите удалить <strong>«{name}»</strong>? Все данные будут безвозвратно удалены.",
       "deleteButton": "Удалить",
       "cancelButton": "Отмена",
       "successMessage": "Задача успешно удалена"
     },
     "DeleteTasksModal": {
       "heading": "Удалить задачи",
-      "text": "Вы уверены, что хотите удалить <strong>{count} выбранных задач</strong>? Всё содержимое будет безвозвратно удалено.",
+      "text": "Вы уверены, что хотите удалить <strong>{count} задач</strong>? Все данные будут безвозвратно удалены.",
       "deleteButton": "Удалить",
       "cancelButton": "Отмена",
       "successMessage": "Задачи успешно удалены"
@@ -1142,7 +1142,7 @@
       "title": "Новая задача"
     },
     "UpdateTaskModal": {
-      "title": "Редактировать задачу"
+      "title": "Редактирование задачи"
     },
     "TaskCommentsModal": {
       "title": "Комментарии к задаче"
@@ -1155,10 +1155,10 @@
       "text": "Только мои задачи"
     },
     "DeadlineFromDatePicker": {
-      "label": "Дедлайн с"
+      "label": "Дедлайн от"
     },
     "DeadlineToDatePicker": {
-      "label": "Дедлайн по"
+      "label": "Дедлайн до"
     },
     "TaskStatusCheckboxGroup": {
       "label": "Статус"
@@ -1170,7 +1170,7 @@
       "label": "Заголовок",
       "placeholder": "Введите заголовок",
       "validation": {
-        "required": "«Заголовок» обязателен для заполнения"
+        "required": "Заголовок обязателен для заполнения"
       }
     },
     "TaskDescriptionTextField": {
@@ -1187,26 +1187,26 @@
       "label": "Статус",
       "placeholder": "Выберите статус",
       "validation": {
-        "required": "Требуется статус"
+        "required": "Необходимо выбрать статус"
       }
     },
     "TaskDetail": {
-      "deadline": "Срок",
+      "deadline": "Срок выполнения",
       "description": "Описание",
       "noDescription": "Нет описания",
       "creator": "Кем создана",
       "noCreator": "Нет создателя",
       "category": "Категория",
+      "noCategory": "Нет категории",
       "project": "Проект",
       "noProject": "Нет проекта",
       "assignee": "Исполнитель",
       "noAssignee": "Нет исполнителя",
       "status": "Статус",
       "subtasks": "Подзадачи",
-      "noCategory": "Нет категории",
       "title": "Заголовок",
       "progress": "Прогресс выполнения задачи",
-      "noSubtasks": "Пока нет ни одной подзадачи",
+      "noSubtasks": "Пока нет подзадач",
       "editAssigneeButtonLabel": "Изменить исполнителя",
       "editTaskCategoryButtonLabel": "Изменить категорию",
       "editDeadlineButtonLabel": "Изменить дедлайн",
@@ -1222,26 +1222,26 @@
       "dialogHeading": "Статус задачи",
       "items": {
         "pending": "В ожидании",
-        "active": "Активная",
-        "completed": "Завершённая"
+        "active": "Активна",
+        "completed": "Завершена"
       }
     },
     "TaskStatus": {
-      "pending": "Ожидает",
+      "pending": "В ожидании",
       "active": "Активна",
       "completed": "Завершена",
       "overdue": "Просрочена"
     },
     "TaskManageMenuTrigger": {
       "categories": "Категории",
-      "importCSV": "Импорт задач (CSV) ",
+      "importCSV": "Импорт задач (CSV)",
       "exportCSV": "Экспорт задач (CSV)",
       "successMessage": "Задачи успешно экспортированы",
       "errorMessage": "Не удалось экспортировать задачи"
     },
     "TasksFilteredEmptySection": {
       "heading": "Задачи не найдены",
-      "description": "По выбранным фильтрам задачи отсутствуют. Попробуйте изменить или сбросить фильтры"
+      "description": "По выбранным фильтрам ничего не найдено. Попробуйте изменить или сбросить фильтры."
     },
     "TaskStatusFiltersModal": {
       "heading": "Статус"
@@ -1316,7 +1316,7 @@
       "label": "Удалить задачу"
     },
     "ImportTasksModal": {
-      "heading": "Импортирование задач"
+      "heading": "Импорт задач"
     }
   },
   "users": {
@@ -1328,7 +1328,7 @@
       "noAssignee": "Нет исполнителя"
     },
     "UserContainer": {
-      "notFound": "Пользователь не найден. Возможно, он был удален другим пользователем."
+      "notFound": "Пользователь не найден. Возможно, он был удалён другим пользователем."
     },
     "ChangePasswordModal": {
       "title": "Изменить пароль"
@@ -1354,11 +1354,11 @@
         "placeholder": "Введите новый пароль"
       },
       "submitButtonLabel": "Изменить пароль",
-      "successMessage": "Пароль успешно изменен"
+      "successMessage": "Пароль успешно изменён"
     },
     "UpdateUserForm": {
       "submitButtonLabel": "Обновить пользователя",
-      "successMessage": "Пользователь успешно обновлен"
+      "successMessage": "Пользователь успешно обновлён"
     },
     "CreateUserForm": {
       "submitButtonLabel": "Создать пользователя",
@@ -1368,13 +1368,13 @@
       "title": "Новый пользователь"
     },
     "UpdateUserModal": {
-      "title": "Изменить пользователя"
+      "title": "Редактировать пользователя"
     },
     "UserFullNameTextField": {
       "label": "Полное имя",
       "placeholder": "Введите полное имя",
       "validation": {
-        "required": "«Полное имя» обязательно для заполнения"
+        "required": "Полное имя обязательно для заполнения"
       }
     },
     "UserBioTextField": {
@@ -1403,13 +1403,13 @@
       "label": "Email",
       "placeholder": "Введите email",
       "validation": {
-        "required": "Требуется электронная почта",
+        "required": "Email обязателен для заполнения",
         "format": "Введите корректный адрес электронной почты, например user@example.com"
       }
     },
     "UserPasswordTextField": {
       "validation": {
-        "required": "Требуется пароль",
+        "required": "Пароль обязателен для заполнения",
         "tooShort": "Пароль слишком короткий. Он должен содержать не менее {minLength} символов."
       }
     },
@@ -1423,22 +1423,22 @@
     "ProfileActions": {
       "deleteAccount": "Удалить аккаунт",
       "resetPassword": "Сбросить пароль",
-      "changePassword": "Сменить пароль",
+      "changePassword": "Изменить пароль",
       "editAccount": "Редактировать аккаунт",
       "delete": "Удалить пользователя",
-      "changePasswordSuccessMessage": "Пароль успешно изменен"
+      "changePasswordSuccessMessage": "Пароль успешно изменён"
     },
     "ProfileNavigationLarge": {
-      "userInformation": "Детали пользователя",
+      "userInformation": "Данные пользователя",
       "assignedTasks": "Назначенные задачи"
     },
     "ProfileNavigationMobile": {
-      "info": "Детали",
+      "info": "Данные",
       "assignedTasks": "Задачи"
     },
     "UserDetail": {
       "bio": "О себе",
-      "noBio": "Этот пользователь еще не написал о себе.",
+      "noBio": "Пользователь пока не добавил информацию о себе.",
       "fullName": "Полное имя",
       "noFullName": "Имя не указано",
       "email": "Адрес электронной почты",
@@ -1454,20 +1454,20 @@
       "birthdate": "Дата рождения",
       "noBirthdate": "Дата рождения не указана",
       "editAddressButtonLabel": "Изменить адрес",
-      "editBioButtonLabel": "Изменить дату рождения",
+      "editBioButtonLabel": "Изменить информацию о себе",
       "editFullNameButtonLabel": "Изменить полное имя",
       "editPhoneNumberButtonLabel": "Изменить номер телефона",
       "editPositionButtonLabel": "Изменить должность",
       "editPublicLinkButtonLabel": "Изменить публичную ссылку"
     },
     "UserDetailCard": {
-      "title": "Детали пользователя"
+      "title": "Данные пользователя"
     },
     "UserDetailContainer": {
-      "noPosition": "Нет должности"
+      "noPosition": "Должность не указана"
     },
     "UserDetailSideSheet": {
-      "dialogHeading": "Детали пользователя",
+      "dialogHeading": "Данные пользователя",
       "openInFullPage": "Открыть пользователя"
     },
     "UserFiltersFormRoleCheckboxGroup": {
@@ -1488,10 +1488,10 @@
     },
     "DeleteUserModal": {
       "heading": "Удалить пользователя",
-      "text": "Вы уверены, что хотите удалить пользователя <strong>«{name}»</strong>? Все содержимое будет безвозвратно удалено.",
+      "text": "Вы уверены, что хотите удалить пользователя <strong>«{name}»</strong>? Все данные будут безвозвратно удалены.",
       "deleteButton": "Удалить",
       "cancelButton": "Отменить",
-      "successMessage": "Пользователь успешно удален"
+      "successMessage": "Пользователь успешно удалён"
     },
     "DeleteUserImageModal": {
       "heading": "Удалить изображение",
@@ -1509,7 +1509,7 @@
       "noPosition": "Нет должности"
     },
     "UserListItem": {
-      "checkboxAriaLabel": "чекбокс пользователя",
+      "checkboxAriaLabel": "Чекбокс пользователя",
       "phoneNumber": "Номер телефона",
       "noPhoneNumber": "Нет номера телефона",
       "publicLink": "Публичная ссылка",
@@ -1518,15 +1518,15 @@
       "noPosition": "Нет должности"
     },
     "UserNavigationLarge": {
-      "userInformation": "Детали пользователя",
+      "userInformation": "Данные пользователя",
       "assignedTasks": "Назначенные задачи"
     },
     "UserNavigationMobile": {
-      "info": "Детали",
+      "info": "Данные",
       "assignedTasks": "Задачи"
     },
     "UserTaskListItem": {
-      "checkboxAriaLabel": "чекбокс задачи",
+      "checkboxAriaLabel": "Чекбокс задачи",
       "noDeadline": "Без дедлайна",
       "deadlineOn": "Срок до {date}"
     },
@@ -1549,7 +1549,10 @@
     },
     "UsersFilteredEmptySection": {
       "heading": "Пользователи не найдены",
-      "description": "По выбранным фильтрам пользователи отсутствуют. Попробуйте изменить или сбросить фильтры"
+      "description": "По выбранным фильтрам пользователи отсутствуют. Попробуйте изменить или сбросить фильтры."
+    },
+    "DeleteUserProvider": {
+      "successMessage": "Пользователь успешно удалён"
     },
     "UserResultsCount": {
       "usersFound": "{count, plural, one {Найден # пользователь} few {Найдено # пользователя} many {Найдено # пользователей} other {Найдено # пользователей}}"
@@ -1562,13 +1565,13 @@
       "label": "Меню изображения профиля"
     },
     "UpdateUserBioModal": {
-      "title": "Изменить о себе"
+      "title": "Изменить информацию о себе"
     },
     "UpdateUserFullNameModal": {
       "title": "Изменить полное имя"
     },
     "UpdateUserPhoneNumberModal": {
-      "title": "Изменить номер телефон"
+      "title": "Изменить номер телефона"
     },
     "UpdateUserBirthdateModal": {
       "title": "Изменить дату рождения"
@@ -1595,7 +1598,7 @@
       "submitButtonLabel": "Обновить адрес"
     },
     "UpdateUserBioForm": {
-      "submitButtonLabel": "Обновить о себе"
+      "submitButtonLabel": "Обновить информацию о себе"
     },
     "UpdateUserBirthdateForm": {
       "submitButtonLabel": "Обновить дату рождения"
@@ -1606,7 +1609,7 @@
   },
   "companies": {
     "ImportCompaniesModal": {
-      "heading": "Импортировать компании"
+      "heading": "Импорт компаний"
     },
     "CompanyManageMenuTrigger": {
       "importCSV": "Импорт компаний (CSV)",
