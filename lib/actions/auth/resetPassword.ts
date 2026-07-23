@@ -4,6 +4,7 @@ import * as z from "zod";
 import { auth } from "@/lib/auth";
 import { ActionState } from "../types";
 import { APIError } from "better-auth";
+import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
 import { userPassword } from "@/lib/schemas/user";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -30,6 +31,7 @@ export async function resetPassword(
         newPassword: parsedData.password,
         token,
       },
+      headers: await headers(),
     });
   } catch (error: unknown) {
     console.error("Reset Password Error:", error);
@@ -38,7 +40,7 @@ export async function resetPassword(
     if (error instanceof APIError) {
       return {
         status: "error",
-        message: t("common.error.authError", { message: error.message }),
+        message: error.message,
       };
     }
 

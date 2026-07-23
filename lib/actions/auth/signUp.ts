@@ -54,6 +54,7 @@ export async function signUp(
         workspaceId: workspace.id,
         callbackURL: "/dashboard",
       },
+      headers: await headers(),
     });
   } catch (error: unknown) {
     console.error("Sign-up Error:", error);
@@ -62,7 +63,7 @@ export async function signUp(
     if (error instanceof APIError) {
       return {
         status: "error",
-        message: t("common.error.authError", { message: error.message }),
+        message: error.message,
       };
     }
 

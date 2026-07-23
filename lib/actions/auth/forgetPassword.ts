@@ -4,6 +4,7 @@ import * as z from "zod";
 import { auth } from "@/lib/auth";
 import { ActionState } from "../types";
 import { APIError } from "better-auth";
+import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
 import { userEmail } from "@/lib/schemas/user";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -28,6 +29,7 @@ export async function forgetPassword(
         email: parsedData.email,
         redirectTo: "/reset-password",
       },
+      headers: await headers(),
     });
   } catch (error: unknown) {
     console.error("Password Reset Error:", error);
@@ -36,7 +38,7 @@ export async function forgetPassword(
     if (error instanceof APIError) {
       return {
         status: "error",
-        message: t("common.error.authError", { message: error.message }),
+        message: error.message,
       };
     }
 

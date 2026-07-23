@@ -1,10 +1,4 @@
 {
-  "common": {
-    "error": {
-      "internalServerError": "Something went wrong. Refresh the page or try again later.",
-      "authError": "A server error occurred. Details: {message}"
-    }
-  },
   "createPresignedUrl": {
     "error": {
       "internalServerError": "Something went wrong. Failed to create the URL. Refresh the page or try again later."

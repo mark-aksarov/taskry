@@ -4,6 +4,7 @@ import * as z from "zod";
 import { auth } from "@/lib/auth";
 import { ActionState } from "../types";
 import { APIError } from "better-auth";
+import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
 import { userEmail, userPassword } from "@/lib/schemas/user";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -31,6 +32,7 @@ export async function acceptInvite(
         newPassword: parsedData.password,
         token,
       },
+      headers: await headers(),
     });
 
     // Sign in
@@ -39,6 +41,7 @@ export async function acceptInvite(
         email: parsedData.email,
         password: parsedData.password,
       },
+      headers: await headers(),
     });
   } catch (error: unknown) {
     console.error("Reset Password Error:", error);
@@ -47,7 +50,7 @@ export async function acceptInvite(
     if (error instanceof APIError) {
       return {
         status: "error",
-        message: t("common.error.authError", { message: error.message }),
+        message: error.message,
       };
     }
 

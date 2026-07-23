@@ -7,11 +7,11 @@ import { APIError } from "better-auth";
 import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
-import { rememberMe, userEmail, userPassword } from "@/lib/schemas/user";
+import { rememberMe, userEmail } from "@/lib/schemas/user";
 
 const schema = z.object({
   email: userEmail,
-  password: userPassword,
+  password: z.string(),
   rememberMe: rememberMe,
 });
 
@@ -41,6 +41,7 @@ export async function signIn(
 
     const result = await auth.api.signInEmail({
       body: parsedData,
+      headers: await headers(),
     });
 
     signedInUser = result.user;
@@ -50,7 +51,7 @@ export async function signIn(
     if (error instanceof APIError) {
       return {
         status: "error",
-        message: t("common.error.authError", { message: error.message }),
+        message: error.message,
       };
     }
 

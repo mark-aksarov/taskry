@@ -46,6 +46,7 @@ export const createUser = async (input: CreateUserInputDTO) => {
         emailVerified: true,
       },
     },
+    headers: await headers(),
   });
 
   await auth.api.requestPasswordReset({
@@ -53,6 +54,7 @@ export const createUser = async (input: CreateUserInputDTO) => {
       email: input.email,
       redirectTo: `/accept-invite?email=${input.email}`,
     },
+    headers: await headers(),
   });
 
   return user;

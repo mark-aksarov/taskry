@@ -34,7 +34,7 @@ export async function changePassword(formData: FormData): Promise<ActionState> {
     if (error instanceof APIError) {
       return {
         status: "error",
-        message: t("common.error.authError", { message: error.message }),
+        message: error.message,
       };
     }
 
