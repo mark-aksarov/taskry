@@ -8,8 +8,8 @@ export interface ProjectListItemLayoutProps {
   categorySlot: React.ReactNode;
   creatorImgSlot: React.ReactNode;
   creatorSlot: React.ReactNode;
-  customerImgSlot: React.ReactNode;
-  customerSlot: React.ReactNode;
+  clientImgSlot: React.ReactNode;
+  clientSlot: React.ReactNode;
   companySlot: React.ReactNode;
   statusSlot: React.ReactNode;
   commentsModalTriggerSlot: React.ReactNode;
@@ -23,8 +23,8 @@ export const ProjectListItemLayout = ({
   mainSlot,
   creatorImgSlot,
   creatorSlot,
-  customerImgSlot,
-  customerSlot,
+  clientImgSlot,
+  clientSlot,
   categorySlot,
   companySlot,
   statusSlot,
@@ -42,8 +42,8 @@ export const ProjectListItemLayout = ({
         <ListItemInfo>{mainSlot}</ListItemInfo>
         {creatorImgSlot}
         <ListItemInfo>{creatorSlot}</ListItemInfo>
-        {customerImgSlot}
-        <ListItemInfo>{customerSlot}</ListItemInfo>
+        {clientImgSlot}
+        <ListItemInfo>{clientSlot}</ListItemInfo>
         <ListItemInfo className="@max-4xl:hidden">{categorySlot}</ListItemInfo>
         <ListItemInfo className="@max-5xl:hidden">{companySlot}</ListItemInfo>
 

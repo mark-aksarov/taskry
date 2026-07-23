@@ -1,1 +1,0 @@
-export { UpdateCustomerFullNameModal } from "./UpdateCustomerFullNameModal";

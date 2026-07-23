@@ -1,1 +1,0 @@
-export { UpdateCustomerImageProvider } from "./UpdateCustomerImageProvider";

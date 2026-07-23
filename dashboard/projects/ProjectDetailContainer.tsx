@@ -30,7 +30,7 @@ export function ProjectDetailContainer({
       creator={project.creator}
       deadline={project.deadline}
       description={project.description}
-      customer={project.customer}
+      client={project.client}
       category={project.category}
       status={project.status}
     />

@@ -44,7 +44,7 @@ export function useUpdateImageActionState<T extends TId>(
         } as ActionState;
       }
 
-      // update customer image url in database
+      // update client image url in database
       const { url, fields } = uploadImageState.presignedPost!;
       const updateImageUrlState = await updateImageUrl({
         id,

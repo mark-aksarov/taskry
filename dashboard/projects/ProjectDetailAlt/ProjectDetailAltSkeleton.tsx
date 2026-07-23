@@ -9,7 +9,7 @@ export function ProjectDetailAltSkeleton() {
       descriptionSlot={<DetailInfoAltSkeleton surface />}
       statusSlot={<DetailInfoAltSkeleton surface />}
       deadlineSlot={<DetailInfoAltSkeleton surface />}
-      customerSlot={<DetailInfoAltSkeleton surface />}
+      clientSlot={<DetailInfoAltSkeleton surface />}
       categorySlot={<DetailInfoAltSkeleton surface />}
       progressSlot={<DetailInfoAltSkeleton surface />}
       creatorSlot={<DetailInfoAltSkeleton surface />}

@@ -1,1 +1,0 @@
-export { UpdateCustomerPhoneNumberModal } from "./UpdateCustomerPhoneNumberModal";

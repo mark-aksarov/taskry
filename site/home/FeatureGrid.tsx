@@ -46,9 +46,9 @@ export function FeatureGrid() {
           <Building2 size={24} />
         </IconWrapper>
 
-        <SiteCardHeading>{t("customers.title")}</SiteCardHeading>
+        <SiteCardHeading>{t("clients.title")}</SiteCardHeading>
 
-        <SiteCardDescription>{t("customers.description")}</SiteCardDescription>
+        <SiteCardDescription>{t("clients.description")}</SiteCardDescription>
       </SiteCard>
 
       <SiteCard>

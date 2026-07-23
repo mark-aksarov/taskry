@@ -1,1 +1,0 @@
-export { UpdateCustomerPublicLinkModal } from "./UpdateCustomerPublicLinkModal";

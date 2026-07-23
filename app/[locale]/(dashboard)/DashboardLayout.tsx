@@ -39,18 +39,18 @@ export function DashboardLayout({
   /** Route configuration */
   const routeConfig = [
     {
-      match: pathname === "/customers",
-      namespace: "app.CustomersPage",
+      match: pathname === "/clients",
+      namespace: "app.ClientsPage",
     },
     {
-      match: pathname.startsWith("/customers") && params.id,
-      namespace: "app.CustomerDetailPage",
-      backButtonHref: "/customers",
+      match: pathname.startsWith("/clients") && params.id,
+      namespace: "app.ClientDetailPage",
+      backButtonHref: "/clients",
     },
     {
       match: pathname === "/companies",
       namespace: "app.CompaniesPage",
-      backButtonHref: "/customers",
+      backButtonHref: "/clients",
     },
     {
       match: pathname === "/projects",

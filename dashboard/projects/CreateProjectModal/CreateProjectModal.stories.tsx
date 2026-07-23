@@ -6,7 +6,7 @@ import {
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CreateProjectModal } from "../CreateProjectModal";
 import { CreateProjectForm } from "../CreateProjectForm";
-import { mockedCustomerSummaries } from "@/mocks/customers";
+import { mockedClientSummaries } from "@/mocks/clients";
 import { ProjectFormSkeleton } from "../ProjectFormSkeleton";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
@@ -34,7 +34,7 @@ export const Default = {
     createProjectFormContainer: (
       <CreateProjectForm
         projectCategorySelectItems={mockedProjectCategorySummaries}
-        customerSelectItems={mockedCustomerSummaries}
+        clientSelectItems={mockedClientSummaries}
       />
     ),
   },

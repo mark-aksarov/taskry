@@ -11,7 +11,7 @@ import { ProjectTitleDetailInfoAlt } from "./ProjectTitleDetailInfoAlt";
 import { ProjectStatusDetailInfoAlt } from "./ProjectStatusDetailInfoAlt";
 import { ProjectCategoryDetailInfoAlt } from "./ProjectCategoryDetailInfoAlt";
 import { ProjectDeadlineDetailInfoAlt } from "./ProjectDeadlineDetailInfoAlt";
-import { ProjectCustomerDetailInfoAlt } from "./ProjectCustomerDetailInfoAlt";
+import { ProjectClientDetailInfoAlt } from "./ProjectClientDetailInfoAlt";
 import { ProgressDetailInfoAlt } from "@/dashboard/common/ProgressDetailInfoAlt";
 import { ProjectDescriptionDetailInfoAlt } from "./ProjectDescriptionDetailInfoAlt";
 import { ProjectTasksStatsDetailInfoAlt } from "./ProjectTasksStatsDetailInfoAlt";
@@ -25,7 +25,7 @@ interface ProjectDetailAltProps {
   };
   deadline: string;
   description?: string;
-  customer?: {
+  client?: {
     id: number;
     fullName: string;
     imageUrl?: string;
@@ -48,7 +48,7 @@ export function ProjectDetailAlt({
   creator,
   deadline,
   description,
-  customer,
+  client,
   category,
   status,
   tasks,
@@ -63,7 +63,7 @@ export function ProjectDetailAlt({
       }
       statusSlot={<ProjectStatusDetailInfoAlt status={status} />}
       deadlineSlot={<ProjectDeadlineDetailInfoAlt deadline={deadline} />}
-      customerSlot={<ProjectCustomerDetailInfoAlt customer={customer} />}
+      clientSlot={<ProjectClientDetailInfoAlt client={client} />}
       categorySlot={<ProjectCategoryDetailInfoAlt category={category} />}
       creatorSlot={
         <DetailInfoAlt

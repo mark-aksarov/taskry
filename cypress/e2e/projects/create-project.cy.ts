@@ -3,7 +3,7 @@ import {
   accounts,
   positions,
   companies,
-  customers,
+  clients,
   workspaces,
   projectCategories,
 } from "@/prisma/seed/test-data";
@@ -15,7 +15,7 @@ describe("Project creation", () => {
     deadline: { day: "01", month: "02", year: "2030" },
     statusKey: "active",
     categoryKey: "1",
-    customerKey: "1",
+    clientKey: "1",
   };
 
   beforeEach(() => {
@@ -27,7 +27,7 @@ describe("Project creation", () => {
       users,
       accounts,
       companies,
-      customers,
+      clients,
       projectCategories,
     };
 
@@ -49,7 +49,7 @@ describe("Project creation", () => {
       cy.contains(projectData.title);
       cy.contains(projectData.deadline.year);
       cy.contains(/active/i);
-      cy.contains("Customer 1");
+      cy.contains("Client 1");
       cy.contains("Project Category 1");
       cy.contains("Company 1");
     });
@@ -81,7 +81,7 @@ describe("Project creation", () => {
       cy.contains(/active/i);
       cy.contains("No category");
       cy.contains("No company");
-      cy.contains("No customer");
+      cy.contains("No client");
     });
   });
 });

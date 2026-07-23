@@ -50,10 +50,10 @@ export const WithOverflowContent = {
       ...Default.args.creator,
       fullName: "This is a user name with a very long text for layout testing",
     },
-    customer: {
-      ...Default.args.customer,
+    client: {
+      ...Default.args.client,
       fullName:
-        "This is a customer name with a very long text for layout testing",
+        "This is a client name with a very long text for layout testing",
     },
     category: {
       ...Default.args.category,

@@ -1,0 +1,402 @@
+import {
+  users,
+  positions,
+  workspaces,
+  taskCategories,
+  projectCategories,
+} from "@/prisma/seed/test-data";
+
+import prisma from "@/lib/prisma";
+import { getClientList } from "../client.dal";
+import { dates } from "@/lib/data/utils/test-utils";
+import { ProjectStatus } from "@/generated/prisma/enums";
+import { seed } from "@/prisma/test-seed";
+import { requireSession } from "@/lib/data/utils/requireSession";
+import { resetDatabase } from "@/lib/test-utils/resetDatabase";
+import { it, expect, describe, beforeAll, afterEach, afterAll } from "vitest";
+
+describe("getClientList", () => {
+  beforeAll(async () => {
+    (requireSession as any).mockResolvedValue({
+      user: { id: "user-1", workspaceId: 1 },
+    });
+
+    await resetDatabase();
+
+    await seed({
+      workspaces,
+      positions,
+      users,
+      taskCategories,
+      projectCategories,
+    });
+
+    return prisma.company.createMany({
+      data: [
+        { id: 1, name: "Company 1", workspaceId: 1 },
+        { id: 2, name: "Company 2", workspaceId: 1 },
+      ],
+    });
+  });
+
+  it("should return a valid ClientListDTO", async () => {
+    await prisma.client.create({
+      data: {
+        id: 1,
+        bio: "Client 1 bio",
+        fullName: "Client 1",
+        email: "client-1@test.com",
+        imageUrl: "https://example.com/client-1.jpg",
+        phoneNumber: "123-456-7890",
+        publicLink: "https://example.com/client-1",
+        companyId: 1,
+        workspaceId: 1,
+      },
+    });
+
+    const result = await getClientList({
+      page: 1,
+      pageSize: 10,
+      sort: "fullName",
+    });
+    await prisma.client.deleteMany();
+
+    expect(result).toStrictEqual({
+      items: [
+        {
+          id: 1,
+          fullName: "Client 1",
+          email: "client-1@test.com",
+          phoneNumber: "123-456-7890",
+          imageUrl: "https://example.com/client-1.jpg",
+          publicLink: "https://example.com/client-1",
+
+          company: {
+            id: 1,
+            name: "Company 1",
+          },
+        },
+      ],
+      totalCount: 1,
+    });
+  });
+
+  it("should return an empty array if no clients", async () => {
+    const result = await getClientList({
+      page: 1,
+      pageSize: 10,
+      sort: "fullName",
+    });
+
+    expect(result.items).toHaveLength(0);
+    expect(result.totalCount).toBe(0);
+  });
+
+  describe("sorting", () => {
+    afterEach(async () => {
+      await prisma.client.deleteMany();
+    });
+
+    it("should correctly sort clients by fullName", async () => {
+      await prisma.client.createMany({
+        data: [
+          {
+            id: 1,
+            fullName: "Client C",
+            email: "client-1@test.com",
+            companyId: 1,
+            workspaceId: 1,
+          },
+          {
+            id: 2,
+            fullName: "Client A",
+            email: "client-2@test.com",
+            companyId: 1,
+            workspaceId: 1,
+          },
+          {
+            id: 3,
+            fullName: "Client B",
+            email: "client-3@test.com",
+            companyId: 1,
+            workspaceId: 1,
+          },
+        ],
+      });
+
+      const result = await getClientList({
+        page: 1,
+        pageSize: 50,
+        sort: "fullName",
+      });
+
+      expect(result.items[0].fullName).toBe("Client A");
+      expect(result.items[1].fullName).toBe("Client B");
+      expect(result.items[2].fullName).toBe("Client C");
+    });
+
+    it("should correctly sort clients by company", async () => {
+      await prisma.client.createMany({
+        data: [
+          {
+            id: 1,
+            fullName: "Client A",
+            email: "client-1@test.com",
+            companyId: 1,
+            workspaceId: 1,
+          },
+          {
+            id: 2,
+            fullName: "Client B",
+            email: "client-2@test.com",
+            companyId: 2,
+            workspaceId: 1,
+          },
+          {
+            id: 3,
+            fullName: "Client C",
+            email: "client-3@test.com",
+            companyId: 1,
+            workspaceId: 1,
+          },
+        ],
+      });
+
+      const result = await getClientList({
+        page: 1,
+        pageSize: 50,
+        sort: "company",
+      });
+
+      expect(result.items[0].fullName).toBe("Client A");
+      expect(result.items[1].fullName).toBe("Client C");
+      expect(result.items[2].fullName).toBe("Client B");
+    });
+  });
+
+  describe("filtering", () => {
+    beforeAll(async () => {
+      await prisma.client.createMany({
+        data: [
+          {
+            id: 1,
+            fullName: "Client A",
+            email: "client-1@test.com",
+            companyId: 1,
+            workspaceId: 1,
+          },
+          {
+            id: 2,
+            fullName: "Client B",
+            email: "client-2@test.com",
+            companyId: 2,
+            workspaceId: 1,
+          },
+          {
+            id: 3,
+            fullName: "Client C",
+            email: "client-3@test.com",
+            companyId: 2,
+            workspaceId: 1,
+          },
+        ],
+      });
+
+      await prisma.project.createMany({
+        data: [
+          {
+            id: 1,
+            workspaceId: 1,
+            title: "Project A",
+            deadline: dates.nextWeek,
+            creatorId: "user-1",
+            categoryId: 1,
+            clientId: 1,
+            status: ProjectStatus.active,
+          },
+          {
+            id: 2,
+            workspaceId: 1,
+            title: "Project B",
+            deadline: dates.nextWeek,
+            creatorId: "user-1",
+            categoryId: 1,
+            clientId: 2,
+            status: ProjectStatus.completed,
+          },
+          {
+            id: 3,
+            workspaceId: 1,
+            title: "Project C",
+            deadline: dates.overdue,
+            creatorId: "user-1",
+            categoryId: 1,
+            clientId: 3,
+            status: ProjectStatus.pending,
+          },
+        ],
+      });
+    });
+
+    afterAll(async () => {
+      await prisma.client.deleteMany();
+      await prisma.project.deleteMany();
+    });
+
+    it("should filter clients by query", async () => {
+      const result = await getClientList({
+        page: 1,
+        pageSize: 10,
+        sort: "fullName",
+        filters: { query: "A" },
+      });
+
+      expect(result.items).toHaveLength(1);
+      expect(result.items[0].fullName).toBe("Client A");
+    });
+
+    it("should filter clients which have not active projects", async () => {
+      const result = await getClientList({
+        page: 1,
+        pageSize: 10,
+        sort: "fullName",
+        filters: { hasNoActiveProjects: true },
+      });
+
+      expect(result.items).toHaveLength(2);
+      expect(result.items).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ fullName: "Client B" }),
+          expect.objectContaining({ fullName: "Client C" }),
+        ]),
+      );
+    });
+
+    it("should filter clients which have active projects", async () => {
+      const result = await getClientList({
+        page: 1,
+        pageSize: 10,
+        sort: "fullName",
+        filters: { hasActiveProjects: true },
+      });
+
+      expect(result.items).toHaveLength(1);
+      expect(result.totalCount).toBe(1);
+      expect(result.items[0].fullName).toBe("Client A");
+    });
+
+    it("should filter clients which have overdue projects", async () => {
+      const result = await getClientList({
+        page: 1,
+        pageSize: 10,
+        sort: "fullName",
+        filters: { hasOverdueProjects: true },
+      });
+
+      expect(result.items).toHaveLength(1);
+      expect(result.totalCount).toBe(1);
+      expect(result.items[0].fullName).toBe("Client C");
+    });
+
+    it("should filter clients which have active OR overdue projects", async () => {
+      const result = await getClientList({
+        page: 1,
+        pageSize: 10,
+        sort: "fullName",
+        filters: {
+          hasActiveProjects: true,
+          hasOverdueProjects: true,
+        },
+      });
+
+      expect(result.totalCount).toBe(2);
+      expect(result.items).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ fullName: "Client A" }),
+          expect.objectContaining({ fullName: "Client C" }),
+        ]),
+      );
+    });
+
+    it("should filter clients by company", async () => {
+      const result = await getClientList({
+        page: 1,
+        pageSize: 10,
+        sort: "fullName",
+        filters: { companyIds: [1] },
+      });
+
+      expect(result.items).toHaveLength(1);
+      expect(result.totalCount).toBe(1);
+      expect(result.items[0].fullName).toBe("Client A");
+    });
+  });
+
+  describe("pagination", () => {
+    beforeAll(async () => {
+      await prisma.client.createMany({
+        data: [
+          {
+            id: 1,
+            fullName: "Client 1",
+            email: "client-1@test.com",
+            companyId: 1,
+            workspaceId: 1,
+          },
+          {
+            id: 2,
+            fullName: "Client 2",
+            email: "client-2@test.com",
+            companyId: 1,
+            workspaceId: 1,
+          },
+          {
+            id: 3,
+            fullName: "Client 3",
+            email: "client-3@test.com",
+            companyId: 1,
+            workspaceId: 1,
+          },
+        ],
+      });
+    });
+
+    afterAll(async () => {
+      await prisma.client.deleteMany();
+    });
+
+    it("should handle pagination correctly (page and pageSize)", async () => {
+      const page1 = await getClientList({
+        page: 1,
+        pageSize: 2,
+        sort: "fullName",
+      });
+
+      const page2 = await getClientList({
+        page: 2,
+        pageSize: 2,
+        sort: "fullName",
+      });
+
+      expect(page1.items).toHaveLength(2);
+      expect(page1.totalCount).toBe(3);
+      expect(page1.items[0].fullName).toBe("Client 1");
+      expect(page1.items[1].fullName).toBe("Client 2");
+
+      expect(page2.items).toHaveLength(1);
+      expect(page2.totalCount).toBe(3);
+      expect(page2.items[0].fullName).toBe("Client 3");
+    });
+
+    it("should return an empty array if page exceeds available data", async () => {
+      const result = await getClientList({
+        page: 99,
+        pageSize: 10,
+        sort: "fullName",
+      });
+
+      expect(result.items).toEqual([]);
+      expect(result.totalCount).toBe(3);
+    });
+  });
+});

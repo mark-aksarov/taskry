@@ -496,7 +496,7 @@ export const projectComments = [
   },
   {
     id: 5066,
-    content: "I've started integrating the new customer interaction data source. It requires mapping 15 new fields into our central data warehouse schema.",
+    content: "I've started integrating the new client interaction data source. It requires mapping 15 new fields into our central data warehouse schema.",
     createdAt: "2025-01-20T13:58:02.000Z",
     senderId: "user-20",
     projectId: 47,

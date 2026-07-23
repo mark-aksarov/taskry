@@ -38623,7 +38623,7 @@ export let taskComments = [
   },
   {
     id: 4772,
-    content: "Спроектирована таблица `referrals`: ID, partner_id (FK), customer_id, cookie_expiry_date (90 дней, согласно 523), timestamp.",
+    content: "Спроектирована таблица `referrals`: ID, partner_id (FK), client_id, cookie_expiry_date (90 дней, согласно 523), timestamp.",
     senderId: "user-3",
     projectId: null,
     taskId: 525,

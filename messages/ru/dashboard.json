@@ -213,51 +213,51 @@
       "heading": "Импорт компаний"
     }
   },
-  "customers": {
-    "CustomerCheckboxGroup": {
+  "clients": {
+    "ClientCheckboxGroup": {
       "label": "Клиент"
     },
-    "CustomerCompanyFiltersModal": {
+    "ClientCompanyFiltersModal": {
       "heading": "Компания"
     },
-    "CustomerCompanyFiltersModalTrigger": {
+    "ClientCompanyFiltersModalTrigger": {
       "label": "Компания"
     },
-    "CustomerSearchModal": {
+    "ClientSearchModal": {
       "heading": "Поиск клиентов"
     },
-    "CustomerSelect": {
+    "ClientSelect": {
       "label": "Клиент",
-      "noCustomer": "Нет клиента"
+      "noClient": "Нет клиента"
     },
-    "CustomersEmptySectionCreateButton": {
+    "ClientsEmptySectionCreateButton": {
       "label": "Новый клиент"
     },
-    "CustomerContainer": {
+    "ClientContainer": {
       "notFound": "Клиент не найден. Возможно, он был удалён другим пользователем."
     },
-    "UpdateCustomerForm": {
+    "UpdateClientForm": {
       "submitButtonLabel": "Обновить клиента",
       "successMessage": "Клиент успешно обновлён"
     },
-    "CreateCustomerForm": {
+    "CreateClientForm": {
       "submitButtonLabel": "Создать клиента",
       "successMessage": "Клиент успешно создан"
     },
-    "TotalCustomersCard": {
+    "TotalClientsCard": {
       "text": "Всего клиентов"
     },
-    "CustomerDetailActions": {
+    "ClientDetailActions": {
       "delete": "Удалить клиента",
       "edit": "Редактировать клиента",
       "deleteImage": "Удалить изображение",
       "updateImage": "Обновить изображение"
     },
-    "CustomerSortingMenuTrigger": {
+    "ClientSortingMenuTrigger": {
       "byFullName": "По полному имени",
       "byCompany": "По компании"
     },
-    "CustomerDetail": {
+    "ClientDetail": {
       "bio": "О себе",
       "fullName": "Полное имя",
       "email": "Электронная почта",
@@ -277,27 +277,27 @@
       "editPhoneNumberButtonLabel": "Изменить номер телефона",
       "editPublicLinkButtonLabel": "Изменить публичную ссылку"
     },
-    "CreateCustomerModal": {
+    "CreateClientModal": {
       "title": "Новый клиент"
     },
-    "UpdateCustomerModal": {
+    "UpdateClientModal": {
       "title": "Редактировать клиента"
     },
-    "CustomerDetailCard": {
+    "ClientDetailCard": {
       "title": "Детали клиента"
     },
-    "CustomerFullNameTextField": {
+    "ClientFullNameTextField": {
       "label": "Полное имя",
       "placeholder": "Введите полное имя",
       "validation": {
         "required": "Полное имя обязательно для заполнения"
       }
     },
-    "CustomerBioTextField": {
+    "ClientBioTextField": {
       "label": "О себе",
       "placeholder": "Введите информацию о себе"
     },
-    "CustomerEmailTextField": {
+    "ClientEmailTextField": {
       "label": "Email",
       "placeholder": "Введите email",
       "validation": {
@@ -305,51 +305,51 @@
         "format": "Введите корректный адрес электронной почты, например user@example.com"
       }
     },
-    "CustomerPhoneNumberTextField": {
+    "ClientPhoneNumberTextField": {
       "label": "Номер телефона",
       "placeholder": "Введите номер телефона"
     },
-    "CustomerPublicLinkTextField": {
+    "ClientPublicLinkTextField": {
       "label": "Публичная ссылка",
       "placeholder": "Введите публичную ссылку",
       "validation": {
         "format": "Введите корректный URL, например https://example.com"
       }
     },
-    "CustomerDetailSideSheet": {
+    "ClientDetailSideSheet": {
       "dialogHeading": "Детали клиента",
       "openInFullPage": "Открыть клиента"
     },
-    "CustomerItemActionMenuTrigger": {
+    "ClientItemActionMenuTrigger": {
       "edit": "Редактировать",
       "delete": "Удалить",
       "details": "Открыть детали"
     },
-    "DeleteCustomerModal": {
+    "DeleteClientModal": {
       "heading": "Удалить клиента",
       "text": "Вы уверены, что хотите удалить клиента <strong>«{name}»</strong>? Всё содержимое будет безвозвратно удалено.",
       "deleteButton": "Удалить",
       "cancelButton": "Отменить",
       "successMessage": "Клиент успешно удалён"
     },
-    "DeleteCustomerImageModal": {
+    "DeleteClientImageModal": {
       "heading": "Удалить изображение",
       "text": "Вы уверены, что хотите удалить изображение клиента <strong>«{name}»</strong>?",
       "deleteButton": "Удалить",
       "cancelButton": "Отменить",
       "successMessage": "Изображение успешно удалено"
     },
-    "DeleteCustomersModal": {
+    "DeleteClientsModal": {
       "heading": "Удалить клиентов",
       "text": "Вы уверены, что хотите удалить <strong>{count} выбранных клиентов</strong>? Всё содержимое будет безвозвратно удалено.",
       "deleteButton": "Удалить",
       "cancelButton": "Отменить",
       "successMessage": "Клиенты успешно удалены"
     },
-    "CustomerGridItem": {
+    "ClientGridItem": {
       "noCompany": "Нет компании"
     },
-    "CustomerListItem": {
+    "ClientListItem": {
       "checkboxAriaLabel": "Чекбокс клиента",
       "phoneNumber": "Номер телефона",
       "publicLink": "Публичная ссылка",
@@ -358,78 +358,78 @@
       "company": "Компания",
       "noCompany": "Нет компании"
     },
-    "CustomerResultsCount": {
-      "customersFound": "{count, plural, one {Найден # клиент} few {Найдено # клиента} many {Найдено # клиентов} other {Найдено # клиентов}}"
+    "ClientResultsCount": {
+      "clientsFound": "{count, plural, one {Найден # клиент} few {Найдено # клиента} many {Найдено # клиентов} other {Найдено # клиентов}}"
     },
-    "CustomerFiltersModal": {
+    "ClientFiltersModal": {
       "heading": "Фильтры клиентов"
     },
-    "CustomerActionsMenuTrigger": {
+    "ClientActionsMenuTrigger": {
       "dialogHeading": "Действия",
       "delete": "Удалить"
     },
-    "CreateCustomerMenuTrigger": {
+    "CreateClientMenuTrigger": {
       "dialogHeading": "Создать новое",
       "label": "Создать новое",
       "items": {
-        "customer": "Клиент",
+        "client": "Клиент",
         "company": "Компания"
       }
     },
-    "CustomersFilteredEmptySection": {
+    "ClientsFilteredEmptySection": {
       "heading": "Клиенты не найдены",
       "description": "По выбранным фильтрам клиенты не найдены. Попробуйте изменить или сбросить фильтры."
     },
-    "CustomerManageMenuTrigger": {
+    "ClientManageMenuTrigger": {
       "companies": "Компании",
       "importCSV": "Импорт клиентов (CSV)",
       "exportCSV": "Экспорт клиентов (CSV)",
       "successMessage": "Клиенты успешно экспортированы",
       "errorMessage": "Не удалось экспортировать клиентов"
     },
-    "CustomerImageMenuTrigger": {
+    "ClientImageMenuTrigger": {
       "label": "Меню изображения профиля"
     },
     "PersonDetailHeaderImage": {
       "imageAlt": "Изображение профиля"
     },
-    "UpdateCustomerBioModal": {
+    "UpdateClientBioModal": {
       "title": "Редактировать информацию о себе"
     },
-    "UpdateCustomerFullNameModal": {
+    "UpdateClientFullNameModal": {
       "title": "Редактировать полное имя"
     },
-    "UpdateCustomerPhoneNumberModal": {
+    "UpdateClientPhoneNumberModal": {
       "title": "Редактировать номер телефона"
     },
-    "UpdateCustomerFullNameForm": {
+    "UpdateClientFullNameForm": {
       "submitButtonLabel": "Обновить полное имя"
     },
-    "UpdateCustomerPhoneNumberForm": {
+    "UpdateClientPhoneNumberForm": {
       "submitButtonLabel": "Обновить номер телефона"
     },
-    "UpdateCustomerBioForm": {
+    "UpdateClientBioForm": {
       "submitButtonLabel": "Обновить информацию о себе"
     },
-    "UpdateCustomerPublicLinkForm": {
+    "UpdateClientPublicLinkForm": {
       "submitButtonLabel": "Обновить публичную ссылку"
     },
-    "UpdateCustomerPublicLinkModal": {
+    "UpdateClientPublicLinkModal": {
       "title": "Редактировать публичную ссылку"
     },
-    "UpdateCustomerEmailForm": {
+    "UpdateClientEmailForm": {
       "submitButtonLabel": "Обновить email"
     },
-    "UpdateCustomerEmailModal": {
+    "UpdateClientEmailModal": {
       "title": "Редактировать email"
     },
-    "UpdateCustomerCompanyForm": {
+    "UpdateClientCompanyForm": {
       "submitButtonLabel": "Обновить компанию"
     },
-    "UpdateCustomerCompanyModal": {
+    "UpdateClientCompanyModal": {
       "title": "Редактировать компанию"
     },
-    "ImportCustomersModal": {
+    "ImportClientsModal": {
       "heading": "Импорт клиентов"
     },
     "ImportPositionsModal": {
@@ -442,7 +442,7 @@
       "projects": "Проекты",
       "tasks": "Задачи",
       "team": "Команда",
-      "customers": "Клиенты",
+      "clients": "Клиенты",
       "profile": "Профиль",
       "home": "На главную"
     },
@@ -721,8 +721,8 @@
       "deadlineOn": "Срок до {date}",
       "noCreator": "Нет создателя",
       "creator": "Кем создан",
-      "noCustomer": "Нет клиента",
-      "customer": "Клиент",
+      "noClient": "Нет клиента",
+      "client": "Клиент",
       "category": "Категория",
       "noCategory": "Нет категории",
       "company": "Компания",
@@ -766,15 +766,15 @@
       "noDeadline": "Без дедлайна",
       "description": "Описание",
       "noDescription": "Нет описания",
-      "customer": "Клиент",
-      "noCustomer": "Нет клиента",
+      "client": "Клиент",
+      "noClient": "Нет клиента",
       "category": "Категория",
       "noCategory": "Нет категории",
       "status": "Статус",
       "title": "Заголовок",
       "tasksStats": "Статистика задач",
       "editProjectCategoryButtonLabel": "Изменить категорию",
-      "editCustomerButtonLabel": "Изменить клиента",
+      "editClientButtonLabel": "Изменить клиента",
       "editDeadlineButtonLabel": "Изменить дедлайн",
       "editDescriptionButtonLabel": "Изменить описание",
       "editStatusButtonLabel": "Изменить статус",
@@ -802,10 +802,10 @@
     "ProjectCreatorFiltersModalTrigger": {
       "buttonLabel": "Кем создан"
     },
-    "ProjectCustomerFiltersModal": {
+    "ProjectClientFiltersModal": {
       "heading": "Клиент"
     },
-    "ProjectCustomerFiltersModalTrigger": {
+    "ProjectClientFiltersModalTrigger": {
       "buttonLabel": "Клиент"
     },
     "ProjectResultsCount": {
@@ -853,10 +853,10 @@
     "UpdateProjectDeadlineModal": {
       "title": "Изменить срок выполнения"
     },
-    "UpdateProjectCustomerForm": {
+    "UpdateProjectClientForm": {
       "submitButtonLabel": "Обновить клиента"
     },
-    "UpdateProjectCustomerModal": {
+    "UpdateProjectClientModal": {
       "title": "Изменить клиента"
     },
     "ProjectActiveTasksDetailStat": {
@@ -883,7 +883,7 @@
       "users": "Пользователи",
       "tasks": "Задачи",
       "projects": "Проекты",
-      "customers": "Клиенты"
+      "clients": "Клиенты"
     },
     "SearchModalTrigger": {
       "placeholder": "Поиск",

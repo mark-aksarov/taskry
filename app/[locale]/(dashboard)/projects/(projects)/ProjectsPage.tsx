@@ -41,7 +41,7 @@ import { ProjectsFilteredEmptySection } from "@/dashboard/projects/ProjectsFilte
 import { ProjectStatusFiltersModalTrigger } from "@/dashboard/projects/ProjectStatusFiltersModal";
 import { ProjectCreatorFiltersModalTrigger } from "@/dashboard/projects/ProjectCreatorFiltersModal";
 import { ProjectCategoryFiltersModalTrigger } from "@/dashboard/projects/ProjectCategoryFiltersModal";
-import { ProjectCustomerFiltersModalTrigger } from "@/dashboard/projects/ProjectCustomerFiltersModal";
+import { ProjectClientFiltersModalTrigger } from "@/dashboard/projects/ProjectClientFiltersModal";
 import { ProjectsEmptySectionCreateButton } from "@/dashboard/projects/ProjectsEmptySectionCreateButton";
 
 interface ProjectsPageProps {
@@ -49,7 +49,7 @@ interface ProjectsPageProps {
   pageSize: number;
   totalCount: number;
   categoryCount: number;
-  customerCount: number;
+  clientCount: number;
   totalFilteredProjects: number;
   selectedSortField: ProjectSortField;
   projectGrid: React.ReactNode;
@@ -60,7 +60,7 @@ export function ProjectsPage({
   pageSize,
   totalCount,
   categoryCount,
-  customerCount,
+  clientCount,
   totalFilteredProjects,
   selectedSortField,
   projectGrid,
@@ -133,7 +133,7 @@ export function ProjectsPage({
             <ProjectStatusFiltersModalTrigger />
             {categoryCount > 0 && <ProjectCategoryFiltersModalTrigger />}
             <ProjectCreatorFiltersModalTrigger />
-            {customerCount > 0 && <ProjectCustomerFiltersModalTrigger />}
+            {clientCount > 0 && <ProjectClientFiltersModalTrigger />}
           </ToolbarFiltersMobile>
 
           {!isFilteredEmpty && (

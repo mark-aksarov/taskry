@@ -15,7 +15,7 @@ import { TotalTasksCardContainer } from "@/dashboard/tasks/TotalTasksCardContain
 import { TotalUsersCardContainer } from "@/dashboard/users/TotalUsersCardContainer";
 import { UpdateTaskStatusesProvider } from "@/dashboard/tasks/UpdateTaskStatusesProvider";
 import { TotalProjectsCardContainer } from "@/dashboard/projects/TotalProjectsCardContainer";
-import { TotalCustomersCardContainer } from "@/dashboard/customer/TotalCustomersCardContainer";
+import { TotalClientsCardContainer } from "@/dashboard/client/TotalClientsCardContainer";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -58,7 +58,7 @@ export default async function AppDashboardPage({
               totalProjectsCardContainer={<TotalProjectsCardContainer />}
               totalTasksCardContainer={<TotalTasksCardContainer />}
               totalUsersCardContainer={<TotalUsersCardContainer />}
-              totalCustomersCardContainer={<TotalCustomersCardContainer />}
+              totalClientsCardContainer={<TotalClientsCardContainer />}
               taskGrid={
                 <TaskGridContainer tasks={tasks} showCheckbox={false} />
               }

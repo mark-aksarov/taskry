@@ -15,7 +15,7 @@ import { ProjectStatusCheckboxGroup } from "../ProjectStatusCheckboxGroup";
 import { ProjectCreatorCheckboxGroup } from "../ProjectCreatorCheckboxGroup";
 import { NoActiveTasksSwitch } from "@/dashboard/tasks/NoActiveTasksSwitch";
 import { DeadlineToDatePicker } from "@/dashboard/common/DeadlineToDatePicker";
-import { CustomerCheckboxGroup } from "@/dashboard/customer/CustomerCheckboxGroup";
+import { ClientCheckboxGroup } from "@/dashboard/client/ClientCheckboxGroup";
 import { DeadlineFromDatePicker } from "@/dashboard/common/DeadlineFromDatePicker";
 import { useFilterSubmitSideEffects } from "@/lib/hooks/useFilterSubmitSideEffects";
 import { ProjectCategoryCheckboxGroup } from "@/dashboard/projectCategory/ProjectCategoryCheckboxGroup";
@@ -23,13 +23,13 @@ import { ProjectCategoryCheckboxGroup } from "@/dashboard/projectCategory/Projec
 interface ProjectFiltersFormProps {
   categoryCheckboxGroupItems: { id: number; name: string }[];
   userCheckboxGroupItems: { id: string; fullName: string }[];
-  customerCheckboxGroupItems: { id: number; fullName: string }[];
+  clientCheckboxGroupItems: { id: number; fullName: string }[];
 }
 
 export function ProjectFiltersForm({
   categoryCheckboxGroupItems,
   userCheckboxGroupItems,
-  customerCheckboxGroupItems,
+  clientCheckboxGroupItems,
 }: ProjectFiltersFormProps) {
   const searchParams = useSearchParams();
   const applyFilterURL = useApplyFilterURL();
@@ -42,7 +42,7 @@ export function ProjectFiltersForm({
     noActiveTasks,
     deadlineFrom,
     deadlineTo,
-    customerIds,
+    clientIds,
     categoryIds,
     creatorIds,
     statuses,
@@ -64,7 +64,7 @@ export function ProjectFiltersForm({
     newSearchParams.delete("deadlineFrom");
     newSearchParams.delete("deadlineTo");
     newSearchParams.delete("statuses");
-    newSearchParams.delete("customerIds");
+    newSearchParams.delete("clientIds");
     newSearchParams.delete("categoryIds");
     newSearchParams.delete("creatorIds");
 
@@ -80,7 +80,7 @@ export function ProjectFiltersForm({
       newSearchParams.set("deadlineTo", deadlineTo.toString());
     }
     statuses.forEach((status) => newSearchParams.append("statuses", status));
-    customerIds.forEach((id) => newSearchParams.append("customerIds", id));
+    clientIds.forEach((id) => newSearchParams.append("clientIds", id));
     categoryIds.forEach((id) => newSearchParams.append("categoryIds", id));
     creatorIds.forEach((id) => newSearchParams.append("creatorIds", id));
 
@@ -133,15 +133,15 @@ export function ProjectFiltersForm({
         </>
       )}
 
-      {customerCheckboxGroupItems.length > 0 && (
+      {clientCheckboxGroupItems.length > 0 && (
         <>
           <Separator />
 
-          <CustomerCheckboxGroup
-            items={customerCheckboxGroupItems}
-            value={customerIds}
+          <ClientCheckboxGroup
+            items={clientCheckboxGroupItems}
+            value={clientIds}
             onChange={(value) =>
-              dispatch({ type: "setCustomerIds", payload: value })
+              dispatch({ type: "setClientIds", payload: value })
             }
           />
         </>

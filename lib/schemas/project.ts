@@ -1,5 +1,5 @@
 import z from "zod";
-import { customerId } from "./customer";
+import { clientId } from "./client";
 import { emptyStringToUndefined } from "./base";
 import { projectCategoryId } from "./projectCategory";
 import { ProjectStatus } from "@/generated/prisma/enums";
@@ -22,5 +22,5 @@ export const createProjectSchema = z.object({
     emptyStringToUndefined,
     projectCategoryId.optional(),
   ),
-  customerId: z.preprocess(emptyStringToUndefined, customerId.optional()),
+  clientId: z.preprocess(emptyStringToUndefined, clientId.optional()),
 });

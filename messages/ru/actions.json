@@ -129,7 +129,7 @@
       }
     }
   },
-  "customer": {
+  "client": {
     "create": {
       "success": "Клиент успешно создан",
       "error": {

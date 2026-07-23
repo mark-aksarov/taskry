@@ -1,0 +1,1 @@
+export { UpdateClientModal } from "./UpdateClientModal";

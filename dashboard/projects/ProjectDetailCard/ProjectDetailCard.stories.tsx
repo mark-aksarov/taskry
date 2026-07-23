@@ -18,7 +18,7 @@ import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories
 import { withUpdateProjectTitleProvider } from "@/dashboard/projects/UpdateProjectTitleProvider/__stories__";
 import { withUpdateProjectStatusProvider } from "@/dashboard/projects/UpdateProjectStatusProvider/__stories__";
 import { withUpdateProjectDeadlineProvider } from "@/dashboard/projects/UpdateProjectDeadlineProvider/__stories__";
-import { withUpdateProjectCustomerProvider } from "@/dashboard/projects/UpdateProjectCustomerProvider/__stories__";
+import { withUpdateProjectClientProvider } from "@/dashboard/projects/UpdateProjectClientProvider/__stories__";
 import { withUpdateProjectStatusAltProvider } from "@/dashboard/projects/UpdateProjectStatusAltProvider/__stories__";
 import { withUpdateProjectDescriptionProvider } from "@/dashboard/projects/UpdateProjectDescriptionProvider/__stories__";
 import { withUpdateProjectCategoryRelProvider } from "@/dashboard/projects/UpdateProjectCategoryRelProvider/__stories__";
@@ -29,7 +29,7 @@ const meta = {
   decorators: [
     withDeleteProjectProvider,
     withCurrentUserProvider,
-    withUpdateProjectCustomerProvider,
+    withUpdateProjectClientProvider,
     withUpdateProjectDeadlineProvider,
     withUpdateProjectCategoryRelProvider,
     withUpdateProjectStatusAltProvider,

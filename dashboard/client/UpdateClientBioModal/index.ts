@@ -1,0 +1,1 @@
+export { UpdateClientBioModal } from "./UpdateClientBioModal";

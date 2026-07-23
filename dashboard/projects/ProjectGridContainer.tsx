@@ -22,10 +22,10 @@ import { ProjectCommentsContainer } from "./ProjectCommentsContainer";
 import { UpdateProjectFormContainer } from "./UpdateProjectFormContainer";
 import { UpdateCommentProvider } from "../comments/UpdateCommentProvider";
 import { UpdateProjectStatusProvider } from "./UpdateProjectStatusProvider";
-import { CustomerDetailSideSheet } from "../customer/CustomerDetailSideSheet";
-import { CustomerDetailContainer } from "../customer/CustomerDetailContainer";
+import { ClientDetailSideSheet } from "../client/ClientDetailSideSheet";
+import { ClientDetailContainer } from "../client/ClientDetailContainer";
 import { UserDetailHeaderContainer } from "../users/UserDetailHeaderContainer";
-import { CustomerDetailHeaderContainer } from "../customer/CustomerDetailHeaderContainer";
+import { ClientDetailHeaderContainer } from "../client/ClientDetailHeaderContainer";
 
 const ProjectListItem = dynamic(
   () => import("./ProjectListItem").then((mod) => mod.ProjectListItem),
@@ -91,17 +91,17 @@ export function ProjectGridContainer({ projects }: ProjectGridContainerProps) {
                           }
                         />
 
-                        {project.customer && (
-                          <CustomerDetailSideSheet
-                            customerId={project.customer.id}
-                            customerDetailContainer={
-                              <CustomerDetailContainer
-                                customerId={project.customer.id}
+                        {project.client && (
+                          <ClientDetailSideSheet
+                            clientId={project.client.id}
+                            clientDetailContainer={
+                              <ClientDetailContainer
+                                clientId={project.client.id}
                               />
                             }
-                            customerDetailHeaderContainer={
-                              <CustomerDetailHeaderContainer
-                                customerId={project.customer.id}
+                            clientDetailHeaderContainer={
+                              <ClientDetailHeaderContainer
+                                clientId={project.client.id}
                               />
                             }
                           />

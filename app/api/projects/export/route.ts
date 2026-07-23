@@ -19,9 +19,9 @@ export async function GET() {
   }
 
   try {
-    const customers = await getProjects();
+    const clients = await getProjects();
 
-    const csv = Papa.unparse(customers);
+    const csv = Papa.unparse(clients);
 
     return new Response(csv, {
       headers: {

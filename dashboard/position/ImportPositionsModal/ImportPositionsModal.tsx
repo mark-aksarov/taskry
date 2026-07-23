@@ -15,7 +15,7 @@ import { ConfirmModal, ConfirmModalActions } from "@/common/ConfirmModal";
 import { ImportModalUploadTrigger } from "@/dashboard/common/ImportModal";
 
 export function ImportPositionsModal() {
-  const t = useTranslations("dashboard.customers.ImportPositionsModal");
+  const t = useTranslations("dashboard.clients.ImportPositionsModal");
 
   const [fileSizeError, setFileSizeError] = useState(false);
   const { state, action, isPending } = useImportPositions();

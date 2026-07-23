@@ -14,9 +14,9 @@ import {
 } from "@/dashboard/projects/TotalProjectsCard";
 
 import {
-  TotalCustomersCard,
-  TotalCustomersCardSkeleton,
-} from "@/dashboard/customer/TotalCustomersCard";
+  TotalClientsCard,
+  TotalClientsCardSkeleton,
+} from "@/dashboard/client/TotalClientsCard";
 
 import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
@@ -63,7 +63,7 @@ export const Default = {
     totalProjectsCardContainer: <TotalProjectsCard totalProjects={50} />,
     totalTasksCardContainer: <TotalTasksCard totalTasks={500} />,
     totalUsersCardContainer: <TotalUsersCard totalUsers={15} />,
-    totalCustomersCardContainer: <TotalCustomersCard totalCustomers={20} />,
+    totalClientsCardContainer: <TotalClientsCard totalClients={20} />,
     taskGrid: <TaskGridExample showCheckbox={false} />,
   },
 } satisfies Story;
@@ -74,7 +74,7 @@ export const Loading = {
     totalProjectsCardContainer: <TotalProjectsCardSkeleton />,
     totalTasksCardContainer: <TotalTasksCardSkeleton />,
     totalUsersCardContainer: <TotalUsersCardSkeleton />,
-    totalCustomersCardContainer: <TotalCustomersCardSkeleton />,
+    totalClientsCardContainer: <TotalClientsCardSkeleton />,
     taskGrid: <TaskGridSkeleton viewMode="list" showCheckbox={false} />,
   },
 } satisfies Story;

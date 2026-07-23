@@ -258,11 +258,11 @@ export const getUserList = cache(
         {
           fullName: "asc",
         },
-      ] as Prisma.CustomerOrderByWithRelationInput[];
+      ] as Prisma.ClientOrderByWithRelationInput[];
     } else if (sort === "fullName") {
       orderBy = {
         fullName: "asc",
-      } as Prisma.CustomerOrderByWithRelationInput;
+      } as Prisma.ClientOrderByWithRelationInput;
     }
 
     const where = buildUserWhereClause(workspaceId, filters);

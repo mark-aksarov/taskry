@@ -48,10 +48,10 @@ declare namespace Cypress {
       deadline?: { day: string; month: string; year: string };
       statusKey?: string;
       categoryKey?: string;
-      customerKey?: string;
+      clientKey?: string;
     }): Chainable<JQuery<HTMLElement>>;
 
-    fillCustomerForm(data: {
+    fillClientForm(data: {
       fullName?: string;
       bio?: string;
       email?: string;

@@ -84,15 +84,15 @@ export async function validateProjectCategories(
   );
 }
 
-// Validate that customer exists and belongs to the workspace
-export async function validateCustomers(
+// Validate that client exists and belongs to the workspace
+export async function validateClients(
   workspaceId: number,
-  customerIds: number[],
+  clientIds: number[],
 ) {
-  const customers = await prisma.customer.findMany({
+  const clients = await prisma.client.findMany({
     where: {
       id: {
-        in: customerIds,
+        in: clientIds,
       },
     },
     select: {
@@ -100,7 +100,7 @@ export async function validateCustomers(
     },
   });
 
-  validateEntities(customers, customerIds.length, "Customer", workspaceId);
+  validateEntities(clients, clientIds.length, "Client", workspaceId);
 }
 
 // Validate that task category exists and belongs to the workspace
@@ -233,17 +233,14 @@ export function validateCompanyLimit(
   });
 }
 
-// Validate that customer limit has not been reached
-export function validateCustomerLimit(
-  workspaceId: number,
-  newCustomersCount = 1,
-) {
+// Validate that client limit has not been reached
+export function validateClientLimit(workspaceId: number, newClientsCount = 1) {
   return validateLimit({
-    model: prisma.customer,
+    model: prisma.client,
     workspaceId,
-    newCount: newCustomersCount,
+    newCount: newClientsCount,
     maxCount: CUSTOMER_MAX_COUNT,
-    entityName: "customers",
+    entityName: "clients",
   });
 }
 

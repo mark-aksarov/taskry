@@ -10,7 +10,7 @@ import {
 
 import { mockedUserSummaries } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { mockedCustomerSummaries } from "@/mocks/customers";
+import { mockedClientSummaries } from "@/mocks/clients";
 import { ProjectFiltersModal } from "../ProjectFiltersModal";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
@@ -44,7 +44,7 @@ export const Default = {
       <ProjectFiltersForm
         categoryCheckboxGroupItems={mockedProjectCategorySummaries}
         userCheckboxGroupItems={mockedUserSummaries}
-        customerCheckboxGroupItems={mockedCustomerSummaries}
+        clientCheckboxGroupItems={mockedClientSummaries}
       />
     ),
   },

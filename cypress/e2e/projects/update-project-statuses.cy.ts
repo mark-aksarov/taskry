@@ -3,7 +3,7 @@ import {
   accounts,
   positions,
   companies,
-  customers,
+  clients,
   workspaces,
   projectCategories,
   taskCategories,
@@ -21,7 +21,7 @@ describe("update project statuses", () => {
       accounts,
       positions,
       companies,
-      customers,
+      clients,
       projectCategories,
       taskCategories,
       projects: [

@@ -34,7 +34,7 @@ export interface Props extends BaseProjectItemProps {
     id: number;
     name: string;
   };
-  customer?: {
+  client?: {
     id: number;
     fullName: string;
     imageUrl?: string;
@@ -68,7 +68,7 @@ export const ProjectListItemInner = memo(function ProjectListItemInner({
   title,
   deadline,
   category,
-  customer,
+  client,
   company,
   commentsCount,
   status,
@@ -79,8 +79,8 @@ export const ProjectListItemInner = memo(function ProjectListItemInner({
   const { onOpenChange: onProjectDetailModalOpenChange } =
     useModal("projectDetail");
   const { onOpenChange: onUserDetailModalOpenChange } = useModal("userDetail");
-  const { onOpenChange: onCustomerDetailModalOpenChange } =
-    useModal("customerDetail");
+  const { onOpenChange: onClientDetailModalOpenChange } =
+    useModal("clientDetail");
   const { onOpenChange: onProjectCommentsModalOpenChange } =
     useModal("projectComments");
 
@@ -93,9 +93,9 @@ export const ProjectListItemInner = memo(function ProjectListItemInner({
     />
   );
 
-  const customerImg = (
+  const clientImg = (
     <ItemBaseUserImageContainer
-      user={customer}
+      user={client}
       className="h-9 w-9"
       width={36}
       height={36}
@@ -150,32 +150,32 @@ export const ProjectListItemInner = memo(function ProjectListItemInner({
           <ListItemText>{t("creator")}</ListItemText>
         </>
       }
-      customerImgSlot={
+      clientImgSlot={
         <>
-          {customer ? (
+          {client ? (
             <ItemBaseDetailButton
-              onPress={() => onCustomerDetailModalOpenChange(true)}
+              onPress={() => onClientDetailModalOpenChange(true)}
             >
-              {customerImg}
+              {clientImg}
             </ItemBaseDetailButton>
           ) : (
-            customerImg
+            clientImg
           )}
         </>
       }
-      customerSlot={
+      clientSlot={
         <>
-          {customer ? (
+          {client ? (
             <ListItemTitleButton
-              onPress={() => onCustomerDetailModalOpenChange(true)}
+              onPress={() => onClientDetailModalOpenChange(true)}
             >
-              {customer.fullName}
+              {client.fullName}
             </ListItemTitleButton>
           ) : (
-            <ListItemTitle>{t("noCustomer")} </ListItemTitle>
+            <ListItemTitle>{t("noClient")} </ListItemTitle>
           )}
 
-          <ListItemText>{t("customer")}</ListItemText>
+          <ListItemText>{t("client")}</ListItemText>
         </>
       }
       categorySlot={

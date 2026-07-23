@@ -3,7 +3,7 @@ import {
   tasks,
   accounts,
   projects,
-  customers,
+  clients,
   positions,
   companies,
   workspaces,
@@ -21,7 +21,7 @@ describe("dashboard cards", () => {
       users,
       accounts,
       companies,
-      customers,
+      clients,
       projectCategories,
       projects,
       taskCategories,
@@ -48,7 +48,7 @@ describe("dashboard cards", () => {
 
     cy.getByData("dashboard-card-text")
       .eq(3)
-      .should("contain", "Total customers");
+      .should("contain", "Total clients");
     cy.getByData("dashboard-card-value").eq(3).should("contain", "2");
   });
 });

@@ -47,9 +47,9 @@ export function DocsSectionGrid() {
             <Building2 size={24} />
           </IconWrapper>
         }
-        href="/docs/customers"
-        heading={t("customers.heading")}
-        subtext={t("customers.subtext")}
+        href="/docs/clients"
+        heading={t("clients.heading")}
+        subtext={t("clients.subtext")}
       />
     </div>
   );

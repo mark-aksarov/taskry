@@ -213,58 +213,58 @@
       "heading": "Import companies"
     }
   },
-  "customers": {
-    "CustomerCheckboxGroup": {
-      "label": "Customer"
+  "clients": {
+    "ClientCheckboxGroup": {
+      "label": "Client"
     },
-    "CustomerCompanyFiltersModal": {
+    "ClientCompanyFiltersModal": {
       "heading": "Company"
     },
-    "CustomerCompanyFiltersModalTrigger": {
+    "ClientCompanyFiltersModalTrigger": {
       "label": "Company"
     },
-    "CustomerSearchModal": {
-      "heading": "Search customers"
+    "ClientSearchModal": {
+      "heading": "Search clients"
     },
-    "CustomerSelect": {
-      "label": "Customer",
-      "noCustomer": "No customer"
+    "ClientSelect": {
+      "label": "Client",
+      "noClient": "No client"
     },
-    "CustomersEmptySectionCreateButton": {
-      "label": "New customer"
+    "ClientsEmptySectionCreateButton": {
+      "label": "New client"
     },
-    "CustomerContainer": {
-      "notFound": "Customer not found. It may have been deleted by another user."
+    "ClientContainer": {
+      "notFound": "Client not found. It may have been deleted by another user."
     },
-    "UpdateCustomerForm": {
-      "submitButtonLabel": "Update customer",
-      "successMessage": "Customer updated successfully"
+    "UpdateClientForm": {
+      "submitButtonLabel": "Update client",
+      "successMessage": "Client updated successfully"
     },
-    "CreateCustomerForm": {
-      "submitButtonLabel": "Create customer",
-      "successMessage": "Customer created successfully"
+    "CreateClientForm": {
+      "submitButtonLabel": "Create client",
+      "successMessage": "Client created successfully"
     },
-    "TotalCustomersCard": {
-      "text": "Total customers"
+    "TotalClientsCard": {
+      "text": "Total clients"
     },
-    "CustomerDetailActions": {
-      "delete": "Delete customer",
-      "edit": "Edit customer",
+    "ClientDetailActions": {
+      "delete": "Delete client",
+      "edit": "Edit client",
       "deleteImage": "Delete image",
       "updateImage": "Update image"
     },
-    "CustomerSortingMenuTrigger": {
+    "ClientSortingMenuTrigger": {
       "byFullName": "By full name",
       "byCompany": "By company"
     },
-    "CustomerDetail": {
+    "ClientDetail": {
       "bio": "About me",
       "fullName": "Full name",
       "email": "Email address",
       "phoneNumber": "Phone number",
       "publicLink": "Public link",
       "company": "Company",
-      "noBio": "This customer hasn't written anything about themselves yet.",
+      "noBio": "This client hasn't written anything about themselves yet.",
       "noFullName": "No name provided",
       "noEmail": "No email provided",
       "noPhoneNumber": "No phone number provided",
@@ -277,27 +277,27 @@
       "editPhoneNumberButtonLabel": "Edit phone number",
       "editPublicLinkButtonLabel": "Edit public link"
     },
-    "CreateCustomerModal": {
-      "title": "New customer"
+    "CreateClientModal": {
+      "title": "New client"
     },
-    "UpdateCustomerModal": {
-      "title": "Edit customer"
+    "UpdateClientModal": {
+      "title": "Edit client"
     },
-    "CustomerDetailCard": {
-      "title": "Customer details"
+    "ClientDetailCard": {
+      "title": "Client details"
     },
-    "CustomerFullNameTextField": {
+    "ClientFullNameTextField": {
       "label": "Full name",
       "placeholder": "Enter full name",
       "validation": {
         "required": "Full name is required"
       }
     },
-    "CustomerBioTextField": {
+    "ClientBioTextField": {
       "label": "Bio",
       "placeholder": "Enter about me"
     },
-    "CustomerEmailTextField": {
+    "ClientEmailTextField": {
       "label": "Email",
       "placeholder": "Enter email",
       "validation": {
@@ -305,52 +305,52 @@
         "format": "Enter a valid email address, for example user@example.com"
       }
     },
-    "CustomerPhoneNumberTextField": {
+    "ClientPhoneNumberTextField": {
       "label": "Phone number",
       "placeholder": "Enter phone number"
     },
-    "CustomerPublicLinkTextField": {
+    "ClientPublicLinkTextField": {
       "label": "Public link",
       "placeholder": "Enter a public link",
       "validation": {
         "format": "Please enter a valid URL, for example https://example.com"
       }
     },
-    "CustomerDetailSideSheet": {
-      "dialogHeading": "Customer details",
-      "openInFullPage": "Open customer"
+    "ClientDetailSideSheet": {
+      "dialogHeading": "Client details",
+      "openInFullPage": "Open client"
     },
-    "CustomerItemActionMenuTrigger": {
+    "ClientItemActionMenuTrigger": {
       "edit": "Edit",
       "delete": "Delete",
       "details": "Open details"
     },
-    "DeleteCustomerModal": {
-      "heading": "Delete customer",
-      "text": "Are you sure you want to delete customer <strong>«{name}»</strong>? All content will be permanently removed.",
+    "DeleteClientModal": {
+      "heading": "Delete client",
+      "text": "Are you sure you want to delete client <strong>«{name}»</strong>? All content will be permanently removed.",
       "deleteButton": "Delete",
       "cancelButton": "Cancel",
-      "successMessage": "Customer deleted successfully"
+      "successMessage": "Client deleted successfully"
     },
-    "DeleteCustomerImageModal": {
+    "DeleteClientImageModal": {
       "heading": "Delete image",
-      "text": "Are you sure you want to delete customer <strong>«{name}»</strong>'s image?",
+      "text": "Are you sure you want to delete client <strong>«{name}»</strong>'s image?",
       "deleteButton": "Delete",
       "cancelButton": "Cancel",
       "successMessage": "Image deleted successfully"
     },
-    "DeleteCustomersModal": {
-      "heading": "Delete customers",
-      "text": "Are you sure you want to delete <strong>{count} customers</strong>? All content will be permanently removed.",
+    "DeleteClientsModal": {
+      "heading": "Delete clients",
+      "text": "Are you sure you want to delete <strong>{count} clients</strong>? All content will be permanently removed.",
       "deleteButton": "Delete",
       "cancelButton": "Cancel",
-      "successMessage": "Customers deleted successfully"
+      "successMessage": "Clients deleted successfully"
     },
-    "CustomerGridItem": {
+    "ClientGridItem": {
       "noCompany": "No company"
     },
-    "CustomerListItem": {
-      "checkboxAriaLabel": "Customer checkbox",
+    "ClientListItem": {
+      "checkboxAriaLabel": "Client checkbox",
       "phoneNumber": "Phone number",
       "publicLink": "Public link",
       "noPhoneNumber": "No phone number",
@@ -358,79 +358,79 @@
       "noCompany": "No company",
       "company": "Company"
     },
-    "CustomerResultsCount": {
-      "customersFound": "{count, plural, one {# customer found} other {# customers found}}"
+    "ClientResultsCount": {
+      "clientsFound": "{count, plural, one {# client found} other {# clients found}}"
     },
-    "CustomerFiltersModal": {
-      "heading": "Customer filters"
+    "ClientFiltersModal": {
+      "heading": "Client filters"
     },
-    "CustomerActionsMenuTrigger": {
+    "ClientActionsMenuTrigger": {
       "dialogHeading": "Actions",
       "delete": "Delete"
     },
-    "CreateCustomerMenuTrigger": {
+    "CreateClientMenuTrigger": {
       "dialogHeading": "Create new",
       "label": "Create new",
       "items": {
-        "customer": "Customer",
+        "client": "Client",
         "company": "Company"
       }
     },
-    "CustomersFilteredEmptySection": {
-      "heading": "No customers found",
-      "description": "No customers match the selected filters. Try changing or resetting the filters."
+    "ClientsFilteredEmptySection": {
+      "heading": "No clients found",
+      "description": "No clients match the selected filters. Try changing or resetting the filters."
     },
-    "CustomerManageMenuTrigger": {
+    "ClientManageMenuTrigger": {
       "companies": "Companies",
-      "importCSV": "Import customers (CSV)",
-      "exportCSV": "Export customers (CSV)",
-      "successMessage": "Customers exported successfully",
-      "errorMessage": "Failed to export customers"
+      "importCSV": "Import clients (CSV)",
+      "exportCSV": "Export clients (CSV)",
+      "successMessage": "Clients exported successfully",
+      "errorMessage": "Failed to export clients"
     },
-    "CustomerImageMenuTrigger": {
+    "ClientImageMenuTrigger": {
       "label": "Profile image menu"
     },
     "PersonDetailHeaderImage": {
       "imageAlt": "Profile image"
     },
-    "UpdateCustomerBioModal": {
+    "UpdateClientBioModal": {
       "title": "Edit about me"
     },
-    "UpdateCustomerFullNameModal": {
+    "UpdateClientFullNameModal": {
       "title": "Edit full name"
     },
-    "UpdateCustomerPhoneNumberModal": {
+    "UpdateClientPhoneNumberModal": {
       "title": "Edit phone number"
     },
-    "UpdateCustomerFullNameForm": {
+    "UpdateClientFullNameForm": {
       "submitButtonLabel": "Update full name"
     },
-    "UpdateCustomerPhoneNumberForm": {
+    "UpdateClientPhoneNumberForm": {
       "submitButtonLabel": "Update phone number"
     },
-    "UpdateCustomerBioForm": {
+    "UpdateClientBioForm": {
       "submitButtonLabel": "Update about me"
     },
-    "UpdateCustomerPublicLinkForm": {
+    "UpdateClientPublicLinkForm": {
       "submitButtonLabel": "Update public link"
     },
-    "UpdateCustomerPublicLinkModal": {
+    "UpdateClientPublicLinkModal": {
       "title": "Edit public link"
     },
-    "UpdateCustomerEmailForm": {
+    "UpdateClientEmailForm": {
       "submitButtonLabel": "Update email"
     },
-    "UpdateCustomerEmailModal": {
+    "UpdateClientEmailModal": {
       "title": "Edit email"
     },
-    "UpdateCustomerCompanyForm": {
+    "UpdateClientCompanyForm": {
       "submitButtonLabel": "Update company"
     },
-    "UpdateCustomerCompanyModal": {
+    "UpdateClientCompanyModal": {
       "title": "Edit company"
     },
-    "ImportCustomersModal": {
-      "heading": "Import customers"
+    "ImportClientsModal": {
+      "heading": "Import clients"
     },
     "ImportPositionsModal": {
       "heading": "Import positions"
@@ -442,7 +442,7 @@
       "projects": "Projects",
       "tasks": "Tasks",
       "team": "Team",
-      "customers": "Customers",
+      "clients": "Clients",
       "profile": "Profile",
       "home": "Home"
     },
@@ -721,8 +721,8 @@
       "deadlineOn": "Deadline on {date}",
       "noCreator": "No creator",
       "creator": "Creator",
-      "noCustomer": "No customer",
-      "customer": "Customer",
+      "noClient": "No client",
+      "client": "Client",
       "category": "Category",
       "noCategory": "No category",
       "company": "Company",
@@ -766,15 +766,15 @@
       "noDeadline": "No deadline",
       "description": "Description",
       "noDescription": "No description",
-      "customer": "Customer",
-      "noCustomer": "No customer",
+      "client": "Client",
+      "noClient": "No client",
       "category": "Category",
       "noCategory": "No category",
       "status": "Status",
       "title": "Title",
       "tasksStats": "Task statistics",
       "editProjectCategoryButtonLabel": "Edit category",
-      "editCustomerButtonLabel": "Edit customer",
+      "editClientButtonLabel": "Edit client",
       "editDeadlineButtonLabel": "Edit deadline",
       "editDescriptionButtonLabel": "Edit description",
       "editStatusButtonLabel": "Edit status",
@@ -802,11 +802,11 @@
     "ProjectCreatorFiltersModalTrigger": {
       "buttonLabel": "Creator"
     },
-    "ProjectCustomerFiltersModal": {
-      "heading": "Customer"
+    "ProjectClientFiltersModal": {
+      "heading": "Client"
     },
-    "ProjectCustomerFiltersModalTrigger": {
-      "buttonLabel": "Customer"
+    "ProjectClientFiltersModalTrigger": {
+      "buttonLabel": "Client"
     },
     "ProjectResultsCount": {
       "projectsFound": "{count, plural, one {# project found} other {# projects found}}"
@@ -853,11 +853,11 @@
     "UpdateProjectDeadlineModal": {
       "title": "Edit deadline"
     },
-    "UpdateProjectCustomerForm": {
-      "submitButtonLabel": "Update customer"
+    "UpdateProjectClientForm": {
+      "submitButtonLabel": "Update client"
     },
-    "UpdateProjectCustomerModal": {
-      "title": "Edit customer"
+    "UpdateProjectClientModal": {
+      "title": "Edit client"
     },
     "ProjectActiveTasksDetailStat": {
       "text": "Active tasks"
@@ -883,7 +883,7 @@
       "users": "Users",
       "tasks": "Tasks",
       "projects": "Projects",
-      "customers": "Customers"
+      "clients": "Clients"
     },
     "SearchModalTrigger": {
       "placeholder": "Search",

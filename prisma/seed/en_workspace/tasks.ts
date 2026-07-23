@@ -537,7 +537,7 @@ export const tasks = [
   {
     id: 599,
     title: "Integrate New Data Sources (CRM)",
-    description: "Establish the ETL pipeline and necessary APIs to pull data from the customer relationship management (CRM) system into the new dashboard data lake.",
+    description: "Establish the ETL pipeline and necessary APIs to pull data from the client relationship management (CRM) system into the new dashboard data lake.",
     deadline: "2026-08-25T17:00:00.000Z",
     projectId: 47,
     creatorId: "user-12",

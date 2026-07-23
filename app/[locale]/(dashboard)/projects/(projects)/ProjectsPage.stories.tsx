@@ -43,7 +43,7 @@ export const Default = {
     pageSize: 1,
     totalCount: 10,
     categoryCount: 2,
-    customerCount: 3,
+    clientCount: 3,
     totalFilteredProjects: 3,
     selectedSortField: "createdAt",
     projectGrid: <ProjectGridExample />,

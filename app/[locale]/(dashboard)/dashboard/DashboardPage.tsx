@@ -21,7 +21,7 @@ interface DashboardPageProps {
   totalProjectsCardContainer: React.ReactNode;
   totalTasksCardContainer: React.ReactNode;
   totalUsersCardContainer: React.ReactNode;
-  totalCustomersCardContainer: React.ReactNode;
+  totalClientsCardContainer: React.ReactNode;
   taskGrid: React.ReactNode;
 }
 
@@ -32,7 +32,7 @@ export function DashboardPage({
   totalProjectsCardContainer,
   totalTasksCardContainer,
   totalUsersCardContainer,
-  totalCustomersCardContainer,
+  totalClientsCardContainer,
   taskGrid,
 }: DashboardPageProps) {
   const t = useTranslations("app.DashboardPage");
@@ -48,7 +48,7 @@ export function DashboardPage({
             {totalProjectsCardContainer}
             {totalTasksCardContainer}
             {totalUsersCardContainer}
-            {totalCustomersCardContainer}
+            {totalClientsCardContainer}
           </DashboardCardsGrid>
 
           <AssignedTasksSection

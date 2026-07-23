@@ -7,7 +7,7 @@ import { ProjectStatus } from "@/generated/prisma/enums";
 import { useUpdateProject } from "../UpdateProjectContext";
 import { ProjectStatusSelect } from "../ProjectStatusSelect";
 import { ProjectTitleTextField } from "../ProjectTitleTextField";
-import { CustomerSelect } from "@/dashboard/customer/CustomerSelect";
+import { ClientSelect } from "@/dashboard/client/ClientSelect";
 import { FormErrorBanner } from "@/dashboard/common/FormErrorBanner";
 import { ProjectDeadlineDatePicker } from "../ProjectDeadlineDatePicker";
 import { ProjectDescriptionTextField } from "../ProjectDescriptionTextField";
@@ -20,9 +20,9 @@ interface UpdateProjectFormProps {
   deadline: string;
   status: ProjectStatus;
   categoryId?: number;
-  customerId?: number;
+  clientId?: number;
   projectCategorySelectItems: { id: number; name: string }[];
-  customerSelectItems: { id: number; fullName: string }[];
+  clientSelectItems: { id: number; fullName: string }[];
 }
 
 export function UpdateProjectForm({
@@ -32,9 +32,9 @@ export function UpdateProjectForm({
   deadline,
   status,
   categoryId,
-  customerId,
+  clientId,
   projectCategorySelectItems,
-  customerSelectItems,
+  clientSelectItems,
 }: UpdateProjectFormProps) {
   const { state, isPending, action } = useUpdateProject();
 
@@ -65,9 +65,9 @@ export function UpdateProjectForm({
         defaultSelectedKey={categoryId?.toString()}
         items={projectCategorySelectItems}
       />
-      <CustomerSelect
-        defaultSelectedKey={customerId?.toString()}
-        items={customerSelectItems}
+      <ClientSelect
+        defaultSelectedKey={clientId?.toString()}
+        items={clientSelectItems}
       />
 
       <FormErrorBanner status={state.status} isPending={isPending}>

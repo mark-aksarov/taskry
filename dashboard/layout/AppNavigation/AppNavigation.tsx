@@ -73,12 +73,12 @@ export const AppNavigation = ({ signOut }: AppNavigationProps) => {
       />
 
       <NavigationLink
-        href="/customers"
+        href="/clients"
         isActive={
-          pathname.startsWith("/customers") || pathname === "/companies"
+          pathname.startsWith("/clients") || pathname === "/companies"
         }
         iconLeft={<Contact size={18}   />}
-        label={t("customers")}
+        label={t("clients")}
       />
 
       <NavigationLink

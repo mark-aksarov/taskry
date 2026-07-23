@@ -129,43 +129,43 @@
       }
     }
   },
-  "customer": {
+  "client": {
     "create": {
-      "success": "Customer created successfully",
+      "success": "Client created successfully",
       "error": {
-        "limitExceededError": "The maximum number of customers would be exceeded. Maximum: {count}.",
-        "internalServerError": "Something went wrong. Failed to create the customer. Refresh the page or try again later."
+        "limitExceededError": "The maximum number of clients would be exceeded. Maximum: {count}.",
+        "internalServerError": "Something went wrong. Failed to create the client. Refresh the page or try again later."
       }
     },
     "update": {
-      "success": "Customer updated successfully",
+      "success": "Client updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the customer. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to update the client. Refresh the page or try again later."
       }
     },
     "updateImageUrl": {
-      "success": "Customer image updated successfully",
+      "success": "Client image updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the customer image. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to update the client image. Refresh the page or try again later."
       }
     },
     "delete": {
-      "success": "Customer deleted successfully",
+      "success": "Client deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the customer. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the client. Refresh the page or try again later."
       }
     },
     "deleteMany": {
-      "success": "Customers deleted successfully",
+      "success": "Clients deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the customers. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the clients. Refresh the page or try again later."
       }
     },
     "import": {
-      "success": "Customers imported successfully",
+      "success": "Clients imported successfully",
       "error": {
-        "limitExceededError": "The maximum number of customers would be exceeded. Maximum: {count}.",
-        "internalServerError": "Something went wrong. Failed to import customers. Refresh the page or try again later."
+        "limitExceededError": "The maximum number of clients would be exceeded. Maximum: {count}.",
+        "internalServerError": "Something went wrong. Failed to import clients. Refresh the page or try again later."
       }
     }
   },

@@ -12,7 +12,7 @@ export interface PersonDetailHeaderImageProps {
 export function PersonDetailHeaderImage({
   imageUrl,
 }: PersonDetailHeaderImageProps) {
-  const t = useTranslations("dashboard.customers.PersonDetailHeaderImage");
+  const t = useTranslations("dashboard.clients.PersonDetailHeaderImage");
 
   return (
     <ImageContainer className="h-21 w-21">

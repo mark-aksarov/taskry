@@ -1,0 +1,1 @@
+export { ClientDetailSideSheet } from "./ClientDetailSideSheet";

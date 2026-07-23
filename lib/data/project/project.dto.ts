@@ -10,7 +10,7 @@ export interface CreateProjectInputDTO {
   title: string;
   description?: string;
   deadline: string;
-  customerId?: number;
+  clientId?: number;
   categoryId?: number;
   status: ProjectStatus;
 }
@@ -20,7 +20,7 @@ export interface UpdateProjectInputDTO {
   title?: string;
   description?: string | null;
   deadline?: string;
-  customerId?: number | null;
+  clientId?: number | null;
   categoryId?: number | null;
   status?: ProjectStatus;
 }
@@ -32,7 +32,7 @@ export interface ProjectDTO {
   deadline: string;
   status: ProjectStatus;
   categoryId?: number;
-  customerId?: number;
+  clientId?: number;
 }
 
 export interface ProjectDetailDTO {
@@ -42,7 +42,7 @@ export interface ProjectDetailDTO {
   deadline: string;
   status: ProjectStatus;
   categoryId?: number;
-  customerId?: number;
+  clientId?: number;
 
   creator?: {
     id: string;
@@ -50,7 +50,7 @@ export interface ProjectDetailDTO {
     imageUrl?: string;
   };
 
-  customer?: {
+  client?: {
     id: number;
     fullName: string;
   };
@@ -90,7 +90,7 @@ export interface ProjectListItemDTO {
     name: string;
   };
 
-  customer?: {
+  client?: {
     id: number;
     fullName: string;
     imageUrl?: string;
@@ -118,7 +118,7 @@ export function mapToProjectDTO(
     | "deadline"
     | "status"
     | "categoryId"
-    | "customerId"
+    | "clientId"
   >,
 ): ProjectDTO {
   return {
@@ -128,6 +128,6 @@ export function mapToProjectDTO(
     deadline: position.deadline.toISOString(),
     status: position.status,
     categoryId: position.categoryId ?? undefined,
-    customerId: position.customerId ?? undefined,
+    clientId: position.clientId ?? undefined,
   };
 }

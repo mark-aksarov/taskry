@@ -2,7 +2,7 @@ import {
   users,
   positions,
   companies,
-  customers,
+  clients,
   workspaces,
   taskCategories,
   projectCategories,
@@ -36,7 +36,7 @@ describe("createProjects", () => {
       positions,
       users,
       companies,
-      customers,
+      clients,
       taskCategories,
       projectCategories,
     });
@@ -50,7 +50,7 @@ describe("createProjects", () => {
         deadline: "2025-12-31",
         status: ProjectStatus.active,
         categoryId: 1,
-        customerId: 1,
+        clientId: 1,
       },
       {
         title: "Project 2",
@@ -58,7 +58,7 @@ describe("createProjects", () => {
         deadline: "2025-12-31",
         status: ProjectStatus.active,
         categoryId: 1,
-        customerId: 1,
+        clientId: 1,
       },
     ]);
 
@@ -70,7 +70,7 @@ describe("createProjects", () => {
         deadline: new Date("2025-12-31").toISOString(),
         status: ProjectStatus.active,
         categoryId: 1,
-        customerId: 1,
+        clientId: 1,
       },
       {
         title: "Project 2",
@@ -78,7 +78,7 @@ describe("createProjects", () => {
         deadline: new Date("2025-12-31").toISOString(),
         status: ProjectStatus.active,
         categoryId: 1,
-        customerId: 1,
+        clientId: 1,
       },
     ]);
   });
@@ -89,7 +89,7 @@ describe("createProjects", () => {
         title: "Project 1",
         deadline: "2025-12-31",
         categoryId: 999,
-        customerId: 1,
+        clientId: 1,
         status: ProjectStatus.active,
       },
     ]);
@@ -100,19 +100,19 @@ describe("createProjects", () => {
     );
   });
 
-  it("should throw error if customer does not found", async () => {
+  it("should throw error if client does not found", async () => {
     const createProjectsPromise = createProjects([
       {
         title: "Project 1",
         deadline: "2025-12-31",
         categoryId: 1,
-        customerId: 999,
+        clientId: 999,
         status: ProjectStatus.active,
       },
     ]);
 
     await expect(createProjectsPromise).rejects.toThrow(NotFoundError);
-    await expect(createProjectsPromise).rejects.toThrow(/Customer not found/i);
+    await expect(createProjectsPromise).rejects.toThrow(/Client not found/i);
   });
 
   it("should throw error if category does not belong to the workspace", async () => {
@@ -121,7 +121,7 @@ describe("createProjects", () => {
         title: "Project 1",
         deadline: "2025-12-31",
         categoryId: 2,
-        customerId: 1,
+        clientId: 1,
         status: ProjectStatus.active,
       },
     ]);
@@ -132,20 +132,20 @@ describe("createProjects", () => {
     );
   });
 
-  it("should throw error if customer does not belong to the workspace", async () => {
+  it("should throw error if client does not belong to the workspace", async () => {
     const createProjectsPromise = createProjects([
       {
         title: "Project 1",
         deadline: "2025-12-31",
         categoryId: 1,
-        customerId: 3,
+        clientId: 3,
         status: ProjectStatus.active,
       },
     ]);
 
     await expect(createProjectsPromise).rejects.toThrow(AccessDeniedError);
     await expect(createProjectsPromise).rejects.toThrow(
-      /Customer access denied/i,
+      /Client access denied/i,
     );
   });
 
@@ -161,7 +161,7 @@ describe("createProjects", () => {
 
     expect(result).toHaveLength(1);
     expect(result[0].id).toBeDefined();
-    expect(result[0].customerId).toBeUndefined();
+    expect(result[0].clientId).toBeUndefined();
   });
 
   it("should fail when creating projects exceeds the limit", async () => {
@@ -185,14 +185,14 @@ describe("createProjects", () => {
           deadline: "2025-12-31",
           status: ProjectStatus.active,
           categoryId: 1,
-          customerId: 1,
+          clientId: 1,
         },
         {
           title: "Project 2",
           deadline: "2025-12-31",
           status: ProjectStatus.active,
           categoryId: 1,
-          customerId: 1,
+          clientId: 1,
         },
       ]),
     ).rejects.toThrow(LimitExceededError);
@@ -211,7 +211,7 @@ describe("createProjects", () => {
           title: "Project 1",
           deadline: "2025-12-31",
           categoryId: 1,
-          customerId: 1,
+          clientId: 1,
           status: ProjectStatus.active,
         },
       ];

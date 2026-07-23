@@ -44,12 +44,12 @@ export function DocsPagination() {
         { slug: "positions", label: t("team.positions") },
       ],
 
-      customers: [
-        { slug: "", label: t("customers.heading") },
-        { slug: "view", label: t("customers.view") },
-        { slug: "actions", label: t("customers.actions") },
-        { slug: "search", label: t("customers.search") },
-        { slug: "companies", label: t("customers.companies") },
+      clients: [
+        { slug: "", label: t("clients.heading") },
+        { slug: "view", label: t("clients.view") },
+        { slug: "actions", label: t("clients.actions") },
+        { slug: "search", label: t("clients.search") },
+        { slug: "companies", label: t("clients.companies") },
       ],
     };
 

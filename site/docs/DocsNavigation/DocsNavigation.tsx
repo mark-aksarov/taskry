@@ -20,7 +20,7 @@ export function DocsNavigation() {
     pathname.startsWith("/docs/projects") && "projects",
     pathname.startsWith("/docs/tasks") && "tasks",
     pathname.startsWith("/docs/team") && "team",
-    pathname.startsWith("/docs/customers") && "customers",
+    pathname.startsWith("/docs/clients") && "clients",
   ].filter(Boolean) as string[];
 
   return (
@@ -189,49 +189,49 @@ export function DocsNavigation() {
           </DisclosurePanel>
         </Disclosure>
 
-        {/* Customers */}
-        <Disclosure id="customers">
-          <DisclosureHeader>{t("customers.heading")}</DisclosureHeader>
+        {/* Clients */}
+        <Disclosure id="clients">
+          <DisclosureHeader>{t("clients.heading")}</DisclosureHeader>
           <DisclosurePanel>
             <DocsNavigationList>
               <li>
                 <DocsNavigationLink
-                  href="/docs/customers"
-                  isActive={pathname === "/docs/customers"}
+                  href="/docs/clients"
+                  isActive={pathname === "/docs/clients"}
                 >
-                  {t("customers.heading")}
+                  {t("clients.heading")}
                 </DocsNavigationLink>
               </li>
               <li>
                 <DocsNavigationLink
-                  href="/docs/customers/view"
-                  isActive={pathname === "/docs/customers/view"}
+                  href="/docs/clients/view"
+                  isActive={pathname === "/docs/clients/view"}
                 >
-                  {t("customers.view")}
+                  {t("clients.view")}
                 </DocsNavigationLink>
               </li>
               <li>
                 <DocsNavigationLink
-                  href="/docs/customers/actions"
-                  isActive={pathname === "/docs/customers/actions"}
+                  href="/docs/clients/actions"
+                  isActive={pathname === "/docs/clients/actions"}
                 >
-                  {t("customers.actions")}
+                  {t("clients.actions")}
                 </DocsNavigationLink>
               </li>
               <li>
                 <DocsNavigationLink
-                  href="/docs/customers/search"
-                  isActive={pathname === "/docs/customers/search"}
+                  href="/docs/clients/search"
+                  isActive={pathname === "/docs/clients/search"}
                 >
-                  {t("customers.search")}
+                  {t("clients.search")}
                 </DocsNavigationLink>
               </li>
               <li>
                 <DocsNavigationLink
-                  href="/docs/customers/companies"
-                  isActive={pathname === "/docs/customers/companies"}
+                  href="/docs/clients/companies"
+                  isActive={pathname === "/docs/clients/companies"}
                 >
-                  {t("customers.companies")}
+                  {t("clients.companies")}
                 </DocsNavigationLink>
               </li>
             </DocsNavigationList>

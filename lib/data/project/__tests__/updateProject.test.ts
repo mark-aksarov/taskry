@@ -2,7 +2,7 @@ import {
   users,
   positions,
   companies,
-  customers,
+  clients,
   workspaces,
   taskCategories,
   projectCategories,
@@ -31,7 +31,7 @@ describe("updateProject", () => {
       positions,
       users,
       companies,
-      customers,
+      clients,
       taskCategories,
       projectCategories,
     });
@@ -50,7 +50,7 @@ describe("updateProject", () => {
       title: "Project 1",
       categoryId: 1,
       status: ProjectStatus.active,
-      customerId: null,
+      clientId: null,
     };
 
     await prisma.project.create({
@@ -81,7 +81,7 @@ describe("updateProject", () => {
       title: "Project 1",
       categoryId: 1,
       status: ProjectStatus.active,
-      customerId: null,
+      clientId: null,
     };
 
     await prisma.project.create({
@@ -104,7 +104,7 @@ describe("updateProject", () => {
     );
   });
 
-  it("should throw error if customer does not found", async () => {
+  it("should throw error if client does not found", async () => {
     const deadlineIso = "2025-12-31";
 
     const projectData = {
@@ -113,7 +113,7 @@ describe("updateProject", () => {
       title: "Project 1",
       categoryId: 1,
       status: ProjectStatus.active,
-      customerId: null,
+      clientId: null,
     };
 
     await prisma.project.create({
@@ -127,11 +127,11 @@ describe("updateProject", () => {
     const updateProjectPromise = updateProject({
       ...projectData,
       deadline: deadlineIso,
-      customerId: 999,
+      clientId: 999,
     });
 
     await expect(updateProjectPromise).rejects.toThrow(NotFoundError);
-    await expect(updateProjectPromise).rejects.toThrow(/Customer not found/i);
+    await expect(updateProjectPromise).rejects.toThrow(/Client not found/i);
   });
 
   it("should throw error if category does not belong to the workspace", async () => {
@@ -143,7 +143,7 @@ describe("updateProject", () => {
       title: "Project 1",
       categoryId: 1,
       status: ProjectStatus.active,
-      customerId: null,
+      clientId: null,
     };
 
     await prisma.project.create({
@@ -166,7 +166,7 @@ describe("updateProject", () => {
     );
   });
 
-  it("should throw error if customer does not belong to the workspace", async () => {
+  it("should throw error if client does not belong to the workspace", async () => {
     const deadlineIso = "2025-12-31";
 
     const projectData = {
@@ -175,7 +175,7 @@ describe("updateProject", () => {
       title: "Project 1",
       categoryId: 1,
       status: ProjectStatus.active,
-      customerId: null,
+      clientId: null,
     };
 
     await prisma.project.create({
@@ -189,12 +189,12 @@ describe("updateProject", () => {
     const updateProjectPromise = updateProject({
       ...projectData,
       deadline: deadlineIso,
-      customerId: 3,
+      clientId: 3,
     });
 
     await expect(updateProjectPromise).rejects.toThrow(AccessDeniedError);
     await expect(updateProjectPromise).rejects.toThrow(
-      /Customer access denied/i,
+      /Client access denied/i,
     );
   });
 
@@ -208,7 +208,7 @@ describe("updateProject", () => {
       deadline: "2025-12-31",
       categoryId: 2,
       status: ProjectStatus.active,
-      customerId: null,
+      clientId: null,
     };
 
     await prisma.project.create({
@@ -247,7 +247,7 @@ describe("updateProject", () => {
         title: "Project 1",
         categoryId: 1,
         status: ProjectStatus.active,
-        customerId: null,
+        clientId: null,
       };
 
       await prisma.project.create({

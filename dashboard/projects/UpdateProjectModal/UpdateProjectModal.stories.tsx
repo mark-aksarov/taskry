@@ -6,7 +6,7 @@ import {
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UpdateProjectForm } from "../UpdateProjectForm";
 import { UpdateProjectModal } from "./UpdateProjectModal";
-import { mockedCustomerSummaries } from "@/mocks/customers";
+import { mockedClientSummaries } from "@/mocks/clients";
 import { ProjectFormSkeleton } from "../ProjectFormSkeleton";
 import { mockedProjectDetail as mockedProject } from "@/mocks/projects";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
@@ -37,7 +37,7 @@ export const Default = {
         {...mockedProject}
         projectId={mockedProject.id}
         projectCategorySelectItems={mockedProjectCategorySummaries}
-        customerSelectItems={mockedCustomerSummaries}
+        clientSelectItems={mockedClientSummaries}
       />
     ),
   },

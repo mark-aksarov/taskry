@@ -1,1 +1,0 @@
-export { UpdateProjectCustomerModal } from "./UpdateProjectCustomerModal";

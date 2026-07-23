@@ -1,1 +1,0 @@
-export { CustomerDetailSideSheet } from "./CustomerDetailSideSheet";

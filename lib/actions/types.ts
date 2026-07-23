@@ -37,7 +37,7 @@ export type DeleteTaskPayload = {
   shouldRedirect: boolean;
 };
 
-export type DeleteCustomerPayload = {
+export type DeleteClientPayload = {
   id: number;
   shouldRedirect: boolean;
 };
@@ -52,7 +52,7 @@ export type UpdateUserImageUrlPayload = {
   imageUrl: string | null;
 };
 
-export type UpdateCustomerImageUrlPayload = {
+export type UpdateClientImageUrlPayload = {
   id: number;
   imageUrl: string | null;
 };

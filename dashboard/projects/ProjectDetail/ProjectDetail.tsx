@@ -17,7 +17,7 @@ interface ProjectDetailProps {
   };
   deadline?: string;
   description?: string;
-  customer?: {
+  client?: {
     id: number;
     fullName: string;
     imageUrl?: string;
@@ -34,7 +34,7 @@ export function ProjectDetail({
   creator,
   deadline,
   description,
-  customer,
+  client,
   category,
   status,
 }: ProjectDetailProps) {
@@ -110,13 +110,13 @@ export function ProjectDetail({
           <DetailText>{category ? category.name : t("noCategory")}</DetailText>
         </DetailInfo>
       }
-      customerSlot={
+      clientSlot={
         <DetailInfo className="border-none pb-0">
-          <DetailTitle>{t("customer")}</DetailTitle>
-          {customer ? (
-            <DetailText>{customer.fullName}</DetailText>
+          <DetailTitle>{t("client")}</DetailTitle>
+          {client ? (
+            <DetailText>{client.fullName}</DetailText>
           ) : (
-            <DetailText>{t("noCustomer")}</DetailText>
+            <DetailText>{t("noClient")}</DetailText>
           )}
         </DetailInfo>
       }

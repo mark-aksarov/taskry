@@ -6,7 +6,7 @@ export function useSelectedProjectFiltersCount() {
   const selectedCount =
     (initialFilters.statuses?.length ?? 0) +
     (initialFilters.categoryIds?.length ?? 0) +
-    (initialFilters.customerIds?.length ?? 0) +
+    (initialFilters.clientIds?.length ?? 0) +
     (initialFilters.creatorIds?.length ?? 0) +
     (initialFilters.noActiveTasks ? 1 : 0) +
     (initialFilters.deadlineFrom ? 1 : 0) +

@@ -77,10 +77,10 @@
         "search": "Search and filtering",
         "positions": "Positions"
       },
-      "customers": {
-        "heading": "Customers",
-        "view": "Customer view",
-        "actions": "Customer actions",
+      "clients": {
+        "heading": "Clients",
+        "view": "Client view",
+        "actions": "Client actions",
         "search": "Search and filtering",
         "companies": "Companies"
       }
@@ -146,9 +146,9 @@
         "title": "Project management",
         "description": "Manage projects with tasks, comments, statuses, and client linking"
       },
-      "customers": {
-        "title": "Customers and companies",
-        "description": "Store customers, their companies, contacts, notes, public links, and related projects"
+      "clients": {
+        "title": "Clients and companies",
+        "description": "Store clients, their companies, contacts, notes, public links, and related projects"
       },
       "discussion": {
         "title": "Task and project discussions",
@@ -184,9 +184,9 @@
         "heading": "Tasks",
         "subtext": "Working with tasks and their structure"
       },
-      "customers": {
-        "heading": "Customers",
-        "subtext": "Customer base management"
+      "clients": {
+        "heading": "Clients",
+        "subtext": "Client base management"
       }
     },
     "SwitchToDemoModal": {

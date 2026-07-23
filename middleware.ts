@@ -18,7 +18,7 @@ function normalizePath(pathname: string) {
 const protectedRoutes = [
   { type: "exact", path: "/dashboard" },
   { type: "prefix", path: "/companies" },
-  { type: "prefix", path: "/customers" },
+  { type: "prefix", path: "/clients" },
   { type: "prefix", path: "/positions" },
   { type: "prefix", path: "/project-categories" },
   { type: "prefix", path: "/projects" },

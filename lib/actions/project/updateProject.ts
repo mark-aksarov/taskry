@@ -11,7 +11,7 @@ import {
 import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
-import { customerId } from "@/lib/schemas/customer";
+import { clientId } from "@/lib/schemas/client";
 import { emptyStringToNull } from "@/lib/schemas/base";
 import { projectCategoryId } from "@/lib/schemas/projectCategory";
 import { updateProject as updateProjectQuery } from "@/lib/data/project/project.dal";
@@ -28,7 +28,7 @@ const schema = z.object({
   categoryId: z
     .preprocess(emptyStringToNull, projectCategoryId.nullable())
     .optional(),
-  customerId: z.preprocess(emptyStringToNull, customerId.nullable()).optional(),
+  clientId: z.preprocess(emptyStringToNull, clientId.nullable()).optional(),
 });
 
 export async function updateProject(formData: FormData): Promise<ActionState> {

@@ -208,7 +208,7 @@ export const taskComments = [
   },
   {
     id: 5195,
-    content: "For now, log the failure and alert the customer service team. No automatic retries yet.",
+    content: "For now, log the failure and alert the client service team. No automatic retries yet.",
     createdAt: "2025-01-06T05:52:23.000Z",
     senderId: "user-11",
     projectId: null,
@@ -2413,7 +2413,7 @@ export const taskComments = [
   },
   {
     id: 5440,
-    content: "I am documenting specific terminology. E.g., Use 'Client' instead of 'Customer' and 'Solutions' instead of 'Features'.",
+    content: "I am documenting specific terminology. E.g., Use 'Client' instead of 'Client' and 'Solutions' instead of 'Features'.",
     createdAt: "2025-01-12T13:07:44.000Z",
     senderId: "user-17",
     projectId: null,
@@ -2962,7 +2962,7 @@ export const taskComments = [
   },
   {
     id: 5501,
-    content: "We must ensure the pipeline performs proper data cleansing, especially normalizing customer names and address formats.",
+    content: "We must ensure the pipeline performs proper data cleansing, especially normalizing client names and address formats.",
     createdAt: "2025-01-19T04:09:51.000Z",
     senderId: "user-12",
     projectId: null,
@@ -3160,7 +3160,7 @@ export const taskComments = [
   },
   {
     id: 5523,
-    content: "Added composite index on (transaction_date, customer_id). Re-running the slow query now.",
+    content: "Added composite index on (transaction_date, client_id). Re-running the slow query now.",
     createdAt: "2025-01-20T08:52:20.000Z",
     senderId: "user-12",
     projectId: null,
@@ -5140,7 +5140,7 @@ export const taskComments = [
   },
   {
     id: 5743,
-    content: "Starting keyword research for Q2. Initial focus on identifying mid-tail and long-tail terms for underserved customer needs.",
+    content: "Starting keyword research for Q2. Initial focus on identifying mid-tail and long-tail terms for underserved client needs.",
     createdAt: "2025-02-03T13:32:20.000Z",
     senderId: "user-17",
     projectId: null,
@@ -6427,7 +6427,7 @@ export const taskComments = [
   },
   {
     id: 5886,
-    content: "Drafting the email copy: keeping it concise, thanking the customer, and explaining the value of their feedback.",
+    content: "Drafting the email copy: keeping it concise, thanking the client, and explaining the value of their feedback.",
     createdAt: "2025-02-17T09:19:54.000Z",
     senderId: "user-17",
     projectId: null,
@@ -6832,7 +6832,7 @@ export const taskComments = [
   },
   {
     id: 5931,
-    content: "Starting scriptwriting for the 5 video ads. Theme 1: 'Speed', Theme 2: 'Security', Theme 3: 'Scalability', Theme 4: 'Ease of Use', Theme 5: 'Customer Success'.",
+    content: "Starting scriptwriting for the 5 video ads. Theme 1: 'Speed', Theme 2: 'Security', Theme 3: 'Scalability', Theme 4: 'Ease of Use', Theme 5: 'Client Success'.",
     createdAt: "2025-02-22T06:15:14.000Z",
     senderId: "user-17",
     projectId: null,
@@ -6868,7 +6868,7 @@ export const taskComments = [
   },
   {
     id: 5935,
-    content: "Finalizing Scripts 3, 4, and 5. Script 5 ('Customer Success') uses a short animated text sequence to highlight key testimonials.",
+    content: "Finalizing Scripts 3, 4, and 5. Script 5 ('Client Success') uses a short animated text sequence to highlight key testimonials.",
     createdAt: "2025-02-22T04:27:14.000Z",
     senderId: "user-17",
     projectId: null,

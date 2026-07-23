@@ -20,7 +20,7 @@ export function DeleteProjectsModal() {
   const t = useTranslations("dashboard.projects.DeleteProjectsModal");
   const { isOpen, onOpenChange } = useModal("deleteProjects");
   const { ids: selectedIds, clear: clearSelectedItems } = useSelectedProjects();
-  const { action, setIds: setDeleteCustomerIds } = useDeleteProjects();
+  const { action, setIds: setDeleteClientIds } = useDeleteProjects();
 
   function handleDelete() {
     // Close modal
@@ -28,7 +28,7 @@ export function DeleteProjectsModal() {
 
     // Highlight currently selected entities before deletion.
     // Note: selectedIds may change if the user updates selection.
-    setDeleteCustomerIds(selectedIds);
+    setDeleteClientIds(selectedIds);
 
     // Clear selected items after the modal close animation.
     // This prevents the modal text from jumping due to deleted items.

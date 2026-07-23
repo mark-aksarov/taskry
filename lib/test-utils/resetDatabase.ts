@@ -9,7 +9,7 @@ export async function resetDatabase() {
     "task_category",
     "project",
     "project_category",
-    "customer",
+    "client",
     "company",
     "user",
     "position",

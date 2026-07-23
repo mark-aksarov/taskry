@@ -2,7 +2,7 @@ import {
   users,
   positions,
   companies,
-  customers,
+  clients,
   workspaces,
   taskCategories,
   projectCategories,
@@ -17,7 +17,7 @@ import { requireSession } from "@/lib/data/utils/requireSession";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
 
-describe("deleteCustomers", () => {
+describe("deleteClients", () => {
   beforeAll(async () => {
     (requireSession as any).mockResolvedValue({
       user: { id: "user-1", workspaceId: 1 },
@@ -30,7 +30,7 @@ describe("deleteCustomers", () => {
       positions,
       users,
       companies,
-      customers,
+      clients,
       taskCategories,
       projectCategories,
     });

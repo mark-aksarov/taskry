@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { UpdateProjectForm } from "./UpdateProjectForm";
 import { ProjectFormSkeleton } from "./ProjectFormSkeleton";
 import { ProjectDTO } from "@/lib/data/project/project.dto";
-import { CustomerSummaryDTO } from "@/lib/data/customer/customer.dto";
+import { ClientSummaryDTO } from "@/lib/data/client/client.dto";
 import { ProjectCategoryDTO } from "@/lib/data/projectCategory/projectCategory.dto";
 
 interface UpdateProjectFormContainerProps {
@@ -18,7 +18,7 @@ export function UpdateProjectFormContainer({
     `/api/project-categories`,
   );
 
-  const { data: customers } = useSWR<CustomerSummaryDTO[]>(`/api/customers`);
+  const { data: clients } = useSWR<ClientSummaryDTO[]>(`/api/clients`);
 
   const {
     data: project,
@@ -35,7 +35,7 @@ export function UpdateProjectFormContainer({
 
   // Show skeleton while loading
   // or revalidating to prevent stale data rendering
-  const showSkeleton = !categories || !customers || !project || isValidating;
+  const showSkeleton = !categories || !clients || !project || isValidating;
 
   if (showSkeleton) {
     return <ProjectFormSkeleton />;
@@ -49,9 +49,9 @@ export function UpdateProjectFormContainer({
       deadline={project.deadline}
       status={project.status}
       categoryId={project.categoryId}
-      customerId={project.customerId}
+      clientId={project.clientId}
       projectCategorySelectItems={categories}
-      customerSelectItems={customers}
+      clientSelectItems={clients}
     />
   );
 }

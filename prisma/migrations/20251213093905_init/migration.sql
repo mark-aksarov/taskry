@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "public"."NotificationType" AS ENUM ('taskAdded', 'taskDeleted', 'taskUpdated', 'projectAdded', 'projectDeleted', 'projectUpdated', 'userAdded', 'userDeleted', 'userUpdated', 'customerAdded', 'customerDeleted', 'customerUpdated', 'commentReplied', 'commentAdded');
+CREATE TYPE "public"."NotificationType" AS ENUM ('taskAdded', 'taskDeleted', 'taskUpdated', 'projectAdded', 'projectDeleted', 'projectUpdated', 'userAdded', 'userDeleted', 'userUpdated', 'clientAdded', 'clientDeleted', 'clientUpdated', 'commentReplied', 'commentAdded');
 
 -- CreateTable
 CREATE TABLE "public"."workspace" (
@@ -50,7 +50,7 @@ CREATE TABLE "public"."company" (
 );
 
 -- CreateTable
-CREATE TABLE "public"."customer" (
+CREATE TABLE "public"."client" (
     "id" SERIAL NOT NULL,
     "fullName" VARCHAR(100) NOT NULL,
     "bio" TEXT,
@@ -63,7 +63,7 @@ CREATE TABLE "public"."customer" (
     "companyId" INTEGER NOT NULL,
     "workspaceId" INTEGER NOT NULL,
 
-    CONSTRAINT "customer_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "client_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -73,7 +73,7 @@ CREATE TABLE "public"."project" (
     "description" VARCHAR(5000),
     "deadline" TIMESTAMP(3) NOT NULL,
     "creatorId" TEXT,
-    "customerId" INTEGER,
+    "clientId" INTEGER,
     "categoryId" INTEGER NOT NULL,
     "statusId" TEXT NOT NULL,
     "workspaceId" INTEGER NOT NULL,
@@ -174,7 +174,7 @@ CREATE TABLE "public"."notification" (
 CREATE TABLE "public"."notification_target" (
     "id" SERIAL NOT NULL,
     "userId" TEXT,
-    "customerId" INTEGER,
+    "clientId" INTEGER,
     "projectId" INTEGER,
     "taskId" INTEGER,
     "commentId" INTEGER,
@@ -284,7 +284,7 @@ CREATE INDEX "comment_taskId_idx" ON "public"."comment"("taskId");
 CREATE INDEX "company_workspaceId_idx" ON "public"."company"("workspaceId");
 
 -- CreateIndex
-CREATE INDEX "customer_workspaceId_idx" ON "public"."customer"("workspaceId");
+CREATE INDEX "client_workspaceId_idx" ON "public"."client"("workspaceId");
 
 -- CreateIndex
 CREATE INDEX "project_workspaceId_idx" ON "public"."project"("workspaceId");
@@ -347,10 +347,10 @@ ALTER TABLE "public"."comment" ADD CONSTRAINT "comment_parentId_fkey" FOREIGN KE
 ALTER TABLE "public"."company" ADD CONSTRAINT "company_workspaceId_fkey" FOREIGN KEY ("workspaceId") REFERENCES "public"."workspace"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."customer" ADD CONSTRAINT "customer_workspaceId_fkey" FOREIGN KEY ("workspaceId") REFERENCES "public"."workspace"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "public"."client" ADD CONSTRAINT "client_workspaceId_fkey" FOREIGN KEY ("workspaceId") REFERENCES "public"."workspace"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."customer" ADD CONSTRAINT "customer_companyId_fkey" FOREIGN KEY ("companyId") REFERENCES "public"."company"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "public"."client" ADD CONSTRAINT "client_companyId_fkey" FOREIGN KEY ("companyId") REFERENCES "public"."company"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "public"."project" ADD CONSTRAINT "project_workspaceId_fkey" FOREIGN KEY ("workspaceId") REFERENCES "public"."workspace"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -359,7 +359,7 @@ ALTER TABLE "public"."project" ADD CONSTRAINT "project_workspaceId_fkey" FOREIGN
 ALTER TABLE "public"."project" ADD CONSTRAINT "project_creatorId_fkey" FOREIGN KEY ("creatorId") REFERENCES "public"."user"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."project" ADD CONSTRAINT "project_customerId_fkey" FOREIGN KEY ("customerId") REFERENCES "public"."customer"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "public"."project" ADD CONSTRAINT "project_clientId_fkey" FOREIGN KEY ("clientId") REFERENCES "public"."client"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "public"."project" ADD CONSTRAINT "project_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "public"."project_category"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -413,7 +413,7 @@ ALTER TABLE "public"."notification_target" ADD CONSTRAINT "notification_target_t
 ALTER TABLE "public"."notification_target" ADD CONSTRAINT "notification_target_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."notification_target" ADD CONSTRAINT "notification_target_customerId_fkey" FOREIGN KEY ("customerId") REFERENCES "public"."customer"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "public"."notification_target" ADD CONSTRAINT "notification_target_clientId_fkey" FOREIGN KEY ("clientId") REFERENCES "public"."client"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "public"."notification_target" ADD CONSTRAINT "notification_target_commentId_fkey" FOREIGN KEY ("commentId") REFERENCES "public"."comment"("id") ON DELETE CASCADE ON UPDATE CASCADE;

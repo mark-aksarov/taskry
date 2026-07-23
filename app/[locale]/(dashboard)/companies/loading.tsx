@@ -26,7 +26,7 @@ export default function CompaniesPageLoading() {
         <ToolbarMobile
           firstSlot={
             <>
-              <BackButton fallbackHref="/customers" />
+              <BackButton fallbackHref="/clients" />
               <PageHeadingMobile>{t("heading")}</PageHeadingMobile>
             </>
           }

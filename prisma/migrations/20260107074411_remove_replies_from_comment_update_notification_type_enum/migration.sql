@@ -1,7 +1,7 @@
 /*
   Warnings:
 
-  - The values [taskUpdated,projectUpdated,userAdded,userDeleted,userUpdated,customerAdded,customerDeleted,customerUpdated,commentReplied] on the enum `NotificationType` will be removed. If these variants are still used in the database, this will fail.
+  - The values [taskUpdated,projectUpdated,userAdded,userDeleted,userUpdated,clientAdded,clientDeleted,clientUpdated,commentReplied] on the enum `NotificationType` will be removed. If these variants are still used in the database, this will fail.
   - You are about to drop the column `parentId` on the `comment` table. All the data in the column will be lost.
   - You are about to drop the column `targetName` on the `notification` table. All the data in the column will be lost.
 

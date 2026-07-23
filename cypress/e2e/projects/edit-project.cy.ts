@@ -4,7 +4,7 @@ import {
   accounts,
   positions,
   companies,
-  customers,
+  clients,
   workspaces,
 } from "@/prisma/seed/test-data";
 import { ProjectStatus } from "@/generated/prisma/enums";
@@ -17,7 +17,7 @@ describe("Project editing", () => {
       accounts,
       positions,
       companies,
-      customers,
+      clients,
       projectCategories: [
         { id: 1, name: "Project Category 1", workspaceId: 1 },
         { id: 2, name: "Project Category 2", workspaceId: 1 },
@@ -42,7 +42,7 @@ describe("Project editing", () => {
       deadline: { day: "01", month: "02", year: "2030" },
       statusKey: "pending",
       categoryKey: "2",
-      customerKey: "2",
+      clientKey: "2",
     });
 
     cy.get('button[type="submit"]').click();
@@ -51,7 +51,7 @@ describe("Project editing", () => {
       cy.contains("Updated Project Title");
       cy.contains("Category 2");
       cy.contains("Pending");
-      cy.contains("Customer 2");
+      cy.contains("Client 2");
       cy.contains("Company 1");
     });
   });
@@ -75,7 +75,7 @@ describe("Project editing", () => {
     cy.getByData("project-category-select").within(() =>
       cy.get("select").should("have.value", "1"),
     );
-    cy.getByData("customer-select").within(() =>
+    cy.getByData("client-select").within(() =>
       cy.get("select").should("have.value", "1"),
     );
   });
@@ -89,7 +89,7 @@ describe("Project editing", () => {
       deadline: { day: "01", month: "02", year: "2030" },
       statusKey: ProjectStatus.active,
       categoryKey: "",
-      customerKey: "",
+      clientKey: "",
     });
 
     cy.get('button[type="submit"]').click();
@@ -100,7 +100,7 @@ describe("Project editing", () => {
       cy.contains(/active/i);
       cy.contains("No category");
       cy.contains("No company");
-      cy.contains("No customer");
+      cy.contains("No client");
     });
   });
 });

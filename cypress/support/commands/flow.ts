@@ -123,7 +123,7 @@ Cypress.Commands.add(
     deadline?: { day: string; month: string; year: string };
     statusKey?: string;
     categoryKey?: string;
-    customerKey?: string;
+    clientKey?: string;
   }) => {
     // Text fields (selector : value)
     const fields = {
@@ -153,7 +153,7 @@ Cypress.Commands.add(
     const selects = {
       "project-status-select": data.statusKey,
       "project-category-select": data.categoryKey,
-      "customer-select": data.customerKey,
+      "client-select": data.clientKey,
     };
 
     Object.entries(selects).forEach(([selectTestId, optionKey]) => {
@@ -166,7 +166,7 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add(
-  "fillCustomerForm",
+  "fillClientForm",
   (data: {
     fullName?: string;
     bio?: string;
@@ -177,11 +177,11 @@ Cypress.Commands.add(
   }) => {
     // Text fields (field name : value)
     const fields = {
-      "customer-full-name-field": data.fullName,
-      "customer-bio-field": data.bio,
-      "customer-email-field": data.email,
-      "customer-phone-number-field": data.phoneNumber,
-      "customer-public-link-field": data.publicLink,
+      "client-full-name-field": data.fullName,
+      "client-bio-field": data.bio,
+      "client-email-field": data.email,
+      "client-phone-number-field": data.phoneNumber,
+      "client-public-link-field": data.publicLink,
     };
 
     // We clear each field and print only if there is text.

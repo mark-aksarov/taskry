@@ -1,0 +1,1 @@
+export { UpdateClientFullNameProvider } from "./UpdateClientFullNameProvider";

@@ -11,7 +11,7 @@ export interface ProjectFilters {
   noActiveTasks?: boolean;
   statuses?: ProjectStatus[];
   categoryIds?: number[];
-  customerIds?: number[];
+  clientIds?: number[];
   creatorIds?: string[];
   deadlineFrom?: string;
   deadlineTo?: string;
@@ -36,7 +36,7 @@ export interface UserFilters {
   positionIds?: number[];
 }
 
-export interface CustomerFilters {
+export interface ClientFilters {
   query?: string;
   hasNoActiveProjects?: boolean;
   hasActiveProjects?: boolean;
@@ -62,9 +62,9 @@ export const projectSortFields = [
 
 export type ProjectSortField = (typeof projectSortFields)[number];
 
-export const customerSortFields = ["fullName", "company"] as const;
+export const clientSortFields = ["fullName", "company"] as const;
 
-export type CustomerSortField = (typeof customerSortFields)[number];
+export type ClientSortField = (typeof clientSortFields)[number];
 
 export const userSortFields = ["fullName", "position"] as const;
 

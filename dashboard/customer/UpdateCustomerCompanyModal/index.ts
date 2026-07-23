@@ -1,1 +1,0 @@
-export { UpdateCustomerCompanyModal } from "./UpdateCustomerCompanyModal";

@@ -10,7 +10,7 @@ export default function AppTaskDetailNotFound() {
       <NotFoundSection
         heading={t("notFound.heading")}
         description={t("notFound.description")}
-        linkHref="/customers"
+        linkHref="/clients"
         linkLabel={t("notFound.buttonLabel")}
       />
     </ErrorDashboardContainer>

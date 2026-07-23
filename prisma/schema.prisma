@@ -15,7 +15,7 @@ model Workspace {
   attachments       Attachment[]
   comments          Comment[]
   companies         Company[]
-  customers         Customer[]
+  clients           Client[]
   projectCategories ProjectCategory[]
   projects          Project[]
   tasks             Task[]
@@ -101,7 +101,7 @@ model Company {
 
   workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 
-  customers Customer[]
+  clients Client[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -110,9 +110,9 @@ model Company {
   @@map("company")
 }
 
-// Customer
+// Client
 
-model Customer {
+model Client {
   id          Int     @id @default(autoincrement())
   fullName    String  @db.VarChar(255)
   bio         String? @db.VarChar(5000)
@@ -128,12 +128,12 @@ model Customer {
   workspaceId Int
 
   workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-  company   Company?  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  company   Company?  @relation(fields: [companyId], references: [id], onDelete: SetNull)
 
   projects Project[]
 
   @@index(workspaceId)
-  @@map("customer")
+  @@map("client")
 }
 
 // Project
@@ -145,13 +145,13 @@ model Project {
   deadline    DateTime
 
   creatorId   String?
-  customerId  Int?
+  clientId    Int?
   categoryId  Int?
   workspaceId Int
 
   workspace Workspace        @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   creator   User?            @relation(fields: [creatorId], references: [id], onDelete: SetNull)
-  customer  Customer?        @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  client    Client?          @relation(fields: [clientId], references: [id], onDelete: SetNull)
   category  ProjectCategory? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   status    ProjectStatus
 

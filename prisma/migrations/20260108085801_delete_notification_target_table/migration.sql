@@ -8,7 +8,7 @@
 ALTER TABLE "notification_target" DROP CONSTRAINT "notification_target_commentId_fkey";
 
 -- DropForeignKey
-ALTER TABLE "notification_target" DROP CONSTRAINT "notification_target_customerId_fkey";
+ALTER TABLE "notification_target" DROP CONSTRAINT "notification_target_clientId_fkey";
 
 -- DropForeignKey
 ALTER TABLE "notification_target" DROP CONSTRAINT "notification_target_notificationId_fkey";

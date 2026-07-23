@@ -24,8 +24,8 @@ Disallow: /*/dashboard
 Disallow: /companies
 Disallow: /*/companies
 
-Disallow: /customers
-Disallow: /*/customers
+Disallow: /clients
+Disallow: /*/clients
 
 Disallow: /positions
 Disallow: /*/positions

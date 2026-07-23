@@ -5,7 +5,7 @@ import { FormBase } from "@/dashboard/common/FormBase";
 import { useCreateProject } from "../CreateProjectContext";
 import { ProjectStatusSelect } from "../ProjectStatusSelect";
 import { ProjectTitleTextField } from "../ProjectTitleTextField";
-import { CustomerSelect } from "@/dashboard/customer/CustomerSelect";
+import { ClientSelect } from "@/dashboard/client/ClientSelect";
 import { FormErrorBanner } from "@/dashboard/common/FormErrorBanner";
 import { ProjectDeadlineDatePicker } from "../ProjectDeadlineDatePicker";
 import { ProjectDescriptionTextField } from "../ProjectDescriptionTextField";
@@ -13,12 +13,12 @@ import { ProjectCategorySelect } from "../../projectCategory/ProjectCategorySele
 
 interface CreateProjectFormProps {
   projectCategorySelectItems: { id: number; name: string }[];
-  customerSelectItems: { id: number; fullName: string }[];
+  clientSelectItems: { id: number; fullName: string }[];
 }
 
 export function CreateProjectForm({
   projectCategorySelectItems,
-  customerSelectItems,
+  clientSelectItems,
 }: CreateProjectFormProps) {
   const { state, action, isPending } = useCreateProject();
 
@@ -38,7 +38,7 @@ export function CreateProjectForm({
       <ProjectDescriptionTextField />
       <ProjectStatusSelect />
       <ProjectCategorySelect items={projectCategorySelectItems} />
-      <CustomerSelect items={customerSelectItems} />
+      <ClientSelect items={clientSelectItems} />
       <FormErrorBanner status={state.status} isPending={isPending}>
         {state.message}
       </FormErrorBanner>

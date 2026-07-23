@@ -27,7 +27,7 @@ export function DocsBreadcrumbs() {
       projects: t("projects.heading"),
       tasks: t("tasks.heading"),
       team: t("team.heading"),
-      customers: t("customers.heading"),
+      clients: t("clients.heading"),
     };
 
     if (section) {
@@ -58,11 +58,11 @@ export function DocsBreadcrumbs() {
         search: t("team.search"),
         positions: t("team.positions"),
       },
-      customers: {
-        view: t("customers.view"),
-        actions: t("customers.actions"),
-        search: t("customers.search"),
-        companies: t("customers.companies"),
+      clients: {
+        view: t("clients.view"),
+        actions: t("clients.actions"),
+        search: t("clients.search"),
+        companies: t("clients.companies"),
       },
     };
 

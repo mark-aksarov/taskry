@@ -11,7 +11,7 @@ import {
 } from "./project.dto";
 
 import {
-  validateCustomers,
+  validateClients,
   validateProjectCategories,
   validateProjectLimit,
 } from "../utils/validation";
@@ -50,7 +50,7 @@ export const getProjectDetail = cache(
           },
         },
 
-        customer: {
+        client: {
           select: {
             id: true,
             fullName: true,
@@ -95,7 +95,7 @@ export const getProjectDetail = cache(
       deadline: project.deadline.toISOString(),
       status: project.status,
       categoryId: project.category?.id,
-      customerId: project.customer?.id,
+      clientId: project.client?.id,
       creator: project.creator
         ? {
             id: project.creator.id,
@@ -103,10 +103,10 @@ export const getProjectDetail = cache(
             imageUrl: project.creator.imageUrl ?? undefined,
           }
         : undefined,
-      customer: project.customer
+      client: project.client
         ? {
-            id: project.customer.id,
-            fullName: project.customer.fullName,
+            id: project.client.id,
+            fullName: project.client.fullName,
           }
         : undefined,
       category: project.category ?? undefined,
@@ -137,7 +137,7 @@ export const getProject = cache(
         deadline: true,
         status: true,
         categoryId: true,
-        customerId: true,
+        clientId: true,
       },
     });
 
@@ -153,7 +153,7 @@ export const getProject = cache(
       deadline: project.deadline.toISOString(),
       status: project.status,
       categoryId: project.categoryId ?? undefined,
-      customerId: project.customerId ?? undefined,
+      clientId: project.clientId ?? undefined,
     };
   },
 );
@@ -176,7 +176,7 @@ export const getProjects = cache(async (): Promise<ProjectDTO[]> => {
       deadline: true,
       status: true,
       categoryId: true,
-      customerId: true,
+      clientId: true,
     },
   });
 
@@ -187,7 +187,7 @@ export const getProjects = cache(async (): Promise<ProjectDTO[]> => {
     deadline: project.deadline.toISOString(),
     status: project.status,
     categoryId: project.categoryId ?? undefined,
-    customerId: project.customerId ?? undefined,
+    clientId: project.clientId ?? undefined,
   }));
 });
 
@@ -303,7 +303,7 @@ export const getProjectList = cache(
               name: true,
             },
           },
-          customer: {
+          client: {
             select: {
               id: true,
               fullName: true,
@@ -351,17 +351,17 @@ export const getProjectList = cache(
                 imageUrl: p.creator.imageUrl ?? undefined,
               }
             : undefined,
-          customer: p.customer
+          client: p.client
             ? {
-                id: p.customer.id,
-                fullName: p.customer.fullName,
-                imageUrl: p.customer.imageUrl ?? undefined,
+                id: p.client.id,
+                fullName: p.client.fullName,
+                imageUrl: p.client.imageUrl ?? undefined,
               }
             : undefined,
-          company: p.customer?.company
+          company: p.client?.company
             ? {
-                id: p.customer.company.id,
-                name: p.customer.company.name,
+                id: p.client.company.id,
+                name: p.client.company.name,
               }
             : undefined,
           category: p.category
@@ -428,13 +428,13 @@ export const createProjects = async (input: CreateProjectInputDTO[]) => {
     await validateProjectCategories(workspaceId, categoryIds);
   }
 
-  // Validate customers
-  const customerIds = uniqueDefinedIds(
-    input.map((project) => project.customerId),
+  // Validate clients
+  const clientIds = uniqueDefinedIds(
+    input.map((project) => project.clientId),
   );
 
-  if (customerIds.length > 0) {
-    await validateCustomers(workspaceId, customerIds);
+  if (clientIds.length > 0) {
+    await validateClients(workspaceId, clientIds);
   }
 
   const projects = await prisma.project.createManyAndReturn({
@@ -442,7 +442,7 @@ export const createProjects = async (input: CreateProjectInputDTO[]) => {
       title: project.title,
       description: project.description,
       deadline: new Date(project.deadline),
-      customerId: project.customerId,
+      clientId: project.clientId,
       categoryId: project.categoryId,
       status: project.status,
       creatorId: userId,
@@ -480,9 +480,9 @@ export const updateProject = async (input: UpdateProjectInputDTO) => {
     await validateProjectCategories(workspaceId, [input.categoryId]);
   }
 
-  // Validate customer
-  if (input.customerId) {
-    await validateCustomers(workspaceId, [input.customerId]);
+  // Validate client
+  if (input.clientId) {
+    await validateClients(workspaceId, [input.clientId]);
   }
 
   // Update project
@@ -495,7 +495,7 @@ export const updateProject = async (input: UpdateProjectInputDTO) => {
       title: input.title,
       description: input.description,
       deadline: input.deadline ? new Date(input.deadline) : undefined,
-      customerId: input.customerId,
+      clientId: input.clientId,
       categoryId: input.categoryId,
       status: input.status,
     },
@@ -598,8 +598,8 @@ export function buildProjectWhereClause(
     ...(filters.categoryIds?.length && {
       categoryId: { in: filters.categoryIds },
     }),
-    ...(filters.customerIds?.length && {
-      customerId: { in: filters.customerIds },
+    ...(filters.clientIds?.length && {
+      clientId: { in: filters.clientIds },
     }),
     ...(filters.creatorIds?.length && {
       creatorId: { in: filters.creatorIds },

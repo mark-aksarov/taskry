@@ -17,8 +17,8 @@ import { positions as ruPositions } from "./seed/ru_workspace/positions";
 import { positions as enPositions } from "./seed/en_workspace/positions";
 import { companies as ruCompanies } from "./seed/ru_workspace/companies";
 import { companies as enCompanies } from "./seed/en_workspace/companies";
-import { customers as ruCustomers } from "./seed/ru_workspace/customers";
-import { customers as enCustomers } from "./seed/en_workspace/customers";
+import { clients as ruClients } from "./seed/ru_workspace/clients";
+import { clients as enClients } from "./seed/en_workspace/clients";
 import { workspace as ruWorkspace } from "./seed/ru_workspace/workspace";
 import { workspace as enWorkspace } from "./seed/en_workspace/workspace";
 import { taskComments as ruTaskComments } from "./seed/ru_workspace/taskComments";
@@ -67,14 +67,14 @@ async function main() {
     data: [...ruAccounts, ...enAccounts],
   });
 
-  // ----------------- Customers -----------------
+  // ----------------- Clients -----------------
 
   await prisma.company.createMany({
     data: [...ruCompanies, ...enCompanies],
   });
 
-  await prisma.customer.createMany({
-    data: [...ruCustomers, ...enCustomers],
+  await prisma.client.createMany({
+    data: [...ruClients, ...enClients],
   });
 
   // ----------------- Projects -----------------
@@ -116,7 +116,7 @@ async function main() {
   const tables = [
     "comment",
     "company",
-    "customer",
+    "client",
     "position",
     "project",
     "project_category",

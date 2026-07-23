@@ -2,7 +2,7 @@ import {
   users,
   positions,
   companies,
-  customers,
+  clients,
   workspaces,
   taskCategories,
   projectCategories,
@@ -29,7 +29,7 @@ describe("getProjectDetail", () => {
       positions,
       users,
       companies,
-      customers,
+      clients,
       taskCategories,
       projectCategories,
       projects,
@@ -46,7 +46,7 @@ describe("getProjectDetail", () => {
       deadline: new Date("2030-12-31").toISOString(),
       status: ProjectStatus.active,
       categoryId: 1,
-      customerId: 1,
+      clientId: 1,
 
       creator: {
         id: "user-1",
@@ -54,9 +54,9 @@ describe("getProjectDetail", () => {
         imageUrl: "/man.jpg",
       },
 
-      customer: {
+      client: {
         id: 1,
-        fullName: "Customer 1",
+        fullName: "Client 1",
       },
 
       category: {

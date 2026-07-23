@@ -14,7 +14,7 @@ ALTER TABLE "notification" DROP CONSTRAINT "notification_commentId_fkey";
 ALTER TABLE "notification" DROP CONSTRAINT "notification_companyId_fkey";
 
 -- DropForeignKey
-ALTER TABLE "notification" DROP CONSTRAINT "notification_customerId_fkey";
+ALTER TABLE "notification" DROP CONSTRAINT "notification_clientId_fkey";
 
 -- DropForeignKey
 ALTER TABLE "notification" DROP CONSTRAINT "notification_positionId_fkey";

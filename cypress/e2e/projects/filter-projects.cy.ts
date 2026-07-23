@@ -4,7 +4,7 @@ import {
   positions,
   workspaces,
   companies,
-  customers,
+  clients,
 } from "@/prisma/seed/test-data";
 
 import { dates } from "@/lib/data/utils/test-utils";
@@ -18,7 +18,7 @@ const createPayload = (payload: TestSeedPayload): TestSeedPayload => {
     accounts,
     positions,
     companies,
-    customers,
+    clients,
     projectCategories: [
       { id: 1, name: "Category A", workspaceId: 1 },
       { id: 2, name: "Category B", workspaceId: 1 },
@@ -51,7 +51,7 @@ describe("filter projects", () => {
             status: ProjectStatus.active,
             deadline: dates.today,
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             workspaceId: 1,
             creatorId: "user-1",
           },
@@ -61,7 +61,7 @@ describe("filter projects", () => {
             status: ProjectStatus.active,
             deadline: dates.tomorrow,
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             workspaceId: 1,
             creatorId: "user-1",
           },
@@ -71,7 +71,7 @@ describe("filter projects", () => {
             status: ProjectStatus.pending,
             deadline: dates.tomorrow,
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             workspaceId: 1,
             creatorId: "user-1",
           },
@@ -136,7 +136,7 @@ describe("filter projects", () => {
             status: ProjectStatus.active,
             deadline: new Date("2025-12-31"),
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             workspaceId: 1,
             creatorId: "user-1",
           },
@@ -146,7 +146,7 @@ describe("filter projects", () => {
             status: ProjectStatus.active,
             deadline: new Date("2026-01-01"),
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             workspaceId: 1,
             creatorId: "user-1",
           },
@@ -156,7 +156,7 @@ describe("filter projects", () => {
             status: ProjectStatus.active,
             deadline: new Date("2026-01-02"),
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             workspaceId: 1,
             creatorId: "user-1",
           },
@@ -190,7 +190,7 @@ describe("filter projects", () => {
               status: ProjectStatus.active,
               deadline: new Date("2025-12-31"),
               categoryId: 1,
-              customerId: 1,
+              clientId: 1,
               workspaceId: 1,
               creatorId: "user-1",
             },
@@ -200,7 +200,7 @@ describe("filter projects", () => {
               status: ProjectStatus.pending,
               deadline: new Date("2026-01-01"),
               categoryId: 1,
-              customerId: 1,
+              clientId: 1,
               workspaceId: 1,
               creatorId: "user-1",
             },
@@ -210,7 +210,7 @@ describe("filter projects", () => {
               status: ProjectStatus.completed,
               deadline: new Date("2026-01-02"),
               categoryId: 1,
-              customerId: 1,
+              clientId: 1,
               workspaceId: 1,
               creatorId: "user-1",
             },
@@ -263,7 +263,7 @@ describe("filter projects", () => {
             status: ProjectStatus.active,
             deadline: new Date("2025-12-31"),
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             workspaceId: 1,
             creatorId: "user-1",
           },
@@ -273,7 +273,7 @@ describe("filter projects", () => {
             status: ProjectStatus.pending,
             deadline: new Date("2026-01-01"),
             categoryId: 2,
-            customerId: 1,
+            clientId: 1,
             workspaceId: 1,
             creatorId: "user-1",
           },
@@ -291,7 +291,7 @@ describe("filter projects", () => {
     cy.location("search").should("include", "categoryIds=1");
   });
 
-  it("filter by customer", () => {
+  it("filter by client", () => {
     setup(
       createPayload({
         projects: [
@@ -301,7 +301,7 @@ describe("filter projects", () => {
             status: ProjectStatus.active,
             deadline: new Date("2025-12-31"),
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             workspaceId: 1,
             creatorId: "user-1",
           },
@@ -311,7 +311,7 @@ describe("filter projects", () => {
             status: ProjectStatus.pending,
             deadline: new Date("2026-01-01"),
             categoryId: 1,
-            customerId: 2,
+            clientId: 2,
             workspaceId: 1,
             creatorId: "user-2",
           },
@@ -321,14 +321,14 @@ describe("filter projects", () => {
 
     cy.getByData("project-filters-modal-trigger-large").click();
 
-    cy.getByData("customer-checkbox", "1").click();
+    cy.getByData("client-checkbox", "1").click();
     cy.get('button[type="submit"]').click();
 
     cy.getByData("project-list-item")
       .should("have.length", 1)
       .and("contain", "Project A");
 
-    cy.location("search").should("include", "customerIds=1");
+    cy.location("search").should("include", "clientIds=1");
   });
 
   it("filter by project creator", () => {
@@ -341,7 +341,7 @@ describe("filter projects", () => {
             status: ProjectStatus.active,
             deadline: new Date("2025-12-31"),
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             workspaceId: 1,
             creatorId: "user-1",
           },
@@ -351,7 +351,7 @@ describe("filter projects", () => {
             status: ProjectStatus.pending,
             deadline: new Date("2026-01-01"),
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             workspaceId: 1,
             creatorId: "user-2",
           },

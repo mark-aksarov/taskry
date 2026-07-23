@@ -4,7 +4,7 @@ import { Prisma } from "@/generated/prisma/client";
 export interface TestSeedPayload {
   workspaces?: Prisma.WorkspaceCreateManyInput[];
   companies?: Prisma.CompanyCreateManyInput[];
-  customers?: Prisma.CustomerCreateManyInput[];
+  clients?: Prisma.ClientCreateManyInput[];
   projectCategories?: Prisma.ProjectCategoryCreateManyInput[];
   projects?: Prisma.ProjectCreateManyInput[];
   taskCategories?: Prisma.TaskCategoryCreateManyInput[];
@@ -51,11 +51,11 @@ export async function seed(payload: TestSeedPayload) {
     await syncSequence("company");
   }
 
-  if (payload.customers) {
-    await prisma.customer.createMany({
-      data: payload.customers,
+  if (payload.clients) {
+    await prisma.client.createMany({
+      data: payload.clients,
     });
-    await syncSequence("customer");
+    await syncSequence("client");
   }
 
   if (payload.projectCategories) {

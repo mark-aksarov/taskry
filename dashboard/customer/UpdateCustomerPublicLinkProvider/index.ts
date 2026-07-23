@@ -1,1 +1,0 @@
-export { UpdateCustomerPublicLinkProvider } from "./UpdateCustomerPublicLinkProvider";

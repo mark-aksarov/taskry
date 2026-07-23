@@ -23,7 +23,7 @@
       "description": "Создайте новую задачу, чтобы отслеживать работу"
     }
   },
-  "CustomersPage": {
+  "ClientsPage": {
     "heading": "Клиенты",
     "emptySection": {
       "heading": "Нет клиентов",
@@ -88,7 +88,7 @@
       "buttonLabel": "К задачам"
     }
   },
-  "CustomerDetailPage": {
+  "ClientDetailPage": {
     "heading": "Клиент",
     "notFound": {
       "heading": "Клиент не найден",

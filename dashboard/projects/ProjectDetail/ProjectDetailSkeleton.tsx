@@ -16,7 +16,7 @@ export function ProjectDetailSkeleton() {
       }
       statusSlot={<DetailInfoSkeleton />}
       categorySlot={<DetailInfoSkeleton />}
-      customerSlot={<DetailInfoSkeleton className="border-none pb-0" />}
+      clientSlot={<DetailInfoSkeleton className="border-none pb-0" />}
     />
   );
 }

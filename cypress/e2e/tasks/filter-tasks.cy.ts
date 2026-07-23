@@ -3,7 +3,7 @@ import {
   accounts,
   positions,
   companies,
-  customers,
+  clients,
   workspaces,
 } from "@/prisma/seed/test-data";
 
@@ -18,7 +18,7 @@ const createPayload = (payload: TestSeedPayload): TestSeedPayload => {
     accounts,
     positions,
     companies,
-    customers,
+    clients,
     projectCategories: [{ id: 1, name: "Category A", workspaceId: 1 }],
     taskCategories: [
       { id: 1, name: "Category A", workspaceId: 1 },
@@ -31,7 +31,7 @@ const createPayload = (payload: TestSeedPayload): TestSeedPayload => {
         status: ProjectStatus.active,
         deadline: new Date("2030-01-01"),
         categoryId: 1,
-        customerId: 1,
+        clientId: 1,
         workspaceId: 1,
         creatorId: "user-1",
       },
@@ -41,7 +41,7 @@ const createPayload = (payload: TestSeedPayload): TestSeedPayload => {
         status: ProjectStatus.active,
         deadline: new Date("2031-01-01"),
         categoryId: 1,
-        customerId: 1,
+        clientId: 1,
         workspaceId: 1,
         creatorId: "user-1",
       },

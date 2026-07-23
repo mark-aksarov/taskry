@@ -4,7 +4,7 @@ interface ProjectDetailAltLayoutProps {
   creatorSlot: React.ReactNode;
   statusSlot: React.ReactNode;
   deadlineSlot: React.ReactNode;
-  customerSlot: React.ReactNode;
+  clientSlot: React.ReactNode;
   categorySlot: React.ReactNode;
   progressSlot: React.ReactNode;
   tasksStatsSlot: React.ReactNode;
@@ -16,7 +16,7 @@ export function ProjectDetailAltLayout({
   creatorSlot,
   statusSlot,
   deadlineSlot,
-  customerSlot,
+  clientSlot,
   categorySlot,
   progressSlot,
   tasksStatsSlot,
@@ -27,7 +27,7 @@ export function ProjectDetailAltLayout({
       {descriptionSlot}
       {statusSlot}
       {deadlineSlot}
-      {customerSlot}
+      {clientSlot}
       {categorySlot}
       {creatorSlot}
       {progressSlot}

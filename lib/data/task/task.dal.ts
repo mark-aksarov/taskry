@@ -376,7 +376,7 @@ export const createTasks = async (input: CreateTaskInputDTO[]) => {
   // Validate assignees
   const assigneeIds = uniqueDefinedIds(input.map((task) => task.assigneeId));
 
-  if (assigneeIds) {
+  if (assigneeIds.length > 0) {
     await validateUsers(workspaceId, assigneeIds);
   }
 

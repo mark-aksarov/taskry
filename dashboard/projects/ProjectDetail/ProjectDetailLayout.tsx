@@ -4,7 +4,7 @@ interface ProjectDetailLayoutProps {
   creatorSlot: React.ReactNode;
   deadlineSlot: React.ReactNode;
   descriptionSlot: React.ReactNode;
-  customerSlot: React.ReactNode;
+  clientSlot: React.ReactNode;
   categorySlot: React.ReactNode;
 }
 
@@ -14,7 +14,7 @@ export function ProjectDetailLayout({
   creatorSlot,
   deadlineSlot,
   descriptionSlot,
-  customerSlot,
+  clientSlot,
   categorySlot,
 }: ProjectDetailLayoutProps) {
   return (
@@ -26,7 +26,7 @@ export function ProjectDetailLayout({
         {descriptionSlot}
         {statusSlot}
         {categorySlot}
-        {customerSlot}
+        {clientSlot}
       </div>
     </div>
   );

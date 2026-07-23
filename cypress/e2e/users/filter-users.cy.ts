@@ -2,7 +2,7 @@ import { TestSeedPayload } from "@/prisma/test-seed";
 import { accounts, workspaces } from "@/prisma/seed/test-data";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
-describe("filter customers", () => {
+describe("filter clients", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 

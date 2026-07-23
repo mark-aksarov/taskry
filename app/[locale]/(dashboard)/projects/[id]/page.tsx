@@ -10,11 +10,11 @@ import { UpdateProjectTitleModal } from "@/dashboard/projects/UpdateProjectTitle
 import { DeleteProjectDetailModal } from "@/dashboard/projects/DeleteProjectDetailModal";
 import { UpdateProjectStatusModal } from "@/dashboard/projects/UpdateProjectStatusModal";
 import { ProjectDetailAltContainer } from "@/dashboard/projects/ProjectDetailAltContainer";
-import { UpdateProjectCustomerModal } from "@/dashboard/projects/UpdateProjectCustomerModal";
+import { UpdateProjectClientModal } from "@/dashboard/projects/UpdateProjectClientModal";
 import { UpdateProjectTitleProvider } from "@/dashboard/projects/UpdateProjectTitleProvider";
 import { UpdateProjectDeadlineModal } from "@/dashboard/projects/UpdateProjectDeadlineModal";
 import { UpdateProjectStatusProvider } from "@/dashboard/projects/UpdateProjectStatusProvider";
-import { UpdateProjectCustomerProvider } from "@/dashboard/projects/UpdateProjectCustomerProvider";
+import { UpdateProjectClientProvider } from "@/dashboard/projects/UpdateProjectClientProvider";
 import { UpdateProjectDescriptionModal } from "@/dashboard/projects/UpdateProjectDescriptionModal";
 import { UpdateProjectCategoryRelModal } from "@/dashboard/projects/UpdateProjectCategoryRelModal";
 import { UpdateProjectDeadlineProvider } from "@/dashboard/projects/UpdateProjectDeadlineProvider";
@@ -22,7 +22,7 @@ import { UpdateProjectStatusAltProvider } from "@/dashboard/projects/UpdateProje
 import { UpdateProjectDescriptionProvider } from "@/dashboard/projects/UpdateProjectDescriptionProvider";
 import { UpdateProjectCategoryRelProvider } from "@/dashboard/projects/UpdateProjectCategoryRelProvider";
 import { ProjectDetailCardHeaderContainer } from "@/dashboard/projects/ProjectDetailCardHeaderContainer";
-import { UpdateProjectCustomerFormContainer } from "@/dashboard/projects/UpdateProjectCustomerFormContainer";
+import { UpdateProjectClientFormContainer } from "@/dashboard/projects/UpdateProjectClientFormContainer";
 import { UpdateProjectCategoryRelFormContainer } from "@/dashboard/projects/UpdateProjectCategoryRelFormContainer";
 
 export default async function AppProjectDetailPage({
@@ -56,7 +56,7 @@ export default async function AppProjectDetailPage({
             <UpdateProjectStatusAltProvider>
               <UpdateProjectCategoryRelProvider>
                 <UpdateProjectDeadlineProvider>
-                  <UpdateProjectCustomerProvider>
+                  <UpdateProjectClientProvider>
                     <ProjectDetailPage
                       projectDetailCardHeaderContainer={
                         <ProjectDetailCardHeaderContainer projectId={id} />
@@ -95,11 +95,11 @@ export default async function AppProjectDetailPage({
                       }
                     />
 
-                    <UpdateProjectCustomerModal
-                      updateProjectCustomerFormContainer={
-                        <UpdateProjectCustomerFormContainer
+                    <UpdateProjectClientModal
+                      updateProjectClientFormContainer={
+                        <UpdateProjectClientFormContainer
                           projectId={project.id}
-                          customerId={project.customerId}
+                          clientId={project.clientId}
                         />
                       }
                     />
@@ -114,7 +114,7 @@ export default async function AppProjectDetailPage({
                         <LinkSearchContainer pathname="/tasks" />
                       }
                     />
-                  </UpdateProjectCustomerProvider>
+                  </UpdateProjectClientProvider>
                 </UpdateProjectDeadlineProvider>
               </UpdateProjectCategoryRelProvider>
             </UpdateProjectStatusAltProvider>

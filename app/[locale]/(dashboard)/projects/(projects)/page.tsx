@@ -16,10 +16,10 @@ import { z } from "zod";
 import { userId } from "@/lib/schemas/user";
 import { ProjectsPage } from "./ProjectsPage";
 import { projectSortFields } from "@/lib/types";
-import { customerId } from "@/lib/schemas/customer";
+import { clientId } from "@/lib/schemas/client";
 import { projectStatus } from "@/lib/schemas/project";
 import { projectCategoryId } from "@/lib/schemas/projectCategory";
-import { getCustomerCount } from "@/lib/data/customer/customer.dal";
+import { getClientCount } from "@/lib/data/client/client.dal";
 import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { CreateProjectModal } from "@/dashboard/projects/CreateProjectModal";
 import { ProjectSearchModal } from "@/dashboard/projects/ProjectSearchModal";
@@ -37,14 +37,14 @@ import { ProjectStatusFiltersModal } from "@/dashboard/projects/ProjectStatusFil
 import { ProjectCreatorFiltersModal } from "@/dashboard/projects/ProjectCreatorFiltersModal";
 import { CreateProjectFormContainer } from "@/dashboard/projects/CreateProjectFormContainer";
 import { ProjectCategoryFiltersModal } from "@/dashboard/projects/ProjectCategoryFiltersModal";
-import { ProjectCustomerFiltersModal } from "@/dashboard/projects/ProjectCustomerFiltersModal";
+import { ProjectClientFiltersModal } from "@/dashboard/projects/ProjectClientFiltersModal";
 import { ProjectFiltersFormContainer } from "@/dashboard/projects/ProjectFiltersFormContainer";
 import { ProjectRouterSearchContainer } from "@/dashboard/projects/ProjectRouterSearchContainer";
 import { UpdateProjectStatusesProvider } from "@/dashboard/projects/UpdateProjectStatusesProvider";
 import { CreateProjectCategoryModal } from "@/dashboard/projectCategory/CreateProjectCategoryModal";
 import { CreateProjectCategoryProvider } from "@/dashboard/projectCategory/CreateProjectCategoryProvider";
 import { ProjectCreatorFiltersFormContainer } from "@/dashboard/projects/ProjectCreatorFiltersFormContainer";
-import { ProjectCustomerFiltersFormContainer } from "@/dashboard/projects/ProjectCustomerFiltersFormContainer";
+import { ProjectClientFiltersFormContainer } from "@/dashboard/projects/ProjectClientFiltersFormContainer";
 import { ProjectCategoryFiltersFormContainer } from "@/dashboard/projects/ProjectCategoryFiltersFormContainer";
 
 const searchParamsSchema = z.object({
@@ -63,9 +63,9 @@ const searchParamsSchema = z.object({
     searchParamToArray,
     z.array(projectCategoryId).optional().catch(undefined),
   ),
-  customerIds: z.preprocess(
+  clientIds: z.preprocess(
     searchParamToArray,
-    z.array(customerId).optional().catch(undefined),
+    z.array(clientId).optional().catch(undefined),
   ),
   creatorIds: z.preprocess(
     searchParamToArray,
@@ -101,8 +101,8 @@ export default async function AppProjectsPage({
   // Show category filters only when categories exist
   const categoryCount = await getProjectCategoryCount();
 
-  // Show customer filters only when customers exist
-  const customerCount = await getCustomerCount();
+  // Show client filters only when clients exist
+  const clientCount = await getClientCount();
 
   return (
     <SelectedProjectsProvider pageItems={projects}>
@@ -117,7 +117,7 @@ export default async function AppProjectsPage({
                     pageSize={pageSize}
                     totalCount={totalCount}
                     categoryCount={categoryCount}
-                    customerCount={customerCount}
+                    clientCount={clientCount}
                     totalFilteredProjects={totalFilteredProjects}
                     selectedSortField={sort}
                     projectGrid={<ProjectGridContainer projects={projects} />}
@@ -133,9 +133,9 @@ export default async function AppProjectsPage({
                   <ProjectFiltersModal
                     filtersFormContainer={<ProjectFiltersFormContainer />}
                   />
-                  <ProjectCustomerFiltersModal
+                  <ProjectClientFiltersModal
                     filtersFormContainer={
-                      <ProjectCustomerFiltersFormContainer />
+                      <ProjectClientFiltersFormContainer />
                     }
                   />
                   <ProjectCategoryFiltersModal

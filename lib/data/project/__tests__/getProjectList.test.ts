@@ -2,7 +2,7 @@ import {
   users,
   positions,
   companies,
-  customers,
+  clients,
   workspaces,
   taskCategories,
   projectCategories,
@@ -30,7 +30,7 @@ describe("getProjectList", () => {
       positions,
       users,
       companies,
-      customers,
+      clients,
       taskCategories,
       projectCategories,
     });
@@ -46,7 +46,7 @@ describe("getProjectList", () => {
         deadline: new Date("2025-03-01"),
         creatorId: "user-1",
         categoryId: 1,
-        customerId: 1,
+        clientId: 1,
         status: ProjectStatus.active,
       },
     });
@@ -116,9 +116,9 @@ describe("getProjectList", () => {
             name: "Project Category 1",
           },
 
-          customer: {
+          client: {
             id: 1,
-            fullName: "Customer 1",
+            fullName: "Client 1",
             imageUrl: "/man.jpg",
           },
 
@@ -160,7 +160,7 @@ describe("getProjectList", () => {
           deadline: new Date("2025-03-01"),
           creatorId: "user-1",
           categoryId: 1,
-          customerId: 1,
+          clientId: 1,
           status: ProjectStatus.active,
         },
         {
@@ -170,7 +170,7 @@ describe("getProjectList", () => {
           deadline: new Date("2025-05-15"),
           creatorId: "user-1",
           categoryId: 1,
-          customerId: 1,
+          clientId: 1,
           status: ProjectStatus.pending,
         },
       ],
@@ -203,7 +203,7 @@ describe("getProjectList", () => {
             deadline: new Date("2025-03-01"),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.active,
           },
           {
@@ -213,7 +213,7 @@ describe("getProjectList", () => {
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.pending,
           },
           {
@@ -223,7 +223,7 @@ describe("getProjectList", () => {
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.pending,
           },
         ],
@@ -250,7 +250,7 @@ describe("getProjectList", () => {
             deadline: new Date("2023-01-02"),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.active,
           },
           {
@@ -260,7 +260,7 @@ describe("getProjectList", () => {
             deadline: new Date("2023-01-03"),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.pending,
           },
           {
@@ -270,7 +270,7 @@ describe("getProjectList", () => {
             deadline: new Date("2023-01-01"),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.pending,
           },
         ],
@@ -297,7 +297,7 @@ describe("getProjectList", () => {
             deadline: new Date(),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.pending,
           },
           {
@@ -307,7 +307,7 @@ describe("getProjectList", () => {
             deadline: new Date(),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.completed,
           },
           {
@@ -317,7 +317,7 @@ describe("getProjectList", () => {
             deadline: new Date(),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.active,
           },
         ],
@@ -350,7 +350,7 @@ describe("getProjectList", () => {
             deadline: new Date("2025-03-01"),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.completed,
           },
           {
@@ -360,7 +360,7 @@ describe("getProjectList", () => {
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
             categoryId: 2,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.active,
           },
           {
@@ -370,7 +370,7 @@ describe("getProjectList", () => {
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
             categoryId: 2,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.active,
           },
         ],
@@ -397,7 +397,7 @@ describe("getProjectList", () => {
             deadline: new Date("2025-03-01"),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.active,
           },
           {
@@ -407,7 +407,7 @@ describe("getProjectList", () => {
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.active,
           },
         ],
@@ -468,7 +468,7 @@ describe("getProjectList", () => {
             deadline: new Date("2025-03-01"),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.completed,
           },
           {
@@ -478,7 +478,7 @@ describe("getProjectList", () => {
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.active,
           },
           {
@@ -488,7 +488,7 @@ describe("getProjectList", () => {
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.completed,
           },
         ],
@@ -521,7 +521,7 @@ describe("getProjectList", () => {
               deadline: deadlines[0],
               creatorId: "user-1",
               categoryId: 1,
-              customerId: 1,
+              clientId: 1,
               status: ProjectStatus.active,
             },
             {
@@ -531,7 +531,7 @@ describe("getProjectList", () => {
               deadline: deadlines[1],
               creatorId: "user-1",
               categoryId: 1,
-              customerId: 1,
+              clientId: 1,
               status: ProjectStatus.completed,
             },
             {
@@ -541,7 +541,7 @@ describe("getProjectList", () => {
               deadline: deadlines[2],
               creatorId: "user-1",
               categoryId: 1,
-              customerId: 1,
+              clientId: 1,
               status: ProjectStatus.completed,
             },
           ],
@@ -574,7 +574,7 @@ describe("getProjectList", () => {
       });
     });
 
-    it("should filter projects by customer", async () => {
+    it("should filter projects by client", async () => {
       await prisma.project.createMany({
         data: [
           {
@@ -584,7 +584,7 @@ describe("getProjectList", () => {
             deadline: new Date("2025-03-01"),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.completed,
           },
           {
@@ -594,14 +594,14 @@ describe("getProjectList", () => {
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 2,
+            clientId: 2,
             status: ProjectStatus.active,
           },
         ],
       });
 
       const filters: ProjectFilters = {
-        customerIds: [1],
+        clientIds: [1],
       };
 
       const result = await getProjectList({
@@ -625,7 +625,7 @@ describe("getProjectList", () => {
             deadline: new Date("2025-03-01"),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.completed,
           },
           {
@@ -635,7 +635,7 @@ describe("getProjectList", () => {
             deadline: new Date("2025-05-15"),
             creatorId: "user-2",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.active,
           },
         ],
@@ -666,7 +666,7 @@ describe("getProjectList", () => {
             deadline: new Date("2025-03-01"),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.completed,
           },
           {
@@ -676,7 +676,7 @@ describe("getProjectList", () => {
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
             categoryId: 2,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.active,
           },
         ],
@@ -709,7 +709,7 @@ describe("getProjectList", () => {
             deadline: new Date("2025-03-01"),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.active,
           },
           {
@@ -719,7 +719,7 @@ describe("getProjectList", () => {
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.pending,
           },
           {
@@ -729,7 +729,7 @@ describe("getProjectList", () => {
             deadline: new Date("2025-07-15"),
             creatorId: "user-1",
             categoryId: 1,
-            customerId: 1,
+            clientId: 1,
             status: ProjectStatus.completed,
           },
         ],

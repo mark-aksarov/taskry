@@ -31,8 +31,8 @@ export const ProjectListItemSkeleton = () => {
           <ListItemTextSkeleton />
         </>
       }
-      customerImgSlot={<ImageContainerSkeleton className="h-9 w-9" />}
-      customerSlot={
+      clientImgSlot={<ImageContainerSkeleton className="h-9 w-9" />}
+      clientSlot={
         <>
           <ListItemTitleSkeleton />
           <ListItemTextSkeleton />

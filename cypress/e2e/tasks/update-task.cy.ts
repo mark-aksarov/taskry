@@ -5,7 +5,7 @@ import {
   accounts,
   positions,
   companies,
-  customers,
+  clients,
   workspaces,
   projectCategories,
 } from "@/prisma/seed/test-data";
@@ -19,7 +19,7 @@ describe("Task updating", () => {
       accounts,
       positions,
       companies,
-      customers,
+      clients,
       projectCategories,
       taskCategories: [
         { id: 1, name: "Task Category 1", workspaceId: 1 },

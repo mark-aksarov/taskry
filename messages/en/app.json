@@ -23,11 +23,11 @@
       "description": "Create a new task to keep track of your work"
     }
   },
-  "CustomersPage": {
-    "heading": "Customers",
+  "ClientsPage": {
+    "heading": "Clients",
     "emptySection": {
-      "heading": "No customers",
-      "description": "Add a customer to get started and organize your projects"
+      "heading": "No clients",
+      "description": "Add a client to get started and organize your projects"
     }
   },
   "TeamPage": {
@@ -88,12 +88,12 @@
       "buttonLabel": "Back to tasks"
     }
   },
-  "CustomerDetailPage": {
-    "heading": "Customer",
+  "ClientDetailPage": {
+    "heading": "Client",
     "notFound": {
-      "heading": "Customer not found",
-      "description": "The customer does not exist or has been deleted.",
-      "buttonLabel": "Back to customers"
+      "heading": "Client not found",
+      "description": "The client does not exist or has been deleted.",
+      "buttonLabel": "Back to clients"
     }
   },
   "CheckEmailPage": {

@@ -63,7 +63,7 @@ type ProjectFiltersFormAction =
   | { type: "setStatuses"; payload: ProjectStatus[] }
   | { type: "setCreatorIds"; payload: string[] }
   | { type: "setCategoryIds"; payload: string[] }
-  | { type: "setCustomerIds"; payload: string[] }
+  | { type: "setClientIds"; payload: string[] }
   | { type: "resetFilters" };
 
 interface ProjectFiltersFormState {
@@ -73,7 +73,7 @@ interface ProjectFiltersFormState {
   statuses: ProjectStatus[];
   creatorIds: string[];
   categoryIds: string[];
-  customerIds: string[];
+  clientIds: string[];
 }
 
 function createInitialState(
@@ -90,7 +90,7 @@ function createInitialState(
     statuses: initialFilters?.statuses ?? [],
     creatorIds: initialFilters?.creatorIds ?? [],
     categoryIds: initialFilters?.categoryIds?.map((id) => id.toString()) ?? [],
-    customerIds: initialFilters?.customerIds?.map((id) => id.toString()) ?? [],
+    clientIds: initialFilters?.clientIds?.map((id) => id.toString()) ?? [],
   };
 }
 
@@ -111,8 +111,8 @@ export function projectFiltersReducer(
       return { ...state, creatorIds: action.payload };
     case "setCategoryIds":
       return { ...state, categoryIds: action.payload };
-    case "setCustomerIds":
-      return { ...state, customerIds: action.payload };
+    case "setClientIds":
+      return { ...state, clientIds: action.payload };
     case "resetFilters":
       return {
         noActiveTasks: false,
@@ -121,7 +121,7 @@ export function projectFiltersReducer(
         statuses: [],
         creatorIds: [],
         categoryIds: [],
-        customerIds: [],
+        clientIds: [],
       };
     default:
       return state;
