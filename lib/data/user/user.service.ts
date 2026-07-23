@@ -20,16 +20,16 @@ export const createUser = async (input: CreateUserInputDTO) => {
   } = await requireSession();
 
   // Check permission
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId,
-      permission: {
+      permissions: {
         user: ["create"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError("You do not have permission to create user.");
   }
 
@@ -65,16 +65,16 @@ export const updateUser = async (input: UpdateUserInputDTO) => {
   } = await requireSession();
 
   // Check permission
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId,
-      permission: {
+      permissions: {
         user: ["update"],
       },
     },
   });
 
-  if (!permission.success || (role === "user" && userId !== input.id)) {
+  if (!permissions.success || (role === "user" && userId !== input.id)) {
     throw new AccessDeniedError("You do not have permission to update user.");
   }
 
@@ -113,16 +113,16 @@ export const updateUserImageUrl = async (input: UpdateUserImageUrlInputDTO) => {
   } = await requireSession();
 
   // Check permission
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId,
-      permission: {
+      permissions: {
         user: ["update"],
       },
     },
   });
 
-  if (!permission.success || (role === "user" && userId !== input.id)) {
+  if (!permissions.success || (role === "user" && userId !== input.id)) {
     throw new AccessDeniedError("You do not have permission to update user.");
   }
 
@@ -150,16 +150,16 @@ export const resetPassword = async (input: ResetPasswordInputDTO) => {
   } = await requireSession();
 
   // Check permission
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId,
-      permission: {
+      permissions: {
         user: ["reset-password"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to reset password.",
     );
@@ -187,16 +187,16 @@ export const changePassword = async (input: ChangePasswordInputDTO) => {
   } = await requireSession();
 
   // Check permission
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId,
-      permission: {
+      permissions: {
         user: ["change-password"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to change password.",
     );
@@ -221,16 +221,16 @@ export const deleteUser = async (deletedUserId: string) => {
   } = await requireSession();
 
   // Check permission
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId,
-      permission: {
+      permissions: {
         user: ["update"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError("You do not have permission to delete user.");
   }
 

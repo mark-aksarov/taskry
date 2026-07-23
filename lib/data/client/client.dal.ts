@@ -327,16 +327,16 @@ export const deleteClients = async (ids: number[]) => {
   } = await requireSession();
 
   // Check permissions
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId: userId,
-      permission: {
+      permissions: {
         client: ["delete"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to delete clients.",
     );
@@ -360,16 +360,16 @@ export const createClients = async (input: CreateClientInputDTO[]) => {
   } = await requireSession();
 
   // Check permissions
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId: userId,
-      permission: {
+      permissions: {
         client: ["create"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to create clients.",
     );
@@ -379,9 +379,7 @@ export const createClients = async (input: CreateClientInputDTO[]) => {
   await validateClientLimit(workspaceId, input.length);
 
   // Validate companies
-  const companyIds = uniqueDefinedIds(
-    input.map((client) => client.companyId),
-  );
+  const companyIds = uniqueDefinedIds(input.map((client) => client.companyId));
 
   if (companyIds.length > 0) {
     await validateCompanies(workspaceId, companyIds);
@@ -411,16 +409,16 @@ export const updateClient = async (input: UpdateClientInputDTO) => {
   } = await requireSession();
 
   // Check permissions
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId: userId,
-      permission: {
+      permissions: {
         client: ["update"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to update clients.",
     );
@@ -459,16 +457,16 @@ export const updateClientImageUrl = async (
   } = await requireSession();
 
   // Check permissions
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId: userId,
-      permission: {
+      permissions: {
         client: ["update"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to update clients.",
     );

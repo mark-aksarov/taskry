@@ -49,16 +49,16 @@ export const createPositions = async (input: CreatePositionInputDTO[]) => {
   } = await requireSession();
 
   // ACL
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId: userId,
-      permission: {
+      permissions: {
         position: ["create"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to create positions.",
     );
@@ -84,17 +84,17 @@ export const updatePosition = async (input: UpdatePositionInputDTO) => {
     user: { id: userId, workspaceId },
   } = await requireSession();
 
-  // ACL
-  const permission = await auth.api.userHasPermission({
+  // Check permissions
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId: userId,
-      permission: {
+      permissions: {
         position: ["update"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to update positions.",
     );
@@ -120,17 +120,17 @@ export const deletePositions = async (ids: number[]) => {
     user: { id: userId, workspaceId },
   } = await requireSession();
 
-  // ACL
-  const permission = await auth.api.userHasPermission({
+  // Check permissions
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId: userId,
-      permission: {
+      permissions: {
         position: ["delete"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to delete positions.",
     );

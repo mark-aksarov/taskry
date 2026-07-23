@@ -55,16 +55,16 @@ export const updateCompany = async (
   } = await requireSession();
 
   // ACL
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId: userId,
-      permission: {
+      permissions: {
         company: ["update"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to update companies.",
     );
@@ -91,16 +91,16 @@ export const createCompanies = async (input: CreateCompanyInputDTO[]) => {
   } = await requireSession();
 
   // ACL
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId,
-      permission: {
+      permissions: {
         company: ["create"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to create companies.",
     );
@@ -126,17 +126,17 @@ export const deleteCompanies = async (ids: number[]) => {
     user: { id: userId, workspaceId },
   } = await requireSession();
 
-  // ACL
-  const permission = await auth.api.userHasPermission({
+  // Check permissions
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId: userId,
-      permission: {
+      permissions: {
         company: ["delete"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to delete companies.",
     );

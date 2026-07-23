@@ -47,16 +47,16 @@ export const createTaskCategories = async (
   } = await requireSession();
 
   // Check permission
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId,
-      permission: {
+      permissions: {
         taskCategory: ["create"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to create task categories.",
     );
@@ -83,16 +83,16 @@ export const updateTaskCategory = async (input: UpdateTaskCategoryInputDTO) => {
   } = await requireSession();
 
   // Check permission
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId: userId,
-      permission: {
+      permissions: {
         taskCategory: ["update"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to update task categories.",
     );
@@ -119,16 +119,16 @@ export const deleteTaskCategories = async (ids: number[]) => {
   } = await requireSession();
 
   // Check permission
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId: userId,
-      permission: {
+      permissions: {
         taskCategory: ["delete"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to delete task categories.",
     );

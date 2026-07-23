@@ -89,16 +89,16 @@ export const createComment = async (input: CreateCommentInputDTO) => {
   } = await requireSession();
 
   // Check permission
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId: senderId,
-      permission: {
+      permissions: {
         comment: ["create"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to create comment.",
     );
@@ -142,16 +142,16 @@ export const deleteComment = async (commentId: number) => {
   } = await requireSession();
 
   // Check permission
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId: senderId,
-      permission: {
+      permissions: {
         comment: ["delete"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to delete comment.",
     );
@@ -188,17 +188,17 @@ export const updateComment = async (input: UpdateCommentInputDTO) => {
     user: { id: senderId, role, workspaceId },
   } = await requireSession();
 
-  // Check permission
-  const permission = await auth.api.userHasPermission({
+  // Check permissions
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId: senderId,
-      permission: {
+      permissions: {
         comment: ["update"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to update comment.",
     );

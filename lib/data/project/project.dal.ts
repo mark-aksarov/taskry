@@ -401,16 +401,16 @@ export const createProjects = async (input: CreateProjectInputDTO[]) => {
   } = await requireSession();
 
   // Check permission
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId,
-      permission: {
+      permissions: {
         project: ["create"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to create projects.",
     );
@@ -429,9 +429,7 @@ export const createProjects = async (input: CreateProjectInputDTO[]) => {
   }
 
   // Validate clients
-  const clientIds = uniqueDefinedIds(
-    input.map((project) => project.clientId),
-  );
+  const clientIds = uniqueDefinedIds(input.map((project) => project.clientId));
 
   if (clientIds.length > 0) {
     await validateClients(workspaceId, clientIds);
@@ -459,17 +457,17 @@ export const updateProject = async (input: UpdateProjectInputDTO) => {
     user: { id: userId, workspaceId },
   } = await requireSession();
 
-  // Check permission
-  const permission = await auth.api.userHasPermission({
+  // Check permissions
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId,
-      permission: {
+      permissions: {
         project: ["update"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to update project.",
     );
@@ -513,17 +511,17 @@ export const updateProjectStatuses = async (
     user: { id: userId, workspaceId },
   } = await requireSession();
 
-  // Check permission
-  const permission = await auth.api.userHasPermission({
+  // Check permissions
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId,
-      permission: {
+      permissions: {
         project: ["update"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to update project.",
     );
@@ -550,17 +548,17 @@ export const deleteProjects = async (ids: number[]) => {
     user: { id: userId, workspaceId },
   } = await requireSession();
 
-  // Check permission
-  const permission = await auth.api.userHasPermission({
+  // Check permissions
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId: userId,
-      permission: {
+      permissions: {
         project: ["delete"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError("You do not have permission to delete tasks.");
   }
 

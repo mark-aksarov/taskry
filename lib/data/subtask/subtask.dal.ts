@@ -17,16 +17,16 @@ export const createSubtask = async (input: CreateSubtaskInputDTO) => {
   } = await requireSession();
 
   // Check permission
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId,
-      permission: {
+      permissions: {
         subtask: ["create"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to create subtask.",
     );
@@ -66,16 +66,16 @@ export const updateSubtask = async (input: UpdateSubtaskInputDTO) => {
   } = await requireSession();
 
   // Check permission
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId,
-      permission: {
+      permissions: {
         subtask: ["update"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to update subtask.",
     );
@@ -115,16 +115,16 @@ export const deleteSubtask = async (id: number) => {
   } = await requireSession();
 
   // Check permission
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId,
-      permission: {
+      permissions: {
         subtask: ["delete"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to delete subtask.",
     );

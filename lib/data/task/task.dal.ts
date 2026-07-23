@@ -343,16 +343,16 @@ export const createTasks = async (input: CreateTaskInputDTO[]) => {
   } = await requireSession();
 
   // Check permission
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId,
-      permission: {
+      permissions: {
         task: ["create"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError("You do not have permission to create tasks.");
   }
 
@@ -404,16 +404,16 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
   } = await requireSession();
 
   // Check permission
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId,
-      permission: {
+      permissions: {
         task: ["update"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError("You do not have permission to update task.");
   }
 
@@ -462,16 +462,16 @@ export const updateTaskStatuses = async (
   } = await requireSession();
 
   // Check permission
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId,
-      permission: {
+      permissions: {
         task: ["update"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError("You do not have permission to update task.");
   }
 
@@ -508,16 +508,16 @@ export const deleteTasks = async (ids: number[]) => {
   } = await requireSession();
 
   // Check permission
-  const permission = await auth.api.userHasPermission({
+  const permissions = await auth.api.userHasPermission({
     body: {
       userId: actorId,
-      permission: {
+      permissions: {
         task: ["delete"],
       },
     },
   });
 
-  if (!permission.success) {
+  if (!permissions.success) {
     throw new AccessDeniedError("You do not have permission to delete tasks.");
   }
 
