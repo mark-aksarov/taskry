@@ -12,22 +12,29 @@ export async function createClient(formData: FormData): Promise<ActionState> {
 
   const t = await getTranslations("actions");
 
-  try {
-    const input = Object.fromEntries(formData.entries());
-    const parsedData = createClientSchema.parse(input);
+  // Validation
+  const input = Object.fromEntries(formData.entries());
+  const result = createClientSchema.safeParse(input);
 
-    await createClientsQuery([parsedData]);
-
+  if (!result.success) {
     return {
-      status: "success",
-      message: t("client.create.success"),
+      status: "error",
+      message: t("common.error.invalidData"),
     };
-  } catch (error) {
-    console.error("Server Action Error:", error);
+  }
 
+  // Create client
+  try {
+    await createClientsQuery([result.data]);
+  } catch {
     return {
       status: "error",
       message: t("client.create.error.internalServerError"),
     };
   }
+
+  return {
+    status: "success",
+    message: t("client.create.success"),
+  };
 }

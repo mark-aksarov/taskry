@@ -40,7 +40,7 @@ export async function signIn(
   if (!result.success) {
     return {
       status: "error",
-      message: t("signIn.error.invalidData"),
+      message: t("common.error.invalidData"),
     };
   }
 

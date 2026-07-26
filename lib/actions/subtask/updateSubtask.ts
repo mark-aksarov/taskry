@@ -18,21 +18,29 @@ export async function updateSubtask(formData: FormData): Promise<ActionState> {
 
   const t = await getTranslations("actions");
 
-  try {
-    const input = Object.fromEntries(formData.entries());
-    const parsedData = schema.parse(input);
-    await updateSubtaskQuery(parsedData);
+  // Validation
+  const input = Object.fromEntries(formData.entries());
+  const result = schema.safeParse(input);
 
+  if (!result.success) {
     return {
-      status: "success",
-      message: t("subtask.update.success"),
+      status: "error",
+      message: t("common.error.invalidData"),
     };
-  } catch (error) {
-    console.error("Server Action Error:", error);
+  }
 
+  // Update subtask
+  try {
+    await updateSubtaskQuery(result.data);
+  } catch {
     return {
       status: "error",
       message: t("subtask.update.error.internalServerError"),
     };
   }
+
+  return {
+    status: "success",
+    message: t("subtask.update.success"),
+  };
 }

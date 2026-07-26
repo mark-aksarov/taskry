@@ -37,22 +37,29 @@ export async function updateProject(formData: FormData): Promise<ActionState> {
 
   const t = await getTranslations("actions");
 
-  try {
-    const input = Object.fromEntries(formData.entries());
-    const parsedData = schema.parse(input);
+  // Validation
+  const input = Object.fromEntries(formData.entries());
+  const result = schema.safeParse(input);
 
-    await updateProjectQuery(parsedData);
-
+  if (!result.success) {
     return {
-      status: "success",
-      message: t("project.update.success"),
+      status: "error",
+      message: t("common.error.invalidData"),
     };
-  } catch (error) {
-    console.error("Server Action Error:", error);
+  }
 
+  // Update project
+  try {
+    await updateProjectQuery(result.data);
+  } catch {
     return {
       status: "error",
       message: t("project.update.error.internalServerError"),
     };
   }
+
+  return {
+    status: "success",
+    message: t("project.update.success"),
+  };
 }

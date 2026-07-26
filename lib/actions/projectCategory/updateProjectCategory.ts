@@ -24,22 +24,29 @@ export async function updateProjectCategory(
 
   const t = await getTranslations("actions");
 
-  try {
-    const input = Object.fromEntries(formData.entries());
-    const parsedData = schema.parse(input);
+  // Validation
+  const input = Object.fromEntries(formData.entries());
+  const result = schema.safeParse(input);
 
-    await updateProjectCategoryQuery(parsedData);
-
+  if (!result.success) {
     return {
-      status: "success",
-      message: t("projectCategory.update.success"),
+      status: "error",
+      message: t("common.error.invalidData"),
     };
-  } catch (error) {
-    console.error("Server Action Error:", error);
+  }
 
+  // Update project
+  try {
+    await updateProjectCategoryQuery(result.data);
+  } catch {
     return {
       status: "error",
       message: t("projectCategory.update.error.internalServerError"),
     };
   }
+
+  return {
+    status: "success",
+    message: t("projectCategory.update.success"),
+  };
 }

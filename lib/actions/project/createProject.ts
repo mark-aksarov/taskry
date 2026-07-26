@@ -14,19 +14,21 @@ export async function createProject(formData: FormData): Promise<ActionState> {
 
   const t = await getTranslations("actions");
 
-  try {
-    const input = Object.fromEntries(formData.entries());
-    const parsedData = createProjectSchema.parse(input);
+  // Validation
+  const input = Object.fromEntries(formData.entries());
+  const result = createProjectSchema.safeParse(input);
 
-    await createProjectsQuery([parsedData]);
-
+  if (!result.success) {
     return {
-      status: "success",
-      message: t("project.create.success"),
+      status: "error",
+      message: t("common.error.invalidData"),
     };
-  } catch (error) {
-    console.error("Server Action Error:", error);
+  }
 
+  // Create project
+  try {
+    await createProjectsQuery([result.data]);
+  } catch (error) {
     if (error instanceof LimitExceededError) {
       return {
         status: "error",
@@ -41,4 +43,9 @@ export async function createProject(formData: FormData): Promise<ActionState> {
       message: t("project.create.error.internalServerError"),
     };
   }
+
+  return {
+    status: "success",
+    message: t("project.create.success"),
+  };
 }

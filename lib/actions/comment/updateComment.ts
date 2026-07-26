@@ -3,9 +3,9 @@
 import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { commentId, commentContent } from "@/lib/schemas/comment";
 import { updateComment as updateCommentQuery } from "@/lib/data/comment/comment.dal";
-import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 
 const schema = z.object({
   id: commentId,
@@ -18,22 +18,29 @@ export async function updateComment(formData: FormData): Promise<ActionState> {
 
   const t = await getTranslations("actions");
 
-  try {
-    const input = Object.fromEntries(formData.entries());
-    const parsedData = schema.parse(input);
+  // Validation
+  const input = Object.fromEntries(formData.entries());
+  const result = schema.safeParse(input);
 
-    await updateCommentQuery(parsedData);
-
+  if (!result.success) {
     return {
-      status: "success",
-      message: t("comment.update.success"),
+      status: "error",
+      message: t("common.error.invalidData"),
     };
-  } catch (error) {
-    console.error("Server Action Error:", error);
+  }
 
+  // Update comment
+  try {
+    await updateCommentQuery(result.data);
+  } catch {
     return {
       status: "error",
       message: t("comment.update.error.internalServerError"),
     };
   }
+
+  return {
+    status: "success",
+    message: t("comment.update.success"),
+  };
 }

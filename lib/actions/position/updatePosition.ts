@@ -18,22 +18,28 @@ export async function updatePosition(formData: FormData): Promise<ActionState> {
 
   const t = await getTranslations("actions");
 
-  try {
-    const input = Object.fromEntries(formData.entries());
-    const data = schema.parse(input);
+  // Validation
+  const input = Object.fromEntries(formData.entries());
+  const result = schema.safeParse(input);
 
-    await updatePositionQuery(data);
-
+  if (!result.success) {
     return {
-      status: "success",
-      message: t("position.update.success"),
+      status: "error",
+      message: t("common.error.invalidData"),
     };
-  } catch (error) {
-    console.error("Server Action Error:", error);
+  }
 
+  try {
+    await updatePositionQuery(result.data);
+  } catch {
     return {
       status: "error",
       message: t("position.update.error.internalServerError"),
     };
   }
+
+  return {
+    status: "success",
+    message: t("position.update.success"),
+  };
 }

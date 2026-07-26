@@ -19,24 +19,34 @@ export async function importProjectCategories(
   await requireFullAccess();
 
   const t = await getTranslations("actions");
+  const internalServerError = t(
+    "projectCategory.import.error.internalServerError",
+  );
 
-  try {
-    const file = formData.get("file");
+  // Extract file from form data
+  const file = formData.get("file");
 
-    if (!(file instanceof File)) {
-      throw new Error("File is required");
-    }
-
-    const parsedData = await parseCsvFile(file, schema);
-    await createProjectCategoriesQuery(parsedData);
-
+  if (!(file instanceof File)) {
     return {
-      status: "success",
-      message: t("projectCategory.import.success"),
+      status: "error",
+      message: internalServerError,
     };
-  } catch (error) {
-    console.error("Server Action Error:", error);
+  }
 
+  // Parse and validate CSV data
+  const result = await parseCsvFile(file, schema);
+
+  if (!result.success) {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  // Create project categories
+  try {
+    await createProjectCategoriesQuery(result.data);
+  } catch (error) {
     if (error instanceof LimitExceededError) {
       return {
         status: "error",
@@ -48,7 +58,12 @@ export async function importProjectCategories(
 
     return {
       status: "error",
-      message: t("projectCategory.import.error.internalServerError"),
+      message: internalServerError,
     };
   }
+
+  return {
+    status: "success",
+    message: t("projectCategory.import.success"),
+  };
 }

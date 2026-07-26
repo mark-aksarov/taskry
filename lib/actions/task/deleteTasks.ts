@@ -14,22 +14,31 @@ export async function deleteTasks(ids: number[]): Promise<ActionState> {
   await requireFullAccess();
 
   const t = await getTranslations("actions");
+  const internalServerError = t("task.deleteMany.error.internalServerError");
 
-  try {
-    const parsedIds = taskIds.parse(ids);
+  // Validation
+  const result = taskIds.safeParse(ids);
 
-    await deleteTaskQuery(parsedIds);
-
-    return {
-      status: "success",
-      message: t("task.deleteMany.success"),
-    };
-  } catch (error) {
-    console.error("Server Action Error:", error);
-
+  if (!result.success) {
     return {
       status: "error",
-      message: t("task.deleteMany.error.internalServerError"),
+      // This ids does not come from a user form, so the user cannot fix invalid input
+      message: internalServerError,
     };
   }
+
+  // Delete tasks
+  try {
+    await deleteTaskQuery(result.data);
+  } catch {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  return {
+    status: "success",
+    message: t("task.deleteMany.success"),
+  };
 }

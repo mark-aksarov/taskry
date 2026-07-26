@@ -19,17 +19,20 @@ export async function createCompany(formData: FormData): Promise<ActionState> {
 
   const t = await getTranslations("actions");
 
-  try {
-    const parsedDate = schema.parse({
-      name: formData.get("name"),
-    });
+  // Validation
+  const input = Object.fromEntries(formData.entries());
+  const result = schema.safeParse(input);
 
-    await createCompaniesQuery([parsedDate]);
-
+  if (!result.success) {
     return {
-      status: "success",
-      message: t("company.create.success"),
+      status: "error",
+      message: t("common.error.invalidData"),
     };
+  }
+
+  // Create company
+  try {
+    await createCompaniesQuery([result.data]);
   } catch (error) {
     console.error("Server Action Error:", error);
 
@@ -47,4 +50,9 @@ export async function createCompany(formData: FormData): Promise<ActionState> {
       message: t("company.create.error.internalServerError"),
     };
   }
+
+  return {
+    status: "success",
+    message: t("company.create.success"),
+  };
 }

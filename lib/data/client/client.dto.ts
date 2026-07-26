@@ -32,11 +32,7 @@ export interface UpdateClientInputDTO {
   phoneNumber?: string | null;
   publicLink?: string | null;
   companyId?: number | null;
-}
-
-export interface UpdateClientImageUrlInputDTO {
-  id: number;
-  imageUrl: string | null;
+  imageUrl?: string | null;
 }
 
 export type ClientDetailDTO = {

@@ -14,22 +14,33 @@ export async function deleteTask(
   await requireFullAccess();
 
   const t = await getTranslations("actions");
+  const internalServerError = t("task.delete.error.internalServerError");
 
-  try {
-    const parsedId = taskId.parse(payload.id);
+  // Validation
+  const result = taskId.safeParse(payload.id);
 
-    await deleteTaskQuery([parsedId]);
-  } catch (error) {
-    console.error("Server Action Error:", error);
-
+  if (!result.success) {
     return {
       status: "error",
-      message: t("task.delete.error.internalServerError"),
+      // This id does not come from a user form, so the user cannot fix invalid input
+      message: internalServerError,
     };
   }
 
+  // Delete task
+  try {
+    await deleteTaskQuery([result.data]);
+  } catch {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  // Success
   const locale = await getLocale();
 
+  // Redirect to tasks page when task is deleted from details page
   if (payload.shouldRedirect) {
     redirect({ href: "/tasks", locale });
   }

@@ -19,22 +19,34 @@ export async function updateProjectStatuses(
   await requireFullAccess();
 
   const t = await getTranslations("actions");
+  const internalServerError = t(
+    "project.updateStatuses.error.internalServerError",
+  );
 
-  try {
-    const parsedData = schema.parse(payload);
+  // Validation
+  const result = schema.safeParse(payload);
 
-    await updateProjectStatusesQuery(parsedData.ids, parsedData.nextStatus);
-
-    return {
-      status: "success",
-      message: t("project.updateStatuses.success"),
-    };
-  } catch (error) {
-    console.error("Server Action Error:", error);
-
+  if (!result.success) {
     return {
       status: "error",
-      message: t("project.updateStatuses.error.internalServerError"),
+      message: internalServerError,
     };
   }
+
+  const { ids, nextStatus } = result.data;
+
+  // Update project
+  try {
+    await updateProjectStatusesQuery(ids, nextStatus);
+  } catch {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  return {
+    status: "success",
+    message: t("project.updateStatuses.success"),
+  };
 }

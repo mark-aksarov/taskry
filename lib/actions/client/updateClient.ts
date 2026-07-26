@@ -37,22 +37,29 @@ export async function updateClient(formData: FormData): Promise<ActionState> {
 
   const t = await getTranslations("actions");
 
-  try {
-    const input = Object.fromEntries(formData.entries());
-    const parsedData = schema.parse(input);
+  // Validation
+  const input = Object.fromEntries(formData.entries());
+  const result = schema.safeParse(input);
 
-    await updateClientQuery(parsedData);
-
+  if (!result.success) {
     return {
-      status: "success",
-      message: t("client.update.success"),
+      status: "error",
+      message: t("common.error.invalidData"),
     };
-  } catch (error) {
-    console.error("Server Action Error:", error);
+  }
 
+  // Update client
+  try {
+    await updateClientQuery(result.data);
+  } catch {
     return {
       status: "error",
       message: t("client.update.error.internalServerError"),
     };
   }
+
+  return {
+    status: "success",
+    message: t("client.update.success"),
+  };
 }

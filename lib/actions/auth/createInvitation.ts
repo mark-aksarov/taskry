@@ -40,7 +40,7 @@ export async function createInvitation(
   if (!result.success) {
     return {
       status: "error",
-      message: t("createInvitation.error.invalidData"),
+      message: t("common.error.invalidData"),
     };
   }
 

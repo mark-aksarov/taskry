@@ -16,22 +16,33 @@ export async function deleteTaskCategories(
   await requireFullAccess();
 
   const t = await getTranslations("actions");
+  const internalServerError = t(
+    "taskCategory.deleteMany.error.internalServerError",
+  );
 
-  try {
-    const parsedIds = taskCategoryIds.parse(ids);
+  // Validation
+  const result = taskCategoryIds.safeParse(ids);
 
-    await deleteTaskCategoriesQuery(parsedIds);
-
-    return {
-      status: "success",
-      message: t("taskCategory.deleteMany.success"),
-    };
-  } catch (error) {
-    console.error("Server Action Error:", error);
-
+  if (!result.success) {
     return {
       status: "error",
-      message: t("taskCategory.deleteMany.error.internalServerError"),
+      // This ids does not come from a user form, so the user cannot fix invalid input
+      message: internalServerError,
     };
   }
+
+  // Delete task categories
+  try {
+    await deleteTaskCategoriesQuery(result.data);
+  } catch {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  return {
+    status: "success",
+    message: t("taskCategory.deleteMany.success"),
+  };
 }

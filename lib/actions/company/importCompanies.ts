@@ -19,24 +19,32 @@ export async function importCompanies(
   await requireFullAccess();
 
   const t = await getTranslations("actions");
+  const internalServerError = t("company.import.error.internalServerError");
 
-  try {
-    const file = formData.get("file");
+  // Extract file from form data
+  const file = formData.get("file");
 
-    if (!(file instanceof File)) {
-      throw new Error("File is required");
-    }
-
-    const parsedData = await parseCsvFile(file, schema);
-    await createCompaniesQuery(parsedData);
-
+  if (!(file instanceof File)) {
     return {
-      status: "success",
-      message: t("company.import.success"),
+      status: "error",
+      message: internalServerError,
     };
-  } catch (error) {
-    console.error("Server Action Error:", error);
+  }
 
+  // Parse and validate CSV data
+  const result = await parseCsvFile(file, schema);
+
+  if (!result.success) {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  // Create companies
+  try {
+    await createCompaniesQuery(result.data);
+  } catch (error) {
     if (error instanceof LimitExceededError) {
       return {
         status: "error",
@@ -51,4 +59,9 @@ export async function importCompanies(
       message: t("company.import.error.internalServerError"),
     };
   }
+
+  return {
+    status: "success",
+    message: t("company.import.success"),
+  };
 }

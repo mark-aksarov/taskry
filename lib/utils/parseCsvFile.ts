@@ -1,10 +1,7 @@
 import Papa from "papaparse";
 import z from "zod";
 
-export async function parseCsvFile<T>(
-  file: File,
-  schema: z.ZodSchema<T>,
-): Promise<T> {
+export async function parseCsvFile<T>(file: File, schema: z.ZodSchema<T>) {
   if (
     file.size === 0 ||
     file.size > 512 * 1024 ||
@@ -20,7 +17,7 @@ export async function parseCsvFile<T>(
     skipEmptyLines: true,
   });
 
-  const data = schema.parse(result.data);
+  const data = schema.safeParse(result.data);
 
   return data;
 }

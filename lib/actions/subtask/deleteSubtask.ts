@@ -11,22 +11,31 @@ export async function deleteSubtask(id: number): Promise<ActionState> {
   await requireFullAccess();
 
   const t = await getTranslations("actions");
+  const internalServerError = t("subtask.delete.error.internalServerError");
 
-  try {
-    const parsedId = subtaskId.parse(id);
+  // Validation
+  const result = subtaskId.safeParse(id);
 
-    await deleteSubtaskQuery(parsedId);
-
-    return {
-      status: "success",
-      message: t("subtask.delete.success"),
-    };
-  } catch (error) {
-    console.error("Server Action Error:", error);
-
+  if (!result.success) {
     return {
       status: "error",
-      message: t("subtask.delete.error.internalServerError"),
+      // This id does not come from a user form, so the user cannot fix invalid input
+      message: internalServerError,
     };
   }
+
+  // Delete subtask
+  try {
+    await deleteSubtaskQuery(result.data);
+  } catch {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  return {
+    status: "success",
+    message: t("subtask.delete.success"),
+  };
 }

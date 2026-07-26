@@ -11,22 +11,33 @@ export async function deleteProjectCategory(id: number): Promise<ActionState> {
   await requireFullAccess();
 
   const t = await getTranslations("actions");
+  const internalServerError = t(
+    "projectCategory.delete.error.internalServerError",
+  );
 
-  try {
-    const parsedId = projectCategoryId.parse(id);
+  // Validation
+  const result = projectCategoryId.safeParse(id);
 
-    await deleteProjectCategoriesQuery([parsedId]);
-
-    return {
-      status: "success",
-      message: t("projectCategory.delete.success"),
-    };
-  } catch (error) {
-    console.error("Server Action Error:", error);
-
+  if (!result.success) {
     return {
       status: "error",
-      message: t("projectCategory.delete.error.internalServerError"),
+      // This id does not come from a user form, so the user cannot fix invalid input
+      message: internalServerError,
     };
   }
+
+  // Delete project category
+  try {
+    await deleteProjectCategoriesQuery([result.data]);
+  } catch {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  return {
+    status: "success",
+    message: t("projectCategory.delete.success"),
+  };
 }

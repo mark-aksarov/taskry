@@ -8,7 +8,6 @@ import {
   ClientSummaryDTO,
   CreateClientInputDTO,
   UpdateClientInputDTO,
-  UpdateClientImageUrlInputDTO,
 } from "./client.dto";
 
 import { cache } from "react";
@@ -435,48 +434,11 @@ export const updateClient = async (input: UpdateClientInputDTO) => {
     data: {
       fullName: input.fullName,
       bio: input.bio,
+      imageUrl: input.imageUrl,
       companyId: input.companyId,
       email: input.email,
       phoneNumber: input.phoneNumber,
       publicLink: input.publicLink,
-    },
-  });
-
-  return mapToClientDTO(updatedClient);
-};
-
-export const updateClientImageUrl = async (
-  input: UpdateClientImageUrlInputDTO,
-) => {
-  // Authorization
-  const {
-    session: { activeOrganizationId: organizationId },
-  } = await requireOrganizationAccess();
-
-  // Check permission
-  const permission = await auth.api.hasPermission({
-    headers: await headers(),
-    body: {
-      permissions: {
-        client: ["update"],
-      },
-    },
-  });
-
-  if (!permission.success) {
-    throw new AccessDeniedError(
-      "You do not have permission to update clients.",
-    );
-  }
-
-  // Update client
-  const updatedClient = await prisma.client.update({
-    where: {
-      id: input.id,
-      organizationId,
-    },
-    data: {
-      imageUrl: input.imageUrl,
     },
   });
 

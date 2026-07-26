@@ -11,21 +11,31 @@ export async function deletePosition(id: number): Promise<ActionState> {
   await requireFullAccess();
 
   const t = await getTranslations("actions");
+  const internalServerError = t("position.delete.error.internalServerError");
 
-  try {
-    const parsedId = positionId.parse(id);
-    await deletePositionsQuery([parsedId]);
+  // Validation
+  const result = positionId.safeParse(id);
 
-    return {
-      status: "success",
-      message: t("position.delete.success"),
-    };
-  } catch (error) {
-    console.error("Server Action Error:", error);
-
+  if (!result.success) {
     return {
       status: "error",
-      message: t("position.delete.error.internalServerError"),
+      // This id does not come from a user form, so the user cannot fix invalid input
+      message: internalServerError,
     };
   }
+
+  // Delete position
+  try {
+    await deletePositionsQuery([result.data]);
+  } catch {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  return {
+    status: "success",
+    message: t("position.delete.success"),
+  };
 }

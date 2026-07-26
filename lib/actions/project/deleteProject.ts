@@ -14,22 +14,33 @@ export async function deleteProject(
   await requireFullAccess();
 
   const t = await getTranslations("actions");
+  const internalServerError = t("project.delete.error.internalServerError");
 
-  try {
-    const parsedId = projectId.parse(payload.id);
+  // Validation
+  const result = projectId.safeParse(payload.id);
 
-    await deleteProjectQuery([parsedId]);
-  } catch (error) {
-    console.error("Server Action Error:", error);
-
+  if (!result.success) {
     return {
       status: "error",
-      message: t("project.delete.error.internalServerError"),
+      // This id does not come from a user form, so the user cannot fix invalid input
+      message: internalServerError,
     };
   }
 
+  // Delete project
+  try {
+    await deleteProjectQuery([result.data]);
+  } catch {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  // Success
   const locale = await getLocale();
 
+  // Redirect to projects page when project is deleted from details page
   if (payload.shouldRedirect) {
     redirect({ href: "/projects", locale });
   }

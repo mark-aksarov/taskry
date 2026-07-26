@@ -2,8 +2,8 @@
 
 import { redirect } from "@/i18n/navigation";
 import { clientId } from "@/lib/schemas/client";
-import { getLocale, getTranslations } from "next-intl/server";
 import { ActionState, DeleteClientPayload } from "../types";
+import { getLocale, getTranslations } from "next-intl/server";
 import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { deleteClients as deleteClientsQuery } from "@/lib/data/client/client.dal";
 
@@ -14,22 +14,33 @@ export async function deleteClient(
   await requireFullAccess();
 
   const t = await getTranslations("actions");
+  const internalServerError = t("client.delete.error.internalServerError");
 
-  try {
-    const parsedId = clientId.parse(payload.id);
+  // Validation
+  const result = clientId.safeParse(payload.id);
 
-    await deleteClientsQuery([parsedId]);
-  } catch (error) {
-    console.error("Server Action Error:", error);
-
+  if (!result.success) {
     return {
       status: "error",
-      message: t("client.delete.error.internalServerError"),
+      // This value does not come from a user form, so the user cannot fix invalid input
+      message: internalServerError,
     };
   }
 
+  // Delete client
+  try {
+    await deleteClientsQuery([result.data]);
+  } catch {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  // Success
   const locale = await getLocale();
 
+  // Redirect to clients page when client is deleted from profile page
   if (payload.shouldRedirect) {
     redirect({ href: "/clients", locale });
   }

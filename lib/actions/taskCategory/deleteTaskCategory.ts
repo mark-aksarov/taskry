@@ -11,22 +11,33 @@ export async function deleteTaskCategory(id: number): Promise<ActionState> {
   await requireFullAccess();
 
   const t = await getTranslations("actions");
+  const internalServerError = t(
+    "taskCategory.delete.error.internalServerError",
+  );
 
-  try {
-    const parsedId = taskCategoryId.parse(id);
+  // Validation
+  const result = taskCategoryId.safeParse(id);
 
-    await deleteTaskCategoriesQuery([parsedId]);
-
-    return {
-      status: "success",
-      message: t("taskCategory.delete.success"),
-    };
-  } catch (error) {
-    console.error("Server Action Error:", error);
-
+  if (!result.success) {
     return {
       status: "error",
-      message: t("taskCategory.delete.error.internalServerError"),
+      // This id does not come from a user form, so the user cannot fix invalid input
+      message: internalServerError,
     };
   }
+
+  // Delete task category
+  try {
+    await deleteTaskCategoriesQuery([result.data]);
+  } catch {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  return {
+    status: "success",
+    message: t("taskCategory.delete.success"),
+  };
 }

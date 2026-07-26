@@ -46,7 +46,7 @@ export async function signUp(
   if (!result.success) {
     return {
       status: "error",
-      message: t("signUp.error.invalidData"),
+      message: t("common.error.invalidData"),
     };
   }
 

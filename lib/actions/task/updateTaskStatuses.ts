@@ -19,21 +19,34 @@ export async function updateTaskStatuses(
   await requireFullAccess();
 
   const t = await getTranslations("actions");
+  const internalServerError = t(
+    "task.updateStatuses.error.internalServerError",
+  );
 
-  try {
-    const parsedData = schema.parse(payload);
-    await updateTaskStatusesQuery(parsedData.ids, parsedData.nextStatus);
+  // Validation
+  const result = schema.safeParse(payload);
 
-    return {
-      status: "success",
-      message: t("task.updateStatuses.success"),
-    };
-  } catch (error) {
-    console.error("Server Action Error:", error);
-
+  if (!result.success) {
     return {
       status: "error",
-      message: t("task.updateStatuses.error.internalServerError"),
+      message: internalServerError,
     };
   }
+
+  const { ids, nextStatus } = result.data;
+
+  // Update task
+  try {
+    await updateTaskStatusesQuery(ids, nextStatus);
+  } catch {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  return {
+    status: "success",
+    message: t("task.updateStatuses.success"),
+  };
 }

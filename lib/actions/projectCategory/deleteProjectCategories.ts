@@ -16,22 +16,33 @@ export async function deleteProjectCategories(
   await requireFullAccess();
 
   const t = await getTranslations("actions");
+  const internalServerError = t(
+    "projectCategory.deleteMany.error.internalServerError",
+  );
 
-  try {
-    const parsedIds = projectCategoryIds.parse(ids);
+  // Validation
+  const result = projectCategoryIds.safeParse(ids);
 
-    await deleteProjectCategoriesQuery(parsedIds);
-
-    return {
-      status: "success",
-      message: t("projectCategory.deleteMany.success"),
-    };
-  } catch (error) {
-    console.error("Server Action Error:", error);
-
+  if (!result.success) {
     return {
       status: "error",
-      message: t("projectCategory.deleteMany.error.internalServerError"),
+      // This ids does not come from a user form, so the user cannot fix invalid input
+      message: internalServerError,
     };
   }
+
+  // Delete project categories
+  try {
+    await deleteProjectCategoriesQuery(result.data);
+  } catch {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  return {
+    status: "success",
+    message: t("projectCategory.deleteMany.success"),
+  };
 }

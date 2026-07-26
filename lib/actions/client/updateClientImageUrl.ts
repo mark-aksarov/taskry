@@ -2,10 +2,10 @@
 
 import z from "zod";
 import { getTranslations } from "next-intl/server";
-import { ActionState, UpdateClientImageUrlPayload } from "../types";
 import { clientId, clientImageUrl } from "@/lib/schemas/client";
 import { requireFullAccess } from "@/lib/utils/requireFullAccess";
-import { updateClientImageUrl as updateClientImageUrlQuery } from "@/lib/data/client/client.dal";
+import { ActionState, UpdateClientImageUrlPayload } from "../types";
+import { updateClient as updateClientQuery } from "@/lib/data/client/client.dal";
 
 const schema = z.object({
   id: clientId,
@@ -19,22 +19,32 @@ export async function updateClientImageUrl(
   await requireFullAccess();
 
   const t = await getTranslations("actions");
+  const internalServerError = t(
+    "client.updateImageUrl.error.internalServerError",
+  );
 
-  try {
-    const parsedData = schema.parse(payload);
+  // Validation
+  const result = schema.safeParse(payload);
 
-    await updateClientImageUrlQuery(parsedData);
-
-    return {
-      status: "success",
-      message: t("client.updateImageUrl.success"),
-    };
-  } catch (error) {
-    console.error("Server Action Error:", error);
-
+  if (!result.success) {
     return {
       status: "error",
-      message: t("client.updateImageUrl.error.internalServerError"),
+      message: internalServerError,
     };
   }
+
+  // Update client
+  try {
+    await updateClientQuery(result.data);
+  } catch {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  return {
+    status: "success",
+    message: t("client.updateImageUrl.success"),
+  };
 }

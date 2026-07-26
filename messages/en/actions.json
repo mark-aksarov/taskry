@@ -1,6 +1,7 @@
 {
   "common": {
     "error": {
+      "invalidData": "Please check that the entered data is correct.",
       "internalServerError": "Something went wrong."
     }
   },
@@ -21,14 +22,12 @@
   },
   "signIn": {
     "error": {
-      "internalServerError": "Something went wrong. Failed to sign in.",
-      "invalidData": "Please check that the entered data is correct."
+      "internalServerError": "Something went wrong. Failed to sign in."
     }
   },
   "signUp": {
     "error": {
-      "internalServerError": "Something went wrong. Failed to sign up.",
-      "invalidData": "Please check that the entered data is correct."
+      "internalServerError": "Something went wrong. Failed to sign up."
     }
   },
   "position": {
@@ -355,8 +354,7 @@
     "update": {
       "success": "User updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the user.",
-        "invalidData": "Please check that the entered data is correct."
+        "internalServerError": "Something went wrong. Failed to update the user."
       }
     },
     "updateImageUrl": {
@@ -374,8 +372,7 @@
     "changePassword": {
       "success": "Password changed successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to change the password.",
-        "invalidData": "Please check that the entered data is correct."
+        "internalServerError": "Something went wrong. Failed to change the password."
       }
     }
   },
@@ -390,7 +387,6 @@
   "createOrganization": {
     "error": {
       "internalServerError": "Something went wrong. Failed to create workspace.",
-      "invalidData": "Please check that the entered data is correct.",
       "alreadyInOrganization": "You are already a member of another workspace"
     }
   },
@@ -398,19 +394,12 @@
     "success": "Invitation created successfully",
     "error": {
       "internalServerError": "Something went wrong. Failed to create the invitation.",
-      "invalidData": "Please check that the entered data is correct.",
       "alreadyInOrganization": "This user is already a member of another workspace"
     }
   },
   "selectOrganization": {
     "error": {
-      "invalidData": "Please check that the entered data is correct.",
       "internalServerError": "Something went wrong. Failed to create workspace."
-    }
-  },
-  "deleteUser": {
-    "error": {
-      "invalidData": "Please check that the entered data is correct."
     }
   }
 }

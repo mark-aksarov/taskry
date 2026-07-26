@@ -27,7 +27,7 @@ export async function changePassword(formData: FormData): Promise<ActionState> {
   if (!result.success) {
     return {
       status: "error",
-      message: t("user.changePassword.error.invalidData"),
+      message: t("common.error.invalidData"),
     };
   }
 

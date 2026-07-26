@@ -19,21 +19,33 @@ export async function toggleSubtask(
   await requireFullAccess();
 
   const t = await getTranslations("actions");
+  const internalServerError = t(
+    "subtask.updateStatus.error.internalServerError",
+  );
 
-  try {
-    const parsedData = schema.parse(data);
-    await updateSubtaskQuery(parsedData);
+  // Validation
+  const result = schema.safeParse(data);
 
-    return {
-      status: "success",
-      message: t("subtask.updateStatus.success"),
-    };
-  } catch (error) {
-    console.error("Server Action Error:", error);
-
+  if (!result.success) {
     return {
       status: "error",
-      message: t("subtask.updateStatus.error.internalServerError"),
+      // This id and isDone does not come from a user form, so the user cannot fix invalid input
+      message: internalServerError,
     };
   }
+
+  // Update subtask
+  try {
+    await updateSubtaskQuery(result.data);
+  } catch {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  return {
+    status: "success",
+    message: t("subtask.updateStatus.success"),
+  };
 }

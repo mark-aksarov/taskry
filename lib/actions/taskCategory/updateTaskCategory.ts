@@ -20,22 +20,29 @@ export async function updateTaskCategory(
 
   const t = await getTranslations("actions");
 
-  try {
-    const input = Object.fromEntries(formData.entries());
-    const parsedData = schema.parse(input);
+  // Validation
+  const input = Object.fromEntries(formData.entries());
+  const result = schema.safeParse(input);
 
-    await updateTaskCategoryQuery(parsedData);
-
+  if (!result.success) {
     return {
-      status: "success",
-      message: t("taskCategory.update.success"),
+      status: "error",
+      message: t("common.error.invalidData"),
     };
-  } catch (error) {
-    console.error("Server Action Error:", error);
+  }
 
+  // Update task category
+  try {
+    await updateTaskCategoryQuery(result.data);
+  } catch {
     return {
       status: "error",
       message: t("taskCategory.update.error.internalServerError"),
     };
   }
+
+  return {
+    status: "success",
+    message: t("taskCategory.update.success"),
+  };
 }

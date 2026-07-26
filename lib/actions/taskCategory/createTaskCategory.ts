@@ -19,20 +19,22 @@ export async function createTaskCategory(
 
   const t = await getTranslations("actions");
 
-  try {
-    const parsedData = schema.parse({
-      name: formData.get("name"),
-    });
+  // Validation
+  const result = schema.safeParse({
+    name: formData.get("name"),
+  });
 
-    await createTaskCategoriesQuery([parsedData]);
-
+  if (!result.success) {
     return {
-      status: "success",
-      message: t("taskCategory.create.success"),
+      status: "error",
+      message: t("common.error.invalidData"),
     };
-  } catch (error) {
-    console.error("Server Action Error:", error);
+  }
 
+  // Create task category
+  try {
+    await createTaskCategoriesQuery([result.data]);
+  } catch (error) {
     if (error instanceof LimitExceededError) {
       return {
         status: "error",
@@ -47,4 +49,9 @@ export async function createTaskCategory(
       message: t("taskCategory.create.error.internalServerError"),
     };
   }
+
+  return {
+    status: "success",
+    message: t("taskCategory.create.success"),
+  };
 }

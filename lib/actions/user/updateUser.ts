@@ -49,7 +49,7 @@ export async function updateUser(formData: FormData): Promise<ActionState> {
   if (!result.success) {
     return {
       status: "error",
-      message: t("user.update.error.invalidData"),
+      message: t("common.error.invalidData"),
     };
   }
 

@@ -19,17 +19,20 @@ export async function createPosition(formData: FormData): Promise<ActionState> {
 
   const t = await getTranslations("actions");
 
-  try {
-    const data = schema.parse({ name: formData.get("name") });
-    await createPositionsQuery([data]);
+  // Validation
+  const result = schema.safeParse({ name: formData.get("name") });
 
+  if (!result.success) {
     return {
-      status: "success",
-      message: t("position.create.success"),
+      status: "error",
+      message: t("common.error.invalidData"),
     };
-  } catch (error) {
-    console.error("Server Action Error:", error);
+  }
 
+  // Create position
+  try {
+    await createPositionsQuery([result.data]);
+  } catch (error) {
     if (error instanceof LimitExceededError) {
       return {
         status: "error",
@@ -44,4 +47,9 @@ export async function createPosition(formData: FormData): Promise<ActionState> {
       message: t("position.create.error.internalServerError"),
     };
   }
+
+  return {
+    status: "success",
+    message: t("position.create.success"),
+  };
 }

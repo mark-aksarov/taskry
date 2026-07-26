@@ -19,24 +19,31 @@ export async function importPositions(
   await requireFullAccess();
 
   const t = await getTranslations("actions");
+  const internalServerError = t("position.import.error.internalServerError");
+
+  // Extract file from form data
+  const file = formData.get("file");
+
+  if (!(file instanceof File)) {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  // Parse and validate CSV data
+  const result = await parseCsvFile(file, schema);
+
+  if (!result.success) {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
 
   try {
-    const file = formData.get("file");
-
-    if (!(file instanceof File)) {
-      throw new Error("File is required");
-    }
-
-    const parsedData = await parseCsvFile(file, schema);
-    await createPositionsQuery(parsedData);
-
-    return {
-      status: "success",
-      message: t("position.import.success"),
-    };
+    await createPositionsQuery(result.data);
   } catch (error) {
-    console.error("Server Action Error:", error);
-
     if (error instanceof LimitExceededError) {
       return {
         status: "error",
@@ -51,4 +58,9 @@ export async function importPositions(
       message: t("position.import.error.internalServerError"),
     };
   }
+
+  return {
+    status: "success",
+    message: t("position.import.success"),
+  };
 }

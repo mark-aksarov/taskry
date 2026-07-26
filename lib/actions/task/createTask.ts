@@ -14,18 +14,21 @@ export async function createTask(formData: FormData): Promise<ActionState> {
 
   const t = await getTranslations("actions");
 
-  try {
-    const input = Object.fromEntries(formData.entries());
-    const parsedData = createTaskSchema.parse(input);
-    await createTasksQuery([parsedData]);
+  // Validation
+  const input = Object.fromEntries(formData.entries());
+  const result = createTaskSchema.safeParse(input);
 
+  if (!result.success) {
     return {
-      status: "success",
-      message: t("task.create.success"),
+      status: "error",
+      message: t("common.error.invalidData"),
     };
-  } catch (error) {
-    console.error("Server Action Error:", error);
+  }
 
+  // Create task
+  try {
+    await createTasksQuery([result.data]);
+  } catch (error) {
     if (error instanceof LimitExceededError) {
       return {
         status: "error",
@@ -40,4 +43,9 @@ export async function createTask(formData: FormData): Promise<ActionState> {
       message: t("task.create.error.internalServerError"),
     };
   }
+
+  return {
+    status: "success",
+    message: t("task.create.success"),
+  };
 }
