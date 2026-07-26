@@ -14,14 +14,14 @@ import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
 import { validatePositions } from "../utils/validation";
 import { UserFilters, UserSortField } from "@/lib/types";
-import { verifyResourceAccess } from "../utils/verifyResourceAccess";
+import { requireOrganizationAccess } from "../utils/requireOrganizationAccess";
 import { Prisma, TaskStatus, User } from "@/generated/prisma/client";
 
 export const getUserDetail = cache(
   async (id: string): Promise<UserDetailDTO | null> => {
     const {
       session: { activeOrganizationId: organizationId },
-    } = await verifyResourceAccess();
+    } = await requireOrganizationAccess();
 
     const member = await prisma.member.findFirst({
       where: {
@@ -74,7 +74,7 @@ export const getUserDetail = cache(
 export const getUser = cache(async (id: string): Promise<UserDTO | null> => {
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   const member = await prisma.member.findFirst({
     where: { userId: id, organizationId },
@@ -117,7 +117,7 @@ export const getUser = cache(async (id: string): Promise<UserDTO | null> => {
 export const getUsers = cache(async (): Promise<UserDTO[]> => {
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   const members = await prisma.member.findMany({
     where: { organizationId },
@@ -163,7 +163,7 @@ export const getUserSummary = cache(
     // Authorization
     const {
       session: { activeOrganizationId: organizationId },
-    } = await verifyResourceAccess();
+    } = await requireOrganizationAccess();
 
     const member = await prisma.member.findFirst({
       where: { userId: id, organizationId },
@@ -193,7 +193,7 @@ export const getUserSummary = cache(
 export const getUserSummaries = cache(async (): Promise<UserSummaryDTO[]> => {
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   const members = await prisma.member.findMany({
     where: { organizationId },
@@ -226,7 +226,7 @@ export const searchUsers = cache(
     // Authorization
     const {
       session: { activeOrganizationId: organizationId },
-    } = await verifyResourceAccess();
+    } = await requireOrganizationAccess();
 
     // Get users
     const where = {
@@ -282,7 +282,7 @@ export const getUserList = cache(
   }): Promise<UserListDTO> => {
     const {
       session: { activeOrganizationId: organizationId },
-    } = await verifyResourceAccess();
+    } = await requireOrganizationAccess();
 
     // Sorting
     let orderBy:
@@ -364,7 +364,7 @@ export const getUserList = cache(
 export const getUserCount = cache(async (filters?: UserFilters) => {
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   return prisma.member.count({
     where: buildMemberWhereClause(organizationId, filters),
@@ -375,7 +375,7 @@ export const updateUser = async (input: UpdateUserInputDTO) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({
@@ -424,7 +424,7 @@ export const updateUser = async (input: UpdateUserInputDTO) => {
 export const deleteUser = async (id: string) => {
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({

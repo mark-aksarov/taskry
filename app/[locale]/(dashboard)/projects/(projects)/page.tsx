@@ -27,7 +27,7 @@ import { DeleteProjectsModal } from "@/dashboard/projects/DeleteProjectsModal";
 import { ImportProjectsModal } from "@/dashboard/projects/ImportProjectsModal";
 import { ProjectGridContainer } from "@/dashboard/projects/ProjectGridContainer";
 import { CreateProjectProvider } from "@/dashboard/projects/CreateProjectProvider";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { ProjectFiltersProvider } from "@/dashboard/projects/ProjectFiltersContext";
 import { ImportProjectsProvider } from "@/dashboard/projects/ImportProjectsProvider";
 import { DeleteProjectsProvider } from "@/dashboard/projects/DeleteProjectsProvider";
@@ -79,7 +79,7 @@ export default async function AppProjectsPage({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   // Authorization
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   // Validation
   const rawParams = await searchParams;

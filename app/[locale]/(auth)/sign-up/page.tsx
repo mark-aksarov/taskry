@@ -1,9 +1,9 @@
 import { SignUpPage } from "./SignUpPage";
 import { signUp } from "@/lib/actions/auth/signUp";
-import { verifyAuthPageSession } from "@/lib/utils/verifyAuthPageSession";
+import { redirectIfAuthenticated } from "@/lib/utils/redirectIfAuthenticated";
 
 export default async function AppSignUpPage() {
-  await verifyAuthPageSession();
+  await redirectIfAuthenticated();
 
   return <SignUpPage action={signUp} />;
 }

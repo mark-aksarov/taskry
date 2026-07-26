@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server";
 import { ActionState, ToggleSubtaskPayload } from "../types";
 import { subtaskId, subtaskIsDone } from "@/lib/schemas/subtask";
 import { updateSubtask as updateSubtaskQuery } from "@/lib/data/subtask/subtask.dal";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 
 const schema = z.object({
   id: subtaskId,
@@ -16,7 +16,7 @@ export async function toggleSubtask(
   data: ToggleSubtaskPayload,
 ): Promise<ActionState> {
   // Authorization
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   const t = await getTranslations("actions");
 

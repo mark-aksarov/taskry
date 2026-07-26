@@ -3,12 +3,12 @@
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
 import { taskCategoryId } from "@/lib/schemas/taskCategory";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { deleteTaskCategories as deleteTaskCategoriesQuery } from "@/lib/data/taskCategory/taskCategory.dal";
 
 export async function deleteTaskCategory(id: number): Promise<ActionState> {
   // Authorization
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   const t = await getTranslations("actions");
 

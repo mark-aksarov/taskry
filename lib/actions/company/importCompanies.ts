@@ -7,7 +7,7 @@ import { companyName } from "@/lib/schemas/company";
 import { parseCsvFile } from "@/lib/utils/parseCsvFile";
 import { COMPANY_MAX_COUNT } from "@/lib/data/constants";
 import { LimitExceededError } from "@/lib/data/utils/error";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { createCompanies as createCompaniesQuery } from "@/lib/data/company/company.dal";
 
 const schema = z.array(z.object({ name: companyName }).strict()).min(1);
@@ -16,7 +16,7 @@ export async function importCompanies(
   formData: FormData,
 ): Promise<ActionState> {
   // Authorization
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   const t = await getTranslations("actions");
 

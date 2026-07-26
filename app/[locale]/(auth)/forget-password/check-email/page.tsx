@@ -1,8 +1,8 @@
 import { CheckEmailPage } from "./CheckEmailPage";
-import { verifyAuthPageSession } from "@/lib/utils/verifyAuthPageSession";
+import { redirectIfAuthenticated } from "@/lib/utils/redirectIfAuthenticated";
 
 export default async function AppCheckEmailPage() {
-  await verifyAuthPageSession();
+  await redirectIfAuthenticated();
 
   return <CheckEmailPage />;
 }

@@ -24,7 +24,7 @@ import { DeleteUserImageModal } from "@/dashboard/users/DeleteUserImageModal";
 import { SelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext";
 import { UserTaskListContainer } from "@/dashboard/users/UserTaskListContainer";
 import { ChangePasswordProvider } from "@/dashboard/users/ChangePasswordProvider";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { CreateTaskFormContainer } from "@/dashboard/tasks/CreateTaskFormContainer";
 import { UpdateUserFormContainer } from "@/dashboard/users/UpdateUserFormContainer";
 import { UpdateUserImageProvider } from "@/dashboard/users/UpdateUserImageProvider";
@@ -47,7 +47,7 @@ export default async function AppProfileTasksPage({
   searchParams: Promise<{ page?: string; pageSize?: string; sort?: string }>;
 }) {
   // Authorization
-  const session = await verifyProtectedPageSession();
+  const session = await requireFullAccess();
 
   // Validation
   const { id: userId } = await params;

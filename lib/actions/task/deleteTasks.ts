@@ -5,13 +5,13 @@ import { ActionState } from "../types";
 import { taskId } from "@/lib/schemas/task";
 import { getTranslations } from "next-intl/server";
 import { deleteTasks as deleteTaskQuery } from "@/lib/data/task/task.dal";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 
 const taskIds = z.array(taskId).min(1);
 
 export async function deleteTasks(ids: number[]): Promise<ActionState> {
   // Authorization
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   const t = await getTranslations("actions");
 

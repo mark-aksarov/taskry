@@ -5,6 +5,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { ActionState } from "../types";
 import { redirect } from "@/i18n/navigation";
+import { getSession } from "@/lib/data/utils/getSession";
 import { getLocale, getTranslations } from "next-intl/server";
 import { handleBetterAuthError } from "@/lib/utils/actionErrors";
 
@@ -13,19 +14,19 @@ export async function createOrganization(): Promise<ActionState> {
   const internalServerError = t("createOrganization.error.internalServerError");
 
   //Authorization
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  const session = await getSession();
+  const locale = await getLocale();
 
   if (!session) {
-    return {
-      status: "error",
-      message: internalServerError,
-    };
+    redirect({ href: "/sign-in", locale });
+  }
+
+  if (!session!.user.emailVerified) {
+    redirect({ href: "/verify-email", locale });
   }
 
   // Validation. Check if user already belongs to another organization
-  if (session.session.activeOrganizationId) {
+  if (session?.session.activeOrganizationId) {
     return {
       status: "error",
       message: t("createOrganization.error.alreadyInOrganization"),
@@ -33,7 +34,7 @@ export async function createOrganization(): Promise<ActionState> {
   }
 
   // Create organization
-  const orgName = `Organization ${session.user.email}`;
+  const orgName = `Organization ${session!.user.email}`;
 
   try {
     await auth.api.createOrganization({
@@ -48,7 +49,6 @@ export async function createOrganization(): Promise<ActionState> {
   }
 
   // Success. Redirect to the dashboard
-  const locale = await getLocale();
   redirect({ href: "/dashboard", locale });
 
   return {

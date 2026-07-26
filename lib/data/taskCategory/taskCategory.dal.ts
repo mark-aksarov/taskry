@@ -13,13 +13,13 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
 import { validateTaskCategoryLimit } from "../utils/validation";
-import { verifyResourceAccess } from "../utils/verifyResourceAccess";
+import { requireOrganizationAccess } from "../utils/requireOrganizationAccess";
 
 export const getTaskCategoryCount = cache(async () => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   return prisma.taskCategory.count({ where: { organizationId } });
 });
@@ -28,7 +28,7 @@ export const getTaskCategories = cache(async (): Promise<TaskCategoryDTO[]> => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   return await prisma.taskCategory.findMany({
     where: { organizationId },
@@ -45,7 +45,7 @@ export const createTaskCategories = async (
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({
@@ -81,7 +81,7 @@ export const updateTaskCategory = async (input: UpdateTaskCategoryInputDTO) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({
@@ -117,7 +117,7 @@ export const deleteTaskCategories = async (ids: number[]) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({

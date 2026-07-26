@@ -5,13 +5,13 @@ import { redirect } from "@/i18n/navigation";
 import { ActionState, DeleteTaskPayload } from "../types";
 import { getLocale, getTranslations } from "next-intl/server";
 import { deleteTasks as deleteTaskQuery } from "@/lib/data/task/task.dal";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 
 export async function deleteTask(
   payload: DeleteTaskPayload,
 ): Promise<ActionState> {
   // Authorization
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   const t = await getTranslations("actions");
 

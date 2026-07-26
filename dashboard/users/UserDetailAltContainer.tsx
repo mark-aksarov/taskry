@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { getUserDetail } from "@/lib/data/user/user.dal";
 import { canEditUserProfile } from "@/lib/utils/canEditUserProfile";
 import { UserDetailAlt, UserDetailAltSkeleton } from "./UserDetailAlt";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 
 interface UserDetailAltContainerProps {
   userId: string;
@@ -28,7 +28,7 @@ async function UserDetailAltContainerInner({
     notFound();
   }
 
-  const session = await verifyProtectedPageSession();
+  const session = await requireFullAccess();
   const canEdit = await canEditUserProfile({ session, profileUserId: userId });
 
   return (

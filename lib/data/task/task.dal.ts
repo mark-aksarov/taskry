@@ -21,7 +21,7 @@ import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
 import { TaskFilters, TaskSortField } from "@/lib/types";
 import { uniqueDefinedIds } from "../utils/uniqueDefinedIds";
-import { verifyResourceAccess } from "../utils/verifyResourceAccess";
+import { requireOrganizationAccess } from "../utils/requireOrganizationAccess";
 import { Prisma, Task, TaskStatus } from "@/generated/prisma/client";
 
 export const getTaskDetail = cache(
@@ -29,7 +29,7 @@ export const getTaskDetail = cache(
     // Authorization
     const {
       session: { activeOrganizationId: organizationId },
-    } = await verifyResourceAccess();
+    } = await requireOrganizationAccess();
 
     const task = await prisma.task.findFirst({
       where: { id, organizationId },
@@ -118,7 +118,7 @@ export const getTask = cache(async (id: number): Promise<TaskDTO | null> => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   const task = await prisma.task.findFirst({
     where: { id, organizationId },
@@ -160,7 +160,7 @@ export const getTaskSummary = cache(
     // Authorization
     const {
       session: { activeOrganizationId: organizationId },
-    } = await verifyResourceAccess();
+    } = await requireOrganizationAccess();
 
     const task = await prisma.task.findFirst({
       where: { id, organizationId },
@@ -185,7 +185,7 @@ export const getTasks = cache(async (): Promise<TaskDTO[]> => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   const tasks = await prisma.task.findMany({
     where: { organizationId },
@@ -232,7 +232,7 @@ export const getTaskList = cache(
     const {
       user: { id: userId },
       session: { activeOrganizationId: organizationId },
-    } = await verifyResourceAccess();
+    } = await requireOrganizationAccess();
 
     // Sorting
     let orderBy: Prisma.ProjectOrderByWithRelationInput;
@@ -331,7 +331,7 @@ export const getTaskCount = cache(async (filters?: TaskFilters) => {
   const {
     user: { id: userId },
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   const where = buildTaskWhereClause(userId, organizationId, filters);
 
@@ -343,7 +343,7 @@ export const createTasks = async (input: CreateTaskInputDTO[]) => {
   const {
     user: { id: userId },
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({
@@ -404,7 +404,7 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({
@@ -462,7 +462,7 @@ export const updateTaskStatuses = async (
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({
@@ -508,7 +508,7 @@ export const deleteTasks = async (ids: number[]) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({

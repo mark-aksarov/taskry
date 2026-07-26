@@ -15,7 +15,7 @@ import { DeleteUserDetailModal } from "@/dashboard/users/DeleteUserDetailModal";
 import { UpdateUserAddressModal } from "@/dashboard/users/UpdateUserAddressModal";
 import { ChangePasswordProvider } from "@/dashboard/users/ChangePasswordProvider";
 import { UserDetailAltContainer } from "@/dashboard/users/UserDetailAltContainer";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { UpdateUserFullNameModal } from "@/dashboard/users/UpdateUserFullNameModal";
 import { UpdateUserPositionModal } from "@/dashboard/users/UpdateUserPositionModal";
 import { UpdateUserImageProvider } from "@/dashboard/users/UpdateUserImageProvider";
@@ -38,7 +38,7 @@ export default async function AppTeamProfilePage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const session = await verifyProtectedPageSession();
+  const session = await requireFullAccess();
 
   // Validation
   const { id: rawUserId } = await params;

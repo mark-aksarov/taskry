@@ -3,7 +3,7 @@ import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
 import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
 import { getTaskCategories } from "@/lib/data/taskCategory/taskCategory.dal";
 import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { CreateTaskCategoryModal } from "@/dashboard/taskCategory/CreateTaskCategoryModal";
 import { TaskCategoriesContainer } from "@/dashboard/taskCategory/TaskCategoriesContainer";
 import { ImportTaskCategoriesModal } from "@/dashboard/taskCategory/ImportTaskCategoriesModal";
@@ -14,7 +14,7 @@ import { ImportTaskCategoriesProvider } from "@/dashboard/taskCategory/ImportTas
 
 export default async function AppTaskCategoriesPage() {
   // Authorization
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   const taskCategories = await getTaskCategories();
 

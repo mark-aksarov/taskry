@@ -29,14 +29,14 @@ import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
 import { uniqueDefinedIds } from "../utils/uniqueDefinedIds";
 import { ProjectFilters, ProjectSortField } from "@/lib/types";
-import { verifyResourceAccess } from "../utils/verifyResourceAccess";
+import { requireOrganizationAccess } from "../utils/requireOrganizationAccess";
 
 export const getProjectDetail = cache(
   async (id: number): Promise<ProjectDetailDTO | null> => {
     // Authorization
     const {
       session: { activeOrganizationId: organizationId },
-    } = await verifyResourceAccess();
+    } = await requireOrganizationAccess();
 
     // Get project
     const project = await prisma.project.findFirst({
@@ -131,7 +131,7 @@ export const getProject = cache(
     // Authorization
     const {
       session: { activeOrganizationId: organizationId },
-    } = await verifyResourceAccess();
+    } = await requireOrganizationAccess();
 
     // Get project
     const project = await prisma.project.findFirst({
@@ -168,7 +168,7 @@ export const getProjects = cache(async (): Promise<ProjectDTO[]> => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   const projects = await prisma.project.findMany({
     where: { organizationId },
@@ -202,7 +202,7 @@ export const getProjectSummary = cache(
     // Authorization
     const {
       session: { activeOrganizationId: organizationId },
-    } = await verifyResourceAccess();
+    } = await requireOrganizationAccess();
 
     // Get project
     const project = await prisma.project.findFirst({
@@ -230,7 +230,7 @@ export const getProjectSummaries = cache(
     // Authorization
     const {
       session: { activeOrganizationId: organizationId },
-    } = await verifyResourceAccess();
+    } = await requireOrganizationAccess();
 
     const where = { organizationId };
 
@@ -266,7 +266,7 @@ export const getProjectList = cache(
     // Authorization
     const {
       session: { activeOrganizationId: organizationId },
-    } = await verifyResourceAccess();
+    } = await requireOrganizationAccess();
 
     // Sorting
     let orderBy: Prisma.ProjectOrderByWithRelationInput;
@@ -393,7 +393,7 @@ export const getProjectCount = cache(async (filters?: ProjectFilters) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   return prisma.project.count({
     where: buildProjectWhereClause(organizationId, filters),
@@ -405,7 +405,7 @@ export const createProjects = async (input: CreateProjectInputDTO[]) => {
   const {
     user: { id: userId },
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({
@@ -462,7 +462,7 @@ export const updateProject = async (input: UpdateProjectInputDTO) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permissions
   const permissions = await auth.api.hasPermission({
@@ -516,7 +516,7 @@ export const updateProjectStatuses = async (
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permissions
   const permissions = await auth.api.hasPermission({
@@ -553,7 +553,7 @@ export const deleteProjects = async (ids: number[]) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permissions
   const permissions = await auth.api.hasPermission({

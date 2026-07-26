@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import { ActionState } from "../types";
 import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
+import { getSession } from "@/lib/data/utils/getSession";
 import { getLocale, getTranslations } from "next-intl/server";
 import { handleBetterAuthError } from "@/lib/utils/actionErrors";
 
@@ -13,7 +14,7 @@ export async function acceptInvitation(
   const t = await getTranslations("actions");
 
   // Authorization
-  const session = await auth.api.getSession({ headers: await headers() });
+  const session = await getSession();
 
   if (!session) {
     return {

@@ -1,14 +1,14 @@
 import { notFound } from "next/navigation";
 import { ResetPasswordPage } from "./ResetPasswordPage";
 import { resetPassword } from "@/lib/actions/auth/resetPassword";
-import { verifyAuthPageSession } from "@/lib/utils/verifyAuthPageSession";
+import { redirectIfAuthenticated } from "@/lib/utils/redirectIfAuthenticated";
 
 export default async function AppResetPasswordPage({
   searchParams,
 }: {
   searchParams: Promise<{ token: string }>;
 }) {
-  await verifyAuthPageSession();
+  await redirectIfAuthenticated();
 
   const { token } = await searchParams;
 

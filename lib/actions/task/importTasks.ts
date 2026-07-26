@@ -8,13 +8,13 @@ import { TASK_MAX_COUNT } from "@/lib/data/constants";
 import { parseCsvFile } from "@/lib/utils/parseCsvFile";
 import { LimitExceededError } from "@/lib/data/utils/error";
 import { createTasks as createTasksQuery } from "@/lib/data/task/task.dal";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 
 const schema = z.array(createTaskSchema.strict()).min(1);
 
 export async function importTasks(formData: FormData): Promise<ActionState> {
   // Authorization
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   const t = await getTranslations("actions");
 

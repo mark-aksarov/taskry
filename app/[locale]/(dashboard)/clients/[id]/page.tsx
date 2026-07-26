@@ -12,7 +12,7 @@ import { UpdateClientEmailModal } from "@/dashboard/client/UpdateClientEmailModa
 import { DeleteClientImageModal } from "@/dashboard/client/DeleteClientImageModal";
 import { UpdateClientBioProvider } from "@/dashboard/client/UpdateClientBioProvider";
 import { DeleteClientDetailModal } from "@/dashboard/client/DeleteClientDetailModal";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { ClientDetailAltContainer } from "@/dashboard/client/ClientDetailAltContainer";
 import { UpdateClientCompanyModal } from "@/dashboard/client/UpdateClientCompanyModal";
 import { UpdateClientEmailProvider } from "@/dashboard/client/UpdateClientEmailProvider";
@@ -34,7 +34,7 @@ export default async function AppClientDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   // Parse and validate
   const { id: rawClientId } = await params;

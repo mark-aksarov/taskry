@@ -10,13 +10,13 @@ import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
 import { validateTasks } from "../utils/validation";
 import { Subtask } from "@/generated/prisma/client";
-import { verifyResourceAccess } from "../utils/verifyResourceAccess";
+import { requireOrganizationAccess } from "../utils/requireOrganizationAccess";
 
 export const createSubtask = async (input: CreateSubtaskInputDTO) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({
@@ -65,7 +65,7 @@ export const updateSubtask = async (input: UpdateSubtaskInputDTO) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({
@@ -114,7 +114,7 @@ export const deleteSubtask = async (id: number) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({

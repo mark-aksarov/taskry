@@ -26,7 +26,7 @@ import { ClientFiltersProvider } from "@/dashboard/client/ClientFiltersContext";
 import { DeleteClientsProvider } from "@/dashboard/client/DeleteClientsProvider";
 import { ImportClientsProvider } from "@/dashboard/client/ImportClientsProvider";
 import { CreateCompanyProvider } from "@/dashboard/company/CreateCompanyProvider";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { ClientCompanyFiltersModal } from "@/dashboard/client/ClientCompanyFiltersModal";
 import { CreateClientFormContainer } from "@/dashboard/client/CreateClientFormContainer";
 import { ClientFiltersFormContainer } from "@/dashboard/client/ClientFiltersFormContainer";
@@ -55,7 +55,7 @@ export default async function AppClientsPage({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   // Authorization
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   // Validation
   const rawParams = await searchParams;

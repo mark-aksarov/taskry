@@ -1,10 +1,12 @@
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import { UnauthorizedError } from "./error";
+import { getSession } from "./getSession";
 
-export const requireActiveOrganization = async () => {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+export async function requireOrganizationAccess() {
+  const session = await getSession();
+
+  if (!session) {
+    throw new UnauthorizedError();
+  }
 
   if (!session?.session.activeOrganizationId) {
     throw new Error("Organization is required");
@@ -17,4 +19,4 @@ export const requireActiveOrganization = async () => {
       activeOrganizationId: session.session.activeOrganizationId,
     },
   };
-};
+}

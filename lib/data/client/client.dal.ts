@@ -18,7 +18,7 @@ import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
 import { uniqueDefinedIds } from "../utils/uniqueDefinedIds";
 import { ClientFilters, ClientSortField } from "@/lib/types";
-import { verifyResourceAccess } from "../utils/verifyResourceAccess";
+import { requireOrganizationAccess } from "../utils/requireOrganizationAccess";
 import { Client, Prisma, ProjectStatus } from "@/generated/prisma/client";
 import { validateCompanies, validateClientLimit } from "../utils/validation";
 
@@ -27,7 +27,7 @@ export const getClientDetail = cache(
     // Authorization
     const {
       session: { activeOrganizationId: organizationId },
-    } = await verifyResourceAccess();
+    } = await requireOrganizationAccess();
 
     // Get client
     const client = await prisma.client.findFirst({
@@ -73,7 +73,7 @@ export const getClient = cache(
     // Authorization
     const {
       session: { activeOrganizationId: organizationId },
-    } = await verifyResourceAccess();
+    } = await requireOrganizationAccess();
 
     // Get client
     const client = await prisma.client.findFirst({
@@ -103,7 +103,7 @@ export const getClientSummary = cache(
     // Authorization
     const {
       session: { activeOrganizationId: organizationId },
-    } = await verifyResourceAccess();
+    } = await requireOrganizationAccess();
 
     const client = await prisma.client.findFirst({
       where: { id, organizationId },
@@ -130,7 +130,7 @@ export const getClientSummaries = cache(
     // Authorization
     const {
       session: { activeOrganizationId: organizationId },
-    } = await verifyResourceAccess();
+    } = await requireOrganizationAccess();
 
     // Get clients
     const clients = await prisma.client.findMany({
@@ -153,7 +153,7 @@ export const getClients = cache(async (): Promise<ClientDTO[]> => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   const clients = await prisma.client.findMany({
     where: { organizationId },
@@ -188,7 +188,7 @@ export const searchClients = cache(
     // Authorization
     const {
       session: { activeOrganizationId: organizationId },
-    } = await verifyResourceAccess();
+    } = await requireOrganizationAccess();
 
     // Get clients
     const where = {
@@ -240,7 +240,7 @@ export const getClientList = cache(
     // Authorization
     const {
       session: { activeOrganizationId: organizationId },
-    } = await verifyResourceAccess();
+    } = await requireOrganizationAccess();
 
     const where = buildClientWhereClause(organizationId, filters);
 
@@ -310,7 +310,7 @@ export const getClientCount = cache(async (filters?: ClientFilters) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   return prisma.client.count({
     where: buildClientWhereClause(organizationId, filters),
@@ -321,7 +321,7 @@ export const deleteClients = async (ids: number[]) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permission = await auth.api.hasPermission({
@@ -354,7 +354,7 @@ export const createClients = async (input: CreateClientInputDTO[]) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permission = await auth.api.hasPermission({
@@ -403,7 +403,7 @@ export const updateClient = async (input: UpdateClientInputDTO) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permission = await auth.api.hasPermission({
@@ -451,7 +451,7 @@ export const updateClientImageUrl = async (
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permission = await auth.api.hasPermission({

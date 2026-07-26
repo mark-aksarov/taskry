@@ -12,7 +12,7 @@ import { SelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext";
 import { CreateTaskFormContainer } from "@/dashboard/tasks/CreateTaskFormContainer";
 import { TotalTasksCardContainer } from "@/dashboard/tasks/TotalTasksCardContainer";
 import { TotalUsersCardContainer } from "@/dashboard/users/TotalUsersCardContainer";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { TotalClientsCardContainer } from "@/dashboard/client/TotalClientsCardContainer";
 import { UpdateTaskStatusesProvider } from "@/dashboard/tasks/UpdateTaskStatusesProvider";
 import { TotalProjectsCardContainer } from "@/dashboard/projects/TotalProjectsCardContainer";
@@ -28,7 +28,7 @@ export default async function AppDashboardPage({
   searchParams: Promise<{ page?: string; pageSize?: string }>;
 }) {
   // Authorization
-  const session = await verifyProtectedPageSession();
+  const session = await requireFullAccess();
 
   // Validation
   const rawParams = await searchParams;

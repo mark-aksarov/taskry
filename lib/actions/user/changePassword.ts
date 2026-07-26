@@ -7,7 +7,7 @@ import { headers } from "next/headers";
 import { userPassword } from "@/lib/schemas/user";
 import { getTranslations } from "next-intl/server";
 import { handleBetterAuthError } from "@/lib/utils/actionErrors";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 
 const schema = z.object({
   currentPassword: userPassword,
@@ -16,7 +16,7 @@ const schema = z.object({
 
 export async function changePassword(formData: FormData): Promise<ActionState> {
   // Authorization
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   const t = await getTranslations("actions");
 

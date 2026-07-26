@@ -1,13 +1,13 @@
 import { SignInPage } from "./SignInPage";
 import { signIn } from "@/lib/actions/auth/signIn";
-import { verifyAuthPageSession } from "@/lib/utils/verifyAuthPageSession";
+import { redirectIfAuthenticated } from "@/lib/utils/redirectIfAuthenticated";
 
 export default async function AppSignInPage({
   searchParams,
 }: {
   searchParams: Promise<{ status: string }>;
 }) {
-  await verifyAuthPageSession();
+  await redirectIfAuthenticated();
 
   const { status } = await searchParams;
 

@@ -4,11 +4,11 @@ import { ActionState } from "../types";
 import { subtaskId } from "@/lib/schemas/subtask";
 import { getTranslations } from "next-intl/server";
 import { deleteSubtask as deleteSubtaskQuery } from "@/lib/data/subtask/subtask.dal";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 
 export async function deleteSubtask(id: number): Promise<ActionState> {
   // Authorization
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   const t = await getTranslations("actions");
 

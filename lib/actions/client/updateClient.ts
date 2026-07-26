@@ -14,7 +14,7 @@ import { ActionState } from "../types";
 import { companyId } from "@/lib/schemas/company";
 import { getTranslations } from "next-intl/server";
 import { emptyStringToNull } from "@/lib/schemas/base";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { updateClient as updateClientQuery } from "@/lib/data/client/client.dal";
 
 const schema = z.object({
@@ -33,7 +33,7 @@ const schema = z.object({
 
 export async function updateClient(formData: FormData): Promise<ActionState> {
   // Authorization
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   const t = await getTranslations("actions");
 

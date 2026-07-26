@@ -13,13 +13,13 @@ import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
 import { Position } from "@/generated/prisma/client";
 import { validatePositionLimit } from "../utils/validation";
-import { verifyResourceAccess } from "../utils/verifyResourceAccess";
+import { requireOrganizationAccess } from "../utils/requireOrganizationAccess";
 
 export const getPositionCount = cache(async () => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   return prisma.position.count({ where: { organizationId } });
 });
@@ -28,7 +28,7 @@ export const getPositions = cache(async () => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   const positions = await prisma.position.findMany({
     where: { organizationId },
@@ -48,7 +48,7 @@ export const createPositions = async (input: CreatePositionInputDTO[]) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // ACL
   const permissions = await auth.api.hasPermission({
@@ -83,7 +83,7 @@ export const updatePosition = async (input: UpdatePositionInputDTO) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permissions
   const permissions = await auth.api.hasPermission({
@@ -119,7 +119,7 @@ export const deletePositions = async (ids: number[]) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permissions
   const permissions = await auth.api.hasPermission({

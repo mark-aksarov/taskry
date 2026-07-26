@@ -30,7 +30,7 @@ import { AssigneeFiltersModal } from "@/dashboard/tasks/AssigneeFiltersModal";
 import { SelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext";
 import { getTaskCategoryCount } from "@/lib/data/taskCategory/taskCategory.dal";
 import { TaskStatusFiltersModal } from "@/dashboard/tasks/TaskStatusFiltersModal";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { TaskProjectFiltersModal } from "@/dashboard/tasks/TaskProjectFiltersModal";
 import { CreateTaskFormContainer } from "@/dashboard/tasks/CreateTaskFormContainer";
 import { TaskCategoryFiltersModal } from "@/dashboard/tasks/TaskCategoryFiltersModal";
@@ -74,7 +74,7 @@ export default async function AppTasksPage({
 }: {
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   // Validation
   const rawParams = await searchParams;

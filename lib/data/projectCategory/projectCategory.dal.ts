@@ -13,13 +13,13 @@ import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
 import { ProjectCategory } from "@/generated/prisma/client";
 import { validateProjectCategoryLimit } from "../utils/validation";
-import { verifyResourceAccess } from "../utils/verifyResourceAccess";
+import { requireOrganizationAccess } from "../utils/requireOrganizationAccess";
 
 export const getProjectCategoryCount = cache(async () => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   return prisma.projectCategory.count({ where: { organizationId } });
 });
@@ -28,7 +28,7 @@ export const getProjectCategories = cache(async () => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Get project categories
   const projectCategories = await prisma.projectCategory.findMany({
@@ -47,7 +47,7 @@ export const createProjectCategories = async (
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({
@@ -85,7 +85,7 @@ export const updateProjectCategory = async (
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({
@@ -121,7 +121,7 @@ export const deleteProjectCategories = async (ids: number[]) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({

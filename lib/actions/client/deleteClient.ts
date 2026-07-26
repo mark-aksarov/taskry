@@ -4,14 +4,14 @@ import { redirect } from "@/i18n/navigation";
 import { clientId } from "@/lib/schemas/client";
 import { getLocale, getTranslations } from "next-intl/server";
 import { ActionState, DeleteClientPayload } from "../types";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { deleteClients as deleteClientsQuery } from "@/lib/data/client/client.dal";
 
 export async function deleteClient(
   payload: DeleteClientPayload,
 ): Promise<ActionState> {
   // Authorization
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   const t = await getTranslations("actions");
 

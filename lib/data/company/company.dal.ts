@@ -13,13 +13,13 @@ import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
 import { Company } from "@/generated/prisma/client";
 import { validateCompanyLimit } from "../utils/validation";
-import { verifyResourceAccess } from "../utils/verifyResourceAccess";
+import { requireOrganizationAccess } from "../utils/requireOrganizationAccess";
 
 export const getCompanyCount = cache(async () => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   return prisma.company.count({ where: { organizationId } });
 });
@@ -28,7 +28,7 @@ export const getCompanies = cache(async () => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Get companies
   const companies = await prisma.company.findMany({
@@ -53,7 +53,7 @@ export const updateCompany = async (
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({
@@ -89,7 +89,7 @@ export const createCompanies = async (input: CreateCompanyInputDTO[]) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({
@@ -125,7 +125,7 @@ export const deleteCompanies = async (ids: number[]) => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permissions
   const permissions = await auth.api.hasPermission({

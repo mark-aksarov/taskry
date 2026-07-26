@@ -15,7 +15,7 @@ import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
 import { positionId } from "@/lib/schemas/position";
 import { emptyStringToNull } from "@/lib/schemas/base";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { updateUser as updateUserQuery } from "@/lib/data/user/user.dal";
 
 const schema = z.object({
@@ -37,7 +37,7 @@ const schema = z.object({
 
 export async function updateUser(formData: FormData): Promise<ActionState> {
   // Authorization
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   const t = await getTranslations("actions");
   const internalServerError = t("user.update.error.internalServerError");

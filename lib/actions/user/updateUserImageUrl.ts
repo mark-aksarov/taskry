@@ -4,7 +4,7 @@ import z from "zod";
 import { getTranslations } from "next-intl/server";
 import { userId, userImageUrl } from "@/lib/schemas/user";
 import { ActionState, UpdateUserImageUrlPayload } from "../types";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { updateUser as updateUserQuery } from "@/lib/data/user/user.dal";
 
 const schema = z.object({
@@ -16,7 +16,7 @@ export async function updateUserImageUrl(
   payload: UpdateUserImageUrlPayload,
 ): Promise<ActionState> {
   // Authorization
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   const t = await getTranslations("actions");
   const internalServerError = t(

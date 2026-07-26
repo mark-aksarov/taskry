@@ -6,7 +6,7 @@ import { getTranslations } from "next-intl/server";
 import { LimitExceededError } from "@/lib/data/utils/error";
 import { taskCategoryName } from "@/lib/schemas/taskCategory";
 import { TASK_CATEGORY_MAX_COUNT } from "@/lib/data/constants";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { createTaskCategories as createTaskCategoriesQuery } from "@/lib/data/taskCategory/taskCategory.dal";
 
 const schema = z.object({ name: taskCategoryName });
@@ -15,7 +15,7 @@ export async function createTaskCategory(
   formData: FormData,
 ): Promise<ActionState> {
   // Authorization
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   const t = await getTranslations("actions");
 

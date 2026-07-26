@@ -7,6 +7,7 @@ import { headers } from "next/headers";
 import { userEmail } from "@/lib/schemas/user";
 import { getTranslations } from "next-intl/server";
 import { handleBetterAuthError } from "@/lib/utils/actionErrors";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { validateUserHasNoMembership } from "@/lib/data/utils/validation";
 
 const schema = z.object({
@@ -20,16 +21,7 @@ export async function createInvitation(
   const internalServerError = t("createInvitation.error.internalServerError");
 
   // Authorization
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session) {
-    return {
-      status: "error",
-      message: internalServerError,
-    };
-  }
+  const session = await requireFullAccess();
 
   // Get active organization
   const organizationId = session.session.activeOrganizationId;

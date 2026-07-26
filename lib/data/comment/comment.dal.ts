@@ -11,7 +11,7 @@ import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { verifyResourceAccess } from "../utils/verifyResourceAccess";
+import { requireOrganizationAccess } from "../utils/requireOrganizationAccess";
 import { ValidationError, AccessDeniedError } from "../utils/error";
 import { validateProjects, validateTasks } from "../utils/validation";
 
@@ -27,7 +27,7 @@ export const getCommentList = cache(
     const {
       user: { id: userId },
       session: { activeOrganizationId: organizationId },
-    } = await verifyResourceAccess();
+    } = await requireOrganizationAccess();
 
     // Validate task
     if (taskId) {
@@ -95,7 +95,7 @@ export const createComment = async (input: CreateCommentInputDTO) => {
   const {
     user: { id: senderId },
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({
@@ -149,7 +149,7 @@ export const deleteComment = async (commentId: number) => {
   const {
     user: { id: senderId },
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permission
   const permissions = await auth.api.hasPermission({
@@ -204,7 +204,7 @@ export const updateComment = async (input: UpdateCommentInputDTO) => {
   const {
     user: { id: senderId },
     session: { activeOrganizationId: organizationId },
-  } = await verifyResourceAccess();
+  } = await requireOrganizationAccess();
 
   // Check permissions
   const permissions = await auth.api.hasPermission({

@@ -5,7 +5,7 @@ import { DashboardLayout } from "./DashboardLayout";
 import { signOut } from "@/lib/actions/auth/signOut";
 import { SessionProvider } from "@/common/SessionContext";
 import { ProfileLinkContainer } from "@/dashboard/layout/ProfileLinkContainer";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 
 export default async function AppDashboardLayout({
   children,
@@ -13,7 +13,7 @@ export default async function AppDashboardLayout({
   children: React.ReactNode;
 }>) {
   // Authorization
-  const session = await verifyProtectedPageSession();
+  const session = await requireFullAccess();
   const { role } = await auth.api.getActiveMemberRole({
     headers: await headers(),
   });

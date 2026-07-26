@@ -20,7 +20,7 @@ import { CreateUserProvider } from "@/dashboard/users/CreateUserProvider";
 import { UserFiltersProvider } from "@/dashboard/users/UserFiltersContext";
 import { CreatePositionModal } from "@/dashboard/position/CreatePositionModal";
 import { RouterSearchContainer } from "@/dashboard/common/RouterSearchContainer";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { CreatePositionProvider } from "@/dashboard/position/CreatePositionProvider";
 import { UserPositionFiltersModal } from "@/dashboard/users/UserPositionFiltersModal";
 import { UserFiltersFormContainer } from "@/dashboard/users/UserFiltersFormContainer";
@@ -46,7 +46,7 @@ export default async function AppTeamPage({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   // Authorization
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   // Validation
   const rawParams = await searchParams;

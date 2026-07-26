@@ -4,14 +4,14 @@ import { redirect } from "@/i18n/navigation";
 import { ActionState, DeleteUserPayload } from "../types";
 import { userId as userIdSchema } from "@/lib/schemas/user";
 import { getLocale, getTranslations } from "next-intl/server";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { deleteUser as deleteUserQuery } from "@/lib/data/user/user.dal";
 
 export async function deleteUser(
   payload: DeleteUserPayload,
 ): Promise<ActionState> {
   // Authorization
-  const { session } = await verifyProtectedPageSession();
+  const { session } = await requireFullAccess();
 
   const t = await getTranslations("actions");
   const internalServerError = t("user.delete.error.internalServerError");

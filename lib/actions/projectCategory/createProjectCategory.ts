@@ -6,7 +6,7 @@ import { getTranslations } from "next-intl/server";
 import { LimitExceededError } from "@/lib/data/utils/error";
 import { PROJECT_CATEGORY_MAX_COUNT } from "@/lib/data/constants";
 import { projectCategoryName } from "@/lib/schemas/projectCategory";
-import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { createProjectCategories as createProjectCategoriesQuery } from "@/lib/data/projectCategory/projectCategory.dal";
 
 const schema = z.object({ name: projectCategoryName });
@@ -15,7 +15,7 @@ export async function createProjectCategory(
   formData: FormData,
 ): Promise<ActionState> {
   // Authorization
-  await verifyProtectedPageSession();
+  await requireFullAccess();
 
   const t = await getTranslations("actions");
 
