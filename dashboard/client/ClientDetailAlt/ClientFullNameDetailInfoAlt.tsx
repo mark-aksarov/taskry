@@ -9,7 +9,6 @@ import {
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
 import { useDeleteClient } from "../DeleteClientContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateClientFullName } from "../UpdateClientFullNameContext";
 
 interface ClientFullNameDetailInfoAltProps {
@@ -20,8 +19,6 @@ export function ClientFullNameDetailInfoAlt({
   fullName,
 }: ClientFullNameDetailInfoAltProps) {
   const t = useTranslations("dashboard.clients.ClientDetail");
-
-  const guestGuard = useGuestModalGuard();
 
   const { onOpenChange: onUpdateFullNameModalOpenChange } = useModal(
     "updateClientFullName",
@@ -35,7 +32,7 @@ export function ClientFullNameDetailInfoAlt({
     useUpdateClientFullName();
 
   const handlePress = () => {
-    guestGuard(() => onUpdateFullNameModalOpenChange(true));
+    onUpdateFullNameModalOpenChange(true);
   };
 
   return (

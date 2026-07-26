@@ -3,7 +3,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withToastRegion } from "@/.storybook/withToastRegion";
 import { withCommentFormProvider } from "./withCommentFormProvider";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 
 const meta = {
@@ -12,7 +12,7 @@ const meta = {
   decorators: [
     withToastRegion,
     withCommentFormProvider,
-    withCurrentUserProvider,
+    withSessionProvider,
     withModalManagerProvider,
     withThemedBackground,
   ],

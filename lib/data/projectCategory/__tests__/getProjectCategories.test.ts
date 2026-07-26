@@ -1,24 +1,24 @@
 import prisma from "@/lib/prisma";
 import { seed } from "@/prisma/test-seed";
+import { loginAs } from "@/lib/test-utils/auth";
+import { members } from "@/prisma/seed/test-data";
 import { getProjectCategories } from "../projectCategory.dal";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
-import { requireSession } from "@/lib/data/utils/requireSession";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
-import { users, positions, workspaces } from "@/prisma/seed/test-data";
+import { users, positions, organizations } from "@/prisma/seed/test-data";
 
 describe("getProjectCategories", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
     });
+
+    await loginAs("user-1");
   });
 
   afterEach(async () => {
@@ -28,8 +28,8 @@ describe("getProjectCategories", () => {
   it("should return all project categories as a list of valid ProjectCategoryDTOs", async () => {
     await prisma.projectCategory.createMany({
       data: [
-        { id: 1, name: "Project Category 1", workspaceId: 1 },
-        { id: 2, name: "Project Category 2", workspaceId: 1 },
+        { id: 1, name: "Project Category 1", organizationId: "org-1" },
+        { id: 2, name: "Project Category 2", organizationId: "org-1" },
       ],
     });
 

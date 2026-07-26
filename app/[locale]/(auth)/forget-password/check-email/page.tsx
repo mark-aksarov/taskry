@@ -1,8 +1,8 @@
 import { CheckEmailPage } from "./CheckEmailPage";
-import { requireAuthPageSession } from "@/lib/utils/requireAuthPageSession";
+import { verifyAuthPageSession } from "@/lib/utils/verifyAuthPageSession";
 
 export default async function AppCheckEmailPage() {
-  await requireAuthPageSession();
+  await verifyAuthPageSession();
 
   return <CheckEmailPage />;
 }

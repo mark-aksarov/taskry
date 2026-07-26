@@ -38,16 +38,16 @@ export const Button = ({
       )}
       {...props}
     >
-      {props.isPending && (
+      {props.isPending ? (
         <Loader2
           data-testid="loader-icon"
           size={size === "small" ? 16 : size === "medium" ? 18 : 20}
           strokeWidth={size === "small" ? 1.5 : size === "medium" ? 1.75 : 2}
-          
           className="animate-spin"
         />
+      ) : (
+        iconLeft
       )}
-      {iconLeft}
       {label && <span>{label}</span>}
       {iconRight}
     </ReactAriaButton>

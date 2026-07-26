@@ -5,22 +5,24 @@ import {
   positions,
   companies,
   clients,
-  workspaces,
+  organizations,
+  members,
 } from "@/prisma/seed/test-data";
 import { ProjectStatus } from "@/generated/prisma/enums";
 
 describe("Project editing", () => {
   beforeEach(() => {
     const payload = {
-      workspaces,
+      organizations,
+      members,
       users,
       accounts,
       positions,
       companies,
       clients,
       projectCategories: [
-        { id: 1, name: "Project Category 1", workspaceId: 1 },
-        { id: 2, name: "Project Category 2", workspaceId: 1 },
+        { id: 1, name: "Project Category 1", organizationId: "org-1" },
+        { id: 2, name: "Project Category 2", organizationId: "org-1" },
       ],
       projects,
     };

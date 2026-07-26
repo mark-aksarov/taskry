@@ -1,24 +1,24 @@
 import prisma from "@/lib/prisma";
 import { seed } from "@/prisma/test-seed";
 import { getCompanies } from "../company.dal";
+import { setupAuth } from "@/lib/test-utils/auth";
+import { members } from "@/prisma/seed/test-data";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
-import { requireSession } from "@/lib/data/utils/requireSession";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
-import { users, positions, workspaces } from "@/prisma/seed/test-data";
+import { users, positions, organizations } from "@/prisma/seed/test-data";
 
 describe("getCompanies", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
     });
+
+    await setupAuth("user-1");
   });
 
   afterEach(async () => {
@@ -28,8 +28,8 @@ describe("getCompanies", () => {
   it("should return all companies", async () => {
     await prisma.company.createMany({
       data: [
-        { id: 1, name: "Company 1", workspaceId: 1 },
-        { id: 2, name: "Company 2", workspaceId: 1 },
+        { id: 1, name: "Company 1", organizationId: "org-1" },
+        { id: 2, name: "Company 2", organizationId: "org-1" },
       ],
     });
 

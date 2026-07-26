@@ -9,7 +9,7 @@ import { TaskDetailAlt, TaskDetailAltSkeleton } from "../TaskDetailAlt";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteTaskProvider } from "../DeleteTaskProvider/__stories__";
 import { SubtaskListExample } from "@/dashboard/subtasks/SubtaskList/__stories__";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withCreateSubtaskProvider } from "@/dashboard/subtasks/CreateSubtaskProvider/__stories__";
 import { withUpdateTaskTitleProvider } from "@/dashboard/tasks/UpdateTaskTitleProvider/__stories__";
@@ -35,7 +35,7 @@ const meta = {
     withUpdateTaskTitleProvider,
     withUpdateTaskStatusProvider,
     withCreateSubtaskProvider,
-    withCurrentUserProvider,
+    withSessionProvider,
     withModalManagerProvider,
     withThemedBackground,
   ],

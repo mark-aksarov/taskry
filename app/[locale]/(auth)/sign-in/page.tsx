@@ -1,13 +1,13 @@
 import { SignInPage } from "./SignInPage";
 import { signIn } from "@/lib/actions/auth/signIn";
-import { requireAuthPageSession } from "@/lib/utils/requireAuthPageSession";
+import { verifyAuthPageSession } from "@/lib/utils/verifyAuthPageSession";
 
 export default async function AppSignInPage({
   searchParams,
 }: {
   searchParams: Promise<{ status: string }>;
 }) {
-  await requireAuthPageSession();
+  await verifyAuthPageSession();
 
   const { status } = await searchParams;
 

@@ -1,26 +1,32 @@
-import { users, accounts, workspaces } from "@/prisma/seed/test-data";
+import {
+  users,
+  accounts,
+  organizations,
+  members,
+} from "@/prisma/seed/test-data";
 
 describe("User updating", () => {
   beforeEach(() => {
     const payload = {
-      workspaces,
+      organizations,
+      members,
       users,
       accounts,
       positions: [
         {
           id: 1,
           name: "Position 1",
-          workspaceId: 1,
+          organizationId: "org-1",
         },
         {
           id: 2,
           name: "Position 2",
-          workspaceId: 2,
+          organizationId: "org-2",
         },
         {
           id: 3,
           name: "Position 3",
-          workspaceId: 1,
+          organizationId: "org-1",
         },
       ],
     };

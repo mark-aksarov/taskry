@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectCategoryGrid } from "../ProjectCategoryGrid";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectCategoryGridExample } from "./ProjectCategoryGridExample";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
 import { withDeleteProjectCategoriesProvider } from "../../DeleteProjectCategoriesProvider/__stories__";
@@ -12,7 +12,7 @@ const meta = {
   component: ProjectCategoryGrid,
   decorators: [
     withDeleteProjectCategoriesProvider,
-    withCurrentUserProvider,
+    withSessionProvider,
     withSelectedItemsProvider,
     withModalManagerProvider,
     withThemedBackground,

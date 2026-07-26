@@ -7,7 +7,7 @@ import { projectId } from "@/lib/schemas/project";
 import { getTranslations } from "next-intl/server";
 import { commentContent } from "@/lib/schemas/comment";
 import { createComment } from "@/lib/data/comment/comment.dal";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 
 const schema = z.object({
   content: commentContent,
@@ -17,7 +17,7 @@ const schema = z.object({
 
 export async function sendComment(formData: FormData): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
 

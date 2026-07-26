@@ -4,40 +4,53 @@ import {
   UserDetailDTO,
   UserSearchDTO,
   UserSummaryDTO,
+  UpdateUserInputDTO,
 } from "./user.dto";
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { AccessDeniedError } from "../utils/error";
+import { validatePositions } from "../utils/validation";
 import { UserFilters, UserSortField } from "@/lib/types";
-import { requireSession } from "../utils/requireSession";
-import { Prisma, TaskStatus } from "@/generated/prisma/client";
+import { verifyResourceAccess } from "../utils/verifyResourceAccess";
+import { Prisma, TaskStatus, User } from "@/generated/prisma/client";
 
 export const getUserDetail = cache(
   async (id: string): Promise<UserDetailDTO | null> => {
     const {
-      user: { workspaceId },
-    } = await requireSession();
+      session: { activeOrganizationId: organizationId },
+    } = await verifyResourceAccess();
 
-    const user = await prisma.user.findFirst({
-      where: { id, workspaceId },
+    const member = await prisma.member.findFirst({
+      where: {
+        userId: id,
+        organizationId,
+      },
       select: {
-        id: true,
-        fullName: true,
-        email: true,
-        phoneNumber: true,
-        imageUrl: true,
-        publicLink: true,
-        birthdate: true,
-        bio: true,
-        address: true,
-
-        position: {
+        user: {
           select: {
-            name: true,
+            id: true,
+            fullName: true,
+            email: true,
+            phoneNumber: true,
+            imageUrl: true,
+            publicLink: true,
+            birthdate: true,
+            bio: true,
+            address: true,
+            position: {
+              select: {
+                name: true,
+              },
+            },
           },
         },
       },
     });
+
+    const user = member?.user;
 
     if (!user) {
       return null;
@@ -60,23 +73,29 @@ export const getUserDetail = cache(
 
 export const getUser = cache(async (id: string): Promise<UserDTO | null> => {
   const {
-    user: { workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
-  const user = await prisma.user.findFirst({
-    where: { id, workspaceId },
+  const member = await prisma.member.findFirst({
+    where: { userId: id, organizationId },
     select: {
-      id: true,
-      fullName: true,
-      phoneNumber: true,
-      imageUrl: true,
-      publicLink: true,
-      birthdate: true,
-      bio: true,
-      address: true,
-      positionId: true,
+      user: {
+        select: {
+          id: true,
+          fullName: true,
+          phoneNumber: true,
+          imageUrl: true,
+          publicLink: true,
+          birthdate: true,
+          bio: true,
+          address: true,
+          positionId: true,
+        },
+      },
     },
   });
+
+  const user = member?.user;
 
   if (!user) {
     return null;
@@ -97,54 +116,68 @@ export const getUser = cache(async (id: string): Promise<UserDTO | null> => {
 
 export const getUsers = cache(async (): Promise<UserDTO[]> => {
   const {
-    user: { workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
-  const users = await prisma.user.findMany({
-    where: { workspaceId },
+  const members = await prisma.member.findMany({
+    where: { organizationId },
     orderBy: {
       createdAt: "desc",
     },
     select: {
-      id: true,
-      fullName: true,
-      phoneNumber: true,
-      imageUrl: true,
-      publicLink: true,
-      birthdate: true,
-      bio: true,
-      address: true,
-      positionId: true,
+      user: {
+        select: {
+          id: true,
+          fullName: true,
+          phoneNumber: true,
+          imageUrl: true,
+          publicLink: true,
+          birthdate: true,
+          bio: true,
+          address: true,
+          positionId: true,
+        },
+      },
     },
   });
 
-  return users.map((user) => ({
-    id: user.id,
-    fullName: user.fullName,
-    phoneNumber: user.phoneNumber ?? undefined,
-    imageUrl: user.imageUrl ?? undefined,
-    publicLink: user.publicLink ?? undefined,
-    birthdate: user.birthdate?.toISOString() ?? undefined,
-    bio: user.bio ?? undefined,
-    address: user.address ?? undefined,
-    positionId: user.positionId ?? undefined,
-  }));
+  return members.map((m) => {
+    const user = m.user;
+
+    return {
+      id: user.id,
+      fullName: user.fullName,
+      phoneNumber: user.phoneNumber ?? undefined,
+      imageUrl: user.imageUrl ?? undefined,
+      publicLink: user.publicLink ?? undefined,
+      birthdate: user.birthdate?.toISOString() ?? undefined,
+      bio: user.bio ?? undefined,
+      address: user.address ?? undefined,
+      positionId: user.positionId ?? undefined,
+    };
+  });
 });
 
 export const getUserSummary = cache(
   async (id: string): Promise<UserSummaryDTO | null> => {
     // Authorization
     const {
-      user: { workspaceId },
-    } = await requireSession();
+      session: { activeOrganizationId: organizationId },
+    } = await verifyResourceAccess();
 
-    const user = await prisma.user.findFirst({
-      where: { id, workspaceId },
+    const member = await prisma.member.findFirst({
+      where: { userId: id, organizationId },
       select: {
-        id: true,
-        fullName: true,
+        user: {
+          select: {
+            id: true,
+            fullName: true,
+          },
+        },
       },
     });
+
+    const user = member?.user;
 
     if (!user) {
       return null;
@@ -159,22 +192,24 @@ export const getUserSummary = cache(
 
 export const getUserSummaries = cache(async (): Promise<UserSummaryDTO[]> => {
   const {
-    user: { workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
-  const where = { workspaceId };
-
-  const users = await prisma.user.findMany({
-    where,
+  const members = await prisma.member.findMany({
+    where: { organizationId },
     select: {
-      id: true,
-      fullName: true,
+      user: {
+        select: {
+          id: true,
+          fullName: true,
+        },
+      },
     },
   });
 
-  return users.map((u) => ({
-    id: u.id,
-    fullName: u.fullName,
+  return members.map(({ user }) => ({
+    id: user.id,
+    fullName: user.fullName,
   }));
 });
 
@@ -190,38 +225,42 @@ export const searchUsers = cache(
   }): Promise<UserSearchDTO> => {
     // Authorization
     const {
-      user: { workspaceId },
-    } = await requireSession();
+      session: { activeOrganizationId: organizationId },
+    } = await verifyResourceAccess();
 
     // Get users
     const where = {
-      workspaceId,
+      organizationId,
       fullName: { contains: query, mode: "insensitive" as const },
     };
 
-    const [items, totalCount] = await Promise.all([
-      prisma.user.findMany({
+    const [members, totalCount] = await Promise.all([
+      prisma.member.findMany({
         where,
-        orderBy: { fullName: "asc" },
+        orderBy: { user: { fullName: "asc" } },
         skip: page && pageSize ? (page - 1) * pageSize : undefined,
         take: pageSize,
         select: {
-          id: true,
-          fullName: true,
-          email: true,
-          imageUrl: true,
+          user: {
+            select: {
+              id: true,
+              fullName: true,
+              email: true,
+              imageUrl: true,
+            },
+          },
         },
       }),
-      prisma.user.count({ where }),
+      prisma.member.count({ where }),
     ]);
 
     //Map to DTO
     return {
-      items: items.map((p) => ({
-        id: p.id,
-        fullName: p.fullName,
-        email: p.email,
-        imageUrl: p.imageUrl ?? undefined,
+      items: members.map(({ user }) => ({
+        id: user.id,
+        fullName: user.fullName,
+        email: user.email,
+        imageUrl: user.imageUrl ?? undefined,
       })),
 
       totalCount,
@@ -242,64 +281,79 @@ export const getUserList = cache(
     filters?: UserFilters;
   }): Promise<UserListDTO> => {
     const {
-      user: { workspaceId },
-    } = await requireSession();
+      session: { activeOrganizationId: organizationId },
+    } = await verifyResourceAccess();
 
     // Sorting
-    let orderBy;
+    let orderBy:
+      | Prisma.MemberOrderByWithRelationInput
+      | Prisma.MemberOrderByWithRelationInput[]
+      | undefined;
 
     if (sort === "position") {
       orderBy = [
         {
-          position: {
-            name: "asc",
+          user: {
+            position: {
+              name: "asc",
+            },
           },
         },
         {
-          fullName: "asc",
+          user: {
+            fullName: "asc",
+          },
         },
-      ] as Prisma.ClientOrderByWithRelationInput[];
+      ];
     } else if (sort === "fullName") {
       orderBy = {
-        fullName: "asc",
-      } as Prisma.ClientOrderByWithRelationInput;
+        user: {
+          fullName: "asc",
+        },
+      };
     }
 
-    const where = buildUserWhereClause(workspaceId, filters);
+    const where = buildMemberWhereClause(organizationId, filters);
 
-    const [items, totalCount] = await Promise.all([
-      prisma.user.findMany({
+    const [members, totalCount] = await Promise.all([
+      prisma.member.findMany({
         where,
         orderBy,
         skip: page && pageSize ? (page - 1) * pageSize : undefined,
         take: pageSize,
         select: {
-          id: true,
-          fullName: true,
-          email: true,
-          phoneNumber: true,
-          imageUrl: true,
-          publicLink: true,
-
-          position: {
+          user: {
             select: {
-              name: true,
+              id: true,
+              fullName: true,
+              email: true,
+              phoneNumber: true,
+              imageUrl: true,
+              publicLink: true,
+              position: {
+                select: {
+                  name: true,
+                },
+              },
             },
           },
         },
       }),
-      prisma.user.count({ where }),
+
+      prisma.member.count({
+        where,
+      }),
     ]);
 
     return {
-      items: items.map((u) => ({
-        id: u.id,
-        fullName: u.fullName,
-        email: u.email,
-        phoneNumber: u.phoneNumber ?? undefined,
-        imageUrl: u.imageUrl ?? undefined,
-        publicLink: u.publicLink ?? undefined,
-        position: u.position ?? undefined,
+      items: members.map(({ user }) => ({
+        id: user.id,
+        fullName: user.fullName,
+        email: user.email,
+        phoneNumber: user.phoneNumber ?? undefined,
+        imageUrl: user.imageUrl ?? undefined,
+        publicLink: user.publicLink ?? undefined,
+        position: user.position ?? undefined,
       })),
 
       totalCount,
@@ -309,52 +363,188 @@ export const getUserList = cache(
 
 export const getUserCount = cache(async (filters?: UserFilters) => {
   const {
-    user: { workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
-  return prisma.user.count({
-    where: buildUserWhereClause(workspaceId, filters),
+  return prisma.member.count({
+    where: buildMemberWhereClause(organizationId, filters),
   });
 });
 
-export function buildUserWhereClause(
-  workspaceId: number,
+export const updateUser = async (input: UpdateUserInputDTO) => {
+  // Authorization
+  const {
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
+
+  // Check permission
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
+    body: {
+      permissions: {
+        user: ["update"],
+      },
+    },
+  });
+
+  if (!permissions.success) {
+    throw new AccessDeniedError("You do not have permission to update user.");
+  }
+
+  // Validate position
+  if (input.positionId) {
+    await validatePositions(organizationId, [input.positionId]);
+  }
+
+  // Update user
+  const updatedUser = await prisma.user.update({
+    where: {
+      members: {
+        some: {
+          organizationId,
+        },
+      },
+      id: input.id,
+    },
+    data: {
+      fullName: input.fullName,
+      imageUrl: input.imageUrl,
+      phoneNumber: input.phoneNumber,
+      publicLink: input.publicLink,
+      positionId: input.positionId,
+      bio: input.bio,
+      address: input.address,
+      birthdate: input.birthdate ? new Date(input.birthdate) : undefined,
+    },
+  });
+
+  return mapToUserDTO(updatedUser);
+};
+
+export const deleteUser = async (id: string) => {
+  const {
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
+
+  // Check permission
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
+    body: {
+      permissions: {
+        user: ["delete"],
+      },
+    },
+  });
+
+  if (!permissions.success) {
+    throw new AccessDeniedError("You do not have permission to delete users.");
+  }
+
+  // Delete user
+  const result = await prisma.user.delete({
+    where: {
+      members: {
+        some: {
+          organizationId,
+        },
+      },
+      id,
+    },
+  });
+
+  return result;
+};
+
+/**
+ * Helpers
+ */
+
+export function buildMemberWhereClause(
+  organizationId: string,
   filters?: UserFilters,
-): Prisma.UserWhereInput {
-  const taskFilters: Prisma.UserWhereInput[] = [];
+): Prisma.MemberWhereInput {
+  const userFilters: Prisma.UserWhereInput[] = [];
 
   if (filters?.hasNoActiveTasks) {
-    taskFilters.push({
-      assignedTasks: { none: { status: TaskStatus.active } },
+    userFilters.push({
+      assignedTasks: {
+        none: {
+          status: TaskStatus.active,
+        },
+      },
     });
   }
 
   if (filters?.hasActiveTasks) {
-    taskFilters.push({
-      assignedTasks: { some: { status: TaskStatus.active } },
+    userFilters.push({
+      assignedTasks: {
+        some: {
+          status: TaskStatus.active,
+        },
+      },
     });
   }
 
   if (filters?.hasOverdueTasks) {
-    taskFilters.push({
+    userFilters.push({
       assignedTasks: {
         some: {
           status: { not: TaskStatus.completed },
-          deadline: { lt: new Date() },
+          deadline: {
+            lt: new Date(),
+          },
         },
       },
     });
   }
 
   return {
-    workspaceId,
+    organizationId,
 
-    ...(filters?.query && {
-      fullName: { contains: filters.query, mode: "insensitive" as const },
-    }),
-    ...(filters?.positionIds?.length && {
-      positionId: { in: filters.positionIds },
-    }),
-    ...(taskFilters.length > 0 && { OR: taskFilters }),
+    user: {
+      ...(filters?.query && {
+        fullName: {
+          contains: filters.query,
+          mode: "insensitive",
+        },
+      }),
+
+      ...(filters?.positionIds?.length && {
+        positionId: {
+          in: filters.positionIds,
+        },
+      }),
+
+      ...(userFilters.length > 0 && {
+        OR: userFilters,
+      }),
+    },
+  };
+}
+
+export function mapToUserDTO(
+  user: Pick<
+    User,
+    | "id"
+    | "fullName"
+    | "bio"
+    | "imageUrl"
+    | "phoneNumber"
+    | "address"
+    | "publicLink"
+    | "birthdate"
+    | "positionId"
+  >,
+): UserDTO {
+  return {
+    id: user.id,
+    fullName: user.fullName,
+    bio: user.bio ?? undefined,
+    imageUrl: user.imageUrl ?? undefined,
+    phoneNumber: user.phoneNumber ?? undefined,
+    address: user.address ?? undefined,
+    publicLink: user.publicLink ?? undefined,
+    birthdate: user.birthdate?.toISOString(),
+    positionId: user.positionId ?? undefined,
   };
 }

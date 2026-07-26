@@ -5,7 +5,6 @@ import { ClientGrid } from "./ClientGrid";
 import { UpdateClientModal } from "./UpdateClientModal";
 import { DeleteClientModal } from "./DeleteClientModal";
 import { ClientListItemSkeleton } from "./ClientListItem";
-import { GuestModeModal } from "@/dashboard/common/GuestModeModal";
 import { DeleteClientProvider } from "./DeleteClientProvider";
 import { UpdateClientProvider } from "./UpdateClientProvider";
 import { ModalManagerProvider } from "@/common/ModalManagerContext";
@@ -43,9 +42,7 @@ interface ClientGridContainerProps {
   clients: ClientListItemDTO[];
 }
 
-export function ClientGridContainer({
-  clients,
-}: ClientGridContainerProps) {
+export function ClientGridContainer({ clients }: ClientGridContainerProps) {
   return (
     <ClientGrid>
       {clients.map((client) => (
@@ -80,8 +77,6 @@ export function ClientGridContainer({
               />
             </UpdateClientProvider>
           </DeleteClientProvider>
-
-          <GuestModeModal />
         </ModalManagerProvider>
       ))}
     </ClientGrid>

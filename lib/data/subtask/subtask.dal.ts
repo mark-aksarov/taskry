@@ -1,25 +1,27 @@
 import {
-  mapToSubtaskDTO,
+  SubtaskDTO,
   CreateSubtaskInputDTO,
   UpdateSubtaskInputDTO,
 } from "./subtask.dto";
 
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
+import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
 import { validateTasks } from "../utils/validation";
-import { requireSession } from "../utils/requireSession";
+import { Subtask } from "@/generated/prisma/client";
+import { verifyResourceAccess } from "../utils/verifyResourceAccess";
 
 export const createSubtask = async (input: CreateSubtaskInputDTO) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permission
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId,
       permissions: {
         subtask: ["create"],
       },
@@ -33,7 +35,7 @@ export const createSubtask = async (input: CreateSubtaskInputDTO) => {
   }
 
   // Validate task
-  await validateTasks(workspaceId, [input.taskId]);
+  await validateTasks(organizationId, [input.taskId]);
 
   // Create subtask
   const subtask = await prisma.subtask.create({
@@ -62,13 +64,13 @@ export const createSubtask = async (input: CreateSubtaskInputDTO) => {
 export const updateSubtask = async (input: UpdateSubtaskInputDTO) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permission
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId,
       permissions: {
         subtask: ["update"],
       },
@@ -85,7 +87,7 @@ export const updateSubtask = async (input: UpdateSubtaskInputDTO) => {
   const updatedSubtask = await prisma.subtask.update({
     where: {
       id: input.id,
-      task: { workspaceId },
+      task: { organizationId },
     },
     data: {
       text: input.text,
@@ -111,13 +113,13 @@ export const updateSubtask = async (input: UpdateSubtaskInputDTO) => {
 export const deleteSubtask = async (id: number) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permission
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId,
       permissions: {
         subtask: ["delete"],
       },
@@ -133,7 +135,7 @@ export const deleteSubtask = async (id: number) => {
   const deletedSubtask = await prisma.subtask.delete({
     where: {
       id,
-      task: { workspaceId },
+      task: { organizationId },
     },
     select: {
       id: true,
@@ -151,3 +153,18 @@ export const deleteSubtask = async (id: number) => {
 
   return mapToSubtaskDTO(deletedSubtask);
 };
+
+/**
+ * Helpers
+ */
+
+export function mapToSubtaskDTO(
+  subtask: Pick<Subtask, "id" | "text" | "isDone" | "taskId">,
+): SubtaskDTO {
+  return {
+    id: subtask.id,
+    text: subtask.text,
+    isDone: subtask.isDone,
+    taskId: subtask.taskId,
+  };
+}

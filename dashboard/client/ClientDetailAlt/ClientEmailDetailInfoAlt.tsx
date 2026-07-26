@@ -9,7 +9,6 @@ import {
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
 import { useDeleteClient } from "../DeleteClientContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateClientEmail } from "../UpdateClientEmailContext";
 
 interface ClientEmailDetailInfoAltProps {
@@ -21,11 +20,8 @@ export function ClientEmailDetailInfoAlt({
 }: ClientEmailDetailInfoAltProps) {
   const t = useTranslations("dashboard.clients.ClientDetail");
 
-  const guestGuard = useGuestModalGuard();
-
-  const { onOpenChange: onUpdateEmailModalOpenChange } = useModal(
-    "updateClientEmail",
-  );
+  const { onOpenChange: onUpdateEmailModalOpenChange } =
+    useModal("updateClientEmail");
 
   //Disable edit button while the client is being deleted
   const { isPending: isDeleteClientPending } = useDeleteClient();
@@ -34,7 +30,7 @@ export function ClientEmailDetailInfoAlt({
   const { isPending: isUpdateClientEmailPending } = useUpdateClientEmail();
 
   const handlePress = () => {
-    guestGuard(() => onUpdateEmailModalOpenChange(true));
+    onUpdateEmailModalOpenChange(true);
   };
 
   return (

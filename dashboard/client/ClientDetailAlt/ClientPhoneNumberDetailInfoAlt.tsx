@@ -9,7 +9,6 @@ import {
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
 import { useDeleteClient } from "../DeleteClientContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateClientPhoneNumber } from "../UpdateClientPhoneNumberContext";
 
 interface ClientPhoneNumberDetailInfoAltProps {
@@ -20,8 +19,6 @@ export function ClientPhoneNumberDetailInfoAlt({
   phoneNumber,
 }: ClientPhoneNumberDetailInfoAltProps) {
   const t = useTranslations("dashboard.clients.ClientDetail");
-
-  const guestGuard = useGuestModalGuard();
 
   const { onOpenChange: onUpdatePhoneNumberModalOpenChange } = useModal(
     "updateClientPhoneNumber",
@@ -35,7 +32,7 @@ export function ClientPhoneNumberDetailInfoAlt({
     useUpdateClientPhoneNumber();
 
   const handlePress = () => {
-    guestGuard(() => onUpdatePhoneNumberModalOpenChange(true));
+    onUpdatePhoneNumberModalOpenChange(true);
   };
 
   return (

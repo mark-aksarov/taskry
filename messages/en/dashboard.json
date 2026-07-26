@@ -65,11 +65,6 @@
         "unknown": "Unknown error while loading image"
       }
     },
-    "GuestModeModal": {
-      "heading": "Guest mode",
-      "text": "<strong>Action is restricted in guest mode.</strong> An account is required to access all features. Please sign in or create a new account to remove guest mode restrictions.",
-      "cancelButton": "Cancel"
-    },
     "SortingMenuTrigger": {
       "dialogHeading": "Sorting"
     },
@@ -1333,17 +1328,6 @@
     "ChangePasswordModal": {
       "title": "Change password"
     },
-    "ResetPasswordModal": {
-      "title": "Reset password"
-    },
-    "ResetPasswordForm": {
-      "newPassword": {
-        "label": "New password",
-        "placeholder": "Enter new password"
-      },
-      "submitButtonLabel": "Reset password",
-      "successMessage": "Password reset successfully"
-    },
     "ChangePasswordForm": {
       "currentPassword": {
         "label": "Current password",
@@ -1422,7 +1406,6 @@
     },
     "ProfileActions": {
       "deleteAccount": "Delete account",
-      "resetPassword": "Reset password",
       "changePassword": "Change password",
       "editAccount": "Edit account",
       "delete": "Delete user",

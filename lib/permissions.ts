@@ -1,3 +1,8 @@
+import {
+  ownerAc,
+  memberAc,
+  defaultStatements,
+} from "better-auth/plugins/organization/access";
 import { createAccessControl } from "better-auth/plugins/access";
 
 const statements = {
@@ -6,39 +11,25 @@ const statements = {
   subtask: ["create", "update", "delete"],
   comment: ["create", "update", "delete"],
   client: ["create", "update", "delete"],
-  user: [
-    "create",
-    "update",
-    "reset-password",
-    "change-password",
-    "delete",
-    "set-role",
-  ],
+  user: ["create", "update", "change-password", "delete"],
   company: ["create", "update", "delete"],
   position: ["create", "update", "delete"],
   projectCategory: ["create", "update", "delete"],
   taskCategory: ["create", "update", "delete"],
 };
 
-export const ac = createAccessControl(statements);
-
-export const admin = ac.newRole(statements);
-export const owner = ac.newRole(statements);
-
-export const user = ac.newRole({
+export const ac = createAccessControl({
+  ...defaultStatements,
   ...statements,
-  user: ["update", "change-password"],
 });
 
-export const guest = ac.newRole({
-  project: [],
-  task: [],
-  subtask: [],
-  comment: [],
-  client: [],
-  user: [],
-  company: [],
-  position: [],
-  projectCategory: [],
-  taskCategory: [],
+export const owner = ac.newRole({
+  ...ownerAc.statements,
+  ...statements,
+});
+
+export const member = ac.newRole({
+  ...memberAc.statements,
+  ...statements,
+  user: ["update", "change-password"],
 });

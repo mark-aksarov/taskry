@@ -1,31 +1,29 @@
 import {
   users,
+  clients,
   projects,
   positions,
   companies,
-  clients,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
 } from "@/prisma/seed/test-data";
 
 import { seed } from "@/prisma/test-seed";
 import { getProjects } from "../project.dal";
+import { loginAs } from "@/lib/test-utils/auth";
+import { members } from "@/prisma/seed/test-data";
 import { it, expect, describe, beforeAll } from "vitest";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { requireSession } from "@/lib/data/utils/requireSession";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 
 describe("getProjects", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
@@ -34,6 +32,8 @@ describe("getProjects", () => {
       projectCategories,
       projects,
     });
+
+    await loginAs("user-1");
   });
 
   it("should return projects with valid ProjectDTO", async () => {

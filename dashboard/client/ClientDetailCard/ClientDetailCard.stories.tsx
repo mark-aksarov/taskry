@@ -11,7 +11,7 @@ import { ClientDetailAltSkeleton } from "../ClientDetailAlt";
 import { DetailHeaderSkeleton } from "@/dashboard/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ClientDetailHeaderInteractive } from "../ClientDetailHeader";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withDeleteClientProvider } from "@/dashboard/client/DeleteClientProvider/__stories__";
 import { withUpdateClientBioProvider } from "@/dashboard/client/UpdateClientBioProvider/__stories__";
@@ -38,7 +38,7 @@ const meta = {
     withUpdateClientImageProvider,
     withClearClientImageUrlProvider,
     withUpdateClientImageFileProvider,
-    withCurrentUserProvider,
+    withSessionProvider,
     withModalManagerProvider,
     withThemedBackground,
   ],
@@ -78,9 +78,7 @@ export const WithoutSomeData = {
       />
     ),
     clientDetailHeaderContainer: (
-      <ClientDetailHeaderInteractive
-        fullName={mockedClientDetail.fullName}
-      />
+      <ClientDetailHeaderInteractive fullName={mockedClientDetail.fullName} />
     ),
     clientDetailActions: <ClientDetailActions />,
   },

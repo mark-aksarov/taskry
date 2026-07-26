@@ -5,30 +5,28 @@ import {
   positions,
   companies,
   clients,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
 } from "@/prisma/seed/test-data";
 
 import prisma from "@/lib/prisma";
-import { updateComment } from "../comment.dal";
-import { AccessDeniedError } from "@/lib/data/utils/error";
 import { seed } from "@/prisma/test-seed";
-import { requireSession } from "@/lib/data/utils/requireSession";
+import { updateComment } from "../comment.dal";
+import { members } from "@/prisma/seed/test-data";
+import { loginAs, setupAuth } from "@/lib/test-utils/auth";
+import { UnauthorizedError } from "@/lib/data/utils/error";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 import { describe, beforeAll, it, expect, beforeEach, afterEach } from "vitest";
 
 describe("updateComment", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
@@ -38,6 +36,8 @@ describe("updateComment", () => {
       projects,
       tasks,
     });
+
+    await loginAs("user-1");
   });
 
   beforeEach(async () => {
@@ -48,21 +48,21 @@ describe("updateComment", () => {
           content: "Comment 1",
           taskId: 1,
           senderId: "user-1",
-          workspaceId: 1,
+          organizationId: "org-1",
         },
         {
           id: 2,
           content: "Comment 2",
           projectId: 1,
           senderId: "user-2",
-          workspaceId: 1,
+          organizationId: "org-1",
         },
         {
           id: 3,
           content: "Comment 3",
           taskId: 2,
           senderId: "user-4",
-          workspaceId: 2,
+          organizationId: "org-2",
         },
       ],
     });
@@ -82,7 +82,7 @@ describe("updateComment", () => {
     expect(updatedComment.content).toBe("Updated Comment 1");
   });
 
-  it("should fail updating a comment from a different workspace", async () => {
+  it("should fail updating a comment from a different organization", async () => {
     await expect(
       updateComment({ id: 3, content: "Attempted update" }),
     ).rejects.toThrow(PrismaClientKnownRequestError);
@@ -104,62 +104,56 @@ describe("updateComment", () => {
 
   describe("RBAC: update comment", () => {
     describe("Owner", () => {
-      beforeEach(() => {
-        (requireSession as any).mockResolvedValue({
-          user: { id: "user-1", role: "owner", workspaceId: 1 },
-        });
+      beforeAll(async () => {
+        await setupAuth("user-1");
       });
 
       it("allows updating own comment", async () => {
         const result = await updateComment({
           id: 1,
-          content: "Owner updated",
+          content: "Comment",
         });
-        expect(result.content).toBe("Owner updated");
+        expect(result.content).toBe("Comment");
       });
 
-      it("allows updating another comment in same workspace", async () => {
+      it("allows updating another comment in same organization", async () => {
         const result = await updateComment({
           id: 2,
-          content: "Owner edits other",
+          content: "Comment",
         });
-        expect(result.content).toBe("Owner edits other");
+        expect(result.content).toBe("Comment");
       });
     });
 
     describe("User", () => {
-      beforeEach(() => {
-        (requireSession as any).mockResolvedValue({
-          user: { id: "user-2", role: "user", workspaceId: 1 },
-        });
+      beforeAll(async () => {
+        await setupAuth("user-2");
       });
 
       it("allows updating own comment", async () => {
         const result = await updateComment({
           id: 2,
-          content: "User updated own",
+          content: "Comment",
         });
-        expect(result.content).toBe("User updated own");
+        expect(result.content).toBe("Comment");
       });
 
       it("denies updating another user's comment", async () => {
         await expect(
-          updateComment({ id: 1, content: "User tries to update" }),
+          updateComment({ id: 1, content: "Comment" }),
         ).rejects.toThrow(PrismaClientKnownRequestError);
       });
     });
 
-    describe("Guest", () => {
-      beforeEach(() => {
-        (requireSession as any).mockResolvedValue({
-          user: { id: "user-3", role: "guest", workspaceId: 1 },
-        });
+    describe("Anonymous", () => {
+      beforeAll(async () => {
+        await setupAuth();
       });
 
       it("denies updating any comment", async () => {
         await expect(
-          updateComment({ id: 1, content: "Guest tries to update" }),
-        ).rejects.toThrow(AccessDeniedError);
+          updateComment({ id: 1, content: "Comment" }),
+        ).rejects.toThrow(UnauthorizedError);
       });
     });
   });

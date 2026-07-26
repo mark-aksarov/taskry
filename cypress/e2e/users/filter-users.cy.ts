@@ -1,5 +1,5 @@
 import { TestSeedPayload } from "@/prisma/test-seed";
-import { accounts, workspaces } from "@/prisma/seed/test-data";
+import { accounts, organizations, members } from "@/prisma/seed/test-data";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
 describe("filter clients", () => {
@@ -9,8 +9,8 @@ describe("filter clients", () => {
     const payload: TestSeedPayload = {
       accounts: [accounts[0]],
       positions: [
-        { id: 1, name: "Position 1", workspaceId: 1 },
-        { id: 2, name: "Position 2", workspaceId: 1 },
+        { id: 1, name: "Position 1", organizationId: "org-1" },
+        { id: 2, name: "Position 2", organizationId: "org-1" },
       ],
       users: [
         {
@@ -18,27 +18,44 @@ describe("filter clients", () => {
           fullName: "User 1",
           email: "user-1@test.com",
           emailVerified: true,
-          role: "owner",
           positionId: 1,
-          workspaceId: 1,
         },
         {
           id: "user-2",
           fullName: "User 2",
           email: "user-2@test.com",
           emailVerified: true,
-          role: "user",
           positionId: 1,
-          workspaceId: 1,
         },
         {
           id: "user-3",
           fullName: "User 3",
           email: "user-3@test.com",
           emailVerified: true,
-          role: "user",
           positionId: 2,
-          workspaceId: 1,
+        },
+      ],
+      members: [
+        {
+          id: "member-1",
+          userId: "user-1",
+          organizationId: "org-1",
+          role: "owner",
+          createdAt: new Date(),
+        },
+        {
+          id: "member-2",
+          userId: "user-2",
+          organizationId: "org-1",
+          role: "member",
+          createdAt: new Date(),
+        },
+        {
+          id: "member-3",
+          userId: "user-3",
+          organizationId: "org-1",
+          role: "member",
+          createdAt: new Date(),
         },
       ],
       projects: [
@@ -47,7 +64,7 @@ describe("filter clients", () => {
           title: "Project A",
           deadline: new Date("2030-01-01"),
           status: ProjectStatus.active,
-          workspaceId: 1,
+          organizationId: "org-1",
         },
       ],
       tasks: [
@@ -58,7 +75,7 @@ describe("filter clients", () => {
           status: TaskStatus.active,
           assigneeId: "user-1",
           projectId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
         },
         {
           id: 2,
@@ -67,7 +84,7 @@ describe("filter clients", () => {
           status: TaskStatus.pending,
           assigneeId: "user-2",
           projectId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
         },
         {
           id: 3,
@@ -76,10 +93,10 @@ describe("filter clients", () => {
           status: TaskStatus.active,
           assigneeId: "user-3",
           projectId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
         },
       ],
-      workspaces,
+      organizations,
     };
 
     cy.task("db:reset");

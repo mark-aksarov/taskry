@@ -2,7 +2,7 @@
 
 import { useRouter } from "@/i18n/navigation";
 import { CreateUserContext } from "../CreateUserContext";
-import { createUser } from "@/lib/actions/user/createUser";
+import { createInvitation } from "@/lib/actions/auth/createInvitation";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
@@ -14,7 +14,7 @@ interface CreateUserProviderProps {
 
 export function CreateUserProvider({ children }: CreateUserProviderProps) {
   const router = useRouter();
-  const contextValue = useActionStateWithCallbacks(createUser, {
+  const contextValue = useActionStateWithCallbacks(createInvitation, {
     onSuccess: () => router.refresh(),
   });
 

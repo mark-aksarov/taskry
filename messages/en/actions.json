@@ -1,32 +1,34 @@
 {
+  "common": {
+    "error": {
+      "internalServerError": "Something went wrong."
+    }
+  },
   "createPresignedUrl": {
     "error": {
-      "internalServerError": "Something went wrong. Failed to create the URL. Refresh the page or try again later."
+      "internalServerError": "Something went wrong. Failed to create the URL."
     }
   },
   "forgetPassword": {
     "error": {
-      "internalServerError": "Something went wrong. Failed to reset the password. Refresh the page or try again later."
+      "internalServerError": "Something went wrong. Failed to reset the password."
     }
   },
   "resetPassword": {
     "error": {
-      "internalServerError": "Something went wrong. Failed to reset the password. Refresh the page or try again later."
-    }
-  },
-  "acceptInvite": {
-    "error": {
-      "internalServerError": "Something went wrong. We couldn't complete the invitation. Refresh the page or try again later."
+      "internalServerError": "Something went wrong. Failed to reset the password."
     }
   },
   "signIn": {
     "error": {
-      "internalServerError": "Something went wrong. Failed to sign in. Refresh the page or try again later."
+      "internalServerError": "Something went wrong. Failed to sign in.",
+      "invalidData": "Please check that the entered data is correct."
     }
   },
   "signUp": {
     "error": {
-      "internalServerError": "Something went wrong. Failed to sign up. Refresh the page or try again later."
+      "internalServerError": "Something went wrong. Failed to sign up.",
+      "invalidData": "Please check that the entered data is correct."
     }
   },
   "position": {
@@ -34,32 +36,32 @@
       "success": "Position created successfully",
       "error": {
         "limitExceededError": "The maximum number of positions would be exceeded. Maximum: {count}.",
-        "internalServerError": "Something went wrong. Failed to create the position. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to create the position."
       }
     },
     "update": {
       "success": "Position updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the position. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to update the position."
       }
     },
     "delete": {
       "success": "Position deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the position. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the position."
       }
     },
     "deleteMany": {
       "success": "Positions deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the positions. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the positions."
       }
     },
     "import": {
       "success": "Positions imported successfully",
       "error": {
         "limitExceededError": "The maximum number of positions would be exceeded. Maximum: {count}.",
-        "internalServerError": "Something went wrong. Failed to import positions. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to import positions."
       }
     }
   },
@@ -67,25 +69,25 @@
     "create": {
       "success": "Comment sent successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to send the comment. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to send the comment."
       }
     },
     "update": {
       "success": "Comment updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the comment. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to update the comment."
       }
     },
     "delete": {
       "success": "Comment deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the comment. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the comment."
       }
     },
     "deleteMany": {
       "success": "Comments deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the comments. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the comments."
       }
     }
   },
@@ -94,32 +96,32 @@
       "success": "Company created successfully",
       "error": {
         "limitExceededError": "The maximum number of companies would be exceeded. Maximum: {count}.",
-        "internalServerError": "Something went wrong. Failed to create the company. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to create the company."
       }
     },
     "update": {
       "success": "Company updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the company. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to update the company."
       }
     },
     "delete": {
       "success": "Company deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the company. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the company."
       }
     },
     "deleteMany": {
       "success": "Companies deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the companies. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the companies."
       }
     },
     "import": {
       "success": "Companies imported successfully",
       "error": {
         "limitExceededError": "The maximum number of companies would be exceeded. Maximum: {count}.",
-        "internalServerError": "Something went wrong. Failed to import companies. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to import companies."
       }
     }
   },
@@ -128,38 +130,38 @@
       "success": "Client created successfully",
       "error": {
         "limitExceededError": "The maximum number of clients would be exceeded. Maximum: {count}.",
-        "internalServerError": "Something went wrong. Failed to create the client. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to create the client."
       }
     },
     "update": {
       "success": "Client updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the client. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to update the client."
       }
     },
     "updateImageUrl": {
       "success": "Client image updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the client image. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to update the client image."
       }
     },
     "delete": {
       "success": "Client deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the client. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the client."
       }
     },
     "deleteMany": {
       "success": "Clients deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the clients. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the clients."
       }
     },
     "import": {
       "success": "Clients imported successfully",
       "error": {
         "limitExceededError": "The maximum number of clients would be exceeded. Maximum: {count}.",
-        "internalServerError": "Something went wrong. Failed to import clients. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to import clients."
       }
     }
   },
@@ -168,37 +170,37 @@
       "success": "Project created successfully",
       "error": {
         "limitExceededError": "The maximum number of projects would be exceeded. Maximum: {count}.",
-        "internalServerError": "Something went wrong. Failed to create the project. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to create the project."
       }
     },
     "update": {
       "success": "Project updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the project. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to update the project."
       }
     },
     "updateStatus": {
       "success": "Project status updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the project status. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to update the project status."
       }
     },
     "updateStatuses": {
       "success": "Project statuses updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the project statuses. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to update the project statuses."
       }
     },
     "delete": {
       "success": "Project deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the project. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the project."
       }
     },
     "deleteMany": {
       "success": "Projects deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the projects. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the projects."
       }
     },
     "import": {
@@ -214,37 +216,37 @@
       "success": "Task created successfully",
       "error": {
         "limitExceededError": "The maximum number of tasks would be exceeded. Maximum: {count}.",
-        "internalServerError": "Something went wrong. Failed to create the task. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to create the task."
       }
     },
     "update": {
       "success": "Task updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the task. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to update the task."
       }
     },
     "updateStatus": {
       "success": "Task status updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the task status. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to update the task status."
       }
     },
     "updateStatuses": {
       "success": "Task statuses updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the task statuses. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to update the task statuses."
       }
     },
     "delete": {
       "success": "Task deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the task. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the task."
       }
     },
     "deleteMany": {
       "success": "Tasks deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the tasks. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the tasks."
       }
     },
     "import": {
@@ -260,25 +262,25 @@
       "success": "Project category created successfully",
       "error": {
         "limitExceededError": "The maximum number of project categories would be exceeded. Maximum: {count}.",
-        "internalServerError": "Something went wrong. Failed to create the project category. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to create the project category."
       }
     },
     "update": {
       "success": "Project category updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the project category. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to update the project category."
       }
     },
     "delete": {
       "success": "Project category deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the project category. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the project category."
       }
     },
     "deleteMany": {
       "success": "Project categories deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the project categories. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the project categories."
       }
     },
     "import": {
@@ -294,25 +296,25 @@
       "success": "Task category created successfully",
       "error": {
         "limitExceededError": "The maximum number of task categories would be exceeded. Maximum: {count}.",
-        "internalServerError": "Something went wrong. Failed to create the task category. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to create the task category."
       }
     },
     "update": {
       "success": "Task category updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the task category. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to update the task category."
       }
     },
     "delete": {
       "success": "Task category deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the task category. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the task category."
       }
     },
     "deleteMany": {
       "success": "Task categories deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the task categories. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the task categories."
       }
     },
     "import": {
@@ -327,64 +329,88 @@
     "create": {
       "success": "Subtask created successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to create the subtask. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to create the subtask."
       }
     },
     "update": {
       "success": "Subtask updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the subtask. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to update the subtask."
       }
     },
     "updateStatus": {
       "success": "Subtask status updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the subtask status. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to update the subtask status."
       }
     },
     "delete": {
       "success": "Subtask deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the subtask. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the subtask."
       }
     }
   },
   "user": {
-    "create": {
-      "success": "User created successfully",
-      "error": {
-        "internalServerError": "Something went wrong. Failed to create the user. Refresh the page or try again later."
-      }
-    },
     "update": {
       "success": "User updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the user. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to update the user.",
+        "invalidData": "Please check that the entered data is correct."
       }
     },
     "updateImageUrl": {
       "success": "User image updated successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to update the user image. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to update the user image."
       }
     },
     "delete": {
       "success": "User deleted successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to delete the user. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to delete the user."
       }
     },
     "changePassword": {
       "success": "Password changed successfully",
       "error": {
-        "internalServerError": "Something went wrong. Failed to change the password. Refresh the page or try again later."
+        "internalServerError": "Something went wrong. Failed to change the password.",
+        "invalidData": "Please check that the entered data is correct."
       }
+    }
+  },
+  "acceptInvite": {
+    "error": {
+      "internalServerError": "Something went wrong. We couldn't complete the invitation.",
+      "alreadyInOrganization": "You are already a member of another workspace.",
+      "notSignedIn": "You need to sign in to accept the invitation."
     },
-    "resetPassword": {
-      "success": "Password successfully reset",
-      "error": {
-        "internalServerError": "Something went wrong. Failed to reset password. Refresh the page or try again later."
-      }
+    "success": "Invitation accepted successfully"
+  },
+  "createOrganization": {
+    "error": {
+      "internalServerError": "Something went wrong. Failed to create workspace.",
+      "invalidData": "Please check that the entered data is correct.",
+      "alreadyInOrganization": "You are already a member of another workspace"
+    }
+  },
+  "createInvitation": {
+    "success": "Invitation created successfully",
+    "error": {
+      "internalServerError": "Something went wrong. Failed to create the invitation.",
+      "invalidData": "Please check that the entered data is correct.",
+      "alreadyInOrganization": "This user is already a member of another workspace"
+    }
+  },
+  "selectOrganization": {
+    "error": {
+      "invalidData": "Please check that the entered data is correct.",
+      "internalServerError": "Something went wrong. Failed to create workspace."
+    }
+  },
+  "deleteUser": {
+    "error": {
+      "invalidData": "Please check that the entered data is correct."
     }
   }
 }

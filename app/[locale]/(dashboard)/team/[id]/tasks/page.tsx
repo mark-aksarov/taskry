@@ -8,9 +8,8 @@ import { ProfileActions } from "@/dashboard/users/ProfileActions";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
 import { CreateTaskModal } from "@/dashboard/tasks/CreateTaskModal";
 import { UpdateUserModal } from "@/dashboard/users/UpdateUserModal";
+import { canEditUserProfile } from "@/lib/utils/canEditUserProfile";
 import { DeleteTasksModal } from "@/dashboard/tasks/DeleteTasksModal";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
-import { ResetPasswordModal } from "@/dashboard/users/ResetPasswordModal";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { CreateTaskProvider } from "@/dashboard/tasks/CreateTaskProvider";
 import { UpdateUserProvider } from "@/dashboard/users/UpdateUserProvider";
@@ -23,9 +22,9 @@ import { UserNavigationMobile } from "@/dashboard/users/UserNavigationMobile";
 import { UpdateUserImageModal } from "@/dashboard/users/UpdateUserImageModal";
 import { DeleteUserImageModal } from "@/dashboard/users/DeleteUserImageModal";
 import { SelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext";
-import { ResetPasswordProvider } from "@/dashboard/users/ResetPasswordProvider";
 import { UserTaskListContainer } from "@/dashboard/users/UserTaskListContainer";
 import { ChangePasswordProvider } from "@/dashboard/users/ChangePasswordProvider";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { CreateTaskFormContainer } from "@/dashboard/tasks/CreateTaskFormContainer";
 import { UpdateUserFormContainer } from "@/dashboard/users/UpdateUserFormContainer";
 import { UpdateUserImageProvider } from "@/dashboard/users/UpdateUserImageProvider";
@@ -48,7 +47,7 @@ export default async function AppProfileTasksPage({
   searchParams: Promise<{ page?: string; pageSize?: string; sort?: string }>;
 }) {
   // Authorization
-  const session = await requireProtectedPageSession();
+  const session = await verifyProtectedPageSession();
 
   // Validation
   const { id: userId } = await params;
@@ -72,10 +71,10 @@ export default async function AppProfileTasksPage({
     },
   });
 
-  // Show user actions if the user is the owner, guest, or the current user
-  const isOwner = session.user.role === "owner";
-  const isGuest = session.user.role === "guest";
-  const showUserActions = isOwner || isGuest || session.user.id === userId;
+  const showUserActions = await canEditUserProfile({
+    session,
+    profileUserId: userId,
+  });
 
   return (
     <UpdateUserImageFileProvider>
@@ -83,72 +82,67 @@ export default async function AppProfileTasksPage({
         <ClearUserImageUrlProvider>
           <DeleteUserProvider>
             <UpdateUserProvider>
-              <ResetPasswordProvider>
-                <ChangePasswordProvider>
-                  <SelectedTasksProvider
-                    pageItems={tasks.map((task) => ({
-                      id: task.id,
-                      status: task.status,
-                    }))}
-                  >
-                    <UpdateTaskStatusesProvider>
-                      <DeleteTasksProvider>
-                        <CreateTaskProvider>
-                          <TeamProfileTasksPage
-                            page={page}
-                            pageSize={pageSize}
-                            totalTasksCount={totalTasksCount}
-                            selectedSortField={sort}
-                            backButton
-                            navigationLarge={
-                              <UserNavigationLarge
-                                userActions={
-                                  showUserActions && (
-                                    <ProfileActions userId={userId} />
-                                  )
-                                }
-                              />
-                            }
-                            navigationMobile={<UserNavigationMobile />}
-                            userTaskList={
-                              <UserTaskListContainer tasks={tasks} />
-                            }
-                            userDetailHeaderContainer={
-                              <UserDetailHeaderAltContainer userId={userId} />
-                            }
-                          />
+              <ChangePasswordProvider>
+                <SelectedTasksProvider
+                  pageItems={tasks.map((task) => ({
+                    id: task.id,
+                    status: task.status,
+                  }))}
+                >
+                  <UpdateTaskStatusesProvider>
+                    <DeleteTasksProvider>
+                      <CreateTaskProvider>
+                        <TeamProfileTasksPage
+                          page={page}
+                          pageSize={pageSize}
+                          totalTasksCount={totalTasksCount}
+                          selectedSortField={sort}
+                          backButton
+                          navigationLarge={
+                            <UserNavigationLarge
+                              userActions={
+                                showUserActions && (
+                                  <ProfileActions userId={userId} />
+                                )
+                              }
+                            />
+                          }
+                          navigationMobile={<UserNavigationMobile />}
+                          userTaskList={<UserTaskListContainer tasks={tasks} />}
+                          userDetailHeaderContainer={
+                            <UserDetailHeaderAltContainer userId={userId} />
+                          }
+                        />
 
-                          <TaskSearchModal
-                            searchContainer={
-                              <LinkSearchContainer pathname="/tasks" />
-                            }
-                          />
-                          <DeleteTasksModal />
-                          <ChangePasswordModal />
-                          <ResetPasswordModal userId={userId} />
-                          <CreateTaskModal
-                            createTaskFormContainer={
-                              <CreateTaskFormContainer
-                                forcedAssigneeId={userId}
-                              />
-                            }
-                          />
-                          <UpdateUserModal
-                            updateUserFormContainer={
-                              <UpdateUserFormContainer userId={userId} />
-                            }
-                          />
-                          <UpdateUserImageModal userId={userId} />
-                          <DeleteUserImageModal
-                            userId={userId}
-                            userFullName={userSummary.fullName}
-                          />
-                        </CreateTaskProvider>
-                      </DeleteTasksProvider>
-                    </UpdateTaskStatusesProvider>
-                  </SelectedTasksProvider>
-                </ChangePasswordProvider>
-              </ResetPasswordProvider>
+                        <TaskSearchModal
+                          searchContainer={
+                            <LinkSearchContainer pathname="/tasks" />
+                          }
+                        />
+                        <DeleteTasksModal />
+                        <ChangePasswordModal />
+                        <CreateTaskModal
+                          createTaskFormContainer={
+                            <CreateTaskFormContainer
+                              forcedAssigneeId={userId}
+                            />
+                          }
+                        />
+                        <UpdateUserModal
+                          updateUserFormContainer={
+                            <UpdateUserFormContainer userId={userId} />
+                          }
+                        />
+                        <UpdateUserImageModal userId={userId} />
+                        <DeleteUserImageModal
+                          userId={userId}
+                          userFullName={userSummary.fullName}
+                        />
+                      </CreateTaskProvider>
+                    </DeleteTasksProvider>
+                  </UpdateTaskStatusesProvider>
+                </SelectedTasksProvider>
+              </ChangePasswordProvider>
             </UpdateUserProvider>
           </DeleteUserProvider>
         </ClearUserImageUrlProvider>

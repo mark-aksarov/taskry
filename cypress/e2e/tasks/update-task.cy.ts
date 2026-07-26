@@ -6,7 +6,8 @@ import {
   positions,
   companies,
   clients,
-  workspaces,
+  organizations,
+  members,
   projectCategories,
 } from "@/prisma/seed/test-data";
 import { TaskStatus } from "@/generated/prisma/enums";
@@ -14,7 +15,8 @@ import { TaskStatus } from "@/generated/prisma/enums";
 describe("Task updating", () => {
   beforeEach(() => {
     const payload = {
-      workspaces,
+      organizations,
+      members,
       users,
       accounts,
       positions,
@@ -22,8 +24,8 @@ describe("Task updating", () => {
       clients,
       projectCategories,
       taskCategories: [
-        { id: 1, name: "Task Category 1", workspaceId: 1 },
-        { id: 2, name: "Task Category 2", workspaceId: 1 },
+        { id: 1, name: "Task Category 1", organizationId: "org-1" },
+        { id: 2, name: "Task Category 2", organizationId: "org-1" },
       ],
       projects,
       tasks,

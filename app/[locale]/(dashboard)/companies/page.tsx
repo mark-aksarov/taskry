@@ -8,12 +8,12 @@ import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
 import { DeleteCompaniesModal } from "@/dashboard/company/DeleteCompaniesModal";
 import { ImportCompaniesModal } from "@/dashboard/company/ImportCompaniesModal";
 import { CreateCompanyProvider } from "@/dashboard/company/CreateCompanyProvider";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { DeleteCompaniesProvider } from "@/dashboard/company/DeleteCompaniesProvider";
 import { ImportCompaniesProvider } from "@/dashboard/company/ImportCompaniesProvider";
 
 export default async function AppCompaniesPage() {
-  await requireProtectedPageSession();
+  await verifyProtectedPageSession();
 
   const companies = await getCompanies();
 

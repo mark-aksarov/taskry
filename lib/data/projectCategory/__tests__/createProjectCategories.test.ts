@@ -1,26 +1,26 @@
 import prisma from "@/lib/prisma";
 import { seed } from "@/prisma/test-seed";
+import { setupAuth } from "@/lib/test-utils/auth";
+import { members } from "@/prisma/seed/test-data";
 import { it, expect, describe, beforeAll } from "vitest";
 import { PROJECT_CATEGORY_MAX_COUNT } from "../../constants";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { createProjectCategories } from "../projectCategory.dal";
-import { requireSession } from "@/lib/data/utils/requireSession";
-import { users, positions, workspaces } from "@/prisma/seed/test-data";
-import { AccessDeniedError, LimitExceededError } from "../../utils/error";
+import { UnauthorizedError, LimitExceededError } from "../../utils/error";
+import { users, positions, organizations } from "@/prisma/seed/test-data";
 
 describe("createProjectCategories", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
     });
+
+    await setupAuth("user-1");
   });
 
   it("should successfully create projectCategories", async () => {
@@ -53,7 +53,7 @@ describe("createProjectCategories", () => {
 
     for (let i = 1; i < PROJECT_CATEGORY_MAX_COUNT; i++) {
       categories.push({
-        workspaceId: 1,
+        organizationId: "org-1",
         name: `Project Category ${i}`,
       });
     }
@@ -77,10 +77,8 @@ describe("createProjectCategories", () => {
   });
 
   describe("RBAC: create project categories", () => {
-    const setup = async (userId: string, role: string) => {
-      (requireSession as any).mockResolvedValue({
-        user: { id: userId, workspaceId: 1, role },
-      });
+    const setup = async (userId?: string) => {
+      await setupAuth(userId);
 
       const createInput = [
         {
@@ -99,26 +97,26 @@ describe("createProjectCategories", () => {
     };
 
     it("should succeed for owner", async () => {
-      const { createInput } = await setup("user-1", "owner");
+      const { createInput } = await setup("user-1");
 
       const result = await createProjectCategories(createInput);
 
       expect(result.length).toBe(2);
     });
 
-    it("should succeed for user", async () => {
-      const { createInput } = await setup("user-2", "user");
+    it("should succeed for member", async () => {
+      const { createInput } = await setup("user-2");
 
       const result = await createProjectCategories(createInput);
 
       expect(result.length).toBe(2);
     });
 
-    it("should fail for guest", async () => {
-      const { createInput } = await setup("user-3", "guest");
+    it("should fail for anonymous", async () => {
+      const { createInput } = await setup();
 
       await expect(createProjectCategories(createInput)).rejects.toThrow(
-        AccessDeniedError,
+        UnauthorizedError,
       );
     });
   });

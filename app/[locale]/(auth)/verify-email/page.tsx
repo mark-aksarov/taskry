@@ -1,23 +1,17 @@
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
-import { getLocale } from "next-intl/server";
-import { redirect } from "@/i18n/navigation";
 import { VerifyEmailPage } from "./VerifyEmailPage";
 import { signOut } from "@/lib/actions/auth/signOut";
+import { getSession } from "@/lib/data/utils/getSession";
 import { sendVerificationEmail } from "@/lib/actions/auth/sendVerificationEmail";
+import { redirectUnauthenticatedToSignIn } from "@/lib/utils/redirectUnauthenticatedToSignIn";
+import { redirectAuthenticatedToDashboard } from "@/lib/utils/redirectAuthenticatedToDashboard";
+import { redirectAuthenticatedToCreateOrganization } from "@/lib/utils/redirectAuthenticatedToCreateOrganization";
 
 export default async function AppVerifyEmailPage() {
-  const locale = await getLocale();
+  await redirectUnauthenticatedToSignIn();
+  await redirectAuthenticatedToCreateOrganization();
+  await redirectAuthenticatedToDashboard();
 
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (session && session.user.emailVerified) {
-    redirect({ href: "/dashboard", locale });
-  } else if (!session) {
-    redirect({ href: "/sign-in", locale });
-  }
+  const session = await getSession();
 
   return (
     <VerifyEmailPage

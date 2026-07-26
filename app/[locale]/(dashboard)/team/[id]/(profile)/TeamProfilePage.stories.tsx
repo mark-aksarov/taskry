@@ -11,7 +11,6 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UserDetailHeaderInteractive } from "@/dashboard/users/UserDetailHeader";
 import { withTaskSearchModal } from "@/dashboard/tasks/TaskSearchModal/__stories__";
 import { withDeleteUserProvider } from "@/dashboard/users/DeleteUserProvider/__stories__";
-import { withResetPasswordProvider } from "@/dashboard/users/ResetPasswordProvider/__stories__";
 import { withUpdateUserBioProvider } from "@/dashboard/users/UpdateUserBioProvider/__stories__";
 import { withChangePasswordProvider } from "@/dashboard/users/ChangePasswordProvider/__stories__";
 import { withUpdateUserImageProvider } from "@/dashboard/users/UpdateUserImageProvider/__stories__";
@@ -30,7 +29,6 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     withTaskSearchModal,
-    withResetPasswordProvider,
     withChangePasswordProvider,
     withUpdateUserPhoneNumberProvider,
     withUpdateUserBioProvider,

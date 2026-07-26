@@ -1,17 +1,17 @@
 import { TestSeedPayload } from "@/prisma/test-seed";
-import { accounts, workspaces } from "@/prisma/seed/test-data";
+import { accounts, organizations, members } from "@/prisma/seed/test-data";
 
 describe("sort users", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
     const payload: TestSeedPayload = {
-      workspaces,
+      organizations,
       accounts: [accounts[0]],
       positions: [
-        { id: 1, name: "Position A", workspaceId: 1 },
-        { id: 2, name: "Position B", workspaceId: 1 },
-        { id: 3, name: "Position C", workspaceId: 1 },
+        { id: 1, name: "Position A", organizationId: "org-1" },
+        { id: 2, name: "Position B", organizationId: "org-1" },
+        { id: 3, name: "Position C", organizationId: "org-1" },
       ],
       users: [
         {
@@ -19,27 +19,44 @@ describe("sort users", () => {
           fullName: "User C",
           email: "user-1@test.com",
           emailVerified: true,
-          role: "owner",
           positionId: 3,
-          workspaceId: 1,
         },
         {
           id: "user-2",
           fullName: "User B",
           email: "user-2@test.com",
           emailVerified: true,
-          role: "user",
           positionId: 1,
-          workspaceId: 1,
         },
         {
           id: "user-3",
           fullName: "User A",
           email: "user-3@test.com",
           emailVerified: true,
-          role: "user",
           positionId: 2,
-          workspaceId: 1,
+        },
+      ],
+      members: [
+        {
+          id: "member-1",
+          userId: "user-1",
+          organizationId: "org-1",
+          role: "owner",
+          createdAt: new Date(),
+        },
+        {
+          id: "member-2",
+          userId: "user-2",
+          organizationId: "org-1",
+          role: "member",
+          createdAt: new Date(),
+        },
+        {
+          id: "member-3",
+          userId: "user-3",
+          organizationId: "org-1",
+          role: "member",
+          createdAt: new Date(),
         },
       ],
     };

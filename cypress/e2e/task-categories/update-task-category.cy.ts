@@ -2,7 +2,8 @@ import {
   users,
   accounts,
   positions,
-  workspaces,
+  organizations,
+  members,
   taskCategories,
 } from "@/prisma/seed/test-data";
 
@@ -11,7 +12,8 @@ describe("Task category updating", () => {
     cy.viewport(1440, 900);
 
     const payload = {
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       accounts,

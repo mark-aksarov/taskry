@@ -109,9 +109,9 @@
     "heading": "Reset password",
     "subtitle": "Provide a new password for your account."
   },
-  "AcceptInvitePage": {
-    "heading": "Complete registration",
-    "subtitle": "Finish setting up your account to access the workspace."
+  "AcceptInvitationPage": {
+    "heading": "Accept invite",
+    "subtitle": "To finish setting up your account, accept the invitation to the workspace."
   },
   "ResetPasswordNotFound": {
     "heading": "Invalid link",
@@ -134,8 +134,8 @@
   "DashboardPage": {
     "heading": "Dashboard"
   },
-  "GuestSignInPage": {
-    "heading": "Sign in as guest",
-    "subtitle": "Click the button to open the demo version with data in the selected language."
+  "CreateOrganizationPage": {
+    "heading": "Workspace",
+    "subtitle": "To continue, join an existing workspace using an email invitation from another user or create a new workspace."
   }
 }

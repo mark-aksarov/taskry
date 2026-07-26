@@ -1,9 +1,9 @@
 import {
   users,
+  clients,
   positions,
   companies,
-  clients,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
 } from "@/prisma/seed/test-data";
@@ -12,27 +12,26 @@ import {
   NotFoundError,
   AccessDeniedError,
   LimitExceededError,
+  UnauthorizedError,
 } from "../../utils/error";
 
 import prisma from "@/lib/prisma";
 import { seed } from "@/prisma/test-seed";
 import { createProjects } from "../project.dal";
+import { setupAuth } from "@/lib/test-utils/auth";
+import { members } from "@/prisma/seed/test-data";
 import { PROJECT_MAX_COUNT } from "../../constants";
 import { it, expect, describe, beforeAll } from "vitest";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { requireSession } from "@/lib/data/utils/requireSession";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 
 describe("createProjects", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
@@ -40,6 +39,8 @@ describe("createProjects", () => {
       taskCategories,
       projectCategories,
     });
+
+    await setupAuth("user-1");
   });
 
   it("should successfully create projects", async () => {
@@ -115,7 +116,7 @@ describe("createProjects", () => {
     await expect(createProjectsPromise).rejects.toThrow(/Client not found/i);
   });
 
-  it("should throw error if category does not belong to the workspace", async () => {
+  it("should throw error if category does not belong to the organization", async () => {
     const createProjectsPromise = createProjects([
       {
         title: "Project 1",
@@ -132,7 +133,7 @@ describe("createProjects", () => {
     );
   });
 
-  it("should throw error if client does not belong to the workspace", async () => {
+  it("should throw error if client does not belong to the organization", async () => {
     const createProjectsPromise = createProjects([
       {
         title: "Project 1",
@@ -171,7 +172,7 @@ describe("createProjects", () => {
           title: `Project ${i}`,
           deadline: new Date("2025-12-31"),
           status: ProjectStatus.active,
-          workspaceId: 1,
+          organizationId: "org-1",
           creatorId: "user-1",
           categoryId: 1,
         },
@@ -201,10 +202,8 @@ describe("createProjects", () => {
   });
 
   describe("RBAC: create projects", () => {
-    const setup = async (userId: string, role: string) => {
-      (requireSession as any).mockResolvedValue({
-        user: { id: userId, workspaceId: 1, role },
-      });
+    const setup = async (userId?: string) => {
+      await setupAuth(userId);
 
       const createInput = [
         {
@@ -222,7 +221,7 @@ describe("createProjects", () => {
     };
 
     it("should succeed for owner", async () => {
-      const { createInput } = await setup("user-1", "owner");
+      const { createInput } = await setup("user-1");
 
       const result = await createProjects(createInput);
 
@@ -230,8 +229,8 @@ describe("createProjects", () => {
       expect(result[0].title).toBe(createInput[0].title);
     });
 
-    it("should succeed for user", async () => {
-      const { createInput } = await setup("user-2", "user");
+    it("should succeed for member", async () => {
+      const { createInput } = await setup("user-2");
 
       const result = await createProjects(createInput);
 
@@ -239,11 +238,11 @@ describe("createProjects", () => {
       expect(result[0].title).toBe(createInput[0].title);
     });
 
-    it("should fail for guest", async () => {
-      const { createInput } = await setup("user-3", "guest");
+    it("should fail for anonymous", async () => {
+      const { createInput } = await setup();
 
       await expect(createProjects(createInput)).rejects.toThrow(
-        AccessDeniedError,
+        UnauthorizedError,
       );
     });
   });

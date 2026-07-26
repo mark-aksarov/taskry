@@ -7,9 +7,8 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Camera, Trash } from "lucide-react";
 import { Button } from "react-aria-components";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { ResponsiveMenuTrigger } from "@/dashboard/common/ResponsiveMenuTrigger";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
+import { ResponsiveMenuTrigger } from "@/dashboard/common/ResponsiveMenuTrigger";
 
 const styles = tv({
   extend: focusRing,
@@ -37,17 +36,12 @@ export function PersonImageMenuTrigger({
 }: PersonImageMenuTriggerProps) {
   const t = useTranslations("dashboard.common.PersonImageMenuTrigger");
 
-  // Show guest modal for guests
-  const guestGuard = useGuestModalGuard();
-
   function handleAction(key: Key) {
-    guestGuard(() => {
-      if (key === "delete") {
-        onDelete();
-      } else if (key === "update") {
-        onUpdate();
-      }
-    });
+    if (key === "delete") {
+      onDelete();
+    } else if (key === "update") {
+      onUpdate();
+    }
   }
 
   return (
@@ -66,12 +60,12 @@ export function PersonImageMenuTrigger({
     >
       {showDeleteMenuItem ? (
         <Item textValue={t("items.delete")} key="delete">
-          <Trash    />
+          <Trash />
           {t("items.delete")}
         </Item>
       ) : null}
       <Item textValue={t("items.update")} key="update">
-        <Camera    />
+        <Camera />
         {t("items.update")}
       </Item>
     </ResponsiveMenuTrigger>

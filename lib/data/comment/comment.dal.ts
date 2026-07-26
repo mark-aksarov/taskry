@@ -1,17 +1,17 @@
 import "server-only";
 
 import {
-  CommentDTO,
+  toCommentDTO,
   CommentListItemDTO,
   CreateCommentInputDTO,
-  toCommentDTO,
   UpdateCommentInputDTO,
 } from "./comment.dto";
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import { requireSession } from "../utils/requireSession";
+import { headers } from "next/headers";
+import { verifyResourceAccess } from "../utils/verifyResourceAccess";
 import { ValidationError, AccessDeniedError } from "../utils/error";
 import { validateProjects, validateTasks } from "../utils/validation";
 
@@ -25,17 +25,18 @@ export const getCommentList = cache(
   }): Promise<CommentListItemDTO[]> => {
     // Authorization
     const {
-      user: { id: userId, role, workspaceId },
-    } = await requireSession();
+      user: { id: userId },
+      session: { activeOrganizationId: organizationId },
+    } = await verifyResourceAccess();
 
     // Validate task
     if (taskId) {
-      await validateTasks(workspaceId, [taskId]);
+      await validateTasks(organizationId, [taskId]);
     }
 
     // Validate project
     if (projectId) {
-      await validateProjects(workspaceId, [projectId]);
+      await validateProjects(organizationId, [projectId]);
     }
 
     // Get comments
@@ -46,7 +47,7 @@ export const getCommentList = cache(
       where: {
         taskId,
         projectId,
-        workspaceId,
+        organizationId,
       },
       select: {
         id: true,
@@ -63,7 +64,14 @@ export const getCommentList = cache(
       },
     });
 
-    // Map to DTO
+    /*
+      Map to DTO
+      Owner can edit any comment, member can only edit their own comments
+    */
+    const { role } = await auth.api.getActiveMemberRole({
+      headers: await headers(),
+    });
+
     return comments.map((c) => {
       return {
         id: c.id,
@@ -85,13 +93,14 @@ export const getCommentList = cache(
 export const createComment = async (input: CreateCommentInputDTO) => {
   // Authorization
   const {
-    user: { id: senderId, workspaceId },
-  } = await requireSession();
+    user: { id: senderId },
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permission
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId: senderId,
       permissions: {
         comment: ["create"],
       },
@@ -113,12 +122,12 @@ export const createComment = async (input: CreateCommentInputDTO) => {
 
   // Validate task
   if (input.taskId) {
-    await validateTasks(workspaceId, [input.taskId]);
+    await validateTasks(organizationId, [input.taskId]);
   }
 
   // Validate project
   if (input.projectId) {
-    await validateProjects(workspaceId, [input.projectId]);
+    await validateProjects(organizationId, [input.projectId]);
   }
 
   // Create comment
@@ -128,7 +137,7 @@ export const createComment = async (input: CreateCommentInputDTO) => {
       taskId: input.taskId,
       projectId: input.projectId,
       senderId,
-      workspaceId,
+      organizationId,
     },
   });
 
@@ -138,13 +147,14 @@ export const createComment = async (input: CreateCommentInputDTO) => {
 export const deleteComment = async (commentId: number) => {
   // Authorization
   const {
-    user: { id: senderId, role, workspaceId },
-  } = await requireSession();
+    user: { id: senderId },
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permission
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId: senderId,
       permissions: {
         comment: ["delete"],
       },
@@ -157,11 +167,18 @@ export const deleteComment = async (commentId: number) => {
     );
   }
 
-  // Delete comment
+  /*
+    Delete comment
+    Owner can delete any comment, member can only delete their own comments
+  */
+  const { role } = await auth.api.getActiveMemberRole({
+    headers: await headers(),
+  });
+
   const deletedComment = await prisma.comment.delete({
     where: {
-      ...(role === "user" ? { senderId } : {}),
-      workspaceId,
+      ...(role === "member" ? { senderId } : {}),
+      organizationId,
       id: commentId,
     },
     select: {
@@ -185,13 +202,14 @@ export const deleteComment = async (commentId: number) => {
 export const updateComment = async (input: UpdateCommentInputDTO) => {
   // Authorization
   const {
-    user: { id: senderId, role, workspaceId },
-  } = await requireSession();
+    user: { id: senderId },
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permissions
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId: senderId,
       permissions: {
         comment: ["update"],
       },
@@ -204,11 +222,18 @@ export const updateComment = async (input: UpdateCommentInputDTO) => {
     );
   }
 
-  // Update comment
+  /*
+    Update comment
+    Owner can update any comment, member can only delete their own comments
+  */
+  const { role } = await auth.api.getActiveMemberRole({
+    headers: await headers(),
+  });
+
   const updatedComment = await prisma.comment.update({
     where: {
-      workspaceId,
-      ...(role === "user" ? { senderId } : {}),
+      organizationId,
+      ...(role === "member" ? { senderId } : {}),
       id: input.id,
     },
     data: {

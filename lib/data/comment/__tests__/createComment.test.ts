@@ -1,3 +1,4 @@
+import { members } from "@/prisma/seed/test-data";
 import {
   users,
   tasks,
@@ -5,7 +6,7 @@ import {
   positions,
   companies,
   clients,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
 } from "@/prisma/seed/test-data";
@@ -13,26 +14,24 @@ import {
 import {
   NotFoundError,
   ValidationError,
+  UnauthorizedError,
   AccessDeniedError,
 } from "@/lib/data/utils/error";
 
 import prisma from "@/lib/prisma";
 import { createComment } from "../comment.dal";
 import { seed } from "@/prisma/test-seed";
-import { requireSession } from "@/lib/data/utils/requireSession";
+import { loginAs, setupAuth } from "@/lib/test-utils/auth";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { describe, beforeAll, it, expect, beforeEach } from "vitest";
 
 describe("createComment", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
@@ -42,6 +41,8 @@ describe("createComment", () => {
       projects,
       tasks,
     });
+
+    await loginAs("user-1");
   });
 
   beforeEach(async () => {
@@ -123,7 +124,7 @@ describe("createComment", () => {
     await expect(createCommentPromise).rejects.toThrow(/Project not found/i);
   });
 
-  it("should fail with AccessDeniedError if the task belongs to a different workspace", async () => {
+  it("should fail with AccessDeniedError if the task belongs to a different organization", async () => {
     const input = {
       content: "Comment 1",
       taskId: 3,
@@ -135,7 +136,7 @@ describe("createComment", () => {
     await expect(createCommentPromise).rejects.toThrow(/Task access denied/i);
   });
 
-  it("should fail with AccessDeniedError if the project belongs to a different workspace", async () => {
+  it("should fail with AccessDeniedError if the project belongs to a different organization", async () => {
     const input = {
       content: "Comment 1",
       projectId: 3,
@@ -150,63 +151,42 @@ describe("createComment", () => {
   });
 
   describe("RBAC: create comment", () => {
-    describe("Owner", () => {
-      beforeEach(() => {
-        (requireSession as any).mockResolvedValue({
-          user: { id: "user-1", role: "owner", workspaceId: 1 },
-        });
-      });
+    const setup = async (userId?: string) => {
+      await setupAuth(userId);
 
-      it("allows creating a comment", async () => {
-        const input = {
-          content: "Comment by owner",
-          taskId: 1,
-        };
+      const createInput = {
+        content: "Comment",
+        taskId: 1,
+      };
 
-        const result = await createComment(input);
+      return {
+        createInput,
+      };
+    };
 
-        expect(result).toBeDefined();
-        expect(result.content).toBe(input.content);
-        expect(result.senderId).toBe("user-1");
-      });
+    it("should succeed for owner", async () => {
+      const { createInput } = await setup("user-1");
+      const result = await createComment(createInput);
+
+      expect(result).toBeDefined();
+      expect(result.content).toBe(createInput.content);
+      expect(result.senderId).toBe("user-1");
     });
 
-    describe("User", () => {
-      beforeEach(() => {
-        (requireSession as any).mockResolvedValue({
-          user: { id: "user-2", role: "user", workspaceId: 1 },
-        });
-      });
+    it("should succeed for member", async () => {
+      const { createInput } = await setup("user-2");
+      const result = await createComment(createInput);
 
-      it("allows creating a comment", async () => {
-        const input = {
-          content: "Comment by user",
-          taskId: 1,
-        };
-
-        const result = await createComment(input);
-
-        expect(result).toBeDefined();
-        expect(result.content).toBe(input.content);
-        expect(result.senderId).toBe("user-2");
-      });
+      expect(result).toBeDefined();
+      expect(result.content).toBe(createInput.content);
+      expect(result.senderId).toBe("user-2");
     });
 
-    describe("Guest", () => {
-      beforeEach(() => {
-        (requireSession as any).mockResolvedValue({
-          user: { id: "user-3", role: "guest", workspaceId: 1 },
-        });
-      });
-
-      it("denies creating a comment", async () => {
-        const input = {
-          content: "Comment by guest",
-          taskId: 1,
-        };
-
-        await expect(createComment(input)).rejects.toThrow(AccessDeniedError);
-      });
+    it("should fail for anonymous", async () => {
+      const { createInput } = await setup();
+      await expect(createComment(createInput)).rejects.toThrow(
+        UnauthorizedError,
+      );
     });
   });
 });

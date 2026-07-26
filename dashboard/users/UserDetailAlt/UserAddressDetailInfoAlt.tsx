@@ -10,7 +10,6 @@ import { useTranslations } from "next-intl";
 import { useDeleteUser } from "../DeleteUserContext";
 import { useModal } from "@/common/ModalManagerContext";
 import { useUpdateUserAddress } from "../UpdateUserAddressContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
 interface UserAddressDetailInfoAltProps {
   address?: string;
@@ -23,8 +22,6 @@ export function UserAddressDetailInfoAlt({
 }: UserAddressDetailInfoAltProps) {
   const t = useTranslations("dashboard.users.UserDetail");
 
-  const guestGuard = useGuestModalGuard();
-
   const { onOpenChange: onUpdateAddressModalOpenChange } =
     useModal("updateUserAddress");
 
@@ -35,7 +32,7 @@ export function UserAddressDetailInfoAlt({
   const { isPending: isUpdateUserAddressPending } = useUpdateUserAddress();
 
   const handlePress = () => {
-    guestGuard(() => onUpdateAddressModalOpenChange(true));
+    onUpdateAddressModalOpenChange(true);
   };
 
   return (

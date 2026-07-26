@@ -9,7 +9,6 @@ import {
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
 import { useDeleteProject } from "../DeleteProjectContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateProjectDescription } from "../UpdateProjectDescriptionContext";
 
 interface ProjectDescriptionDetailInfoAltProps {
@@ -20,8 +19,6 @@ export function ProjectDescriptionDetailInfoAlt({
   description,
 }: ProjectDescriptionDetailInfoAltProps) {
   const t = useTranslations("dashboard.projects.ProjectDetail");
-
-  const guestGuard = useGuestModalGuard();
 
   //Disable edit button while the project is being deleted
   const { isPending: isDeleteProjectPending } = useDeleteProject();
@@ -35,7 +32,7 @@ export function ProjectDescriptionDetailInfoAlt({
     useUpdateProjectDescription();
 
   const handlePress = () => {
-    guestGuard(() => onUpdateDescriptionModalOpenChange(true));
+    onUpdateDescriptionModalOpenChange(true);
   };
 
   return (

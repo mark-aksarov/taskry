@@ -1,8 +1,9 @@
+import { members } from "@/prisma/seed/test-data";
 import {
   users,
   companies,
   positions,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
 } from "@/prisma/seed/test-data";
@@ -10,26 +11,25 @@ import {
 import prisma from "@/lib/prisma";
 import { seed } from "@/prisma/test-seed";
 import { searchClients } from "../client.dal";
-import { requireSession } from "@/lib/data/utils/requireSession";
+import { setupAuth } from "@/lib/test-utils/auth";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { it, expect, describe, beforeEach, beforeAll, afterEach } from "vitest";
 
 describe("searchClients", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
       taskCategories,
       projectCategories,
     });
+
+    await setupAuth("user-1");
   });
 
   afterEach(async () => {
@@ -45,7 +45,7 @@ describe("searchClients", () => {
           email: "client-1@test.com",
           imageUrl: "https://example.com/client-1.jpg",
           companyId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
         },
         {
           id: 2,
@@ -53,7 +53,7 @@ describe("searchClients", () => {
           email: "client-2@test.com",
           imageUrl: "https://example.com/client-2.jpg",
           companyId: 2,
-          workspaceId: 1,
+          organizationId: "org-1",
         },
       ],
     });
@@ -91,7 +91,7 @@ describe("searchClients", () => {
           email: "client-1@test.com",
           imageUrl: "https://example.com/client-1.jpg",
           companyId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
         },
         {
           id: 2,
@@ -99,7 +99,7 @@ describe("searchClients", () => {
           email: "client-2@test.com",
           imageUrl: "https://example.com/client-2.jpg",
           companyId: 2,
-          workspaceId: 1,
+          organizationId: "org-1",
         },
         {
           id: 3,
@@ -107,7 +107,7 @@ describe("searchClients", () => {
           email: "client-11@test.com",
           imageUrl: "https://example.com/client-11.jpg",
           companyId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
         },
       ],
     });
@@ -147,7 +147,7 @@ describe("searchClients", () => {
             email: "client-1@test.com",
             imageUrl: "https://example.com/client-1.jpg",
             companyId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
           },
           {
             id: 2,
@@ -155,7 +155,7 @@ describe("searchClients", () => {
             email: "client-2@test.com",
             imageUrl: "https://example.com/client-2.jpg",
             companyId: 2,
-            workspaceId: 1,
+            organizationId: "org-1",
           },
           {
             id: 3,
@@ -163,7 +163,7 @@ describe("searchClients", () => {
             email: "client-3@test.com",
             imageUrl: "https://example.com/client-3.jpg",
             companyId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
           },
         ],
       });

@@ -3,8 +3,8 @@ import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 import { DashboardPageDecorator } from "@/.storybook/DashboardPageDecorator";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "pages/DashboardErrorPage",
@@ -12,7 +12,7 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     DashboardPageDecorator,
-    withCurrentUserProvider,
+    withSessionProvider,
     withThemedBackground,
   ],
   beforeEach: () => {

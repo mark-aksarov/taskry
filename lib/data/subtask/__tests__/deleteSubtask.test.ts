@@ -1,34 +1,32 @@
 import {
+  tasks,
   users,
+  clients,
+  projects,
   positions,
   companies,
-  clients,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
-  projects,
-  tasks,
 } from "@/prisma/seed/test-data";
 
 import prisma from "@/lib/prisma";
-import { deleteSubtask } from "../subtask.dal";
 import { seed } from "@/prisma/test-seed";
-import { AccessDeniedError } from "@/lib/data/utils/error";
-import { requireSession } from "@/lib/data/utils/requireSession";
+import { deleteSubtask } from "../subtask.dal";
+import { setupAuth } from "@/lib/test-utils/auth";
+import { members } from "@/prisma/seed/test-data";
+import { UnauthorizedError } from "@/lib/data/utils/error";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 describe("deleteSubtask", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
@@ -38,6 +36,8 @@ describe("deleteSubtask", () => {
       projects,
       tasks,
     });
+
+    await setupAuth("user-1");
   });
 
   afterEach(async () => {
@@ -61,7 +61,7 @@ describe("deleteSubtask", () => {
     expect(result.text).toBe("Subtask 1");
   });
 
-  it("should not delete subtasks from a different workspace", async () => {
+  it("should not delete subtasks from a different organization", async () => {
     await prisma.subtask.createMany({
       data: [
         {
@@ -84,10 +84,8 @@ describe("deleteSubtask", () => {
   });
 
   describe("RBAC: delete subtask", () => {
-    const setup = async (userId: string, role: string) => {
-      (requireSession as any).mockResolvedValue({
-        user: { id: userId, workspaceId: 1, role },
-      });
+    const setup = async (userId?: string) => {
+      await setupAuth(userId);
 
       await prisma.subtask.create({
         data: {
@@ -100,20 +98,20 @@ describe("deleteSubtask", () => {
     };
 
     it("should succeed for owner", async () => {
-      await setup("user-1", "owner");
+      await setup("user-1");
       const result = await deleteSubtask(1);
       expect(result.text).toBe("Subtask 1");
     });
 
-    it("should fail for user", async () => {
-      await setup("user-2", "user");
+    it("should succeed for member", async () => {
+      await setup("user-2");
       const result = await deleteSubtask(1);
       expect(result.text).toBe("Subtask 1");
     });
 
-    it("should fail for guest", async () => {
-      await setup("user-3", "guest");
-      await expect(deleteSubtask(1)).rejects.toThrow(AccessDeniedError);
+    it("should fail for anonymous", async () => {
+      await setup();
+      await expect(deleteSubtask(1)).rejects.toThrow(UnauthorizedError);
     });
   });
 });

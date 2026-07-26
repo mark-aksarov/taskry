@@ -18,12 +18,12 @@ import {
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
+import { useRole } from "@/common/RoleContext";
+import { useModal } from "@/common/ModalManagerContext";
 import { UserListItemLayout } from "./UserListItemLayout";
 import { UserListItemSkeleton } from "./UserListItemSkeleton";
 import { ListItemGate } from "@/dashboard/common/ListItemGate";
-import { useModal } from "@/common/ModalManagerContext";
 import { useUserItemPending } from "../UserItem/useUserItemPending";
-import { useCurrentUser } from "@/common/CurrentUserContext";
 import { BaseUserItemProps, UserItemActionMenuTrigger } from "../UserItem";
 
 export function UserListItem(props: BaseUserItemProps) {
@@ -51,7 +51,7 @@ export const UserListItemInner = memo(function UserListItemInner({
   position,
 }: InnerProps) {
   const t = useTranslations("dashboard.users.UserListItem");
-  const { isOwner, isGuest } = useCurrentUser();
+  const role = useRole();
   const { onOpenChange: onUserDetailModalOpenChange } = useModal("userDetail");
 
   const userImg = (
@@ -63,8 +63,8 @@ export const UserListItemInner = memo(function UserListItemInner({
     />
   );
 
-  // We show the action menu only for owners and guests
-  const showActionMenuTrigger = isOwner || isGuest;
+  // We show the action menu only for owners and
+  const showActionMenuTrigger = role === "owner";
 
   return (
     <UserListItemLayout

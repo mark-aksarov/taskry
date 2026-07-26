@@ -1,23 +1,19 @@
 import prisma from "@/lib/prisma";
 import { getUserList } from "../user.dal";
 import { seed } from "@/prisma/test-seed";
+import { loginAs } from "@/lib/test-utils/auth";
 import { dates } from "@/lib/data/utils/test-utils";
-import { requireSession } from "@/lib/data/utils/requireSession";
-import { positions, workspaces } from "@/prisma/seed/test-data";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
+import { positions, organizations } from "@/prisma/seed/test-data";
 import { it, expect, describe, beforeAll, afterAll } from "vitest";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
 describe("getUserList", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
       positions,
     });
   });
@@ -33,8 +29,6 @@ describe("getUserList", () => {
           imageUrl: "https://example.com/user-1.jpg",
           publicLink: "https://example.com/user-1",
           positionId: 1,
-          role: "user",
-          workspaceId: 1,
         },
         {
           id: "user-2",
@@ -44,11 +38,28 @@ describe("getUserList", () => {
           imageUrl: "https://example.com/user-2.jpg",
           publicLink: "https://example.com/user-2",
           positionId: 2,
-          role: "user",
-          workspaceId: 1,
         },
       ],
     });
+
+    await prisma.member.createMany({
+      data: [
+        {
+          id: "member-1",
+          userId: "user-1",
+          organizationId: "org-1",
+          createdAt: new Date(),
+        },
+        {
+          id: "member-2",
+          userId: "user-2",
+          organizationId: "org-1",
+          createdAt: new Date(),
+        },
+      ],
+    });
+
+    await loginAs("user-1");
 
     const firstPage = await getUserList({
       page: 1,
@@ -80,20 +91,35 @@ describe("getUserList", () => {
             id: "user-1",
             fullName: "User B",
             email: "user-1@test.com",
-            role: "user",
             positionId: 2,
-            workspaceId: 1,
           },
           {
             id: "user-2",
             fullName: "User A",
             email: "user-2@test.com",
-            role: "user",
             positionId: 1,
-            workspaceId: 1,
           },
         ],
       });
+
+      await prisma.member.createMany({
+        data: [
+          {
+            id: "member-1",
+            userId: "user-1",
+            organizationId: "org-1",
+            createdAt: new Date(),
+          },
+          {
+            id: "member-2",
+            userId: "user-2",
+            organizationId: "org-1",
+            createdAt: new Date(),
+          },
+        ],
+      });
+
+      await loginAs("user-1");
     });
 
     afterAll(async () => {
@@ -131,25 +157,42 @@ describe("getUserList", () => {
             id: "user-1",
             fullName: "User A",
             email: "user-1@test.com",
-            role: "user",
             positionId: 1,
-            workspaceId: 1,
           },
           {
             id: "user-2",
             fullName: "User B",
             email: "user-2@test.com",
-            role: "user",
             positionId: 1,
-            workspaceId: 1,
           },
           {
             id: "user-3",
             fullName: "User C",
             email: "user-3@test.com",
-            role: "user",
             positionId: 2,
-            workspaceId: 1,
+          },
+        ],
+      });
+
+      await prisma.member.createMany({
+        data: [
+          {
+            id: "member-1",
+            userId: "user-1",
+            organizationId: "org-1",
+            createdAt: new Date(),
+          },
+          {
+            id: "member-2",
+            userId: "user-2",
+            organizationId: "org-1",
+            createdAt: new Date(),
+          },
+          {
+            id: "member-3",
+            userId: "user-3",
+            organizationId: "org-1",
+            createdAt: new Date(),
           },
         ],
       });
@@ -159,7 +202,7 @@ describe("getUserList", () => {
           {
             id: 1,
             name: "Category 1",
-            workspaceId: 1,
+            organizationId: "org-1",
           },
         ],
       });
@@ -169,7 +212,7 @@ describe("getUserList", () => {
           {
             id: 1,
             name: "Category 1",
-            workspaceId: 1,
+            organizationId: "org-1",
           },
         ],
       });
@@ -181,7 +224,7 @@ describe("getUserList", () => {
             title: "Project 1",
             deadline: new Date(),
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: ProjectStatus.active,
           },
         ],
@@ -195,7 +238,7 @@ describe("getUserList", () => {
             deadline: dates.overdue,
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
             assigneeId: "user-1",
           },
@@ -205,7 +248,7 @@ describe("getUserList", () => {
             deadline: dates.today,
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
             assigneeId: "user-2",
           },
@@ -215,12 +258,14 @@ describe("getUserList", () => {
             deadline: dates.nextWeek,
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.pending,
             assigneeId: "user-3",
           },
         ],
       });
+
+      await loginAs("user-1");
     });
 
     afterAll(async () => {
@@ -302,28 +347,47 @@ describe("getUserList", () => {
             id: "user-1",
             fullName: "User 1",
             email: "user-1@test.com",
-            role: "user",
             positionId: 1,
-            workspaceId: 1,
           },
           {
             id: "user-2",
             fullName: "User 2",
             email: "user-2@test.com",
-            role: "user",
             positionId: 1,
-            workspaceId: 1,
           },
           {
             id: "user-3",
             fullName: "User 3",
             email: "user-3@test.com",
-            role: "user",
             positionId: 1,
-            workspaceId: 1,
           },
         ],
       });
+
+      await prisma.member.createMany({
+        data: [
+          {
+            id: "member-1",
+            userId: "user-1",
+            organizationId: "org-1",
+            createdAt: new Date(),
+          },
+          {
+            id: "member-2",
+            userId: "user-2",
+            organizationId: "org-1",
+            createdAt: new Date(),
+          },
+          {
+            id: "member-3",
+            userId: "user-3",
+            organizationId: "org-1",
+            createdAt: new Date(),
+          },
+        ],
+      });
+
+      await loginAs("user-1");
     });
 
     afterAll(async () => {

@@ -9,10 +9,9 @@ import {
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { useUserItemPending } from "./useUserItemPending";
 import { useModal } from "@/common/ModalManagerContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { useCurrentUser } from "@/common/CurrentUserContext";
+import { useUserItemPending } from "./useUserItemPending";
+import { useSession } from "@/common/SessionContext";
 
 interface UserItemActionMenuTriggerProps {
   userId: string;
@@ -25,11 +24,10 @@ export function UserItemActionMenuTrigger({
 }: UserItemActionMenuTriggerProps) {
   const t = useTranslations("dashboard.users.UserItemActionMenuTrigger");
 
-  // Detect if the current user is a guest
-  const { userId: currentUserId } = useCurrentUser();
+  // Detect if the current user is a
+  const session = useSession();
 
-  // Show guest modal for guests
-  const guestGuard = useGuestModalGuard();
+  const sessionUserId = session?.user.id;
 
   // Delete confirmation modal state
   const { onOpenChange: onDeleteModalOpenChange } = useModal("deleteUser");
@@ -38,22 +36,18 @@ export function UserItemActionMenuTrigger({
   const { onOpenChange: onUpdateModalOpenChange } = useModal("updateUser");
 
   /**
-   * Handles menu actions for a user item
-   * - If user is a guest, show guest modal
-   * - Otherwise, open edit or delete modal based on action key
+   * Open edit or delete modal based on action key
    */
   function handleAction(key: Key) {
-    guestGuard(() => {
-      if (key === "edit") {
-        onUpdateModalOpenChange(true);
-      } else if (key === "delete") {
-        onDeleteModalOpenChange(true);
-      }
-    });
+    if (key === "edit") {
+      onUpdateModalOpenChange(true);
+    } else if (key === "delete") {
+      onDeleteModalOpenChange(true);
+    }
   }
 
   // The user can't delete themselves, so we need to make sure the user sees the "Delete" menu item.
-  const showDeleteMenuItem = currentUserId !== userId;
+  const showDeleteMenuItem = sessionUserId !== userId;
 
   //Pending state while deleting or updating
   const isPending = useUserItemPending();
@@ -72,11 +66,11 @@ export function UserItemActionMenuTrigger({
       )}
     >
       <Item textValue={t("edit")} key="edit">
-        <Pencil  /> {t("edit")}
+        <Pencil /> {t("edit")}
       </Item>
       {showDeleteMenuItem ? (
         <Item textValue={t("delete")} key="delete">
-          <Trash  /> {t("delete")}
+          <Trash /> {t("delete")}
         </Item>
       ) : null}
     </ItemBaseActionMenuTrigger>

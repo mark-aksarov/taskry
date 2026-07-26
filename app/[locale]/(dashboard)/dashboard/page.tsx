@@ -4,7 +4,6 @@ import { getTaskList } from "@/lib/data/task/task.dal";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
 import { CreateTaskModal } from "@/dashboard/tasks/CreateTaskModal";
 import { TaskGridContainer } from "@/dashboard/tasks/TaskGridContainer";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
 import { CreateTaskProvider } from "@/dashboard/tasks/CreateTaskProvider";
 import { DeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider";
@@ -13,9 +12,10 @@ import { SelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext";
 import { CreateTaskFormContainer } from "@/dashboard/tasks/CreateTaskFormContainer";
 import { TotalTasksCardContainer } from "@/dashboard/tasks/TotalTasksCardContainer";
 import { TotalUsersCardContainer } from "@/dashboard/users/TotalUsersCardContainer";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { TotalClientsCardContainer } from "@/dashboard/client/TotalClientsCardContainer";
 import { UpdateTaskStatusesProvider } from "@/dashboard/tasks/UpdateTaskStatusesProvider";
 import { TotalProjectsCardContainer } from "@/dashboard/projects/TotalProjectsCardContainer";
-import { TotalClientsCardContainer } from "@/dashboard/client/TotalClientsCardContainer";
 
 const searchParamsSchema = z.object({
   page: pageSearchParam,
@@ -28,7 +28,7 @@ export default async function AppDashboardPage({
   searchParams: Promise<{ page?: string; pageSize?: string }>;
 }) {
   // Authorization
-  const session = await requireProtectedPageSession();
+  const session = await verifyProtectedPageSession();
 
   // Validation
   const rawParams = await searchParams;

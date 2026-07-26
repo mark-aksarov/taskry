@@ -3,12 +3,12 @@
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
 import { projectCategoryId } from "@/lib/schemas/projectCategory";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { deleteProjectCategories as deleteProjectCategoriesQuery } from "@/lib/data/projectCategory/projectCategory.dal";
 
 export async function deleteProjectCategory(id: number): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
 

@@ -5,7 +5,6 @@ import {
   TaskSummaryDTO,
   UpdateTaskInputDTO,
   CreateTaskInputDTO,
-  mapToTaskDTO,
 } from "./task.dto";
 
 import {
@@ -18,21 +17,22 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
 import { TaskFilters, TaskSortField } from "@/lib/types";
-import { requireSession } from "../utils/requireSession";
 import { uniqueDefinedIds } from "../utils/uniqueDefinedIds";
-import { Prisma, TaskStatus } from "@/generated/prisma/client";
+import { verifyResourceAccess } from "../utils/verifyResourceAccess";
+import { Prisma, Task, TaskStatus } from "@/generated/prisma/client";
 
 export const getTaskDetail = cache(
   async (id: number): Promise<TaskDetailDTO | null> => {
     // Authorization
     const {
-      user: { workspaceId },
-    } = await requireSession();
+      session: { activeOrganizationId: organizationId },
+    } = await verifyResourceAccess();
 
     const task = await prisma.task.findFirst({
-      where: { id, workspaceId },
+      where: { id, organizationId },
       select: {
         id: true,
         title: true,
@@ -117,11 +117,11 @@ export const getTaskDetail = cache(
 export const getTask = cache(async (id: number): Promise<TaskDTO | null> => {
   // Authorization
   const {
-    user: { workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   const task = await prisma.task.findFirst({
-    where: { id, workspaceId },
+    where: { id, organizationId },
     select: {
       id: true,
       title: true,
@@ -159,11 +159,11 @@ export const getTaskSummary = cache(
   async (id: number): Promise<TaskSummaryDTO | null> => {
     // Authorization
     const {
-      user: { workspaceId },
-    } = await requireSession();
+      session: { activeOrganizationId: organizationId },
+    } = await verifyResourceAccess();
 
     const task = await prisma.task.findFirst({
-      where: { id, workspaceId },
+      where: { id, organizationId },
       select: {
         id: true,
         title: true,
@@ -184,11 +184,11 @@ export const getTaskSummary = cache(
 export const getTasks = cache(async (): Promise<TaskDTO[]> => {
   // Authorization
   const {
-    user: { workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   const tasks = await prisma.task.findMany({
-    where: { workspaceId },
+    where: { organizationId },
     orderBy: {
       createdAt: "desc",
     },
@@ -230,8 +230,9 @@ export const getTaskList = cache(
   }): Promise<TaskListDTO> => {
     // Authorization
     const {
-      user: { id: userId, workspaceId },
-    } = await requireSession();
+      user: { id: userId },
+      session: { activeOrganizationId: organizationId },
+    } = await verifyResourceAccess();
 
     // Sorting
     let orderBy: Prisma.ProjectOrderByWithRelationInput;
@@ -247,7 +248,7 @@ export const getTaskList = cache(
     }
 
     // Get tasks
-    const where = buildTaskWhereClause(userId, workspaceId, filters);
+    const where = buildTaskWhereClause(userId, organizationId, filters);
 
     const [items, totalCount] = await Promise.all([
       prisma.task.findMany({
@@ -328,10 +329,11 @@ export const getTaskList = cache(
 export const getTaskCount = cache(async (filters?: TaskFilters) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    user: { id: userId },
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
-  const where = buildTaskWhereClause(userId, workspaceId, filters);
+  const where = buildTaskWhereClause(userId, organizationId, filters);
 
   return prisma.task.count({ where });
 });
@@ -339,13 +341,14 @@ export const getTaskCount = cache(async (filters?: TaskFilters) => {
 export const createTasks = async (input: CreateTaskInputDTO[]) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    user: { id: userId },
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permission
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId,
       permissions: {
         task: ["create"],
       },
@@ -357,27 +360,27 @@ export const createTasks = async (input: CreateTaskInputDTO[]) => {
   }
 
   // Validate limit
-  await validateTaskLimit(workspaceId, input.length);
+  await validateTaskLimit(organizationId, input.length);
 
   // Validate categories
   const categoryIds = uniqueDefinedIds(input.map((task) => task.categoryId));
 
   if (categoryIds.length > 0) {
-    await validateTaskCategories(workspaceId, categoryIds);
+    await validateTaskCategories(organizationId, categoryIds);
   }
 
   // Validate projects
   const projectIds = uniqueDefinedIds(input.map((task) => task.projectId));
 
   if (projectIds.length > 0) {
-    await validateProjects(workspaceId, projectIds);
+    await validateProjects(organizationId, projectIds);
   }
 
   // Validate assignees
   const assigneeIds = uniqueDefinedIds(input.map((task) => task.assigneeId));
 
   if (assigneeIds.length > 0) {
-    await validateUsers(workspaceId, assigneeIds);
+    await validateUsers(organizationId, assigneeIds);
   }
 
   const tasks = await prisma.task.createManyAndReturn({
@@ -390,7 +393,7 @@ export const createTasks = async (input: CreateTaskInputDTO[]) => {
       categoryId: task.categoryId,
       assigneeId: task.assigneeId,
       creatorId: userId,
-      workspaceId,
+      organizationId,
     })),
   });
 
@@ -400,13 +403,13 @@ export const createTasks = async (input: CreateTaskInputDTO[]) => {
 export const updateTask = async (input: UpdateTaskInputDTO) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permission
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId,
       permissions: {
         task: ["update"],
       },
@@ -419,24 +422,24 @@ export const updateTask = async (input: UpdateTaskInputDTO) => {
 
   // Validate category
   if (input.categoryId) {
-    await validateTaskCategories(workspaceId, [input.categoryId]);
+    await validateTaskCategories(organizationId, [input.categoryId]);
   }
 
   // Validate project
   if (input.projectId) {
-    await validateProjects(workspaceId, [input.projectId]);
+    await validateProjects(organizationId, [input.projectId]);
   }
 
   // Validate assignee
   if (input.assigneeId) {
-    await validateUsers(workspaceId, [input.assigneeId]);
+    await validateUsers(organizationId, [input.assigneeId]);
   }
 
   // Update task
   const updatedTask = await prisma.task.update({
     where: {
       id: input.id,
-      workspaceId,
+      organizationId,
     },
     data: {
       title: input.title,
@@ -458,13 +461,13 @@ export const updateTaskStatuses = async (
 ) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permission
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId,
       permissions: {
         task: ["update"],
       },
@@ -478,7 +481,7 @@ export const updateTaskStatuses = async (
   // Update tasks
   const updatedTasks = await prisma.task.updateManyAndReturn({
     where: {
-      workspaceId,
+      organizationId,
       id: {
         in: taskIds,
       },
@@ -504,13 +507,13 @@ export const updateTaskStatuses = async (
 export const deleteTasks = async (ids: number[]) => {
   // Authorization
   const {
-    user: { id: actorId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permission
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId: actorId,
       permissions: {
         task: ["delete"],
       },
@@ -524,7 +527,7 @@ export const deleteTasks = async (ids: number[]) => {
   // Bulk delete tasks
   const result = await prisma.task.deleteMany({
     where: {
-      workspaceId,
+      organizationId,
       id: {
         in: ids,
       },
@@ -540,13 +543,13 @@ export const deleteTasks = async (ids: number[]) => {
 
 export function buildTaskWhereClause(
   userId: string,
-  workspaceId: number,
+  organizationId: string,
   filters?: TaskFilters,
 ): Prisma.TaskWhereInput {
-  if (!filters) return { workspaceId };
+  if (!filters) return { organizationId };
 
   return {
-    workspaceId,
+    organizationId,
 
     ...(filters.query && {
       title: { contains: filters.query, mode: "insensitive" as const },
@@ -566,5 +569,30 @@ export function buildTaskWhereClause(
       ...(filters.deadlineFrom && { gte: new Date(filters.deadlineFrom) }),
       ...(filters.deadlineTo && { lte: new Date(filters.deadlineTo) }),
     },
+  };
+}
+
+function mapToTaskDTO(
+  task: Pick<
+    Task,
+    | "id"
+    | "title"
+    | "description"
+    | "deadline"
+    | "status"
+    | "projectId"
+    | "categoryId"
+    | "assigneeId"
+  >,
+): TaskDTO {
+  return {
+    id: task.id,
+    title: task.title,
+    description: task.description ?? undefined,
+    deadline: task.deadline.toISOString(),
+    status: task.status,
+    projectId: task.projectId ?? undefined,
+    categoryId: task.categoryId ?? undefined,
+    assigneeId: task.assigneeId ?? undefined,
   };
 }

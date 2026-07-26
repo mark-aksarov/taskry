@@ -3,7 +3,7 @@ import {
   positions,
   companies,
   clients,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
   projects,
@@ -13,21 +13,19 @@ import prisma from "@/lib/prisma";
 import { getTaskList } from "../task.dal";
 import { TaskFilters } from "@/lib/types";
 import { seed } from "@/prisma/test-seed";
-import { requireSession } from "@/lib/data/utils/requireSession";
+import { loginAs } from "@/lib/test-utils/auth";
+import { members } from "@/prisma/seed/test-data";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { it, expect, describe, beforeAll, afterEach, afterAll } from "vitest";
 
 describe("getTaskList", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
@@ -36,6 +34,8 @@ describe("getTaskList", () => {
       projectCategories,
       projects,
     });
+
+    await loginAs("user-1");
   });
 
   it("should return all tasks with valid TaskListDTO", async () => {
@@ -48,9 +48,9 @@ describe("getTaskList", () => {
           deadline: new Date("2023-01-01"),
           projectId: 1,
           categoryId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
           status: TaskStatus.active,
-          assigneeId: "user-3",
+          assigneeId: "user-1",
         },
       ],
     });
@@ -79,7 +79,7 @@ describe("getTaskList", () => {
           taskId: 1,
           content: "Comment 1",
           senderId: "user-1",
-          workspaceId: 1,
+          organizationId: "org-1",
         },
       ],
     });
@@ -105,8 +105,8 @@ describe("getTaskList", () => {
 
           deadline: new Date("2023-01-01").toISOString(),
           assignee: {
-            id: "user-3",
-            fullName: "User 3",
+            id: "user-1",
+            fullName: "User 1",
             imageUrl: "/man.jpg",
           },
           project: {
@@ -143,9 +143,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
           {
             id: 2,
@@ -153,9 +153,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
           {
             id: 3,
@@ -163,9 +163,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
         ],
       });
@@ -190,9 +190,9 @@ describe("getTaskList", () => {
             deadline: new Date("2023-01-02"),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
           {
             id: 2,
@@ -200,9 +200,9 @@ describe("getTaskList", () => {
             deadline: new Date("2023-01-03"),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
           {
             id: 3,
@@ -210,9 +210,9 @@ describe("getTaskList", () => {
             deadline: new Date("2023-01-01"),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
         ],
       });
@@ -237,9 +237,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.pending,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
           {
             id: 2,
@@ -247,9 +247,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.completed,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
           {
             id: 3,
@@ -257,9 +257,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
         ],
       });
@@ -290,9 +290,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
           {
             id: 2,
@@ -300,9 +300,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
           {
             id: 3,
@@ -310,9 +310,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
         ],
       });
@@ -339,9 +339,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
           {
             id: 2,
@@ -349,9 +349,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.completed,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
           {
             id: 3,
@@ -359,9 +359,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.completed,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
         ],
       });
@@ -392,9 +392,9 @@ describe("getTaskList", () => {
               deadline: deadlines[0],
               projectId: 1,
               categoryId: 1,
-              workspaceId: 1,
+              organizationId: "org-1",
               status: TaskStatus.active,
-              assigneeId: "user-3",
+              assigneeId: "user-1",
             },
             {
               id: 2,
@@ -402,9 +402,9 @@ describe("getTaskList", () => {
               deadline: deadlines[1],
               projectId: 1,
               categoryId: 1,
-              workspaceId: 1,
+              organizationId: "org-1",
               status: TaskStatus.completed,
-              assigneeId: "user-3",
+              assigneeId: "user-1",
             },
             {
               id: 3,
@@ -412,9 +412,9 @@ describe("getTaskList", () => {
               deadline: deadlines[2],
               projectId: 1,
               categoryId: 1,
-              workspaceId: 1,
+              organizationId: "org-1",
               status: TaskStatus.completed,
-              assigneeId: "user-3",
+              assigneeId: "user-1",
             },
           ],
         });
@@ -455,9 +455,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
           {
             id: 2,
@@ -465,9 +465,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 2,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
         ],
       });
@@ -496,9 +496,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
           {
             id: 2,
@@ -506,9 +506,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 2,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
         ],
       });
@@ -537,9 +537,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
           {
             id: 2,
@@ -547,15 +547,15 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-4",
+            assigneeId: "user-2",
           },
         ],
       });
 
       const filters: TaskFilters = {
-        assigneeIds: ["user-3"],
+        assigneeIds: ["user-1"],
       };
 
       const result = await getTaskList({
@@ -578,7 +578,7 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
             assigneeId: "user-1",
           },
@@ -588,7 +588,7 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
             assigneeId: "user-2",
           },
@@ -598,9 +598,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-2",
           },
         ],
       });
@@ -631,9 +631,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
           {
             id: 2,
@@ -641,9 +641,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
           {
             id: 3,
@@ -651,9 +651,9 @@ describe("getTaskList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
-            assigneeId: "user-3",
+            assigneeId: "user-1",
           },
         ],
       });

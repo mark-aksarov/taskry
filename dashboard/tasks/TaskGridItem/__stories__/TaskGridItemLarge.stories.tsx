@@ -9,7 +9,7 @@ import { withDeleteTasksProvider } from "../../DeleteTasksProvider/__stories__";
 import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
 import { withUpdateTaskStatusProvider } from "../../UpdateTaskStatusProvider/__stories__";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusesProvider/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
@@ -23,7 +23,7 @@ const meta = {
     withDeleteTaskProvider,
     withDeleteTasksProvider,
     withUpdateTaskStatusesProvider,
-    withCurrentUserProvider,
+    withSessionProvider,
     withSelectedTasksProvider,
     withViewModeProvider,
     withPageTransitionProvider,

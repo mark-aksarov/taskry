@@ -12,12 +12,11 @@ import {
 
 import z from "zod";
 import { ActionState } from "../types";
-import { APIError } from "better-auth";
 import { getTranslations } from "next-intl/server";
 import { positionId } from "@/lib/schemas/position";
 import { emptyStringToNull } from "@/lib/schemas/base";
-import { updateUser as updateUserService } from "@/lib/data/user/user.service";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { updateUser as updateUserQuery } from "@/lib/data/user/user.dal";
 
 const schema = z.object({
   id: userId,
@@ -38,32 +37,35 @@ const schema = z.object({
 
 export async function updateUser(formData: FormData): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
+  const internalServerError = t("user.update.error.internalServerError");
 
-  try {
-    const input = Object.fromEntries(formData.entries());
-    const parsedData = schema.parse(input);
-    await updateUserService(parsedData);
+  // Validation
+  const input = Object.fromEntries(formData.entries());
+  const result = schema.safeParse(input);
 
-    return {
-      status: "success",
-      message: t("user.update.success"),
-    };
-  } catch (error) {
-    console.error("Server Action Error:", error);
-
-    if (error instanceof APIError) {
-      return {
-        status: "error",
-        message: error.message,
-      };
-    }
-
+  if (!result.success) {
     return {
       status: "error",
-      message: t("user.update.error.internalServerError"),
+      message: t("user.update.error.invalidData"),
     };
   }
+
+  // Update user in database
+  try {
+    await updateUserQuery(result.data);
+  } catch {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  // Success
+  return {
+    status: "success",
+    message: t("user.update.success"),
+  };
 }

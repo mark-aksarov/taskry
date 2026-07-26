@@ -7,30 +7,26 @@ import {
   searchQueryParam,
 } from "@/lib/schemas/base";
 
-import {
-  getClientCount,
-  getClientList,
-} from "@/lib/data/client/client.dal";
-
 import { z } from "zod";
 import { ClientsPage } from "./ClientsPage";
 import { clientSortFields } from "@/lib/types";
 import { companyId } from "@/lib/schemas/company";
 import { getCompanyCount } from "@/lib/data/company/company.dal";
-import { CreateCompanyModal } from "@/dashboard/company/CreateCompanyModal";
 import { CreateClientModal } from "@/dashboard/client/CreateClientModal";
 import { ClientSearchModal } from "@/dashboard/client/ClientSearchModal";
-import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
 import { ImportClientsModal } from "@/dashboard/client/ImportClientsModal";
 import { DeleteClientsModal } from "@/dashboard/client/DeleteClientsModal";
 import { ClientFiltersModal } from "@/dashboard/client/ClientFiltersModal";
-import { CreateCompanyProvider } from "@/dashboard/company/CreateCompanyProvider";
+import { CreateCompanyModal } from "@/dashboard/company/CreateCompanyModal";
 import { ClientGridContainer } from "@/dashboard/client/ClientGridContainer";
+import { getClientCount, getClientList } from "@/lib/data/client/client.dal";
 import { CreateClientProvider } from "@/dashboard/client/CreateClientProvider";
+import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
 import { ClientFiltersProvider } from "@/dashboard/client/ClientFiltersContext";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { DeleteClientsProvider } from "@/dashboard/client/DeleteClientsProvider";
 import { ImportClientsProvider } from "@/dashboard/client/ImportClientsProvider";
+import { CreateCompanyProvider } from "@/dashboard/company/CreateCompanyProvider";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { ClientCompanyFiltersModal } from "@/dashboard/client/ClientCompanyFiltersModal";
 import { CreateClientFormContainer } from "@/dashboard/client/CreateClientFormContainer";
 import { ClientFiltersFormContainer } from "@/dashboard/client/ClientFiltersFormContainer";
@@ -59,7 +55,7 @@ export default async function AppClientsPage({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   // Authorization
-  await requireProtectedPageSession();
+  await verifyProtectedPageSession();
 
   // Validation
   const rawParams = await searchParams;

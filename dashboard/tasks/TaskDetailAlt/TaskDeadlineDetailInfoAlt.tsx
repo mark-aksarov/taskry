@@ -9,7 +9,6 @@ import {
 import { useDeleteTask } from "../DeleteTaskContext";
 import { useModal } from "@/common/ModalManagerContext";
 import { useFormatter, useTranslations } from "next-intl";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateTaskDeadline } from "../UpdateTaskDeadlineContext";
 
 interface TaskDeadlineDetailInfoAltProps {
@@ -20,8 +19,6 @@ export function TaskDeadlineDetailInfoAlt({
   deadline,
 }: TaskDeadlineDetailInfoAltProps) {
   const t = useTranslations("dashboard.tasks.TaskDetail");
-
-  const guestGuard = useGuestModalGuard();
 
   const { onOpenChange: onUpdateBirthdateModalOpenChange } =
     useModal("updateTaskDeadline");
@@ -41,7 +38,7 @@ export function TaskDeadlineDetailInfoAlt({
   });
 
   const handlePress = () => {
-    guestGuard(() => onUpdateBirthdateModalOpenChange(true));
+    onUpdateBirthdateModalOpenChange(true);
   };
 
   return (

@@ -7,14 +7,14 @@ import { CreatePositionModal } from "@/dashboard/position/CreatePositionModal";
 import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
 import { DeletePositionsModal } from "@/dashboard/position/DeletePositionsModal";
 import { ImportPositionsModal } from "@/dashboard/position/ImportPositionsModal";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { CreatePositionProvider } from "@/dashboard/position/CreatePositionProvider";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { DeletePositionsProvider } from "@/dashboard/position/DeletePositionsProvider";
 import { ImportPositionsProvider } from "@/dashboard/position/ImportPositionsProvider";
 
 export default async function AppPositionsPage() {
   // Authorization
-  await requireProtectedPageSession();
+  await verifyProtectedPageSession();
 
   const positions = await getPositions();
 

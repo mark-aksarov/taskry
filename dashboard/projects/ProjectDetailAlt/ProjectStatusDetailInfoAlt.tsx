@@ -10,7 +10,6 @@ import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useDeleteProject } from "../DeleteProjectContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateProjectStatusAlt } from "../UpdateProjectStatusAltContext";
 
 interface ProjectStatusDetailInfoAltProps {
@@ -22,8 +21,6 @@ export function ProjectStatusDetailInfoAlt({
 }: ProjectStatusDetailInfoAltProps) {
   const tStatus = useTranslations("dashboard.projects.ProjectStatus");
   const t = useTranslations("dashboard.projects.ProjectDetail");
-
-  const guestGuard = useGuestModalGuard();
 
   //Disable edit button while the project is being deleted
   const { isPending: isDeleteProjectPending } = useDeleteProject();
@@ -37,7 +34,7 @@ export function ProjectStatusDetailInfoAlt({
     useUpdateProjectStatusAlt();
 
   const handlePress = () => {
-    guestGuard(() => onUpdateStatusModalOpenChange(true));
+    onUpdateStatusModalOpenChange(true);
   };
 
   return (

@@ -5,7 +5,6 @@ import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Blocks, FolderClosed } from "lucide-react";
 import { useModal } from "@/common/ModalManagerContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { CreateNewMenuTrigger } from "@/dashboard/common/CreateNewMenuTrigger";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
@@ -18,9 +17,6 @@ export function CreateProjectMenuTrigger({
 }: CreateProjectMenuTriggerProps) {
   const t = useTranslations("dashboard.projects.CreateProjectMenuTrigger");
 
-  // Show guest modal for guests
-  const guestGuard = useGuestModalGuard();
-
   // Create project category form modal state
   const { onOpenChange: onCreateProjectCategoryModalOpenChange } = useModal(
     `createProjectCategory`,
@@ -31,18 +27,14 @@ export function CreateProjectMenuTrigger({
     useModal("createProject");
 
   /**
-   * Handles menu actions for creating a project or project category
-   * - If user is a guest, show guest modal
-   * - Otherwise, open create project category modal or create project modal
+   * Open create project category modal or create project modal
    */
   function handleAction(key: Key) {
-    guestGuard(() => {
-      if (key === "project") {
-        onCreateProjectModalOpenChange(true);
-      } else if (key === "category") {
-        onCreateProjectCategoryModalOpenChange(true);
-      }
-    });
+    if (key === "project") {
+      onCreateProjectModalOpenChange(true);
+    } else if (key === "category") {
+      onCreateProjectCategoryModalOpenChange(true);
+    }
   }
 
   return (
@@ -55,11 +47,11 @@ export function CreateProjectMenuTrigger({
         renderButton={renderButton}
       >
         <Item textValue={t("items.project")} key="project">
-          <FolderClosed    />
+          <FolderClosed />
           {t("items.project")}
         </Item>
         <Item textValue={t("items.category")} key="category">
-          <Blocks    />
+          <Blocks />
           {t("items.category")}
         </Item>
       </CreateNewMenuTrigger>

@@ -10,7 +10,6 @@ import { useTranslations } from "next-intl";
 import { useDeleteTask } from "../DeleteTaskContext";
 import { useModal } from "@/common/ModalManagerContext";
 import { useUpdateTaskProject } from "../UpdateTaskProjectContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
 interface TaskProjectDetailInfoAltProps {
   project?: {
@@ -24,8 +23,6 @@ export function TaskProjectDetailInfoAlt({
 }: TaskProjectDetailInfoAltProps) {
   const t = useTranslations("dashboard.tasks.TaskDetail");
 
-  const guestGuard = useGuestModalGuard();
-
   const { onOpenChange: onUpdateProjectModalOpenChange } =
     useModal("updateTaskProject");
 
@@ -36,7 +33,7 @@ export function TaskProjectDetailInfoAlt({
   const { isPending: isUpdateTaskProjectPending } = useUpdateTaskProject();
 
   const handlePress = () => {
-    guestGuard(() => onUpdateProjectModalOpenChange(true));
+    onUpdateProjectModalOpenChange(true);
   };
 
   return (

@@ -1,10 +1,10 @@
 import {
   users,
+  clients,
   projects,
   positions,
   companies,
-  clients,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
 } from "@/prisma/seed/test-data";
@@ -13,27 +13,26 @@ import {
   NotFoundError,
   AccessDeniedError,
   LimitExceededError,
+  UnauthorizedError,
 } from "@/lib/data/utils/error";
 
 import prisma from "@/lib/prisma";
 import { createTasks } from "../task.dal";
 import { seed } from "@/prisma/test-seed";
+import { setupAuth } from "@/lib/test-utils/auth";
 import { TASK_MAX_COUNT } from "../../constants";
+import { members } from "@/prisma/seed/test-data";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { it, expect, describe, beforeAll } from "vitest";
-import { requireSession } from "@/lib/data/utils/requireSession";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 
 describe("createTasks", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
@@ -42,6 +41,8 @@ describe("createTasks", () => {
       projectCategories,
       projects,
     });
+
+    await setupAuth("user-1");
   });
 
   it("should successfully create tasks", async () => {
@@ -135,7 +136,7 @@ describe("createTasks", () => {
     );
   });
 
-  it("should fail if project belongs to another workspace", async () => {
+  it("should fail if project belongs to another organization", async () => {
     const createTasksPromise = createTasks([
       {
         title: "Task 1",
@@ -151,7 +152,7 @@ describe("createTasks", () => {
     await expect(createTasksPromise).rejects.toThrow(/Project access denied/i);
   });
 
-  it("should fail if assignee belongs to another workspace", async () => {
+  it("should fail if assignee belongs to another organization", async () => {
     const createTasksPromise = createTasks([
       {
         title: "Task 1",
@@ -167,7 +168,7 @@ describe("createTasks", () => {
     await expect(createTasksPromise).rejects.toThrow(/User access denied/i);
   });
 
-  it("should fail if task category belongs to another workspace", async () => {
+  it("should fail if task category belongs to another organization", async () => {
     const createTasksPromise = createTasks([
       {
         title: "Task 1",
@@ -211,7 +212,7 @@ describe("createTasks", () => {
         categoryId: 1,
         assigneeId: "user-2",
         deadline: new Date("2025-12-31"),
-        workspaceId: 1,
+        organizationId: "org-1",
       });
     }
 
@@ -236,10 +237,8 @@ describe("createTasks", () => {
   }, 30000);
 
   describe("RBAC: create tasks", () => {
-    const setup = async (userId: string, role: string) => {
-      (requireSession as any).mockResolvedValue({
-        user: { id: userId, workspaceId: 1, role },
-      });
+    const setup = async (userId?: string) => {
+      await setupAuth(userId);
 
       return {
         createInput: [
@@ -256,7 +255,7 @@ describe("createTasks", () => {
     };
 
     it("should succeed for owner", async () => {
-      const { createInput } = await setup("user-1", "owner");
+      const { createInput } = await setup("user-1");
 
       const result = await createTasks(createInput);
 
@@ -264,8 +263,8 @@ describe("createTasks", () => {
       expect(result[0].title).toBe(createInput[0].title);
     });
 
-    it("should succeed for user", async () => {
-      const { createInput } = await setup("user-2", "user");
+    it("should succeed for member", async () => {
+      const { createInput } = await setup("user-2");
 
       const result = await createTasks(createInput);
 
@@ -273,10 +272,10 @@ describe("createTasks", () => {
       expect(result[0].title).toBe(createInput[0].title);
     });
 
-    it("should fail for guest", async () => {
-      const { createInput } = await setup("user-3", "guest");
+    it("should fail for anonymous", async () => {
+      const { createInput } = await setup();
 
-      await expect(createTasks(createInput)).rejects.toThrow(AccessDeniedError);
+      await expect(createTasks(createInput)).rejects.toThrow(UnauthorizedError);
     });
   });
 });

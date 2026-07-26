@@ -9,7 +9,6 @@ import {
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
 import { useDeleteClient } from "../DeleteClientContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateClientPublicLink } from "../UpdateClientPublicLinkContext";
 
 interface ClientPublicLinkDetailInfoAltProps {
@@ -20,8 +19,6 @@ export function ClientPublicLinkDetailInfoAlt({
   publicLink,
 }: ClientPublicLinkDetailInfoAltProps) {
   const t = useTranslations("dashboard.clients.ClientDetail");
-
-  const guestGuard = useGuestModalGuard();
 
   const { onOpenChange: onUpdatePublicLinkModalOpenChange } = useModal(
     "updateClientPublicLink",
@@ -35,7 +32,7 @@ export function ClientPublicLinkDetailInfoAlt({
     useUpdateClientPublicLink();
 
   const handlePress = () => {
-    guestGuard(() => onUpdatePublicLinkModalOpenChange(true));
+    onUpdatePublicLinkModalOpenChange(true);
   };
 
   return (

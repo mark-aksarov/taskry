@@ -94,9 +94,6 @@
     "GetStartedAction": {
       "label": "Начать"
     },
-    "DemoAction": {
-      "label": "Открыть демо"
-    },
     "IntroSection": {
       "heading": {
         "line1": "Управление",

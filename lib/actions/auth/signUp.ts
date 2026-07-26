@@ -9,12 +9,11 @@ import {
 
 import * as z from "zod";
 import { auth } from "@/lib/auth";
-import prisma from "@/lib/prisma";
 import { ActionState } from "../types";
-import { APIError } from "better-auth";
 import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
+import { handleBetterAuthError } from "@/lib/utils/actionErrors";
 
 const schema = z.object({
   name: userFullName,
@@ -40,40 +39,31 @@ export async function signUp(
     };
   }
 
+  // Validation
+  const input = Object.fromEntries(formData.entries());
+  const result = schema.safeParse(input);
+
+  if (!result.success) {
+    return {
+      status: "error",
+      message: t("signUp.error.invalidData"),
+    };
+  }
+
+  // Sign up
   try {
-    const input = Object.fromEntries(formData.entries());
-    const parsedData = schema.parse(input);
-
-    // Create workspace
-    const workspace = await prisma.workspace.create({ data: {} });
-
-    // Create user
     await auth.api.signUpEmail({
       body: {
-        ...parsedData,
-        workspaceId: workspace.id,
-        callbackURL: "/dashboard",
+        ...result.data,
+        callbackURL: "/create-organization",
       },
       headers: await headers(),
     });
   } catch (error: unknown) {
-    console.error("Sign-up Error:", error);
-
-    //Better auth error
-    if (error instanceof APIError) {
-      return {
-        status: "error",
-        message: error.message,
-      };
-    }
-
-    return {
-      status: "error",
-      message: t("signUp.error.internalServerError"),
-    };
+    return handleBetterAuthError(error, t("signUp.error.internalServerError"));
   }
 
-  //we cannot call redirect in try/catch block
+  // Success
   redirect({ href: "/verify-email", locale });
 
   return {

@@ -3,7 +3,8 @@ import {
   accounts,
   companies,
   positions,
-  workspaces,
+  organizations,
+  members,
 } from "@/prisma/seed/test-data";
 
 describe("delete company", () => {
@@ -14,13 +15,14 @@ describe("delete company", () => {
       users,
       accounts,
       positions,
-      workspaces,
+      organizations,
+      members,
       companies: [
         ...companies,
         {
           id: 3,
           name: "Company 3",
-          workspaceId: 1,
+          organizationId: "org-1",
         },
       ],
     };

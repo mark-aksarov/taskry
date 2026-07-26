@@ -1,42 +1,58 @@
 "use server";
 
-import { APIError } from "better-auth";
-import { userId } from "@/lib/schemas/user";
 import { redirect } from "@/i18n/navigation";
 import { ActionState, DeleteUserPayload } from "../types";
+import { userId as userIdSchema } from "@/lib/schemas/user";
 import { getLocale, getTranslations } from "next-intl/server";
-import { deleteUser as deleteUserService } from "@/lib/data/user/user.service";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { deleteUser as deleteUserQuery } from "@/lib/data/user/user.dal";
 
 export async function deleteUser(
   payload: DeleteUserPayload,
 ): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  const { session } = await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
+  const internalServerError = t("user.delete.error.internalServerError");
 
-  try {
-    const parsedId = userId.parse(payload.id);
-    await deleteUserService(parsedId);
-  } catch (error) {
-    console.error("Server Action Error:", error);
+  // Get active organization
+  const organizationId = session.activeOrganizationId;
 
-    if (error instanceof APIError) {
-      return {
-        status: "error",
-        message: error.message,
-      };
-    }
-
+  if (!organizationId) {
     return {
       status: "error",
-      message: t("user.delete.error.internalServerError"),
+      message: internalServerError,
     };
   }
 
+  // Validation
+  const result = userIdSchema.safeParse(payload.id);
+
+  if (!result.success) {
+    return {
+      status: "error",
+      // Show a generic error because the user cannot fix invalid id manually
+      message: internalServerError,
+    };
+  }
+
+  // Delete user from database
+  const userId = result.data;
+
+  try {
+    await deleteUserQuery(userId);
+  } catch {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  // Success
   const locale = await getLocale();
 
+  // Redirect to team page when user is deleted from profile page
   if (payload.shouldRedirect) {
     redirect({ href: "/team", locale });
   }

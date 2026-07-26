@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 import { Prisma } from "@/generated/prisma/client";
 
 export interface TestSeedPayload {
-  workspaces?: Prisma.WorkspaceCreateManyInput[];
+  organizations?: Prisma.OrganizationCreateManyInput[];
   companies?: Prisma.CompanyCreateManyInput[];
   clients?: Prisma.ClientCreateManyInput[];
   projectCategories?: Prisma.ProjectCategoryCreateManyInput[];
@@ -11,6 +11,7 @@ export interface TestSeedPayload {
   tasks?: Prisma.TaskCreateManyInput[];
   subtasks?: Prisma.SubtaskCreateManyInput[];
   users?: Prisma.UserCreateManyInput[];
+  members?: Prisma.MemberCreateManyInput[];
   accounts?: Prisma.AccountCreateManyInput[];
   positions?: Prisma.PositionCreateManyInput[];
   comments?: Prisma.CommentCreateManyInput[];
@@ -18,11 +19,10 @@ export interface TestSeedPayload {
 }
 
 export async function seed(payload: TestSeedPayload) {
-  if (payload.workspaces) {
-    await prisma.workspace.createMany({
-      data: payload.workspaces,
+  if (payload.organizations) {
+    await prisma.organization.createMany({
+      data: payload.organizations,
     });
-    await syncSequence("workspace");
   }
 
   if (payload.positions) {
@@ -35,6 +35,12 @@ export async function seed(payload: TestSeedPayload) {
   if (payload.users) {
     await prisma.user.createMany({
       data: payload.users,
+    });
+  }
+
+  if (payload.members) {
+    await prisma.member.createMany({
+      data: payload.members,
     });
   }
 

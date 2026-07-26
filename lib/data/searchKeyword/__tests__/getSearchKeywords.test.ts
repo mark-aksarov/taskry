@@ -1,21 +1,29 @@
+import {
+  users,
+  members,
+  positions,
+  organizations,
+  searchKeywords,
+} from "@/prisma/seed/test-data";
 import { seed } from "@/prisma/test-seed";
+import { setupAuth } from "@/lib/test-utils/auth";
 import { getSearchKeywords } from "../searchKeyword.dal";
 import { it, expect, describe, beforeAll } from "vitest";
-import { searchKeywords } from "@/prisma/seed/test-data";
-import { requireSession } from "@/lib/data/utils/requireSession";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 
 describe("getSearchKeywords", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
+      organizations,
+      members,
+      positions,
+      users,
       searchKeywords,
     });
+
+    await setupAuth("user-1");
   });
 
   it("should return most popular search keywords", async () => {

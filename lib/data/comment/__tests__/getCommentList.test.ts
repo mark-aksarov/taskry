@@ -1,3 +1,4 @@
+import { members } from "@/prisma/seed/test-data";
 import {
   users,
   tasks,
@@ -6,7 +7,7 @@ import {
   positions,
   companies,
   clients,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
 } from "@/prisma/seed/test-data";
@@ -14,19 +15,16 @@ import {
 import { getCommentList } from "../comment.dal";
 import { describe, beforeAll, it, expect } from "vitest";
 import { seed } from "@/prisma/test-seed";
-import { requireSession } from "@/lib/data/utils/requireSession";
+import { loginAs } from "@/lib/test-utils/auth";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 
 describe("getCommentList", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
@@ -37,6 +35,8 @@ describe("getCommentList", () => {
       tasks,
       comments,
     });
+
+    await loginAs("user-1");
   });
 
   it("should return all comments for a task as a list of valid CommentListItemDTOs", async () => {

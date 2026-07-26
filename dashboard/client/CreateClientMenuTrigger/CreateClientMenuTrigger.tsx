@@ -5,7 +5,6 @@ import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Building2, Contact } from "lucide-react";
 import { useModal } from "@/common/ModalManagerContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 import { CreateNewMenuTrigger } from "@/dashboard/common/CreateNewMenuTrigger";
 
@@ -18,9 +17,6 @@ export function CreateClientMenuTrigger({
 }: CreateClientMenuTriggerProps) {
   const t = useTranslations("dashboard.clients.CreateClientMenuTrigger");
 
-  // Show guest modal for guests
-  const guestGuard = useGuestModalGuard();
-
   // Create company modal state
   const { onOpenChange: onCreateCompanyModalOpenChange } =
     useModal("createCompany");
@@ -30,18 +26,14 @@ export function CreateClientMenuTrigger({
     useModal("createClient");
 
   /**
-   * Handles menu actions for creating a client or company
-   * - If user is a guest, show guest modal
-   * - Otherwise, open create company modal or create client modal
+   * Open create company modal or create client modal
    */
   function handleAction(key: Key) {
-    guestGuard(() => {
-      if (key === "client") {
-        onCreateClientModalOpenChange(true);
-      } else if (key === "company") {
-        onCreateCompanyModalOpenChange(true);
-      }
-    });
+    if (key === "client") {
+      onCreateClientModalOpenChange(true);
+    } else if (key === "company") {
+      onCreateCompanyModalOpenChange(true);
+    }
   }
 
   return (
@@ -54,11 +46,11 @@ export function CreateClientMenuTrigger({
         renderButton={renderButton}
       >
         <Item textValue={t("items.client")} key="client">
-          <Contact    />
+          <Contact />
           {t("items.client")}
         </Item>
         <Item textValue={t("items.company")} key="company">
-          <Building2    />
+          <Building2 />
           {t("items.company")}
         </Item>
       </CreateNewMenuTrigger>

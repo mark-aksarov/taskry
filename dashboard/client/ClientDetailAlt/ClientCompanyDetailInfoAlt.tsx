@@ -9,7 +9,6 @@ import {
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
 import { useDeleteClient } from "../DeleteClientContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateClientCompany } from "../UpdateClientCompanyContext";
 
 interface ClientCompanyDetailInfoAltProps {
@@ -23,8 +22,6 @@ export function ClientCompanyDetailInfoAlt({
 }: ClientCompanyDetailInfoAltProps) {
   const t = useTranslations("dashboard.clients.ClientDetail");
 
-  const guestGuard = useGuestModalGuard();
-
   const { onOpenChange: onUpdatePositionModalOpenChange } = useModal(
     "updateClientCompany",
   );
@@ -33,11 +30,10 @@ export function ClientCompanyDetailInfoAlt({
   const { isPending: isDeleteClientPending } = useDeleteClient();
 
   //Pending state while updating client company
-  const { isPending: isUpdateClientCompanyPending } =
-    useUpdateClientCompany();
+  const { isPending: isUpdateClientCompanyPending } = useUpdateClientCompany();
 
   const handlePress = () => {
-    guestGuard(() => onUpdatePositionModalOpenChange(true));
+    onUpdatePositionModalOpenChange(true);
   };
 
   return (

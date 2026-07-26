@@ -1,7 +1,7 @@
 import { FinalCtaSection } from "./FinalCtaSection";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 
 const meta = {
@@ -9,7 +9,7 @@ const meta = {
   component: FinalCtaSection,
   decorators: [
     withModalManagerProvider,
-    withCurrentUserProvider,
+    withSessionProvider,
     withThemedBackground,
   ],
   parameters: {

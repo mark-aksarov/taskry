@@ -21,7 +21,6 @@ import { getTaskCount, getTaskList } from "@/lib/data/task/task.dal";
 import { TaskFiltersModal } from "@/dashboard/tasks/TaskFiltersModal";
 import { DeleteTasksModal } from "@/dashboard/tasks/DeleteTasksModal";
 import { ImportTasksModal } from "@/dashboard/tasks/ImportTasksModal";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { TaskGridContainer } from "@/dashboard/tasks/TaskGridContainer";
 import { CreateTaskProvider } from "@/dashboard/tasks/CreateTaskProvider";
 import { TaskFiltersProvider } from "@/dashboard/tasks/TaskFiltersContext";
@@ -31,6 +30,7 @@ import { AssigneeFiltersModal } from "@/dashboard/tasks/AssigneeFiltersModal";
 import { SelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext";
 import { getTaskCategoryCount } from "@/lib/data/taskCategory/taskCategory.dal";
 import { TaskStatusFiltersModal } from "@/dashboard/tasks/TaskStatusFiltersModal";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { TaskProjectFiltersModal } from "@/dashboard/tasks/TaskProjectFiltersModal";
 import { CreateTaskFormContainer } from "@/dashboard/tasks/CreateTaskFormContainer";
 import { TaskCategoryFiltersModal } from "@/dashboard/tasks/TaskCategoryFiltersModal";
@@ -74,7 +74,7 @@ export default async function AppTasksPage({
 }: {
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
-  await requireProtectedPageSession();
+  await verifyProtectedPageSession();
 
   // Validation
   const rawParams = await searchParams;

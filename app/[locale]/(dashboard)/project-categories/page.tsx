@@ -2,7 +2,7 @@ import { ProjectCategoriesPage } from "./ProjectCategoriesPage";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
 import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
 import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { getProjectCategories } from "@/lib/data/projectCategory/projectCategory.dal";
 import { ProjectCategoriesContainer } from "@/dashboard/projectCategory/ProjectCategoriesContainer";
 import { CreateProjectCategoryModal } from "@/dashboard/projectCategory/CreateProjectCategoryModal";
@@ -14,7 +14,7 @@ import { ImportProjectCategoriesProvider } from "@/dashboard/projectCategory/Imp
 
 export default async function AppProjectCategoriesPage() {
   // Authorization
-  await requireProtectedPageSession();
+  await verifyProtectedPageSession();
 
   const projectCategories = await getProjectCategories();
 

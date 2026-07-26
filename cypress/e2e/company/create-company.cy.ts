@@ -2,7 +2,8 @@ import {
   users,
   accounts,
   positions,
-  workspaces,
+  organizations,
+  members,
 } from "@/prisma/seed/test-data";
 
 describe("Company creation", () => {
@@ -10,7 +11,8 @@ describe("Company creation", () => {
     cy.viewport(1440, 900);
 
     const payload = {
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       accounts,

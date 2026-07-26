@@ -3,7 +3,6 @@
 import dynamic from "next/dynamic";
 import { ProjectGrid } from "./ProjectGrid/ProjectGrid";
 import { DeleteProjectModal } from "./DeleteProjectModal";
-import { GuestModeModal } from "../common/GuestModeModal";
 import { UpdateProjectModal } from "./UpdateProjectModal";
 import { ProjectListItemSkeleton } from "./ProjectListItem";
 import { ProjectCommentsModal } from "./ProjectCommentsModal";
@@ -147,8 +146,6 @@ export function ProjectGridContainer({ projects }: ProjectGridContainerProps) {
                 </UpdateProjectStatusProvider>
               </DeleteProjectProvider>
             </UpdateProjectProvider>
-
-            <GuestModeModal />
           </ModalManagerProvider>
         );
       })}

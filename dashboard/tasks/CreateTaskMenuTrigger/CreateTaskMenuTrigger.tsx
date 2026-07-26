@@ -5,7 +5,6 @@ import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Blocks, CalendarCheck } from "lucide-react";
 import { useModal } from "@/common/ModalManagerContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 import { CreateNewMenuTrigger } from "@/dashboard/common/CreateNewMenuTrigger";
 
@@ -18,9 +17,6 @@ export function CreateTaskMenuTrigger({
 }: CreateTaskMenuTriggerProps) {
   const t = useTranslations("dashboard.tasks.CreateTaskMenuTrigger");
 
-  // Show guest modal for guests
-  const guestGuard = useGuestModalGuard();
-
   // Create create task category form modal state
   const { onOpenChange: onCreateTaskCategoryModalOpenChange } =
     useModal("createTaskCategory");
@@ -29,18 +25,14 @@ export function CreateTaskMenuTrigger({
   const { onOpenChange: onCreateTaskModalOpenChange } = useModal("createTask");
 
   /**
-   * Handles menu actions for creating a task or task category
-   * - If user is a guest, show guest modal
-   * - Otherwise, open create task category modal or create task modal
+   * Open create task category modal or create task modal
    */
   function handleAction(key: Key) {
-    guestGuard(() => {
-      if (key === "task") {
-        onCreateTaskModalOpenChange(true);
-      } else if (key === "category") {
-        onCreateTaskCategoryModalOpenChange(true);
-      }
-    });
+    if (key === "task") {
+      onCreateTaskModalOpenChange(true);
+    } else if (key === "category") {
+      onCreateTaskCategoryModalOpenChange(true);
+    }
   }
 
   return (
@@ -53,11 +45,11 @@ export function CreateTaskMenuTrigger({
         renderButton={renderButton}
       >
         <Item textValue={t("items.task")} key="task">
-          <CalendarCheck    />
+          <CalendarCheck />
           {t("items.task")}
         </Item>
         <Item textValue={t("items.category")} key="category">
-          <Blocks    />
+          <Blocks />
           {t("items.category")}
         </Item>
       </CreateNewMenuTrigger>

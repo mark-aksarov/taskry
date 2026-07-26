@@ -12,12 +12,12 @@ import { AppSidebarHeader } from "./AppSidebarHeader";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Dialog, DialogCloseButton } from "@/ui/Dialog";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 
 const meta = {
   title: "dashboard/layout/AppSidebar",
   component: AppSidebar,
-  decorators: [withCurrentUserProvider, withThemedBackground],
+  decorators: [withSessionProvider, withThemedBackground],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/dashboard");
   },

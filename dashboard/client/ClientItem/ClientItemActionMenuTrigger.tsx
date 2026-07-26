@@ -9,9 +9,8 @@ import {
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
-import { useClientItemPending } from "./useClientItemPending";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useModal } from "@/common/ModalManagerContext";
+import { useClientItemPending } from "./useClientItemPending";
 
 export type ClientItemActionMenuTriggerProps = {
   clientId: number;
@@ -22,12 +21,7 @@ export function ClientItemActionMenuTrigger({
   clientId,
   className,
 }: ClientItemActionMenuTriggerProps) {
-  const t = useTranslations(
-    "dashboard.clients.ClientItemActionMenuTrigger",
-  );
-
-  // Show guest modal for guests
-  const guestGuard = useGuestModalGuard();
+  const t = useTranslations("dashboard.clients.ClientItemActionMenuTrigger");
 
   // Delete confirmation modal state
   const { onOpenChange: onDeleteModalOpenChange } = useModal("deleteClient");
@@ -36,18 +30,14 @@ export function ClientItemActionMenuTrigger({
   const { onOpenChange: onUpdateModalOpenChange } = useModal("updateClient");
 
   /**
-   * Handles menu actions for a client item
-   * - If user is a guest, show guest modal
-   * - Otherwise, open edit or delete modal based on action key
+   * Open edit or delete modal based on action key
    */
   function handleAction(key: Key) {
-    guestGuard(() => {
-      if (key === "edit") {
-        onUpdateModalOpenChange(true);
-      } else if (key === "delete") {
-        onDeleteModalOpenChange(true);
-      }
-    });
+    if (key === "edit") {
+      onUpdateModalOpenChange(true);
+    } else if (key === "delete") {
+      onDeleteModalOpenChange(true);
+    }
   }
 
   //Pending state while deleting or updating
@@ -67,10 +57,10 @@ export function ClientItemActionMenuTrigger({
       )}
     >
       <Item textValue={t("edit")} key="edit">
-        <Pencil  /> {t("edit")}
+        <Pencil /> {t("edit")}
       </Item>
       <Item textValue={t("delete")} key="delete">
-        <Trash  /> {t("delete")}
+        <Trash /> {t("delete")}
       </Item>
     </ItemBaseActionMenuTrigger>
   );

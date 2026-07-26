@@ -13,7 +13,8 @@ export async function resetDatabase() {
     "company",
     "user",
     "position",
-    "workspace",
+    "organization",
+    "member",
     "account"
     RESTART IDENTITY CASCADE;
   `);

@@ -2,6 +2,7 @@ import { vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@/lib/data/utils/requireSession", () => ({
-  requireSession: vi.fn(),
+vi.mock(import("next/headers"), () => ({
+  headers: vi.fn(),
+  cookies: vi.fn(),
 }));

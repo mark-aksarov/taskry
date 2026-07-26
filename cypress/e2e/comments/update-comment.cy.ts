@@ -7,7 +7,8 @@ import {
   positions,
   companies,
   clients,
-  workspaces,
+  organizations,
+  members,
   taskCategories,
   projectCategories,
 } from "@/prisma/seed/test-data";
@@ -17,7 +18,8 @@ describe("update a comment", () => {
     cy.viewport(1440, 900);
 
     const payload = {
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       accounts,
@@ -83,14 +85,5 @@ describe("update a comment", () => {
     cy.visit("/en/tasks");
     cy.getByData("task-comments-modal-trigger", "1").click();
     cy.getByData("comment-item-action-menu-trigger", "2").should("not.exist");
-  });
-
-  it("cannot delete a comment in guest mode", () => {
-    cy.signIn("user-3@test.com", "12345abc");
-    cy.visit("/en/projects");
-    cy.getByData("project-comments-modal-trigger", "1").click();
-    cy.getByData("comment-item-action-menu-trigger", "1").click();
-    cy.getMenuItem("edit").click();
-    cy.getByData("guest-mode-modal").should("be.visible");
   });
 });

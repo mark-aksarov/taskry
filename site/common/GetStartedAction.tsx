@@ -1,73 +1,41 @@
 "use client";
 
+import React from "react";
 import { useTranslations } from "next-intl";
-import React, { useTransition } from "react";
-import { useRouter } from "@/i18n/navigation";
-import { ActionState } from "@/lib/actions/types";
-import { useAddErrorToast } from "@/lib/hooks/useAddErrorToast";
-import { useCurrentUser } from "@/common/CurrentUserContext";
+import { PageSectionActionLink } from "./PageSection";
+import { useSession } from "@/common/SessionContext";
+import { ButtonLinkProps } from "@/ui/Button/ButtonLink";
 
-interface ButtonProps {
-  isPending: boolean;
-  handlePress: () => void;
-  label: string;
-}
+type GetStartedActionProps = Pick<ButtonLinkProps, "className" | "size">;
 
-interface LinkProps {
-  href: string;
-  label: string;
-}
-
-interface GetStartedActionProps {
-  signOut: () => Promise<ActionState>;
-  renderButton: (props: ButtonProps) => React.ReactNode;
-  renderLink: (props: LinkProps) => React.ReactNode;
-}
-
-export function GetStartedAction({
-  signOut,
-  renderButton,
-  renderLink,
-}: GetStartedActionProps) {
+export function GetStartedAction({ className, size }: GetStartedActionProps) {
   const t = useTranslations("site.home.GetStartedAction");
-  const [isPending, startTransition] = useTransition();
-  const addErrorToast = useAddErrorToast();
-  const router = useRouter();
-  const { isGuest, isEmailVerified, userId } = useCurrentUser();
 
-  function handlePress() {
-    startTransition(async () => {
-      const result = await signOut();
+  const session = useSession();
+  const emailVerified = session?.user.emailVerified;
+  const organizationId = session?.session.activeOrganizationId;
 
-      if (result.status === "error") {
-        addErrorToast(result.message!);
-        return;
-      }
+  // If user is not signed in, redirect to the sign-in page
+  // If user is signed in but email is not verified, redirect to the email verification page
+  // If user is signed in and email is verified but has no organization, redirect to the organization creation page
+  // If user is signed in, email is verified, and has an organization, redirect to the dashboard
+  let href = "/dashboard";
 
-      router.push("/sign-in");
-    });
+  if (!session) {
+    href = "/sign-in";
+  } else if (!emailVerified) {
+    href = "/verify-email";
+  } else if (!organizationId) {
+    href = "/create-organization";
   }
 
-  // If the user is not a guest, we redirect to sign-in page
-  if (isGuest) {
-    return renderButton({
-      isPending,
-      handlePress,
-      label: t("label"),
-    });
-  }
-
-  // If user is not signed in, we redirect to sign-in page
-  // If user is signed in and email is not verified, we redirect to verify-email page
-  // If user is signed in and email is verified, we redirect to dashboard
-  const href = !userId
-    ? "/sign-in"
-    : isEmailVerified
-      ? "/dashboard"
-      : "/verify-email";
-
-  return renderLink({
-    href,
-    label: t("label"),
-  });
+  return (
+    <PageSectionActionLink
+      href={href}
+      size={size}
+      variant="accent"
+      label={t("label")}
+      className={className}
+    />
+  );
 }

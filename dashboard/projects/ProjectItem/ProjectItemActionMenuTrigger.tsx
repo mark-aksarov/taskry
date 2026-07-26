@@ -9,10 +9,9 @@ import {
 import { startTransition } from "react";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
+import { useModal } from "@/common/ModalManagerContext";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { useProjectItemPending } from "./useProjectItemPending";
-import { useModal } from "@/common/ModalManagerContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateProjectStatus } from "../UpdateProjectStatusContext";
 import { Trash, Check, Clock, Pencil, CircleEllipsis } from "lucide-react";
 
@@ -29,9 +28,6 @@ export function ProjectItemActionMenuTrigger({
 }: ProjectItemActionMenuTriggerProps) {
   const t = useTranslations("dashboard.projects.ProjectItemActionMenuTrigger");
 
-  // Show guest modal for guests
-  const guestGuard = useGuestModalGuard();
-
   // Delete confirmation modal state
   const { onOpenChange: onDeleteModalOpenChange } = useModal("deleteProject");
 
@@ -46,29 +42,26 @@ export function ProjectItemActionMenuTrigger({
 
   /**
    * Handles menu actions for a project item:
-   * If the user is a guest, show the guest mode modal.
    * If action is "edit", open the edit modal.
    * If action is "delete", open the delete confirmation modal.
    * Otherwise, treat the action as a project status update
    *    and trigger the updateProjectStatusAction for this project.
    */
   const handleAction = (key: Key) => {
-    guestGuard(() => {
-      const action = key.toString();
+    const action = key.toString();
 
-      if (action === "edit") {
-        onUpdateModalOpenChange(true);
-      } else if (action === "delete") {
-        onDeleteModalOpenChange(true);
-      } else {
-        startTransition(() => {
-          updateProjectStatusAction({
-            id: projectId,
-            nextStatus: action as ProjectStatus,
-          });
+    if (action === "edit") {
+      onUpdateModalOpenChange(true);
+    } else if (action === "delete") {
+      onDeleteModalOpenChange(true);
+    } else {
+      startTransition(() => {
+        updateProjectStatusAction({
+          id: projectId,
+          nextStatus: action as ProjectStatus,
         });
-      }
-    });
+      });
+    }
   };
 
   // Disable status-related menu items while a project update is in progress,
@@ -95,19 +88,19 @@ export function ProjectItemActionMenuTrigger({
       )}
     >
       <Item textValue={t("edit")} key="edit">
-        <Pencil  /> {t("edit")}
+        <Pencil /> {t("edit")}
       </Item>
       <Item textValue={t("delete")} key="delete">
-        <Trash  /> {t("delete")}
+        <Trash /> {t("delete")}
       </Item>
       <Item textValue={t("markPending")} key="pending">
-        <CircleEllipsis  /> {t("markPending")}
+        <CircleEllipsis /> {t("markPending")}
       </Item>
       <Item textValue={t("markActive")} key="active">
-        <Clock  /> {t("markActive")}
+        <Clock /> {t("markActive")}
       </Item>
       <Item textValue={t("markCompleted")} key="completed">
-        <Check  /> {t("markCompleted")}
+        <Check /> {t("markCompleted")}
       </Item>
     </ItemBaseActionMenuTrigger>
   );

@@ -10,7 +10,6 @@ import { UnknownUser } from "@/dashboard/common/UnknownUser";
 import { useCommentItemPending } from "./useCommentItemPending";
 import { ImageContainer } from "@/dashboard/common/ImageContainer";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
-import { useCurrentUser } from "@/common/CurrentUserContext";
 import { CommentItemActionMenuTrigger } from "./CommentItemActionMenuTrigger";
 
 interface CommentItemProps {
@@ -59,8 +58,6 @@ const CommentItemInner = memo(function CommentItemInner({
     hour12: locale === "en" ? true : false,
   });
 
-  const { isGuest } = useCurrentUser();
-
   return (
     <CommentItemLayout
       className={isPending ? "*:opacity-50" : undefined}
@@ -100,7 +97,7 @@ const CommentItemInner = memo(function CommentItemInner({
         </>
       }
       menuTriggerSlot={
-        (canEdit || isGuest) && (
+        canEdit && (
           <CommentItemActionMenuTrigger
             commentId={id}
             commentContent={content}

@@ -4,7 +4,7 @@ import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
 import { projectCategoryId } from "@/lib/schemas/projectCategory";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { deleteProjectCategories as deleteProjectCategoriesQuery } from "@/lib/data/projectCategory/projectCategory.dal";
 
 const projectCategoryIds = z.array(projectCategoryId).min(1);
@@ -13,7 +13,7 @@ export async function deleteProjectCategories(
   ids: number[],
 ): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
 

@@ -1,3 +1,12 @@
-export function AuthCardBody({ children }: { children: React.ReactNode }) {
-  return <div className="flex flex-col gap-6">{children}</div>;
+import { twMerge } from "tailwind-merge";
+
+interface AuthCardBodyProps {
+  className?: string;
+  children: React.ReactNode;
+}
+
+export function AuthCardBody({ className, children }: AuthCardBodyProps) {
+  return (
+    <div className={twMerge("flex flex-col gap-6", className)}>{children}</div>
+  );
 }

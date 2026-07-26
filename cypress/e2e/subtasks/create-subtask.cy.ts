@@ -6,7 +6,8 @@ import {
   positions,
   companies,
   clients,
-  workspaces,
+  organizations,
+  members,
   taskCategories,
   projectCategories,
 } from "@/prisma/seed/test-data";
@@ -23,7 +24,8 @@ describe("Subtask creation", () => {
       positions,
       companies,
       clients,
-      workspaces,
+      organizations,
+      members,
       taskCategories,
       projectCategories,
     };

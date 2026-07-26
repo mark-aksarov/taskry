@@ -3,12 +3,11 @@
 import { Key } from "react-aria";
 import { Item } from "react-stately";
 import { useTranslations } from "next-intl";
+import { useRole } from "@/common/RoleContext";
 import { BriefcaseBusiness, Users } from "lucide-react";
 import { useModal } from "@/common/ModalManagerContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { useCurrentUser } from "@/common/CurrentUserContext";
-import { CreateNewMenuTrigger } from "@/dashboard/common/CreateNewMenuTrigger";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
+import { CreateNewMenuTrigger } from "@/dashboard/common/CreateNewMenuTrigger";
 
 interface CreateUserMenuTriggerProps {
   renderButton: () => React.ReactNode;
@@ -19,10 +18,7 @@ export function CreateUserMenuTrigger({
 }: CreateUserMenuTriggerProps) {
   const t = useTranslations("dashboard.users.CreateUserMenuTrigger");
 
-  const { isOwner, isGuest } = useCurrentUser();
-
-  // Show guest modal for guests
-  const guestGuard = useGuestModalGuard();
+  const role = useRole();
 
   // Create position form modal state
   const { onOpenChange: onCreatePositionModalOpenChange } =
@@ -32,22 +28,18 @@ export function CreateUserMenuTrigger({
   const { onOpenChange: onCreateUserModalOpenChange } = useModal("createUser");
 
   /**
-   * Handles menu actions for creating a user or position
-   * - If user is a guest, show guest modal
-   * - Otherwise, open create position modal or create user modal
+   * Open create position modal or create user modal
    */
   function handleAction(key: Key) {
-    guestGuard(() => {
-      if (key === "user") {
-        onCreateUserModalOpenChange(true);
-      } else if (key === "position") {
-        onCreatePositionModalOpenChange(true);
-      }
-    });
+    if (key === "user") {
+      onCreateUserModalOpenChange(true);
+    } else if (key === "position") {
+      onCreatePositionModalOpenChange(true);
+    }
   }
 
-  // We show the user menu item only for owners and guests
-  const showCreateCreateUserMenuItem = isOwner || isGuest;
+  // We show the user menu item only for owners
+  const showCreateCreateUserMenuItem = role === "owner";
 
   return (
     <>
@@ -60,12 +52,12 @@ export function CreateUserMenuTrigger({
       >
         {showCreateCreateUserMenuItem ? (
           <Item textValue={t("items.user")} key="user">
-            <Users    />
+            <Users />
             {t("items.user")}
           </Item>
         ) : null}
         <Item textValue={t("items.position")} key="position">
-          <BriefcaseBusiness    />
+          <BriefcaseBusiness />
           {t("items.position")}
         </Item>
       </CreateNewMenuTrigger>

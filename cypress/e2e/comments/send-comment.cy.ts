@@ -6,7 +6,8 @@ import {
   positions,
   companies,
   clients,
-  workspaces,
+  organizations,
+  members,
   taskCategories,
   projectCategories,
 } from "@/prisma/seed/test-data";
@@ -16,7 +17,8 @@ describe("send comments", () => {
     cy.viewport(1440, 900);
 
     const payload = {
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       accounts,

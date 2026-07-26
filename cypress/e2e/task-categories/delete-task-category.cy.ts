@@ -2,7 +2,8 @@ import {
   users,
   accounts,
   positions,
-  workspaces,
+  organizations,
+  members,
 } from "@/prisma/seed/test-data";
 
 describe("delete task category", () => {
@@ -13,10 +14,11 @@ describe("delete task category", () => {
       users,
       accounts,
       positions,
-      workspaces,
+      organizations,
+      members,
       taskCategories: [
-        { id: 1, name: "Task Category 1", workspaceId: 1 },
-        { id: 2, name: "Task Category 2", workspaceId: 1 },
+        { id: 1, name: "Task Category 1", organizationId: "org-1" },
+        { id: 2, name: "Task Category 2", organizationId: "org-1" },
       ],
     };
 

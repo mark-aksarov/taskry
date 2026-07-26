@@ -1,29 +1,27 @@
+import { members } from "@/prisma/seed/test-data";
 import {
   users,
   companies,
   clients,
   positions,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
 } from "@/prisma/seed/test-data";
 
 import { seed } from "@/prisma/test-seed";
+import { setupAuth } from "@/lib/test-utils/auth";
 import { getClientSummaries } from "../client.dal";
 import { it, expect, describe, beforeAll } from "vitest";
-import { requireSession } from "@/lib/data/utils/requireSession";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 
 describe("getClientSummaries", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
@@ -31,6 +29,8 @@ describe("getClientSummaries", () => {
       taskCategories,
       projectCategories,
     });
+
+    await setupAuth("user-1");
   });
 
   it("should return all clients", async () => {

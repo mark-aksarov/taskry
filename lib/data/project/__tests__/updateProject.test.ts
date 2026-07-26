@@ -3,31 +3,34 @@ import {
   positions,
   companies,
   clients,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
 } from "@/prisma/seed/test-data";
 
+import {
+  NotFoundError,
+  AccessDeniedError,
+  UnauthorizedError,
+} from "../../utils/error";
+
 import prisma from "@/lib/prisma";
-import { updateProject } from "../project.dal";
 import { seed } from "@/prisma/test-seed";
+import { updateProject } from "../project.dal";
+import { setupAuth } from "@/lib/test-utils/auth";
+import { members } from "@/prisma/seed/test-data";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { requireSession } from "@/lib/data/utils/requireSession";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
-import { AccessDeniedError, NotFoundError } from "../../utils/error";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 describe("updateProject", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
@@ -35,6 +38,8 @@ describe("updateProject", () => {
       taskCategories,
       projectCategories,
     });
+
+    await setupAuth("user-1");
   });
 
   afterEach(async () => {
@@ -57,7 +62,7 @@ describe("updateProject", () => {
       data: {
         ...projectData,
         deadline: new Date(deadlineIso),
-        workspaceId: 1,
+        organizationId: "org-1",
       },
     });
 
@@ -88,7 +93,7 @@ describe("updateProject", () => {
       data: {
         ...projectData,
         deadline: new Date(deadlineIso),
-        workspaceId: 1,
+        organizationId: "org-1",
       },
     });
 
@@ -120,7 +125,7 @@ describe("updateProject", () => {
       data: {
         ...projectData,
         deadline: new Date(deadlineIso),
-        workspaceId: 1,
+        organizationId: "org-1",
       },
     });
 
@@ -134,7 +139,7 @@ describe("updateProject", () => {
     await expect(updateProjectPromise).rejects.toThrow(/Client not found/i);
   });
 
-  it("should throw error if category does not belong to the workspace", async () => {
+  it("should throw error if category does not belong to the organization", async () => {
     const deadlineIso = "2025-12-31";
 
     const projectData = {
@@ -150,7 +155,7 @@ describe("updateProject", () => {
       data: {
         ...projectData,
         deadline: new Date(deadlineIso),
-        workspaceId: 1,
+        organizationId: "org-1",
       },
     });
 
@@ -166,7 +171,7 @@ describe("updateProject", () => {
     );
   });
 
-  it("should throw error if client does not belong to the workspace", async () => {
+  it("should throw error if client does not belong to the organization", async () => {
     const deadlineIso = "2025-12-31";
 
     const projectData = {
@@ -182,7 +187,7 @@ describe("updateProject", () => {
       data: {
         ...projectData,
         deadline: new Date(deadlineIso),
-        workspaceId: 1,
+        organizationId: "org-1",
       },
     });
 
@@ -193,12 +198,10 @@ describe("updateProject", () => {
     });
 
     await expect(updateProjectPromise).rejects.toThrow(AccessDeniedError);
-    await expect(updateProjectPromise).rejects.toThrow(
-      /Client access denied/i,
-    );
+    await expect(updateProjectPromise).rejects.toThrow(/Client access denied/i);
   });
 
-  it("should throw an error when trying to update a project from another workspace", async () => {
+  it("should throw an error when trying to update a project from another organization", async () => {
     const deadlineIso = "2025-12-31";
 
     const projectData = {
@@ -215,7 +218,7 @@ describe("updateProject", () => {
       data: {
         ...projectData,
         deadline: new Date(deadlineIso),
-        workspaceId: 2,
+        organizationId: "org-2",
       },
     });
 
@@ -235,10 +238,8 @@ describe("updateProject", () => {
   });
 
   describe("RBAC: update project", () => {
-    const setup = async (userId: string, role: string) => {
-      (requireSession as any).mockResolvedValue({
-        user: { id: userId, workspaceId: 1, role },
-      });
+    const setup = async (userId?: string) => {
+      await setupAuth(userId);
       const deadlineIso = "2025-12-31";
 
       const projectData = {
@@ -254,7 +255,7 @@ describe("updateProject", () => {
         data: {
           ...projectData,
           deadline: new Date(deadlineIso),
-          workspaceId: 1,
+          organizationId: "org-1",
         },
       });
 
@@ -268,24 +269,24 @@ describe("updateProject", () => {
     };
 
     it("should succeed for owner", async () => {
-      const { updateInput } = await setup("user-1", "owner");
+      const { updateInput } = await setup("user-1");
       const result = await updateProject(updateInput);
       expect(result).toBeDefined();
       expect(result!.title).toBe(updateInput.title);
     });
 
-    it("should succeed for user", async () => {
-      const { updateInput } = await setup("user-2", "user");
+    it("should succeed for member", async () => {
+      const { updateInput } = await setup("user-2");
       const result = await updateProject(updateInput);
       expect(result).toBeDefined();
       expect(result!.title).toBe(updateInput.title);
     });
 
-    it("should fail for guest", async () => {
-      const { updateInput } = await setup("user-3", "guest");
+    it("should fail for anonymous", async () => {
+      const { updateInput } = await setup();
 
       await expect(updateProject(updateInput)).rejects.toThrow(
-        AccessDeniedError,
+        UnauthorizedError,
       );
     });
   });

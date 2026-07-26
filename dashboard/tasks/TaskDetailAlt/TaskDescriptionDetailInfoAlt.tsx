@@ -9,7 +9,6 @@ import {
 import { useTranslations } from "next-intl";
 import { useDeleteTask } from "../DeleteTaskContext";
 import { useModal } from "@/common/ModalManagerContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateTaskDescription } from "../UpdateTaskDescriptionContext";
 
 interface TaskDescriptionDetailInfoAltProps {
@@ -20,8 +19,6 @@ export function TaskDescriptionDetailInfoAlt({
   description,
 }: TaskDescriptionDetailInfoAltProps) {
   const t = useTranslations("dashboard.tasks.TaskDetail");
-
-  const guestGuard = useGuestModalGuard();
 
   const { onOpenChange: onUpdateDescriptionModalOpenChange } = useModal(
     "updateTaskDescription",
@@ -35,7 +32,7 @@ export function TaskDescriptionDetailInfoAlt({
     useUpdateTaskDescription();
 
   const handlePress = () => {
-    guestGuard(() => onUpdateDescriptionModalOpenChange(true));
+    onUpdateDescriptionModalOpenChange(true);
   };
 
   return (

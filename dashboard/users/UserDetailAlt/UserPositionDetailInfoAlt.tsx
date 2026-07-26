@@ -9,7 +9,6 @@ import {
 import { useTranslations } from "next-intl";
 import { useDeleteUser } from "../DeleteUserContext";
 import { useModal } from "@/common/ModalManagerContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateUserPosition } from "../UpdateUserPositionContext";
 
 interface UserPositionDetailInfoAltProps {
@@ -25,8 +24,6 @@ export function UserPositionDetailInfoAlt({
 }: UserPositionDetailInfoAltProps) {
   const t = useTranslations("dashboard.users.UserDetail");
 
-  const guestGuard = useGuestModalGuard();
-
   const { onOpenChange: onUpdatePositionModalOpenChange } =
     useModal("updateUserPosition");
 
@@ -37,7 +34,7 @@ export function UserPositionDetailInfoAlt({
   const { isPending: isUpdateUserPositionPending } = useUpdateUserPosition();
 
   const handlePress = () => {
-    guestGuard(() => onUpdatePositionModalOpenChange(true));
+    onUpdatePositionModalOpenChange(true);
   };
 
   return (

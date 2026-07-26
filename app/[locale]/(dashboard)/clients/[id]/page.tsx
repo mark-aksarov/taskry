@@ -7,12 +7,12 @@ import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
 import { ClientDetailActions } from "@/dashboard/client/ClientDetailActions";
 import { UpdateClientBioModal } from "@/dashboard/client/UpdateClientBioModal";
 import { DeleteClientProvider } from "@/dashboard/client/DeleteClientProvider";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { UpdateClientImageModal } from "@/dashboard/client/UpdateClientImageModal";
 import { UpdateClientEmailModal } from "@/dashboard/client/UpdateClientEmailModal";
 import { DeleteClientImageModal } from "@/dashboard/client/DeleteClientImageModal";
 import { UpdateClientBioProvider } from "@/dashboard/client/UpdateClientBioProvider";
 import { DeleteClientDetailModal } from "@/dashboard/client/DeleteClientDetailModal";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { ClientDetailAltContainer } from "@/dashboard/client/ClientDetailAltContainer";
 import { UpdateClientCompanyModal } from "@/dashboard/client/UpdateClientCompanyModal";
 import { UpdateClientEmailProvider } from "@/dashboard/client/UpdateClientEmailProvider";
@@ -34,7 +34,7 @@ export default async function AppClientDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  await requireProtectedPageSession();
+  await verifyProtectedPageSession();
 
   // Parse and validate
   const { id: rawClientId } = await params;

@@ -3,7 +3,7 @@ import { ProjectGridExample } from "./ProjectGridExample";
 import { DashboardGrid } from "@/dashboard/common/DashboardGrid";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withDeleteProjectsProvider } from "../../DeleteProjectsProvider/__stories__";
 import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
@@ -19,7 +19,7 @@ const meta = {
     withViewModeProvider,
     withPageTransitionProvider,
     withSelectedProjectsProvider,
-    withCurrentUserProvider,
+    withSessionProvider,
     withModalManagerProvider,
     withThemedBackground,
   ],

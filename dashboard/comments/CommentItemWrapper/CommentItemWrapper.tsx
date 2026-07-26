@@ -1,6 +1,5 @@
 import { DeleteCommentModal } from "../DeleteCommentModal";
 import { DeleteCommentProvider } from "../DeleteCommentProvider";
-import { GuestModeModal } from "@/dashboard/common/GuestModeModal";
 import { ModalManagerProvider } from "@/common/ModalManagerContext";
 
 interface CommentItemWrapperProps {
@@ -19,8 +18,6 @@ export function CommentItemWrapper({
 
         <DeleteCommentModal commentId={commentId} />
       </DeleteCommentProvider>
-
-      <GuestModeModal />
     </ModalManagerProvider>
   );
 }

@@ -3,30 +3,28 @@ import {
   positions,
   companies,
   clients,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
 } from "@/prisma/seed/test-data";
 
 import prisma from "@/lib/prisma";
-import { ProjectFilters } from "@/lib/types";
-import { getProjectList } from "../project.dal";
 import { seed } from "@/prisma/test-seed";
-import { requireSession } from "@/lib/data/utils/requireSession";
+import { ProjectFilters } from "@/lib/types";
+import { loginAs } from "@/lib/test-utils/auth";
+import { getProjectList } from "../project.dal";
+import { members } from "@/prisma/seed/test-data";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 import { it, expect, describe, beforeAll, afterEach, afterAll } from "vitest";
 
 describe("getProjectList", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
@@ -34,6 +32,8 @@ describe("getProjectList", () => {
       taskCategories,
       projectCategories,
     });
+
+    await loginAs("user-1");
   });
 
   it("should return a valid ProjectListDTO", async () => {
@@ -41,7 +41,7 @@ describe("getProjectList", () => {
       data: {
         id: 1,
         description: "Description 1",
-        workspaceId: 1,
+        organizationId: "org-1",
         title: "Project 1",
         deadline: new Date("2025-03-01"),
         creatorId: "user-1",
@@ -55,7 +55,7 @@ describe("getProjectList", () => {
       data: {
         id: 1,
         projectId: 1,
-        workspaceId: 1,
+        organizationId: "org-1",
         senderId: "user-1",
         content: "Comment 1",
       },
@@ -69,7 +69,7 @@ describe("getProjectList", () => {
           deadline: new Date(),
           projectId: 1,
           categoryId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
           status: TaskStatus.active,
           assigneeId: "user-1",
         },
@@ -79,7 +79,7 @@ describe("getProjectList", () => {
           deadline: new Date(),
           projectId: 1,
           categoryId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
           status: TaskStatus.completed,
           assigneeId: "user-1",
         },
@@ -155,7 +155,7 @@ describe("getProjectList", () => {
       data: [
         {
           id: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
           title: "Project 1",
           deadline: new Date("2025-03-01"),
           creatorId: "user-1",
@@ -165,7 +165,7 @@ describe("getProjectList", () => {
         },
         {
           id: 2,
-          workspaceId: 1,
+          organizationId: "org-1",
           title: "Project 2",
           deadline: new Date("2025-05-15"),
           creatorId: "user-1",
@@ -198,7 +198,7 @@ describe("getProjectList", () => {
         data: [
           {
             id: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project B",
             deadline: new Date("2025-03-01"),
             creatorId: "user-1",
@@ -208,7 +208,7 @@ describe("getProjectList", () => {
           },
           {
             id: 2,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project C",
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
@@ -218,7 +218,7 @@ describe("getProjectList", () => {
           },
           {
             id: 3,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project A",
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
@@ -245,7 +245,7 @@ describe("getProjectList", () => {
         data: [
           {
             id: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project A",
             deadline: new Date("2023-01-02"),
             creatorId: "user-1",
@@ -255,7 +255,7 @@ describe("getProjectList", () => {
           },
           {
             id: 2,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project B",
             deadline: new Date("2023-01-03"),
             creatorId: "user-1",
@@ -265,7 +265,7 @@ describe("getProjectList", () => {
           },
           {
             id: 3,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project C",
             deadline: new Date("2023-01-01"),
             creatorId: "user-1",
@@ -292,7 +292,7 @@ describe("getProjectList", () => {
         data: [
           {
             id: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project A",
             deadline: new Date(),
             creatorId: "user-1",
@@ -302,7 +302,7 @@ describe("getProjectList", () => {
           },
           {
             id: 2,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project B",
             deadline: new Date(),
             creatorId: "user-1",
@@ -312,7 +312,7 @@ describe("getProjectList", () => {
           },
           {
             id: 3,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project C",
             deadline: new Date(),
             creatorId: "user-1",
@@ -345,7 +345,7 @@ describe("getProjectList", () => {
         data: [
           {
             id: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project A",
             deadline: new Date("2025-03-01"),
             creatorId: "user-1",
@@ -355,7 +355,7 @@ describe("getProjectList", () => {
           },
           {
             id: 2,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project AB",
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
@@ -365,7 +365,7 @@ describe("getProjectList", () => {
           },
           {
             id: 3,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project B",
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
@@ -392,7 +392,7 @@ describe("getProjectList", () => {
         data: [
           {
             id: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project A",
             deadline: new Date("2025-03-01"),
             creatorId: "user-1",
@@ -402,7 +402,7 @@ describe("getProjectList", () => {
           },
           {
             id: 2,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project B",
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
@@ -417,7 +417,7 @@ describe("getProjectList", () => {
         data: {
           id: 1,
           name: "Category A",
-          workspaceId: 1,
+          organizationId: "org-1",
         },
       });
 
@@ -429,7 +429,7 @@ describe("getProjectList", () => {
             deadline: new Date(),
             projectId: 1,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.active,
             assigneeId: "user-1",
           },
@@ -439,7 +439,7 @@ describe("getProjectList", () => {
             deadline: new Date(),
             projectId: 2,
             categoryId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             status: TaskStatus.pending,
             assigneeId: "user-1",
           },
@@ -463,7 +463,7 @@ describe("getProjectList", () => {
         data: [
           {
             id: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project A",
             deadline: new Date("2025-03-01"),
             creatorId: "user-1",
@@ -473,7 +473,7 @@ describe("getProjectList", () => {
           },
           {
             id: 2,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project B",
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
@@ -483,7 +483,7 @@ describe("getProjectList", () => {
           },
           {
             id: 3,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project C",
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
@@ -516,7 +516,7 @@ describe("getProjectList", () => {
           data: [
             {
               id: 1,
-              workspaceId: 1,
+              organizationId: "org-1",
               title: "Project A",
               deadline: deadlines[0],
               creatorId: "user-1",
@@ -526,7 +526,7 @@ describe("getProjectList", () => {
             },
             {
               id: 2,
-              workspaceId: 1,
+              organizationId: "org-1",
               title: "Project B",
               deadline: deadlines[1],
               creatorId: "user-1",
@@ -536,7 +536,7 @@ describe("getProjectList", () => {
             },
             {
               id: 3,
-              workspaceId: 1,
+              organizationId: "org-1",
               title: "Project C",
               deadline: deadlines[2],
               creatorId: "user-1",
@@ -579,7 +579,7 @@ describe("getProjectList", () => {
         data: [
           {
             id: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project A",
             deadline: new Date("2025-03-01"),
             creatorId: "user-1",
@@ -589,7 +589,7 @@ describe("getProjectList", () => {
           },
           {
             id: 2,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project B",
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
@@ -620,7 +620,7 @@ describe("getProjectList", () => {
         data: [
           {
             id: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project A",
             deadline: new Date("2025-03-01"),
             creatorId: "user-1",
@@ -630,7 +630,7 @@ describe("getProjectList", () => {
           },
           {
             id: 2,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project B",
             deadline: new Date("2025-05-15"),
             creatorId: "user-2",
@@ -661,7 +661,7 @@ describe("getProjectList", () => {
         data: [
           {
             id: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project A",
             deadline: new Date("2025-03-01"),
             creatorId: "user-1",
@@ -671,7 +671,7 @@ describe("getProjectList", () => {
           },
           {
             id: 2,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project B",
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
@@ -704,7 +704,7 @@ describe("getProjectList", () => {
         data: [
           {
             id: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project 1",
             deadline: new Date("2025-03-01"),
             creatorId: "user-1",
@@ -714,7 +714,7 @@ describe("getProjectList", () => {
           },
           {
             id: 2,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project 2",
             deadline: new Date("2025-05-15"),
             creatorId: "user-1",
@@ -724,7 +724,7 @@ describe("getProjectList", () => {
           },
           {
             id: 3,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project 3",
             deadline: new Date("2025-07-15"),
             creatorId: "user-1",

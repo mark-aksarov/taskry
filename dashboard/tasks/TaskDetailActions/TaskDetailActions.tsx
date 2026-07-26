@@ -4,14 +4,10 @@ import { Trash } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useDeleteTask } from "../DeleteTaskContext";
 import { useModal } from "@/common/ModalManagerContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { NavigationButton } from "@/dashboard/common/NavigationItem";
 
 export function TaskDetailActions() {
   const t = useTranslations("dashboard.tasks.TaskDetailActions");
-
-  // Show guest modal for guests
-  const guestGuard = useGuestModalGuard();
 
   // Delete task: action state + form modal state
   const { isPending: isDeletePending } = useDeleteTask();
@@ -20,7 +16,7 @@ export function TaskDetailActions() {
   // Edit task: action state + form modal state from context
 
   function handleDeletePress() {
-    guestGuard(() => onDeleteModalOpenChange(true));
+    onDeleteModalOpenChange(true);
   }
 
   return (
@@ -31,7 +27,7 @@ export function TaskDetailActions() {
           onPress={handleDeletePress}
           variant="secondary"
           isPending={isDeletePending}
-          iconLeft={<Trash size={18}   />}
+          iconLeft={<Trash size={18} />}
           label={t("delete")}
         />
       </div>

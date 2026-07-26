@@ -7,7 +7,8 @@ import {
 } from "@/auth/AuthCard";
 import { useTranslations } from "next-intl";
 import { ActionState } from "@/lib/actions/types";
-import { VerifyEmailContent } from "@/auth/VerifyEmailContent";
+import { AuthSignOutButton } from "@/auth/AuthSignOutButton";
+import { SendVerificationEmailButton } from "@/auth/SendVerificationEmailButton";
 
 interface VerifyEmailPageProps {
   email: string;
@@ -28,12 +29,12 @@ export function VerifyEmailPage({
         <AuthCardHeading>{t("heading")}</AuthCardHeading>
         <AuthCardSubtitle>{t("subtitle", { email })}</AuthCardSubtitle>
       </AuthCardHeader>
-      <AuthCardBody>
-        <VerifyEmailContent
+      <AuthCardBody className="gap-4">
+        <SendVerificationEmailButton
           email={email}
-          signOut={signOut}
           sendVerificationEmail={sendVerificationEmail}
         />
+        <AuthSignOutButton signOut={signOut} />
       </AuthCardBody>
     </AuthCard>
   );

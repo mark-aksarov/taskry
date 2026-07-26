@@ -4,11 +4,11 @@ import { S3Client } from "@aws-sdk/client-s3";
 import { getTranslations } from "next-intl/server";
 import { CreatePresignedUrlState } from "../types";
 import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 
 export async function createPresignedUrl(): Promise<CreatePresignedUrlState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
 

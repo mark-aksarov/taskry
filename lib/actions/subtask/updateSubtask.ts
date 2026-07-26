@@ -5,7 +5,7 @@ import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
 import { subtaskId, subtaskText } from "@/lib/schemas/subtask";
 import { updateSubtask as updateSubtaskQuery } from "@/lib/data/subtask/subtask.dal";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 
 const schema = z.object({
   id: subtaskId,
@@ -14,7 +14,7 @@ const schema = z.object({
 
 export async function updateSubtask(formData: FormData): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
 

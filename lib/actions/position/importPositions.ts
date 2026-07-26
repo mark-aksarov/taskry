@@ -7,7 +7,7 @@ import { positionName } from "@/lib/schemas/position";
 import { parseCsvFile } from "@/lib/utils/parseCsvFile";
 import { COMPANY_MAX_COUNT } from "@/lib/data/constants";
 import { LimitExceededError } from "@/lib/data/utils/error";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { createPositions as createPositionsQuery } from "@/lib/data/position/position.dal";
 
 const schema = z.array(z.object({ name: positionName }).strict()).min(1);
@@ -16,7 +16,7 @@ export async function importPositions(
   formData: FormData,
 ): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
 

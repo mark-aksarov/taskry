@@ -6,7 +6,6 @@ import { useTranslations } from "next-intl";
 import { ActionsButton } from "../common/ActionsButton";
 import { useModal } from "../../common/ModalManagerContext";
 import { ActionsMenuTrigger } from "../common/ActionsMenuTrigger";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useSelectedItems } from "@/dashboard/common/SelectedItemsContext";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
@@ -14,9 +13,6 @@ export const TaskCategoryActionsMenuTrigger = () => {
   const t = useTranslations(
     "dashboard.taskCategories.TaskCategoryActionsMenuTrigger",
   );
-
-  // Show guest modal for guests
-  const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
   const { onOpenChange: setDeleteModalOpenChange } = useModal(
@@ -28,11 +24,9 @@ export const TaskCategoryActionsMenuTrigger = () => {
 
   // Menu actions: show delete modal
   const handleAction = (key: Key) => {
-    guestGuard(() => {
-      if (key === "delete") {
-        setDeleteModalOpenChange(true);
-      }
-    });
+    if (key === "delete") {
+      setDeleteModalOpenChange(true);
+    }
   };
 
   return (
@@ -49,7 +43,7 @@ export const TaskCategoryActionsMenuTrigger = () => {
       )}
     >
       <Item textValue={t("delete")} key="delete">
-        <Trash    />
+        <Trash />
         {t("delete")}
       </Item>
     </ActionsMenuTrigger>

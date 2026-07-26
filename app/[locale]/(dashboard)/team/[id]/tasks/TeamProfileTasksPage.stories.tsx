@@ -17,7 +17,6 @@ import { withUpdateUserProvider } from "@/dashboard/users/UpdateUserProvider/__s
 import { withDeleteUserProvider } from "@/dashboard/users/DeleteUserProvider/__stories__";
 import { withDeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider/__stories__";
 import { withSelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext/__stories__";
-import { withResetPasswordProvider } from "@/dashboard/users/ResetPasswordProvider/__stories__";
 import { withChangePasswordProvider } from "@/dashboard/users/ChangePasswordProvider/__stories__";
 import { withUpdateUserImageProvider } from "@/dashboard/users/UpdateUserImageProvider/__stories__";
 import { withClearUserImageUrlProvider } from "@/dashboard/users/ClearUserImageUrlProvider/__stories__";
@@ -33,7 +32,6 @@ const meta = {
     withDeleteTasksProvider,
     withUpdateTaskStatusesProvider,
     withSelectedTasksProvider,
-    withResetPasswordProvider,
     withChangePasswordProvider,
     withUpdateUserProvider,
     withDeleteUserProvider,

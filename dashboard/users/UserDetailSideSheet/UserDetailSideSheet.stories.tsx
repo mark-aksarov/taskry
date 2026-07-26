@@ -10,14 +10,14 @@ import { UserDetailSideSheet } from "./UserDetailSideSheet";
 import { UserDetail, UserDetailSkeleton } from "../UserDetail";
 import { DetailHeaderSkeleton } from "@/dashboard/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 
 const meta = {
   title: "dashboard/users/UserDetailSideSheet",
   component: UserDetailSideSheet,
   decorators: [
     withOpenModal,
-    withCurrentUserProvider,
+    withSessionProvider,
     withModalManagerProvider,
     withThemedBackground,
   ],

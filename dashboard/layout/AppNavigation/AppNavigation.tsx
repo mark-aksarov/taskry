@@ -14,7 +14,7 @@ import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import { ActionState } from "@/lib/actions/types";
 import { NavigationLink } from "@/dashboard/common/NavigationItem";
-import { useCurrentUser } from "@/common/CurrentUserContext";
+import { useSession } from "@/common/SessionContext";
 import { AppNavigationLogoutButton } from "./AppNavigationLogoutButton";
 import { AppNavigationLangMenuTrigger } from "./AppNavigationLangMenuTrigger";
 import { AppNavigationThemeToggleButton } from "./AppNavigationThemeToggleButton";
@@ -27,16 +27,15 @@ export const AppNavigation = ({ signOut }: AppNavigationProps) => {
   const pathname = usePathname();
   const t = useTranslations("dashboard.layout.AppNavigation");
 
-  const { userId } = useCurrentUser();
+  const session = useSession();
+  const userId = session?.user.id;
 
   return (
     <nav className="flex flex-col gap-2.5">
       <NavigationLink
         href="/dashboard"
         isActive={pathname === "/dashboard"}
-        iconLeft={
-          <LayoutDashboard size={18}   />
-        }
+        iconLeft={<LayoutDashboard size={18} />}
         label={t("dashboard")}
       />
 
@@ -45,9 +44,7 @@ export const AppNavigation = ({ signOut }: AppNavigationProps) => {
         isActive={
           pathname.startsWith("/projects") || pathname === "/project-categories"
         }
-        iconLeft={
-          <FolderClosed size={18}   />
-        }
+        iconLeft={<FolderClosed size={18} />}
         label={t("projects")}
       />
 
@@ -56,9 +53,7 @@ export const AppNavigation = ({ signOut }: AppNavigationProps) => {
         isActive={
           pathname.startsWith("/tasks") || pathname === "/task-categories"
         }
-        iconLeft={
-          <CalendarCheck2 size={18}   />
-        }
+        iconLeft={<CalendarCheck2 size={18} />}
         label={t("tasks")}
       />
 
@@ -68,23 +63,21 @@ export const AppNavigation = ({ signOut }: AppNavigationProps) => {
           (pathname.startsWith("/team") || pathname === "/positions") &&
           !pathname.startsWith(`/team/${userId}`)
         }
-        iconLeft={<Users size={18}   />}
+        iconLeft={<Users size={18} />}
         label={t("team")}
       />
 
       <NavigationLink
         href="/clients"
-        isActive={
-          pathname.startsWith("/clients") || pathname === "/companies"
-        }
-        iconLeft={<Contact size={18}   />}
+        isActive={pathname.startsWith("/clients") || pathname === "/companies"}
+        iconLeft={<Contact size={18} />}
         label={t("clients")}
       />
 
       <NavigationLink
         href={`/team/${userId}`}
         isActive={pathname.startsWith(`/team/${userId}`)}
-        iconLeft={<UserRound size={18}   />}
+        iconLeft={<UserRound size={18} />}
         label={t("profile")}
       />
 

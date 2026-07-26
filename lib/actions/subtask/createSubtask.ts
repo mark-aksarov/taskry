@@ -6,7 +6,7 @@ import { taskId } from "@/lib/schemas/task";
 import { getTranslations } from "next-intl/server";
 import { subtaskText } from "@/lib/schemas/subtask";
 import { createSubtask as createSubtaskQuery } from "@/lib/data/subtask/subtask.dal";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 
 const schema = z.object({
   text: subtaskText,
@@ -15,7 +15,7 @@ const schema = z.object({
 
 export async function createSubtask(formData: FormData): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
 

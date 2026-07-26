@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserTaskListExample } from "./UserTaskListExample";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withDeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider/__stories__";
 import { withSelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext/__stories__";
@@ -19,7 +19,7 @@ const meta = {
     withPageTransitionProvider,
     withSelectedTasksProvider,
     withModalManagerProvider,
-    withCurrentUserProvider,
+    withSessionProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof UserTaskListExample>;

@@ -68,6 +68,7 @@ export interface CreateUserInputDTO {
 
 export interface UpdateUserInputDTO {
   id: string;
+  imageUrl?: string | null;
   fullName?: string;
   positionId?: number | null;
   bio?: string | null;
@@ -75,16 +76,6 @@ export interface UpdateUserInputDTO {
   phoneNumber?: string | null;
   address?: string | null;
   publicLink?: string | null;
-}
-
-export interface UpdateUserImageUrlInputDTO {
-  id: string;
-  imageUrl: string | null;
-}
-
-export interface ResetPasswordInputDTO {
-  id: string;
-  newPassword: string;
 }
 
 export interface ChangePasswordInputDTO {

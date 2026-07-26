@@ -3,8 +3,9 @@ import "server-only";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getUserDetail } from "@/lib/data/user/user.dal";
+import { canEditUserProfile } from "@/lib/utils/canEditUserProfile";
 import { UserDetailAlt, UserDetailAltSkeleton } from "./UserDetailAlt";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 
 interface UserDetailAltContainerProps {
   userId: string;
@@ -27,12 +28,8 @@ async function UserDetailAltContainerInner({
     notFound();
   }
 
-  const session = await requireProtectedPageSession();
-  const isOwner = session.user.role === "owner";
-  const isGuest = session.user.role === "guest";
-
-  const currentUserId = session.user.id;
-  const canEdit = isOwner || isGuest || userId === currentUserId;
+  const session = await verifyProtectedPageSession();
+  const canEdit = await canEditUserProfile({ session, profileUserId: userId });
 
   return (
     <UserDetailAlt

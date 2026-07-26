@@ -10,7 +10,6 @@ import { useTranslations } from "next-intl";
 import { useDeleteUser } from "../DeleteUserContext";
 import { useModal } from "@/common/ModalManagerContext";
 import { useUpdateUserBio } from "../UpdateUserBioContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
 interface UserBioDetailInfoAltProps {
   bio?: string;
@@ -23,8 +22,6 @@ export function UserBioDetailInfoAlt({
 }: UserBioDetailInfoAltProps) {
   const t = useTranslations("dashboard.users.UserDetail");
 
-  const guestGuard = useGuestModalGuard();
-
   const { onOpenChange: onUpdateBioModalOpenChange } =
     useModal("updateUserBio");
 
@@ -35,7 +32,7 @@ export function UserBioDetailInfoAlt({
   const { isPending: isUpdateUserBioPending } = useUpdateUserBio();
 
   const handlePress = () => {
-    guestGuard(() => onUpdateBioModalOpenChange(true));
+    onUpdateBioModalOpenChange(true);
   };
 
   return (

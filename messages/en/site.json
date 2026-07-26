@@ -94,9 +94,6 @@
     "GetStartedAction": {
       "label": "Get started"
     },
-    "DemoAction": {
-      "label": "Open demo"
-    },
     "IntroSection": {
       "heading": {
         "line1": "Task",

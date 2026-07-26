@@ -10,7 +10,6 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { useModal } from "@/common/ModalManagerContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useTaskCategoryListItemPending } from "./useTaskCategoryListItemPending";
 
 export type TaskCategoryListItemActionMenuTriggerProps = {
@@ -24,9 +23,6 @@ export function TaskCategoryListItemActionMenuTrigger({
     "dashboard.taskCategories.TaskCategoryListItemActionMenuTrigger",
   );
 
-  // Show guest modal for guests
-  const guestGuard = useGuestModalGuard();
-
   // Delete confirmation modal state
   const { onOpenChange: onDeleteModalOpenChange } =
     useModal("deleteTaskCategory");
@@ -36,19 +32,15 @@ export function TaskCategoryListItemActionMenuTrigger({
     useModal("updateTaskCategory");
 
   /**
-   * Handles menu actions for a task category item
-   * - If user is a guest, show guest modal
-   * - Otherwise, open edit or delete modal based on action key
+   * Open edit or delete modal based on action key
    */
   const handleAction = (key: Key) => {
-    guestGuard(() => {
-      const action = key.toString();
-      if (action === "edit") {
-        onUpdateModalOpenChange(true);
-      } else if (action === "delete") {
-        onDeleteModalOpenChange(true);
-      }
-    });
+    const action = key.toString();
+    if (action === "edit") {
+      onUpdateModalOpenChange(true);
+    } else if (action === "delete") {
+      onDeleteModalOpenChange(true);
+    }
   };
 
   // Determine if any action on this task category item is pending (update or delete)
@@ -67,10 +59,10 @@ export function TaskCategoryListItemActionMenuTrigger({
       )}
     >
       <Item textValue={t("edit")} key="edit">
-        <Pencil  /> {t("edit")}
+        <Pencil /> {t("edit")}
       </Item>
       <Item textValue={t("delete")} key="delete">
-        <Trash  /> {t("delete")}
+        <Trash /> {t("delete")}
       </Item>
     </ItemBaseActionMenuTrigger>
   );

@@ -1,9 +1,9 @@
 import { ForgetPasswordPage } from "./ForgetPasswordPage";
 import { forgetPassword } from "@/lib/actions/auth/forgetPassword";
-import { requireAuthPageSession } from "@/lib/utils/requireAuthPageSession";
+import { verifyAuthPageSession } from "@/lib/utils/verifyAuthPageSession";
 
 export default async function Page() {
-  await requireAuthPageSession();
+  await verifyAuthPageSession();
 
   return <ForgetPasswordPage action={forgetPassword} />;
 }

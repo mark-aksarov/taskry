@@ -1,25 +1,25 @@
 import prisma from "@/lib/prisma";
 import { seed } from "@/prisma/test-seed";
-import { AccessDeniedError } from "../../utils/error";
-import { requireSession } from "@/lib/data/utils/requireSession";
+import { members } from "@/prisma/seed/test-data";
+import { setupAuth } from "@/lib/test-utils/auth";
+import { UnauthorizedError } from "../../utils/error";
+import { deleteTaskCategories } from "../taskCategory.dal";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
-import { users, positions, workspaces } from "@/prisma/seed/test-data";
-import { deleteTaskCategories } from "../taskCategory.dal";
+import { users, positions, organizations } from "@/prisma/seed/test-data";
 
 describe("deleteTaskCategories", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
     });
+
+    await setupAuth("user-1");
   });
 
   afterEach(async () => {
@@ -32,12 +32,12 @@ describe("deleteTaskCategories", () => {
         {
           id: 1,
           name: "Task Category 1",
-          workspaceId: 1,
+          organizationId: "org-1",
         },
         {
           id: 2,
           name: "Task Category 2",
-          workspaceId: 1,
+          organizationId: "org-1",
         },
       ],
     });
@@ -50,13 +50,13 @@ describe("deleteTaskCategories", () => {
     expect(remainingTaskCategories).toHaveLength(0);
   });
 
-  it("should not delete task categories from a different workspace", async () => {
+  it("should not delete task categories from a different organization", async () => {
     await prisma.taskCategory.createMany({
       data: [
         {
           id: 1,
           name: "Task Category 1",
-          workspaceId: 2,
+          organizationId: "org-2",
         },
       ],
     });
@@ -65,18 +65,18 @@ describe("deleteTaskCategories", () => {
     expect(result.count).toBe(0);
   });
 
-  it("should only delete task categories belonging to the current workspace", async () => {
+  it("should only delete task categories belonging to the current organization", async () => {
     await prisma.taskCategory.createMany({
       data: [
         {
           id: 1,
           name: "Task Category 1",
-          workspaceId: 1,
+          organizationId: "org-1",
         },
         {
           id: 2,
           name: "Task Category 2",
-          workspaceId: 2,
+          organizationId: "org-2",
         },
       ],
     });
@@ -91,36 +91,34 @@ describe("deleteTaskCategories", () => {
   });
 
   describe("RBAC: delete task categories", () => {
-    const setup = async (userId: string, role: string) => {
-      (requireSession as any).mockResolvedValue({
-        user: { id: userId, workspaceId: 1, role },
-      });
+    const setup = async (userId?: string) => {
+      await setupAuth(userId);
 
       await prisma.taskCategory.create({
         data: {
           id: 1,
           name: "Task Category 1",
-          workspaceId: 1,
+          organizationId: "org-1",
         },
       });
     };
 
     it("should succeed for owner", async () => {
-      await setup("user-1", "owner");
+      await setup("user-1");
       const result = await deleteTaskCategories([1]);
       expect(result.count).toBe(1);
     });
 
-    it("should fail for user", async () => {
-      await setup("user-2", "user");
+    it("should succeed for member", async () => {
+      await setup("user-2");
       const result = await deleteTaskCategories([1]);
       expect(result.count).toBe(1);
     });
 
-    it("should fail for guest", async () => {
-      await setup("user-3", "guest");
+    it("should fail for anonymous", async () => {
+      await setup();
       await expect(deleteTaskCategories([1])).rejects.toThrow(
-        AccessDeniedError,
+        UnauthorizedError,
       );
     });
   });

@@ -4,7 +4,7 @@ import { DashboardGrid } from "@/dashboard/common/DashboardGrid";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
 import { withDeleteTasksProvider } from "../../DeleteTasksProvider/__stories__";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusesProvider/__stories__";
@@ -20,7 +20,7 @@ const meta = {
     withPageTransitionProvider,
     withSelectedTasksProvider,
     withModalManagerProvider,
-    withCurrentUserProvider,
+    withSessionProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof TaskGridExample>;

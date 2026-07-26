@@ -1,17 +1,15 @@
 import { type Decorator } from "@storybook/nextjs-vite";
 import { ProfileLink } from "@/dashboard/layout/ProfileLink";
 import { DashboardLayout } from "../app/[locale]/(dashboard)/DashboardLayout";
-import { MockedCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
+import { MockedSessionProvider } from "@/common/SessionContext/__stories__";
 
 /**
  * The page decorator is used to wrap the story in the page layout
  * Preserves the provider and layout structure
  */
-export const DashboardPageDecorator: Decorator = (Story, context) => {
-  const isGuest = context.parameters.isGuest || false;
-
+export const DashboardPageDecorator: Decorator = (Story) => {
   return (
-    <MockedCurrentUserProvider isGuest={isGuest}>
+    <MockedSessionProvider>
       <DashboardLayout
         profileLinkContainer={
           <ProfileLink userId="user-1" fullName="User 1" imageUrl="/man.jpg" />
@@ -20,6 +18,6 @@ export const DashboardPageDecorator: Decorator = (Story, context) => {
       >
         <Story />
       </DashboardLayout>
-    </MockedCurrentUserProvider>
+    </MockedSessionProvider>
   );
 };

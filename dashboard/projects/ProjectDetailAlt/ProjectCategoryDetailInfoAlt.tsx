@@ -9,7 +9,6 @@ import {
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
 import { useDeleteProject } from "../DeleteProjectContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateProjectCategoryRel } from "../UpdateProjectCategoryRelContext";
 
 interface ProjectCategoryDetailInfoAltProps {
@@ -24,8 +23,6 @@ export function ProjectCategoryDetailInfoAlt({
 }: ProjectCategoryDetailInfoAltProps) {
   const t = useTranslations("dashboard.projects.ProjectDetail");
 
-  const guestGuard = useGuestModalGuard();
-
   const { onOpenChange: onUpdateCategoryModalOpenChange } = useModal(
     "updateProjectCategoryRel",
   );
@@ -38,7 +35,7 @@ export function ProjectCategoryDetailInfoAlt({
     useUpdateProjectCategoryRel();
 
   const handlePress = () => {
-    guestGuard(() => onUpdateCategoryModalOpenChange(true));
+    onUpdateCategoryModalOpenChange(true);
   };
 
   return (

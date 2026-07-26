@@ -5,18 +5,14 @@ import { useTranslations } from "next-intl";
 import { Button, ButtonProps } from "@/ui/Button";
 import { useModal } from "../../common/ModalManagerContext";
 import { useDeleteTask } from "../tasks/DeleteTaskContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 
 export function CreateSubtasksButton(props: ButtonProps) {
   const t = useTranslations("dashboard.subtasks.CreateSubtasksButton");
 
-  // Show guest modal for guests
-  const guestGuard = useGuestModalGuard();
-
   const { onOpenChange: onModalOpenChange } = useModal("createSubtask");
 
   function handlePress() {
-    guestGuard(() => onModalOpenChange(true));
+    onModalOpenChange(true);
   }
 
   // Disable button while the task is being deleted
@@ -28,7 +24,7 @@ export function CreateSubtasksButton(props: ButtonProps) {
       data-test="create-subtask-button"
       variant="primary"
       outlined
-      iconLeft={<Plus    />}
+      iconLeft={<Plus />}
       aria-label={t("label")}
       onPress={handlePress}
       isDisabled={isDeleteTaskPending}

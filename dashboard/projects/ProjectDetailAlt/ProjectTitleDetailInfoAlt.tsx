@@ -9,7 +9,6 @@ import {
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
 import { useDeleteProject } from "../DeleteProjectContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateProjectTitle } from "../UpdateProjectTitleContext";
 
 interface ProjectTitleDetailInfoAltProps {
@@ -21,8 +20,6 @@ export function ProjectTitleDetailInfoAlt({
 }: ProjectTitleDetailInfoAltProps) {
   const t = useTranslations("dashboard.projects.ProjectDetail");
 
-  const guestGuard = useGuestModalGuard();
-
   const { onOpenChange: onUpdateTitleModalOpenChange } =
     useModal("updateProjectTitle");
 
@@ -33,7 +30,7 @@ export function ProjectTitleDetailInfoAlt({
   const { isPending: isUpdateProjectTitlePending } = useUpdateProjectTitle();
 
   const handlePress = () => {
-    guestGuard(() => onUpdateTitleModalOpenChange(true));
+    onUpdateTitleModalOpenChange(true);
   };
 
   return (

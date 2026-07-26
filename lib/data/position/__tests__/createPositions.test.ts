@@ -1,26 +1,26 @@
 import prisma from "@/lib/prisma";
 import { seed } from "@/prisma/test-seed";
+import { setupAuth } from "@/lib/test-utils/auth";
+import { members } from "@/prisma/seed/test-data";
 import { createPositions } from "../position.dal";
 import { POSITION_MAX_COUNT } from "../../constants";
 import { beforeAll, describe, expect, it } from "vitest";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
-import { requireSession } from "@/lib/data/utils/requireSession";
-import { users, positions, workspaces } from "@/prisma/seed/test-data";
-import { AccessDeniedError, LimitExceededError } from "../../utils/error";
+import { users, positions, organizations } from "@/prisma/seed/test-data";
+import { LimitExceededError, UnauthorizedError } from "../../utils/error";
 
 describe("createPositions", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
     });
+
+    await setupAuth("user-1");
   });
 
   it("should successfully create positions", async () => {
@@ -53,7 +53,7 @@ describe("createPositions", () => {
     for (let i = 1; i <= POSITION_MAX_COUNT; i++) {
       positions.push({
         name: `Position ${i + 1}`,
-        workspaceId: 1,
+        organizationId: "org-1",
       });
     }
 
@@ -69,10 +69,8 @@ describe("createPositions", () => {
   });
 
   describe("RBAC: create positions", () => {
-    const setup = async (userId: string, role: string) => {
-      (requireSession as any).mockResolvedValue({
-        user: { id: userId, workspaceId: 1, role },
-      });
+    const setup = async (userId?: string) => {
+      await setupAuth(userId);
 
       return {
         input: [
@@ -84,7 +82,7 @@ describe("createPositions", () => {
     };
 
     it("should succeed for owner", async () => {
-      const { input } = await setup("user-1", "owner");
+      const { input } = await setup("user-1");
 
       const result = await createPositions(input);
 
@@ -92,8 +90,8 @@ describe("createPositions", () => {
       expect(result[0].name).toBe(input[0].name);
     });
 
-    it("should succeed for user", async () => {
-      const { input } = await setup("user-2", "user");
+    it("should succeed for member", async () => {
+      const { input } = await setup("user-2");
 
       const result = await createPositions(input);
 
@@ -101,10 +99,10 @@ describe("createPositions", () => {
       expect(result[0].name).toBe(input[0].name);
     });
 
-    it("should fail for guest", async () => {
-      const { input } = await setup("user-3", "guest");
+    it("should fail for anonymous", async () => {
+      const { input } = await setup();
 
-      await expect(createPositions(input)).rejects.toThrow(AccessDeniedError);
+      await expect(createPositions(input)).rejects.toThrow(UnauthorizedError);
     });
   });
 });

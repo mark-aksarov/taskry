@@ -16,11 +16,11 @@ import { UserSearchModal } from "@/dashboard/users/UserSearchModal";
 import { CreateUserModal } from "@/dashboard/users/CreateUserModal";
 import { UserFiltersModal } from "@/dashboard/users/UserFiltersModal";
 import { UserGridContainer } from "@/dashboard/users/UserGridContainer";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { CreateUserProvider } from "@/dashboard/users/CreateUserProvider";
 import { UserFiltersProvider } from "@/dashboard/users/UserFiltersContext";
 import { CreatePositionModal } from "@/dashboard/position/CreatePositionModal";
 import { RouterSearchContainer } from "@/dashboard/common/RouterSearchContainer";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { CreatePositionProvider } from "@/dashboard/position/CreatePositionProvider";
 import { UserPositionFiltersModal } from "@/dashboard/users/UserPositionFiltersModal";
 import { UserFiltersFormContainer } from "@/dashboard/users/UserFiltersFormContainer";
@@ -46,7 +46,7 @@ export default async function AppTeamPage({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   // Authorization
-  await requireProtectedPageSession();
+  await verifyProtectedPageSession();
 
   // Validation
   const rawParams = await searchParams;

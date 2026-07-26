@@ -3,7 +3,7 @@ import {
   positions,
   companies,
   clients,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
   projects,
@@ -11,23 +11,21 @@ import {
 } from "@/prisma/seed/test-data";
 
 import prisma from "@/lib/prisma";
-import { getTaskDetail } from "../task.dal";
 import { seed } from "@/prisma/test-seed";
+import { getTaskDetail } from "../task.dal";
+import { loginAs } from "@/lib/test-utils/auth";
+import { members } from "@/prisma/seed/test-data";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { requireSession } from "@/lib/data/utils/requireSession";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterAll } from "vitest";
 
 describe("getTaskDetail", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
@@ -37,6 +35,8 @@ describe("getTaskDetail", () => {
       projects,
       tasks,
     });
+
+    await loginAs("user-1");
 
     await prisma.subtask.createMany({
       data: [
@@ -62,14 +62,14 @@ describe("getTaskDetail", () => {
           taskId: 1,
           content: "Comment 1",
           senderId: "user-1",
-          workspaceId: 1,
+          organizationId: "org-1",
         },
         {
           id: 2,
           taskId: 1,
           content: "Comment 2",
           senderId: "user-2",
-          workspaceId: 1,
+          organizationId: "org-1",
         },
       ],
     });

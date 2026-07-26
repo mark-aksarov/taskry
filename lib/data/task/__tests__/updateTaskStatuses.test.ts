@@ -3,7 +3,7 @@ import {
   positions,
   companies,
   clients,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
   projects,
@@ -12,22 +12,20 @@ import {
 import prisma from "@/lib/prisma";
 import { seed } from "@/prisma/test-seed";
 import { updateTaskStatuses } from "../task.dal";
+import { setupAuth } from "@/lib/test-utils/auth";
+import { members } from "@/prisma/seed/test-data";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { AccessDeniedError } from "@/lib/data/utils/error";
-import { requireSession } from "@/lib/data/utils/requireSession";
+import { UnauthorizedError } from "@/lib/data/utils/error";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
 
 describe("updateTaskStatuses", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
@@ -36,6 +34,8 @@ describe("updateTaskStatuses", () => {
       projectCategories,
       projects,
     });
+
+    await setupAuth("user-1");
   });
 
   afterEach(async () => {
@@ -51,7 +51,7 @@ describe("updateTaskStatuses", () => {
           deadline: new Date(),
           projectId: 1,
           categoryId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
           status: TaskStatus.active,
         },
         {
@@ -60,8 +60,8 @@ describe("updateTaskStatuses", () => {
           deadline: new Date(),
           projectId: 1,
           categoryId: 1,
-          workspaceId: 1,
-          assigneeId: "user-3",
+          organizationId: "org-1",
+          assigneeId: "user-1",
           status: TaskStatus.active,
         },
         {
@@ -70,7 +70,7 @@ describe("updateTaskStatuses", () => {
           deadline: new Date(),
           projectId: 2,
           categoryId: 2,
-          workspaceId: 2,
+          organizationId: "org-2",
           status: TaskStatus.active,
         },
       ],
@@ -88,7 +88,7 @@ describe("updateTaskStatuses", () => {
     ]);
   });
 
-  it("should return empty array when attempting to update tasks from a different workspace", async () => {
+  it("should return empty array when attempting to update tasks from a different organization", async () => {
     await prisma.task.createMany({
       data: [
         {
@@ -97,7 +97,7 @@ describe("updateTaskStatuses", () => {
           deadline: new Date(),
           projectId: 1,
           categoryId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
           status: TaskStatus.active,
         },
         {
@@ -106,7 +106,7 @@ describe("updateTaskStatuses", () => {
           deadline: new Date(),
           projectId: 2,
           categoryId: 2,
-          workspaceId: 2,
+          organizationId: "org-2",
           status: TaskStatus.active,
         },
       ],
@@ -120,11 +120,8 @@ describe("updateTaskStatuses", () => {
   });
 
   describe("RBAC: update task status", () => {
-    const setup = async (userId: string, role: string, assigneeId?: string) => {
-      (requireSession as any).mockResolvedValue({
-        user: { id: userId, role, workspaceId: 1 },
-      });
-
+    const setup = async (userId?: string) => {
+      await setupAuth(userId);
       const taskId = 100;
 
       await prisma.task.create({
@@ -134,15 +131,14 @@ describe("updateTaskStatuses", () => {
           deadline: new Date(),
           projectId: 1,
           categoryId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
           status: TaskStatus.active,
-          assigneeId: assigneeId,
         },
       });
     };
 
     it("should succeed for owner", async () => {
-      await setup("user-1", "owner");
+      await setup("user-1");
 
       const updatedTask = await updateTaskStatuses([100], "completed");
 
@@ -150,8 +146,8 @@ describe("updateTaskStatuses", () => {
       expect(updatedTask![0].status).toBe("completed");
     });
 
-    it("should succeed for assignee user", async () => {
-      await setup("user-2", "user");
+    it("should succeed for member", async () => {
+      await setup("user-2");
 
       const updatedTask = await updateTaskStatuses([100], "completed");
 
@@ -159,11 +155,11 @@ describe("updateTaskStatuses", () => {
       expect(updatedTask![0].status).toBe("completed");
     });
 
-    it("should fail for guest", async () => {
-      await setup("user-3", "guest");
+    it("should fail for anonymous", async () => {
+      await setup();
 
       await expect(updateTaskStatuses([100], "completed")).rejects.toThrow(
-        AccessDeniedError,
+        UnauthorizedError,
       );
     });
   });

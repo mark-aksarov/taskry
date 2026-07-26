@@ -9,7 +9,6 @@ import {
 import { useTranslations } from "next-intl";
 import { useDeleteUser } from "../DeleteUserContext";
 import { useModal } from "@/common/ModalManagerContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateUserPublicLink } from "../UpdateUserPublicLinkContext";
 
 interface UserPublicLinkDetailInfoAltProps {
@@ -23,8 +22,6 @@ export function UserPublicLinkDetailInfoAlt({
 }: UserPublicLinkDetailInfoAltProps) {
   const t = useTranslations("dashboard.users.UserDetail");
 
-  const guestGuard = useGuestModalGuard();
-
   const { onOpenChange: onUpdatePublicLinkModalOpenChange } = useModal(
     "updateUserPublicLink",
   );
@@ -37,7 +34,7 @@ export function UserPublicLinkDetailInfoAlt({
     useUpdateUserPublicLink();
 
   const handlePress = () => {
-    guestGuard(() => onUpdatePublicLinkModalOpenChange(true));
+    onUpdatePublicLinkModalOpenChange(true);
   };
 
   return (

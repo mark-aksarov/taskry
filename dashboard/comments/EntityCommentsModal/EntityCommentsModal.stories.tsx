@@ -16,7 +16,7 @@ import { withSendCommentProvider } from "../SendCommentProvider/__stories__";
 import { withUpdateCommentProvider } from "../UpdateCommentProvider/__stories__";
 import { withDeleteCommentProvider } from "../DeleteCommentProvider/__stories__";
 import { withCommentFormProvider } from "@/dashboard/comments/CommentForm/__stories__";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 
 const meta = {
   title: "dashboard/comments/EntityCommentsModal",
@@ -27,7 +27,7 @@ const meta = {
     withUpdateCommentProvider,
     withSendCommentProvider,
     withCommentFormProvider,
-    withCurrentUserProvider,
+    withSessionProvider,
     withModalManagerProvider,
     withThemedBackground,
   ],

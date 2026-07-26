@@ -11,7 +11,6 @@ import { useSelectedTasks } from "./SelectedTasksContext";
 import { ActionsMenuTrigger } from "../common/ActionsMenuTrigger";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
 import { useUpdateTaskStatuses } from "./UpdateTaskStatusesContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 
 interface TaskActionsMenuTriggerProps {
@@ -26,9 +25,6 @@ export const TaskActionsMenuTrigger = ({
 }: TaskActionsMenuTriggerProps) => {
   const t = useTranslations("dashboard.tasks.TaskActionsMenuTrigger");
 
-  // Show guest modal for guests
-  const guestGuard = useGuestModalGuard();
-
   // Delete confirmation modal state
   const { onOpenChange: onDeleteModalOpenChange } = useModal("deleteTasks");
 
@@ -40,29 +36,25 @@ export const TaskActionsMenuTrigger = ({
   const selected = useSelectedTasks();
 
   /**
-   * Handles menu actions for a selected tasks
-   * - If user is a guest, show guest modal
-   * - Otherwise, open delete confirmation modal based on action key or update task statuses
+   * Open delete confirmation modal based on action key or update task statuses
    */
   const handleAction = (key: Key) => {
-    guestGuard(() => {
-      if (key === "delete") {
-        onDeleteModalOpenChange(true);
-      } else {
-        // I store the current ids separately so that checkbox changes
-        // during the update process don’t affect status tracking.
-        setUpdateTaskStatusesIds(selected.ids);
+    if (key === "delete") {
+      onDeleteModalOpenChange(true);
+    } else {
+      // I store the current ids separately so that checkbox changes
+      // during the update process don’t affect status tracking.
+      setUpdateTaskStatusesIds(selected.ids);
 
-        startTransition(() => {
-          const nextStatus = key as TaskStatus;
+      startTransition(() => {
+        const nextStatus = key as TaskStatus;
 
-          updateTaskStatusesAction({
-            ids: selected.ids,
-            nextStatus,
-          });
+        updateTaskStatusesAction({
+          ids: selected.ids,
+          nextStatus,
         });
-      }
-    });
+      });
+    }
   };
 
   // disable menu items if selected tasks have the same status.
@@ -87,19 +79,19 @@ export const TaskActionsMenuTrigger = ({
       )}
     >
       <Item textValue={t("delete")} key="delete">
-        <Trash    />
+        <Trash />
         {t("delete")}
       </Item>
       <Item textValue={t("pending")} key="pending">
-        <CircleEllipsis    />
+        <CircleEllipsis />
         {t("pending")}
       </Item>
       <Item textValue={t("active")} key="active">
-        <Check    />
+        <Check />
         {t("active")}
       </Item>
       <Item textValue={t("completed")} key="completed">
-        <Clock    />
+        <Clock />
         {t("completed")}
       </Item>
     </ActionsMenuTrigger>

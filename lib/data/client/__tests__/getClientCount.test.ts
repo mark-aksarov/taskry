@@ -1,36 +1,36 @@
 import {
   users,
+  clients,
+  members,
   positions,
   companies,
-  workspaces,
+  organizations,
   taskCategories,
-  clients,
   projectCategories,
 } from "@/prisma/seed/test-data";
 
-import { getClientCount } from "../client.dal";
-import { it, expect, describe, beforeAll } from "vitest";
 import { seed } from "@/prisma/test-seed";
-import { requireSession } from "@/lib/data/utils/requireSession";
+import { getClientCount } from "../client.dal";
+import { setupAuth } from "@/lib/test-utils/auth";
+import { it, expect, describe, beforeAll } from "vitest";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 
 describe("getClientCount", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
-      positions,
       users,
+      clients,
+      members,
+      positions,
       companies,
+      organizations,
       taskCategories,
       projectCategories,
-      clients,
     });
+
+    await setupAuth("user-1");
   });
 
   it("should return total count of clients", async () => {

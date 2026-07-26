@@ -13,7 +13,6 @@ import { useSendComment } from "../SendCommentContext";
 import { useUpdateComment } from "../UpdateCommentContext";
 import { useCommentFormContext } from "../CommentFormContext";
 import { useCommentItemPending } from "./useCommentItemPending";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useModal } from "@/common/ModalManagerContext";
 import { twMerge } from "tailwind-merge";
 
@@ -32,29 +31,23 @@ export function CommentItemActionMenuTrigger({
 
   const t = useTranslations("dashboard.comments.CommentItemActionMenuTrigger");
 
-  // Show guest modal for guests
-  const guestGuard = useGuestModalGuard();
-
   // Delete confirmation modal state
   const { onOpenChange: onDeleteModalOpenChange } = useModal("deleteComment");
 
   /**
    * Handles menu actions for a comment item.
-   * - If the user is a guest, opens the guest access modal.
    * - If "edit" is selected, switches the form to edit mode
    *   and pre-fills it with the current comment data.
    * - If "delete" is selected, opens the delete confirmation modal.
    */
   function handleAction(key: Key) {
-    guestGuard(() => {
-      const action = key.toString();
-      if (action === "edit") {
-        setEditCommentId(commentId);
-        setCommentContent(commentContent);
-      } else if (action === "delete") {
-        onDeleteModalOpenChange(true);
-      }
-    });
+    const action = key.toString();
+    if (action === "edit") {
+      setEditCommentId(commentId);
+      setCommentContent(commentContent);
+    } else if (action === "delete") {
+      onDeleteModalOpenChange(true);
+    }
   }
 
   // Pending state for this specific comment item (when it’s being deleted or updated)
@@ -84,10 +77,10 @@ export function CommentItemActionMenuTrigger({
       )}
     >
       <Item textValue={t("edit")} key="edit">
-        <Pencil  /> {t("edit")}
+        <Pencil /> {t("edit")}
       </Item>
       <Item textValue={t("delete")} key="delete">
-        <Trash  /> {t("delete")}
+        <Trash /> {t("delete")}
       </Item>
     </ItemBaseActionMenuTrigger>
   );

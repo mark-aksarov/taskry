@@ -1,6 +1,5 @@
 import "server-only";
 
-import { GuestModeModal } from "../common/GuestModeModal";
 import { ProjectCategoryGrid } from "./ProjectCategoryGrid";
 import { ProjectCategoryListItem } from "./ProjectCategoryListItem";
 import { ModalManagerProvider } from "../../common/ModalManagerContext";
@@ -33,8 +32,6 @@ export async function ProjectCategoriesContainer() {
                 projectCategoryId={projectCategory.id}
                 projectCategoryName={projectCategory.name}
               />
-
-              <GuestModeModal />
             </DeleteProjectCategoryProvider>
           </UpdateProjectCategoryProvider>
         </ModalManagerProvider>

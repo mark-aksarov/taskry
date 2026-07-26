@@ -4,7 +4,7 @@ import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
 import { companyId, companyName } from "@/lib/schemas/company";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { updateCompany as updateCompanyQuery } from "@/lib/data/company/company.dal";
 
 const schema = z.object({
@@ -14,7 +14,7 @@ const schema = z.object({
 
 export async function updateCompany(formData: FormData): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
 

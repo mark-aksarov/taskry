@@ -1,42 +1,42 @@
 import {
   users,
+  members,
   positions,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
 } from "@/prisma/seed/test-data";
 
 import prisma from "@/lib/prisma";
+import { seed } from "@/prisma/test-seed";
 import { getClientList } from "../client.dal";
+import { setupAuth } from "@/lib/test-utils/auth";
 import { dates } from "@/lib/data/utils/test-utils";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { seed } from "@/prisma/test-seed";
-import { requireSession } from "@/lib/data/utils/requireSession";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterEach, afterAll } from "vitest";
 
 describe("getClientList", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
-      positions,
       users,
+      members,
+      positions,
+      organizations,
       taskCategories,
       projectCategories,
     });
 
-    return prisma.company.createMany({
+    await prisma.company.createMany({
       data: [
-        { id: 1, name: "Company 1", workspaceId: 1 },
-        { id: 2, name: "Company 2", workspaceId: 1 },
+        { id: 1, name: "Company 1", organizationId: "org-1" },
+        { id: 2, name: "Company 2", organizationId: "org-1" },
       ],
     });
+
+    await setupAuth("user-1");
   });
 
   it("should return a valid ClientListDTO", async () => {
@@ -50,7 +50,7 @@ describe("getClientList", () => {
         phoneNumber: "123-456-7890",
         publicLink: "https://example.com/client-1",
         companyId: 1,
-        workspaceId: 1,
+        organizationId: "org-1",
       },
     });
 
@@ -105,21 +105,21 @@ describe("getClientList", () => {
             fullName: "Client C",
             email: "client-1@test.com",
             companyId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
           },
           {
             id: 2,
             fullName: "Client A",
             email: "client-2@test.com",
             companyId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
           },
           {
             id: 3,
             fullName: "Client B",
             email: "client-3@test.com",
             companyId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
           },
         ],
       });
@@ -143,21 +143,21 @@ describe("getClientList", () => {
             fullName: "Client A",
             email: "client-1@test.com",
             companyId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
           },
           {
             id: 2,
             fullName: "Client B",
             email: "client-2@test.com",
             companyId: 2,
-            workspaceId: 1,
+            organizationId: "org-1",
           },
           {
             id: 3,
             fullName: "Client C",
             email: "client-3@test.com",
             companyId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
           },
         ],
       });
@@ -183,21 +183,21 @@ describe("getClientList", () => {
             fullName: "Client A",
             email: "client-1@test.com",
             companyId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
           },
           {
             id: 2,
             fullName: "Client B",
             email: "client-2@test.com",
             companyId: 2,
-            workspaceId: 1,
+            organizationId: "org-1",
           },
           {
             id: 3,
             fullName: "Client C",
             email: "client-3@test.com",
             companyId: 2,
-            workspaceId: 1,
+            organizationId: "org-1",
           },
         ],
       });
@@ -206,7 +206,7 @@ describe("getClientList", () => {
         data: [
           {
             id: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project A",
             deadline: dates.nextWeek,
             creatorId: "user-1",
@@ -216,7 +216,7 @@ describe("getClientList", () => {
           },
           {
             id: 2,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project B",
             deadline: dates.nextWeek,
             creatorId: "user-1",
@@ -226,7 +226,7 @@ describe("getClientList", () => {
           },
           {
             id: 3,
-            workspaceId: 1,
+            organizationId: "org-1",
             title: "Project C",
             deadline: dates.overdue,
             creatorId: "user-1",
@@ -341,21 +341,21 @@ describe("getClientList", () => {
             fullName: "Client 1",
             email: "client-1@test.com",
             companyId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
           },
           {
             id: 2,
             fullName: "Client 2",
             email: "client-2@test.com",
             companyId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
           },
           {
             id: 3,
             fullName: "Client 3",
             email: "client-3@test.com",
             companyId: 1,
-            workspaceId: 1,
+            organizationId: "org-1",
           },
         ],
       });

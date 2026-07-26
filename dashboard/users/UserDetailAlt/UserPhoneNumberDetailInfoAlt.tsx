@@ -9,7 +9,6 @@ import {
 import { useTranslations } from "next-intl";
 import { useDeleteUser } from "../DeleteUserContext";
 import { useModal } from "@/common/ModalManagerContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateUserPhoneNumber } from "../UpdateUserPhoneNumberContext";
 
 interface UserPhoneNumberDetailInfoAltProps {
@@ -23,8 +22,6 @@ export function UserPhoneNumberDetailInfoAlt({
 }: UserPhoneNumberDetailInfoAltProps) {
   const t = useTranslations("dashboard.users.UserDetail");
 
-  const guestGuard = useGuestModalGuard();
-
   const { onOpenChange: onUpdatePhoneNumberModalOpenChange } = useModal(
     "updateUserPhoneNumber",
   );
@@ -37,7 +34,7 @@ export function UserPhoneNumberDetailInfoAlt({
     useUpdateUserPhoneNumber();
 
   const handlePress = () => {
-    guestGuard(() => onUpdatePhoneNumberModalOpenChange(true));
+    onUpdatePhoneNumberModalOpenChange(true);
   };
 
   return (

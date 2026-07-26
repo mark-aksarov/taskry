@@ -9,9 +9,8 @@ import {
 import { Logo } from "../Logo";
 import { tv } from "tailwind-variants";
 import { usePathname } from "@/i18n/navigation";
-import { ActionState } from "@/lib/actions/types";
-import { AppHeaderCtaButton } from "./AppHeaderCtaButton";
 import { PageContainer } from "../../common/PageContainer";
+import { GetStartedAction } from "@/site/common/GetStartedAction";
 import { AppHeaderLangMenuTrigger } from "./AppHeaderLangMenuTrigger";
 import { DocsSidebarSheetTrigger } from "@/site/docs/DocsSidebarSheetTrigger";
 
@@ -23,11 +22,7 @@ const styles = tv({
   ],
 });
 
-interface AppHeaderCtaButtonProps {
-  signOut: () => Promise<ActionState>;
-}
-
-export function AppHeader({ signOut }: AppHeaderCtaButtonProps) {
+export function AppHeader() {
   const pathname = usePathname();
 
   const isDocsPage = pathname?.startsWith("/docs");
@@ -49,7 +44,10 @@ export function AppHeader({ signOut }: AppHeaderCtaButtonProps) {
             <>
               <AppHeaderThemeToggleButton />
               <AppHeaderLangMenuTrigger />
-              <AppHeaderCtaButton signOut={signOut} />
+              <GetStartedAction
+                size="small"
+                className="rounded-lg py-2 max-md:hidden"
+              />
             </>
           }
         />

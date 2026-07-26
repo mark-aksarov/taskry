@@ -1,8 +1,11 @@
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { RoleProvider } from "@/common/RoleContext";
 import { DashboardLayout } from "./DashboardLayout";
 import { signOut } from "@/lib/actions/auth/signOut";
-import { CurrentUserProvider } from "@/common/CurrentUserContext";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
+import { SessionProvider } from "@/common/SessionContext";
 import { ProfileLinkContainer } from "@/dashboard/layout/ProfileLinkContainer";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 
 export default async function AppDashboardLayout({
   children,
@@ -10,25 +13,21 @@ export default async function AppDashboardLayout({
   children: React.ReactNode;
 }>) {
   // Authorization
-  const session = await requireProtectedPageSession();
-
-  // This data is required to determine the user's role
-  // and render the UI accordingly on the client side.
-  const currentUserContextValue = {
-    isGuest: session.user.role === "guest",
-    isOwner: session.user.role === "owner",
-    isEmailVerified: session.user.emailVerified,
-    userId: session.user.id,
-  };
+  const session = await verifyProtectedPageSession();
+  const { role } = await auth.api.getActiveMemberRole({
+    headers: await headers(),
+  });
 
   return (
-    <CurrentUserProvider value={currentUserContextValue}>
-      <DashboardLayout
-        signOut={signOut}
-        profileLinkContainer={<ProfileLinkContainer />}
-      >
-        {children}
-      </DashboardLayout>
-    </CurrentUserProvider>
+    <SessionProvider value={session}>
+      <RoleProvider value={role}>
+        <DashboardLayout
+          signOut={signOut}
+          profileLinkContainer={<ProfileLinkContainer />}
+        >
+          {children}
+        </DashboardLayout>
+      </RoleProvider>
+    </SessionProvider>
   );
 }

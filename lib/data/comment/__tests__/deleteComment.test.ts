@@ -5,31 +5,29 @@ import {
   positions,
   companies,
   clients,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
 } from "@/prisma/seed/test-data";
 
 import prisma from "@/lib/prisma";
 import { afterEach } from "vitest";
-import { deleteComment } from "../comment.dal";
-import { AccessDeniedError } from "@/lib/data/utils/error";
 import { seed } from "@/prisma/test-seed";
-import { requireSession } from "@/lib/data/utils/requireSession";
+import { deleteComment } from "../comment.dal";
+import { members } from "@/prisma/seed/test-data";
+import { UnauthorizedError } from "@/lib/data/utils/error";
+import { loginAs, setupAuth } from "@/lib/test-utils/auth";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { describe, beforeAll, it, expect, beforeEach } from "vitest";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 describe("deleteComment", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
@@ -39,6 +37,8 @@ describe("deleteComment", () => {
       projects,
       tasks,
     });
+
+    await loginAs("user-1");
   });
 
   afterEach(async () => {
@@ -53,28 +53,28 @@ describe("deleteComment", () => {
           content: "Comment 1",
           taskId: 1,
           senderId: "user-1",
-          workspaceId: 1,
+          organizationId: "org-1",
         },
         {
           id: 2,
           content: "Comment 2",
           projectId: 1,
           senderId: "user-2",
-          workspaceId: 1,
+          organizationId: "org-1",
         },
         {
           id: 3,
           content: "Comment 3",
           taskId: 2,
           senderId: "user-4",
-          workspaceId: 2,
+          organizationId: "org-2",
         },
         {
           id: 4,
           content: "Comment 4",
           projectId: 2,
           senderId: "user-4",
-          workspaceId: 2,
+          organizationId: "org-2",
         },
       ],
     });
@@ -87,7 +87,7 @@ describe("deleteComment", () => {
     expect(deletedComment.content).toBe("Comment 1");
   });
 
-  it("should fail when deleting a comment from a different workspace", async () => {
+  it("should fail when deleting a comment from a different organization", async () => {
     await expect(deleteComment(3)).rejects.toThrow(
       PrismaClientKnownRequestError,
     );
@@ -101,10 +101,8 @@ describe("deleteComment", () => {
 
   describe("RBAC: delete comment", () => {
     describe("Owner", () => {
-      beforeEach(() => {
-        (requireSession as any).mockResolvedValue({
-          user: { id: "user-1", role: "owner", workspaceId: 1 },
-        });
+      beforeAll(async () => {
+        await setupAuth("user-1");
       });
 
       it("allows deleting own comment", async () => {
@@ -119,10 +117,8 @@ describe("deleteComment", () => {
     });
 
     describe("User", () => {
-      beforeEach(() => {
-        (requireSession as any).mockResolvedValue({
-          user: { id: "user-2", role: "user", workspaceId: 1 },
-        });
+      beforeAll(async () => {
+        await setupAuth("user-2");
       });
 
       it("allows deleting own comment", async () => {
@@ -137,15 +133,13 @@ describe("deleteComment", () => {
       });
     });
 
-    describe("Guest", () => {
-      beforeEach(() => {
-        (requireSession as any).mockResolvedValue({
-          user: { id: "user-3", role: "guest", workspaceId: 1 },
-        });
+    describe("Anonymous", () => {
+      beforeAll(async () => {
+        await setupAuth();
       });
 
       it("denies deleting any comment", async () => {
-        await expect(deleteComment(1)).rejects.toThrow(AccessDeniedError);
+        await expect(deleteComment(1)).rejects.toThrow(UnauthorizedError);
       });
     });
   });

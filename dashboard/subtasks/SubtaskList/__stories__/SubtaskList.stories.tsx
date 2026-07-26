@@ -3,7 +3,7 @@ import { SubtaskList } from "../SubtaskList";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SubtaskListExample } from "./SubtaskListExample";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 import { withDeleteTaskProvider } from "@/dashboard/tasks/DeleteTaskProvider/__stories__";
 
 const meta = {
@@ -11,7 +11,7 @@ const meta = {
   component: SubtaskList,
   decorators: [
     withDeleteTaskProvider,
-    withCurrentUserProvider,
+    withSessionProvider,
     withThemedBackground,
   ],
   parameters: {

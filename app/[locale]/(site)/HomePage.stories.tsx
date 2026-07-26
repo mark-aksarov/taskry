@@ -4,8 +4,8 @@ import { SiteLayout } from "./SiteLayout";
 import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
 
 const meta = {
   title: "pages/HomePage",
@@ -13,12 +13,12 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     (Story) => (
-      <SiteLayout signOut={async () => ({ status: "success" })}>
+      <SiteLayout>
         <Story />
       </SiteLayout>
     ),
     withModalManagerProvider,
-    withCurrentUserProvider,
+    withSessionProvider,
     withThemedBackground,
   ],
   beforeEach: () => {

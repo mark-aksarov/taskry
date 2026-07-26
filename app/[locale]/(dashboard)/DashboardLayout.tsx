@@ -13,7 +13,6 @@ import { ActionState } from "@/lib/actions/types";
 import { AppHeader } from "@/dashboard/layout/AppHeader";
 import { useParams, useSearchParams } from "next/navigation";
 import { AppNavigation } from "@/dashboard/layout/AppNavigation";
-import { GuestModeModal } from "@/dashboard/common/GuestModeModal";
 import { ModalManagerProvider } from "@/common/ModalManagerContext";
 import { SearchBarProvider } from "@/dashboard/search/SearchBar/index";
 import { PageTransitionProvider } from "@/dashboard/common/PageTransitionContext";
@@ -133,8 +132,6 @@ export function DashboardLayout({
               <main>{children}</main>
             </SearchBarProvider>
           </PageTransitionProvider>
-
-          <GuestModeModal />
         </ModalManagerProvider>
       </div>
     </div>

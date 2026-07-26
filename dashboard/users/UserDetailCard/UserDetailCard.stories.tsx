@@ -15,13 +15,12 @@ import { UserDetailHeaderInteractive } from "../UserDetailHeader";
 import { DetailHeaderSkeleton } from "@/dashboard/common/DetailHeader";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteUserProvider } from "../DeleteUserProvider/__stories__";
-import { withResetPasswordProvider } from "../ResetPasswordProvider/__stories__";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 import { withChangePasswordProvider } from "../ChangePasswordProvider/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withUpdateUserImageProvider } from "../UpdateUserImageProvider/__stories__";
 import { withClearUserImageUrlProvider } from "../ClearUserImageUrlProvider/__stories__";
 import { withUpdateUserImageFileProvider } from "../UpdateUserImageFileContext/__stories__";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
 import { withUpdateUserBioProvider } from "@/dashboard/users/UpdateUserBioProvider/__stories__";
 import { withUpdateUserAddressProvider } from "@/dashboard/users/UpdateUserAddressProvider/__stories__";
 import { withUpdateUserPositionProvider } from "@/dashboard/users/UpdateUserPositionProvider/__stories__";
@@ -51,9 +50,8 @@ const meta = {
     withUpdateUserImageProvider,
     withClearUserImageUrlProvider,
     withUpdateUserImageFileProvider,
-    withResetPasswordProvider,
     withChangePasswordProvider,
-    withCurrentUserProvider,
+    withSessionProvider,
     withModalManagerProvider,
     withThemedBackground,
   ],

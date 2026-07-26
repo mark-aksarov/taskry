@@ -3,7 +3,6 @@ import "server-only";
 import {
   ClientDTO,
   ClientListDTO,
-  mapToClientDTO,
   ClientDetailDTO,
   ClientSearchDTO,
   ClientSummaryDTO,
@@ -13,25 +12,26 @@ import {
 } from "./client.dto";
 
 import { cache } from "react";
-import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
-import { requireSession } from "../utils/requireSession";
 import { uniqueDefinedIds } from "../utils/uniqueDefinedIds";
 import { ClientFilters, ClientSortField } from "@/lib/types";
-import { Prisma, ProjectStatus } from "@/generated/prisma/client";
+import { verifyResourceAccess } from "../utils/verifyResourceAccess";
+import { Client, Prisma, ProjectStatus } from "@/generated/prisma/client";
 import { validateCompanies, validateClientLimit } from "../utils/validation";
 
 export const getClientDetail = cache(
   async (id: number): Promise<ClientDetailDTO | null> => {
     // Authorization
     const {
-      user: { workspaceId },
-    } = await requireSession();
+      session: { activeOrganizationId: organizationId },
+    } = await verifyResourceAccess();
 
     // Get client
     const client = await prisma.client.findFirst({
-      where: { id, workspaceId },
+      where: { id, organizationId },
       select: {
         id: true,
         fullName: true,
@@ -40,7 +40,7 @@ export const getClientDetail = cache(
         imageUrl: true,
         publicLink: true,
         bio: true,
-        workspaceId: true,
+        organizationId: true,
 
         company: {
           select: {
@@ -63,7 +63,6 @@ export const getClientDetail = cache(
       imageUrl: client.imageUrl ?? undefined,
       publicLink: client.publicLink ?? undefined,
       bio: client.bio ?? undefined,
-      workspaceId: client.workspaceId,
       company: client.company ? client.company : undefined,
     };
   },
@@ -73,12 +72,12 @@ export const getClient = cache(
   async (id: number): Promise<ClientDTO | null> => {
     // Authorization
     const {
-      user: { workspaceId },
-    } = await requireSession();
+      session: { activeOrganizationId: organizationId },
+    } = await verifyResourceAccess();
 
     // Get client
     const client = await prisma.client.findFirst({
-      where: { id, workspaceId },
+      where: { id, organizationId },
       select: {
         id: true,
         fullName: true,
@@ -103,11 +102,11 @@ export const getClientSummary = cache(
   async (id: number): Promise<ClientSummaryDTO | null> => {
     // Authorization
     const {
-      user: { workspaceId },
-    } = await requireSession();
+      session: { activeOrganizationId: organizationId },
+    } = await verifyResourceAccess();
 
     const client = await prisma.client.findFirst({
-      where: { id, workspaceId },
+      where: { id, organizationId },
       select: {
         id: true,
         fullName: true,
@@ -130,14 +129,12 @@ export const getClientSummaries = cache(
   async (): Promise<ClientSummaryDTO[]> => {
     // Authorization
     const {
-      user: { workspaceId },
-    } = await requireSession();
-
-    const where = { workspaceId };
+      session: { activeOrganizationId: organizationId },
+    } = await verifyResourceAccess();
 
     // Get clients
     const clients = await prisma.client.findMany({
-      where,
+      where: { organizationId },
       select: {
         id: true,
         fullName: true,
@@ -155,11 +152,11 @@ export const getClientSummaries = cache(
 export const getClients = cache(async (): Promise<ClientDTO[]> => {
   // Authorization
   const {
-    user: { workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   const clients = await prisma.client.findMany({
-    where: { workspaceId },
+    where: { organizationId },
     orderBy: {
       createdAt: "desc",
     },
@@ -190,12 +187,12 @@ export const searchClients = cache(
   }): Promise<ClientSearchDTO> => {
     // Authorization
     const {
-      user: { workspaceId },
-    } = await requireSession();
+      session: { activeOrganizationId: organizationId },
+    } = await verifyResourceAccess();
 
     // Get clients
     const where = {
-      workspaceId,
+      organizationId,
       fullName: { contains: query, mode: "insensitive" as const },
     };
 
@@ -242,10 +239,10 @@ export const getClientList = cache(
   }): Promise<ClientListDTO> => {
     // Authorization
     const {
-      user: { workspaceId },
-    } = await requireSession();
+      session: { activeOrganizationId: organizationId },
+    } = await verifyResourceAccess();
 
-    const where = buildClientWhereClause(workspaceId, filters);
+    const where = buildClientWhereClause(organizationId, filters);
 
     // Sorting
     let orderBy;
@@ -312,31 +309,31 @@ export const getClientList = cache(
 export const getClientCount = cache(async (filters?: ClientFilters) => {
   // Authorization
   const {
-    user: { workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   return prisma.client.count({
-    where: buildClientWhereClause(workspaceId, filters),
+    where: buildClientWhereClause(organizationId, filters),
   });
 });
 
 export const deleteClients = async (ids: number[]) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
-  // Check permissions
-  const permissions = await auth.api.userHasPermission({
+  // Check permission
+  const permission = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId: userId,
       permissions: {
         client: ["delete"],
       },
     },
   });
 
-  if (!permissions.success) {
+  if (!permission.success) {
     throw new AccessDeniedError(
       "You do not have permission to delete clients.",
     );
@@ -345,7 +342,7 @@ export const deleteClients = async (ids: number[]) => {
   // Bulk delete clients within the workspace
   const result = await prisma.client.deleteMany({
     where: {
-      workspaceId,
+      organizationId,
       id: { in: ids },
     },
   });
@@ -356,33 +353,33 @@ export const deleteClients = async (ids: number[]) => {
 export const createClients = async (input: CreateClientInputDTO[]) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
-  // Check permissions
-  const permissions = await auth.api.userHasPermission({
+  // Check permission
+  const permission = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId: userId,
       permissions: {
         client: ["create"],
       },
     },
   });
 
-  if (!permissions.success) {
+  if (!permission.success) {
     throw new AccessDeniedError(
       "You do not have permission to create clients.",
     );
   }
 
   // Validate limit
-  await validateClientLimit(workspaceId, input.length);
+  await validateClientLimit(organizationId, input.length);
 
   // Validate companies
   const companyIds = uniqueDefinedIds(input.map((client) => client.companyId));
 
   if (companyIds.length > 0) {
-    await validateCompanies(workspaceId, companyIds);
+    await validateCompanies(organizationId, companyIds);
   }
 
   // Create clients
@@ -395,7 +392,7 @@ export const createClients = async (input: CreateClientInputDTO[]) => {
       phoneNumber: client.phoneNumber,
       publicLink: client.publicLink,
       imageUrl: client.imageUrl,
-      workspaceId,
+      organizationId,
     })),
   });
 
@@ -405,20 +402,20 @@ export const createClients = async (input: CreateClientInputDTO[]) => {
 export const updateClient = async (input: UpdateClientInputDTO) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
-  // Check permissions
-  const permissions = await auth.api.userHasPermission({
+  // Check permission
+  const permission = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId: userId,
       permissions: {
         client: ["update"],
       },
     },
   });
 
-  if (!permissions.success) {
+  if (!permission.success) {
     throw new AccessDeniedError(
       "You do not have permission to update clients.",
     );
@@ -426,14 +423,14 @@ export const updateClient = async (input: UpdateClientInputDTO) => {
 
   // Validate company
   if (input.companyId) {
-    await validateCompanies(workspaceId, [input.companyId]);
+    await validateCompanies(organizationId, [input.companyId]);
   }
 
   // Update client
   const updatedClient = await prisma.client.update({
     where: {
       id: input.id,
-      workspaceId,
+      organizationId,
     },
     data: {
       fullName: input.fullName,
@@ -453,20 +450,20 @@ export const updateClientImageUrl = async (
 ) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
-  // Check permissions
-  const permissions = await auth.api.userHasPermission({
+  // Check permission
+  const permission = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId: userId,
       permissions: {
         client: ["update"],
       },
     },
   });
 
-  if (!permissions.success) {
+  if (!permission.success) {
     throw new AccessDeniedError(
       "You do not have permission to update clients.",
     );
@@ -476,7 +473,7 @@ export const updateClientImageUrl = async (
   const updatedClient = await prisma.client.update({
     where: {
       id: input.id,
-      workspaceId,
+      organizationId,
     },
     data: {
       imageUrl: input.imageUrl,
@@ -491,10 +488,10 @@ export const updateClientImageUrl = async (
  */
 
 export function buildClientWhereClause(
-  workspaceId: number,
+  organizationId: string,
   filters?: ClientFilters,
 ): Prisma.ClientWhereInput {
-  if (!filters) return { workspaceId };
+  if (!filters) return { organizationId };
 
   const projectFilters: Prisma.ClientWhereInput[] = [];
 
@@ -522,7 +519,7 @@ export function buildClientWhereClause(
   }
 
   return {
-    workspaceId,
+    organizationId,
     ...(filters?.query && {
       fullName: { contains: filters.query, mode: "insensitive" as const },
     }),
@@ -530,5 +527,34 @@ export function buildClientWhereClause(
       companyId: { in: filters.companyIds },
     }),
     ...(projectFilters.length > 0 && { OR: projectFilters }),
+  };
+}
+
+/**
+ * Helpers
+ */
+
+export function mapToClientDTO(
+  client: Pick<
+    Client,
+    | "id"
+    | "imageUrl"
+    | "bio"
+    | "fullName"
+    | "email"
+    | "phoneNumber"
+    | "publicLink"
+    | "companyId"
+  >,
+): ClientDTO {
+  return {
+    id: client.id,
+    imageUrl: client.imageUrl ?? undefined,
+    bio: client.bio ?? undefined,
+    fullName: client.fullName,
+    email: client.email,
+    phoneNumber: client.phoneNumber ?? undefined,
+    publicLink: client.publicLink ?? undefined,
+    companyId: client.companyId ?? undefined,
   };
 }

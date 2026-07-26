@@ -1,7 +1,7 @@
 import "server-only";
 
 import {
-  mapToPositionDTO,
+  PositionDTO,
   CreatePositionInputDTO,
   UpdatePositionInputDTO,
 } from "./position.dto";
@@ -9,27 +9,29 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
-import { requireSession } from "../utils/requireSession";
+import { Position } from "@/generated/prisma/client";
 import { validatePositionLimit } from "../utils/validation";
+import { verifyResourceAccess } from "../utils/verifyResourceAccess";
 
 export const getPositionCount = cache(async () => {
   // Authorization
   const {
-    user: { workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
-  return prisma.position.count({ where: { workspaceId } });
+  return prisma.position.count({ where: { organizationId } });
 });
 
 export const getPositions = cache(async () => {
   // Authorization
   const {
-    user: { workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   const positions = await prisma.position.findMany({
-    where: { workspaceId },
+    where: { organizationId },
     select: {
       id: true,
       name: true,
@@ -45,19 +47,18 @@ export const getPositions = cache(async () => {
 export const createPositions = async (input: CreatePositionInputDTO[]) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // ACL
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId: userId,
       permissions: {
         position: ["create"],
       },
     },
   });
-
   if (!permissions.success) {
     throw new AccessDeniedError(
       "You do not have permission to create positions.",
@@ -65,13 +66,13 @@ export const createPositions = async (input: CreatePositionInputDTO[]) => {
   }
 
   // Validate limit
-  await validatePositionLimit(workspaceId, input.length);
+  await validatePositionLimit(organizationId, input.length);
 
   // Create positions
   const positions = await prisma.position.createManyAndReturn({
     data: input.map((position) => ({
       name: position.name,
-      workspaceId,
+      organizationId,
     })),
   });
 
@@ -81,13 +82,13 @@ export const createPositions = async (input: CreatePositionInputDTO[]) => {
 export const updatePosition = async (input: UpdatePositionInputDTO) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permissions
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId: userId,
       permissions: {
         position: ["update"],
       },
@@ -104,7 +105,7 @@ export const updatePosition = async (input: UpdatePositionInputDTO) => {
   const updatedPosition = await prisma.position.update({
     where: {
       id: input.id,
-      workspaceId,
+      organizationId,
     },
     data: {
       name: input.name,
@@ -117,13 +118,13 @@ export const updatePosition = async (input: UpdatePositionInputDTO) => {
 export const deletePositions = async (ids: number[]) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permissions
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId: userId,
       permissions: {
         position: ["delete"],
       },
@@ -139,10 +140,23 @@ export const deletePositions = async (ids: number[]) => {
   // Bulk delete positions within the workspace
   const result = await prisma.position.deleteMany({
     where: {
-      workspaceId,
+      organizationId,
       id: { in: ids },
     },
   });
 
   return result;
 };
+
+/**
+ * Helpers
+ */
+
+export function mapToPositionDTO(
+  position: Pick<Position, "id" | "name">,
+): PositionDTO {
+  return {
+    id: position.id,
+    name: position.name,
+  };
+}

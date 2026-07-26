@@ -2,7 +2,6 @@ import "server-only";
 
 import {
   CompanyDTO,
-  mapToCompanyDTO,
   UpdateCompanyInputDTO,
   CreateCompanyInputDTO,
 } from "./company.dto";
@@ -10,29 +9,31 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
-import { requireSession } from "../utils/requireSession";
+import { Company } from "@/generated/prisma/client";
 import { validateCompanyLimit } from "../utils/validation";
+import { verifyResourceAccess } from "../utils/verifyResourceAccess";
 
 export const getCompanyCount = cache(async () => {
   // Authorization
   const {
-    user: { workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
-  return prisma.company.count({ where: { workspaceId } });
+  return prisma.company.count({ where: { organizationId } });
 });
 
 export const getCompanies = cache(async () => {
   // Authorization
   const {
-    user: { workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Get companies
   const companies = await prisma.company.findMany({
     where: {
-      workspaceId,
+      organizationId,
     },
     select: {
       id: true,
@@ -51,13 +52,13 @@ export const updateCompany = async (
 ): Promise<CompanyDTO> => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
-  // ACL
-  const permissions = await auth.api.userHasPermission({
+  // Check permission
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId: userId,
       permissions: {
         company: ["update"],
       },
@@ -74,7 +75,7 @@ export const updateCompany = async (
   const updatedCompany = await prisma.company.update({
     where: {
       id: input.id,
-      workspaceId,
+      organizationId,
     },
     data: {
       name: input.name,
@@ -87,13 +88,13 @@ export const updateCompany = async (
 export const createCompanies = async (input: CreateCompanyInputDTO[]) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
-  // ACL
-  const permissions = await auth.api.userHasPermission({
+  // Check permission
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId,
       permissions: {
         company: ["create"],
       },
@@ -107,13 +108,13 @@ export const createCompanies = async (input: CreateCompanyInputDTO[]) => {
   }
 
   // Validate limit
-  await validateCompanyLimit(workspaceId, input.length);
+  await validateCompanyLimit(organizationId, input.length);
 
   // Create companies
   const companies = await prisma.company.createManyAndReturn({
     data: input.map((company) => ({
       name: company.name,
-      workspaceId,
+      organizationId,
     })),
   });
 
@@ -123,13 +124,13 @@ export const createCompanies = async (input: CreateCompanyInputDTO[]) => {
 export const deleteCompanies = async (ids: number[]) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permissions
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId: userId,
       permissions: {
         company: ["delete"],
       },
@@ -145,10 +146,23 @@ export const deleteCompanies = async (ids: number[]) => {
   // Bulk delete companies within the workspace
   const result = await prisma.company.deleteMany({
     where: {
-      workspaceId,
+      organizationId,
       id: { in: ids },
     },
   });
 
   return result;
 };
+
+/**
+ * Helpers
+ */
+
+export function mapToCompanyDTO(
+  company: Pick<Company, "id" | "name">,
+): CompanyDTO {
+  return {
+    id: company.id,
+    name: company.name,
+  };
+}

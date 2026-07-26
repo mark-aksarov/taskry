@@ -15,7 +15,7 @@ import { CreateSubtaskProvider } from "@/dashboard/subtasks/CreateSubtaskProvide
 import { UpdateTaskTitleProvider } from "@/dashboard/tasks/UpdateTaskTitleProvider";
 import { UpdateTaskAssigneeModal } from "@/dashboard/tasks/UpdateTaskAssigneeModal";
 import { UpdateTaskDeadlineModal } from "@/dashboard/tasks/UpdateTaskDeadlineModal";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { UpdateTaskStatusProvider } from "@/dashboard/tasks/UpdateTaskStatusProvider";
 import { UpdateTaskProjectProvider } from "@/dashboard/tasks/UpdateTaskProjectProvider";
 import { UpdateTaskDescriptionModal } from "@/dashboard/tasks/UpdateTaskDescriptionModal";
@@ -35,7 +35,7 @@ export default async function AppTaskDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  await requireProtectedPageSession();
+  await verifyProtectedPageSession();
 
   // Validation
   const { id: rawTaskId } = await params;

@@ -1,26 +1,26 @@
 import prisma from "@/lib/prisma";
 import { seed } from "@/prisma/test-seed";
 import { createCompanies } from "../company.dal";
+import { setupAuth } from "@/lib/test-utils/auth";
+import { members } from "@/prisma/seed/test-data";
 import { COMPANY_MAX_COUNT } from "../../constants";
 import { it, expect, describe, beforeAll } from "vitest";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
-import { requireSession } from "@/lib/data/utils/requireSession";
-import { users, positions, workspaces } from "@/prisma/seed/test-data";
-import { AccessDeniedError, LimitExceededError } from "../../utils/error";
+import { UnauthorizedError, LimitExceededError } from "../../utils/error";
+import { users, positions, organizations } from "@/prisma/seed/test-data";
 
 describe("createCompanies", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
     });
+
+    await setupAuth("user-1");
   });
 
   it("should successfully create companies", async () => {
@@ -51,7 +51,7 @@ describe("createCompanies", () => {
 
     for (let i = 1; i < COMPANY_MAX_COUNT; i++) {
       companies.push({
-        workspaceId: 1,
+        organizationId: "org-1",
         name: `Company ${i}`,
       });
     }
@@ -72,10 +72,8 @@ describe("createCompanies", () => {
   });
 
   describe("RBAC: create companies", () => {
-    const setup = async (userId: string, role: string) => {
-      (requireSession as any).mockResolvedValue({
-        user: { id: userId, workspaceId: 1, role },
-      });
+    const setup = async (userId?: string) => {
+      await setupAuth(userId);
 
       const createInput = [
         {
@@ -92,26 +90,26 @@ describe("createCompanies", () => {
     };
 
     it("should succeed for owner", async () => {
-      const { createInput } = await setup("user-1", "owner");
+      const { createInput } = await setup("user-1");
 
       const result = await createCompanies(createInput);
 
       expect(result.length).toBe(2);
     });
 
-    it("should succeed for user", async () => {
-      const { createInput } = await setup("user-2", "user");
+    it("should succeed for member", async () => {
+      const { createInput } = await setup("user-2");
 
       const result = await createCompanies(createInput);
 
       expect(result.length).toBe(2);
     });
 
-    it("should fail for guest", async () => {
-      const { createInput } = await setup("user-3", "guest");
+    it("should fail for anonymous", async () => {
+      const { createInput } = await setup();
 
       await expect(createCompanies(createInput)).rejects.toThrow(
-        AccessDeniedError,
+        UnauthorizedError,
       );
     });
   });

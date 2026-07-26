@@ -4,7 +4,8 @@ import {
   clients,
   positions,
   companies,
-  workspaces,
+  organizations,
+  members,
 } from "@/prisma/seed/test-data";
 
 describe("delete clients", () => {
@@ -17,7 +18,8 @@ describe("delete clients", () => {
       positions,
       companies,
       clients,
-      workspaces,
+      organizations,
+      members,
     };
 
     cy.task("db:reset");

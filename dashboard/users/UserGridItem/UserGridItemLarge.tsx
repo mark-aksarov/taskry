@@ -22,12 +22,12 @@ import {
 } from "@/dashboard/common/ItemBase";
 
 import { memo } from "react";
-import { useTranslations } from "next-intl";
 import { Separator } from "@/ui/Separator";
-import { UserGridItemLayout } from "./UserGridItemLayout";
+import { useTranslations } from "next-intl";
+import { useRole } from "@/common/RoleContext";
 import { useModal } from "@/common/ModalManagerContext";
+import { UserGridItemLayout } from "./UserGridItemLayout";
 import { UserGridItemLargeSkeleton } from "./UserGridItemSkeleton";
-import { useCurrentUser } from "@/common/CurrentUserContext";
 import { GridItemLargeGate } from "@/dashboard/common/GridItemLargeGate";
 
 export function UserGridItemLarge(props: BaseUserItemProps) {
@@ -55,7 +55,7 @@ const UserGridItemLargeInner = memo(function UserGridItemLargeInner({
   email,
 }: InnerProps) {
   const t = useTranslations("dashboard.users.UserGridItem");
-  const { isOwner, isGuest } = useCurrentUser();
+  const role = useRole();
   const { onOpenChange: onUserDetailModalOpenChange } = useModal("userDetail");
 
   const userImg = (
@@ -67,8 +67,8 @@ const UserGridItemLargeInner = memo(function UserGridItemLargeInner({
     />
   );
 
-  // We show the action menu only for owners and guests
-  const showActionMenuTrigger = isOwner || isGuest;
+  // We show the action menu only for owners
+  const showActionMenuTrigger = role === "owner";
 
   return (
     <UserGridItemLayout

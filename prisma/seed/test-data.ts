@@ -1,10 +1,15 @@
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
 
-export const workspaces = [{ id: 1 }, { id: 2 }];
-export const projectCategories = [
-  { id: 1, name: "Project Category 1", workspaceId: 1 },
-  { id: 2, name: "Project Category 2", workspaceId: 2 },
+export const organizations = [
+  { id: "org-1", name: "Organization 1", slug: "org-1", createdAt: new Date() },
+  { id: "org-2", name: "Organization 2", slug: "org-2", createdAt: new Date() },
 ];
+
+export const projectCategories = [
+  { id: 1, name: "Project Category 1", organizationId: "org-1" },
+  { id: 2, name: "Project Category 2", organizationId: "org-2" },
+];
+
 export const projects = [
   {
     id: 1,
@@ -14,7 +19,7 @@ export const projects = [
     creatorId: "user-1",
     clientId: 1,
     categoryId: 1,
-    workspaceId: 1,
+    organizationId: "org-1",
     status: ProjectStatus.active,
   },
   {
@@ -24,7 +29,7 @@ export const projects = [
     deadline: new Date("2030-12-30"),
     clientId: 1,
     categoryId: 1,
-    workspaceId: 1,
+    organizationId: "org-1",
     status: ProjectStatus.active,
   },
   {
@@ -34,14 +39,14 @@ export const projects = [
     deadline: new Date("2030-12-29"),
     clientId: 2,
     categoryId: 2,
-    workspaceId: 2,
+    organizationId: "org-2",
     status: ProjectStatus.active,
   },
 ];
 
 export const taskCategories = [
-  { id: 1, name: "Task Category 1", workspaceId: 1 },
-  { id: 2, name: "Task Category 2", workspaceId: 2 },
+  { id: 1, name: "Task Category 1", organizationId: "org-1" },
+  { id: 2, name: "Task Category 2", organizationId: "org-2" },
 ];
 
 export const tasks = [
@@ -54,7 +59,7 @@ export const tasks = [
     projectId: 1,
     categoryId: 1,
     assigneeId: "user-1",
-    workspaceId: 1,
+    organizationId: "org-1",
   },
   {
     id: 2,
@@ -65,7 +70,7 @@ export const tasks = [
     projectId: 1,
     categoryId: 1,
     assigneeId: "user-1",
-    workspaceId: 1,
+    organizationId: "org-1",
   },
   {
     id: 3,
@@ -76,18 +81,42 @@ export const tasks = [
     projectId: 2,
     categoryId: 2,
     assigneeId: "user-1",
-    workspaceId: 2,
+    organizationId: "org-2",
   },
 ];
 
 export const companies = [
-  { id: 1, name: "Company 1", workspaceId: 1 },
-  { id: 2, name: "Company 2", workspaceId: 2 },
+  { id: 1, name: "Company 1", organizationId: "org-1" },
+  { id: 2, name: "Company 2", organizationId: "org-2" },
 ];
 
 export const positions = [
-  { id: 1, name: "Position 1", workspaceId: 1 },
-  { id: 2, name: "Position 2", workspaceId: 2 },
+  { id: 1, name: "Position 1", organizationId: "org-1" },
+  { id: 2, name: "Position 2", organizationId: "org-2" },
+];
+
+export const members = [
+  {
+    id: "member-1",
+    userId: "user-1",
+    organizationId: "org-1",
+    role: "owner",
+    createdAt: new Date(),
+  },
+  {
+    id: "member-2",
+    userId: "user-2",
+    organizationId: "org-1",
+    role: "member",
+    createdAt: new Date(),
+  },
+  {
+    id: "member-4",
+    userId: "user-4",
+    organizationId: "org-2",
+    role: "owner",
+    createdAt: new Date(),
+  },
 ];
 
 export const users = [
@@ -102,9 +131,7 @@ export const users = [
     publicLink: "https://example.com/user-1",
     address: "address user 1",
     birthdate: new Date("1999-01-01"),
-    role: "owner",
     positionId: 1,
-    workspaceId: 1,
   },
   {
     id: "user-2",
@@ -117,24 +144,7 @@ export const users = [
     publicLink: "https://example.com/user-2",
     address: "address user 2",
     birthdate: new Date("1999-01-01"),
-    role: "user",
     positionId: 1,
-    workspaceId: 1,
-  },
-  {
-    id: "user-3",
-    fullName: "User 3",
-    bio: "user 3 bio",
-    phoneNumber: "phone 3",
-    email: "user-3@test.com",
-    emailVerified: true,
-    imageUrl: "/man.jpg",
-    publicLink: "https://example.com/user-3",
-    address: "address user 3",
-    birthdate: new Date("1999-01-01"),
-    role: "guest",
-    positionId: 1,
-    workspaceId: 1,
   },
   {
     id: "user-4",
@@ -147,17 +157,14 @@ export const users = [
     publicLink: "https://example.com/user-4",
     address: "address user 4",
     birthdate: new Date("1999-01-01"),
-    role: "manager",
     positionId: 2,
-    workspaceId: 2,
   },
 ];
 
 export const accounts = [
   {
     id: "account-1",
-    password:
-      "df7e56ada337fc279c71bc2a34a20489:28aba8385a21ae385f98076554a3ecd02ed35fa4d7178a4cedc7820eb161fa6bbe2048b423e5124ae1b489952453131e688d49750d2d48178f5f7e256d3e947d",
+    password: "df7e56ada337fc279c71bc2a34a20489:28aba8385a21ae385f98076554a3ecd02ed35fa4d7178a4cedc7820eb161fa6bbe2048b423e5124ae1b489952453131e688d49750d2d48178f5f7e256d3e947d",
     accountId: "account-1",
     providerId: "credential",
     userId: "user-1",
@@ -166,21 +173,10 @@ export const accounts = [
   },
   {
     id: "account-2",
-    password:
-      "df7e56ada337fc279c71bc2a34a20489:28aba8385a21ae385f98076554a3ecd02ed35fa4d7178a4cedc7820eb161fa6bbe2048b423e5124ae1b489952453131e688d49750d2d48178f5f7e256d3e947d",
+    password: "df7e56ada337fc279c71bc2a34a20489:28aba8385a21ae385f98076554a3ecd02ed35fa4d7178a4cedc7820eb161fa6bbe2048b423e5124ae1b489952453131e688d49750d2d48178f5f7e256d3e947d",
     accountId: "account-2",
     providerId: "credential",
     userId: "user-2",
-    createdAt: new Date("2023-01-10T10:00:00Z"),
-    updatedAt: new Date("2023-01-10T10:00:00Z"),
-  },
-  {
-    id: "account-3",
-    password:
-      "df7e56ada337fc279c71bc2a34a20489:28aba8385a21ae385f98076554a3ecd02ed35fa4d7178a4cedc7820eb161fa6bbe2048b423e5124ae1b489952453131e688d49750d2d48178f5f7e256d3e947d",
-    accountId: "account-3",
-    providerId: "credential",
-    userId: "user-3",
     createdAt: new Date("2023-01-10T10:00:00Z"),
     updatedAt: new Date("2023-01-10T10:00:00Z"),
   },
@@ -196,7 +192,7 @@ export const clients = [
     phoneNumber: "123-456-7890",
     publicLink: "https://example.com/client-1",
     companyId: 1,
-    workspaceId: 1,
+    organizationId: "org-1",
   },
   {
     id: 2,
@@ -207,7 +203,7 @@ export const clients = [
     phoneNumber: "987-654-3210",
     publicLink: "https://example.com/client-2",
     companyId: 1,
-    workspaceId: 1,
+    organizationId: "org-1",
   },
   {
     id: 3,
@@ -218,7 +214,7 @@ export const clients = [
     phoneNumber: "987-654-3210",
     publicLink: "https://example.com/client-2",
     companyId: 2,
-    workspaceId: 2,
+    organizationId: "org-2",
   },
 ];
 
@@ -228,7 +224,7 @@ export const comments = [
     content: "Comment 1",
     projectId: 1,
     taskId: null,
-    workspaceId: 1,
+    organizationId: "org-1",
     senderId: "user-1",
     createdAt: new Date("2025-03-01"),
   },
@@ -237,7 +233,7 @@ export const comments = [
     content: "Comment 2",
     projectId: 1,
     taskId: null,
-    workspaceId: 1,
+    organizationId: "org-1",
     senderId: "user-1",
     createdAt: new Date("2025-03-02"),
   },
@@ -246,7 +242,7 @@ export const comments = [
     content: "Comment 3",
     projectId: null,
     taskId: 1,
-    workspaceId: 1,
+    organizationId: "org-1",
     senderId: "user-1",
     createdAt: new Date("2025-03-03"),
   },

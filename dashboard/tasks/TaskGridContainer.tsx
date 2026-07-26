@@ -9,7 +9,6 @@ import { TaskCommentsModal } from "./TaskCommentsModal";
 import { UpdateTaskProvider } from "./UpdateTaskProvider";
 import { DeleteTaskProvider } from "./DeleteTaskProvider";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
-import { GuestModeModal } from "../common/GuestModeModal";
 import { TaskGridItemMobileSkeleton } from "./TaskGridItem";
 import { TaskDetailSideSheet } from "./TaskDetailSideSheet";
 import { TaskDetailContainer } from "./TaskDetailContainer";
@@ -140,8 +139,6 @@ export function TaskGridContainer({
                 </UpdateTaskStatusProvider>
               </DeleteTaskProvider>
             </UpdateTaskProvider>
-
-            <GuestModeModal />
           </ModalManagerProvider>
         );
       })}

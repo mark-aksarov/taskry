@@ -4,7 +4,7 @@ import z from "zod";
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
 import { positionId, positionName } from "@/lib/schemas/position";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { updatePosition as updatePositionQuery } from "@/lib/data/position/position.dal";
 
 const schema = z.object({
@@ -14,7 +14,7 @@ const schema = z.object({
 
 export async function updatePosition(formData: FormData): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
 

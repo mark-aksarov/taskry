@@ -4,7 +4,6 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { useDownloadFile } from "@/lib/hooks/useDownloadFile";
 import { BriefcaseBusiness, Download, Loader2 } from "lucide-react";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { ManageMenuTrigger } from "@/dashboard/common/ManageMenuTrigger";
 
 interface UserManageMenuTriggerProps {
@@ -23,33 +22,20 @@ export function UserManageMenuTrigger({
     t("errorMessage"),
   );
 
-  const guestGuard = useGuestModalGuard();
-
   function handleAction(key: Key) {
-    guestGuard(() => {
-      if (key === "export-csv") {
-        downloadFile();
-      }
-    });
+    if (key === "export-csv") {
+      downloadFile();
+    }
   }
 
   return (
     <ManageMenuTrigger renderButton={renderButton} onAction={handleAction}>
       <Item textValue={t("exportCSV")} key="export-csv">
-        {isPending ? (
-          <Loader2
-            
-            
-            
-            className="animate-spin"
-          />
-        ) : (
-          <Download    />
-        )}
+        {isPending ? <Loader2 className="animate-spin" /> : <Download />}
         {t("exportCSV")}
       </Item>
       <Item textValue={t("positions")} href="/positions">
-        <BriefcaseBusiness    />
+        <BriefcaseBusiness />
         {t("positions")}
       </Item>
     </ManageMenuTrigger>

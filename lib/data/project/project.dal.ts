@@ -1,13 +1,19 @@
 import "server-only";
 
 import {
+  Prisma,
+  Project,
+  TaskStatus,
+  ProjectStatus,
+} from "@/generated/prisma/client";
+
+import {
   ProjectDTO,
   ProjectListDTO,
   ProjectDetailDTO,
   ProjectSummaryDTO,
   UpdateProjectInputDTO,
   CreateProjectInputDTO,
-  mapToProjectDTO,
 } from "./project.dto";
 
 import {
@@ -19,22 +25,22 @@ import {
 import { cache } from "react";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
+import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
-import { requireSession } from "../utils/requireSession";
 import { uniqueDefinedIds } from "../utils/uniqueDefinedIds";
 import { ProjectFilters, ProjectSortField } from "@/lib/types";
-import { Prisma, TaskStatus, ProjectStatus } from "@/generated/prisma/client";
+import { verifyResourceAccess } from "../utils/verifyResourceAccess";
 
 export const getProjectDetail = cache(
   async (id: number): Promise<ProjectDetailDTO | null> => {
     // Authorization
     const {
-      user: { workspaceId },
-    } = await requireSession();
+      session: { activeOrganizationId: organizationId },
+    } = await verifyResourceAccess();
 
     // Get project
     const project = await prisma.project.findFirst({
-      where: { id, workspaceId },
+      where: { id, organizationId },
       select: {
         id: true,
         title: true,
@@ -124,12 +130,12 @@ export const getProject = cache(
   async (id: number): Promise<ProjectDTO | null> => {
     // Authorization
     const {
-      user: { workspaceId },
-    } = await requireSession();
+      session: { activeOrganizationId: organizationId },
+    } = await verifyResourceAccess();
 
     // Get project
     const project = await prisma.project.findFirst({
-      where: { id, workspaceId },
+      where: { id, organizationId },
       select: {
         id: true,
         title: true,
@@ -161,11 +167,11 @@ export const getProject = cache(
 export const getProjects = cache(async (): Promise<ProjectDTO[]> => {
   // Authorization
   const {
-    user: { workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   const projects = await prisma.project.findMany({
-    where: { workspaceId },
+    where: { organizationId },
     orderBy: {
       createdAt: "desc",
     },
@@ -195,12 +201,12 @@ export const getProjectSummary = cache(
   async (id: number): Promise<ProjectSummaryDTO | null> => {
     // Authorization
     const {
-      user: { workspaceId },
-    } = await requireSession();
+      session: { activeOrganizationId: organizationId },
+    } = await verifyResourceAccess();
 
     // Get project
     const project = await prisma.project.findFirst({
-      where: { id, workspaceId },
+      where: { id, organizationId },
       select: {
         id: true,
         title: true,
@@ -223,10 +229,10 @@ export const getProjectSummaries = cache(
   async (): Promise<ProjectSummaryDTO[]> => {
     // Authorization
     const {
-      user: { workspaceId },
-    } = await requireSession();
+      session: { activeOrganizationId: organizationId },
+    } = await verifyResourceAccess();
 
-    const where = { workspaceId };
+    const where = { organizationId };
 
     // Get projects
     const projects = await prisma.project.findMany({
@@ -259,8 +265,8 @@ export const getProjectList = cache(
   }): Promise<ProjectListDTO> => {
     // Authorization
     const {
-      user: { workspaceId },
-    } = await requireSession();
+      session: { activeOrganizationId: organizationId },
+    } = await verifyResourceAccess();
 
     // Sorting
     let orderBy: Prisma.ProjectOrderByWithRelationInput;
@@ -275,7 +281,7 @@ export const getProjectList = cache(
       orderBy = { createdAt: "desc" };
     }
 
-    const where = buildProjectWhereClause(workspaceId, filters);
+    const where = buildProjectWhereClause(organizationId, filters);
 
     // Get projects
     const [items, totalCount] = await Promise.all([
@@ -386,24 +392,25 @@ export const getProjectList = cache(
 export const getProjectCount = cache(async (filters?: ProjectFilters) => {
   // Authorization
   const {
-    user: { workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   return prisma.project.count({
-    where: buildProjectWhereClause(workspaceId, filters),
+    where: buildProjectWhereClause(organizationId, filters),
   });
 });
 
 export const createProjects = async (input: CreateProjectInputDTO[]) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    user: { id: userId },
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permission
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId,
       permissions: {
         project: ["create"],
       },
@@ -417,7 +424,7 @@ export const createProjects = async (input: CreateProjectInputDTO[]) => {
   }
 
   // Validate limit
-  await validateProjectLimit(workspaceId, input.length);
+  await validateProjectLimit(organizationId, input.length);
 
   // Validate categories
   const categoryIds = uniqueDefinedIds(
@@ -425,14 +432,14 @@ export const createProjects = async (input: CreateProjectInputDTO[]) => {
   );
 
   if (categoryIds.length > 0) {
-    await validateProjectCategories(workspaceId, categoryIds);
+    await validateProjectCategories(organizationId, categoryIds);
   }
 
   // Validate clients
   const clientIds = uniqueDefinedIds(input.map((project) => project.clientId));
 
   if (clientIds.length > 0) {
-    await validateClients(workspaceId, clientIds);
+    await validateClients(organizationId, clientIds);
   }
 
   const projects = await prisma.project.createManyAndReturn({
@@ -444,7 +451,7 @@ export const createProjects = async (input: CreateProjectInputDTO[]) => {
       categoryId: project.categoryId,
       status: project.status,
       creatorId: userId,
-      workspaceId,
+      organizationId,
     })),
   });
 
@@ -454,13 +461,13 @@ export const createProjects = async (input: CreateProjectInputDTO[]) => {
 export const updateProject = async (input: UpdateProjectInputDTO) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permissions
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId,
       permissions: {
         project: ["update"],
       },
@@ -475,19 +482,19 @@ export const updateProject = async (input: UpdateProjectInputDTO) => {
 
   // Validate category
   if (input.categoryId) {
-    await validateProjectCategories(workspaceId, [input.categoryId]);
+    await validateProjectCategories(organizationId, [input.categoryId]);
   }
 
   // Validate client
   if (input.clientId) {
-    await validateClients(workspaceId, [input.clientId]);
+    await validateClients(organizationId, [input.clientId]);
   }
 
   // Update project
   const updatedProject = await prisma.project.update({
     where: {
       id: input.id,
-      workspaceId,
+      organizationId,
     },
     data: {
       title: input.title,
@@ -508,13 +515,13 @@ export const updateProjectStatuses = async (
 ) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permissions
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId,
       permissions: {
         project: ["update"],
       },
@@ -532,7 +539,7 @@ export const updateProjectStatuses = async (
   const updatedProjects = await prisma.project.updateManyAndReturn({
     where: {
       id: { in: ids },
-      workspaceId,
+      organizationId,
     },
     data: {
       status,
@@ -545,13 +552,13 @@ export const updateProjectStatuses = async (
 export const deleteProjects = async (ids: number[]) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permissions
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId: userId,
       permissions: {
         project: ["delete"],
       },
@@ -565,7 +572,7 @@ export const deleteProjects = async (ids: number[]) => {
   // Bulk delete projects
   const deletedProjects = await prisma.project.deleteMany({
     where: {
-      workspaceId,
+      organizationId,
       id: { in: ids },
     },
   });
@@ -578,13 +585,13 @@ export const deleteProjects = async (ids: number[]) => {
  */
 
 export function buildProjectWhereClause(
-  workspaceId: number,
+  organizationId: string,
   filters?: ProjectFilters,
 ): Prisma.ProjectWhereInput {
-  if (!filters) return { workspaceId };
+  if (!filters) return { organizationId };
 
   return {
-    workspaceId,
+    organizationId,
 
     ...(filters.query && {
       title: { contains: filters.query, mode: "insensitive" as const },
@@ -606,5 +613,32 @@ export function buildProjectWhereClause(
       ...(filters.deadlineFrom && { gte: new Date(filters.deadlineFrom) }),
       ...(filters.deadlineTo && { lte: new Date(filters.deadlineTo) }),
     },
+  };
+}
+
+/**
+ * Helpers
+ */
+
+export function mapToProjectDTO(
+  position: Pick<
+    Project,
+    | "id"
+    | "title"
+    | "description"
+    | "deadline"
+    | "status"
+    | "categoryId"
+    | "clientId"
+  >,
+): ProjectDTO {
+  return {
+    id: position.id,
+    title: position.title,
+    description: position.description ?? undefined,
+    deadline: position.deadline.toISOString(),
+    status: position.status,
+    categoryId: position.categoryId ?? undefined,
+    clientId: position.clientId ?? undefined,
   };
 }

@@ -5,7 +5,7 @@ import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteUserProvider } from "../../DeleteUserProvider/__stories__";
 import { withUpdateUserProvider } from "../../UpdateUserProvider/__stories__";
 import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
 
@@ -15,7 +15,7 @@ const meta = {
   decorators: [
     withUpdateUserProvider,
     withDeleteUserProvider,
-    withCurrentUserProvider,
+    withSessionProvider,
     withViewModeProvider,
     withPageTransitionProvider,
     withModalManagerProvider,

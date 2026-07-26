@@ -8,8 +8,8 @@ import {
 import { useTranslations } from "next-intl";
 import { DialogBody, DialogFooter } from "@/ui/Dialog";
 import { useModal } from "@/common/ModalManagerContext";
-import { CreateUserForm, CreateUserFormSubmitButton } from "../CreateUserForm";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
+import { CreateUserForm, CreateUserFormSubmitButton } from "../CreateUserForm";
 
 export function CreateUserModal() {
   const t = useTranslations("dashboard.users.CreateUserModal");
@@ -21,7 +21,7 @@ export function CreateUserModal() {
       data-test="create-user-modal"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
-      className="md:w-[450px]"
+      className="md:w-[350px]"
     >
       <FormBaseModalDialog>
         <DialogHeaderWithClose>{t("title")}</DialogHeaderWithClose>

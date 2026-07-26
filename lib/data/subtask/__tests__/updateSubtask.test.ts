@@ -3,7 +3,7 @@ import {
   positions,
   companies,
   clients,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
   projects,
@@ -11,23 +11,21 @@ import {
 } from "@/prisma/seed/test-data";
 
 import prisma from "@/lib/prisma";
-import { updateSubtask } from "../subtask.dal";
 import { seed } from "@/prisma/test-seed";
-import { AccessDeniedError } from "@/lib/data/utils/error";
-import { requireSession } from "@/lib/data/utils/requireSession";
+import { updateSubtask } from "../subtask.dal";
+import { members } from "@/prisma/seed/test-data";
+import { setupAuth } from "@/lib/test-utils/auth";
+import { UnauthorizedError } from "@/lib/data/utils/error";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
 
 describe("updateSubtask", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
@@ -37,6 +35,8 @@ describe("updateSubtask", () => {
       projects,
       tasks,
     });
+
+    await setupAuth("user-1");
   });
 
   afterEach(async () => {
@@ -63,7 +63,7 @@ describe("updateSubtask", () => {
     expect(result!.text).toBe("Updated Subtask Text");
   });
 
-  it("should throw an error when trying to update a subtask from another workspace", async () => {
+  it("should throw an error when trying to update a subtask from another organization", async () => {
     await prisma.subtask.create({
       data: {
         id: 1,
@@ -82,10 +82,8 @@ describe("updateSubtask", () => {
   });
 
   describe("RBAC: update subtask", () => {
-    const setup = async (userId: string, role: string) => {
-      (requireSession as any).mockResolvedValue({
-        user: { id: userId, workspaceId: 1, role },
-      });
+    const setup = async (userId?: string) => {
+      await setupAuth(userId);
 
       await prisma.subtask.create({
         data: {
@@ -105,24 +103,24 @@ describe("updateSubtask", () => {
     };
 
     it("should succeed for owner", async () => {
-      const { updateInput } = await setup("user-1", "owner");
+      const { updateInput } = await setup("user-1");
       const result = await updateSubtask(updateInput);
       expect(result).toBeDefined();
       expect(result!.text).toBe(updateInput.text);
     });
 
-    it("should fail for user", async () => {
-      const { updateInput } = await setup("user-2", "user");
+    it("should succeed for member", async () => {
+      const { updateInput } = await setup("user-2");
       const result = await updateSubtask(updateInput);
       expect(result).toBeDefined();
       expect(result!.text).toBe(updateInput.text);
     });
 
-    it("should fail for guest", async () => {
-      const { updateInput } = await setup("user-3", "guest");
+    it("should fail for anonymous", async () => {
+      const { updateInput } = await setup();
 
       await expect(updateSubtask(updateInput)).rejects.toThrow(
-        AccessDeniedError,
+        UnauthorizedError,
       );
     });
   });

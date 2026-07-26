@@ -7,14 +7,14 @@ import { parseCsvFile } from "@/lib/utils/parseCsvFile";
 import { PROJECT_MAX_COUNT } from "@/lib/data/constants";
 import { createProjectSchema } from "@/lib/schemas/project";
 import { LimitExceededError } from "@/lib/data/utils/error";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { createProjects as createProjectsQuery } from "@/lib/data/project/project.dal";
 
 const schema = z.array(createProjectSchema.strict()).min(1);
 
 export async function importProjects(formData: FormData): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
 

@@ -9,7 +9,6 @@ import {
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
 import { useDeleteProject } from "../DeleteProjectContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateProjectClient } from "../UpdateProjectClientContext";
 
 interface ProjectClientDetailInfoAltProps {
@@ -24,8 +23,6 @@ export function ProjectClientDetailInfoAlt({
 }: ProjectClientDetailInfoAltProps) {
   const t = useTranslations("dashboard.projects.ProjectDetail");
 
-  const guestGuard = useGuestModalGuard();
-
   const { onOpenChange: onUpdateClientModalOpenChange } = useModal(
     "updateProjectClient",
   );
@@ -34,11 +31,10 @@ export function ProjectClientDetailInfoAlt({
   const { isPending: isDeleteProjectPending } = useDeleteProject();
 
   //Pending state while updating project client
-  const { isPending: isUpdateProjectClientPending } =
-    useUpdateProjectClient();
+  const { isPending: isUpdateProjectClientPending } = useUpdateProjectClient();
 
   const handlePress = () => {
-    guestGuard(() => onUpdateClientModalOpenChange(true));
+    onUpdateClientModalOpenChange(true);
   };
 
   return (
@@ -46,9 +42,7 @@ export function ProjectClientDetailInfoAlt({
       data-test="project-client-detail-info"
       title={<DetailTitle>{t("client")}</DetailTitle>}
       content={
-        <DetailText>
-          {client ? client.fullName : t("noClient")}
-        </DetailText>
+        <DetailText>{client ? client.fullName : t("noClient")}</DetailText>
       }
       rightSlot={
         <DetailEditButton

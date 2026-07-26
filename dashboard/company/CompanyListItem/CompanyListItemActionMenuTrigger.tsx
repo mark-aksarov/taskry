@@ -10,7 +10,6 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { Pencil, Trash } from "lucide-react";
 import { useModal } from "@/common/ModalManagerContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useCompanyListItemPending } from "./useCompanyListItemPending";
 
 export type CompanyListItemActionMenuTriggerProps = {
@@ -24,9 +23,6 @@ export function CompanyListItemActionMenuTrigger({
     "dashboard.company.CompanyListItemActionMenuTrigger",
   );
 
-  // Show guest modal for guests
-  const guestGuard = useGuestModalGuard();
-
   // Delete confirmation modal state from context
   const { onOpenChange: onDeleteModalOpenChange } = useModal("deleteCompany");
 
@@ -34,19 +30,15 @@ export function CompanyListItemActionMenuTrigger({
   const { onOpenChange: onUpdateModalOpenChange } = useModal("updateCompany");
 
   /**
-   * Handles menu actions for a company item
-   * - If user is a guest, show guest modal
-   * - Otherwise, open edit or delete modal based on action key
+   * Open edit or delete modal based on action key
    */
   const handleAction = (key: Key) => {
-    guestGuard(() => {
-      const action = key.toString();
-      if (action === "edit") {
-        onUpdateModalOpenChange(true);
-      } else if (action === "delete") {
-        onDeleteModalOpenChange(true);
-      }
-    });
+    const action = key.toString();
+    if (action === "edit") {
+      onUpdateModalOpenChange(true);
+    } else if (action === "delete") {
+      onDeleteModalOpenChange(true);
+    }
   };
 
   // Determine if any action on this company item is pending (update or delete)
@@ -65,10 +57,10 @@ export function CompanyListItemActionMenuTrigger({
       )}
     >
       <Item textValue={t("edit")} key="edit">
-        <Pencil  /> {t("edit")}
+        <Pencil /> {t("edit")}
       </Item>
       <Item textValue={t("delete")} key="delete">
-        <Trash  /> {t("delete")}
+        <Trash /> {t("delete")}
       </Item>
     </ItemBaseActionMenuTrigger>
   );

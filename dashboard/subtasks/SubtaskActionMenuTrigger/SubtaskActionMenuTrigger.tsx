@@ -10,10 +10,9 @@ import { startTransition } from "react";
 import { twMerge } from "tailwind-merge";
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
+import { useModal } from "@/common/ModalManagerContext";
 import { CheckCheck, Pencil, Trash } from "lucide-react";
 import { useToggleSubtask } from "../ToggleSubtaskContext";
-import { useModal } from "@/common/ModalManagerContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useDeleteTask } from "@/dashboard/tasks/DeleteTaskContext";
 import { useSubtaskListItemPending } from "../SubtaskListItem/useSubtaskListItemPending";
 
@@ -30,9 +29,6 @@ export function SubtaskActionMenuTrigger({
 }: SubtaskActionMenuTriggerProps) {
   const t = useTranslations("dashboard.subtasks.SubtaskActionMenuTrigger");
 
-  // Show guest modal for guests
-  const guestGuard = useGuestModalGuard();
-
   // Delete confirmation modal state
   const { onOpenChange: onDeleteModalOpenChange } = useModal("deleteSubtask");
 
@@ -43,17 +39,15 @@ export function SubtaskActionMenuTrigger({
   const { onOpenChange: onUpdateModalOpenChange } = useModal("updateSubtask");
 
   function handleAction(key: Key) {
-    guestGuard(() => {
-      if (key === "delete") {
-        onDeleteModalOpenChange(true);
-      } else if (key === "edit") {
-        onUpdateModalOpenChange(true);
-      } else if (key === "toggle") {
-        startTransition(() =>
-          toggleSubtaskAction({ id: subtaskId, isDone: !isDone }),
-        );
-      }
-    });
+    if (key === "delete") {
+      onDeleteModalOpenChange(true);
+    } else if (key === "edit") {
+      onUpdateModalOpenChange(true);
+    } else if (key === "toggle") {
+      startTransition(() =>
+        toggleSubtaskAction({ id: subtaskId, isDone: !isDone }),
+      );
+    }
   }
 
   // Disable button while the task is being deleted
@@ -81,13 +75,13 @@ export function SubtaskActionMenuTrigger({
       )}
     >
       <Item textValue={t("edit")} key="edit">
-        <Pencil  /> {t("edit")}
+        <Pencil /> {t("edit")}
       </Item>
       <Item textValue={isDone ? t("undone") : t("done")} key="toggle">
-        <CheckCheck  /> {isDone ? t("undone") : t("done")}
+        <CheckCheck /> {isDone ? t("undone") : t("done")}
       </Item>
       <Item textValue={t("delete")} key="delete">
-        <Trash  /> {t("delete")}
+        <Trash /> {t("delete")}
       </Item>
     </ItemBaseActionMenuTrigger>
   );

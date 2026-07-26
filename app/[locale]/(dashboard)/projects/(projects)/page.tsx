@@ -20,7 +20,6 @@ import { clientId } from "@/lib/schemas/client";
 import { projectStatus } from "@/lib/schemas/project";
 import { projectCategoryId } from "@/lib/schemas/projectCategory";
 import { getClientCount } from "@/lib/data/client/client.dal";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { CreateProjectModal } from "@/dashboard/projects/CreateProjectModal";
 import { ProjectSearchModal } from "@/dashboard/projects/ProjectSearchModal";
 import { ProjectFiltersModal } from "@/dashboard/projects/ProjectFiltersModal";
@@ -28,16 +27,17 @@ import { DeleteProjectsModal } from "@/dashboard/projects/DeleteProjectsModal";
 import { ImportProjectsModal } from "@/dashboard/projects/ImportProjectsModal";
 import { ProjectGridContainer } from "@/dashboard/projects/ProjectGridContainer";
 import { CreateProjectProvider } from "@/dashboard/projects/CreateProjectProvider";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { ProjectFiltersProvider } from "@/dashboard/projects/ProjectFiltersContext";
 import { ImportProjectsProvider } from "@/dashboard/projects/ImportProjectsProvider";
 import { DeleteProjectsProvider } from "@/dashboard/projects/DeleteProjectsProvider";
 import { SelectedProjectsProvider } from "@/dashboard/projects/SelectedProjectsContext";
 import { getProjectCategoryCount } from "@/lib/data/projectCategory/projectCategory.dal";
 import { ProjectStatusFiltersModal } from "@/dashboard/projects/ProjectStatusFiltersModal";
+import { ProjectClientFiltersModal } from "@/dashboard/projects/ProjectClientFiltersModal";
 import { ProjectCreatorFiltersModal } from "@/dashboard/projects/ProjectCreatorFiltersModal";
 import { CreateProjectFormContainer } from "@/dashboard/projects/CreateProjectFormContainer";
 import { ProjectCategoryFiltersModal } from "@/dashboard/projects/ProjectCategoryFiltersModal";
-import { ProjectClientFiltersModal } from "@/dashboard/projects/ProjectClientFiltersModal";
 import { ProjectFiltersFormContainer } from "@/dashboard/projects/ProjectFiltersFormContainer";
 import { ProjectRouterSearchContainer } from "@/dashboard/projects/ProjectRouterSearchContainer";
 import { UpdateProjectStatusesProvider } from "@/dashboard/projects/UpdateProjectStatusesProvider";
@@ -79,7 +79,7 @@ export default async function AppProjectsPage({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   // Authorization
-  await requireProtectedPageSession();
+  await verifyProtectedPageSession();
 
   // Validation
   const rawParams = await searchParams;
@@ -134,9 +134,7 @@ export default async function AppProjectsPage({
                     filtersFormContainer={<ProjectFiltersFormContainer />}
                   />
                   <ProjectClientFiltersModal
-                    filtersFormContainer={
-                      <ProjectClientFiltersFormContainer />
-                    }
+                    filtersFormContainer={<ProjectClientFiltersFormContainer />}
                   />
                   <ProjectCategoryFiltersModal
                     filtersFormContainer={

@@ -10,27 +10,28 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
-import { requireSession } from "../utils/requireSession";
 import { validateTaskCategoryLimit } from "../utils/validation";
+import { verifyResourceAccess } from "../utils/verifyResourceAccess";
 
 export const getTaskCategoryCount = cache(async () => {
   // Authorization
   const {
-    user: { workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
-  return prisma.taskCategory.count({ where: { workspaceId } });
+  return prisma.taskCategory.count({ where: { organizationId } });
 });
 
 export const getTaskCategories = cache(async (): Promise<TaskCategoryDTO[]> => {
   // Authorization
   const {
-    user: { workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   return await prisma.taskCategory.findMany({
-    where: { workspaceId },
+    where: { organizationId },
     select: { id: true, name: true },
     orderBy: {
       createdAt: "desc",
@@ -43,13 +44,13 @@ export const createTaskCategories = async (
 ) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permission
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId,
       permissions: {
         taskCategory: ["create"],
       },
@@ -63,13 +64,13 @@ export const createTaskCategories = async (
   }
 
   // Validate limit
-  await validateTaskCategoryLimit(workspaceId, input.length);
+  await validateTaskCategoryLimit(organizationId, input.length);
 
   // Create task categories
   const taskCategories = await prisma.taskCategory.createManyAndReturn({
     data: input.map((category) => ({
       name: category.name,
-      workspaceId,
+      organizationId,
     })),
   });
 
@@ -79,13 +80,13 @@ export const createTaskCategories = async (
 export const updateTaskCategory = async (input: UpdateTaskCategoryInputDTO) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permission
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId: userId,
       permissions: {
         taskCategory: ["update"],
       },
@@ -102,7 +103,7 @@ export const updateTaskCategory = async (input: UpdateTaskCategoryInputDTO) => {
   const updatedTaskCategory = await prisma.taskCategory.update({
     where: {
       id: input.id,
-      workspaceId,
+      organizationId,
     },
     data: {
       name: input.name,
@@ -115,13 +116,13 @@ export const updateTaskCategory = async (input: UpdateTaskCategoryInputDTO) => {
 export const deleteTaskCategories = async (ids: number[]) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permission
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId: userId,
       permissions: {
         taskCategory: ["delete"],
       },
@@ -137,7 +138,7 @@ export const deleteTaskCategories = async (ids: number[]) => {
   // Bulk delete task categories within the workspace
   const result = await prisma.taskCategory.deleteMany({
     where: {
-      workspaceId,
+      organizationId,
       id: { in: ids },
     },
   });

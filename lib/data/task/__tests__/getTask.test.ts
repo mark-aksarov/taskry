@@ -3,7 +3,7 @@ import {
   positions,
   companies,
   clients,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
   projects,
@@ -12,21 +12,19 @@ import {
 
 import { getTask } from "../task.dal";
 import { seed } from "@/prisma/test-seed";
+import { loginAs } from "@/lib/test-utils/auth";
+import { members } from "@/prisma/seed/test-data";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { it, expect, describe, beforeAll } from "vitest";
-import { requireSession } from "@/lib/data/utils/requireSession";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 
 describe("getTask", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
@@ -36,6 +34,8 @@ describe("getTask", () => {
       projects,
       tasks,
     });
+
+    await loginAs("user-1");
   });
 
   it("should return a valid TaskDTO", async () => {

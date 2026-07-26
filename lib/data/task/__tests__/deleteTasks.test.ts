@@ -3,7 +3,7 @@ import {
   positions,
   companies,
   clients,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
   projects,
@@ -12,22 +12,20 @@ import {
 import prisma from "@/lib/prisma";
 import { deleteTasks } from "../task.dal";
 import { seed } from "@/prisma/test-seed";
+import { setupAuth } from "@/lib/test-utils/auth";
+import { members } from "@/prisma/seed/test-data";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { AccessDeniedError } from "@/lib/data/utils/error";
-import { requireSession } from "@/lib/data/utils/requireSession";
+import { UnauthorizedError } from "@/lib/data/utils/error";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
 
 describe("deleteTasks", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
@@ -36,6 +34,8 @@ describe("deleteTasks", () => {
       projectCategories,
       projects,
     });
+
+    await setupAuth("user-1");
   });
 
   afterEach(async () => {
@@ -51,7 +51,7 @@ describe("deleteTasks", () => {
           deadline: new Date(),
           projectId: 1,
           categoryId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
           status: TaskStatus.active,
         },
         {
@@ -60,9 +60,9 @@ describe("deleteTasks", () => {
           deadline: new Date(),
           projectId: 1,
           categoryId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
           status: TaskStatus.active,
-          assigneeId: "user-3",
+          assigneeId: "user-1",
         },
       ],
     });
@@ -75,7 +75,7 @@ describe("deleteTasks", () => {
     expect(remainingTasks).toHaveLength(0);
   });
 
-  it("should not delete tasks from a different workspace", async () => {
+  it("should not delete tasks from a different organization", async () => {
     await prisma.task.createMany({
       data: [
         {
@@ -84,7 +84,7 @@ describe("deleteTasks", () => {
           deadline: new Date(),
           projectId: 2,
           categoryId: 2,
-          workspaceId: 2,
+          organizationId: "org-2",
           status: TaskStatus.active,
         },
       ],
@@ -95,7 +95,7 @@ describe("deleteTasks", () => {
     expect(result.count).toBe(0);
   });
 
-  it("should only delete tasks belonging to the current workspace", async () => {
+  it("should only delete tasks belonging to the current organization", async () => {
     await prisma.task.createMany({
       data: [
         {
@@ -104,7 +104,7 @@ describe("deleteTasks", () => {
           deadline: new Date(),
           projectId: 1,
           categoryId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
           status: TaskStatus.active,
         },
         {
@@ -113,7 +113,7 @@ describe("deleteTasks", () => {
           deadline: new Date(),
           projectId: 2,
           categoryId: 2,
-          workspaceId: 2,
+          organizationId: "org-2",
           status: TaskStatus.active,
         },
       ],
@@ -142,10 +142,8 @@ describe("deleteTasks", () => {
   describe("RBAC: delete tasks", () => {
     const taskId = 100;
 
-    const setup = async (userId: string, role: string) => {
-      (requireSession as any).mockResolvedValue({
-        user: { id: userId, workspaceId: 1, role },
-      });
+    const setup = async (userId?: string) => {
+      await setupAuth(userId);
 
       await prisma.task.create({
         data: {
@@ -154,27 +152,27 @@ describe("deleteTasks", () => {
           deadline: new Date(),
           projectId: 1,
           categoryId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
           status: TaskStatus.active,
         },
       });
     };
 
     it("should succeed for owner", async () => {
-      await setup("user-1", "owner");
+      await setup("user-1");
       const result = await deleteTasks([taskId]);
       expect(result.count).toBe(1);
     });
 
-    it("should fail for user", async () => {
-      await setup("user-2", "user");
+    it("should succeed for member", async () => {
+      await setup("user-2");
       const result = await deleteTasks([taskId]);
       expect(result.count).toBe(1);
     });
 
-    it("should fail for guest", async () => {
-      await setup("user-3", "guest");
-      await expect(deleteTasks([taskId])).rejects.toThrow(AccessDeniedError);
+    it("should fail for anonymous", async () => {
+      await setup();
+      await expect(deleteTasks([taskId])).rejects.toThrow(UnauthorizedError);
     });
   });
 });

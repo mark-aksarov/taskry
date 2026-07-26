@@ -10,7 +10,7 @@ import { TaskDetail, TaskDetailSkeleton } from "../TaskDetail";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withDeleteTaskProvider } from "../DeleteTaskProvider/__stories__";
 import { SubtaskListExample } from "@/dashboard/subtasks/SubtaskList/__stories__";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 
 const meta = {
   title: "dashboard/tasks/TaskDetailSideSheet",
@@ -18,7 +18,7 @@ const meta = {
   decorators: [
     withOpenModal,
     withDeleteTaskProvider,
-    withCurrentUserProvider,
+    withSessionProvider,
     withModalManagerProvider,
     withThemedBackground,
   ],

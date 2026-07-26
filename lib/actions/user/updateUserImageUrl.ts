@@ -4,8 +4,8 @@ import z from "zod";
 import { getTranslations } from "next-intl/server";
 import { userId, userImageUrl } from "@/lib/schemas/user";
 import { ActionState, UpdateUserImageUrlPayload } from "../types";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
-import { updateUserImageUrl as updateUserImageUrlQuery } from "@/lib/data/user/user.service";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
+import { updateUser as updateUserQuery } from "@/lib/data/user/user.dal";
 
 const schema = z.object({
   id: userId,
@@ -16,25 +16,36 @@ export async function updateUserImageUrl(
   payload: UpdateUserImageUrlPayload,
 ): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
+  const internalServerError = t(
+    "user.updateImageUrl.error.internalServerError",
+  );
 
-  try {
-    const parsedData = schema.parse(payload);
+  // Validation
+  const result = schema.safeParse(payload);
 
-    await updateUserImageUrlQuery(parsedData);
-
-    return {
-      status: "success",
-      message: t("user.updateImageUrl.success"),
-    };
-  } catch (error) {
-    console.error("Server Action Error:", error);
-
+  if (!result.success) {
     return {
       status: "error",
-      message: t("user.updateImageUrl.error.internalServerError"),
+      // Show a generic error because the user cannot fix invalid id manually
+      message: internalServerError,
     };
   }
+
+  // Update user in database
+  try {
+    await updateUserQuery(result.data);
+  } catch {
+    return {
+      status: "error",
+      message: internalServerError,
+    };
+  }
+
+  return {
+    status: "success",
+    message: t("user.updateImageUrl.success"),
+  };
 }

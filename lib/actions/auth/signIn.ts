@@ -3,11 +3,11 @@
 import * as z from "zod";
 import { auth } from "@/lib/auth";
 import { ActionState } from "../types";
-import { APIError } from "better-auth";
 import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
-import { getLocale, getTranslations } from "next-intl/server";
 import { rememberMe, userEmail } from "@/lib/schemas/user";
+import { getLocale, getTranslations } from "next-intl/server";
+import { handleBetterAuthError } from "@/lib/utils/actionErrors";
 
 const schema = z.object({
   email: userEmail,
@@ -33,40 +33,69 @@ export async function signIn(
     };
   }
 
-  let signedInUser;
+  // Validation
+  const input = Object.fromEntries(formData.entries());
+  const result = schema.safeParse(input);
+
+  if (!result.success) {
+    return {
+      status: "error",
+      message: t("signIn.error.invalidData"),
+    };
+  }
+
+  // Sign in
+  let signInHeaders: Headers | null = null;
 
   try {
-    const input = Object.fromEntries(formData.entries());
-    const parsedData = schema.parse(input);
-
-    const result = await auth.api.signInEmail({
-      body: parsedData,
+    ({ headers: signInHeaders } = await auth.api.signInEmail({
+      returnHeaders: true,
+      body: result.data,
       headers: await headers(),
-    });
-
-    signedInUser = result.user;
+    }));
   } catch (error: unknown) {
-    console.error("Sign-in Error:", error);
+    return await handleBetterAuthError(
+      error,
+      t("signIn.error.internalServerError"),
+    );
+  }
 
-    if (error instanceof APIError) {
-      return {
-        status: "error",
-        message: error.message,
-      };
-    }
+  // Read the session created during sign-in using the returned cookie,
+  // then redirect the user based on their account state.
+  const setCookie = signInHeaders!.get("set-cookie");
 
+  if (!setCookie) {
     return {
       status: "error",
       message: t("signIn.error.internalServerError"),
     };
   }
 
-  //we cannot call redirect in try/catch block
-  if (signedInUser.emailVerified) {
-    redirect({ href: "/dashboard", locale });
+  const sessionAfterSignIn = await auth.api.getSession({
+    headers: { cookie: setCookie },
+  });
+
+  if (!sessionAfterSignIn) {
+    return {
+      status: "error",
+      message: t("signIn.error.internalServerError"),
+    };
   }
 
-  redirect({ href: "/verify-email", locale });
+  const emailVerified = sessionAfterSignIn.user.emailVerified;
+  const activeOrganizationId = sessionAfterSignIn.session.activeOrganizationId;
 
-  return { status: "success" };
+  if (!emailVerified) {
+    redirect({ href: "/verify-email", locale });
+  }
+
+  if (!activeOrganizationId) {
+    redirect({ href: "/create-organization", locale });
+  }
+
+  redirect({ href: "/dashboard", locale });
+
+  return {
+    status: "success",
+  };
 }

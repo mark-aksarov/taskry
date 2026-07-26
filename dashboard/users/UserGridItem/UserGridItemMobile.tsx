@@ -17,13 +17,13 @@ import {
 } from "@/dashboard/common/GridItem";
 
 import { memo } from "react";
-import { twMerge } from "tailwind-merge";
 import { BaseLink } from "@/ui/Link";
-import { useTranslations } from "next-intl";
+import { twMerge } from "tailwind-merge";
 import { Separator } from "@/ui/Separator";
+import { useTranslations } from "next-intl";
+import { useRole } from "@/common/RoleContext";
 import { UserGridItemLayout } from "./UserGridItemLayout";
 import { UserGridItemMobileSkeleton } from "./UserGridItemSkeleton";
-import { useCurrentUser } from "@/common/CurrentUserContext";
 import { ItemBaseUserImageContainer } from "@/dashboard/common/ItemBase";
 import { GridItemMobileGate } from "@/dashboard/common/GridItemMobileGate";
 
@@ -52,7 +52,7 @@ export const UserGridItemMobileInner = memo(function UserGridItemMobileInner({
 }: InnerProps) {
   const t = useTranslations("dashboard.users.UserGridItem");
 
-  const { isOwner, isGuest } = useCurrentUser();
+  const role = useRole();
 
   const userImg = (
     <ItemBaseUserImageContainer
@@ -63,8 +63,8 @@ export const UserGridItemMobileInner = memo(function UserGridItemMobileInner({
     />
   );
 
-  // We show the action menu only for owners and guests
-  const showActionMenuTrigger = isOwner || isGuest;
+  // We show the action menu only for owners
+  const showActionMenuTrigger = role === "owner";
 
   return (
     <div

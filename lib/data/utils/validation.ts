@@ -1,32 +1,38 @@
-import prisma from "@/lib/prisma";
-import { AccessDeniedError, LimitExceededError, NotFoundError } from "./error";
 import {
+  TASK_MAX_COUNT,
   COMPANY_MAX_COUNT,
+  PROJECT_MAX_COUNT,
   CUSTOMER_MAX_COUNT,
   POSITION_MAX_COUNT,
-  PROJECT_CATEGORY_MAX_COUNT,
-  PROJECT_MAX_COUNT,
   TASK_CATEGORY_MAX_COUNT,
-  TASK_MAX_COUNT,
+  PROJECT_CATEGORY_MAX_COUNT,
 } from "../constants";
 
+import {
+  NotFoundError,
+  ValidationError,
+  AccessDeniedError,
+  LimitExceededError,
+} from "./error";
+import prisma from "@/lib/prisma";
+
 function validateEntities(
-  entities: { workspaceId: number }[],
+  entities: { organizationId: string | null }[],
   count: number,
   name: string,
-  workspaceId: number,
+  organizationId: string,
 ) {
   if (entities.length !== count) {
     throw new NotFoundError(`${name} not found`);
   }
 
-  if (entities.some((entity) => entity.workspaceId !== workspaceId)) {
+  if (entities.some((entity) => entity.organizationId !== organizationId)) {
     throw new AccessDeniedError(`${name} access denied`);
   }
 }
 
 // Validate that task exists and belongs to the workspace
-export async function validateTasks(workspaceId: number, taskIds: number[]) {
+export async function validateTasks(organizationId: string, taskIds: number[]) {
   const tasks = await prisma.task.findMany({
     where: {
       id: {
@@ -34,16 +40,16 @@ export async function validateTasks(workspaceId: number, taskIds: number[]) {
       },
     },
     select: {
-      workspaceId: true,
+      organizationId: true,
     },
   });
 
-  validateEntities(tasks, taskIds.length, "Task", workspaceId);
+  validateEntities(tasks, taskIds.length, "Task", organizationId);
 }
 
 // Validate that company exists and belongs to the workspace
 export async function validateCompanies(
-  workspaceId: number,
+  organizationId: string,
   companyIds: number[],
 ) {
   const companies = await prisma.company.findMany({
@@ -53,16 +59,16 @@ export async function validateCompanies(
       },
     },
     select: {
-      workspaceId: true,
+      organizationId: true,
     },
   });
 
-  validateEntities(companies, companyIds.length, "Company", workspaceId);
+  validateEntities(companies, companyIds.length, "Company", organizationId);
 }
 
 // Validate that project category exists and belongs to the workspace
 export async function validateProjectCategories(
-  workspaceId: number,
+  organizationId: string,
   categoryIds: number[],
 ) {
   const categories = await prisma.projectCategory.findMany({
@@ -72,7 +78,7 @@ export async function validateProjectCategories(
       },
     },
     select: {
-      workspaceId: true,
+      organizationId: true,
     },
   });
 
@@ -80,13 +86,13 @@ export async function validateProjectCategories(
     categories,
     categoryIds.length,
     "Project category",
-    workspaceId,
+    organizationId,
   );
 }
 
 // Validate that client exists and belongs to the workspace
 export async function validateClients(
-  workspaceId: number,
+  organizationId: string,
   clientIds: number[],
 ) {
   const clients = await prisma.client.findMany({
@@ -96,16 +102,16 @@ export async function validateClients(
       },
     },
     select: {
-      workspaceId: true,
+      organizationId: true,
     },
   });
 
-  validateEntities(clients, clientIds.length, "Client", workspaceId);
+  validateEntities(clients, clientIds.length, "Client", organizationId);
 }
 
 // Validate that task category exists and belongs to the workspace
 export async function validateTaskCategories(
-  workspaceId: number,
+  organizationId: string,
   categoryIds: number[],
 ) {
   const categories = await prisma.taskCategory.findMany({
@@ -115,7 +121,7 @@ export async function validateTaskCategories(
       },
     },
     select: {
-      workspaceId: true,
+      organizationId: true,
     },
   });
 
@@ -123,13 +129,13 @@ export async function validateTaskCategories(
     categories,
     categoryIds.length,
     "Task category",
-    workspaceId,
+    organizationId,
   );
 }
 
 // Validate that project exists and belongs to the workspace
 export async function validateProjects(
-  workspaceId: number,
+  organizationId: string,
   projectIds: number[],
 ) {
   const projects = await prisma.project.findMany({
@@ -139,32 +145,32 @@ export async function validateProjects(
       },
     },
     select: {
-      workspaceId: true,
+      organizationId: true,
     },
   });
 
-  validateEntities(projects, projectIds.length, "Project", workspaceId);
+  validateEntities(projects, projectIds.length, "Project", organizationId);
 }
 
 // Validate that user exists and belongs to the workspace
-export async function validateUsers(workspaceId: number, userIds: string[]) {
-  const assignees = await prisma.user.findMany({
+export async function validateUsers(organizationId: string, userIds: string[]) {
+  const members = await prisma.member.findMany({
     where: {
-      id: {
+      userId: {
         in: userIds,
       },
     },
     select: {
-      workspaceId: true,
+      organizationId: true,
     },
   });
 
-  validateEntities(assignees, userIds.length, "User", workspaceId);
+  validateEntities(members, userIds.length, "User", organizationId);
 }
 
 // Validate that position exists and belongs to the workspace
 export async function validatePositions(
-  workspaceId: number,
+  organizationId: string,
   positionIds: number[],
 ) {
   const positions = await prisma.position.findMany({
@@ -174,45 +180,29 @@ export async function validatePositions(
       },
     },
     select: {
-      workspaceId: true,
+      organizationId: true,
     },
   });
 
-  validateEntities(positions, positionIds.length, "Position", workspaceId);
+  validateEntities(positions, positionIds.length, "Position", organizationId);
 }
 
 /**
  * HELPERS
  */
 
-type LimitModel = {
-  count: (args: {
-    where: {
-      workspaceId: number;
-    };
-  }) => Promise<number>;
-};
-
 async function validateLimit({
-  model,
-  workspaceId,
+  count,
   newCount = 1,
   maxCount,
   entityName,
 }: {
-  model: LimitModel;
-  workspaceId: number;
+  count: number;
   newCount?: number;
   maxCount: number;
   entityName: string;
 }) {
-  const existingCount = await model.count({
-    where: {
-      workspaceId,
-    },
-  });
-
-  if (existingCount + newCount > maxCount) {
+  if (count + newCount > maxCount) {
     throw new LimitExceededError(
       `You cannot create more than ${maxCount} ${entityName}.`,
     );
@@ -220,13 +210,18 @@ async function validateLimit({
 }
 
 // Validate that company limit has not been reached
-export function validateCompanyLimit(
-  workspaceId: number,
+export async function validateCompanyLimit(
+  organizationId: string,
   newCompaniesCount = 1,
 ) {
+  const count = await prisma.company.count({
+    where: {
+      organizationId,
+    },
+  });
+
   return validateLimit({
-    model: prisma.company,
-    workspaceId,
+    count,
     newCount: newCompaniesCount,
     maxCount: COMPANY_MAX_COUNT,
     entityName: "companies",
@@ -234,10 +229,18 @@ export function validateCompanyLimit(
 }
 
 // Validate that client limit has not been reached
-export function validateClientLimit(workspaceId: number, newClientsCount = 1) {
+export async function validateClientLimit(
+  organizationId: string,
+  newClientsCount = 1,
+) {
+  const count = await prisma.client.count({
+    where: {
+      organizationId,
+    },
+  });
+
   return validateLimit({
-    model: prisma.client,
-    workspaceId,
+    count,
     newCount: newClientsCount,
     maxCount: CUSTOMER_MAX_COUNT,
     entityName: "clients",
@@ -245,13 +248,18 @@ export function validateClientLimit(workspaceId: number, newClientsCount = 1) {
 }
 
 // Validate that position limit has not been reached
-export function validatePositionLimit(
-  workspaceId: number,
+export async function validatePositionLimit(
+  organizationId: string,
   newPositionsCount = 1,
 ) {
+  const count = await prisma.position.count({
+    where: {
+      organizationId,
+    },
+  });
+
   return validateLimit({
-    model: prisma.position,
-    workspaceId,
+    count,
     newCount: newPositionsCount,
     maxCount: POSITION_MAX_COUNT,
     entityName: "positions",
@@ -259,13 +267,18 @@ export function validatePositionLimit(
 }
 
 // Validate that project limit has not been reached
-export function validateProjectLimit(
-  workspaceId: number,
+export async function validateProjectLimit(
+  organizationId: string,
   newProjectsCount = 1,
 ) {
+  const count = await prisma.project.count({
+    where: {
+      organizationId,
+    },
+  });
+
   return validateLimit({
-    model: prisma.project,
-    workspaceId,
+    count,
     newCount: newProjectsCount,
     maxCount: PROJECT_MAX_COUNT,
     entityName: "projects",
@@ -273,13 +286,18 @@ export function validateProjectLimit(
 }
 
 // Validate that project category limit has not been reached
-export function validateProjectCategoryLimit(
-  workspaceId: number,
+export async function validateProjectCategoryLimit(
+  organizationId: string,
   newCategoriesCount = 1,
 ) {
+  const count = await prisma.projectCategory.count({
+    where: {
+      organizationId,
+    },
+  });
+
   return validateLimit({
-    model: prisma.projectCategory,
-    workspaceId,
+    count,
     newCount: newCategoriesCount,
     maxCount: PROJECT_CATEGORY_MAX_COUNT,
     entityName: "project categories",
@@ -287,10 +305,18 @@ export function validateProjectCategoryLimit(
 }
 
 // Validate that task limit has not been reached
-export function validateTaskLimit(workspaceId: number, newTasksCount = 1) {
+export async function validateTaskLimit(
+  organizationId: string,
+  newTasksCount = 1,
+) {
+  const count = await prisma.task.count({
+    where: {
+      organizationId,
+    },
+  });
+
   return validateLimit({
-    model: prisma.task,
-    workspaceId,
+    count,
     newCount: newTasksCount,
     maxCount: TASK_MAX_COUNT,
     entityName: "tasks",
@@ -298,15 +324,35 @@ export function validateTaskLimit(workspaceId: number, newTasksCount = 1) {
 }
 
 // Validate that task category limit has not been reached
-export function validateTaskCategoryLimit(
-  workspaceId: number,
+export async function validateTaskCategoryLimit(
+  organizationId: string,
   newCategoriesCount = 1,
 ) {
+  const count = await prisma.taskCategory.count({
+    where: {
+      organizationId,
+    },
+  });
+
   return validateLimit({
-    model: prisma.taskCategory,
-    workspaceId,
+    count,
     newCount: newCategoriesCount,
     maxCount: TASK_CATEGORY_MAX_COUNT,
     entityName: "task categories",
   });
+}
+
+// Validate that user is not a member
+export async function validateUserHasNoMembership(email: string) {
+  const existingMember = await prisma.member.findFirst({
+    where: {
+      user: {
+        email,
+      },
+    },
+  });
+
+  if (existingMember) {
+    throw new ValidationError("User already member");
+  }
 }

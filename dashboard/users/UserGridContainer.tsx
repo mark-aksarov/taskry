@@ -8,7 +8,6 @@ import { UserListItemSkeleton } from "./UserListItem";
 import { DeleteUserProvider } from "./DeleteUserProvider";
 import { UpdateUserProvider } from "./UpdateUserProvider";
 import { UserListItemDTO } from "@/lib/data/user/user.dto";
-import { GuestModeModal } from "../common/GuestModeModal";
 import { UserDetailSideSheet } from "./UserDetailSideSheet";
 import { UserDetailContainer } from "./UserDetailContainer";
 import { UserGridItemMobileSkeleton } from "./UserGridItem";
@@ -73,8 +72,6 @@ export function UserGridContainer({ users }: UserGridContainerProps) {
               <DeleteUserModal userId={user.id} userFullName={user.fullName} />
             </UpdateUserProvider>
           </DeleteUserProvider>
-
-          <GuestModeModal />
         </ModalManagerProvider>
       ))}
     </UserGrid>

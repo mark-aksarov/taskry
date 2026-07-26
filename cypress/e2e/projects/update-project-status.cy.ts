@@ -1,12 +1,12 @@
 import { ProjectStatus } from "@/generated/prisma/enums";
 import {
   users,
-  projects,
   accounts,
   positions,
   companies,
   clients,
-  workspaces,
+  organizations,
+  members,
   projectCategories,
   taskCategories,
 } from "@/prisma/seed/test-data";
@@ -23,14 +23,14 @@ describe("update project status", () => {
           id: 1,
           title: "Project 1",
           deadline: new Date("2030-12-31"),
-          workspaceId: 1,
+          organizationId: "org-1",
           status: ProjectStatus.active,
         },
         {
           id: 2,
           title: "Project 2",
           deadline: new Date("2030-12-30"),
-          workspaceId: 1,
+          organizationId: "org-1",
           status: ProjectStatus.pending,
         },
       ],
@@ -38,7 +38,8 @@ describe("update project status", () => {
       positions,
       companies,
       clients,
-      workspaces,
+      organizations,
+      members,
       taskCategories,
       projectCategories,
     };

@@ -3,12 +3,12 @@
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
 import { createClientSchema } from "@/lib/schemas/client";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { createClients as createClientsQuery } from "@/lib/data/client/client.dal";
 
 export async function createClient(formData: FormData): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
 

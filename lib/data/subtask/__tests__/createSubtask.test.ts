@@ -1,32 +1,35 @@
 import {
   users,
+  tasks,
+  clients,
+  projects,
   positions,
   companies,
-  clients,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
-  projects,
-  tasks,
 } from "@/prisma/seed/test-data";
 
-import { createSubtask } from "../subtask.dal";
+import {
+  NotFoundError,
+  AccessDeniedError,
+  UnauthorizedError,
+} from "../../utils/error";
+
 import { seed } from "@/prisma/test-seed";
+import { createSubtask } from "../subtask.dal";
+import { setupAuth } from "@/lib/test-utils/auth";
+import { members } from "@/prisma/seed/test-data";
 import { it, expect, describe, beforeAll } from "vitest";
-import { requireSession } from "@/lib/data/utils/requireSession";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
-import { AccessDeniedError, NotFoundError } from "../../utils/error";
 
 describe("createSubtask", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
@@ -36,6 +39,8 @@ describe("createSubtask", () => {
       projects,
       tasks,
     });
+
+    await setupAuth("user-1");
   });
 
   it("should successfully create a subtask", async () => {
@@ -59,7 +64,7 @@ describe("createSubtask", () => {
     await expect(createSubtaskPromise).rejects.toThrow(/Task not found/i);
   });
 
-  it("should fail if the task belongs to a different workspace", async () => {
+  it("should fail if the task belongs to a different organization", async () => {
     const createSubtaskPromise = createSubtask({
       text: "Subtask 1",
       taskId: 3,
@@ -70,10 +75,8 @@ describe("createSubtask", () => {
   });
 
   describe("RBAC: create subtask", () => {
-    const setup = async (userId: string, role: string) => {
-      (requireSession as any).mockResolvedValue({
-        user: { id: userId, workspaceId: 1, role },
-      });
+    const setup = async (userId?: string) => {
+      await setupAuth(userId);
 
       const createInput = {
         text: "Subtask 1",
@@ -86,23 +89,23 @@ describe("createSubtask", () => {
     };
 
     it("should succeed for owner", async () => {
-      const { createInput } = await setup("user-1", "owner");
+      const { createInput } = await setup("user-1");
       const result = await createSubtask(createInput);
       expect(result).toBeDefined();
       expect(result.text).toBe(createInput.text);
     });
 
-    it("should succeed for user", async () => {
-      const { createInput } = await setup("user-2", "user");
+    it("should succeed for member", async () => {
+      const { createInput } = await setup("user-2");
       const result = await createSubtask(createInput);
       expect(result).toBeDefined();
       expect(result.text).toBe(createInput.text);
     });
 
-    it("should fail for guest", async () => {
-      const { createInput } = await setup("user-3", "guest");
+    it("should fail for anonymous", async () => {
+      const { createInput } = await setup();
       await expect(createSubtask(createInput)).rejects.toThrow(
-        AccessDeniedError,
+        UnauthorizedError,
       );
     });
   });

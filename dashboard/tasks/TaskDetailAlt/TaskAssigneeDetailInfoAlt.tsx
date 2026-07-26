@@ -9,7 +9,6 @@ import {
 import { useTranslations } from "next-intl";
 import { useDeleteTask } from "../DeleteTaskContext";
 import { useModal } from "@/common/ModalManagerContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateTaskAssignee } from "../UpdateTaskAssigneeContext";
 
 interface TaskAssigneeDetailInfoAltProps {
@@ -24,8 +23,6 @@ export function TaskAssigneeDetailInfoAlt({
 }: TaskAssigneeDetailInfoAltProps) {
   const t = useTranslations("dashboard.tasks.TaskDetail");
 
-  const guestGuard = useGuestModalGuard();
-
   const { onOpenChange: onUpdateAssigneeModalOpenChange } =
     useModal("updateTaskAssignee");
 
@@ -36,7 +33,7 @@ export function TaskAssigneeDetailInfoAlt({
   const { isPending: isUpdateTaskAssigneePending } = useUpdateTaskAssignee();
 
   const handlePress = () => {
-    guestGuard(() => onUpdateAssigneeModalOpenChange(true));
+    onUpdateAssigneeModalOpenChange(true);
   };
 
   return (

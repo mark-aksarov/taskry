@@ -1,7 +1,7 @@
 import "server-only";
 
 import {
-  mapToProjectCategoryDTO,
+  ProjectCategoryDTO,
   CreateProjectCategoryInputDTO,
   UpdateProjectCategoryInputDTO,
 } from "./projectCategory.dto";
@@ -9,28 +9,30 @@ import {
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
-import { requireSession } from "../utils/requireSession";
+import { ProjectCategory } from "@/generated/prisma/client";
 import { validateProjectCategoryLimit } from "../utils/validation";
+import { verifyResourceAccess } from "../utils/verifyResourceAccess";
 
 export const getProjectCategoryCount = cache(async () => {
   // Authorization
   const {
-    user: { workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
-  return prisma.projectCategory.count({ where: { workspaceId } });
+  return prisma.projectCategory.count({ where: { organizationId } });
 });
 
 export const getProjectCategories = cache(async () => {
   // Authorization
   const {
-    user: { workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Get project categories
   const projectCategories = await prisma.projectCategory.findMany({
-    where: { workspaceId },
+    where: { organizationId },
     select: { id: true, name: true },
     orderBy: {
       createdAt: "desc",
@@ -39,19 +41,18 @@ export const getProjectCategories = cache(async () => {
 
   return projectCategories.map(mapToProjectCategoryDTO);
 });
-
 export const createProjectCategories = async (
   input: CreateProjectCategoryInputDTO[],
 ) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permission
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId,
       permissions: {
         projectCategory: ["create"],
       },
@@ -65,13 +66,13 @@ export const createProjectCategories = async (
   }
 
   // Validate limit
-  await validateProjectCategoryLimit(workspaceId, input.length);
+  await validateProjectCategoryLimit(organizationId, input.length);
 
   // Create project categories
   const projectCategories = await prisma.projectCategory.createManyAndReturn({
     data: input.map((category) => ({
       name: category.name,
-      workspaceId,
+      organizationId,
     })),
   });
 
@@ -83,13 +84,13 @@ export const updateProjectCategory = async (
 ) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permission
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId: userId,
       permissions: {
         projectCategory: ["update"],
       },
@@ -106,7 +107,7 @@ export const updateProjectCategory = async (
   const updatedProjectCategory = await prisma.projectCategory.update({
     where: {
       id: input.id,
-      workspaceId,
+      organizationId,
     },
     data: {
       name: input.name,
@@ -119,13 +120,13 @@ export const updateProjectCategory = async (
 export const deleteProjectCategories = async (ids: number[]) => {
   // Authorization
   const {
-    user: { id: userId, workspaceId },
-  } = await requireSession();
+    session: { activeOrganizationId: organizationId },
+  } = await verifyResourceAccess();
 
   // Check permission
-  const permissions = await auth.api.userHasPermission({
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
     body: {
-      userId: userId,
       permissions: {
         projectCategory: ["delete"],
       },
@@ -141,10 +142,23 @@ export const deleteProjectCategories = async (ids: number[]) => {
   // Bulk delete project categories within the workspace
   const result = await prisma.projectCategory.deleteMany({
     where: {
-      workspaceId,
+      organizationId,
       id: { in: ids },
     },
   });
 
   return result;
 };
+
+/**
+ * Helper
+ */
+
+export function mapToProjectCategoryDTO(
+  projectCategory: Pick<ProjectCategory, "id" | "name">,
+): ProjectCategoryDTO {
+  return {
+    id: projectCategory.id,
+    name: projectCategory.name,
+  };
+}

@@ -6,15 +6,11 @@ import { useTranslations } from "next-intl";
 import { ActionsButton } from "../common/ActionsButton";
 import { useModal } from "../../common/ModalManagerContext";
 import { ActionsMenuTrigger } from "../common/ActionsMenuTrigger";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { DialogHeaderWithClose } from "@/common/DialogHeaderWithClose";
 import { useSelectedItems } from "@/dashboard/common/SelectedItemsContext";
 
 export const PositionActionsMenuTrigger = () => {
   const t = useTranslations("dashboard.positions.PositionActionsMenuTrigger");
-
-  // Show guest modal for guests
-  const guestGuard = useGuestModalGuard();
 
   // Delete confirmation modal state
   const { onOpenChange: setDeleteModalOpenChange } =
@@ -25,11 +21,9 @@ export const PositionActionsMenuTrigger = () => {
 
   // Menu actions: show delete modal
   const handleAction = (key: Key) => {
-    guestGuard(() => {
-      if (key === "delete") {
-        setDeleteModalOpenChange(true);
-      }
-    });
+    if (key === "delete") {
+      setDeleteModalOpenChange(true);
+    }
   };
 
   return (
@@ -46,7 +40,7 @@ export const PositionActionsMenuTrigger = () => {
       )}
     >
       <Item textValue={t("delete")} key="delete">
-        <Trash    />
+        <Trash />
         {t("delete")}
       </Item>
     </ActionsMenuTrigger>

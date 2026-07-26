@@ -5,7 +5,8 @@ import {
   positions,
   companies,
   clients,
-  workspaces,
+  organizations,
+  members,
   taskCategories,
   projectCategories,
 } from "@/prisma/seed/test-data";
@@ -23,7 +24,7 @@ describe("Subtask deletion", () => {
           title: "Task 1",
           deadline: new Date("2030-12-31"),
           status: TaskStatus.active,
-          workspaceId: 1,
+          organizationId: "org-1",
         },
       ],
       subtasks: [
@@ -39,7 +40,8 @@ describe("Subtask deletion", () => {
       positions,
       companies,
       clients,
-      workspaces,
+      organizations,
+      members,
       taskCategories,
       projectCategories,
     };

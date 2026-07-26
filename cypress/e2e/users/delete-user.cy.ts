@@ -2,7 +2,8 @@ import {
   users,
   accounts,
   positions,
-  workspaces,
+  organizations,
+  members,
 } from "@/prisma/seed/test-data";
 
 describe("deletes an user", () => {
@@ -10,7 +11,8 @@ describe("deletes an user", () => {
     cy.viewport(1440, 900);
     cy.task("db:reset");
     cy.task("db:seed", {
-      workspaces,
+      organizations,
+      members,
       users,
       accounts,
       positions,

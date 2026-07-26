@@ -1,37 +1,42 @@
 import {
   users,
+  members,
   companies,
   positions,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
 } from "@/prisma/seed/test-data";
 
+import {
+  NotFoundError,
+  AccessDeniedError,
+  UnauthorizedError,
+} from "../../utils/error";
+
 import prisma from "@/lib/prisma";
 import { seed } from "@/prisma/test-seed";
 import { updateClient } from "../client.dal";
-import { requireSession } from "@/lib/data/utils/requireSession";
+import { setupAuth } from "@/lib/test-utils/auth";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
-import { AccessDeniedError, NotFoundError } from "../../utils/error";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 describe("updateClient", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       companies,
       taskCategories,
       projectCategories,
     });
+
+    await setupAuth("user-1");
   });
 
   afterEach(async () => {
@@ -52,7 +57,7 @@ describe("updateClient", () => {
     await prisma.client.create({
       data: {
         ...clientData,
-        workspaceId: 1,
+        organizationId: "org-1",
       },
     });
 
@@ -80,7 +85,7 @@ describe("updateClient", () => {
     await prisma.client.create({
       data: {
         ...clientData,
-        workspaceId: 1,
+        organizationId: "org-1",
       },
     });
 
@@ -93,7 +98,7 @@ describe("updateClient", () => {
     await expect(updateClientPromise).rejects.toThrow(/Company not found/i);
   });
 
-  it("should throw AccessDeniedError if company does not belong to the workspace", async () => {
+  it("should throw AccessDeniedError if company does not belong to the organization", async () => {
     const clientData = {
       id: 1,
       bio: null,
@@ -107,7 +112,7 @@ describe("updateClient", () => {
     await prisma.client.create({
       data: {
         ...clientData,
-        workspaceId: 1,
+        organizationId: "org-1",
       },
     });
 
@@ -117,12 +122,10 @@ describe("updateClient", () => {
     });
 
     await expect(updateClientPromise).rejects.toThrow(AccessDeniedError);
-    await expect(updateClientPromise).rejects.toThrow(
-      /Company access denied/i,
-    );
+    await expect(updateClientPromise).rejects.toThrow(/Company access denied/i);
   });
 
-  it("should throw an error when trying to update a client from another workspace", async () => {
+  it("should throw an error when trying to update a client from another organization", async () => {
     const clientData = {
       id: 1,
       bio: null,
@@ -136,7 +139,7 @@ describe("updateClient", () => {
     await prisma.client.create({
       data: {
         ...clientData,
-        workspaceId: 2,
+        organizationId: "org-2",
       },
     });
 
@@ -154,10 +157,8 @@ describe("updateClient", () => {
   });
 
   describe("RBAC: update client", () => {
-    const setup = async (userId: string, role: string) => {
-      (requireSession as any).mockResolvedValue({
-        user: { id: userId, workspaceId: 1, role },
-      });
+    const setup = async (userId?: string) => {
+      await setupAuth(userId);
 
       const clientData = {
         id: 1,
@@ -172,7 +173,7 @@ describe("updateClient", () => {
       await prisma.client.create({
         data: {
           ...clientData,
-          workspaceId: 1,
+          organizationId: "org-1",
         },
       });
 
@@ -185,22 +186,22 @@ describe("updateClient", () => {
     };
 
     it("should succeed for owner", async () => {
-      const { updateInput } = await setup("user-1", "owner");
+      const { updateInput } = await setup("user-1");
       const result = await updateClient(updateInput);
       expect(result.fullName).toBe(updateInput.fullName);
     });
 
-    it("should fail for user", async () => {
-      const { updateInput } = await setup("user-2", "user");
+    it("should succeed for member", async () => {
+      const { updateInput } = await setup("user-2");
       const result = await updateClient(updateInput);
       expect(result.fullName).toBe(updateInput.fullName);
     });
 
-    it("should fail for guest", async () => {
-      const { updateInput } = await setup("user-3", "guest");
+    it("should fail for anonymous", async () => {
+      const { updateInput } = await setup();
 
       await expect(updateClient(updateInput)).rejects.toThrow(
-        AccessDeniedError,
+        UnauthorizedError,
       );
     });
   });

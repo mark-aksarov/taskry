@@ -6,7 +6,7 @@ import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
 import { withDeleteClientProvider } from "../../DeleteClientProvider/__stories__";
 import { withUpdateClientProvider } from "../../UpdateClientProvider/__stories__";
 import { withDeleteClientsProvider } from "../../DeleteClientsProvider/__stories__";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
@@ -19,7 +19,7 @@ const meta = {
     withDeleteClientProvider,
     withDeleteClientsProvider,
     withSelectedItemsProvider,
-    withCurrentUserProvider,
+    withSessionProvider,
     withModalManagerProvider,
     withViewModeProvider,
     withPageTransitionProvider,
@@ -43,8 +43,7 @@ export const Default = {
 export const WithOverflowContent = {
   args: {
     ...Default.args,
-    fullName:
-      "This is a client name with a very long text for layout testing",
+    fullName: "This is a client name with a very long text for layout testing",
     email: "longemailaddressfortestingpurposes@exampledomainfortestemail.com",
     phoneNumber: "+1000000000000000000000000000000000000000000000000000",
     publicLink:

@@ -6,11 +6,11 @@ import { createTaskSchema } from "@/lib/schemas/task";
 import { TASK_MAX_COUNT } from "@/lib/data/constants";
 import { LimitExceededError } from "@/lib/data/utils/error";
 import { createTasks as createTasksQuery } from "@/lib/data/task/task.dal";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 
 export async function createTask(formData: FormData): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
 

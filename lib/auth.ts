@@ -3,10 +3,10 @@ import { transporter } from "./mail";
 import { i18n } from "@better-auth/i18n";
 import { betterAuth } from "better-auth";
 import { nextCookies } from "better-auth/next-js";
+import { ac, owner, member } from "./permissions";
 import { translations } from "@/messages/better-auth";
-import { admin as adminPlugin } from "better-auth/plugins";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { ac, admin, owner, user, guest } from "@/lib/permissions";
+import { organization, testUtils } from "better-auth/plugins";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -94,75 +94,6 @@ export const auth = betterAuth({
     maxPasswordLength: 128,
 
     sendResetPassword: async ({ user, url }) => {
-      const parsedUrl = new URL(url);
-      const callbackURL = parsedUrl.searchParams.get("callbackURL");
-
-      const isInvite = callbackURL?.includes("/accept-invite");
-
-      if (isInvite) {
-        transporter.sendMail({
-          from: `"Taskry" <${process.env.SMTP_USER}>`,
-          to: user.email,
-          subject: "Приглашение в систему",
-          text: `Вас пригласили в систему: ${url}`,
-          html: `
-          <div style="margin:0;padding:0;background:#f4f4f5;font-family:Arial,sans-serif;">
-            <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
-              <tr>
-                <td align="center">
-                  <table width="600" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:12px;padding:40px;">
-                    <tr>
-                      <td align="center">
-
-                        <h1 style="margin:0;font-size:28px;color:#111827;">
-                          Приглашение в систему
-                        </h1>
-
-                        <p style="margin:24px 0 0;color:#4b5563;font-size:16px;line-height:24px;">
-                          Вас пригласили присоединиться к платформе.
-                        </p>
-
-                        <p style="margin:16px 0 32px;color:#4b5563;font-size:16px;line-height:24px;">
-                          Нажмите кнопку ниже, чтобы принять приглашение.
-                        </p>
-
-                        <a href="${url}"
-                          style="
-                            display:inline-block;
-                            background:#111827;
-                            color:#fff;
-                            text-decoration:none;
-                            padding:14px 28px;
-                            border-radius:8px;
-                            font-size:16px;
-                            font-weight:600;
-                          ">
-                          Принять приглашение
-                        </a>
-
-                        <p style="margin:32px 0 0;color:#9ca3af;font-size:14px;line-height:22px;">
-                          Если вы не ожидали это письмо — просто проигнорируйте его.
-                        </p>
-
-                        <p style="margin:12px 0 0;word-break:break-all;">
-                          <a href="${url}" style="color:#2563eb;font-size:14px;">
-                            ${url}
-                          </a>
-                        </p>
-
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-          </div>
-        `,
-        });
-
-        return;
-      }
-
       transporter.sendMail({
         from: `"Taskry" <${process.env.SMTP_USER}>`,
         to: user.email,
@@ -224,39 +155,54 @@ export const auth = betterAuth({
       });
     },
   },
+
   plugins: [
-    adminPlugin({
-      ac,
-      defaultRole: "owner",
-      roles: {
-        admin,
-        owner,
-        user,
-        guest,
-      },
-    }),
     i18n({
       translations,
       defaultLocale: "ru",
       detection: ["cookie"],
       localeCookie: "NEXT_LOCALE",
     }),
+    organization({
+      ac,
+      roles: {
+        owner,
+        member,
+      },
+      async sendInvitationEmail(data) {
+        const domain = process.env.BETTER_AUTH_URL;
+        const inviteLink = `${domain}/accept-invitation/${data.id}`;
+
+        await transporter.sendMail({
+          from: `"Taskry" <${process.env.SMTP_USER}>`,
+          to: data.email,
+          subject: `Invitation to join ${data.organization.name}`,
+          html: `
+              <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+                <h2>Join ${data.organization.name}</h2>
+                <p><strong>${data.inviter.user.name}</strong> (${data.inviter.user.email}) has invited you to join their organization on our platform.</p>
+                <div style="margin: 24px 0;">
+                  <a href="${inviteLink}" style="background-color: #000; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 4px; display: inline-block;">
+                    Accept Invitation
+                  </a>
+                </div>
+                <p style="font-size: 12px; color: #666;">If the button doesn't work, copy and paste this link into your browser:<br>${inviteLink}</p>
+              </div>
+            `,
+        });
+      },
+      organizationLimit: 1,
+    }),
+    ...(process.env.NODE_ENV === "test" ? [testUtils()] : []),
     nextCookies(),
   ],
+
   user: {
     fields: {
       name: "fullName",
     },
 
     additionalFields: {
-      workspaceId: {
-        type: "number",
-        input: true,
-      },
-      role: {
-        type: "string",
-        input: false,
-      },
       positionId: {
         type: "number",
         input: false,
@@ -287,4 +233,35 @@ export const auth = betterAuth({
       },
     },
   },
+
+  databaseHooks: {
+    session: {
+      create: {
+        before: async (session) => {
+          const organization = await getOrganization(session.userId);
+
+          return {
+            data: {
+              ...session,
+              activeOrganizationId: organization?.id,
+            },
+          };
+        },
+      },
+    },
+  },
 });
+
+async function getOrganization(userId: string) {
+  const organization = await prisma.organization.findFirst({
+    where: {
+      members: {
+        some: {
+          userId,
+        },
+      },
+    },
+  });
+
+  return organization;
+}

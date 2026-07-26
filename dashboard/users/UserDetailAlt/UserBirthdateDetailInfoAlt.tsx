@@ -9,7 +9,6 @@ import {
 import { useDeleteUser } from "../DeleteUserContext";
 import { useModal } from "@/common/ModalManagerContext";
 import { useFormatter, useTranslations } from "next-intl";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateUserBirthdate } from "../UpdateUserBirthdateContext";
 
 interface UserBirthdateDetailInfoAltProps {
@@ -22,8 +21,6 @@ export function UserBirthdateDetailInfoAlt({
   canEdit,
 }: UserBirthdateDetailInfoAltProps) {
   const t = useTranslations("dashboard.users.UserDetail");
-
-  const guestGuard = useGuestModalGuard();
 
   const { onOpenChange: onUpdateBirthdateModalOpenChange } = useModal(
     "updateUserBirthdate",
@@ -46,7 +43,7 @@ export function UserBirthdateDetailInfoAlt({
     : t("noBirthdate");
 
   const handlePress = () => {
-    guestGuard(() => onUpdateBirthdateModalOpenChange(true));
+    onUpdateBirthdateModalOpenChange(true);
   };
 
   return (

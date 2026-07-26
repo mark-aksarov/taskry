@@ -1,36 +1,36 @@
 import {
   users,
+  members,
   positions,
   companies,
-  workspaces,
+  organizations,
   taskCategories,
   projectCategories,
 } from "@/prisma/seed/test-data";
 
 import prisma from "@/lib/prisma";
-import { deleteClients } from "../client.dal";
-import { AccessDeniedError } from "../../utils/error";
 import { seed } from "@/prisma/test-seed";
-import { requireSession } from "@/lib/data/utils/requireSession";
+import { deleteClients } from "../client.dal";
+import { setupAuth } from "@/lib/test-utils/auth";
+import { UnauthorizedError } from "../../utils/error";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 import { it, expect, describe, beforeAll, afterEach } from "vitest";
 
 describe("deleteClients", () => {
   beforeAll(async () => {
-    (requireSession as any).mockResolvedValue({
-      user: { id: "user-1", workspaceId: 1 },
-    });
-
     await resetDatabase();
 
     await seed({
-      workspaces,
-      positions,
       users,
+      members,
+      positions,
       companies,
+      organizations,
       taskCategories,
       projectCategories,
     });
+
+    await setupAuth("user-1");
   });
 
   afterEach(async () => {
@@ -45,14 +45,14 @@ describe("deleteClients", () => {
           fullName: "Client 1",
           email: "client-1@test.com",
           companyId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
         },
         {
           id: 2,
           fullName: "Client 2",
           email: "client-2@test.com",
           companyId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
         },
       ],
     });
@@ -66,7 +66,7 @@ describe("deleteClients", () => {
     expect(remainingClients).toHaveLength(0);
   });
 
-  it("should not delete clients from a different workspace", async () => {
+  it("should not delete clients from a different organization", async () => {
     await prisma.client.createMany({
       data: [
         {
@@ -74,7 +74,7 @@ describe("deleteClients", () => {
           fullName: "Client 1",
           email: "client-1@test.com",
           companyId: 1,
-          workspaceId: 2,
+          organizationId: "org-2",
         },
       ],
     });
@@ -85,7 +85,7 @@ describe("deleteClients", () => {
     expect(result.count).toBe(0);
   });
 
-  it("should only delete clients belonging to the current workspace", async () => {
+  it("should only delete clients belonging to the current organization", async () => {
     await prisma.client.createMany({
       data: [
         {
@@ -93,14 +93,14 @@ describe("deleteClients", () => {
           fullName: "Client 1",
           email: "client-1@test.com",
           companyId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
         },
         {
           id: 2,
           fullName: "Client 2",
           email: "client-2@test.com",
           companyId: 2,
-          workspaceId: 2,
+          organizationId: "org-2",
         },
       ],
     });
@@ -117,10 +117,8 @@ describe("deleteClients", () => {
   });
 
   describe("RBAC: delete clients", () => {
-    const setup = async (userId: string, role: string) => {
-      (requireSession as any).mockResolvedValue({
-        user: { id: userId, workspaceId: 1, role },
-      });
+    const setup = async (userId?: string) => {
+      await setupAuth(userId);
 
       await prisma.client.create({
         data: {
@@ -128,26 +126,26 @@ describe("deleteClients", () => {
           fullName: "Client 1",
           email: "client-1@test.com",
           companyId: 1,
-          workspaceId: 1,
+          organizationId: "org-1",
         },
       });
     };
 
     it("should succeed for owner", async () => {
-      await setup("user-1", "owner");
+      await setup("user-1");
       const result = await deleteClients([1]);
       expect(result.count).toBe(1);
     });
 
-    it("should fail for user", async () => {
-      await setup("user-2", "user");
+    it("should fail for member", async () => {
+      await setup("user-2");
       const result = await deleteClients([1]);
       expect(result.count).toBe(1);
     });
 
-    it("should fail for guest", async () => {
-      await setup("user-3", "guest");
-      await expect(deleteClients([1])).rejects.toThrow(AccessDeniedError);
+    it("should fail for anonymous", async () => {
+      await setup();
+      await expect(deleteClients([1])).rejects.toThrow(UnauthorizedError);
     });
   });
 });

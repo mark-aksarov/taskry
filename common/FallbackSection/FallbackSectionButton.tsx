@@ -1,9 +1,8 @@
 "use client";
 
 import { CirclePlus } from "lucide-react";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
-import { ButtonProps, PressEvent } from "react-aria-components";
 import { TextButton } from "@/common/TextButton";
+import { ButtonProps } from "react-aria-components";
 
 interface FallbackSectionButtonProps extends ButtonProps {
   children: React.ReactNode;
@@ -12,21 +11,11 @@ interface FallbackSectionButtonProps extends ButtonProps {
 
 export function FallbackSectionButton({
   children,
-  onPress,
   ...props
 }: FallbackSectionButtonProps) {
-  // Show guest modal for guests
-  const guestGuard = useGuestModalGuard();
-
-  function handlePress(e: PressEvent) {
-    guestGuard(() => {
-      onPress?.(e);
-    });
-  }
-
   return (
-    <TextButton {...props} onPress={handlePress} className="font-bold">
-      <CirclePlus    />
+    <TextButton {...props} className="font-bold">
+      <CirclePlus />
       {children}
     </TextButton>
   );

@@ -3,7 +3,7 @@ import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DashboardGrid } from "@/dashboard/common/DashboardGrid";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
 
@@ -13,7 +13,7 @@ const meta = {
   decorators: [
     withViewModeProvider,
     withPageTransitionProvider,
-    withCurrentUserProvider,
+    withSessionProvider,
     withModalManagerProvider,
     withThemedBackground,
   ],

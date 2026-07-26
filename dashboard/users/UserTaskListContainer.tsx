@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import { UserTaskList } from "./UserTaskList";
 import { TaskListItemDTO } from "@/lib/data/task/task.dto";
 import { UserTaskListItemSkeleton } from "./UserTaskListItem";
-import { GuestModeModal } from "@/dashboard/common/GuestModeModal";
 import { UpdateTaskModal } from "@/dashboard/tasks/UpdateTaskModal";
 import { DeleteTaskModal } from "@/dashboard/tasks/DeleteTaskModal";
 import { TaskCommentsModal } from "@/dashboard/tasks/TaskCommentsModal";
@@ -98,8 +97,6 @@ export function UserTaskListContainer({ tasks }: UserTaskListContainerProps) {
                 </UpdateTaskStatusProvider>
               </DeleteTaskProvider>
             </UpdateTaskProvider>
-
-            <GuestModeModal />
           </ModalManagerProvider>
         );
       })}

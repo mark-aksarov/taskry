@@ -3,12 +3,12 @@
 import { ActionState } from "../types";
 import { getTranslations } from "next-intl/server";
 import { positionId } from "@/lib/schemas/position";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { deletePositions as deletePositionsQuery } from "@/lib/data/position/position.dal";
 
 export async function deletePosition(id: number): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
 

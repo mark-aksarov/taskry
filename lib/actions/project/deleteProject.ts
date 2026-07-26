@@ -4,14 +4,14 @@ import { redirect } from "@/i18n/navigation";
 import { projectId } from "@/lib/schemas/project";
 import { ActionState, DeleteProjectPayload } from "../types";
 import { getLocale, getTranslations } from "next-intl/server";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { deleteProjects as deleteProjectQuery } from "@/lib/data/project/project.dal";
 
 export async function deleteProject(
   payload: DeleteProjectPayload,
 ): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
 

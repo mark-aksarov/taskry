@@ -5,7 +5,7 @@ import { getProject } from "@/lib/data/project/project.dal";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
 import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
 import { DeleteProjectProvider } from "@/dashboard/projects/DeleteProjectProvider";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { UpdateProjectTitleModal } from "@/dashboard/projects/UpdateProjectTitleModal";
 import { DeleteProjectDetailModal } from "@/dashboard/projects/DeleteProjectDetailModal";
 import { UpdateProjectStatusModal } from "@/dashboard/projects/UpdateProjectStatusModal";
@@ -30,7 +30,7 @@ export default async function AppProjectDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  await requireProtectedPageSession();
+  await verifyProtectedPageSession();
 
   // Validation
   const { id: rawProjectId } = await params;

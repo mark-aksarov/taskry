@@ -9,7 +9,6 @@ import {
 import { useTranslations } from "next-intl";
 import { useDeleteTask } from "../DeleteTaskContext";
 import { useModal } from "@/common/ModalManagerContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateTaskCategoryRel } from "../UpdateTaskCategoryRelContext";
 
 interface TaskCategoryDetailInfoAltProps {
@@ -24,8 +23,6 @@ export function TaskCategoryDetailInfoAlt({
 }: TaskCategoryDetailInfoAltProps) {
   const t = useTranslations("dashboard.tasks.TaskDetail");
 
-  const guestGuard = useGuestModalGuard();
-
   const { onOpenChange: onUpdateCategoryModalOpenChange } = useModal(
     "updateTaskCategoryRel",
   );
@@ -37,7 +34,7 @@ export function TaskCategoryDetailInfoAlt({
   const { isPending: isUpdateTaskCategoryPending } = useUpdateTaskCategoryRel();
 
   const handlePress = () => {
-    guestGuard(() => onUpdateCategoryModalOpenChange(true));
+    onUpdateCategoryModalOpenChange(true);
   };
 
   return (

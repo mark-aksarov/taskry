@@ -3,7 +3,7 @@ import { ClientGridExample } from "./ClientGridExample";
 import { DashboardGrid } from "@/dashboard/common/DashboardGrid";
 import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
-import { withCurrentUserProvider } from "@/common/CurrentUserContext/__stories__";
+import { withSessionProvider } from "@/common/SessionContext/__stories__";
 import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
 import { withDeleteClientsProvider } from "../../DeleteClientsProvider/__stories__";
 import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
@@ -18,7 +18,7 @@ const meta = {
     withSelectedItemsProvider,
     withPageTransitionProvider,
     withModalManagerProvider,
-    withCurrentUserProvider,
+    withSessionProvider,
     withThemedBackground,
   ],
 } satisfies Meta<typeof ClientGridExample>;

@@ -3,7 +3,7 @@ import { getUser } from "@/lib/data/user/user.dal";
 import { TeamProfilePage } from "./TeamProfilePage";
 import { userId as userIdSchema } from "@/lib/schemas/user";
 import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
-import { ResetPasswordModal } from "@/dashboard/users/ResetPasswordModal";
+import { canEditUserProfile } from "@/lib/utils/canEditUserProfile";
 import { UpdateUserBioModal } from "@/dashboard/users/UpdateUserBioModal";
 import { DeleteUserProvider } from "@/dashboard/users/DeleteUserProvider";
 import { ChangePasswordModal } from "@/dashboard/users/ChangePasswordModal";
@@ -15,11 +15,11 @@ import { DeleteUserDetailModal } from "@/dashboard/users/DeleteUserDetailModal";
 import { UpdateUserAddressModal } from "@/dashboard/users/UpdateUserAddressModal";
 import { ChangePasswordProvider } from "@/dashboard/users/ChangePasswordProvider";
 import { UserDetailAltContainer } from "@/dashboard/users/UserDetailAltContainer";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { UpdateUserFullNameModal } from "@/dashboard/users/UpdateUserFullNameModal";
 import { UpdateUserPositionModal } from "@/dashboard/users/UpdateUserPositionModal";
 import { UpdateUserImageProvider } from "@/dashboard/users/UpdateUserImageProvider";
 import { UpdateUserBirthdateModal } from "@/dashboard/users/UpdateUserBirthdateModal";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
 import { UpdateUserPublicLinkModal } from "@/dashboard/users/UpdateUserPublicLinkModal";
 import { ClearUserImageUrlProvider } from "@/dashboard/users/ClearUserImageUrlProvider";
 import { UpdateUserAddressProvider } from "@/dashboard/users/UpdateUserAddressProvider";
@@ -32,14 +32,13 @@ import { UserDetailHeaderAltContainer } from "@/dashboard/users/UserDetailHeader
 import { UpdateUserPublicLinkProvider } from "@/dashboard/users/UpdateUserPublicLinkProvider";
 import { UpdateUserPhoneNumberProvider } from "@/dashboard/users/UpdateUserPhoneNumberProvider";
 import { UpdateUserPositionFormContainer } from "@/dashboard/users/UpdateUserPositionFormContainer";
-import { ResetPasswordProvider } from "@/dashboard/users/ResetPasswordProvider";
 
 export default async function AppTeamProfilePage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const session = await requireProtectedPageSession();
+  const session = await verifyProtectedPageSession();
 
   // Validation
   const { id: rawUserId } = await params;
@@ -57,10 +56,10 @@ export default async function AppTeamProfilePage({
     notFound();
   }
 
-  // Show user actions if the user is the owner, guest, or the current user
-  const isOwner = session.user.role === "owner";
-  const isGuest = session.user.role === "guest";
-  const showUserActions = isOwner || isGuest || session.user.id === userId;
+  const showUserActions = await canEditUserProfile({
+    session,
+    profileUserId: userId,
+  });
 
   return (
     <UpdateUserImageFileProvider>
@@ -74,82 +73,77 @@ export default async function AppTeamProfilePage({
                     <UpdateUserAddressProvider>
                       <UpdateUserPublicLinkProvider>
                         <UpdateUserPositionProvider>
-                          <ResetPasswordProvider>
-                            <ChangePasswordProvider>
-                              <TeamProfilePage
-                                showUserActions={showUserActions}
-                                userId={userId}
-                                userDetailContainer={
-                                  <UserDetailAltContainer userId={userId} />
-                                }
-                                userDetailHeaderContainer={
-                                  <UserDetailHeaderAltContainer
-                                    userId={userId}
-                                  />
-                                }
-                              />
+                          <ChangePasswordProvider>
+                            <TeamProfilePage
+                              showUserActions={showUserActions}
+                              userId={userId}
+                              userDetailContainer={
+                                <UserDetailAltContainer userId={userId} />
+                              }
+                              userDetailHeaderContainer={
+                                <UserDetailHeaderAltContainer userId={userId} />
+                              }
+                            />
 
-                              <TaskSearchModal
-                                searchContainer={
-                                  <LinkSearchContainer pathname="/tasks" />
-                                }
-                              />
+                            <TaskSearchModal
+                              searchContainer={
+                                <LinkSearchContainer pathname="/tasks" />
+                              }
+                            />
 
-                              <ChangePasswordModal />
-                              <ResetPasswordModal userId={userId} />
+                            <ChangePasswordModal />
 
-                              <DeleteUserDetailModal
-                                userId={userId}
-                                userFullName={user.fullName}
-                              />
+                            <DeleteUserDetailModal
+                              userId={userId}
+                              userFullName={user.fullName}
+                            />
 
-                              <UpdateUserBioModal
-                                userId={userId}
-                                userBio={user.bio}
-                              />
+                            <UpdateUserBioModal
+                              userId={userId}
+                              userBio={user.bio}
+                            />
 
-                              <UpdateUserFullNameModal
-                                userId={userId}
-                                userFullName={user.fullName}
-                              />
+                            <UpdateUserFullNameModal
+                              userId={userId}
+                              userFullName={user.fullName}
+                            />
 
-                              <UpdateUserPhoneNumberModal
-                                userId={userId}
-                                userPhoneNumber={user.phoneNumber}
-                              />
+                            <UpdateUserPhoneNumberModal
+                              userId={userId}
+                              userPhoneNumber={user.phoneNumber}
+                            />
 
-                              <UpdateUserBirthdateModal
-                                userId={userId}
-                                userBirthdate={user.birthdate}
-                              />
+                            <UpdateUserBirthdateModal
+                              userId={userId}
+                              userBirthdate={user.birthdate}
+                            />
 
-                              <UpdateUserAddressModal
-                                userId={userId}
-                                userAddress={user.address}
-                              />
+                            <UpdateUserAddressModal
+                              userId={userId}
+                              userAddress={user.address}
+                            />
 
-                              <UpdateUserPublicLinkModal
-                                userId={userId}
-                                userPublicLink={user.publicLink}
-                              />
+                            <UpdateUserPublicLinkModal
+                              userId={userId}
+                              userPublicLink={user.publicLink}
+                            />
 
-                              <UpdateUserPositionModal
-                                updateUserPositionFormContainer={
-                                  <UpdateUserPositionFormContainer
-                                    userId={userId}
-                                    positionId={user.positionId}
-                                  />
-                                }
-                              />
+                            <UpdateUserPositionModal
+                              updateUserPositionFormContainer={
+                                <UpdateUserPositionFormContainer
+                                  userId={userId}
+                                  positionId={user.positionId}
+                                />
+                              }
+                            />
 
-                              <UpdateUserImageModal userId={userId} />
+                            <UpdateUserImageModal userId={userId} />
 
-                              <DeleteUserImageModal
-                                userId={userId}
-                                userFullName={user.fullName}
-                              />
-                            </ChangePasswordProvider>
-                          </ResetPasswordProvider>
+                            <DeleteUserImageModal
+                              userId={userId}
+                              userFullName={user.fullName}
+                            />
+                          </ChangePasswordProvider>
                         </UpdateUserPositionProvider>
                       </UpdateUserPublicLinkProvider>
                     </UpdateUserAddressProvider>

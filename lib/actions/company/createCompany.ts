@@ -6,7 +6,7 @@ import { getTranslations } from "next-intl/server";
 import { companyName } from "@/lib/schemas/company";
 import { COMPANY_MAX_COUNT } from "@/lib/data/constants";
 import { LimitExceededError } from "@/lib/data/utils/error";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { createCompanies as createCompaniesQuery } from "@/lib/data/company/company.dal";
 
 const schema = z.object({
@@ -15,7 +15,7 @@ const schema = z.object({
 
 export async function createCompany(formData: FormData): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
 

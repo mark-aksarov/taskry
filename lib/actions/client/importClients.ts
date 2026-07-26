@@ -7,16 +7,14 @@ import { parseCsvFile } from "@/lib/utils/parseCsvFile";
 import { CUSTOMER_MAX_COUNT } from "@/lib/data/constants";
 import { LimitExceededError } from "@/lib/data/utils/error";
 import { createClientSchema } from "@/lib/schemas/client";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { createClients as createClientsQuery } from "@/lib/data/client/client.dal";
 
 const schema = z.array(createClientSchema.strict()).min(1);
 
-export async function importClients(
-  formData: FormData,
-): Promise<ActionState> {
+export async function importClients(formData: FormData): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
 

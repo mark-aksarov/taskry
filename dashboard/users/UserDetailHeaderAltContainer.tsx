@@ -8,8 +8,9 @@ import {
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getUserDetail } from "@/lib/data/user/user.dal";
+import { canEditUserProfile } from "@/lib/utils/canEditUserProfile";
 import { DetailHeaderSkeleton } from "@/dashboard/common/DetailHeader";
-import { requireProtectedPageSession } from "@/lib/utils/requireProtectedPageSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 
 interface UserDetailHeaderAltContainerProps {
   userId: string;
@@ -34,14 +35,10 @@ async function UserDetailHeaderAltContainerInner({
     notFound();
   }
 
-  const session = await requireProtectedPageSession();
-  const isOwner = session.user.role === "owner";
-  const isGuest = session.user.role === "guest";
+  const session = await verifyProtectedPageSession();
+  const canEdit = await canEditUserProfile({ session, profileUserId: userId });
 
-  const currentUserId = session.user.id;
-  const canUpdateImage = isOwner || isGuest || userId === currentUserId;
-
-  if (!canUpdateImage) {
+  if (!canEdit) {
     return (
       <UserDetailHeader
         fullName={user.fullName}

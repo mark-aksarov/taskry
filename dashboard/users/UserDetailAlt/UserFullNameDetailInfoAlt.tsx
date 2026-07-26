@@ -9,7 +9,6 @@ import {
 import { useTranslations } from "next-intl";
 import { useDeleteUser } from "../DeleteUserContext";
 import { useModal } from "@/common/ModalManagerContext";
-import { useGuestModalGuard } from "@/lib/hooks/useGuestModalGuard";
 import { useUpdateUserFullName } from "../UpdateUserFullNameContext";
 
 interface UserFullNameDetailInfoAltProps {
@@ -23,8 +22,6 @@ export function UserFullNameDetailInfoAlt({
 }: UserFullNameDetailInfoAltProps) {
   const t = useTranslations("dashboard.users.UserDetail");
 
-  const guestGuard = useGuestModalGuard();
-
   const { onOpenChange: onUpdateFullNameModalOpenChange } =
     useModal("updateUserFullName");
 
@@ -35,7 +32,7 @@ export function UserFullNameDetailInfoAlt({
   const { isPending: isUpdateUserFullNamePending } = useUpdateUserFullName();
 
   const handlePress = () => {
-    guestGuard(() => onUpdateFullNameModalOpenChange(true));
+    onUpdateFullNameModalOpenChange(true);
   };
 
   return (

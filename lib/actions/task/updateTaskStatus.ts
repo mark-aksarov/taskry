@@ -4,7 +4,7 @@ import z from "zod";
 import { getTranslations } from "next-intl/server";
 import { taskId, taskStatus } from "@/lib/schemas/task";
 import { ActionState, UpdateTaskStatusPayload } from "../types";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { updateTaskStatuses as updateTaskStatusesQuery } from "@/lib/data/task/task.dal";
 
 const schema = z.object({
@@ -16,7 +16,7 @@ export async function updateTaskStatus(
   payload: UpdateTaskStatusPayload,
 ): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
 

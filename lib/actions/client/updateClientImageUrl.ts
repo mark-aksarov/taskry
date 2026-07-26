@@ -4,7 +4,7 @@ import z from "zod";
 import { getTranslations } from "next-intl/server";
 import { ActionState, UpdateClientImageUrlPayload } from "../types";
 import { clientId, clientImageUrl } from "@/lib/schemas/client";
-import { requireActionSession } from "@/lib/utils/requireActionSession";
+import { verifyProtectedPageSession } from "@/lib/utils/verifyProtectedPageSession";
 import { updateClientImageUrl as updateClientImageUrlQuery } from "@/lib/data/client/client.dal";
 
 const schema = z.object({
@@ -16,7 +16,7 @@ export async function updateClientImageUrl(
   payload: UpdateClientImageUrlPayload,
 ): Promise<ActionState> {
   // Authorization
-  await requireActionSession();
+  await verifyProtectedPageSession();
 
   const t = await getTranslations("actions");
 

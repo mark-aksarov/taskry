@@ -6,7 +6,8 @@ import {
   clients,
   positions,
   companies,
-  workspaces,
+  organizations,
+  members,
   taskCategories,
   projectCategories,
 } from "@/prisma/seed/test-data";
@@ -16,7 +17,8 @@ describe("dashboard cards", () => {
     cy.viewport(1440, 900);
 
     const payload = {
-      workspaces,
+      organizations,
+      members,
       positions,
       users,
       accounts,
@@ -44,7 +46,7 @@ describe("dashboard cards", () => {
     cy.getByData("dashboard-card-value").eq(1).should("contain", "2");
 
     cy.getByData("dashboard-card-text").eq(2).should("contain", "Total users");
-    cy.getByData("dashboard-card-value").eq(2).should("contain", "3");
+    cy.getByData("dashboard-card-value").eq(2).should("contain", "2");
 
     cy.getByData("dashboard-card-text")
       .eq(3)

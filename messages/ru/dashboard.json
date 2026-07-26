@@ -65,11 +65,6 @@
         "unknown": "Неизвестная ошибка при загрузке изображения"
       }
     },
-    "GuestModeModal": {
-      "heading": "Гостевой режим",
-      "text": "<strong>Действие ограничено в гостевом режиме.</strong> Для доступа ко всем функциям требуется аккаунт. Войдите в систему или создайте новый аккаунт, чтобы снять ограничения гостевого режима.",
-      "cancelButton": "Отмена"
-    },
     "SortingMenuTrigger": {
       "dialogHeading": "Сортировка"
     },
@@ -1333,17 +1328,6 @@
     "ChangePasswordModal": {
       "title": "Изменить пароль"
     },
-    "ResetPasswordModal": {
-      "title": "Сбросить пароль"
-    },
-    "ResetPasswordForm": {
-      "newPassword": {
-        "label": "Новый пароль",
-        "placeholder": "Введите новый пароль"
-      },
-      "submitButtonLabel": "Сбросить пароль",
-      "successMessage": "Пароль успешно сброшен"
-    },
     "ChangePasswordForm": {
       "currentPassword": {
         "label": "Текущий пароль",
@@ -1422,7 +1406,6 @@
     },
     "ProfileActions": {
       "deleteAccount": "Удалить аккаунт",
-      "resetPassword": "Сбросить пароль",
       "changePassword": "Изменить пароль",
       "editAccount": "Редактировать аккаунт",
       "delete": "Удалить пользователя",
