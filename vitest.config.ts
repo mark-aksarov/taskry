@@ -52,9 +52,19 @@ export default defineConfig({
 
         test: {
           name: "integration",
+          env: {
+            NODE_ENV: "test",
+          },
           environment: "node",
           setupFiles: "./vitest.setup.integration.ts",
           include: ["lib/data/**/*.test.ts"],
+          // Run tests in a single fork since they share the same test database
+          pool: "forks",
+          poolOptions: {
+            forks: {
+              singleFork: true,
+            },
+          },
         },
       },
 
