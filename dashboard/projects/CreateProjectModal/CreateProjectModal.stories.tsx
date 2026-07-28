@@ -1,25 +1,24 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { CreateProjectModal } from "../CreateProjectModal";
-import { CreateProjectForm } from "../CreateProjectForm";
 import { mockedClientSummaries } from "@/mocks/clients";
+import { CreateProjectForm } from "../CreateProjectForm";
+import { CreateProjectModal } from "../CreateProjectModal";
 import { ProjectFormSkeleton } from "../ProjectFormSkeleton";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { CreateProjectProvider } from "../CreateProjectContext";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
-import { withCreateProjectProvider } from "../CreateProjectProvider/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/projects/CreateProjectModal",
   component: CreateProjectModal,
   decorators: [
     withOpenModal,
-    withCreateProjectProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <CreateProjectProvider>
+        <Story />
+      </CreateProjectProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     modalId: "createProject",

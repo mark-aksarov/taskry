@@ -1,1 +1,0 @@
-export { withChangePasswordProvider } from "./withChangePasswordProvider";

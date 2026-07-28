@@ -1,11 +1,9 @@
 import { ProgressBar } from "../ProgressBar";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof ProgressBar> = {
   title: "UI/ProgressBar",
   component: ProgressBar,
-  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

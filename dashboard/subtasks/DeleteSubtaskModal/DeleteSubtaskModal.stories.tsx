@@ -1,23 +1,20 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DeleteSubtaskModal } from "../DeleteSubtaskModal";
-import { withToastRegion } from "@/.storybook/withToastRegion";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteSubtaskProvider } from "../DeleteSubtaskProvider/__stories__";
+import { DeleteSubtaskProvider } from "../DeleteSubtaskContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/subtasks/DeleteSubtaskModal",
   component: DeleteSubtaskModal,
   decorators: [
     withOpenModal,
-    withDeleteSubtaskProvider,
-    withToastRegion,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <DeleteSubtaskProvider>
+        <Story />
+      </DeleteSubtaskProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

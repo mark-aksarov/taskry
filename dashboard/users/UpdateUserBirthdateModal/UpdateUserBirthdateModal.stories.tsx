@@ -1,24 +1,22 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
 import { mockedUserDetail } from "@/mocks/users";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UpdateUserBirthdateModal } from "../UpdateUserBirthdateModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateUserBirthdateProvider } from "../UpdateUserBirthdateProvider/__stories__";
+import { UpdateUserBirthdateProvider } from "../UpdateUserBirthdateContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/users/UpdateUserBirthdateModal",
   component: UpdateUserBirthdateModal,
   decorators: [
     withOpenModal,
-    withUpdateUserBirthdateProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateUserBirthdateProvider>
+        <Story />
+      </UpdateUserBirthdateProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
-
   parameters: {
     modalId: "updateUserBirthdate",
   },

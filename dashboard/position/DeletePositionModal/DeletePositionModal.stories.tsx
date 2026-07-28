@@ -1,23 +1,23 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DeletePositionModal } from "./DeletePositionModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeletePositionProvider } from "../DeletePositionProvider/__stories__";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
+import { DeletePositionProvider } from "../DeletePositionContext";
+import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/positions/DeletePositionModal",
   component: DeletePositionModal,
   decorators: [
     withOpenModal,
-    withDeletePositionProvider,
-    withSelectedItemsProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedItemsProvider pageItems={[]}>
+        <DeletePositionProvider>
+          <Story />
+        </DeletePositionProvider>
+      </SelectedItemsProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

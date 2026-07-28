@@ -1,23 +1,20 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ImportPositionsModal } from "./ImportPositionsModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withImportPositionsProvider } from "../ImportPositionsProvider/__stories__";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
+import { ModalManagerProvider } from "@/common/ModalManagerContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/positions/ImportPositionsModal",
   component: ImportPositionsModal,
   decorators: [
     withOpenModal,
-    withImportPositionsProvider,
-    withSelectedItemsProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <ModalManagerProvider>
+        <Story />
+      </ModalManagerProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

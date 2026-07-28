@@ -1,11 +1,9 @@
 import { Skeleton } from "./Skeleton";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof Skeleton> = {
   title: "UI/Skeleton",
   component: Skeleton,
-  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

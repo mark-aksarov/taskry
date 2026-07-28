@@ -1,35 +1,33 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
-import { CommentList } from "../CommentList";
 import { Repeat } from "@/common/Repeat";
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { CommentList } from "../CommentList";
 import { CommentItemSkeleton } from "../CommentItem";
-import { EntityCommentsModal } from "./EntityCommentsModal";
-import { CommentsEmptySection } from "../CommentsEmptySection";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { useModal } from "@/common/ModalManagerContext";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { CommentFormProvider } from "../CommentFormContext";
+import { EntityCommentsModal } from "./EntityCommentsModal";
+import { SendCommentProvider } from "../SendCommentContext";
+import { CommentsEmptySection } from "../CommentsEmptySection";
+import { UpdateCommentProvider } from "../UpdateCommentContext";
 import { CommentListExample } from "../CommentList/__stories__";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withSendCommentProvider } from "../SendCommentProvider/__stories__";
-import { withUpdateCommentProvider } from "../UpdateCommentProvider/__stories__";
-import { withDeleteCommentProvider } from "../DeleteCommentProvider/__stories__";
-import { withCommentFormProvider } from "@/dashboard/comments/CommentForm/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/comments/EntityCommentsModal",
   component: EntityCommentsModal,
   decorators: [
     withOpenModal,
-    withDeleteCommentProvider,
-    withUpdateCommentProvider,
-    withSendCommentProvider,
-    withCommentFormProvider,
-    withSessionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <CommentFormProvider entityId={1} entityKey="task" mutateUrl="">
+        <SendCommentProvider>
+          <UpdateCommentProvider>
+            <Story />
+          </UpdateCommentProvider>
+        </SendCommentProvider>
+      </CommentFormProvider>
+    ),
+
+    withDashboardLayoutProviders,
   ],
 
   render: (args) => {

@@ -1,16 +1,8 @@
 import { PositionsPage } from "./PositionsPage";
 import { getPositions } from "@/lib/data/position/position.dal";
-import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { PositionsContainer } from "@/dashboard/position/PositionsContainer";
 import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
-import { CreatePositionModal } from "@/dashboard/position/CreatePositionModal";
-import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
-import { DeletePositionsModal } from "@/dashboard/position/DeletePositionsModal";
-import { ImportPositionsModal } from "@/dashboard/position/ImportPositionsModal";
-import { requireFullAccess } from "@/lib/utils/requireFullAccess";
-import { CreatePositionProvider } from "@/dashboard/position/CreatePositionProvider";
-import { DeletePositionsProvider } from "@/dashboard/position/DeletePositionsProvider";
-import { ImportPositionsProvider } from "@/dashboard/position/ImportPositionsProvider";
 
 export default async function AppPositionsPage() {
   // Authorization
@@ -19,24 +11,11 @@ export default async function AppPositionsPage() {
   const positions = await getPositions();
 
   return (
-    <SelectedItemsProvider pageItems={positions.map((p) => ({ id: p.id }))}>
-      <DeletePositionsProvider>
-        <CreatePositionProvider>
-          <ImportPositionsProvider>
-            <PositionsPage
-              totalCount={positions.length}
-              positionsContainer={<PositionsContainer />}
-            />
-
-            <TaskSearchModal
-              searchContainer={<LinkSearchContainer pathname="/tasks" />}
-            />
-            <CreatePositionModal />
-            <DeletePositionsModal />
-            <ImportPositionsModal />
-          </ImportPositionsProvider>
-        </CreatePositionProvider>
-      </DeletePositionsProvider>
-    </SelectedItemsProvider>
+    <PositionsPage
+      totalCount={positions.length}
+      selectedItems={positions.map((p) => ({ id: p.id }))}
+      positionsContainer={<PositionsContainer />}
+      searchContainer={<LinkSearchContainer pathname="/tasks" />}
+    />
   );
 }

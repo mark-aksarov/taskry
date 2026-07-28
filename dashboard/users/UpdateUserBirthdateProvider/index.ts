@@ -1,1 +1,0 @@
-export { UpdateUserBirthdateProvider } from "./UpdateUserBirthdateProvider";

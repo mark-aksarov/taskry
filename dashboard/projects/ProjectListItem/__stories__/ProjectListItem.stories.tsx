@@ -1,17 +1,14 @@
 import { ProjectListItem } from "../ProjectListItem";
 import { mockedProjectList } from "@/mocks/projects";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
-import { withUpdateProjectProvider } from "../../UpdateProjectProvider/__stories__";
-import { withDeleteProjectProvider } from "../../DeleteProjectProvider/__stories__";
-import { withDeleteProjectsProvider } from "../../DeleteProjectsProvider/__stories__";
-import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withUpdateProjectStatusProvider } from "../../UpdateProjectStatusProvider/__stories__";
-import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
-import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusesProvider/__stories__";
+import { ViewModeProvider } from "@/dashboard/common/ViewMode";
+import { UpdateProjectProvider } from "../../UpdateProjectContext";
+import { DeleteProjectProvider } from "../../DeleteProjectContext";
+import { DeleteProjectsProvider } from "../../DeleteProjectsContext";
+import { SelectedProjectsProvider } from "../../SelectedProjectsContext";
+import { UpdateProjectStatusProvider } from "../../UpdateProjectStatusContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
+import { UpdateProjectStatusesProvider } from "../../UpdateProjectStatusesContext";
 
 const mockedProject = mockedProjectList[0];
 
@@ -19,17 +16,24 @@ const meta = {
   title: "dashboard/projects/ProjectListItem",
   component: ProjectListItem,
   decorators: [
-    withUpdateProjectStatusProvider,
-    withUpdateProjectProvider,
-    withDeleteProjectProvider,
-    withDeleteProjectsProvider,
-    withUpdateProjectStatusesProvider,
-    withSessionProvider,
-    withSelectedProjectsProvider,
-    withViewModeProvider,
-    withPageTransitionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedProjectsProvider pageItems={[]}>
+        <ViewModeProvider initialValue="list">
+          <DeleteProjectsProvider>
+            <DeleteProjectProvider>
+              <UpdateProjectProvider>
+                <UpdateProjectStatusProvider>
+                  <UpdateProjectStatusesProvider>
+                    <Story />
+                  </UpdateProjectStatusesProvider>
+                </UpdateProjectStatusProvider>
+              </UpdateProjectProvider>
+            </DeleteProjectProvider>
+          </DeleteProjectsProvider>
+        </ViewModeProvider>
+      </SelectedProjectsProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 } satisfies Meta<typeof ProjectListItem>;
 

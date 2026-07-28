@@ -4,7 +4,6 @@ import { Item } from "react-stately";
 import { MenuTrigger } from "./MenuTrigger";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Check, CircleEllipsis, Clock, Trash } from "lucide-react";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { DialogCloseButton, DialogHeader, DialogHeading } from "../Dialog";
 
 const meta: Meta<typeof MenuTrigger> = {
@@ -16,7 +15,6 @@ const meta: Meta<typeof MenuTrigger> = {
   parameters: {
     layout: "centered",
   },
-  decorators: [withThemedBackground],
 };
 
 export default meta;
@@ -25,17 +23,17 @@ type Story = StoryObj<typeof meta>;
 function getItems() {
   const items = [
     <Item textValue="Delete" key="delete">
-      <Trash  /> Delete
+      <Trash /> Delete
     </Item>,
     <Item textValue="Mark as Pending" key="pending">
-      <CircleEllipsis  /> Mark as Pending
+      <CircleEllipsis /> Mark as Pending
     </Item>,
     <Item textValue="Mark as Done" key="done">
-      <Check  />
+      <Check />
       Mark as Done
     </Item>,
     <Item textValue="Mark as In Progress" key="progress">
-      <Clock  />
+      <Clock />
       Mark as In Progress
     </Item>,
   ];

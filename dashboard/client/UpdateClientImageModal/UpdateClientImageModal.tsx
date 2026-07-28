@@ -5,11 +5,7 @@ import { useModal } from "@/common/ModalManagerContext";
 import { UpdateClientImageDialog } from "./UpdateClientImageDialog";
 import { useUpdateClientImageFile } from "../UpdateClientImageFileContext";
 
-export function UpdateClientImageModal({
-  clientId,
-}: {
-  clientId: number;
-}) {
+export function UpdateClientImageModal({ clientId }: { clientId: number }) {
   const { isOpen, onOpenChange } = useModal("updateClientImage");
   const { imageFile, onImageFileChange } = useUpdateClientImageFile();
 
@@ -19,9 +15,7 @@ export function UpdateClientImageModal({
       onImageFileChange={onImageFileChange}
       isOpen={isOpen}
       onOpenChange={onOpenChange}
-      updatePersonImageDialog={
-        <UpdateClientImageDialog clientId={clientId} />
-      }
+      updatePersonImageDialog={<UpdateClientImageDialog clientId={clientId} />}
     />
   );
 }

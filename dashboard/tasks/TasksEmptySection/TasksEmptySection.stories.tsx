@@ -1,19 +1,11 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TasksEmptySection } from "./TasksEmptySection";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCreateTaskProvider } from "../CreateTaskProvider/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/tasks/TasksEmptySection",
   component: TasksEmptySection,
-  decorators: [
-    withCreateTaskProvider,
-    withSessionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
-  ],
+  decorators: [withDashboardLayoutProviders],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof TasksEmptySection>;
 

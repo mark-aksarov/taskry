@@ -1,27 +1,15 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
 import { mockedTaskDetail } from "@/mocks/tasks";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskDetailSideSheet } from "./TaskDetailSideSheet";
 import { TaskDetail, TaskDetailSkeleton } from "../TaskDetail";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteTaskProvider } from "../DeleteTaskProvider/__stories__";
 import { SubtaskListExample } from "@/dashboard/subtasks/SubtaskList/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/tasks/TaskDetailSideSheet",
   component: TaskDetailSideSheet,
-  decorators: [
-    withOpenModal,
-    withDeleteTaskProvider,
-    withSessionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
-  ],
+  decorators: [withOpenModal, withDashboardLayoutProviders],
   parameters: {
     modalId: "taskDetail",
   },

@@ -1,21 +1,22 @@
 import { PositionGrid } from "../PositionGrid";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PositionGridExample } from "./PositionGridExample";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeletePositionsProvider } from "../../DeletePositionsProvider/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
+import { DeletePositionsProvider } from "../../DeletePositionsContext";
+import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/positions/PositionGrid",
   component: PositionGrid,
   decorators: [
-    withDeletePositionsProvider,
-    withSessionProvider,
-    withSelectedItemsProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedItemsProvider pageItems={[]}>
+        <DeletePositionsProvider>
+          <Story />
+        </DeletePositionsProvider>
+      </SelectedItemsProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 } satisfies Meta<typeof PositionGrid>;
 

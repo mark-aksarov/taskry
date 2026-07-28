@@ -3,7 +3,6 @@ import { DisclosurePanel } from "./DisclosurePanel";
 import { DisclosureGroup } from "./DisclosureGroup";
 import { DisclosureHeader } from "./DisclosureHeader";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "UI/DisclosureGroup",
@@ -11,7 +10,6 @@ const meta = {
   args: {
     children: "DisclosureGroup",
   },
-  decorators: [withThemedBackground],
 } satisfies Meta<typeof DisclosureGroup>;
 
 export default meta;

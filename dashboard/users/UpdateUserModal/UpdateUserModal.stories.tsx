@@ -1,27 +1,25 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
 import { mockedUserDetail } from "@/mocks/users";
 import { UpdateUserForm } from "../UpdateUserForm";
 import { UpdateUserModal } from "../UpdateUserModal";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { UpdateUserProvider } from "../UpdateUserProvider";
 import { UpdateUserFormSkeleton } from "../UpdateUserForm";
 import { mockedPositionSummaries } from "@/mocks/positions";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateUserProvider } from "../UpdateUserProvider/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/users/UpdateUserModal",
   component: UpdateUserModal,
   decorators: [
     withOpenModal,
-    withUpdateUserProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateUserProvider>
+        <Story />
+      </UpdateUserProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
-
   parameters: {
     modalId: "updateUser",
   },

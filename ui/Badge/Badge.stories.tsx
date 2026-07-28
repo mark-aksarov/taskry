@@ -1,11 +1,9 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Badge } from "./Badge";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta = {
   title: "UI/Badge",
   component: Badge,
-  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

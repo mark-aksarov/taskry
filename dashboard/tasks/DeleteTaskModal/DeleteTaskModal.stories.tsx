@@ -1,23 +1,23 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
 import { DeleteTaskModal } from "../DeleteTaskModal";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteTaskProvider } from "../DeleteTaskProvider/__stories__";
-import { withSelectedTasksProvider } from "../SelectedTasksContext/__stories__";
+import { DeleteTaskProvider } from "../DeleteTaskContext";
+import { SelectedTasksProvider } from "../SelectedTasksContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/tasks/DeleteTaskModal",
   component: DeleteTaskModal,
   decorators: [
     withOpenModal,
-    withDeleteTaskProvider,
-    withSelectedTasksProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedTasksProvider pageItems={[]}>
+        <DeleteTaskProvider>
+          <Story />
+        </DeleteTaskProvider>
+      </SelectedTasksProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     modalId: "deleteTask",

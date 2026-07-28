@@ -1,47 +1,27 @@
 import { mocked } from "storybook/test";
-import { mockedUserDetail } from "@/mocks/users";
 import AppProfileTasksPageLoading from "./loading";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
+import { mockedProjectSummaries } from "@/mocks/projects";
+import { mockedPositionSummaries } from "@/mocks/positions";
 import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
+import { CreateTaskForm } from "@/dashboard/tasks/CreateTaskForm";
+import { UpdateUserForm } from "@/dashboard/users/UpdateUserForm";
 import { ProfileActions } from "@/dashboard/users/ProfileActions";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
+import { mockedUserDetail, mockedUserSummaries } from "@/mocks/users";
+import { withDashboardLayout } from "@/.storybook/withDashboardLayout";
 import { UserNavigationLarge } from "@/dashboard/users/UserNavigationLarge";
-import { DashboardPageDecorator } from "@/.storybook/DashboardPageDecorator";
 import { UserNavigationMobile } from "@/dashboard/users/UserNavigationMobile";
-import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
+import { SearchListExample } from "@/dashboard/search/SearchList/__stories__";
 import { UserTaskListExample } from "@/dashboard/users/UserTaskList/__stories__";
 import { UserDetailHeaderInteractive } from "@/dashboard/users/UserDetailHeader";
-import { withCreateTaskProvider } from "@/dashboard/tasks/CreateTaskProvider/__stories__";
-import { withUpdateUserProvider } from "@/dashboard/users/UpdateUserProvider/__stories__";
-import { withDeleteUserProvider } from "@/dashboard/users/DeleteUserProvider/__stories__";
-import { withDeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider/__stories__";
-import { withSelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext/__stories__";
-import { withChangePasswordProvider } from "@/dashboard/users/ChangePasswordProvider/__stories__";
-import { withUpdateUserImageProvider } from "@/dashboard/users/UpdateUserImageProvider/__stories__";
-import { withClearUserImageUrlProvider } from "@/dashboard/users/ClearUserImageUrlProvider/__stories__";
-import { withUpdateTaskStatusesProvider } from "@/dashboard/tasks/UpdateTaskStatusesProvider/__stories__";
-import { withUpdateUserImageFileProvider } from "@/dashboard/users/UpdateUserImageFileContext/__stories__";
 
 const meta = {
   title: "pages/TeamProfileTasksPage",
   component: TeamProfileTasksPage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    withCreateTaskProvider,
-    withDeleteTasksProvider,
-    withUpdateTaskStatusesProvider,
-    withSelectedTasksProvider,
-    withChangePasswordProvider,
-    withUpdateUserProvider,
-    withDeleteUserProvider,
-    withUpdateUserImageProvider,
-    withClearUserImageUrlProvider,
-    withUpdateUserImageFileProvider,
-    withViewModeProvider,
-    DashboardPageDecorator,
-    withThemedBackground,
-  ],
+  decorators: [withDashboardLayout],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue(`/team/user-1/tasks`);
     mocked(useParams).mockReturnValue({ id: "user-1" });
@@ -53,11 +33,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    user: mockedUserDetail,
     page: 1,
     pageSize: 1,
     totalTasksCount: 3,
     selectedSortField: "title",
     backButton: true,
+    selectedItems: [],
     userTaskList: <UserTaskListExample />,
     userDetailHeaderContainer: (
       <UserDetailHeaderInteractive
@@ -72,6 +54,23 @@ export const Default = {
       />
     ),
     navigationMobile: <UserNavigationMobile />,
+    searchContainer: <SearchListExample />,
+    createTaskFormContainer: (
+      <CreateTaskForm
+        forcedAssigneeId={mockedUserDetail.id}
+        categorySelectItems={mockedTaskCategorySummaries}
+        projectSelectItems={mockedProjectSummaries}
+        assigneeSelectItems={mockedUserSummaries}
+      />
+    ),
+
+    updateUserFormContainer: (
+      <UpdateUserForm
+        {...mockedUserDetail}
+        userId={mockedUserDetail.id}
+        positionSelectItems={mockedPositionSummaries}
+      />
+    ),
   },
 } satisfies Story;
 

@@ -1,4 +1,3 @@
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { Checkbox } from "../Checkbox";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
@@ -8,7 +7,6 @@ const meta = {
   args: {
     children: "Checkbox",
   },
-  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

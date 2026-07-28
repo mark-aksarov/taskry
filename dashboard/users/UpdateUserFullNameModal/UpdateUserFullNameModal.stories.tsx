@@ -1,24 +1,22 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
 import { mockedUserDetail } from "@/mocks/users";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UpdateUserFullNameModal } from "../UpdateUserFullNameModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateUserFullNameProvider } from "../UpdateUserFullNameProvider/__stories__";
+import { UpdateUserFullNameProvider } from "../UpdateUserFullNameContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/users/UpdateUserFullNameModal",
   component: UpdateUserFullNameModal,
   decorators: [
     withOpenModal,
-    withUpdateUserFullNameProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateUserFullNameProvider>
+        <Story />
+      </UpdateUserFullNameProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
-
   parameters: {
     modalId: "updateUserFullName",
   },

@@ -1,27 +1,28 @@
 import { TaskGridExample } from "./TaskGridExample";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DashboardGrid } from "@/dashboard/common/DashboardGrid";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
-import { withDeleteTasksProvider } from "../../DeleteTasksProvider/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusesProvider/__stories__";
-import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
+import { ViewModeProvider } from "@/dashboard/common/ViewMode";
+import { DeleteTasksProvider } from "../../DeleteTasksContext";
+import { SelectedTasksProvider } from "../../SelectedTasksContext";
+import { UpdateTaskStatusesProvider } from "../../UpdateTaskStatusesContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/tasks/TaskGrid",
   component: TaskGridExample,
   decorators: [
-    withUpdateTaskStatusesProvider,
-    withDeleteTasksProvider,
-    withViewModeProvider,
-    withPageTransitionProvider,
-    withSelectedTasksProvider,
-    withModalManagerProvider,
-    withSessionProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedTasksProvider pageItems={[]}>
+        <ViewModeProvider initialValue="grid">
+          <DeleteTasksProvider>
+            <UpdateTaskStatusesProvider>
+              <Story />
+            </UpdateTaskStatusesProvider>
+          </DeleteTasksProvider>
+        </ViewModeProvider>
+      </SelectedTasksProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 } satisfies Meta<typeof TaskGridExample>;
 

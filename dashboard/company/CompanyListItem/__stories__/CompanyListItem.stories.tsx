@@ -1,26 +1,27 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CompanyListItem } from "../CompanyListItem";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateCompanyProvider } from "../../UpdateCompanyProvider/__stories__";
-import { withDeleteCompanyProvider } from "../../DeleteCompanyProvider/__stories__";
-import { withDeleteCompaniesProvider } from "../../DeleteCompaniesProvider/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { UpdateCompanyProvider } from "../../UpdateCompanyContext";
+import { DeleteCompanyProvider } from "../../DeleteCompanyContext";
+import { DeleteCompaniesProvider } from "../../DeleteCompaniesContext";
+import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/companies/CompanyListItem",
   component: CompanyListItem,
   decorators: [
-    withUpdateCompanyProvider,
-    withDeleteCompanyProvider,
-
-    withDeleteCompaniesProvider,
-    withSelectedItemsProvider,
-    withSessionProvider,
-    withModalManagerProvider,
-
-    withThemedBackground,
+    (Story) => (
+      <SelectedItemsProvider pageItems={[]}>
+        <DeleteCompaniesProvider>
+          <UpdateCompanyProvider>
+            <DeleteCompanyProvider>
+              <Story />
+            </DeleteCompanyProvider>
+          </UpdateCompanyProvider>
+        </DeleteCompaniesProvider>
+      </SelectedItemsProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 } satisfies Meta<typeof CompanyListItem>;
 

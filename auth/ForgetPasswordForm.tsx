@@ -3,22 +3,22 @@
 import { useActionState } from "react";
 import { EmailField } from "./EmailField";
 import { useTranslations } from "next-intl";
-import { ActionFn, ActionState } from "@/lib/actions/types";
+import { ActionState } from "@/lib/actions/types";
 import { AuthForm, AuthFormSubmitButton } from "./AuthForm";
 import { FormErrorBanner } from "@/dashboard/common/FormErrorBanner";
+import { forgetPassword } from "@/lib/actions/auth/forgetPassword";
 
 const initialState: ActionState = {
   status: null,
 };
 
-interface ForgetPasswordFormProps {
-  action: ActionFn<ActionState, FormData>;
-}
-
-export function ForgetPasswordForm({ action }: ForgetPasswordFormProps) {
+export function ForgetPasswordForm() {
   const t = useTranslations("auth.ForgetPasswordForm");
 
-  const [state, formAction, isPending] = useActionState(action, initialState);
+  const [state, formAction, isPending] = useActionState(
+    forgetPassword,
+    initialState,
+  );
 
   return (
     <AuthForm action={formAction}>

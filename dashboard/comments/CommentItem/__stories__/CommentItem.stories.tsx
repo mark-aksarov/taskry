@@ -1,24 +1,27 @@
 import { CommentItem } from "../CommentItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withCommentFormProvider } from "../../CommentForm/__stories__";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withSendCommentProvider } from "../../SendCommentProvider/__stories__";
-import { withUpdateCommentProvider } from "../../UpdateCommentProvider/__stories__";
-import { withDeleteCommentProvider } from "../../DeleteCommentProvider/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
+import { CommentFormProvider } from "../../CommentFormContext";
+import { SendCommentProvider } from "../../SendCommentContext";
+import { DeleteCommentProvider } from "../../DeleteCommentContext";
+import { UpdateCommentProvider } from "../../UpdateCommentContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/comments/CommentItem",
   component: CommentItem,
   decorators: [
-    withDeleteCommentProvider,
-    withUpdateCommentProvider,
-    withSendCommentProvider,
-    withCommentFormProvider,
-    withSessionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <CommentFormProvider entityId={1} entityKey="task" mutateUrl="">
+        <DeleteCommentProvider>
+          <UpdateCommentProvider>
+            <SendCommentProvider>
+              <Story />
+            </SendCommentProvider>
+          </UpdateCommentProvider>
+        </DeleteCommentProvider>
+      </CommentFormProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     backgroundVariant: "alt",

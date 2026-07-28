@@ -1,24 +1,27 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectCategoryListItem } from "../ProjectCategoryListItem";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
-import { withUpdateProjectCategoryProvider } from "../../UpdateProjectCategoryProvider/__stories__";
-import { withDeleteProjectCategoryProvider } from "../../DeleteProjectCategoryProvider/__stories__";
-import { withDeleteProjectCategoriesProvider } from "../../DeleteProjectCategoriesProvider/__stories__";
+import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
+import { UpdateProjectCategoryProvider } from "../../UpdateProjectCategoryContext";
+import { DeleteProjectCategoryProvider } from "../../DeleteProjectCategoryContext";
+import { DeleteProjectCategoriesProvider } from "../../DeleteProjectCategoriesContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/project-categories/ProjectCategoryListItem",
   component: ProjectCategoryListItem,
   decorators: [
-    withUpdateProjectCategoryProvider,
-    withDeleteProjectCategoryProvider,
-    withDeleteProjectCategoriesProvider,
-    withSessionProvider,
-    withSelectedItemsProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedItemsProvider pageItems={[]}>
+        <UpdateProjectCategoryProvider>
+          <DeleteProjectCategoryProvider>
+            <DeleteProjectCategoriesProvider>
+              <Story />
+            </DeleteProjectCategoriesProvider>
+          </DeleteProjectCategoryProvider>
+        </UpdateProjectCategoryProvider>
+      </SelectedItemsProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 } satisfies Meta<typeof ProjectCategoryListItem>;
 

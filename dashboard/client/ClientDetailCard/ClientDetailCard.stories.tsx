@@ -3,44 +3,50 @@ import {
   ClientDetailActionsSkeleton,
 } from "../ClientDetailActions";
 
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ClientDetailAlt } from "../ClientDetailAlt";
 import { mockedClientDetail } from "@/mocks/clients";
 import { ClientDetailCard } from "./ClientDetailCard";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ClientDetailAltSkeleton } from "../ClientDetailAlt";
-import { DetailHeaderSkeleton } from "@/dashboard/common/DetailHeader";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { DeleteClientProvider } from "../DeleteClientContext";
+import { UpdateClientBioProvider } from "../UpdateClientBioContext";
 import { ClientDetailHeaderInteractive } from "../ClientDetailHeader";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withDeleteClientProvider } from "@/dashboard/client/DeleteClientProvider/__stories__";
-import { withUpdateClientBioProvider } from "@/dashboard/client/UpdateClientBioProvider/__stories__";
-import { withUpdateClientImageProvider } from "@/dashboard/client/UpdateClientImageProvider/__stories__";
-import { withUpdateClientEmailProvider } from "@/dashboard/client/UpdateClientEmailProvider/__stories__";
-import { withClearClientImageUrlProvider } from "@/dashboard/client/ClearClientImageUrlProvider/__stories__";
-import { withUpdateClientCompanyProvider } from "@/dashboard/client/UpdateClientCompanyProvider/__stories__";
-import { withUpdateClientFullNameProvider } from "@/dashboard/client/UpdateClientFullNameProvider/__stories__";
-import { withUpdateClientImageFileProvider } from "@/dashboard/client/UpdateClientImageFileContext/__stories__";
-import { withUpdateClientPublicLinkProvider } from "@/dashboard/client/UpdateClientPublicLinkProvider/__stories__";
-import { withUpdateClientPhoneNumberProvider } from "@/dashboard/client/UpdateClientPhoneNumberProvider/__stories__";
+import { DetailHeaderSkeleton } from "@/dashboard/common/DetailHeader";
+import { UpdateClientImageProvider } from "../UpdateClientImageContext";
+import { UpdateClientEmailProvider } from "../UpdateClientEmailContext";
+import { UpdateClientCompanyProvider } from "../UpdateClientCompanyContext";
+import { UpdateClientFullNameProvider } from "../UpdateClientFullNameContext";
+import { UpdateClientImageFileProvider } from "../UpdateClientImageFileContext";
+import { UpdateClientPublicLinkProvider } from "../UpdateClientPublicLinkContext";
+import { UpdateClientPhoneNumberProvider } from "../UpdateClientPhoneNumberContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/clients/ClientDetailCard",
   component: ClientDetailCard,
   decorators: [
-    withUpdateClientCompanyProvider,
-    withUpdateClientEmailProvider,
-    withUpdateClientPublicLinkProvider,
-    withUpdateClientPhoneNumberProvider,
-    withUpdateClientFullNameProvider,
-    withUpdateClientBioProvider,
-    withDeleteClientProvider,
-    withUpdateClientImageProvider,
-    withClearClientImageUrlProvider,
-    withUpdateClientImageFileProvider,
-    withSessionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateClientImageFileProvider>
+        <UpdateClientImageProvider>
+          <DeleteClientProvider>
+            <UpdateClientBioProvider>
+              <UpdateClientFullNameProvider>
+                <UpdateClientPhoneNumberProvider>
+                  <UpdateClientPublicLinkProvider>
+                    <UpdateClientEmailProvider>
+                      <UpdateClientCompanyProvider>
+                        <Story />
+                      </UpdateClientCompanyProvider>
+                    </UpdateClientEmailProvider>
+                  </UpdateClientPublicLinkProvider>
+                </UpdateClientPhoneNumberProvider>
+              </UpdateClientFullNameProvider>
+            </UpdateClientBioProvider>
+          </DeleteClientProvider>
+        </UpdateClientImageProvider>
+      </UpdateClientImageFileProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 } satisfies Meta<typeof ClientDetailCard>;
 
@@ -52,6 +58,7 @@ export const Default = {
     clientDetailContainer: <ClientDetailAlt {...mockedClientDetail} />,
     clientDetailHeaderContainer: (
       <ClientDetailHeaderInteractive
+        clientId={mockedClientDetail.id}
         fullName={mockedClientDetail.fullName}
         imageUrl={mockedClientDetail.imageUrl}
         companyName={mockedClientDetail.company.name}
@@ -78,7 +85,10 @@ export const WithoutSomeData = {
       />
     ),
     clientDetailHeaderContainer: (
-      <ClientDetailHeaderInteractive fullName={mockedClientDetail.fullName} />
+      <ClientDetailHeaderInteractive
+        clientId={mockedClientDetail.id}
+        fullName={mockedClientDetail.fullName}
+      />
     ),
     clientDetailActions: <ClientDetailActions />,
   },

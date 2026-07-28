@@ -1,24 +1,22 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
 import { mockedUserDetail } from "@/mocks/users";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UpdateUserPublicLinkModal } from "../UpdateUserPublicLinkModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateUserPublicLinkProvider } from "../UpdateUserPublicLinkProvider/__stories__";
+import { UpdateUserPublicLinkProvider } from "../UpdateUserPublicLinkContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/users/UpdateUserPublicLinkModal",
   component: UpdateUserPublicLinkModal,
   decorators: [
     withOpenModal,
-    withUpdateUserPublicLinkProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateUserPublicLinkProvider>
+        <Story />
+      </UpdateUserPublicLinkProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
-
   parameters: {
     modalId: "updateUserPublicLink",
   },

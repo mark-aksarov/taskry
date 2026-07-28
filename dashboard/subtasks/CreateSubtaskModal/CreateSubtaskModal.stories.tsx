@@ -1,21 +1,20 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CreateSubtaskModal } from "../CreateSubtaskModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCreateSubtaskProvider } from "../CreateSubtaskProvider/__stories__";
+import { CreateSubtaskProvider } from "../CreateSubtaskContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/subtasks/CreateSubtaskModal",
   component: CreateSubtaskModal,
   decorators: [
     withOpenModal,
-    withCreateSubtaskProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <CreateSubtaskProvider>
+        <Story />
+      </CreateSubtaskProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

@@ -3,16 +3,15 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { fn } from "storybook/test";
 
 import { Button } from "./Button";
-import { Clock, Download, Heart } from "lucide-react";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { twMerge } from "tailwind-merge";
+import { Clock, Download, Heart } from "lucide-react";
 
 const iconOptions = ["None", "Clock", "Heart", "Download"];
 const icons = {
   None: null,
-  Clock: <Clock    />,
-  Heart: <Heart    />,
-  Download: <Download    />,
+  Clock: <Clock />,
+  Heart: <Heart />,
+  Download: <Download />,
 };
 
 const meta = {
@@ -47,7 +46,6 @@ const meta = {
   args: {
     onPress: fn(),
   },
-  decorators: [withThemedBackground],
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -152,19 +150,19 @@ export const Icon = {
       <Button variant="accent" label="No icon" {...args} />
       <Button
         variant="accent"
-        iconLeft={<Clock    />}
+        iconLeft={<Clock />}
         label="Icon left"
         {...args}
       />
       <Button
         variant="accent"
-        iconRight={<Heart    />}
+        iconRight={<Heart />}
         label="Icon right"
         {...args}
       />
       <Button
         variant="accent"
-        iconRight={<Download    />}
+        iconRight={<Download />}
         aria-label="Button"
         {...args}
       />

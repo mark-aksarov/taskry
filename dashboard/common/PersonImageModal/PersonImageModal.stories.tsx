@@ -11,12 +11,10 @@ import { useRef, useState } from "react";
 import { Button } from "@/ui/Button";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Dialog, DialogFooter } from "@/ui/Dialog";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "dashboard/common/PersonImageModal",
   component: PersonImageModal,
-  decorators: [withThemedBackground],
   render: () => {
     const editorRef = useRef(null);
     const [isOpen, setIsOpen] = useState(true);

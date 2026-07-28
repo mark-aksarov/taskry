@@ -1,1 +1,0 @@
-export { withCommentFormProvider } from "./withCommentFormProvider";

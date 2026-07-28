@@ -1,26 +1,27 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { PositionListItem } from "../PositionListItem";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdatePositionProvider } from "../../UpdatePositionProvider/__stories__";
-import { withDeletePositionProvider } from "../../DeletePositionProvider/__stories__";
-import { withDeletePositionsProvider } from "../../DeletePositionsProvider/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { DeletePositionProvider } from "../../DeletePositionContext";
+import { UpdatePositionProvider } from "../../UpdatePositionContext";
+import { DeletePositionsProvider } from "../../DeletePositionsContext";
+import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/positions/PositionListItem",
   component: PositionListItem,
   decorators: [
-    withUpdatePositionProvider,
-    withDeletePositionProvider,
-
-    withDeletePositionsProvider,
-    withSessionProvider,
-    withSelectedItemsProvider,
-    withModalManagerProvider,
-
-    withThemedBackground,
+    (Story) => (
+      <SelectedItemsProvider pageItems={[]}>
+        <UpdatePositionProvider>
+          <DeletePositionProvider>
+            <DeletePositionsProvider>
+              <Story />
+            </DeletePositionsProvider>
+          </DeletePositionProvider>
+        </UpdatePositionProvider>
+      </SelectedItemsProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 } satisfies Meta<typeof PositionListItem>;
 

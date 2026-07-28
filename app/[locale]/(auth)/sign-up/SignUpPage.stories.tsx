@@ -1,20 +1,15 @@
 import { SignUpPage } from "./SignUpPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { AuthPageDecorator } from "@/.storybook/AuthPageDecorator";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withAuthDecorator } from "@/.storybook/withAuthDecorator";
 
 const meta = {
   title: "pages/SignUpPage",
   component: SignUpPage,
   parameters: { layout: "fullscreen" },
-  decorators: [AuthPageDecorator, withThemedBackground],
+  decorators: [withAuthDecorator],
 } satisfies Meta<typeof SignUpPage>;
 
 export default meta;
 export type Story = StoryObj<typeof meta>;
 
-export const Default = {
-  args: {
-    action: () => ({ status: "success" }),
-  },
-} satisfies Story;
+export const Default = {} satisfies Story;

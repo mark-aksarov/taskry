@@ -1,11 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectActiveTasksDetailStat } from "./ProjectActiveTasksDetailStat";
 
 const meta = {
   title: "dashboard/projects/ProjectActiveTasksDetailStat",
   component: ProjectActiveTasksDetailStat,
-  decorators: [withThemedBackground],
   args: {
     value: 20,
   },

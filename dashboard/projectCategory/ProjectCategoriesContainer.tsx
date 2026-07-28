@@ -5,8 +5,8 @@ import { ProjectCategoryListItem } from "./ProjectCategoryListItem";
 import { ModalManagerProvider } from "../../common/ModalManagerContext";
 import { UpdateProjectCategoryModal } from "./UpdateProjectCategoryModal";
 import { DeleteProjectCategoryModal } from "./DeleteProjectCategoryModal";
-import { UpdateProjectCategoryProvider } from "./UpdateProjectCategoryProvider";
-import { DeleteProjectCategoryProvider } from "./DeleteProjectCategoryProvider";
+import { UpdateProjectCategoryProvider } from "./UpdateProjectCategoryContext";
+import { DeleteProjectCategoryProvider } from "./DeleteProjectCategoryContext";
 import { getProjectCategories } from "@/lib/data/projectCategory/projectCategory.dal";
 
 export async function ProjectCategoriesContainer() {

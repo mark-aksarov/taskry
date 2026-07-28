@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { ResetPasswordPage } from "./ResetPasswordPage";
-import { resetPassword } from "@/lib/actions/auth/resetPassword";
 import { redirectIfAuthenticated } from "@/lib/utils/redirectIfAuthenticated";
 
 export default async function AppResetPasswordPage({
@@ -16,7 +15,5 @@ export default async function AppResetPasswordPage({
     notFound();
   }
 
-  const resetPasswordWithToken = resetPassword.bind(null, token);
-
-  return <ResetPasswordPage resetPassword={resetPasswordWithToken} />;
+  return <ResetPasswordPage />;
 }

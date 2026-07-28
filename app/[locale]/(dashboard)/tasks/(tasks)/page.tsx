@@ -15,31 +15,14 @@ import { taskStatus } from "@/lib/schemas/task";
 import { projectId } from "@/lib/schemas/project";
 import { taskCategoryId } from "@/lib/schemas/taskCategory";
 import { getProjectCount } from "@/lib/data/project/project.dal";
-import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
-import { CreateTaskModal } from "@/dashboard/tasks/CreateTaskModal";
-import { getTaskCount, getTaskList } from "@/lib/data/task/task.dal";
-import { TaskFiltersModal } from "@/dashboard/tasks/TaskFiltersModal";
-import { DeleteTasksModal } from "@/dashboard/tasks/DeleteTasksModal";
-import { ImportTasksModal } from "@/dashboard/tasks/ImportTasksModal";
-import { TaskGridContainer } from "@/dashboard/tasks/TaskGridContainer";
-import { CreateTaskProvider } from "@/dashboard/tasks/CreateTaskProvider";
-import { TaskFiltersProvider } from "@/dashboard/tasks/TaskFiltersContext";
-import { DeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider";
-import { ImportTasksProvider } from "@/dashboard/tasks/ImportTasksProvider";
-import { AssigneeFiltersModal } from "@/dashboard/tasks/AssigneeFiltersModal";
-import { SelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext";
-import { getTaskCategoryCount } from "@/lib/data/taskCategory/taskCategory.dal";
-import { TaskStatusFiltersModal } from "@/dashboard/tasks/TaskStatusFiltersModal";
 import { requireFullAccess } from "@/lib/utils/requireFullAccess";
-import { TaskProjectFiltersModal } from "@/dashboard/tasks/TaskProjectFiltersModal";
+import { getTaskCount, getTaskList } from "@/lib/data/task/task.dal";
+import { TaskGridContainer } from "@/dashboard/tasks/TaskGridContainer";
+import { getTaskCategoryCount } from "@/lib/data/taskCategory/taskCategory.dal";
 import { CreateTaskFormContainer } from "@/dashboard/tasks/CreateTaskFormContainer";
-import { TaskCategoryFiltersModal } from "@/dashboard/tasks/TaskCategoryFiltersModal";
 import { TaskFiltersFormContainer } from "@/dashboard/tasks/TaskFiltersFormContainer";
 import { TaskRouterSearchContainer } from "@/dashboard/tasks/TaskRouterSearchContainer";
-import { UpdateTaskStatusesProvider } from "@/dashboard/tasks/UpdateTaskStatusesProvider";
-import { CreateTaskCategoryModal } from "@/dashboard/taskCategory/CreateTaskCategoryModal";
 import { AssigneeFiltersFormContainer } from "@/dashboard/tasks/AssigneeFiltersFormContainer";
-import { CreateTaskCategoryProvider } from "@/dashboard/taskCategory/CreateTaskCategoryProvider";
 import { TaskProjectFiltersFormContainer } from "@/dashboard/tasks/TaskProjectFiltersFormContainer";
 import { TaskCategoryFiltersFormContainer } from "@/dashboard/tasks/TaskCategoryFiltersFormContainer";
 
@@ -99,55 +82,26 @@ export default async function AppTasksPage({
   const projectCount = await getProjectCount();
 
   return (
-    <SelectedTasksProvider pageItems={tasks}>
-      <UpdateTaskStatusesProvider>
-        <DeleteTasksProvider>
-          <CreateTaskProvider>
-            <CreateTaskCategoryProvider>
-              <TaskFiltersProvider filters={filters}>
-                <ImportTasksProvider>
-                  <TasksPage
-                    page={page}
-                    pageSize={pageSize}
-                    totalCount={totalCount}
-                    categoryCount={categoryCount}
-                    projectCount={projectCount}
-                    totalFilteredTasks={totalFilteredTasks}
-                    selectedSortField={sort}
-                    taskGrid={
-                      <TaskGridContainer tasks={tasks} showCheckbox={true} />
-                    }
-                  />
-
-                  <TaskSearchModal
-                    searchContainer={<TaskRouterSearchContainer />}
-                  />
-                  <CreateTaskModal
-                    createTaskFormContainer={<CreateTaskFormContainer />}
-                  />
-                  <CreateTaskCategoryModal />
-                  <DeleteTasksModal />
-
-                  <TaskFiltersModal
-                    filtersFormContainer={<TaskFiltersFormContainer />}
-                  />
-                  <TaskStatusFiltersModal />
-                  <TaskCategoryFiltersModal
-                    filtersFormContainer={<TaskCategoryFiltersFormContainer />}
-                  />
-                  <TaskProjectFiltersModal
-                    filtersFormContainer={<TaskProjectFiltersFormContainer />}
-                  />
-                  <AssigneeFiltersModal
-                    filtersFormContainer={<AssigneeFiltersFormContainer />}
-                  />
-                  <ImportTasksModal />
-                </ImportTasksProvider>
-              </TaskFiltersProvider>
-            </CreateTaskCategoryProvider>
-          </CreateTaskProvider>
-        </DeleteTasksProvider>
-      </UpdateTaskStatusesProvider>
-    </SelectedTasksProvider>
+    <TasksPage
+      page={page}
+      pageSize={pageSize}
+      totalCount={totalCount}
+      categoryCount={categoryCount}
+      projectCount={projectCount}
+      totalFilteredTasks={totalFilteredTasks}
+      selectedSortField={sort}
+      selectedItems={tasks.map((task) => ({
+        id: task.id,
+        status: task.status,
+      }))}
+      filters={filters}
+      taskGrid={<TaskGridContainer tasks={tasks} showCheckbox={true} />}
+      searchContainer={<TaskRouterSearchContainer />}
+      createTaskFormContainer={<CreateTaskFormContainer />}
+      taskFiltersFormContainer={<TaskFiltersFormContainer />}
+      assigneeFiltersFormContainer={<AssigneeFiltersFormContainer />}
+      taskProjectFiltersFormContainer={<TaskProjectFiltersFormContainer />}
+      taskCategoryFiltersFormContainer={<TaskCategoryFiltersFormContainer />}
+    />
   );
 }

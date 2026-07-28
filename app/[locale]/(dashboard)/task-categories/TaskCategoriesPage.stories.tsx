@@ -3,26 +3,15 @@ import TasksPageLoading from "./loading";
 import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskCategoriesPage } from "./TaskCategoriesPage";
-import { DashboardPageDecorator } from "@/.storybook/DashboardPageDecorator";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskSearchModal } from "@/dashboard/tasks/TaskSearchModal/__stories__";
+import { withDashboardLayout } from "@/.storybook/withDashboardLayout";
+import { SearchListExample } from "@/dashboard/search/SearchList/__stories__";
 import { TaskCategoryGridExample } from "@/dashboard/taskCategory/TaskCategoryGrid/__stories__";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
-import { withCreateTaskCategoryProvider } from "@/dashboard/taskCategory/CreateTaskCategoryProvider/__stories__";
-import { withDeleteTaskCategoriesProvider } from "@/dashboard/taskCategory/DeleteTaskCategoriesProvider/__stories__";
 
 const meta = {
   title: "pages/TaskCategoriesPage",
   component: TaskCategoriesPage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    withTaskSearchModal,
-    withCreateTaskCategoryProvider,
-    withDeleteTaskCategoriesProvider,
-    withSelectedItemsProvider,
-    DashboardPageDecorator,
-    withThemedBackground,
-  ],
+  decorators: [withDashboardLayout],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/task-categories");
   },
@@ -34,7 +23,9 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     totalCount: 10,
+    selectedItems: [{ id: 1 }, { id: 2 }, { id: 3 }],
     taskCategoriesContainer: <TaskCategoryGridExample />,
+    searchContainer: <SearchListExample />,
   },
 } satisfies Story;
 

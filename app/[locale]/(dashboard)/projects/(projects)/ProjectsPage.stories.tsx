@@ -2,33 +2,24 @@ import { mocked } from "storybook/test";
 import ProjectsPageLoading from "./loading";
 import { ProjectsPage } from "./ProjectsPage";
 import { usePathname } from "next/navigation";
+import { mockedUserSummaries } from "@/mocks/users";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { DashboardPageDecorator } from "@/.storybook/DashboardPageDecorator";
+import { mockedClientSummaries } from "@/mocks/clients";
+import { withDashboardLayout } from "@/.storybook/withDashboardLayout";
+import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
+import { CreateProjectForm } from "@/dashboard/projects/CreateProjectForm";
+import { ProjectFiltersForm } from "@/dashboard/projects/ProjectFiltersForm";
+import { SearchListExample } from "@/dashboard/search/SearchList/__stories__";
 import { ProjectGridExample } from "@/dashboard/projects/ProjectGrid/__stories__";
-import { withProjectSearchModal } from "@/dashboard/projects/ProjectSearchModal/__stories__";
-import { withCreateProjectProvider } from "@/dashboard/projects/CreateProjectProvider/__stories__";
-import { withProjectFiltersProvider } from "@/dashboard/projects/ProjectFiltersContext/__stories__";
-import { withDeleteProjectsProvider } from "@/dashboard/projects/DeleteProjectsProvider/__stories__";
-import { withSelectedProjectsProvider } from "@/dashboard/projects/SelectedProjectsContext/__stories__";
-import { withUpdateProjectStatusesProvider } from "@/dashboard/projects/UpdateProjectStatusesProvider/__stories__";
-import { withCreateProjectCategoryProvider } from "@/dashboard/projectCategory/CreateProjectCategoryProvider/__stories__";
+import { ProjectClientFiltersForm } from "@/dashboard/projects/ProjectClientFiltersForm";
+import { ProjectCreatorFiltersForm } from "@/dashboard/projects/ProjectCreatorFiltersForm";
+import { ProjectCategoryFiltersForm } from "@/dashboard/projects/ProjectCategoryFiltersForm";
 
 const meta = {
   title: "pages/ProjectsPage",
   component: ProjectsPage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    withProjectSearchModal,
-    withProjectFiltersProvider,
-    withCreateProjectCategoryProvider,
-    withCreateProjectProvider,
-    withDeleteProjectsProvider,
-    withUpdateProjectStatusesProvider,
-    withSelectedProjectsProvider,
-    DashboardPageDecorator,
-    withThemedBackground,
-  ],
+  decorators: [withDashboardLayout],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/projects");
   },
@@ -46,7 +37,38 @@ export const Default = {
     clientCount: 3,
     totalFilteredProjects: 3,
     selectedSortField: "createdAt",
+    selectedItems: [],
+    filters: {},
     projectGrid: <ProjectGridExample />,
+    searchContainer: <SearchListExample />,
+    createProjectFormContainer: (
+      <CreateProjectForm
+        projectCategorySelectItems={mockedProjectCategorySummaries}
+        clientSelectItems={mockedClientSummaries}
+      />
+    ),
+    projectFiltersFormContainer: (
+      <ProjectFiltersForm
+        categoryCheckboxGroupItems={mockedProjectCategorySummaries}
+        userCheckboxGroupItems={mockedUserSummaries}
+        clientCheckboxGroupItems={mockedClientSummaries}
+      />
+    ),
+    projectClientFiltersFormContainer: (
+      <ProjectClientFiltersForm
+        clientCheckboxGroupItems={mockedClientSummaries}
+      />
+    ),
+    projectCategoryFiltersFormContainer: (
+      <ProjectCategoryFiltersForm
+        categoryCheckboxGroupItems={mockedProjectCategorySummaries}
+      />
+    ),
+    projectCreatorFiltersFormContainer: (
+      <ProjectCreatorFiltersForm
+        creatorCheckboxGroupItems={mockedUserSummaries}
+      />
+    ),
   },
 } satisfies Story;
 

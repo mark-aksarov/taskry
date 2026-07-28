@@ -1,21 +1,20 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UpdateSubtaskModal } from "./UpdateSubtaskModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateSubtaskProvider } from "../UpdateSubtaskProvider/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
+import { UpdateSubtaskProvider } from "@/dashboard/subtasks/UpdateSubtaskContext";
 
 const meta = {
   title: "dashboard/subtasks/UpdateSubtaskModal",
   component: UpdateSubtaskModal,
   decorators: [
     withOpenModal,
-    withUpdateSubtaskProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateSubtaskProvider>
+        <Story />
+      </UpdateSubtaskProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     modalId: "updateSubtask",

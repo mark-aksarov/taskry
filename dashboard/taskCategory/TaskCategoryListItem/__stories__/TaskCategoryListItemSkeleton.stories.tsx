@@ -1,11 +1,9 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { TaskCategoryListItemSkeleton } from "../TaskCategoryListItemSkeleton";
 
 const meta = {
   title: "dashboard/task-categories/TaskCategoryListItemSkeleton",
   component: TaskCategoryListItemSkeleton,
-  decorators: [withThemedBackground],
 } satisfies Meta<typeof TaskCategoryListItemSkeleton>;
 
 export default meta;

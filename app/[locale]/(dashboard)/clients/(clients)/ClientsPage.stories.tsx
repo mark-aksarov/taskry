@@ -3,30 +3,19 @@ import ClientsPageLoading from "./loading";
 import { usePathname } from "next/navigation";
 import { ClientsPage } from "./ClientsPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { DashboardPageDecorator } from "@/.storybook/DashboardPageDecorator";
+import { mockedCompanySummaries } from "@/mocks/companies";
+import { CreateClientForm } from "@/dashboard/client/CreateClientForm";
+import { withDashboardLayout } from "@/.storybook/withDashboardLayout";
+import { ClientFiltersForm } from "@/dashboard/client/ClientFiltersForm";
 import { ClientGridExample } from "@/dashboard/client/ClientGrid/__stories__";
-import { withClientSearchModal } from "@/dashboard/client/ClientSearchModal/__stories__";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
-import { withCreateCompanyProvider } from "@/dashboard/company/CreateCompanyProvider/__stories__";
-import { withCreateClientProvider } from "@/dashboard/client/CreateClientProvider/__stories__";
-import { withClientFiltersProvider } from "@/dashboard/client/ClientFiltersContext/__stories__";
-import { withDeleteClientsProvider } from "@/dashboard/client/DeleteClientsProvider/__stories__";
+import { SearchListExample } from "@/dashboard/search/SearchList/__stories__";
+import { ClientCompanyFiltersForm } from "@/dashboard/client/ClientCompanyFiltersForm";
 
 const meta = {
   title: "pages/ClientsPage",
   component: ClientsPage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    withClientSearchModal,
-    withClientFiltersProvider,
-    withCreateClientProvider,
-    withCreateCompanyProvider,
-    withDeleteClientsProvider,
-    withSelectedItemsProvider,
-    DashboardPageDecorator,
-    withThemedBackground,
-  ],
+  decorators: [withDashboardLayout],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/clients");
   },
@@ -42,8 +31,22 @@ export const Default = {
     totalCount: 10,
     companyCount: 5,
     totalFilteredClients: 3,
+    selectedItems: [{ id: 1 }, { id: 2 }, { id: 3 }],
     selectedSortField: "fullName",
+    filters: {},
     clientGrid: <ClientGridExample />,
+    createClientFormContainer: (
+      <CreateClientForm companySelectItems={mockedCompanySummaries} />
+    ),
+    searchContainer: <SearchListExample />,
+    clientFiltersFormContainer: (
+      <ClientFiltersForm companyCheckboxGroupItems={mockedCompanySummaries} />
+    ),
+    clientCompanyFiltersFormContainer: (
+      <ClientCompanyFiltersForm
+        companyCheckboxGroupItems={mockedCompanySummaries}
+      />
+    ),
   },
 } satisfies Story;
 

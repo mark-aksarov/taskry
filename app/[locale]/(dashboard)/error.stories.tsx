@@ -2,19 +2,13 @@ import error from "./error";
 import { mocked } from "storybook/test";
 import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { DashboardPageDecorator } from "@/.storybook/DashboardPageDecorator";
+import { withDashboardLayout } from "@/.storybook/withDashboardLayout";
 
 const meta = {
   title: "pages/DashboardErrorPage",
   component: error,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    DashboardPageDecorator,
-    withSessionProvider,
-    withThemedBackground,
-  ],
+  decorators: [withDashboardLayout],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/dashboard");
   },

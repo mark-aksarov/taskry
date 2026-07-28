@@ -7,12 +7,11 @@ import {
 } from "../Dialog";
 
 import React from "react";
-import { Modal, ModalProps } from "../Modal";
 import { Button } from "@/ui/Button";
 import { TextField } from "@/ui/TextField";
+import { Modal, ModalProps } from "../Modal";
 import { DialogTrigger, Form } from "react-aria-components";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof Modal> = {
   title: "UI/Modal",
@@ -20,7 +19,6 @@ const meta: Meta<typeof Modal> = {
   args: {
     isDismissable: true,
   },
-  decorators: [withThemedBackground],
 } satisfies Meta<typeof Modal>;
 
 export default meta;

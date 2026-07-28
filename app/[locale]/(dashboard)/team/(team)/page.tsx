@@ -11,18 +11,10 @@ import { TeamPage } from "./TeamPage";
 import { userSortFields } from "@/lib/types";
 import { positionId } from "@/lib/schemas/position";
 import { getUserList } from "@/lib/data/user/user.dal";
-import { getPositionCount } from "@/lib/data/position/position.dal";
-import { UserSearchModal } from "@/dashboard/users/UserSearchModal";
-import { CreateUserModal } from "@/dashboard/users/CreateUserModal";
-import { UserFiltersModal } from "@/dashboard/users/UserFiltersModal";
-import { UserGridContainer } from "@/dashboard/users/UserGridContainer";
-import { CreateUserProvider } from "@/dashboard/users/CreateUserProvider";
-import { UserFiltersProvider } from "@/dashboard/users/UserFiltersContext";
-import { CreatePositionModal } from "@/dashboard/position/CreatePositionModal";
-import { RouterSearchContainer } from "@/dashboard/common/RouterSearchContainer";
 import { requireFullAccess } from "@/lib/utils/requireFullAccess";
-import { CreatePositionProvider } from "@/dashboard/position/CreatePositionProvider";
-import { UserPositionFiltersModal } from "@/dashboard/users/UserPositionFiltersModal";
+import { getPositionCount } from "@/lib/data/position/position.dal";
+import { UserGridContainer } from "@/dashboard/users/UserGridContainer";
+import { RouterSearchContainer } from "@/dashboard/common/RouterSearchContainer";
 import { UserFiltersFormContainer } from "@/dashboard/users/UserFiltersFormContainer";
 import { UserPositionFiltersFormContainer } from "@/dashboard/users/UserPositionFiltersFormContainer";
 
@@ -65,29 +57,17 @@ export default async function AppTeamPage({
   const positionCount = await getPositionCount();
 
   return (
-    <CreateUserProvider>
-      <CreatePositionProvider>
-        <UserFiltersProvider filters={filters}>
-          <TeamPage
-            page={page}
-            pageSize={pageSize}
-            positionCount={positionCount}
-            totalFilteredUsers={totalFilteredUsers}
-            selectedSortField={sort}
-            userGrid={<UserGridContainer users={users} />}
-          />
-
-          <UserSearchModal searchContainer={<RouterSearchContainer />} />
-          <CreateUserModal />
-          <CreatePositionModal />
-          <UserFiltersModal
-            filtersFormContainer={<UserFiltersFormContainer />}
-          />
-          <UserPositionFiltersModal
-            filtersFormContainer={<UserPositionFiltersFormContainer />}
-          />
-        </UserFiltersProvider>
-      </CreatePositionProvider>
-    </CreateUserProvider>
+    <TeamPage
+      page={page}
+      pageSize={pageSize}
+      positionCount={positionCount}
+      totalFilteredUsers={totalFilteredUsers}
+      filters={filters}
+      selectedSortField={sort}
+      userGrid={<UserGridContainer users={users} />}
+      searchContainer={<RouterSearchContainer />}
+      userFiltersFormContainer={<UserFiltersFormContainer />}
+      userPositionFiltersFormContainer={<UserPositionFiltersFormContainer />}
+    />
   );
 }

@@ -1,13 +1,12 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AcceptInvitationPage } from "./AcceptInvitationPage";
-import { AuthPageDecorator } from "@/.storybook/AuthPageDecorator";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withAuthDecorator } from "@/.storybook/withAuthDecorator";
 
 const meta = {
   title: "pages/AcceptInvitationPage",
   component: AcceptInvitationPage,
   parameters: { layout: "fullscreen" },
-  decorators: [AuthPageDecorator, withThemedBackground],
+  decorators: [withAuthDecorator],
 } satisfies Meta<typeof AcceptInvitationPage>;
 
 export default meta;

@@ -1,24 +1,12 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ImportCompaniesModal } from "./ImportCompaniesModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withImportCompaniesProvider } from "../ImportCompaniesProvider/__stories__";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/companies/ImportCompaniesModal",
   component: ImportCompaniesModal,
-  decorators: [
-    withOpenModal,
-    withImportCompaniesProvider,
-    withSelectedItemsProvider,
-    withModalManagerProvider,
-    withThemedBackground,
-  ],
+  decorators: [withOpenModal, withDashboardLayoutProviders],
 
   parameters: {
     modalId: "importCompanies",

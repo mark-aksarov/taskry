@@ -1,11 +1,9 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Pagination } from "./Pagination";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "dashboard/common/Pagination",
   component: Pagination,
-  decorators: [withThemedBackground],
 } satisfies Meta<typeof Pagination>;
 
 export default meta;

@@ -1,1 +1,0 @@
-export { withClientSearchModal } from "./withClientSearchModal";

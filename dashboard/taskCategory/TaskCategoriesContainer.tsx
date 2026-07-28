@@ -3,8 +3,8 @@ import { TaskCategoryListItem } from "./TaskCategoryListItem";
 import { UpdateTaskCategoryModal } from "./UpdateTaskCategoryModal";
 import { DeleteTaskCategoryModal } from "./DeleteTaskCategoryModal";
 import { ModalManagerProvider } from "../../common/ModalManagerContext";
-import { UpdateTaskCategoryProvider } from "./UpdateTaskCategoryProvider";
-import { DeleteTaskCategoryProvider } from "./DeleteTaskCategoryProvider";
+import { UpdateTaskCategoryProvider } from "./UpdateTaskCategoryContext";
+import { DeleteTaskCategoryProvider } from "./DeleteTaskCategoryContext";
 import { getTaskCategories } from "@/lib/data/taskCategory/taskCategory.dal";
 
 export async function TaskCategoriesContainer() {

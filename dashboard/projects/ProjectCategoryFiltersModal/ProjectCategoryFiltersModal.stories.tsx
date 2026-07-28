@@ -3,28 +3,27 @@ import {
   ProjectCategoryFiltersFormSkeleton,
 } from "../ProjectCategoryFiltersForm";
 
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { ProjectFiltersProvider } from "../ProjectFiltersContext";
+import { SelectedProjectsProvider } from "../SelectedProjectsContext";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
 import { ProjectCategoryFiltersModal } from "../ProjectCategoryFiltersModal";
-import { withProjectFiltersProvider } from "../ProjectFiltersContext/__stories__";
-import { withSelectedProjectsProvider } from "../SelectedProjectsContext/__stories__";
-import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
-import {
-  withModalManagerProvider,
-  withOpenModal,
-} from "@/common/ModalManagerContext/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/projects/ProjectCategoryFiltersModal",
   component: ProjectCategoryFiltersModal,
   decorators: [
     withOpenModal,
-    withProjectFiltersProvider,
-    withSelectedProjectsProvider,
-    withPageTransitionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedProjectsProvider pageItems={[]}>
+        <ProjectFiltersProvider filters={{}}>
+          <Story />
+        </ProjectFiltersProvider>
+      </SelectedProjectsProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     modalId: "projectCategoryFilters",

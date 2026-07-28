@@ -5,7 +5,7 @@ import { UserGrid } from "./UserGrid";
 import { UpdateUserModal } from "./UpdateUserModal";
 import { DeleteUserModal } from "./DeleteUserModal";
 import { UserListItemSkeleton } from "./UserListItem";
-import { DeleteUserProvider } from "./DeleteUserProvider";
+import { DeleteUserProvider } from "./DeleteUserContext";
 import { UpdateUserProvider } from "./UpdateUserProvider";
 import { UserListItemDTO } from "@/lib/data/user/user.dto";
 import { UserDetailSideSheet } from "./UserDetailSideSheet";

@@ -1,27 +1,23 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { UserFiltersModal } from "../UserFiltersModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedPositionSummaries } from "@/mocks/positions";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUserFiltersProvider } from "../UserFiltersContext/__stories__";
+import { UserFiltersProvider } from "../UserFiltersContext";
 import { UserFiltersForm, UserFiltersFormSkeleton } from "../UserFiltersForm";
-import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/users/UserFiltersModal",
   component: UserFiltersModal,
   decorators: [
     withOpenModal,
-    withUserFiltersProvider,
-    withPageTransitionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UserFiltersProvider filters={{}}>
+        <Story />
+      </UserFiltersProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
-
   parameters: {
     modalId: "userFilters",
   },

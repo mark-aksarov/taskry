@@ -1,24 +1,22 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
 import { mockedUserDetail } from "@/mocks/users";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UpdateUserPhoneNumberModal } from "../UpdateUserPhoneNumberModal";
-import { withUpdateUserPhoneNumberProvider } from "../UpdateUserPhoneNumberProvider/__stories__";
+import { UpdateUserPhoneNumberProvider } from "../UpdateUserPhoneNumberContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/users/UpdateUserPhoneNumberModal",
   component: UpdateUserPhoneNumberModal,
   decorators: [
     withOpenModal,
-    withUpdateUserPhoneNumberProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateUserPhoneNumberProvider>
+        <Story />
+      </UpdateUserPhoneNumberProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
-
   parameters: {
     modalId: "updateUserPhoneNumber",
   },

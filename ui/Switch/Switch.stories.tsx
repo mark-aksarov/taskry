@@ -1,11 +1,9 @@
 import { Switch } from "./Switch";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "UI/Switch",
   component: Switch,
-  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

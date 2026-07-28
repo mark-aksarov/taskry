@@ -3,31 +3,29 @@ import {
   ProjectFiltersFormSkeleton,
 } from "../ProjectFiltersForm";
 
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
 import { mockedUserSummaries } from "@/mocks/users";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedClientSummaries } from "@/mocks/clients";
 import { ProjectFiltersModal } from "../ProjectFiltersModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { ProjectFiltersProvider } from "../ProjectFiltersContext";
+import { SelectedProjectsProvider } from "../SelectedProjectsContext";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
-import { withProjectFiltersProvider } from "../ProjectFiltersContext/__stories__";
-import { withSelectedProjectsProvider } from "../SelectedProjectsContext/__stories__";
-import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/projects/ProjectFiltersModal",
   component: ProjectFiltersModal,
   decorators: [
     withOpenModal,
-    withProjectFiltersProvider,
-    withSelectedProjectsProvider,
-    withPageTransitionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedProjectsProvider pageItems={[]}>
+        <ProjectFiltersProvider filters={{}}>
+          <Story />
+        </ProjectFiltersProvider>
+      </SelectedProjectsProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

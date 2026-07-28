@@ -1,24 +1,12 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 import { ImportProjectCategoriesModal } from "./ImportProjectCategoriesModal";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
-import { withImportProjectCategoriesProvider } from "../ImportProjectCategoriesProvider/__stories__";
 
 const meta = {
   title: "dashboard/project-categories/ImportProjectCategoriesModal",
   component: ImportProjectCategoriesModal,
-  decorators: [
-    withOpenModal,
-    withImportProjectCategoriesProvider,
-    withSelectedItemsProvider,
-    withModalManagerProvider,
-    withThemedBackground,
-  ],
+  decorators: [withOpenModal, withDashboardLayoutProviders],
 
   parameters: {
     modalId: "importProjectCategories",

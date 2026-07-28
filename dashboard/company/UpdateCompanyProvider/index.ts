@@ -1,1 +1,0 @@
-export { UpdateCompanyProvider } from "./UpdateCompanyProvider";

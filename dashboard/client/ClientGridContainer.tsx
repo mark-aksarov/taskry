@@ -5,13 +5,13 @@ import { ClientGrid } from "./ClientGrid";
 import { UpdateClientModal } from "./UpdateClientModal";
 import { DeleteClientModal } from "./DeleteClientModal";
 import { ClientListItemSkeleton } from "./ClientListItem";
-import { DeleteClientProvider } from "./DeleteClientProvider";
-import { UpdateClientProvider } from "./UpdateClientProvider";
-import { ModalManagerProvider } from "@/common/ModalManagerContext";
+import { DeleteClientProvider } from "./DeleteClientContext";
+import { UpdateClientProvider } from "./UpdateClientContext";
 import { ClientGridItemMobileSkeleton } from "./ClientGridItem";
 import { ClientDetailSideSheet } from "./ClientDetailSideSheet";
 import { ClientDetailContainer } from "./ClientDetailContainer";
 import { ClientListItemDTO } from "@/lib/data/client/client.dto";
+import { ModalManagerProvider } from "@/common/ModalManagerContext";
 import { UpdateClientFormContainer } from "./UpdateClientFormContainer";
 import { ClientDetailHeaderContainer } from "./ClientDetailHeaderContainer";
 

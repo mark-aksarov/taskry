@@ -1,11 +1,9 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserGridItemMobileSkeleton } from "../UserGridItemSkeleton";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "dashboard/users/UserGridItemMobileSkeleton",
   component: UserGridItemMobileSkeleton,
-  decorators: [withThemedBackground],
   globals: {
     viewport: { value: "mobile2", isRotated: false },
   },

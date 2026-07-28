@@ -1,46 +1,23 @@
 import { mocked } from "storybook/test";
 import AppClientDetailLoading from "./loading";
 import AppClientDetailNotFound from "./not-found";
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { useParams, usePathname } from "next/navigation";
 import { mockedClientDetail } from "@/mocks/clients";
 import { ClientDetailPage } from "./ClientDetailPage";
-import { DashboardPageDecorator } from "@/.storybook/DashboardPageDecorator";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { useParams, usePathname } from "next/navigation";
+import { mockedCompanySummaries } from "@/mocks/companies";
 import { ClientDetailAlt } from "@/dashboard/client/ClientDetailAlt";
+import { withDashboardLayout } from "@/.storybook/withDashboardLayout";
 import { ClientDetailActions } from "@/dashboard/client/ClientDetailActions";
-import { withTaskSearchModal } from "@/dashboard/tasks/TaskSearchModal/__stories__";
+import { SearchListExample } from "@/dashboard/search/SearchList/__stories__";
+import { UpdateClientCompanyForm } from "@/dashboard/client/UpdateClientCompanyForm";
 import { ClientDetailHeaderInteractive } from "@/dashboard/client/ClientDetailHeader";
-import { withDeleteClientProvider } from "@/dashboard/client/DeleteClientProvider/__stories__";
-import { withUpdateClientBioProvider } from "@/dashboard/client/UpdateClientBioProvider/__stories__";
-import { withUpdateClientImageProvider } from "@/dashboard/client/UpdateClientImageProvider/__stories__";
-import { withUpdateClientEmailProvider } from "@/dashboard/client/UpdateClientEmailProvider/__stories__";
-import { withClearClientImageUrlProvider } from "@/dashboard/client/ClearClientImageUrlProvider/__stories__";
-import { withUpdateClientCompanyProvider } from "@/dashboard/client/UpdateClientCompanyProvider/__stories__";
-import { withUpdateClientFullNameProvider } from "@/dashboard/client/UpdateClientFullNameProvider/__stories__";
-import { withUpdateClientImageFileProvider } from "@/dashboard/client/UpdateClientImageFileContext/__stories__";
-import { withUpdateClientPublicLinkProvider } from "@/dashboard/client/UpdateClientPublicLinkProvider/__stories__";
-import { withUpdateClientPhoneNumberProvider } from "@/dashboard/client/UpdateClientPhoneNumberProvider/__stories__";
 
 const meta = {
   title: "pages/ClientDetailPage",
   component: ClientDetailPage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    withTaskSearchModal,
-    withUpdateClientCompanyProvider,
-    withUpdateClientEmailProvider,
-    withUpdateClientPublicLinkProvider,
-    withUpdateClientPhoneNumberProvider,
-    withUpdateClientFullNameProvider,
-    withUpdateClientBioProvider,
-    withDeleteClientProvider,
-    withUpdateClientImageProvider,
-    withClearClientImageUrlProvider,
-    withUpdateClientImageFileProvider,
-    DashboardPageDecorator,
-    withThemedBackground,
-  ],
+  decorators: [withDashboardLayout],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/clients/1");
     mocked(useParams).mockReturnValue({
@@ -54,15 +31,25 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    client: mockedClientDetail,
     clientDetailContainer: <ClientDetailAlt {...mockedClientDetail} />,
     clientDetailHeaderContainer: (
       <ClientDetailHeaderInteractive
+        clientId={mockedClientDetail.id}
         fullName={mockedClientDetail.fullName}
         imageUrl={mockedClientDetail.imageUrl}
         companyName={mockedClientDetail.company.name}
       />
     ),
     clientDetailActions: <ClientDetailActions />,
+    updateClientCompanyFormContainer: (
+      <UpdateClientCompanyForm
+        clientId={mockedClientDetail.id}
+        companyId={mockedClientDetail.company.id}
+        companySelectItems={mockedCompanySummaries}
+      />
+    ),
+    searchContainer: <SearchListExample />,
   },
 } satisfies Story;
 
@@ -73,6 +60,7 @@ export const Loading = {
 
 export const WithoutSomeData = {
   args: {
+    ...Default.args,
     clientDetailContainer: (
       <ClientDetailAlt
         fullName={mockedClientDetail.fullName}
@@ -81,6 +69,7 @@ export const WithoutSomeData = {
     ),
     clientDetailHeaderContainer: (
       <ClientDetailHeaderInteractive
+        clientId={mockedClientDetail.id}
         fullName={mockedClientDetail.fullName}
       />
     ),

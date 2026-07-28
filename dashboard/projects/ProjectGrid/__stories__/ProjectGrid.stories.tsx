@@ -1,27 +1,28 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectGridExample } from "./ProjectGridExample";
+import { ViewModeProvider } from "@/dashboard/common/ViewMode";
 import { DashboardGrid } from "@/dashboard/common/DashboardGrid";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withDeleteProjectsProvider } from "../../DeleteProjectsProvider/__stories__";
-import { withSelectedProjectsProvider } from "../../SelectedProjectsContext/__stories__";
-import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
-import { withUpdateProjectStatusesProvider } from "../../UpdateProjectStatusesProvider/__stories__";
+import { DeleteProjectsProvider } from "../../DeleteProjectsContext";
+import { SelectedProjectsProvider } from "../../SelectedProjectsContext";
+import { UpdateProjectStatusesProvider } from "../../UpdateProjectStatusesContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/projects/ProjectGrid",
   component: ProjectGridExample,
   decorators: [
-    withUpdateProjectStatusesProvider,
-    withDeleteProjectsProvider,
-    withViewModeProvider,
-    withPageTransitionProvider,
-    withSelectedProjectsProvider,
-    withSessionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedProjectsProvider pageItems={[]}>
+        <ViewModeProvider initialValue="grid">
+          <DeleteProjectsProvider>
+            <UpdateProjectStatusesProvider>
+              <Story />
+            </UpdateProjectStatusesProvider>
+          </DeleteProjectsProvider>
+        </ViewModeProvider>
+      </SelectedProjectsProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 } satisfies Meta<typeof ProjectGridExample>;
 

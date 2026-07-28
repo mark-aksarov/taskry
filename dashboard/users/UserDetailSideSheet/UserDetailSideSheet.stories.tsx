@@ -1,26 +1,16 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
 import { mockedUserDetail } from "@/mocks/users";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { UserDetailHeader } from "../UserDetailHeader";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserDetailSideSheet } from "./UserDetailSideSheet";
 import { UserDetail, UserDetailSkeleton } from "../UserDetail";
 import { DetailHeaderSkeleton } from "@/dashboard/common/DetailHeader";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/users/UserDetailSideSheet",
   component: UserDetailSideSheet,
-  decorators: [
-    withOpenModal,
-    withSessionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
-  ],
+  decorators: [withOpenModal, withDashboardLayoutProviders],
 
   parameters: {
     modalId: "userDetail",

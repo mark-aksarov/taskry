@@ -1,1 +1,0 @@
-export { UpdateProjectCategoryProvider } from "./UpdateProjectCategoryProvider";

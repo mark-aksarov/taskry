@@ -1,26 +1,14 @@
 import { HomePage } from "./HomePage";
 import { mocked } from "storybook/test";
-import { SiteLayout } from "./SiteLayout";
 import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
+import { withSiteLayout } from "@/.storybook/withSiteLayout";
 
 const meta = {
   title: "pages/HomePage",
   component: HomePage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    (Story) => (
-      <SiteLayout>
-        <Story />
-      </SiteLayout>
-    ),
-    withModalManagerProvider,
-    withSessionProvider,
-    withThemedBackground,
-  ],
+  decorators: [withSiteLayout],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/");
   },

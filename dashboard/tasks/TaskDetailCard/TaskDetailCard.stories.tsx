@@ -5,39 +5,49 @@ import {
 import { mockedTaskDetail } from "@/mocks/tasks";
 import { TaskDetailCard } from "./TaskDetailCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { DeleteTaskProvider } from "../DeleteTaskContext";
+import { UpdateTaskTitleProvider } from "../UpdateTaskTitleContext";
+import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
+import { UpdateTaskProjectProvider } from "../UpdateTaskProjectContext";
 import { TaskDetailAlt, TaskDetailAltSkeleton } from "../TaskDetailAlt";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteTaskProvider } from "../DeleteTaskProvider/__stories__";
+import { UpdateTaskAssigneeProvider } from "../UpdateTaskAssigneeContext";
+import { UpdateTaskDeadlineProvider } from "../UpdateTaskDeadlineContext";
+import { UpdateTaskStatusAltProvider } from "../UpdateTaskStatusAltContext";
+import { UpdateTaskCategoryRelProvider } from "../UpdateTaskCategoryRelContext";
+import { UpdateTaskDescriptionProvider } from "../UpdateTaskDescriptionContext";
 import { SubtaskListExample } from "@/dashboard/subtasks/SubtaskList/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withCreateSubtaskProvider } from "@/dashboard/subtasks/CreateSubtaskProvider/__stories__";
-import { withUpdateTaskTitleProvider } from "@/dashboard/tasks/UpdateTaskTitleProvider/__stories__";
-import { withUpdateTaskStatusProvider } from "@/dashboard/tasks/UpdateTaskStatusProvider/__stories__";
-import { withUpdateTaskProjectProvider } from "@/dashboard/tasks/UpdateTaskProjectProvider/__stories__";
-import { withUpdateTaskDeadlineProvider } from "@/dashboard/tasks/UpdateTaskDeadlineProvider/__stories__";
-import { withUpdateTaskAssigneeProvider } from "@/dashboard/tasks/UpdateTaskAssigneeProvider/__stories__";
-import { withUpdateTaskStatusAltProvider } from "@/dashboard/tasks/UpdateTaskStatusAltProvider/__stories__";
-import { withUpdateTaskDescriptionProvider } from "@/dashboard/tasks/UpdateTaskDescriptionProvider/__stories__";
-import { withUpdateTaskCategoryRelProvider } from "@/dashboard/tasks/UpdateTaskCategoryRelProvider/__stories__";
+import { CreateSubtaskProvider } from "@/dashboard/subtasks/CreateSubtaskContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/tasks/TaskDetailCard",
   component: TaskDetailCard,
   decorators: [
-    withDeleteTaskProvider,
-    withUpdateTaskProjectProvider,
-    withUpdateTaskCategoryRelProvider,
-    withUpdateTaskAssigneeProvider,
-    withUpdateTaskStatusAltProvider,
-    withUpdateTaskDeadlineProvider,
-    withUpdateTaskDescriptionProvider,
-    withUpdateTaskTitleProvider,
-    withUpdateTaskStatusProvider,
-    withCreateSubtaskProvider,
-    withSessionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <CreateSubtaskProvider>
+        <UpdateTaskStatusProvider>
+          <UpdateTaskTitleProvider>
+            <UpdateTaskDescriptionProvider>
+              <UpdateTaskDeadlineProvider>
+                <UpdateTaskStatusAltProvider>
+                  <UpdateTaskAssigneeProvider>
+                    <UpdateTaskCategoryRelProvider>
+                      <UpdateTaskProjectProvider>
+                        <DeleteTaskProvider>
+                          <Story />
+                        </DeleteTaskProvider>
+                      </UpdateTaskProjectProvider>
+                    </UpdateTaskCategoryRelProvider>
+                  </UpdateTaskAssigneeProvider>
+                </UpdateTaskStatusAltProvider>
+              </UpdateTaskDeadlineProvider>
+            </UpdateTaskDescriptionProvider>
+          </UpdateTaskTitleProvider>
+        </UpdateTaskStatusProvider>
+      </CreateSubtaskProvider>
+    ),
+
+    withDashboardLayoutProviders,
   ],
 } satisfies Meta<typeof TaskDetailCard>;
 

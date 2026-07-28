@@ -5,7 +5,6 @@ import { Form } from "react-aria-components";
 import { DateValue, I18nProvider } from "react-aria";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { today, getLocalTimeZone } from "@internationalized/date";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 type DatePickerPropsWithLocaleArgs = React.ComponentProps<typeof DatePicker> & {
   locale: string;
@@ -52,7 +51,6 @@ const meta = {
         <Story />
       </div>
     ),
-    withThemedBackground,
   ],
   parameters: {
     backgroundVariant: "alt",

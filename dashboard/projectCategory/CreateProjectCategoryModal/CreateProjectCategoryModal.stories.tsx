@@ -1,21 +1,20 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { CreateProjectCategoryModal } from "../CreateProjectCategoryModal";
-import { withCreateProjectCategoryProvider } from "../CreateProjectCategoryProvider/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
+import { CreateProjectCategoryProvider } from "../CreateProjectCategoryContext";
 
 const meta = {
   title: "dashboard/project-categories/CreateProjectCategoryModal",
   component: CreateProjectCategoryModal,
   decorators: [
     withOpenModal,
-    withCreateProjectCategoryProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <CreateProjectCategoryProvider>
+        <Story />
+      </CreateProjectCategoryProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

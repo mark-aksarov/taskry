@@ -1,25 +1,24 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedClientDetail } from "@/mocks/clients";
-import { mockedCompanySummaries } from "@/mocks/companies";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { UpdateClientForm } from "../UpdateClientForm";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UpdateClientModal } from "./UpdateClientModal";
+import { mockedCompanySummaries } from "@/mocks/companies";
 import { ClientFormSkeleton } from "../ClientFormSkeleton";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateClientProvider } from "../UpdateClientProvider/__stories__";
+import { UpdateClientProvider } from "../UpdateClientContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/clients/UpdateClientModal",
   component: UpdateClientModal,
   decorators: [
     withOpenModal,
-    withUpdateClientProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateClientProvider>
+        <Story />
+      </UpdateClientProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

@@ -1,16 +1,21 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskItemStatusBadge } from "./TaskItemStatusBadge";
-import { withSelectedTasksProvider } from "../SelectedTasksContext/__stories__";
-import { withUpdateTaskStatusProvider } from "../UpdateTaskStatusProvider/__stories__";
-import { withUpdateTaskStatusesProvider } from "../UpdateTaskStatusesProvider/__stories__";
+import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
+import { UpdateTaskStatusesProvider } from "../UpdateTaskStatusesContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta: Meta<typeof TaskItemStatusBadge> = {
   title: "dashboard/tasks/TaskItemStatusBadge",
   component: TaskItemStatusBadge,
   decorators: [
-    withUpdateTaskStatusProvider,
-    withUpdateTaskStatusesProvider,
-    withSelectedTasksProvider,
+    (Story) => (
+      <UpdateTaskStatusesProvider>
+        <UpdateTaskStatusProvider>
+          <Story />
+        </UpdateTaskStatusProvider>
+      </UpdateTaskStatusesProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 } satisfies Meta<typeof TaskItemStatusBadge>;
 

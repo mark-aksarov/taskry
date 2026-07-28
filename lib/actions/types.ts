@@ -1,9 +1,4 @@
-import { useActionState } from "react";
 import { ProjectStatus, TaskStatus } from "@/generated/prisma/enums";
-
-export type ActionFn<State, Payload> = Parameters<
-  typeof useActionState<State, Payload>
->[0];
 
 export type ActionStatus = "error" | "success" | null;
 

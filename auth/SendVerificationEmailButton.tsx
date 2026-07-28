@@ -4,25 +4,19 @@ import { Mail } from "lucide-react";
 import { Button } from "@/ui/Button";
 import { useTransition } from "react";
 import { useTranslations } from "next-intl";
-import { ActionState } from "@/lib/actions/types";
+import { useSession } from "@/common/SessionContext";
 import { useAddErrorToast } from "@/lib/hooks/useAddErrorToast";
+import { sendVerificationEmail } from "@/lib/actions/auth/sendVerificationEmail";
 
-interface SendVerificationEmailButtonProps {
-  email: string;
-  sendVerificationEmail: (email: string) => Promise<ActionState>;
-}
-
-export function SendVerificationEmailButton({
-  email,
-  sendVerificationEmail,
-}: SendVerificationEmailButtonProps) {
+export function SendVerificationEmailButton() {
   const t = useTranslations("auth.SendVerificationEmailButton");
   const [isPending, startTransition] = useTransition();
   const addErrorToast = useAddErrorToast();
+  const session = useSession();
 
   const handlePress = () => {
     startTransition(async () => {
-      const result = await sendVerificationEmail(email);
+      const result = await sendVerificationEmail(session!.user.email);
 
       if (result.status === "error") {
         addErrorToast(result.message!);
@@ -38,7 +32,7 @@ export function SendVerificationEmailButton({
       isPending={isPending}
       className="justify-center py-4"
       onPress={handlePress}
-      iconLeft={<Mail size={18}   />}
+      iconLeft={<Mail size={18} />}
       label={t("label")}
       size="medium"
     />

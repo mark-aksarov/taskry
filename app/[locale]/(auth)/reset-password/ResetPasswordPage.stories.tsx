@@ -1,26 +1,20 @@
 import ResetPasswordNotFound from "./not-found";
 import { ResetPasswordPage } from "./ResetPasswordPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { AuthPageDecorator } from "@/.storybook/AuthPageDecorator";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withAuthDecorator } from "@/.storybook/withAuthDecorator";
 
 const meta = {
   title: "pages/ResetPasswordPage",
   component: ResetPasswordPage,
   parameters: { layout: "fullscreen" },
-  decorators: [AuthPageDecorator, withThemedBackground],
+  decorators: [withAuthDecorator],
 } satisfies Meta<typeof ResetPasswordPage>;
 
 export default meta;
 export type Story = StoryObj<typeof meta>;
 
-export const Default = {
-  args: {
-    resetPassword: () => ({ status: "success" }),
-  },
-} satisfies Story;
+export const Default = {} satisfies Story;
 
 export const NotFound = {
-  ...Default,
   render: () => <ResetPasswordNotFound />,
 } satisfies Story;

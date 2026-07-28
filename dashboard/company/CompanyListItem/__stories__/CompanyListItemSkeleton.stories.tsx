@@ -1,11 +1,9 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CompanyListItemSkeleton } from "../CompanyListItemSkeleton";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "dashboard/companies/CompanyListItemSkeleton",
   component: CompanyListItemSkeleton,
-  decorators: [withThemedBackground],
 } satisfies Meta<typeof CompanyListItemSkeleton>;
 
 export default meta;

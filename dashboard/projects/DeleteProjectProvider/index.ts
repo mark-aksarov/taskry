@@ -1,1 +1,0 @@
-export { DeleteProjectProvider } from "./DeleteProjectProvider";

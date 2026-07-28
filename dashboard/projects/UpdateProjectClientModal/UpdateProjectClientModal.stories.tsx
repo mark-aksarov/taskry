@@ -3,26 +3,25 @@ import {
   UpdateProjectClientFormSkeleton,
 } from "../UpdateProjectClientForm";
 
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedClientSummaries } from "@/mocks/clients";
-import { mockedProjectDetail as mockedProject } from "@/mocks/projects";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UpdateProjectClientModal } from "./UpdateProjectClientModal";
-import { withUpdateProjectClientProvider } from "../UpdateProjectClientProvider/__stories__";
+import { mockedProjectDetail as mockedProject } from "@/mocks/projects";
+import { UpdateProjectClientProvider } from "../UpdateProjectClientContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/projects/UpdateProjectClientModal",
   component: UpdateProjectClientModal,
   decorators: [
     withOpenModal,
-    withUpdateProjectClientProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateProjectClientProvider>
+        <Story />
+      </UpdateProjectClientProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     modalId: "updateProjectClient",

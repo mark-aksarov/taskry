@@ -1,27 +1,21 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
 import { DeleteUserModal } from "../DeleteUserModal";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withToastRegion } from "@/.storybook/withToastRegion";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteUserProvider } from "../DeleteUserProvider/__stories__";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
+import { DeleteUserProvider } from "../DeleteUserContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/users/DeleteUserModal",
   component: DeleteUserModal,
   decorators: [
     withOpenModal,
-    withToastRegion,
-    withDeleteUserProvider,
-    withSelectedItemsProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <DeleteUserProvider>
+        <Story />
+      </DeleteUserProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
-
   parameters: {
     modalId: "deleteUser",
   },

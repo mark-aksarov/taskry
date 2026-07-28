@@ -1,26 +1,24 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { ProjectFiltersProvider } from "../ProjectFiltersContext";
+import { SelectedProjectsProvider } from "../SelectedProjectsContext";
 import { ProjectStatusFiltersForm } from "../ProjectStatusFiltersForm";
 import { ProjectStatusFiltersModal } from "./ProjectStatusFiltersModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withProjectFiltersProvider } from "../ProjectFiltersContext/__stories__";
-import { withSelectedProjectsProvider } from "../SelectedProjectsContext/__stories__";
-import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/projects/ProjectStatusFiltersModal",
   component: ProjectStatusFiltersModal,
   decorators: [
     withOpenModal,
-    withProjectFiltersProvider,
-    withSelectedProjectsProvider,
-    withPageTransitionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedProjectsProvider pageItems={[]}>
+        <ProjectFiltersProvider filters={{}}>
+          <Story />
+        </ProjectFiltersProvider>
+      </SelectedProjectsProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     modalId: "projectStatusFilters",

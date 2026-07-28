@@ -31,6 +31,7 @@ async function ClientDetailHeaderAltContainerInner({
 
   return (
     <ClientDetailHeaderInteractive
+      clientId={client.id}
       fullName={client.fullName}
       imageUrl={client.imageUrl}
       companyName={client.company?.name}

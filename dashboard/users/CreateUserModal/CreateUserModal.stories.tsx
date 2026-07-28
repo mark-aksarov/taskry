@@ -1,21 +1,20 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
 import { CreateUserModal } from "../CreateUserModal";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCreateUserProvider } from "../CreateUserProvider/__stories__";
+import { CreateUserProvider } from "../CreateUserContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/users/CreateUserModal",
   component: CreateUserModal,
   decorators: [
     withOpenModal,
-    withCreateUserProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <CreateUserProvider>
+        <Story />
+      </CreateUserProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     modalId: "createUser",

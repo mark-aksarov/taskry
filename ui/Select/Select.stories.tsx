@@ -1,11 +1,10 @@
 import { Select } from "../Select";
-import { Item } from "react-stately";
+import { Button } from "../Button";
 import { fn } from "storybook/test";
+import { Item } from "react-stately";
+import { Form } from "react-aria-components";
 import { Apple, Banana, Citrus } from "lucide-react";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Form } from "react-aria-components";
-import { Button } from "../Button";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof Select> = {
   title: "UI/Select",
@@ -19,7 +18,6 @@ const meta: Meta<typeof Select> = {
     onSelectionChange: fn(),
     isDisabled: false,
   },
-  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },
@@ -33,13 +31,13 @@ const SelectTemplate: Story = {
     return (
       <Select {...args}>
         <Item textValue="Apple" key="apple">
-          <Apple  /> Apple
+          <Apple /> Apple
         </Item>
         <Item textValue="Banana" key="banana">
-          <Banana  /> Banana
+          <Banana /> Banana
         </Item>
         <Item textValue="Orange" key="orange">
-          <Citrus  />
+          <Citrus />
           Orange
         </Item>
       </Select>

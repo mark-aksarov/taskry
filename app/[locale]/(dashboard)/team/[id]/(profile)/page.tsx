@@ -2,36 +2,11 @@ import { notFound } from "next/navigation";
 import { getUser } from "@/lib/data/user/user.dal";
 import { TeamProfilePage } from "./TeamProfilePage";
 import { userId as userIdSchema } from "@/lib/schemas/user";
-import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
-import { canEditUserProfile } from "@/lib/utils/canEditUserProfile";
-import { UpdateUserBioModal } from "@/dashboard/users/UpdateUserBioModal";
-import { DeleteUserProvider } from "@/dashboard/users/DeleteUserProvider";
-import { ChangePasswordModal } from "@/dashboard/users/ChangePasswordModal";
-import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
-import { UpdateUserImageModal } from "@/dashboard/users/UpdateUserImageModal";
-import { DeleteUserImageModal } from "@/dashboard/users/DeleteUserImageModal";
-import { UpdateUserBioProvider } from "@/dashboard/users/UpdateUserBioProvider";
-import { DeleteUserDetailModal } from "@/dashboard/users/DeleteUserDetailModal";
-import { UpdateUserAddressModal } from "@/dashboard/users/UpdateUserAddressModal";
-import { ChangePasswordProvider } from "@/dashboard/users/ChangePasswordProvider";
-import { UserDetailAltContainer } from "@/dashboard/users/UserDetailAltContainer";
 import { requireFullAccess } from "@/lib/utils/requireFullAccess";
-import { UpdateUserFullNameModal } from "@/dashboard/users/UpdateUserFullNameModal";
-import { UpdateUserPositionModal } from "@/dashboard/users/UpdateUserPositionModal";
-import { UpdateUserImageProvider } from "@/dashboard/users/UpdateUserImageProvider";
-import { UpdateUserBirthdateModal } from "@/dashboard/users/UpdateUserBirthdateModal";
-import { UpdateUserPublicLinkModal } from "@/dashboard/users/UpdateUserPublicLinkModal";
-import { ClearUserImageUrlProvider } from "@/dashboard/users/ClearUserImageUrlProvider";
-import { UpdateUserAddressProvider } from "@/dashboard/users/UpdateUserAddressProvider";
-import { UpdateUserFullNameProvider } from "@/dashboard/users/UpdateUserFullNameProvider";
-import { UpdateUserPositionProvider } from "@/dashboard/users/UpdateUserPositionProvider";
-import { UpdateUserPhoneNumberModal } from "@/dashboard/users/UpdateUserPhoneNumberModal";
-import { UpdateUserImageFileProvider } from "@/dashboard/users/UpdateUserImageFileContext";
-import { UpdateUserBirthdateProvider } from "@/dashboard/users/UpdateUserBirthdateProvider";
+import { canEditUserProfile } from "@/lib/utils/canEditUserProfile";
+import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
+import { UserDetailAltContainer } from "@/dashboard/users/UserDetailAltContainer";
 import { UserDetailHeaderAltContainer } from "@/dashboard/users/UserDetailHeaderAltContainer";
-import { UpdateUserPublicLinkProvider } from "@/dashboard/users/UpdateUserPublicLinkProvider";
-import { UpdateUserPhoneNumberProvider } from "@/dashboard/users/UpdateUserPhoneNumberProvider";
-import { UpdateUserPositionFormContainer } from "@/dashboard/users/UpdateUserPositionFormContainer";
 
 export default async function AppTeamProfilePage({
   params,
@@ -62,98 +37,14 @@ export default async function AppTeamProfilePage({
   });
 
   return (
-    <UpdateUserImageFileProvider>
-      <UpdateUserImageProvider>
-        <ClearUserImageUrlProvider>
-          <DeleteUserProvider>
-            <UpdateUserFullNameProvider>
-              <UpdateUserBioProvider>
-                <UpdateUserPhoneNumberProvider>
-                  <UpdateUserBirthdateProvider>
-                    <UpdateUserAddressProvider>
-                      <UpdateUserPublicLinkProvider>
-                        <UpdateUserPositionProvider>
-                          <ChangePasswordProvider>
-                            <TeamProfilePage
-                              showUserActions={showUserActions}
-                              userId={userId}
-                              userDetailContainer={
-                                <UserDetailAltContainer userId={userId} />
-                              }
-                              userDetailHeaderContainer={
-                                <UserDetailHeaderAltContainer userId={userId} />
-                              }
-                            />
-
-                            <TaskSearchModal
-                              searchContainer={
-                                <LinkSearchContainer pathname="/tasks" />
-                              }
-                            />
-
-                            <ChangePasswordModal />
-
-                            <DeleteUserDetailModal
-                              userId={userId}
-                              userFullName={user.fullName}
-                            />
-
-                            <UpdateUserBioModal
-                              userId={userId}
-                              userBio={user.bio}
-                            />
-
-                            <UpdateUserFullNameModal
-                              userId={userId}
-                              userFullName={user.fullName}
-                            />
-
-                            <UpdateUserPhoneNumberModal
-                              userId={userId}
-                              userPhoneNumber={user.phoneNumber}
-                            />
-
-                            <UpdateUserBirthdateModal
-                              userId={userId}
-                              userBirthdate={user.birthdate}
-                            />
-
-                            <UpdateUserAddressModal
-                              userId={userId}
-                              userAddress={user.address}
-                            />
-
-                            <UpdateUserPublicLinkModal
-                              userId={userId}
-                              userPublicLink={user.publicLink}
-                            />
-
-                            <UpdateUserPositionModal
-                              updateUserPositionFormContainer={
-                                <UpdateUserPositionFormContainer
-                                  userId={userId}
-                                  positionId={user.positionId}
-                                />
-                              }
-                            />
-
-                            <UpdateUserImageModal userId={userId} />
-
-                            <DeleteUserImageModal
-                              userId={userId}
-                              userFullName={user.fullName}
-                            />
-                          </ChangePasswordProvider>
-                        </UpdateUserPositionProvider>
-                      </UpdateUserPublicLinkProvider>
-                    </UpdateUserAddressProvider>
-                  </UpdateUserBirthdateProvider>
-                </UpdateUserPhoneNumberProvider>
-              </UpdateUserBioProvider>
-            </UpdateUserFullNameProvider>
-          </DeleteUserProvider>
-        </ClearUserImageUrlProvider>
-      </UpdateUserImageProvider>
-    </UpdateUserImageFileProvider>
+    <TeamProfilePage
+      user={user}
+      showUserActions={showUserActions}
+      userDetailContainer={<UserDetailAltContainer userId={user.id} />}
+      userDetailHeaderContainer={
+        <UserDetailHeaderAltContainer userId={user.id} />
+      }
+      searchContainer={<LinkSearchContainer pathname="/tasks" />}
+    />
   );
 }

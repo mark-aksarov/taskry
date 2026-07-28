@@ -1,24 +1,22 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
 import { mockedTaskDetail } from "@/mocks/tasks";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UpdateTaskDescriptionModal } from "./UpdateTaskDescriptionModal";
-import { withUpdateTaskDescriptionProvider } from "../UpdateTaskDescriptionProvider/__stories__";
+import { UpdateTaskDescriptionProvider } from "../UpdateTaskDescriptionContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/tasks/UpdateTaskDescriptionModal",
   component: UpdateTaskDescriptionModal,
   decorators: [
     withOpenModal,
-    withUpdateTaskDescriptionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateTaskDescriptionProvider>
+        <Story />
+      </UpdateTaskDescriptionProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
-
   parameters: {
     modalId: "updateTaskDescription",
   },

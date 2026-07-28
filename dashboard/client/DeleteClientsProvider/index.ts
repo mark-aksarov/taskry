@@ -1,1 +1,0 @@
-export { DeleteClientsProvider } from "./DeleteClientsProvider";

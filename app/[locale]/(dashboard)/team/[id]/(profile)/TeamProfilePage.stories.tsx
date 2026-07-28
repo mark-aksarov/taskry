@@ -6,44 +6,15 @@ import { TeamProfilePage } from "./TeamProfilePage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
 import { UserDetailAlt } from "@/dashboard/users/UserDetailAlt";
-import { DashboardPageDecorator } from "@/.storybook/DashboardPageDecorator";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDashboardLayout } from "@/.storybook/withDashboardLayout";
+import { SearchListExample } from "@/dashboard/search/SearchList/__stories__";
 import { UserDetailHeaderInteractive } from "@/dashboard/users/UserDetailHeader";
-import { withTaskSearchModal } from "@/dashboard/tasks/TaskSearchModal/__stories__";
-import { withDeleteUserProvider } from "@/dashboard/users/DeleteUserProvider/__stories__";
-import { withUpdateUserBioProvider } from "@/dashboard/users/UpdateUserBioProvider/__stories__";
-import { withChangePasswordProvider } from "@/dashboard/users/ChangePasswordProvider/__stories__";
-import { withUpdateUserImageProvider } from "@/dashboard/users/UpdateUserImageProvider/__stories__";
-import { withUpdateUserAddressProvider } from "@/dashboard/users/UpdateUserAddressProvider/__stories__";
-import { withClearUserImageUrlProvider } from "@/dashboard/users/ClearUserImageUrlProvider/__stories__";
-import { withUpdateUserPositionProvider } from "@/dashboard/users/UpdateUserPositionProvider/__stories__";
-import { withUpdateUserFullNameProvider } from "@/dashboard/users/UpdateUserFullNameProvider/__stories__";
-import { withUpdateUserImageFileProvider } from "@/dashboard/users/UpdateUserImageFileContext/__stories__";
-import { withUpdateUserBirthdateProvider } from "@/dashboard/users/UpdateUserBirthdateProvider/__stories__";
-import { withUpdateUserPublicLinkProvider } from "@/dashboard/users/UpdateUserPublicLinkProvider/__stories__";
-import { withUpdateUserPhoneNumberProvider } from "@/dashboard/users/UpdateUserPhoneNumberProvider/__stories__";
 
 const meta = {
   title: "pages/TeamProfilePage",
   component: TeamProfilePage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    withTaskSearchModal,
-    withChangePasswordProvider,
-    withUpdateUserPhoneNumberProvider,
-    withUpdateUserBioProvider,
-    withUpdateUserFullNameProvider,
-    withUpdateUserBirthdateProvider,
-    withUpdateUserAddressProvider,
-    withUpdateUserPublicLinkProvider,
-    withUpdateUserPositionProvider,
-    withDeleteUserProvider,
-    withUpdateUserImageProvider,
-    withClearUserImageUrlProvider,
-    withUpdateUserImageFileProvider,
-    DashboardPageDecorator,
-    withThemedBackground,
-  ],
+  decorators: [withDashboardLayout],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue(`/team/user-1`);
     mocked(useParams).mockReturnValue({
@@ -57,7 +28,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    userId: mockedUserDetail.id,
+    user: mockedUserDetail,
     showUserActions: true,
     userDetailContainer: <UserDetailAlt {...mockedUserDetail} />,
     userDetailHeaderContainer: (
@@ -67,6 +38,7 @@ export const Default = {
         imageUrl={mockedUserDetail.imageUrl}
       />
     ),
+    searchContainer: <SearchListExample />,
   },
 } satisfies Story;
 

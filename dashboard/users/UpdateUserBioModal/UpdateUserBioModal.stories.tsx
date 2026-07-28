@@ -1,24 +1,22 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
 import { mockedUserDetail } from "@/mocks/users";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UpdateUserBioModal } from "../UpdateUserBioModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateUserBioProvider } from "../UpdateUserBioProvider/__stories__";
+import { UpdateUserBioProvider } from "../UpdateUserBioContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/users/UpdateUserBioModal",
   component: UpdateUserBioModal,
   decorators: [
     withOpenModal,
-    withUpdateUserBioProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateUserBioProvider>
+        <Story />
+      </UpdateUserBioProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
-
   parameters: {
     modalId: "updateUserBio",
   },

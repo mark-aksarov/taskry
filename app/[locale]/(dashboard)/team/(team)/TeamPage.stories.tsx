@@ -3,26 +3,18 @@ import { mocked } from "storybook/test";
 import TeamPageLoading from "./loading";
 import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { mockedPositionSummaries } from "@/mocks/positions";
+import { UserFiltersForm } from "@/dashboard/users/UserFiltersForm";
+import { withDashboardLayout } from "@/.storybook/withDashboardLayout";
 import { UserGridExample } from "@/dashboard/users/UserGrid/__stories__";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { DashboardPageDecorator } from "@/.storybook/DashboardPageDecorator";
-import { withUserSearchModal } from "@/dashboard/users/UserSearchModal/__stories__";
-import { withCreateUserProvider } from "@/dashboard/users/CreateUserProvider/__stories__";
-import { withUserFiltersProvider } from "@/dashboard/users/UserFiltersContext/__stories__";
-import { withCreatePositionProvider } from "@/dashboard/position/CreatePositionProvider/__stories__";
+import { SearchListExample } from "@/dashboard/search/SearchList/__stories__";
+import { UserPositionFiltersForm } from "@/dashboard/users/UserPositionFiltersForm";
 
 const meta = {
   title: "pages/TeamPage",
   component: TeamPage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    withUserSearchModal,
-    withUserFiltersProvider,
-    withCreatePositionProvider,
-    withCreateUserProvider,
-    DashboardPageDecorator,
-    withThemedBackground,
-  ],
+  decorators: [withDashboardLayout],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/team");
   },
@@ -37,8 +29,18 @@ export const Default = {
     pageSize: 1,
     positionCount: 3,
     totalFilteredUsers: 3,
+    filters: {},
     selectedSortField: "fullName",
     userGrid: <UserGridExample />,
+    searchContainer: <SearchListExample />,
+    userFiltersFormContainer: (
+      <UserFiltersForm positionCheckboxGroupItems={mockedPositionSummaries} />
+    ),
+    userPositionFiltersFormContainer: (
+      <UserPositionFiltersForm
+        positionCheckboxGroupItems={mockedPositionSummaries}
+      />
+    ),
   },
 } satisfies Story;
 

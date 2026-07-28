@@ -1,25 +1,23 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withToastRegion } from "@/.storybook/withToastRegion";
 import { DeleteTaskCategoriesModal } from "./DeleteTaskCategoriesModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteTaskCategoriesProvider } from "../DeleteTaskCategoriesProvider/__stories__";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
+import { DeleteTaskCategoriesProvider } from "../DeleteTaskCategoriesContext";
+import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/task-categories/DeleteTaskCategoriesModal",
   component: DeleteTaskCategoriesModal,
   decorators: [
     withOpenModal,
-    withDeleteTaskCategoriesProvider,
-    withSelectedItemsProvider,
-    withToastRegion,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedItemsProvider pageItems={[]}>
+        <DeleteTaskCategoriesProvider>
+          <Story />
+        </DeleteTaskCategoriesProvider>
+      </SelectedItemsProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     modalId: "deleteTaskCategories",

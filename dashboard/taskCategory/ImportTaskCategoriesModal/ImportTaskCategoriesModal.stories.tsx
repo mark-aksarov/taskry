@@ -1,24 +1,12 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ImportTaskCategoriesModal } from "./ImportTaskCategoriesModal";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
-import { withImportTaskCategoriesProvider } from "../ImportTaskCategoriesProvider/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/task-categories/ImportTaskCategoriesModal",
   component: ImportTaskCategoriesModal,
-  decorators: [
-    withOpenModal,
-    withImportTaskCategoriesProvider,
-    withSelectedItemsProvider,
-    withModalManagerProvider,
-    withThemedBackground,
-  ],
+  decorators: [withOpenModal, withDashboardLayoutProviders],
 
   parameters: {
     modalId: "importTaskCategories",

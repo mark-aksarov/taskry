@@ -2,26 +2,26 @@ import { mockedTaskList } from "@/mocks/tasks";
 import { UserTaskList } from "../UserTaskList";
 import { UserTaskListItem } from "../../UserTaskListItem";
 import { TaskGridItemMobile } from "@/dashboard/tasks/TaskGridItem";
-import { MockedDeleteTaskProvider } from "@/dashboard/tasks/DeleteTaskProvider/__stories__";
-import { MockedUpdateTaskProvider } from "@/dashboard/tasks/UpdateTaskProvider/__stories__";
-import { MockedUpdateTaskStatusProvider } from "@/dashboard/tasks/UpdateTaskStatusProvider/__stories__";
+import { DeleteTaskProvider } from "@/dashboard/tasks/DeleteTaskContext";
+import { UpdateTaskProvider } from "@/dashboard/tasks/UpdateTaskContext";
+import { UpdateTaskStatusProvider } from "@/dashboard/tasks/UpdateTaskStatusContext";
 
 export function UserTaskListExample() {
   return (
     <UserTaskList>
       {mockedTaskList.map((task) => (
-        <MockedDeleteTaskProvider key={task.id}>
-          <MockedUpdateTaskProvider>
-            <MockedUpdateTaskStatusProvider>
+        <DeleteTaskProvider key={task.id}>
+          <UpdateTaskProvider>
+            <UpdateTaskStatusProvider>
               <UserTaskListItem {...task} />
               <TaskGridItemMobile
                 {...task}
                 subtasksTotal={task.subtasks.total}
                 subtasksDone={task.subtasks.done}
               />
-            </MockedUpdateTaskStatusProvider>
-          </MockedUpdateTaskProvider>
-        </MockedDeleteTaskProvider>
+            </UpdateTaskStatusProvider>
+          </UpdateTaskProvider>
+        </DeleteTaskProvider>
       ))}
     </UserTaskList>
   );

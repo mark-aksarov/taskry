@@ -1,11 +1,9 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskGridItemMobileSkeleton } from "../TaskGridItemSkeleton";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "dashboard/tasks/TaskGridItemMobileSkeleton",
   component: TaskGridItemMobileSkeleton,
-  decorators: [withThemedBackground],
   globals: {
     viewport: { value: "mobile2", isRotated: false },
   },

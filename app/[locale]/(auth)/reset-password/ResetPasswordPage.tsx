@@ -6,15 +6,10 @@ import {
   AuthCardSubtitle,
 } from "@/auth/AuthCard";
 import { useTranslations } from "next-intl";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { ResetPasswordForm } from "@/auth/ResetPasswordForm";
 import { AuthCardSignInFooter } from "@/auth/AuthCardSignInFooter";
 
-interface ResetPasswordPageProps {
-  resetPassword: ActionFn<ActionState, FormData>;
-}
-
-export function ResetPasswordPage({ resetPassword }: ResetPasswordPageProps) {
+export function ResetPasswordPage() {
   const t = useTranslations("app.ResetPasswordPage");
 
   return (
@@ -24,7 +19,7 @@ export function ResetPasswordPage({ resetPassword }: ResetPasswordPageProps) {
         <AuthCardSubtitle>{t("subtitle")}</AuthCardSubtitle>
       </AuthCardHeader>
       <AuthCardBody>
-        <ResetPasswordForm resetPassword={resetPassword} />
+        <ResetPasswordForm />
       </AuthCardBody>
       <AuthCardSignInFooter />
     </AuthCard>

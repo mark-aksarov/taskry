@@ -18,33 +18,16 @@ import { ProjectsPage } from "./ProjectsPage";
 import { projectSortFields } from "@/lib/types";
 import { clientId } from "@/lib/schemas/client";
 import { projectStatus } from "@/lib/schemas/project";
-import { projectCategoryId } from "@/lib/schemas/projectCategory";
 import { getClientCount } from "@/lib/data/client/client.dal";
-import { CreateProjectModal } from "@/dashboard/projects/CreateProjectModal";
-import { ProjectSearchModal } from "@/dashboard/projects/ProjectSearchModal";
-import { ProjectFiltersModal } from "@/dashboard/projects/ProjectFiltersModal";
-import { DeleteProjectsModal } from "@/dashboard/projects/DeleteProjectsModal";
-import { ImportProjectsModal } from "@/dashboard/projects/ImportProjectsModal";
-import { ProjectGridContainer } from "@/dashboard/projects/ProjectGridContainer";
-import { CreateProjectProvider } from "@/dashboard/projects/CreateProjectProvider";
 import { requireFullAccess } from "@/lib/utils/requireFullAccess";
-import { ProjectFiltersProvider } from "@/dashboard/projects/ProjectFiltersContext";
-import { ImportProjectsProvider } from "@/dashboard/projects/ImportProjectsProvider";
-import { DeleteProjectsProvider } from "@/dashboard/projects/DeleteProjectsProvider";
-import { SelectedProjectsProvider } from "@/dashboard/projects/SelectedProjectsContext";
+import { projectCategoryId } from "@/lib/schemas/projectCategory";
+import { ProjectGridContainer } from "@/dashboard/projects/ProjectGridContainer";
 import { getProjectCategoryCount } from "@/lib/data/projectCategory/projectCategory.dal";
-import { ProjectStatusFiltersModal } from "@/dashboard/projects/ProjectStatusFiltersModal";
-import { ProjectClientFiltersModal } from "@/dashboard/projects/ProjectClientFiltersModal";
-import { ProjectCreatorFiltersModal } from "@/dashboard/projects/ProjectCreatorFiltersModal";
 import { CreateProjectFormContainer } from "@/dashboard/projects/CreateProjectFormContainer";
-import { ProjectCategoryFiltersModal } from "@/dashboard/projects/ProjectCategoryFiltersModal";
 import { ProjectFiltersFormContainer } from "@/dashboard/projects/ProjectFiltersFormContainer";
 import { ProjectRouterSearchContainer } from "@/dashboard/projects/ProjectRouterSearchContainer";
-import { UpdateProjectStatusesProvider } from "@/dashboard/projects/UpdateProjectStatusesProvider";
-import { CreateProjectCategoryModal } from "@/dashboard/projectCategory/CreateProjectCategoryModal";
-import { CreateProjectCategoryProvider } from "@/dashboard/projectCategory/CreateProjectCategoryProvider";
-import { ProjectCreatorFiltersFormContainer } from "@/dashboard/projects/ProjectCreatorFiltersFormContainer";
 import { ProjectClientFiltersFormContainer } from "@/dashboard/projects/ProjectClientFiltersFormContainer";
+import { ProjectCreatorFiltersFormContainer } from "@/dashboard/projects/ProjectCreatorFiltersFormContainer";
 import { ProjectCategoryFiltersFormContainer } from "@/dashboard/projects/ProjectCategoryFiltersFormContainer";
 
 const searchParamsSchema = z.object({
@@ -105,56 +88,27 @@ export default async function AppProjectsPage({
   const clientCount = await getClientCount();
 
   return (
-    <SelectedProjectsProvider pageItems={projects}>
-      <UpdateProjectStatusesProvider>
-        <DeleteProjectsProvider>
-          <CreateProjectProvider>
-            <CreateProjectCategoryProvider>
-              <ProjectFiltersProvider filters={filters}>
-                <ImportProjectsProvider>
-                  <ProjectsPage
-                    page={page}
-                    pageSize={pageSize}
-                    totalCount={totalCount}
-                    categoryCount={categoryCount}
-                    clientCount={clientCount}
-                    totalFilteredProjects={totalFilteredProjects}
-                    selectedSortField={sort}
-                    projectGrid={<ProjectGridContainer projects={projects} />}
-                  />
-
-                  <ProjectSearchModal
-                    searchContainer={<ProjectRouterSearchContainer />}
-                  />
-                  <CreateProjectModal
-                    createProjectFormContainer={<CreateProjectFormContainer />}
-                  />
-                  <CreateProjectCategoryModal />
-                  <ProjectFiltersModal
-                    filtersFormContainer={<ProjectFiltersFormContainer />}
-                  />
-                  <ProjectClientFiltersModal
-                    filtersFormContainer={<ProjectClientFiltersFormContainer />}
-                  />
-                  <ProjectCategoryFiltersModal
-                    filtersFormContainer={
-                      <ProjectCategoryFiltersFormContainer />
-                    }
-                  />
-                  <ProjectCreatorFiltersModal
-                    filtersFormContainer={
-                      <ProjectCreatorFiltersFormContainer />
-                    }
-                  />
-                  <DeleteProjectsModal />
-                  <ProjectStatusFiltersModal />
-                  <ImportProjectsModal />
-                </ImportProjectsProvider>
-              </ProjectFiltersProvider>
-            </CreateProjectCategoryProvider>
-          </CreateProjectProvider>
-        </DeleteProjectsProvider>
-      </UpdateProjectStatusesProvider>
-    </SelectedProjectsProvider>
+    <ProjectsPage
+      page={page}
+      pageSize={pageSize}
+      totalCount={totalCount}
+      categoryCount={categoryCount}
+      clientCount={clientCount}
+      totalFilteredProjects={totalFilteredProjects}
+      selectedSortField={sort}
+      selectedItems={projects.map((p) => ({ id: p.id, status: p.status }))}
+      filters={filters}
+      projectGrid={<ProjectGridContainer projects={projects} />}
+      searchContainer={<ProjectRouterSearchContainer />}
+      createProjectFormContainer={<CreateProjectFormContainer />}
+      projectFiltersFormContainer={<ProjectFiltersFormContainer />}
+      projectClientFiltersFormContainer={<ProjectClientFiltersFormContainer />}
+      projectCategoryFiltersFormContainer={
+        <ProjectCategoryFiltersFormContainer />
+      }
+      projectCreatorFiltersFormContainer={
+        <ProjectCreatorFiltersFormContainer />
+      }
+    />
   );
 }

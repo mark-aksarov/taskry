@@ -1,1 +1,0 @@
-export { UpdateTaskAssigneeProvider } from "./UpdateTaskAssigneeProvider";

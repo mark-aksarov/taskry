@@ -12,22 +12,9 @@ import { ClientsPage } from "./ClientsPage";
 import { clientSortFields } from "@/lib/types";
 import { companyId } from "@/lib/schemas/company";
 import { getCompanyCount } from "@/lib/data/company/company.dal";
-import { CreateClientModal } from "@/dashboard/client/CreateClientModal";
-import { ClientSearchModal } from "@/dashboard/client/ClientSearchModal";
-import { ImportClientsModal } from "@/dashboard/client/ImportClientsModal";
-import { DeleteClientsModal } from "@/dashboard/client/DeleteClientsModal";
-import { ClientFiltersModal } from "@/dashboard/client/ClientFiltersModal";
-import { CreateCompanyModal } from "@/dashboard/company/CreateCompanyModal";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { ClientGridContainer } from "@/dashboard/client/ClientGridContainer";
 import { getClientCount, getClientList } from "@/lib/data/client/client.dal";
-import { CreateClientProvider } from "@/dashboard/client/CreateClientProvider";
-import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
-import { ClientFiltersProvider } from "@/dashboard/client/ClientFiltersContext";
-import { DeleteClientsProvider } from "@/dashboard/client/DeleteClientsProvider";
-import { ImportClientsProvider } from "@/dashboard/client/ImportClientsProvider";
-import { CreateCompanyProvider } from "@/dashboard/company/CreateCompanyProvider";
-import { requireFullAccess } from "@/lib/utils/requireFullAccess";
-import { ClientCompanyFiltersModal } from "@/dashboard/client/ClientCompanyFiltersModal";
 import { CreateClientFormContainer } from "@/dashboard/client/CreateClientFormContainer";
 import { ClientFiltersFormContainer } from "@/dashboard/client/ClientFiltersFormContainer";
 import { ClientRouterSearchContainer } from "@/dashboard/client/ClientRouterSearchContainer";
@@ -78,43 +65,21 @@ export default async function AppClientsPage({
   const companyCount = await getCompanyCount();
 
   return (
-    <SelectedItemsProvider pageItems={clients.map((c) => ({ id: c.id }))}>
-      <DeleteClientsProvider>
-        <CreateCompanyProvider>
-          <CreateClientProvider>
-            <ClientFiltersProvider filters={filters}>
-              <ImportClientsProvider>
-                <ClientsPage
-                  page={page}
-                  pageSize={pageSize}
-                  totalCount={totalCount}
-                  companyCount={companyCount}
-                  totalFilteredClients={totalFilteredClients}
-                  selectedSortField={sort}
-                  // ClientGrid is passed via props to allow mocking in Storybook stories
-                  clientGrid={<ClientGridContainer clients={clients} />}
-                />
-
-                <ClientSearchModal
-                  searchContainer={<ClientRouterSearchContainer />}
-                />
-                <CreateClientModal
-                  createClientFormContainer={<CreateClientFormContainer />}
-                />
-                <CreateCompanyModal />
-                <ClientFiltersModal
-                  filtersFormContainer={<ClientFiltersFormContainer />}
-                />
-                <ClientCompanyFiltersModal
-                  filtersFormContainer={<ClientCompanyFiltersFormContainer />}
-                />
-                <DeleteClientsModal />
-                <ImportClientsModal />
-              </ImportClientsProvider>
-            </ClientFiltersProvider>
-          </CreateClientProvider>
-        </CreateCompanyProvider>
-      </DeleteClientsProvider>
-    </SelectedItemsProvider>
+    <ClientsPage
+      page={page}
+      pageSize={pageSize}
+      totalCount={totalCount}
+      companyCount={companyCount}
+      totalFilteredClients={totalFilteredClients}
+      selectedSortField={sort}
+      filters={filters}
+      selectedItems={clients.map((c) => ({ id: c.id }))}
+      // Containers is passed via props to allow mocking in Storybook stories
+      clientGrid={<ClientGridContainer clients={clients} />}
+      createClientFormContainer={<CreateClientFormContainer />}
+      searchContainer={<ClientRouterSearchContainer />}
+      clientFiltersFormContainer={<ClientFiltersFormContainer />}
+      clientCompanyFiltersFormContainer={<ClientCompanyFiltersFormContainer />}
+    />
   );
 }

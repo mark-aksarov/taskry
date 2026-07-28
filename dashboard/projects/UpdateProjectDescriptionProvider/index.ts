@@ -1,1 +1,0 @@
-export { UpdateProjectDescriptionProvider } from "./UpdateProjectDescriptionProvider";

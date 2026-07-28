@@ -1,25 +1,25 @@
 import { mockedUserDetail } from "@/mocks/users";
 import { UserGridItemLarge } from "../UserGridItemLarge";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteUserProvider } from "../../DeleteUserProvider/__stories__";
-import { withUpdateUserProvider } from "../../UpdateUserProvider/__stories__";
-import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
+import { DeleteUserProvider } from "../../DeleteUserContext";
+import { UpdateUserProvider } from "../../UpdateUserProvider";
+import { ViewModeProvider } from "@/dashboard/common/ViewMode";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/users/UserGridItemLarge",
   component: UserGridItemLarge,
   decorators: [
-    withUpdateUserProvider,
-    withDeleteUserProvider,
-    withSessionProvider,
-    withViewModeProvider,
-    withPageTransitionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <ViewModeProvider initialValue="grid">
+        <UpdateUserProvider>
+          <DeleteUserProvider>
+            <Story />
+          </DeleteUserProvider>
+        </UpdateUserProvider>
+      </ViewModeProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     viewMode: "grid",

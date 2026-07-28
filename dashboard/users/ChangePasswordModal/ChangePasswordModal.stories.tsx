@@ -1,23 +1,21 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ChangePasswordModal } from "../ChangePasswordModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withChangePasswordProvider } from "../ChangePasswordProvider/__stories__";
+import { ChangePasswordProvider } from "../ChangePasswordContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/users/ChangePasswordModal",
   component: ChangePasswordModal,
   decorators: [
     withOpenModal,
-    withChangePasswordProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <ChangePasswordProvider>
+        <Story />
+      </ChangePasswordProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
-
   parameters: {
     modalId: "changePassword",
   },

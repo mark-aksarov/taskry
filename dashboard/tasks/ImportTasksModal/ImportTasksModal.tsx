@@ -8,17 +8,33 @@ import {
 import { useState } from "react";
 import { DialogHeading } from "@/ui/Dialog";
 import { useTranslations } from "next-intl";
-import { useImportTasks } from "../ImportTasksContext";
+import { useRouter } from "@/i18n/navigation";
 import { useModal } from "@/common/ModalManagerContext";
+import { importTasks } from "@/lib/actions/task/importTasks";
 import { ImportModalText } from "@/dashboard/common/ImportModal";
 import { ConfirmModal, ConfirmModalActions } from "@/common/ConfirmModal";
 import { ImportModalUploadTrigger } from "@/dashboard/common/ImportModal";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
+import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 
 export function ImportTasksModal() {
   const t = useTranslations("dashboard.tasks.ImportTasksModal");
 
+  const router = useRouter();
+  const { state, action, isPending } = useActionStateWithCallbacks(
+    importTasks,
+    {
+      onSuccess: () => router.refresh(),
+    },
+  );
+
+  useCloseModalOnActionSuccess(state, "importTasks");
+  useShowToastOnActionSuccess(state);
+  useShowToastWhenModalClosedOnActionError(state, "importTasks");
+
   const [fileSizeError, setFileSizeError] = useState(false);
-  const { state, action, isPending } = useImportTasks();
   const { isOpen, onOpenChange } = useModal("importTasks");
 
   return (

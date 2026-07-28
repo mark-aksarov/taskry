@@ -12,15 +12,9 @@ import { SendVerificationEmailButton } from "@/auth/SendVerificationEmailButton"
 
 interface VerifyEmailPageProps {
   email: string;
-  signOut: () => Promise<ActionState>;
-  sendVerificationEmail: (email: string) => Promise<ActionState>;
 }
 
-export function VerifyEmailPage({
-  email,
-  signOut,
-  sendVerificationEmail,
-}: VerifyEmailPageProps) {
+export function VerifyEmailPage({ email }: VerifyEmailPageProps) {
   const t = useTranslations("app.VerifyEmailPage");
 
   return (
@@ -30,11 +24,8 @@ export function VerifyEmailPage({
         <AuthCardSubtitle>{t("subtitle", { email })}</AuthCardSubtitle>
       </AuthCardHeader>
       <AuthCardBody className="gap-4">
-        <SendVerificationEmailButton
-          email={email}
-          sendVerificationEmail={sendVerificationEmail}
-        />
-        <AuthSignOutButton signOut={signOut} />
+        <SendVerificationEmailButton />
+        <AuthSignOutButton />
       </AuthCardBody>
     </AuthCard>
   );

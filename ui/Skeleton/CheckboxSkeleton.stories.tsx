@@ -1,11 +1,9 @@
 import { CheckboxSkeleton } from "./CheckboxSkeleton";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "UI/CheckboxSkeleton",
   component: CheckboxSkeleton,
-  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

@@ -1,1 +1,0 @@
-export { UpdateTaskDescriptionProvider } from "./UpdateTaskDescriptionProvider";

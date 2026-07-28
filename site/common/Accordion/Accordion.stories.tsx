@@ -3,13 +3,11 @@ import { AccordionItem } from "./AccordionItem";
 import { AccordionHeader } from "./AccordionHeader";
 import { AccordionContent } from "./AccordionContent";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { AccordionPanel } from "./AccordionPanel";
 
 const meta = {
   title: "site/common/Accordion",
   component: Accordion,
-  decorators: [withThemedBackground],
 } satisfies Meta<typeof Accordion>;
 
 export default meta;

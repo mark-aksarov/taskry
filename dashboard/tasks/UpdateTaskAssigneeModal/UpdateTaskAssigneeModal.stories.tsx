@@ -3,26 +3,25 @@ import {
   UpdateTaskAssigneeFormSkeleton,
 } from "../UpdateTaskAssigneeForm";
 
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
 import { mockedUserSummaries } from "@/mocks/users";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedTaskDetail as mockedTask } from "@/mocks/tasks";
 import { UpdateTaskAssigneeModal } from "./UpdateTaskAssigneeModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateTaskAssigneeProvider } from "../UpdateTaskAssigneeProvider/__stories__";
+import { UpdateTaskAssigneeProvider } from "../UpdateTaskAssigneeContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/tasks/UpdateTaskAssigneeModal",
   component: UpdateTaskAssigneeModal,
   decorators: [
     withOpenModal,
-    withUpdateTaskAssigneeProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateTaskAssigneeProvider>
+        <Story />
+      </UpdateTaskAssigneeProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     modalId: "updateTaskAssignee",

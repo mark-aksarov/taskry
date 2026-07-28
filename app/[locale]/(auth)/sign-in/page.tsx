@@ -1,5 +1,4 @@
 import { SignInPage } from "./SignInPage";
-import { signIn } from "@/lib/actions/auth/signIn";
 import { redirectIfAuthenticated } from "@/lib/utils/redirectIfAuthenticated";
 
 export default async function AppSignInPage({
@@ -12,9 +11,6 @@ export default async function AppSignInPage({
   const { status } = await searchParams;
 
   return (
-    <SignInPage
-      signIn={signIn}
-      resetPasswordSuccess={status === "reset-password-success"}
-    />
+    <SignInPage resetPasswordSuccess={status === "reset-password-success"} />
   );
 }

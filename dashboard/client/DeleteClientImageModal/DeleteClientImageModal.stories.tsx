@@ -1,21 +1,20 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DeleteClientImageModal } from "./DeleteClientImageModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withClearClientImageUrlProvider } from "../ClearClientImageUrlProvider/__stories__";
+import { ClearClientImageUrlProvider } from "../ClearClientImageUrlContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/clients/DeleteClientImageModal",
   component: DeleteClientImageModal,
   decorators: [
     withOpenModal,
-    withClearClientImageUrlProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <ClearClientImageUrlProvider>
+        <Story />
+      </ClearClientImageUrlProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     modalId: "deleteClientImage",

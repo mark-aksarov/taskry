@@ -1,21 +1,17 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedClientDetail } from "@/mocks/clients";
+import { withOpenModal } from "@/.storybook/withOpenModal";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ClientDetailHeader } from "../ClientDetailHeader";
 import { ClientDetail } from "../ClientDetail/ClientDetail";
 import { ClientDetailSideSheet } from "./ClientDetailSideSheet";
 import { DetailHeaderSkeleton } from "@/dashboard/common/DetailHeader";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ClientDetailSkeleton } from "../ClientDetail/ClientDetailSkeleton";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/clients/ClientDetailSideSheet",
   component: ClientDetailSideSheet,
-  decorators: [withOpenModal, withModalManagerProvider, withThemedBackground],
+  decorators: [withOpenModal, withDashboardLayoutProviders],
   parameters: {
     modalId: "clientDetail",
   },

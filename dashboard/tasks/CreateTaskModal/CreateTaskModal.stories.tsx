@@ -1,26 +1,25 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
 import { CreateTaskForm } from "../CreateTaskForm";
 import { CreateTaskModal } from "./CreateTaskModal";
 import { mockedUserSummaries } from "@/mocks/users";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { TaskFormSkeleton } from "../TaskFormSkeleton";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedProjectSummaries } from "@/mocks/projects";
+import { CreateTaskProvider } from "../CreateTaskContext";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCreateTaskProvider } from "../CreateTaskProvider/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/tasks/CreateTaskModal",
   component: CreateTaskModal,
   decorators: [
     withOpenModal,
-    withCreateTaskProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <CreateTaskProvider>
+        <Story />
+      </CreateTaskProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     modalId: "createTask",

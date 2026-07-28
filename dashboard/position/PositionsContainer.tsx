@@ -5,8 +5,8 @@ import { PositionListItem } from "./PositionListItem";
 import { UpdatePositionModal } from "./UpdatePositionModal";
 import { DeletePositionModal } from "./DeletePositionModal";
 import { getPositions } from "@/lib/data/position/position.dal";
-import { UpdatePositionProvider } from "./UpdatePositionProvider";
-import { DeletePositionProvider } from "./DeletePositionProvider";
+import { UpdatePositionProvider } from "./UpdatePositionContext";
+import { DeletePositionProvider } from "./DeletePositionContext";
 import { ModalManagerProvider } from "../../common/ModalManagerContext";
 
 export async function PositionsContainer() {

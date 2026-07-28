@@ -4,7 +4,6 @@ import { TextField } from "../TextField";
 import { Form } from "react-aria-components";
 import { Button } from "@/ui/Button";
 import { fn } from "storybook/test";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "UI/TextField",
@@ -26,7 +25,6 @@ const meta = {
     onChange: fn(),
   },
 
-  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

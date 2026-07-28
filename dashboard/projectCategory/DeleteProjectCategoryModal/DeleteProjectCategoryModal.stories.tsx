@@ -1,23 +1,23 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { DeleteProjectCategoryModal } from "../DeleteProjectCategoryModal";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
-import { withDeleteProjectCategoryProvider } from "../DeleteProjectCategoryProvider/__stories__";
+import { DeleteProjectCategoryProvider } from "../DeleteProjectCategoryContext";
+import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/project-categories/DeleteProjectCategoryModal",
   component: DeleteProjectCategoryModal,
   decorators: [
     withOpenModal,
-    withDeleteProjectCategoryProvider,
-    withSelectedItemsProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedItemsProvider pageItems={[]}>
+        <DeleteProjectCategoryProvider>
+          <Story />
+        </DeleteProjectCategoryProvider>
+      </SelectedItemsProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

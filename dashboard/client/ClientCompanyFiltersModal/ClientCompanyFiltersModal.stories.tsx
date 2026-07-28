@@ -1,30 +1,29 @@
 import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { mockedCompanySummaries } from "@/mocks/companies";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { ClientCompanyFiltersModal } from "./ClientCompanyFiltersModal";
-import {
   ClientCompanyFiltersForm,
   ClientCompanyFiltersFormSkeleton,
 } from "../ClientCompanyFiltersForm";
-import { withClientFiltersProvider } from "../ClientFiltersContext/__stories__";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
-import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
+
+import { withOpenModal } from "@/.storybook/withOpenModal";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { mockedCompanySummaries } from "@/mocks/companies";
+import { ClientFiltersProvider } from "../ClientFiltersContext";
+import { ClientCompanyFiltersModal } from "./ClientCompanyFiltersModal";
+import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/clients/ClientCompanyFiltersModal",
   component: ClientCompanyFiltersModal,
   decorators: [
     withOpenModal,
-    withClientFiltersProvider,
-    withSelectedItemsProvider,
-    withPageTransitionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedItemsProvider pageItems={[]}>
+        <ClientFiltersProvider filters={{}}>
+          <Story />
+        </ClientFiltersProvider>
+      </SelectedItemsProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

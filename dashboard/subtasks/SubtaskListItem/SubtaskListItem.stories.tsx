@@ -1,24 +1,30 @@
 import { SubtaskListItem } from "../SubtaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteSubtaskProvider } from "../DeleteSubtaskProvider/__stories__";
-import { withUpdateSubtaskProvider } from "../UpdateSubtaskProvider/__stories__";
-import { withToggleSubtaskProvider } from "../ToggleSubtaskProvider/__stories__";
-import { withDeleteTaskProvider } from "@/dashboard/tasks/DeleteTaskProvider/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
+import { DeleteSubtaskProvider } from "../DeleteSubtaskContext";
+import { CreateSubtaskProvider } from "../CreateSubtaskContext";
+import { UpdateSubtaskProvider } from "../UpdateSubtaskContext";
+import { ToggleSubtaskProvider } from "../ToggleSubtaskContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
+import { DeleteTaskProvider } from "@/dashboard/tasks/DeleteTaskContext";
 
 const meta = {
   title: "dashboard/subtasks/SubtaskListItem",
   component: SubtaskListItem,
   decorators: [
-    withDeleteTaskProvider,
-    withDeleteSubtaskProvider,
-    withUpdateSubtaskProvider,
-    withToggleSubtaskProvider,
-    withSessionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <DeleteTaskProvider>
+        <CreateSubtaskProvider>
+          <UpdateSubtaskProvider>
+            <DeleteSubtaskProvider>
+              <ToggleSubtaskProvider>
+                <Story />
+              </ToggleSubtaskProvider>
+            </DeleteSubtaskProvider>
+          </UpdateSubtaskProvider>
+        </CreateSubtaskProvider>
+      </DeleteTaskProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     backgroundVariant: "alt",

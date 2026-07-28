@@ -11,13 +11,12 @@ import { DialogTrigger } from "react-aria-components";
 import { AppSidebarHeader } from "./AppSidebarHeader";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Dialog, DialogCloseButton } from "@/ui/Dialog";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/layout/AppSidebar",
   component: AppSidebar,
-  decorators: [withSessionProvider, withThemedBackground],
+  decorators: [withDashboardLayoutProviders],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/dashboard");
   },

@@ -1,11 +1,9 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TotalUsersCard } from "./TotalUsersCard";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "dashboard/users/TotalUsersCard",
   component: TotalUsersCard,
-  decorators: [withThemedBackground],
   args: {
     totalUsers: 15,
   },

@@ -4,14 +4,10 @@ import { Button } from "@/ui/Button";
 import { useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
-import { ActionState } from "@/lib/actions/types";
+import { signOut } from "@/lib/actions/auth/signOut";
 import { useAddErrorToast } from "@/lib/hooks/useAddErrorToast";
 
-interface AuthSignOutButtonProps {
-  signOut: () => Promise<ActionState>;
-}
-
-export function AuthSignOutButton({ signOut }: AuthSignOutButtonProps) {
+export function AuthSignOutButton() {
   const t = useTranslations("auth.AuthSignOutButton");
   const [isPending, startTransition] = useTransition();
   const addErrorToast = useAddErrorToast();

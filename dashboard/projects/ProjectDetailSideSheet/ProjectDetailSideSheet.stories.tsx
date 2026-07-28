@@ -1,18 +1,14 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { mockedProjectDetail } from "@/mocks/projects";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectDetailSideSheet } from "./ProjectDetailSideSheet";
 import { ProjectDetail, ProjectDetailSkeleton } from "../ProjectDetail";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/projects/ProjectDetailSideSheet",
   component: ProjectDetailSideSheet,
-  decorators: [withOpenModal, withModalManagerProvider, withThemedBackground],
+  decorators: [withOpenModal, withDashboardLayoutProviders],
   parameters: {
     modalId: "projectDetail",
   },

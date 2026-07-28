@@ -1,26 +1,20 @@
 import { useEffect } from "react";
+import { Button } from "@/ui/Button";
 import { SearchBar } from "../SearchBar";
 import { SearchModal } from "../SearchModal";
-import { Button } from "@/ui/Button";
 import { SearchListSkeleton } from "../SearchList";
+import { useModal } from "@/common/ModalManagerContext";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SearchModalDialog } from "./SearchModalDialog";
 import { SearchListExample } from "../SearchList/__stories__";
 import { SearchModalDialogBody } from "./SearchModalDialogBody";
-import { withSearchBarProvider } from "../SearchBar/__stories__";
-import { useModal } from "@/common/ModalManagerContext";
 import { SearchModalDialogHeader } from "./SearchModalDialogHeader";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/search/SearchModal",
   component: SearchModal,
-  decorators: [
-    withModalManagerProvider,
-    withSearchBarProvider,
-    withThemedBackground,
-  ],
+  decorators: [withDashboardLayoutProviders],
 } satisfies Meta<typeof SearchModal>;
 
 export default meta;

@@ -1,21 +1,22 @@
 import { TaskCategoryGrid } from "../TaskCategoryGrid";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskCategoryGridExample } from "./TaskCategoryGridExample";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
-import { withDeleteTaskCategoriesProvider } from "../../DeleteTaskCategoriesProvider/__stories__";
+import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
+import { DeleteTaskCategoriesProvider } from "../../DeleteTaskCategoriesContext";
 
 const meta = {
   title: "dashboard/task-categories/TaskCategoryGrid",
   component: TaskCategoryGrid,
   decorators: [
-    withDeleteTaskCategoriesProvider,
-    withSessionProvider,
-    withSelectedItemsProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedItemsProvider pageItems={[]}>
+        <DeleteTaskCategoriesProvider>
+          <Story />
+        </DeleteTaskCategoriesProvider>
+      </SelectedItemsProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 } satisfies Meta<typeof TaskCategoryGrid>;
 

@@ -1,1 +1,0 @@
-export { withSearchBarProvider } from "./withSearchBarProvider";

@@ -1,30 +1,28 @@
 import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import {
   TaskCategoryFiltersForm,
   TaskCategoryFiltersFormSkeleton,
 } from "../TaskCategoryFiltersForm";
+import { withOpenModal } from "@/.storybook/withOpenModal";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { TaskFiltersProvider } from "../TaskFiltersContext";
+import { SelectedTasksProvider } from "../SelectedTasksContext";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
 import { TaskCategoryFiltersModal } from "./TaskCategoryFiltersModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskFiltersProvider } from "../TaskFiltersContext/__stories__";
-import { withSelectedTasksProvider } from "../SelectedTasksContext/__stories__";
-import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/tasks/TaskCategoryFiltersModal",
   component: TaskCategoryFiltersModal,
   decorators: [
     withOpenModal,
-    withTaskFiltersProvider,
-    withSelectedTasksProvider,
-    withPageTransitionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedTasksProvider pageItems={[]}>
+        <TaskFiltersProvider filters={{}}>
+          <Story />
+        </TaskFiltersProvider>
+      </SelectedTasksProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

@@ -1,1 +1,0 @@
-export { withProjectFiltersProvider } from "./withProjectFiltersProvider";

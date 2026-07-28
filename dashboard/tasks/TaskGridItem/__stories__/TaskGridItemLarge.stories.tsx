@@ -2,33 +2,37 @@ import { mockedTaskList } from "@/mocks/tasks";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskGridItemLarge } from "../TaskGridItemLarge";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateTaskProvider } from "../../UpdateTaskProvider/__stories__";
-import { withDeleteTaskProvider } from "../../DeleteTaskProvider/__stories__";
-import { withDeleteTasksProvider } from "../../DeleteTasksProvider/__stories__";
-import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
-import { withSelectedTasksProvider } from "../../SelectedTasksContext/__stories__";
-import { withUpdateTaskStatusProvider } from "../../UpdateTaskStatusProvider/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withUpdateTaskStatusesProvider } from "../../UpdateTaskStatusesProvider/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
+import { ViewModeProvider } from "@/dashboard/common/ViewMode";
+import { UpdateTaskProvider } from "../../UpdateTaskContext";
+import { DeleteTaskProvider } from "../../DeleteTaskContext";
+import { DeleteTasksProvider } from "../../DeleteTasksContext";
+import { SelectedTasksProvider } from "../../SelectedTasksContext";
+import { UpdateTaskStatusProvider } from "../../UpdateTaskStatusContext";
+import { UpdateTaskStatusesProvider } from "../../UpdateTaskStatusesContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/tasks/TaskGridItemLarge",
   component: TaskGridItemLarge,
   decorators: [
-    withUpdateTaskStatusProvider,
-    withUpdateTaskProvider,
-    withDeleteTaskProvider,
-    withDeleteTasksProvider,
-    withUpdateTaskStatusesProvider,
-    withSessionProvider,
-    withSelectedTasksProvider,
-    withViewModeProvider,
-    withPageTransitionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedTasksProvider pageItems={[]}>
+        <ViewModeProvider initialValue="grid">
+          <DeleteTasksProvider>
+            <DeleteTaskProvider>
+              <UpdateTaskProvider>
+                <UpdateTaskStatusProvider>
+                  <UpdateTaskStatusesProvider>
+                    <Story />
+                  </UpdateTaskStatusesProvider>
+                </UpdateTaskStatusProvider>
+              </UpdateTaskProvider>
+            </DeleteTaskProvider>
+          </DeleteTasksProvider>
+        </ViewModeProvider>
+      </SelectedTasksProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     viewMode: "grid",

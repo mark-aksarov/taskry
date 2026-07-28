@@ -3,26 +3,25 @@ import {
   UpdateProjectCategoryRelFormSkeleton,
 } from "../UpdateProjectCategoryRelForm";
 
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedProjectDetail as mockedProject } from "@/mocks/projects";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
 import { UpdateProjectCategoryRelModal } from "./UpdateProjectCategoryRelModal";
-import { withUpdateProjectCategoryRelProvider } from "../UpdateProjectCategoryRelProvider/__stories__";
+import { UpdateProjectCategoryRelProvider } from "../UpdateProjectCategoryRelContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/projects/UpdateProjectCategoryRelModal",
   component: UpdateProjectCategoryRelModal,
   decorators: [
     withOpenModal,
-    withUpdateProjectCategoryRelProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateProjectCategoryRelProvider>
+        <Story />
+      </UpdateProjectCategoryRelProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     modalId: "updateProjectCategoryRel",

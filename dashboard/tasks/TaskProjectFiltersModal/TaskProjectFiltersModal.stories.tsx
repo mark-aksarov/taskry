@@ -3,29 +3,27 @@ import {
   TaskProjectFiltersFormSkeleton,
 } from "../TaskProjectFiltersForm";
 
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedProjectSummaries } from "@/mocks/projects";
+import { TaskFiltersProvider } from "../TaskFiltersContext";
+import { SelectedTasksProvider } from "../SelectedTasksContext";
 import { TaskProjectFiltersModal } from "./TaskProjectFiltersModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskFiltersProvider } from "../TaskFiltersContext/__stories__";
-import { withSelectedTasksProvider } from "../SelectedTasksContext/__stories__";
-import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/tasks/TaskProjectFiltersModal",
   component: TaskProjectFiltersModal,
   decorators: [
     withOpenModal,
-    withTaskFiltersProvider,
-    withSelectedTasksProvider,
-    withPageTransitionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedTasksProvider pageItems={[]}>
+        <TaskFiltersProvider filters={{}}>
+          <Story />
+        </TaskFiltersProvider>
+      </SelectedTasksProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     modalId: "taskProjectFilters",

@@ -1,9 +1,9 @@
 import { SubtaskList } from "../SubtaskList";
+import { DeleteSubtaskProvider } from "../../DeleteSubtaskContext";
+import { UpdateSubtaskProvider } from "../../UpdateSubtaskContext";
+import { ToggleSubtaskProvider } from "../../ToggleSubtaskContext";
 import { ModalManagerProvider } from "@/common/ModalManagerContext";
 import { SubtaskListItem, SubtaskListItemVariant } from "../../SubtaskListItem";
-import { MockedDeleteSubtaskProvider } from "../../DeleteSubtaskProvider/__stories__";
-import { MockedUpdateSubtaskProvider } from "../../UpdateSubtaskProvider/__stories__";
-import { MockedToggleSubtaskProvider } from "../../ToggleSubtaskProvider/__stories__";
 
 const mockedSubtasks = [
   { id: 1, text: "Subtask placeholder text 1 text", isDone: false },
@@ -24,17 +24,17 @@ export function SubtaskListExample({
     <SubtaskList>
       {mockedSubtasks.map((subtask) => (
         <ModalManagerProvider key={subtask.id}>
-          <MockedDeleteSubtaskProvider>
-            <MockedUpdateSubtaskProvider>
-              <MockedToggleSubtaskProvider>
+          <DeleteSubtaskProvider>
+            <UpdateSubtaskProvider>
+              <ToggleSubtaskProvider>
                 <SubtaskListItem
                   {...subtask}
                   variant={variant}
                   showActionMenu={showActionMenu}
                 />
-              </MockedToggleSubtaskProvider>
-            </MockedUpdateSubtaskProvider>
-          </MockedDeleteSubtaskProvider>
+              </ToggleSubtaskProvider>
+            </UpdateSubtaskProvider>
+          </DeleteSubtaskProvider>
         </ModalManagerProvider>
       ))}
     </SubtaskList>

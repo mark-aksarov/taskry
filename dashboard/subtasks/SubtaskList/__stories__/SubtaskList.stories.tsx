@@ -2,17 +2,19 @@ import React from "react";
 import { SubtaskList } from "../SubtaskList";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SubtaskListExample } from "./SubtaskListExample";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withDeleteTaskProvider } from "@/dashboard/tasks/DeleteTaskProvider/__stories__";
+import { DeleteTaskProvider } from "@/dashboard/tasks/DeleteTaskContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/subtasks/SubtaskList",
   component: SubtaskList,
   decorators: [
-    withDeleteTaskProvider,
-    withSessionProvider,
-    withThemedBackground,
+    (Story) => (
+      <DeleteTaskProvider>
+        <Story />
+      </DeleteTaskProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     backgroundVariant: "alt",

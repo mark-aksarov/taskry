@@ -1,16 +1,21 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectItemStatusBadge } from "./ProjectItemStatusBadge";
-import { withSelectedProjectsProvider } from "../SelectedProjectsContext/__stories__";
-import { withUpdateProjectStatusProvider } from "../UpdateProjectStatusProvider/__stories__";
-import { withUpdateProjectStatusesProvider } from "../UpdateProjectStatusesProvider/__stories__";
+import { UpdateProjectStatusProvider } from "../UpdateProjectStatusContext";
+import { UpdateProjectStatusesProvider } from "../UpdateProjectStatusesContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta: Meta<typeof ProjectItemStatusBadge> = {
   title: "dashboard/projects/ProjectItemStatusBadge",
   component: ProjectItemStatusBadge,
   decorators: [
-    withUpdateProjectStatusProvider,
-    withUpdateProjectStatusesProvider,
-    withSelectedProjectsProvider,
+    (Story) => (
+      <UpdateProjectStatusProvider>
+        <UpdateProjectStatusesProvider>
+          <Story />
+        </UpdateProjectStatusesProvider>
+      </UpdateProjectStatusProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 } satisfies Meta<typeof ProjectItemStatusBadge>;
 

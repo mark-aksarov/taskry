@@ -1,22 +1,21 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { mockedProjectDetail } from "@/mocks/projects";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UpdateProjectDeadlineModal } from "./UpdateProjectDeadlineModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateProjectDeadlineProvider } from "../UpdateProjectDeadlineProvider/__stories__";
+import { UpdateProjectDeadlineProvider } from "../UpdateProjectDeadlineContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/projects/UpdateProjectDeadlineModal",
   component: UpdateProjectDeadlineModal,
   decorators: [
     withOpenModal,
-    withUpdateProjectDeadlineProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateProjectDeadlineProvider>
+        <Story />
+      </UpdateProjectDeadlineProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

@@ -1,25 +1,23 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DeleteCommentModal } from "../DeleteCommentModal";
-import { withToastRegion } from "@/.storybook/withToastRegion";
-import { withCommentFormProvider } from "../CommentForm/__stories__";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteCommentProvider } from "../DeleteCommentProvider/__stories__";
+import { CommentFormProvider } from "../CommentFormContext";
+import { DeleteCommentProvider } from "../DeleteCommentContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/comments/DeleteCommentModal",
   component: DeleteCommentModal,
   decorators: [
     withOpenModal,
-    withToastRegion,
-    withDeleteCommentProvider,
-    withCommentFormProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <CommentFormProvider entityId={1} entityKey="task" mutateUrl="">
+        <DeleteCommentProvider>
+          <Story />
+        </DeleteCommentProvider>
+      </CommentFormProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

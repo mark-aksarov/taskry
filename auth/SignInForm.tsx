@@ -4,9 +4,10 @@ import { useActionState } from "react";
 import { EmailField } from "./EmailField";
 import { useTranslations } from "next-intl";
 import { PasswordField } from "./PasswordField";
+import { ActionState } from "@/lib/actions/types";
+import { signIn } from "@/lib/actions/auth/signIn";
 import { AuthForgotPassword } from "./AuthForgotPassword";
 import { RememberMeCheckbox } from "./RememberMeCheckbox";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { AuthForm, AuthFormSubmitButton } from "./AuthForm";
 import { FormErrorBanner } from "@/dashboard/common/FormErrorBanner";
 
@@ -14,11 +15,7 @@ const initialState: ActionState = {
   status: null,
 };
 
-interface SignInFormProps {
-  signIn: ActionFn<ActionState, FormData>;
-}
-
-export function SignInForm({ signIn }: SignInFormProps) {
+export function SignInForm() {
   const t = useTranslations("auth.SignInForm");
 
   const [state, formAction, isPending] = useActionState(signIn, initialState);

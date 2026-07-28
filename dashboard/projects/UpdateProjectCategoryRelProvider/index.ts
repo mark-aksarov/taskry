@@ -1,1 +1,0 @@
-export { UpdateProjectCategoryRelProvider } from "./UpdateProjectCategoryRelProvider";

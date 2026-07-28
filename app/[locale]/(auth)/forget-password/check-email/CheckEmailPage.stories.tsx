@@ -1,13 +1,12 @@
 import { CheckEmailPage } from "./CheckEmailPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { AuthPageDecorator } from "@/.storybook/AuthPageDecorator";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withAuthDecorator } from "@/.storybook/withAuthDecorator";
 
 const meta = {
   title: "pages/CheckEmailPage",
   component: CheckEmailPage,
   parameters: { layout: "fullscreen" },
-  decorators: [AuthPageDecorator, withThemedBackground],
+  decorators: [withAuthDecorator],
 } satisfies Meta<typeof CheckEmailPage>;
 
 export default meta;

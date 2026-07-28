@@ -2,12 +2,10 @@ import { DetailStatText } from "./DetailStatText";
 import { DetailStatValue } from "./DetailStatValue";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DetailStat, DetailStatSkeleton } from "./DetailStat";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "dashboard/common/DetailStat",
   component: DetailStat,
-  decorators: [withThemedBackground],
   args: {
     text: <DetailStatText>Detail stat text</DetailStatText>,
     value: <DetailStatValue>20</DetailStatValue>,

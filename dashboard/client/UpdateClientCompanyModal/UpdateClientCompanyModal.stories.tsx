@@ -3,26 +3,25 @@ import {
   UpdateClientCompanyFormSkeleton,
 } from "../UpdateClientCompanyForm";
 
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedClientDetail } from "@/mocks/clients";
+import { withOpenModal } from "@/.storybook/withOpenModal";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedCompanySummaries } from "@/mocks/companies";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UpdateClientCompanyModal } from "./UpdateClientCompanyModal";
-import { withUpdateClientCompanyProvider } from "../UpdateClientCompanyProvider/__stories__";
+import { UpdateClientCompanyProvider } from "../UpdateClientCompanyContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/clients/UpdateClientCompanyModal",
   component: UpdateClientCompanyModal,
   decorators: [
     withOpenModal,
-    withUpdateClientCompanyProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateClientCompanyProvider>
+        <Story />
+      </UpdateClientCompanyProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

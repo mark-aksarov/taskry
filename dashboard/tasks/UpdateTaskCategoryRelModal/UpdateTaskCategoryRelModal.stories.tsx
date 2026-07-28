@@ -3,26 +3,25 @@ import {
   UpdateTaskCategoryRelFormSkeleton,
 } from "../UpdateTaskCategoryRelForm";
 
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedTaskDetail as mockedTask } from "@/mocks/tasks";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { UpdateTaskCategoryRelModal } from "./UpdateTaskCategoryRelModal";
-import { withUpdateTaskCategoryRelProvider } from "../UpdateTaskCategoryRelProvider/__stories__";
+import { UpdateTaskCategoryRelProvider } from "../UpdateTaskCategoryRelContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/tasks/UpdateTaskCategoryRelModal",
   component: UpdateTaskCategoryRelModal,
   decorators: [
     withOpenModal,
-    withUpdateTaskCategoryRelProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateTaskCategoryRelProvider>
+        <Story />
+      </UpdateTaskCategoryRelProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     modalId: "updateTaskCategoryRel",

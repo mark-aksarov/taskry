@@ -1,18 +1,16 @@
 import { useState } from "react";
-import { ConfirmModal } from "./ConfirmModal";
 import { Button } from "@/ui/Button";
-import { ConfirmModalText } from "./ConfirmModalText";
+import { ConfirmModal } from "./ConfirmModal";
 import { DialogHeading } from "@/ui/Dialog";
+import { ConfirmModalText } from "./ConfirmModalText";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ConfirmModalActions } from "./ConfirmModalActions";
 import { ConfirmModalCancelButton } from "./ConfirmModalCancelButton";
 import { ConfirmModalConfirmButton } from "./ConfirmModalConfirmButton";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "dashboard/common/ConfirmModal",
   component: ConfirmModal,
-  decorators: [withThemedBackground],
   render: (args) => {
     const [isOpen, setIsOpen] = useState(true);
 

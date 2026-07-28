@@ -1,11 +1,9 @@
 import { RoadmapSection } from "./RoadmapSection";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "site/home/RoadmapSection",
   component: RoadmapSection,
-  decorators: [withThemedBackground],
   parameters: {
     layout: "fullscreen",
   },

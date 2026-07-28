@@ -6,17 +6,10 @@ import {
   AuthCardSubtitle,
 } from "@/auth/AuthCard";
 import { useTranslations } from "next-intl";
-import { ActionState } from "@/lib/actions/types";
 import { AuthSignOutButton } from "@/auth/AuthSignOutButton";
 import { CreateOrganizationButton } from "@/auth/CreateOrganizationButton";
 
-interface CreateOrganizationPageProps {
-  signOut: () => Promise<ActionState>;
-}
-
-export function CreateOrganizationPage({
-  signOut,
-}: CreateOrganizationPageProps) {
+export function CreateOrganizationPage() {
   const t = useTranslations("app.CreateOrganizationPage");
 
   return (
@@ -27,7 +20,7 @@ export function CreateOrganizationPage({
       </AuthCardHeader>
       <AuthCardBody className="gap-4">
         <CreateOrganizationButton />
-        <AuthSignOutButton signOut={signOut} />
+        <AuthSignOutButton />
       </AuthCardBody>
     </AuthCard>
   );

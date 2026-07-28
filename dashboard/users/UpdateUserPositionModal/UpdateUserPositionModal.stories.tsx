@@ -3,28 +3,26 @@ import {
   UpdateUserPositionFormSkeleton,
 } from "../UpdateUserPositionForm";
 
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
 import { mockedUserDetail } from "@/mocks/users";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { UpdateUserPositionModal } from "../UpdateUserPositionModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateUserPositionProvider } from "../UpdateUserPositionProvider/__stories__";
+import { UpdateUserPositionProvider } from "../UpdateUserPositionContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/users/UpdateUserPositionModal",
   component: UpdateUserPositionModal,
   decorators: [
     withOpenModal,
-    withUpdateUserPositionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateUserPositionProvider>
+        <Story />
+      </UpdateUserPositionProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
-
   parameters: {
     modalId: "updateUserPosition",
   },

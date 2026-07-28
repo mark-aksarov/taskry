@@ -1,12 +1,11 @@
-import { TaskGridItemMobile, TaskGridItemLarge } from "../../TaskGridItem";
-
 import { mockedTaskList } from "@/mocks/tasks";
 import { TaskListItem } from "../../TaskListItem";
 import { useViewMode } from "@/dashboard/common/ViewMode";
 import { EntityGrid } from "@/dashboard/common/EntityGrid";
-import { MockedDeleteTaskProvider } from "../../DeleteTaskProvider/__stories__";
-import { MockedUpdateTaskProvider } from "../../UpdateTaskProvider/__stories__";
-import { MockedUpdateTaskStatusProvider } from "../../UpdateTaskStatusProvider/__stories__";
+import { DeleteTaskProvider } from "../../DeleteTaskContext";
+import { UpdateTaskProvider } from "../../UpdateTaskContext";
+import { UpdateTaskStatusProvider } from "../../UpdateTaskStatusContext";
+import { TaskGridItemMobile, TaskGridItemLarge } from "../../TaskGridItem";
 
 export function TaskGridExample({ showCheckbox }: { showCheckbox: boolean }) {
   const { viewMode } = useViewMode();
@@ -20,15 +19,15 @@ export function TaskGridExample({ showCheckbox }: { showCheckbox: boolean }) {
         };
 
         return (
-          <MockedDeleteTaskProvider key={task.id}>
-            <MockedUpdateTaskProvider>
-              <MockedUpdateTaskStatusProvider>
+          <DeleteTaskProvider key={task.id}>
+            <UpdateTaskProvider>
+              <UpdateTaskStatusProvider>
                 <TaskListItem {...task} showCheckbox={showCheckbox} />
                 <TaskGridItemMobile {...task} {...taskStat} />
                 <TaskGridItemLarge {...task} {...taskStat} />
-              </MockedUpdateTaskStatusProvider>
-            </MockedUpdateTaskProvider>
-          </MockedDeleteTaskProvider>
+              </UpdateTaskStatusProvider>
+            </UpdateTaskProvider>
+          </DeleteTaskProvider>
         );
       })}
     </EntityGrid>

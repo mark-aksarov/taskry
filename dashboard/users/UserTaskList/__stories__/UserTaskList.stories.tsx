@@ -1,27 +1,31 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserTaskListExample } from "./UserTaskListExample";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withDeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider/__stories__";
-import { withSelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext/__stories__";
-import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
-import { withUpdateTaskStatusesProvider } from "@/dashboard/tasks/UpdateTaskStatusesProvider/__stories__";
+import { ViewModeProvider } from "@/dashboard/common/ViewMode";
+import { DeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksContext";
+import { SelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext";
+import { UpdateTaskStatusesProvider } from "@/dashboard/tasks/UpdateTaskStatusesContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/users/UserTaskList",
   component: UserTaskListExample,
   decorators: [
-    withUpdateTaskStatusesProvider,
-    withDeleteTasksProvider,
-    withViewModeProvider,
-    withPageTransitionProvider,
-    withSelectedTasksProvider,
-    withModalManagerProvider,
-    withSessionProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedTasksProvider pageItems={[]}>
+        <ViewModeProvider initialValue="list">
+          <DeleteTasksProvider>
+            <UpdateTaskStatusesProvider>
+              <Story />
+            </UpdateTaskStatusesProvider>
+          </DeleteTasksProvider>
+        </ViewModeProvider>
+      </SelectedTasksProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
+  parameters: {
+    backgroundVariant: "alt",
+  },
 } satisfies Meta<typeof UserTaskListExample>;
 
 export default meta;

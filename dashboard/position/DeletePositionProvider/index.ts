@@ -1,1 +1,0 @@
-export { DeletePositionProvider } from "./DeletePositionProvider";

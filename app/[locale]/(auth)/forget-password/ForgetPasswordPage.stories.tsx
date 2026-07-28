@@ -1,20 +1,15 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ForgetPasswordPage } from "./ForgetPasswordPage";
-import { AuthPageDecorator } from "@/.storybook/AuthPageDecorator";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withAuthDecorator } from "@/.storybook/withAuthDecorator";
 
 const meta = {
   title: "pages/ForgetPasswordPage",
   component: ForgetPasswordPage,
   parameters: { layout: "fullscreen" },
-  decorators: [AuthPageDecorator, withThemedBackground],
+  decorators: [withAuthDecorator],
 } satisfies Meta<typeof ForgetPasswordPage>;
 
 export default meta;
 export type Story = StoryObj<typeof meta>;
 
-export const Default = {
-  args: {
-    action: () => ({ status: "success" }),
-  },
-} satisfies Story;
+export const Default = {} satisfies Story;

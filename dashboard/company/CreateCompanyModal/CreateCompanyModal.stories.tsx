@@ -1,21 +1,20 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CreateCompanyModal } from "./CreateCompanyModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCreateCompanyProvider } from "../CreateCompanyProvider/__stories__";
+import { CreateCompanyProvider } from "../CreateCompanyContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/companies/CreateCompanyModal",
   component: CreateCompanyModal,
   decorators: [
     withOpenModal,
-    withCreateCompanyProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <CreateCompanyProvider>
+        <Story />
+      </CreateCompanyProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

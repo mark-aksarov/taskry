@@ -7,8 +7,8 @@ import { mockedClientList } from "@/mocks/clients";
 import { ClientListItem } from "../../ClientListItem";
 import { useViewMode } from "@/dashboard/common/ViewMode";
 import { EntityGrid } from "@/dashboard/common/EntityGrid";
-import { MockedDeleteClientProvider } from "../../DeleteClientProvider/__stories__";
-import { MockedUpdateClientProvider } from "../../UpdateClientProvider/__stories__";
+import { DeleteClientProvider } from "../../DeleteClientContext";
+import { UpdateClientProvider } from "../../UpdateClientContext";
 
 export function ClientGridExample() {
   const { viewMode } = useViewMode();
@@ -16,13 +16,13 @@ export function ClientGridExample() {
   return (
     <EntityGrid viewMode={viewMode}>
       {mockedClientList.map((client) => (
-        <MockedDeleteClientProvider key={client.id}>
-          <MockedUpdateClientProvider>
+        <DeleteClientProvider key={client.id}>
+          <UpdateClientProvider>
             <ClientListItem {...client} />
             <ClientGridItemMobile {...client} />
             <ClientGridItemLarge {...client} />
-          </MockedUpdateClientProvider>
-        </MockedDeleteClientProvider>
+          </UpdateClientProvider>
+        </DeleteClientProvider>
       ))}
     </EntityGrid>
   );

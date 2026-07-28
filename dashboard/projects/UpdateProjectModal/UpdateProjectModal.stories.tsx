@@ -1,26 +1,25 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { mockedClientSummaries } from "@/mocks/clients";
 import { UpdateProjectForm } from "../UpdateProjectForm";
 import { UpdateProjectModal } from "./UpdateProjectModal";
-import { mockedClientSummaries } from "@/mocks/clients";
 import { ProjectFormSkeleton } from "../ProjectFormSkeleton";
+import { UpdateProjectProvider } from "../UpdateProjectContext";
 import { mockedProjectDetail as mockedProject } from "@/mocks/projects";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
-import { withUpdateProjectProvider } from "../UpdateProjectProvider/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/projects/UpdateProjectModal",
   component: UpdateProjectModal,
   decorators: [
     withOpenModal,
-    withUpdateProjectProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateProjectProvider>
+        <Story />
+      </UpdateProjectProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     modalId: "updateProject",

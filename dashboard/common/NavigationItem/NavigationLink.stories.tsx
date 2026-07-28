@@ -1,11 +1,9 @@
 import { NavigationLink } from "./NavigationLink";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "dashboard/common/NavigationLink",
   component: NavigationLink,
-  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

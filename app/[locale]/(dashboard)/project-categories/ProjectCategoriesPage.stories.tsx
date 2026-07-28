@@ -3,26 +3,15 @@ import ProjectsPageLoading from "./loading";
 import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectCategoriesPage } from "./ProjectCategoriesPage";
-import { DashboardPageDecorator } from "@/.storybook/DashboardPageDecorator";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskSearchModal } from "@/dashboard/tasks/TaskSearchModal/__stories__";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
+import { withDashboardLayout } from "@/.storybook/withDashboardLayout";
+import { SearchListExample } from "@/dashboard/search/SearchList/__stories__";
 import { ProjectCategoryGridExample } from "@/dashboard/projectCategory/ProjectCategoryGrid/__stories__";
-import { withCreateProjectCategoryProvider } from "@/dashboard/projectCategory/CreateProjectCategoryProvider/__stories__";
-import { withDeleteProjectCategoriesProvider } from "@/dashboard/projectCategory/DeleteProjectCategoriesProvider/__stories__";
 
 const meta = {
   title: "pages/ProjectCategoriesPage",
   component: ProjectCategoriesPage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    withTaskSearchModal,
-    withCreateProjectCategoryProvider,
-    withDeleteProjectCategoriesProvider,
-    withSelectedItemsProvider,
-    DashboardPageDecorator,
-    withThemedBackground,
-  ],
+  decorators: [withDashboardLayout],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/project-categories");
   },
@@ -34,7 +23,9 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     totalCount: 10,
+    selectedItems: [{ id: 1 }, { id: 2 }, { id: 3 }],
     projectCategoriesContainer: <ProjectCategoryGridExample />,
+    searchContainer: <SearchListExample />,
   },
 } satisfies Story;
 

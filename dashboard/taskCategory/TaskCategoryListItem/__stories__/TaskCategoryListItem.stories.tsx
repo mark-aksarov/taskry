@@ -1,26 +1,27 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskCategoryListItem } from "../TaskCategoryListItem";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskCategoryProviders } from "../../TaskCategoryProviders/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withDeleteTaskCategoryProvider } from "../../DeleteTaskCategoryProvider/__stories__";
-import { withUpdateTaskCategoryProvider } from "../../UpdateTaskCategoryProvider/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
-import { withDeleteTaskCategoriesProvider } from "../../DeleteTaskCategoriesProvider/__stories__";
+import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
+import { UpdateTaskCategoryProvider } from "../../UpdateTaskCategoryContext";
+import { DeleteTaskCategoryProvider } from "../../DeleteTaskCategoryContext";
+import { DeleteTaskCategoriesProvider } from "../../DeleteTaskCategoriesContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/task-categories/TaskCategoryListItem",
   component: TaskCategoryListItem,
   decorators: [
-    withUpdateTaskCategoryProvider,
-    withDeleteTaskCategoryProvider,
-    withTaskCategoryProviders,
-    withDeleteTaskCategoriesProvider,
-    withSessionProvider,
-    withSelectedItemsProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedItemsProvider pageItems={[]}>
+        <UpdateTaskCategoryProvider>
+          <DeleteTaskCategoryProvider>
+            <DeleteTaskCategoriesProvider>
+              <Story />
+            </DeleteTaskCategoriesProvider>
+          </DeleteTaskCategoryProvider>
+        </UpdateTaskCategoryProvider>
+      </SelectedItemsProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 } satisfies Meta<typeof TaskCategoryListItem>;
 

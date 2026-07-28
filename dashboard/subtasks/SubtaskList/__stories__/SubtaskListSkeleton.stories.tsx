@@ -1,11 +1,9 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { SubtaskListSkeleton } from "../SubtaskList";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "dashboard/subtasks/SubtaskListSkeleton",
   component: SubtaskListSkeleton,
-  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

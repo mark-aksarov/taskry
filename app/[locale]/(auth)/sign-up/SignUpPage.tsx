@@ -7,14 +7,9 @@ import {
 } from "@/auth/AuthCard";
 import { useTranslations } from "next-intl";
 import { SignUpForm } from "@/auth/SignUpForm";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { AuthCardSignInFooter } from "@/auth/AuthCardSignInFooter";
 
-export function SignUpPage({
-  action,
-}: {
-  action: ActionFn<ActionState, FormData>;
-}) {
+export function SignUpPage() {
   const t = useTranslations("app.SignUpPage");
 
   return (
@@ -24,7 +19,7 @@ export function SignUpPage({
         <AuthCardSubtitle>{t("subtitle")}</AuthCardSubtitle>
       </AuthCardHeader>
       <AuthCardBody>
-        <SignUpForm action={action} />
+        <SignUpForm />
       </AuthCardBody>
       <AuthCardSignInFooter />
     </AuthCard>

@@ -1,24 +1,23 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { mockedCompanySummaries } from "@/mocks/companies";
-import { CreateClientModal } from "./CreateClientModal";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { CreateClientForm } from "../CreateClientForm";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { CreateClientModal } from "./CreateClientModal";
+import { mockedCompanySummaries } from "@/mocks/companies";
 import { ClientFormSkeleton } from "../ClientFormSkeleton";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCreateClientProvider } from "../CreateClientProvider/__stories__";
+import { CreateClientProvider } from "../CreateClientContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/clients/CreateClientModal",
   component: CreateClientModal,
   decorators: [
     withOpenModal,
-    withCreateClientProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <CreateClientProvider>
+        <Story />
+      </CreateClientProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

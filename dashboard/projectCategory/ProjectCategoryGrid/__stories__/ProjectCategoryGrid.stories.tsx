@@ -1,21 +1,22 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProjectCategoryGrid } from "../ProjectCategoryGrid";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 import { ProjectCategoryGridExample } from "./ProjectCategoryGridExample";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
-import { withDeleteProjectCategoriesProvider } from "../../DeleteProjectCategoriesProvider/__stories__";
+import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
+import { DeleteProjectCategoriesProvider } from "../../DeleteProjectCategoriesContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/project-categories/ProjectCategoryGrid",
   component: ProjectCategoryGrid,
   decorators: [
-    withDeleteProjectCategoriesProvider,
-    withSessionProvider,
-    withSelectedItemsProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedItemsProvider pageItems={[]}>
+        <DeleteProjectCategoriesProvider>
+          <Story />
+        </DeleteProjectCategoriesProvider>
+      </SelectedItemsProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 } satisfies Meta<typeof ProjectCategoryGrid>;
 

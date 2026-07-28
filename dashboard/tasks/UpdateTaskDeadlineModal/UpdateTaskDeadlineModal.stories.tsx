@@ -1,22 +1,21 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
 import { mockedTaskDetail } from "@/mocks/tasks";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UpdateTaskDeadlineModal } from "./UpdateTaskDeadlineModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateTaskDeadlineProvider } from "../UpdateTaskDeadlineProvider/__stories__";
+import { UpdateTaskDeadlineProvider } from "../UpdateTaskDeadlineContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/tasks/UpdateTaskDeadlineModal",
   component: UpdateTaskDeadlineModal,
   decorators: [
     withOpenModal,
-    withUpdateTaskDeadlineProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateTaskDeadlineProvider>
+        <Story />
+      </UpdateTaskDeadlineProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

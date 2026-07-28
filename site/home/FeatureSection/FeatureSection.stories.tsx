@@ -1,11 +1,9 @@
 import { FeatureSection } from "./FeatureSection";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "site/home/FeatureSection",
   component: FeatureSection,
-  decorators: [withThemedBackground],
   parameters: {
     layout: "fullscreen",
   },

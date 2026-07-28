@@ -2,40 +2,23 @@ import { mocked } from "storybook/test";
 import AppProjectDetailLoading from "./loading";
 import AppProjectDetailNotFound from "./not-found";
 import { mockedProjectDetail } from "@/mocks/projects";
+import { mockedClientSummaries } from "@/mocks/clients";
 import { ProjectDetailPage } from "./ProjectDetailPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
-import { DashboardPageDecorator } from "@/.storybook/DashboardPageDecorator";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withDashboardLayout } from "@/.storybook/withDashboardLayout";
 import { ProjectDetailAlt } from "@/dashboard/projects/ProjectDetailAlt";
+import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
+import { SearchListExample } from "@/dashboard/search/SearchList/__stories__";
 import { ProjectDetailCardHeader } from "@/dashboard/projects/ProjectDetailCard";
-import { withTaskSearchModal } from "@/dashboard/tasks/TaskSearchModal/__stories__";
-import { withDeleteProjectProvider } from "@/dashboard/projects/DeleteProjectProvider/__stories__";
-import { withUpdateProjectTitleProvider } from "@/dashboard/projects/UpdateProjectTitleProvider/__stories__";
-import { withUpdateProjectStatusProvider } from "@/dashboard/projects/UpdateProjectStatusProvider/__stories__";
-import { withUpdateProjectDeadlineProvider } from "@/dashboard/projects/UpdateProjectDeadlineProvider/__stories__";
-import { withUpdateProjectClientProvider } from "@/dashboard/projects/UpdateProjectClientProvider/__stories__";
-import { withUpdateProjectStatusAltProvider } from "@/dashboard/projects/UpdateProjectStatusAltProvider/__stories__";
-import { withUpdateProjectDescriptionProvider } from "@/dashboard/projects/UpdateProjectDescriptionProvider/__stories__";
-import { withUpdateProjectCategoryRelProvider } from "@/dashboard/projects/UpdateProjectCategoryRelProvider/__stories__";
+import { UpdateProjectClientForm } from "@/dashboard/projects/UpdateProjectClientForm";
+import { UpdateProjectCategoryRelForm } from "@/dashboard/projects/UpdateProjectCategoryRelForm";
 
 const meta = {
   title: "pages/ProjectDetailPage",
   component: ProjectDetailPage,
   parameters: { layout: "fullscreen" },
-  decorators: [
-    withTaskSearchModal,
-    withUpdateProjectClientProvider,
-    withUpdateProjectDeadlineProvider,
-    withUpdateProjectCategoryRelProvider,
-    withUpdateProjectStatusAltProvider,
-    withUpdateProjectTitleProvider,
-    withUpdateProjectDescriptionProvider,
-    withUpdateProjectStatusProvider,
-    withDeleteProjectProvider,
-    DashboardPageDecorator,
-    withThemedBackground,
-  ],
+  decorators: [withDashboardLayout],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/projects/1");
     mocked(useParams).mockReturnValue({
@@ -49,6 +32,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
+    project: mockedProjectDetail,
     projectDetailCardHeaderContainer: (
       <ProjectDetailCardHeader
         projectStatus={mockedProjectDetail.status}
@@ -56,6 +40,21 @@ export const Default = {
       />
     ),
     projectDetailContainer: <ProjectDetailAlt {...mockedProjectDetail} />,
+    updateProjectCategoryRelFormContainer: (
+      <UpdateProjectCategoryRelForm
+        projectId={mockedProjectDetail.id}
+        categoryId={mockedProjectDetail.category.id}
+        projectCategorySelectItems={mockedProjectCategorySummaries}
+      />
+    ),
+    updateProjectClientFormContainer: (
+      <UpdateProjectClientForm
+        projectId={mockedProjectDetail.id}
+        clientId={mockedProjectDetail.client.id}
+        clientSelectItems={mockedClientSummaries}
+      />
+    ),
+    searchContainer: <SearchListExample />,
   },
 } satisfies Story;
 

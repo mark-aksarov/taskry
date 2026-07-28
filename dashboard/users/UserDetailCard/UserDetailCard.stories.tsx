@@ -11,23 +11,21 @@ import { ProfileActions } from "../ProfileActions";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UserDetailAltSkeleton } from "../UserDetailAlt";
 import { useParams, usePathname } from "next/navigation";
+import { DeleteUserProvider } from "../DeleteUserContext";
+import { UpdateUserBioProvider } from "../UpdateUserBioContext";
 import { UserDetailHeaderInteractive } from "../UserDetailHeader";
+import { ChangePasswordProvider } from "../ChangePasswordContext";
+import { UpdateUserImageProvider } from "../UpdateUserImageContext";
 import { DetailHeaderSkeleton } from "@/dashboard/common/DetailHeader";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteUserProvider } from "../DeleteUserProvider/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withChangePasswordProvider } from "../ChangePasswordProvider/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withUpdateUserImageProvider } from "../UpdateUserImageProvider/__stories__";
-import { withClearUserImageUrlProvider } from "../ClearUserImageUrlProvider/__stories__";
-import { withUpdateUserImageFileProvider } from "../UpdateUserImageFileContext/__stories__";
-import { withUpdateUserBioProvider } from "@/dashboard/users/UpdateUserBioProvider/__stories__";
-import { withUpdateUserAddressProvider } from "@/dashboard/users/UpdateUserAddressProvider/__stories__";
-import { withUpdateUserPositionProvider } from "@/dashboard/users/UpdateUserPositionProvider/__stories__";
-import { withUpdateUserFullNameProvider } from "@/dashboard/users/UpdateUserFullNameProvider/__stories__";
-import { withUpdateUserBirthdateProvider } from "@/dashboard/users/UpdateUserBirthdateProvider/__stories__";
-import { withUpdateUserPublicLinkProvider } from "@/dashboard/users/UpdateUserPublicLinkProvider/__stories__";
-import { withUpdateUserPhoneNumberProvider } from "@/dashboard/users/UpdateUserPhoneNumberProvider/__stories__";
+import { UpdateUserAddressProvider } from "../UpdateUserAddressContext";
+import { ClearUserImageUrlProvider } from "../ClearUserImageUrlContext";
+import { UpdateUserFullNameProvider } from "../UpdateUserFullNameContext";
+import { UpdateUserPositionProvider } from "../UpdateUserPositionContext";
+import { UpdateUserBirthdateProvider } from "../UpdateUserBirthdateContext";
+import { UpdateUserImageFileProvider } from "../UpdateUserImageFileContext";
+import { UpdateUserPublicLinkProvider } from "../UpdateUserPublicLinkContext";
+import { UpdateUserPhoneNumberProvider } from "../UpdateUserPhoneNumberContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/users/UserDetailCard",
@@ -39,21 +37,34 @@ const meta = {
     });
   },
   decorators: [
-    withUpdateUserPhoneNumberProvider,
-    withUpdateUserBioProvider,
-    withUpdateUserFullNameProvider,
-    withUpdateUserBirthdateProvider,
-    withUpdateUserAddressProvider,
-    withUpdateUserPublicLinkProvider,
-    withUpdateUserPositionProvider,
-    withDeleteUserProvider,
-    withUpdateUserImageProvider,
-    withClearUserImageUrlProvider,
-    withUpdateUserImageFileProvider,
-    withChangePasswordProvider,
-    withSessionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <ChangePasswordProvider>
+        <UpdateUserImageFileProvider>
+          <ClearUserImageUrlProvider>
+            <UpdateUserImageProvider>
+              <DeleteUserProvider>
+                <UpdateUserPositionProvider>
+                  <UpdateUserPublicLinkProvider>
+                    <UpdateUserAddressProvider>
+                      <UpdateUserBirthdateProvider>
+                        <UpdateUserFullNameProvider>
+                          <UpdateUserBioProvider>
+                            <UpdateUserPhoneNumberProvider>
+                              <Story />
+                            </UpdateUserPhoneNumberProvider>
+                          </UpdateUserBioProvider>
+                        </UpdateUserFullNameProvider>
+                      </UpdateUserBirthdateProvider>
+                    </UpdateUserAddressProvider>
+                  </UpdateUserPublicLinkProvider>
+                </UpdateUserPositionProvider>
+              </DeleteUserProvider>
+            </UpdateUserImageProvider>
+          </ClearUserImageUrlProvider>
+        </UpdateUserImageFileProvider>
+      </ChangePasswordProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 } satisfies Meta<typeof UserDetailCard>;
 

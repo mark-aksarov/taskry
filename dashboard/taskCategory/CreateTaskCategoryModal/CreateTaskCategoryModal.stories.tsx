@@ -1,21 +1,20 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CreateTaskCategoryModal } from "../CreateTaskCategoryModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCreateTaskCategoryProvider } from "../CreateTaskCategoryProvider/__stories__";
+import { CreateTaskCategoryProvider } from "../CreateTaskCategoryContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/task-categories/CreateTaskCategoryModal",
   component: CreateTaskCategoryModal,
   decorators: [
     withOpenModal,
-    withCreateTaskCategoryProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <CreateTaskCategoryProvider>
+        <Story />
+      </CreateTaskCategoryProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     modalId: "createTaskCategory",

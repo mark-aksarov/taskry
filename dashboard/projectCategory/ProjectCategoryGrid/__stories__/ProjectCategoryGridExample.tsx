@@ -1,18 +1,18 @@
 import { ProjectCategoryGrid } from "../ProjectCategoryGrid";
 import { ProjectCategoryListItem } from "../../ProjectCategoryListItem";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
-import { MockedUpdateProjectCategoryProvider } from "../../UpdateProjectCategoryProvider/__stories__";
-import { MockedDeleteProjectCategoryProvider } from "../../DeleteProjectCategoryProvider/__stories__";
+import { UpdateProjectCategoryProvider } from "../../UpdateProjectCategoryContext";
+import { DeleteProjectCategoryProvider } from "../../DeleteProjectCategoryContext";
 
 export function ProjectCategoryGridExample() {
   return (
     <ProjectCategoryGrid>
       {mockedProjectCategorySummaries.map((projectCategory) => (
-        <MockedUpdateProjectCategoryProvider key={projectCategory.id}>
-          <MockedDeleteProjectCategoryProvider>
+        <UpdateProjectCategoryProvider key={projectCategory.id}>
+          <DeleteProjectCategoryProvider>
             <ProjectCategoryListItem {...projectCategory} />
-          </MockedDeleteProjectCategoryProvider>
-        </MockedUpdateProjectCategoryProvider>
+          </DeleteProjectCategoryProvider>
+        </UpdateProjectCategoryProvider>
       ))}
     </ProjectCategoryGrid>
   );

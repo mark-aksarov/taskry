@@ -1,11 +1,9 @@
 import { Breadcrumb, Breadcrumbs } from "./Breadcrumbs";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "UI/Breadcrumbs",
   component: Breadcrumbs,
-  decorators: [withThemedBackground],
 } satisfies Meta<typeof Breadcrumbs>;
 
 export default meta;

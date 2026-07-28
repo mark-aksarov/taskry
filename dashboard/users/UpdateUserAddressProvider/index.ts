@@ -1,1 +1,0 @@
-export { UpdateUserAddressProvider } from "./UpdateUserAddressProvider";

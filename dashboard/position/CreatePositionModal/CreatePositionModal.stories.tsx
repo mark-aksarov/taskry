@@ -1,21 +1,20 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { CreatePositionModal } from "./CreatePositionModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withCreatePositionProvider } from "../CreatePositionProvider/__stories__";
+import { CreatePositionProvider } from "../CreatePositionContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/positions/CreatePositionModal",
   component: CreatePositionModal,
   decorators: [
     withOpenModal,
-    withCreatePositionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <CreatePositionProvider>
+        <Story />
+      </CreatePositionProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

@@ -1,26 +1,14 @@
 import { mocked } from "storybook/test";
 import { AppHeader } from "../AppHeader";
-import { usePathname } from "next/navigation";
 import { ProfileLink } from "../ProfileLink";
+import { usePathname } from "next/navigation";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withSearchBarProvider } from "@/dashboard/search/SearchBar/__stories__";
-import { withTaskSearchModal } from "@/dashboard/tasks/TaskSearchModal/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/layout/AppHeader",
   component: AppHeader,
-  decorators: [
-    withTaskSearchModal,
-    withSearchBarProvider,
-    withPageTransitionProvider,
-    withModalManagerProvider,
-    withSessionProvider,
-    withThemedBackground,
-  ],
+  decorators: [withDashboardLayoutProviders],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/dashboard");
   },

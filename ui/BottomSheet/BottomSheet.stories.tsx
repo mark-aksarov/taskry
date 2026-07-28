@@ -12,7 +12,6 @@ import {
   DialogHeader,
   DialogHeading,
 } from "../Dialog";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof BottomSheet> = {
   title: "UI/BottomSheet",
@@ -23,7 +22,6 @@ const meta: Meta<typeof BottomSheet> = {
   args: {
     isDismissable: true,
   },
-  decorators: [withThemedBackground],
 } satisfies Meta<typeof BottomSheet>;
 
 export default meta;

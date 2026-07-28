@@ -3,29 +3,27 @@ import {
   ClientFiltersFormSkeleton,
 } from "../ClientFiltersForm";
 
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedCompanySummaries } from "@/mocks/companies";
 import { ClientFiltersModal } from "./ClientFiltersModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withClientFiltersProvider } from "../ClientFiltersContext/__stories__";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
-import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
+import { ClientFiltersProvider } from "../ClientFiltersContext";
+import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/clients/ClientFiltersModal",
   component: ClientFiltersModal,
   decorators: [
     withOpenModal,
-    withClientFiltersProvider,
-    withSelectedItemsProvider,
-    withPageTransitionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedItemsProvider pageItems={[]}>
+        <ClientFiltersProvider filters={{}}>
+          <Story />
+        </ClientFiltersProvider>
+      </SelectedItemsProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

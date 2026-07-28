@@ -1,23 +1,21 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DeleteUserImageModal } from "./DeleteUserImageModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withClearUserImageUrlProvider } from "../ClearUserImageUrlProvider/__stories__";
+import { ClearUserImageUrlProvider } from "../ClearUserImageUrlContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/users/DeleteUserImageModal",
   component: DeleteUserImageModal,
   decorators: [
     withOpenModal,
-    withClearUserImageUrlProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <ClearUserImageUrlProvider>
+        <Story />
+      </ClearUserImageUrlProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
-
   parameters: {
     modalId: "deleteUserImage",
   },

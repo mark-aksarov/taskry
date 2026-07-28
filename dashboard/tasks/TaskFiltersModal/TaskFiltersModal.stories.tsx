@@ -1,29 +1,27 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
 import { mockedUserSummaries } from "@/mocks/users";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { TaskFiltersModal } from "./TaskFiltersModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedProjectSummaries } from "@/mocks/projects";
+import { TaskFiltersProvider } from "../TaskFiltersContext";
+import { SelectedTasksProvider } from "../SelectedTasksContext";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskFiltersProvider } from "../TaskFiltersContext/__stories__";
 import { TaskFiltersForm, TaskFiltersFormSkeleton } from "../TaskFiltersForm";
-import { withSelectedTasksProvider } from "../SelectedTasksContext/__stories__";
-import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/tasks/TaskFiltersModal",
   component: TaskFiltersModal,
   decorators: [
     withOpenModal,
-    withTaskFiltersProvider,
-    withSelectedTasksProvider,
-    withPageTransitionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedTasksProvider pageItems={[]}>
+        <TaskFiltersProvider filters={{}}>
+          <Story />
+        </TaskFiltersProvider>
+      </SelectedTasksProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     modalId: "taskFilters",

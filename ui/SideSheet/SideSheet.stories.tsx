@@ -1,21 +1,20 @@
+import {
+  Dialog,
+  DialogBody,
+  DialogHeader,
+  DialogHeading,
+  DialogCloseButton,
+} from "../Dialog";
+
 import React from "react";
 import { Button } from "@/ui/Button";
 import { DialogTrigger } from "react-aria-components";
 import { SideSheet, SideSheetProps } from "../SideSheet";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import {
-  Dialog,
-  DialogBody,
-  DialogCloseButton,
-  DialogHeader,
-  DialogHeading,
-} from "../Dialog";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta: Meta<typeof SideSheet> = {
   title: "UI/SideSheet",
   component: SideSheet,
-  decorators: [withThemedBackground],
 } satisfies Meta<typeof SideSheet>;
 
 export default meta;

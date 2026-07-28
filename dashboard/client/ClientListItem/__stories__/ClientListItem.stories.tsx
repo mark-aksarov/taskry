@@ -1,29 +1,31 @@
 import { ClientListItem } from "../ClientListItem";
 import { mockedClientDetail } from "@/mocks/clients";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
-import { withUpdateClientProvider } from "../../UpdateClientProvider/__stories__";
-import { withDeleteClientProvider } from "../../DeleteClientProvider/__stories__";
-import { withDeleteClientsProvider } from "../../DeleteClientsProvider/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
-import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
+import { ViewModeProvider } from "@/dashboard/common/ViewMode";
+import { DeleteClientProvider } from "../../DeleteClientContext";
+import { UpdateClientProvider } from "../../UpdateClientContext";
+import { DeleteClientsProvider } from "../../DeleteClientsContext";
+import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/clients/ClientListItem",
   component: ClientListItem,
   decorators: [
-    withUpdateClientProvider,
-    withDeleteClientProvider,
-    withDeleteClientsProvider,
-    withSelectedItemsProvider,
-    withSessionProvider,
-    withModalManagerProvider,
-    withViewModeProvider,
-    withPageTransitionProvider,
-    withThemedBackground,
+    (Story) => (
+      <ViewModeProvider initialValue="list">
+        <SelectedItemsProvider pageItems={[]}>
+          <UpdateClientProvider>
+            <DeleteClientProvider>
+              <DeleteClientsProvider>
+                <Story />
+              </DeleteClientsProvider>
+            </DeleteClientProvider>
+          </UpdateClientProvider>
+        </SelectedItemsProvider>
+      </ViewModeProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 } satisfies Meta<typeof ClientListItem>;
 

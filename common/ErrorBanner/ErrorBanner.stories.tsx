@@ -1,11 +1,9 @@
 import { ErrorBanner } from "./ErrorBanner";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 const meta = {
   title: "common/ErrorBanner",
   component: ErrorBanner,
-  decorators: [withThemedBackground],
   parameters: {
     backgroundVariant: "alt",
   },

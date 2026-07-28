@@ -1,26 +1,24 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { TaskFiltersProvider } from "../TaskFiltersContext";
+import { SelectedTasksProvider } from "../SelectedTasksContext";
 import { TaskStatusFiltersForm } from "../TaskStatusFiltersForm";
 import { TaskStatusFiltersModal } from "./TaskStatusFiltersModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withTaskFiltersProvider } from "../TaskFiltersContext/__stories__";
-import { withSelectedTasksProvider } from "../SelectedTasksContext/__stories__";
-import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/tasks/TaskStatusFiltersModal",
   component: TaskStatusFiltersModal,
   decorators: [
     withOpenModal,
-    withTaskFiltersProvider,
-    withSelectedTasksProvider,
-    withPageTransitionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedTasksProvider pageItems={[]}>
+        <TaskFiltersProvider filters={{}}>
+          <Story />
+        </TaskFiltersProvider>
+      </SelectedTasksProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     modalId: "taskStatusFilters",

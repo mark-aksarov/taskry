@@ -1,6 +1,5 @@
 import { redirect } from "@/i18n/navigation";
 import { getLocale } from "next-intl/server";
-import { signOut } from "@/lib/actions/auth/signOut";
 import { getSession } from "@/lib/data/utils/getSession";
 import { CreateOrganizationPage } from "./CreateOrganizationPage";
 
@@ -20,5 +19,5 @@ export default async function AppCreateOrganizationPage() {
     redirect({ href: "/dashboard", locale });
   }
 
-  return <CreateOrganizationPage signOut={signOut} />;
+  return <CreateOrganizationPage />;
 }

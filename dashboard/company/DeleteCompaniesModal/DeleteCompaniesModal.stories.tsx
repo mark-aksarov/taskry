@@ -1,24 +1,23 @@
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DeleteCompaniesModal } from "./DeleteCompaniesModal";
-import { withToastRegion } from "@/.storybook/withToastRegion";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteCompaniesProvider } from "../DeleteCompaniesProvider/__stories__";
-import { withSelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext/__stories__";
-import {
-  withModalManagerProvider,
-  withOpenModal,
-} from "@/common/ModalManagerContext/__stories__";
+import { DeleteCompaniesProvider } from "../DeleteCompaniesContext";
+import { SelectedItemsProvider } from "@/dashboard/common/SelectedItemsContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/companies/DeleteCompaniesModal",
   component: DeleteCompaniesModal,
   decorators: [
     withOpenModal,
-    withToastRegion,
-    withSelectedItemsProvider,
-    withDeleteCompaniesProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedItemsProvider pageItems={[]}>
+        <DeleteCompaniesProvider>
+          <Story />
+        </DeleteCompaniesProvider>
+      </SelectedItemsProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

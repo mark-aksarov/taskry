@@ -23,7 +23,7 @@ export function ChangePasswordModal() {
   return (
     <FormBaseModal
       data-test="change-password-modal"
-      className="md:w-[350px]"
+      className="md:w-[450px]"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
     >

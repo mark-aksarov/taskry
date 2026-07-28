@@ -11,33 +11,40 @@ import {
 import { mockedProjectDetail } from "@/mocks/projects";
 import { ProjectDetailCard } from "./ProjectDetailCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withDeleteProjectProvider } from "../DeleteProjectProvider/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withUpdateProjectTitleProvider } from "@/dashboard/projects/UpdateProjectTitleProvider/__stories__";
-import { withUpdateProjectStatusProvider } from "@/dashboard/projects/UpdateProjectStatusProvider/__stories__";
-import { withUpdateProjectDeadlineProvider } from "@/dashboard/projects/UpdateProjectDeadlineProvider/__stories__";
-import { withUpdateProjectClientProvider } from "@/dashboard/projects/UpdateProjectClientProvider/__stories__";
-import { withUpdateProjectStatusAltProvider } from "@/dashboard/projects/UpdateProjectStatusAltProvider/__stories__";
-import { withUpdateProjectDescriptionProvider } from "@/dashboard/projects/UpdateProjectDescriptionProvider/__stories__";
-import { withUpdateProjectCategoryRelProvider } from "@/dashboard/projects/UpdateProjectCategoryRelProvider/__stories__";
+import { DeleteProjectProvider } from "../DeleteProjectContext";
+import { UpdateProjectTitleProvider } from "../UpdateProjectTitleContext";
+import { UpdateProjectClientProvider } from "../UpdateProjectClientContext";
+import { UpdateProjectStatusProvider } from "../UpdateProjectStatusContext";
+import { UpdateProjectDeadlineProvider } from "../UpdateProjectDeadlineContext";
+import { UpdateProjectStatusAltProvider } from "../UpdateProjectStatusAltContext";
+import { UpdateProjectCategoryRelProvider } from "../UpdateProjectCategoryRelContext";
+import { UpdateProjectDescriptionProvider } from "../UpdateProjectDescriptionContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/projects/ProjectDetailCard",
   component: ProjectDetailCard,
   decorators: [
-    withDeleteProjectProvider,
-    withSessionProvider,
-    withUpdateProjectClientProvider,
-    withUpdateProjectDeadlineProvider,
-    withUpdateProjectCategoryRelProvider,
-    withUpdateProjectStatusAltProvider,
-    withUpdateProjectTitleProvider,
-    withUpdateProjectDescriptionProvider,
-    withUpdateProjectStatusProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateProjectStatusProvider>
+        <UpdateProjectDescriptionProvider>
+          <UpdateProjectTitleProvider>
+            <UpdateProjectStatusAltProvider>
+              <UpdateProjectCategoryRelProvider>
+                <UpdateProjectDeadlineProvider>
+                  <UpdateProjectClientProvider>
+                    <DeleteProjectProvider>
+                      <Story />
+                    </DeleteProjectProvider>
+                  </UpdateProjectClientProvider>
+                </UpdateProjectDeadlineProvider>
+              </UpdateProjectCategoryRelProvider>
+            </UpdateProjectStatusAltProvider>
+          </UpdateProjectTitleProvider>
+        </UpdateProjectDescriptionProvider>
+      </UpdateProjectStatusProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 } satisfies Meta<typeof ProjectDetailCard>;
 

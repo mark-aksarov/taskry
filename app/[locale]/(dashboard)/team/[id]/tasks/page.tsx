@@ -5,32 +5,15 @@ import { getTaskList } from "@/lib/data/task/task.dal";
 import { getUserSummary } from "@/lib/data/user/user.dal";
 import { TeamProfileTasksPage } from "./TeamProfileTasksPage";
 import { ProfileActions } from "@/dashboard/users/ProfileActions";
-import { TaskSearchModal } from "@/dashboard/tasks/TaskSearchModal";
-import { CreateTaskModal } from "@/dashboard/tasks/CreateTaskModal";
-import { UpdateUserModal } from "@/dashboard/users/UpdateUserModal";
+import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { canEditUserProfile } from "@/lib/utils/canEditUserProfile";
-import { DeleteTasksModal } from "@/dashboard/tasks/DeleteTasksModal";
 import { pageSearchParam, pageSizeSearchParam } from "@/lib/schemas/base";
-import { CreateTaskProvider } from "@/dashboard/tasks/CreateTaskProvider";
-import { UpdateUserProvider } from "@/dashboard/users/UpdateUserProvider";
-import { DeleteUserProvider } from "@/dashboard/users/DeleteUserProvider";
-import { ChangePasswordModal } from "@/dashboard/users/ChangePasswordModal";
-import { DeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider";
 import { UserNavigationLarge } from "@/dashboard/users/UserNavigationLarge";
 import { LinkSearchContainer } from "@/dashboard/common/LinkSearchContainer";
 import { UserNavigationMobile } from "@/dashboard/users/UserNavigationMobile";
-import { UpdateUserImageModal } from "@/dashboard/users/UpdateUserImageModal";
-import { DeleteUserImageModal } from "@/dashboard/users/DeleteUserImageModal";
-import { SelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext";
 import { UserTaskListContainer } from "@/dashboard/users/UserTaskListContainer";
-import { ChangePasswordProvider } from "@/dashboard/users/ChangePasswordProvider";
-import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { CreateTaskFormContainer } from "@/dashboard/tasks/CreateTaskFormContainer";
 import { UpdateUserFormContainer } from "@/dashboard/users/UpdateUserFormContainer";
-import { UpdateUserImageProvider } from "@/dashboard/users/UpdateUserImageProvider";
-import { ClearUserImageUrlProvider } from "@/dashboard/users/ClearUserImageUrlProvider";
-import { UpdateTaskStatusesProvider } from "@/dashboard/tasks/UpdateTaskStatusesProvider";
-import { UpdateUserImageFileProvider } from "@/dashboard/users/UpdateUserImageFileContext";
 import { UserDetailHeaderAltContainer } from "@/dashboard/users/UserDetailHeaderAltContainer";
 
 const searchParamsSchema = z.object({
@@ -77,76 +60,29 @@ export default async function AppProfileTasksPage({
   });
 
   return (
-    <UpdateUserImageFileProvider>
-      <UpdateUserImageProvider>
-        <ClearUserImageUrlProvider>
-          <DeleteUserProvider>
-            <UpdateUserProvider>
-              <ChangePasswordProvider>
-                <SelectedTasksProvider
-                  pageItems={tasks.map((task) => ({
-                    id: task.id,
-                    status: task.status,
-                  }))}
-                >
-                  <UpdateTaskStatusesProvider>
-                    <DeleteTasksProvider>
-                      <CreateTaskProvider>
-                        <TeamProfileTasksPage
-                          page={page}
-                          pageSize={pageSize}
-                          totalTasksCount={totalTasksCount}
-                          selectedSortField={sort}
-                          backButton
-                          navigationLarge={
-                            <UserNavigationLarge
-                              userActions={
-                                showUserActions && (
-                                  <ProfileActions userId={userId} />
-                                )
-                              }
-                            />
-                          }
-                          navigationMobile={<UserNavigationMobile />}
-                          userTaskList={<UserTaskListContainer tasks={tasks} />}
-                          userDetailHeaderContainer={
-                            <UserDetailHeaderAltContainer userId={userId} />
-                          }
-                        />
-
-                        <TaskSearchModal
-                          searchContainer={
-                            <LinkSearchContainer pathname="/tasks" />
-                          }
-                        />
-                        <DeleteTasksModal />
-                        <ChangePasswordModal />
-                        <CreateTaskModal
-                          createTaskFormContainer={
-                            <CreateTaskFormContainer
-                              forcedAssigneeId={userId}
-                            />
-                          }
-                        />
-                        <UpdateUserModal
-                          updateUserFormContainer={
-                            <UpdateUserFormContainer userId={userId} />
-                          }
-                        />
-                        <UpdateUserImageModal userId={userId} />
-                        <DeleteUserImageModal
-                          userId={userId}
-                          userFullName={userSummary.fullName}
-                        />
-                      </CreateTaskProvider>
-                    </DeleteTasksProvider>
-                  </UpdateTaskStatusesProvider>
-                </SelectedTasksProvider>
-              </ChangePasswordProvider>
-            </UpdateUserProvider>
-          </DeleteUserProvider>
-        </ClearUserImageUrlProvider>
-      </UpdateUserImageProvider>
-    </UpdateUserImageFileProvider>
+    <TeamProfileTasksPage
+      user={userSummary}
+      page={page}
+      pageSize={pageSize}
+      totalTasksCount={totalTasksCount}
+      selectedSortField={sort}
+      backButton
+      selectedItems={tasks.map((t) => ({ id: t.id, status: t.status }))}
+      navigationLarge={
+        <UserNavigationLarge
+          userActions={showUserActions && <ProfileActions userId={userId} />}
+        />
+      }
+      navigationMobile={<UserNavigationMobile />}
+      userTaskList={<UserTaskListContainer tasks={tasks} />}
+      userDetailHeaderContainer={
+        <UserDetailHeaderAltContainer userId={userId} />
+      }
+      searchContainer={<LinkSearchContainer pathname="/tasks" />}
+      createTaskFormContainer={
+        <CreateTaskFormContainer forcedAssigneeId={userId} />
+      }
+      updateUserFormContainer={<UpdateUserFormContainer userId={userId} />}
+    />
   );
 }

@@ -1,22 +1,21 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedClientDetail } from "@/mocks/clients";
+import { withOpenModal } from "@/.storybook/withOpenModal";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UpdateClientEmailModal } from "./UpdateClientEmailModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateClientEmailProvider } from "../UpdateClientEmailProvider/__stories__";
+import { UpdateClientEmailProvider } from "../UpdateClientEmailContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/clients/UpdateClientEmailModal",
   component: UpdateClientEmailModal,
   decorators: [
     withOpenModal,
-    withUpdateClientEmailProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateClientEmailProvider>
+        <Story />
+      </UpdateClientEmailProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

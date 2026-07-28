@@ -1,24 +1,22 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
 import { mockedTaskDetail } from "@/mocks/tasks";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UpdateTaskStatusModal } from "./UpdateTaskStatusModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateTaskStatusAltProvider } from "../UpdateTaskStatusAltProvider/__stories__";
+import { UpdateTaskStatusAltProvider } from "../UpdateTaskStatusAltContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/tasks/UpdateTaskStatusModal",
   component: UpdateTaskStatusModal,
   decorators: [
     withOpenModal,
-    withUpdateTaskStatusAltProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateTaskStatusAltProvider>
+        <Story />
+      </UpdateTaskStatusAltProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
-
   parameters: {
     modalId: "updateTaskStatus",
   },

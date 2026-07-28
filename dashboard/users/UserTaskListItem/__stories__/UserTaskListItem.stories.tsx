@@ -1,17 +1,14 @@
 import { mockedTaskList } from "@/mocks/tasks";
 import { UserTaskListItem } from "../UserTaskListItem";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withViewModeProvider } from "@/dashboard/common/ViewMode/__stories__";
-import { withDeleteTaskProvider } from "@/dashboard/tasks/DeleteTaskProvider/__stories__";
-import { withUpdateTaskProvider } from "@/dashboard/tasks/UpdateTaskProvider/__stories__";
-import { withDeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksProvider/__stories__";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
-import { withModalManagerProvider } from "@/common/ModalManagerContext/__stories__";
-import { withSelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext/__stories__";
-import { withPageTransitionProvider } from "@/dashboard/common/PageTransitionContext/__stories__";
-import { withUpdateTaskStatusProvider } from "@/dashboard/tasks/UpdateTaskStatusProvider/__stories__";
-import { withUpdateTaskStatusesProvider } from "@/dashboard/tasks/UpdateTaskStatusesProvider/__stories__";
+import { ViewModeProvider } from "@/dashboard/common/ViewMode";
+import { DeleteTaskProvider } from "@/dashboard/tasks/DeleteTaskContext";
+import { UpdateTaskProvider } from "@/dashboard/tasks/UpdateTaskContext";
+import { DeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksContext";
+import { SelectedTasksProvider } from "@/dashboard/tasks/SelectedTasksContext";
+import { UpdateTaskStatusProvider } from "@/dashboard/tasks/UpdateTaskStatusContext";
+import { UpdateTaskStatusesProvider } from "@/dashboard/tasks/UpdateTaskStatusesContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const mockedTask = mockedTaskList[0];
 
@@ -19,17 +16,24 @@ const meta = {
   title: "dashboard/users/UserTaskListItem",
   component: UserTaskListItem,
   decorators: [
-    withUpdateTaskStatusProvider,
-    withUpdateTaskProvider,
-    withDeleteTaskProvider,
-    withDeleteTasksProvider,
-    withUpdateTaskStatusesProvider,
-    withSessionProvider,
-    withSelectedTasksProvider,
-    withViewModeProvider,
-    withPageTransitionProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <SelectedTasksProvider pageItems={[]}>
+        <ViewModeProvider initialValue="list">
+          <DeleteTasksProvider>
+            <DeleteTaskProvider>
+              <UpdateTaskProvider>
+                <UpdateTaskStatusProvider>
+                  <UpdateTaskStatusesProvider>
+                    <Story />
+                  </UpdateTaskStatusesProvider>
+                </UpdateTaskStatusProvider>
+              </UpdateTaskProvider>
+            </DeleteTaskProvider>
+          </DeleteTasksProvider>
+        </ViewModeProvider>
+      </SelectedTasksProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
   parameters: {
     backgroundVariant: "alt",

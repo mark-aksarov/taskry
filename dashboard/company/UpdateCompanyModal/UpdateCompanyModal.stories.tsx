@@ -1,21 +1,20 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UpdateCompanyModal } from "../UpdateCompanyModal";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withUpdateCompanyProvider } from "../UpdateCompanyProvider/__stories__";
+import { UpdateCompanyProvider } from "../UpdateCompanyContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {
   title: "dashboard/companies/UpdateCompanyModal",
   component: UpdateCompanyModal,
   decorators: [
     withOpenModal,
-    withUpdateCompanyProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateCompanyProvider>
+        <Story />
+      </UpdateCompanyProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

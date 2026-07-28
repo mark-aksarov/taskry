@@ -1,22 +1,21 @@
-import {
-  withOpenModal,
-  withModalManagerProvider,
-} from "@/common/ModalManagerContext/__stories__";
-
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { mockedClientDetail } from "@/mocks/clients";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
+import { withOpenModal } from "@/.storybook/withOpenModal";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { UpdateClientPublicLinkModal } from "./UpdateClientPublicLinkModal";
-import { withUpdateClientPublicLinkProvider } from "../UpdateClientPublicLinkProvider/__stories__";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
+import { UpdateClientPublicLinkProvider } from "../UpdateClientPublicLinkContext";
 
 const meta = {
   title: "dashboard/clients/UpdateClientPublicLinkModal",
   component: UpdateClientPublicLinkModal,
   decorators: [
     withOpenModal,
-    withUpdateClientPublicLinkProvider,
-    withModalManagerProvider,
-    withThemedBackground,
+    (Story) => (
+      <UpdateClientPublicLinkProvider>
+        <Story />
+      </UpdateClientPublicLinkProvider>
+    ),
+    withDashboardLayoutProviders,
   ],
 
   parameters: {

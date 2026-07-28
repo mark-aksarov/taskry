@@ -1,12 +1,9 @@
 import { AppHeader } from "./AppHeader";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
-import { withSessionProvider } from "@/common/SessionContext/__stories__";
 
 const meta = {
   title: "site/layout/AppHeader",
   component: AppHeader,
-  decorators: [withSessionProvider, withThemedBackground],
   parameters: {
     layout: "fullscreen",
   },

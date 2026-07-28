@@ -7,15 +7,13 @@ import {
 } from "@/auth/AuthCard";
 import { useTranslations } from "next-intl";
 import { SignInForm } from "@/auth/SignInForm";
-import { ActionFn, ActionState } from "@/lib/actions/types";
 import { AuthCardSignUpFooter } from "@/auth/AuthCardSignUpFooter";
 
 interface SignInPageProps {
   resetPasswordSuccess?: boolean;
-  signIn: ActionFn<ActionState, FormData>;
 }
 
-export function SignInPage({ resetPasswordSuccess, signIn }: SignInPageProps) {
+export function SignInPage({ resetPasswordSuccess }: SignInPageProps) {
   const t = useTranslations("app.SignInPage");
 
   return (
@@ -27,7 +25,7 @@ export function SignInPage({ resetPasswordSuccess, signIn }: SignInPageProps) {
         </AuthCardSubtitle>
       </AuthCardHeader>
       <AuthCardBody>
-        <SignInForm signIn={signIn} />
+        <SignInForm />
       </AuthCardBody>
       <AuthCardSignUpFooter />
     </AuthCard>

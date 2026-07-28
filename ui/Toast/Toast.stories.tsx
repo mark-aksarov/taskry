@@ -4,7 +4,6 @@ import { ToastContext } from "./ToastContext";
 import { ToastColor, ToastRegion } from "./Toast";
 import { CheckCircle2, CircleX } from "lucide-react";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { withThemedBackground } from "@/.storybook/withThemedBackground";
 
 interface ToastStoryArgs {
   title: string;
@@ -31,7 +30,6 @@ const meta: Meta<ToastStoryArgs> = {
   args: {
     color: "red",
   },
-  decorators: [withThemedBackground],
 };
 
 export default meta;
@@ -49,16 +47,7 @@ const ToastTemplate = (props: ToastStoryArgs) => {
           toastQueue.add(
             {
               title: "A server error occurred. ",
-              iconLeft:
-                props.color === "red" ? (
-                  <CircleX    />
-                ) : (
-                  <CheckCircle2
-                    
-                    
-                    
-                  />
-                ),
+              iconLeft: props.color === "red" ? <CircleX /> : <CheckCircle2 />,
               color: props.color,
             },
             props.timeout ? { timeout: props.timeout } : undefined,
