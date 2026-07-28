@@ -4,7 +4,7 @@ import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
 import { useDownloadFile } from "@/lib/hooks/useDownloadFile";
-import { Blocks, Download, FileUp, Loader2 } from "lucide-react";
+import { Blocks, Download, Upload, Loader2 } from "lucide-react";
 import { ManageMenuTrigger } from "@/dashboard/common/ManageMenuTrigger";
 
 interface TaskManageMenuTriggerProps {
@@ -40,7 +40,7 @@ export function TaskManageMenuTrigger({
       disabledKeys={isPending ? ["export-csv"] : []}
     >
       <Item textValue={t("importCSV")} key="import-csv">
-        <FileUp />
+        <Upload />
         {t("importCSV")}
       </Item>
       <Item textValue={t("exportCSV")} key="export-csv">

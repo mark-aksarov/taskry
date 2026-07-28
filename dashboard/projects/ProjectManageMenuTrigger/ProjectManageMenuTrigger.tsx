@@ -3,7 +3,7 @@
 import { Item, Key } from "react-stately";
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
-import { Blocks, Download, FileUp, Loader2 } from "lucide-react";
+import { Blocks, Download, Upload, Loader2 } from "lucide-react";
 import { ManageMenuTrigger } from "@/dashboard/common/ManageMenuTrigger";
 import { useDownloadFile } from "@/lib/hooks/useDownloadFile";
 
@@ -37,7 +37,7 @@ export function ProjectManageMenuTrigger({
   return (
     <ManageMenuTrigger renderButton={renderButton} onAction={handleAction}>
       <Item textValue={t("importCSV")} key="import-csv">
-        <FileUp />
+        <Upload />
         {t("importCSV")}
       </Item>
       <Item textValue={t("exportCSV")} key="export-csv">
