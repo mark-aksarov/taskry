@@ -16,9 +16,9 @@ import {
 } from "@/dashboard/projects/ProjectSortingMenuTrigger";
 
 import {
-  CreateProjectMenuTriggerLarge,
-  CreateProjectMenuTriggerMobile,
-} from "@/dashboard/projects/CreateProjectMenuTrigger";
+  CreateProjectModalTriggerLarge,
+  CreateProjectModalTriggerMobile,
+} from "@/dashboard/projects/CreateProjectModalTrigger";
 
 import {
   ProjectFiltersModal,
@@ -167,7 +167,7 @@ export function ProjectsPage({
                           secondSlot={
                             <>
                               <ViewModeToggleButtonGroup />
-                              <CreateProjectMenuTriggerLarge />
+                              <CreateProjectModalTriggerLarge />
                             </>
                           }
                           twoRowsOnLg
@@ -181,7 +181,7 @@ export function ProjectsPage({
                           }
                           secondSlot={
                             <>
-                              <CreateProjectMenuTriggerMobile />
+                              <CreateProjectModalTriggerMobile />
                               <ProjectManageMenuTriggerMobile />
                             </>
                           }

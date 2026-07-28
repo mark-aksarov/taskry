@@ -363,14 +363,6 @@
       "dialogHeading": "Действия",
       "delete": "Удалить"
     },
-    "CreateClientMenuTrigger": {
-      "dialogHeading": "Создать новое",
-      "label": "Создать новое",
-      "items": {
-        "client": "Клиент",
-        "company": "Компания"
-      }
-    },
     "ClientsFilteredEmptySection": {
       "heading": "Клиенты не найдены",
       "description": "По выбранным фильтрам клиенты не найдены. Попробуйте изменить или сбросить фильтры."
@@ -429,6 +421,9 @@
     },
     "ImportPositionsModal": {
       "heading": "Импорт должностей"
+    },
+    "CreateClientModalTrigger": {
+      "label": "Новый клиент"
     }
   },
   "layout": {
@@ -700,14 +695,6 @@
     "ProjectCreatorCheckboxGroup": {
       "label": "Кем создан"
     },
-    "CreateProjectMenuTrigger": {
-      "dialogHeading": "Создать новое",
-      "label": "Создать новое",
-      "items": {
-        "project": "Проект",
-        "category": "Категория"
-      }
-    },
     "ProjectGridItemProgress": {
       "progressAriaLabel": "Прогресс проекта"
     },
@@ -868,6 +855,9 @@
     },
     "ImportProjectsModal": {
       "heading": "Импорт проектов"
+    },
+    "CreateProjectModalTrigger": {
+      "label": "Новый проект"
     }
   },
   "search": {
@@ -1108,14 +1098,6 @@
       "markActive": "Отметить как «Активно»",
       "details": "Открыть детали"
     },
-    "CreateTaskMenuTrigger": {
-      "label": "Создать новую",
-      "dialogHeading": "Создать новую",
-      "items": {
-        "task": "Задача",
-        "category": "Категория"
-      }
-    },
     "CreateTaskModalTrigger": {
       "label": "Новая задача"
     },
@@ -1345,11 +1327,11 @@
       "successMessage": "Пользователь успешно обновлён"
     },
     "CreateUserForm": {
-      "submitButtonLabel": "Создать пользователя",
+      "submitButtonLabel": "Пригласить пользователя",
       "successMessage": "Пользователь успешно создан"
     },
     "CreateUserModal": {
-      "title": "Новый пользователь"
+      "title": "Пригласить пользователя"
     },
     "UpdateUserModal": {
       "title": "Редактировать пользователя"
@@ -1516,14 +1498,6 @@
     "UserFiltersModal": {
       "heading": "Фильтры пользователей"
     },
-    "CreateUserMenuTrigger": {
-      "dialogHeading": "Создать нового",
-      "label": "Создать нового",
-      "items": {
-        "user": "Пользователь",
-        "position": "Должность"
-      }
-    },
     "UserManageMenuTrigger": {
       "positions": "Должности",
       "exportCSV": "Экспорт пользователей (CSV)",
@@ -1588,6 +1562,9 @@
     },
     "UpdateUserPositionForm": {
       "submitButtonLabel": "Обновить должность"
+    },
+    "CreateUserModalTrigger": {
+      "label": "Пригласить пользователя"
     }
   },
   "companies": {
@@ -1599,6 +1576,11 @@
       "exportCSV": "Экспорт компаний (CSV)",
       "successMessage": "Компании успешно экспортированы",
       "errorMessage": "Не удалось экспортировать компании"
+    }
+  },
+  "client": {
+    "CreateClientModalTrigger": {
+      "label": "Новый клиент"
     }
   }
 }

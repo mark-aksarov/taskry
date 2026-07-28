@@ -16,9 +16,9 @@ import {
 } from "@/dashboard/users/UserSortingMenuTrigger";
 
 import {
-  CreateUserMenuTriggerLarge,
-  CreateUserMenuTriggerMobile,
-} from "@/dashboard/users/CreateUserMenuTrigger";
+  CreateUserModalTriggerLarge,
+  CreateUserModalTriggerMobile,
+} from "@/dashboard/users/CreateUserModalTrigger";
 
 import {
   UserFiltersModal,
@@ -98,7 +98,7 @@ export function TeamPage({
                   secondSlot={
                     <>
                       <ViewModeToggleButtonGroup />
-                      <CreateUserMenuTriggerLarge />
+                      <CreateUserModalTriggerLarge />
                     </>
                   }
                   twoRowsOnLg
@@ -110,7 +110,7 @@ export function TeamPage({
                   }
                   secondSlot={
                     <>
-                      <CreateUserMenuTriggerMobile />
+                      <CreateUserModalTriggerMobile />
                       <UserManageMenuTriggerMobile />
                     </>
                   }

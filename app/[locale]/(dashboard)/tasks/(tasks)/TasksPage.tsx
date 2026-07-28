@@ -12,9 +12,9 @@ import {
 } from "@/dashboard/tasks/TaskFiltersModal";
 
 import {
-  CreateTaskMenuTriggerMobile,
-  CreateTaskMenuTriggerLarge,
-} from "@/dashboard/tasks/CreateTaskMenuTrigger";
+  CreateTaskModalTriggerLarge,
+  CreateTaskModalTriggerMobile,
+} from "@/dashboard/tasks/CreateTaskModalTrigger";
 
 import {
   TaskManageMenuTriggerLarge,
@@ -163,7 +163,7 @@ export function TasksPage({
                           secondSlot={
                             <>
                               <ViewModeToggleButtonGroup />
-                              <CreateTaskMenuTriggerLarge />
+                              <CreateTaskModalTriggerLarge />
                             </>
                           }
                           twoRowsOnLg
@@ -177,7 +177,7 @@ export function TasksPage({
                           }
                           secondSlot={
                             <>
-                              <CreateTaskMenuTriggerMobile />
+                              <CreateTaskModalTriggerMobile />
                               <TaskManageMenuTriggerMobile />
                             </>
                           }

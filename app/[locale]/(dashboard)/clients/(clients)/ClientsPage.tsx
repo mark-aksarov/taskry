@@ -21,9 +21,9 @@ import {
 } from "@/dashboard/client/ClientSortingMenuTrigger";
 
 import {
-  CreateClientMenuTriggerLarge,
-  CreateClientMenuTriggerMobile,
-} from "@/dashboard/client/CreateClientMenuTrigger";
+  CreateClientModalTriggerLarge,
+  CreateClientModalTriggerMobile,
+} from "@/dashboard/client/CreateClientModalTrigger";
 
 import { useTranslations } from "next-intl";
 import { ClientFilters, ClientSortField } from "@/lib/types";
@@ -136,7 +136,7 @@ export function ClientsPage({
                         secondSlot={
                           <>
                             <ViewModeToggleButtonGroup />
-                            <CreateClientMenuTriggerLarge />
+                            <CreateClientModalTriggerLarge />
                           </>
                         }
                         twoRowsOnLg
@@ -148,7 +148,7 @@ export function ClientsPage({
                         }
                         secondSlot={
                           <>
-                            <CreateClientMenuTriggerMobile />
+                            <CreateClientModalTriggerMobile />
                             <ClientManageMenuTriggerMobile />
                           </>
                         }

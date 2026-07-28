@@ -363,14 +363,6 @@
       "dialogHeading": "Actions",
       "delete": "Delete"
     },
-    "CreateClientMenuTrigger": {
-      "dialogHeading": "Create new",
-      "label": "Create new",
-      "items": {
-        "client": "Client",
-        "company": "Company"
-      }
-    },
     "ClientsFilteredEmptySection": {
       "heading": "No clients found",
       "description": "No clients match the selected filters. Try changing or resetting the filters."
@@ -429,6 +421,9 @@
     },
     "ImportPositionsModal": {
       "heading": "Import positions"
+    },
+    "CreateClientModalTrigger": {
+      "label": "New client"
     }
   },
   "layout": {
@@ -700,14 +695,6 @@
     "ProjectCreatorCheckboxGroup": {
       "label": "Creator"
     },
-    "CreateProjectMenuTrigger": {
-      "dialogHeading": "Create new",
-      "label": "Create new",
-      "items": {
-        "project": "Project",
-        "category": "Category"
-      }
-    },
     "ProjectGridItemProgress": {
       "progressAriaLabel": "Project progress"
     },
@@ -868,6 +855,9 @@
     },
     "ImportProjectsModal": {
       "heading": "Import projects"
+    },
+    "CreateProjectModalTrigger": {
+      "label": "New project"
     }
   },
   "search": {
@@ -1108,14 +1098,6 @@
       "markActive": "Mark as active",
       "details": "Open details"
     },
-    "CreateTaskMenuTrigger": {
-      "label": "Create new",
-      "dialogHeading": "Create new",
-      "items": {
-        "task": "Task",
-        "category": "Category"
-      }
-    },
     "DeleteTaskModal": {
       "heading": "Delete task",
       "text": "Are you sure you want to delete <strong>«{name}»</strong>? All data will be permanently removed.",
@@ -1345,11 +1327,11 @@
       "successMessage": "User updated successfully"
     },
     "CreateUserForm": {
-      "submitButtonLabel": "Create user",
+      "submitButtonLabel": "Invite user",
       "successMessage": "User created successfully"
     },
     "CreateUserModal": {
-      "title": "New user"
+      "title": "Invite user"
     },
     "UpdateUserModal": {
       "title": "Edit user"
@@ -1516,14 +1498,6 @@
     "UserFiltersModal": {
       "heading": "User filters"
     },
-    "CreateUserMenuTrigger": {
-      "dialogHeading": "Create new",
-      "label": "Create new",
-      "items": {
-        "user": "User",
-        "position": "Position"
-      }
-    },
     "UserManageMenuTrigger": {
       "positions": "Positions",
       "exportCSV": "Export users (CSV)",
@@ -1588,6 +1562,9 @@
     },
     "UpdateUserPositionForm": {
       "submitButtonLabel": "Update position"
+    },
+    "CreateUserModalTrigger": {
+      "label": "Invite user"
     }
   },
   "companies": {
