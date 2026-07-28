@@ -8,6 +8,85 @@ import { translations } from "@/messages/better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { organization, testUtils } from "better-auth/plugins";
 
+type EmailTemplateProps = {
+  title: string;
+  paragraphs: string[];
+  buttonText: string;
+  buttonUrl: string;
+  buttonColor?: string;
+  footer?: string;
+};
+
+export function emailTemplate({
+  title,
+  paragraphs,
+  buttonText,
+  buttonUrl,
+  buttonColor = "#111827",
+  footer,
+}: EmailTemplateProps) {
+  return `
+    <div style="margin:0;background:#f4f4f5;padding:40px 20px;font-family:Arial,Helvetica,sans-serif;">
+      <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:12px;padding:40px;box-sizing:border-box;text-align:center;">
+
+        <h1 style="margin:0;font-size:28px;font-weight:700;color:#111827;">
+          ${title}
+        </h1>
+
+        ${paragraphs
+          .map(
+            (paragraph, index) => `
+              <p style="
+                margin:${index === 0 ? "24px" : "16px"} 0 ${
+                  index === paragraphs.length - 1 ? "32px" : "0"
+                };
+                font-size:16px;
+                line-height:24px;
+                color:#4b5563;
+              ">
+                ${paragraph}
+              </p>
+            `,
+          )
+          .join("")}
+
+        <a
+          href="${buttonUrl}"
+          style="
+            display:inline-block;
+            padding:14px 28px;
+            background:${buttonColor};
+            border-radius:8px;
+            color:#ffffff;
+            text-decoration:none;
+            font-size:16px;
+            font-weight:600;
+          "
+        >
+          ${buttonText}
+        </a>
+
+        ${
+          footer
+            ? `
+          <p style="margin:32px 0 0;font-size:14px;line-height:22px;color:#9ca3af;">
+            ${footer}
+          </p>
+        `
+            : ""
+        }
+
+        <p style="margin:24px 0 0;font-size:14px;line-height:20px;word-break:break-all;">
+          <a href="${buttonUrl}" style="color:#2563eb;text-decoration:none;">
+            ${buttonUrl}
+          </a>
+        </p>
+
+      </div>
+    </div>
+  `;
+}
+
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
@@ -19,68 +98,15 @@ export const auth = betterAuth({
         to: user.email,
         subject: "Подтверждение электронной почты",
         text: `Перейдите по ссылке для подтверждения email: ${url}`,
-        html: `
-        <div style="margin:0;padding:0;background-color:#f4f4f5;font-family:Arial,sans-serif;">
-          <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
-            <tr>
-              <td align="center">
-                <table
-                  width="600"
-                  cellpadding="0"
-                  cellspacing="0"
-                  style="background:#ffffff;border-radius:12px;padding:40px;"
-                >
-                  <tr>
-                    <td align="center">
-                      <h1 style="margin:0;font-size:28px;color:#111827;">
-                        Подтвердите ваш email
-                      </h1>
-
-                      <p style="margin:24px 0 0;color:#4b5563;font-size:16px;line-height:24px;">
-                        Здравствуйте, ${user.name ?? "пользователь"}!
-                      </p>
-
-                      <p style="margin:16px 0 32px;color:#4b5563;font-size:16px;line-height:24px;">
-                        Спасибо за регистрацию. Нажмите кнопку ниже,
-                        чтобы подтвердить адрес электронной почты.
-                      </p>
-
-                      <a
-                        href="${url}"
-                        style="
-                          display:inline-block;
-                          background:#111827;
-                          color:#ffffff;
-                          text-decoration:none;
-                          padding:14px 28px;
-                          border-radius:8px;
-                          font-size:16px;
-                          font-weight:600;
-                        "
-                      >
-                        Подтвердить email
-                      </a>
-
-                      <p style="margin:32px 0 0;color:#9ca3af;font-size:14px;line-height:22px;">
-                        Если кнопка не работает, откройте ссылку вручную:
-                      </p>
-
-                      <p style="margin:12px 0 0;word-break:break-all;">
-                        <a
-                          href="${url}"
-                          style="color:#2563eb;font-size:14px;text-decoration:none;"
-                        >
-                          ${url}
-                        </a>
-                      </p>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-        </div>
-      `,
+        html: emailTemplate({
+          title: "Подтвердите ваш email",
+          paragraphs: [
+            `Здравствуйте, ${user.name ?? "пользователь"}!`,
+            "Спасибо за регистрацию. Нажмите кнопку ниже, чтобы подтвердить адрес электронной почты.",
+          ],
+          buttonText: "Подтвердить email",
+          buttonUrl: url,
+        }),
       });
     },
 
@@ -99,59 +125,18 @@ export const auth = betterAuth({
         to: user.email,
         subject: "Сброс пароля",
         text: `Перейдите по ссылке для сброса пароля: ${url}`,
-        html: `
-        <div style="margin:0;padding:0;background:#f4f4f5;font-family:Arial,sans-serif;">
-          <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
-            <tr>
-              <td align="center">
-                <table width="600" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:12px;padding:40px;">
-                  <tr>
-                    <td align="center">
-
-                      <h1 style="margin:0;font-size:28px;color:#111827;">
-                        Сброс пароля
-                      </h1>
-
-                      <p style="margin:24px 0 0;color:#4b5563;font-size:16px;line-height:24px;">
-                        Мы получили запрос на сброс пароля.
-                      </p>
-
-                      <p style="margin:16px 0 32px;color:#4b5563;font-size:16px;line-height:24px;">
-                        Нажмите кнопку ниже, чтобы создать новый пароль.
-                      </p>
-
-                      <a href="${url}"
-                        style="
-                          display:inline-block;
-                          background:#dc2626;
-                          color:#fff;
-                          text-decoration:none;
-                          padding:14px 28px;
-                          border-radius:8px;
-                          font-size:16px;
-                          font-weight:600;
-                        ">
-                        Сбросить пароль
-                      </a>
-
-                      <p style="margin:32px 0 0;color:#9ca3af;font-size:14px;">
-                        Если вы не запрашивали сброс — игнорируйте это письмо.
-                      </p>
-
-                      <p style="margin:12px 0 0;word-break:break-all;">
-                        <a href="${url}" style="color:#2563eb;font-size:14px;">
-                          ${url}
-                        </a>
-                      </p>
-
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-        </div>
-      `,
+        html: emailTemplate({
+          title: "Сброс пароля",
+          paragraphs: [
+            "Мы получили запрос на сброс пароля для вашей учетной записи.",
+            "Нажмите кнопку ниже, чтобы задать новый пароль.",
+          ],
+          buttonText: "Сбросить пароль",
+          buttonUrl: url,
+          buttonColor: "#dc2626",
+          footer:
+            "Если вы не запрашивали сброс пароля, просто проигнорируйте это письмо.",
+        }),
       });
     },
   },
@@ -176,19 +161,16 @@ export const auth = betterAuth({
         await transporter.sendMail({
           from: `"Taskry" <${process.env.SMTP_USER}>`,
           to: data.email,
-          subject: `Invitation to join ${data.organization.name}`,
-          html: `
-              <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-                <h2>Join ${data.organization.name}</h2>
-                <p><strong>${data.inviter.user.name}</strong> (${data.inviter.user.email}) has invited you to join their organization on our platform.</p>
-                <div style="margin: 24px 0;">
-                  <a href="${inviteLink}" style="background-color: #000; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 4px; display: inline-block;">
-                    Accept Invitation
-                  </a>
-                </div>
-                <p style="font-size: 12px; color: #666;">If the button doesn't work, copy and paste this link into your browser:<br>${inviteLink}</p>
-              </div>
-            `,
+          subject: `Приглашение в рабочее пространство`,
+          text: `Вас пригласили присоединиться к рабочему пространству. Примите приглашение: ${inviteLink}`,
+          html: emailTemplate({
+            title: `Приглашение в рабочее пространство`,
+            paragraphs: [
+              `${data.inviter.user.name} (${data.inviter.user.email}) пригласил вас присоединиться к рабочему пространству.`,
+            ],
+            buttonText: "Принять приглашение",
+            buttonUrl: inviteLink,
+          }),
         });
       },
       organizationLimit: 1,
