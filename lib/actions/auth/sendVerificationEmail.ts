@@ -4,9 +4,9 @@ import z from "zod";
 import { auth } from "@/lib/auth";
 import { ActionState } from "../types";
 import { headers } from "next/headers";
-import { APIError } from "better-auth";
 import { userEmail } from "@/lib/schemas/user";
 import { getTranslations } from "next-intl/server";
+import { handleBetterAuthError } from "@/lib/utils/actionErrors";
 
 const schema = z.object({
   email: userEmail,
@@ -17,31 +17,30 @@ export async function sendVerificationEmail(
 ): Promise<ActionState> {
   const t = await getTranslations("actions");
 
-  try {
-    const parsedData = schema.parse({ email });
+  // Validation
+  const result = schema.safeParse({ email });
 
+  if (!result.success) {
+    return {
+      status: "error",
+      message: t("common.error.invalidData"),
+    };
+  }
+
+  // Send verification email
+  try {
     await auth.api.sendVerificationEmail({
       body: {
-        email: parsedData.email,
+        email: result.data.email,
         callbackURL: "/dashboard",
       },
       headers: await headers(),
     });
   } catch (error: unknown) {
-    console.error("SendVerificationEmail Error:", error);
-
-    //Better auth error
-    if (error instanceof APIError) {
-      return {
-        status: "error",
-        message: error.message,
-      };
-    }
-
-    return {
-      status: "error",
-      message: t("common.error.internalServerError"),
-    };
+    return handleBetterAuthError(
+      error,
+      t("resetPassword.error.internalServerError"),
+    );
   }
 
   return { status: "success" };
