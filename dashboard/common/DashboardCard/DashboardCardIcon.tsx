@@ -1,6 +1,6 @@
 import { twMerge } from "tailwind-merge";
 
-export type DashboardCardIconColor = "blue" | "red" | "orange" | "green";
+type DashboardCardIconColor = "blue" | "red" | "orange" | "green";
 
 interface DashboardCardIconProps {
   color?: DashboardCardIconColor;

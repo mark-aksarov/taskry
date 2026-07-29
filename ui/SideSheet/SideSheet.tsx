@@ -10,7 +10,7 @@ import {
 import { tv } from "tailwind-variants";
 import { overlayStyles } from "../styles";
 
-export type SideSheetSide = "left" | "right";
+type SideSheetSide = "left" | "right";
 
 export type SideSheetProps = ModalOverlayProps &
   React.RefAttributes<HTMLDivElement> & {

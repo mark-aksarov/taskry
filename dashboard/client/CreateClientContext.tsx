@@ -9,9 +9,7 @@ import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuc
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 
-export const CreateClientContext = createContext<ActionContextType | null>(
-  null,
-);
+const CreateClientContext = createContext<ActionContextType | null>(null);
 
 interface CreateClientProviderProps {
   children: React.ReactNode;

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { type Decorator } from "@storybook/nextjs-vite";
 
-export type BackgroundVariant = "default" | "alt";
+type BackgroundVariant = "default" | "alt";
 
 export const withThemedBackground: Decorator = (Story, context) => {
   const variant: BackgroundVariant =

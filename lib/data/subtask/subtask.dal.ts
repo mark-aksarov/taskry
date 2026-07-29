@@ -158,7 +158,7 @@ export const deleteSubtask = async (id: number) => {
  * Helpers
  */
 
-export function mapToSubtaskDTO(
+function mapToSubtaskDTO(
   subtask: Pick<Subtask, "id" | "text" | "isDone" | "taskId">,
 ): SubtaskDTO {
   return {

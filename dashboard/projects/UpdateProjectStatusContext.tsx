@@ -10,7 +10,7 @@ import { updateProjectStatus } from "@/lib/actions/project/updateProjectStatus";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
-export const UpdateProjectStatusContext =
+const UpdateProjectStatusContext =
   createContext<ActionContextType<UpdateProjectStatusPayload> | null>(null);
 
 interface UpdateProjectStatusProviderProps {

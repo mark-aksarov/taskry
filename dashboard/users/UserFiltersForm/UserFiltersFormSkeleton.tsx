@@ -1,7 +1,7 @@
 import { Skeleton } from "@/ui/Skeleton";
 import { Separator } from "@/ui/Separator";
 import { FieldSkeleton } from "@/ui/Skeleton";
-import { SwitchSkeleton } from "@/ui/Skeleton/SwitchSkeleton";
+import { SwitchSkeleton } from "@/ui/Skeleton";
 
 export function UserFiltersFormSkeleton() {
   return (

@@ -9,8 +9,8 @@ import {
   ListItemTitleSkeleton,
 } from "@/dashboard/common/ListItem";
 
+import { CheckboxSkeleton } from "@/ui/Skeleton";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
-import { CheckboxSkeleton } from "@/ui/Skeleton/CheckboxSkeleton";
 
 export const UserTaskListItemSkeleton = () => {
   return (

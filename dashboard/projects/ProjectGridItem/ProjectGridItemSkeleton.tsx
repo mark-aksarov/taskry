@@ -5,10 +5,10 @@ import {
 } from "@/dashboard/common/ItemBase";
 
 import { ProgressSkeleton } from "@/ui/Skeleton";
+import { CheckboxSkeleton } from "@/ui/Skeleton";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { GridItemInfoSkeleton } from "@/dashboard/common/GridItem";
 import { ImageContainerSkeleton } from "@/dashboard/common/ImageContainer";
-import { CheckboxSkeleton } from "@/ui/Skeleton/CheckboxSkeleton";
 
 interface ProjectGridItemSkeletonProps {
   showCheckbox?: boolean;

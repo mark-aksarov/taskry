@@ -9,9 +9,7 @@ import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuc
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 
-export const UpdateUserAddressContext = createContext<ActionContextType | null>(
-  null,
-);
+const UpdateUserAddressContext = createContext<ActionContextType | null>(null);
 
 interface UpdateUserAddressProviderProps {
   children: React.ReactNode;

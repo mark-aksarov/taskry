@@ -5,9 +5,9 @@ import {
 } from "@/dashboard/common/GridItem";
 
 import { Skeleton } from "@/ui/Skeleton";
+import { CheckboxSkeleton } from "@/ui/Skeleton";
 import { ClientGridItemLayout } from "./ClientGridItemLayout";
 import { ImageContainerSkeleton } from "@/dashboard/common/ImageContainer";
-import { CheckboxSkeleton } from "@/ui/Skeleton/CheckboxSkeleton";
 import { ItemBaseActionMenuTriggerSkeleton } from "@/dashboard/common/ItemBase";
 
 interface ClientGridItemSkeletonProps {
@@ -16,7 +16,7 @@ interface ClientGridItemSkeletonProps {
   className?: string;
 }
 
-export function ClientGridItemSkeleton({
+function ClientGridItemSkeleton({
   showCheckbox,
   imageClassName,
   className,
@@ -54,9 +54,6 @@ export const ClientGridItemLargeSkeleton = () => {
 
 export const ClientGridItemMobileSkeleton = () => {
   return (
-    <ClientGridItemSkeleton
-      className="md:hidden"
-      imageClassName="h-11 w-11"
-    />
+    <ClientGridItemSkeleton className="md:hidden" imageClassName="h-11 w-11" />
   );
 };

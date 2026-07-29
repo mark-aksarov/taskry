@@ -2,7 +2,7 @@ import { mockedUserDetail } from "@/mocks/users";
 import { UserGridItemLarge } from "../UserGridItemLarge";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DeleteUserProvider } from "../../DeleteUserContext";
-import { UpdateUserProvider } from "../../UpdateUserProvider";
+import { UpdateUserProvider } from "../../UpdateUserContext";
 import { ViewModeProvider } from "@/dashboard/common/ViewMode";
 import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 

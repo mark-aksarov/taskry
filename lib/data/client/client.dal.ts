@@ -4,7 +4,6 @@ import {
   ClientDTO,
   ClientListDTO,
   ClientDetailDTO,
-  ClientSearchDTO,
   ClientSummaryDTO,
   CreateClientInputDTO,
   UpdateClientInputDTO,
@@ -173,56 +172,6 @@ export const getClients = cache(async (): Promise<ClientDTO[]> => {
 
   return clients.map(mapToClientDTO);
 });
-
-export const searchClients = cache(
-  async ({
-    query,
-    page,
-    pageSize,
-  }: {
-    query?: string;
-    page?: number;
-    pageSize?: number;
-  }): Promise<ClientSearchDTO> => {
-    // Authorization
-    const {
-      session: { activeOrganizationId: organizationId },
-    } = await requireOrganizationAccess();
-
-    // Get clients
-    const where = {
-      organizationId,
-      fullName: { contains: query, mode: "insensitive" as const },
-    };
-
-    const [items, totalCount] = await Promise.all([
-      prisma.client.findMany({
-        where,
-        orderBy: { fullName: "asc" },
-        skip: page && pageSize ? (page - 1) * pageSize : undefined,
-        take: pageSize,
-        select: {
-          id: true,
-          fullName: true,
-          email: true,
-          imageUrl: true,
-        },
-      }),
-      prisma.client.count({ where }),
-    ]);
-
-    //Map to ClientSearchDTO
-    return {
-      items: items.map((c) => ({
-        id: c.id,
-        fullName: c.fullName,
-        email: c.email,
-        imageUrl: c.imageUrl ?? undefined,
-      })),
-      totalCount,
-    };
-  },
-);
 
 export const getClientList = cache(
   async ({
@@ -449,7 +398,7 @@ export const updateClient = async (input: UpdateClientInputDTO) => {
  * HELPERS
  */
 
-export function buildClientWhereClause(
+function buildClientWhereClause(
   organizationId: string,
   filters?: ClientFilters,
 ): Prisma.ClientWhereInput {
@@ -492,11 +441,7 @@ export function buildClientWhereClause(
   };
 }
 
-/**
- * Helpers
- */
-
-export function mapToClientDTO(
+function mapToClientDTO(
   client: Pick<
     Client,
     | "id"

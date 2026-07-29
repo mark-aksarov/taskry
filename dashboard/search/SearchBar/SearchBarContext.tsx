@@ -11,9 +11,7 @@ interface SearchBarContextProps {
   updateValue: (value: string) => void;
 }
 
-export const SearchBarContext = createContext<SearchBarContextProps | null>(
-  null,
-);
+const SearchBarContext = createContext<SearchBarContextProps | null>(null);
 
 interface SearchBarProviderProps {
   initialValue: string;

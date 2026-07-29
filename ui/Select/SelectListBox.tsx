@@ -47,7 +47,7 @@ interface OptionProps<T extends object = any>
   state: ListState<T>;
 }
 
-export const Option = <T extends object>({
+const Option = <T extends object>({
   item,
   state,
   className,

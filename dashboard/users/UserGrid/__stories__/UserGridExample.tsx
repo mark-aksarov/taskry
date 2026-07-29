@@ -3,7 +3,7 @@ import { UserListItem } from "../../UserListItem";
 import { useViewMode } from "@/dashboard/common/ViewMode";
 import { EntityGrid } from "@/dashboard/common/EntityGrid";
 import { DeleteUserProvider } from "../../DeleteUserContext";
-import { UpdateUserProvider } from "../../UpdateUserProvider";
+import { UpdateUserProvider } from "../../UpdateUserContext";
 import { UserGridItemLarge, UserGridItemMobile } from "../../UserGridItem";
 
 export function UserGridExample() {

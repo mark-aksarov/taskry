@@ -9,8 +9,7 @@ import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuc
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 
-export const UpdateTaskDeadlineContext =
-  createContext<ActionContextType | null>(null);
+const UpdateTaskDeadlineContext = createContext<ActionContextType | null>(null);
 
 interface UpdateTaskDeadlineProviderProps {
   children: React.ReactNode;

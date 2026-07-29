@@ -13,14 +13,6 @@ export const mockedProjectSummaries = [
   { id: 10, title: "Project 10" },
 ];
 
-export const mockedProjectSearchList = [
-  { id: 1, title: "Project 1", deadline: "2025-01-01" },
-  { id: 2, title: "Project 2", deadline: "2025-01-02" },
-  { id: 3, title: "Project 3", deadline: "2025-01-03" },
-  { id: 4, title: "Project 4", deadline: "2025-01-04" },
-  { id: 5, title: "Project 5", deadline: "2025-01-05" },
-];
-
 export const mockedProjectDetail = {
   id: 1,
   title: "Fake project",

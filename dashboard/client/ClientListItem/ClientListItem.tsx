@@ -43,7 +43,7 @@ type InnerProps = BaseClientItemProps & {
   isPending: boolean;
 };
 
-export const ClientListItemInner = memo(function ClientListItemInner({
+const ClientListItemInner = memo(function ClientListItemInner({
   id,
   isPending,
   fullName,

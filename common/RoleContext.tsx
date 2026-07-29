@@ -4,7 +4,7 @@ import { createContext, useContext } from "react";
 
 type RoleContextType = "owner" | "member";
 
-export const RoleContext = createContext<RoleContextType | null>(null);
+const RoleContext = createContext<RoleContextType | null>(null);
 
 interface RoleProviderProps {
   value: RoleContextType;

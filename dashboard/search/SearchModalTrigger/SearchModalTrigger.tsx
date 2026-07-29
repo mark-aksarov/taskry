@@ -11,7 +11,7 @@ import { usePageTransition } from "@/dashboard/common/PageTransitionContext";
 import { SearchModalTriggerPlaceholder } from "./SearchModalTriggerPlaceholder";
 import { SearchModalTriggerClearButton } from "./SearchModalTriggerClearButton";
 
-export const styles = tv({
+const styles = tv({
   extend: focusRing,
   base: [
     "flex flex-auto items-center justify-between",

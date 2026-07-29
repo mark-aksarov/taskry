@@ -154,7 +154,7 @@ export const deleteProjectCategories = async (ids: number[]) => {
  * Helper
  */
 
-export function mapToProjectCategoryDTO(
+function mapToProjectCategoryDTO(
   projectCategory: Pick<ProjectCategory, "id" | "name">,
 ): ProjectCategoryDTO {
   return {

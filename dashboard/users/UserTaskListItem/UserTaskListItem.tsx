@@ -35,7 +35,7 @@ export const UserTaskListItem = (props: BaseTaskItemProps) => {
 
 type InnerProps = BaseTaskItemProps & { isPending: boolean };
 
-export const UserTaskListItemInner = memo(function UserTaskListItemInner({
+const UserTaskListItemInner = memo(function UserTaskListItemInner({
   id,
   isPending,
   title,

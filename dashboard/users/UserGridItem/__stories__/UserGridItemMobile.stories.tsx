@@ -3,7 +3,7 @@ import { UserGridItemMobile } from "../UserGridItemMobile";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ViewModeProvider } from "@/dashboard/common/ViewMode";
 import { DeleteUserProvider } from "../../DeleteUserContext";
-import { UpdateUserProvider } from "../../UpdateUserProvider";
+import { UpdateUserProvider } from "../../UpdateUserContext";
 import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const meta = {

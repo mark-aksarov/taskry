@@ -5,7 +5,7 @@ import {
   ListItemTitleSkeleton,
 } from "@/dashboard/common/ListItem";
 
-import { CheckboxSkeleton } from "@/ui/Skeleton/CheckboxSkeleton";
+import { CheckboxSkeleton } from "@/ui/Skeleton";
 import { ItemBaseActionMenuTriggerSkeleton } from "@/dashboard/common/ItemBase";
 
 export function ProjectCategoryListItemSkeleton() {

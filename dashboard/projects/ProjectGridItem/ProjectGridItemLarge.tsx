@@ -20,12 +20,12 @@ import {
 } from "@/dashboard/common/ItemBase";
 
 import { memo } from "react";
+import { ProjectItemCheckbox } from "../ProjectItem";
+import { useModal } from "@/common/ModalManagerContext";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { SelectableProjectItem } from "../SelectableProjectItem";
 import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
-import { useModal } from "@/common/ModalManagerContext";
 import { ProjectGridItemProgress } from "./ProjectGridItemProgress";
-import { ProjectItemCheckbox } from "../ProjectItem/ProjectItemCheckbox";
 import { ProjectGridItemLargeSkeleton } from "./ProjectGridItemSkeleton";
 import { GridItemLargeGate } from "@/dashboard/common/GridItemLargeGate";
 
@@ -50,92 +50,89 @@ type InnerProps = Props & {
   isPending: boolean;
 };
 
-export const ProjectGridItemLargeInner = memo(
-  function ProjectGridItemLargeInner({
-    id,
-    isPending,
-    title,
-    deadline,
-    creator,
-    commentsCount,
-    status,
-    tasksTotal,
-    tasksCompleted,
-  }: InnerProps) {
-    const { onOpenChange: onProjectDetailModalOpenChange } =
-      useModal("projectDetail");
-    const { onOpenChange: onUserDetailModalOpenChange } =
-      useModal("userDetail");
-    const { onOpenChange: onProjectCommentsModalOpenChange } =
-      useModal("projectComments");
+const ProjectGridItemLargeInner = memo(function ProjectGridItemLargeInner({
+  id,
+  isPending,
+  title,
+  deadline,
+  creator,
+  commentsCount,
+  status,
+  tasksTotal,
+  tasksCompleted,
+}: InnerProps) {
+  const { onOpenChange: onProjectDetailModalOpenChange } =
+    useModal("projectDetail");
+  const { onOpenChange: onUserDetailModalOpenChange } = useModal("userDetail");
+  const { onOpenChange: onProjectCommentsModalOpenChange } =
+    useModal("projectComments");
 
-    const creatorImg = (
-      <ItemBaseUserImageContainer
-        user={creator}
-        className="h-9 w-9"
-        width={36}
-        height={36}
-      />
-    );
+  const creatorImg = (
+    <ItemBaseUserImageContainer
+      user={creator}
+      className="h-9 w-9"
+      width={36}
+      height={36}
+    />
+  );
 
-    return (
-      <ProjectGridItemLayout
-        className={isPending ? "*:opacity-50" : undefined}
-        checkboxSlot={
-          <ProjectItemCheckbox id={id} title={title} status={status} />
-        }
-        menuTriggerSlot={
-          <ProjectItemActionMenuTrigger
-            projectId={id}
-            projectStatus={status}
-            className="-mr-2"
-          />
-        }
-        mainSlot={
-          <GridItemInfo className="flex-auto">
-            <GridItemTitleButton
-              onPress={() => onProjectDetailModalOpenChange(true)}
-            >
-              {title}
-            </GridItemTitleButton>
+  return (
+    <ProjectGridItemLayout
+      className={isPending ? "*:opacity-50" : undefined}
+      checkboxSlot={
+        <ProjectItemCheckbox id={id} title={title} status={status} />
+      }
+      menuTriggerSlot={
+        <ProjectItemActionMenuTrigger
+          projectId={id}
+          projectStatus={status}
+          className="-mr-2"
+        />
+      }
+      mainSlot={
+        <GridItemInfo className="flex-auto">
+          <GridItemTitleButton
+            onPress={() => onProjectDetailModalOpenChange(true)}
+          >
+            {title}
+          </GridItemTitleButton>
 
-            <GridItemText>
-              <ItemBaseDeadline deadline={deadline} />
-            </GridItemText>
-          </GridItemInfo>
-        }
-        creatorImageSlot={
-          creator ? (
-            <ItemBaseDetailButton
-              aria-label={creator.fullName}
-              onPress={() => onUserDetailModalOpenChange(true)}
-            >
-              {creatorImg}
-            </ItemBaseDetailButton>
-          ) : (
-            creatorImg
-          )
-        }
-        commentsSlot={
-          <ItemBaseCommentsButton
-            commentsCount={commentsCount}
-            onPress={() => onProjectCommentsModalOpenChange(true)}
-          />
-        }
-        statusSlot={
-          <ProjectItemStatusBadge
-            projectId={id}
-            deadline={deadline}
-            status={status}
-          />
-        }
-        progressSlot={
-          <ProjectGridItemProgress
-            tasksTotal={tasksTotal}
-            tasksCompleted={tasksCompleted}
-          />
-        }
-      />
-    );
-  },
-);
+          <GridItemText>
+            <ItemBaseDeadline deadline={deadline} />
+          </GridItemText>
+        </GridItemInfo>
+      }
+      creatorImageSlot={
+        creator ? (
+          <ItemBaseDetailButton
+            aria-label={creator.fullName}
+            onPress={() => onUserDetailModalOpenChange(true)}
+          >
+            {creatorImg}
+          </ItemBaseDetailButton>
+        ) : (
+          creatorImg
+        )
+      }
+      commentsSlot={
+        <ItemBaseCommentsButton
+          commentsCount={commentsCount}
+          onPress={() => onProjectCommentsModalOpenChange(true)}
+        />
+      }
+      statusSlot={
+        <ProjectItemStatusBadge
+          projectId={id}
+          deadline={deadline}
+          status={status}
+        />
+      }
+      progressSlot={
+        <ProjectGridItemProgress
+          tasksTotal={tasksTotal}
+          tasksCompleted={tasksCompleted}
+        />
+      }
+    />
+  );
+});

@@ -1,5 +1,4 @@
 import { twMerge } from "tailwind-merge";
-import { Skeleton } from "@/ui/Skeleton";
 
 interface CommentItemTextProps {
   className?: string;
@@ -15,16 +14,6 @@ export function CommentItemText({ className, children }: CommentItemTextProps) {
       )}
     >
       {children}
-    </div>
-  );
-}
-
-export function CommentItemTextSkeleton({ className }: { className?: string }) {
-  return (
-    <div className={twMerge("flex flex-col", className)}>
-      <Skeleton size="sm" />
-      <Skeleton size="sm" />
-      <Skeleton size="sm" />
     </div>
   );
 }

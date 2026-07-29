@@ -9,8 +9,9 @@ import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuc
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 
-export const UpdateClientFullNameContext =
-  createContext<ActionContextType | null>(null);
+const UpdateClientFullNameContext = createContext<ActionContextType | null>(
+  null,
+);
 
 interface UpdateClientFullNameProviderProps {
   children: React.ReactNode;

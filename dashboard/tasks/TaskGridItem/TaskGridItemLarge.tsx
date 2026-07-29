@@ -40,7 +40,7 @@ export function TaskGridItemLarge(props: Props) {
 
 type InnerProps = Props & { isPending: boolean };
 
-export const TaskGridItemLargeInner = memo(function TaskGridItemLargeInner({
+const TaskGridItemLargeInner = memo(function TaskGridItemLargeInner({
   id,
   title,
   deadline,

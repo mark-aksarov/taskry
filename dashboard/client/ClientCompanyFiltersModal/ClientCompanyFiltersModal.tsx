@@ -43,7 +43,7 @@ export function ClientCompanyFiltersModal({
   );
 }
 
-export function DialogHeader() {
+function DialogHeader() {
   const t = useTranslations("dashboard.clients.ClientCompanyFiltersModal");
 
   const dispatch = useClientFiltersFormDispatch();

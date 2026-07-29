@@ -45,93 +45,88 @@ export function ProjectGridItemMobile(props: Props) {
 
 type InnerProps = Props & { isPending: boolean };
 
-export const ProjectGridItemMobileInner = memo(
-  function ProjectGridItemMobileInner({
-    id,
-    isPending,
-    title,
-    deadline,
-    creator,
-    commentsCount,
-    status,
-    tasksTotal,
-    tasksCompleted,
-  }: InnerProps) {
-    const { onOpenChange: onProjectCommentsModalOpenChange } =
-      useModal("projectComments");
+const ProjectGridItemMobileInner = memo(function ProjectGridItemMobileInner({
+  id,
+  isPending,
+  title,
+  deadline,
+  creator,
+  commentsCount,
+  status,
+  tasksTotal,
+  tasksCompleted,
+}: InnerProps) {
+  const { onOpenChange: onProjectCommentsModalOpenChange } =
+    useModal("projectComments");
 
-    const creatorImg = (
-      <ItemBaseUserImageContainer
-        user={creator}
-        className="z-1 h-11 w-11"
-        width={44}
-        height={44}
+  const creatorImg = (
+    <ItemBaseUserImageContainer
+      user={creator}
+      className="z-1 h-11 w-11"
+      width={44}
+      height={44}
+    />
+  );
+
+  return (
+    <div
+      className={twMerge("relative block", isPending && "pointer-events-none")}
+    >
+      <BaseLink
+        aria-label={title}
+        href={`/projects/${id}`}
+        className="absolute inset-0 z-0"
       />
-    );
-
-    return (
-      <div
-        className={twMerge(
-          "relative block",
-          isPending && "pointer-events-none",
-        )}
-      >
-        <BaseLink
-          aria-label={title}
-          href={`/projects/${id}`}
-          className="absolute inset-0 z-0"
-        />
-        <ProjectGridItemLayout
-          className={isPending ? "*:opacity-50" : undefined}
-          menuTriggerSlot={
-            <ProjectItemActionMenuTrigger
-              projectId={id}
-              projectStatus={status}
-              className="relative z-1 -mr-2 ml-auto"
-            />
-          }
-          mainSlot={
-            <GridItemInfo className="flex-auto">
-              <GridItemTitle>{title}</GridItemTitle>
-              <GridItemText>
-                <ItemBaseDeadline deadline={deadline} />
-              </GridItemText>
-            </GridItemInfo>
-          }
-          creatorImageSlot={
-            creator ? (
-              <BaseLink
-                aria-label={creator.fullName}
-                href={`/team/${creator.id}`}
-              >
-                {creatorImg}
-              </BaseLink>
-            ) : (
-              creatorImg
-            )
-          }
-          commentsSlot={
-            <ItemBaseCommentsButton
-              commentsCount={commentsCount}
-              onPress={() => onProjectCommentsModalOpenChange(true)}
-              className="relative z-1"
-            />
-          }
-          statusSlot={
-            <ProjectItemStatusBadge
-              projectId={id}
-              deadline={deadline}
-              status={status}
-            />
-          }
-          progressSlot={
-            <ProjectGridItemProgress
-              tasksTotal={tasksTotal}
-              tasksCompleted={tasksCompleted}
-            />
-          }
-        />
-      </div>
-    );
-  },
-);
+      <ProjectGridItemLayout
+        className={isPending ? "*:opacity-50" : undefined}
+        menuTriggerSlot={
+          <ProjectItemActionMenuTrigger
+            projectId={id}
+            projectStatus={status}
+            className="relative z-1 -mr-2 ml-auto"
+          />
+        }
+        mainSlot={
+          <GridItemInfo className="flex-auto">
+            <GridItemTitle>{title}</GridItemTitle>
+            <GridItemText>
+              <ItemBaseDeadline deadline={deadline} />
+            </GridItemText>
+          </GridItemInfo>
+        }
+        creatorImageSlot={
+          creator ? (
+            <BaseLink
+              aria-label={creator.fullName}
+              href={`/team/${creator.id}`}
+            >
+              {creatorImg}
+            </BaseLink>
+          ) : (
+            creatorImg
+          )
+        }
+        commentsSlot={
+          <ItemBaseCommentsButton
+            commentsCount={commentsCount}
+            onPress={() => onProjectCommentsModalOpenChange(true)}
+            className="relative z-1"
+          />
+        }
+        statusSlot={
+          <ProjectItemStatusBadge
+            projectId={id}
+            deadline={deadline}
+            status={status}
+          />
+        }
+        progressSlot={
+          <ProjectGridItemProgress
+            tasksTotal={tasksTotal}
+            tasksCompleted={tasksCompleted}
+          />
+        }
+      />
+    </div>
+  );
+});

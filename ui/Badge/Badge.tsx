@@ -1,6 +1,6 @@
-import { tv, type VariantProps } from "tailwind-variants";
+import { tv } from "tailwind-variants";
 
-export const badgeStyles = tv({
+const badgeStyles = tv({
   base: "flex items-center justify-center gap-1 rounded-full px-5 py-1.5 text-center text-xs font-bold",
   variants: {
     color: {

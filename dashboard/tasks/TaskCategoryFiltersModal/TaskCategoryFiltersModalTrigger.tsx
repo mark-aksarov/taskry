@@ -5,10 +5,6 @@ import { useModal } from "@/common/ModalManagerContext";
 import { FilterButtonMobile } from "@/dashboard/common/FilterButton";
 import { useTaskFilters } from "../TaskFiltersContext";
 
-export interface TaskCategoryFiltersModalTriggerProps {
-  filtersFormContainer: React.ReactNode;
-}
-
 export function TaskCategoryFiltersModalTrigger() {
   const t = useTranslations("dashboard.tasks.TaskCategoryFiltersModalTrigger");
   const { onOpenChange } = useModal("taskCategoryFilters");

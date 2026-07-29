@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { ProjectGrid } from "./ProjectGrid/ProjectGrid";
+import { ProjectGrid } from "./ProjectGrid";
 import { DeleteProjectModal } from "./DeleteProjectModal";
 import { UpdateProjectModal } from "./UpdateProjectModal";
 import { ProjectListItemSkeleton } from "./ProjectListItem";

@@ -4,10 +4,10 @@ import {
   ItemBaseActionMenuTriggerSkeleton,
 } from "@/dashboard/common/ItemBase";
 
-import { TaskGridItemLayout } from "./TaskGridItemLayout";
+import { CheckboxSkeleton } from "@/ui/Skeleton";
 import { ProgressSkeleton } from "@/ui/Skeleton";
+import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { GridItemInfoSkeleton } from "@/dashboard/common/GridItem";
-import { CheckboxSkeleton } from "@/ui/Skeleton/CheckboxSkeleton";
 import { ImageContainerSkeleton } from "@/dashboard/common/ImageContainer";
 
 interface TaskGridItemSkeletonProps {

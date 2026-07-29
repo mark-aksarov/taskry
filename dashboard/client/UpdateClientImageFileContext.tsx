@@ -6,8 +6,7 @@ import {
 } from "@/dashboard/common/ImageFileContext";
 import { createContext, useContext } from "react";
 
-export const UpdateClientImageFileContext =
-  createContext<ImageFileContextType>(null);
+const UpdateClientImageFileContext = createContext<ImageFileContextType>(null);
 
 interface UpdateClientImageFileProviderProps {
   children: React.ReactNode;

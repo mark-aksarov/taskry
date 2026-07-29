@@ -8,8 +8,9 @@ import { deletePositions } from "@/lib/actions/position/deletePositions";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
-export const DeletePositionsContext =
-  createContext<DeleteEntitiesContextType | null>(null);
+const DeletePositionsContext = createContext<DeleteEntitiesContextType | null>(
+  null,
+);
 
 interface DeletePositionsProviderProps {
   children: React.ReactNode;

@@ -9,7 +9,7 @@ import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuc
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 
-export const CreateUserContext = createContext<ActionContextType | null>(null);
+const CreateUserContext = createContext<ActionContextType | null>(null);
 
 interface CreateUserProviderProps {
   children: React.ReactNode;

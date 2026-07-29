@@ -8,8 +8,9 @@ import { useRefreshComments } from "@/lib/swr/hooks/useRefreshComments";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
-export const DeleteCommentContext =
-  createContext<ActionContextType<number> | null>(null);
+const DeleteCommentContext = createContext<ActionContextType<number> | null>(
+  null,
+);
 
 interface DeleteCommentProviderProps {
   children: React.ReactNode;

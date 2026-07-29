@@ -5,10 +5,9 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { useReducer, useContext, createContext } from "react";
 import { CalendarDate, parseDate } from "@internationalized/date";
 
-export const TaskFiltersFormContext =
-  createContext<TaskFiltersFormState | null>(null);
+const TaskFiltersFormContext = createContext<TaskFiltersFormState | null>(null);
 
-export const TaskFiltersFormDispatchContext =
+const TaskFiltersFormDispatchContext =
   createContext<React.Dispatch<TaskFiltersFormAction> | null>(null);
 
 interface TaskFiltersFormProviderProps {
@@ -94,7 +93,7 @@ function createInitialState(
   };
 }
 
-export function taskFiltersReducer(
+function taskFiltersReducer(
   state: TaskFiltersFormState,
   action: TaskFiltersFormAction,
 ) {

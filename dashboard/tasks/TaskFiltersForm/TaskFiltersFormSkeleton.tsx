@@ -1,6 +1,6 @@
 import { Skeleton } from "@/ui/Skeleton";
 import { Separator } from "@/ui/Separator";
-import { SwitchSkeleton } from "@/ui/Skeleton/SwitchSkeleton";
+import { SwitchSkeleton } from "@/ui/Skeleton";
 import { FieldSkeleton, FieldGroupSkeleton } from "@/ui/Skeleton";
 
 export function TaskFiltersFormSkeleton() {

@@ -158,9 +158,7 @@ export const deleteCompanies = async (ids: number[]) => {
  * Helpers
  */
 
-export function mapToCompanyDTO(
-  company: Pick<Company, "id" | "name">,
-): CompanyDTO {
+function mapToCompanyDTO(company: Pick<Company, "id" | "name">): CompanyDTO {
   return {
     id: company.id,
     name: company.name,

@@ -5,7 +5,7 @@ import { createContext, useContext } from "react";
 
 type SessionContextType = typeof auth.$Infer.Session | null;
 
-export const SessionContext = createContext<SessionContextType>(null);
+const SessionContext = createContext<SessionContextType>(null);
 
 interface SessionProviderProps {
   value: SessionContextType;

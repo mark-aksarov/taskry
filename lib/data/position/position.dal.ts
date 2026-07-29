@@ -152,7 +152,7 @@ export const deletePositions = async (ids: number[]) => {
  * Helpers
  */
 
-export function mapToPositionDTO(
+function mapToPositionDTO(
   position: Pick<Position, "id" | "name">,
 ): PositionDTO {
   return {

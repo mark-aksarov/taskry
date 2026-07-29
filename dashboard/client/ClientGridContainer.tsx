@@ -15,7 +15,7 @@ import { ModalManagerProvider } from "@/common/ModalManagerContext";
 import { UpdateClientFormContainer } from "./UpdateClientFormContainer";
 import { ClientDetailHeaderContainer } from "./ClientDetailHeaderContainer";
 
-export const ClientListItem = dynamic(
+const ClientListItem = dynamic(
   () => import("./ClientListItem").then((mod) => mod.ClientListItem),
   {
     ssr: false,
@@ -23,14 +23,14 @@ export const ClientListItem = dynamic(
   },
 );
 
-export const ClientGridItemLarge = dynamic(
+const ClientGridItemLarge = dynamic(
   () => import("./ClientGridItem").then((mod) => mod.ClientGridItemLarge),
   {
     ssr: false,
   },
 );
 
-export const ClientGridItemMobile = dynamic(
+const ClientGridItemMobile = dynamic(
   () => import("./ClientGridItem").then((mod) => mod.ClientGridItemMobile),
   {
     ssr: false,

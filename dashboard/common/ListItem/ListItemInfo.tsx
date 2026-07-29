@@ -1,5 +1,4 @@
 import { twMerge } from "tailwind-merge";
-import { Skeleton } from "@/ui/Skeleton";
 
 interface ListItemInfoProps {
   className?: string;
@@ -14,13 +13,4 @@ const styles =
 
 export function ListItemInfo({ className, children }: ListItemInfoProps) {
   return <div className={twMerge(styles, className)}>{children}</div>;
-}
-
-export function ListItemInfoSkeleton({ className }: { className?: string }) {
-  return (
-    <div className={twMerge(styles, className)}>
-      <Skeleton className="w-[6rem] max-w-full" size="sm" />
-      <Skeleton className="w-[4rem] max-w-full" size="xs" />
-    </div>
-  );
 }

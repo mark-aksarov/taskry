@@ -40,7 +40,7 @@ type InnerProps = BaseUserItemProps & {
   isPending: boolean;
 };
 
-export const UserGridItemMobileInner = memo(function UserGridItemMobileInner({
+const UserGridItemMobileInner = memo(function UserGridItemMobileInner({
   id,
   isPending,
   fullName,

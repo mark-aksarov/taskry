@@ -7,7 +7,7 @@ import { ActionContextType, DeleteUserPayload } from "@/lib/actions/types";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
-export const DeleteUserContext =
+const DeleteUserContext =
   createContext<ActionContextType<DeleteUserPayload> | null>(null);
 
 interface DeleteUserProviderProps {

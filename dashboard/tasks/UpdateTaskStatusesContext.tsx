@@ -8,7 +8,7 @@ import { updateTaskStatuses } from "@/lib/actions/task/updateTaskStatuses";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
-export const UpdateTaskStatusesContext =
+const UpdateTaskStatusesContext =
   createContext<UpdateTaskStatusesContextType | null>(null);
 
 interface UpdateTaskStatusesProviderProps {

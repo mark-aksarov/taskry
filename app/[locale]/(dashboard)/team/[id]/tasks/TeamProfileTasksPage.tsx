@@ -32,7 +32,7 @@ import { EntityPagination } from "@/dashboard/common/EntityPagination";
 import { PageHeadingMobile } from "@/dashboard/common/PageHeadingMobile";
 import { DeleteUserProvider } from "@/dashboard/users/DeleteUserContext";
 import { CreateTaskProvider } from "@/dashboard/tasks/CreateTaskContext";
-import { UpdateUserProvider } from "@/dashboard/users/UpdateUserProvider";
+import { UpdateUserProvider } from "@/dashboard/users/UpdateUserContext";
 import { DeleteTasksProvider } from "@/dashboard/tasks/DeleteTasksContext";
 import { DashboardContainer } from "@/dashboard/common/DashboardContainer";
 import { ChangePasswordModal } from "@/dashboard/users/ChangePasswordModal";

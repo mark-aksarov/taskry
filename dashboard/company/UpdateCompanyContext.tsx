@@ -9,9 +9,7 @@ import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuc
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 
-export const UpdateCompanyContext = createContext<ActionContextType | null>(
-  null,
-);
+const UpdateCompanyContext = createContext<ActionContextType | null>(null);
 
 interface UpdateCompanyProviderProps {
   children: React.ReactNode;

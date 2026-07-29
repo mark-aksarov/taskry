@@ -9,8 +9,9 @@ import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionS
 import { createProjectCategory } from "@/lib/actions/projectCategory/createProjectCategory";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 
-export const CreateProjectCategoryContext =
-  createContext<ActionContextType | null>(null);
+const CreateProjectCategoryContext = createContext<ActionContextType | null>(
+  null,
+);
 
 interface CreateProjectCategoryProviderProps {
   children: React.ReactNode;

@@ -44,72 +44,68 @@ type InnerProps = BaseClientItemProps & {
   isPending: boolean;
 };
 
-export const ClientGridItemLargeInner = memo(
-  function ClientGridItemLargeInner({
-    id,
-    isPending,
-    fullName,
-    email,
-    phoneNumber,
-    publicLink,
-    imageUrl,
-    company,
-  }: InnerProps) {
-    const t = useTranslations("dashboard.clients.ClientGridItem");
+const ClientGridItemLargeInner = memo(function ClientGridItemLargeInner({
+  id,
+  isPending,
+  fullName,
+  email,
+  phoneNumber,
+  publicLink,
+  imageUrl,
+  company,
+}: InnerProps) {
+  const t = useTranslations("dashboard.clients.ClientGridItem");
 
-    const { onOpenChange: onClientDetailModalOpenChange } =
-      useModal("clientDetail");
+  const { onOpenChange: onClientDetailModalOpenChange } =
+    useModal("clientDetail");
 
-    const clientImg = (
-      <ItemBaseUserImageContainer
-        user={{ fullName, imageUrl }}
-        width={36}
-        height={36}
-        className="h-9 w-9"
-      />
-    );
+  const clientImg = (
+    <ItemBaseUserImageContainer
+      user={{ fullName, imageUrl }}
+      width={36}
+      height={36}
+      className="h-9 w-9"
+    />
+  );
 
-    return (
-      <ClientGridItemLayout
-        className={isPending ? "*:opacity-50" : undefined}
-        topRowSlot={
-          <GridItemRow>
-            <ClientItemCheckbox id={id} fullName={fullName} />
-            <ClientItemActionMenuTrigger clientId={id} className="-mr-2" />
-          </GridItemRow>
-        }
-        imageSlot={
-          <ItemBaseDetailButton
-            aria-label={fullName}
+  return (
+    <ClientGridItemLayout
+      className={isPending ? "*:opacity-50" : undefined}
+      topRowSlot={
+        <GridItemRow>
+          <ClientItemCheckbox id={id} fullName={fullName} />
+          <ClientItemActionMenuTrigger clientId={id} className="-mr-2" />
+        </GridItemRow>
+      }
+      imageSlot={
+        <ItemBaseDetailButton
+          aria-label={fullName}
+          onPress={() => onClientDetailModalOpenChange(true)}
+        >
+          {clientImg}
+        </ItemBaseDetailButton>
+      }
+      titleSlot={
+        <GridItemInfo className="flex-auto">
+          <GridItemTitleButton
             onPress={() => onClientDetailModalOpenChange(true)}
           >
-            {clientImg}
-          </ItemBaseDetailButton>
-        }
-        titleSlot={
-          <GridItemInfo className="flex-auto">
-            <GridItemTitleButton
-              onPress={() => onClientDetailModalOpenChange(true)}
-            >
-              {fullName}
-            </GridItemTitleButton>
+            {fullName}
+          </GridItemTitleButton>
 
-            <GridItemText>
-              {company ? company.name : t("noCompany")}
-            </GridItemText>
-          </GridItemInfo>
-        }
-        contactSlot={
-          <>
-            <Separator />
-            <GridItemContactList>
-              <GridItemPhoneNumber phoneNumber={phoneNumber} />
-              <GridItemPublicLink publicLink={publicLink} />
-              <GridItemEmail email={email} />
-            </GridItemContactList>
-          </>
-        }
-      />
-    );
-  },
-);
+          <GridItemText>{company ? company.name : t("noCompany")}</GridItemText>
+        </GridItemInfo>
+      }
+      contactSlot={
+        <>
+          <Separator />
+          <GridItemContactList>
+            <GridItemPhoneNumber phoneNumber={phoneNumber} />
+            <GridItemPublicLink publicLink={publicLink} />
+            <GridItemEmail email={email} />
+          </GridItemContactList>
+        </>
+      }
+    />
+  );
+});

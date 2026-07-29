@@ -3,7 +3,7 @@ import { UpdateUserForm } from "../UpdateUserForm";
 import { UpdateUserModal } from "../UpdateUserModal";
 import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { UpdateUserProvider } from "../UpdateUserProvider";
+import { UpdateUserProvider } from "../UpdateUserContext";
 import { UpdateUserFormSkeleton } from "../UpdateUserForm";
 import { mockedPositionSummaries } from "@/mocks/positions";
 import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";

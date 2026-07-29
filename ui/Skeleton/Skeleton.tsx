@@ -1,6 +1,6 @@
 import { twMerge } from "tailwind-merge";
 
-export type SkeletonSize =
+type SkeletonSize =
   | "xs"
   | "sm"
   | "base"

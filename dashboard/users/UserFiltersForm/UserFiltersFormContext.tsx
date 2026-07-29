@@ -3,10 +3,9 @@
 import { UserFilters } from "@/lib/types";
 import { useReducer, useContext, createContext } from "react";
 
-export const UserFiltersFormContext =
-  createContext<UserFiltersFormState | null>(null);
+const UserFiltersFormContext = createContext<UserFiltersFormState | null>(null);
 
-export const UserFiltersFormDispatchContext =
+const UserFiltersFormDispatchContext =
   createContext<React.Dispatch<UserFiltersFormAction> | null>(null);
 
 interface UserFiltersFormProviderProps {
@@ -79,7 +78,7 @@ function createInitialState(
   };
 }
 
-export function UserFiltersFormReducer(
+function UserFiltersFormReducer(
   state: UserFiltersFormState,
   action: UserFiltersFormAction,
 ) {

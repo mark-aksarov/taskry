@@ -12,9 +12,7 @@ interface CommentFormContextType {
   setCommentContent: (content: string) => void;
 }
 
-export const CommentFormContext = createContext<CommentFormContextType | null>(
-  null,
-);
+const CommentFormContext = createContext<CommentFormContextType | null>(null);
 
 interface CommentFormProviderProps {
   entityId: number;

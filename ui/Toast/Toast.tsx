@@ -61,7 +61,7 @@ export function ToastRegion() {
             <Button
               slot="close"
               variant="primary"
-              iconLeft={<X    />}
+              iconLeft={<X />}
               className={button()}
               aria-label={t("close")}
             />
@@ -72,7 +72,7 @@ export function ToastRegion() {
   );
 }
 
-export function Toast(props: RACToastProps<ToastContent>) {
+function Toast(props: RACToastProps<ToastContent>) {
   return (
     <RACToast
       {...props}

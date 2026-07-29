@@ -6,7 +6,7 @@ import { ItemBaseDetailButton, ItemBaseDetailButtonProps } from "../ItemBase";
 // Truncate (overflow-hidden + text-overflow) works only on block elements.
 // See: https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow#formal_definition
 
-export const titleStyles =
+const titleStyles =
   "truncate max-w-full text-sm font-bold text-(--text-primary)";
 
 // Text only title

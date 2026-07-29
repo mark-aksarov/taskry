@@ -541,7 +541,7 @@ export const deleteTasks = async (ids: number[]) => {
  * HELPERS
  */
 
-export function buildTaskWhereClause(
+function buildTaskWhereClause(
   userId: string,
   organizationId: string,
   filters?: TaskFilters,

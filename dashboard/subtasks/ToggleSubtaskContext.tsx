@@ -12,11 +12,11 @@ import { toggleSubtask } from "@/lib/actions/subtask/toggleSubtask";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
-export const initialState: ActionState = {
+const initialState: ActionState = {
   status: null,
 };
 
-export const ToggleSubtaskContext =
+const ToggleSubtaskContext =
   createContext<ActionContextType<ToggleSubtaskPayload> | null>(null);
 
 interface ToggleSubtaskProviderProps {

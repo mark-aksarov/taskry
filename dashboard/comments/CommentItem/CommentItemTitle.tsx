@@ -1,4 +1,4 @@
-export const styles =
+const styles =
   "overflow-hidden p-1 -m-1 text-nowrap overflow-ellipsis text-sm font-bold text-(--text-primary) inline";
 
 interface CommentItemTitleProps {

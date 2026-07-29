@@ -21,29 +21,3 @@ export function DetailInfoSkeleton({ className }: { className?: string }) {
     </div>
   );
 }
-
-interface DetailInfoAltProps {
-  className?: string;
-  title: React.ReactNode;
-  content: React.ReactNode;
-  editButton?: React.ReactNode;
-  "data-test"?: string;
-}
-
-export function DetailInfoAlt({
-  className,
-  title,
-  content,
-  editButton,
-  "data-test": dataTest,
-}: DetailInfoAltProps) {
-  return (
-    <div data-test={dataTest} className={twMerge(styles, className)}>
-      <div className="flex items-center justify-between self-stretch">
-        {title}
-        {editButton}
-      </div>
-      {content}
-    </div>
-  );
-}

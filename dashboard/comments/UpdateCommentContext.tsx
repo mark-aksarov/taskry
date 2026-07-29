@@ -8,9 +8,7 @@ import { useRefreshComments } from "@/lib/swr/hooks/useRefreshComments";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
-export const UpdateCommentContext = createContext<ActionContextType | null>(
-  null,
-);
+const UpdateCommentContext = createContext<ActionContextType | null>(null);
 
 interface UpdateCommentProviderProps {
   children: React.ReactNode;

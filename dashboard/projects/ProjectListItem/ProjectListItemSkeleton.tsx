@@ -9,9 +9,9 @@ import {
   ListItemTitleSkeleton,
 } from "@/dashboard/common/ListItem";
 
+import { CheckboxSkeleton } from "@/ui/Skeleton";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { ImageContainerSkeleton } from "@/dashboard/common/ImageContainer";
-import { CheckboxSkeleton } from "@/ui/Skeleton/CheckboxSkeleton";
 
 export const ProjectListItemSkeleton = () => {
   return (

@@ -8,7 +8,7 @@ import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
 
-export const ClearUserImageUrlContext =
+const ClearUserImageUrlContext =
   createContext<ActionContextType<string> | null>(null);
 
 interface ClearUserImageUrlProviderProps {

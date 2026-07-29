@@ -43,7 +43,7 @@ export function UserPositionFiltersModal({
   );
 }
 
-export function DialogHeader() {
+function DialogHeader() {
   const t = useTranslations("dashboard.users.UserPositionFiltersModal");
 
   const dispatch = useUserFiltersFormDispatch();

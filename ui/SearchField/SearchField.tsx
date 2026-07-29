@@ -24,7 +24,7 @@ type SearchFieldProps = RACSearchFieldProps &
     inputClassName?: string | ((values: any) => string);
   };
 
-export const searchInputStyles = tv({
+const searchInputStyles = tv({
   extend: fieldInputStyles,
   base: "peer pr-[calc(var(--spacing)*8+18px)]! [&::-webkit-search-cancel-button]:hidden",
 
@@ -64,12 +64,7 @@ export const SearchField = ({
             (className, renderProps) => base({ ...renderProps, className }),
           )}
         />
-        <Search
-          size={18}
-          
-          
-          className={icon()}
-        />
+        <Search size={18} className={icon()} />
       </div>
       <FieldError>{errorMessage}</FieldError>
     </RACSearchField>

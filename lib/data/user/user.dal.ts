@@ -2,7 +2,6 @@ import {
   UserDTO,
   UserListDTO,
   UserDetailDTO,
-  UserSearchDTO,
   UserSummaryDTO,
   UpdateUserInputDTO,
 } from "./user.dto";
@@ -213,61 +212,6 @@ export const getUserSummaries = cache(async (): Promise<UserSummaryDTO[]> => {
   }));
 });
 
-export const searchUsers = cache(
-  async ({
-    query,
-    page,
-    pageSize,
-  }: {
-    query?: string;
-    page?: number;
-    pageSize?: number;
-  }): Promise<UserSearchDTO> => {
-    // Authorization
-    const {
-      session: { activeOrganizationId: organizationId },
-    } = await requireOrganizationAccess();
-
-    // Get users
-    const where = {
-      organizationId,
-      fullName: { contains: query, mode: "insensitive" as const },
-    };
-
-    const [members, totalCount] = await Promise.all([
-      prisma.member.findMany({
-        where,
-        orderBy: { user: { fullName: "asc" } },
-        skip: page && pageSize ? (page - 1) * pageSize : undefined,
-        take: pageSize,
-        select: {
-          user: {
-            select: {
-              id: true,
-              fullName: true,
-              email: true,
-              imageUrl: true,
-            },
-          },
-        },
-      }),
-      prisma.member.count({ where }),
-    ]);
-
-    //Map to DTO
-    return {
-      items: members.map(({ user }) => ({
-        id: user.id,
-        fullName: user.fullName,
-        email: user.email,
-        imageUrl: user.imageUrl ?? undefined,
-      })),
-
-      totalCount,
-    };
-  },
-);
-
 export const getUserList = cache(
   async ({
     page,
@@ -459,7 +403,7 @@ export const deleteUser = async (id: string) => {
  * Helpers
  */
 
-export function buildMemberWhereClause(
+function buildMemberWhereClause(
   organizationId: string,
   filters?: UserFilters,
 ): Prisma.MemberWhereInput {
@@ -522,7 +466,7 @@ export function buildMemberWhereClause(
   };
 }
 
-export function mapToUserDTO(
+function mapToUserDTO(
   user: Pick<
     User,
     | "id"

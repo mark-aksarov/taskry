@@ -9,9 +9,7 @@ import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallb
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 
-export const UpdateSubtaskContext = createContext<ActionContextType | null>(
-  null,
-);
+const UpdateSubtaskContext = createContext<ActionContextType | null>(null);
 
 interface UpdateSubtaskProviderProps {
   children: React.ReactNode;

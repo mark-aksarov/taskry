@@ -27,7 +27,7 @@ export function EntityPagination(props: EntityPaginationProps) {
   return <EntityPaginationInner {...props} />;
 }
 
-export function EntityPaginationInner({
+function EntityPaginationInner({
   page,
   pageSize,
   totalPages,

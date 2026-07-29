@@ -2,7 +2,7 @@ import { FieldSkeleton, FieldGroupSkeleton } from "@/ui/Skeleton";
 
 import { Skeleton } from "@/ui/Skeleton";
 import { Separator } from "@/ui/Separator";
-import { SwitchSkeleton } from "@/ui/Skeleton/SwitchSkeleton";
+import { SwitchSkeleton } from "@/ui/Skeleton";
 
 export function ProjectFiltersFormSkeleton() {
   return (

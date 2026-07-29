@@ -17,7 +17,7 @@ type EmailTemplateProps = {
   footer?: string;
 };
 
-export function emailTemplate({
+function emailTemplate({
   title,
   paragraphs,
   buttonText,

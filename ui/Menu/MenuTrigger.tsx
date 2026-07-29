@@ -11,7 +11,7 @@ import { PressResponder } from "@react-aria/interactions";
 import { AriaMenuProps, useMenuTrigger } from "react-aria";
 import type { MenuTriggerProps as RACMenuTriggerProps } from "react-stately";
 
-export type MenuTriggerOwnProps = {
+type MenuTriggerOwnProps = {
   overlayType?: "popover" | "bottomsheet";
   overlayClassName?: string;
   placement?: Placement;

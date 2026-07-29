@@ -8,12 +8,12 @@ import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuc
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 
-export type UpdateClientImageActionPayloadType = {
+type UpdateClientImageActionPayloadType = {
   id: number;
   blob: Blob;
 };
 
-export const UpdateClientImageContext =
+const UpdateClientImageContext =
   createContext<ActionContextType<UpdateClientImageActionPayloadType> | null>(
     null,
   );

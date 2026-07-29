@@ -5,10 +5,11 @@ import { ProjectStatus } from "@/generated/prisma/enums";
 import { useReducer, useContext, createContext } from "react";
 import { CalendarDate, parseDate } from "@internationalized/date";
 
-export const ProjectFiltersFormContext =
-  createContext<ProjectFiltersFormState | null>(null);
+const ProjectFiltersFormContext = createContext<ProjectFiltersFormState | null>(
+  null,
+);
 
-export const ProjectFiltersFormDispatchContext =
+const ProjectFiltersFormDispatchContext =
   createContext<React.Dispatch<ProjectFiltersFormAction> | null>(null);
 
 interface ProjectFiltersFormProviderProps {
@@ -94,7 +95,7 @@ function createInitialState(
   };
 }
 
-export function projectFiltersReducer(
+function projectFiltersReducer(
   state: ProjectFiltersFormState,
   action: ProjectFiltersFormAction,
 ) {

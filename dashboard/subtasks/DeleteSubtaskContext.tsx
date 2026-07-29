@@ -7,8 +7,9 @@ import { deleteSubtask } from "@/lib/actions/subtask/deleteSubtask";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
-export const DeleteSubtaskContext =
-  createContext<ActionContextType<number> | null>(null);
+const DeleteSubtaskContext = createContext<ActionContextType<number> | null>(
+  null,
+);
 
 interface DeleteSubtaskProviderProps {
   children: React.ReactNode;

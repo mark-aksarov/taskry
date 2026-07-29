@@ -9,8 +9,9 @@ import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuc
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 
-export const UpdateTaskCategoryRelContext =
-  createContext<ActionContextType | null>(null);
+const UpdateTaskCategoryRelContext = createContext<ActionContextType | null>(
+  null,
+);
 
 interface UpdateTaskCategoryRelProviderProps {
   children: React.ReactNode;

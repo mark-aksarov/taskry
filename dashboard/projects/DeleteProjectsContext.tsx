@@ -8,8 +8,9 @@ import { deleteProjects } from "@/lib/actions/project/deleteProjects";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
-export const DeleteProjectsContext =
-  createContext<DeleteEntitiesContextType | null>(null);
+const DeleteProjectsContext = createContext<DeleteEntitiesContextType | null>(
+  null,
+);
 
 interface DeleteProjectsProviderProps {
   children: React.ReactNode;

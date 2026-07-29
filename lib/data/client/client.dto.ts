@@ -67,15 +67,3 @@ export type ClientListItemDTO = {
     name: string;
   };
 };
-
-export interface ClientSearchDTO {
-  items: ClientSearchItemDTO[];
-  totalCount: number;
-}
-
-export interface ClientSearchItemDTO {
-  id: number;
-  fullName: string;
-  email: string;
-  imageUrl?: string;
-}

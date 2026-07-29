@@ -1,7 +1,2 @@
 export { SearchBar } from "./SearchBar";
-
-export {
-  SearchBarContext,
-  SearchBarProvider,
-  useSearchBar,
-} from "./SearchBarContext";
+export { SearchBarProvider, useSearchBar } from "./SearchBarContext";

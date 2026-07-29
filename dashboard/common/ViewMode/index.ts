@@ -1,7 +1,6 @@
 export {
   useViewMode,
   type ViewMode,
-  ViewModeContext,
   ViewModeProvider,
 } from "./ViewModeContext";
 

@@ -1,7 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import { ItemBaseDetailButton, ItemBaseDetailButtonProps } from "../ItemBase";
 
-export const titleStyles =
+const titleStyles =
   "truncate max-w-full md:text-sm max-md:text-base font-bold text-(--text-primary)";
 
 // Text only title

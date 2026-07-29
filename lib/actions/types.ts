@@ -16,12 +16,6 @@ export type CreatePresignedUrlState = {
   message?: string;
 };
 
-export type DeleteCommentPayload = {
-  id: number;
-  taskId?: number;
-  projectId?: number;
-};
-
 export type DeleteProjectPayload = {
   id: number;
   shouldRedirect: boolean;
@@ -71,8 +65,6 @@ export interface UpdateTaskStatusesPayload {
   ids: number[];
   nextStatus: TaskStatus;
 }
-
-export type MarkAsReadPayload = number[] | null;
 
 export type ToggleSubtaskPayload = { id: number; isDone: boolean };
 

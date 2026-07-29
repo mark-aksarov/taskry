@@ -7,7 +7,7 @@ import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError
 import { deleteTaskCategory } from "@/lib/actions/taskCategory/deleteTaskCategory";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
-export const DeleteTaskCategoryContext =
+const DeleteTaskCategoryContext =
   createContext<ActionContextType<number> | null>(null);
 
 interface DeleteTaskCategoryProviderProps {

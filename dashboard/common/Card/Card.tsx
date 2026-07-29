@@ -12,7 +12,7 @@ export const Card = ({
   );
 };
 
-export const cardStyles = tv({
+const cardStyles = tv({
   base: [
     "overflow-hidden",
     "rounded-2xl",

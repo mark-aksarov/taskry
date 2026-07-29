@@ -18,7 +18,7 @@ interface ViewModeContextType {
   changeViewMode: (mode: ViewMode) => void;
 }
 
-export const ViewModeContext = createContext<ViewModeContextType | null>(null);
+const ViewModeContext = createContext<ViewModeContextType | null>(null);
 
 export function ViewModeProvider({
   initialValue = "list",

@@ -18,8 +18,9 @@ interface PageTransitionContextType {
   startSortingTransition: TransitionStartFunction;
 }
 
-export const PageTransitionContext =
-  createContext<PageTransitionContextType | null>(null);
+const PageTransitionContext = createContext<PageTransitionContextType | null>(
+  null,
+);
 
 export const PageTransitionProvider = ({
   children,

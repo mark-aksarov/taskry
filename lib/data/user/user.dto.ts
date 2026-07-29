@@ -49,23 +49,6 @@ export interface UserListItemDTO {
   };
 }
 
-export interface UserSearchDTO {
-  items: UserSearchItemDTO[];
-  totalCount: number;
-}
-
-export interface UserSearchItemDTO {
-  id: string;
-  fullName: string;
-  email: string;
-  imageUrl?: string;
-}
-
-export interface CreateUserInputDTO {
-  email: string;
-  fullName: string;
-}
-
 export interface UpdateUserInputDTO {
   id: string;
   imageUrl?: string | null;
@@ -76,9 +59,4 @@ export interface UpdateUserInputDTO {
   phoneNumber?: string | null;
   address?: string | null;
   publicLink?: string | null;
-}
-
-export interface ChangePasswordInputDTO {
-  currentPassword: string;
-  newPassword: string;
 }

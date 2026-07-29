@@ -8,7 +8,7 @@ import { updateClientImageUrl } from "@/lib/actions/client/updateClientImageUrl"
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
 
-export const ClearClientImageUrlContext =
+const ClearClientImageUrlContext =
   createContext<ActionContextType<number> | null>(null);
 
 interface ClearClientImageUrlProviderProps {

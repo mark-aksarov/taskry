@@ -7,7 +7,7 @@ import { ActionContextType, DeleteProjectPayload } from "@/lib/actions/types";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
-export const DeleteProjectContext =
+const DeleteProjectContext =
   createContext<ActionContextType<DeleteProjectPayload> | null>(null);
 
 interface DeleteProjectProviderProps {

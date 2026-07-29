@@ -13,7 +13,7 @@ import { TextArea, composeRenderProps, TextField } from "react-aria-components";
 
 const MAX_TEXTAREA_HEIGHT = 164;
 
-export const fieldInputStyles = tv({
+const fieldInputStyles = tv({
   base: [
     focusRing.base,
     "peer w-full resize-none rounded-xl p-4 pr-14 text-sm",

@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "@/i18n/navigation";
-import { ActionState } from "@/lib/actions/types";
 import { useContext, createContext } from "react";
 import { ActionContextType } from "@/lib/actions/types";
 import { createPosition } from "@/lib/actions/position/createPosition";
@@ -10,13 +9,7 @@ import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuc
 import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
 import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 
-export const CreatePositionContext = createContext<ActionContextType | null>(
-  null,
-);
-
-export const initialState: ActionState = {
-  status: null,
-};
+const CreatePositionContext = createContext<ActionContextType | null>(null);
 
 interface CreatePositionProviderProps {
   children: React.ReactNode;

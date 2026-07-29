@@ -29,7 +29,7 @@ import { buttonStyles } from "../Select/SelectButton";
 import { mergeProps, useResizeObserver } from "@react-aria/utils";
 import { Button, DateFieldContext, DateInput } from "react-aria-components";
 
-export interface DatePickerOwnProps {
+interface DatePickerOwnProps {
   overlayType?: "popover" | "bottomsheet";
   className?: string;
   overlayClassName?: string;
@@ -40,7 +40,7 @@ export type DatePickerProps<T extends DateValue> = AriaDatePickerProps<T> &
   React.RefAttributes<HTMLDivElement> &
   DatePickerOwnProps;
 
-export const groupStyles = tv({
+const groupStyles = tv({
   extend: fieldGroupStyles,
   base: buttonStyles.base,
   variants: {
@@ -189,7 +189,7 @@ export const DatePicker = <T extends DateValue>({
           </DateInput>
 
           <Button {...buttonProps} className={button}>
-            <CalendarIcon    />
+            <CalendarIcon />
           </Button>
         </div>
 

@@ -584,7 +584,7 @@ export const deleteProjects = async (ids: number[]) => {
  * HELPERS
  */
 
-export function buildProjectWhereClause(
+function buildProjectWhereClause(
   organizationId: string,
   filters?: ProjectFilters,
 ): Prisma.ProjectWhereInput {
@@ -616,11 +616,7 @@ export function buildProjectWhereClause(
   };
 }
 
-/**
- * Helpers
- */
-
-export function mapToProjectDTO(
+function mapToProjectDTO(
   position: Pick<
     Project,
     | "id"

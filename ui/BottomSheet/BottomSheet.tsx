@@ -22,7 +22,7 @@ const styles = tv({
   },
 });
 
-export type BottomSheetOwnProps = {
+type BottomSheetOwnProps = {
   state: OverlayTriggerState;
   className?: string;
   children: React.ReactNode;

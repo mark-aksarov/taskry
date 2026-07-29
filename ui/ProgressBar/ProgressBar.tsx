@@ -9,7 +9,7 @@ import {
 import { tv } from "tailwind-variants";
 import type { ProgressBarProps as RACProgressBarProps } from "react-aria-components";
 
-export const progressBarStyles = tv({
+const progressBarStyles = tv({
   slots: {
     root: "flex flex-col gap-1",
     header: "flex justify-between gap-2",

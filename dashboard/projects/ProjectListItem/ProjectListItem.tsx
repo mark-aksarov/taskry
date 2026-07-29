@@ -21,13 +21,13 @@ import {
 
 import { memo } from "react";
 import { useTranslations } from "next-intl";
+import { ProjectItemCheckbox } from "../ProjectItem";
+import { useModal } from "@/common/ModalManagerContext";
 import { ListItemGate } from "@/dashboard/common/ListItemGate";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { SelectableProjectItem } from "../SelectableProjectItem";
 import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
-import { useModal } from "@/common/ModalManagerContext";
 import { ProjectListItemSkeleton } from "./ProjectListItemSkeleton";
-import { ProjectItemCheckbox } from "../ProjectItem/ProjectItemCheckbox";
 
 export interface Props extends BaseProjectItemProps {
   category?: {

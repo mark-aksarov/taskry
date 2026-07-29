@@ -5,5 +5,4 @@ export { ListItemTextLink } from "./ListItemText";
 export { ListItemTextSkeleton } from "./ListItemText";
 export { ListItemTitleButton } from "./ListItemTitle";
 export { ListItemTitleSkeleton } from "./ListItemTitle";
-export { ListItemInfo, ListItemInfoSkeleton } from "./ListItemInfo";
-export { ListItemProgress, ListItemProgressSkeleton } from "./ListItemProgress";
+export { ListItemInfo } from "./ListItemInfo";

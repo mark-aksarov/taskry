@@ -9,7 +9,7 @@ import { useRefreshComments } from "@/lib/swr/hooks/useRefreshComments";
 import { useShowToastOnActionError } from "@/lib/hooks/useShowToastOnActionError";
 import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
 
-export const SendCommentContext = createContext<ActionContextType | null>(null);
+const SendCommentContext = createContext<ActionContextType | null>(null);
 
 interface SendCommentProviderProps {
   children: React.ReactNode;
