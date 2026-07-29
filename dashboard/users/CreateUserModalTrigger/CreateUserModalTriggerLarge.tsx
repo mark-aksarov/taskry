@@ -1,8 +1,9 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { CreateNewButtonLarge } from "@/dashboard/common/CreateNewButton";
+import { useRole } from "@/common/RoleContext";
 import { useCreateUserTriggerPress } from "./useCreateUserTriggerPress";
+import { CreateNewButtonLarge } from "@/dashboard/common/CreateNewButton";
 import { useCreateUserTriggerDisabled } from "./useCreateUserTriggerDisabled";
 
 export function CreateUserModalTriggerLarge({
@@ -14,6 +15,11 @@ export function CreateUserModalTriggerLarge({
 
   const isDisabled = useCreateUserTriggerDisabled();
   const handlePress = useCreateUserTriggerPress();
+  const role = useRole();
+
+  if (role !== "owner") {
+    return null;
+  }
 
   return (
     <CreateNewButtonLarge
