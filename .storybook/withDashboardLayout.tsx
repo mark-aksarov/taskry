@@ -17,7 +17,6 @@ export const withDashboardLayout: Decorator = (Story) => {
               imageUrl="/man.jpg"
             />
           }
-          signOut={async () => ({ status: "success" })}
         >
           <Story />
         </DashboardLayout>

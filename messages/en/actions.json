@@ -401,5 +401,14 @@
     "error": {
       "internalServerError": "Something went wrong. Failed to create workspace."
     }
+  },
+  "demoData": {
+    "create": {
+      "error": {
+        "internalServerError": "Something went wrong. Failed to load the data.",
+        "workspaceNotEmpty": "This workspace already contains projects, tasks, project categories, task categories, customers, or companies. Demo data can only be created in an empty workspace."
+      },
+      "success": "Data loaded successfully."
+    }
   }
 }

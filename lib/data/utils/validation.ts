@@ -356,3 +356,32 @@ export async function validateUserHasNoMembership(email: string) {
     throw new ValidationError("User already member");
   }
 }
+
+// Validate that workspace is empty
+export async function validateWorkspaceIsEmpty(organizationId: string) {
+  const [taskCategory, projectCategory, project, task, client, company] =
+    await Promise.all([
+      prisma.taskCategory.findFirst({
+        where: { organizationId },
+      }),
+      prisma.projectCategory.findFirst({
+        where: { organizationId },
+      }),
+      prisma.project.findFirst({
+        where: { organizationId },
+      }),
+      prisma.task.findFirst({
+        where: { organizationId },
+      }),
+      prisma.client.findFirst({
+        where: { organizationId },
+      }),
+      prisma.company.findFirst({
+        where: { organizationId },
+      }),
+    ]);
+
+  if (taskCategory || projectCategory || project || task || client || company) {
+    throw new ValidationError("Workspace must be empty");
+  }
+}

@@ -12,18 +12,18 @@ import {
 import { Separator } from "@/ui/Separator";
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
-import { ActionState } from "@/lib/actions/types";
-import { NavigationLink } from "@/dashboard/common/NavigationItem";
 import { useSession } from "@/common/SessionContext";
+import { NavigationLink } from "@/dashboard/common/NavigationItem";
 import { AppNavigationLogoutButton } from "./AppNavigationLogoutButton";
 import { AppNavigationLangMenuTrigger } from "./AppNavigationLangMenuTrigger";
 import { AppNavigationThemeToggleButton } from "./AppNavigationThemeToggleButton";
+import { AppNavigationDemoDataModalTrigger } from "./AppNavigationDemoDataModalTrigger";
 
 interface AppNavigationProps {
-  signOut: () => Promise<ActionState>;
+  closeSheet?: () => void;
 }
 
-export const AppNavigation = ({ signOut }: AppNavigationProps) => {
+export const AppNavigation = ({ closeSheet }: AppNavigationProps) => {
   const pathname = usePathname();
   const t = useTranslations("dashboard.layout.AppNavigation");
 
@@ -84,11 +84,12 @@ export const AppNavigation = ({ signOut }: AppNavigationProps) => {
       <Separator />
 
       <div className="flex flex-col gap-2.5 md:hidden">
-        <AppNavigationLangMenuTrigger />
         <AppNavigationThemeToggleButton />
+        <AppNavigationDemoDataModalTrigger closeSheet={closeSheet} />
+        <AppNavigationLangMenuTrigger />
       </div>
 
-      <AppNavigationLogoutButton signOut={signOut} />
+      <AppNavigationLogoutButton />
     </nav>
   );
 };

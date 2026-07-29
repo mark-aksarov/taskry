@@ -1582,5 +1582,33 @@
     "CreateClientModalTrigger": {
       "label": "Новый клиент"
     }
+  },
+  "demoData": {
+    "DemoDataModal": {
+      "heading": "Демо данные",
+      "text": "Создайте готовый набор данных с проектами, задачами и клиентами, чтобы быстро познакомиться с Taskry.",
+      "cancelButtonLabel": "Отменить",
+      "confirmButtonLabel": "Создать"
+    },
+    "DemoDataModalTrigger": {
+      "label": "Демо данные"
+    },
+    "DemoDataSummary": {
+      "title": "Будет создано:",
+      "projects": {
+        "title": "Проекты"
+      },
+      "tasks": {
+        "title": "Задачи",
+        "description": "{count} задач с категориями и подзадачами"
+      },
+      "clients": {
+        "title": "Клиенты",
+        "description": "{count} клиентов и компании"
+      },
+      "project": {
+        "description": "{count} проекта с категориями"
+      }
+    }
   }
 }

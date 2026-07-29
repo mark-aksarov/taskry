@@ -86,3 +86,5 @@ export interface UpdateTaskStatusesContextType
   ids: number[];
   setIds: (ids: number[]) => void;
 }
+
+export type Lang = "ru" | "en";

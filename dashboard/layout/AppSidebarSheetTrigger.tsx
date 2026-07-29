@@ -11,12 +11,9 @@ import { AppSidebar } from "./AppSidebar/AppSidebar";
 import { Dialog, DialogCloseButton } from "@/ui/Dialog";
 import { AppSidebarBody } from "./AppSidebar/AppSidebarBody";
 import { AppSidebarHeader } from "./AppSidebar/AppSidebarHeader";
+import { AppNavigation } from "./AppNavigation";
 
-export function AppSidebarSheetTrigger({
-  appNavigation,
-}: {
-  appNavigation: React.ReactNode;
-}) {
+export function AppSidebarSheetTrigger() {
   const t = useTranslations("dashboard.layout.AppSidebarSheetTrigger");
 
   const [isOpen, setOpen] = useState(false);
@@ -26,7 +23,7 @@ export function AppSidebarSheetTrigger({
       <Button
         aria-label={t("triggerAriaLabel")}
         variant="secondary"
-        iconLeft={<Menu    />}
+        iconLeft={<Menu />}
         className="-mr-3 rounded-full p-3 max-md:hidden xl:hidden"
         onPress={() => setOpen(true)}
       />
@@ -50,7 +47,9 @@ export function AppSidebarSheetTrigger({
                 />
               </div>
             </AppSidebarHeader>
-            <AppSidebarBody>{appNavigation}</AppSidebarBody>
+            <AppSidebarBody>
+              <AppNavigation />
+            </AppSidebarBody>
           </AppSidebar>
         </Dialog>
       </SideSheet>

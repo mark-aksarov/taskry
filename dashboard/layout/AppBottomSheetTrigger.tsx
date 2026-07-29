@@ -6,14 +6,11 @@ import { Button } from "@/ui/Button";
 import { useTranslations } from "next-intl";
 import { useOverlayTrigger } from "react-aria";
 import { BottomSheet } from "@/ui/BottomSheet";
+import { AppNavigation } from "./AppNavigation";
 import { Dialog, DialogBody } from "@/ui/Dialog";
 import { useOverlayTriggerState } from "react-stately";
 
-export function AppBottomSheetTrigger({
-  appNavigation,
-}: {
-  appNavigation: React.ReactNode;
-}) {
+export function AppBottomSheetTrigger() {
   const t = useTranslations("dashboard.layout.AppBottomSheetTrigger");
 
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -27,7 +24,7 @@ export function AppBottomSheetTrigger({
         ref={triggerRef}
         aria-label={t("triggerAriaLabel")}
         variant="secondary"
-        iconLeft={<Menu    />}
+        iconLeft={<Menu />}
         className="-mr-2 rounded-full p-3"
       />
 
@@ -36,7 +33,9 @@ export function AppBottomSheetTrigger({
           aria-label={t("dialogAriaLabel")}
           className="max-h-[calc(100dvh-64px)]"
         >
-          <DialogBody className="px-3 py-4">{appNavigation}</DialogBody>
+          <DialogBody className="px-3 py-4">
+            <AppNavigation closeSheet={state.close} />
+          </DialogBody>
         </Dialog>
       </BottomSheet>
     </>

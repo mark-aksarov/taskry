@@ -1,26 +1,26 @@
 "use client";
 
-import { Button } from "@/ui/Button";
+import { Button, ButtonProps } from "@/ui/Button";
 
-interface ConfirmModalProps {
-  label: string;
+interface ConfirmModalProps
+  extends Pick<ButtonProps, "label" | "isPending" | "variant"> {
   onConfirm?: () => void;
-  isPending?: boolean;
   "data-test"?: string;
 }
 
 export function ConfirmModalConfirmButton({
   onConfirm,
+  variant = "contrast",
   ...props
 }: ConfirmModalProps) {
   const handlePress = () => onConfirm?.();
 
   return (
     <Button
-      variant="contrast"
       onPress={handlePress}
       size="medium"
       className="py-2"
+      variant={variant}
       {...props}
     />
   );

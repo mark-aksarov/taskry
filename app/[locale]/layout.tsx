@@ -1,5 +1,6 @@
 import "../globals.css";
 
+import { Lang } from "@/lib/types";
 import type { Viewport } from "next";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
@@ -25,7 +26,7 @@ export const viewport: Viewport = {
 
 type RootLayoutProps = {
   children: React.ReactNode;
-  params: Promise<{ locale: "ru" | "en" }>;
+  params: Promise<{ locale: Lang }>;
 };
 
 export async function generateMetadata({ params }: RootLayoutProps) {
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: RootLayoutProps) {
     metadataBase: new URL("https://taskry.ru"),
     title: t("title"),
     description: t("description"),
-    author: t("author"),
+    authors: [{ name: t("author") }],
     keywords: t("keywords"),
   };
 }

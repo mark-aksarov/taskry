@@ -1577,5 +1577,33 @@
       "successMessage": "Companies exported successfully",
       "errorMessage": "Companies export failed"
     }
+  },
+  "demoData": {
+    "DemoDataModal": {
+      "heading": "Demo data",
+      "text": "Create a ready-made dataset with projects, tasks, and clients to quickly explore Taskry.",
+      "cancelButtonLabel": "Cancel",
+      "confirmButtonLabel": "Create"
+    },
+    "DemoDataModalTrigger": {
+      "label": "Demo data"
+    },
+    "DemoDataSummary": {
+      "title": "This will create:",
+      "projects": {
+        "title": "Projects"
+      },
+      "tasks": {
+        "title": "Tasks",
+        "description": "{count} tasks with categories and subtasks"
+      },
+      "clients": {
+        "title": "Clients",
+        "description": "{count} clients and companies"
+      },
+      "project": {
+        "description": "{count} projects with categories"
+      }
+    }
   }
 }

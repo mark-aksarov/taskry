@@ -9,24 +9,23 @@ import {
 import { useTranslations } from "next-intl";
 import { Logo } from "@/dashboard/layout/Logo";
 import { usePathname } from "@/i18n/navigation";
-import { ActionState } from "@/lib/actions/types";
+import { searchQueryParam } from "@/lib/schemas/base";
 import { AppHeader } from "@/dashboard/layout/AppHeader";
 import { useParams, useSearchParams } from "next/navigation";
 import { AppNavigation } from "@/dashboard/layout/AppNavigation";
+import { DemoDataModal } from "@/dashboard/demoData/DemoDataModal";
 import { ModalManagerProvider } from "@/common/ModalManagerContext";
 import { SearchBarProvider } from "@/dashboard/search/SearchBar/index";
 import { PageTransitionProvider } from "@/dashboard/common/PageTransitionContext";
-import { searchQueryParam } from "@/lib/schemas/base";
+import { DemoDataProvider } from "@/dashboard/demoData/DemoDataContext";
 
 interface DashboardLayoutProps {
   profileLinkContainer: React.ReactNode;
-  signOut: () => Promise<ActionState>;
   children: React.ReactNode;
 }
 
 export function DashboardLayout({
   profileLinkContainer,
-  signOut,
   children,
 }: DashboardLayoutProps) {
   const pathname = usePathname();
@@ -104,36 +103,39 @@ export function DashboardLayout({
 
   return (
     <div className="flex">
-      <AppSidebar className="sticky top-0 z-2 h-dvh flex-none shadow-sm max-xl:hidden">
-        <AppSidebarHeader>
-          <Logo />
-        </AppSidebarHeader>
-        <AppSidebarBody>
-          <AppNavigation signOut={signOut} />
-        </AppSidebarBody>
-      </AppSidebar>
+      <ModalManagerProvider key={pathname}>
+        <AppSidebar className="sticky top-0 z-2 h-dvh flex-none shadow-sm max-xl:hidden">
+          <AppSidebarHeader>
+            <Logo />
+          </AppSidebarHeader>
+          <AppSidebarBody>
+            <AppNavigation />
+          </AppSidebarBody>
+        </AppSidebar>
 
-      {/* flex items have min-width:auto in row; min-w-0 prevents filters overflow when empty filtering results */}
-      <div className="flex min-w-0 flex-auto flex-col">
-        {/**
-         * We need to reset the search bar and modal manager state whenever the route changes.
-         * We cannot use templates because the state does not reset
-         * when navigating to deeper segments, e.g., /tasks -> /tasks/[id].
-         */}
-        <ModalManagerProvider key={pathname}>
+        {/* flex items have min-width:auto in row; min-w-0 prevents filters overflow when empty filtering results */}
+        <div className="flex min-w-0 flex-auto flex-col">
+          {/**
+           * We need to reset the search bar and modal manager state whenever the route changes.
+           * We cannot use templates because the state does not reset
+           * when navigating to deeper segments, e.g., /tasks -> /tasks/[id].
+           */}
           <PageTransitionProvider>
             <SearchBarProvider key={pathname} initialValue={validQuery ?? ""}>
-              <AppHeader
-                signOut={signOut}
-                profileLinkContainer={profileLinkContainer}
-                heading={t("heading" as never)}
-                backButtonHref={activeRoute?.backButtonHref}
-              />
-              <main>{children}</main>
+              <DemoDataProvider>
+                <AppHeader
+                  profileLinkContainer={profileLinkContainer}
+                  heading={t("heading" as never)}
+                  backButtonHref={activeRoute?.backButtonHref}
+                />
+                <main>{children}</main>
+
+                <DemoDataModal />
+              </DemoDataProvider>
             </SearchBarProvider>
           </PageTransitionProvider>
-        </ModalManagerProvider>
-      </div>
+        </div>
+      </ModalManagerProvider>
     </div>
   );
 }

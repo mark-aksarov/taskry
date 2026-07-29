@@ -78,6 +78,8 @@ sb.mock(import("../lib/actions/user/deleteUser.ts"));
 sb.mock(import("../lib/actions/user/updateUser.ts"));
 sb.mock(import("../lib/actions/user/updateUserImageUrl.ts"));
 
+sb.mock(import("../lib/actions/demoData/seedDemoData.ts"));
+
 sb.mock(import("../lib/hooks/useUpdateImageActionState.ts"));
 
 const preview: Preview = {

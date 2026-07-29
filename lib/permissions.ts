@@ -16,6 +16,7 @@ const statements = {
   position: ["create", "update", "delete"],
   projectCategory: ["create", "update", "delete"],
   taskCategory: ["create", "update", "delete"],
+  demo: ["create"],
 };
 
 export const ac = createAccessControl({
@@ -32,4 +33,5 @@ export const member = ac.newRole({
   ...memberAc.statements,
   ...statements,
   user: ["update", "change-password"],
+  demo: [],
 });

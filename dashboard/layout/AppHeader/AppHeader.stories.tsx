@@ -22,7 +22,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    signOut: async () => ({ status: "success" }),
     heading: "Dashboard",
     profileLinkContainer: (
       <ProfileLink userId="user-1" fullName="User 1" imageUrl="/man.jpg" />
