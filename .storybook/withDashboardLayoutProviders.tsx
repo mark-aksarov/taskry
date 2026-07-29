@@ -4,7 +4,6 @@ import { type Decorator } from "@storybook/nextjs-vite";
 import { SessionProvider } from "@/common/SessionContext";
 import { SearchBarProvider } from "@/dashboard/search/SearchBar";
 import { ModalManagerProvider } from "@/common/ModalManagerContext";
-import { DemoDataProvider } from "@/dashboard/demoData/DemoDataContext";
 import { PageTransitionProvider } from "@/dashboard/common/PageTransitionContext";
 
 export const withDashboardLayoutProviders: Decorator = (Story) => {
@@ -14,9 +13,7 @@ export const withDashboardLayoutProviders: Decorator = (Story) => {
         <ModalManagerProvider key="/dashboard">
           <PageTransitionProvider>
             <SearchBarProvider key="/dashboard" initialValue="">
-              <DemoDataProvider>
-                <Story />
-              </DemoDataProvider>
+              <Story />
             </SearchBarProvider>
           </PageTransitionProvider>
         </ModalManagerProvider>

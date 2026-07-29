@@ -11,15 +11,31 @@ import {
 import { startTransition } from "react";
 import { DialogHeading } from "@/ui/Dialog";
 import { useTranslations } from "next-intl";
-import { useDemoData } from "../DemoDataContext";
-import { useModal } from "@/common/ModalManagerContext";
+import { useRouter } from "@/i18n/navigation";
 import { DemoDataSummary } from "../DemoDataSummary";
+import { useModal } from "@/common/ModalManagerContext";
+import { seedDemoData } from "@/lib/actions/demoData/seedDemoData";
 import { FormErrorBanner } from "@/dashboard/common/FormErrorBanner";
+import { useActionStateWithCallbacks } from "@/lib/hooks/useActionStateWithCallbacks";
+import { useShowToastOnActionSuccess } from "@/lib/hooks/useShowToastOnActionSuccess";
+import { useCloseModalOnActionSuccess } from "@/lib/hooks/useCloseModalOnActionSuccess";
+import { useShowToastWhenModalClosedOnActionError } from "@/lib/hooks/useShowToastWhenModalClosedOnActionError";
 
 export function DemoDataModal() {
   const t = useTranslations("dashboard.demoData.DemoDataModal");
 
-  const { state, action, isPending } = useDemoData();
+  const router = useRouter();
+  const { state, action, isPending } = useActionStateWithCallbacks<undefined>(
+    seedDemoData,
+    {
+      onSuccess: () => router.refresh(),
+    },
+  );
+
+  useCloseModalOnActionSuccess(state, "demoData");
+  useShowToastOnActionSuccess(state);
+  useShowToastWhenModalClosedOnActionError(state, "demoData");
+
   const { isOpen, onOpenChange } = useModal("demoData");
 
   function handlePress() {

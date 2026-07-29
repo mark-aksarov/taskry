@@ -17,7 +17,6 @@ import { DemoDataModal } from "@/dashboard/demoData/DemoDataModal";
 import { ModalManagerProvider } from "@/common/ModalManagerContext";
 import { SearchBarProvider } from "@/dashboard/search/SearchBar/index";
 import { PageTransitionProvider } from "@/dashboard/common/PageTransitionContext";
-import { DemoDataProvider } from "@/dashboard/demoData/DemoDataContext";
 
 interface DashboardLayoutProps {
   profileLinkContainer: React.ReactNode;
@@ -122,16 +121,14 @@ export function DashboardLayout({
            */}
           <PageTransitionProvider>
             <SearchBarProvider key={pathname} initialValue={validQuery ?? ""}>
-              <DemoDataProvider>
-                <AppHeader
-                  profileLinkContainer={profileLinkContainer}
-                  heading={t("heading" as never)}
-                  backButtonHref={activeRoute?.backButtonHref}
-                />
-                <main>{children}</main>
+              <AppHeader
+                profileLinkContainer={profileLinkContainer}
+                heading={t("heading" as never)}
+                backButtonHref={activeRoute?.backButtonHref}
+              />
+              <main>{children}</main>
 
-                <DemoDataModal />
-              </DemoDataProvider>
+              <DemoDataModal />
             </SearchBarProvider>
           </PageTransitionProvider>
         </div>
