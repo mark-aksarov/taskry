@@ -2,6 +2,7 @@ import "server-only";
 
 import {
   CompanyDTO,
+  CompanyCsvDTO,
   UpdateCompanyInputDTO,
   CreateCompanyInputDTO,
 } from "./company.dto";
@@ -47,7 +48,7 @@ export const getCompanies = cache(async () => {
   return companies.map(mapToCompanyDTO);
 });
 
-export const exportCompanies = cache(async () => {
+export const exportCompanies = cache(async (): Promise<CompanyCsvDTO[]> => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
