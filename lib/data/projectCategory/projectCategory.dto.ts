@@ -3,6 +3,10 @@ export interface ProjectCategoryDTO {
   name: string;
 }
 
+export interface ProjectCategoryCsvDTO {
+  name: string;
+}
+
 export interface CreateProjectCategoryInputDTO {
   name: string;
 }

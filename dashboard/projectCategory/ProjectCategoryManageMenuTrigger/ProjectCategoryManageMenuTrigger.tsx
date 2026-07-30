@@ -19,8 +19,8 @@ export function ProjectCategoryManageMenuTrigger({
   );
 
   const [isPending, downloadFile] = useDownloadFile(
-    "/api/positions/export",
-    "positions.csv",
+    "/api/project-categories/export",
+    "project-categories.csv",
     t("successMessage"),
     t("errorMessage"),
   );

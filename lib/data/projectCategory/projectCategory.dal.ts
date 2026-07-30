@@ -2,6 +2,7 @@ import "server-only";
 
 import {
   ProjectCategoryDTO,
+  ProjectCategoryCsvDTO,
   CreateProjectCategoryInputDTO,
   UpdateProjectCategoryInputDTO,
 } from "./projectCategory.dto";
@@ -41,6 +42,27 @@ export const getProjectCategories = cache(async () => {
 
   return projectCategories.map(mapToProjectCategoryDTO);
 });
+
+export const exportProjectCategories = cache(
+  async (): Promise<ProjectCategoryCsvDTO[]> => {
+    // Authorization
+    const {
+      session: { activeOrganizationId: organizationId },
+    } = await requireOrganizationAccess();
+
+    // Get project categories
+    const projectCategories = await prisma.projectCategory.findMany({
+      where: { organizationId },
+      select: { name: true },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return projectCategories.map((pc) => ({ name: pc.name }));
+  },
+);
+
 export const createProjectCategories = async (
   input: CreateProjectCategoryInputDTO[],
 ) => {
