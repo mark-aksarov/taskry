@@ -3,6 +3,10 @@ export type PositionDTO = {
   name: string;
 };
 
+export type PositionCsvDTO = {
+  name: string;
+};
+
 export interface CreatePositionInputDTO {
   name: string;
 }

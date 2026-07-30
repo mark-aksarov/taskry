@@ -2,6 +2,7 @@ import "server-only";
 
 import {
   PositionDTO,
+  PositionCsvDTO,
   CreatePositionInputDTO,
   UpdatePositionInputDTO,
 } from "./position.dto";
@@ -42,6 +43,25 @@ export const getPositions = cache(async () => {
   });
 
   return positions.map(mapToPositionDTO);
+});
+
+export const exportPositions = cache(async (): Promise<PositionCsvDTO[]> => {
+  // Authorization
+  const {
+    session: { activeOrganizationId: organizationId },
+  } = await requireOrganizationAccess();
+
+  const positions = await prisma.position.findMany({
+    where: { organizationId },
+    select: {
+      name: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return positions.map((position) => ({ name: position.name }));
 });
 
 export const createPositions = async (input: CreatePositionInputDTO[]) => {
