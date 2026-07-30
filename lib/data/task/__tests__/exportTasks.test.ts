@@ -38,30 +38,28 @@ describe("getTasks", () => {
     await loginAs("user-1");
   });
 
-  it("should return tasks with valid TaskDTO", async () => {
+  it("should return tasks with valid TaskCsvDTO", async () => {
     const result = await exportTasks();
 
     // Assert
     expect(result).toStrictEqual([
       {
-        id: 1,
         title: "Task 1",
         description: "Description 1",
-        deadline: new Date("2030-12-31").toISOString(),
+        deadline: "2030-12-31",
         status: TaskStatus.active,
-        projectId: 1,
-        categoryId: 1,
-        assigneeId: "user-1",
+        projectTitle: "Project 1",
+        categoryName: "Task Category 1",
+        assigneeEmail: "user-1@test.com",
       },
       {
-        id: 2,
         title: "Task 2",
         description: "Description 2",
-        deadline: new Date("2030-12-30").toISOString(),
+        deadline: "2030-12-30",
         status: TaskStatus.active,
-        projectId: 1,
-        categoryId: 1,
-        assigneeId: "user-1",
+        projectTitle: "Project 1",
+        categoryName: "Task Category 1",
+        assigneeEmail: "user-1@test.com",
       },
     ]);
   });
