@@ -160,7 +160,8 @@
       "success": "Clients imported successfully",
       "error": {
         "limitExceededError": "The maximum number of clients would be exceeded. Maximum: {count}.",
-        "internalServerError": "Something went wrong. Failed to import clients."
+        "internalServerError": "Something went wrong. Failed to import clients.",
+        "notFoundError": "CSV import failed. Some related companies was not found in the database. Please check the values in the file and try again."
       }
     }
   },

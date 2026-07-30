@@ -24,6 +24,16 @@ export interface CreateClientInputDTO {
   companyId?: number;
 }
 
+export interface ClientCsvDTO {
+  imageUrl?: string;
+  bio?: string;
+  fullName: string;
+  email: string;
+  phoneNumber?: string;
+  publicLink?: string;
+  companyName?: string;
+}
+
 export interface UpdateClientInputDTO {
   id: number;
   bio?: string | null;

@@ -2,6 +2,7 @@ import "server-only";
 
 import {
   ClientDTO,
+  ClientCsvDTO,
   ClientListDTO,
   ClientDetailDTO,
   ClientSummaryDTO,
@@ -18,7 +19,12 @@ import { uniqueDefinedIds } from "../utils/uniqueDefinedIds";
 import { ClientFilters, ClientSortField } from "@/lib/types";
 import { requireOrganizationAccess } from "../utils/requireOrganizationAccess";
 import { Client, Prisma, ProjectStatus } from "@/generated/prisma/client";
-import { validateCompanies, validateClientLimit } from "../utils/validation";
+import {
+  validateCompanies,
+  validateClientLimit,
+  validateValuesExist,
+} from "../utils/validation";
+import { uniqueDefinedStrings } from "../utils/uniqueDefinedStrings";
 
 export const getClientDetail = cache(
   async (id: number): Promise<ClientDetailDTO | null> => {
@@ -147,7 +153,7 @@ export const getClientSummaries = cache(
   },
 );
 
-export const getClients = cache(async (): Promise<ClientDTO[]> => {
+export const exportClients = cache(async (): Promise<ClientCsvDTO[]> => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
@@ -159,18 +165,29 @@ export const getClients = cache(async (): Promise<ClientDTO[]> => {
       createdAt: "desc",
     },
     select: {
-      id: true,
       fullName: true,
       email: true,
       phoneNumber: true,
       imageUrl: true,
       publicLink: true,
       bio: true,
-      companyId: true,
+      company: {
+        select: {
+          name: true,
+        },
+      },
     },
   });
 
-  return clients.map(mapToClientDTO);
+  return clients.map((client) => ({
+    fullName: client.fullName,
+    email: client.email,
+    phoneNumber: client.phoneNumber ?? undefined,
+    imageUrl: client.imageUrl ?? undefined,
+    publicLink: client.publicLink ?? undefined,
+    bio: client.bio ?? undefined,
+    companyName: client.company?.name,
+  }));
 });
 
 export const getClientList = cache(
@@ -336,6 +353,81 @@ export const createClients = async (input: CreateClientInputDTO[]) => {
       fullName: client.fullName,
       bio: client.bio,
       companyId: client.companyId,
+      email: client.email,
+      phoneNumber: client.phoneNumber,
+      publicLink: client.publicLink,
+      imageUrl: client.imageUrl,
+      organizationId,
+    })),
+  });
+
+  return clients.map(mapToClientDTO);
+};
+
+export const importClients = async (input: ClientCsvDTO[]) => {
+  // Authorization
+  const {
+    session: { activeOrganizationId: organizationId },
+  } = await requireOrganizationAccess();
+
+  // Check permission
+  const permission = await auth.api.hasPermission({
+    headers: await headers(),
+    body: {
+      permissions: {
+        client: ["create"],
+      },
+    },
+  });
+
+  if (!permission.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to create clients.",
+    );
+  }
+
+  // Validate limit
+  await validateClientLimit(organizationId, input.length);
+
+  // Get existing companies by name
+  const companyNames = uniqueDefinedStrings(
+    input.map((client) => client.companyName),
+  );
+
+  const existingCompanies = await prisma.company.findMany({
+    where: {
+      organizationId,
+      name: {
+        in: companyNames,
+      },
+    },
+    select: {
+      id: true,
+      name: true,
+    },
+  });
+
+  const existingCompanyNames = new Set(
+    existingCompanies.map((company) => company.name),
+  );
+
+  // Check if all companies exist
+  validateValuesExist(
+    companyNames,
+    existingCompanyNames,
+    "Companies not found",
+  );
+
+  // Create clients
+  const companyMap = new Map(
+    existingCompanies.map((company) => [company.name, company.id]),
+  );
+
+  const clients = await prisma.client.createManyAndReturn({
+    data: input.map((client) => ({
+      fullName: client.fullName,
+      bio: client.bio,
+      companyId: client.companyName ? companyMap.get(client.companyName) : null,
       email: client.email,
       phoneNumber: client.phoneNumber,
       publicLink: client.publicLink,
