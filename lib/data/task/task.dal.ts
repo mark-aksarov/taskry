@@ -12,6 +12,7 @@ import {
   validateUsers,
   validateProjects,
   validateTaskLimit,
+  validateValuesExist,
   validateTaskCategories,
 } from "../utils/validation";
 
@@ -460,16 +461,10 @@ export const importTasks = async (input: TaskCsvDTO[]) => {
   );
 
   // Check if all projects exist
-  const missingProjectTitles = projectTitles.filter(
-    (title) => !existingProjectTitles.has(title),
-  );
-
-  if (missingProjectTitles.length > 0) {
-    throw new NotFoundError(`Projects not found`);
-  }
-
-  const projectMap = new Map(
-    existingProjects.map((project) => [project.title, project.id]),
+  validateValuesExist(
+    projectTitles,
+    existingProjectTitles,
+    "Projects not found",
   );
 
   // Get existing categories by name
@@ -495,16 +490,10 @@ export const importTasks = async (input: TaskCsvDTO[]) => {
   );
 
   // Check if all categories exist
-  const missingCategoryNames = categoryNames.filter(
-    (name) => !existingCategoryNames.has(name),
-  );
-
-  if (missingCategoryNames.length > 0) {
-    throw new NotFoundError(`Categories not found`);
-  }
-
-  const categoryMap = new Map(
-    existingCategories.map((category) => [category.name, category.id]),
+  validateValuesExist(
+    categoryNames,
+    existingCategoryNames,
+    "Task categories not found",
   );
 
   // Get existing assignees by email
@@ -534,19 +523,25 @@ export const importTasks = async (input: TaskCsvDTO[]) => {
   );
 
   // Check if all assignees exist
-  const missingAssigneeEmails = assigneeEmails.filter(
-    (email) => !existingAssigneeEmails.has(email),
+  validateValuesExist(
+    assigneeEmails,
+    existingAssigneeEmails,
+    "Assignees not found",
   );
 
-  if (missingAssigneeEmails.length > 0) {
-    throw new NotFoundError(`Assignees not found`);
-  }
+  // Create tasks
+  const projectMap = new Map(
+    existingProjects.map((project) => [project.title, project.id]),
+  );
+
+  const categoryMap = new Map(
+    existingCategories.map((category) => [category.name, category.id]),
+  );
 
   const assigneeMap = new Map(
     existingAssignees.map((assignee) => [assignee.email, assignee.id]),
   );
 
-  // Create tasks
   const tasks = await prisma.task.createManyAndReturn({
     data: input.map((task) => ({
       title: task.title,

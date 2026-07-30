@@ -385,3 +385,16 @@ export async function validateWorkspaceIsEmpty(organizationId: string) {
     throw new ValidationError("Workspace must be empty");
   }
 }
+
+// Validate that values exist
+export function validateValuesExist(
+  values: string[],
+  existingValues: Set<string>,
+  message: string,
+) {
+  const missingValues = values.filter((value) => !existingValues.has(value));
+
+  if (missingValues.length > 0) {
+    throw new NotFoundError(message);
+  }
+}
