@@ -6,7 +6,6 @@ import {
   AuthCardSubtitle,
 } from "@/auth/AuthCard";
 import { useTranslations } from "next-intl";
-import { ActionState } from "@/lib/actions/types";
 import { AuthSignOutButton } from "@/auth/AuthSignOutButton";
 import { SendVerificationEmailButton } from "@/auth/SendVerificationEmailButton";
 

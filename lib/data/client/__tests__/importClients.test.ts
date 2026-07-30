@@ -12,7 +12,6 @@ import {
   NotFoundError,
   LimitExceededError,
   UnauthorizedError,
-  AccessDeniedError,
 } from "../../utils/error";
 
 import prisma from "@/lib/prisma";
