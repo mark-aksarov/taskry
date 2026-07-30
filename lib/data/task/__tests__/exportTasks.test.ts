@@ -10,7 +10,7 @@ import {
   projectCategories,
 } from "@/prisma/seed/test-data";
 
-import { getTasks } from "../task.dal";
+import { exportTasks } from "../task.dal";
 import { seed } from "@/prisma/test-seed";
 import { loginAs } from "@/lib/test-utils/auth";
 import { members } from "@/prisma/seed/test-data";
@@ -39,7 +39,7 @@ describe("getTasks", () => {
   });
 
   it("should return tasks with valid TaskDTO", async () => {
-    const result = await getTasks();
+    const result = await exportTasks();
 
     // Assert
     expect(result).toStrictEqual([

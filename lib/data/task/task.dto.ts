@@ -26,6 +26,16 @@ export interface CreateTaskInputDTO {
   assigneeId?: string;
 }
 
+export interface TaskCsvDTO {
+  title: string;
+  description?: string;
+  deadline: string;
+  status: TaskStatus;
+  projectTitle?: string;
+  categoryName?: string;
+  assigneeEmail?: string;
+}
+
 export interface UpdateTaskInputDTO {
   id: number;
   title?: string;

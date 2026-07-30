@@ -1,5 +1,6 @@
 import {
   TaskDTO,
+  TaskCsvDTO,
   TaskListDTO,
   TaskDetailDTO,
   TaskSummaryDTO,
@@ -10,19 +11,21 @@ import {
 import {
   validateUsers,
   validateProjects,
-  validateTaskCategories,
   validateTaskLimit,
+  validateTaskCategories,
 } from "../utils/validation";
 
 import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
+import { format } from "date-fns";
 import { headers } from "next/headers";
-import { AccessDeniedError } from "../utils/error";
 import { TaskFilters, TaskSortField } from "@/lib/types";
 import { uniqueDefinedIds } from "../utils/uniqueDefinedIds";
-import { requireOrganizationAccess } from "../utils/requireOrganizationAccess";
+import { AccessDeniedError, NotFoundError } from "../utils/error";
 import { Prisma, Task, TaskStatus } from "@/generated/prisma/client";
+import { uniqueDefinedStrings } from "../utils/uniqueDefinedStrings";
+import { requireOrganizationAccess } from "../utils/requireOrganizationAccess";
 
 export const getTaskDetail = cache(
   async (id: number): Promise<TaskDetailDTO | null> => {
@@ -181,7 +184,7 @@ export const getTaskSummary = cache(
   },
 );
 
-export const getTasks = cache(async (): Promise<TaskDTO[]> => {
+export const exportTasks = cache(async (): Promise<TaskCsvDTO[]> => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
@@ -193,26 +196,36 @@ export const getTasks = cache(async (): Promise<TaskDTO[]> => {
       createdAt: "desc",
     },
     select: {
-      id: true,
       title: true,
       description: true,
       deadline: true,
       status: true,
-      projectId: true,
-      categoryId: true,
-      assigneeId: true,
+      project: {
+        select: {
+          title: true,
+        },
+      },
+      category: {
+        select: {
+          name: true,
+        },
+      },
+      assignee: {
+        select: {
+          email: true,
+        },
+      },
     },
   });
 
   return tasks.map((task) => ({
-    id: task.id,
     title: task.title,
     description: task.description ?? undefined,
-    deadline: task.deadline.toISOString(),
+    deadline: format(task.deadline, "yyyy-MM-dd"),
     status: task.status,
-    projectId: task.projectId ?? undefined,
-    categoryId: task.categoryId ?? undefined,
-    assigneeId: task.assigneeId ?? undefined,
+    projectTitle: task.project ? task.project.title : undefined,
+    categoryName: task.category ? task.category.name : undefined,
+    assigneeEmail: task.assignee ? task.assignee.email : undefined,
   }));
 });
 
@@ -392,6 +405,159 @@ export const createTasks = async (input: CreateTaskInputDTO[]) => {
       projectId: task.projectId,
       categoryId: task.categoryId,
       assigneeId: task.assigneeId,
+      creatorId: userId,
+      organizationId,
+    })),
+  });
+
+  return tasks.map(mapToTaskDTO);
+};
+
+export const importTasks = async (input: TaskCsvDTO[]) => {
+  // Authorization
+  const {
+    user: { id: userId },
+    session: { activeOrganizationId: organizationId },
+  } = await requireOrganizationAccess();
+
+  // Check permission
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
+    body: {
+      permissions: {
+        task: ["create"],
+      },
+    },
+  });
+
+  if (!permissions.success) {
+    throw new AccessDeniedError("You do not have permission to create tasks.");
+  }
+
+  // Validate limit
+  await validateTaskLimit(organizationId, input.length);
+
+  // Get existing projects by title
+  const projectTitles = uniqueDefinedStrings(
+    input.map((task) => task.projectTitle),
+  );
+
+  const existingProjects = await prisma.project.findMany({
+    where: {
+      organizationId,
+      title: {
+        in: projectTitles,
+      },
+    },
+    select: {
+      id: true,
+      title: true,
+    },
+  });
+
+  const existingProjectTitles = new Set(
+    existingProjects.map((project) => project.title),
+  );
+
+  // Check if all projects exist
+  const missingProjectTitles = projectTitles.filter(
+    (title) => !existingProjectTitles.has(title),
+  );
+
+  if (missingProjectTitles.length > 0) {
+    throw new NotFoundError(`Projects not found`);
+  }
+
+  const projectMap = new Map(
+    existingProjects.map((project) => [project.title, project.id]),
+  );
+
+  // Get existing categories by name
+  const categoryNames = uniqueDefinedStrings(
+    input.map((task) => task.categoryName),
+  );
+
+  const existingCategories = await prisma.taskCategory.findMany({
+    where: {
+      organizationId,
+      name: {
+        in: categoryNames,
+      },
+    },
+    select: {
+      id: true,
+      name: true,
+    },
+  });
+
+  const existingCategoryNames = new Set(
+    existingCategories.map((category) => category.name),
+  );
+
+  // Check if all categories exist
+  const missingCategoryNames = categoryNames.filter(
+    (name) => !existingCategoryNames.has(name),
+  );
+
+  if (missingCategoryNames.length > 0) {
+    throw new NotFoundError(`Categories not found`);
+  }
+
+  const categoryMap = new Map(
+    existingCategories.map((category) => [category.name, category.id]),
+  );
+
+  // Get existing assignees by email
+  const assigneeEmails = uniqueDefinedStrings(
+    input.map((task) => task.assigneeEmail),
+  );
+
+  const existingAssignees = await prisma.user.findMany({
+    where: {
+      members: {
+        some: {
+          organizationId,
+        },
+      },
+      email: {
+        in: assigneeEmails,
+      },
+    },
+    select: {
+      id: true,
+      email: true,
+    },
+  });
+
+  const existingAssigneeEmails = new Set(
+    existingAssignees.map((assignee) => assignee.email),
+  );
+
+  // Check if all assignees exist
+  const missingAssigneeEmails = assigneeEmails.filter(
+    (email) => !existingAssigneeEmails.has(email),
+  );
+
+  if (missingAssigneeEmails.length > 0) {
+    throw new NotFoundError(`Assignees not found`);
+  }
+
+  const assigneeMap = new Map(
+    existingAssignees.map((assignee) => [assignee.email, assignee.id]),
+  );
+
+  // Create tasks
+  const tasks = await prisma.task.createManyAndReturn({
+    data: input.map((task) => ({
+      title: task.title,
+      description: task.description,
+      deadline: new Date(task.deadline),
+      status: task.status,
+      projectId: task.projectTitle ? projectMap.get(task.projectTitle) : null,
+      categoryId: task.categoryName ? categoryMap.get(task.categoryName) : null,
+      assigneeId: task.assigneeEmail
+        ? assigneeMap.get(task.assigneeEmail)
+        : null,
       creatorId: userId,
       organizationId,
     })),

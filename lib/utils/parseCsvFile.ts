@@ -7,7 +7,10 @@ export async function parseCsvFile<T>(file: File, schema: z.ZodSchema<T>) {
     file.size > 512 * 1024 ||
     !file.name.toLowerCase().endsWith(".csv")
   ) {
-    throw new Error("Invalid CSV file");
+    return {
+      success: false,
+      error: "Invalid CSV file",
+    } as const;
   }
 
   const text = await file.text();
