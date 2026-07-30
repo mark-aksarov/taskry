@@ -1,14 +1,18 @@
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { Lang } from "@/lib/types";
+import { addDays } from "date-fns";
 import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
 import { validateWorkspaceIsEmpty } from "../utils/validation";
 import { requireOrganizationAccess } from "../utils/requireOrganizationAccess";
 
+const today = new Date();
+
 export async function seedDemoData(lang: Lang) {
   // Authorization
   const {
+    user: { id: userId },
     session: { activeOrganizationId: organizationId },
   } = await requireOrganizationAccess();
 
@@ -31,13 +35,13 @@ export async function seedDemoData(lang: Lang) {
   await validateWorkspaceIsEmpty(organizationId);
 
   if (lang === "en") {
-    await seedDemoDataEn(organizationId);
+    await seedDemoDataEn(userId, organizationId);
   } else {
-    await seedDemoDataRu(organizationId);
+    await seedDemoDataRu(userId, organizationId);
   }
 }
 
-async function seedDemoDataEn(organizationId: string) {
+async function seedDemoDataEn(userId: string, organizationId: string) {
   // Create companies
   const companies = await prisma.company.createManyAndReturn({
     data: [
@@ -172,40 +176,44 @@ async function seedDemoDataEn(organizationId: string) {
         title: "E-commerce Platform Redesign",
         description:
           "Full overhaul of the existing e-commerce platform, focusing on modernizing the UI/UX, improving conversion funnels, and integrating a new payment gateway. The project will involve extensive A/B testing and performance optimization across all major browsers and mobile devices. Key deliverables include a component library and a comprehensive style guide.",
-        deadline: "2026-10-30T23:59:59.000Z",
+        deadline: addDays(today, 12),
         clientId: clientMap.get("Elena Rodriguez"),
         categoryId: projectCategoryMap.get("Web Development"),
         status: "active",
+        creatorId: userId,
         organizationId,
       },
       {
         title: "iOS & Android App Development",
         description:
           "Design and build a new cross-platform mobile application to complement the company's core services. The app must feature real-time data synchronization, offline capabilities, and push notifications. Technology stack will be React Native to ensure rapid deployment on both iOS and Android platforms. Security audit required prior to launch.",
-        deadline: "2027-01-15T23:59:59.000Z",
+        deadline: addDays(today, 22),
         clientId: clientMap.get("Sophia Davies"),
         categoryId: projectCategoryMap.get("Mobile Applications"),
         status: "pending",
+        creatorId: userId,
         organizationId,
       },
       {
         title: "Q4 Digital Marketing Campaign",
         description:
           "Execute a comprehensive Q4 digital marketing strategy covering SEO content, paid social media ads, and email campaigns. The goal is to increase lead generation by 25% and boost brand awareness in target regions. Requires collaboration with the content and design teams for asset creation and deployment tracking.",
-        deadline: "2026-08-31T23:59:59.000Z",
+        deadline: addDays(today, 35),
         clientId: clientMap.get("Liam O'Connell"),
         categoryId: projectCategoryMap.get("Marketing"),
         status: "active",
+        creatorId: userId,
         organizationId,
       },
       {
         title: "Brand Style Guide Finalization",
         description:
           "Complete the final comprehensive brand style guide, covering typography, color palettes, logo usage, and voice/tone guidelines for all external communication channels. This includes creation of a high-fidelity design system that will be used by both internal and external design partners for future projects and campaigns.",
-        deadline: "2026-09-28T23:59:59.000Z",
+        deadline: addDays(today, 8),
         clientId: clientMap.get("Liam O'Connell"),
         categoryId: projectCategoryMap.get("Design"),
         status: "completed",
+        creatorId: userId,
         organizationId,
       },
     ],
@@ -261,120 +269,144 @@ async function seedDemoDataEn(organizationId: string) {
         title: "Setup React Project Structure",
         description:
           "Initialize the new e-commerce frontend repository, configure Webpack/Vite, and establish the base folder structure for components, pages, and utilities.",
-        deadline: "2026-08-15T17:00:00.000Z",
+        deadline: addDays(today, 45),
         projectId: projectMap.get("E-commerce Platform Redesign"),
         categoryId: taskCategoryMap.get("Frontend"),
         status: "active",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Design System Component Audit",
         description:
           "Review all existing UI components and prepare a list of those needing redesign or replacement to align with the new style guide.",
-        deadline: "2026-08-20T17:00:00.000Z",
+        deadline: addDays(today, 34),
         projectId: projectMap.get("E-commerce Platform Redesign"),
         categoryId: taskCategoryMap.get("Frontend"),
         status: "pending",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Integrate New Payment Gateway",
         description:
           "Implement the backend integration for the new payment processor (Stripe/PayPal) and ensure secure token handling and transaction logging.",
-        deadline: "2026-09-10T17:00:00.000Z",
+        deadline: addDays(today, 27),
         projectId: projectMap.get("E-commerce Platform Redesign"),
         categoryId: taskCategoryMap.get("Backend"),
         status: "completed",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Create App Landing Page Docs",
         description:
           "Write initial documentation for the mobile app landing page, including installation steps and key feature overview for users.",
-        deadline: "2026-08-10T17:00:00.000Z",
+        deadline: addDays(today, 42),
         projectId: projectMap.get("iOS & Android App Development"),
         categoryId: taskCategoryMap.get("Documentation"),
         status: "pending",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Setup React Native Environment",
         description:
           "Configure the React Native development environment, including setting up simulators, connecting to backend staging API, and installing necessary dependencies.",
-        deadline: "2026-08-20T17:00:00.000Z",
+        deadline: addDays(today, 24),
         projectId: projectMap.get("iOS & Android App Development"),
         categoryId: taskCategoryMap.get("Frontend"),
         status: "pending",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Design App Navigation Flow",
         description:
           "Create wireframes and a detailed user flow diagram for the main navigation, user profiles, and settings screens in the mobile app.",
-        deadline: "2026-08-30T17:00:00.000Z",
+        deadline: addDays(today, 15),
         projectId: projectMap.get("iOS & Android App Development"),
         categoryId: taskCategoryMap.get("Frontend"),
         status: "pending",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Finalize Q4 Ad Copy & Assets",
         description:
           "Review and approve the final text, images, and video assets for deployment across all paid social media platforms (Facebook, LinkedIn, Instagram).",
-        deadline: "2026-07-20T17:00:00.000Z",
+        deadline: addDays(today, 22),
         projectId: projectMap.get("Q4 Digital Marketing Campaign"),
         categoryId: taskCategoryMap.get("Content"),
         status: "completed",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Implement Google Ads Campaigns",
         description:
           "Setup and launch three targeted search and display campaigns on Google Ads, focusing on long-tail keywords identified in the SEO audit.",
-        deadline: "2026-08-05T17:00:00.000Z",
+        deadline: addDays(today, 10),
         projectId: projectMap.get("Q4 Digital Marketing Campaign"),
         categoryId: taskCategoryMap.get("Testing"),
         status: "active",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Draft 5 SEO Blog Posts",
         description:
           "Write and schedule five new blog posts focusing on high-priority SEO topics relevant to the Q4 campaign goals. Requires content review by Grace Hall.",
-        deadline: "2026-08-15T17:00:00.000Z",
+        deadline: addDays(today, 9),
         projectId: projectMap.get("Q4 Digital Marketing Campaign"),
         categoryId: taskCategoryMap.get("Content"),
         status: "pending",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Gathering All Style Assets",
         description:
           "Collect all existing design assets, including old logo variations, current color codes, and any typography documentation to form the basis of the new guide.",
-        deadline: "2026-07-25T17:00:00.000Z",
+        deadline: addDays(today, 17),
         projectId: projectMap.get("Brand Style Guide Finalization"),
         categoryId: taskCategoryMap.get("Frontend"),
         status: "completed",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Define Color Palette Rules",
         description:
           "Finalize the primary, secondary, and accent color palettes, defining hex codes, RGB values, and acceptable usage rules for each color across digital and print media.",
-        deadline: "2026-08-10T17:00:00.000Z",
+        deadline: addDays(today, 27),
         projectId: projectMap.get("Brand Style Guide Finalization"),
         categoryId: taskCategoryMap.get("Documentation"),
         status: "completed",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Typography Usage Guidelines",
         description:
           "Document font families, weights, sizing hierarchy (H1, H2, body, etc.), and pairing rules for all communications.",
-        deadline: "2026-08-20T17:00:00.000Z",
+        deadline: addDays(today, 37),
         projectId: projectMap.get("Brand Style Guide Finalization"),
         categoryId: taskCategoryMap.get("Documentation"),
         status: "completed",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
     ],
@@ -609,7 +641,7 @@ async function seedDemoDataEn(organizationId: string) {
   });
 }
 
-async function seedDemoDataRu(organizationId: string) {
+async function seedDemoDataRu(userId: string, organizationId: string) {
   // Create companies
   const companies = await prisma.company.createManyAndReturn({
     data: [
@@ -766,40 +798,44 @@ async function seedDemoDataRu(organizationId: string) {
         title: "Разработка корпоративного сайта",
         description:
           "Создание современного, адаптивного корпоративного сайта с каталогом услуг и системой обратной связи. Проект включает полную разработку дизайна, фронтенда и бэкенда, обеспечивая высокую производительность и удобство использования.",
-        deadline: "2027-03-15T00:00:00.000Z",
+        deadline: addDays(today, 14),
         clientId: clientMap.get("Николай Орлов"),
         categoryId: projectCategoryMap.get("Веб-разработка"),
         status: "active",
+        creatorId: userId,
         organizationId,
       },
       {
         title: "Мобильное приложение (MVP)",
         description:
           "Разработка MVP для iOS и Android, позволяющего пользователям просматривать, анализировать и управлять своими инвестиционными портфелями. Фокус на интуитивном UX/UI и обеспечении безопасности данных для первичного запуска.",
-        deadline: "2027-05-20T00:00:00.000Z",
+        deadline: addDays(today, 32),
         clientId: clientMap.get("Артем Гусев"),
         categoryId: projectCategoryMap.get("Мобильные приложения"),
         status: "active",
+        creatorId: userId,
         organizationId,
       },
       {
         title: "Редизайн логотипа и стиля",
         description:
           "Обновление визуальной идентичности компании для более современного восприятия на рынке. Задача включает разработку нового логотипа, выбор фирменных цветов, шрифтов и создание руководства по использованию брендбука.",
-        deadline: "2027-02-10T00:00:00.000Z",
+        deadline: addDays(today, 39),
         clientId: clientMap.get("Денис Струков"),
         categoryId: projectCategoryMap.get("Дизайн"),
         status: "completed",
+        creatorId: userId,
         organizationId,
       },
       {
         title: "Внедрение CRM-системы",
         description:
           "Интеграция облачной CRM для автоматизации процессов продаж и управления клиентами. Проект включает настройку системы под специфику бизнеса, миграцию данных и обучение персонала для эффективного использования нового инструмента.",
-        deadline: "2027-04-01T00:00:00.000Z",
+        deadline: addDays(today, 26),
         clientId: clientMap.get("Жанна Крылова"),
         categoryId: projectCategoryMap.get("Внутренние системы"),
         status: "active",
+        creatorId: userId,
         organizationId,
       },
     ],
@@ -855,160 +891,192 @@ async function seedDemoDataRu(organizationId: string) {
         title: "Разработка главной страницы (макет)",
         description:
           "Создать адаптивный макет главной страницы в Figma/Sketch, включая шапку, подвал и основные секции (о нас, услуги, контакты). Необходимо также разработать и утвердить цветовую палитру и типографику, следуя принципам удобства и современному дизайну.",
-        deadline: "2026-12-10T00:00:00.000Z",
+        deadline: addDays(today, 14),
         projectId: projectMap.get("Разработка корпоративного сайта"),
         categoryId: taskCategoryMap.get("Фронтенд"),
         status: "active",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Настройка структуры проекта",
         description:
           "Инициализировать репозиторий, настроить сборку (Webpack/Vite), подключить базовые стили (SCSS/Tailwind) и роутинг. Проект должен использовать современную структуру с разделением на компоненты и модули для обеспечения легкой поддержки и масштабируемости.",
-        deadline: "2026-12-05T00:00:00.000Z",
+        deadline: addDays(today, 17),
         projectId: projectMap.get("Разработка корпоративного сайта"),
         categoryId: taskCategoryMap.get("Бэкенд"),
         status: "completed",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Создание API: список услуг",
         description:
           "Разработать REST API эндпоинт для получения данных о каталоге услуг (название, описание, иконка). API должно быть защищено, возвращать данные в стандартизированном формате (JSON) и быть оптимизировано для быстрого ответа на запросы фронтенда.",
-        deadline: "2026-12-15T00:00:00.000Z",
+        deadline: addDays(today, 20),
         projectId: projectMap.get("Разработка корпоративного сайта"),
         categoryId: taskCategoryMap.get("Бэкенд"),
         status: "active",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Верстка 'Карточка услуги'",
         description:
           "Реализовать адаптивный и reusable компонент для отображения отдельной услуги на странице каталога. Компонент должен корректно отображаться на всех типах устройств и быть семантически правильно размечен для SEO-оптимизации.",
-        deadline: "2026-12-12T00:00:00.000Z",
+        deadline: addDays(today, 21),
         projectId: projectMap.get("Разработка корпоративного сайта"),
         categoryId: taskCategoryMap.get("Фронтенд"),
         status: "pending",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Написание ТЗ для тестирования",
         description:
           "Составить полный список тестовых сценариев и кейсов для функционального и кросс-браузерного тестирования основных разделов. Тестовая документация должна включать позитивные и негативные сценарии для всех интерактивных элементов сайта.",
-        deadline: "2026-12-20T00:00:00.000Z",
+        deadline: addDays(today, 23),
         projectId: projectMap.get("Разработка корпоративного сайта"),
         categoryId: taskCategoryMap.get("Тестирование"),
         status: "pending",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Интеграция формы обратной связи",
         description:
           "Подключить фронтенд-форму 'Связаться с нами' к разработанному API для отправки данных. Необходимо реализовать валидацию данных на стороне клиента и сервера, а также обработку всех возможных ошибок при отправке сообщения.",
-        deadline: "2026-12-25T00:00:00.000Z",
+        deadline: addDays(today, 36),
         projectId: projectMap.get("Разработка корпоративного сайта"),
         categoryId: taskCategoryMap.get("Фронтенд"),
         status: "pending",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Наполнение раздела 'О нас'",
         description:
           "Загрузить тексты, фотографии и логотипы, предоставленные заказчиком, в базу данных. Контент должен быть правильно структурирован, оптимизирован (сжатые изображения) и проверен на соответствие макетам и общему тону бренда.",
-        deadline: "2027-01-05T00:00:00.000Z",
+        deadline: addDays(today, 38),
         projectId: projectMap.get("Разработка корпоративного сайта"),
         categoryId: taskCategoryMap.get("Контент"),
         status: "pending",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "UI/UX макеты MVP (iOS/Android)",
         description:
           "Создать адаптивные макеты основных экранов (портфель, графики, настройки) в Figma/Sketch. Работа включает разработку пользовательских сценариев, создание интерактивного прототипа и финальное утверждение дизайна с командой и заказчиком.",
-        deadline: "2027-01-15T00:00:00.000Z",
+        deadline: addDays(today, 24),
         projectId: projectMap.get("Мобильное приложение (MVP)"),
         categoryId: taskCategoryMap.get("Фронтенд"),
         status: "active",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Настройка сервера и БД",
         description:
           "Инициализация бэкенд-проекта, развертывание базовой базы данных (PostgreSQL) для хранения данных пользователей. Настройка должна включать базовое кеширование, миграции схемы БД и создание среды для разработки (Dev/Stage).",
-        deadline: "2027-01-10T00:00:00.000Z",
+        deadline: addDays(today, 22),
         projectId: projectMap.get("Мобильное приложение (MVP)"),
         categoryId: taskCategoryMap.get("Бэкенд"),
         status: "completed",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Реализация API: Аутентификация",
         description:
           "Разработка эндпоинтов для регистрации, входа в систему и получения JWT-токенов. Необходимо обеспечить высокий уровень криптографической защиты паролей, внедрить механизм обновления токенов (refresh token) и обработку всех ошибок авторизации.",
-        deadline: "2027-01-30T00:00:00.000Z",
+        deadline: addDays(today, 31),
         projectId: projectMap.get("Мобильное приложение (MVP)"),
         categoryId: taskCategoryMap.get("Бэкенд"),
         status: "active",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Настройка мобильного клиента",
         description:
           "Инициализация проекта, настройка навигации и подключение к тестовому API. Проект должен быть настроен для сборки под обе платформы (iOS/Android), с учетом особенностей каждого SDK и использованием общих модулей для кроссплатформенной разработки.",
-        deadline: "2027-01-25T00:00:00.000Z",
+        deadline: addDays(today, 11),
         projectId: projectMap.get("Мобильное приложение (MVP)"),
         categoryId: taskCategoryMap.get("Фронтенд"),
         status: "active",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Интеграция экрана портфеля",
         description:
           "Разработка компонента для отображения общего баланса и списка активов пользователя с получением данных с бэкенда. Компонент должен включать интерактивные графики и возможность сортировки данных, обеспечивая при этом высокую скорость загрузки информации.",
-        deadline: "2027-02-15T00:00:00.000Z",
+        deadline: addDays(today, 31),
         projectId: projectMap.get("Мобильное приложение (MVP)"),
         categoryId: taskCategoryMap.get("Фронтенд"),
         status: "pending",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Написание E2E тестов (Android)",
         description:
           "Создание сквозных тестов для ключевого функционала (вход, просмотр портфеля) с использованием Detox/Appium. Тесты должны охватывать все критические пользовательские сценарии для обеспечения стабильности приложения перед релизом и после каждого обновления.",
-        deadline: "2027-03-05T00:00:00.000Z",
+        deadline: addDays(today, 28),
         projectId: projectMap.get("Мобильное приложение (MVP)"),
         categoryId: taskCategoryMap.get("Тестирование"),
         status: "pending",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Кэширование данных на клиенте",
         description:
           "Реализовать локальное хранение данных портфеля для обеспечения работы в режиме оффлайн. Необходимо настроить логику синхронизации данных при восстановлении соединения, чтобы пользователь всегда видел актуальную информацию после возвращения в сеть.",
-        deadline: "2027-02-28T00:00:00.000Z",
+        deadline: addDays(today, 18),
         projectId: projectMap.get("Мобильное приложение (MVP)"),
         categoryId: taskCategoryMap.get("Фронтенд"),
         status: "pending",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Сбор и анализ требований",
         description:
           "Провести интервью с заказчиком, собрать референсы и определить ключевые ценности, которые должен отражать новый логотип. Сбор информации включает изучение целевой аудитории, анализ конкурентов и формулирование четкого технического задания на разработку.",
-        deadline: "2026-11-05T00:00:00.000Z",
+        deadline: addDays(today, 46),
         projectId: projectMap.get("Редизайн логотипа и стиля"),
         categoryId: taskCategoryMap.get("Контент"),
         status: "completed",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Разработка 3 концепций лого",
         description:
           "Создание трех различных черновых концепций логотипа, отражающих современный стиль и сферу деятельности компании. Концепции должны включать текстовый, графический и комбинированный варианты для выбора и дальнейшего развития с заказчиком.",
-        deadline: "2026-11-20T00:00:00.000Z",
+        deadline: addDays(today, 41),
         projectId: projectMap.get("Редизайн логотипа и стиля"),
         categoryId: taskCategoryMap.get("Фронтенд"),
         status: "completed",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
@@ -1016,120 +1084,144 @@ async function seedDemoDataRu(organizationId: string) {
         title: "Выбор палитры и шрифтов",
         description:
           "Определение основных и акцентных корпоративных цветов (CMYK, RGB, HEX) и подбор подходящих шрифтов. Цветовая палитра и шрифтовая пара должны соответствовать психологии бренда и быть универсальными для использования как в печати, так и в цифровых медиа.",
-        deadline: "2026-11-25T00:00:00.000Z",
+        deadline: addDays(today, 31),
         projectId: projectMap.get("Редизайн логотипа и стиля"),
         categoryId: taskCategoryMap.get("Фронтенд"),
         status: "completed",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Финальная доработка логотипа",
         description:
           "Внесение правок по выбранной заказчиком концепции, финализация геометрии и подготовка векторных исходников. Этап включает детальную проработку всех элементов, тестирование на масштабируемость и утверждение точных пропорций логотипа.",
-        deadline: "2026-12-10T00:00:00.000Z",
+        deadline: addDays(today, 29),
         projectId: projectMap.get("Редизайн логотипа и стиля"),
         categoryId: taskCategoryMap.get("Фронтенд"),
         status: "completed",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Создание макетов визиток/бланков",
         description:
           "Разработка макетов деловой документации в новом фирменном стиле (визитки, фирменные бланки, конверты). Макеты должны быть подготовлены с учетом типографских требований (вылеты, цветовая модель CMYK) и переданы в печать.",
-        deadline: "2026-12-20T00:00:00.000Z",
+        deadline: addDays(today, 26),
         projectId: projectMap.get("Редизайн логотипа и стиля"),
         categoryId: taskCategoryMap.get("Фронтенд"),
         status: "completed",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Разработка гайдлайна (Часть 1)",
         description:
           "Описание правил использования логотипа (охранное поле, минимальный размер, инверсные версии) и цветовой палитры. Документ должен четко регламентировать, какие модификации логотипа допустимы, а какие строго запрещены, для сохранения целостности бренда.",
-        deadline: "2027-01-10T00:00:00.000Z",
+        deadline: addDays(today, 25),
         projectId: projectMap.get("Редизайн логотипа и стиля"),
         categoryId: taskCategoryMap.get("Документация"),
         status: "completed",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Создание иконки и фавикона",
         description:
           "Разработка оптимизированной версии логотипа для использования в качестве фавикона, иконки мобильного приложения и социальных сетей. Иконка должна быть разборчивой в маленьком размере и соответствовать требованиям всех платформ (iOS, Android, Web).",
-        deadline: "2026-12-15T00:00:00.000Z",
+        deadline: addDays(today, 34),
         projectId: projectMap.get("Редизайн логотипа и стиля"),
         categoryId: taskCategoryMap.get("Фронтенд"),
         status: "completed",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Выбор и закупка лицензии CRM",
         description:
           "Анализ предложений (например, Bitrix24, AmoCRM, Salesforce) и оформление подписки/лицензии для необходимого количества пользователей. Проект включает сравнительный анализ функционала, ценовых планов, а также юридическое оформление договора и оплаты лицензии.",
-        deadline: "2026-12-15T00:00:00.000Z",
+        deadline: addDays(today, 13),
         projectId: projectMap.get("Внедрение CRM-системы"),
         categoryId: taskCategoryMap.get("Контент"),
         status: "active",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Настройка структуры CRM",
         description:
           "Создание необходимых воронок продаж, кастомизация полей для сделок, контактов и компаний в соответствии с требованиями. Настройка должна быть гибкой, отражать реальные бизнес-процессы компании и обеспечивать легкую работу для менеджеров.",
-        deadline: "2026-12-30T00:00:00.000Z",
+        deadline: addDays(today, 14),
         projectId: projectMap.get("Внедрение CRM-системы"),
         categoryId: taskCategoryMap.get("Бэкенд"),
         status: "active",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Импорт существующей базы",
         description:
           "Сбор данных из старых таблиц/систем и загрузка их в новую CRM-систему, обеспечение чистоты данных. Включает дедупликацию, стандартизацию форматов данных (например, номеров телефонов) и верификацию успешного переноса всех существующих сделок и контактов.",
-        deadline: "2027-01-15T00:00:00.000Z",
+        deadline: addDays(today, 19),
         projectId: projectMap.get("Внедрение CRM-системы"),
         categoryId: taskCategoryMap.get("Контент"),
         status: "active",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Интеграция с корпоративной почтой",
         description:
           "Настройка подключения почтовых ящиков менеджеров к CRM для автоматической привязки переписки к сделкам. Необходимо обеспечить корректную работу с несколькими доменами, безопасность учетных данных и тестирование отправки/получения писем через CRM-интерфейс.",
-        deadline: "2027-01-20T00:00:00.000Z",
+        deadline: addDays(today, 23),
         projectId: projectMap.get("Внедрение CRM-системы"),
         categoryId: taskCategoryMap.get("Бэкенд"),
         status: "active",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Обучающие материалы по CRM",
         description:
           "Создание пошаговых инструкций и видео-гайдов по работе с CRM для менеджеров отдела продаж. Материалы должны охватывать все ключевые функции: создание лидов, ведение сделок, работу с контактами и использование встроенных инструментов коммуникации.",
-        deadline: "2027-02-10T00:00:00.000Z",
+        deadline: addDays(today, 20),
         projectId: projectMap.get("Внедрение CRM-системы"),
         categoryId: taskCategoryMap.get("Документация"),
         status: "active",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Тестирование процесса продаж",
         description:
           "Проверка корректности прохождения тестовой сделки по всем этапам воронки и автоматическому созданию задач. Тестирование должно симулировать реальные сценарии, включая обработку отказов, перенос сделок и проверку корректности автоматических уведомлений.",
-        deadline: "2027-02-15T00:00:00.000Z",
+        deadline: addDays(today, 21),
         projectId: projectMap.get("Внедрение CRM-системы"),
         categoryId: taskCategoryMap.get("Тестирование"),
         status: "active",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
       {
         title: "Настройка прав доступа (роли)",
         description:
           "Определение и настройка различных уровней доступа для менеджеров, руководителей отдела и администратора CRM. Настройка должна строго разграничивать видимость данных и разрешенные действия, согласно иерархии и политике безопасности компании.",
-        deadline: "2027-01-25T00:00:00.000Z",
+        deadline: addDays(today, 16),
         projectId: projectMap.get("Внедрение CRM-системы"),
         categoryId: taskCategoryMap.get("Бэкенд"),
         status: "active",
+        creatorId: userId,
+        assigneeId: userId,
         organizationId,
       },
     ],
