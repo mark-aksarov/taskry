@@ -2,9 +2,10 @@ import "server-only";
 
 import {
   TaskCategoryDTO,
+  TaskCategoryCsvDTO,
+  mapToTaskCategoryDTO,
   CreateTaskCategoryInputDTO,
   UpdateTaskCategoryInputDTO,
-  mapToTaskCategoryDTO,
 } from "./taskCategory.dto";
 
 import { cache } from "react";
@@ -14,6 +15,7 @@ import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
 import { validateTaskCategoryLimit } from "../utils/validation";
 import { requireOrganizationAccess } from "../utils/requireOrganizationAccess";
+import { TaskCategorySelect } from "@/generated/prisma/models/TaskCategory";
 
 export const getTaskCategoryCount = cache(async () => {
   // Authorization
@@ -30,14 +32,26 @@ export const getTaskCategories = cache(async (): Promise<TaskCategoryDTO[]> => {
     session: { activeOrganizationId: organizationId },
   } = await requireOrganizationAccess();
 
-  return await prisma.taskCategory.findMany({
-    where: { organizationId },
-    select: { id: true, name: true },
-    orderBy: {
-      createdAt: "desc",
-    },
+  // Get task categories
+  return await getTaskCategoriesQuery(organizationId, {
+    id: true,
+    name: true,
   });
 });
+
+export const exportTaskCategories = cache(
+  async (): Promise<TaskCategoryCsvDTO[]> => {
+    // Authorization
+    const {
+      session: { activeOrganizationId: organizationId },
+    } = await requireOrganizationAccess();
+
+    // Get task categories
+    return await getTaskCategoriesQuery(organizationId, {
+      name: true,
+    });
+  },
+);
 
 export const createTaskCategories = async (
   input: CreateTaskCategoryInputDTO[],
@@ -145,3 +159,20 @@ export const deleteTaskCategories = async (ids: number[]) => {
 
   return result;
 };
+
+/**
+ * HELPERS
+ */
+
+async function getTaskCategoriesQuery<T extends TaskCategorySelect>(
+  organizationId: string,
+  select: T,
+) {
+  return prisma.taskCategory.findMany({
+    where: { organizationId },
+    select,
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+}

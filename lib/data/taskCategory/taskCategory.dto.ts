@@ -5,6 +5,10 @@ export interface TaskCategoryDTO {
   name: string;
 }
 
+export interface TaskCategoryCsvDTO {
+  name: string;
+}
+
 export interface CreateTaskCategoryInputDTO {
   name: string;
 }
