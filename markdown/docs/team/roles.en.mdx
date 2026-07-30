@@ -1,16 +1,11 @@
 # Roles and permissions
 
-The system provides 3 roles: <b>Owner</b>, <b>User</b>, and <b>Guest</b>.
+The system provides 2 roles: <b>Owner</b> and <b>Member</b>.
 
 - Owner — <span className="font-normal">a user who registered an account through the <b>Sign Up</b> page.</span>
-- User — <span className="font-normal">an account created by the owner.</span>
-- Guest — <span className="font-normal">a demo access mode intended only for viewing the interface and system features.</span>
+- Member — <span className="font-normal">an account created by the owner.</span>
 
-Permissions depend on the user's role and determine which actions are available in the system.
-
----
-
-## Owner and user
+Permissions depend on the member's role and determine which actions are available in the system.
 
 The <b>Owner</b> and <b>User</b> roles have extended permissions and work with the main system entities: projects, tasks, clients, and related data.
 
@@ -40,26 +35,14 @@ The Owner has full access to managing users and comments in the system.
 
 ---
 
-## User
+## Member
 
-The User has more limited permissions than the Owner.
+The Member has more limited permissions than the Owner.
 
 - edit their profile
 - change their profile image
 - change their password
 - edit their own comments
 - delete their own comments
-
----
-
-## Guest
-
-The Guest has view-only access to the system.
-
-- view pages
-- use search
-- filter and sort data
-
-Any attempt to modify data will display an access restriction dialog.
 
 ---
