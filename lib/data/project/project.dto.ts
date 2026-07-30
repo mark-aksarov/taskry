@@ -14,6 +14,15 @@ export interface CreateProjectInputDTO {
   status: ProjectStatus;
 }
 
+export interface ProjectCsvDTO {
+  title: string;
+  description?: string;
+  deadline: string;
+  clientEmail?: string;
+  categoryName?: string;
+  status: ProjectStatus;
+}
+
 export interface UpdateProjectInputDTO {
   id: number;
   title?: string;

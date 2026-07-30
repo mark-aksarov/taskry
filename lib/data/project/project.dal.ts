@@ -14,12 +14,14 @@ import {
   ProjectSummaryDTO,
   UpdateProjectInputDTO,
   CreateProjectInputDTO,
+  ProjectCsvDTO,
 } from "./project.dto";
 
 import {
   validateClients,
   validateProjectCategories,
   validateProjectLimit,
+  validateValuesExist,
 } from "../utils/validation";
 
 import { cache } from "react";
@@ -30,6 +32,8 @@ import { AccessDeniedError } from "../utils/error";
 import { uniqueDefinedIds } from "../utils/uniqueDefinedIds";
 import { ProjectFilters, ProjectSortField } from "@/lib/types";
 import { requireOrganizationAccess } from "../utils/requireOrganizationAccess";
+import { uniqueDefinedStrings } from "../utils/uniqueDefinedStrings";
+import { format } from "date-fns";
 
 export const getProjectDetail = cache(
   async (id: number): Promise<ProjectDetailDTO | null> => {
@@ -164,7 +168,7 @@ export const getProject = cache(
   },
 );
 
-export const getProjects = cache(async (): Promise<ProjectDTO[]> => {
+export const exportProjects = cache(async (): Promise<ProjectCsvDTO[]> => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
@@ -181,19 +185,27 @@ export const getProjects = cache(async (): Promise<ProjectDTO[]> => {
       description: true,
       deadline: true,
       status: true,
-      categoryId: true,
-      clientId: true,
+
+      category: {
+        select: {
+          name: true,
+        },
+      },
+      client: {
+        select: {
+          email: true,
+        },
+      },
     },
   });
 
   return projects.map((project) => ({
-    id: project.id,
     title: project.title,
     description: project.description ?? undefined,
-    deadline: project.deadline.toISOString(),
+    deadline: format(project.deadline, "yyyy-MM-dd"),
     status: project.status,
-    categoryId: project.categoryId ?? undefined,
-    clientId: project.clientId ?? undefined,
+    categoryName: project.category ? project.category.name : undefined,
+    clientEmail: project.client ? project.client.email : undefined,
   }));
 });
 
@@ -449,6 +461,113 @@ export const createProjects = async (input: CreateProjectInputDTO[]) => {
       deadline: new Date(project.deadline),
       clientId: project.clientId,
       categoryId: project.categoryId,
+      status: project.status,
+      creatorId: userId,
+      organizationId,
+    })),
+  });
+
+  return projects.map(mapToProjectDTO);
+};
+
+export const importProjects = async (input: ProjectCsvDTO[]) => {
+  // Authorization
+  const {
+    user: { id: userId },
+    session: { activeOrganizationId: organizationId },
+  } = await requireOrganizationAccess();
+
+  // Check permission
+  const permissions = await auth.api.hasPermission({
+    headers: await headers(),
+    body: {
+      permissions: {
+        project: ["create"],
+      },
+    },
+  });
+
+  if (!permissions.success) {
+    throw new AccessDeniedError(
+      "You do not have permission to create projects.",
+    );
+  }
+
+  // Validate limit
+  await validateProjectLimit(organizationId, input.length);
+
+  // Get existing project categories by name
+  const categoryNames = uniqueDefinedStrings(
+    input.map((project) => project.categoryName),
+  );
+
+  const existingCategories = await prisma.projectCategory.findMany({
+    where: {
+      organizationId,
+      name: {
+        in: categoryNames,
+      },
+    },
+    select: {
+      id: true,
+      name: true,
+    },
+  });
+
+  const existingCategoryNames = new Set(
+    existingCategories.map((category) => category.name),
+  );
+
+  // Check if all project categories exist
+  validateValuesExist(
+    categoryNames,
+    existingCategoryNames,
+    "Project categories not found",
+  );
+
+  // Get existing clients by full name
+  const clientEmails = uniqueDefinedStrings(
+    input.map((project) => project.clientEmail),
+  );
+
+  const existingClients = await prisma.client.findMany({
+    where: {
+      organizationId,
+      email: {
+        in: clientEmails,
+      },
+    },
+    select: {
+      id: true,
+      email: true,
+    },
+  });
+
+  const existingClientEmails = new Set(
+    existingClients.map((client) => client.email),
+  );
+
+  // Check if all project categories exist
+  validateValuesExist(clientEmails, existingClientEmails, "Clients not found");
+
+  // Create tasks
+  const categoryMap = new Map(
+    existingCategories.map((category) => [category.name, category.id]),
+  );
+
+  const clientMap = new Map(
+    existingClients.map((client) => [client.email, client.id]),
+  );
+
+  const projects = await prisma.project.createManyAndReturn({
+    data: input.map((project) => ({
+      title: project.title,
+      description: project.description,
+      deadline: new Date(project.deadline),
+      clientId: project.clientEmail ? clientMap.get(project.clientEmail) : null,
+      categoryId: project.categoryName
+        ? categoryMap.get(project.categoryName)
+        : null,
       status: project.status,
       creatorId: userId,
       organizationId,

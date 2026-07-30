@@ -8,11 +8,11 @@ import { projectTitle } from "@/lib/schemas/project";
 import { createTaskSchema } from "@/lib/schemas/task";
 import { TASK_MAX_COUNT } from "@/lib/data/constants";
 import { parseCsvFile } from "@/lib/utils/parseCsvFile";
-import { LimitExceededError, NotFoundError } from "@/lib/data/utils/error";
 import { emptyStringToUndefined } from "@/lib/schemas/base";
+import { taskCategoryName } from "@/lib/schemas/taskCategory";
 import { requireFullAccess } from "@/lib/utils/requireFullAccess";
-import { projectCategoryName } from "@/lib/schemas/projectCategory";
 import { importTasks as importTasksQuery } from "@/lib/data/task/task.dal";
+import { LimitExceededError, NotFoundError } from "@/lib/data/utils/error";
 
 const schema = z
   .array(
@@ -25,7 +25,7 @@ const schema = z
         ),
         categoryName: z.preprocess(
           emptyStringToUndefined,
-          projectCategoryName.optional(),
+          taskCategoryName.optional(),
         ),
         assigneeEmail: z.preprocess(
           emptyStringToUndefined,
@@ -67,8 +67,6 @@ export async function importTasks(formData: FormData): Promise<ActionState> {
   try {
     await importTasksQuery(result.data);
   } catch (error) {
-    console.log(error);
-
     if (error instanceof NotFoundError) {
       return {
         status: "error",

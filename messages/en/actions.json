@@ -206,7 +206,8 @@
       "success": "Project categories imported successfully",
       "error": {
         "limitExceededError": "The maximum number of projects would be exceeded. Maximum: {count}.",
-        "internalServerError": "Something went wrong. Failed to import project categories. Make sure the CSV file is filled out correctly and try again."
+        "internalServerError": "Something went wrong. Failed to import project categories. Make sure the CSV file is filled out correctly and try again.",
+        "notFoundError": "CSV import failed. Some related data was not found in the database:clients or project categories. Please check the values in the file and try again."
       }
     }
   },

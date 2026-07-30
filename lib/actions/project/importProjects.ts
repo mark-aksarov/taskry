@@ -2,15 +2,34 @@
 
 import z from "zod";
 import { ActionState } from "../types";
+import { clientEmail } from "@/lib/schemas/client";
 import { getTranslations } from "next-intl/server";
 import { parseCsvFile } from "@/lib/utils/parseCsvFile";
 import { PROJECT_MAX_COUNT } from "@/lib/data/constants";
 import { createProjectSchema } from "@/lib/schemas/project";
-import { LimitExceededError } from "@/lib/data/utils/error";
+import { emptyStringToUndefined } from "@/lib/schemas/base";
 import { requireFullAccess } from "@/lib/utils/requireFullAccess";
-import { createProjects as createProjectsQuery } from "@/lib/data/project/project.dal";
+import { projectCategoryName } from "@/lib/schemas/projectCategory";
+import { LimitExceededError, NotFoundError } from "@/lib/data/utils/error";
+import { importProjects as importProjectsQuery } from "@/lib/data/project/project.dal";
 
-const schema = z.array(createProjectSchema.strict()).min(1);
+const schema = z
+  .array(
+    createProjectSchema
+      .omit({ categoryId: true, clientId: true })
+      .extend({
+        categoryName: z.preprocess(
+          emptyStringToUndefined,
+          projectCategoryName.optional(),
+        ),
+        clientEmail: z.preprocess(
+          emptyStringToUndefined,
+          clientEmail.optional(),
+        ),
+      })
+      .strict(),
+  )
+  .min(1);
 
 export async function importProjects(formData: FormData): Promise<ActionState> {
   // Authorization
@@ -41,8 +60,15 @@ export async function importProjects(formData: FormData): Promise<ActionState> {
 
   // Create projects
   try {
-    await createProjectsQuery(result.data);
+    await importProjectsQuery(result.data);
   } catch (error) {
+    if (error instanceof NotFoundError) {
+      return {
+        status: "error",
+        message: t("project.import.error.notFoundError"),
+      };
+    }
+
     if (error instanceof LimitExceededError) {
       return {
         status: "error",
