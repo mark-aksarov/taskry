@@ -18,7 +18,7 @@ import { TaskStatus } from "@/generated/prisma/enums";
 import { it, expect, describe, beforeAll } from "vitest";
 import { resetDatabase } from "@/lib/test-utils/resetDatabase";
 
-describe("getTasks", () => {
+describe("exportTasks", () => {
   beforeAll(async () => {
     await resetDatabase();
 
