@@ -15,6 +15,7 @@ import { AccessDeniedError } from "../utils/error";
 import { ProjectCategory } from "@/generated/prisma/client";
 import { validateProjectCategoryLimit } from "../utils/validation";
 import { requireOrganizationAccess } from "../utils/requireOrganizationAccess";
+import { ProjectCategorySelect } from "@/generated/prisma/models/ProjectCategory";
 
 export const getProjectCategoryCount = cache(async () => {
   // Authorization
@@ -25,23 +26,20 @@ export const getProjectCategoryCount = cache(async () => {
   return prisma.projectCategory.count({ where: { organizationId } });
 });
 
-export const getProjectCategories = cache(async () => {
-  // Authorization
-  const {
-    session: { activeOrganizationId: organizationId },
-  } = await requireOrganizationAccess();
+export const getProjectCategories = cache(
+  async (): Promise<ProjectCategoryDTO[]> => {
+    // Authorization
+    const {
+      session: { activeOrganizationId: organizationId },
+    } = await requireOrganizationAccess();
 
-  // Get project categories
-  const projectCategories = await prisma.projectCategory.findMany({
-    where: { organizationId },
-    select: { id: true, name: true },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-
-  return projectCategories.map(mapToProjectCategoryDTO);
-});
+    // Get project categories
+    return await getProjectCategoriesQuery(organizationId, {
+      id: true,
+      name: true,
+    });
+  },
+);
 
 export const exportProjectCategories = cache(
   async (): Promise<ProjectCategoryCsvDTO[]> => {
@@ -51,15 +49,9 @@ export const exportProjectCategories = cache(
     } = await requireOrganizationAccess();
 
     // Get project categories
-    const projectCategories = await prisma.projectCategory.findMany({
-      where: { organizationId },
-      select: { name: true },
-      orderBy: {
-        createdAt: "desc",
-      },
+    return await getProjectCategoriesQuery(organizationId, {
+      name: true,
     });
-
-    return projectCategories.map((pc) => ({ name: pc.name }));
   },
 );
 
@@ -173,7 +165,7 @@ export const deleteProjectCategories = async (ids: number[]) => {
 };
 
 /**
- * Helper
+ * HELPERS
  */
 
 function mapToProjectCategoryDTO(
@@ -183,4 +175,17 @@ function mapToProjectCategoryDTO(
     id: projectCategory.id,
     name: projectCategory.name,
   };
+}
+
+async function getProjectCategoriesQuery<T extends ProjectCategorySelect>(
+  organizationId: string,
+  select: T,
+) {
+  return prisma.projectCategory.findMany({
+    where: { organizationId },
+    select,
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 }

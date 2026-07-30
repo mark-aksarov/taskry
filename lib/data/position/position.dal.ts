@@ -14,6 +14,7 @@ import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
 import { Position } from "@/generated/prisma/client";
 import { validatePositionLimit } from "../utils/validation";
+import { PositionSelect } from "@/generated/prisma/models/Position";
 import { requireOrganizationAccess } from "../utils/requireOrganizationAccess";
 
 export const getPositionCount = cache(async () => {
@@ -25,24 +26,17 @@ export const getPositionCount = cache(async () => {
   return prisma.position.count({ where: { organizationId } });
 });
 
-export const getPositions = cache(async () => {
+export const getPositions = cache(async (): Promise<PositionDTO[]> => {
   // Authorization
   const {
     session: { activeOrganizationId: organizationId },
   } = await requireOrganizationAccess();
 
-  const positions = await prisma.position.findMany({
-    where: { organizationId },
-    select: {
-      id: true,
-      name: true,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
+  // Get positions
+  return await getPositionsQuery(organizationId, {
+    id: true,
+    name: true,
   });
-
-  return positions.map(mapToPositionDTO);
 });
 
 export const exportPositions = cache(async (): Promise<PositionCsvDTO[]> => {
@@ -51,17 +45,10 @@ export const exportPositions = cache(async (): Promise<PositionCsvDTO[]> => {
     session: { activeOrganizationId: organizationId },
   } = await requireOrganizationAccess();
 
-  const positions = await prisma.position.findMany({
-    where: { organizationId },
-    select: {
-      name: true,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
+  // Get positions
+  return await getPositionsQuery(organizationId, {
+    name: true,
   });
-
-  return positions.map((position) => ({ name: position.name }));
 });
 
 export const createPositions = async (input: CreatePositionInputDTO[]) => {
@@ -169,7 +156,7 @@ export const deletePositions = async (ids: number[]) => {
 };
 
 /**
- * Helpers
+ * HELPERS
  */
 
 function mapToPositionDTO(
@@ -179,4 +166,17 @@ function mapToPositionDTO(
     id: position.id,
     name: position.name,
   };
+}
+
+async function getPositionsQuery<T extends PositionSelect>(
+  organizationId: string,
+  select: T,
+) {
+  return prisma.position.findMany({
+    where: { organizationId },
+    select,
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 }

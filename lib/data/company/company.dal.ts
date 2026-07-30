@@ -14,6 +14,7 @@ import { headers } from "next/headers";
 import { AccessDeniedError } from "../utils/error";
 import { Company } from "@/generated/prisma/client";
 import { validateCompanyLimit } from "../utils/validation";
+import { CompanySelect } from "@/generated/prisma/models/Company";
 import { requireOrganizationAccess } from "../utils/requireOrganizationAccess";
 
 export const getCompanyCount = cache(async () => {
@@ -32,20 +33,10 @@ export const getCompanies = cache(async () => {
   } = await requireOrganizationAccess();
 
   // Get companies
-  const companies = await prisma.company.findMany({
-    where: {
-      organizationId,
-    },
-    select: {
-      id: true,
-      name: true,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
+  return await getCompaniesQuery(organizationId, {
+    id: true,
+    name: true,
   });
-
-  return companies.map(mapToCompanyDTO);
 });
 
 export const exportCompanies = cache(async (): Promise<CompanyCsvDTO[]> => {
@@ -55,19 +46,9 @@ export const exportCompanies = cache(async (): Promise<CompanyCsvDTO[]> => {
   } = await requireOrganizationAccess();
 
   // Get companies
-  const companies = await prisma.company.findMany({
-    where: {
-      organizationId,
-    },
-    select: {
-      name: true,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
+  return await getCompaniesQuery(organizationId, {
+    name: true,
   });
-
-  return companies.map((company) => ({ name: company.name }));
 });
 
 export const updateCompany = async (
@@ -186,4 +167,19 @@ function mapToCompanyDTO(company: Pick<Company, "id" | "name">): CompanyDTO {
     id: company.id,
     name: company.name,
   };
+}
+
+async function getCompaniesQuery<T extends CompanySelect>(
+  organizationId: string,
+  select: T,
+) {
+  return prisma.company.findMany({
+    where: {
+      organizationId,
+    },
+    select,
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 }
