@@ -47,6 +47,28 @@ export const getCompanies = cache(async () => {
   return companies.map(mapToCompanyDTO);
 });
 
+export const exportCompanies = cache(async () => {
+  // Authorization
+  const {
+    session: { activeOrganizationId: organizationId },
+  } = await requireOrganizationAccess();
+
+  // Get companies
+  const companies = await prisma.company.findMany({
+    where: {
+      organizationId,
+    },
+    select: {
+      name: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return companies.map((company) => ({ name: company.name }));
+});
+
 export const updateCompany = async (
   input: UpdateCompanyInputDTO,
 ): Promise<CompanyDTO> => {

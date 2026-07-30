@@ -6,7 +6,7 @@ import {
 import Papa from "papaparse";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { getCompanies } from "@/lib/data/company/company.dal";
+import { exportCompanies } from "@/lib/data/company/company.dal";
 
 export async function GET() {
   // Authorization
@@ -19,7 +19,7 @@ export async function GET() {
   }
 
   try {
-    const companies = await getCompanies();
+    const companies = await exportCompanies();
 
     const csv = Papa.unparse(companies);
 

@@ -3,6 +3,10 @@ export interface CompanyDTO {
   name: string;
 }
 
+export interface CompanyCsvDTO {
+  name: string;
+}
+
 export interface CreateCompanyInputDTO {
   name: string;
 }
