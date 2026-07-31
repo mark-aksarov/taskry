@@ -31,7 +31,10 @@ const meta = {
   title: "dashboard/projects/ProjectDetailCard",
   component: ProjectDetailCard,
   render: (args) => (
-    <DeadlineProvider deadline={args.deadline}>
+    <DeadlineProvider
+      deadline={args.deadline}
+      status={mockedProjectDetail.status}
+    >
       <ProjectDetailCard {...args} />
     </DeadlineProvider>
   ),

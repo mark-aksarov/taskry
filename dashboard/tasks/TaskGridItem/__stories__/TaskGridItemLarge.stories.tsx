@@ -17,7 +17,7 @@ const meta = {
   title: "dashboard/tasks/TaskGridItemLarge",
   component: TaskGridItemLarge,
   render: (args) => (
-    <DeadlineProvider deadline={args.deadline}>
+    <DeadlineProvider deadline={args.deadline} status={args.status}>
       <TaskGridItemLarge {...args} />
     </DeadlineProvider>
   ),

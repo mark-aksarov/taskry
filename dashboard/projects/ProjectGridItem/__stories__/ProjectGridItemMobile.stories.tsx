@@ -19,7 +19,7 @@ const meta = {
   title: "dashboard/projects/ProjectGridItemMobile",
   component: ProjectGridItemMobile,
   render: (args) => (
-    <DeadlineProvider deadline={args.deadline}>
+    <DeadlineProvider deadline={args.deadline} status={args.status}>
       <ProjectGridItemMobile {...args} />
     </DeadlineProvider>
   ),

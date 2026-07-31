@@ -21,7 +21,10 @@ export function ProjectGridExample() {
         <DeleteProjectProvider key={project.id}>
           <UpdateProjectProvider>
             <UpdateProjectStatusProvider>
-              <DeadlineProvider deadline={project.deadline}>
+              <DeadlineProvider
+                deadline={project.deadline}
+                status={project.status}
+              >
                 <ProjectListItem {...project} />
                 <ProjectGridItemMobile {...project} />
                 <ProjectGridItemLarge {...project} />

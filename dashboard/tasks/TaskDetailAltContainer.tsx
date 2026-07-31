@@ -40,7 +40,7 @@ async function TaskDetailAltContainerInner({
   const doneCount = task.subtasks.filter((s) => s.isDone).length;
 
   return (
-    <DeadlineProvider deadline={task.deadline}>
+    <DeadlineProvider deadline={task.deadline} status={task.status}>
       <TaskDetailAlt
         title={task.title}
         creator={task.creator}

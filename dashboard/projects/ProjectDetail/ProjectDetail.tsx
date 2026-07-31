@@ -51,7 +51,7 @@ export function ProjectDetail({
   );
 
   return (
-    <DeadlineProvider deadline={deadline}>
+    <DeadlineProvider deadline={deadline} status={status}>
       <ProjectDetailLayout
         titleSlot={
           <h2 className="text-base font-bold text-(--text-primary)">{title}</h2>

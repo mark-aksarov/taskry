@@ -17,7 +17,7 @@ const meta = {
   title: "dashboard/tasks/TaskGridItemMobile",
   component: TaskGridItemMobile,
   render: (args) => (
-    <DeadlineProvider deadline={args.deadline}>
+    <DeadlineProvider deadline={args.deadline} status={args.status}>
       <TaskGridItemMobile {...args} />
     </DeadlineProvider>
   ),

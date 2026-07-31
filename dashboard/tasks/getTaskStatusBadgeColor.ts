@@ -5,9 +5,7 @@ export function getTaskStatusBadgeColor(
   status: TaskStatus,
   overdue: boolean,
 ): BadgeColor {
-  const isOverdue = overdue && status !== TaskStatus.completed;
-
-  if (isOverdue) return "red";
+  if (overdue) return "red";
 
   switch (status) {
     case "pending":

@@ -60,7 +60,10 @@ export function UserTaskListContainer({ tasks }: UserTaskListContainerProps) {
                   >
                     <SendCommentProvider>
                       <UpdateCommentProvider>
-                        <DeadlineProvider deadline={task.deadline}>
+                        <DeadlineProvider
+                          deadline={task.deadline}
+                          status={task.status}
+                        >
                           {/* Dynamic */}
                           <UserTaskListItem {...task} />
                           <TaskGridItemMobile

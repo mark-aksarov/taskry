@@ -18,7 +18,7 @@ const meta = {
   title: "dashboard/projects/ProjectListItem",
   component: ProjectListItem,
   render: (args) => (
-    <DeadlineProvider deadline={args.deadline}>
+    <DeadlineProvider deadline={args.deadline} status={args.status}>
       <ProjectListItem {...args} />
     </DeadlineProvider>
   ),

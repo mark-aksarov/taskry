@@ -31,7 +31,7 @@ async function TaskDetailCardHeaderContainerInner({
   }
 
   return (
-    <DeadlineProvider deadline={task.deadline}>
+    <DeadlineProvider deadline={task.deadline} status={task.status}>
       <TaskDetailCardHeader taskStatus={task.status} />
     </DeadlineProvider>
   );

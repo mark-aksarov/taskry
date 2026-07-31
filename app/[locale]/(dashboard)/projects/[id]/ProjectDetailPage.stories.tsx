@@ -21,7 +21,10 @@ const meta = {
   parameters: { layout: "fullscreen" },
   decorators: [
     (Story) => (
-      <DeadlineProvider deadline={new Date().toString()}>
+      <DeadlineProvider
+        deadline={new Date().toString()}
+        status={mockedProjectDetail.status}
+      >
         <Story />
       </DeadlineProvider>
     ),

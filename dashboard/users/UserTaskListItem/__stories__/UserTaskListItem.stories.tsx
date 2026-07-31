@@ -18,7 +18,7 @@ const meta = {
   title: "dashboard/users/UserTaskListItem",
   component: UserTaskListItem,
   render: (args) => (
-    <DeadlineProvider deadline={args.deadline}>
+    <DeadlineProvider deadline={args.deadline} status={args.status}>
       <UserTaskListItem {...args} />
     </DeadlineProvider>
   ),

@@ -23,7 +23,7 @@ export function TaskGridExample({ showCheckbox }: { showCheckbox: boolean }) {
           <DeleteTaskProvider key={task.id}>
             <UpdateTaskProvider>
               <UpdateTaskStatusProvider>
-                <DeadlineProvider deadline={task.deadline}>
+                <DeadlineProvider deadline={task.deadline} status={task.status}>
                   <TaskListItem {...task} showCheckbox={showCheckbox} />
                   <TaskGridItemMobile {...task} {...taskStat} />
                   <TaskGridItemLarge {...task} {...taskStat} />

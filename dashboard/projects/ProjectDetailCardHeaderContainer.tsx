@@ -31,7 +31,7 @@ async function ProjectDetailCardHeaderContainerInner({
   }
 
   return (
-    <DeadlineProvider deadline={project.deadline}>
+    <DeadlineProvider deadline={project.deadline} status={project.status}>
       <ProjectDetailCardHeader projectStatus={project.status} />
     </DeadlineProvider>
   );

@@ -14,7 +14,7 @@ export function UserTaskListExample() {
         <DeleteTaskProvider key={task.id}>
           <UpdateTaskProvider>
             <UpdateTaskStatusProvider>
-              <DeadlineProvider deadline={task.deadline}>
+              <DeadlineProvider deadline={task.deadline} status={task.status}>
                 <UserTaskListItem {...task} />
                 <TaskGridItemMobile
                   {...task}

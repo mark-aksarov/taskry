@@ -5,9 +5,7 @@ export function getProjectStatusBadgeColor(
   status: ProjectStatus,
   overdue: boolean,
 ): BadgeColor {
-  const isOverdue = overdue && status !== ProjectStatus.completed;
-
-  if (isOverdue) return "red";
+  if (overdue) return "red";
 
   switch (status) {
     case "pending":

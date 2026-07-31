@@ -75,7 +75,10 @@ export function ProjectGridContainer({ projects }: ProjectGridContainerProps) {
                   >
                     <SendCommentProvider>
                       <UpdateCommentProvider>
-                        <DeadlineProvider deadline={project.deadline}>
+                        <DeadlineProvider
+                          deadline={project.deadline}
+                          status={project.status}
+                        >
                           {/* Dynamic */}
                           <ProjectListItem {...project} />
                           <ProjectGridItemMobile

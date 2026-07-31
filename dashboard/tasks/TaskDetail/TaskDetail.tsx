@@ -49,7 +49,7 @@ export function TaskDetail({
   const t = useTranslations("dashboard.tasks.TaskDetail");
 
   return (
-    <DeadlineProvider deadline={deadline}>
+    <DeadlineProvider deadline={deadline} status={status}>
       <TaskDetailLayout
         titleSlot={
           <h2 className="text-base font-bold text-(--text-primary)">{title}</h2>

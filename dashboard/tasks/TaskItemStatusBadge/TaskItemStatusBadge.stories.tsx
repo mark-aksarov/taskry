@@ -12,7 +12,7 @@ const meta: Meta<typeof TaskItemStatusBadge> = {
     (Story) => (
       <UpdateTaskStatusesProvider>
         <UpdateTaskStatusProvider>
-          <DeadlineProvider deadline={new Date().toString()}>
+          <DeadlineProvider deadline={new Date().toString()} status="active">
             <Story />
           </DeadlineProvider>
         </UpdateTaskStatusProvider>

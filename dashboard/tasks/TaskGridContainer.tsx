@@ -80,7 +80,10 @@ export function TaskGridContainer({
                   >
                     <SendCommentProvider>
                       <UpdateCommentProvider>
-                        <DeadlineProvider deadline={task.deadline}>
+                        <DeadlineProvider
+                          deadline={task.deadline}
+                          status={task.status}
+                        >
                           {/* Dynamic */}
                           <TaskListItem {...task} showCheckbox={showCheckbox} />
                           <TaskGridItemLarge {...task} {...subtaskStatProps} />
