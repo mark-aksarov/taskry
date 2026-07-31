@@ -431,7 +431,6 @@ export const importClients = async (input: ClientCsvDTO[]) => {
       email: client.email,
       phoneNumber: client.phoneNumber,
       publicLink: client.publicLink,
-      imageUrl: client.imageUrl,
       organizationId,
     })),
   });

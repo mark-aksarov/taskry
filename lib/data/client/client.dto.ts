@@ -25,7 +25,6 @@ export interface CreateClientInputDTO {
 }
 
 export interface ClientCsvDTO {
-  imageUrl?: string;
   bio?: string;
   fullName: string;
   email: string;

@@ -5,9 +5,7 @@ import { companyId } from "./company";
 export const clientId = z.coerce.number().int().positive();
 export const clientFullName = z.string().trim().min(1).max(255);
 export const clientBio = z.string().trim().min(1).max(5000);
-export const clientEmail = z
-  .email({ pattern: z.regexes.html5Email })
-  .max(254);
+export const clientEmail = z.email({ pattern: z.regexes.html5Email }).max(254);
 export const clientPhoneNumber = z.string().trim().min(1).max(20);
 export const clientPublicLink = z.string().trim().min(1).max(255);
 export const clientImageUrl = z.url();
@@ -20,10 +18,6 @@ export const createClientSchema = z.object({
     emptyStringToUndefined,
     clientPhoneNumber.optional(),
   ),
-  publicLink: z.preprocess(
-    emptyStringToUndefined,
-    clientPublicLink.optional(),
-  ),
-  imageUrl: z.preprocess(emptyStringToUndefined, clientImageUrl.optional()),
+  publicLink: z.preprocess(emptyStringToUndefined, clientPublicLink.optional()),
   companyId: z.preprocess(emptyStringToUndefined, companyId.optional()),
 });
