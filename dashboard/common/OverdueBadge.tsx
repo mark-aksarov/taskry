@@ -1,17 +1,19 @@
+"use client";
+
 import { Badge } from "@/ui/Badge";
 import { twMerge } from "tailwind-merge";
-import { ru, enUS } from "date-fns/locale";
-import { formatDistanceToNow } from "date-fns";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
+import { useDeadline } from "./DeadlineContext";
 
 interface OverdueBadgeProps {
-  deadline: Date;
   className?: string;
 }
 
-export function OverdueBadge({ deadline, className }: OverdueBadgeProps) {
+export function OverdueBadge({ className }: OverdueBadgeProps) {
   const t = useTranslations("dashboard.common.OverdueBadge");
-  const locale = useLocale();
+  const { overdue } = useDeadline();
+
+  if (!overdue) return null;
 
   return (
     <Badge
@@ -23,10 +25,7 @@ export function OverdueBadge({ deadline, className }: OverdueBadgeProps) {
     >
       <span className="truncate">
         {t("task.overdue", {
-          time: formatDistanceToNow(deadline, {
-            addSuffix: true,
-            locale: locale === "en" ? enUS : ru,
-          }),
+          time: overdue,
         })}
       </span>
     </Badge>

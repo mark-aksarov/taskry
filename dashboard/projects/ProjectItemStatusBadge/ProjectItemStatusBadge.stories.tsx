@@ -3,6 +3,7 @@ import { ProjectItemStatusBadge } from "./ProjectItemStatusBadge";
 import { UpdateProjectStatusProvider } from "../UpdateProjectStatusContext";
 import { UpdateProjectStatusesProvider } from "../UpdateProjectStatusesContext";
 import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
+import { DeadlineProvider } from "@/dashboard/common/DeadlineContext";
 
 const meta: Meta<typeof ProjectItemStatusBadge> = {
   title: "dashboard/projects/ProjectItemStatusBadge",
@@ -11,7 +12,9 @@ const meta: Meta<typeof ProjectItemStatusBadge> = {
     (Story) => (
       <UpdateProjectStatusProvider>
         <UpdateProjectStatusesProvider>
-          <Story />
+          <DeadlineProvider deadline={new Date().toString()}>
+            <Story />
+          </DeadlineProvider>
         </UpdateProjectStatusesProvider>
       </UpdateProjectStatusProvider>
     ),

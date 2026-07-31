@@ -3,10 +3,9 @@ import { ProjectStatus } from "@/generated/prisma/enums";
 
 export function getProjectStatusBadgeColor(
   status: ProjectStatus,
-  deadline: string,
+  overdue: boolean,
 ): BadgeColor {
-  const isOverdue =
-    new Date(deadline) < new Date() && status !== ProjectStatus.completed;
+  const isOverdue = overdue && status !== ProjectStatus.completed;
 
   if (isOverdue) return "red";
 

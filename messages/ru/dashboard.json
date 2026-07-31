@@ -146,7 +146,7 @@
     },
     "OverdueBadge": {
       "task": {
-        "overdue": "Просрочена {time}"
+        "overdue": "Просрочено: {time}"
       }
     }
   },

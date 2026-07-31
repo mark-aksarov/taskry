@@ -30,6 +30,7 @@ import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { SelectableProjectItem } from "../SelectableProjectItem";
 import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
 import { ProjectListItemSkeleton } from "./ProjectListItemSkeleton";
+import { useDeadline } from "@/dashboard/common/DeadlineContext";
 
 export interface Props extends BaseProjectItemProps {
   category?: {
@@ -85,6 +86,7 @@ export const ProjectListItemInner = memo(function ProjectListItemInner({
     useModal("clientDetail");
   const { onOpenChange: onProjectCommentsModalOpenChange } =
     useModal("projectComments");
+  const { overdue } = useDeadline();
 
   const creatorImg = (
     <ItemBaseUserImageContainer
@@ -104,8 +106,6 @@ export const ProjectListItemInner = memo(function ProjectListItemInner({
     />
   );
 
-  const deadlineDate = new Date(deadline);
-
   return (
     <ProjectListItemLayout
       data-id={id}
@@ -120,11 +120,11 @@ export const ProjectListItemInner = memo(function ProjectListItemInner({
           >
             {title}
           </ListItemTitleButton>
-          {isPast(deadlineDate) ? (
-            <OverdueBadge deadline={deadlineDate} />
+          {overdue ? (
+            <OverdueBadge />
           ) : (
             <ListItemText>
-              <ItemBaseDeadline deadline={deadlineDate} />
+              <ItemBaseDeadline />
             </ListItemText>
           )}
         </>
@@ -204,13 +204,7 @@ export const ProjectListItemInner = memo(function ProjectListItemInner({
           <ListItemText>{t("company")}</ListItemText>
         </>
       }
-      statusSlot={
-        <ProjectItemStatusBadge
-          projectId={id}
-          deadline={deadline}
-          status={status}
-        />
-      }
+      statusSlot={<ProjectItemStatusBadge projectId={id} status={status} />}
       commentsModalTriggerSlot={
         <ItemBaseCommentsButton
           data-test="project-comments-modal-trigger"

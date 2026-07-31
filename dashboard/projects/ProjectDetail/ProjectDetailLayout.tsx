@@ -1,5 +1,6 @@
 interface ProjectDetailLayoutProps {
   titleSlot: React.ReactNode;
+  overdueSlot: React.ReactNode;
   statusSlot: React.ReactNode;
   creatorSlot: React.ReactNode;
   deadlineSlot: React.ReactNode;
@@ -10,6 +11,7 @@ interface ProjectDetailLayoutProps {
 
 export function ProjectDetailLayout({
   titleSlot,
+  overdueSlot,
   statusSlot,
   creatorSlot,
   deadlineSlot,
@@ -19,7 +21,10 @@ export function ProjectDetailLayout({
 }: ProjectDetailLayoutProps) {
   return (
     <div className="flex flex-col gap-6">
-      {titleSlot}
+      <div className="flex flex-col gap-4">
+        {titleSlot}
+        {overdueSlot}
+      </div>
       <div className="flex flex-col gap-4">
         {creatorSlot}
         {deadlineSlot}

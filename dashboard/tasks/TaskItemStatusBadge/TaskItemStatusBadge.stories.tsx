@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { TaskItemStatusBadge } from "./TaskItemStatusBadge";
 import { UpdateTaskStatusProvider } from "../UpdateTaskStatusContext";
+import { DeadlineProvider } from "@/dashboard/common/DeadlineContext";
 import { UpdateTaskStatusesProvider } from "../UpdateTaskStatusesContext";
 import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
@@ -11,7 +12,9 @@ const meta: Meta<typeof TaskItemStatusBadge> = {
     (Story) => (
       <UpdateTaskStatusesProvider>
         <UpdateTaskStatusProvider>
-          <Story />
+          <DeadlineProvider deadline={new Date().toString()}>
+            <Story />
+          </DeadlineProvider>
         </UpdateTaskStatusProvider>
       </UpdateTaskStatusesProvider>
     ),

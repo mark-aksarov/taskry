@@ -5,14 +5,12 @@ import { useUpdateProjectStatuses } from "../UpdateProjectStatusesContext";
 
 interface ProjectItemStatusBadgeProps {
   projectId: number;
-  deadline: string;
   className?: string;
   status: ProjectStatus;
 }
 
 export function ProjectItemStatusBadge({
   projectId,
-  deadline,
   className,
   status,
 }: ProjectItemStatusBadgeProps) {
@@ -36,7 +34,6 @@ export function ProjectItemStatusBadge({
       isPending={isPending}
       className={className}
       status={status}
-      deadline={deadline}
     />
   );
 }

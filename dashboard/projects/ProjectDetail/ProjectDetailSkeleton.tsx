@@ -6,6 +6,7 @@ export function ProjectDetailSkeleton() {
   return (
     <ProjectDetailLayout
       titleSlot={<Skeleton size="base" className="w-[15rem]" />}
+      overdueSlot={null}
       creatorSlot={<DetailInfoSkeleton />}
       deadlineSlot={<DetailInfoSkeleton />}
       descriptionSlot={

@@ -6,6 +6,7 @@ import { mockedClientSummaries } from "@/mocks/clients";
 import { ProjectDetailPage } from "./ProjectDetailPage";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useParams, usePathname } from "next/navigation";
+import { DeadlineProvider } from "@/dashboard/common/DeadlineContext";
 import { withDashboardLayout } from "@/.storybook/withDashboardLayout";
 import { ProjectDetailAlt } from "@/dashboard/projects/ProjectDetailAlt";
 import { mockedProjectCategorySummaries } from "@/mocks/projectCategories";
@@ -18,7 +19,14 @@ const meta = {
   title: "pages/ProjectDetailPage",
   component: ProjectDetailPage,
   parameters: { layout: "fullscreen" },
-  decorators: [withDashboardLayout],
+  decorators: [
+    (Story) => (
+      <DeadlineProvider deadline={new Date().toString()}>
+        <Story />
+      </DeadlineProvider>
+    ),
+    withDashboardLayout,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/projects/1");
     mocked(useParams).mockReturnValue({
@@ -34,10 +42,7 @@ export const Default = {
   args: {
     project: mockedProjectDetail,
     projectDetailCardHeaderContainer: (
-      <ProjectDetailCardHeader
-        projectStatus={mockedProjectDetail.status}
-        projectDeadline={mockedProjectDetail.deadline}
-      />
+      <ProjectDetailCardHeader projectStatus={mockedProjectDetail.status} />
     ),
     projectDetailContainer: <ProjectDetailAlt {...mockedProjectDetail} />,
     updateProjectCategoryRelFormContainer: (
@@ -70,7 +75,6 @@ export const WithoutSomeData = {
       <ProjectDetailAlt
         title={mockedProjectDetail.title}
         status={mockedProjectDetail.status}
-        deadline={mockedProjectDetail.deadline}
         tasks={mockedProjectDetail.tasks}
       />
     ),

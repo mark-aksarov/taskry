@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ProjectDetailAltSkeleton } from "./ProjectDetailAlt";
 import { ProjectDetailCardHeader } from "./ProjectDetailCard";
 import { getProjectDetail } from "@/lib/data/project/project.dal";
+import { DeadlineProvider } from "../common/DeadlineContext";
 
 interface ProjectDetailCardHeaderContainerProps {
   projectId: number;
@@ -30,9 +31,8 @@ async function ProjectDetailCardHeaderContainerInner({
   }
 
   return (
-    <ProjectDetailCardHeader
-      projectStatus={project.status}
-      projectDeadline={project.deadline}
-    />
+    <DeadlineProvider deadline={project.deadline}>
+      <ProjectDetailCardHeader projectStatus={project.status} />
+    </DeadlineProvider>
   );
 }

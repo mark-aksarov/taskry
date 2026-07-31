@@ -9,6 +9,7 @@ import { useParams, usePathname } from "next/navigation";
 import { mockedProjectSummaries } from "@/mocks/projects";
 import { TaskDetailAlt } from "@/dashboard/tasks/TaskDetailAlt";
 import { mockedTaskCategorySummaries } from "@/mocks/taskCategories";
+import { DeadlineProvider } from "@/dashboard/common/DeadlineContext";
 import { withDashboardLayout } from "@/.storybook/withDashboardLayout";
 import { TaskDetailCardHeader } from "@/dashboard/tasks/TaskDetailCard";
 import { SearchListExample } from "@/dashboard/search/SearchList/__stories__";
@@ -21,7 +22,14 @@ const meta = {
   title: "pages/TaskDetailPage",
   component: TaskDetailPage,
   parameters: { layout: "fullscreen" },
-  decorators: [withDashboardLayout],
+  decorators: [
+    (Story) => (
+      <DeadlineProvider deadline={new Date().toString()}>
+        <Story />
+      </DeadlineProvider>
+    ),
+    withDashboardLayout,
+  ],
   beforeEach: () => {
     mocked(usePathname).mockReturnValue("/tasks/1");
     mocked(useParams).mockReturnValue({
@@ -37,10 +45,7 @@ export const Default = {
   args: {
     task: mockedTaskDetail,
     taskDetailCardHeaderContainer: (
-      <TaskDetailCardHeader
-        taskStatus={mockedTaskDetail.status}
-        taskDeadline={mockedTaskDetail.deadline}
-      />
+      <TaskDetailCardHeader taskStatus={mockedTaskDetail.status} />
     ),
     taskDetailContainer: (
       <TaskDetailAlt
@@ -85,7 +90,6 @@ export const WithoutOptionalTaskData = {
     taskDetailContainer: (
       <TaskDetailAlt
         title={mockedTaskDetail.title}
-        deadline={mockedTaskDetail.deadline}
         status={mockedTaskDetail.status}
         progress={75}
       />

@@ -29,6 +29,7 @@ import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
 import { ProjectGridItemProgress } from "./ProjectGridItemProgress";
 import { ProjectGridItemMobileSkeleton } from "./ProjectGridItemSkeleton";
 import { GridItemMobileGate } from "@/dashboard/common/GridItemMobileGate";
+import { useDeadline } from "@/dashboard/common/DeadlineContext";
 
 interface Props extends BaseProjectItemProps {
   tasksTotal: number;
@@ -51,7 +52,6 @@ const ProjectGridItemMobileInner = memo(function ProjectGridItemMobileInner({
   id,
   isPending,
   title,
-  deadline,
   creator,
   commentsCount,
   status,
@@ -61,6 +61,8 @@ const ProjectGridItemMobileInner = memo(function ProjectGridItemMobileInner({
   const { onOpenChange: onProjectCommentsModalOpenChange } =
     useModal("projectComments");
 
+  const { overdue } = useDeadline();
+
   const creatorImg = (
     <ItemBaseUserImageContainer
       user={creator}
@@ -69,8 +71,6 @@ const ProjectGridItemMobileInner = memo(function ProjectGridItemMobileInner({
       height={44}
     />
   );
-
-  const deadlineDate = new Date(deadline);
 
   return (
     <div
@@ -94,11 +94,11 @@ const ProjectGridItemMobileInner = memo(function ProjectGridItemMobileInner({
           <GridItemInfo className="flex-auto">
             <GridItemTitle>{title}</GridItemTitle>
 
-            {isPast(deadlineDate) ? (
-              <OverdueBadge deadline={deadlineDate} />
+            {overdue ? (
+              <OverdueBadge />
             ) : (
               <GridItemText>
-                <ItemBaseDeadline deadline={deadlineDate} />
+                <ItemBaseDeadline />
               </GridItemText>
             )}
           </GridItemInfo>
@@ -122,13 +122,7 @@ const ProjectGridItemMobileInner = memo(function ProjectGridItemMobileInner({
             className="relative z-1"
           />
         }
-        statusSlot={
-          <ProjectItemStatusBadge
-            projectId={id}
-            deadline={deadline}
-            status={status}
-          />
-        }
+        statusSlot={<ProjectItemStatusBadge projectId={id} status={status} />}
         progressSlot={
           <ProjectGridItemProgress
             tasksTotal={tasksTotal}

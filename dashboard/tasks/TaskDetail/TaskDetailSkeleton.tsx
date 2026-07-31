@@ -7,6 +7,7 @@ export function TaskDetailSkeleton() {
   return (
     <TaskDetailLayout
       titleSlot={<Skeleton size="base" className="w-[15rem]" />}
+      overdueSlot={null}
       descriptionSlot={
         <DetailInfo>
           <Skeleton className="w-[7rem]" size="xs" />

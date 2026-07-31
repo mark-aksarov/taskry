@@ -6,6 +6,7 @@ import { DeleteTaskProvider } from "../../DeleteTaskContext";
 import { UpdateTaskProvider } from "../../UpdateTaskContext";
 import { UpdateTaskStatusProvider } from "../../UpdateTaskStatusContext";
 import { TaskGridItemMobile, TaskGridItemLarge } from "../../TaskGridItem";
+import { DeadlineProvider } from "@/dashboard/common/DeadlineContext";
 
 export function TaskGridExample({ showCheckbox }: { showCheckbox: boolean }) {
   const { viewMode } = useViewMode();
@@ -22,9 +23,11 @@ export function TaskGridExample({ showCheckbox }: { showCheckbox: boolean }) {
           <DeleteTaskProvider key={task.id}>
             <UpdateTaskProvider>
               <UpdateTaskStatusProvider>
-                <TaskListItem {...task} showCheckbox={showCheckbox} />
-                <TaskGridItemMobile {...task} {...taskStat} />
-                <TaskGridItemLarge {...task} {...taskStat} />
+                <DeadlineProvider deadline={task.deadline}>
+                  <TaskListItem {...task} showCheckbox={showCheckbox} />
+                  <TaskGridItemMobile {...task} {...taskStat} />
+                  <TaskGridItemLarge {...task} {...taskStat} />
+                </DeadlineProvider>
               </UpdateTaskStatusProvider>
             </UpdateTaskProvider>
           </DeleteTaskProvider>

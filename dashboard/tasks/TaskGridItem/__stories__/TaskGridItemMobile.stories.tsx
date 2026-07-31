@@ -1,3 +1,4 @@
+import { subDays } from "date-fns";
 import { mockedTaskList } from "@/mocks/tasks";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
@@ -7,6 +8,7 @@ import { DeleteTaskProvider } from "../../DeleteTaskContext";
 import { DeleteTasksProvider } from "../../DeleteTasksContext";
 import { ViewModeProvider } from "@/dashboard/common/ViewMode";
 import { SelectedTasksProvider } from "../../SelectedTasksContext";
+import { DeadlineProvider } from "@/dashboard/common/DeadlineContext";
 import { UpdateTaskStatusProvider } from "../../UpdateTaskStatusContext";
 import { UpdateTaskStatusesProvider } from "../../UpdateTaskStatusesContext";
 import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
@@ -14,6 +16,11 @@ import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutPr
 const meta = {
   title: "dashboard/tasks/TaskGridItemMobile",
   component: TaskGridItemMobile,
+  render: (args) => (
+    <DeadlineProvider deadline={args.deadline}>
+      <TaskGridItemMobile {...args} />
+    </DeadlineProvider>
+  ),
   decorators: [
     (Story) => (
       <SelectedTasksProvider pageItems={[]}>
@@ -49,6 +56,13 @@ export const Default = {
     ...mockedTask,
     subtasksTotal: mockedTask.subtasks.total,
     subtasksDone: mockedTask.subtasks.done,
+  },
+} satisfies Story;
+
+export const WithOverdueDeadline = {
+  args: {
+    ...Default.args,
+    deadline: subDays(new Date(), 3).toISOString(),
   },
 } satisfies Story;
 

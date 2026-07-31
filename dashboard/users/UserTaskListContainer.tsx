@@ -19,6 +19,7 @@ import { ModalManagerProvider } from "@/dashboard/../common/ModalManagerContext"
 import { UpdateCommentProvider } from "@/dashboard/comments/UpdateCommentContext";
 import { UpdateTaskFormContainer } from "@/dashboard/tasks/UpdateTaskFormContainer";
 import { UpdateTaskStatusProvider } from "@/dashboard/tasks/UpdateTaskStatusContext";
+import { DeadlineProvider } from "../common/DeadlineContext";
 
 const UserTaskListItem = dynamic(
   () => import("./UserTaskListItem").then((mod) => mod.UserTaskListItem),
@@ -59,13 +60,15 @@ export function UserTaskListContainer({ tasks }: UserTaskListContainerProps) {
                   >
                     <SendCommentProvider>
                       <UpdateCommentProvider>
-                        {/* Dynamic */}
-                        <UserTaskListItem {...task} />
-                        <TaskGridItemMobile
-                          {...task}
-                          subtasksTotal={task.subtasks.total}
-                          subtasksDone={task.subtasks.done}
-                        />
+                        <DeadlineProvider deadline={task.deadline}>
+                          {/* Dynamic */}
+                          <UserTaskListItem {...task} />
+                          <TaskGridItemMobile
+                            {...task}
+                            subtasksTotal={task.subtasks.total}
+                            subtasksDone={task.subtasks.done}
+                          />
+                        </DeadlineProvider>
 
                         {/* Modals and side sheets */}
                         <TaskDetailSideSheet

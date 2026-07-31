@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { TaskDetailAltSkeleton } from "./TaskDetailAlt";
 import { TaskDetailCardHeader } from "./TaskDetailCard";
 import { getTaskDetail } from "@/lib/data/task/task.dal";
+import { DeadlineProvider } from "../common/DeadlineContext";
 
 interface TaskDetailCardHeaderContainerProps {
   taskId: number;
@@ -30,9 +31,8 @@ async function TaskDetailCardHeaderContainerInner({
   }
 
   return (
-    <TaskDetailCardHeader
-      taskStatus={task.status}
-      taskDeadline={task.deadline}
-    />
+    <DeadlineProvider deadline={task.deadline}>
+      <TaskDetailCardHeader taskStatus={task.status} />
+    </DeadlineProvider>
   );
 }

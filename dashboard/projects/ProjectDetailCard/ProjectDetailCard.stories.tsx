@@ -13,6 +13,7 @@ import { mockedProjectDetail } from "@/mocks/projects";
 import { ProjectDetailCard } from "./ProjectDetailCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { DeleteProjectProvider } from "../DeleteProjectContext";
+import { DeadlineProvider } from "@/dashboard/common/DeadlineContext";
 import { UpdateProjectTitleProvider } from "../UpdateProjectTitleContext";
 import { UpdateProjectClientProvider } from "../UpdateProjectClientContext";
 import { UpdateProjectStatusProvider } from "../UpdateProjectStatusContext";
@@ -22,9 +23,18 @@ import { UpdateProjectCategoryRelProvider } from "../UpdateProjectCategoryRelCon
 import { UpdateProjectDescriptionProvider } from "../UpdateProjectDescriptionContext";
 import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
+type PropsAndDeadlineArgs = React.ComponentProps<typeof ProjectDetailCard> & {
+  deadline: string;
+};
+
 const meta = {
   title: "dashboard/projects/ProjectDetailCard",
   component: ProjectDetailCard,
+  render: (args) => (
+    <DeadlineProvider deadline={args.deadline}>
+      <ProjectDetailCard {...args} />
+    </DeadlineProvider>
+  ),
   decorators: [
     (Story) => (
       <UpdateProjectStatusProvider>
@@ -47,7 +57,7 @@ const meta = {
     ),
     withDashboardLayoutProviders,
   ],
-} satisfies Meta<typeof ProjectDetailCard>;
+} satisfies Meta<PropsAndDeadlineArgs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -55,24 +65,18 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     projectDetailCardHeaderContainer: (
-      <ProjectDetailCardHeader
-        projectStatus={mockedProjectDetail.status}
-        projectDeadline={mockedProjectDetail.deadline}
-      />
+      <ProjectDetailCardHeader projectStatus={mockedProjectDetail.status} />
     ),
     projectDetailContainer: <ProjectDetailAlt {...mockedProjectDetail} />,
+    deadline: mockedProjectDetail.deadline,
   },
 } satisfies Story;
 
 export const WithOverdueDeadline = {
   args: {
     ...Default.args,
-    projectDetailContainer: (
-      <ProjectDetailAlt
-        {...mockedProjectDetail}
-        deadline={subDays(new Date(), 3).toISOString()}
-      />
-    ),
+    projectDetailContainer: <ProjectDetailAlt {...mockedProjectDetail} />,
+    deadline: subDays(new Date(), 3).toISOString(),
   },
 } satisfies Story;
 
@@ -80,6 +84,7 @@ export const WithSkeleton = {
   args: {
     projectDetailCardHeaderContainer: <ProjectDetailCardHeaderSkeleton />,
     projectDetailContainer: <ProjectDetailAltSkeleton />,
+    deadline: mockedProjectDetail.deadline,
   },
 } satisfies Story;
 
@@ -89,7 +94,6 @@ export const WithoutOptionalProjectData = {
     projectDetailContainer: (
       <ProjectDetailAlt
         title={mockedProjectDetail.title}
-        deadline={mockedProjectDetail.deadline}
         status={mockedProjectDetail.status}
         tasks={{
           total: 0,

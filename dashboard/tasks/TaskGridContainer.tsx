@@ -12,11 +12,12 @@ import { TaskListItemDTO } from "@/lib/data/task/task.dto";
 import { TaskGridItemMobileSkeleton } from "./TaskGridItem";
 import { TaskDetailSideSheet } from "./TaskDetailSideSheet";
 import { TaskDetailContainer } from "./TaskDetailContainer";
+import { DeadlineProvider } from "../common/DeadlineContext";
 import { TaskCommentsContainer } from "./TaskCommentsContainer";
-import { ModalManagerProvider } from "@/common/ModalManagerContext";
-import { UpdateTaskFormContainer } from "./UpdateTaskFormContainer";
 import { UserDetailSideSheet } from "../users/UserDetailSideSheet";
 import { UserDetailContainer } from "../users/UserDetailContainer";
+import { ModalManagerProvider } from "@/common/ModalManagerContext";
+import { UpdateTaskFormContainer } from "./UpdateTaskFormContainer";
 import { CommentFormProvider } from "../comments/CommentFormContext";
 import { UpdateTaskStatusProvider } from "./UpdateTaskStatusContext";
 import { SendCommentProvider } from "../comments/SendCommentContext";
@@ -79,10 +80,12 @@ export function TaskGridContainer({
                   >
                     <SendCommentProvider>
                       <UpdateCommentProvider>
-                        {/* Dynamic */}
-                        <TaskListItem {...task} showCheckbox={showCheckbox} />
-                        <TaskGridItemLarge {...task} {...subtaskStatProps} />
-                        <TaskGridItemMobile {...task} {...subtaskStatProps} />
+                        <DeadlineProvider deadline={task.deadline}>
+                          {/* Dynamic */}
+                          <TaskListItem {...task} showCheckbox={showCheckbox} />
+                          <TaskGridItemLarge {...task} {...subtaskStatProps} />
+                          <TaskGridItemMobile {...task} {...subtaskStatProps} />
+                        </DeadlineProvider>
 
                         {/* Modals and side sheets */}
                         <TaskDetailSideSheet

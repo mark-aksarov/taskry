@@ -7,14 +7,12 @@ interface TaskItemStatusBadgeProps {
   taskId: number;
   className?: string;
   status: TaskStatus;
-  deadline: string;
 }
 
 export function TaskItemStatusBadge({
   taskId,
   className,
   status,
-  deadline,
 }: TaskItemStatusBadgeProps) {
   // Pending state for single task status update
   const { isPending: isUpdateTaskStatusPending } = useUpdateTaskStatus();
@@ -36,7 +34,6 @@ export function TaskItemStatusBadge({
       isPending={isPending}
       status={status}
       className={className}
-      deadline={deadline}
     />
   );
 }

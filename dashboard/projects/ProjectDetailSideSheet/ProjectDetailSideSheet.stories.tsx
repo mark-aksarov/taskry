@@ -1,6 +1,7 @@
-import { withOpenModal } from "@/.storybook/withOpenModal";
+import { subDays } from "date-fns";
 import { mockedProjectDetail } from "@/mocks/projects";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { ProjectDetailSideSheet } from "./ProjectDetailSideSheet";
 import { ProjectDetail, ProjectDetailSkeleton } from "../ProjectDetail";
 import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
@@ -23,6 +24,18 @@ export const Default = {
   args: {
     projectId: project.id,
     projectDetailContainer: <ProjectDetail {...project} />,
+  },
+} satisfies Story;
+
+export const WithOverdueDeadline = {
+  args: {
+    projectId: project.id,
+    projectDetailContainer: (
+      <ProjectDetail
+        {...project}
+        deadline={subDays(new Date(), 3).toISOString()}
+      />
+    ),
   },
 } satisfies Story;
 

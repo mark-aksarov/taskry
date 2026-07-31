@@ -1,3 +1,4 @@
+import { subDays } from "date-fns";
 import { mockedProjectList } from "@/mocks/projects";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
@@ -6,16 +7,22 @@ import { ProjectGridItemMobile } from "../ProjectGridItemMobile";
 import { UpdateProjectProvider } from "../../UpdateProjectContext";
 import { DeleteProjectProvider } from "../../DeleteProjectContext";
 import { DeleteProjectsProvider } from "../../DeleteProjectsContext";
+import { DeadlineProvider } from "@/dashboard/common/DeadlineContext";
 import { SelectedProjectsProvider } from "../../SelectedProjectsContext";
 import { UpdateProjectStatusProvider } from "../../UpdateProjectStatusContext";
-import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 import { UpdateProjectStatusesProvider } from "../../UpdateProjectStatusesContext";
+import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
 
 const mockedProject = mockedProjectList[0];
 
 const meta = {
   title: "dashboard/projects/ProjectGridItemMobile",
   component: ProjectGridItemMobile,
+  render: (args) => (
+    <DeadlineProvider deadline={args.deadline}>
+      <ProjectGridItemMobile {...args} />
+    </DeadlineProvider>
+  ),
   decorators: [
     (Story) => (
       <SelectedProjectsProvider pageItems={[]}>
@@ -47,6 +54,13 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     ...mockedProject,
+  },
+} satisfies Story;
+
+export const WithOverdueDeadline = {
+  args: {
+    ...mockedProject,
+    deadline: subDays(new Date(), 3).toISOString(),
   },
 } satisfies Story;
 

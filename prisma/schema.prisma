@@ -120,7 +120,7 @@ model Project {
   id          Int      @id @default(autoincrement())
   title       String   @db.VarChar(255)
   description String?  @db.VarChar(5000)
-  deadline    DateTime
+  deadline    DateTime @db.Date
 
   creatorId      String?
   clientId       Int?
@@ -173,7 +173,7 @@ model Task {
   id          Int      @id @default(autoincrement())
   title       String   @db.VarChar(255)
   description String?  @db.VarChar(5000)
-  deadline    DateTime
+  deadline    DateTime @db.Date
 
   projectId      Int?
   creatorId      String?
@@ -261,7 +261,7 @@ model User {
   fullName      String    @db.VarChar(100)
   bio           String?   @db.VarChar(5000)
   address       String?   @db.VarChar(255)
-  birthdate     DateTime?
+  birthdate     DateTime? @db.Date
   email         String    @db.VarChar(100)
   emailVerified Boolean   @default(false)
   imageUrl      String?

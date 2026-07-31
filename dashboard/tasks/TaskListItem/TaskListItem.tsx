@@ -14,7 +14,6 @@ import {
 } from "@/dashboard/common/ItemBase";
 
 import { memo } from "react";
-import { isPast } from "date-fns";
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
 import { TaskItemActionMenuTrigger } from "../TaskItem";
@@ -25,6 +24,7 @@ import { TaskListItemSkeleton } from "./TaskListItemSkeleton";
 import { ListItemGate } from "@/dashboard/common/ListItemGate";
 import { OverdueBadge } from "@/dashboard/common/OverdueBadge";
 import { TaskItemCheckbox } from "../TaskItem/TaskItemCheckbox";
+import { useDeadline } from "@/dashboard/common/DeadlineContext";
 import { BaseTaskItemProps, useTaskItemPending } from "../TaskItem";
 
 export interface Props extends BaseTaskItemProps {
@@ -59,7 +59,6 @@ export const TaskListItemInner = memo(function TaskListItemInner({
   id,
   isPending,
   title,
-  deadline,
   assignee,
   category,
   project,
@@ -68,6 +67,7 @@ export const TaskListItemInner = memo(function TaskListItemInner({
   showCheckbox,
 }: InnerProps) {
   const t = useTranslations("dashboard.tasks.TaskListItem");
+  const { overdue } = useDeadline();
 
   const assigneeImg = (
     <ItemBaseUserImageContainer
@@ -84,8 +84,6 @@ export const TaskListItemInner = memo(function TaskListItemInner({
     useModal("projectDetail");
   const { onOpenChange: onTaskCommentsModalOpenChange } =
     useModal("taskComments");
-
-  const deadlineDate = new Date(deadline);
 
   return (
     <TaskListItemLayout
@@ -104,11 +102,11 @@ export const TaskListItemInner = memo(function TaskListItemInner({
             {title}
           </ListItemTitleButton>
 
-          {isPast(deadlineDate) ? (
-            <OverdueBadge deadline={deadlineDate} />
+          {overdue ? (
+            <OverdueBadge />
           ) : (
             <ListItemText>
-              <ItemBaseDeadline deadline={deadlineDate} />
+              <ItemBaseDeadline />
             </ListItemText>
           )}
         </>
@@ -165,9 +163,7 @@ export const TaskListItemInner = memo(function TaskListItemInner({
           <ListItemText>{t("project")}</ListItemText>
         </>
       }
-      statusSlot={
-        <TaskItemStatusBadge taskId={id} deadline={deadline} status={status} />
-      }
+      statusSlot={<TaskItemStatusBadge taskId={id} status={status} />}
       commentsModalTriggerSlot={
         <ItemBaseCommentsButton
           data-test="task-comments-modal-trigger"

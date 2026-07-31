@@ -1,7 +1,4 @@
-import { DetailInfo, DetailText, DetailTitle } from "@/dashboard/common/Detail";
-
 import Image from "next/image";
-import { isPast } from "date-fns";
 import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { ProjectDetailLayout } from "./ProjectDetailLayout";
@@ -9,6 +6,8 @@ import { UnknownUser } from "@/dashboard/common/UnknownUser";
 import { OverdueBadge } from "@/dashboard/common/OverdueBadge";
 import { DeadlineBadge } from "@/dashboard/common/DeadlineBadge";
 import { ImageContainer } from "@/dashboard/common/ImageContainer";
+import { DeadlineProvider } from "@/dashboard/common/DeadlineContext";
+import { DetailInfo, DetailText, DetailTitle } from "@/dashboard/common/Detail";
 
 interface ProjectDetailProps {
   title: string;
@@ -51,70 +50,70 @@ export function ProjectDetail({
     <UnknownUser className="h-9 w-9" />
   );
 
-  const deadlineDate = new Date(deadline);
-
   return (
-    <ProjectDetailLayout
-      titleSlot={
-        <h2 className="text-base font-bold text-(--text-primary)">{title}</h2>
-      }
-      creatorSlot={
-        <DetailInfo>
-          <DetailTitle>{t("creator")}</DetailTitle>
-          <div className="flex items-center gap-2">
-            {creator ? (
-              <>
-                {creatorImg}
-                <DetailText>{creator.fullName}</DetailText>
-              </>
+    <DeadlineProvider deadline={deadline}>
+      <ProjectDetailLayout
+        titleSlot={
+          <h2 className="text-base font-bold text-(--text-primary)">{title}</h2>
+        }
+        overdueSlot={<OverdueBadge className="w-fit" />}
+        creatorSlot={
+          <DetailInfo>
+            <DetailTitle>{t("creator")}</DetailTitle>
+            <div className="flex items-center gap-2">
+              {creator ? (
+                <>
+                  {creatorImg}
+                  <DetailText>{creator.fullName}</DetailText>
+                </>
+              ) : (
+                <>
+                  <UnknownUser className="h-9 w-9" />
+                  <DetailText>{t("noCreator")}</DetailText>
+                </>
+              )}
+            </div>
+          </DetailInfo>
+        }
+        deadlineSlot={
+          <DetailInfo className="md:gap-3.5">
+            <DetailTitle>{t("deadline")}</DetailTitle>
+            <DeadlineBadge className="self-start" />
+          </DetailInfo>
+        }
+        descriptionSlot={
+          <DetailInfo>
+            <DetailTitle>{t("description")}</DetailTitle>
+            <DetailText>
+              {description ? description : t("noDescription")}
+            </DetailText>
+          </DetailInfo>
+        }
+        statusSlot={
+          <DetailInfo>
+            <DetailTitle>{t("status")}</DetailTitle>
+            <DetailText>{tStatus(status)}</DetailText>
+          </DetailInfo>
+        }
+        categorySlot={
+          <DetailInfo>
+            <DetailTitle>{t("category")}</DetailTitle>
+            <DetailText>
+              {category ? category.name : t("noCategory")}
+            </DetailText>
+          </DetailInfo>
+        }
+        clientSlot={
+          <DetailInfo className="border-none pb-0">
+            <DetailTitle>{t("client")}</DetailTitle>
+            {client ? (
+              <DetailText>{client.fullName}</DetailText>
             ) : (
-              <>
-                <UnknownUser className="h-9 w-9" />
-                <DetailText>{t("noCreator")}</DetailText>
-              </>
+              <DetailText>{t("noClient")}</DetailText>
             )}
-          </div>
-        </DetailInfo>
-      }
-      deadlineSlot={
-        <DetailInfo className="md:gap-3.5">
-          <DetailTitle>{t("deadline")}</DetailTitle>
-          <div className="flex w-full items-center justify-between">
-            <DeadlineBadge deadline={deadlineDate} className="self-start" />
-            {isPast(deadlineDate) && <OverdueBadge deadline={deadlineDate} />}
-          </div>
-        </DetailInfo>
-      }
-      descriptionSlot={
-        <DetailInfo>
-          <DetailTitle>{t("description")}</DetailTitle>
-          <DetailText>
-            {description ? description : t("noDescription")}
-          </DetailText>
-        </DetailInfo>
-      }
-      statusSlot={
-        <DetailInfo>
-          <DetailTitle>{t("status")}</DetailTitle>
-          <DetailText>{tStatus(status)}</DetailText>
-        </DetailInfo>
-      }
-      categorySlot={
-        <DetailInfo>
-          <DetailTitle>{t("category")}</DetailTitle>
-          <DetailText>{category ? category.name : t("noCategory")}</DetailText>
-        </DetailInfo>
-      }
-      clientSlot={
-        <DetailInfo className="border-none pb-0">
-          <DetailTitle>{t("client")}</DetailTitle>
-          {client ? (
-            <DetailText>{client.fullName}</DetailText>
-          ) : (
-            <DetailText>{t("noClient")}</DetailText>
-          )}
-        </DetailInfo>
-      }
-    />
+          </DetailInfo>
+        }
+      />
+    </DeadlineProvider>
   );
 }

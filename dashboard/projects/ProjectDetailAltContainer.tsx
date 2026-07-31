@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getProjectDetail } from "@/lib/data/project/project.dal";
 import { ProjectDetailAlt, ProjectDetailAltSkeleton } from "./ProjectDetailAlt";
+import { DeadlineProvider } from "../common/DeadlineContext";
 
 interface ProjectDetailAltContainerProps {
   projectId: number;
@@ -29,15 +30,16 @@ async function ProjectDetailAltContainerInner({
   }
 
   return (
-    <ProjectDetailAlt
-      title={project.title}
-      creator={project.creator}
-      deadline={project.deadline}
-      description={project.description}
-      client={project.client}
-      category={project.category}
-      status={project.status}
-      tasks={project.tasks}
-    />
+    <DeadlineProvider deadline={project.deadline}>
+      <ProjectDetailAlt
+        title={project.title}
+        creator={project.creator}
+        description={project.description}
+        client={project.client}
+        category={project.category}
+        status={project.status}
+        tasks={project.tasks}
+      />
+    </DeadlineProvider>
   );
 }

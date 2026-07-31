@@ -10,12 +10,10 @@ import { DeleteProjectModalTrigger } from "../DeleteProjectModalTrigger";
 
 interface ProjectDetailCardHeaderProps {
   projectStatus: ProjectStatus;
-  projectDeadline: string;
 }
 
 export function ProjectDetailCardHeader({
   projectStatus,
-  projectDeadline,
 }: ProjectDetailCardHeaderProps) {
   const t = useTranslations("dashboard.projects.ProjectDetailCard");
 
@@ -23,13 +21,8 @@ export function ProjectDetailCardHeader({
     <DetailCardAltHeader
       title={t("title")}
       statusSlot={
-        <ProjectStatusBadge
-          isPending={false}
-          status={projectStatus}
-          deadline={projectDeadline}
-        />
+        <ProjectStatusBadge isPending={false} status={projectStatus} />
       }
-      deadline={projectDeadline}
       deleteButtonSlot={<DeleteProjectModalTrigger buttonVariant="primary" />}
     />
   );

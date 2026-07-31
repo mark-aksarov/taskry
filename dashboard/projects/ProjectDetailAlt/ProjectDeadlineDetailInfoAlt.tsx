@@ -10,15 +10,12 @@ import { useModal } from "@/common/ModalManagerContext";
 import { useFormatter, useTranslations } from "next-intl";
 import { useDeleteProject } from "../DeleteProjectContext";
 import { useUpdateProjectDeadline } from "../UpdateProjectDeadlineContext";
+import { useDeadline } from "@/dashboard/common/DeadlineContext";
 
-interface ProjectDeadlineDetailInfoAltProps {
-  deadline: Date;
-}
-
-export function ProjectDeadlineDetailInfoAlt({
-  deadline,
-}: ProjectDeadlineDetailInfoAltProps) {
+export function ProjectDeadlineDetailInfoAlt() {
   const t = useTranslations("dashboard.projects.ProjectDetail");
+
+  const { deadline } = useDeadline();
 
   const { onOpenChange: onUpdateBirthdateModalOpenChange } = useModal(
     "updateProjectDeadline",

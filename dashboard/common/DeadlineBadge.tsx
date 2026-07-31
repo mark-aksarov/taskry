@@ -1,12 +1,15 @@
+"use client";
+
 import { Badge } from "@/ui/Badge";
 import { useFormatter } from "next-intl";
+import { useDeadline } from "./DeadlineContext";
 
 interface DeadlineBadgeProps {
   className?: string;
-  deadline: Date;
 }
 
-export function DeadlineBadge({ className, deadline }: DeadlineBadgeProps) {
+export function DeadlineBadge({ className }: DeadlineBadgeProps) {
+  const { deadline } = useDeadline();
   const format = useFormatter();
 
   const formattedDeadline = format.dateTime(deadline, {

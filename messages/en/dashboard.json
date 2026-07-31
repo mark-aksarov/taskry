@@ -146,7 +146,7 @@
     },
     "OverdueBadge": {
       "task": {
-        "overdue": "Overdue {time}"
+        "overdue": "Overdue: {time}"
       }
     }
   },

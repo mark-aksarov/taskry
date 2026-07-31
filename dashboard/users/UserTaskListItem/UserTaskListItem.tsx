@@ -12,7 +12,9 @@ import {
 
 import { memo } from "react";
 import { useModal } from "@/common/ModalManagerContext";
+import { OverdueBadge } from "@/dashboard/common/OverdueBadge";
 import { ListItemGate } from "@/dashboard/common/ListItemGate";
+import { useDeadline } from "@/dashboard/common/DeadlineContext";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
 import { UserTaskListItemSkeleton } from "./UserTaskListItemSkeleton";
 import { TaskItemActionMenuTrigger } from "@/dashboard/tasks/TaskItem";
@@ -39,13 +41,14 @@ const UserTaskListItemInner = memo(function UserTaskListItemInner({
   id,
   isPending,
   title,
-  deadline,
   status,
   commentsCount,
 }: InnerProps) {
   const { onOpenChange: onTaskDetailModalOpenChange } = useModal("taskDetail");
   const { onOpenChange: onTaskCommentsModalOpenChange } =
     useModal("taskComments");
+
+  const { overdue } = useDeadline();
 
   return (
     <UserTaskListItemLayout
@@ -58,14 +61,17 @@ const UserTaskListItemInner = memo(function UserTaskListItemInner({
           >
             {title}
           </ListItemTitleButton>
-          <ListItemText>
-            <ItemBaseDeadline deadline={new Date(deadline)} />
-          </ListItemText>
+
+          {overdue ? (
+            <OverdueBadge />
+          ) : (
+            <ListItemText>
+              <ItemBaseDeadline />
+            </ListItemText>
+          )}
         </>
       }
-      statusSlot={
-        <TaskItemStatusBadge taskId={id} deadline={deadline} status={status} />
-      }
+      statusSlot={<TaskItemStatusBadge taskId={id} status={status} />}
       commentsModalTriggerSlot={
         <ItemBaseCommentsButton
           commentsCount={commentsCount}

@@ -10,6 +10,7 @@ import { EntityGrid } from "@/dashboard/common/EntityGrid";
 import { DeleteProjectProvider } from "../../DeleteProjectContext";
 import { UpdateProjectProvider } from "../../UpdateProjectContext";
 import { UpdateProjectStatusProvider } from "../../UpdateProjectStatusContext";
+import { DeadlineProvider } from "@/dashboard/common/DeadlineContext";
 
 export function ProjectGridExample() {
   const { viewMode } = useViewMode();
@@ -20,9 +21,11 @@ export function ProjectGridExample() {
         <DeleteProjectProvider key={project.id}>
           <UpdateProjectProvider>
             <UpdateProjectStatusProvider>
-              <ProjectListItem {...project} />
-              <ProjectGridItemMobile {...project} />
-              <ProjectGridItemLarge {...project} />
+              <DeadlineProvider deadline={project.deadline}>
+                <ProjectListItem {...project} />
+                <ProjectGridItemMobile {...project} />
+                <ProjectGridItemLarge {...project} />
+              </DeadlineProvider>
             </UpdateProjectStatusProvider>
           </UpdateProjectProvider>
         </DeleteProjectProvider>

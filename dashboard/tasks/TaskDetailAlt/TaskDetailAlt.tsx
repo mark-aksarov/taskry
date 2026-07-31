@@ -4,7 +4,6 @@ import {
   DetailInfoAlt,
 } from "@/dashboard/common/Detail";
 
-import { isPast } from "date-fns";
 import { useTranslations } from "next-intl";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { TaskDetailAltLayout } from "./TaskDetailAltLayout";
@@ -30,7 +29,6 @@ interface TaskDetailAltProps {
     fullName: string;
     imageUrl?: string;
   };
-  deadline: string;
   description?: string;
   category?: {
     id: number;
@@ -49,7 +47,6 @@ export function TaskDetailAlt({
   title,
   assignee,
   creator,
-  deadline,
   description,
   category,
   project,
@@ -59,21 +56,15 @@ export function TaskDetailAlt({
 }: TaskDetailAltProps) {
   const t = useTranslations("dashboard.tasks.TaskDetail");
 
-  const deadlineDate = new Date(deadline);
-
   return (
     <TaskDetailAltLayout
-      overdueSlot={
-        isPast(deadlineDate) && (
-          <OverdueBadge deadline={deadlineDate} className="w-fit" />
-        )
-      }
+      overdueSlot={<OverdueBadge className="w-fit" />}
       titleSlot={<TaskTitleDetailInfoAlt title={title} />}
       descriptionSlot={
         <TaskDescriptionDetailInfoAlt description={description} />
       }
       assigneesSlot={<TaskAssigneeDetailInfoAlt assignee={assignee} />}
-      deadlineSlot={<TaskDeadlineDetailInfoAlt deadline={deadline} />}
+      deadlineSlot={<TaskDeadlineDetailInfoAlt />}
       statusSlot={<TaskStatusDetailInfoAlt status={status} />}
       categoryNameSlot={<TaskCategoryDetailInfoAlt category={category} />}
       projectTitleSlot={<TaskProjectDetailInfoAlt project={project} />}

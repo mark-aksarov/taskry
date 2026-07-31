@@ -25,7 +25,6 @@ interface ProjectDetailAltProps {
     fullName: string;
     imageUrl?: string;
   };
-  deadline: string;
   description?: string;
   client?: {
     id: number;
@@ -48,7 +47,6 @@ interface ProjectDetailAltProps {
 export function ProjectDetailAlt({
   title,
   creator,
-  deadline,
   description,
   client,
   category,
@@ -57,21 +55,15 @@ export function ProjectDetailAlt({
 }: ProjectDetailAltProps) {
   const t = useTranslations("dashboard.projects.ProjectDetail");
 
-  const deadlineDate = new Date(deadline);
-
   return (
     <ProjectDetailAltLayout
-      overdueSlot={
-        isPast(deadlineDate) && (
-          <OverdueBadge deadline={deadlineDate} className="w-fit" />
-        )
-      }
+      overdueSlot={<OverdueBadge className="w-fit" />}
       titleSlot={<ProjectTitleDetailInfoAlt title={title} />}
       descriptionSlot={
         <ProjectDescriptionDetailInfoAlt description={description} />
       }
       statusSlot={<ProjectStatusDetailInfoAlt status={status} />}
-      deadlineSlot={<ProjectDeadlineDetailInfoAlt deadline={deadlineDate} />}
+      deadlineSlot={<ProjectDeadlineDetailInfoAlt />}
       clientSlot={<ProjectClientDetailInfoAlt client={client} />}
       categorySlot={<ProjectCategoryDetailInfoAlt category={category} />}
       creatorSlot={

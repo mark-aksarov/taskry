@@ -1,5 +1,6 @@
 interface TaskDetailLayoutProps {
   titleSlot: React.ReactNode;
+  overdueSlot: React.ReactNode;
   descriptionSlot: React.ReactNode;
   assigneesSlot: React.ReactNode;
   deadlineSlot: React.ReactNode;
@@ -12,6 +13,7 @@ interface TaskDetailLayoutProps {
 
 export function TaskDetailLayout({
   titleSlot,
+  overdueSlot,
   assigneesSlot,
   deadlineSlot,
   descriptionSlot,
@@ -23,7 +25,10 @@ export function TaskDetailLayout({
 }: TaskDetailLayoutProps) {
   return (
     <div className="flex flex-col gap-6">
-      {titleSlot}
+      <div className="flex flex-col gap-4">
+        {titleSlot}
+        {overdueSlot}
+      </div>
       <div className="flex flex-col gap-4">
         {assigneesSlot}
         {deadlineSlot}

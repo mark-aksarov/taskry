@@ -1,6 +1,6 @@
 import { DeadlineBadge } from "../DeadlineBadge";
-import { DetailCardTitle } from "../DetailCard/DetailCardTitle";
 import { BadgeSkeleton, ButtonSkeleton } from "@/ui/Skeleton";
+import { DetailCardTitle } from "../DetailCard/DetailCardTitle";
 
 interface CommonProps {
   title: string;
@@ -8,19 +8,9 @@ interface CommonProps {
   deleteButtonSlot: React.ReactNode;
 }
 
-interface DetailCardAltHeaderProps extends CommonProps {
-  deadline: string;
-}
-
-export function DetailCardAltHeader({
-  deadline,
-  ...props
-}: DetailCardAltHeaderProps) {
+export function DetailCardAltHeader(props: CommonProps) {
   return (
-    <DetailCardAltHeaderLayout
-      deadlineSlot={<DeadlineBadge deadline={new Date(deadline)} />}
-      {...props}
-    />
+    <DetailCardAltHeaderLayout deadlineSlot={<DeadlineBadge />} {...props} />
   );
 }
 

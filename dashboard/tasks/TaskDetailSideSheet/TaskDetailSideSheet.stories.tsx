@@ -1,6 +1,7 @@
+import { subDays } from "date-fns";
 import { mockedTaskDetail } from "@/mocks/tasks";
-import { withOpenModal } from "@/.storybook/withOpenModal";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { withOpenModal } from "@/.storybook/withOpenModal";
 import { TaskDetailSideSheet } from "./TaskDetailSideSheet";
 import { TaskDetail, TaskDetailSkeleton } from "../TaskDetail";
 import { SubtaskListExample } from "@/dashboard/subtasks/SubtaskList/__stories__";
@@ -29,6 +30,21 @@ export const Default = {
         subtasksList={
           <SubtaskListExample variant="plain" showActionMenu={false} />
         }
+      />
+    ),
+  },
+} satisfies Story;
+
+export const WithOverdueDeadline = {
+  args: {
+    taskId: task.id,
+    taskDetailContainer: (
+      <TaskDetail
+        {...task}
+        subtasksList={
+          <SubtaskListExample variant="plain" showActionMenu={false} />
+        }
+        deadline={subDays(new Date(), 3).toISOString()}
       />
     ),
   },

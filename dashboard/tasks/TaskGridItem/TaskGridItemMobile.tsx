@@ -13,7 +13,6 @@ import {
 } from "@/dashboard/common/ItemBase";
 
 import { memo } from "react";
-import { isPast } from "date-fns";
 import { BaseLink } from "@/ui/Link";
 import { twMerge } from "tailwind-merge";
 import { useModal } from "@/common/ModalManagerContext";
@@ -22,6 +21,7 @@ import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { TaskItemStatusBadge } from "../TaskItemStatusBadge";
 import { TaskGridItemProgress } from "./TaskGridItemProgress";
 import { OverdueBadge } from "@/dashboard/common/OverdueBadge";
+import { useDeadline } from "@/dashboard/common/DeadlineContext";
 import { BaseTaskItemProps, useTaskItemPending } from "../TaskItem";
 import { TaskGridItemMobileSkeleton } from "./TaskGridItemSkeleton";
 import { GridItemMobileGate } from "@/dashboard/common/GridItemMobileGate";
@@ -47,13 +47,16 @@ export const TaskGridItemMobileInner = memo(function TaskGridItemMobileInner({
   id,
   isPending,
   title,
-  deadline,
   assignee,
   commentsCount,
   status,
   subtasksTotal,
   subtasksDone,
 }: InnerProps) {
+  const { onOpenChange: onTaskCommentsModalOpenChange } =
+    useModal("taskComments");
+  const { overdue } = useDeadline();
+
   const assigneeImg = (
     <ItemBaseUserImageContainer
       user={assignee}
@@ -62,11 +65,6 @@ export const TaskGridItemMobileInner = memo(function TaskGridItemMobileInner({
       height={44}
     />
   );
-
-  const { onOpenChange: onTaskCommentsModalOpenChange } =
-    useModal("taskComments");
-
-  const deadlineDate = new Date(deadline);
 
   return (
     <div
@@ -91,11 +89,11 @@ export const TaskGridItemMobileInner = memo(function TaskGridItemMobileInner({
           <GridItemInfo className="flex-auto">
             <GridItemTitle>{title}</GridItemTitle>
 
-            {isPast(deadlineDate) ? (
-              <OverdueBadge deadline={deadlineDate} />
+            {overdue ? (
+              <OverdueBadge />
             ) : (
               <GridItemText>
-                <ItemBaseDeadline deadline={deadlineDate} />
+                <ItemBaseDeadline />
               </GridItemText>
             )}
           </GridItemInfo>
@@ -119,13 +117,7 @@ export const TaskGridItemMobileInner = memo(function TaskGridItemMobileInner({
             className="relative z-1"
           />
         }
-        statusSlot={
-          <TaskItemStatusBadge
-            taskId={id}
-            deadline={deadline}
-            status={status}
-          />
-        }
+        statusSlot={<TaskItemStatusBadge taskId={id} status={status} />}
         progressSlot={
           <TaskGridItemProgress
             subtasksDone={subtasksDone}

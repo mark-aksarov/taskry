@@ -9,16 +9,13 @@ import {
 import { useDeleteTask } from "../DeleteTaskContext";
 import { useModal } from "@/common/ModalManagerContext";
 import { useFormatter, useTranslations } from "next-intl";
+import { useDeadline } from "@/dashboard/common/DeadlineContext";
 import { useUpdateTaskDeadline } from "../UpdateTaskDeadlineContext";
 
-interface TaskDeadlineDetailInfoAltProps {
-  deadline: string;
-}
-
-export function TaskDeadlineDetailInfoAlt({
-  deadline,
-}: TaskDeadlineDetailInfoAltProps) {
+export function TaskDeadlineDetailInfoAlt() {
   const t = useTranslations("dashboard.tasks.TaskDetail");
+
+  const { deadline } = useDeadline();
 
   const { onOpenChange: onUpdateBirthdateModalOpenChange } =
     useModal("updateTaskDeadline");
@@ -31,7 +28,7 @@ export function TaskDeadlineDetailInfoAlt({
 
   const format = useFormatter();
 
-  const formattedBirthdate = format.dateTime(new Date(deadline), {
+  const formattedBirthdate = format.dateTime(deadline, {
     day: "2-digit",
     month: "short",
     year: "numeric",

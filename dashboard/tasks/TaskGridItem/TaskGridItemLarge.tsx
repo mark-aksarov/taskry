@@ -7,7 +7,6 @@ import {
 } from "@/dashboard/common/ItemBase";
 
 import { memo } from "react";
-import { isPast } from "date-fns";
 import { TaskItemActionMenuTrigger } from "../TaskItem";
 import { useModal } from "@/common/ModalManagerContext";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
@@ -17,6 +16,7 @@ import { TaskGridItemProgress } from "./TaskGridItemProgress";
 import { OverdueBadge } from "@/dashboard/common/OverdueBadge";
 import { ItemBaseDeadline } from "@/dashboard/common/ItemBase";
 import { TaskItemCheckbox } from "../TaskItem/TaskItemCheckbox";
+import { useDeadline } from "@/dashboard/common/DeadlineContext";
 import { ListItemTitleButton } from "@/dashboard/common/ListItem";
 import { TaskGridItemLargeSkeleton } from "./TaskGridItemSkeleton";
 import { BaseTaskItemProps, useTaskItemPending } from "../TaskItem";
@@ -45,7 +45,6 @@ type InnerProps = Props & { isPending: boolean };
 const TaskGridItemLargeInner = memo(function TaskGridItemLargeInner({
   id,
   title,
-  deadline,
   assignee,
   commentsCount,
   status,
@@ -53,6 +52,13 @@ const TaskGridItemLargeInner = memo(function TaskGridItemLargeInner({
   subtasksDone,
   isPending,
 }: InnerProps) {
+  const { overdue } = useDeadline();
+
+  const { onOpenChange: onTaskDetailModalOpenChange } = useModal("taskDetail");
+  const { onOpenChange: onUserDetailModalOpenChange } = useModal("userDetail");
+  const { onOpenChange: onTaskCommentsModalOpenChange } =
+    useModal("taskComments");
+
   const assigneeImg = (
     <ItemBaseUserImageContainer
       user={assignee}
@@ -61,13 +67,6 @@ const TaskGridItemLargeInner = memo(function TaskGridItemLargeInner({
       height={36}
     />
   );
-
-  const { onOpenChange: onTaskDetailModalOpenChange } = useModal("taskDetail");
-  const { onOpenChange: onUserDetailModalOpenChange } = useModal("userDetail");
-  const { onOpenChange: onTaskCommentsModalOpenChange } =
-    useModal("taskComments");
-
-  const deadlineDate = new Date(deadline);
 
   return (
     <TaskGridItemLayout
@@ -88,11 +87,11 @@ const TaskGridItemLargeInner = memo(function TaskGridItemLargeInner({
             {title}
           </ListItemTitleButton>
 
-          {isPast(deadlineDate) ? (
-            <OverdueBadge deadline={deadlineDate} />
+          {overdue ? (
+            <OverdueBadge />
           ) : (
             <GridItemText>
-              <ItemBaseDeadline deadline={deadlineDate} />
+              <ItemBaseDeadline />
             </GridItemText>
           )}
         </GridItemInfo>
@@ -115,9 +114,7 @@ const TaskGridItemLargeInner = memo(function TaskGridItemLargeInner({
           onPress={() => onTaskCommentsModalOpenChange(true)}
         />
       }
-      statusSlot={
-        <TaskItemStatusBadge taskId={id} deadline={deadline} status={status} />
-      }
+      statusSlot={<TaskItemStatusBadge taskId={id} status={status} />}
       progressSlot={
         <TaskGridItemProgress
           subtasksDone={subtasksDone}

@@ -25,6 +25,7 @@ import { UpdateProjectFormContainer } from "./UpdateProjectFormContainer";
 import { UpdateProjectStatusProvider } from "./UpdateProjectStatusContext";
 import { UserDetailHeaderContainer } from "../users/UserDetailHeaderContainer";
 import { ClientDetailHeaderContainer } from "../client/ClientDetailHeaderContainer";
+import { DeadlineProvider } from "../common/DeadlineContext";
 
 const ProjectListItem = dynamic(
   () => import("./ProjectListItem").then((mod) => mod.ProjectListItem),
@@ -74,13 +75,18 @@ export function ProjectGridContainer({ projects }: ProjectGridContainerProps) {
                   >
                     <SendCommentProvider>
                       <UpdateCommentProvider>
-                        {/* Dynamic */}
-                        <ProjectListItem {...project} />
-                        <ProjectGridItemMobile
-                          {...project}
-                          {...taskStatProps}
-                        />
-                        <ProjectGridItemLarge {...project} {...taskStatProps} />
+                        <DeadlineProvider deadline={project.deadline}>
+                          {/* Dynamic */}
+                          <ProjectListItem {...project} />
+                          <ProjectGridItemMobile
+                            {...project}
+                            {...taskStatProps}
+                          />
+                          <ProjectGridItemLarge
+                            {...project}
+                            {...taskStatProps}
+                          />
+                        </DeadlineProvider>
 
                         {/* Modals and side sheets */}
                         <ProjectDetailSideSheet

@@ -1,3 +1,4 @@
+import { subDays } from "date-fns";
 import { mockedTaskList } from "@/mocks/tasks";
 import { TaskListItem } from "../TaskListItem";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
@@ -6,6 +7,7 @@ import { DeleteTaskProvider } from "../../DeleteTaskContext";
 import { ViewModeProvider } from "@/dashboard/common/ViewMode";
 import { DeleteTasksProvider } from "../../DeleteTasksContext";
 import { SelectedTasksProvider } from "../../SelectedTasksContext";
+import { DeadlineProvider } from "@/dashboard/common/DeadlineContext";
 import { UpdateTaskStatusProvider } from "../../UpdateTaskStatusContext";
 import { UpdateTaskStatusesProvider } from "../../UpdateTaskStatusesContext";
 import { withDashboardLayoutProviders } from "@/.storybook/withDashboardLayoutProviders";
@@ -15,6 +17,11 @@ const mockedTask = mockedTaskList[0];
 const meta = {
   title: "dashboard/tasks/TaskListItem",
   component: TaskListItem,
+  render: (args) => (
+    <DeadlineProvider deadline={args.deadline}>
+      <TaskListItem {...args} />
+    </DeadlineProvider>
+  ),
   decorators: [
     (Story) => (
       <SelectedTasksProvider pageItems={[]}>
@@ -44,6 +51,13 @@ export const Default = {
   args: {
     ...mockedTask,
     showCheckbox: false,
+  },
+} satisfies Story;
+
+export const WithOverdueDeadline = {
+  args: {
+    ...Default.args,
+    deadline: subDays(new Date(), 3).toISOString(),
   },
 } satisfies Story;
 
