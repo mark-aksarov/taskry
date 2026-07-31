@@ -7,15 +7,17 @@ import {
 } from "@/dashboard/common/ItemBase";
 
 import { memo } from "react";
+import { isPast } from "date-fns";
 import { TaskItemActionMenuTrigger } from "../TaskItem";
+import { useModal } from "@/common/ModalManagerContext";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { SelectableTaskItem } from "../SelectableTaskItem";
 import { TaskItemStatusBadge } from "../TaskItemStatusBadge";
 import { TaskGridItemProgress } from "./TaskGridItemProgress";
-import { ListItemTitleButton } from "@/dashboard/common/ListItem";
+import { OverdueBadge } from "@/dashboard/common/OverdueBadge";
 import { ItemBaseDeadline } from "@/dashboard/common/ItemBase";
 import { TaskItemCheckbox } from "../TaskItem/TaskItemCheckbox";
-import { useModal } from "@/common/ModalManagerContext";
+import { ListItemTitleButton } from "@/dashboard/common/ListItem";
 import { TaskGridItemLargeSkeleton } from "./TaskGridItemSkeleton";
 import { BaseTaskItemProps, useTaskItemPending } from "../TaskItem";
 import { GridItemInfo, GridItemText } from "@/dashboard/common/GridItem";
@@ -65,6 +67,8 @@ const TaskGridItemLargeInner = memo(function TaskGridItemLargeInner({
   const { onOpenChange: onTaskCommentsModalOpenChange } =
     useModal("taskComments");
 
+  const deadlineDate = new Date(deadline);
+
   return (
     <TaskGridItemLayout
       className={isPending ? "*:opacity-50" : undefined}
@@ -84,9 +88,13 @@ const TaskGridItemLargeInner = memo(function TaskGridItemLargeInner({
             {title}
           </ListItemTitleButton>
 
-          <GridItemText>
-            <ItemBaseDeadline deadline={deadline} />
-          </GridItemText>
+          {isPast(deadlineDate) ? (
+            <OverdueBadge deadline={deadlineDate} />
+          ) : (
+            <GridItemText>
+              <ItemBaseDeadline deadline={deadlineDate} />
+            </GridItemText>
+          )}
         </GridItemInfo>
       }
       assigneeImageSlot={

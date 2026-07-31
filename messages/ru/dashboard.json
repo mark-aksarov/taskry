@@ -38,7 +38,7 @@
       "noPublicLink": "Нет публичной ссылки"
     },
     "ItemBaseDeadline": {
-      "deadlineOn": "Срок до {date}"
+      "deadlineOn": "Срок: {date}"
     },
     "PersonImageMenuTrigger": {
       "heading": "Изображение профиля",
@@ -143,6 +143,11 @@
     },
     "ImportModalText": {
       "text": "Загрузите CSV-файл. Максимальный размер — 512 KB. Инструкции по подготовке файла доступны в документации."
+    },
+    "OverdueBadge": {
+      "task": {
+        "overdue": "Просрочена {time}"
+      }
     }
   },
   "company": {
@@ -700,7 +705,7 @@
     },
     "ProjectListItem": {
       "noDeadline": "Без срока",
-      "deadlineOn": "Срок до {date}",
+      "deadlineOn": "Срок: {date}",
       "noCreator": "Нет создателя",
       "creator": "Кем создан",
       "noClient": "Нет клиента",
@@ -862,7 +867,7 @@
   },
   "search": {
     "SearchListItem": {
-      "deadlineOn": "Срок до {date}"
+      "deadlineOn": "Срок: {date}"
     },
     "SearchToggleButtonGroup": {
       "users": "Пользователи",
@@ -1168,7 +1173,7 @@
       }
     },
     "TaskDetail": {
-      "deadline": "Срок выполнения",
+      "deadline": "Дедлайн",
       "description": "Описание",
       "noDescription": "Нет описания",
       "creator": "Кем создана",
@@ -1493,7 +1498,7 @@
     "UserTaskListItem": {
       "checkboxAriaLabel": "Чекбокс задачи",
       "noDeadline": "Без дедлайна",
-      "deadlineOn": "Срок до {date}"
+      "deadlineOn": "Срок: {date}"
     },
     "UserFiltersModal": {
       "heading": "Фильтры пользователей"

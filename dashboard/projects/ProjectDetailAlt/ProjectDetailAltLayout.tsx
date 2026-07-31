@@ -1,4 +1,5 @@
 interface ProjectDetailAltLayoutProps {
+  overdueSlot: React.ReactNode;
   titleSlot: React.ReactNode;
   descriptionSlot: React.ReactNode;
   creatorSlot: React.ReactNode;
@@ -11,6 +12,7 @@ interface ProjectDetailAltLayoutProps {
 }
 
 export function ProjectDetailAltLayout({
+  overdueSlot,
   titleSlot,
   descriptionSlot,
   creatorSlot,
@@ -23,6 +25,7 @@ export function ProjectDetailAltLayout({
 }: ProjectDetailAltLayoutProps) {
   return (
     <div className="flex flex-col max-md:gap-4 md:gap-6">
+      {overdueSlot}
       {titleSlot}
       {descriptionSlot}
       {statusSlot}

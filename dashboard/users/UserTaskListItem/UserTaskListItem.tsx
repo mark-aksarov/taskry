@@ -11,15 +11,15 @@ import {
 } from "@/dashboard/common/ItemBase";
 
 import { memo } from "react";
+import { useModal } from "@/common/ModalManagerContext";
 import { ListItemGate } from "@/dashboard/common/ListItemGate";
 import { UserTaskListItemLayout } from "./UserTaskListItemLayout";
-import { useModal } from "@/common/ModalManagerContext";
 import { UserTaskListItemSkeleton } from "./UserTaskListItemSkeleton";
 import { TaskItemActionMenuTrigger } from "@/dashboard/tasks/TaskItem";
 import { SelectableTaskItem } from "@/dashboard/tasks/SelectableTaskItem";
 import { TaskItemStatusBadge } from "@/dashboard/tasks/TaskItemStatusBadge";
-import { ListItemText, ListItemTitleButton } from "@/dashboard/common/ListItem";
 import { TaskItemCheckbox } from "@/dashboard/tasks/TaskItem/TaskItemCheckbox";
+import { ListItemText, ListItemTitleButton } from "@/dashboard/common/ListItem";
 
 export const UserTaskListItem = (props: BaseTaskItemProps) => {
   const isPending = useTaskItemPending(props.id);
@@ -59,7 +59,7 @@ const UserTaskListItemInner = memo(function UserTaskListItemInner({
             {title}
           </ListItemTitleButton>
           <ListItemText>
-            <ItemBaseDeadline deadline={deadline} />
+            <ItemBaseDeadline deadline={new Date(deadline)} />
           </ListItemText>
         </>
       }

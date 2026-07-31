@@ -1,3 +1,4 @@
+import { isPast } from "date-fns";
 import { BadgeColor } from "@/ui/Badge";
 import { TaskStatus } from "@/generated/prisma/enums";
 
@@ -6,7 +7,7 @@ export function getTaskStatusBadgeColor(
   deadline: string,
 ): BadgeColor {
   const isOverdue =
-    new Date(deadline) < new Date() && status !== TaskStatus.completed;
+    isPast(new Date(deadline)) && status !== TaskStatus.completed;
 
   if (isOverdue) return "red";
 

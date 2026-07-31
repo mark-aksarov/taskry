@@ -4,9 +4,11 @@ import {
   DetailInfoAlt,
 } from "@/dashboard/common/Detail";
 
+import { isPast } from "date-fns";
 import { useTranslations } from "next-intl";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { TaskDetailAltLayout } from "./TaskDetailAltLayout";
+import { OverdueBadge } from "@/dashboard/common/OverdueBadge";
 import { TaskTitleDetailInfoAlt } from "./TaskTitleDetailInfoAlt";
 import { TaskStatusDetailInfoAlt } from "./TaskStatusDetailInfoAlt";
 import { TaskProjectDetailInfoAlt } from "./TaskProjectDetailInfoAlt";
@@ -57,8 +59,15 @@ export function TaskDetailAlt({
 }: TaskDetailAltProps) {
   const t = useTranslations("dashboard.tasks.TaskDetail");
 
+  const deadlineDate = new Date(deadline);
+
   return (
     <TaskDetailAltLayout
+      overdueSlot={
+        isPast(deadlineDate) && (
+          <OverdueBadge deadline={deadlineDate} className="w-fit" />
+        )
+      }
       titleSlot={<TaskTitleDetailInfoAlt title={title} />}
       descriptionSlot={
         <TaskDescriptionDetailInfoAlt description={description} />

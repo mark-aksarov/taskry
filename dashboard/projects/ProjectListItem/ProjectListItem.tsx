@@ -20,9 +20,11 @@ import {
 } from "@/dashboard/common/ItemBase";
 
 import { memo } from "react";
+import { isPast } from "date-fns";
 import { useTranslations } from "next-intl";
 import { ProjectItemCheckbox } from "../ProjectItem";
 import { useModal } from "@/common/ModalManagerContext";
+import { OverdueBadge } from "@/dashboard/common/OverdueBadge";
 import { ListItemGate } from "@/dashboard/common/ListItemGate";
 import { ProjectListItemLayout } from "./ProjectListItemLayout";
 import { SelectableProjectItem } from "../SelectableProjectItem";
@@ -102,6 +104,8 @@ export const ProjectListItemInner = memo(function ProjectListItemInner({
     />
   );
 
+  const deadlineDate = new Date(deadline);
+
   return (
     <ProjectListItemLayout
       data-id={id}
@@ -116,9 +120,13 @@ export const ProjectListItemInner = memo(function ProjectListItemInner({
           >
             {title}
           </ListItemTitleButton>
-          <ListItemText>
-            <ItemBaseDeadline deadline={deadline} />
-          </ListItemText>
+          {isPast(deadlineDate) ? (
+            <OverdueBadge deadline={deadlineDate} />
+          ) : (
+            <ListItemText>
+              <ItemBaseDeadline deadline={deadlineDate} />
+            </ListItemText>
+          )}
         </>
       }
       creatorImgSlot={

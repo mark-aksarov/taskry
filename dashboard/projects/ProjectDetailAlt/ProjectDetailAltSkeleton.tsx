@@ -5,6 +5,7 @@ import { ProjectTasksStatsDetailInfoAltSkeleton } from "./ProjectTasksStatsDetai
 export function ProjectDetailAltSkeleton() {
   return (
     <ProjectDetailAltLayout
+      overdueSlot={null}
       titleSlot={<DetailInfoAltSkeleton surface />}
       descriptionSlot={<DetailInfoAltSkeleton surface />}
       statusSlot={<DetailInfoAltSkeleton surface />}

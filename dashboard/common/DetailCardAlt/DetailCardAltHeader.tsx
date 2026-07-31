@@ -18,7 +18,7 @@ export function DetailCardAltHeader({
 }: DetailCardAltHeaderProps) {
   return (
     <DetailCardAltHeaderLayout
-      deadlineSlot={<DeadlineBadge deadline={deadline} />}
+      deadlineSlot={<DeadlineBadge deadline={new Date(deadline)} />}
       {...props}
     />
   );

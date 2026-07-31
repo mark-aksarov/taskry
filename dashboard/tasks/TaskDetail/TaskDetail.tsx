@@ -1,11 +1,12 @@
-import { DetailInfo, DetailText, DetailTitle } from "@/dashboard/common/Detail";
-
 import React from "react";
+import { isPast } from "date-fns";
 import { useTranslations } from "next-intl";
 import { TaskDetailLayout } from "./TaskDetailLayout";
 import { TaskStatus } from "@/generated/prisma/enums";
 import { TaskDetailAssignee } from "./TaskDetailAssignee";
+import { OverdueBadge } from "@/dashboard/common/OverdueBadge";
 import { DeadlineBadge } from "@/dashboard/common/DeadlineBadge";
+import { DetailInfo, DetailText, DetailTitle } from "@/dashboard/common/Detail";
 
 interface TaskDetailProps {
   title: string;
@@ -19,7 +20,7 @@ interface TaskDetailProps {
     fullName: string;
     imageUrl?: string;
   };
-  deadline?: string;
+  deadline: string;
   description?: string;
   category?: {
     id: number;
@@ -47,6 +48,8 @@ export function TaskDetail({
   const tStatus = useTranslations("dashboard.tasks.TaskStatus");
   const t = useTranslations("dashboard.tasks.TaskDetail");
 
+  const deadlineDate = new Date(deadline);
+
   return (
     <TaskDetailLayout
       titleSlot={
@@ -61,7 +64,10 @@ export function TaskDetail({
       deadlineSlot={
         <DetailInfo className="md:gap-3.5">
           <DetailTitle>{t("deadline")}</DetailTitle>
-          <DeadlineBadge deadline={deadline} className="self-start" />
+          <div className="flex w-full items-center justify-between">
+            <DeadlineBadge deadline={deadlineDate} className="self-start" />
+            {isPast(deadlineDate) && <OverdueBadge deadline={deadlineDate} />}
+          </div>
         </DetailInfo>
       }
       descriptionSlot={

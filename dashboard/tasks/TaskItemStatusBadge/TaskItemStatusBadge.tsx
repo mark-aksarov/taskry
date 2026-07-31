@@ -1,10 +1,7 @@
-import { useTranslations } from "next-intl";
+import { TaskStatusBadge } from "../TaskStatusBadge";
 import { TaskStatus } from "@/generated/prisma/enums";
-import { ItemBaseBadge } from "@/dashboard/common/ItemBase";
-import { StatusLoader } from "@/dashboard/common/StatusLoader";
 import { useUpdateTaskStatus } from "../UpdateTaskStatusContext";
 import { useUpdateTaskStatuses } from "../UpdateTaskStatusesContext";
-import { getTaskStatusBadgeColor } from "../getTaskStatusBadgeColor";
 
 interface TaskItemStatusBadgeProps {
   taskId: number;
@@ -19,8 +16,6 @@ export function TaskItemStatusBadge({
   status,
   deadline,
 }: TaskItemStatusBadgeProps) {
-  const t = useTranslations("dashboard.tasks.TaskStatus");
-
   // Pending state for single task status update
   const { isPending: isUpdateTaskStatusPending } = useUpdateTaskStatus();
 
@@ -36,11 +31,12 @@ export function TaskItemStatusBadge({
     isUpdateTaskStatusPending ||
     (isUpdateTaskStatusesPending && isTaskInBatchUpdate);
 
-  const color = getTaskStatusBadgeColor(status, deadline);
-
   return (
-    <ItemBaseBadge className={className} color={isPending ? "gray" : color}>
-      {isPending ? <StatusLoader /> : t(`${status}`)}
-    </ItemBaseBadge>
+    <TaskStatusBadge
+      isPending={isPending}
+      status={status}
+      className={className}
+      deadline={deadline}
+    />
   );
 }

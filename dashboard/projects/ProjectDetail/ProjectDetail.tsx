@@ -1,11 +1,13 @@
 import { DetailInfo, DetailText, DetailTitle } from "@/dashboard/common/Detail";
 
 import Image from "next/image";
-import { Badge } from "@/ui/Badge";
+import { isPast } from "date-fns";
+import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { useFormatter, useTranslations } from "next-intl";
 import { ProjectDetailLayout } from "./ProjectDetailLayout";
 import { UnknownUser } from "@/dashboard/common/UnknownUser";
+import { OverdueBadge } from "@/dashboard/common/OverdueBadge";
+import { DeadlineBadge } from "@/dashboard/common/DeadlineBadge";
 import { ImageContainer } from "@/dashboard/common/ImageContainer";
 
 interface ProjectDetailProps {
@@ -15,7 +17,7 @@ interface ProjectDetailProps {
     fullName: string;
     imageUrl?: string;
   };
-  deadline?: string;
+  deadline: string;
   description?: string;
   client?: {
     id: number;
@@ -41,16 +43,6 @@ export function ProjectDetail({
   const tStatus = useTranslations("dashboard.projects.ProjectStatus");
   const t = useTranslations("dashboard.projects.ProjectDetail");
 
-  const format = useFormatter();
-
-  const formattedDeadline = deadline
-    ? format.dateTime(new Date(deadline), {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      })
-    : t("noDeadline");
-
   const creatorImg = creator?.imageUrl ? (
     <ImageContainer className="h-9 w-9">
       <Image src={creator.imageUrl} alt="" width={36} height={36} />
@@ -58,6 +50,8 @@ export function ProjectDetail({
   ) : (
     <UnknownUser className="h-9 w-9" />
   );
+
+  const deadlineDate = new Date(deadline);
 
   return (
     <ProjectDetailLayout
@@ -85,9 +79,10 @@ export function ProjectDetail({
       deadlineSlot={
         <DetailInfo className="md:gap-3.5">
           <DetailTitle>{t("deadline")}</DetailTitle>
-          <Badge color="gray" className="self-start">
-            {formattedDeadline}
-          </Badge>
+          <div className="flex w-full items-center justify-between">
+            <DeadlineBadge deadline={deadlineDate} className="self-start" />
+            {isPast(deadlineDate) && <OverdueBadge deadline={deadlineDate} />}
+          </div>
         </DetailInfo>
       }
       descriptionSlot={

@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { StatusLoader } from "../common/StatusLoader";
 import { ProjectStatus } from "@/generated/prisma/enums";
 import { ItemBaseBadge } from "@/dashboard/common/ItemBase";
 import { getProjectStatusBadgeColor } from "./getProjectStatusBadgeColor";
@@ -22,7 +23,7 @@ export function ProjectStatusBadge({
 
   return (
     <ItemBaseBadge className={className} color={isPending ? "gray" : color}>
-      {t(`${status}`)}
+      {isPending ? <StatusLoader /> : t(`${status}`)}
     </ItemBaseBadge>
   );
 }

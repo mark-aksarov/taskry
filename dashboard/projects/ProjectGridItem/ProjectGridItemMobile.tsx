@@ -19,11 +19,13 @@ import {
 } from "../ProjectItem";
 
 import { memo } from "react";
+import { isPast } from "date-fns";
 import { BaseLink } from "@/ui/Link";
 import { twMerge } from "tailwind-merge";
+import { useModal } from "@/common/ModalManagerContext";
+import { OverdueBadge } from "@/dashboard/common/OverdueBadge";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
-import { useModal } from "@/common/ModalManagerContext";
 import { ProjectGridItemProgress } from "./ProjectGridItemProgress";
 import { ProjectGridItemMobileSkeleton } from "./ProjectGridItemSkeleton";
 import { GridItemMobileGate } from "@/dashboard/common/GridItemMobileGate";
@@ -68,6 +70,8 @@ const ProjectGridItemMobileInner = memo(function ProjectGridItemMobileInner({
     />
   );
 
+  const deadlineDate = new Date(deadline);
+
   return (
     <div
       className={twMerge("relative block", isPending && "pointer-events-none")}
@@ -89,9 +93,14 @@ const ProjectGridItemMobileInner = memo(function ProjectGridItemMobileInner({
         mainSlot={
           <GridItemInfo className="flex-auto">
             <GridItemTitle>{title}</GridItemTitle>
-            <GridItemText>
-              <ItemBaseDeadline deadline={deadline} />
-            </GridItemText>
+
+            {isPast(deadlineDate) ? (
+              <OverdueBadge deadline={deadlineDate} />
+            ) : (
+              <GridItemText>
+                <ItemBaseDeadline deadline={deadlineDate} />
+              </GridItemText>
+            )}
           </GridItemInfo>
         }
         creatorImageSlot={

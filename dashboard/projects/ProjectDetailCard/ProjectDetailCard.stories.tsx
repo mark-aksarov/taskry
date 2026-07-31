@@ -8,6 +8,7 @@ import {
   ProjectDetailCardHeaderSkeleton,
 } from "./ProjectDetailCardHeader";
 
+import { subDays } from "date-fns";
 import { mockedProjectDetail } from "@/mocks/projects";
 import { ProjectDetailCard } from "./ProjectDetailCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
@@ -60,6 +61,18 @@ export const Default = {
       />
     ),
     projectDetailContainer: <ProjectDetailAlt {...mockedProjectDetail} />,
+  },
+} satisfies Story;
+
+export const WithOverdueDeadline = {
+  args: {
+    ...Default.args,
+    projectDetailContainer: (
+      <ProjectDetailAlt
+        {...mockedProjectDetail}
+        deadline={subDays(new Date(), 3).toISOString()}
+      />
+    ),
   },
 } satisfies Story;
 

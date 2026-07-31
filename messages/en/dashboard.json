@@ -38,7 +38,7 @@
       "noPublicLink": "No public link"
     },
     "ItemBaseDeadline": {
-      "deadlineOn": "Deadline on {date}"
+      "deadlineOn": "Deadline: {date}"
     },
     "PersonImageMenuTrigger": {
       "heading": "Profile image",
@@ -143,6 +143,11 @@
     },
     "ImportModalText": {
       "text": "Upload a CSV file. Maximum file size: 512 KB. Instructions for preparing the file are available in the documentation."
+    },
+    "OverdueBadge": {
+      "task": {
+        "overdue": "Overdue {time}"
+      }
     }
   },
   "company": {
@@ -700,7 +705,7 @@
     },
     "ProjectListItem": {
       "noDeadline": "No deadline",
-      "deadlineOn": "Deadline on {date}",
+      "deadlineOn": "Deadline: {date}",
       "noCreator": "No creator",
       "creator": "Creator",
       "noClient": "No client",
@@ -862,7 +867,7 @@
   },
   "search": {
     "SearchListItem": {
-      "deadlineOn": "Deadline on {date}"
+      "deadlineOn": "Deadline: {date}"
     },
     "SearchToggleButtonGroup": {
       "users": "Users",
@@ -1493,7 +1498,7 @@
     "UserTaskListItem": {
       "checkboxAriaLabel": "Task checkbox",
       "noDeadline": "No deadline",
-      "deadlineOn": "Deadline on {date}"
+      "deadlineOn": "Deadline: {date}"
     },
     "UserFiltersModal": {
       "heading": "User filters"

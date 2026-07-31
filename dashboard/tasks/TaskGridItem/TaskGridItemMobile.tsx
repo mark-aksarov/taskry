@@ -13,13 +13,15 @@ import {
 } from "@/dashboard/common/ItemBase";
 
 import { memo } from "react";
-import { twMerge } from "tailwind-merge";
+import { isPast } from "date-fns";
 import { BaseLink } from "@/ui/Link";
+import { twMerge } from "tailwind-merge";
+import { useModal } from "@/common/ModalManagerContext";
 import { TaskItemActionMenuTrigger } from "../TaskItem";
 import { TaskGridItemLayout } from "./TaskGridItemLayout";
 import { TaskItemStatusBadge } from "../TaskItemStatusBadge";
 import { TaskGridItemProgress } from "./TaskGridItemProgress";
-import { useModal } from "@/common/ModalManagerContext";
+import { OverdueBadge } from "@/dashboard/common/OverdueBadge";
 import { BaseTaskItemProps, useTaskItemPending } from "../TaskItem";
 import { TaskGridItemMobileSkeleton } from "./TaskGridItemSkeleton";
 import { GridItemMobileGate } from "@/dashboard/common/GridItemMobileGate";
@@ -64,6 +66,8 @@ export const TaskGridItemMobileInner = memo(function TaskGridItemMobileInner({
   const { onOpenChange: onTaskCommentsModalOpenChange } =
     useModal("taskComments");
 
+  const deadlineDate = new Date(deadline);
+
   return (
     <div
       className={twMerge("relative block", isPending && "pointer-events-none")}
@@ -86,9 +90,14 @@ export const TaskGridItemMobileInner = memo(function TaskGridItemMobileInner({
         titleSlot={
           <GridItemInfo className="flex-auto">
             <GridItemTitle>{title}</GridItemTitle>
-            <GridItemText>
-              <ItemBaseDeadline deadline={deadline} />
-            </GridItemText>
+
+            {isPast(deadlineDate) ? (
+              <OverdueBadge deadline={deadlineDate} />
+            ) : (
+              <GridItemText>
+                <ItemBaseDeadline deadline={deadlineDate} />
+              </GridItemText>
+            )}
           </GridItemInfo>
         }
         assigneeImageSlot={

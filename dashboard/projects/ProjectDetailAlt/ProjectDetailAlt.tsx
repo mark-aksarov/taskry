@@ -4,17 +4,19 @@ import {
   DetailInfoAlt,
 } from "@/dashboard/common/Detail";
 
+import { isPast } from "date-fns";
 import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
+import { OverdueBadge } from "@/dashboard/common/OverdueBadge";
 import { ProjectDetailAltLayout } from "./ProjectDetailAltLayout";
 import { ProjectTitleDetailInfoAlt } from "./ProjectTitleDetailInfoAlt";
 import { ProjectStatusDetailInfoAlt } from "./ProjectStatusDetailInfoAlt";
+import { ProjectClientDetailInfoAlt } from "./ProjectClientDetailInfoAlt";
 import { ProjectCategoryDetailInfoAlt } from "./ProjectCategoryDetailInfoAlt";
 import { ProjectDeadlineDetailInfoAlt } from "./ProjectDeadlineDetailInfoAlt";
-import { ProjectClientDetailInfoAlt } from "./ProjectClientDetailInfoAlt";
 import { ProgressDetailInfoAlt } from "@/dashboard/common/ProgressDetailInfoAlt";
-import { ProjectDescriptionDetailInfoAlt } from "./ProjectDescriptionDetailInfoAlt";
 import { ProjectTasksStatsDetailInfoAlt } from "./ProjectTasksStatsDetailInfoAlt";
+import { ProjectDescriptionDetailInfoAlt } from "./ProjectDescriptionDetailInfoAlt";
 
 interface ProjectDetailAltProps {
   title: string;
@@ -55,14 +57,21 @@ export function ProjectDetailAlt({
 }: ProjectDetailAltProps) {
   const t = useTranslations("dashboard.projects.ProjectDetail");
 
+  const deadlineDate = new Date(deadline);
+
   return (
     <ProjectDetailAltLayout
+      overdueSlot={
+        isPast(deadlineDate) && (
+          <OverdueBadge deadline={deadlineDate} className="w-fit" />
+        )
+      }
       titleSlot={<ProjectTitleDetailInfoAlt title={title} />}
       descriptionSlot={
         <ProjectDescriptionDetailInfoAlt description={description} />
       }
       statusSlot={<ProjectStatusDetailInfoAlt status={status} />}
-      deadlineSlot={<ProjectDeadlineDetailInfoAlt deadline={deadline} />}
+      deadlineSlot={<ProjectDeadlineDetailInfoAlt deadline={deadlineDate} />}
       clientSlot={<ProjectClientDetailInfoAlt client={client} />}
       categorySlot={<ProjectCategoryDetailInfoAlt category={category} />}
       creatorSlot={

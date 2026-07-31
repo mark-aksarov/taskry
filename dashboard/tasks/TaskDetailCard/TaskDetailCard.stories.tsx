@@ -2,6 +2,8 @@ import {
   TaskDetailCardHeader,
   TaskDetailCardHeaderSkeleton,
 } from "./TaskDetailCardHeader";
+
+import { subDays } from "date-fns";
 import { mockedTaskDetail } from "@/mocks/tasks";
 import { TaskDetailCard } from "./TaskDetailCard";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
@@ -67,6 +69,19 @@ export const Default = {
         {...mockedTaskDetail}
         progress={75}
         subtasksList={<SubtaskListExample variant="rich" showActionMenu />}
+      />
+    ),
+  },
+} satisfies Story;
+
+export const WithOverdueDeadline = {
+  args: {
+    ...Default.args,
+    taskDetailContainer: (
+      <TaskDetailAlt
+        {...mockedTaskDetail}
+        progress={75}
+        deadline={subDays(new Date(), 3).toISOString()}
       />
     ),
   },

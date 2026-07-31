@@ -14,6 +14,7 @@ import {
 } from "@/dashboard/common/ItemBase";
 
 import { memo } from "react";
+import { isPast } from "date-fns";
 import { useTranslations } from "next-intl";
 import { useModal } from "@/common/ModalManagerContext";
 import { TaskItemActionMenuTrigger } from "../TaskItem";
@@ -22,6 +23,7 @@ import { SelectableTaskItem } from "../SelectableTaskItem";
 import { TaskItemStatusBadge } from "../TaskItemStatusBadge";
 import { TaskListItemSkeleton } from "./TaskListItemSkeleton";
 import { ListItemGate } from "@/dashboard/common/ListItemGate";
+import { OverdueBadge } from "@/dashboard/common/OverdueBadge";
 import { TaskItemCheckbox } from "../TaskItem/TaskItemCheckbox";
 import { BaseTaskItemProps, useTaskItemPending } from "../TaskItem";
 
@@ -83,10 +85,12 @@ export const TaskListItemInner = memo(function TaskListItemInner({
   const { onOpenChange: onTaskCommentsModalOpenChange } =
     useModal("taskComments");
 
+  const deadlineDate = new Date(deadline);
+
   return (
     <TaskListItemLayout
       data-id={id}
-      className={isPending ? "*:opacity-50" : undefined}
+      className={isPending ? "relative *:opacity-50" : undefined}
       checkboxSlot={
         showCheckbox ? (
           <TaskItemCheckbox id={id} title={title} status={status} />
@@ -100,9 +104,13 @@ export const TaskListItemInner = memo(function TaskListItemInner({
             {title}
           </ListItemTitleButton>
 
-          <ListItemText>
-            <ItemBaseDeadline deadline={deadline} />
-          </ListItemText>
+          {isPast(deadlineDate) ? (
+            <OverdueBadge deadline={deadlineDate} />
+          ) : (
+            <ListItemText>
+              <ItemBaseDeadline deadline={deadlineDate} />
+            </ListItemText>
+          )}
         </>
       }
       assigneeImgSlot={

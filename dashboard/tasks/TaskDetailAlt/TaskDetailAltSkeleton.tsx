@@ -4,6 +4,7 @@ import { DetailInfoAltSkeleton } from "@/dashboard/common/Detail";
 export function TaskDetailAltSkeleton() {
   return (
     <TaskDetailAltLayout
+      overdueSlot={null}
       titleSlot={<DetailInfoAltSkeleton surface />}
       descriptionSlot={<DetailInfoAltSkeleton surface />}
       assigneesSlot={<DetailInfoAltSkeleton surface />}

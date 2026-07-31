@@ -20,8 +20,10 @@ import {
 } from "@/dashboard/common/ItemBase";
 
 import { memo } from "react";
+import { isPast } from "date-fns";
 import { ProjectItemCheckbox } from "../ProjectItem";
 import { useModal } from "@/common/ModalManagerContext";
+import { OverdueBadge } from "@/dashboard/common/OverdueBadge";
 import { ProjectGridItemLayout } from "./ProjectGridItemLayout";
 import { SelectableProjectItem } from "../SelectableProjectItem";
 import { ProjectItemStatusBadge } from "../ProjectItemStatusBadge";
@@ -76,6 +78,8 @@ const ProjectGridItemLargeInner = memo(function ProjectGridItemLargeInner({
     />
   );
 
+  const deadlineDate = new Date(deadline);
+
   return (
     <ProjectGridItemLayout
       className={isPending ? "*:opacity-50" : undefined}
@@ -97,9 +101,13 @@ const ProjectGridItemLargeInner = memo(function ProjectGridItemLargeInner({
             {title}
           </GridItemTitleButton>
 
-          <GridItemText>
-            <ItemBaseDeadline deadline={deadline} />
-          </GridItemText>
+          {isPast(deadlineDate) ? (
+            <OverdueBadge deadline={deadlineDate} />
+          ) : (
+            <GridItemText>
+              <ItemBaseDeadline deadline={deadlineDate} />
+            </GridItemText>
+          )}
         </GridItemInfo>
       }
       creatorImageSlot={

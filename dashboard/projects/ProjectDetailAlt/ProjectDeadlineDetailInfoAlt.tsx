@@ -12,7 +12,7 @@ import { useDeleteProject } from "../DeleteProjectContext";
 import { useUpdateProjectDeadline } from "../UpdateProjectDeadlineContext";
 
 interface ProjectDeadlineDetailInfoAltProps {
-  deadline: string;
+  deadline: Date;
 }
 
 export function ProjectDeadlineDetailInfoAlt({
@@ -33,7 +33,7 @@ export function ProjectDeadlineDetailInfoAlt({
 
   const format = useFormatter();
 
-  const formattedBirthdate = format.dateTime(new Date(deadline), {
+  const formattedBirthdate = format.dateTime(deadline, {
     day: "2-digit",
     month: "short",
     year: "numeric",

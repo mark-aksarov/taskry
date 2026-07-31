@@ -1,4 +1,5 @@
 interface TaskDetailAltLayoutProps {
+  overdueSlot: React.ReactNode;
   titleSlot: React.ReactNode;
   descriptionSlot: React.ReactNode;
   assigneesSlot: React.ReactNode;
@@ -12,6 +13,7 @@ interface TaskDetailAltLayoutProps {
 }
 
 export function TaskDetailAltLayout({
+  overdueSlot,
   titleSlot,
   descriptionSlot,
   assigneesSlot,
@@ -28,6 +30,7 @@ export function TaskDetailAltLayout({
       data-test="task-detail-alt"
       className="flex flex-col max-md:gap-4 md:gap-6"
     >
+      {overdueSlot}
       {titleSlot}
       {assigneesSlot}
       {deadlineSlot}

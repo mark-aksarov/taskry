@@ -1,10 +1,7 @@
-import { useTranslations } from "next-intl";
 import { ProjectStatus } from "@/generated/prisma/enums";
-import { ItemBaseBadge } from "@/dashboard/common/ItemBase";
-import { StatusLoader } from "@/dashboard/common/StatusLoader";
+import { ProjectStatusBadge } from "../ProjectStatusBadge";
 import { useUpdateProjectStatus } from "../UpdateProjectStatusContext";
 import { useUpdateProjectStatuses } from "../UpdateProjectStatusesContext";
-import { getProjectStatusBadgeColor } from "../getProjectStatusBadgeColor";
 
 interface ProjectItemStatusBadgeProps {
   projectId: number;
@@ -19,8 +16,6 @@ export function ProjectItemStatusBadge({
   className,
   status,
 }: ProjectItemStatusBadgeProps) {
-  const t = useTranslations("dashboard.projects.ProjectStatus");
-
   // Pending state for single project status update
   const { isPending: isUpdateProjectStatusPending } = useUpdateProjectStatus();
 
@@ -36,11 +31,12 @@ export function ProjectItemStatusBadge({
     isUpdateProjectStatusPending ||
     (isUpdateProjectStatusesPending && isProjectInBatchUpdate);
 
-  const color = getProjectStatusBadgeColor(status, deadline);
-
   return (
-    <ItemBaseBadge className={className} color={isPending ? "gray" : color}>
-      {isPending ? <StatusLoader /> : t(`${status}`)}
-    </ItemBaseBadge>
+    <ProjectStatusBadge
+      isPending={isPending}
+      className={className}
+      status={status}
+      deadline={deadline}
+    />
   );
 }
