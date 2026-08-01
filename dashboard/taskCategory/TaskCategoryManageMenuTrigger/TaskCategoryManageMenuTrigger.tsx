@@ -21,7 +21,6 @@ export function TaskCategoryManageMenuTrigger({
   const [isPending, downloadFile] = useDownloadFile(
     "/api/task-categories/export",
     "taskCategories.csv",
-    t("successMessage"),
     t("errorMessage"),
   );
 

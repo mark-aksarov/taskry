@@ -1,0 +1,139 @@
+import { DocsImage } from "@/site/docs/DocsImage";
+import { Link } from "@/ui/Link";
+
+# Import and export
+
+This section describes importing and exporting users and positions using CSV files. This is useful for bulk record creation, backup, and later recovery of information.
+
+You can prepare a CSV file yourself or download the <Link className="inline text-base" variant="primary" href="/csv-examples.zip" download>CSV examples archive</Link> for import.
+
+---
+
+## Import positions
+
+To import positions, use a CSV with one required column:
+
+- name — <span className="font-normal">position name</span>
+
+Importing positions creates new positions in the current organization and does not modify existing records.
+
+To import positions, open the <b>Positions</b> page, click the <b>Manage</b> button, and select <b>Import positions (CSV)</b>.
+
+<DocsImage
+  src="/docs/team/en/light/large/position-manage-import.jpg"
+  width={539 / 2}
+  height={367 / 2}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/dark/large/position-manage-import.jpg"
+  width={539 / 2}
+  height={367 / 2}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/light/small/position-manage-import.jpg"
+  width={1170 / 3}
+  height={631 / 3}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/dark/small/position-manage-import.jpg"
+  width={1170 / 3}
+  height={631 / 3}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After that, a modal window will open. Click <b>Upload CSV</b>.
+
+<DocsImage
+  src="/docs/team/en/light/large/import-positions-modal.jpg"
+  width={824 / 2}
+  height={532 / 2}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/dark/large/import-positions-modal.jpg"
+  width={824 / 2}
+  height={532 / 2}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/light/small/import-positions-modal.jpg"
+  width={1051 / 3}
+  height={841 / 3}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/dark/small/import-positions-modal.jpg"
+  width={1051 / 3}
+  height={841 / 3}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After clicking the button, a file selection window opens. Choose the prepared CSV file and wait for the import to finish.
+
+---
+
+## Export users and positions
+
+Export is available from the manage menu on the <b>Users</b> page and on the <b>Positions</b> page. Select <b>Export CSV</b>, and the file will be downloaded automatically.
+
+<DocsImage
+  src="/docs/team/en/light/large/user-manage-export.jpg"
+  width={549 / 2}
+  height={362 / 2}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/dark/large/user-manage-export.jpg"
+  width={549 / 2}
+  height={362 / 2}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/light/small/user-manage-export.jpg"
+  width={1170 / 3}
+  height={643 / 3}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/en/dark/small/user-manage-export.jpg"
+  width={1170 / 3}
+  height={643 / 3}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+- <span className="font-normal">Users are exported to the file <b>users.csv</b></span>
+- <span className="font-normal">Positions are exported to the file <b>positions.csv</b></span>
+
+The exported data contains the current records for the active organization and can be reused for importing into the system.
+
+> Users cannot be imported directly via CSV because their accounts are created and managed through invitations. For bulk user creation, use the invitation mechanism.
+
+---
+
+## Limitations
+
+The following limitations apply to import and export:
+
+- <span className="font-normal">Only CSV format is supported</span>
+- <span className="font-normal">Maximum size of the uploaded file is <b>512 KB</b></span>
+- <span className="font-normal">The file must not be empty</span>
+- <span className="font-normal">For position import, the required field is <b>name</b></span>
+- <span className="font-normal">Importing users via CSV is not supported</span>
+- <span className="font-normal">Import rejects malformed data, missing related records, and organization limit overages</span>
+- <span className="font-normal">The number of newly created records during import is limited by system limits</span>
+- <span className="font-normal">Keep the file in <b>CSV UTF-8</b> format to avoid encoding issues with Cyrillic characters.</span>
+- <span className="font-normal">If you use Microsoft Excel, choose <b>CSV UTF-8 (Comma delimited) (*.csv)</b> when saving instead of regular <b>CSV</b>. Regular CSV may use the system encoding, which can cause Cyrillic characters to display incorrectly when importing or opening the file in other applications.</span>
+
+---

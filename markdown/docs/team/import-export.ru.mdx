@@ -1,0 +1,139 @@
+import { DocsImage } from "@/site/docs/DocsImage";
+import { Link } from "@/ui/Link";
+
+# Импорт и экспорт
+
+В этом разделе описывается импорт и экспорт пользователей и должностей с помощью CSV-файлов. Это удобно для массового создания записей, резервного копирования и последующего восстановления информации.
+
+Подготовить CSV-файл можно самостоятельно или скачать <Link className="inline text-base" variant="primary" href="/csv-examples.zip" download>архив с примерами CSV-файлов</Link> для импорта.
+
+Пользователей нельзя импортировать напрямую через CSV, потому что их учетные записи создаются и управляются через приглашения.
+
+---
+
+## Импорт должностей
+
+Для импорта должностей используется CSV с одним обязательным столбцом:
+
+- name — <span className="font-normal">название должности</span>
+
+Импорт должностей создает новые должности в текущей организации и не изменяет уже существующие записи.
+
+Для импорта должностей на странице <b>Должности</b> нужно нажать кнопку <b>Управление</b>, выбрать пункт <b>Импорт должностей (CSV)</b>.
+
+<DocsImage
+  src="/docs/team/ru/light/large/position-manage-import.jpg"
+  width={637 / 2}
+  height={377 / 2}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/ru/dark/large/position-manage-import.jpg"
+  width={637 / 2}
+  height={377 / 2}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/ru/light/small/position-manage-import.jpg"
+  width={1170 / 3}
+  height={633 / 3}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/ru/dark/small/position-manage-import.jpg"
+  width={1170 / 3}
+  height={633 / 3}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+После этого откроется модальное окно, в котором нужно нажать кнопку <b>Загрузить CSV</b>
+
+<DocsImage
+  src="/docs/team/ru/light/large/import-positions-modal.jpg"
+  width={824 / 2}
+  height={576 / 2}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/ru/dark/large/import-positions-modal.jpg"
+  width={824 / 2}
+  height={576 / 2}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/ru/light/small/import-positions-modal.jpg"
+  width={1051 / 3}
+  height={841 / 3}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/ru/dark/small/import-positions-modal.jpg"
+  width={1051 / 3}
+  height={841 / 3}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+После нажатия кнопки откроется окно выбора файла. Выберите подготовленный CSV-файл и дождитесь завершения импорта.
+
+---
+
+## Экспорт пользователей и должностей
+
+Экспорт доступен из меню управления на странице <b>Пользователи</b> и на странице <b>Должности</b>. Выберите пункт <b>Экспорт CSV</b>, и файл будет загружен автоматически.
+
+<DocsImage
+  src="/docs/team/ru/light/large/user-manage-export.jpg"
+  width={697 / 2}
+  height={378 / 2}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/ru/dark/large/user-manage-export.jpg"
+  width={697 / 2}
+  height={378 / 2}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/ru/light/small/user-manage-export.jpg"
+  width={1170 / 3}
+  height={642 / 3}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/team/ru/dark/small/user-manage-export.jpg"
+  width={1170 / 3}
+  height={642 / 3}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+- <span className="font-normal">Для пользователей экспортируется файл <b>users.csv</b></span>
+- <span className="font-normal">Для должностей экспортируется файл <b>positions.csv</b></span>
+
+Экспортированные данные содержат текущие записи для активной организации и могут быть использованы повторно для импорта в систему.
+
+---
+
+## Ограничения
+
+При импорте и экспорте действуют следующие ограничения:
+
+- <span className="font-normal">Поддерживается только формат CSV</span>
+- <span className="font-normal">Максимальный размер загружаемого файла — <b>512 KB</b></span>
+- <span className="font-normal">Файл не должен быть пустым</span>
+- <span className="font-normal">Для импорта должностей обязательное поле <b>name</b></span>
+- <span className="font-normal">Импорт пользователей через CSV не поддерживается</span>
+- <span className="font-normal">Импорт не допускает некорректный формат данных, несуществующие связанные записи и превышение лимитов организации</span>
+- <span className="font-normal">Количество новых записей при импорте ограничено системными лимитами</span>
+- <span className="font-normal">Сохраняйте файл в формате <b>CSV UTF-8</b>, чтобы избежать проблем с отображением кириллицы.</span>
+- <span className="font-normal">Если вы используете Microsoft Excel, при сохранении выберите <b>CSV UTF-8 (разделители-запятые) (*.csv)</b>, а не обычный <b>CSV</b>. Обычный CSV может использовать системную кодировку, из-за чего русские символы могут отображаться некорректно при импорте или открытии файла в других приложениях.</span>
+
+---

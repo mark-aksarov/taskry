@@ -1,16 +1,13 @@
 import { useState } from "react";
 import { useAddErrorToast } from "./useAddErrorToast";
-import { useAddSuccessToast } from "./useAddSuccessToast";
 
 export function useDownloadFile(
   url: string,
   filename: string,
-  successMessage: string,
   errorMessage: string,
 ): [boolean, () => Promise<void>] {
   const [isPending, setIsPending] = useState(false);
 
-  const addSuccessToast = useAddSuccessToast();
   const addErrorToast = useAddErrorToast();
 
   async function downloadFile() {
@@ -35,8 +32,6 @@ export function useDownloadFile(
       link.remove();
 
       URL.revokeObjectURL(objectUrl);
-
-      addSuccessToast(successMessage);
     } catch {
       addErrorToast(errorMessage);
     } finally {

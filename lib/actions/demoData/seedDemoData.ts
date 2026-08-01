@@ -17,8 +17,6 @@ export async function seedDemoData(): Promise<ActionState> {
   try {
     await seedDemoDataQuery(locale);
   } catch (error) {
-    console.log(error);
-
     if (error instanceof ValidationError) {
       return {
         status: "error",

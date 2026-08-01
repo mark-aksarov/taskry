@@ -19,7 +19,6 @@ export function ClientManageMenuTrigger({
   const [isPending, downloadFile] = useDownloadFile(
     "/api/clients/export",
     "clients.csv",
-    t("successMessage"),
     t("errorMessage"),
   );
 

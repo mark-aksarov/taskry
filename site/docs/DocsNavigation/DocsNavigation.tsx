@@ -57,6 +57,14 @@ export function DocsNavigation() {
               </li>
               <li>
                 <DocsNavigationLink
+                  href="/docs/projects/import-export"
+                  isActive={pathname === "/docs/projects/import-export"}
+                >
+                  {t("projects.importExport")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
                   href="/docs/projects/search"
                   isActive={pathname === "/docs/projects/search"}
                 >
@@ -102,6 +110,14 @@ export function DocsNavigation() {
                   isActive={pathname === "/docs/tasks/actions"}
                 >
                   {t("tasks.actions")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/tasks/import-export"
+                  isActive={pathname === "/docs/tasks/import-export"}
+                >
+                  {t("tasks.importExport")}
                 </DocsNavigationLink>
               </li>
               <li>
@@ -171,6 +187,14 @@ export function DocsNavigation() {
               </li>
               <li>
                 <DocsNavigationLink
+                  href="/docs/team/import-export"
+                  isActive={pathname === "/docs/team/import-export"}
+                >
+                  {t("team.importExport")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
                   href="/docs/team/search"
                   isActive={pathname === "/docs/team/search"}
                 >
@@ -216,6 +240,14 @@ export function DocsNavigation() {
                   isActive={pathname === "/docs/clients/actions"}
                 >
                   {t("clients.actions")}
+                </DocsNavigationLink>
+              </li>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/clients/import-export"
+                  isActive={pathname === "/docs/clients/import-export"}
+                >
+                  {t("clients.importExport")}
                 </DocsNavigationLink>
               </li>
               <li>

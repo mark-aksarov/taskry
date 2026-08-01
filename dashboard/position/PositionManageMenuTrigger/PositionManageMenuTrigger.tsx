@@ -19,7 +19,6 @@ export function PositionManageMenuTrigger({
   const [isPending, downloadFile] = useDownloadFile(
     "/api/positions/export",
     "positions.csv",
-    t("successMessage"),
     t("errorMessage"),
   );
 

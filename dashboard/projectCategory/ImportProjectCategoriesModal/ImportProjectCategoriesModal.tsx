@@ -2,6 +2,8 @@
 
 import {
   ImportModalCancelButton,
+  ImportModalDocsLink,
+  ImportModalDownloadLink,
   ImportModalErrorBanner,
 } from "@/dashboard/common/ImportModal";
 
@@ -47,6 +49,9 @@ export function ImportProjectCategoriesModal() {
     >
       <DialogHeading>{t("heading")}</DialogHeading>
       <ImportModalText />
+      <ImportModalDocsLink href="/docs/projects/import-export" />
+      <ImportModalDownloadLink />
+
       <ImportModalErrorBanner
         fileSizeError={fileSizeError}
         state={state}

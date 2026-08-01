@@ -4,5 +4,5 @@ import { ConfirmModalText } from "@/common/ConfirmModal";
 export function ImportModalText() {
   const t = useTranslations("dashboard.common.ImportModalText");
 
-  return <ConfirmModalText>{t("text")}</ConfirmModalText>;
+  return <ConfirmModalText className="mb-4">{t("text")}</ConfirmModalText>;
 }

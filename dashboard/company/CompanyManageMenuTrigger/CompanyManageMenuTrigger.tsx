@@ -19,7 +19,6 @@ export function CompanyManageMenuTrigger({
   const [isPending, downloadFile] = useDownloadFile(
     "/api/companies/export",
     "companies.csv",
-    t("successMessage"),
     t("errorMessage"),
   );
 

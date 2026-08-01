@@ -1,8 +1,10 @@
 "use client";
 
 import {
-  ImportModalCancelButton,
+  ImportModalDocsLink,
   ImportModalErrorBanner,
+  ImportModalDownloadLink,
+  ImportModalCancelButton,
 } from "@/dashboard/common/ImportModal";
 
 import { useState } from "react";
@@ -44,7 +46,11 @@ export function ImportProjectsModal() {
       onOpenChange={onOpenChange}
     >
       <DialogHeading>{t("heading")}</DialogHeading>
+
       <ImportModalText />
+      <ImportModalDocsLink href="/docs/projects/import-export" />
+      <ImportModalDownloadLink />
+
       <ImportModalErrorBanner
         fileSizeError={fileSizeError}
         state={state}

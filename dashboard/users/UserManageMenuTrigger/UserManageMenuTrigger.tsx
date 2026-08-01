@@ -18,7 +18,6 @@ export function UserManageMenuTrigger({
   const [isPending, downloadFile] = useDownloadFile(
     "/api/users/export",
     "users.csv",
-    t("successMessage"),
     t("errorMessage"),
   );
 

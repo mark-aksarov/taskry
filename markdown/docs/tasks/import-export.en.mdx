@@ -1,0 +1,215 @@
+import { DocsImage } from "@/site/docs/DocsImage";
+import { Link } from "@/ui/Link";
+
+# Import and export
+
+This section describes importing and exporting tasks and task categories using CSV files. This is useful for bulk record creation, backup, and later recovery of information.
+
+You can prepare a CSV file yourself or download the <Link className="inline text-base" variant="primary" href="/csv-examples.zip" download>CSV examples archive</Link> for import.
+
+---
+
+## Import tasks
+
+To import tasks into CSV, the following columns must be specified:
+
+- title — <span className="font-normal">task title</span>
+- description — <span className="font-normal">task description, optional</span>
+- deadline — <span className="font-normal">due date in <b>yyyy-MM-dd</b> format</span>
+- status — <span className="font-normal">task status</span>
+- projectTitle — <span className="font-normal">project title, optional</span>
+- categoryName — <span className="font-normal">task category name, optional</span>
+- assigneeEmail — <span className="font-normal">assignee email, optional</span>
+
+If the file contains a project, category, or assignee that does not exist in the system, the import will fail. For a successful import, all related entities must exist beforehand. The date must be provided in <b>yyyy-MM-dd</b> format.
+
+To import tasks, open the <b>Tasks</b> page, click the <b>Manage</b> button, and select <b>Import tasks (CSV)</b>.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/task-manage-import.jpg"
+  width={523 / 2}
+  height={454 / 2}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/task-manage-import.jpg"
+  width={523 / 2}
+  height={454 / 2}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/task-manage-import.jpg"
+  width={1170 / 3}
+  height={766 / 3}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/task-manage-import.jpg"
+  width={1170 / 3}
+  height={766 / 3}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After that, a modal window will open. Click <b>Upload CSV</b>.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/import-tasks-modal.jpg"
+  width={824 / 2}
+  height={532 / 2}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/import-tasks-modal.jpg"
+  width={824 / 2}
+  height={532 / 2}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/import-tasks-modal.jpg"
+  width={1051 / 3}
+  height={841 / 3}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/import-tasks-modal.jpg"
+  width={1051 / 3}
+  height={841 / 3}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After clicking the button, a file selection window opens. Choose the prepared CSV file and wait for the import to finish.
+
+---
+
+## Import categories
+
+To import categories, use a CSV with one required column:
+
+- name — <span className="font-normal">task category name</span>
+
+Importing categories creates new categories in the current organization and does not modify existing records.
+
+To import task categories, open the <b>Task Categories</b> page, click the <b>Manage</b> button, and select <b>Import categories (CSV)</b>.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/task-category-manage-import.jpg"
+  width={581 / 2}
+  height={371 / 2}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/task-category-manage-import.jpg"
+  width={581 / 2}
+  height={371 / 2}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/task-category-manage-import.jpg"
+  width={1170 / 3}
+  height={600 / 3}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/task-category-manage-import.jpg"
+  width={1170 / 3}
+  height={600 / 3}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After that, a modal window will open. Click <b>Upload CSV</b>.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/import-task-categories-modal.jpg"
+  width={824 / 2}
+  height={532 / 2}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/import-task-categories-modal.jpg"
+  width={824 / 2}
+  height={532 / 2}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/import-task-categories-modal.jpg"
+  width={1051 / 3}
+  height={841 / 3}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/import-task-categories-modal.jpg"
+  width={1051 / 3}
+  height={841 / 3}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+After clicking the button, a file selection window opens. Choose the prepared CSV file and wait for the import to finish.
+
+---
+
+## Export tasks and categories
+
+Export is available from the same manage menu. Select <b>Export CSV</b>, and the file will be downloaded automatically.
+
+<DocsImage
+  src="/docs/tasks/en/light/large/task-manage-export.jpg"
+  width={548 / 2}
+  height={468 / 2}
+  containerClassName="dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/large/task-manage-export.jpg"
+  width={548 / 2}
+  height={468 / 2}
+  containerClassName="not-dark:hidden max-md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/light/small/task-manage-export.jpg"
+  width={1170 / 3}
+  height={766 / 3}
+  containerClassName="dark:hidden md:hidden"
+/>
+
+<DocsImage
+  src="/docs/tasks/en/dark/small/task-manage-export.jpg"
+  width={1170 / 3}
+  height={766 / 3}
+  containerClassName="not-dark:hidden md:hidden"
+/>
+
+- <span className="font-normal">Tasks are exported to the file <b>tasks.csv</b></span>
+- <span className="font-normal">Task categories are exported to the file <b>taskCategories.csv</b></span>
+
+The exported data contains the current records for the active organization and can be reused for importing into the system.
+
+---
+
+## Limitations
+
+The following limitations apply to import and export:
+
+- <span className="font-normal">Only CSV format is supported</span>
+- <span className="font-normal">Maximum size of the uploaded file is <b>512 KB</b></span>
+- <span className="font-normal">The file must not be empty</span>
+- <span className="font-normal">For task import, the required fields are <b>title</b>, <b>deadline</b>, and <b>status</b></span>
+- <span className="font-normal">For category import, the required field is <b>name</b></span>
+- <span className="font-normal">Import rejects invalid date formats, missing related data, and organization limit overages</span>
+- <span className="font-normal">The number of newly created records during import is limited by system limits</span>
+- <span className="font-normal">Keep the file in <b>CSV UTF-8</b> format to avoid encoding issues with Cyrillic characters.</span>
+- <span className="font-normal">If you use Microsoft Excel, choose <b>CSV UTF-8 (Comma delimited) (*.csv)</b> when saving instead of regular <b>CSV</b>. Regular CSV may use the system encoding, which can cause Cyrillic characters to display incorrectly when importing or opening the file in other applications.</span>
+
+---

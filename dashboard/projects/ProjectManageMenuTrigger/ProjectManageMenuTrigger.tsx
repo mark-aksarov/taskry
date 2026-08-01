@@ -19,7 +19,6 @@ export function ProjectManageMenuTrigger({
   const [isPending, downloadFile] = useDownloadFile(
     "/api/projects/export",
     "projects.csv",
-    t("successMessage"),
     t("errorMessage"),
   );
 

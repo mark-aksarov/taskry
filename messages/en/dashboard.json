@@ -142,12 +142,18 @@
       "label": "Cancel"
     },
     "ImportModalText": {
-      "text": "Upload a CSV file. Maximum file size: 512 KB. Instructions for preparing the file are available in the documentation."
+      "text": "Upload a CSV file. Maximum file size: 512 KB. Instructions for preparing the file are available in the documentation, or you can download an archive with sample CSV files."
     },
     "OverdueBadge": {
       "task": {
         "overdue": "Overdue: {time}"
       }
+    },
+    "ImportModalDocsLink": {
+      "label": "Open documentation"
+    },
+    "ImportModalDownloadLink": {
+      "label": "Download examples archive"
     }
   },
   "company": {
@@ -859,7 +865,8 @@
       "label": "Delete project"
     },
     "ImportProjectsModal": {
-      "heading": "Import projects"
+      "heading": "Import projects",
+      "downloadErrorMessage": "Failed to download the archive with sample CSV files"
     },
     "CreateProjectModalTrigger": {
       "label": "New project"

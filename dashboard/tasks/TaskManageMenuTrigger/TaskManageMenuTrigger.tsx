@@ -19,7 +19,6 @@ export function TaskManageMenuTrigger({
   const [isPending, downloadFile] = useDownloadFile(
     "/api/tasks/export",
     "tasks.csv",
-    t("successMessage"),
     t("errorMessage"),
   );
 

@@ -59,7 +59,8 @@
         "view": "Project view",
         "actions": "Project actions",
         "search": "Search and filtering",
-        "categories": "Project categories"
+        "categories": "Project categories",
+        "importExport": "Import and export"
       },
       "tasks": {
         "heading": "Tasks",
@@ -67,7 +68,8 @@
         "actions": "Task actions",
         "search": "Search and filtering",
         "subtasks": "Subtasks",
-        "categories": "Task categories"
+        "categories": "Task categories",
+        "importExport": "Import and export"
       },
       "team": {
         "heading": "Team",
@@ -75,14 +77,16 @@
         "roles": "Roles and permissions",
         "actions": "User actions",
         "search": "Search and filtering",
-        "positions": "Positions"
+        "positions": "Positions",
+        "importExport": "Import and export"
       },
       "clients": {
         "heading": "Clients",
         "view": "Client view",
         "actions": "Client actions",
         "search": "Search and filtering",
-        "companies": "Companies"
+        "companies": "Companies",
+        "importExport": "Import and export"
       }
     },
     "DocsPaginationLink": {
