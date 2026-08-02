@@ -50,6 +50,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <ul className={twMerge("mb-6 list-disc pl-5", className)} {...props} />
     ),
 
+    ol: ({ className, ...props }) => (
+      <ol className={twMerge("mb-6 list-decimal pl-5", className)} {...props} />
+    ),
+
     li: ({ className, ...props }) => (
       <li
         className={twMerge("mb-2 text-base/7 font-bold", className)}

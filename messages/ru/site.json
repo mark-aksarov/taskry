@@ -87,6 +87,9 @@
         "search": "Поиск и фильтрация",
         "companies": "Компании",
         "importExport": "Импорт и экспорт"
+      },
+      "quickGuide": {
+        "heading": "Краткое руководство"
       }
     },
     "DocsPaginationLink": {

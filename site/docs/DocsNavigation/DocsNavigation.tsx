@@ -17,6 +17,7 @@ export function DocsNavigation() {
   const t = useTranslations("site.docs.DocsNavigation");
 
   const defaultExpandedKeys = [
+    pathname.startsWith("/docs/quick-guide") && "quickGuide",
     pathname.startsWith("/docs/projects") && "projects",
     pathname.startsWith("/docs/tasks") && "tasks",
     pathname.startsWith("/docs/team") && "team",
@@ -26,6 +27,22 @@ export function DocsNavigation() {
   return (
     <nav className="flex w-[250px] flex-col gap-4">
       <DisclosureGroup defaultExpandedKeys={defaultExpandedKeys}>
+        {/* Quick guide */}
+        <Disclosure id="quickGuide">
+          <DisclosureHeader>{t("quickGuide.heading")}</DisclosureHeader>
+          <DisclosurePanel>
+            <DocsNavigationList>
+              <li>
+                <DocsNavigationLink
+                  href="/docs/quick-guide"
+                  isActive={pathname === "/docs/quick-guide"}
+                >
+                  {t("quickGuide.heading")}
+                </DocsNavigationLink>
+              </li>
+            </DocsNavigationList>
+          </DisclosurePanel>
+        </Disclosure>
         {/* Projects */}
         <Disclosure id="projects">
           <DisclosureHeader>{t("projects.heading")}</DisclosureHeader>

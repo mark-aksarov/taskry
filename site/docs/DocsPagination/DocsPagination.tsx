@@ -18,6 +18,8 @@ export function DocsPagination() {
     if (!section) return null;
 
     const pagesMap: Record<string, { slug: string; label: string }[]> = {
+      "quick-guide": [{ slug: "", label: t("quickGuide.heading") }],
+
       projects: [
         { slug: "", label: t("projects.heading") },
         { slug: "view", label: t("projects.view") },

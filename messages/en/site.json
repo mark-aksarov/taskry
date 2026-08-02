@@ -87,6 +87,9 @@
         "search": "Search and filtering",
         "companies": "Companies",
         "importExport": "Import and export"
+      },
+      "quickGuide": {
+        "heading": "Quick guide"
       }
     },
     "DocsPaginationLink": {
