@@ -23,7 +23,7 @@ export function VerifyEmailPage({ email }: VerifyEmailPageProps) {
         <AuthCardSubtitle>{t("subtitle", { email })}</AuthCardSubtitle>
       </AuthCardHeader>
       <AuthCardBody className="gap-4">
-        <SendVerificationEmailButton />
+        <SendVerificationEmailButton email={email} />
         <AuthSignOutButton />
       </AuthCardBody>
     </AuthCard>
