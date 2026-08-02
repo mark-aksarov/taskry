@@ -142,7 +142,8 @@
       "label": "Cancel"
     },
     "ImportModalText": {
-      "text": "Upload a CSV file. Maximum file size: 512 KB. Instructions for preparing the file are available in the documentation, or you can download an archive with sample CSV files."
+      "text": "Upload a CSV file. Maximum file size: 512 KB. Instructions for preparing the file are available in the documentation, or you can download an archive with sample CSV files.",
+      "note": "<strong>Please note</strong>: dates must be provided in the <strong>yyyy-MM-dd</strong> format when importing. Programs such as Excel may automatically change the date format, so make sure that all dates in the file match the required format before importing."
     },
     "OverdueBadge": {
       "task": {
