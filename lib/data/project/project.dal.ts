@@ -281,16 +281,16 @@ export const getProjectList = cache(
     } = await requireOrganizationAccess();
 
     // Sorting
-    let orderBy: Prisma.ProjectOrderByWithRelationInput;
+    let orderBy: Prisma.ProjectOrderByWithRelationInput[];
 
     if (sort === "title") {
-      orderBy = { title: "asc" };
+      orderBy = [{ title: "asc" }, { id: "asc" }];
     } else if (sort === "deadline") {
-      orderBy = { deadline: "asc" };
+      orderBy = [{ deadline: "asc" }, { id: "asc" }];
     } else if (sort === "status") {
-      orderBy = { status: "asc" };
+      orderBy = [{ status: "asc" }, { id: "asc" }];
     } else {
-      orderBy = { createdAt: "desc" };
+      orderBy = [{ createdAt: "desc" }, { id: "desc" }];
     }
 
     const where = buildProjectWhereClause(organizationId, filters);
