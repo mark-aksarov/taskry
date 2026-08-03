@@ -6,7 +6,7 @@ import {
   members,
 } from "@/prisma/seed/test-data";
 
-describe("Positions import", () => {
+describe("Companies import", () => {
   beforeEach(() => {
     cy.viewport(1440, 900);
 
@@ -22,27 +22,27 @@ describe("Positions import", () => {
     cy.task("db:seed", payload);
 
     cy.signIn("user-1@test.com", "12345abc");
-    cy.visit("/en/positions");
+    cy.visit("/en/companies");
 
-    cy.getByData("position-manage-menu-trigger-large").click();
+    cy.getByData("company-manage-menu-trigger-large").click();
     cy.getMenuItem("import-csv").click();
   });
 
   const uploadCsv = (file: string) => {
     cy.get('input[type="file"]').selectFile(
-      `cypress/fixtures/csv/position/${file}.csv`,
+      `cypress/fixtures/csv/company/${file}.csv`,
       { force: true },
     );
 
     cy.get('[data-test="import-modal-upload-button"]').click();
   };
 
-  it("imports valid CSV file with positions", () => {
+  it("imports valid CSV file with companies", () => {
     uploadCsv("valid");
 
-    cy.contains("Position 1").should("be.visible");
-    cy.contains("Position 2").should("be.visible");
-    cy.contains("Position 3").should("be.visible");
+    cy.contains("Company 1").should("be.visible");
+    cy.contains("Company 2").should("be.visible");
+    cy.contains("Company 3").should("be.visible");
   });
 
   it("shows error when CSV file is empty", () => {
@@ -66,25 +66,25 @@ describe("Positions import", () => {
   it("ignores empty rows in CSV file", () => {
     uploadCsv("empty-rows");
 
-    cy.contains("Position 1").should("be.visible");
-    cy.contains("Position 2").should("be.visible");
-    cy.contains("Position 3").should("be.visible");
+    cy.contains("Company 1").should("be.visible");
+    cy.contains("Company 2").should("be.visible");
+    cy.contains("Company 3").should("be.visible");
   });
 
-  it("trims whitespace from position names", () => {
+  it("trims whitespace from company names", () => {
     uploadCsv("trim-whitespace");
 
-    cy.contains("Position 1").should("be.visible");
-    cy.contains("Position 2").should("be.visible");
-    cy.contains("Position 3").should("be.visible");
+    cy.contains("Company 1").should("be.visible");
+    cy.contains("Company 2").should("be.visible");
+    cy.contains("Company 3").should("be.visible");
   });
 
   it("removes empty columns from CSV file", () => {
     uploadCsv("empty-columns");
 
-    cy.contains("Position 1").should("be.visible");
-    cy.contains("Position 2").should("be.visible");
-    cy.contains("Position 3").should("be.visible");
+    cy.contains("Company 1").should("be.visible");
+    cy.contains("Company 2").should("be.visible");
+    cy.contains("Company 3").should("be.visible");
   });
 
   it("shows validation error when CSV contains additional unknown columns", () => {
@@ -93,22 +93,22 @@ describe("Positions import", () => {
     cy.getByData("error-banner").should("be.visible");
   });
 
-  it("imports positions with quoted values", () => {
+  it("imports companies with quoted values", () => {
     uploadCsv("quoted-values");
 
-    cy.contains("Position 1").should("be.visible");
-    cy.contains("Position 2").should("be.visible");
+    cy.contains("Company 1").should("be.visible");
+    cy.contains("Company 2").should("be.visible");
   });
 
-  it("imports positions with commas inside values", () => {
+  it("imports companies with commas inside values", () => {
     uploadCsv("commas-in-values");
 
-    cy.contains("Position 1, Frontend").should("be.visible");
+    cy.contains("Company, 1").should("be.visible");
   });
 
   it("rejects files with unsupported extension", () => {
     cy.get('input[type="file"]').selectFile(
-      "cypress/fixtures/csv/position/invalid.txt",
+      "cypress/fixtures/csv/company/invalid.txt",
       { force: true },
     );
 
@@ -121,7 +121,7 @@ describe("Positions import", () => {
     cy.getByData("error-banner").should("be.visible");
   });
 
-  it("shows validation error for position name exceeding maximum length", () => {
+  it("shows validation error for company name exceeding maximum length", () => {
     uploadCsv("max-length");
 
     cy.getByData("error-banner").should("be.visible");
