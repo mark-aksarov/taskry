@@ -251,10 +251,10 @@
       }
     },
     "import": {
-      "success": "Task categories imported successfully",
+      "success": "Tasks imported successfully",
       "error": {
         "limitExceededError": "The maximum number of tasks would be exceeded. Maximum: {count}.",
-        "internalServerError": "Something went wrong. Failed to import task categories. Make sure the CSV file is filled out correctly and try again.",
+        "internalServerError": "Something went wrong. Failed to import tasks. Make sure the CSV file is filled out correctly and try again.",
         "notFoundError": "CSV import failed. Some related data was not found in the database: projects, assignees, or task categories. Please check the values in the file and try again."
       }
     }
