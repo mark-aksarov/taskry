@@ -1,5 +1,5 @@
-import Papa from "papaparse";
 import z from "zod";
+import Papa from "papaparse";
 
 export async function parseCsvFile<T>(file: File, schema: z.ZodSchema<T>) {
   if (
@@ -13,14 +13,37 @@ export async function parseCsvFile<T>(file: File, schema: z.ZodSchema<T>) {
     } as const;
   }
 
-  const text = await file.text();
+  try {
+    const text = await file.text();
 
-  const result = Papa.parse(text, {
-    header: true,
-    skipEmptyLines: true,
-  });
+    const result = Papa.parse<Record<string, string>>(text, {
+      header: true,
+      skipEmptyLines: true,
+      transform: (value) => value.trim(),
+    });
 
-  const data = schema.safeParse(result.data);
+    if (result.errors.length > 0) {
+      return {
+        success: false,
+        error: "Failed to parse CSV file",
+      } as const;
+    }
 
-  return data;
+    const rows = result.data
+      .map((row) => {
+        const cleaned = Object.fromEntries(
+          Object.entries(row).filter(([key]) => key.trim() !== ""),
+        );
+
+        return cleaned;
+      })
+      .filter((row) => Object.values(row).some((value) => value.trim() !== ""));
+
+    return schema.safeParse(rows);
+  } catch {
+    return {
+      success: false,
+      error: "Failed to read CSV file",
+    } as const;
+  }
 }
