@@ -9,6 +9,22 @@ Taskry and its storybook are available at the links below.
 - [Taskry](https://taskry.ru)
 - [Storybook](https://storybook.taskry.ru)
 
+## Tech Stack
+
+| Category                 | Technologies                                                   |
+| ------------------------ | -------------------------------------------------------------- |
+| **Core**                 | TypeScript, Next.js, React                                     |
+| **UI & Styling**         | Tailwind CSS, React Aria, Storybook, lucide-react, next-themes |
+| **Database**             | Prisma ORM, PostgreSQL                                         |
+| **Data Fetching**        | SWR                                                            |
+| **Authentication**       | Better Auth                                                    |
+| **Validation**           | Zod                                                            |
+| **Internationalization** | next-intl                                                      |
+| **Testing & Quality**    | Vitest, React Testing Library, ESLint                          |
+| **Services**             | AWS SDK                                                        |
+| **Communication**        | Nodemailer                                                     |
+| **Containerization**     | Docker                                                         |
+
 ## Application Overview
 
 **Taskry** is a task management system that helps organize team workflows, track task progress, and store all important information in one place.
@@ -78,22 +94,6 @@ The following video shows the data import process and adding information through
 The application has a responsive interface and supports devices with different screen sizes. The mobile version has some functional differences compared to the desktop version, which are designed to improve the user experience.
 
 [![Mobile version](public/mobile-version.jpg)](https://youtu.be/QKSiIqg2bpI)
-
-## Tech Stack
-
-| Category                 | Technologies                                                   |
-| ------------------------ | -------------------------------------------------------------- |
-| **Core**                 | TypeScript, Next.js, React                                     |
-| **UI & Styling**         | Tailwind CSS, React Aria, Storybook, lucide-react, next-themes |
-| **Database**             | Prisma ORM, PostgreSQL                                         |
-| **Data Fetching**        | SWR                                                            |
-| **Authentication**       | Better Auth                                                    |
-| **Validation**           | Zod                                                            |
-| **Internationalization** | next-intl                                                      |
-| **Testing & Quality**    | Vitest, React Testing Library, ESLint                          |
-| **Services**             | AWS SDK                                                        |
-| **Communication**        | Nodemailer                                                     |
-| **Containerization**     | Docker                                                         |
 
 ## Getting Started
 
