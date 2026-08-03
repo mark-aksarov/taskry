@@ -25,7 +25,9 @@ export async function parseCsvFile<T>(file: File, schema: z.ZodSchema<T>) {
     const rows = result.data
       .map((row) => {
         const cleaned = Object.fromEntries(
-          Object.entries(row).filter(([key]) => key.trim() !== ""),
+          Object.entries(row).filter(
+            ([key]) => !key.startsWith("_") && key.trim() !== "",
+          ),
         );
 
         return cleaned;

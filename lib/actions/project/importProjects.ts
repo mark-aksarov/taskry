@@ -52,8 +52,6 @@ export async function importProjects(formData: FormData): Promise<ActionState> {
   const result = await parseCsvFile(file, schema);
 
   if (!result.success) {
-    console.log(result.error);
-
     return {
       status: "error",
       message: internalServerError,
