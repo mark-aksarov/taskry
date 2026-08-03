@@ -9,7 +9,7 @@ Taskry and its storybook are available at the links below.
 - [Taskry](https://taskry.ru)
 - [Storybook](https://storybook.taskry.ru)
 
-## Quick guide
+## Application Overview
 
 **Taskry** is a task management system that helps organize team workflows, track task progress, and store all important information in one place.
 
