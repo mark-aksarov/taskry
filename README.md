@@ -9,23 +9,75 @@ Taskry and its storybook are available at the links below.
 - [Taskry](https://taskry.ru)
 - [Storybook](https://storybook.taskry.ru)
 
-## Demo videos
+## Quick guide
 
-In the following videos, a demonstration of the application is shown in both desktop and mobile versions with light and dark themes.
+**Taskry** is a task management system that helps organize team workflows, track task progress, and store all important information in one place.
 
-- [Desktop (Light Theme)](https://youtu.be/8nDvyUagTw0)
-- [Desktop (Dark Theme)](https://youtu.be/F5QXiqQ25Ek)
-- [Mobile (Light Theme)](https://youtu.be/aSs-WBqivkI)
+Main application features:
 
-## Features
+- Manage projects and tasks.
+- Search and filter projects and tasks.
+- Import and export data in CSV format.
+- Invite users to the workspace for collaboration.
+- Manage users, customers, companies, categories, and positions.
 
-- **Projects** — Manage projects and categories. Create, edit, delete projects. Each project can include tasks.
-- **Tasks** — Manage tasks and categories. Create, edit, delete tasks. Subtasks support breaking work into smaller parts.
-- **Clients** — Manage clients and companies. Create, edit, delete client.
-- **Team** — Manage users, positions and roles. Create, edit, delete users. Roles and permissions.
-- **Filtering and sorting** — Filter and sort data to quickly find and manage projects, tasks, users, and clients.
-- **Search** — Quickly find projects, tasks, users, and clients using search.
-- **Comments** — Add comments to projects and tasks for discussion and collaboration.
+### Quick start
+
+To start working with the application, follow a few simple steps:
+
+1. Register in the system.
+2. Confirm your email address.
+3. Create a workspace.
+4. Fill it with demo data.
+5. Use the main application features.
+
+The following video covers the main steps to get started with the application.
+
+[![Quick start](public/quick-start.jpg)](https://youtu.be/T7ozM0Beh-g)
+
+### Inviting users
+
+To invite a colleague or partner to your workspace:
+
+1. Open the **Team** page.
+2. Click the **Invite user** button.
+3. Enter the email address.
+4. Send the invitation.
+
+The recipient must accept the invitation from the email, then complete registration or sign in with an existing account. After confirming access, the user automatically becomes a member of the workspace.
+
+Important: users cannot be imported as regular data. They must be invited via email.
+
+The following video shows the user invitation process.
+
+[![Inviting users](public/invitation-user.jpg)](https://youtu.be/9GMsusbQDmY)
+
+### Working with data
+
+The system supports data import and export. You can transfer and manage:
+
+- Tasks and task categories.
+- Projects and project categories.
+- Customers and companies.
+- Positions.
+
+User import is not supported — users are added through the email invitation mechanism.
+
+In addition to import and export, data can be edited directly through application forms:
+
+- Create, edit, and delete tasks.
+- Create, edit, and delete projects.
+- Add comments.
+
+The following video shows the data import process and adding information through application forms.
+
+[![Working with data](public/working-with-data.jpg)](https://youtu.be/3m3HrpccU_M)
+
+### Mobile version
+
+The application has a responsive interface and supports devices with different screen sizes. The mobile version has some functional differences compared to the desktop version, which are designed to improve the user experience.
+
+[![Mobile version](public/mobile-version.jpg)](https://youtu.be/QKSiIqg2bpI)
 
 ## Tech Stack
 
