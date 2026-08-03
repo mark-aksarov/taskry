@@ -133,10 +133,12 @@ describe("Clients import", () => {
     cy.contains("Client 2").should("be.visible");
   });
 
-  it("shows error when CSV contains additional unknown columns", () => {
+  it("imports clients when CSV contains additional unknown columns", () => {
     uploadCsv("unknown-columns");
 
-    cy.getByData("error-banner").should("be.visible");
+    cy.contains("Clients imported successfully").should("be.visible");
+
+    cy.contains("Client 1").should("be.visible");
   });
 
   it("imports clients with quoted values", () => {

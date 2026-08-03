@@ -10,7 +10,7 @@ import { LimitExceededError } from "@/lib/data/utils/error";
 import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { createPositions as createPositionsQuery } from "@/lib/data/position/position.dal";
 
-const schema = z.array(z.object({ name: positionName }).strict()).min(1);
+const schema = z.array(z.object({ name: positionName })).min(1);
 
 export async function importPositions(
   formData: FormData,

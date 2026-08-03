@@ -10,7 +10,7 @@ import { projectCategoryName } from "@/lib/schemas/projectCategory";
 import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { createProjectCategories as createProjectCategoriesQuery } from "@/lib/data/projectCategory/projectCategory.dal";
 
-const schema = z.array(z.object({ name: projectCategoryName }).strict()).min(1);
+const schema = z.array(z.object({ name: projectCategoryName })).min(1);
 
 export async function importProjectCategories(
   formData: FormData,

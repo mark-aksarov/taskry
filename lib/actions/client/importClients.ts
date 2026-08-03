@@ -14,15 +14,9 @@ import { importClients as importClientsQuery } from "@/lib/data/client/client.da
 
 const schema = z
   .array(
-    createClientSchema
-      .omit({ companyId: true })
-      .extend({
-        companyName: z.preprocess(
-          emptyStringToUndefined,
-          companyName.optional(),
-        ),
-      })
-      .strict(),
+    createClientSchema.omit({ companyId: true }).extend({
+      companyName: z.preprocess(emptyStringToUndefined, companyName.optional()),
+    }),
   )
   .min(1);
 

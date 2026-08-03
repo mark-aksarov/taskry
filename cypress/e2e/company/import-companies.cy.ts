@@ -87,10 +87,10 @@ describe("Companies import", () => {
     cy.contains("Company 3").should("be.visible");
   });
 
-  it("shows validation error when CSV contains additional unknown columns", () => {
+  it("imports companies when CSV contains additional unknown columns", () => {
     uploadCsv("unknown-columns");
 
-    cy.getByData("error-banner").should("be.visible");
+    cy.contains("Company 1").should("be.visible");
   });
 
   it("imports companies with quoted values", () => {

@@ -15,19 +15,13 @@ import { importProjects as importProjectsQuery } from "@/lib/data/project/projec
 
 const schema = z
   .array(
-    createProjectSchema
-      .omit({ categoryId: true, clientId: true })
-      .extend({
-        categoryName: z.preprocess(
-          emptyStringToUndefined,
-          projectCategoryName.optional(),
-        ),
-        clientEmail: z.preprocess(
-          emptyStringToUndefined,
-          clientEmail.optional(),
-        ),
-      })
-      .strict(),
+    createProjectSchema.omit({ categoryId: true, clientId: true }).extend({
+      categoryName: z.preprocess(
+        emptyStringToUndefined,
+        projectCategoryName.optional(),
+      ),
+      clientEmail: z.preprocess(emptyStringToUndefined, clientEmail.optional()),
+    }),
   )
   .min(1);
 

@@ -155,10 +155,12 @@ describe("Tasks import", () => {
     cy.contains("Task 1").should("be.visible");
   });
 
-  it("shows error when CSV contains additional unknown columns", () => {
+  it("imports tasks when CSV contains additional unknown columns", () => {
     uploadCsv("unknown-columns");
 
-    cy.getByData("error-banner").should("be.visible");
+    cy.contains("Tasks imported successfully").should("be.visible");
+
+    cy.contains("Task 1").should("be.visible");
   });
 
   it("imports tasks with quoted values", () => {

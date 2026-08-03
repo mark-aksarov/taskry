@@ -10,7 +10,7 @@ import { LimitExceededError } from "@/lib/data/utils/error";
 import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { createCompanies as createCompaniesQuery } from "@/lib/data/company/company.dal";
 
-const schema = z.array(z.object({ name: companyName }).strict()).min(1);
+const schema = z.array(z.object({ name: companyName })).min(1);
 
 export async function importCompanies(
   formData: FormData,

@@ -123,7 +123,7 @@ describe("Task category import", () => {
     cy.contains("Task Category 3").should("be.visible");
   });
 
-  it("shows validation error when CSV contains additional unknown columns", () => {
+  it("imports categories when CSV contains additional unknown columns", () => {
     cy.get('input[type="file"]').selectFile(
       "cypress/fixtures/csv/task-category/unknown-columns.csv",
       { force: true },
@@ -131,7 +131,9 @@ describe("Task category import", () => {
 
     cy.get('[data-test="import-modal-upload-button"]').click();
 
-    cy.getByData("error-banner").should("be.visible");
+    cy.contains("Task Category 1").should("be.visible");
+    cy.contains("Task Category 2").should("be.visible");
+    cy.contains("Task Category 3").should("be.visible");
   });
 
   it("imports categories with quoted values", () => {

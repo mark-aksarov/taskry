@@ -127,7 +127,7 @@ describe("Project category import", () => {
     );
   });
 
-  it("shows validation error when CSV contains additional unknown columns", () => {
+  it("imports categories when CSV contains additional unknown columns", () => {
     cy.get('input[type="file"]').selectFile(
       "cypress/fixtures/csv/project-category/unknown-columns.csv",
       { force: true },
@@ -135,7 +135,9 @@ describe("Project category import", () => {
 
     cy.get('[data-test="import-modal-upload-button"]').click();
 
-    cy.getByData("error-banner").should("be.visible");
+    cy.contains("Project categories imported successfully").should(
+      "be.visible",
+    );
   });
 
   it("imports categories with quoted values", () => {

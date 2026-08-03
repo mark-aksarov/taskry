@@ -10,7 +10,7 @@ import { TASK_CATEGORY_MAX_COUNT } from "@/lib/data/constants";
 import { requireFullAccess } from "@/lib/utils/requireFullAccess";
 import { createTaskCategories as createTaskCategoriesQuery } from "@/lib/data/taskCategory/taskCategory.dal";
 
-const schema = z.array(z.object({ name: taskCategoryName }).strict()).min(1);
+const schema = z.array(z.object({ name: taskCategoryName })).min(1);
 
 export async function importTaskCategories(
   formData: FormData,

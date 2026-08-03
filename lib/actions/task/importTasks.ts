@@ -31,8 +31,7 @@ const schema = z
           emptyStringToUndefined,
           userEmail.optional(),
         ),
-      })
-      .strict(),
+      }),
   )
   .min(1);
 

@@ -137,10 +137,10 @@ describe("Projects import", () => {
     cy.contains("Projects imported successfully").should("be.visible");
   });
 
-  it("shows error when CSV contains additional unknown columns", () => {
+  it("imports projects when CSV contains additional unknown columns", () => {
     uploadCsv("unknown-columns");
 
-    cy.getByData("error-banner").should("be.visible");
+    cy.contains("Projects imported successfully").should("be.visible");
   });
 
   it("imports projects with quoted values", () => {
