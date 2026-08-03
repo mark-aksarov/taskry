@@ -22,13 +22,6 @@ export async function parseCsvFile<T>(file: File, schema: z.ZodSchema<T>) {
       transform: (value) => value.trim(),
     });
 
-    if (result.errors.length > 0) {
-      return {
-        success: false,
-        error: "Failed to parse CSV file",
-      } as const;
-    }
-
     const rows = result.data
       .map((row) => {
         const cleaned = Object.fromEntries(
