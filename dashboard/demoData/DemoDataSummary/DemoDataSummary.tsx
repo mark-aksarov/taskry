@@ -7,7 +7,7 @@ export function DemoDataSummary() {
 
   return (
     <div className="mt-6 flex flex-col gap-3">
-      <h4 className="text-sm font-bold text-(--text-primary)">{t("title")}</h4>
+      <h3 className="text-sm font-bold text-(--text-primary)">{t("title")}</h3>
       <ul className="flex flex-col gap-4">
         <DemoDataSummaryItem
           title={t("projects.title")}
