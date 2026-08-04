@@ -43,7 +43,7 @@ export async function createPresignedUrl(): Promise<CreatePresignedUrlState> {
       Bucket: process.env.S3_BUCKET,
       Key: crypto.randomUUID(),
       Conditions: [
-        ["content-length-range", 1, 200 * 1024],
+        ["content-length-range", 1, 1024 * 1024],
         { "Content-Type": "image/*" },
       ],
       Fields: {

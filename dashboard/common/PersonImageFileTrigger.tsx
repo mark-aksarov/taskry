@@ -21,7 +21,7 @@ export function PersonImageFileTrigger({
         if (!file) return;
 
         // Check file size
-        const maxSize = 200 * 1024;
+        const maxSize = 1024 * 1024;
         if (file.size > maxSize) {
           setError(t("error.fileSize"));
           return;

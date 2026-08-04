@@ -26,13 +26,17 @@ export function UpdatePersonImageActionButton({
 
     setIsBlobPending(true);
 
-    canvas.toBlob((blob) => {
-      if (blob) {
-        startTransition(() => updatePersonImageAction(blob));
-      }
+    canvas.toBlob(
+      (blob) => {
+        if (blob) {
+          startTransition(() => updatePersonImageAction(blob));
+        }
 
-      setIsBlobPending(false);
-    }, imageFile.type);
+        setIsBlobPending(false);
+      },
+      imageFile.type,
+      0.75,
+    );
   }
 
   const isPending = isBlobPending || isUpdatePersonImagePending;
