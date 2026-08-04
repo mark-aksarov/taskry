@@ -9,6 +9,7 @@ import {
 import { useTranslations } from "next-intl";
 import { CtaActions } from "../../common/CtaActions";
 import { PageContainer } from "@/site/common/PageContainer";
+import { GithubAction } from "@/site/common/GithubAction";
 
 export function FinalCtaSection() {
   const t = useTranslations("site.home.FinalCtaSection");
@@ -27,7 +28,9 @@ export function FinalCtaSection() {
               {t("description.line2")}
             </PageSectionDescription>
           </PageSectionHeader>
-          <CtaActions />
+          <CtaActions>
+            <GithubAction />
+          </CtaActions>
         </PageSectionContent>
       </PageContainer>
     </PageSection>

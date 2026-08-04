@@ -46,7 +46,7 @@ export function DemoDataModal() {
 
   return (
     <ConfirmModal
-      data-test="quick-start-modal"
+      data-test="demo-data-modal"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
     >

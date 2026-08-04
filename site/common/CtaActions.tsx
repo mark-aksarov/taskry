@@ -1,14 +1,14 @@
 "use client";
 
-import { GithubAction } from "./GithubAction";
 import { PageSectionActions } from "./PageSection";
 import { GetStartedAction } from "./GetStartedAction";
+import { AppOverviewAction } from "./AppOverviewAction";
 
-export function CtaActions() {
+export function CtaActions({ children }: { children: React.ReactNode }) {
   return (
     <PageSectionActions>
       <GetStartedAction />
-      <GithubAction />
+      {children}
     </PageSectionActions>
   );
 }

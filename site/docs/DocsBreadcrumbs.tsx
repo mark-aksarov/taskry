@@ -24,7 +24,7 @@ export function DocsBreadcrumbs() {
     });
 
     const sectionMap: Record<string, string> = {
-      "quick-guide": t("quickGuide.heading"),
+      "app-overview": t("appOverview.heading"),
       projects: t("projects.heading"),
       tasks: t("tasks.heading"),
       team: t("team.heading"),

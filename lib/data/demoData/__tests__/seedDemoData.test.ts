@@ -30,7 +30,7 @@ describe("seedDemoData", () => {
     });
   });
 
-  it("should successfully seed quick start data in english", async () => {
+  it("should successfully seed demo data in english", async () => {
     await setupAuth("user-1");
 
     await seedDemoData("en");
@@ -46,7 +46,7 @@ describe("seedDemoData", () => {
     expect(clients).toBeGreaterThan(0);
   });
 
-  it("should successfully seed quick start data in russian", async () => {
+  it("should successfully seed demo data in russian", async () => {
     await resetDatabase();
 
     await seed({
@@ -87,7 +87,7 @@ describe("seedDemoData", () => {
     await expect(seedDemoData("en")).rejects.toThrow(ValidationError);
   });
 
-  describe("RBAC: seed quick start", () => {
+  describe("RBAC: seed demo data", () => {
     const setup = async (userId?: string) => {
       await resetDatabase();
 

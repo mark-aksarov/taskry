@@ -88,7 +88,7 @@
         "companies": "Companies",
         "importExport": "Import and export"
       },
-      "quickGuide": {
+      "appOverview": {
         "heading": "Application overview"
       }
     },
@@ -320,6 +320,11 @@
         "title": "Open source",
         "description": "The project is open source — you can study it, use it, and contribute to its development."
       }
+    }
+  },
+  "common": {
+    "AppOverviewAction": {
+      "label": "App overview"
     }
   }
 }

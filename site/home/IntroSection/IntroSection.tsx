@@ -10,6 +10,7 @@ import { CtaActions } from "@/site/common/CtaActions";
 import { PageContainer } from "@/site/common/PageContainer";
 import { IntroSectionHeading } from "./IntroSectionHeading";
 import { IntroSectionDescription } from "./IntroSectionDescription";
+import { AppOverviewAction } from "@/site/common/AppOverviewAction";
 
 export function IntroSection() {
   return (
@@ -21,7 +22,9 @@ export function IntroSection() {
             <IntroSectionHeading />
             <IntroSectionDescription />
           </PageSectionHeader>
-          <CtaActions />
+          <CtaActions>
+            <AppOverviewAction />
+          </CtaActions>
           <IntroBackground />
         </PageSectionContent>
       </PageContainer>
