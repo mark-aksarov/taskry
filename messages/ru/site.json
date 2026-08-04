@@ -44,7 +44,7 @@
     "DocsNavigation": {
       "breadcrumbs": "Документация",
       "gettingStarted": {
-        "heading": "Краткое руководство",
+        "heading": "Обзор приложения",
         "overview": "Обзор"
       },
       "general": {
@@ -89,7 +89,7 @@
         "importExport": "Импорт и экспорт"
       },
       "quickGuide": {
-        "heading": "Краткое руководство"
+        "heading": "Обзор приложения"
       }
     },
     "DocsPaginationLink": {

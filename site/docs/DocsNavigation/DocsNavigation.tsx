@@ -27,7 +27,7 @@ export function DocsNavigation() {
   return (
     <nav className="flex w-[250px] flex-col gap-4">
       <DisclosureGroup defaultExpandedKeys={defaultExpandedKeys}>
-        {/* Quick guide */}
+        {/* Application overview */}
         <Disclosure id="quickGuide">
           <DisclosureHeader>{t("quickGuide.heading")}</DisclosureHeader>
           <DisclosurePanel>
